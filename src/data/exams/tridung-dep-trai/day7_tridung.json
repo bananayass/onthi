@@ -1,0 +1,1835 @@
+{
+  "id": "day7-tridung",
+  "title": "Trí Dũng đẹp trai · Ngày 7",
+  "description": "Bộ đề Ngày 7: 60 câu trắc nghiệm và 10 câu tự luận, biên soạn từ tài liệu ôn thi cùng ngày.",
+  "course": "tridung",
+  "kind": "daily",
+  "day": 7,
+  "label": "Ngày 7",
+  "durationMinutes": 90,
+  "totalPoints": 100,
+  "passingScore": 70,
+  "disclaimer": "Bộ đề ôn tập Trí Dũng đẹp trai, tham khảo từ tài liệu cùng ngày; không phải đề thi chính thức.",
+  "questions": [
+    {
+      "id": "D07-001",
+      "type": "mcq",
+      "prompt": "Một công ty có 800 file policy và cần agent trả lời câu hỏi về chính sách hoàn tiền. Nhóm kỹ thuật đề xuất fine-tune model trên 5.000 cặp Q–A để model 'thuộc' toàn bộ policy. Theo bài giảng, vì sao đây là lựa chọn sai?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Fine-tuning chỉ hoạt động ổn định với corpus dưới 100 file nên 800 file đã vượt quá giới hạn kỹ thuật cho phép"
+        },
+        {
+          "key": "B",
+          "text": "Fine-tuning dạy model cách nói chứ không phải điều cần nói; policy thay đổi thường xuyên nên mỗi lần đổi phải train lại"
+        },
+        {
+          "key": "C",
+          "text": "Fine-tuning yêu cầu context window lớn hơn tổng dung lượng 800 file nên không thể nạp đủ dữ liệu vào một training job"
+        },
+        {
+          "key": "D",
+          "text": "Fine-tuning làm giảm chất lượng reasoning của model gốc nên các câu trả lời sau đó sẽ kém chính xác hơn hẳn ban đầu"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bài giảng chỉ rõ đây là hiểu nhầm phổ biến nhất: fine-tuning dạy model CÁCH NÓI (giọng điệu, format), còn RAG cung cấp ĐIỀU CẦN NÓI (fact). Fact thay đổi thường xuyên thì phải chọn RAG, vì sửa policy chỉ cần re-index là xong, trong khi fine-tuning phải chạy lại training job tốn GPU và cần data sạch. Fine-tuning chỉ nên dùng khi cần style/tone riêng, không phải để nhớ fact.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-002",
+      "type": "mcq",
+      "prompt": "Ba cách đưa data vào model là In-Context, RAG và Fine-tuning. Điểm khác biệt cốt lõi giữa In-Context và RAG nằm ở đâu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "In-Context lưu dữ liệu ngay trong trọng số của model sau bước nạp, còn RAG lưu dữ liệu trong context window của mỗi phiên hội thoại"
+        },
+        {
+          "key": "B",
+          "text": "In-Context nạp toàn bộ nội dung thẳng vào prompt, không có bước embed và không có database; RAG chỉ nạp đoạn liên quan sau khi chunk-embed-store"
+        },
+        {
+          "key": "C",
+          "text": "In-Context chỉ dùng được cho dữ liệu đã có cấu trúc rõ ràng, còn RAG chỉ dùng được cho dữ liệu phi cấu trúc dạng văn bản thuần túy"
+        },
+        {
+          "key": "D",
+          "text": "In-Context yêu cầu model có năng lực suy luận mạnh hơn hẳn nên chỉ chạy được với những model thuộc tầng frontier đắt tiền"
+        }
+      ],
+      "answer": "B",
+      "explanation": "In-Context là cách đơn giản nhất: dán thẳng tài liệu vào prompt, làm được trong 5 phút, không cần pipeline nào. Nhược điểm là 800 file không nhét nổi vào context window. RAG thêm một tầng hạ tầng (chunk → embed → store → query top-k) để chỉ nạp phần liên quan. Cả hai đều KHÔNG đổi model — chỉ đổi context. Chỉ fine-tuning mới đụng vào trọng số.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-003",
+      "type": "mcq",
+      "prompt": "Theo bài giảng, In-Context phù hợp nhất với tình huống nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bất kỳ corpus nào miễn là model có context window từ 128K token trở lên"
+        },
+        {
+          "key": "B",
+          "text": "Dữ liệu nhạy cảm cần kiểm soát truy cập chặt chẽ theo từng nhóm người dùng"
+        },
+        {
+          "key": "C",
+          "text": "Tài liệu 1–20 trang, ít thay đổi, cần triển khai nhanh mà không dựng hạ tầng"
+        },
+        {
+          "key": "D",
+          "text": "Corpus khoảng 200 tài liệu nhưng nội dung ổn định và ít khi cần cập nhật lại"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Bài giảng ghi rõ: 'Dùng khi 1–20 trang, ít thay đổi'. Ưu điểm là làm được trong 5 phút, không cần embed hay DB. Ngưỡng này không phải do context window quyết định mà do tính thực dụng: khi corpus lớn hoặc thay đổi thường xuyên, việc dán thủ công trở nên không bền vững và tốn token mỗi lần gọi.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-004",
+      "type": "mcq",
+      "prompt": "Ưu điểm nào sau đây thuộc về RAG mà In-Context KHÔNG có?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Triển khai được ngay trong vài phút mà không cần dựng thêm bất kỳ thành phần hạ tầng nào"
+        },
+        {
+          "key": "B",
+          "text": "Dạy được model giọng điệu và định dạng riêng phù hợp với thương hiệu của doanh nghiệp"
+        },
+        {
+          "key": "C",
+          "text": "Không yêu cầu thay đổi trọng số model nên tránh được chi phí GPU cho việc huấn luyện"
+        },
+        {
+          "key": "D",
+          "text": "Trích được nguồn để cite, và khi sửa policy chỉ cần re-index thay vì sửa thủ công từng prompt"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide liệt kê ưu điểm RAG: (+) sửa policy → re-index, xong; (+) trích được nguồn để cite. Phương án A là ưu điểm của In-Context. Phương án C đúng cho cả In-Context lẫn RAG nên không phân biệt được. Phương án B là ưu điểm riêng của fine-tuning ('học được giọng điệu, format riêng').",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-005",
+      "type": "mcq",
+      "prompt": "Theo dữ liệu Stanford AI Index 2025 trong slide, tỷ lệ tổ chức áp dụng AI thay đổi thế nào và hàm ý gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Từ 71% xuống 33% với AI use, phản ánh giai đoạn vỡ mộng diễn ra sau làn sóng hào hứng ban đầu của thị trường"
+        },
+        {
+          "key": "B",
+          "text": "Từ 33% lên 71% với GenAI, cho thấy câu hỏi trọng tâm đã chuyển từ 'dùng model nào' sang 'agent được phép biết gì'"
+        },
+        {
+          "key": "C",
+          "text": "Từ 55% lên 78% với GenAI, chứng minh rằng việc chọn đúng model vẫn là yếu tố quyết định thành công của sản phẩm"
+        },
+        {
+          "key": "D",
+          "text": "Từ 78% lên 90% với AI use, cho thấy AI đã trở thành hạ tầng mặc định của hầu hết doanh nghiệp trên toàn cầu"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Biểu đồ trong slide: AI use 55% (2023) → 78% (2024); GenAI 33% (2023) → 71% (2024). Hàm ý mà giảng viên rút ra: khi ai cũng đã dùng AI, lợi thế cạnh tranh không còn nằm ở việc chọn model nào, mà ở việc agent được truy cập dữ liệu gì. Data quality và retrieval quality quyết định trải nghiệm thật hơn là đổi sang model đắt hơn.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-006",
+      "type": "mcq",
+      "prompt": "Ba loại data mà agent cần là Knowledge, Operational và Contextual. Loại nào phù hợp nhất với retrieval bằng vector search?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Contextual Data — vì session history phản ánh đúng nhu cầu tức thời của người dùng hiện tại"
+        },
+        {
+          "key": "B",
+          "text": "Operational Data — vì database và trạng thái đơn hàng luôn có cấu trúc rõ ràng dễ đánh index"
+        },
+        {
+          "key": "C",
+          "text": "Knowledge Data — vì tài liệu, policy, SOP, FAQ là văn bản phi cấu trúc cần tìm theo ngữ nghĩa"
+        },
+        {
+          "key": "D",
+          "text": "Cả ba loại đều nên đưa vào vector store để đảm bảo agent có bức tranh đầy đủ nhất"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide phân vai rõ ràng: Knowledge data (tài liệu, policy, SOP, FAQ, manual, hợp đồng) phù hợp với retrieval. Operational data (database, trạng thái đơn, ticket, CRM) thường cần query CÓ KIỂM SOÁT — tức truy vấn chính xác qua SQL/API, không phải tìm mờ theo ngữ nghĩa. Contextual data (session history, user profile) nên được inject NGẮN và ĐÚNG LÚC. Nhét cả ba vào vector store là sai thiết kế.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-007",
+      "type": "mcq",
+      "prompt": "Trạng thái đơn hàng của khách nên được đưa vào agent bằng cách nào và vì sao?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Fine-tune model định kỳ theo tuần để model cập nhật được trạng thái đơn hàng mới nhất của toàn bộ khách hàng"
+        },
+        {
+          "key": "B",
+          "text": "Query có kiểm soát vì đây là operational data cần độ chính xác tuyệt đối, không phải tìm mờ theo nghĩa"
+        },
+        {
+          "key": "C",
+          "text": "Embed rồi lưu vào vector store để agent tìm bằng semantic search cho linh hoạt và hỗ trợ nhiều cách diễn đạt"
+        },
+        {
+          "key": "D",
+          "text": "Inject toàn bộ vào system prompt ngay từ đầu phiên để agent luôn có sẵn thông tin mà không cần gọi thêm tool"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Trạng thái đơn hàng là operational data. Bài giảng nêu: 'operational data thường cần query có kiểm soát'. Lý do sâu hơn: dữ liệu này thay đổi liên tục và yêu cầu chính xác tuyệt đối — semantic search trả về 'gần giống' là không chấp nhận được khi khách hỏi đơn của họ đang ở đâu. Ngoài ra vector store sẽ lỗi thời ngay khi trạng thái thay đổi.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-008",
+      "type": "mcq",
+      "prompt": "Data Quality Pyramid có 4 tầng từ dưới lên. Tầng nào xử lý việc chuẩn hóa Unicode và loại bỏ header/footer?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cleaned — vì tầng này chịu trách nhiệm làm sạch text, sửa lỗi OCR và chuẩn hóa Unicode"
+        },
+        {
+          "key": "B",
+          "text": "Structured — vì việc bỏ header/footer thuộc về khâu tổ chức lại cấu trúc tài liệu"
+        },
+        {
+          "key": "C",
+          "text": "Enriched — vì đây là tầng cuối cùng nên bao gồm cả việc dọn dẹp lẫn gắn thẻ metadata"
+        },
+        {
+          "key": "D",
+          "text": "Raw — vì đây là bước đầu tiên tiếp nhận file gốc trước khi mọi xử lý khác diễn ra"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Kim tự tháp 4 tầng: Raw (PDF scan lệch, OCR ra 'đổi trả' thành 'd0̲i trả', HTML chứa tag rác) → Cleaned (sửa thành 'đổi trả', bỏ header/footer, chuẩn hóa Unicode) → Structured (chunk theo heading, gắn source refund-v3.pdf) → Enriched (tag category:support, access:public, quality:verified). Mỗi tầng có nhiệm vụ riêng, không lẫn lộn.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-009",
+      "type": "mcq",
+      "prompt": "Tầng Enriched trong Data Quality Pyramid làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Loại bỏ tag HTML rác cùng phần header/footer lặp lại ở mọi trang tài liệu"
+        },
+        {
+          "key": "B",
+          "text": "Chuyển đổi PDF scan thành text bằng OCR và sửa các lỗi nhận dạng ký tự sai"
+        },
+        {
+          "key": "C",
+          "text": "Gắn thẻ phân loại như category:support, access:public, quality:verified cho từng chunk"
+        },
+        {
+          "key": "D",
+          "text": "Cắt tài liệu thành chunk theo heading và ghi nhận tên file nguồn cho mỗi đoạn"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Enriched là tầng cao nhất: sau khi đã có chunk sạch và có cấu trúc, ta bổ sung metadata ngữ nghĩa để phục vụ filter và governance. Ví dụ trong slide: category:support (lọc domain), access:public (kiểm soát truy cập), quality:verified (đánh dấu độ tin cậy). Chính lớp metadata này về sau cho phép attribute filter trước khi semantic search.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-010",
+      "type": "mcq",
+      "prompt": "Sai lầm phổ biến nhất liên quan đến Data Quality Pyramid là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Index ngay dữ liệu raw rồi kỳ vọng retrieval sẽ tự chữa mọi vấn đề chất lượng dữ liệu"
+        },
+        {
+          "key": "B",
+          "text": "Dành quá nhiều thời gian cho tầng Cleaned khiến dự án chậm tiến độ triển khai thực tế"
+        },
+        {
+          "key": "C",
+          "text": "Gắn quá nhiều metadata ở tầng Enriched làm tăng dung lượng lưu trữ của vector store"
+        },
+        {
+          "key": "D",
+          "text": "Chuẩn hóa Unicode quá sớm khiến các ký tự đặc biệt trong tài liệu gốc bị mất mát"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide ghi nguyên văn: 'Sai lầm phổ biến: index ngay dữ liệu raw rồi kỳ vọng retrieval sẽ tự chữa mọi vấn đề'. Đây là ảo tưởng nguy hiểm vì embedding model chỉ mã hóa những gì bạn đưa vào — nếu chunk chứa tag HTML, header lặp lại, hay lỗi OCR thì vector sẽ mang cả nhiễu đó. Nguyên tắc garbage in, garbage out áp dụng nguyên vẹn.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-011",
+      "type": "mcq",
+      "prompt": "Trong Data Ownership & Governance, câu hỏi nào KHÔNG thuộc danh sách phải trả lời trước khi index?",
+      "options": [
+        {
+          "key": "A",
+          "text": "PII hoặc sensitive fields có cần mask trước khi đưa vào bước embed hay không?"
+        },
+        {
+          "key": "B",
+          "text": "Embedding model nào cho điểm MTEB cao nhất trên bảng xếp hạng hiện tại?"
+        },
+        {
+          "key": "C",
+          "text": "Ai sở hữu dữ liệu và team nào chịu trách nhiệm cập nhật nội dung đó định kỳ?"
+        },
+        {
+          "key": "D",
+          "text": "Data freshness bao lâu thì phải re-index để nội dung không bị lỗi thời?"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide Governance nêu 5 câu hỏi: (1) ai sở hữu, team nào cập nhật; (2) ai được phép truy cập, dữ liệu nào cần ACL; (3) data freshness — bao lâu re-index; (4) PII/sensitive có cần mask trước khi embed; (5) không index mọi thứ theo kiểu 'cứ nạp hết vào vector DB đã'. Chọn embedding model là quyết định kỹ thuật ở bước sau, không thuộc phạm vi governance.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-012",
+      "type": "mcq",
+      "prompt": "Ví dụ governance trong slide mô tả FAQ được quản trị như thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Do team kỹ thuật sở hữu, truy cập restricted, re-index hằng ngày, có mask PII đầy đủ"
+        },
+        {
+          "key": "B",
+          "text": "Do team CS sở hữu, public nội bộ, re-index mỗi tuần, không chia sẻ PII"
+        },
+        {
+          "key": "C",
+          "text": "Do team pháp chế sở hữu, access internal, re-index mỗi tháng, mask toàn bộ tên riêng"
+        },
+        {
+          "key": "D",
+          "text": "Do team sản phẩm sở hữu, public hoàn toàn, re-index theo yêu cầu, không giới hạn gì"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Ví dụ cụ thể trong slide: 'FAQ do team CS sở hữu, public nội bộ, re-index mỗi tuần, không chia PII'. Đây là mẫu governance tối thiểu cho một nguồn dữ liệu: xác định chủ sở hữu (ai chịu trách nhiệm khi nội dung sai), mức truy cập, chu kỳ làm mới, và ranh giới dữ liệu nhạy cảm.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-013",
+      "type": "mcq",
+      "prompt": "Vì sao bài giảng nhấn mạnh 'không index mọi thứ theo kiểu cứ nạp hết vào vector DB đã'?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì nạp bừa làm mất kiểm soát về quyền truy cập, độ tươi của dữ liệu và trách nhiệm cập nhật"
+        },
+        {
+          "key": "B",
+          "text": "Vì chi phí lưu trữ vector tăng theo cấp số nhân khiến ngân sách vượt kiểm soát nhanh chóng"
+        },
+        {
+          "key": "C",
+          "text": "Vì embedding model xử lý chậm hơn đáng kể khi collection vượt quá một triệu vector"
+        },
+        {
+          "key": "D",
+          "text": "Vì vector store có giới hạn cứng về số lượng record nên phải chọn lọc ngay từ đầu"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Đây là câu hỏi governance chứ không phải kỹ thuật. Nạp bừa dẫn tới: không biết ai chịu trách nhiệm khi nội dung sai, tài liệu restricted lọt vào kết quả của người không có quyền, nội dung cũ 2023 lẫn với bản mới, và PII bị embed vào vector không gỡ ra được. Chính ví dụ mở đầu bài giảng — agent trả sai chính sách hoàn tiền vì data là policy cũ 2023 — minh họa hậu quả này.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-014",
+      "type": "mcq",
+      "prompt": "Câu hỏi mở đầu bài giảng: 'Agent CS dùng GPT-4 nhưng trả sai chính sách hoàn tiền — vì data là policy cũ 2023'. Bài học rút ra là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Agent trả lời sai không hẳn do model yếu mà thường do không có đúng dữ liệu để suy luận"
+        },
+        {
+          "key": "B",
+          "text": "Chính sách hoàn tiền là loại nội dung quá phức tạp nên cần fine-tune riêng cho từng domain"
+        },
+        {
+          "key": "C",
+          "text": "Cần tăng temperature để model linh hoạt hơn khi gặp thông tin mâu thuẫn trong tài liệu"
+        },
+        {
+          "key": "D",
+          "text": "GPT-4 đã lỗi thời và cần nâng cấp lên thế hệ model mới hơn để cải thiện độ chính xác"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Đây là luận điểm xuyên suốt Day 7: chất lượng câu trả lời bị chặn bởi chất lượng dữ liệu, không phải bởi sức mạnh model. Một model frontier với policy cũ vẫn trả lời sai, trong khi một model rẻ hơn với chunk đúng và mới sẽ trả lời chính xác. Bài giảng kết luận: data quality và retrieval quality thường quyết định trải nghiệm thật hơn là đổi sang model đắt hơn.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-015",
+      "type": "mcq",
+      "prompt": "Short-term memory và long-term memory của agent khác nhau ở điểm nào về mặt vị trí lưu trữ?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cả hai đều nằm bên trong context window của phiên hiện tại nhưng khác nhau về thời gian tồn tại của dữ liệu được lưu"
+        },
+        {
+          "key": "B",
+          "text": "Short-term nằm trong vector store bên ngoài còn long-term nằm trong context window của phiên làm việc hiện tại"
+        },
+        {
+          "key": "C",
+          "text": "Short-term nằm trong context window còn long-term nằm ngoài, thường là vector store, DB hoặc profile store"
+        },
+        {
+          "key": "D",
+          "text": "Cả hai đều nằm bên ngoài context window nhưng khác nhau về tần suất truy xuất và cơ chế ghi dữ liệu khi cần dùng"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Short-term memory nằm TRONG context window: giữ lịch sử gần đây và task hiện tại, rẻ để dùng nhưng dễ đầy token, phù hợp session logic ngắn. Long-term memory nằm NGOÀI context window: thường là vector store, DB, profile store; phải truy xuất khi cần; phù hợp cho tri thức tích lũy và user history chọn lọc.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-016",
+      "type": "mcq",
+      "prompt": "Phát biểu 'Context window không phải là vector store' hàm ý điều gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Hai khái niệm này thuộc hai tầng kiến trúc khác nhau nên không thể so sánh trực tiếp"
+        },
+        {
+          "key": "B",
+          "text": "Vector store hoạt động chậm hơn context window nên chỉ dùng cho dữ liệu ít truy cập"
+        },
+        {
+          "key": "C",
+          "text": "Context window có dung lượng nhỏ hơn vector store nên chỉ chứa được một phần dữ liệu"
+        },
+        {
+          "key": "D",
+          "text": "Agent chỉ thật sự nhớ dài hạn khi có cơ chế truy xuất hoặc lưu trữ bên ngoài được thiết kế"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Nhiều người nhầm rằng context window lớn (1M token) đồng nghĩa với việc agent 'nhớ lâu'. Thực tế context window là bộ nhớ tạm của một lượt gọi — hết phiên là mất. Muốn agent nhớ dài hạn, phải chủ động thiết kế cơ chế lưu (ghi ra store) và cơ chế truy xuất (đọc lại đúng lúc). Đó là hai việc kỹ thuật riêng biệt, không tự có khi tăng context window.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-017",
+      "type": "mcq",
+      "prompt": "Chunking được định nghĩa là gì và lý do kỹ thuật quan trọng nhất buộc phải chunk là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Phân loại tài liệu theo chủ đề trước khi index; lý do là vector store yêu cầu phân vùng theo namespace"
+        },
+        {
+          "key": "B",
+          "text": "Nén tài liệu để tiết kiệm dung lượng lưu trữ; lý do là chi phí vector store tăng theo số byte"
+        },
+        {
+          "key": "C",
+          "text": "Dịch tài liệu sang định dạng chuẩn hóa; lý do là embedding model chỉ nhận đầu vào dạng Markdown"
+        },
+        {
+          "key": "D",
+          "text": "Chia tài liệu dài thành đoạn nhỏ để embed và index riêng; lý do là embedding model có giới hạn token input"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Chunking = chia tài liệu dài thành các đoạn nhỏ hơn để embed và index riêng. Slide nêu 4 lý do: (1) embedding model có giới hạn token input; (2) 1 file dài → 1 vector thì chỉ tìm được file chứ không tìm được đoạn liên quan; (3) chunk nhỏ cho retrieval chính xác hơn và inject ít nhiễu hơn; (4) đưa quá nhiều context không liên quan làm giảm chất lượng câu trả lời do model bị phân tán, tốn thêm token và latency.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-018",
+      "type": "mcq",
+      "prompt": "Nếu embed nguyên một file PDF dài thành MỘT vector duy nhất, hậu quả cụ thể là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vector sẽ vượt quá số chiều tối đa mà vector store hỗ trợ nên thao tác add sẽ báo lỗi"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ tìm được file nào liên quan chứ không xác định được đoạn nào trong file trả lời câu hỏi"
+        },
+        {
+          "key": "C",
+          "text": "Quá trình embed sẽ mất thời gian gấp nhiều lần nhưng chất lượng retrieval vẫn giữ nguyên"
+        },
+        {
+          "key": "D",
+          "text": "Cosine similarity luôn trả về giá trị âm do vector bị lệch khỏi phân phối chuẩn của model"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide ghi rõ: '1 file dài → 1 vector: chỉ tìm được file, không tìm được đoạn liên quan'. Đây là vấn đề về ĐỘ PHÂN GIẢI của retrieval. Vector là trung bình ngữ nghĩa của toàn file, nên một file chứa cả chính sách đổi trả, hoàn tiền và giao hàng sẽ có vector 'mờ' — không nổi bật ở chủ đề nào. Khi inject vào prompt, bạn buộc phải đưa cả file, gây nhiễu nặng.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-019",
+      "type": "mcq",
+      "prompt": "Ngưỡng token được khuyến nghị cho chunk hợp lý, và tỷ lệ overlap giữa các chunk là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "500–800 tokens với overlap 20–25% để đảm bảo mỗi chunk chứa đủ một section trọn vẹn"
+        },
+        {
+          "key": "B",
+          "text": "800–1000 tokens với overlap 15–20% để tận dụng tối đa giới hạn của embedding model"
+        },
+        {
+          "key": "C",
+          "text": "100–200 tokens với overlap 5–8% để giảm thiểu số lượng record trong vector store"
+        },
+        {
+          "key": "D",
+          "text": "200–500 tokens với overlap 10–15% để giữ ngữ cảnh tại điểm cắt giữa hai chunk"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide chỉ ra ba vùng: chunk quá to là > 1000 tokens (dính nhiều chủ đề, retrieve trúng nhưng inject rất nhiễu); chunk hợp lý là 200–500 tokens với overlap 10–15%; chunk quá nhỏ là < 50 tokens (mất ngữ cảnh, retrieve nhiều mảnh rời rạc, khó tổng hợp). Kỹ thuật overlap: lấy thêm 1–2 câu cuối của chunk trước làm phần đầu chunk sau.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-020",
+      "type": "mcq",
+      "prompt": "Chunk QUÁ TO (>1000 tokens) gây ra vấn đề gì, và điều gì KHÔNG phải là hệ quả của nó?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Gây tăng số lượng record trong store; nhưng không ảnh hưởng đến độ chính xác semantic"
+        },
+        {
+          "key": "B",
+          "text": "Gây mất ngữ cảnh nghiêm trọng ở điểm cắt; nhưng không ảnh hưởng đến chi phí token"
+        },
+        {
+          "key": "C",
+          "text": "Gây nhiễu khi inject vì dính nhiều chủ đề vào cùng một vector; nhưng không gây lỗi retrieve trượt"
+        },
+        {
+          "key": "D",
+          "text": "Gây quá tải bộ nhớ khi build index; nhưng không ảnh hưởng đến chất lượng câu trả lời cuối"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide mô tả chính xác: chunk quá to 'dính nhiều chủ đề vào cùng một vector, retrieve TRÚNG nhưng inject RẤT NHIỄU'. Điểm tinh tế là retrieval vẫn hoạt động — bạn vẫn tìm được đúng chunk chứa câu trả lời. Vấn đề nằm ở bước sau: chunk đó kèm theo nhiều nội dung không liên quan, làm LLM bị phân tán. Mất ngữ cảnh là vấn đề của chunk quá NHỎ, không phải quá to.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-021",
+      "type": "mcq",
+      "prompt": "Trong ví dụ FAQ, khi chunk quá nhỏ chỉ chứa 'Trong 30 ngày.' và người dùng hỏi 'đổi size', điều gì xảy ra?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cosine similarity giữa query và chunk vượt ngưỡng 0.9 nên câu trả lời cuối cùng của hệ thống sẽ rất chính xác"
+        },
+        {
+          "key": "B",
+          "text": "Vector store trả về lỗi ngay lập tức vì chunk không đủ số token tối thiểu để tạo ra một embedding hợp lệ"
+        },
+        {
+          "key": "C",
+          "text": "LLM tự suy luận bổ sung phần thông tin còn thiếu dựa trên kiến thức nền nên vẫn cho ra được đáp án đúng"
+        },
+        {
+          "key": "D",
+          "text": "Hệ thống retrieve chunk 'Q2: Đổi size được không?' nhưng thiếu ngữ cảnh nên LLM không đủ thông tin trả lời"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Đây là minh họa kinh điển: khi cắt Q và A thành hai chunk riêng, retrieval tìm đúng câu hỏi 'Q2: Đổi size được không?' nhưng phần trả lời '30 ngày' lại nằm ở chunk khác. LLM nhận được câu hỏi mà không có đáp án — thiếu ngữ cảnh để trả lời. Ngược lại chunk hợp lý giữ trọn cặp Q2+A2 nên LLM trả lời chính xác. Đây là lý do cần overlap và cắt theo đơn vị ngữ nghĩa.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-022",
+      "type": "mcq",
+      "prompt": "Trong ví dụ FAQ với chunk quá to (gộp cả Q1, Q2, Q3), truy vấn 'đổi size' dẫn tới kết quả gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Retrieve trượt hoàn toàn vì vector trung bình không còn gần với truy vấn về đổi size"
+        },
+        {
+          "key": "B",
+          "text": "Retrieve trả về cảnh báo vượt giới hạn token nên hệ thống tự động cắt bớt phần cuối chunk"
+        },
+        {
+          "key": "C",
+          "text": "Retrieve được cả 3 cặp Q–A nên LLM bị nhiễu bởi thông tin về hoàn tiền và ship quốc tế"
+        },
+        {
+          "key": "D",
+          "text": "Retrieve đúng chunk chứa Q2 nhưng score cosine giảm xuống dưới ngưỡng threshold mặc định"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide ghi: 'Query đổi size → retrieve cả 3 → LLM bị nhiễu bởi Q1, Q3'. Lưu ý điểm quan trọng: retrieval KHÔNG thất bại — chunk đó thật sự chứa câu trả lời nên vẫn được tìm thấy. Thất bại xảy ra ở bước generation: LLM phải đọc thêm thông tin về thời gian hoàn tiền (7 ngày) và ship quốc tế, dễ trộn lẫn con số hoặc trả lời lan man.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-023",
+      "type": "mcq",
+      "prompt": "Kỹ thuật overlap khi cắt chunk được thực hiện cụ thể như thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dịch chuyển ranh giới cắt sang trái một khoảng bằng 10% độ dài chunk trong lần index thứ hai"
+        },
+        {
+          "key": "B",
+          "text": "Nhân đôi toàn bộ chunk rồi lưu hai bản với metadata khác nhau để tăng khả năng trúng"
+        },
+        {
+          "key": "C",
+          "text": "Chèn phần tóm tắt của toàn tài liệu vào đầu mỗi chunk nhằm cung cấp bối cảnh tổng thể"
+        },
+        {
+          "key": "D",
+          "text": "Lấy thêm 1–2 câu cuối của chunk trước làm phần đầu của chunk sau để giữ ngữ cảnh tại điểm cắt"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide mô tả: 'Khi cắt chunk, lấy thêm 1–2 câu cuối của chunk trước làm phần đầu chunk sau. Giúp giữ ngữ cảnh tại điểm cắt.' Overlap giải quyết vấn đề: nếu một ý bị cắt đôi ngay giữa, cả hai chunk đều không đủ nghĩa. Overlap 10–15% đảm bảo ý đó xuất hiện trọn vẹn ở ít nhất một chunk. Đánh đổi là tăng nhẹ số token lưu trữ và chi phí embed.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-024",
+      "type": "mcq",
+      "prompt": "Chiến lược Fixed-size chunking có điểm mạnh và điểm yếu gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mạnh ở sự đơn giản, chunk đều và dễ kiểm soát cost; yếu ở chỗ cắt giữa câu hoặc giữa bảng"
+        },
+        {
+          "key": "B",
+          "text": "Mạnh ở chunk trọn ý và metadata section rõ ràng; yếu ở chỗ cần tài liệu có cấu trúc tốt"
+        },
+        {
+          "key": "C",
+          "text": "Mạnh ở việc tôn trọng ranh giới tự nhiên của văn bản; yếu ở chỗ vẫn cắt nếu một đoạn quá dài"
+        },
+        {
+          "key": "D",
+          "text": "Mạnh ở ranh giới đúng theo ý và không phụ thuộc heading; yếu ở chỗ cần tune ngưỡng cosine"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Bảng chiến lược nền tảng: Fixed-size cắt mỗi N token với overlap 10–15%. Mạnh: đơn giản, chunk đều, dễ kiểm soát cost (biết trước số chunk và chi phí embed). Yếu: cắt giữa câu, giữa bảng — vì thuật toán chỉ đếm token, không hiểu ngữ nghĩa. Phương án C mô tả Recursive, B mô tả Heading/structural, D mô tả Semantic.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-025",
+      "type": "mcq",
+      "prompt": "Recursive chunking hoạt động theo cơ chế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đệ quy chia đôi tài liệu cho đến khi mỗi phần nhỏ hơn giới hạn token của embedding model"
+        },
+        {
+          "key": "B",
+          "text": "Gọi LLM viết lại đoạn thành các mệnh đề độc lập rồi mỗi mệnh đề trở thành một chunk"
+        },
+        {
+          "key": "C",
+          "text": "Embed từng câu rồi cắt tại vị trí có độ tương đồng cosine giữa hai câu liền kề tụt mạnh"
+        },
+        {
+          "key": "D",
+          "text": "Thử tách theo \\n\\n rồi đến \\n rồi đến câu, cho đến khi đoạn vừa với kích thước mong muốn"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Recursive thử một chuỗi separator theo thứ tự ưu tiên: đoạn (\\n\\n) → dòng (\\n) → câu, dừng khi chunk vừa kích thước. Mạnh: tôn trọng ranh giới tự nhiên của văn bản, được coi là 'mặc định tốt'. Yếu: vẫn phải cắt cứng nếu gặp một đoạn quá dài không có separator nào bên trong. Phương án C là Proposition, D là Semantic.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-026",
+      "type": "mcq",
+      "prompt": "Semantic chunking khác biệt căn bản với Fixed-size ở chỗ nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Semantic embed từng câu và cắt tại điểm cosine giữa hai câu liền kề tụt mạnh, tức nơi có topic shift"
+        },
+        {
+          "key": "B",
+          "text": "Semantic cắt theo heading Markdown của tài liệu nên mỗi chunk luôn trùng khớp với một section hoàn chỉnh"
+        },
+        {
+          "key": "C",
+          "text": "Semantic index từng câu riêng lẻ rồi inject thêm k câu xung quanh vào prompt khi trả kết quả về cho LLM"
+        },
+        {
+          "key": "D",
+          "text": "Semantic dùng LLM đọc toàn bộ tài liệu một lượt rồi tự quyết định vị trí cắt tối ưu nhất cho từng đoạn"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Semantic chunking phát hiện ranh giới CHỦ ĐỀ thay vì đếm token: embed từng câu, tính cosine giữa các câu liền kề, và cắt tại vị trí độ tương đồng tụt mạnh — dấu hiệu chuyển sang chủ đề mới. Mạnh: ranh giới đúng theo ý, không phụ thuộc vào việc tài liệu có heading hay không. Yếu: tốn embedding lúc ingest và cần tune ngưỡng. Phương án C là Sentence-window.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-027",
+      "type": "mcq",
+      "prompt": "Sentence-window chunking giải quyết vấn đề gì mà chunk cố định không giải quyết được?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bảo toàn cấu trúc bảng biểu bằng cách kèm lại header dòng cho mỗi phần của bảng"
+        },
+        {
+          "key": "B",
+          "text": "Tự động phát hiện điểm chuyển chủ đề mà không cần tính toán embedding cho từng câu"
+        },
+        {
+          "key": "C",
+          "text": "Giảm số lượng record trong vector store nhờ gộp nhiều câu vào cùng một bản ghi"
+        },
+        {
+          "key": "D",
+          "text": "Cho phép retrieve rất chính xác ở mức câu nhưng vẫn inject đủ ngữ cảnh nhờ mở rộng ±k câu"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Sentence-window tách bạch hai việc vốn bị gộp: ĐƠN VỊ TÌM KIẾM và ĐƠN VỊ INJECT. Index ở mức 1 câu để vector rất sắc nét (retrieve chính xác cao), nhưng khi trả kết quả thì mở rộng ra ±k câu xung quanh để LLM có đủ ngữ cảnh. Yếu: số record lớn và cần lưu vị trí câu để tra ngược. Phương án A mô tả Table/layout-aware.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-028",
+      "type": "mcq",
+      "prompt": "Proposition/atomic chunking có ưu điểm nổi bật và rủi ro lớn nhất là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ưu điểm là tốc độ index nhanh nhất; rủi ro là phải lưu thêm quan hệ cha–con phức tạp"
+        },
+        {
+          "key": "B",
+          "text": "Ưu điểm là mỗi chunk tự đủ nghĩa và ít nhiễu nhất; rủi ro là đắt nhất và LLM có thể bóp méo nội dung"
+        },
+        {
+          "key": "C",
+          "text": "Ưu điểm là không cần embedding model; rủi ro là phụ thuộc chất lượng parser theo ngôn ngữ"
+        },
+        {
+          "key": "D",
+          "text": "Ưu điểm là chi phí ingest thấp nhất; rủi ro là mất hoàn toàn ngữ cảnh giữa các mệnh đề"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Proposition dùng LLM viết lại đoạn văn thành các mệnh đề độc lập, mỗi mệnh đề là một chunk. Mạnh: mỗi chunk tự đủ nghĩa, ít nhiễu nhất trong tất cả chiến lược. Yếu: đắt nhất (phải gọi LLM cho toàn corpus) và LLM có thể bóp méo nội dung khi viết lại — đây là rủi ro nghiêm trọng vì sai lệch được đưa thẳng vào knowledge base.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-029",
+      "type": "mcq",
+      "prompt": "Parent-child chunking hoạt động thế nào và vì sao rất phổ biến trong production?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Index theo nhiều tầng summary rồi search từ trên xuống để thu hẹp dần phạm vi tìm kiếm"
+        },
+        {
+          "key": "B",
+          "text": "Index chunk nhỏ để search chính xác rồi inject chunk cha lớn hơn, cân bằng precision và ngữ cảnh"
+        },
+        {
+          "key": "C",
+          "text": "Index đồng thời cả chunk cha lẫn chunk con rồi lấy kết quả nào có cosine cao hơn"
+        },
+        {
+          "key": "D",
+          "text": "Index chunk lớn để search rồi inject chunk nhỏ hơn nhằm tiết kiệm token cho prompt"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Parent-child: index chunk NHỎ để search (vector sắc nét, precision cao), nhưng khi trả về thì inject chunk CHA lớn hơn (đủ ngữ cảnh cho LLM). Slide ghi 'rất phổ biến trong production' vì nó giải quyết đúng mâu thuẫn cốt lõi của chunking: nhỏ thì tìm chính xác nhưng thiếu ngữ cảnh, to thì đủ ngữ cảnh nhưng nhiễu. Yếu: cần lưu quan hệ cha–con. Phương án D là Hierarchical.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-030",
+      "type": "mcq",
+      "prompt": "Hierarchical chunking phù hợp với loại bài toán nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "PDF chứa nhiều bảng biểu cần bảo toàn quan hệ giữa header dòng và dữ liệu"
+        },
+        {
+          "key": "B",
+          "text": "Tài liệu ngắn dưới 20 trang cần retrieval độ chính xác cực cao ở mức từng câu"
+        },
+        {
+          "key": "C",
+          "text": "Source code cần giữ nguyên vẹn signature và import của mỗi hàm khi cắt"
+        },
+        {
+          "key": "D",
+          "text": "Corpus rất lớn có câu hỏi tổng hợp, cần nhiều tầng doc summary → section → paragraph"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Hierarchical dựng nhiều tầng: doc summary → section → paragraph, và search đi từ trên xuống. Mạnh: tốt cho corpus rất lớn, hỗ trợ câu hỏi tổng hợp (kiểu 'tài liệu này nói về gì', 'so sánh các chính sách') mà chunk phẳng không trả lời được. Yếu: pipeline phức tạp và phải sinh summary cho từng tầng. Cây quyết định trong slide ghi: 'Corpus rất lớn, có câu hỏi tổng hợp → Hierarchical'.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-031",
+      "type": "mcq",
+      "prompt": "Code-aware (AST) chunking đảm bảo điều gì mà fixed-size không thể?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tự động phát hiện ranh giới chủ đề dựa trên độ tương đồng ngữ nghĩa giữa các dòng"
+        },
+        {
+          "key": "B",
+          "text": "Không bao giờ cắt giữa hàm; giữ nguyên import và signature cho mỗi đơn vị code"
+        },
+        {
+          "key": "C",
+          "text": "Mỗi chunk luôn có kích thước bằng nhau nên chi phí embed được dự đoán chính xác"
+        },
+        {
+          "key": "D",
+          "text": "Chuyển đổi source code sang Markdown trước khi cắt để tối ưu số token sử dụng"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Code-aware cắt theo hàm/class bằng AST parser (cây cú pháp trừu tượng). Mạnh: không bao giờ cắt giữa hàm, giữ import và signature — cực kỳ quan trọng vì một hàm bị cắt đôi thì cả hai nửa đều vô dụng cho việc trả lời câu hỏi về code. Yếu: cần parser riêng cho từng ngôn ngữ lập trình, nên chi phí bảo trì tăng theo số ngôn ngữ hỗ trợ.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-032",
+      "type": "mcq",
+      "prompt": "Table/layout-aware chunking giải quyết vấn đề đặc thù nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Giữ nguyên bảng và kèm lại header dòng cho mỗi phần bảng để bảng không mất nghĩa khi cắt"
+        },
+        {
+          "key": "B",
+          "text": "Giảm số lượng token cần embed khi tài liệu chứa nhiều hình ảnh và biểu đồ phức tạp"
+        },
+        {
+          "key": "C",
+          "text": "Tự động chuyển bảng thành văn bản mô tả để embedding model dễ hiểu nội dung hơn"
+        },
+        {
+          "key": "D",
+          "text": "Phát hiện và loại bỏ các bảng không chứa thông tin hữu ích trước khi đưa vào index"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Khi một bảng dài bị cắt ngang, phần dưới mất header nên các con số trở nên vô nghĩa — không biết cột nào là gì. Table-aware giữ nguyên bảng và lặp lại header dòng cho mỗi phần. Mạnh: bảng không bị mất nghĩa khi cắt. Yếu: cần layout parser cho PDF, vốn là bài toán khó vì PDF không lưu cấu trúc bảng một cách tường minh.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-033",
+      "type": "mcq",
+      "prompt": "Theo cây quyết định chọn chunking, khi 'retrieval trúng chunk nhưng LLM thiếu ngữ cảnh' thì nên làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chuyển sang Parent-child hoặc Sentence-window để mở rộng phần inject mà không đổi phần index"
+        },
+        {
+          "key": "B",
+          "text": "Giảm kích thước chunk xuống dưới 200 token hoặc chuyển hẳn sang Proposition chunking cho toàn bộ corpus"
+        },
+        {
+          "key": "C",
+          "text": "Chuyển sang Hierarchical để bổ sung thêm tầng summary cho toàn bộ corpus hiện có trong knowledge base"
+        },
+        {
+          "key": "D",
+          "text": "Tăng giá trị top-k lên gấp đôi và đồng thời hạ score threshold xuống mức thấp hơn ngưỡng hiện tại"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Triệu chứng 'trúng nhưng thiếu ngữ cảnh' nghĩa là chunk đang quá nhỏ so với nhu cầu của LLM. Giải pháp đúng là giữ nguyên độ sắc nét của phần tìm kiếm nhưng mở rộng phần đưa vào prompt — đó chính xác là cơ chế của Parent-child và Sentence-window. Ngược lại, khi 'trúng chunk nhưng LLM bị nhiễu' thì mới cần chunk nhỏ hơn hoặc Proposition.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-034",
+      "type": "mcq",
+      "prompt": "Theo cây quyết định, tài liệu không có cấu trúc và văn bản chảy dài nên bắt đầu bằng chiến lược nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Proposition ngay từ đầu vì đây là chiến lược cho chunk tự đủ nghĩa nhất hiện nay"
+        },
+        {
+          "key": "B",
+          "text": "Recursive, sau đó thử Semantic nếu kết quả retrieval chưa đạt yêu cầu mong muốn"
+        },
+        {
+          "key": "C",
+          "text": "Heading/structural rồi tinh chỉnh dần bằng cách bổ sung metadata section thủ công"
+        },
+        {
+          "key": "D",
+          "text": "Sentence-window vì nó không phụ thuộc vào việc tài liệu có heading hay không"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Cây quyết định ghi: 'Không có cấu trúc, văn bản chảy dài → Recursive, rồi thử Semantic'. Logic ở đây là leo thang chi phí: Recursive rẻ và không cần embed thêm, nên thử trước; nếu chưa đủ tốt mới chuyển sang Semantic vốn tốn embedding lúc ingest và cần tune ngưỡng. Nguyên tắc chung của slide: bắt đầu bằng strategy đơn giản nhất chạy được.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-035",
+      "type": "mcq",
+      "prompt": "Nguyên tắc được nhấn mạnh khi lựa chọn và tối ưu chiến lược chunking là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Luôn thử nghiệm cả bảy chiến lược song song rồi chọn phương án cho cosine trung bình cao nhất"
+        },
+        {
+          "key": "B",
+          "text": "Bắt đầu bằng strategy đơn giản nhất chạy được, dựng bộ eval query, rồi nâng cấp dựa trên số đo"
+        },
+        {
+          "key": "C",
+          "text": "Ưu tiên chiến lược nào cho ra số lượng chunk ít nhất để tiết kiệm chi phí lưu trữ và embed"
+        },
+        {
+          "key": "D",
+          "text": "Nên chọn Proposition hoặc Hierarchical ngay từ đầu vì đây là các phương pháp hiện đại nhất"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide ghi nguyên văn: 'Bắt đầu bằng strategy đơn giản nhất chạy được, dựng bộ eval query, rồi mới nâng cấp dựa trên số đo — không nhảy thẳng vào Proposition vì nghe hiện đại.' Đây là cùng tinh thần với nguyên tắc rule/workflow/agent ở Day 3: leo thang độ phức tạp dựa trên bằng chứng, không dựa trên cảm tính hay xu hướng.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-036",
+      "type": "mcq",
+      "prompt": "Lab 7 yêu cầu implement bao nhiêu chiến lược chunking và mục đích của yêu cầu đó là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Năm chiến lược gồm ba nhóm nền tảng và hai nhóm ngữ nghĩa để so sánh chi phí ingest"
+        },
+        {
+          "key": "B",
+          "text": "Một chiến lược duy nhất là Heading/structural vì đây là lựa chọn mặc định tốt nhất"
+        },
+        {
+          "key": "C",
+          "text": "Ba chiến lược nền tảng rồi so sánh trên cùng một tập query, để thấy chunking là quyết định thiết kế"
+        },
+        {
+          "key": "D",
+          "text": "Bảy chiến lược đầy đủ để nắm được toàn bộ phổ giải pháp trước khi bước sang Day 8"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide ghi: 'Ba strategy nền tảng — lab yêu cầu implement cả ba rồi so sánh trên cùng một tập query, để thấy chunking là quyết định thiết kế, không phải tham số mặc định.' Ba strategy đó là Fixed-size, Recursive, và Heading/structural. Các strategy còn lại là hướng mở rộng cho Day 8 và project cuối phase.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-037",
+      "type": "mcq",
+      "prompt": "Vì sao slide nói 'đưa quá nhiều context không liên quan có thể làm giảm chất lượng câu trả lời'?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì model bị phân tán bởi thông tin thừa, đồng thời tốn thêm token và tăng độ trễ phản hồi"
+        },
+        {
+          "key": "B",
+          "text": "Vì embedding model tự động giảm trọng số của các chunk có độ dài vượt mức trung bình"
+        },
+        {
+          "key": "C",
+          "text": "Vì vector store sẽ từ chối trả về kết quả khi tổng số token vượt ngưỡng cấu hình"
+        },
+        {
+          "key": "D",
+          "text": "Vì LLM sẽ ưu tiên chunk xuất hiện cuối cùng và bỏ qua hoàn toàn các chunk phía trước"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide nêu ba hệ quả: model bị phân tán, tốn thêm token, và tăng latency. Đây cũng liên hệ với hiện tượng 'Lost in the Middle' đã học ở Day 4 — khi context dài, thông tin ở giữa dễ bị bỏ sót. Vì vậy mục tiêu của chunking không phải là 'đưa được nhiều nhất' mà là 'đưa đúng nhất'.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-038",
+      "type": "mcq",
+      "prompt": "Chiến lược chunking nào được slide gọi là 'phổ biến nhất' trong các chiến lược cơ bản?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Theo ranh giới ngữ nghĩa phát hiện được bằng cách so sánh embedding các câu"
+        },
+        {
+          "key": "B",
+          "text": "Theo từng câu hoặc từng paragraph tùy vào độ dài trung bình của tài liệu"
+        },
+        {
+          "key": "C",
+          "text": "Theo heading hoặc section của tài liệu vì chunk trọn ý và có metadata rõ"
+        },
+        {
+          "key": "D",
+          "text": "Theo số token cố định trong khoảng 200 đến 500 token cho mỗi chunk"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide liệt kê 'Chiến lược phổ biến: theo heading/section (PHỔ BIẾN NHẤT); theo số token cố định (200–500); theo câu/paragraph.' Cây quyết định cũng khẳng định: 'Tài liệu có heading/Markdown tốt → Heading/structural (BẮT ĐẦU Ở ĐÂY)'. Lý do: heading do con người viết ra vốn đã đánh dấu ranh giới ý, nên tận dụng được cấu trúc sẵn có mà không tốn thêm chi phí tính toán.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-039",
+      "type": "mcq",
+      "prompt": "Trong Failure Demo, chunk xấu cho cosine 0.61 còn chunk tốt cho 0.89 với cùng query 'Chính sách đổi trả áp dụng trong bao lâu?'. Kết luận quan trọng nhất là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cần tăng top-k lên nhiều hơn để bù đắp cho việc chunk chưa được tối ưu hóa"
+        },
+        {
+          "key": "B",
+          "text": "Ngưỡng score threshold nên được hạ xuống 0.6 để không bỏ sót các chunk có ích"
+        },
+        {
+          "key": "C",
+          "text": "Cùng model và cùng query nhưng kết quả khác hoàn toàn chỉ vì chất lượng chunk khác nhau"
+        },
+        {
+          "key": "D",
+          "text": "Cần nâng cấp lên embedding model có số chiều lớn hơn để cải thiện điểm cosine"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide kết luận: 'Cùng model, cùng query — khác nhau hoàn toàn vì chất lượng chunk.' Chunk xấu trả về đoạn trộn lẫn 'giao hàng miễn phí đơn trên 500k... Đổi trả trong 30 ngày. Liên hệ hotline 1900...' khiến LLM trả lời nhiễu và thiếu chi tiết. Chunk tốt theo section trả về nội dung trọn vẹn nên LLM trả lời chính xác kèm nguồn. Đây là bằng chứng thực nghiệm cho luận điểm data quality > model quality.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-040",
+      "type": "mcq",
+      "prompt": "Điểm khác biệt giữa nhóm chiến lược 'ngữ nghĩa' (Semantic, Sentence-window, Proposition) và nhóm 'nền tảng' là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Nhóm ngữ nghĩa yêu cầu vector store thương mại còn nhóm nền tảng chạy được với Chroma"
+        },
+        {
+          "key": "B",
+          "text": "Nhóm ngữ nghĩa tôn trọng ngữ nghĩa thay vì đếm token, đắt hơn khi ingest nhưng tăng precision rõ rệt"
+        },
+        {
+          "key": "C",
+          "text": "Nhóm ngữ nghĩa tạo ra ít chunk hơn đáng kể nên tiết kiệm được chi phí lưu trữ dài hạn"
+        },
+        {
+          "key": "D",
+          "text": "Nhóm ngữ nghĩa chỉ áp dụng được cho tiếng Anh còn nhóm nền tảng hỗ trợ đa ngôn ngữ"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide tổng kết nhóm ngữ nghĩa: 'tôn trọng ngữ nghĩa thay vì đếm token. Đắt hơn khi ingest (cần embed hoặc gọi LLM), nhưng thường tăng retrieval precision rõ rệt trên tài liệu dài, ít cấu trúc.' Đây là đánh đổi kinh điển: chi phí một lần lúc ingest để đổi lấy chất lượng ở mọi lần query về sau. Với corpus truy vấn nhiều, đánh đổi này thường có lợi.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-041",
+      "type": "mcq",
+      "prompt": "Embedding model được định nghĩa chính xác là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Hàm biến dữ liệu thô (text, ảnh, audio) thành vector số cùng kích thước để đo khoảng cách"
+        },
+        {
+          "key": "B",
+          "text": "Thuật toán nén dữ liệu nhằm giảm dung lượng lưu trữ mà vẫn giữ được thông tin gốc"
+        },
+        {
+          "key": "C",
+          "text": "Bộ phân loại gán nhãn chủ đề cho tài liệu dựa trên tần suất xuất hiện của từ khóa"
+        },
+        {
+          "key": "D",
+          "text": "Mô hình sinh văn bản mới dựa trên ngữ cảnh đầu vào và phân phối xác suất token"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide định nghĩa: 'Embedding model là hàm biến dữ liệu thô (text, ảnh, audio) thành vector số CÙNG KÍCH THƯỚC. Sau đó, đo khoảng cách giữa các vector = đo độ giống nhau về nghĩa.' Điểm mấu chốt là 'cùng kích thước' và 'cùng không gian' — chỉ khi đó mới so sánh được text với ảnh, hoặc tiếng Việt với tiếng Anh.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-042",
+      "type": "mcq",
+      "prompt": "Bài toán 'khoảng cách' mà embedding giải quyết được minh họa bằng ba trường hợp nào trong slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Khác domain cùng thuật ngữ, khác ngữ cảnh cùng từ vựng, khác tone cùng thông điệp"
+        },
+        {
+          "key": "B",
+          "text": "Khác ngôn ngữ cùng nghĩa, khác pose cùng chủ thể, khác modality cùng nội dung"
+        },
+        {
+          "key": "C",
+          "text": "Cùng ngôn ngữ khác độ dài, cùng định dạng khác kích thước, cùng chủ đề khác thời điểm"
+        },
+        {
+          "key": "D",
+          "text": "Khác tác giả cùng phong cách, khác nguồn cùng chủ đề, khác format cùng cấu trúc"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Ba minh họa: (1) 'chính sách hoàn tiền' ↔ 'refund policy' — khác ngôn ngữ cùng nghĩa; (2) ảnh mèo ngồi ↔ ảnh mèo nằm — khác pose cùng chủ thể; (3) text 'a cat on a sofa' ↔ ảnh mèo trên sofa — khác modality cùng nội dung. Con người nhìn là biết giống nhau, nhưng máy cần biến tất cả thành số trong cùng không gian rồi mới đo được.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-043",
+      "type": "mcq",
+      "prompt": "Trong lịch sử phát triển embedding, One-Hot/BOW thập niên 1990s có hạn chế cốt lõi nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ma trận thưa tốn bộ nhớ khi từ điển lớn, và hoàn toàn không hiểu ngữ nghĩa giữa các từ"
+        },
+        {
+          "key": "B",
+          "text": "Yêu cầu tài nguyên GPU khổng lồ nên chi phí triển khai và độ trễ đều rất cao"
+        },
+        {
+          "key": "C",
+          "text": "Vector tĩnh nên một từ chỉ có duy nhất một biểu diễn bất kể ngữ cảnh câu chứa nó"
+        },
+        {
+          "key": "D",
+          "text": "Xử lý tuần tự bằng LSTM nên tốc độ huấn luyện chậm và khó song song hóa"
+        }
+      ],
+      "answer": "A",
+      "explanation": "One-Hot/BOW biểu diễn từ dạng thưa (sparse) với kích thước bằng từ điển — mỗi từ là một vector toàn số 0 trừ một vị trí bằng 1. Hệ quả: tốn bộ nhớ khi từ điển lớn, và quan trọng hơn là mọi cặp từ đều cách đều nhau, không mã hóa được quan hệ ngữ nghĩa. Phương án C là hạn chế của Word2Vec, D của ELMo, B của BERT/GPT.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-044",
+      "type": "mcq",
+      "prompt": "Word2Vec/GloVe (2013) mang lại đột phá gì nhưng vẫn còn vướng vấn đề nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đột phá ở embedding động thay đổi theo ngữ cảnh câu; vướng ở chỗ mạng LSTM xử lý tuần tự nên huấn luyện chậm"
+        },
+        {
+          "key": "B",
+          "text": "Đột phá ở vector dày học được quan hệ ngữ nghĩa; vướng ở chỗ vector tĩnh nên không xử lý được từ đa nghĩa"
+        },
+        {
+          "key": "C",
+          "text": "Đột phá ở cơ chế Self-Attention hiểu ngữ cảnh đa chiều; vướng ở chi phí tính toán và độ trễ triển khai rất lớn"
+        },
+        {
+          "key": "D",
+          "text": "Đột phá ở tốc độ xử lý cực nhanh không cần huấn luyện; vướng ở việc tốn nhiều bộ nhớ khi kích thước từ điển lớn"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Word2Vec/GloVe mở ra kỷ nguyên vector DÀY (dense): biến từ thành vector có số chiều cố định, các từ cùng ngữ cảnh đứng gần nhau — lần đầu tiên máy học được quan hệ ngữ nghĩa. Hạn chế: vector TĨNH, mỗi từ chỉ có một biểu diễn duy nhất, nên không giải quyết được từ đa nghĩa (homonyms) — 'bank' trong ngân hàng và bờ sông có cùng một vector.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-045",
+      "type": "mcq",
+      "prompt": "ELMo/CoVe (2018) đóng góp gì cho sự phát triển của embedding?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Embedding động đầu tiên dùng LSTM: một từ có nhiều vector tùy vào câu chứa nó"
+        },
+        {
+          "key": "B",
+          "text": "Chuyển từ biểu diễn thưa sang biểu diễn dày giúp tối ưu không gian lưu trữ vượt trội"
+        },
+        {
+          "key": "C",
+          "text": "Giới thiệu kiến trúc Transformer với Self-Attention làm nền tảng cho các LLM hiện đại"
+        },
+        {
+          "key": "D",
+          "text": "Cho phép so sánh trực tiếp giữa các modality khác nhau như text, ảnh và audio"
+        }
+      ],
+      "answer": "A",
+      "explanation": "ELMo/CoVe là embedding NGỮ CẢNH đầu tiên, dùng mạng LSTM. Đột phá: một từ có thể có nhiều vector khác nhau tùy vào câu chứa nó — giải quyết được bài toán từ đa nghĩa mà Word2Vec bó tay. Hạn chế: LSTM xử lý tuần tự nên huấn luyện chậm, và khả năng ghi nhớ ngữ cảnh dài (long-range dependency) còn hạn chế.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-046",
+      "type": "mcq",
+      "prompt": "Theo bảng so sánh kiến trúc, BERT/GPT (2019–nay) có nhược điểm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không giải quyết được hiện tượng từ đa nghĩa do vector biểu diễn mang tính tĩnh"
+        },
+        {
+          "key": "B",
+          "text": "Khả năng ghi nhớ ngữ cảnh dài bị hạn chế do cơ chế xử lý tuần tự của mạng nơ-ron"
+        },
+        {
+          "key": "C",
+          "text": "Ma trận biểu diễn quá thưa nên tiêu tốn nhiều bộ nhớ khi kích thước từ điển tăng lên"
+        },
+        {
+          "key": "D",
+          "text": "Yêu cầu tài nguyên tính toán khổng lồ, chi phí triển khai cao và độ trễ lớn hơn các thế hệ trước"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Bảng so sánh ghi rõ nhược điểm của BERT/GPT: yêu cầu tài nguyên tính toán khổng lồ (GPU) để chạy và finetune; chi phí triển khai cao và độ trễ lớn hơn các thế hệ trước. Nhận xét tổng kết của slide: 'Sự phát triển đi từ đơn giản đến phức tạp, đánh đổi chi phí tài nguyên để lấy khả năng hiểu sâu sắc ngữ nghĩa của ngôn ngữ.'",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-047",
+      "type": "mcq",
+      "prompt": "Công thức cosine similarity là A·B / (‖A‖ × ‖B‖). Việc chia cho tích hai độ dài có tác dụng gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Triệt tiêu norm nên chỉ còn đo hướng: 1 là cùng hướng, 0 là vuông góc, −1 là ngược hướng"
+        },
+        {
+          "key": "B",
+          "text": "Chuẩn hóa các chiều về cùng đơn vị đo để tránh chiều nào đó chi phối kết quả cuối"
+        },
+        {
+          "key": "C",
+          "text": "Đưa kết quả về thang điểm phần trăm để dễ so sánh giữa các cặp vector khác nhau"
+        },
+        {
+          "key": "D",
+          "text": "Tăng tốc độ tính toán bằng cách giảm số phép nhân cần thực hiện trên từng chiều"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide giải thích: 'Mẫu số chia cho hai độ dài → norm bị triệt tiêu. 1 = cùng hướng, 0 = vuông góc, −1 = ngược.' Đây là lý do cosine phù hợp với text: một truy vấn 5 từ và cả trang policy có độ dài vector rất khác nhau, nhưng nếu cùng chủ đề thì hướng vẫn gần nhau. Loại bỏ độ lớn chính là loại bỏ ảnh hưởng của độ dài văn bản.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-048",
+      "type": "mcq",
+      "prompt": "Câu hỏi gốc để quyết định dùng Cosine hay Euclidean là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Số chiều của vector lớn hơn hay nhỏ hơn ngưỡng một nghìn chiều?"
+        },
+        {
+          "key": "B",
+          "text": "Độ lớn của vector có mang thông tin cần so sánh hay không?"
+        },
+        {
+          "key": "C",
+          "text": "Vector store đang dùng có hỗ trợ sẵn phép đo khoảng cách đó hay không?"
+        },
+        {
+          "key": "D",
+          "text": "Dữ liệu đầu vào là văn bản hay là hình ảnh và âm thanh đa phương tiện?"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide đặt câu hỏi gốc: 'độ lớn của vector có mang thông tin cần so sánh hay không?' Nếu độ lớn là nhiễu (như độ dài văn bản) thì dùng cosine để triệt tiêu nó. Nếu độ lớn là thông tin thật (như khoảng cách GPS, giá trị cảm biến) thì phải dùng Euclidean vì chuẩn hóa sẽ làm mất thông tin quan trọng.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-049",
+      "type": "mcq",
+      "prompt": "Trường hợp nào sau đây nên dùng Euclidean distance thay vì Cosine?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tính khoảng cách giữa hai điểm GPS vì 2 km và 200 km khác nhau thật, không được chuẩn hóa mất"
+        },
+        {
+          "key": "B",
+          "text": "Xếp hạng mức độ liên quan giữa các chunk văn bản trong một knowledge base nội bộ của doanh nghiệp"
+        },
+        {
+          "key": "C",
+          "text": "Tìm tài liệu viết bằng tiếng Anh tương ứng với một câu hỏi được người dùng đặt bằng tiếng Việt"
+        },
+        {
+          "key": "D",
+          "text": "So sánh truy vấn 'hoàn tiền' chỉ năm từ với toàn bộ trang policy nói về chính sách hoàn tiền"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide nêu: dùng Euclidean khi 'độ lớn là thông tin thật, không phải nhiễu, và các chiều cùng đơn vị/cùng scale. Cần khoảng cách tuyệt đối: toạ độ, cảm biến, image feature, clustering (k-means). Ví dụ: hai điểm GPS — 2 km và 200 km khác nhau thật, không được chuẩn hóa mất.' Các phương án còn lại đều là bài toán text embedding, nơi cosine phù hợp hơn.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-050",
+      "type": "mcq",
+      "prompt": "Vì sao slide kết luận 'mặc định cứ dùng cosine cho text'?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì cosine tính toán nhanh hơn Euclidean khoảng ba lần khi làm việc với vector có số chiều lớn hàng nghìn"
+        },
+        {
+          "key": "B",
+          "text": "Vì mọi vector store thương mại hiện nay đều chỉ hỗ trợ duy nhất phép đo cosine similarity chứ không có lựa chọn khác"
+        },
+        {
+          "key": "C",
+          "text": "Vì phần lớn embedding model hiện đại trả vector đã normalize, khi đó cosine và Euclidean xếp hạng giống nhau"
+        },
+        {
+          "key": "D",
+          "text": "Vì Euclidean cho kết quả sai lệch hoàn toàn khi số chiều của vector vượt quá ngưỡng một nghìn chiều"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide ghi: 'Khi vector đã normalize về độ dài 1, cosine và Euclidean xếp hạng giống nhau. Phần lớn embedding model hiện đại đều trả vector đã normalize → mặc định cứ dùng cosine cho text.' Điểm tinh tế: không phải Euclidean sai, mà là trong trường hợp vector đã chuẩn hóa thì hai phép đo cho cùng thứ tự xếp hạng, nên chọn cosine vì quen thuộc và diễn giải dễ hơn.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-051",
+      "type": "mcq",
+      "prompt": "Bảng ví dụ score cho thấy 'Chính sách hoàn tiền' vs 'Refund policy' đạt cosine khoảng 0.82. Điều này chứng minh năng lực gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Điểm số này thấp hơn ngưỡng 0.87 nên hai cụm từ chỉ được xếp vào nhóm liên quan nhẹ với nhau"
+        },
+        {
+          "key": "B",
+          "text": "Model đã được fine-tune riêng cho cặp ngôn ngữ Việt–Anh trong lĩnh vực tài chính và ngân hàng"
+        },
+        {
+          "key": "C",
+          "text": "Hệ thống đã tự động dịch cụm tiếng Việt sang tiếng Anh trước khi thực hiện phép so sánh vector"
+        },
+        {
+          "key": "D",
+          "text": "Embedding model hiểu nghĩa cross-lingual — hai cụm từ khác ngôn ngữ vẫn gần nhau trong không gian vector"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide nhấn mạnh: 'Embedding model hiểu nghĩa cross-lingual: hoàn tiền và refund gần nhau dù khác ngôn ngữ. Đây là sức mạnh so với keyword search.' Keyword search sẽ trả về 0 kết quả vì không có ký tự nào trùng nhau. Embedding mã hóa Ý NGHĨA nên vượt qua rào cản ngôn ngữ mà không cần bước dịch tường minh nào.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-052",
+      "type": "mcq",
+      "prompt": "Theo bảng ví dụ score, cặp 'Chính sách hoàn tiền' vs 'Cách giao hàng nhanh' đạt khoảng 0.52 được diễn giải là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Trùng lặp nội dung, cần được gộp lại trong quá trình dedup knowledge base"
+        },
+        {
+          "key": "B",
+          "text": "Không liên quan, nên bị loại bỏ hoàn toàn ở mọi ngưỡng score threshold thông dụng"
+        },
+        {
+          "key": "C",
+          "text": "Liên quan — cùng thuộc miền chính sách bán hàng nhưng không cùng chủ đề cụ thể"
+        },
+        {
+          "key": "D",
+          "text": "Rất gần nghĩa, có thể coi là hai cách diễn đạt của cùng một khái niệm"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Bảng score có 4 mức: ~0.87 'Quy định đổi trả' = rất gần nghĩa; ~0.52 'Cách giao hàng nhanh' = liên quan; ~0.31 'Thời tiết hôm nay' = không liên quan; ~0.82 'Refund policy' = cross-lingual. Mức 0.52 nằm ở vùng xám — cùng miền chính sách bán hàng nên không hoàn toàn xa lạ, nhưng chủ đề khác. Đây chính là lý do cần score threshold để lọc.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-053",
+      "type": "mcq",
+      "prompt": "Use case 'Dedup' bằng embedding hoạt động theo cơ chế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Gom các vector nằm gần nhau thành từng nhóm riêng rồi gán nhãn chủ đề tương ứng cho mỗi nhóm"
+        },
+        {
+          "key": "B",
+          "text": "Embed ý định của người dùng cùng với từng item rồi xếp hạng danh sách gợi ý theo độ tương đồng"
+        },
+        {
+          "key": "C",
+          "text": "So cosine giữa các cặp và đánh dấu cặp vượt ngưỡng threshold để phát hiện nội dung trùng"
+        },
+        {
+          "key": "D",
+          "text": "Embed cả truy vấn lẫn tài liệu rồi trả về những kết quả đạt điểm cosine similarity cao nhất"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Bảng use case: Dedup = 'So cosine giữa các cặp, đánh dấu cặp > threshold'. Ví dụ thực tế: phát hiện 2 bài FAQ nội dung gần giống nhau để gộp lại. Đây là bước vệ sinh knowledge base quan trọng, vì nội dung trùng lặp làm loãng kết quả top-k. Phương án A là Clustering, B là Semantic search, D là Recommendation.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-054",
+      "type": "mcq",
+      "prompt": "Use case Clustering bằng embedding được minh họa bằng ví dụ nào trong slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mười nghìn ticket CS được tự động phân thành khoảng mười lăm nhóm chủ đề"
+        },
+        {
+          "key": "B",
+          "text": "User hỏi 'trả hàng' rồi tìm được chunk 'chính sách đổi trả' dù không trùng từ nào"
+        },
+        {
+          "key": "C",
+          "text": "Hai bài FAQ có nội dung gần giống nhau được phát hiện và đề xuất gộp lại"
+        },
+        {
+          "key": "D",
+          "text": "Người dùng vừa đọc 'React hooks' nên hệ thống gợi ý tiếp 'useState patterns'"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Bảng use case: Clustering = 'Gom các vector gần nhau thành nhóm', ví dụ '10,000 ticket CS → tự phân thành 15 chủ đề'. Đây là ứng dụng phân tích: không cần định nghĩa trước danh mục, thuật toán tự phát hiện cấu trúc chủ đề từ dữ liệu. Rất hữu ích để hiểu khách hàng đang gặp vấn đề gì nhiều nhất.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-055",
+      "type": "mcq",
+      "prompt": "Cảnh báo quan trọng nhất về giới hạn của embedding là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Embedding không tự tạo ra 'sự thật' — nếu text nguồn sai, thiếu hoặc chunk xấu thì retrieval vẫn tệ"
+        },
+        {
+          "key": "B",
+          "text": "Embedding chỉ hoạt động thật sự tốt với tiếng Anh nên cần dịch sang tiếng Anh trước khi xử lý tiếng Việt"
+        },
+        {
+          "key": "C",
+          "text": "Embedding không so sánh được giữa các loại dữ liệu khác nhau như văn bản, hình ảnh và âm thanh"
+        },
+        {
+          "key": "D",
+          "text": "Embedding cần được huấn luyện lại định kỳ mỗi quý một lần để duy trì chất lượng ổn định theo thời gian"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide ghi: 'Embedding không tự tạo ra sự thật. Nếu text nguồn sai, thiếu, hoặc chunk xấu thì retrieval vẫn tệ — garbage in, garbage out.' Đây là lời nhắc chống lại ảo tưởng rằng công nghệ mới sẽ tự chữa vấn đề dữ liệu. Embedding chỉ mã hóa trung thực những gì bạn đưa vào; nó khuếch đại chất lượng dữ liệu chứ không thay thế nó.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-056",
+      "type": "mcq",
+      "prompt": "Theo bảng so sánh model, text-embedding-3-small có thông số nào và phù hợp với mục đích gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "1536 chiều, MTEB khoảng 62.3, phù hợp cho demo, PoC và lab vì rẻ và nhanh"
+        },
+        {
+          "key": "B",
+          "text": "3072 chiều, MTEB khoảng 64.6, phù hợp cho production cần chất lượng cao nhất"
+        },
+        {
+          "key": "C",
+          "text": "4096 chiều, MTEB khoảng 66, phù hợp cho corpus quy mô hàng tỉ vector"
+        },
+        {
+          "key": "D",
+          "text": "768 chiều, MTEB khoảng 61, phù hợp cho self-host với dữ liệu nhạy cảm"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Bảng so sánh: text-embedding-3-small (1536 chiều, MTEB 62.3) dùng cho demo/PoC/lab vì rẻ và nhanh; text-embedding-3-large (3072 chiều, MTEB 64.6) cho production cần chất lượng; open-source như e5 và BGE (768–4096 chiều, MTEB 61–66) cho self-host, data nhạy cảm và miễn phí.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-057",
+      "type": "mcq",
+      "prompt": "Lời khuyên của slide khi chọn embedding model cho sản phẩm thực tế là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Model cân bằng thường tốt hơn model mạnh nhất nhưng chậm và đắt; chọn theo quality, latency, storage, language"
+        },
+        {
+          "key": "B",
+          "text": "Luôn chọn model có điểm MTEB cao nhất trên bảng xếp hạng hiện tại để đảm bảo chất lượng retrieval tối ưu"
+        },
+        {
+          "key": "C",
+          "text": "Luôn chọn model open-source để tránh phụ thuộc nhà cung cấp và tiết kiệm tối đa chi phí vận hành hằng tháng"
+        },
+        {
+          "key": "D",
+          "text": "Nên dùng đồng thời hai model khác nhau rồi lấy trung bình điểm số để giảm rủi ro chọn sai ngay từ đầu"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide nêu: 'Không có model tốt nhất cho mọi use case. Chọn theo quality, latency, storage, language.' Và: 'Với product thực tế, model cân bằng thường tốt hơn model mạnh nhất nhưng chậm và đắt.' Điểm MTEB chỉ đo chất lượng trên benchmark chung, không phản ánh độ trễ, chi phí lưu trữ (số chiều lớn = tốn storage), hay chất lượng trên ngôn ngữ cụ thể của bạn.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-058",
+      "type": "mcq",
+      "prompt": "Vì sao slide cảnh báo phải kiểm tra bản mới nhất của MTEB Leaderboard?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì các model cũ sẽ bị gỡ khỏi bảng xếp hạng sau khi ngừng được hỗ trợ chính thức"
+        },
+        {
+          "key": "B",
+          "text": "Vì số liệu MTEB chỉ mang tính tham khảo (đầu 2026) và leaderboard thay đổi liên tục"
+        },
+        {
+          "key": "C",
+          "text": "Vì điểm MTEB được tính lại mỗi tháng dựa trên phản hồi thực tế của người dùng"
+        },
+        {
+          "key": "D",
+          "text": "Vì điểm số phụ thuộc vào phần cứng dùng để chạy benchmark nên không ổn định"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide ghi: 'Số liệu MTEB tham khảo (đầu 2026); leaderboard thay đổi liên tục — luôn kiểm tra bản mới nhất.' Lĩnh vực embedding có hàng trăm model (Cohere, Voyage, Gemini, Jina...) và các model mới liên tục xuất hiện. Con số trong slide chỉ là ảnh chụp tại một thời điểm, không nên coi là kết luận vĩnh viễn.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-059",
+      "type": "mcq",
+      "prompt": "Trong Python example về embedding, hàm cosine được viết là 'a @ b / (np.linalg.norm(a) * np.linalg.norm(b))'. Toán tử @ ở đây làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tính tích vô hướng (dot product) giữa hai vector, tức tử số của công thức cosine"
+        },
+        {
+          "key": "B",
+          "text": "So sánh hai mảng và trả về mảng boolean đánh dấu các vị trí có giá trị bằng nhau"
+        },
+        {
+          "key": "C",
+          "text": "Nhân từng phần tử tương ứng của hai mảng rồi trả về mảng kết quả cùng kích thước"
+        },
+        {
+          "key": "D",
+          "text": "Nối hai mảng numpy lại thành một mảng có độ dài bằng tổng hai mảng gốc"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Toán tử @ trong numpy là phép nhân ma trận; với hai vector 1 chiều nó chính là tích vô hướng A·B — đúng bằng tử số trong công thức cosine. Mẫu số np.linalg.norm(a) * np.linalg.norm(b) là tích hai độ dài. Kết quả in ra: ~0.87 cho 'hoàn tiền' ↔ 'đổi trả', và ~0.31 cho 'hoàn tiền' ↔ 'thời tiết'.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-060",
+      "type": "mcq",
+      "prompt": "Semantic search khác keyword search ở điểm căn bản nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Semantic search luôn trả về nhiều kết quả hơn hẳn nên khả năng tìm thấy được đáp án đúng cũng cao hơn"
+        },
+        {
+          "key": "B",
+          "text": "Semantic search không cần bước index trước nên triển khai nhanh hơn và tiết kiệm chi phí hạ tầng hơn"
+        },
+        {
+          "key": "C",
+          "text": "Semantic search chạy nhanh hơn đáng kể vì không cần quét toàn bộ chỉ mục đảo ngược như keyword search"
+        },
+        {
+          "key": "D",
+          "text": "Semantic search tìm được chunk 'chính sách đổi trả' khi user hỏi 'trả hàng' dù không trùng từ nào"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Bảng use case ghi ví dụ: 'User hỏi trả hàng → tìm được chunk chính sách đổi trả dù không trùng từ'. Keyword search khớp ký tự nên 'trả hàng' và 'đổi trả' là hai chuỗi khác nhau. Semantic search khớp Ý NGHĨA thông qua khoảng cách vector, nên vượt qua được sự khác biệt về cách diễn đạt, từ đồng nghĩa, và cả ngôn ngữ.",
+      "source": "exam-97.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D07-TL-01",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Giải thích chunking và nêu một ví dụ áp dụng trong sản phẩm AI.",
+      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm chunking, embedding, cosine similarity, vector store, metadata filter, ingestion pipeline, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "D07-TL-02",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "So sánh chunking với embedding; nêu tiêu chí lựa chọn trong một tình huống thực tế.",
+      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm chunking, embedding, cosine similarity, vector store, metadata filter, ingestion pipeline, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "D07-TL-03",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Thiết kế một quy trình ngắn sử dụng cosine similarity để giảm rủi ro cho người dùng.",
+      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm chunking, embedding, cosine similarity, vector store, metadata filter, ingestion pipeline, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "D07-TL-04",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Phân tích một failure mode liên quan đến vector store, nguyên nhân và cách khắc phục.",
+      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm chunking, embedding, cosine similarity, vector store, metadata filter, ingestion pipeline, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "D07-TL-05",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Đề xuất metric đánh giá cho metadata filter; giải thích vì sao metric đó hữu ích.",
+      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm chunking, embedding, cosine similarity, vector store, metadata filter, ingestion pipeline, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "D07-TL-06",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Lập kế hoạch thử nghiệm nhỏ cho ingestion pipeline: giả định, dữ liệu, tiêu chí đạt và tiêu chí dừng.",
+      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm chunking, embedding, cosine similarity, vector store, metadata filter, ingestion pipeline, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "D07-TL-07",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Tình huống: kết quả liên quan đến chunking không đạt kỳ vọng. Bạn sẽ debug theo thứ tự nào?",
+      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm chunking, embedding, cosine similarity, vector store, metadata filter, ingestion pipeline, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "D07-TL-08",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Viết khuyến nghị cho stakeholder về lợi ích, giới hạn và rủi ro của embedding.",
+      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm chunking, embedding, cosine similarity, vector store, metadata filter, ingestion pipeline, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "D07-TL-09",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Nêu các đánh đổi khi triển khai cosine similarity trong production và cách theo dõi sau triển khai.",
+      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm chunking, embedding, cosine similarity, vector store, metadata filter, ingestion pipeline, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "D07-TL-10",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Tạo checklist trước khi ship một tính năng AI có dùng vector store và metadata filter.",
+      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm chunking, embedding, cosine similarity, vector store, metadata filter, ingestion pipeline, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    }
+  ]
+}

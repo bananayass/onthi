@@ -82,6 +82,18 @@ export const studyGuides: StudyGuide[] = [
     examId: 'exam-107'
   },
   {
+    id: 'study-day06',
+    file: 'day06-ai-product-project-management.html',
+    title: 'AI Product & Project Management',
+    summary:
+      'Quản lý dự án AI trong điều kiện bất định: AI sprint, Definition of Done, PoC/MVE/MVP, thử nghiệm time-box, ROI theo ba kịch bản và cách trình bày để xin quyết định rõ ràng.',
+    course: 'aicb',
+    day: 6,
+    label: 'Ngày 6',
+    topics: ['AI sprint & Definition of Done', 'MVE / MVP / PoC', 'Wizard of Oz', 'ROI & break-even', 'Stakeholder deck'],
+    examId: 'day6-tridung'
+  },
+  {
     id: 'study-day07',
     file: 'day07-embedding-vector-store.html',
     title: 'Data Foundations: Embedding & Vector Store',

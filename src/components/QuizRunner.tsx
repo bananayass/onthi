@@ -15,7 +15,9 @@ interface Props {
 }
 
 export function QuizRunner({ exam, mode, timerEnabled, onHome }: Props) {
-  const [randomizedExam] = useState(() => shuffleExam(exam));
+  // Xáo vị trí A/B/C/D ở mỗi lượt bắt đầu; key đáp án đúng được cập nhật cùng lúc
+  // trong shuffleExam nên việc chấm điểm vẫn chính xác.
+  const [randomizedExam, setRandomizedExam] = useState(() => shuffleExam(exam));
   const [answers, setAnswers] = useState<Record<string, AnswerState>>(() => loadProgress(exam.id));
   const [current, setCurrent] = useState(0);
   const [submitted, setSubmitted] = useState(false);
@@ -52,7 +54,7 @@ export function QuizRunner({ exam, mode, timerEnabled, onHome }: Props) {
   };
 
   if (submitted) {
-    return <ResultSummary exam={randomizedExam} answers={answers} onReview={(idx) => { setSubmitted(false); setCurrent(idx); }} onRestart={() => { clearProgress(exam.id); setAnswers({}); setCurrent(0); setSecondsLeft(exam.durationMinutes * 60); setSubmitted(false); }} onHome={onHome} />;
+    return <ResultSummary exam={randomizedExam} answers={answers} onReview={(idx) => { setSubmitted(false); setCurrent(idx); }} onRestart={() => { clearProgress(exam.id); setRandomizedExam(shuffleExam(exam)); setAnswers({}); setCurrent(0); setSecondsLeft(exam.durationMinutes * 60); setSubmitted(false); }} onHome={onHome} />;
   }
 
   return (

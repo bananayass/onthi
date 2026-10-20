@@ -1,0 +1,1835 @@
+{
+  "id": "day3-tridung",
+  "title": "Trí Dũng đẹp trai · Ngày 3",
+  "description": "Bộ đề Ngày 3: 60 câu trắc nghiệm và 10 câu tự luận, biên soạn từ tài liệu ôn thi cùng ngày.",
+  "course": "tridung",
+  "kind": "daily",
+  "day": 3,
+  "label": "Ngày 3",
+  "durationMinutes": 90,
+  "totalPoints": 100,
+  "passingScore": 70,
+  "disclaimer": "Bộ đề ôn tập Trí Dũng đẹp trai, tham khảo từ tài liệu cùng ngày; không phải đề thi chính thức.",
+  "questions": [
+    {
+      "id": "D03-001",
+      "type": "mcq",
+      "prompt": "Chủ đề chính của bài giảng AICB-P1 Ngày 3 là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Huấn luyện mô hình LLM từ đầu"
+        },
+        {
+          "key": "B",
+          "text": "Từ Chatbot đến Agentic Agent — Design Pattern ReAct"
+        },
+        {
+          "key": "C",
+          "text": "Tối ưu chi phí token cho API"
+        },
+        {
+          "key": "D",
+          "text": "Xây dựng RAG với vector database"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Ngày 3 tập trung vào việc phân biệt chatbot và agent, và học Design Pattern ReAct để biến LLM thành hệ thống biết hành động.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-002",
+      "type": "mcq",
+      "prompt": "Spectrum 3 kiểu hệ thống AI theo bài giảng, từ đơn giản đến phức tạp, là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bot → Chatbot → Agent, dù kiến thức nền của model vẫn giữ nguyên"
+        },
+        {
+          "key": "B",
+          "text": "Rule-based Bot → LLM Chatbot → Reactive Agent → Autonomous Agent"
+        },
+        {
+          "key": "C",
+          "text": "Script → Function → Model → System, kể cả khi context window được mở rộng thêm"
+        },
+        {
+          "key": "D",
+          "text": "Prompt → Chain → Graph, kể cả khi context window được mở rộng thêm"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Spectrum đầy đủ: Rule-based Bot (if/else) → LLM Chatbot (trả lời thông minh 1 lượt) → Reactive Agent (dùng tools + loop) → Autonomous Agent (long-horizon goal).",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-003",
+      "type": "mcq",
+      "prompt": "Rule-based Bot có đặc điểm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dùng LLM để sinh câu trả lời linh hoạt"
+        },
+        {
+          "key": "B",
+          "text": "If/else cứng, predictable, logic dễ kiểm soát, chi phí thấp nhất"
+        },
+        {
+          "key": "C",
+          "text": "Chủ động chọn tool theo bước tiếp theo"
+        },
+        {
+          "key": "D",
+          "text": "Có long-term memory, dù kiến thức nền của model vẫn giữ nguyên"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Rule-based Bot dùng if/else cố định — flexibility thấp, gần như không có memory, tool hard-coded, cost thấp nhất, rủi ro thấp. Ví dụ: menu IVR, form validation.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-004",
+      "type": "mcq",
+      "prompt": "LLM Chatbot khác Rule-based Bot ở điểm nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Có thể lập kế hoạch nhiều bước, dù kiến thức nền của model vẫn giữ nguyên"
+        },
+        {
+          "key": "B",
+          "text": "Sinh câu trả lời tốt theo context, flexibility trung bình, có memory ngắn hạn trong context"
+        },
+        {
+          "key": "C",
+          "text": "Chủ động quyết định gọi tool nào tiếp theo, nên chất lượng đầu ra phụ thuộc vào cách đặt câu hỏi"
+        },
+        {
+          "key": "D",
+          "text": "Có thể chạy vòng lặp quan sát kết quả, trong khi tham số của model không hề thay đổi"
+        }
+      ],
+      "answer": "B",
+      "explanation": "LLM Chatbot sinh câu trả lời theo ngữ cảnh, có memory ngắn hạn trong context window, có thể gọi tool nhưng theo chỉ định — không tự chủ động chọn.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-005",
+      "type": "mcq",
+      "prompt": "Theo bài giảng, Agent chỉ thực sự xuất hiện khi nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Khi hệ thống dùng LLM thay vì rule, kể cả khi số vòng lặp tối đa được nới rộng"
+        },
+        {
+          "key": "B",
+          "text": "Khi hệ thống phải quyết định, hành động, quan sát kết quả, rồi lặp lại"
+        },
+        {
+          "key": "C",
+          "text": "Khi hệ thống có giao diện chat, kể cả khi số vòng lặp tối đa được nới rộng"
+        },
+        {
+          "key": "D",
+          "text": "Khi hệ thống được deploy lên cloud, kể cả khi số vòng lặp tối đa được nới rộng"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bài giảng nhấn mạnh: không phải mọi thứ dùng LLM đều là agent. Agent = phải có vòng lặp quyết định → hành động → quan sát → lặp lại.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-006",
+      "type": "mcq",
+      "prompt": "Điểm khác biệt về tool use giữa LLM Chatbot và Agent là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chatbot không dùng được tool nào, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+        },
+        {
+          "key": "B",
+          "text": "Chatbot có thể gọi tool theo chỉ định; Agent chủ động chọn tool theo bước tiếp theo"
+        },
+        {
+          "key": "C",
+          "text": "Agent chỉ dùng được 1 tool duy nhất, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+        },
+        {
+          "key": "D",
+          "text": "Cả hai đều hard-coded tool, dù phần hướng dẫn hệ thống đã được viết rõ ràng"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bảng so sánh trong bài: Chatbot 'có thể gọi tool theo chỉ định'; Agent 'chủ động chọn tool theo bước tiếp theo' — đây là khác biệt về quyền tự quyết.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-007",
+      "type": "mcq",
+      "prompt": "Rủi ro đặc trưng của Agent so với Chatbot là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chỉ có hallucination, trong khi tham số của model không hề thay đổi"
+        },
+        {
+          "key": "B",
+          "text": "Hallucination + tool misuse + loop (lặp vô hạn)"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ có format drift, kể cả khi context window được mở rộng thêm"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ có latency cao, dù kiến thức nền của model vẫn giữ nguyên"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Chatbot có rủi ro hallucination/format drift. Agent thêm hai rủi ro mới: dùng sai tool (tool misuse) và bị kẹt trong vòng lặp không tiến triển.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-008",
+      "type": "mcq",
+      "prompt": "Ví dụ phù hợp cho Rule-based Bot theo bảng so sánh là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Booking, research, coding assistant"
+        },
+        {
+          "key": "B",
+          "text": "FAQ, support cơ bản"
+        },
+        {
+          "key": "C",
+          "text": "Menu IVR, form validation"
+        },
+        {
+          "key": "D",
+          "text": "Data analysis nhiều bước"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Rule-based Bot phù hợp với logic dễ kiểm soát: menu IVR, form validation — nơi mọi nhánh đều liệt kê được trước.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-009",
+      "type": "mcq",
+      "prompt": "Ví dụ phù hợp cho Agent theo bảng so sánh là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Menu IVR, form validation"
+        },
+        {
+          "key": "B",
+          "text": "FAQ, support cơ bản"
+        },
+        {
+          "key": "C",
+          "text": "Booking, research, coding assistant"
+        },
+        {
+          "key": "D",
+          "text": "Hiển thị nội dung tĩnh"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Agent phù hợp cho bài toán nhiều bước, cần tool và quyết định động: booking, research, coding assistant.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-010",
+      "type": "mcq",
+      "prompt": "Trong ví dụ 'Tìm vé HAN → HCM dưới 2 triệu, gợi ý mang gì nếu trời mưa', Rule-based Bot thất bại vì sao?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không viết được câu trả lời mượt, trong khi tham số của model không hề thay đổi"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ trả menu lựa chọn cố định, không search được dữ liệu mới, không tổng hợp nhiều điều kiện"
+        },
+        {
+          "key": "C",
+          "text": "Không kết nối được internet, kể cả khi context window được mở rộng thêm"
+        },
+        {
+          "key": "D",
+          "text": "Chi phí quá cao, kể cả khi context window được mở rộng thêm, kể cả khi context window được mở rộng thêm"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bot chỉ có menu cố định — không truy vấn được dữ liệu thời gian thực và không tổng hợp được nhiều điều kiện (giá vé + thời tiết) cùng lúc.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-011",
+      "type": "mcq",
+      "prompt": "Trong cùng ví dụ đó, LLM Chatbot có hạn chế gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không viết được câu trả lời, trong khi tham số của model không hề thay đổi"
+        },
+        {
+          "key": "B",
+          "text": "Viết câu trả lời mượt nhưng không tự truy vấn giá vé thật"
+        },
+        {
+          "key": "C",
+          "text": "Không hiểu được câu hỏi, trong khi tham số của model không hề thay đổi"
+        },
+        {
+          "key": "D",
+          "text": "Trả lời quá chậm, dù kiến thức nền của model vẫn giữ nguyên"
+        }
+      ],
+      "answer": "B",
+      "explanation": "LLM Chatbot viết văn tốt nhưng không tự gọi API để lấy giá vé thật — nó chỉ 'nghe có vẻ đúng' chứ không dựa trên dữ liệu thực.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-012",
+      "type": "mcq",
+      "prompt": "Reactive Agent xử lý ví dụ 'tìm vé + thời tiết' như thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Trả lời ngay bằng kiến thức có sẵn, dù agent vẫn gọi được đầy đủ các tool đã khai báo, kể cả khi số vòng lặp tối đa được nới rộng"
+        },
+        {
+          "key": "B",
+          "text": "Tách goal thành 2 việc (tìm vé + check thời tiết), gọi từng tool theo bước, so sánh kết quả rồi trả lời gộp"
+        },
+        {
+          "key": "C",
+          "text": "Chuyển câu hỏi cho con người, trong khi mục tiêu ban đầu vẫn được giữ nguyên, nên vòng lặp hành động sẽ dừng sớm hơn dự kiến"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ tìm vé, bỏ qua thời tiết, trong khi mục tiêu ban đầu vẫn được giữ nguyên, kể cả khi số vòng lặp tối đa được nới rộng"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Reactive Agent phân rã mục tiêu thành các subtask, gọi tool tuần tự, quan sát kết quả từng bước rồi tổng hợp thành câu trả lời cuối.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-013",
+      "type": "mcq",
+      "prompt": "Khi nào agent thường là 'overkill' theo bài giảng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Khi bài toán có nhiều bước phụ thuộc nhau, trong khi tham số của model không hề thay đổi"
+        },
+        {
+          "key": "B",
+          "text": "Nếu bài toán không cần dữ liệu mới, không nhiều bước, hay không cần quyết định động"
+        },
+        {
+          "key": "C",
+          "text": "Khi cần gọi nhiều API bên ngoài, nên chất lượng đầu ra phụ thuộc vào cách đặt câu hỏi"
+        },
+        {
+          "key": "D",
+          "text": "Khi mục tiêu kéo dài qua nhiều vòng lặp, kể cả khi context window được mở rộng thêm"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bài giảng lưu ý rõ: nếu bài toán không cần dữ liệu mới, nhiều bước, hay quyết định động thì agent là overkill — chi phí và độ phức tạp không xứng đáng.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-014",
+      "type": "mcq",
+      "prompt": "Bốn tiêu chí của Agentic Fit Framework là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cost, Speed, Quality, Scale, dù agent vẫn gọi được đầy đủ các tool đã khai báo"
+        },
+        {
+          "key": "B",
+          "text": "Multi-step Reasoning, Tool Interaction, Dynamic Decision, Long Horizon"
+        },
+        {
+          "key": "C",
+          "text": "Data, Model, Deploy, Monitor, nên vòng lặp hành động sẽ dừng sớm hơn dự kiến"
+        },
+        {
+          "key": "D",
+          "text": "Input, Process, Output, Feedback, trong khi mục tiêu ban đầu vẫn được giữ nguyên"
+        }
+      ],
+      "answer": "B",
+      "explanation": "4 tiêu chí Agentic Fit: (1) Multi-step Reasoning, (2) Tool Interaction, (3) Dynamic Decision (bước sau phụ thuộc quan sát), (4) Long Horizon (giữ mục tiêu xuyên suốt nhiều vòng lặp/state).",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-015",
+      "type": "mcq",
+      "prompt": "Tiêu chí 'Multi-step Reasoning' hỏi điều gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Hệ thống có cần gọi API không?, trong khi mục tiêu ban đầu vẫn được giữ nguyên"
+        },
+        {
+          "key": "B",
+          "text": "Bài toán có cần chia thành nhiều bước phụ thuộc nhau không?"
+        },
+        {
+          "key": "C",
+          "text": "Chi phí mỗi request là bao nhiêu?, trong khi mục tiêu ban đầu vẫn được giữ nguyên"
+        },
+        {
+          "key": "D",
+          "text": "Người dùng có hài lòng không?, kể cả khi số vòng lặp tối đa được nới rộng"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Multi-step Reasoning kiểm tra xem bài toán có phân rã thành chuỗi bước mà bước sau phụ thuộc kết quả bước trước hay không.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-016",
+      "type": "mcq",
+      "prompt": "Tiêu chí 'Tool Interaction' hỏi điều gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Hệ thống có giao diện đẹp không?, dù phần hướng dẫn hệ thống đã được viết rõ ràng"
+        },
+        {
+          "key": "B",
+          "text": "Hệ thống có cần gọi search, API, database, calculator, browser, file system không?"
+        },
+        {
+          "key": "C",
+          "text": "Model nào đang được sử dụng?, nên model dễ hiểu sai phạm vi nhiệm vụ được giao"
+        },
+        {
+          "key": "D",
+          "text": "Có bao nhiêu người dùng?, trong khi định dạng đầu ra vẫn được giữ ổn định"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Tool Interaction đánh giá nhu cầu tương tác với thế giới bên ngoài: search, API, DB, calculator, browser, file system.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-017",
+      "type": "mcq",
+      "prompt": "Tiêu chí 'Long Horizon' trong Agentic Fit nghĩa là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dự án kéo dài nhiều tháng, nên vòng lặp hành động sẽ dừng sớm hơn dự kiến"
+        },
+        {
+          "key": "B",
+          "text": "Hệ thống có phải giữ mục tiêu xuyên suốt qua nhiều vòng lặp hoặc nhiều state không"
+        },
+        {
+          "key": "C",
+          "text": "Câu trả lời phải dài, nên vòng lặp hành động sẽ dừng sớm hơn dự kiến"
+        },
+        {
+          "key": "D",
+          "text": "Model có context window lớn, nên vòng lặp hành động sẽ dừng sớm hơn dự kiến"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Long Horizon = khả năng duy trì mục tiêu và trạng thái qua nhiều vòng lặp, không bị 'mất mạch' giữa chừng.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-018",
+      "type": "mcq",
+      "prompt": "Nếu đa số tiêu chí Agentic Fit chỉ ở mức 1-2/5, nên làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vẫn xây agent để đón đầu tương lai"
+        },
+        {
+          "key": "B",
+          "text": "Bắt đầu bằng chatbot hoặc workflow đơn giản"
+        },
+        {
+          "key": "C",
+          "text": "Chuyển sang dùng model mạnh nhất"
+        },
+        {
+          "key": "D",
+          "text": "Bỏ hẳn dự án, kể cả khi số vòng lặp tối đa được nới rộng"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bài giảng khuyến nghị: điểm thấp ở đa số tiêu chí → bắt đầu bằng chatbot hoặc workflow đơn giản thay vì nhảy thẳng lên agent.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-019",
+      "type": "mcq",
+      "prompt": "Thang điểm gợi ý để đọc kết quả Agentic Fit là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "0-3 chatbot, 4-7 workflow, 8+ agent, trong khi mục tiêu ban đầu vẫn được giữ nguyên"
+        },
+        {
+          "key": "B",
+          "text": "0-5 = chatbot/rule đủ; 6-10 = augmented chatbot; 11+ = agent đáng thử"
+        },
+        {
+          "key": "C",
+          "text": "0-10 chatbot, 11-15 agent, 16+ multi-agent, nên vòng lặp hành động sẽ dừng sớm hơn dự kiến"
+        },
+        {
+          "key": "D",
+          "text": "Không có thang điểm cụ thể, dù agent vẫn gọi được đầy đủ các tool đã khai báo"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Chấm 1-5 cho từng tiêu chí rồi cộng: 0-5 = chatbot/rule đủ; 6-10 = augmented chatbot; 11+ = agent đáng thử.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-020",
+      "type": "mcq",
+      "prompt": "Trong bảng chấm điểm ví dụ, 'FAQ nội bộ HR' được bao nhiêu điểm và kết luận gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "3 điểm — chatbot/rule là đủ"
+        },
+        {
+          "key": "B",
+          "text": "7 điểm — augmented chatbot"
+        },
+        {
+          "key": "C",
+          "text": "13 điểm — agent đáng thử"
+        },
+        {
+          "key": "D",
+          "text": "14 điểm — bắt buộc dùng agent"
+        }
+      ],
+      "answer": "A",
+      "explanation": "FAQ nội bộ HR được 1+1+1 = 3 điểm, nằm trong khoảng 0-5 → chatbot/rule đã đủ, không cần agent. Ba tiêu chí chấm gồm Reasoning, Tool use và Dynamic decision, mỗi tiêu chí thang 1-5. Thang đọc điểm: 0-5 chatbot/rule là đủ, 6-10 augmented chatbot, 11+ mới đáng thử agent.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-021",
+      "type": "mcq",
+      "prompt": "Case 'Booking assistant du lịch' được chấm bao nhiêu điểm trong ví dụ?",
+      "options": [
+        {
+          "key": "A",
+          "text": "3 điểm"
+        },
+        {
+          "key": "B",
+          "text": "7 điểm"
+        },
+        {
+          "key": "C",
+          "text": "13 điểm — thuộc nhóm agent đáng thử"
+        },
+        {
+          "key": "D",
+          "text": "5 điểm"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Booking assistant du lịch: Reasoning 4 + Tool use 5 + Dynamic decision 4 = 13 điểm, vượt ngưỡng 11 → agent đáng thử.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-022",
+      "type": "mcq",
+      "prompt": "Case 'Code assistant có test & fix loop' được chấm điểm cao nhất là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "10 điểm"
+        },
+        {
+          "key": "B",
+          "text": "12 điểm"
+        },
+        {
+          "key": "C",
+          "text": "13 điểm"
+        },
+        {
+          "key": "D",
+          "text": "14 điểm"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Code assistant có test & fix loop: 5 + 5 + 4 = 14 điểm — cao nhất trong bảng, rất phù hợp với agent. Điểm cao vì hội đủ cả ba yếu tố: sửa code cần suy luận nhiều bước, phải gọi nhiều tool như đọc file và chạy test, và bước tiếp theo phụ thuộc hoàn toàn vào kết quả test vừa chạy.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-023",
+      "type": "mcq",
+      "prompt": "Anti-pattern nào sau đây cho thấy dùng agent là sai bài?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bài toán nhiều bước phụ thuộc nhau"
+        },
+        {
+          "key": "B",
+          "text": "Bài toán 1 bước: hỏi đáp, tra FAQ, phân loại cơ bản"
+        },
+        {
+          "key": "C",
+          "text": "Cần gọi nhiều tool khác nhau"
+        },
+        {
+          "key": "D",
+          "text": "Mục tiêu kéo dài qua nhiều vòng lặp"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bài toán 1 bước (hỏi đáp, FAQ, phân loại) không cần vòng lặp — dùng agent chỉ tăng chi phí và độ trễ mà không thêm giá trị.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-024",
+      "type": "mcq",
+      "prompt": "Vì sao 'không có tool nào để gọi' là anti-pattern của agent?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì agent sẽ báo lỗi ngay, trong khi tham số của model không hề thay đổi"
+        },
+        {
+          "key": "B",
+          "text": "Vì agent chỉ 'suy nghĩ' nhưng không hành động được — mất hoàn toàn giá trị của vòng lặp"
+        },
+        {
+          "key": "C",
+          "text": "Vì tốn quá nhiều token, nên chất lượng đầu ra phụ thuộc vào cách đặt câu hỏi"
+        },
+        {
+          "key": "D",
+          "text": "Vì không deploy được, kể cả khi context window được mở rộng thêm"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Agent mạnh nhờ khả năng hành động qua tool. Không có tool thì vòng lặp Thought→Action→Observation vô nghĩa — chỉ còn là chatbot đắt tiền.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-025",
+      "type": "mcq",
+      "prompt": "Vì sao 'mọi thứ phải 100% deterministic' là anti-pattern của agent?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì agent chạy chậm, kể cả khi context window được mở rộng thêm"
+        },
+        {
+          "key": "B",
+          "text": "Vì mỗi sai sót đều rất đắt, trong khi agent vốn có tính không tất định"
+        },
+        {
+          "key": "C",
+          "text": "Vì agent không hỗ trợ tiếng Việt, dù kiến thức nền của model vẫn giữ nguyên"
+        },
+        {
+          "key": "D",
+          "text": "Vì cần quá nhiều dữ liệu, nên chất lượng đầu ra phụ thuộc vào cách đặt câu hỏi"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Agent có tính stochastic (chọn tool, sinh args). Khi yêu cầu chính xác tuyệt đối và mỗi lỗi đều rất đắt, rule/workflow deterministic là lựa chọn đúng.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-026",
+      "type": "mcq",
+      "prompt": "Nguyên tắc được nhấn mạnh trước khi mở agent loop là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Luôn chọn model mạnh nhất trước, trong khi tham số của model không hề thay đổi"
+        },
+        {
+          "key": "B",
+          "text": "Luôn benchmark rule / workflow / chatbot trước khi mở agent loop"
+        },
+        {
+          "key": "C",
+          "text": "Luôn thử nghiệm với dữ liệu giả trước, trong khi tham số của model không hề thay đổi"
+        },
+        {
+          "key": "D",
+          "text": "Luôn xin phê duyệt từ ban lãnh đạo, trong khi tham số của model không hề thay đổi"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Nguyên tắc: benchmark các giải pháp đơn giản hơn (rule, workflow, chatbot) trước — chỉ nâng lên agent khi chúng chứng minh là không đủ.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-027",
+      "type": "mcq",
+      "prompt": "Trong case study, 'Customer FAQ' được kết luận best fit là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Reactive agent có tool use, nên chất lượng đầu ra phụ thuộc vào cách đặt câu hỏi"
+        },
+        {
+          "key": "B",
+          "text": "Chatbot có retrieval — câu hỏi lặp lại, intent khá ổn định, chủ yếu retrieve policy rồi trả lời"
+        },
+        {
+          "key": "C",
+          "text": "Rule-based bot thuần túy, nên chất lượng đầu ra phụ thuộc vào cách đặt câu hỏi"
+        },
+        {
+          "key": "D",
+          "text": "Multi-agent system, nên chất lượng đầu ra phụ thuộc vào cách đặt câu hỏi"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Customer FAQ: intent ổn định, chủ yếu tra cứu policy. Có thể thêm RAG nhưng chưa cần autonomy → best fit là chatbot có retrieval.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-028",
+      "type": "mcq",
+      "prompt": "Trong case study, 'Booking Assistant' được kết luận best fit là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chatbot có retrieval, trong khi tham số của model không hề thay đổi, dù kiến thức nền của model vẫn giữ nguyên"
+        },
+        {
+          "key": "B",
+          "text": "Reactive agent có tool use — nhiều ràng buộc, phải search/so sánh/hỏi lại, bước sau phụ thuộc kết quả bước trước"
+        },
+        {
+          "key": "C",
+          "text": "Rule-based bot, dù kiến thức nền của model vẫn giữ nguyên, trong khi tham số của model không hề thay đổi"
+        },
+        {
+          "key": "D",
+          "text": "Không cần AI, trong khi tham số của model không hề thay đổi, trong khi tham số của model không hề thay đổi"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Booking Assistant có nhiều ràng buộc (thời gian, ngân sách, preference), phải search-so sánh-hỏi lại, và bước sau phụ thuộc bước trước → reactive agent.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-029",
+      "type": "mcq",
+      "prompt": "Bốn khối trong kiến trúc Agent theo bài giảng là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Input, Process, Output, Feedback"
+        },
+        {
+          "key": "B",
+          "text": "Perception, Reasoning, Action, Memory"
+        },
+        {
+          "key": "C",
+          "text": "Model, Context, Planning, Tools"
+        },
+        {
+          "key": "D",
+          "text": "Frontend, Backend, Database, API"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Kiến trúc Agent gồm 4 khối: Perception (nhận input/tool output/feedback), Reasoning (LLM Core phân tích và chọn bước), Action (gọi tool hoặc trả lời), Memory (giữ goal, facts, kết quả trung gian).",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-030",
+      "type": "mcq",
+      "prompt": "Khối Perception trong kiến trúc Agent nhận những gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chỉ nhận user input"
+        },
+        {
+          "key": "B",
+          "text": "Text từ user, tool output, và feedback"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ nhận kết quả từ database"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ nhận system prompt"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Perception là cổng vào của agent: nhận user input, kết quả trả về từ tool, và feedback từ môi trường.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-031",
+      "type": "mcq",
+      "prompt": "Khối Reasoning (LLM Core) làm nhiệm vụ gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Lưu trữ lịch sử hội thoại"
+        },
+        {
+          "key": "B",
+          "text": "Phân tích trạng thái và chọn bước tiếp theo"
+        },
+        {
+          "key": "C",
+          "text": "Gọi API bên ngoài"
+        },
+        {
+          "key": "D",
+          "text": "Hiển thị kết quả cho người dùng"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Reasoning là 'bộ não': đọc trạng thái hiện tại (goal + observation) rồi quyết định bước kế tiếp là gọi tool nào hay đã đủ để kết luận.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-032",
+      "type": "mcq",
+      "prompt": "Bốn khối kiến trúc agent kéo theo bốn nhóm chi phí chính nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Nhân sự, phần cứng, phần mềm, vận hành"
+        },
+        {
+          "key": "B",
+          "text": "Token, storage, API, latency"
+        },
+        {
+          "key": "C",
+          "text": "CPU, RAM, disk, network"
+        },
+        {
+          "key": "D",
+          "text": "Development, testing, deployment, maintenance"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bài giảng nêu rõ: 4 khối kiến trúc kéo theo 4 nhóm cost — token (reasoning), storage (memory), API (tool calls), và latency (vòng lặp).",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-033",
+      "type": "mcq",
+      "prompt": "Short-term memory của agent có đặc điểm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Lưu trong database bên ngoài, trong khi metadata vẫn được gắn đầy đủ cho từng chunk"
+        },
+        {
+          "key": "B",
+          "text": "Nằm trong context window, dùng cho task hiện tại, rẻ dễ implement nhưng dễ đầy"
+        },
+        {
+          "key": "C",
+          "text": "Cần retrieval strategy phức tạp, trong khi metadata vẫn được gắn đầy đủ cho từng chunk"
+        },
+        {
+          "key": "D",
+          "text": "Tồn tại vĩnh viễn qua các session, dù toàn bộ tài liệu đã được đưa vào index"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Short-term memory nằm trong context window — rẻ và dễ triển khai, phù hợp hội thoại ngắn và goal chỉ kéo dài vài bước, nhưng dễ bị đầy.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-034",
+      "type": "mcq",
+      "prompt": "Long-term memory của agent khác short-term ở điểm nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chạy nhanh hơn, kể cả khi corpus được cập nhật thường xuyên, trong khi metadata vẫn được gắn đầy đủ cho từng chunk"
+        },
+        {
+          "key": "B",
+          "text": "Lưu facts, preferences, state ngoài context — có thể là DB, vector store, key-value store; cần retrieval strategy và permission model"
+        },
+        {
+          "key": "C",
+          "text": "Không tốn chi phí lưu trữ, dù toàn bộ tài liệu đã được đưa vào index, dù toàn bộ tài liệu đã được đưa vào index"
+        },
+        {
+          "key": "D",
+          "text": "Luôn chính xác hơn, nên chất lượng truy xuất bị giới hạn ngay từ đầu, kể cả khi corpus được cập nhật thường xuyên"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Long-term memory nằm ngoài context window (DB/vector store/KV store), nên đòi hỏi chiến lược truy xuất và mô hình phân quyền rõ ràng.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-035",
+      "type": "mcq",
+      "prompt": "Lưu ý quan trọng về memory trong agent là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Càng nhiều memory agent càng giỏi, nên chất lượng truy xuất bị giới hạn ngay từ đầu, dù toàn bộ tài liệu đã được đưa vào index"
+        },
+        {
+          "key": "B",
+          "text": "Không phải thêm memory là agent giỏi hơn — memory chỉ có ích khi chiến lược đọc/ghi và quyền truy cập được thiết kế rõ"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ nên dùng short-term memory, dù toàn bộ tài liệu đã được đưa vào index, trong khi metadata vẫn được gắn đầy đủ cho từng chunk"
+        },
+        {
+          "key": "D",
+          "text": "Long-term memory luôn tốt hơn short-term, trong khi metadata vẫn được gắn đầy đủ cho từng chunk"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bài giảng cảnh báo: memory chỉ tạo giá trị khi có chiến lược đọc/ghi rõ ràng và permission model được thiết kế — thêm bừa chỉ gây nhiễu và tốn chi phí.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-036",
+      "type": "mcq",
+      "prompt": "Vì sao Tool Calling được gọi là 'tay chân của agent'?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì nó giúp agent chạy nhanh hơn, trong khi định dạng đầu ra vẫn được giữ ổn định"
+        },
+        {
+          "key": "B",
+          "text": "Vì nó là cầu nối giữa reasoning trong model và hành động ngoài thế giới thực"
+        },
+        {
+          "key": "C",
+          "text": "Vì nó thay thế hoàn toàn phần reasoning, dù phần hướng dẫn hệ thống đã được viết rõ ràng"
+        },
+        {
+          "key": "D",
+          "text": "Vì nó giảm chi phí token, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Tool calling biến suy luận thành hành động thật. Agent mạnh lên nhờ tool nhưng cũng dễ fail hơn vì phụ thuộc dependency bên ngoài.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-037",
+      "type": "mcq",
+      "prompt": "ReAct là viết tắt của cụm từ nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Reactive Action"
+        },
+        {
+          "key": "B",
+          "text": "Reasoning + Acting"
+        },
+        {
+          "key": "C",
+          "text": "Retrieval + Action"
+        },
+        {
+          "key": "D",
+          "text": "Real-time Action"
+        }
+      ],
+      "answer": "B",
+      "explanation": "ReAct = Reasoning + Acting — pattern kết hợp suy luận theo từng bước với gọi công cụ và quan sát kết quả.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-038",
+      "type": "mcq",
+      "prompt": "Ba thành phần của một vòng lặp ReAct là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Input, Process, Output"
+        },
+        {
+          "key": "B",
+          "text": "Thought → Action → Observation"
+        },
+        {
+          "key": "C",
+          "text": "Plan, Execute, Review"
+        },
+        {
+          "key": "D",
+          "text": "Query, Retrieve, Generate"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Vòng lặp ReAct: Thought (đang thiếu gì, nên làm gì tiếp?) → Action (gọi tool nào, tham số nào?) → Observation (kết quả trả về là gì?) → lặp lại.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-039",
+      "type": "mcq",
+      "prompt": "Bước 'Thought' trong ReAct trả lời câu hỏi gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Kết quả trả về là gì?"
+        },
+        {
+          "key": "B",
+          "text": "Mình đang thiếu gì, nên làm gì tiếp?"
+        },
+        {
+          "key": "C",
+          "text": "Người dùng có hài lòng không?"
+        },
+        {
+          "key": "D",
+          "text": "Chi phí bao nhiêu?"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Thought là bước tự vấn: agent đánh giá mình đang thiếu thông tin gì và bước hành động tiếp theo nên là gì.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-040",
+      "type": "mcq",
+      "prompt": "Bước 'Action' trong ReAct xác định điều gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Kết quả cuối cùng cho người dùng"
+        },
+        {
+          "key": "B",
+          "text": "Gọi tool nào, với tham số nào"
+        },
+        {
+          "key": "C",
+          "text": "Số vòng lặp còn lại"
+        },
+        {
+          "key": "D",
+          "text": "Chi phí token đã dùng"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Action là quyết định cụ thể: chọn tool nào trong registry và truyền tham số gì vào. Trong ReAct dạng text, Action được viết thành chuỗi theo format quy ước nên dễ vỡ parser; từ 2023 function calling chuyển Action thành JSON object có schema nên đáng tin cậy hơn hẳn.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-041",
+      "type": "mcq",
+      "prompt": "Vòng lặp ReAct kết thúc khi nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Sau đúng 3 vòng lặp"
+        },
+        {
+          "key": "B",
+          "text": "Khi đủ thông tin để trả lời hoặc gặp điều kiện dừng"
+        },
+        {
+          "key": "C",
+          "text": "Khi người dùng bấm nút dừng"
+        },
+        {
+          "key": "D",
+          "text": "Khi hết token trong context"
+        }
+      ],
+      "answer": "B",
+      "explanation": "ReAct lặp lại đến khi agent có đủ thông tin để đưa ra câu trả lời cuối, hoặc chạm điều kiện dừng (max iterations, timeout, budget).",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-042",
+      "type": "mcq",
+      "prompt": "Vì sao ReAct mạnh về khả năng debug?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì nó chạy nhanh hơn các pattern khác, kể cả khi số vòng lặp tối đa được nới rộng, kể cả khi số vòng lặp tối đa được nới rộng"
+        },
+        {
+          "key": "B",
+          "text": "Vì trace lý do hành động được bộc lộ ra ngoài, giúp con người debug và can thiệp dễ hơn so với chỉ nhìn final answer"
+        },
+        {
+          "key": "C",
+          "text": "Vì nó không bao giờ sai, dù agent vẫn gọi được đầy đủ các tool đã khai báo, trong khi mục tiêu ban đầu vẫn được giữ nguyên"
+        },
+        {
+          "key": "D",
+          "text": "Vì nó dùng ít token hơn, nên vòng lặp hành động sẽ dừng sớm hơn dự kiến, trong khi mục tiêu ban đầu vẫn được giữ nguyên"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Điểm mạnh của ReAct không chỉ là answer tốt hơn, mà là con người nhìn được agent đã hành động dựa trên quan sát nào — trace minh bạch hóa quá trình.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-043",
+      "type": "mcq",
+      "prompt": "Trong trace ví dụ tìm chuyến bay HAN → HCM, Action 1 là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "get_weather(city='Ho Chi Minh City'), dù agent vẫn gọi được đầy đủ các tool đã khai báo"
+        },
+        {
+          "key": "B",
+          "text": "search_flights(origin='HAN', destination='SGN', date='2026-03-18', max_price=2000000)"
+        },
+        {
+          "key": "C",
+          "text": "recommend_outfit(temp=30), nên vòng lặp hành động sẽ dừng sớm hơn dự kiến"
+        },
+        {
+          "key": "D",
+          "text": "final_answer(), trong khi mục tiêu ban đầu vẫn được giữ nguyên"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Thought 1 xác định cần tìm chuyến bay dưới 2 triệu → Action 1 gọi search_flights với đầy đủ tham số tuyến, ngày và giá trần.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-044",
+      "type": "mcq",
+      "prompt": "Observation 1 trong trace ví dụ trả về kết quả gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Nhiệt độ 27-32C, xác suất mưa 70%, nên vòng lặp hành động sẽ dừng sớm hơn dự kiến"
+        },
+        {
+          "key": "B",
+          "text": "2 lựa chọn phù hợp: VietJet 06:10 giá 1.75M, Vietnam Airlines 08:20 giá 1.95M"
+        },
+        {
+          "key": "C",
+          "text": "Không tìm thấy chuyến bay nào, nên vòng lặp hành động sẽ dừng sớm hơn dự kiến"
+        },
+        {
+          "key": "D",
+          "text": "Lỗi timeout khi gọi API, dù agent vẫn gọi được đầy đủ các tool đã khai báo"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Observation 1 là kết quả thật từ tool search_flights: hai chuyến phù hợp với giá cụ thể. Điểm quan trọng là Observation đến từ hệ thống bên ngoài chứ không phải model tự sinh — đây chính là chứng cứ thực giúp Thought tiếp theo quyết định đúng thay vì đoán.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-045",
+      "type": "mcq",
+      "prompt": "Vì sao trong trace ví dụ agent thực hiện Action 2 (get_weather)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì Action 1 thất bại, kể cả khi số vòng lặp tối đa được nới rộng, kể cả khi số vòng lặp tối đa được nới rộng"
+        },
+        {
+          "key": "B",
+          "text": "Vì Thought 2 nhận ra user cũng hỏi về trang phục nếu trời mưa, nên cần check thời tiết tại HCM"
+        },
+        {
+          "key": "C",
+          "text": "Vì hệ thống tự động gọi mọi tool có sẵn, nên vòng lặp hành động sẽ dừng sớm hơn dự kiến"
+        },
+        {
+          "key": "D",
+          "text": "Vì cần xác minh lại giá vé, nên vòng lặp hành động sẽ dừng sớm hơn dự kiến, trong khi mục tiêu ban đầu vẫn được giữ nguyên"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Thought 2 phân tích rằng mục tiêu chưa hoàn thành: user còn hỏi mang gì nếu mưa → cần dữ liệu thời tiết, do đó gọi get_weather.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-046",
+      "type": "mcq",
+      "prompt": "Thought 3 trong trace ví dụ dẫn tới hành động gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Gọi thêm tool thứ ba, dù agent vẫn gọi được đầy đủ các tool đã khai báo"
+        },
+        {
+          "key": "B",
+          "text": "Kết luận — agent đã có cả lựa chọn chuyến bay và dữ liệu thời tiết nên đưa ra Final Answer"
+        },
+        {
+          "key": "C",
+          "text": "Quay lại gọi lại search_flights, nên vòng lặp hành động sẽ dừng sớm hơn dự kiến"
+        },
+        {
+          "key": "D",
+          "text": "Chuyển câu hỏi cho con người, kể cả khi số vòng lặp tối đa được nới rộng"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Thought 3 xác nhận đã đủ thông tin (chuyến bay + thời tiết) → thoát vòng lặp và sinh Final Answer gộp cả hai.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-047",
+      "type": "mcq",
+      "prompt": "Ưu điểm nào KHÔNG thuộc về ReAct pattern?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dễ đọc trace và debug"
+        },
+        {
+          "key": "B",
+          "text": "Tự quyết được bước tiếp theo từ observation"
+        },
+        {
+          "key": "C",
+          "text": "Tốn ít token và latency hơn chatbot"
+        },
+        {
+          "key": "D",
+          "text": "Có thể cài safeguard ở từng vòng lặp"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Ngược lại — ReAct TỐN nhiều token và latency hơn chatbot vì phải chạy nhiều vòng lặp và nhiều lần gọi model/tool.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-048",
+      "type": "mcq",
+      "prompt": "Giới hạn nào của ReAct được nêu trong bài giảng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không thể dùng tool, trong khi mục tiêu ban đầu vẫn được giữ nguyên"
+        },
+        {
+          "key": "B",
+          "text": "Dễ loop hoặc gọi sai tool; cần eval theo trace chứ không chỉ final answer"
+        },
+        {
+          "key": "C",
+          "text": "Không debug được, dù agent vẫn gọi được đầy đủ các tool đã khai báo"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ chạy với một model duy nhất, dù agent vẫn gọi được đầy đủ các tool đã khai báo"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Giới hạn ReAct: tốn token/latency, dễ rơi vào loop hoặc chọn sai tool, cần đánh giá theo trace, và không phù hợp bài toán đơn giản hoặc cần deterministic tuyệt đối.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-049",
+      "type": "mcq",
+      "prompt": "Khi hệ thống có nhiều nhánh hơn, bài giảng khuyên chuyển từ ReAct sang gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Rule-based bot"
+        },
+        {
+          "key": "B",
+          "text": "Graph/state machine rõ ràng"
+        },
+        {
+          "key": "C",
+          "text": "Prompt engineering thuần"
+        },
+        {
+          "key": "D",
+          "text": "Multi-agent ngẫu nhiên"
+        }
+      ],
+      "answer": "B",
+      "explanation": "ReAct dễ bắt đầu nhất, nhưng khi workflow nhiều nhánh thì nên chuyển sang graph/state machine (như LangGraph) để dễ biểu diễn và bảo trì.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-050",
+      "type": "mcq",
+      "prompt": "Theo tổng kết bài giảng, công thức của agent là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Agent = chatbot thông minh hơn"
+        },
+        {
+          "key": "B",
+          "text": "Agent = LLM + reasoning + tools + memory/state"
+        },
+        {
+          "key": "C",
+          "text": "Agent = LLM + context window lớn"
+        },
+        {
+          "key": "D",
+          "text": "Agent = nhiều LLM chạy song song"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Key takeaway: agent KHÔNG phải 'chatbot thông minh hơn'; agent = LLM + reasoning + tools + memory/state.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-051",
+      "type": "mcq",
+      "prompt": "Năm bước tiến hóa từ LLM thuần đến agent hiện đại theo bài giảng là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "LLM → RAG → Fine-tuning → Agent → Multi-agent, nên chất lượng đầu ra phụ thuộc vào cách đặt câu hỏi"
+        },
+        {
+          "key": "B",
+          "text": "LLM thuần → Prompt Engineering → Text-based ReAct (2022) → Function Calling (2023+) → Agent hiện nay"
+        },
+        {
+          "key": "C",
+          "text": "Rule → Chatbot → Agent → AGI → ASI, nên chất lượng đầu ra phụ thuộc vào cách đặt câu hỏi"
+        },
+        {
+          "key": "D",
+          "text": "GPT-3 → GPT-4 → GPT-5 → Agent SDK → MCP, dù kiến thức nền của model vẫn giữ nguyên"
+        }
+      ],
+      "answer": "B",
+      "explanation": "5 bước: (1) LLM thuần chỉ next-token prediction; (2) Prompt engineering few-shot/CoT; (3) Text-based ReAct 2022; (4) Function Calling 2023+; (5) Agent hiện nay gộp reasoning + tool call + memory.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-052",
+      "type": "mcq",
+      "prompt": "Bước 1 'LLM thuần' trong tiến hóa có đặc điểm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Có thể gọi tool theo schema"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ next-token prediction, không hành động được"
+        },
+        {
+          "key": "C",
+          "text": "Suy luận nhiều bước có scratch pad"
+        },
+        {
+          "key": "D",
+          "text": "Trả về JSON có cấu trúc"
+        }
+      ],
+      "answer": "B",
+      "explanation": "LLM thuần chỉ dự đoán token tiếp theo — sinh được văn bản nhưng không có cơ chế hành động ra thế giới ngoài.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-053",
+      "type": "mcq",
+      "prompt": "Bước 2 'Prompt Engineering' giải quyết được gì và còn hạn chế gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Giải quyết được tool calling nhưng chậm, dù phần hướng dẫn hệ thống đã được viết rõ ràng"
+        },
+        {
+          "key": "B",
+          "text": "Few-shot/CoT giúp reasoning tốt hơn, nhưng vẫn 1 lượt và không gọi tool được"
+        },
+        {
+          "key": "C",
+          "text": "Cho phép gọi nhiều tool song song, trong khi định dạng đầu ra vẫn được giữ ổn định"
+        },
+        {
+          "key": "D",
+          "text": "Đảm bảo output đúng schema, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Prompt engineering (few-shot, Chain-of-Thought) cải thiện chất lượng suy luận nhưng vẫn chỉ một lượt phản hồi, chưa có khả năng hành động.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-054",
+      "type": "mcq",
+      "prompt": "Trong paper ReAct gốc, Action được biểu diễn dưới dạng nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "JSON object có schema, trong khi mục tiêu ban đầu vẫn được giữ nguyên"
+        },
+        {
+          "key": "B",
+          "text": "Chuỗi text theo format cố định, ví dụ search[entity] hay lookup[string]"
+        },
+        {
+          "key": "C",
+          "text": "Lời gọi hàm Python trực tiếp, nên vòng lặp hành động sẽ dừng sớm hơn dự kiến"
+        },
+        {
+          "key": "D",
+          "text": "Câu lệnh SQL, nên vòng lặp hành động sẽ dừng sớm hơn dự kiến"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Paper ReAct gốc dùng Action là chuỗi text theo format quy ước (search[entity], lookup[string]) — model phải tự 'nhớ' đúng cú pháp.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-055",
+      "type": "mcq",
+      "prompt": "Hạn chế cốt lõi của text-based ReAct là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Model không đủ thông minh để suy luận, dù agent vẫn gọi được đầy đủ các tool đã khai báo, nên vòng lặp hành động sẽ dừng sớm hơn dự kiến"
+        },
+        {
+          "key": "B",
+          "text": "Không có schema để model hay hệ thống kiểm tra tính hợp lệ trước khi gọi tool — hệ thống phải parse bằng regex/string matching"
+        },
+        {
+          "key": "C",
+          "text": "Không chạy được trên GPU, nên vòng lặp hành động sẽ dừng sớm hơn dự kiến, nên vòng lặp hành động sẽ dừng sớm hơn dự kiến"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ hoạt động với tiếng Anh, nên vòng lặp hành động sẽ dừng sớm hơn dự kiến, kể cả khi số vòng lặp tối đa được nới rộng"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Gốc rễ vấn đề: hệ thống chỉ prompt model trả lời đúng định dạng text, chứ chưa từng gửi cho model một 'hợp đồng máy đọc được' (schema) để bám.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-056",
+      "type": "mcq",
+      "prompt": "Lỗi điển hình nhất của text-based ReAct trong production là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Out of memory, nên vòng lặp hành động sẽ dừng sớm hơn dự kiến, dù agent vẫn gọi được đầy đủ các tool đã khai báo"
+        },
+        {
+          "key": "B",
+          "text": "'Could not parse LLM output' — chỉ cần thiếu dấu hai chấm, sai hoa/thường, hoặc quên 'Action Input:' là parser vỡ"
+        },
+        {
+          "key": "C",
+          "text": "Rate limit exceeded, kể cả khi số vòng lặp tối đa được nới rộng, trong khi mục tiêu ban đầu vẫn được giữ nguyên"
+        },
+        {
+          "key": "D",
+          "text": "Model timeout, trong khi mục tiêu ban đầu vẫn được giữ nguyên, nên vòng lặp hành động sẽ dừng sớm hơn dự kiến"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Parser dựa trên regex rất mong manh: chỉ một ký tự sai định dạng là toàn bộ vòng lặp dừng lại với lỗi 'Could not parse LLM output'.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-057",
+      "type": "mcq",
+      "prompt": "Trong ví dụ parser vỡ của bài giảng, nguyên nhân cụ thể là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Model trả về tiếng Việt thay vì tiếng Anh, trong khi mục tiêu ban đầu vẫn được giữ nguyên, trong khi mục tiêu ban đầu vẫn được giữ nguyên"
+        },
+        {
+          "key": "B",
+          "text": "Model viết thường 'action:' thay vì 'Action:' — với con người là lỗi không đáng kể, nhưng parser regex coi là sai hoàn toàn"
+        },
+        {
+          "key": "C",
+          "text": "Tham số truyền sai kiểu dữ liệu, kể cả khi số vòng lặp tối đa được nới rộng, trong khi mục tiêu ban đầu vẫn được giữ nguyên"
+        },
+        {
+          "key": "D",
+          "text": "Tool không tồn tại trong registry, kể cả khi số vòng lặp tối đa được nới rộng, trong khi mục tiêu ban đầu vẫn được giữ nguyên"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Ví dụ minh họa: model viết 'action:' viết thường, regex chỉ khớp 'Action:' viết hoa → ValueError, cả vòng lặp dừng vì 1 ký tự.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-058",
+      "type": "mcq",
+      "prompt": "Vấn đề nào về format của text-based ReAct gây khó bảo trì ở production?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Format quá dài dòng, dù agent vẫn gọi được đầy đủ các tool đã khai báo"
+        },
+        {
+          "key": "B",
+          "text": "Format dễ trôi (drift) khi đổi model, đổi phiên bản, hoặc đổi prompt"
+        },
+        {
+          "key": "C",
+          "text": "Format không hỗ trợ Unicode, trong khi mục tiêu ban đầu vẫn được giữ nguyên"
+        },
+        {
+          "key": "D",
+          "text": "Format tốn quá nhiều dung lượng lưu trữ, nên vòng lặp hành động sẽ dừng sớm hơn dự kiến"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Format drift: prompt hoạt động tốt với model này có thể vỡ khi đổi model/phiên bản — không có hợp đồng chính thức nên rất khó bảo trì.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-059",
+      "type": "mcq",
+      "prompt": "Function calling được OpenAI ra mắt vào thời điểm nào và cho model nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tháng 11/2022 cho GPT-3.5"
+        },
+        {
+          "key": "B",
+          "text": "Tháng 6/2023 cho gpt-4-0613 và gpt-3.5-turbo-0613"
+        },
+        {
+          "key": "C",
+          "text": "Tháng 3/2024 cho GPT-4o"
+        },
+        {
+          "key": "D",
+          "text": "Tháng 9/2025 cho GPT-5"
+        }
+      ],
+      "answer": "B",
+      "explanation": "OpenAI ra mắt function calling tháng 6/2023 cho gpt-4-0613 và gpt-3.5-turbo-0613; Anthropic tích hợp tool use tương tự cho Claude.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-060",
+      "type": "mcq",
+      "prompt": "Function calling thay đổi bản chất bài toán như thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Từ 'model chậm' sang 'model nhanh', nên chất lượng đầu ra phụ thuộc vào cách đặt câu hỏi"
+        },
+        {
+          "key": "B",
+          "text": "Từ 'prompt model trả lời đúng format' sang 'model được thiết kế để trả structured output'"
+        },
+        {
+          "key": "C",
+          "text": "Từ 'dùng ít token' sang 'dùng nhiều token', trong khi tham số của model không hề thay đổi"
+        },
+        {
+          "key": "D",
+          "text": "Từ 'một tool' sang 'không tool nào', kể cả khi context window được mở rộng thêm"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Đây là bước chuyển tư duy: thay vì cầu mong model tuân thủ format text, ngành chuyển sang thiết kế model để sinh ra output có cấu trúc theo schema.",
+      "source": "exam-93.json",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "D03-TL-01",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Giải thích Agentic Fit và nêu một ví dụ áp dụng trong sản phẩm AI.",
+      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Agentic Fit, ReAct loop, Thought–Action–Observation, function calling, trace, debug agent, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "D03-TL-02",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "So sánh Agentic Fit với ReAct loop; nêu tiêu chí lựa chọn trong một tình huống thực tế.",
+      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Agentic Fit, ReAct loop, Thought–Action–Observation, function calling, trace, debug agent, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "D03-TL-03",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Thiết kế một quy trình ngắn sử dụng Thought–Action–Observation để giảm rủi ro cho người dùng.",
+      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Agentic Fit, ReAct loop, Thought–Action–Observation, function calling, trace, debug agent, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "D03-TL-04",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Phân tích một failure mode liên quan đến function calling, nguyên nhân và cách khắc phục.",
+      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Agentic Fit, ReAct loop, Thought–Action–Observation, function calling, trace, debug agent, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "D03-TL-05",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Đề xuất metric đánh giá cho trace; giải thích vì sao metric đó hữu ích.",
+      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Agentic Fit, ReAct loop, Thought–Action–Observation, function calling, trace, debug agent, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "D03-TL-06",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Lập kế hoạch thử nghiệm nhỏ cho debug agent: giả định, dữ liệu, tiêu chí đạt và tiêu chí dừng.",
+      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Agentic Fit, ReAct loop, Thought–Action–Observation, function calling, trace, debug agent, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "D03-TL-07",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Tình huống: kết quả liên quan đến Agentic Fit không đạt kỳ vọng. Bạn sẽ debug theo thứ tự nào?",
+      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Agentic Fit, ReAct loop, Thought–Action–Observation, function calling, trace, debug agent, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "D03-TL-08",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Viết khuyến nghị cho stakeholder về lợi ích, giới hạn và rủi ro của ReAct loop.",
+      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Agentic Fit, ReAct loop, Thought–Action–Observation, function calling, trace, debug agent, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "D03-TL-09",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Nêu các đánh đổi khi triển khai Thought–Action–Observation trong production và cách theo dõi sau triển khai.",
+      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Agentic Fit, ReAct loop, Thought–Action–Observation, function calling, trace, debug agent, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "D03-TL-10",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Tạo checklist trước khi ship một tính năng AI có dùng function calling và trace.",
+      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Agentic Fit, ReAct loop, Thought–Action–Observation, function calling, trace, debug agent, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    }
+  ]
+}

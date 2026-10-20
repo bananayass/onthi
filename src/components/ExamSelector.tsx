@@ -52,6 +52,19 @@ export function ExamSelector({ exams, selectedExamId, mode, timerEnabled, onExam
 
   const selectedGuide = findGuideByExamId(selected.id);
 
+  /**
+   * Mở đề từ thẻ tài liệu và đồng thời đổi sang đúng nhóm chứa đề.
+   * Nếu không, khi đang lọc tab Trí Dũng mà mở Ngày 2 AICB, effect phía trên
+   * sẽ thấy đề AICB không hiển thị và tự đổi lại thành đề Trí Dũng đầu tiên.
+   */
+  const handleOpenExam = (examId: string) => {
+    const exam = exams.find((item) => item.id === examId);
+    if (!exam) return;
+    setGroup(exam.course === 'aicb' ? 'aicb' : exam.course === 'tridung' ? 'tridung' : 'other');
+    onExamChange(examId);
+    listRef.current?.scrollTo({ top: 0 });
+  };
+
   const handleGroupChange = (next: GroupId) => {
     setGroup(next);
     listRef.current?.scrollTo({ top: 0 });
@@ -67,7 +80,7 @@ export function ExamSelector({ exams, selectedExamId, mode, timerEnabled, onExam
           <p>Chọn một đề phù hợp và bắt đầu củng cố kiến thức AI thực chiến của bạn.</p>
         </section>
 
-        <StudyGuideList onOpenExam={onExamChange} />
+        <StudyGuideList onOpenExam={handleOpenExam} />
 
         <section className="exam-library card">
           <div className="section-heading">
@@ -140,25 +153,10 @@ export function ExamSelector({ exams, selectedExamId, mode, timerEnabled, onExam
         <section className="setup card">
           <div className="section-heading"><div><span className="eyebrow">CẤU HÌNH</span><h2>Thiết lập bài làm</h2></div></div>
 
-        <div className="mode-grid">
-          <button className={mode === 'practice' ? 'active mode-card' : 'mode-card'} onClick={() => onModeChange('practice')}>
-            <strong>Luyện tập</strong>
-            <span>Xem đáp án và giải thích ngay sau khi chọn.</span>
-          </button>
-          <button className={mode === 'exam' ? 'active mode-card' : 'mode-card'} onClick={() => onModeChange('exam')}>
-            <strong>Thi thử</strong>
-            <span>Chỉ xem đáp án sau khi hoàn tất bài thi.</span>
-          </button>
-        </div>
-
         <label className="toggle-row">
           <span><strong>Bật đồng hồ đếm ngược</strong><small>Thời gian làm bài: {selected.durationMinutes} phút</small></span>
           <input type="checkbox" checked={timerEnabled} onChange={(event) => onTimerChange(event.target.checked)} />
         </label>
-        <div className="setup-action-bar">
-          <button className="primary start-button" disabled={visibleExams.length === 0} onClick={onStart}>Bắt đầu làm bài <span aria-hidden="true">→</span></button>
-          <p className="setup-note">Tiến độ được lưu tự động trên thiết bị này.</p>
-        </div>
         </section>
 
         <footer className="home-footer">
@@ -166,6 +164,33 @@ export function ExamSelector({ exams, selectedExamId, mode, timerEnabled, onExam
           <Disclaimer />
         </footer>
       </main>
+      <div className="setup-action-bar" aria-label="Hành động làm bài">
+        <div className="setup-action-bar__inner">
+          <div className="setup-action-summary">
+            <strong>{selected.title}</strong>
+            <span>{selected.questions.length} câu · {selected.durationMinutes} phút</span>
+          </div>
+          <div className="setup-action-controls">
+            <button
+              type="button"
+              className={mode === 'practice' ? 'mode-action active' : 'mode-action'}
+              aria-pressed={mode === 'practice'}
+              onClick={() => onModeChange('practice')}
+            >
+              Luyện tập
+            </button>
+            <button
+              type="button"
+              className={mode === 'exam' ? 'mode-action active' : 'mode-action'}
+              aria-pressed={mode === 'exam'}
+              onClick={() => onModeChange('exam')}
+            >
+              Thi thử
+            </button>
+            <button className="primary start-button" disabled={visibleExams.length === 0} onClick={onStart}>Bắt đầu làm bài <span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

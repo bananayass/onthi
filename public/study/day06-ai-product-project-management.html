@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day 6 — AI Product & Project Management | Tóm tắt cho người mới</title>
+<style>
+:root{--ink:#183047;--muted:#5e7184;--blue:#2563eb;--blue-soft:#edf4ff;--green:#13795b;--green-soft:#e9f8f0;--gold:#9a6700;--gold-soft:#fff7df;--red:#a83434;--red-soft:#fff0ef;--line:#dbe5ee;--paper:#fff;--bg:#f3f7fb;--shadow:0 8px 26px rgba(26,55,90,.07)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:13pt/1.65 "Times New Roman",Georgia,serif}a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}.layout{display:grid;grid-template-columns:260px minmax(0,900px);gap:26px;max-width:1220px;margin:0 auto;padding:24px 20px}.sidebar{position:sticky;top:18px;align-self:start;max-height:calc(100vh - 36px);overflow:auto;background:white;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}.brand{font-family:Arial,sans-serif;font-size:12px;color:var(--blue);font-weight:800;letter-spacing:.12em;text-transform:uppercase}.sidebar h2{font-size:19px;line-height:1.25;margin:8px 0 14px}.nav a{display:block;padding:7px 9px;border-radius:8px;color:#3c5268;font-size:12.5pt}.nav a:hover{background:var(--blue-soft);text-decoration:none}.side-note{margin-top:16px;padding:12px;background:var(--green-soft);border-radius:10px;color:#165d48;font-size:11.5pt}.content{min-width:0}.hero{background:linear-gradient(130deg,#102f54,#1d4f88);color:white;padding:36px 34px;border-radius:20px;box-shadow:var(--shadow);margin-bottom:22px}.eyebrow{font:700 11px Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#b9d6ff}.hero h1{font-size:34px;line-height:1.13;margin:12px 0}.hero p{font-size:15pt;color:#e2edfb;max-width:720px;margin:0}.hero-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.chip{font:12px Arial,sans-serif;padding:6px 10px;border-radius:99px;background:#ffffff1c;border:1px solid #ffffff3b}.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px;margin:0 0 18px;box-shadow:var(--shadow);scroll-margin-top:18px}.section-kicker{font:700 11px Arial,sans-serif;letter-spacing:.11em;text-transform:uppercase;color:var(--blue)}h2{font-size:25px;line-height:1.2;margin:4px 0 12px}h3{font-size:18px;margin:22px 0 8px}h4{font-size:15px;margin:14px 0 5px}.lead{font-size:14pt;color:#344e66}.plain{color:var(--muted)}.callout{border-left:4px solid var(--blue);background:var(--blue-soft);padding:12px 15px;margin:14px 0;border-radius:0 10px 10px 0}.good{border-left-color:var(--green);background:var(--green-soft)}.warn{border-left-color:#d39a15;background:var(--gold-soft)}.bad{border-left-color:var(--red);background:var(--red-soft)}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.mini{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fcfdff}.mini h3,.mini h4{margin-top:0}.pill{display:inline-block;padding:3px 8px;border-radius:20px;background:var(--blue-soft);color:#2054a4;font-size:11pt}.green-pill{background:var(--green-soft);color:#116248}table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5pt}th,td{border:1px solid var(--line);padding:10px 11px;text-align:left;vertical-align:top}th{background:#eef4fa;font-weight:bold}tr:nth-child(even) td{background:#fbfdff}ul,ol{padding-left:24px}li{margin:4px 0}.flow{display:flex;gap:7px;align-items:stretch;flex-wrap:wrap;margin:12px 0}.flow span{background:var(--blue-soft);color:#194c8f;padding:8px 10px;border-radius:8px;text-align:center;flex:1;min-width:105px}.flow b{align-self:center;color:#7190b0}.formula{font:700 18px Arial,sans-serif;text-align:center;background:#f2f7fc;border:1px dashed #9db5cb;padding:17px;border-radius:12px;margin:14px 0}.example{background:#fbfcfe;border:1px dashed #b7c8d8;border-radius:10px;padding:13px;margin:10px 0}.example strong{color:var(--green)}.exam-tag{font:700 10px Arial,sans-serif;color:#8a5c00;text-transform:uppercase;letter-spacing:.08em}.term{font-weight:bold;color:#204f86}.quiz{border:1px solid var(--line);border-radius:11px;padding:13px 15px;margin:11px 0;background:#fff}.quiz summary{cursor:pointer;font-weight:bold}.quiz .answer{padding:10px 0 0;color:#2d4d63}.footer{text-align:center;padding:22px;color:#6e8091;font-size:11.5pt}.checklist label{display:block;padding:6px 0}.checklist input{margin-right:8px;accent-color:var(--green)}.toplink{display:inline-block;margin-top:10px;font-family:Arial,sans-serif;font-size:12px}.small{font-size:11.5pt}.two-col{columns:2;column-gap:28px}.two-col li{break-inside:avoid}.highlight{color:var(--green);font-weight:bold}.muted{color:var(--muted)}
+@media(max-width:900px){.layout{display:block;padding:12px}.sidebar{position:relative;top:auto;max-height:none;margin-bottom:15px}.nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px}.hero{padding:26px 22px}.hero h1{font-size:28px}.card{padding:19px}.grid2,.grid3{grid-template-columns:1fr}.two-col{columns:1}}
+@media print{body{background:white;font-size:12pt}.layout{display:block;padding:0;max-width:none}.sidebar{display:none}.hero,.card{box-shadow:none;break-inside:avoid}.hero{background:#183047!important;print-color-adjust:exact}.card{margin-bottom:12px}.quiz .answer{display:block}a{color:inherit}}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="brand">AICB · Day 06</div>
+  <h2>AI Product &amp; Project Management</h2>
+  <nav class="nav">
+    <a href="#big-picture">0. Bức tranh lớn</a>
+    <a href="#agile">1. Agile cho AI</a>
+    <a href="#mve-mvp-poc">2. MVE, MVP &amp; PoC</a>
+    <a href="#lowcode">3. Low-code / No-code</a>
+    <a href="#poc">4. PoC với stakeholder</a>
+    <a href="#roi">5. ROI &amp; Break-even</a>
+    <a href="#communication">6. Giao tiếp &amp; Pitch</a>
+    <a href="#lab">7. Lab &amp; checklist</a>
+    <a href="#dictionary">Từ điển thuật ngữ</a>
+    <a href="#quiz">Tự kiểm tra</a>
+  </nav>
+  <div class="side-note"><b>Cách học:</b> Đọc phần “Nói đơn giản” trước, hiểu ví dụ rồi mới ghi nhớ thuật ngữ. Bấm vào câu hỏi cuối bài để xem đáp án.</div>
+</aside>
+<main class="content">
+<header class="hero" id="top">
+  <div class="eyebrow">Tài liệu ôn tập · Giải thích từ đầu</div>
+  <h1>Day 6 — AI Product &amp; Project Management</h1>
+  <p>Team đã làm ba tuần, nhưng stakeholder muốn đổi yêu cầu. Với dự án AI, ta không chỉ cần quản lý tiến độ; ta cần thử nghiệm giả định, đo kết quả và quyết định có nên đầu tư tiếp hay không.</p>
+  <div class="hero-chips"><span class="chip">Cho người mới bắt đầu</span><span class="chip">Tóm tắt theo PDF Day 6</span><span class="chip">Ví dụ · Mẹo thi · Quiz</span></div>
+</header>
+
+<section class="card" id="big-picture">
+  <div class="section-kicker">Trước khi học chi tiết</div><h2>0. Bức tranh lớn của cả bài</h2>
+  <p class="lead">Hãy tưởng tượng công ty muốn làm một trợ lý AI giúp nhân viên tra cứu chính sách. Làm thế nào biết ý tưởng có đáng để bỏ tiền và thời gian xây thật?</p>
+  <div class="grid2">
+    <div class="mini"><h3>1. Thử trước</h3><p>Đừng xây tất cả ngay. Kiểm tra xem người dùng có thật sự cần giải pháp này không.</p></div>
+    <div class="mini"><h3>2. Đo bằng số</h3><p>Ví dụ: thời gian tìm câu trả lời có giảm không, câu trả lời có trích dẫn đúng nguồn không?</p></div>
+    <div class="mini"><h3>3. Tính đủ chi phí</h3><p>Không chỉ tiền xây ban đầu; còn có API, máy tính, người duyệt câu trả lời, giám sát và bảo trì.</p></div>
+    <div class="mini"><h3>4. Xin quyết định rõ</h3><p>Đưa bằng chứng để stakeholder quyết định tiếp tục, chạy pilot giới hạn hay dừng.</p></div>
+  </div>
+  <div class="callout good"><b>Thông điệp cốt lõi:</b> Quản lý dự án AI = Agile + phương pháp khoa học: nêu giả định → thử → đo → học → điều chỉnh → mới đầu tư tiếp.</div>
+  <p><b>Deliverable cuối Day 6 theo slide:</b> PRD hoàn chỉnh, mô hình ROI theo mốc 3–6–12 tháng với ba kịch bản, slide deck 5–7 trang và bài pitch khoảng 5 phút.</p>
+</section>
+
+<section class="card" id="agile">
+ <div class="section-kicker">01 · Agile cho AI projects</div><h2>1. Vì sao dự án AI cần Agile?</h2>
+ <h3>Nói đơn giản</h3><p><b>Agile</b> là cách làm việc theo từng vòng ngắn: làm một phần, kiểm tra kết quả, nhận phản hồi rồi điều chỉnh. Không đợi làm xong toàn bộ dự án mới biết mình đi sai hướng.</p>
+ <p>Với AI, kết quả phụ thuộc vào nhiều yếu tố chưa chắc chắn: dữ liệu, prompt, độ ổn định của tool và cách người dùng thật sự sử dụng. Nhiều giả định chỉ kiểm chứng được sau khi có prototype hoặc chạy đánh giá thực tế.</p>
+ <h3>Vòng lặp AI Sprint</h3>
+ <div class="flow"><span>Research / Spike<br><small>Tìm hiểu</small></span><b>→</b><span>Hypothesis<br><small>Đặt giả thuyết</small></span><b>→</b><span>Build<br><small>Làm thử</small></span><b>→</b><span>Eval<br><small>Đánh giá</small></span><b>→</b><span>Iterate<br><small>Điều chỉnh</small></span></div>
+ <div class="example"><strong>Ví dụ:</strong> Giả thuyết “AI giúp HR trả lời câu hỏi chính sách nhanh hơn”. Team thử với một nhóm câu hỏi, đo thời gian và độ chính xác. Nếu AI trả lời nhanh nhưng trích dẫn sai, phải sửa dữ liệu/prompt hoặc thu hẹp phạm vi, không nên vội kết luận dự án đã thành công.</div>
+ <p>Mỗi sprint phải trả lời: <b>đã học được gì, giả định nào bị bác bỏ, và nên tiếp tục đầu tư hay dừng ở đâu?</b></p>
+ <h3>Ước lượng công việc AI: nhớ tính phần chưa chắc chắn</h3>
+ <table><thead><tr><th>Loại công việc</th><th>Hay ước lượng thiếu</th><th>Cần tính thêm</th></tr></thead><tbody>
+ <tr><td>Prompt / behavior tuning</td><td>Nghĩ rằng chỉ sửa prompt một lần.</td><td>Nhiều vòng thử và đánh giá lại.</td></tr>
+ <tr><td>Tool integration</td><td>Chỉ tính thời gian viết code kết nối.</td><td>Xử lý lỗi, retry và tình huống tool không phản hồi.</td></tr>
+ <tr><td>Data / retrieval</td><td>Chỉ tính bước thiết lập ban đầu.</td><td>Làm sạch dữ liệu, độ bao phủ và edge cases.</td></tr>
+ <tr><td>UX / trust calibration</td><td>Không dành thời gian kiểm tra với người dùng.</td><td>Thử nghiệm thực tế để biết người dùng có tin và dùng đúng cách không.</td></tr>
+ </tbody></table>
+ <h3>Definition of Done — Khi nào mới được coi là hoàn thành?</h3>
+ <p>Không chỉ là “code chạy được”. Một AI feature chỉ được coi là hoàn thành khi có <b>ngưỡng chất lượng</b>, giới hạn thời gian phản hồi (latency), cách xử lý khi thất bại (fallback) và tín hiệu để theo dõi sau khi ra mắt (monitoring).</p>
+ <div class="example"><strong>Ví dụ:</strong> Một trợ lý tra cứu chính sách chỉ được đánh dấu “Done” khi tỷ lệ trích dẫn đúng nguồn đạt ngưỡng đã thống nhất, câu hỏi khó có đường chuyển cho người thật, và bộ test đạt yêu cầu.</div>
+ <p>Slide cũng nhắc đến ba loại “nợ” cần theo dõi: <b>feature debt</b> (nợ tính năng), <b>data debt</b> (nợ chất lượng/dữ liệu) và <b>technical debt</b> (nợ kỹ thuật).</p>
+ <div class="callout warn"><b>Mẹo thi:</b> Với AI, “đã code xong” ≠ “đã hoàn thành”. Cần quality threshold + latency + fallback + monitoring.</div>
+</section>
+
+<section class="card" id="mve-mvp-poc">
+ <div class="section-kicker">02 · MVP first</div><h2>2. Phân biệt MVE, MVP và PoC</h2>
+ <p class="lead">Ba thuật ngữ này gần nhau nhưng mục tiêu khác nhau. Khi làm bài, hãy nhìn vào câu hỏi mà thử nghiệm cần trả lời.</p>
+ <table><thead><tr><th>Khái niệm</th><th>Nói dễ hiểu</th><th>Câu hỏi cần trả lời</th><th>Khi nào dùng?</th></tr></thead><tbody>
+ <tr><td><b>MVE</b><br><span class="muted">Minimum Viable Experiment</span></td><td>Thử nghiệm nhỏ nhất để kiểm tra giả định về giá trị.</td><td>Người dùng có thật sự muốn thứ này không?</td><td>Khi cần học nhanh với ít công sức.</td></tr>
+ <tr><td><b>MVP</b><br><span class="muted">Minimum Viable Product</span></td><td>Sản phẩm nhỏ nhất nhưng người dùng có thể sử dụng thật.</td><td>Workflow có vận hành được trong thực tế không?</td><td>Khi đã có cơ sở để đưa phiên bản nhỏ vào sử dụng.</td></tr>
+ <tr><td><b>PoC</b><br><span class="muted">Proof of Concept</span></td><td>Bản chứng minh ý tưởng/khả năng có thể thực hiện.</td><td>Có đáng đầu tư thêm không?</td><td>Khi cần giảm bất định để stakeholder/sponsor quyết định.</td></tr>
+ </tbody></table>
+ <div class="callout good"><b>Cách nhớ:</b> MVE = kiểm tra giá trị; MVP = sản phẩm nhỏ dùng được; PoC = chứng minh tính khả thi để hỗ trợ quyết định đầu tư.</div>
+ <h3>Wizard of Oz Testing là gì?</h3>
+ <p>Đây là cách kiểm tra trải nghiệm mà người dùng nhìn thấy như thể có AI, nhưng phía sau một phần công việc vẫn do con người làm thủ công. Mục tiêu là kiểm tra giá trị và quy trình trước khi đầu tư nhiều vào model hoặc tích hợp.</p>
+ <div class="example"><strong>Ví dụ:</strong> Công ty muốn biết nhân viên có dùng trợ lý trả lời chính sách không. Trong buổi thử nghiệm, nhân viên gửi câu hỏi qua giao diện demo, nhưng người BA tự soạn câu trả lời ở phía sau. Team đo xem người dùng có thấy hữu ích và quy trình có phù hợp không.</div>
+ <div class="callout warn">Wizard of Oz không có nghĩa là lừa người dùng. Theo slide, đây là cách kiểm chứng value/workflow sớm, trước khi đầu tư sâu vào hệ thống.</div>
+ <h3>Time-box experiment — Thử nghiệm có giới hạn</h3>
+ <p>Mỗi thử nghiệm cần có đủ bốn thứ: <b>giả định cần kiểm tra, thời hạn, giới hạn ngân sách và tiêu chí dừng</b>.</p>
+ <div class="example"><strong>Ví dụ theo tinh thần slide:</strong> Trong 2 tuần, thử trợ lý chính sách nội bộ với 20 câu hỏi lặp lại. Nếu thời gian tìm câu trả lời không giảm đáng kể, dừng hoặc xem lại giả định thay vì tiếp tục tiêu tiền vô hạn.</div>
+ <p>Nguyên tắc: đầu tư nhỏ để học nhanh thường tốt hơn đầu tư lớn rồi mới phát hiện không có giá trị cho người dùng.</p>
+</section>
+
+<section class="card" id="lowcode">
+ <div class="section-kicker">03 · Low-code / no-code</div><h2>3. Dùng low-code/no-code để làm PoC nhanh</h2>
+ <p><b>Low-code/no-code</b> là công cụ giúp dựng thử ứng dụng hoặc workflow với ít code hơn. Nó hữu ích khi cần demo và kiểm chứng ý tưởng sớm, nhưng không tự động thay thế việc tìm hiểu nhu cầu, viết PRD, đánh giá rủi ro hay thiết kế production.</p>
+ <table><thead><tr><th>Công cụ trong slide</th><th>Phù hợp để</th><th>Giới hạn được nhắc đến</th></tr></thead><tbody>
+ <tr><td><b>Assistants API</b></td><td>PoC nhanh với tool calls cơ bản.</td><td>Không thay thế kiến trúc production.</td></tr>
+ <tr><td><b>Dify</b></td><td>Dựng demo workflow, RAG và giao diện ứng dụng nhanh.</td><td>Không giải quyết hết bài toán enterprise phức tạp.</td></tr>
+ <tr><td><b>LangFlow</b></td><td>Trình bày trực quan luồng agent.</td><td>Không thay thế product discovery đầy đủ.</td></tr>
+ </tbody></table>
+ <h3>Khi nào PM/BA nên cân nhắc dùng?</h3>
+ <ul><li>Cần demo cho stakeholder trong thời gian ngắn.</li><li>Muốn kiểm tra workflow có phù hợp với người dùng trước khi engineer xây sâu.</li><li>Muốn chỉ ra rõ hành trình người dùng và chỗ trải nghiệm có thể bị đứt gãy.</li></ul>
+ <div class="callout"><b>Nhớ:</b> Công cụ dựng nhanh giúp kiểm chứng nhanh, nhưng vẫn cần PRD rõ, risk register rõ và success metrics rõ.</div>
+</section>
+
+<section class="card" id="poc">
+ <div class="section-kicker">04 · PoC với stakeholders</div><h2>4. Thiết kế PoC để giảm bất định</h2>
+ <p class="lead">PoC tốt không phải là bản demo trông thật thông minh. PoC tốt giúp team biết một điều quan trọng mà trước đó chưa chắc chắn.</p>
+ <h3>PoC Canvas — 5 phần cần chốt</h3>
+ <table><thead><tr><th>Phần</th><th>Nói dễ hiểu</th><th>Ví dụ trợ lý chính sách</th></tr></thead><tbody>
+ <tr><td><b>1. Key hypothesis</b></td><td>Giả định quan trọng nhất cần kiểm chứng.</td><td>AI giúp giảm thời gian tìm câu trả lời.</td></tr>
+ <tr><td><b>2. Scope</b></td><td>Phạm vi nhỏ, rõ và có thể kiểm soát.</td><td>Chỉ một quy trình, một nhóm người dùng, một bộ dữ liệu.</td></tr>
+ <tr><td><b>3. Success criteria</b></td><td>Tiêu chí đo thành công, phải thống nhất trước.</td><td>Định trước mức giảm thời gian và yêu cầu trích dẫn đúng.</td></tr>
+ <tr><td><b>4. Timebox</b></td><td>Thời hạn và điểm review.</td><td>2–4 tuần, sau đó đánh giá.</td></tr>
+ <tr><td><b>5. Next decision</b></td><td>Nếu đạt hoặc không đạt thì quyết định gì?</td><td>Tiếp tục pilot, điều chỉnh phạm vi hoặc dừng.</td></tr>
+ </tbody></table>
+ <div class="grid2"><div class="mini"><h3>PoC nên làm</h3><ul><li>Giảm bất định chính.</li><li>Đo giá trị ban đầu.</li><li>Kiểm chứng một workflow hẹp.</li></ul></div><div class="mini"><h3>PoC không nên làm</h3><ul><li>Ôm luôn toàn bộ scope tương lai.</li><li>Hứa rằng đã sẵn sàng chạy production.</li><li>Dùng demo đẹp để che số liệu/metric yếu.</li></ul></div></div>
+ <div class="callout warn"><b>Mẹo thi:</b> Nếu đề hỏi PoC dùng để làm gì, chọn ý <b>giảm bất định, kiểm chứng tính khả thi/giá trị và hỗ trợ quyết định tiếp tục đầu tư</b> — không phải xây toàn bộ sản phẩm.</div>
+</section>
+
+<section class="card" id="roi">
+ <div class="section-kicker">05 · ROI analysis</div><h2>5. Tính ROI cho dự án AI</h2>
+ <h3>Nói đơn giản: đừng chỉ hỏi “AI có tốt không?”</h3><p>Hãy hỏi: <b>AI tạo ra giá trị gì, phải trả những khoản chi phí nào, và sau bao lâu lợi ích mới bù được chi phí?</b> ROI cần số liệu, giả định minh bạch và mốc thời gian.</p>
+ <h3>Cost anatomy — Chi phí gồm những gì?</h3>
+ <table><thead><tr><th>Giai đoạn</th><th>Các chi phí cần tính</th><th>Giá trị có thể tạo ra</th></tr></thead><tbody>
+ <tr><td><b>Build</b><br>Xây dựng</td><td>Công sức developer, thiết lập, tích hợp.</td><td>Ra mắt nhanh hơn hoặc tạo năng lực mới.</td></tr>
+ <tr><td><b>Run</b><br>Vận hành kỹ thuật</td><td>API, compute, lưu trữ.</td><td>Xử lý nhiều việc hơn, giảm công việc thủ công.</td></tr>
+ <tr><td><b>Operate</b><br>Vận hành liên tục</td><td>Người kiểm duyệt, monitoring, bảo trì.</td><td>Giữ chất lượng và giảm rủi ro.</td></tr>
+ <tr><td><b>Business impact</b><br>Tác động kinh doanh</td><td>—</td><td>Tiết kiệm thời gian, tạo doanh thu hoặc tránh chi phí.</td></tr>
+ </tbody></table>
+ <h3>3 kịch bản ROI bắt buộc cân nhắc</h3>
+ <div class="grid3">
+  <div class="mini"><span class="pill">Conservative</span><h3>Kịch bản thận trọng</h3><p>Người dùng áp dụng chậm, chi phí cao hơn và giá trị thấp hơn dự kiến.</p></div>
+  <div class="mini"><span class="pill green-pill">Realistic</span><h3>Kịch bản thực tế</h3><p>Dựa trên baseline hợp lý, kết quả pilot và benchmark nội bộ.</p></div>
+  <div class="mini"><span class="pill">Optimistic</span><h3>Kịch bản lạc quan</h3><p>Tỷ lệ áp dụng tốt, workflow phù hợp và ít trở ngại hơn dự kiến.</p></div>
+ </div>
+ <p>Vì tương lai không chắc chắn, stakeholder cần thấy một khoảng kết quả có thể xảy ra, không chỉ một con số đẹp.</p>
+ <h3>Break-even — Điểm hòa vốn</h3>
+ <p>Điểm hòa vốn là thời điểm mà giá trị tích lũy tạo ra bù lại chi phí tích lũy đã bỏ ra. Câu hỏi quan trọng: dự án hòa vốn vào tháng nào, trong kịch bản nào, và giả định nào có thể làm thời điểm đó trễ hơn?</p>
+ <div class="example"><strong>Ví dụ đơn giản:</strong> Ban đầu công ty phải trả chi phí xây và tích hợp. Sau khi dùng AI, mỗi tháng tiết kiệm được một phần thời gian nhân viên nhưng vẫn phải trả tiền API và người duyệt kết quả. Chỉ khi tổng giá trị tích lũy bù được tổng chi phí tích lũy thì mới đạt break-even.</div>
+ <h3>Nói ROI với CFO hoặc sponsor như thế nào?</h3>
+ <div class="flow"><span>Baseline hiện tại</span><b>→</b><span>Giả định thay đổi</span><b>→</b><span>Giá trị tháng 3–6–12</span><b>→</b><span>Điều kiện để đạt giá trị</span></div>
+ <p>Slide nhấn mạnh phải công khai các giả định nhạy cảm nhất: <b>adoption rate</b> (tỷ lệ người dùng áp dụng), chi phí human review, chi phí API và chi phí xử lý lỗi.</p>
+ <div class="callout warn"><b>Tránh lỗi phổ biến:</b> Không nói mơ hồ “AI sẽ giúp hiệu quả hơn”. Hãy chỉ ra baseline, giả định, chi phí, lợi ích dự kiến và điều kiện để lợi ích đó xảy ra.</div>
+ <p class="small muted">Lưu ý: PDF yêu cầu lập mô hình ROI nhưng không đưa một công thức tính duy nhất trong phần slide được trích xuất. Khi làm bài, hãy dùng công thức hoặc cách tính theo mẫu lớp/giảng viên cung cấp và ghi rõ giả định.</p>
+</section>
+
+<section class="card" id="communication">
+ <div class="section-kicker">06 · Stakeholder communication</div><h2>6. Giao tiếp với stakeholder và làm pitch deck</h2>
+ <p class="lead">Cùng một sản phẩm, nhưng người kỹ thuật và người phê duyệt đầu tư quan tâm những thứ khác nhau. Vì vậy không nên dùng một bài trình bày y hệt cho tất cả.</p>
+ <table><thead><tr><th>Người nghe</th><th>Họ quan tâm điều gì?</th><th>Nên nhấn mạnh</th></tr></thead><tbody>
+ <tr><td><b>Technical team</b></td><td>Kiến trúc, kết quả eval, rủi ro, các phụ thuộc giữa hệ thống.</td><td>Phạm vi, luồng xử lý, Definition of Done.</td></tr>
+ <tr><td><b>Executive / sponsor</b></td><td>ROI, thời gian, mức độ người dùng chấp nhận, rủi ro kinh doanh.</td><td>Giá trị kinh doanh, các kịch bản, rủi ro và quyết định cần họ đưa ra.</td></tr>
+ </tbody></table>
+ <h3>Expectation setting — Quản lý kỳ vọng</h3>
+ <p>Phải nói rõ AI làm tốt việc gì, chưa làm tốt việc gì và lúc nào cần người thật xem xét. Nếu stakeholder nghĩ AI có thể làm mọi thứ hoàn hảo, team dễ bị giao phạm vi không thực tế.</p>
+ <h3>Pitch deck 5–7 slides: nội dung theo thứ tự</h3>
+ <ol><li><b>Problem / pain point:</b> Vấn đề hoặc nỗi đau hiện tại.</li><li><b>Target user &amp; current workflow:</b> Ai đang gặp vấn đề và họ làm việc đó ra sao hôm nay?</li><li><b>Proposed AI solution:</b> Đề xuất AI giải quyết phần nào.</li><li><b>Metrics &amp; expected value:</b> Đo điều gì và kỳ vọng giá trị gì.</li><li><b>ROI / three scenarios:</b> Các kịch bản tài chính.</li><li><b>Risks + mitigation:</b> Rủi ro và cách giảm rủi ro.</li><li><b>Decision ask:</b> Muốn người nghe quyết định go, pilot hay no-go?</li></ol>
+ <div class="callout good"><b>Mẹo trình bày:</b> Kết thúc bằng một đề nghị rõ ràng. Đừng chỉ giới thiệu sản phẩm; hãy nói bạn cần stakeholder phê duyệt điều gì và dựa trên bằng chứng nào.</div>
+</section>
+
+<section class="card" id="lab">
+ <div class="section-kicker">07 · Hands-on &amp; assessment</div><h2>7. Lab Day 6 cần hoàn thành gì?</h2>
+ <ol><li>Hoàn thiện <b>PRD final</b> từ Day 5.</li><li>Lập <b>ROI model theo mốc 3–6–12 tháng</b>, với kịch bản conservative, realistic và optimistic.</li><li>Chuẩn bị <b>stakeholder deck 5–7 slides</b>.</li><li>Luyện bài <b>pitch 5 phút</b>: một người trình bày, một người đóng vai sponsor và hỏi lại.</li></ol>
+ <h3>Checklist tự rà trước khi nộp</h3>
+ <div class="checklist">
+  <label><input type="checkbox"> PRD có scope, metric, risk và logic đi tiếp rõ ràng.</label>
+  <label><input type="checkbox"> ROI có cả chi phí lẫn giá trị, không chỉ nêu lợi ích.</label>
+  <label><input type="checkbox"> Có ba kịch bản: conservative, realistic, optimistic.</label>
+  <label><input type="checkbox"> Đã xem xét break-even và các giả định nhạy cảm.</label>
+  <label><input type="checkbox"> Slide phù hợp với người nghe không chuyên kỹ thuật.</label>
+  <label><input type="checkbox"> Quyết định cần xin rõ ràng: go, pilot/conditional go hoặc no-go.</label>
+ </div>
+ <h3>Phân biệt ba quyết định</h3>
+ <table><thead><tr><th>Quyết định</th><th>Nghĩa đơn giản</th><th>Khi nào phù hợp?</th></tr></thead><tbody>
+ <tr><td><b>Go</b></td><td>Tiếp tục triển khai.</td><td>Có bằng chứng và điều kiện cần thiết để đi tiếp.</td></tr>
+ <tr><td><b>Pilot / Conditional go</b></td><td>Cho phép thử có điều kiện và phạm vi giới hạn.</td><td>Còn điều chưa chắc chắn, cần thử an toàn và đo thêm.</td></tr>
+ <tr><td><b>No-go</b></td><td>Chưa tiếp tục đầu tư.</td><td>Bằng chứng chưa đủ, rủi ro hoặc giả định quan trọng chưa được giải quyết.</td></tr>
+ </tbody></table>
+ <div class="callout warn"><b>Thông điệp cuối bài:</b> AI project management tốt là thử, đo và học trước khi đầu tư lớn. Một prototype đẹp chưa đủ; team cần chứng minh giá trị, làm rõ giả định và giúp stakeholder đưa ra quyết định.</div>
+</section>
+
+<section class="card" id="dictionary">
+ <div class="section-kicker">Tra cứu nhanh</div><h2>Từ điển thuật ngữ cho người mới</h2>
+ <table><thead><tr><th>Thuật ngữ</th><th>Hiểu đơn giản</th></tr></thead><tbody>
+ <tr><td><b>Agile</b></td><td>Làm theo vòng ngắn, kiểm tra và điều chỉnh liên tục.</td></tr>
+ <tr><td><b>Hypothesis</b></td><td>Giả thuyết/điều ta tin là đúng nhưng cần kiểm tra bằng dữ liệu.</td></tr>
+ <tr><td><b>Spike</b></td><td>Khoảng thời gian ngắn để tìm hiểu một điều chưa rõ về kỹ thuật hoặc giải pháp.</td></tr>
+ <tr><td><b>Eval</b></td><td>Evaluation: đánh giá chất lượng hoặc kết quả của AI bằng cách đã định.</td></tr>
+ <tr><td><b>Iteration</b></td><td>Một vòng lặp thử và chỉnh sửa.</td></tr>
+ <tr><td><b>Definition of Done</b></td><td>Danh sách điều kiện để xác nhận một việc thực sự hoàn thành.</td></tr>
+ <tr><td><b>MVE</b></td><td>Thử nghiệm nhỏ nhất để kiểm chứng giá trị.</td></tr>
+ <tr><td><b>MVP</b></td><td>Sản phẩm tối thiểu nhưng có thể dùng được.</td></tr>
+ <tr><td><b>PoC</b></td><td>Thử nghiệm chứng minh ý tưởng/khả năng có thể thực hiện.</td></tr>
+ <tr><td><b>Wizard of Oz</b></td><td>Trải nghiệm trông như tự động, nhưng một phần phía sau được con người xử lý để thử workflow sớm.</td></tr>
+ <tr><td><b>Low-code / No-code</b></td><td>Công cụ dựng ứng dụng/luồng xử lý với ít hoặc không cần viết code trực tiếp.</td></tr>
+ <tr><td><b>Stakeholder</b></td><td>Người hoặc nhóm có liên quan hay có quyền ảnh hưởng đến dự án.</td></tr>
+ <tr><td><b>ROI</b></td><td>Return on Investment: đánh giá lợi ích/giá trị so với khoản đầu tư bỏ ra.</td></tr>
+ <tr><td><b>Baseline</b></td><td>Mức ban đầu để làm mốc so sánh trước và sau cải tiến.</td></tr>
+ <tr><td><b>Adoption rate</b></td><td>Tỷ lệ người dùng thực sự chấp nhận và sử dụng sản phẩm.</td></tr>
+ <tr><td><b>Break-even</b></td><td>Điểm hòa vốn: thời điểm giá trị tích lũy bù được chi phí tích lũy.</td></tr>
+ <tr><td><b>Human review</b></td><td>Con người xem xét/kiểm duyệt kết quả AI.</td></tr>
+ <tr><td><b>Mitigation</b></td><td>Biện pháp giảm khả năng xảy ra hoặc mức độ tác động của rủi ro.</td></tr>
+ <tr><td><b>Go / Pilot / No-go</b></td><td>Tiếp tục / thử nghiệm có giới hạn / chưa tiếp tục đầu tư.</td></tr>
+ </tbody></table>
+</section>
+
+<section class="card" id="quiz">
+ <div class="section-kicker">Tự kiểm tra</div><h2>12 câu hỏi ôn thi</h2>
+ <p class="plain">Hãy tự chọn câu trả lời trong đầu trước, rồi bấm vào từng câu để xem đáp án và giải thích.</p>
+ <details class="quiz"><summary>1. Vì sao AI project cần Agile hơn là chỉ dùng timeline cứng?</summary><div class="answer">Vì chất lượng phụ thuộc vào dữ liệu, prompt, độ tin cậy của tool và hành vi người dùng; nhiều giả định chỉ được kiểm chứng sau khi thử nghiệm thực tế.</div></details>
+ <details class="quiz"><summary>2. AI sprint nên làm gì sau khi build?</summary><div class="answer">Đánh giá (eval), rút ra điều đã học và tiếp tục điều chỉnh (iterate). Vòng lặp giúp quyết định nên tiếp tục, đổi hướng hay dừng.</div></details>
+ <details class="quiz"><summary>3. Với AI, “code chạy được” có đồng nghĩa feature đã Done không?</summary><div class="answer">Không. Còn cần ngưỡng chất lượng, latency, fallback và monitoring signal; ví dụ phải đạt ngưỡng trích dẫn đúng nguồn và có đường chuyển cho người thật.</div></details>
+ <details class="quiz"><summary>4. MVE khác MVP như thế nào?</summary><div class="answer">MVE dùng thử nghiệm nhỏ nhất để kiểm tra người dùng có muốn giá trị đó không. MVP là phiên bản sản phẩm nhỏ nhất nhưng có thể dùng được để kiểm tra workflow thực tế.</div></details>
+ <details class="quiz"><summary>5. PoC chủ yếu trả lời câu hỏi gì?</summary><div class="answer">Ý tưởng/giải pháp có khả thi và có đáng để tiếp tục đầu tư không? PoC cần giảm bất định, không cần ôm toàn bộ sản phẩm tương lai.</div></details>
+ <details class="quiz"><summary>6. Wizard of Oz Testing hoạt động ra sao?</summary><div class="answer">Người dùng thử một trải nghiệm trông như có AI, nhưng một phần xử lý phía sau do người thật thực hiện. Mục đích là kiểm tra giá trị/workflow sớm trước khi đầu tư lớn.</div></details>
+ <details class="quiz"><summary>7. Một time-box experiment cần xác định những gì?</summary><div class="answer">Giả định cần kiểm chứng, thời hạn, giới hạn ngân sách và tiêu chí dừng.</div></details>
+ <details class="quiz"><summary>8. Low-code/no-code có thay thế product discovery và production planning không?</summary><div class="answer">Không. Nó giúp demo và kiểm chứng workflow nhanh, nhưng vẫn phải tìm hiểu nhu cầu, viết PRD, đánh giá rủi ro và lên kế hoạch vận hành.</div></details>
+ <details class="quiz"><summary>9. PoC Canvas gồm 5 phần nào?</summary><div class="answer">Key hypothesis, scope, success criteria, timebox và next decision.</div></details>
+ <details class="quiz"><summary>10. Vì sao ROI cần ba kịch bản?</summary><div class="answer">Vì mức áp dụng, chi phí và giá trị thực tế có thể khác kỳ vọng. Conservative, realistic và optimistic giúp stakeholder thấy phạm vi kết quả có thể xảy ra thay vì chỉ một con số đẹp.</div></details>
+ <details class="quiz"><summary>11. Break-even là gì?</summary><div class="answer">Là thời điểm giá trị tích lũy bù lại chi phí tích lũy. Cần xem dự án hòa vốn vào tháng nào và giả định nào có thể làm thời điểm đó trễ hơn.</div></details>
+ <details class="quiz"><summary>12. Technical deck và executive deck cần nhấn mạnh điều gì khác nhau?</summary><div class="answer">Technical deck tập trung kiến trúc, eval, rủi ro, phụ thuộc, scope và Definition of Done. Executive deck tập trung ROI, timeline, adoption, rủi ro kinh doanh, kịch bản và quyết định cần phê duyệt.</div></details>
+ <div class="callout good"><b>Ôn siêu nhanh trước khi thi:</b><br>Agile = thử–đo–học; MVE = kiểm tra giá trị; MVP = sản phẩm nhỏ dùng được; PoC = giảm bất định/kiểm tra khả thi; PoC Canvas = giả thuyết–phạm vi–tiêu chí–thời hạn–quyết định; ROI = chi phí + giá trị + giả định + timeline; pitch = vấn đề → người dùng → giải pháp → metric/ROI → rủi ro → quyết định.</div>
+</section>
+<div class="footer">Tài liệu học tập được tổng hợp từ PDF “AI Product &amp; Project Management — AICB-P1 Day 6”. Các ví dụ được đơn giản hóa để người mới dễ hiểu.</div>
+</main>
+</div>
+</body>
+</html>

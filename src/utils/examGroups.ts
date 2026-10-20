@@ -1,6 +1,6 @@
 import type { Exam } from '../types/exam';
 
-export type GroupId = 'all' | 'aicb' | 'other';
+export type GroupId = 'all' | 'aicb' | 'tridung' | 'other';
 
 export interface GroupTab {
   id: GroupId;
@@ -11,6 +11,11 @@ export interface GroupTab {
 /** Đề thuộc khóa AICB (đã gắn `course: "aicb"` trong file JSON). */
 export function isAicb(exam: Exam): boolean {
   return exam.course === 'aicb';
+}
+
+/** Bộ đề do Trí Dũng biên soạn. */
+export function isTridung(exam: Exam): boolean {
+  return exam.course === 'tridung';
 }
 
 /**
@@ -44,16 +49,19 @@ export function compareExams(a: Exam, b: Exam): number {
 
 export function filterByGroup(exams: Exam[], group: GroupId): Exam[] {
   if (group === 'aicb') return exams.filter(isAicb);
-  if (group === 'other') return exams.filter((exam) => !isAicb(exam));
+  if (group === 'tridung') return exams.filter(isTridung);
+  if (group === 'other') return exams.filter((exam) => !isAicb(exam) && !isTridung(exam));
   return exams;
 }
 
 export function buildGroupTabs(exams: Exam[]): GroupTab[] {
   const aicb = exams.filter(isAicb).length;
+  const tridung = exams.filter(isTridung).length;
   return [
     { id: 'all', label: 'Tất cả', count: exams.length },
     { id: 'aicb', label: 'Khóa AICB', count: aicb },
-    { id: 'other', label: 'Đề khác', count: exams.length - aicb }
+    { id: 'tridung', label: 'Trí Dũng đẹp trai', count: tridung },
+    { id: 'other', label: 'Đề khác', count: exams.length - aicb - tridung }
   ];
 }
 

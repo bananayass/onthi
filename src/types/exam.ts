@@ -3,7 +3,7 @@ export type QuestionType = 'mcq' | 'fill' | 'code' | 'essay';
 export type QuizMode = 'practice' | 'exam';
 
 /** Khóa học mà đề thuộc về. Đề không gắn `course` được xếp vào nhóm "Đề khác". */
-export type CourseId = 'aicb';
+export type CourseId = 'aicb' | 'tridung';
 
 /** Vị trí của đề trong lộ trình khóa học. */
 export type ExamKind = 'daily' | 'review';
@@ -89,7 +89,8 @@ export const MODULE_LABELS: Record<ModuleId, string> = {
 };
 
 export const COURSE_LABELS: Record<CourseId, string> = {
-  aicb: 'Khóa AICB'
+  aicb: 'Khóa AICB',
+  tridung: 'Trí Dũng đẹp trai'
 };
 
 /** Tài liệu ôn tập dạng trang HTML tĩnh, đặt trong `public/study/`. */

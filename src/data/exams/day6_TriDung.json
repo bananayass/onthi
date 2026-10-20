@@ -1,0 +1,207 @@
+{
+  "id": "day6-tridung",
+  "title": "AICB Ngày 6 — AI Product & Project Management",
+  "description": "Bộ đề trắc nghiệm ôn tập Ngày 6, bám sát tài liệu về Agile cho dự án AI, PoC/MVE/MVP, đo ROI và giao tiếp với stakeholder.",
+  "course": "aicb",
+  "kind": "daily",
+  "day": 6,
+  "label": "Ngày 6",
+  "durationMinutes": 20,
+  "totalPoints": 12,
+  "passingScore": 70,
+  "disclaimer": "Đề ôn tập tự soạn từ tài liệu Ngày 6, không phải đề thi chính thức.",
+  "questions": [
+    {
+      "id": "D06-001",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Vì sao dự án AI phù hợp với cách làm Agile hơn là chỉ bám một timeline cứng?",
+      "options": [
+        { "key": "A", "text": "Vì dự án AI không cần xác định mục tiêu kinh doanh." },
+        { "key": "B", "text": "Vì chất lượng phụ thuộc vào dữ liệu, prompt, tool và hành vi người dùng; nhiều giả định chỉ rõ sau thử nghiệm." },
+        { "key": "C", "text": "Vì Agile loại bỏ hoàn toàn nhu cầu đo chất lượng." },
+        { "key": "D", "text": "Vì mọi mô hình AI đều tự cải thiện khi đưa vào production." }
+      ],
+      "answer": "B",
+      "explanation": "Dự án AI có nhiều bất định về dữ liệu, chất lượng đầu ra và mức người dùng chấp nhận. Sprint ngắn giúp đo, học và điều chỉnh sớm.",
+      "tags": ["day6", "agile"]
+    },
+    {
+      "id": "D06-002",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Sau khi build một phần của AI sprint, bước tiếp theo phù hợp nhất là gì?",
+      "options": [
+        { "key": "A", "text": "Đánh giá, rút kinh nghiệm và lặp lại hoặc đổi hướng dựa trên bằng chứng." },
+        { "key": "B", "text": "Mặc định mở rộng toàn bộ phạm vi dự án." },
+        { "key": "C", "text": "Dừng đo lường để tránh thay đổi kế hoạch." },
+        { "key": "D", "text": "Chỉ kiểm tra giao diện vì mô hình đã chạy được." }
+      ],
+      "answer": "A",
+      "explanation": "Vòng lặp AI sprint là build–evaluate–learn–iterate. Kết quả eval giúp quyết định tiếp tục, điều chỉnh hay dừng thử nghiệm.",
+      "tags": ["day6", "sprint", "eval"]
+    },
+    {
+      "id": "D06-003",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trong dự án AI, điều nào đúng nhất về Definition of Done?",
+      "options": [
+        { "key": "A", "text": "Code chạy được là đủ để feature hoàn thành." },
+        { "key": "B", "text": "Chỉ cần stakeholder thích bản demo." },
+        { "key": "C", "text": "Cần tiêu chí chất lượng, latency, fallback và tín hiệu monitoring ngoài việc code chạy." },
+        { "key": "D", "text": "Chỉ cần mô hình trả lời dài và tự tin." }
+      ],
+      "answer": "C",
+      "explanation": "AI feature chỉ thực sự hoàn thành khi đạt ngưỡng chất lượng và vận hành an toàn: latency, fallback, monitoring và đường xử lý khi AI thất bại.",
+      "tags": ["day6", "definition-of-done"]
+    },
+    {
+      "id": "D06-004",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "MVE khác MVP ở điểm nào?",
+      "options": [
+        { "key": "A", "text": "MVE là sản phẩm hoàn chỉnh hơn MVP." },
+        { "key": "B", "text": "MVE là thử nghiệm nhỏ nhất để kiểm tra giá trị; MVP là phiên bản nhỏ nhất có thể dùng để kiểm tra workflow thực tế." },
+        { "key": "C", "text": "MVE chỉ áp dụng cho dự án không dùng AI." },
+        { "key": "D", "text": "MVP không cần người dùng thử." }
+      ],
+      "answer": "B",
+      "explanation": "MVE ưu tiên kiểm tra giả định giá trị với chi phí thấp nhất. MVP đi xa hơn để kiểm tra người dùng có thể dùng workflow trong thực tế hay không.",
+      "tags": ["day6", "mve", "mvp"]
+    },
+    {
+      "id": "D06-005",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Mục tiêu chính của một Proof of Concept (PoC) là gì?",
+      "options": [
+        { "key": "A", "text": "Chứng minh giải pháp khả thi và giảm bất định trước khi đầu tư lớn." },
+        { "key": "B", "text": "Xây toàn bộ sản phẩm production ngay từ đầu." },
+        { "key": "C", "text": "Thay thế hoàn toàn PRD và kế hoạch vận hành." },
+        { "key": "D", "text": "Cam kết chắc chắn ROI sẽ đạt mức lạc quan." }
+      ],
+      "answer": "A",
+      "explanation": "PoC trả lời liệu ý tưởng hoặc giải pháp có khả thi, đáng tiếp tục đầu tư hay không. Nó phải giảm một bất định quan trọng, không ôm toàn bộ scope tương lai.",
+      "tags": ["day6", "poc"]
+    },
+    {
+      "id": "D06-006",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Wizard of Oz Testing dùng để làm gì?",
+      "options": [
+        { "key": "A", "text": "Che giấu hoàn toàn việc hệ thống chưa có đánh giá chất lượng." },
+        { "key": "B", "text": "Cho người dùng trải nghiệm như có AI, trong khi một phần xử lý phía sau do con người thực hiện để kiểm tra giá trị sớm." },
+        { "key": "C", "text": "Tự động hóa mọi quyết định có rủi ro cao." },
+        { "key": "D", "text": "Thay thế kiểm thử với người dùng thật." }
+      ],
+      "answer": "B",
+      "explanation": "Wizard of Oz giúp kiểm tra nhu cầu và workflow trước khi đầu tư xây toàn bộ hệ thống AI. Người dùng phải được xử lý minh bạch, phù hợp với bối cảnh thử nghiệm.",
+      "tags": ["day6", "wizard-of-oz"]
+    },
+    {
+      "id": "D06-007",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Một time-box experiment cần nêu rõ thành phần nào sau đây?",
+      "options": [
+        { "key": "A", "text": "Giả định cần kiểm chứng, thời hạn, giới hạn ngân sách và tiêu chí dừng." },
+        { "key": "B", "text": "Toàn bộ roadmap ba năm và mọi tính năng có thể có." },
+        { "key": "C", "text": "Chỉ tên công cụ low-code sẽ sử dụng." },
+        { "key": "D", "text": "Một lời hứa rằng thử nghiệm chắc chắn thành công." }
+      ],
+      "answer": "A",
+      "explanation": "Time-box giúp thử nghiệm có kỷ luật: biết đang kiểm chứng điều gì, tốn bao nhiêu nguồn lực, khi nào dừng và quyết định gì sẽ được đưa ra.",
+      "tags": ["day6", "experiment"]
+    },
+    {
+      "id": "D06-008",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Nhận định nào đúng về low-code/no-code trong một PoC AI?",
+      "options": [
+        { "key": "A", "text": "Có thể thay thế hoàn toàn product discovery và production planning." },
+        { "key": "B", "text": "Chỉ nên dùng khi không có người dùng thật." },
+        { "key": "C", "text": "Giúp demo và kiểm chứng workflow nhanh, nhưng vẫn cần tìm hiểu nhu cầu, PRD, đánh giá rủi ro và kế hoạch vận hành." },
+        { "key": "D", "text": "Bảo đảm mô hình sẽ an toàn khi production." }
+      ],
+      "answer": "C",
+      "explanation": "Low-code/no-code giảm thời gian dựng thử, không thay thế việc hiểu người dùng, định nghĩa thành công, quản lý rủi ro và chuẩn bị vận hành.",
+      "tags": ["day6", "low-code", "poc"]
+    },
+    {
+      "id": "D06-009",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Tập hợp nào mô tả đúng PoC Canvas trong tài liệu Ngày 6?",
+      "options": [
+        { "key": "A", "text": "Key hypothesis, scope, success criteria, timebox và next decision." },
+        { "key": "B", "text": "Logo, màu thương hiệu, giá bán, slogan và chiến dịch quảng cáo." },
+        { "key": "C", "text": "Mô hình lớn nhất, GPU nhiều nhất, số slide nhiều nhất, deadline ngắn nhất và ngân sách mở." },
+        { "key": "D", "text": "Source code, mật khẩu API, danh sách nhân sự, hợp đồng và roadmap bí mật." }
+      ],
+      "answer": "A",
+      "explanation": "PoC Canvas giữ thử nghiệm tập trung vào giả định, phạm vi, thước đo thành công, giới hạn thời gian và quyết định tiếp theo.",
+      "tags": ["day6", "poc-canvas"]
+    },
+    {
+      "id": "D06-010",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Vì sao nên trình bày ROI theo ba kịch bản conservative, realistic và optimistic?",
+      "options": [
+        { "key": "A", "text": "Để luôn chọn số cao nhất khi xin ngân sách." },
+        { "key": "B", "text": "Vì mức áp dụng, chi phí và giá trị thực tế có thể khác kỳ vọng; ba kịch bản cho thấy phạm vi kết quả và giả định." },
+        { "key": "C", "text": "Để tránh nêu bất kỳ rủi ro nào với sponsor." },
+        { "key": "D", "text": "Vì ROI không cần liên hệ với chi phí." }
+      ],
+      "answer": "B",
+      "explanation": "Kịch bản ROI giúp stakeholder nhìn thấy độ nhạy của kết quả trước các giả định về adoption, chi phí, chất lượng và giá trị tạo ra.",
+      "tags": ["day6", "roi"]
+    },
+    {
+      "id": "D06-011",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Break-even của dự án AI là gì?",
+      "options": [
+        { "key": "A", "text": "Ngày đội ngũ bắt đầu viết code." },
+        { "key": "B", "text": "Thời điểm mô hình có câu trả lời đầu tiên." },
+        { "key": "C", "text": "Thời điểm giá trị tích lũy bù lại chi phí tích lũy." },
+        { "key": "D", "text": "Mức điểm cao nhất của một benchmark." }
+      ],
+      "answer": "C",
+      "explanation": "Điểm hòa vốn cho biết khi nào lợi ích tích lũy đủ bù chi phí tích lũy. Cần kèm các giả định có thể làm mốc này sớm hơn hoặc trễ hơn.",
+      "tags": ["day6", "roi", "break-even"]
+    },
+    {
+      "id": "D06-012",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Khi trình bày với executive hoặc sponsor, nội dung nào nên được ưu tiên?",
+      "options": [
+        { "key": "A", "text": "ROI, timeline, adoption, rủi ro kinh doanh, các kịch bản và quyết định cần phê duyệt." },
+        { "key": "B", "text": "Chỉ chi tiết mọi hàm trong source code." },
+        { "key": "C", "text": "Chỉ thông số GPU và framework." },
+        { "key": "D", "text": "Chỉ khẳng định AI sẽ không bao giờ sai." }
+      ],
+      "answer": "A",
+      "explanation": "Executive deck cần giúp người ra quyết định hiểu giá trị, chi phí, rủi ro, tiến độ và quyết định họ cần đưa ra; technical deck mới đi sâu vào kiến trúc và eval.",
+      "tags": ["day6", "stakeholder", "pitch"]
+    }
+  ]
+}
