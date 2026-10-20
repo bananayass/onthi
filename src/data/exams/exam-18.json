@@ -1,0 +1,1938 @@
+{
+  "id": "exam-18",
+  "title": "Đề thi thử 1 — Mô phỏng đầy đủ",
+  "description": "Thi thử toàn diện: Kiểm tra toàn bộ 4 module trong điều kiện thi thực tế. 60 câu - 90 phút.",
+  "durationMinutes": 90,
+  "totalPoints": 100,
+  "disclaimer": "Đây chỉ là đề cương ôn tập cộng đồng, không phải đề thi chính thức của VinUni, không cố gắng mô phỏng đề thi thật và không cam kết giống đề thật.",
+  "module": "Mixed",
+  "difficulty": "hard",
+  "questions": [
+    {
+      "id": "18-A-01",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Một mô hình dự đoán giá trị 8 và giá trị thực tế là 5. Sai số bình phương (squared error) là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "3"
+        },
+        {
+          "key": "B",
+          "text": "9"
+        },
+        {
+          "key": "C",
+          "text": "13"
+        },
+        {
+          "key": "D",
+          "text": "64"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Sai số bình phương = (dự đoán - thực tế)^2 = (8-5)^2 = 9.",
+      "tags": [
+        "regression",
+        "loss",
+        "module-A"
+      ]
+    },
+    {
+      "id": "18-A-02",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Phép toán ma trận nào KHÔNG được xác định?\nA = ma trận 2x3, B = ma trận 3x4",
+      "options": [
+        {
+          "key": "A",
+          "text": "A * B (nhân ma trận)"
+        },
+        {
+          "key": "B",
+          "text": "A + B"
+        },
+        {
+          "key": "C",
+          "text": "B^T (chuyển vị)"
+        },
+        {
+          "key": "D",
+          "text": "A^T * A"
+        }
+      ],
+      "answer": "B",
+      "explanation": "A (2x3) + B (3x4): kích thước phải khớp nhau để cộng. Chúng không khớp, nên A+B không xác định.",
+      "tags": [
+        "linear-algebra",
+        "matrix-operations",
+        "module-A"
+      ]
+    },
+    {
+      "id": "18-A-03",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trong một tập dữ liệu điểm thi, trung bình (mean) là 72 và trung vị (median) là 68. Phân phối này có khả năng là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đối xứng"
+        },
+        {
+          "key": "B",
+          "text": "Lệch trái"
+        },
+        {
+          "key": "C",
+          "text": "Lệch phải"
+        },
+        {
+          "key": "D",
+          "text": "Đều (uniform)"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Khi trung bình > trung vị, phân phối lệch phải (lệch dương) với đuôi bên phải dài hơn.",
+      "tags": [
+        "statistics",
+        "skewness",
+        "module-A"
+      ]
+    },
+    {
+      "id": "18-A-04",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "P(ít nhất một mặt ngửa) khi tung 3 đồng xu cân đối là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "1/8"
+        },
+        {
+          "key": "B",
+          "text": "7/8"
+        },
+        {
+          "key": "C",
+          "text": "3/8"
+        },
+        {
+          "key": "D",
+          "text": "1/2"
+        }
+      ],
+      "answer": "B",
+      "explanation": "P(ít nhất một mặt ngửa) = 1 - P(tất cả mặt sấp) = 1 - (1/2)^3 = 1 - 1/8 = 7/8.",
+      "tags": [
+        "probability",
+        "complement",
+        "module-A"
+      ]
+    },
+    {
+      "id": "18-A-05",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Hạng (rank) của ma trận [[1,2,3],[2,4,6],[0,0,0]] là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "0"
+        },
+        {
+          "key": "B",
+          "text": "1"
+        },
+        {
+          "key": "C",
+          "text": "2"
+        },
+        {
+          "key": "D",
+          "text": "3"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Hàng 2 = 2 * Hàng 1, Hàng 3 toàn số 0. Chỉ có một hàng độc lập tuyến tính. Hạng = 1.",
+      "tags": [
+        "linear-algebra",
+        "rank",
+        "module-A"
+      ]
+    },
+    {
+      "id": "18-A-06",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Cho hàm số f(x) = 3x^2 + 2x - 1. f'(x) là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "6x"
+        },
+        {
+          "key": "B",
+          "text": "6x + 2"
+        },
+        {
+          "key": "C",
+          "text": "3x + 2"
+        },
+        {
+          "key": "D",
+          "text": "6x^2 + 2"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Dùng quy tắc lũy thừa: d/dx[3x^2] = 6x, d/dx[2x] = 2, d/dx[-1] = 0. Vậy f'(x) = 6x + 2.",
+      "tags": [
+        "calculus",
+        "derivatives",
+        "module-A"
+      ]
+    },
+    {
+      "id": "18-A-07",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Phương pháp lấy mẫu nào đảm bảo mọi nhóm con trong tổng thể đều được đại diện theo tỷ lệ?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Lấy mẫu ngẫu nhiên (random sampling)"
+        },
+        {
+          "key": "B",
+          "text": "Lấy mẫu hệ thống (systematic sampling)"
+        },
+        {
+          "key": "C",
+          "text": "Lấy mẫu phân tầng (stratified sampling)"
+        },
+        {
+          "key": "D",
+          "text": "Lấy mẫu theo cụm (cluster sampling)"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Lấy mẫu phân tầng chia tổng thể thành các tầng và lấy mẫu theo tỷ lệ từ mỗi tầng.",
+      "tags": [
+        "statistics",
+        "sampling",
+        "module-A"
+      ]
+    },
+    {
+      "id": "18-A-08",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Nếu hệ số tương quan r = -0.85, điều này cho thấy gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mối quan hệ âm yếu"
+        },
+        {
+          "key": "B",
+          "text": "Mối quan hệ dương mạnh"
+        },
+        {
+          "key": "C",
+          "text": "Mối quan hệ âm mạnh"
+        },
+        {
+          "key": "D",
+          "text": "Không có mối quan hệ"
+        }
+      ],
+      "answer": "C",
+      "explanation": "r = -0.85 cho thấy mối quan hệ tuyến tính âm mạnh giữa hai biến.",
+      "tags": [
+        "statistics",
+        "correlation",
+        "module-A"
+      ]
+    },
+    {
+      "id": "18-A-09",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trung bình nhân (geometric mean) của [4, 9, 36] là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "16.3"
+        },
+        {
+          "key": "B",
+          "text": "12"
+        },
+        {
+          "key": "C",
+          "text": "10"
+        },
+        {
+          "key": "D",
+          "text": "15"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Trung bình nhân = (4 * 9 * 36)^(1/3) = (1296)^(1/3) = 12.",
+      "tags": [
+        "statistics",
+        "mean",
+        "module-A"
+      ]
+    },
+    {
+      "id": "18-A-10",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Phát biểu nào về giá trị p (p-value) là đúng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "p < 0.05 chứng minh giả thuyết đối là đúng"
+        },
+        {
+          "key": "B",
+          "text": "p < 0.05 nghĩa là ta bác bỏ H0 ở mức ý nghĩa 5%"
+        },
+        {
+          "key": "C",
+          "text": "Giá trị p nhỏ hơn nghĩa là kích thước hiệu ứng (effect size) lớn hơn"
+        },
+        {
+          "key": "D",
+          "text": "Giá trị p là xác suất H0 đúng"
+        }
+      ],
+      "answer": "B",
+      "explanation": "p-value < alpha nghĩa là ta bác bỏ giả thuyết không. Nó không chứng minh điều gì và cũng không cho biết kích thước hiệu ứng.",
+      "tags": [
+        "statistics",
+        "hypothesis-testing",
+        "module-A"
+      ]
+    },
+    {
+      "id": "18-A-11",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Tích vô hướng (dot product) của hai vector [1, 2, 3] và [4, 5, 6] là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "15"
+        },
+        {
+          "key": "B",
+          "text": "32"
+        },
+        {
+          "key": "C",
+          "text": "21"
+        },
+        {
+          "key": "D",
+          "text": "27"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Tích vô hướng = 1*4 + 2*5 + 3*6 = 4 + 10 + 18 = 32.",
+      "tags": [
+        "linear-algebra",
+        "dot-product",
+        "module-A"
+      ]
+    },
+    {
+      "id": "18-A-12",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Một lớp mạng nơ-ron có 128 đầu vào và 64 đầu ra. Nó có bao nhiêu tham số trọng số (không tính bias)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "192"
+        },
+        {
+          "key": "B",
+          "text": "8192"
+        },
+        {
+          "key": "C",
+          "text": "64"
+        },
+        {
+          "key": "D",
+          "text": "128"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Ma trận trọng số có hình dạng (đầu vào x đầu ra) = 128 x 64 = 8192 tham số.",
+      "tags": [
+        "neural-networks",
+        "parameters",
+        "module-A"
+      ]
+    },
+    {
+      "id": "18-A-13",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "5! (5 giai thừa) bằng bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "25"
+        },
+        {
+          "key": "B",
+          "text": "60"
+        },
+        {
+          "key": "C",
+          "text": "120"
+        },
+        {
+          "key": "D",
+          "text": "720"
+        }
+      ],
+      "answer": "C",
+      "explanation": "5! = 5 x 4 x 3 x 2 x 1 = 120.",
+      "tags": [
+        "combinatorics",
+        "factorial",
+        "module-A"
+      ]
+    },
+    {
+      "id": "18-A-14",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Một lớp tích chập (convolution) có kích thước kernel 3x3, stride 1, không padding, đầu vào 8x8. Kích thước đầu ra là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "8x8"
+        },
+        {
+          "key": "B",
+          "text": "7x7"
+        },
+        {
+          "key": "C",
+          "text": "6x6"
+        },
+        {
+          "key": "D",
+          "text": "5x5"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Đầu ra = floor((đầu vào - kernel + 2*padding) / stride) + 1 = (8-3+0)/1 + 1 = 6. Vậy 6x6.",
+      "tags": [
+        "deep-learning",
+        "convolution",
+        "module-A"
+      ]
+    },
+    {
+      "id": "18-A-15",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Phân phối xác suất nào được dùng để mô hình hóa số sự kiện trong một khoảng thời gian cố định khi các sự kiện xảy ra độc lập?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chuẩn (Normal)"
+        },
+        {
+          "key": "B",
+          "text": "Nhị thức (Binomial)"
+        },
+        {
+          "key": "C",
+          "text": "Poisson"
+        },
+        {
+          "key": "D",
+          "text": "Đều (Uniform)"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Phân phối Poisson mô hình hóa số đếm các sự kiện độc lập xảy ra trong một khoảng cố định với tốc độ trung bình đã biết.",
+      "tags": [
+        "statistics",
+        "distributions",
+        "poisson",
+        "module-A"
+      ]
+    },
+    {
+      "id": "18-B-01",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Đầu ra của lệnh sau là gì?\nprint(type(lambda x: x))",
+      "options": [
+        {
+          "key": "A",
+          "text": "<class 'function'>"
+        },
+        {
+          "key": "B",
+          "text": "<class 'lambda'>"
+        },
+        {
+          "key": "C",
+          "text": "<class 'method'>"
+        },
+        {
+          "key": "D",
+          "text": "<class 'type'>"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Hàm lambda có kiểu function trong Python.",
+      "tags": [
+        "python",
+        "lambda",
+        "types",
+        "module-B"
+      ]
+    },
+    {
+      "id": "18-B-02",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Hàm numpy nào tạo một mảng số 0 với hình dạng (3,4)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "np.zeros((3,4))"
+        },
+        {
+          "key": "B",
+          "text": "np.empty((3,4))"
+        },
+        {
+          "key": "C",
+          "text": "np.ones((3,4)) - 1"
+        },
+        {
+          "key": "D",
+          "text": "Cả A và C"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Cả np.zeros((3,4)) và np.ones((3,4))-1 đều tạo mảng số 0. A là cách chuẩn.",
+      "tags": [
+        "numpy",
+        "array-creation",
+        "module-B"
+      ]
+    },
+    {
+      "id": "18-B-03",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Theo mặc định, pandas df.describe() KHÔNG bao gồm thông tin nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Trung bình (Mean)"
+        },
+        {
+          "key": "B",
+          "text": "Yếu vị (Mode)"
+        },
+        {
+          "key": "C",
+          "text": "Độ lệch chuẩn (Standard deviation)"
+        },
+        {
+          "key": "D",
+          "text": "Đếm (Count)"
+        }
+      ],
+      "answer": "B",
+      "explanation": "df.describe() bao gồm count, mean, std, min, các phân vị, max. Yếu vị (mode) không được bao gồm theo mặc định.",
+      "tags": [
+        "pandas",
+        "describe",
+        "module-B"
+      ]
+    },
+    {
+      "id": "18-B-04",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Đầu ra của: list(zip([1,2,3], ['a','b'])) là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "[(1,'a'),(2,'b'),(3,None)]"
+        },
+        {
+          "key": "B",
+          "text": "[(1,'a'),(2,'b')]"
+        },
+        {
+          "key": "C",
+          "text": "Lỗi"
+        },
+        {
+          "key": "D",
+          "text": "[(1,'a'),(2,'b'),(3,'')]"
+        }
+      ],
+      "answer": "B",
+      "explanation": "zip dừng tại iterable ngắn nhất. Kết quả: [(1,'a'),(2,'b')].",
+      "tags": [
+        "python",
+        "zip",
+        "module-B"
+      ]
+    },
+    {
+      "id": "18-B-05",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Lớp sklearn nào hiện thực chuẩn hóa (standardization: trung bình 0, phương sai đơn vị)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "MinMaxScaler"
+        },
+        {
+          "key": "B",
+          "text": "RobustScaler"
+        },
+        {
+          "key": "C",
+          "text": "StandardScaler"
+        },
+        {
+          "key": "D",
+          "text": "Normalizer"
+        }
+      ],
+      "answer": "C",
+      "explanation": "StandardScaler biến đổi các đặc trưng để có mean=0 và std=1 (chuẩn hóa z-score).",
+      "tags": [
+        "sklearn",
+        "preprocessing",
+        "module-B"
+      ]
+    },
+    {
+      "id": "18-B-06",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "np.where(condition, x, y) trả về gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Các chỉ số nơi điều kiện là True"
+        },
+        {
+          "key": "B",
+          "text": "Các phần tử từ x nơi điều kiện là True, ngược lại lấy từ y"
+        },
+        {
+          "key": "C",
+          "text": "x nếu điều kiện đúng, ngược lại y (vô hướng)"
+        },
+        {
+          "key": "D",
+          "text": "Mặt nạ boolean của điều kiện"
+        }
+      ],
+      "answer": "B",
+      "explanation": "np.where(cond, x, y) thực hiện chọn theo từng phần tử: x[i] nếu cond[i] đúng, ngược lại y[i].",
+      "tags": [
+        "numpy",
+        "where",
+        "module-B"
+      ]
+    },
+    {
+      "id": "18-B-07",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Phương thức pandas nào dùng để loại bỏ các hàng trùng lặp?",
+      "options": [
+        {
+          "key": "A",
+          "text": "df.unique()"
+        },
+        {
+          "key": "B",
+          "text": "df.drop_duplicates()"
+        },
+        {
+          "key": "C",
+          "text": "df.remove_duplicates()"
+        },
+        {
+          "key": "D",
+          "text": "df.distinct()"
+        }
+      ],
+      "answer": "B",
+      "explanation": "df.drop_duplicates() loại bỏ các hàng trùng lặp hoàn toàn.",
+      "tags": [
+        "pandas",
+        "deduplication",
+        "module-B"
+      ]
+    },
+    {
+      "id": "18-B-08",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Đoạn mã sau tính toán gì?\nimport numpy as np\nnp.linalg.norm(np.array([3, 4]))",
+      "options": [
+        {
+          "key": "A",
+          "text": "7.0"
+        },
+        {
+          "key": "B",
+          "text": "5.0"
+        },
+        {
+          "key": "C",
+          "text": "12.0"
+        },
+        {
+          "key": "D",
+          "text": "25.0"
+        }
+      ],
+      "answer": "B",
+      "explanation": "np.linalg.norm tính chuẩn Euclid: sqrt(3^2 + 4^2) = sqrt(9+16) = sqrt(25) = 5.0.",
+      "tags": [
+        "numpy",
+        "linear-algebra",
+        "module-B"
+      ]
+    },
+    {
+      "id": "18-B-09",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Sự khác biệt giữa list.append(x) và list.extend(iterable) là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "append và extend làm cùng một việc"
+        },
+        {
+          "key": "B",
+          "text": "append thêm x như một phần tử duy nhất; extend thêm từng phần tử của iterable một cách riêng lẻ"
+        },
+        {
+          "key": "C",
+          "text": "extend thêm x như một phần tử duy nhất; append giải nén iterable"
+        },
+        {
+          "key": "D",
+          "text": "Cả hai đều sửa đổi tại chỗ nhưng extend nhanh hơn"
+        }
+      ],
+      "answer": "B",
+      "explanation": "append([1,2]) thêm danh sách như một phần tử. extend([1,2]) thêm 1 rồi 2 như các phần tử riêng biệt.",
+      "tags": [
+        "python",
+        "list",
+        "module-B"
+      ]
+    },
+    {
+      "id": "18-B-10",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trong pandas, df.groupby(\"col\").agg({\"value\": \"sum\"}) trả về:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Một giá trị vô hướng (tổng)"
+        },
+        {
+          "key": "B",
+          "text": "Một Series với các nhóm làm chỉ mục và các giá trị đã tính tổng"
+        },
+        {
+          "key": "C",
+          "text": "Một DataFrame mới với hình dạng ban đầu"
+        },
+        {
+          "key": "D",
+          "text": "Một danh sách các tổng theo nhóm"
+        }
+      ],
+      "answer": "B",
+      "explanation": "groupby().agg() trả về một DataFrame/Series được lập chỉ mục theo khóa nhóm với các giá trị đã tổng hợp.",
+      "tags": [
+        "pandas",
+        "groupby",
+        "module-B"
+      ]
+    },
+    {
+      "id": "18-B-11",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Ngoại lệ Python nào được phát sinh khi bạn truy cập một khóa dict không tồn tại?",
+      "options": [
+        {
+          "key": "A",
+          "text": "IndexError"
+        },
+        {
+          "key": "B",
+          "text": "AttributeError"
+        },
+        {
+          "key": "C",
+          "text": "KeyError"
+        },
+        {
+          "key": "D",
+          "text": "ValueError"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Truy cập một khóa không tồn tại trong dict phát sinh KeyError.",
+      "tags": [
+        "python",
+        "exceptions",
+        "module-B"
+      ]
+    },
+    {
+      "id": "18-B-12",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "sklearn train_test_split(X, y, test_size=0.2, random_state=42) làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tạo phần chia 80% train và 20% test với hạt giống ngẫu nhiên có thể tái lập"
+        },
+        {
+          "key": "B",
+          "text": "Tạo phần chia 20% train và 80% test"
+        },
+        {
+          "key": "C",
+          "text": "Tạo kiểm định chéo 5-fold"
+        },
+        {
+          "key": "D",
+          "text": "Loại bỏ 20% đặc trưng"
+        }
+      ],
+      "answer": "A",
+      "explanation": "test_size=0.2 dành 20% cho test (80% train), random_state=42 đảm bảo khả năng tái lập.",
+      "tags": [
+        "sklearn",
+        "train-test-split",
+        "module-B"
+      ]
+    },
+    {
+      "id": "18-B-13",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Đầu ra của: [i for i in range(10) if i % 3 == 0] là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "[3,6,9]"
+        },
+        {
+          "key": "B",
+          "text": "[0,3,6,9]"
+        },
+        {
+          "key": "C",
+          "text": "[1,4,7]"
+        },
+        {
+          "key": "D",
+          "text": "[0,3,6]"
+        }
+      ],
+      "answer": "B",
+      "explanation": "range(10) = 0..9. Chia hết cho 3: 0,3,6,9.",
+      "tags": [
+        "python",
+        "list-comprehension",
+        "module-B"
+      ]
+    },
+    {
+      "id": "18-B-14",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Phép toán numpy nào lan truyền (broadcast) một mảng (3,) để cộng vào ma trận (4,3)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "np.expand_dims trước khi cộng"
+        },
+        {
+          "key": "B",
+          "text": "Cộng trực tiếp - numpy tự động xử lý broadcasting"
+        },
+        {
+          "key": "C",
+          "text": "np.reshape thành (4,3)"
+        },
+        {
+          "key": "D",
+          "text": "np.tile thành (4,3)"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Broadcasting của NumPy tự động căn chỉnh (3,) với (4,3) bằng cách coi nó như (1,3) và lan truyền.",
+      "tags": [
+        "numpy",
+        "broadcasting",
+        "module-B"
+      ]
+    },
+    {
+      "id": "18-B-15",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "pd.read_csv(\"file.csv\", index_col=0) làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dùng cột 0 làm chỉ mục hàng"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ đọc cột 0"
+        },
+        {
+          "key": "C",
+          "text": "Bỏ qua hàng đầu tiên"
+        },
+        {
+          "key": "D",
+          "text": "Loại bỏ cột 0"
+        }
+      ],
+      "answer": "A",
+      "explanation": "index_col=0 đặt cột đầu tiên làm chỉ mục của DataFrame thay vì dùng chỉ mục số nguyên mặc định.",
+      "tags": [
+        "pandas",
+        "read-csv",
+        "module-B"
+      ]
+    },
+    {
+      "id": "18-B-16",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Decorator trong Python là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Một mẫu thiết kế thêm màu sắc cho đầu ra"
+        },
+        {
+          "key": "B",
+          "text": "Một hàm nhận vào một hàm và trả về một hàm đã được sửa đổi"
+        },
+        {
+          "key": "C",
+          "text": "Một lớp kế thừa từ lớp khác"
+        },
+        {
+          "key": "D",
+          "text": "Một kiểu chú thích dùng cho tài liệu"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Decorator bao bọc các hàm để thêm hành vi. @dec là cú pháp đường (syntactic sugar) cho func = dec(func).",
+      "tags": [
+        "python",
+        "decorators",
+        "module-B"
+      ]
+    },
+    {
+      "id": "18-B-17",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Phép toán numpy nào thực hiện nhân theo từng phần tử (KHÔNG phải tích vô hướng)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "np.dot(a, b)"
+        },
+        {
+          "key": "B",
+          "text": "a @ b"
+        },
+        {
+          "key": "C",
+          "text": "a * b"
+        },
+        {
+          "key": "D",
+          "text": "np.matmul(a, b)"
+        }
+      ],
+      "answer": "C",
+      "explanation": "a * b thực hiện nhân theo từng phần tử (Hadamard). dot, @, và matmul thực hiện nhân ma trận.",
+      "tags": [
+        "numpy",
+        "operations",
+        "module-B"
+      ]
+    },
+    {
+      "id": "18-B-18",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Phương thức __len__ cho phép điều gì đối với một lớp Python tùy chỉnh?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Lặp qua đối tượng"
+        },
+        {
+          "key": "B",
+          "text": "So sánh giữa các đối tượng"
+        },
+        {
+          "key": "C",
+          "text": "Sử dụng len() trên đối tượng"
+        },
+        {
+          "key": "D",
+          "text": "Biểu diễn chuỗi của đối tượng"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Định nghĩa __len__ cho phép len(obj) hoạt động đối với các đối tượng tùy chỉnh.",
+      "tags": [
+        "python",
+        "dunder-methods",
+        "module-B"
+      ]
+    },
+    {
+      "id": "18-B-19",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Phương thức pandas nào được dùng để điền các giá trị NaN bằng trung bình của cột?",
+      "options": [
+        {
+          "key": "A",
+          "text": "df.fillna(df.mean())"
+        },
+        {
+          "key": "B",
+          "text": "df.replace(NaN, df.mean())"
+        },
+        {
+          "key": "C",
+          "text": "df.impute(strategy='mean')"
+        },
+        {
+          "key": "D",
+          "text": "df.clean(method='mean')"
+        }
+      ],
+      "answer": "A",
+      "explanation": "df.fillna(df.mean()) thay thế các giá trị NaN trong mỗi cột bằng trung bình của cột đó.",
+      "tags": [
+        "pandas",
+        "missing-data",
+        "module-B"
+      ]
+    },
+    {
+      "id": "18-B-20",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Đầu ra của đoạn mã này là gì?\n\nd = {'a':1, 'b':2}\nd.update({'b':3, 'c':4})\nprint(d)",
+      "options": [
+        {
+          "key": "A",
+          "text": "{'a':1,'b':2,'c':4}"
+        },
+        {
+          "key": "B",
+          "text": "{'a':1,'b':3,'c':4}"
+        },
+        {
+          "key": "C",
+          "text": "{'a':1,'b':2}"
+        },
+        {
+          "key": "D",
+          "text": "Lỗi"
+        }
+      ],
+      "answer": "B",
+      "explanation": "dict.update() hợp nhất dict, ghi đè các khóa đã tồn tại. b trở thành 3, c=4 được thêm vào.",
+      "tags": [
+        "python",
+        "dict",
+        "module-B"
+      ]
+    },
+    {
+      "id": "18-C-01",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Thuật toán nào xây dựng nhiều cây quyết định và kết hợp các dự đoán bằng biểu quyết đa số?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Gradient Boosting"
+        },
+        {
+          "key": "B",
+          "text": "Random Forest"
+        },
+        {
+          "key": "C",
+          "text": "SVM"
+        },
+        {
+          "key": "D",
+          "text": "K-Nearest Neighbors"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Random Forest xây dựng nhiều cây song song bằng bagging và chọn đặc trưng ngẫu nhiên, kết hợp bằng biểu quyết.",
+      "tags": [
+        "ensemble",
+        "random-forest",
+        "module-C"
+      ]
+    },
+    {
+      "id": "18-C-02",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Vai trò của hàm kích hoạt sigmoid trong lớp đầu ra của phân loại nhị phân là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Căn giữa đầu ra quanh số 0"
+        },
+        {
+          "key": "B",
+          "text": "Cho đầu ra trong khoảng [0,1] có thể diễn giải như xác suất"
+        },
+        {
+          "key": "C",
+          "text": "Ngăn chặn vanishing gradient"
+        },
+        {
+          "key": "D",
+          "text": "Chuẩn hóa đầu ra của lớp"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Sigmoid ánh xạ bất kỳ giá trị thực nào về (0,1), phù hợp cho đầu ra xác suất của phân loại nhị phân.",
+      "tags": [
+        "deep-learning",
+        "activation",
+        "module-C"
+      ]
+    },
+    {
+      "id": "18-C-03",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Thước đo đánh giá nào xem xét cả false positive và false negative một cách ngang nhau?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Precision"
+        },
+        {
+          "key": "B",
+          "text": "Recall"
+        },
+        {
+          "key": "C",
+          "text": "F1 Score"
+        },
+        {
+          "key": "D",
+          "text": "Accuracy"
+        }
+      ],
+      "answer": "C",
+      "explanation": "F1 = trung bình điều hòa của precision và recall, cân bằng cả chi phí của false positive và false negative.",
+      "tags": [
+        "ml-evaluation",
+        "f1",
+        "module-C"
+      ]
+    },
+    {
+      "id": "18-C-04",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Điều gì phân biệt học có giám sát (supervised) với học không giám sát (unsupervised)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Học có giám sát dùng nhiều dữ liệu hơn"
+        },
+        {
+          "key": "B",
+          "text": "Học có giám sát cần dữ liệu huấn luyện có nhãn; học không giám sát thì không"
+        },
+        {
+          "key": "C",
+          "text": "Học không giám sát luôn tốt hơn"
+        },
+        {
+          "key": "D",
+          "text": "Học có giám sát chỉ dùng được cho phân loại"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Học có giám sát huấn luyện trên các cặp có nhãn (X,y). Học không giám sát tìm các mẫu trong dữ liệu không có nhãn.",
+      "tags": [
+        "ml-fundamentals",
+        "supervised",
+        "module-C"
+      ]
+    },
+    {
+      "id": "18-C-05",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "BERT là một mô hình transformer sử dụng:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Attention một chiều (trái sang phải)"
+        },
+        {
+          "key": "B",
+          "text": "Attention hai chiều (xem xét cả ngữ cảnh bên trái và bên phải)"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ mã hóa vị trí (positional encoding) mà không có attention"
+        },
+        {
+          "key": "D",
+          "text": "Các lớp hồi quy (recurrent) với attention"
+        }
+      ],
+      "answer": "B",
+      "explanation": "BERT (Bidirectional Encoder Representations from Transformers) sử dụng attention hai chiều thông qua masked language modeling.",
+      "tags": [
+        "nlp",
+        "bert",
+        "transformer",
+        "module-C"
+      ]
+    },
+    {
+      "id": "18-C-06",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Overfitting (quá khớp) là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mô hình hoạt động kém trên cả dữ liệu train và test"
+        },
+        {
+          "key": "B",
+          "text": "Mô hình hoạt động tốt trên dữ liệu train nhưng kém trên dữ liệu mới/test"
+        },
+        {
+          "key": "C",
+          "text": "Mô hình quá đơn giản để nắm bắt các mẫu"
+        },
+        {
+          "key": "D",
+          "text": "Việc huấn luyện mô hình mất quá nhiều thời gian"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Overfitting: mô hình ghi nhớ dữ liệu huấn luyện bao gồm cả nhiễu, không thể tổng quát hóa cho các ví dụ mới.",
+      "tags": [
+        "ml-fundamentals",
+        "overfitting",
+        "module-C"
+      ]
+    },
+    {
+      "id": "18-C-07",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trong mạng nơ-ron, batch normalization làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Loại bỏ ngẫu nhiên các nơ-ron"
+        },
+        {
+          "key": "B",
+          "text": "Chuẩn hóa đầu ra của một lớp để có trung bình 0 và phương sai đơn vị"
+        },
+        {
+          "key": "C",
+          "text": "Giảm kích thước batch trong quá trình huấn luyện"
+        },
+        {
+          "key": "D",
+          "text": "Áp dụng điều chuẩn L2 cho các trọng số"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Batch norm chuẩn hóa các giá trị kích hoạt của lớp trên một mini-batch, giúp ổn định huấn luyện và cho phép tốc độ học cao hơn.",
+      "tags": [
+        "deep-learning",
+        "batch-normalization",
+        "module-C"
+      ]
+    },
+    {
+      "id": "18-C-08",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Thước đo nào quan trọng nhất khi false negative rất tốn kém (vd: phát hiện bệnh)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Precision"
+        },
+        {
+          "key": "B",
+          "text": "Recall (Độ nhạy / Sensitivity)"
+        },
+        {
+          "key": "C",
+          "text": "Specificity"
+        },
+        {
+          "key": "D",
+          "text": "Accuracy"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Recall = TP/(TP+FN). Khi bỏ sót các ca dương tính (false negative) là tốn kém, tối đa hóa recall là rất quan trọng.",
+      "tags": [
+        "ml-evaluation",
+        "recall",
+        "module-C"
+      ]
+    },
+    {
+      "id": "18-C-09",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Mục đích của lớp embedding trong mạng nơ-ron là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chuyển đổi embedding trở lại thành văn bản"
+        },
+        {
+          "key": "B",
+          "text": "Ánh xạ các token/danh mục rời rạc thành các vector liên tục dày đặc"
+        },
+        {
+          "key": "C",
+          "text": "Áp dụng attention trên các token đầu vào"
+        },
+        {
+          "key": "D",
+          "text": "Giảm kích thước của lớp đầu ra"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Lớp embedding chuyển các đầu vào rời rạc (vd: ID từ) thành các biểu diễn vector dày đặc mà mạng có thể xử lý.",
+      "tags": [
+        "deep-learning",
+        "embeddings",
+        "module-C"
+      ]
+    },
+    {
+      "id": "18-C-10",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Đâu là một kỹ thuật AI tạo sinh (generative AI) tạo ra nội dung mới bằng cách học phân phối dữ liệu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Decision Tree (Cây quyết định)"
+        },
+        {
+          "key": "B",
+          "text": "Logistic Regression (Hồi quy logistic)"
+        },
+        {
+          "key": "C",
+          "text": "Generative Adversarial Network (GAN)"
+        },
+        {
+          "key": "D",
+          "text": "K-Means Clustering (Phân cụm K-Means)"
+        }
+      ],
+      "answer": "C",
+      "explanation": "GAN (và các mô hình sinh khác) học cách tạo ra các mẫu mới khớp với phân phối dữ liệu huấn luyện.",
+      "tags": [
+        "generative-ai",
+        "gan",
+        "module-C"
+      ]
+    },
+    {
+      "id": "18-C-11",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trong hệ thống gợi ý, \"lọc cộng tác\" (collaborative filtering) dùng gì để đưa ra gợi ý?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Các đặc trưng nội dung của mục (tiêu đề, danh mục, mô tả)"
+        },
+        {
+          "key": "B",
+          "text": "Các mẫu tương tác người dùng - mục từ nhiều người dùng"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ thông tin nhân khẩu học"
+        },
+        {
+          "key": "D",
+          "text": "Tuyển chọn biên tập"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Lọc cộng tác tận dụng hành vi tập thể của người dùng: những người dùng có lịch sử tương tự sẽ nhận được gợi ý tương tự.",
+      "tags": [
+        "recommender-systems",
+        "collaborative-filtering",
+        "module-C"
+      ]
+    },
+    {
+      "id": "18-C-12",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Việc tăng tham số \"temperature\" làm gì khi sinh văn bản với một LLM?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Làm đầu ra xác định và tập trung hơn"
+        },
+        {
+          "key": "B",
+          "text": "Làm đầu ra ngẫu nhiên và sáng tạo hơn"
+        },
+        {
+          "key": "C",
+          "text": "Tăng tốc độ suy luận"
+        },
+        {
+          "key": "D",
+          "text": "Giảm số lượng token"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Temperature cao hơn làm phẳng phân phối xác suất trên các token, tăng tính ngẫu nhiên và đa dạng trong đầu ra.",
+      "tags": [
+        "llm",
+        "temperature",
+        "module-C"
+      ]
+    },
+    {
+      "id": "18-C-13",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "\"AI lấy dữ liệu làm trung tâm\" (data-centric AI) quan tâm đến hướng tiếp cận nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Thiết kế các kiến trúc mạng nơ-ron lớn hơn"
+        },
+        {
+          "key": "B",
+          "text": "Cải thiện một cách hệ thống chất lượng và tính nhất quán của dữ liệu huấn luyện"
+        },
+        {
+          "key": "C",
+          "text": "Suy luận mô hình nhanh hơn"
+        },
+        {
+          "key": "D",
+          "text": "Dùng nhiều tài nguyên tính toán hơn cho huấn luyện"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AI lấy dữ liệu làm trung tâm tập trung cải thiện chất lượng dữ liệu, tính nhất quán của nhãn và các pipeline dữ liệu thay vì kiến trúc mô hình.",
+      "tags": [
+        "data-centric-ai",
+        "module-C"
+      ]
+    },
+    {
+      "id": "18-C-14",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Mục đích của RLHF (Reinforcement Learning from Human Feedback) trong huấn luyện LLM là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Để tăng tốc tiền huấn luyện (pre-training)"
+        },
+        {
+          "key": "B",
+          "text": "Để căn chỉnh (align) đầu ra mô hình với sở thích con người và giảm các đầu ra có hại"
+        },
+        {
+          "key": "C",
+          "text": "Để nén kích thước mô hình"
+        },
+        {
+          "key": "D",
+          "text": "Để cải thiện tốc độ token hóa (tokenization)"
+        }
+      ],
+      "answer": "B",
+      "explanation": "RLHF dùng dữ liệu sở thích của con người để huấn luyện một mô hình phần thưởng, sau đó tinh chỉnh LLM để tối đa hóa các đầu ra được con người ưa thích.",
+      "tags": [
+        "llm",
+        "rlhf",
+        "alignment",
+        "module-C"
+      ]
+    },
+    {
+      "id": "18-C-15",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trong phát hiện đối tượng (object detection), \"mAP\" (mean Average Precision) đo lường điều gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Kích thước mô hình"
+        },
+        {
+          "key": "B",
+          "text": "Độ chính xác phát hiện trên nhiều ngưỡng IoU và nhiều lớp"
+        },
+        {
+          "key": "C",
+          "text": "Độ trễ suy luận"
+        },
+        {
+          "key": "D",
+          "text": "Mức sử dụng bộ nhớ"
+        }
+      ],
+      "answer": "B",
+      "explanation": "mAP lấy trung bình các điểm AP trên tất cả các lớp và các ngưỡng IoU, cung cấp một thước đo hiệu năng phát hiện toàn diện.",
+      "tags": [
+        "computer-vision",
+        "object-detection",
+        "map",
+        "module-C"
+      ]
+    },
+    {
+      "id": "18-C-16",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Kỹ thuật điều chuẩn (regularization) nào có thể đưa một số trọng số đặc trưng về đúng bằng 0 (chọn lọc đặc trưng)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "L2 (Ridge)"
+        },
+        {
+          "key": "B",
+          "text": "L1 (Lasso)"
+        },
+        {
+          "key": "C",
+          "text": "Dropout"
+        },
+        {
+          "key": "D",
+          "text": "Tăng cường dữ liệu (Data augmentation)"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Điều chuẩn L1 thêm phạt |w|. Hình học không trơn của nó đưa một số trọng số về đúng bằng 0, thực hiện chọn lọc đặc trưng.",
+      "tags": [
+        "ml-fundamentals",
+        "regularization",
+        "lasso",
+        "module-C"
+      ]
+    },
+    {
+      "id": "18-C-17",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "A/B testing đo lường điều gì trong bối cảnh sản phẩm?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Thời gian huấn luyện mô hình"
+        },
+        {
+          "key": "B",
+          "text": "Tác động nhân quả của một thay đổi sản phẩm bằng cách so sánh hai nhóm người dùng"
+        },
+        {
+          "key": "C",
+          "text": "Thời gian phản hồi API"
+        },
+        {
+          "key": "D",
+          "text": "Hiệu năng truy vấn cơ sở dữ liệu"
+        }
+      ],
+      "answer": "B",
+      "explanation": "A/B testing phân ngẫu nhiên người dùng vào nhóm đối chứng (A) và nhóm thử nghiệm (B) để đo tác động nhân quả của một thay đổi.",
+      "tags": [
+        "product-ai",
+        "ab-testing",
+        "module-C"
+      ]
+    },
+    {
+      "id": "18-C-18",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Thành phần nào của kiến trúc Transformer cho phép mỗi vị trí chú ý (attend) đến tất cả các vị trí trong lớp trước đó?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mạng truyền thẳng (Feed-forward network)"
+        },
+        {
+          "key": "B",
+          "text": "Mã hóa vị trí (Positional encoding)"
+        },
+        {
+          "key": "C",
+          "text": "Multi-head self-attention"
+        },
+        {
+          "key": "D",
+          "text": "Chuẩn hóa lớp (Layer normalization)"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Multi-head self-attention tính các điểm attention giữa tất cả các cặp vị trí, nắm bắt các phụ thuộc toàn cục.",
+      "tags": [
+        "transformer",
+        "attention",
+        "module-C"
+      ]
+    },
+    {
+      "id": "18-D-01",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Một hệ thống AI sàng lọc hồ sơ tự động từ chối các ứng viên có khoảng trống trong sự nghiệp mà không giải thích. Điều này vi phạm nguyên tắc nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Hiệu quả"
+        },
+        {
+          "key": "B",
+          "text": "Minh bạch và khả năng giải thích (transparency & explainability)"
+        },
+        {
+          "key": "C",
+          "text": "Khả năng mở rộng"
+        },
+        {
+          "key": "D",
+          "text": "Hiệu năng"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Các quyết định tự động ảnh hưởng đến cá nhân cần có khả năng giải thích. Việc từ chối thiếu minh bạch vi phạm nguyên tắc minh bạch/khả năng giải thích.",
+      "tags": [
+        "responsible-ai",
+        "transparency",
+        "module-D"
+      ]
+    },
+    {
+      "id": "18-D-02",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Đâu là một dạng lập luận logic hợp lệ?\nNếu P thì Q. Không Q. Do đó:",
+      "options": [
+        {
+          "key": "A",
+          "text": "P"
+        },
+        {
+          "key": "B",
+          "text": "Không P"
+        },
+        {
+          "key": "C",
+          "text": "Q"
+        },
+        {
+          "key": "D",
+          "text": "Không Q và P"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Modus tollens: Nếu P->Q và KHÔNG Q, thì KHÔNG P. Đây là suy luận logic hợp lệ.",
+      "tags": [
+        "logic",
+        "modus-tollens",
+        "module-D"
+      ]
+    },
+    {
+      "id": "18-D-03",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Một hệ thống AI cho độ chính xác khác nhau giữa nam và nữ. Tiêu chí công bằng nào bị vi phạm?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cơ hội bình đẳng (equal opportunity) - cân bằng tỷ lệ true positive giữa các nhóm"
+        },
+        {
+          "key": "B",
+          "text": "Bình đẳng nhân khẩu (demographic parity) - tỷ lệ dự đoán bằng nhau giữa các nhóm"
+        },
+        {
+          "key": "C",
+          "text": "Cả hai đều có thể bị vi phạm tùy thuộc vào tỷ lệ nào khác biệt"
+        },
+        {
+          "key": "D",
+          "text": "Không tiêu chí nào - khác biệt về độ chính xác luôn chấp nhận được"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Độ chính xác khác nhau có thể vi phạm nhiều tiêu chí công bằng. Cơ hội bình đẳng kiểm tra sự cân bằng TPR; bình đẳng nhân khẩu kiểm tra tỷ lệ cơ sở.",
+      "tags": [
+        "fairness",
+        "responsible-ai",
+        "module-D"
+      ]
+    },
+    {
+      "id": "18-D-04",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "\"Quản trị mô hình\" (model governance) trong AI doanh nghiệp là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Một thư viện Python để quản lý mô hình"
+        },
+        {
+          "key": "B",
+          "text": "Các chính sách, quy trình và kiểm soát để phát triển, triển khai và giám sát mô hình một cách có trách nhiệm"
+        },
+        {
+          "key": "C",
+          "text": "Một mẫu thiết kế kiến trúc mô hình"
+        },
+        {
+          "key": "D",
+          "text": "Một cơ sở dữ liệu để lưu trữ trọng số mô hình"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Quản trị mô hình bao gồm các chính sách và kiểm soát của tổ chức nhằm đảm bảo các mô hình AI được phát triển và sử dụng một cách có trách nhiệm.",
+      "tags": [
+        "mlops",
+        "governance",
+        "module-D"
+      ]
+    },
+    {
+      "id": "18-D-05",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Phát biểu nào về an toàn AI (AI safety) là chính xác nhất?",
+      "options": [
+        {
+          "key": "A",
+          "text": "An toàn AI chỉ liên quan đến các ứng dụng quân sự"
+        },
+        {
+          "key": "B",
+          "text": "Nghiên cứu an toàn AI nhằm đảm bảo các hệ thống AI hoạt động đúng như mong muốn và duy trì sự căn chỉnh với giá trị con người ở quy mô lớn"
+        },
+        {
+          "key": "C",
+          "text": "An toàn AI được giải quyết bằng cách thêm nhiều dữ liệu huấn luyện hơn"
+        },
+        {
+          "key": "D",
+          "text": "An toàn AI chỉ liên quan đến các hệ thống AGI"
+        }
+      ],
+      "answer": "B",
+      "explanation": "An toàn AI tập trung vào việc đảm bảo các hệ thống AI đáng tin cậy, căn chỉnh với giá trị con người và không gây ra tác hại ngoài ý muốn.",
+      "tags": [
+        "ai-safety",
+        "responsible-ai",
+        "module-D"
+      ]
+    },
+    {
+      "id": "18-D-06",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Xét lập luận: \"Mọi mạng nơ-ron đều cần GPU. ResNet là một mạng nơ-ron. Do đó, ResNet cần GPU.\"\nLập luận này có hợp lệ không?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không hợp lệ - kết luận không suy ra được"
+        },
+        {
+          "key": "B",
+          "text": "Hợp lệ - kết luận suy ra từ các tiền đề"
+        },
+        {
+          "key": "C",
+          "text": "Không hợp lệ - tiền đề đầu tiên sai"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ hợp lệ nếu ResNet là một CNN"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Lập luận hợp lệ về mặt logic (tam đoạn luận phổ quát). Kết luận suy ra từ các tiền đề, ngay cả khi tiền đề 1 còn gây tranh cãi về mặt thực nghiệm.",
+      "tags": [
+        "logic",
+        "syllogism",
+        "module-D"
+      ]
+    },
+    {
+      "id": "18-D-07",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "\"Quyền riêng tư vi phân\" (differential privacy) được dùng để làm gì trong AI?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đảm bảo suy luận nhanh"
+        },
+        {
+          "key": "B",
+          "text": "Bảo vệ quyền riêng tư dữ liệu cá nhân bằng cách thêm nhiễu được hiệu chỉnh vào đầu ra hoặc quá trình huấn luyện"
+        },
+        {
+          "key": "C",
+          "text": "Mã hóa trọng số mô hình"
+        },
+        {
+          "key": "D",
+          "text": "Ngăn chặn đánh cắp mô hình"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Quyền riêng tư vi phân giới hạn về mặt toán học những gì kẻ tấn công có thể biết về bất kỳ cá nhân nào từ đầu ra mô hình hoặc dữ liệu huấn luyện.",
+      "tags": [
+        "privacy",
+        "differential-privacy",
+        "responsible-ai",
+        "module-D"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2022 @@
+{
+  "id": "new-2026-07",
+  "title": "Bộ mô phỏng khóa mới 2026 · Đề 07",
+  "description": "Đề giữ cùng mức tính toán, bổ sung vài câu SVM trực quan và thay đổi chủ yếu ở ba bài tự luận.",
+  "durationMinutes": 90,
+  "totalPoints": 100,
+  "disclaimer": "Đây là bộ câu hỏi ôn tập cộng đồng, được biên soạn từ phản hồi không chính thức của người thi các khóa gần đây. Đây không phải đề thi chính thức hoặc đề bị lộ. Bộ đề giữ độ khó ứng dụng cơ bản, chủ yếu ở mức SFIA Level 3 và chỉ dùng một phần câu lập luận để quan sát mức sẵn sàng lên Level 4.",
+  "moduleLabels": {
+    "A": "Xác suất & đại số tuyến tính phần ma trận",
+    "B": "Euclid, Python gọi API & NumPy",
+    "C": "ML cơ bản, confusion matrix, SVM, backprop & RAG",
+    "D": "Đạo đức AI, banking & privacy"
+  },
+  "moduleOverview": [
+    "Module 1 · A: 20 câu xác suất và ma trận; giải bằng giấy nháp.",
+    "Module 2 · B: 20 câu Euclid, Python API và NumPy; gồm 2 câu code.",
+    "Module 3 · C: 12 câu ML/RAG cơ bản; gồm 3 câu tự luận có ràng buộc.",
+    "Module 4 · D: 8 câu đạo đức AI, banking, privacy và phân quyền."
+  ],
+  "coverageProfile": {
+    "title": "Inverse matrix, SVM cơ bản và RAG có phân quyền",
+    "sfiaOrientation": "Level 3 Apply là trọng tâm; tự luận quan sát mức sẵn sàng lên Level 4 Enable",
+    "variationPolicy": "Cùng nền tảng, khác chủ yếu ở tự luận",
+    "source": "Learner-reported topics plus limited adjacent fundamentals"
+  },
+  "questions": [
+    {
+      "id": "N26E07-A01",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Một bệnh có tỷ lệ mắc 20%. Xét nghiệm phát hiện đúng người mắc bệnh với xác suất 75% và cho dương tính giả với xác suất 25%. Giả sử hai lần xét nghiệm độc lập khi đã biết tình trạng bệnh. Một người có hai lần đều dương tính. Xác suất người đó thực sự mắc bệnh gần nhất là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "56,25%"
+        },
+        {
+          "key": "B",
+          "text": "20%"
+        },
+        {
+          "key": "C",
+          "text": "75%"
+        },
+        {
+          "key": "D",
+          "text": "69,23%"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Dùng Bayes: tử số là P(bệnh)×P(++|bệnh), mẫu số cộng thêm P(không bệnh)×P(++|không bệnh). Kết quả gần 69,23%.",
+      "tags": [
+        "probability",
+        "bayes",
+        "conditional-probability"
+      ],
+      "skillId": "probability.bayes.two-positive-tests",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-A02",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Một bảng thống kê cho biết có 24 người nhận kết quả dương tính, trong đó 14 người thực sự mắc bệnh. Chọn ngẫu nhiên một người trong nhóm có kết quả dương tính. Xác suất người đó mắc bệnh là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "7/50"
+        },
+        {
+          "key": "B",
+          "text": "5/12"
+        },
+        {
+          "key": "C",
+          "text": "7/12"
+        },
+        {
+          "key": "D",
+          "text": "6/25"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Điều kiện là đã dương tính, nên xác suất bằng 14/24=7/12.",
+      "tags": [
+        "probability",
+        "conditional-probability",
+        "table"
+      ],
+      "skillId": "probability.conditional.from-count-table",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-A03",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Máy A sản xuất 70% sản phẩm và có tỷ lệ lỗi 1%. Máy B sản xuất phần còn lại và có tỷ lệ lỗi 4%. Chọn ngẫu nhiên một sản phẩm. Xác suất sản phẩm bị lỗi là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "1%"
+        },
+        {
+          "key": "B",
+          "text": "1,9%"
+        },
+        {
+          "key": "C",
+          "text": "4%"
+        },
+        {
+          "key": "D",
+          "text": "5%"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Dùng xác suất toàn phần: 0.7×1% + 0.3×4% = 1,9%.",
+      "tags": [
+        "probability",
+        "total-probability"
+      ],
+      "skillId": "probability.total-probability.two-sources",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-A04",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Một túi có 5 bi đỏ và 4 bi xanh. Rút 2 bi không hoàn lại. Xác suất hai bi khác màu là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "5/9"
+        },
+        {
+          "key": "B",
+          "text": "5/18"
+        },
+        {
+          "key": "C",
+          "text": "4/9"
+        },
+        {
+          "key": "D",
+          "text": "0"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Có hai thứ tự đỏ-xanh và xanh-đỏ, nên P=2×5×4/(9×8)=5/9.",
+      "tags": [
+        "probability",
+        "without-replacement"
+      ],
+      "skillId": "probability.without-replacement.different-colours",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-A05",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Một phép thử độc lập có xác suất thất bại 2/5. Thực hiện 2 lần. Xác suất có ít nhất một lần thành công là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "4/25"
+        },
+        {
+          "key": "B",
+          "text": "3/5"
+        },
+        {
+          "key": "C",
+          "text": "0,84"
+        },
+        {
+          "key": "D",
+          "text": "21/25"
+        }
+      ],
+      "answer": "D",
+      "explanation": "P(ít nhất một thành công)=1-P(tất cả thất bại)=1-(2/5)^2=21/25.",
+      "tags": [
+        "probability",
+        "complement"
+      ],
+      "skillId": "probability.complement.at-least-one",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-A06",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Gieo một xúc xắc công bằng. Biết kết quả lớn hơn 3, xác suất kết quả là số chẵn bằng:",
+      "options": [
+        {
+          "key": "A",
+          "text": "1/3"
+        },
+        {
+          "key": "B",
+          "text": "1/2"
+        },
+        {
+          "key": "C",
+          "text": "2/3"
+        },
+        {
+          "key": "D",
+          "text": "3/4"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Không gian có điều kiện là {4, 5, 6}; có 2/3 kết quả chẵn, nên xác suất là 2/3.",
+      "tags": [
+        "probability",
+        "conditional-probability",
+        "dice"
+      ],
+      "skillId": "probability.conditional.dice",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-A07",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Tung đồng xu công bằng 4 lần. Xác suất có đúng 1 lần ngửa là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "1/16"
+        },
+        {
+          "key": "B",
+          "text": "1/4"
+        },
+        {
+          "key": "C",
+          "text": "1/2"
+        },
+        {
+          "key": "D",
+          "text": "0"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Có C(4,1)=4 chuỗi phù hợp trên 16 chuỗi đồng khả năng, nên xác suất là 1/4.",
+      "tags": [
+        "probability",
+        "binomial",
+        "combinations"
+      ],
+      "skillId": "probability.binomial.exact-successes",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-A08",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trong 100 quan sát, có 50 quan sát thuộc A, 40 quan sát thuộc B và 20 quan sát thuộc cả A lẫn B. Kết luận phù hợp nhất là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "A và B độc lập theo bảng đếm này"
+        },
+        {
+          "key": "B",
+          "text": "A và B chắc chắn xung khắc"
+        },
+        {
+          "key": "C",
+          "text": "P(A|B)=1"
+        },
+        {
+          "key": "D",
+          "text": "Không thể tính P(A∩B)"
+        }
+      ],
+      "answer": "A",
+      "explanation": "P(A)P(B)=(50/100)×(40/100)=20/100=P(A∩B).",
+      "tags": [
+        "probability",
+        "independence",
+        "table"
+      ],
+      "skillId": "probability.independence.from-count-table",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-A09",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Biến ngẫu nhiên X nhận các giá trị 0, 1, 2 với xác suất lần lượt 0,5, 0,25, 0,25. Kỳ vọng E[X] bằng:",
+      "options": [
+        {
+          "key": "A",
+          "text": "1,25"
+        },
+        {
+          "key": "B",
+          "text": "0,25"
+        },
+        {
+          "key": "C",
+          "text": "3"
+        },
+        {
+          "key": "D",
+          "text": "0,75"
+        }
+      ],
+      "answer": "D",
+      "explanation": "E[X]=ΣxP(X=x)=0,75.",
+      "tags": [
+        "probability",
+        "expectation"
+      ],
+      "skillId": "probability.expectation.discrete",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-A10",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Biến Bernoulli X có P(X=1)=0,25. Phương sai Var(X) bằng:",
+      "options": [
+        {
+          "key": "A",
+          "text": "0,063"
+        },
+        {
+          "key": "B",
+          "text": "0,188"
+        },
+        {
+          "key": "C",
+          "text": "0,75"
+        },
+        {
+          "key": "D",
+          "text": "0,25"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Với Bernoulli, Var(X)=p(1-p)=0,188.",
+      "tags": [
+        "probability",
+        "variance",
+        "bernoulli"
+      ],
+      "skillId": "probability.bernoulli.variance",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-A11",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Ma trận A có kích thước 3×2, ma trận B có kích thước 2×4. Kích thước của AB là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "2×2"
+        },
+        {
+          "key": "B",
+          "text": "2×4"
+        },
+        {
+          "key": "C",
+          "text": "3×4"
+        },
+        {
+          "key": "D",
+          "text": "3×2"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Hai kích thước ở giữa bằng nhau; kích thước ngoài là 3×4.",
+      "tags": [
+        "linear-algebra",
+        "matrix"
+      ],
+      "skillId": "matrix.multiplication.dimensions",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-A12",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Cho A=[[2,1],[1,1]] và B=[[1,2],[3,1]]. Tích AB bằng:",
+      "options": [
+        {
+          "key": "A",
+          "text": "[[4,3],[7,4]]"
+        },
+        {
+          "key": "B",
+          "text": "[[2,1],[1,1]]"
+        },
+        {
+          "key": "C",
+          "text": "[[1,2],[3,1]]"
+        },
+        {
+          "key": "D",
+          "text": "[[5,5],[4,3]]"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Nhân từng hàng của A với từng cột của B, thu được [[5,5],[4,3]].",
+      "tags": [
+        "linear-algebra",
+        "matrix-multiplication"
+      ],
+      "skillId": "matrix.multiplication.full-2x2",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-A13",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Định thức của ma trận A=[[3,1],[2,1]] bằng:",
+      "options": [
+        {
+          "key": "A",
+          "text": "1"
+        },
+        {
+          "key": "B",
+          "text": "5"
+        },
+        {
+          "key": "C",
+          "text": "7"
+        },
+        {
+          "key": "D",
+          "text": "-1"
+        }
+      ],
+      "answer": "A",
+      "explanation": "det(A)=ad-bc=3×1-1×2=1.",
+      "tags": [
+        "linear-algebra",
+        "determinant"
+      ],
+      "skillId": "matrix.determinant.2x2",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-A14",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Cho A=[[1,1],[1,2]]. Ma trận nghịch đảo A⁻¹ là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "[[2,-1],[-1,1]]"
+        },
+        {
+          "key": "B",
+          "text": "[[2/1,-1/1],[-1/1,1/1]]"
+        },
+        {
+          "key": "C",
+          "text": "[[1,1],[1,2]]"
+        },
+        {
+          "key": "D",
+          "text": "[[1,-1],[-1,2]]"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Dùng công thức A⁻¹=(1/det(A))[[d,-b],[-c,a]], thu được [[2/1,-1/1],[-1/1,1/1]].",
+      "tags": [
+        "linear-algebra",
+        "inverse-matrix"
+      ],
+      "skillId": "matrix.inverse.full-2x2",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-A15",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Cho A=[[1,1],[2,-1]] và b=[4,2]. Vector x thỏa Ax=b là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "[4,2]"
+        },
+        {
+          "key": "B",
+          "text": "[3,1]"
+        },
+        {
+          "key": "C",
+          "text": "[2,2]"
+        },
+        {
+          "key": "D",
+          "text": "0"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Giải hệ x₁+x₂=4, 2x₁-x₂=2, thu được x=[2,2].",
+      "tags": [
+        "linear-algebra",
+        "linear-system"
+      ],
+      "skillId": "matrix.solve-ax-equals-b",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-A16",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Hạng của ma trận A=[[1,2],[3,6]] là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "0"
+        },
+        {
+          "key": "B",
+          "text": "2"
+        },
+        {
+          "key": "C",
+          "text": "3"
+        },
+        {
+          "key": "D",
+          "text": "1"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Hàng thứ hai bằng 3 lần hàng thứ nhất, nên chỉ có một hàng độc lập tuyến tính; rank=1.",
+      "tags": [
+        "linear-algebra",
+        "rank"
+      ],
+      "skillId": "matrix.rank.proportional-rows",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-A17",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Cho I là ma trận đơn vị 2×2 và A=[[2,1],[2,3]]. Tích AI bằng:",
+      "options": [
+        {
+          "key": "A",
+          "text": "[[2,1],[2,3]]"
+        },
+        {
+          "key": "B",
+          "text": "[[1,0],[0,1]]"
+        },
+        {
+          "key": "C",
+          "text": "[[2,0],[0,3]]"
+        },
+        {
+          "key": "D",
+          "text": "[[3,1],[2,4]]"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Nhân với ma trận đơn vị không làm thay đổi ma trận: AI=A.",
+      "tags": [
+        "linear-algebra",
+        "identity-matrix"
+      ],
+      "skillId": "matrix.identity.product",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-A18",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Với A=[[2,1],[1,1]] và B=[[1,2],[3,1]], nhận xét nào đúng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Luôn luôn AB=BA với mọi ma trận vuông"
+        },
+        {
+          "key": "B",
+          "text": "Trong trường hợp này AB≠BA"
+        },
+        {
+          "key": "C",
+          "text": "AB không xác định"
+        },
+        {
+          "key": "D",
+          "text": "BA không xác định"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Tính được AB=[[5,5],[4,3]] và BA=[[4,3],[7,4]]; phép nhân ma trận nói chung không giao hoán.",
+      "tags": [
+        "linear-algebra",
+        "matrix-multiplication"
+      ],
+      "skillId": "matrix.multiplication.non-commutative",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-A19",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Cho A=[[1,2],[2,3]] và B=[[0,1],[3,2]]. (A+B)ᵀ bằng:",
+      "options": [
+        {
+          "key": "A",
+          "text": "[[1,3],[5,5]]"
+        },
+        {
+          "key": "B",
+          "text": "[[1,2],[2,3]]"
+        },
+        {
+          "key": "C",
+          "text": "[[1,5],[3,5]]"
+        },
+        {
+          "key": "D",
+          "text": "[[0,1],[3,2]]"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Cộng A+B trước rồi chuyển vị, được [[1,5],[3,5]].",
+      "tags": [
+        "linear-algebra",
+        "transpose",
+        "matrix-addition"
+      ],
+      "skillId": "matrix.transpose.of-sum",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-A20",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Ma trận A=[[1,2],[3,6]] có nghịch đảo hay không?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Có, vì mọi ma trận 2×2 đều khả nghịch"
+        },
+        {
+          "key": "B",
+          "text": "Có, vì các phần tử đều khác 0"
+        },
+        {
+          "key": "C",
+          "text": "Không, vì det(A)=0"
+        },
+        {
+          "key": "D",
+          "text": "Không, vì ma trận không đối xứng"
+        }
+      ],
+      "answer": "C",
+      "explanation": "det(A)=1×6-2×3=0, nên A suy biến và không có nghịch đảo.",
+      "tags": [
+        "linear-algebra",
+        "inverse-matrix",
+        "determinant"
+      ],
+      "skillId": "matrix.inverse.singular-recognition",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-B01",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Ước chung lớn nhất của 84 và 30 theo thuật toán Euclid là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "3"
+        },
+        {
+          "key": "B",
+          "text": "12"
+        },
+        {
+          "key": "C",
+          "text": "6"
+        },
+        {
+          "key": "D",
+          "text": "7"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Lặp phép chia lấy dư đến khi số dư bằng 0; ước chung lớn nhất là 6.",
+      "tags": [
+        "euclid",
+        "gcd"
+      ],
+      "skillId": "euclid.compute-gcd",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-B02",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Khi áp dụng Euclid cho (84, 30), dãy số chia khác 0 kết thúc bằng số nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "30"
+        },
+        {
+          "key": "B",
+          "text": "24"
+        },
+        {
+          "key": "C",
+          "text": "2"
+        },
+        {
+          "key": "D",
+          "text": "6"
+        }
+      ],
+      "answer": "D",
+      "explanation": "84=2×30+24; 30=1×24+6; 24=4×6+0. Số chia cuối cùng khác 0 là 6.",
+      "tags": [
+        "euclid",
+        "trace"
+      ],
+      "skillId": "euclid.trace-full-process",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-B03",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trong một hàm Euclid dùng vòng lặp, dòng `a, b = a % b, b` là lỗi chính. Cách sửa phù hợp nhất là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "a, b = b, a % b"
+        },
+        {
+          "key": "B",
+          "text": "break"
+        },
+        {
+          "key": "C",
+          "text": "return 0"
+        },
+        {
+          "key": "D",
+          "text": "a = b = 1"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Thuật toán phải tiếp tục khi b khác 0 và cập nhật đúng cặp (b,a%b); khi kết thúc, a là GCD.",
+      "tags": [
+        "euclid",
+        "debugging"
+      ],
+      "skillId": "euclid.debug-loop",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-B04",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Độ phức tạp thời gian thường dùng để mô tả thuật toán Euclid là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "O(1)"
+        },
+        {
+          "key": "B",
+          "text": "O(log(min(a,b)))"
+        },
+        {
+          "key": "C",
+          "text": "O(a+b)"
+        },
+        {
+          "key": "D",
+          "text": "O(a×b)"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Số bước của thuật toán Euclid tăng theo logarit của số nhỏ hơn.",
+      "tags": [
+        "euclid",
+        "complexity"
+      ],
+      "skillId": "euclid.time-complexity",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-B05",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Cách gọi GET API bằng `requests` nào đúng khi cần truyền tham số `q='ai'` và timeout 5 giây?",
+      "options": [
+        {
+          "key": "A",
+          "text": "requests.get(url, data={'q': 'ai'})"
+        },
+        {
+          "key": "B",
+          "text": "requests.get(url, timeout=None)"
+        },
+        {
+          "key": "C",
+          "text": "requests.get(url, params={'q': 'ai'}, timeout=5)"
+        },
+        {
+          "key": "D",
+          "text": "requests.get(url + 'q=ai')"
+        }
+      ],
+      "answer": "C",
+      "explanation": "`params` tạo query string đúng cách; `timeout` giới hạn thời gian chờ.",
+      "tags": [
+        "api",
+        "requests"
+      ],
+      "skillId": "api.requests.get-params-timeout",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-B06",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Cách gửi dictionary `payload` dưới dạng JSON bằng POST và timeout 6 giây là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "requests.get(url, json=payload)"
+        },
+        {
+          "key": "B",
+          "text": "requests.post(url, params=payload)"
+        },
+        {
+          "key": "C",
+          "text": "requests.post(url, data=str(payload)) trong mọi trường hợp"
+        },
+        {
+          "key": "D",
+          "text": "requests.post(url, json=payload, timeout=6)"
+        }
+      ],
+      "answer": "D",
+      "explanation": "`json=payload` mã hóa body JSON và đặt Content-Type phù hợp.",
+      "tags": [
+        "api",
+        "requests",
+        "post"
+      ],
+      "skillId": "api.requests.post-json",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-B07",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Nếu API yêu cầu Bearer token, cách truyền token phù hợp nhất là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "headers={'Authorization': f'Bearer {token}'}"
+        },
+        {
+          "key": "B",
+          "text": "params={'token': token} trong mọi trường hợp"
+        },
+        {
+          "key": "C",
+          "text": "print(token) rồi gọi API"
+        },
+        {
+          "key": "D",
+          "text": "url = url + token"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Token thường được gửi trong header Authorization theo tài liệu API và không nên xuất hiện trong log hoặc URL.",
+      "tags": [
+        "api",
+        "authorization"
+      ],
+      "skillId": "api.auth.bearer-header",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-B08",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Sau khi nhận `response` từ Requests, lệnh nào phát hiện mã HTTP 4xx hoặc 5xx bằng ngoại lệ?",
+      "options": [
+        {
+          "key": "A",
+          "text": "response.close()"
+        },
+        {
+          "key": "B",
+          "text": "response.raise_for_status()"
+        },
+        {
+          "key": "C",
+          "text": "response.text()"
+        },
+        {
+          "key": "D",
+          "text": "response.ok()"
+        }
+      ],
+      "answer": "B",
+      "explanation": "`raise_for_status()` ném `HTTPError` khi phản hồi là lỗi 4xx/5xx.",
+      "tags": [
+        "api",
+        "http"
+      ],
+      "skillId": "api.http.raise-for-status",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-B09",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Mã HTTP 404 thường có ý nghĩa gần đúng nhất là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chưa xác thực hoặc thông tin xác thực không hợp lệ"
+        },
+        {
+          "key": "B",
+          "text": "Gửi quá nhiều request trong thời gian ngắn"
+        },
+        {
+          "key": "C",
+          "text": "Không tìm thấy tài nguyên"
+        },
+        {
+          "key": "D",
+          "text": "Lỗi phía máy chủ"
+        }
+      ],
+      "answer": "C",
+      "explanation": "HTTP 404: Không tìm thấy tài nguyên.",
+      "tags": [
+        "api",
+        "http-status"
+      ],
+      "skillId": "api.http.status-404",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-B10",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "API dự kiến trả `{\"scores\": [1,2,3]}`. Trước khi tính toán, code nên:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Kiểm tra status, JSON là object và scores là danh sách số không rỗng"
+        },
+        {
+          "key": "B",
+          "text": "Tin rằng API luôn trả đúng schema"
+        },
+        {
+          "key": "C",
+          "text": "Dùng eval để ép kiểu"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ kiểm tra độ dài chuỗi response"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Dữ liệu từ API cần được xác thực trước khi dùng để tránh lỗi kiểu, thiếu trường hoặc danh sách rỗng.",
+      "tags": [
+        "api",
+        "validation"
+      ],
+      "skillId": "api.response.schema-validation",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-B11",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Nhận xét nào đúng nhất về `params=` và `json=` trong Requests?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Hai tham số luôn giống hệt nhau"
+        },
+        {
+          "key": "B",
+          "text": "`params=` chỉ dùng cho POST"
+        },
+        {
+          "key": "C",
+          "text": "`json=` tự động đọc response JSON"
+        },
+        {
+          "key": "D",
+          "text": "`params=` tạo query string; `json=` tạo JSON request body"
+        }
+      ],
+      "answer": "D",
+      "explanation": "`params` thuộc URL query; `json` mã hóa body gửi đi.",
+      "tags": [
+        "api",
+        "requests"
+      ],
+      "skillId": "api.requests.params-vs-json",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-B12",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Cho `x = np.zeros((2, 5))`. Giá trị của `x.shape` là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "(5, 2)"
+        },
+        {
+          "key": "B",
+          "text": "(10,)"
+        },
+        {
+          "key": "C",
+          "text": "(2, 5)"
+        },
+        {
+          "key": "D",
+          "text": "2"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Mảng có 2 hàng và 5 cột nên shape là (2, 5).",
+      "tags": [
+        "numpy",
+        "shape"
+      ],
+      "skillId": "numpy.shape.read",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-B13",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Cho `x=np.array([[1,2,3],[4,5,6]])` và `v=np.array([2,2,2])`. Kết quả `x+v` là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Lỗi vì shape khác nhau"
+        },
+        {
+          "key": "B",
+          "text": "[[3,4,5],[6,7,8]]"
+        },
+        {
+          "key": "C",
+          "text": "[[3,2,3],[6,5,6]]"
+        },
+        {
+          "key": "D",
+          "text": "[[1,2,3],[4,5,6],[2,2,2]]"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Vector shape (3,) được broadcast theo từng hàng của ma trận shape (2,3).",
+      "tags": [
+        "numpy",
+        "broadcasting"
+      ],
+      "skillId": "numpy.broadcast.row-vector",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-B14",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Cho `x=np.array([[2,4],[6,8]])`. Kết quả `x.mean(axis=1)` là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "[3, 7]"
+        },
+        {
+          "key": "B",
+          "text": "[4, 6]"
+        },
+        {
+          "key": "C",
+          "text": "5"
+        },
+        {
+          "key": "D",
+          "text": "[[3],[7]]"
+        }
+      ],
+      "answer": "A",
+      "explanation": "`axis=1` tính trung bình trên từng hàng.",
+      "tags": [
+        "numpy",
+        "axis",
+        "mean"
+      ],
+      "skillId": "numpy.axis.mean-one",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-B15",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Cho `x=np.arange(6).reshape(2,3)`. Kết quả `x[:, 2:3]` có giá trị và shape nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "[2,5], shape (2,)"
+        },
+        {
+          "key": "B",
+          "text": "shape (1,2)"
+        },
+        {
+          "key": "C",
+          "text": "Lỗi slicing"
+        },
+        {
+          "key": "D",
+          "text": "[[2],[5]], shape (2,1)"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Dùng slice giữ lại chiều cột, nên kết quả có shape (2,1).",
+      "tags": [
+        "numpy",
+        "slicing",
+        "shape"
+      ],
+      "skillId": "numpy.slice.column-two-dimensional",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-B16",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Cho `x=np.array([1,2,3,4,5])`. Kết quả `x[x % 2 == 0]` là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "[1, 3, 5]"
+        },
+        {
+          "key": "B",
+          "text": "[False, True, False, True, False]"
+        },
+        {
+          "key": "C",
+          "text": "[2, 4]"
+        },
+        {
+          "key": "D",
+          "text": "6"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Boolean mask giữ các phần tử có phần dư bằng 0.",
+      "tags": [
+        "numpy",
+        "boolean-indexing"
+      ],
+      "skillId": "numpy.boolean-indexing.parity",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-B17",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Cho `x=np.arange(6).reshape(3,2)`. Giá trị `x.ndim` là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "1"
+        },
+        {
+          "key": "B",
+          "text": "2"
+        },
+        {
+          "key": "C",
+          "text": "3"
+        },
+        {
+          "key": "D",
+          "text": "6"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Sau reshape, x là mảng hai chiều nên ndim=2.",
+      "tags": [
+        "numpy",
+        "reshape",
+        "ndim"
+      ],
+      "skillId": "numpy.reshape.ndim",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-B18",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Cho `x=np.array([[1,2,3],[5,6,7]] )`. Kết quả `x.sum(axis=0)` là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "[6, 8, 10]"
+        },
+        {
+          "key": "B",
+          "text": "[6, 18]"
+        },
+        {
+          "key": "C",
+          "text": "24"
+        },
+        {
+          "key": "D",
+          "text": "[[6],[8],[10]]"
+        }
+      ],
+      "answer": "A",
+      "explanation": "`axis=0` gộp theo hàng và trả tổng từng cột.",
+      "tags": [
+        "numpy",
+        "axis"
+      ],
+      "skillId": "numpy.axis.sum-zero",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-B19",
+      "module": "B",
+      "type": "code",
+      "points": 5,
+      "prompt": "Đoạn code sau sai:\n```python\ndef gcd(a,b):\n    while b == 0:\n        a, b = a % b, b\n    return b\n```\nHãy sửa thành hàm Euclid đúng, xử lý số âm và giải thích ba lỗi chính. Kiểm tra với (84,30).",
+      "modelAnswer": "```python\ndef gcd(a,b):\n    a, b = abs(a), abs(b)\n    while b != 0:\n        a, b = b, a % b\n    return a\n```\nBa lỗi: điều kiện vòng lặp bị đảo, phép cập nhật sai thứ tự, và phải trả a khi b=0. Kết quả là 6.",
+      "rubric": [
+        "Sửa while b != 0.",
+        "Sửa a,b=b,a%b.",
+        "Trả a.",
+        "Có abs và ví dụ đúng."
+      ],
+      "tags": [
+        "euclid",
+        "debugging"
+      ],
+      "skillId": "euclid.code.debug-implementation",
+      "sfiaBand": "L3-L4",
+      "difficulty": "applied-reasoning"
+    },
+    {
+      "id": "N26E07-B20",
+      "module": "B",
+      "type": "code",
+      "points": 5,
+      "prompt": "Giải thích giá trị và shape của x, y, z, m mà không chạy code:\n```python\nimport numpy as np\nx=np.array([[1,2,3],[6,7,8]])\ny=x[:,1:]\nz=y.mean(axis=0)\nm=x[x%2==0]\n```",
+      "modelAnswer": "x shape (2,3). y lấy mọi hàng và hai cột cuối, shape (2,2). z là trung bình theo cột của y, shape (2,). m lấy các phần tử chẵn bằng boolean indexing và trở thành mảng 1 chiều.",
+      "rubric": [
+        "Đúng shape x.",
+        "Đúng giá trị/shape y.",
+        "Giải thích axis=0 của z.",
+        "Giải thích boolean indexing tạo mảng 1 chiều."
+      ],
+      "tags": [
+        "numpy",
+        "code-reading"
+      ],
+      "skillId": "numpy.code.explain-slice-mean-mask",
+      "sfiaBand": "L3-L4",
+      "difficulty": "applied-reasoning"
+    },
+    {
+      "id": "N26E07-C01",
+      "module": "C",
+      "type": "mcq",
+      "points": 2,
+      "prompt": "Có dữ liệu đã gắn nhãn để phân loại ticket lỗi hay câu hỏi sử dụng. Loại bài toán phù hợp nhất là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Phân cụm không giám sát"
+        },
+        {
+          "key": "B",
+          "text": "Học có giám sát cho bài toán phân loại"
+        },
+        {
+          "key": "C",
+          "text": "Giảm chiều mà không dự đoán nhãn"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ dùng LLM viết mô tả"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Dữ liệu có nhãn mục tiêu nên đây là bài toán phân loại có giám sát.",
+      "tags": [
+        "machine-learning",
+        "classification"
+      ],
+      "skillId": "ml.supervised.classification",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-C02",
+      "module": "C",
+      "type": "mcq",
+      "points": 2,
+      "prompt": "Vai trò chính của tập validation trong quá trình huấn luyện mô hình là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chọn siêu tham số/ngưỡng và so sánh phiên bản trước khi đánh giá cuối trên test"
+        },
+        {
+          "key": "B",
+          "text": "Dùng để huấn luyện thay cho train"
+        },
+        {
+          "key": "C",
+          "text": "Dùng để xóa dữ liệu sai"
+        },
+        {
+          "key": "D",
+          "text": "Dùng để thay thế hoàn toàn tập test"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Validation hỗ trợ lựa chọn mô hình; test nên được giữ riêng cho đánh giá cuối.",
+      "tags": [
+        "machine-learning",
+        "validation"
+      ],
+      "skillId": "ml.evaluation.validation-role",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-C03",
+      "module": "C",
+      "type": "mcq",
+      "points": 2,
+      "prompt": "Mục tiêu cơ bản của SVM tuyến tính trong bài toán phân loại hai lớp là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tạo ngẫu nhiên nhiều nhãn"
+        },
+        {
+          "key": "B",
+          "text": "Tính trung bình mọi đặc trưng"
+        },
+        {
+          "key": "C",
+          "text": "Thay thế dữ liệu bằng văn bản"
+        },
+        {
+          "key": "D",
+          "text": "Tìm siêu phẳng phân tách có biên lớn giữa hai lớp"
+        }
+      ],
+      "answer": "D",
+      "explanation": "SVM tìm ranh giới phân loại và tối đa hóa margin trong trường hợp tuyến tính.",
+      "tags": [
+        "machine-learning",
+        "svm"
+      ],
+      "skillId": "ml.svm.maximum-margin",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-C04",
+      "module": "C",
+      "type": "mcq",
+      "points": 2,
+      "prompt": "Trong SVM, support vectors là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mọi điểm dữ liệu đều có vai trò giống nhau"
+        },
+        {
+          "key": "B",
+          "text": "Các điểm bị xóa trước khi train"
+        },
+        {
+          "key": "C",
+          "text": "Các điểm dữ liệu nằm gần ranh giới và quyết định vị trí của biên"
+        },
+        {
+          "key": "D",
+          "text": "Các trọng số của neural network"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Các điểm gần margin ảnh hưởng trực tiếp đến siêu phẳng tối ưu.",
+      "tags": [
+        "machine-learning",
+        "svm"
+      ],
+      "skillId": "ml.svm.support-vectors",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-C05",
+      "module": "C",
+      "type": "mcq",
+      "points": 2,
+      "prompt": "Một SVM tuyến tính dùng hàm quyết định f(x)=x₁-x₂+1. Với x=(2,2), f(x)=1. Nếu f(x)>=0 thì dự đoán lớp +1. Dự đoán là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "-1"
+        },
+        {
+          "key": "B",
+          "text": "+1"
+        },
+        {
+          "key": "C",
+          "text": "0"
+        },
+        {
+          "key": "D",
+          "text": "Không thể tính"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Thay x vào f(x) được 1; dấu của f(x) quyết định lớp.",
+      "tags": [
+        "machine-learning",
+        "svm"
+      ],
+      "skillId": "ml.svm.linear-decision-function",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-C06",
+      "module": "C",
+      "type": "mcq",
+      "points": 2,
+      "prompt": "Cho TP=30, FP=10, FN=5, TN=55. Recall của lớp dương tính bằng:",
+      "options": [
+        {
+          "key": "A",
+          "text": "85,7%"
+        },
+        {
+          "key": "B",
+          "text": "85%"
+        },
+        {
+          "key": "C",
+          "text": "75%"
+        },
+        {
+          "key": "D",
+          "text": "8,3%"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Recall=TP/(TP+FN)=30/35=85,7%.",
+      "tags": [
+        "machine-learning",
+        "confusion-matrix",
+        "recall"
+      ],
+      "skillId": "ml.metrics.compute-recall",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-C07",
+      "module": "C",
+      "type": "mcq",
+      "points": 2,
+      "prompt": "Embedding trong một hệ thống RAG thường được dùng để:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mã hóa mật khẩu người dùng"
+        },
+        {
+          "key": "B",
+          "text": "Tự cấp quyền truy cập tài liệu"
+        },
+        {
+          "key": "C",
+          "text": "Thay thế hoàn toàn dữ liệu gốc"
+        },
+        {
+          "key": "D",
+          "text": "Biểu diễn đoạn văn thành vector để so sánh mức độ liên quan"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Embedding hỗ trợ tìm kiếm ngữ nghĩa bằng khoảng cách giữa các vector.",
+      "tags": [
+        "rag",
+        "embedding"
+      ],
+      "skillId": "rag.embedding.semantic-search",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-C08",
+      "module": "C",
+      "type": "mcq",
+      "points": 2,
+      "prompt": "Với hành động có ảnh hưởng lớn đến quyền lợi người dùng, vai trò phù hợp của AI là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tự quyết định mọi trường hợp"
+        },
+        {
+          "key": "B",
+          "text": "Xóa log để tránh tranh chấp"
+        },
+        {
+          "key": "C",
+          "text": "Đưa ra gợi ý và bằng chứng; người có thẩm quyền kiểm tra và quyết định cuối"
+        },
+        {
+          "key": "D",
+          "text": "Công khai dữ liệu để cộng đồng bình chọn"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Human review cần thiết với quyết định rủi ro cao hoặc có hậu quả pháp lý/tài chính.",
+      "tags": [
+        "responsible-ai",
+        "human-in-the-loop"
+      ],
+      "skillId": "ai-responsibility.human-review",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-C09",
+      "module": "C",
+      "type": "mcq",
+      "points": 2,
+      "prompt": "Sau khi triển khai một mô hình AI, nhóm nên theo dõi tối thiểu:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chỉ số dòng code"
+        },
+        {
+          "key": "B",
+          "text": "Chất lượng đầu ra, lỗi, độ trễ, chi phí và phản hồi người dùng"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ lượt tải trang chủ"
+        },
+        {
+          "key": "D",
+          "text": "Không cần theo dõi nếu demo chạy được"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Monitoring giúp phát hiện giảm chất lượng, lỗi vận hành và chi phí vượt dự kiến.",
+      "tags": [
+        "deployment",
+        "monitoring"
+      ],
+      "skillId": "ml.deployment.basic-monitoring",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-C10",
+      "module": "C",
+      "type": "essay",
+      "points": 8,
+      "prompt": "Xây dựng một mô hình phân loại để phân loại ticket lỗi hay câu hỏi sử dụng.\n\nRàng buộc:\n- Có khoảng 7000 mẫu đã gắn nhãn.\n- Hai lớp hơi lệch.\n- Kết quả thử nghiệm có TP=30, FP=10, FN=5, TN=55.\n\nHãy: (1) chọn một baseline dễ hiểu; (2) giải thích accuracy, precision, recall, F1 và metric nên ưu tiên; (3) nêu cách đưa mô hình vào thử nghiệm.",
+      "modelAnswer": "Có thể bắt đầu bằng logistic regression hoặc cây quyết định nhỏ. Chia train/validation/test và giữ test cho đánh giá cuối. Từ confusion matrix tính accuracy, precision=TP/(TP+FP), recall=TP/(TP+FN), F1 là trung bình điều hòa precision/recall. Nếu bỏ sót lớp dương tính nguy hiểm thì ưu tiên recall hơn accuracy. Khi thử nghiệm, đóng gói preprocessing + model thành API đơn giản và theo dõi metric trên dữ liệu mới.",
+      "rubric": [
+        "Chọn baseline hợp lý.",
+        "Chia dữ liệu đúng.",
+        "Giải thích đúng bốn metric.",
+        "Chọn metric theo hậu quả FP/FN.",
+        "Có cách triển khai thử cơ bản."
+      ],
+      "tags": [
+        "classification",
+        "confusion-matrix",
+        "essay"
+      ],
+      "skillId": "essay.ml.classifier-confusion-matrix",
+      "sfiaBand": "L3-L4",
+      "difficulty": "applied-reasoning"
+    },
+    {
+      "id": "N26E07-C11",
+      "module": "C",
+      "type": "essay",
+      "points": 8,
+      "prompt": "Giải thích cách huấn luyện một neural network nhỏ để phân loại ticket lỗi hay câu hỏi sử dụng với khoảng 7000 mẫu.\n\nRàng buộc:\n- Không dùng mạng sâu.\n- Cần giải thích forward pass, loss, backpropagation và cập nhật trọng số bằng ví dụ số nhỏ.\n\nHãy trình bày: (1) flow huấn luyện; (2) một ví dụ cập nhật một trọng số; (3) cách phát hiện overfit.",
+      "modelAnswer": "Forward pass tạo dự đoán, loss đo sai số, backprop dùng chain rule để tính gradient, sau đó gradient descent cập nhật w_new=w-η×grad. Có thể minh họa với một nơ-ron tuyến tính và số nhỏ. Chia train/validation/test, theo dõi train loss và validation loss; nếu train tiếp tục tốt lên nhưng validation xấu đi thì có dấu hiệu overfit. So sánh với baseline đơn giản trước khi chọn mạng.",
+      "rubric": [
+        "Giải thích đúng forward/loss/backprop/update.",
+        "Có ví dụ cập nhật số nhỏ.",
+        "Có train/validation/test.",
+        "Nhận biết overfit.",
+        "Có baseline để so sánh."
+      ],
+      "tags": [
+        "backpropagation",
+        "neural-network",
+        "essay"
+      ],
+      "skillId": "essay.ml.neural-backprop-pipeline",
+      "sfiaBand": "L3-L4",
+      "difficulty": "applied-reasoning"
+    },
+    {
+      "id": "N26E07-C12",
+      "module": "C",
+      "type": "essay",
+      "points": 8,
+      "prompt": "Bạn nhận một bộ dữ liệu 7000 mẫu đã gắn nhãn để phân loại ticket lỗi hay câu hỏi sử dụng.\n\nRàng buộc:\n- Có một số bản ghi gần trùng nhau.\n- Một vài cột được tạo sau khi kết quả thực tế đã xảy ra.\n- Cần báo cáo kết quả đáng tin cậy.\n\nHãy nêu: (1) cách chia train/validation/test; (2) data leakage có thể xuất hiện ở đâu; (3) cách kiểm tra pipeline trước khi train.",
+      "modelAnswer": "Loại hoặc gom các bản ghi gần trùng để không rơi vào nhiều tập khác nhau. Các cột chỉ xuất hiện sau thời điểm dự đoán phải bị loại khỏi feature vì gây leakage. Fit preprocessing chỉ trên train rồi áp dụng cho validation/test. Dùng validation để chọn mô hình và giữ test cho đánh giá cuối. Kiểm tra schema, missing values, tỷ lệ lớp và một vài mẫu bằng tay trước khi train.",
+      "rubric": [
+        "Chia train/validation/test đúng vai trò.",
+        "Nhận ra leakage từ cột hậu nghiệm.",
+        "Xử lý bản ghi trùng hợp lý.",
+        "Fit preprocessing trên train.",
+        "Có kiểm tra dữ liệu cơ bản."
+      ],
+      "tags": [
+        "data-preparation",
+        "leakage",
+        "essay"
+      ],
+      "skillId": "essay.ml.data-split-and-leakage",
+      "sfiaBand": "L3-L4",
+      "difficulty": "applied-reasoning"
+    },
+    {
+      "id": "N26E07-D01",
+      "module": "D",
+      "type": "mcq",
+      "points": 1.25,
+      "prompt": "Một trợ lý AI chỉ cần kiểm tra trạng thái hồ sơ nhưng được cấp quyền đọc toàn bộ hệ thống ngân hàng. Nguyên tắc bị vi phạm rõ nhất là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chỉ cấp quyền tối thiểu cần cho nhiệm vụ"
+        },
+        {
+          "key": "B",
+          "text": "Tăng số epoch"
+        },
+        {
+          "key": "C",
+          "text": "Data augmentation"
+        },
+        {
+          "key": "D",
+          "text": "Batch normalization"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Quyền truy cập phải giới hạn theo nhiệm vụ và phạm vi dữ liệu.",
+      "tags": [
+        "privacy",
+        "banking"
+      ],
+      "skillId": "privacy.least-privilege",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-D02",
+      "module": "D",
+      "type": "mcq",
+      "points": 1.25,
+      "prompt": "Dữ liệu của phòng A bị hạn chế đối với phòng B. Cách bảo vệ đúng nhất là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tải toàn bộ về frontend rồi ẩn bằng CSS"
+        },
+        {
+          "key": "B",
+          "text": "Kiểm tra quyền ở server/data layer và chỉ trả dữ liệu người dùng được phép xem"
+        },
+        {
+          "key": "C",
+          "text": "Nhắc LLM không được đọc bằng prompt"
+        },
+        {
+          "key": "D",
+          "text": "Đổi tên cột để khó hiểu"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Authorization phải được thực thi trước khi dữ liệu rời lớp tin cậy.",
+      "tags": [
+        "privacy",
+        "authorization"
+      ],
+      "skillId": "privacy.access-control.group-isolation",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-D03",
+      "module": "D",
+      "type": "mcq",
+      "points": 1.25,
+      "prompt": "Dữ liệu được thu thập để xử lý hỗ trợ kỹ thuật nhưng nhóm muốn dùng ngay cho quảng cáo cá nhân hóa. Việc cần làm trước tiên là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dùng ngay vì dữ liệu đã có"
+        },
+        {
+          "key": "B",
+          "text": "Ẩn tên cột rồi dùng"
+        },
+        {
+          "key": "C",
+          "text": "Kiểm tra mục đích, cơ sở cho phép và chỉ dùng dữ liệu trong phạm vi đã thông báo/được chấp thuận"
+        },
+        {
+          "key": "D",
+          "text": "Đưa dữ liệu cho mọi nhóm"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Dữ liệu không nên bị dùng sang mục đích mới nếu chưa có cơ sở và thông báo phù hợp.",
+      "tags": [
+        "privacy",
+        "purpose-limitation"
+      ],
+      "skillId": "privacy.purpose-limitation",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-D04",
+      "module": "D",
+      "type": "mcq",
+      "points": 1.25,
+      "prompt": "Trợ lý không chắc chắn về câu trả lời có thể ảnh hưởng đến quyết định pháp lý hoặc tài chính. Hệ thống nên:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Trả lời thật tự tin"
+        },
+        {
+          "key": "B",
+          "text": "Thực hiện giao dịch ngay"
+        },
+        {
+          "key": "C",
+          "text": "Ẩn nguồn để người dùng không biết"
+        },
+        {
+          "key": "D",
+          "text": "Nêu giới hạn, không bịa và chuyển người có thẩm quyền"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Tình huống rủi ro cao và thiếu bằng chứng cần abstention và escalation.",
+      "tags": [
+        "responsible-ai",
+        "escalation"
+      ],
+      "skillId": "ai-responsibility.escalate-high-risk",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-D05",
+      "module": "D",
+      "type": "mcq",
+      "points": 1.25,
+      "prompt": "Mô hình đánh dấu một hồ sơ là rủi ro cao và đề xuất hành động ảnh hưởng lớn. Thiết kế phù hợp nhất là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "AI đưa bằng chứng/đề xuất; người có thẩm quyền kiểm tra và phê duyệt"
+        },
+        {
+          "key": "B",
+          "text": "Cho AI tự thực hiện ngay"
+        },
+        {
+          "key": "C",
+          "text": "Xóa log để tránh tranh chấp"
+        },
+        {
+          "key": "D",
+          "text": "Công khai dữ liệu để cộng đồng bình chọn"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Score không phải quyết định cuối; hành động ảnh hưởng lớn cần human approval.",
+      "tags": [
+        "responsible-ai",
+        "human-in-the-loop"
+      ],
+      "skillId": "ai-responsibility.human-approval",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-D06",
+      "module": "D",
+      "type": "mcq",
+      "points": 1.25,
+      "prompt": "Audit log cho một lần AI truy cập hồ sơ nên ưu tiên ghi:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mật khẩu và API key"
+        },
+        {
+          "key": "B",
+          "text": "Ai/dịch vụ nào truy cập, thời gian, phạm vi, hành động, kết quả và trace ID; che dữ liệu nhạy cảm"
+        },
+        {
+          "key": "C",
+          "text": "Toàn bộ hồ sơ thô"
+        },
+        {
+          "key": "D",
+          "text": "Không ghi gì"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Audit phải đủ truy vết nhưng không trở thành kho chứa secret hoặc PII thô.",
+      "tags": [
+        "privacy",
+        "audit"
+      ],
+      "skillId": "privacy.audit-log.minimal-traceability",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-D07",
+      "module": "D",
+      "type": "mcq",
+      "points": 1.25,
+      "prompt": "Để kiểm tra mô hình có hoạt động khác nhau giữa các nhóm người dùng, nhóm phát triển nên:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chỉ xem accuracy chung"
+        },
+        {
+          "key": "B",
+          "text": "Chọn nhóm có kết quả tốt nhất để báo cáo"
+        },
+        {
+          "key": "C",
+          "text": "So sánh precision/recall hoặc lỗi theo nhóm và kiểm tra cỡ mẫu"
+        },
+        {
+          "key": "D",
+          "text": "Xóa mọi thuộc tính và mặc định mô hình công bằng"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Chỉ số tổng có thể che giấu chênh lệch theo nhóm.",
+      "tags": [
+        "responsible-ai",
+        "fairness"
+      ],
+      "skillId": "ai-responsibility.evaluate-by-group",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    },
+    {
+      "id": "N26E07-D08",
+      "module": "D",
+      "type": "mcq",
+      "points": 1.25,
+      "prompt": "Phát hiện chatbot đã trả nhầm dữ liệu nhạy cảm cho người không có quyền. Hành động đầu tiên phù hợp nhất là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tiếp tục chạy để thu thêm ví dụ"
+        },
+        {
+          "key": "B",
+          "text": "Xóa bằng chứng rồi sửa âm thầm"
+        },
+        {
+          "key": "C",
+          "text": "Đổ lỗi cho người dùng"
+        },
+        {
+          "key": "D",
+          "text": "Dừng hoặc giới hạn luồng bị ảnh hưởng, giữ log và kích hoạt xử lý sự cố"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Ưu tiên ngăn rò rỉ tiếp diễn và bảo toàn bằng chứng phục vụ điều tra.",
+      "tags": [
+        "privacy",
+        "incident-response"
+      ],
+      "skillId": "privacy.incident-response.initial-action",
+      "sfiaBand": "L3",
+      "difficulty": "applied-basic"
+    }
+  ]
+}

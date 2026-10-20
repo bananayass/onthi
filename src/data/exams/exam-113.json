@@ -1,0 +1,236 @@
+{
+  "id": "exam-113",
+  "title": "AICB Tự luận RAG — 10 câu ứng dụng (Ngày 7, 8, 18, 19)",
+  "description": "10 câu tự luận tình huống về RAG, tự chấm theo rubric: chọn chiến lược chunking, chẩn đoán lỗi theo tầng, thiết kế hybrid search, đọc RAGAS và Error Tree, viết prompt grounding, xử lý điểm mù embedding, quyết định GraphRAG, thiết kế ingestion có version, và thiết kế thí nghiệm so v1 với v2.",
+  "durationMinutes": 90,
+  "totalPoints": 100,
+  "passingScore": 70,
+  "disclaimer": "Đề do AI biên soạn từ slide bài giảng AICB, dùng để tự ôn tập. Đáp án mẫu là một cách trả lời tốt, không phải cách duy nhất — hãy tự chấm theo rubric.",
+  "course": "aicb",
+  "kind": "review",
+  "label": "Tự luận RAG",
+  "questions": [
+    {
+      "id": "RAG-01",
+      "module": "C",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Công ty bạn có 400 file chính sách nội bộ dạng PDF: mỗi file 10–60 trang, có heading rõ ràng (Điều 1, Điều 2…), xen kẽ nhiều bảng biểu (bảng phí, bảng hạn mức). Người dùng hỏi những câu như \"nhân viên chính thức được nghỉ phép bao nhiêu ngày\" hoặc \"phí chuyển khoản liên ngân hàng là bao nhiêu\".\n**Yêu cầu.** Thiết kế chiến lược chunking cho corpus này. Nêu rõ: (a) chọn chiến lược nào và vì sao không chọn hai chiến lược còn lại mà bạn cân nhắc; (b) kích thước chunk và overlap; (c) tối thiểu bốn trường metadata cần gắn cho mỗi chunk và mỗi trường sẽ dùng để làm gì ở khâu truy vấn.",
+      "modelAnswer": "- **Chunking: structure-aware theo heading** (Điều 1, Điều 2…) — corpus đã có heading rõ nên cắt theo đó thì mỗi chunk là một điều khoản trọn vẹn.\n- **Bảng xử lý riêng (table-aware)**, giữ header dòng; cắt ngang bảng là con số mất nhãn.\n- Loại **fixed-size** (cắt nửa điều khoản), loại **semantic** (đắt, không cần khi đã có heading).\n- Kích thước **200–500 token, overlap 10–15%**; điều khoản dài thì **parent 2048 / child 256**.\n- **Metadata**, mỗi trường một mục đích: `source`+trang → citation; `clause_id` → check bằng code; `product_line`/`doc_type` → pre-filter; `effective_date`+`version` → lọc bản còn hiệu lực.\n- Thiếu `version` chính là nguyên nhân agent trả lời theo bản cũ.",
+      "rubric": [
+        "Chọn heading/structure-aware và giải thích bằng đặc điểm corpus (có heading rõ)",
+        "Xử lý riêng cho bảng (table-aware) hoặc nêu được rủi ro cắt ngang bảng",
+        "Loại bỏ fixed-size với lý do 'nửa điều khoản', loại semantic với lý do không cần thiết",
+        "Nêu đúng khoảng 200–500 token và overlap 10–15% (hoặc parent-child 2048/256)",
+        "Đủ 4 trường metadata, mỗi trường gắn với một MỤC ĐÍCH cụ thể ở khâu truy vấn",
+        "Có version/effective_date và giải thích nó chặn lỗi trả lời theo bản cũ"
+      ],
+      "tags": [
+        "rag",
+        "day7",
+        "chunking"
+      ]
+    },
+    {
+      "id": "RAG-02",
+      "module": "C",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Chatbot hỗ trợ khách hàng của bạn trả lời: \"Chính sách hoàn tiền áp dụng trong 14 ngày kể từ ngày mua.\" Chính sách thật là **7 ngày**. Câu trả lời có kèm trích dẫn `[1] policy/refund-v2.pdf`.\n**Yêu cầu.** Trình bày quy trình chẩn đoán của bạn theo đúng thứ tự các bước, nêu rõ ở mỗi bước bạn NHÌN VÀO CÁI GÌ và kết luận rút ra được. Sau đó liệt kê ba nguyên nhân gốc có thể xảy ra và cách sửa tương ứng cho từng nguyên nhân.",
+      "modelAnswer": "- **Phân loại lỗi trước khi sửa**: Retrieval / Augmentation / Generation.\n- **Mẹo rẽ nhánh: in `formatted_context`.** Có \"30 ngày\" trong đó mà answer nói 14 → lỗi **Generation**. Không có → lỗi **Retrieval/Augmentation**.\n- **Đọc metadata của citation**: nếu trích v2 trong khi bản hiện hành là v3 → lỗi ở tầng dữ liệu, không phải ở prompt.\n- **Kiểm cả thứ hạng**, không chỉ \"có lấy được không\" — đoạn đúng nằm giữa context dài thì bị bỏ qua (lost in the middle).\n- **Ba nguyên nhân ở ba tầng khác nhau**: (1) ingest — bản mới chưa re-index; (2) metadata — thiếu `effective_date` nên không lọc được bản cũ; (3) generation — temp cao, thiếu luật strict grounding.\n- **Sửa đúng tầng**: lỗi ingest thì thêm scheduled re-index, không phải siết prompt.",
+      "rubric": [
+        "Bắt đầu bằng việc phân biệt lỗi Retrieval / Augmentation / Generation trước khi sửa",
+        "Nêu mẹo in formatted_context làm bước rẽ nhánh và giải thích ý nghĩa hai nhánh",
+        "Đọc metadata của citation (v2 so với bản hiện hành) như một manh mối",
+        "Có kiểm tra thứ hạng / lost in the middle chứ không chỉ kiểm tra có lấy được hay không",
+        "Nêu ít nhất 3 nguyên nhân gốc ở các TẦNG KHÁC NHAU (ingest, metadata, generation)",
+        "Mỗi nguyên nhân có cách sửa đúng tầng, không đề xuất sửa prompt cho lỗi ingest"
+      ],
+      "tags": [
+        "rag",
+        "day8",
+        "debug"
+      ]
+    },
+    {
+      "id": "RAG-03",
+      "module": "B",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Bạn xây trợ lý tra cứu cho đội kỹ thuật. Corpus gồm hai loại: (1) tài liệu vận hành viết bằng văn xuôi, và (2) log lỗi cùng danh mục mã lỗi kiểu `ERR-4012`, `TIMEOUT_GW_503`. Hệ thống hiện chỉ dùng dense search và người dùng phàn nàn: hỏi bằng mã lỗi chính xác thì không ra, còn hỏi bằng lời thì đôi khi ra.\n**Yêu cầu.** (a) Giải thích vì sao dense search thất bại với mã lỗi; (b) thiết kế giải pháp truy xuất cho corpus này, nêu rõ chọn RRF hay alpha weighting và giá trị tham số; (c) mô tả bạn sẽ đo cải thiện bằng metric nào và trên bộ dữ liệu nào.",
+      "modelAnswer": "- **Nguyên nhân**: dense mù trước định danh hiếm (mã lỗi, tên hàm) vì chúng hiếm trong dữ liệu huấn luyện; sparse mù trước cách diễn đạt khác nghĩa.\n- **Hybrid search** (BM25 + dense) chứ không đổi embedding model — đổi model không dạy được model biết mã lỗi nội bộ.\n- Hợp nhất bằng **RRF, k = 60**: chỉ dùng THỨ HẠNG nên không phải chuẩn hoá điểm giữa hai hệ, không cần tuning.\n- Corpus code/log nghiêng về từ khoá → **alpha 0,2–0,4**; tốt hơn là **routing theo loại truy vấn**.\n- Thêm **pre-filter metadata** (`doc_type`) và **rerank** top 50–100 → 3–5.\n- **Đo**: Context Recall và Context Precision trên golden set có `gold_docs`, **chia slice** theo loại truy vấn (văn xuôi / log).\n- Hai version chạy trên **cùng golden set, so từng sample (paired)**.",
+      "rubric": [
+        "Giải thích đúng vì sao dense mù với định danh hiếm và sparse mù với đồng nghĩa",
+        "Đề xuất hybrid search chứ không phải đổi embedding model",
+        "Nêu đúng công thức RRF với k = 60 và lý do không cần tuning",
+        "Nêu khoảng alpha hợp lý cho code/log (0,2–0,4) hoặc đề xuất routing theo loại truy vấn",
+        "Có thêm pre-filter metadata và/hoặc rerank hai tầng",
+        "Đo bằng hit rate@k VÀ MRR trên golden set có gold_docs, chia slice theo loại truy vấn",
+        "Nêu nguyên tắc chạy hai version trên cùng golden set (paired)"
+      ],
+      "tags": [
+        "rag",
+        "day8",
+        "hybrid"
+      ]
+    },
+    {
+      "id": "RAG-04",
+      "module": "C",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Bạn nhận bàn giao một hệ RAG đang chạy production và bốn phiếu lỗi sau:\n1. Người dùng hỏi \"chế độ nghỉ phép\", tài liệu viết là \"annual leave\" — không tìm thấy gì.\n2. Chunk chứa đáp án nằm ở vị trí #8 trong kết quả trả về, nhưng LLM chỉ đọc top-3.\n3. Câu trả lời có thêm một chi tiết không hề có trong bất kỳ chunk nào.\n4. Hai chunk mâu thuẫn nhau về thời hạn, agent chọn bản cũ.\n**Yêu cầu.** Với mỗi phiếu: chỉ ra bước nào trong pipeline cần sửa, giải thích vì sao KHÔNG phải bước khác, và đề xuất một kỹ thuật cụ thể. Cuối cùng nêu thứ tự bạn sẽ xử lý bốn phiếu này và lý do.",
+      "modelAnswer": "- **Phiếu 1 → Retrieval** (không lấy được đoạn đúng): hybrid + query expansion.\n- **Phiếu 2 → Rerank** (lấy được nhưng xếp hạng thấp): cross-encoder top 50→5. Không phải Retrieval vì đoạn đúng ĐÃ nằm trong kết quả.\n- **Phiếu 3 → Generate** (context có mà answer bịa): strict grounding, temp 0, luật citation.\n- **Phiếu 4 → Augment** (đoạn đúng bị chìm giữa prompt): reordering Top 1 đầu / Top 2 cuối, MMR bỏ trùng. Không phải Rerank vì thứ hạng đã đúng, chỉ vị trí trong prompt sai.\n- **Thứ tự xử lý: Retrieval → Rerank → Augment → Generate** — đi từ đầu pipeline ra ngoài.\n- **Lý do**: sửa tầng sau vô ích khi tầng trước còn hỏng — rerank không xếp được thứ chưa lấy lên.\n- **Không bật hết mọi kỹ thuật**: mỗi cái là thêm latency và chi phí.",
+      "rubric": [
+        "Ánh xạ đúng cả 4 phiếu: Retrieval / Rerank / Generate / Augment",
+        "Giải thích được vì sao KHÔNG phải bước khác (đặc biệt phiếu 2 và phiếu 4)",
+        "Mỗi phiếu có ít nhất một kỹ thuật cụ thể, đúng tầng",
+        "Nêu được thứ tự xử lý đi từ đầu pipeline ra ngoài",
+        "Giải thích lý do thứ tự: sửa tầng sau vô ích khi tầng trước còn hỏng",
+        "Có nhắc nguyên tắc không bật hết mọi kỹ thuật vì latency và chi phí"
+      ],
+      "tags": [
+        "rag",
+        "day18",
+        "error-tree"
+      ]
+    },
+    {
+      "id": "RAG-05",
+      "module": "A",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Bạn chạy RAGAS trên bộ 200 câu hỏi của trợ lý nội bộ và nhận được:\n\n```\nContext Recall      0.62\nContext Precision   0.81\nFaithfulness        0.91\nAnswer Relevancy    0.84\n```\n\n**Yêu cầu.** (a) Đọc bảng này và cho biết hệ thống đang hỏng ở đâu, dựa vào ngưỡng khuyến nghị của từng metric; (b) đề xuất thứ tự hành động, giải thích vì sao đi theo thứ tự đó; (c) giải thích vì sao Faithfulness 0,91 KHÔNG chứng minh câu trả lời đúng, và bạn cần thêm metric nào để bắt được loại lỗi mà faithfulness bỏ sót.",
+      "modelAnswer": "- **Đọc số**: chỉ **Context Recall 0,62 < 0,75** là fail; ba chỉ số còn lại đạt.\n- **Diễn giải**: agent rất **trung thực trên một bộ tài liệu THIẾU** — nguy hiểm vì mọi chỉ số khâu sinh đều xanh.\n- **Ánh xạ về tầng Retrieval**, không phải Generate. Siết prompt vô ích vì model đã bám context rồi.\n- **Kỹ thuật đúng tầng**: hybrid + RRF; Multi-Query / HyDE; xem lại chunking; contextual retrieval.\n- **Thứ tự rẻ→đắt: recall → precision → faithfulness.** Recall chưa đủ thì cải thiện precision là xếp lại một tập vốn đã thiếu.\n- **Điểm mù của faithfulness**: retriever lấy bản hết hiệu lực, agent tóm tắt trung thực → faithfulness vẫn 0,95 dù đáp án sai. Nó đo \"bám context\", không đo \"đúng\".\n- **Bù bằng metric có ground truth**: Context Recall so `gold_docs`, Answer Correctness so `reference`.",
+      "rubric": [
+        "Đọc đúng: chỉ Context Recall dưới ngưỡng 0,75, ba metric còn lại đạt",
+        "Diễn giải được ý nghĩa: model trung thực trên một bộ tài liệu thiếu",
+        "Ánh xạ Context Recall thấp về tầng Retrieval (không phải Generate)",
+        "Đề xuất ít nhất hai kỹ thuật đúng tầng: hybrid/RRF, HyDE, Multi-Query, chunking, contextual retrieval",
+        "Nêu thứ tự rẻ→đắt recall → precision → faithfulness và giải thích lý do",
+        "Giải thích đúng điểm mù của faithfulness bằng ví dụ context sai nhưng bám sát",
+        "Nêu metric có ground truth để bù: context recall so gold_docs và/hoặc answer correctness so reference"
+      ],
+      "tags": [
+        "rag",
+        "day18",
+        "ragas"
+      ]
+    },
+    {
+      "id": "RAG-06",
+      "module": "B",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Bạn phải viết prompt cho khối Generation của một trợ lý tra cứu chính sách. Yêu cầu nghiệp vụ: mọi khẳng định phải có trích dẫn kiểm chứng được; khi tài liệu không đủ thông tin thì tuyệt đối không được đoán; và hệ thống thường lấy về 5 đoạn tài liệu mỗi lần.\n**Yêu cầu.** Trình bày thiết kế prompt của bạn: (a) cấu trúc các khối và thứ tự của chúng; (b) cách sắp xếp 5 đoạn tài liệu trong prompt và lý do; (c) cách phân bổ ngân sách token; (d) hai đến ba luật cụ thể bạn sẽ viết để chống bịa và để xử lý khi thiếu dữ liệu.",
+      "modelAnswer": "- **Bốn khối**: System Rules → Retrieved Documents → User Question → Constraints.\n- **Rule quan trọng đặt ở CUỐI** (gần chỗ model bắt đầu trả lời): model nhớ hai đầu tốt hơn giữa — lost in the middle.\n- **Reordering**: Top 1 lên đầu, Top 2 xuống cuối, hạng thấp vào giữa — đặt đoạn tốt nhất vào hai vị trí model chú ý nhất.\n- **MMR** để bỏ các đoạn trùng ý, tránh lãng phí ngân sách context.\n- **Ngân sách token 20/60/20** (system / documents / output). Quên chừa headroom cho output thì `finish_reason = length`.\n- **Luật abstention**: thiếu căn cứ thì nói rõ thiếu gì và đề nghị chuyển người, không đoán.\n- **Luật citation** bắt buộc, kèm `clause_id` để **check bằng code** rằng điều khoản có thật.\n- **Chống suy diễn**: không suy rộng sang dòng sản phẩm khác; xung đột thì ưu tiên `effective_date` mới nhất.",
+      "rubric": [
+        "Nêu đúng 4 khối: System Rules → Retrieved Documents → User Question → Constraints",
+        "Giải thích vì sao rule quan trọng đặt ở cuối (lost in the middle)",
+        "Reordering Top 1 lên đầu, Top 2 xuống cuối, hạng thấp vào giữa — có lý do",
+        "Có nhắc MMR hoặc vấn đề trùng lặp giữa các đoạn lấy về",
+        "Ngân sách token 20/60/20 và nêu rủi ro quên headroom",
+        "Luật abstention rõ ràng: thiếu dữ liệu thì nói không đủ, không đoán",
+        "Luật citation bắt buộc, tốt hơn nữa là clause_id để check bằng code",
+        "Có ít nhất một luật chống suy diễn quá đà hoặc xử lý xung đột theo effective_date"
+      ],
+      "tags": [
+        "rag",
+        "day8",
+        "prompt"
+      ]
+    },
+    {
+      "id": "RAG-07",
+      "module": "C",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Trợ lý HR của bạn liên tục sai ở đúng bốn kiểu câu hỏi:\n- \"Nhân viên thử việc có ĐƯỢC hưởng phụ cấp không?\" — tài liệu ghi \"KHÔNG được\", agent trả lời \"được\".\n- \"Chính sách năm 2026 quy định thế nào?\" — agent lấy về tài liệu 2024.\n- \"Quản lý cấp trung được duyệt chi bao nhiêu?\" — agent lấy nhầm hạn mức của nhân viên.\n- \"Nghỉ ốm tối đa bao nhiêu ngày?\" — tài liệu ghi 12 ngày, agent nói 20 ngày.\n**Yêu cầu.** Bốn trường hợp này thuộc cùng một nhóm nguyên nhân gốc. (a) Gọi tên nhóm đó và giải thích cơ chế; (b) với mỗi trường hợp, đề xuất biện pháp chữa cụ thể; (c) nêu vì sao việc đổi sang embedding model đắt tiền hơn KHÔNG giải quyết được nhóm lỗi này.",
+      "modelAnswer": "- **Gọi đúng tên: bốn điểm mù của embedding** — negation (\"được\" / \"không được\"), temporal, entity, numerical.\n- **Cơ chế**: đổi một từ phủ định thì vector gần như không dịch chuyển, vì embedding mã hoá CHỦ ĐỀ chứ không mã hoá quan hệ logic.\n- **Bằng chứng số**: cặp ngược nghĩa ~0,91 so với cặp cùng nghĩa ~0,93 — không tồn tại ngưỡng nào tách được hai loại này.\n- **Temporal và numerical → metadata filter**: điều kiện xác định trên trường có cấu trúc, không phải tìm gần đúng.\n- **Negation và entity → NLI** (kiểm tra answer có mâu thuẫn với context không), cộng routing và trích nguyên văn điều khoản.\n- **Đổi embedding model không cứu được**: đây là giới hạn bản chất của phép đo tương tự, không phải chất lượng model.\n- Đổi model còn bắt **re-index toàn bộ corpus** — trả giá lớn mà không giải quyết đúng vấn đề.",
+      "rubric": [
+        "Gọi đúng tên nhóm: bốn điểm mù của embedding (negation, temporal, entity, numerical)",
+        "Giải thích cơ chế: đổi một từ thì vector gần như không dịch chuyển",
+        "Dẫn được bằng chứng số: cặp ngược nghĩa ~0,91 so với cặp cùng nghĩa ~0,93, không có ngưỡng tách được",
+        "Chữa temporal và numerical bằng metadata filter",
+        "Chữa negation và entity bằng NLI (và/hoặc routing, trích nguyên văn)",
+        "Giải thích đổi embedding model không cứu được vì đây là giới hạn bản chất của phép đo tương tự",
+        "Nêu chi phí re-index toàn bộ corpus khi đổi embedding model"
+      ],
+      "tags": [
+        "rag",
+        "day18",
+        "embedding-blindspot"
+      ]
+    },
+    {
+      "id": "RAG-08",
+      "module": "C",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Đội pháp chế đề nghị bạn xây trợ lý trả lời được ba loại câu hỏi:\n- \"Điều 12 của hợp đồng số HD-2024-088 quy định gì?\"\n- \"Những hợp đồng nào có cùng điều khoản phạt chậm tiến độ với hợp đồng HD-2024-088?\"\n- \"Tổng quan các rủi ro pháp lý thường gặp trong nhóm hợp đồng xây dựng của công ty?\"\nCorpus khoảng 3.000 hợp đồng.\n**Yêu cầu.** (a) Với mỗi loại câu hỏi, cho biết Flat RAG có giải được không và vì sao; (b) đề xuất kiến trúc cho toàn hệ thống; (c) nêu ít nhất ba rủi ro khi triển khai phương án bạn chọn và cách phòng.",
+      "modelAnswer": "- **Phân loại**: câu 1 là **factoid** — Flat RAG giải được. Câu 2 là **multi-hop**, câu 3 là **global** — Flat RAG bó tay.\n- **Nguyên nhân gốc**: quan hệ giữa các thực thể nằm ở **cấu trúc**, không nằm trong embedding similarity; không đoạn văn nào chứa sẵn cả chuỗi quan hệ.\n- **Kiến trúc HYBRID**, không bỏ Flat RAG: factoid vẫn đi Flat (rẻ, nhanh), multi-hop và global mới đi graph.\n- **Cơ chế**: vector tìm **seed node** → **graph traversal** đi theo quan hệ → gom bằng chứng.\n- **Neo4j** thay NetworkX vì quy mô và ACID; LightRAG rẻ hơn MS GraphRAG đáng kể ở khâu index.\n- **Rủi ro extraction bottleneck**: coreference sai **30–40%** — \"công ty này\", \"bên A\" không nối được về đúng thực thể.\n- **Rủi ro super-node**: giới hạn **2 hop** và giới hạn số cạnh mỗi node.\n- Mỗi graph node giữ **con trỏ về chunk gốc** để còn sinh được citation.",
+      "rubric": [
+        "Phân loại đúng ba câu hỏi: factoid Flat RAG giải được, multi-hop và global thì không",
+        "Giải thích nguyên nhân gốc: quan hệ nằm ở cấu trúc, không ở embedding similarity",
+        "Đề xuất kiến trúc HYBRID, không bỏ Flat RAG",
+        "Nêu cơ chế vector tìm seed node rồi graph traversal tìm quan hệ",
+        "Chọn Neo4j thay NetworkX với lý do quy mô/ACID, hoặc so sánh LightRAG với MS GraphRAG theo chi phí",
+        "Rủi ro extraction bottleneck kèm con số coreference 30–40%",
+        "Rủi ro super-node kèm biện pháp giới hạn 2 hop và số cạnh",
+        "Có nhắc con trỏ từ graph node về chunk gốc để sinh citation"
+      ],
+      "tags": [
+        "rag",
+        "day19",
+        "graphrag"
+      ]
+    },
+    {
+      "id": "RAG-09",
+      "module": "C",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Trợ lý tra cứu chính sách của bạn thỉnh thoảng trả lời theo bản policy đã hết hiệu lực. Đội nghiệp vụ cập nhật file PDF trên SharePoint bất kỳ lúc nào, không theo lịch cố định.\n**Yêu cầu.** Thiết kế lại pipeline ingestion cho tình huống này. Nêu rõ: (a) các bước xử lý và thứ tự; (b) cách bạn phát hiện file đã đổi và tránh embed lại toàn bộ mỗi lần chạy; (c) cách đảm bảo chạy lại pipeline không tạo ra bản trùng; (d) hai chỉ số bạn sẽ theo dõi để biết vấn đề tái diễn TRƯỚC khi người dùng phàn nàn.",
+      "modelAnswer": "- **Ba khối**: Input Control (MIME, ownership, quét PII) → Processing (extract → clean, NFC → structure → Markdown + metadata) → Indexing (chunk → embed → store → **verify**).\n- **Content hash** trả lời \"file có đổi không\"; **logical version** trả lời \"đây là bản nào\". Hai thứ khác nhau.\n- **Thiếu logical version chính là nguyên nhân** agent trả lời theo bản cũ — có hash cũng không biết bản nào còn hiệu lực.\n- **Idempotency**: upsert theo `(doc_id, version)`, hoặc ghi vào staging rồi đổi alias.\n- **Bắt buộc vì retry là mặc định của mọi orchestrator** — chạy lại mà không idempotent thì index có cả v3 lẫn v4.\n- **Freshness đo tại thời điểm document ACTIVE trên vector index**, không phải lúc file vào staging. Đo sai điểm thì SLA xanh mà user vẫn thấy bản cũ.\n- Chỉ số thứ hai hướng người dùng: **citation freshness** (tuổi chunk agent thực sự trích dẫn).\n- **Quality gate đặt TRƯỚC bước embed**; hàng quarantine không cho agent đọc.",
+      "rubric": [
+        "Nêu đủ ba khối Input Control → Processing → Indexing và có bước verify",
+        "Phân biệt rõ content hash (file có đổi không) với logical version (đây là bản nào)",
+        "Chỉ ra logical version chính là thứ thiếu gây lỗi trả lời theo bản cũ",
+        "Nêu idempotency: upsert theo (doc_id, version) hoặc staging rồi đổi alias",
+        "Giải thích vì sao idempotency bắt buộc: retry là mặc định của mọi orchestrator",
+        "Freshness phải đo tại thời điểm document ACTIVE trên vector index, không phải lúc vào staging",
+        "Có chỉ số thứ hai hướng người dùng (citation freshness) hoặc volume",
+        "Điểm cộng: quality gate đặt trước bước embed, quarantine không cho agent đọc"
+      ],
+      "tags": [
+        "rag",
+        "day7",
+        "ingestion"
+      ]
+    },
+    {
+      "id": "RAG-10",
+      "module": "A",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Bạn vừa sửa chunking và bật thêm reranker cho hệ RAG. Chạy trên bộ test 200 câu: **v1 đạt 66%, v2 đạt 71%**. Sếp hỏi có deploy được chưa.\n**Yêu cầu.** (a) Trả lời câu hỏi của sếp và giải thích căn cứ; (b) mô tả bộ dữ liệu và cách chạy thí nghiệm mà bạn cần để kết luận cho đàng hoàng; (c) nêu tối thiểu hai lý do khiến con số \"tăng 5 điểm\" có thể gây hiểu nhầm.",
+      "modelAnswer": "- **Chưa kết luận được.** 5 điểm chênh chưa đủ để nói v2 tốt hơn.\n- **Vạch chia của bộ test**: 200 sample cho khoảng **±11 điểm**; 5 < 11 nên nằm gọn trong nhiễu.\n- **Quan hệ phi tuyến**: muốn vạch chia nhỏ đi một nửa phải tăng **gấp 4 lần** số case.\n- Chạy lại chính **v1** hai lần cũng lệch nhau vài điểm — nên \"v2 hơn v1 5 điểm\" không nói lên điều gì.\n- **Golden set** phải có `gold_docs`, chia **slice**, có `reference`, và được **version cùng code**.\n- Chạy hai version trên **cùng golden set, so từng sample (paired)** — vì cùng một câu hỏi thì loại bỏ được biến thiên do độ khó.\n- **Đếm discordant case** rồi chạy **McNemar test**; p > 0,05 thì không được phép nói v2 tốt hơn.\n- **Số tổng che mất slice**: v2 có thể hơn ở slice này và tụt ở slice kia.\n- **Hai câu hỏi khác nhau**: \"có thật không\" (p-value) và \"có bõ công không\" (độ lớn so với chi phí rerank).",
+      "rubric": [
+        "Trả lời rõ là CHƯA kết luận được, không khẳng định v2 tốt hơn",
+        "Nêu khái niệm vạch chia của bộ test: 200 sample cho khoảng 11 điểm, 5 < 11 nên là nhiễu",
+        "Nêu quan hệ phi tuyến: muốn vạch chia nhỏ một nửa cần gấp 4 lần số case",
+        "Nhắc chính v1 cũng dao động giữa hai lần chạy",
+        "Golden set có gold_docs, slice, reference và được version",
+        "Chạy hai version trên cùng golden set, so từng sample (paired) — có giải thích lý do",
+        "Đếm discordant case và/hoặc chạy McNemar test",
+        "Nêu rủi ro số tổng che mất một slice đi xuống",
+        "Phân biệt hai câu hỏi: có thật không (p-value) và có bõ công không (độ lớn)"
+      ],
+      "tags": [
+        "rag",
+        "day14",
+        "eval"
+      ]
+    }
+  ]
+}

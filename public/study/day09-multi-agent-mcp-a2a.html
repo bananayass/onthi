@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 9 — Multi-Agent, MCP &amp; A2A | Tóm tắt</title>
+<style>
+:root{
+  --bg:#f7f8fa; --card:#fff; --ink:#1a1d24; --muted:#5b6472; --line:#e3e7ee;
+  --brand:#b91c1c; --brand-soft:#fdeaea; --warn:#b8541a; --warn-soft:#fdf1e7;
+  --ok:#1d7a4f; --ok-soft:#e8f6ef; --bad:#c0392b; --bad-soft:#fdeceb;
+  --acc:#2563c9; --acc-soft:#e8f0fd;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+
+header{background:linear-gradient(135deg,#b91c1c,#7f1414);color:#fff;padding:34px 0 26px}
+header .wrap{padding-bottom:0}
+.kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;margin:0 0 6px}
+header h1{margin:0 0 8px;font-size:31px;line-height:1.2;font-weight:700}
+header p{margin:0;opacity:.9;font-size:15px}
+
+.tabbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);
+  box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.tabbar .wrap{display:flex;gap:4px;padding-top:0;padding-bottom:0}
+.tab{appearance:none;border:0;background:none;font:inherit;font-weight:600;font-size:15px;
+  padding:15px 18px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--brand);border-bottom-color:var(--brand)}
+.panel{display:none;padding-top:28px}
+.panel.on{display:block}
+
+h2{font-size:22px;margin:36px 0 4px;padding-top:14px;border-top:2px solid var(--line)}
+h2 .num{color:var(--brand);font-weight:700}
+h2:first-child{border-top:0;padding-top:0;margin-top:0}
+.sub{color:var(--muted);font-size:14.5px;margin:0 0 18px}
+h3{font-size:17px;margin:26px 0 10px}
+h4{font-size:15.5px;margin:0 0 8px}
+p{margin:10px 0}
+ul,ol{margin:10px 0;padding-left:22px}
+li{margin:5px 0}
+code{background:#eef1f6;padding:2px 6px;border-radius:4px;font-size:13.5px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:#1f2430;color:#e6e9ef;padding:13px 15px;border-radius:9px;overflow-x:auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.6;margin:12px 0}
+pre .kw{color:#c792ea} pre .st{color:#c3e88d} pre .cm{color:#7c85a3} pre .fn{color:#82aaff}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:820px){.g2,.g3{grid-template-columns:1fr}}
+
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:#fff;
+  border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{padding:9px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f2f5fa;font-weight:600;font-size:13px}
+tr:last-child td{border-bottom:0}
+
+.note{border-left:4px solid var(--brand);background:var(--brand-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.warn{border-left:4px solid var(--warn);background:var(--warn-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.bad{border-left:4px solid var(--bad);background:var(--bad-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.ok{border-left:4px solid var(--ok);background:var(--ok-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.acc{border-left:4px solid var(--acc);background:var(--acc-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note b,.warn b,.bad b,.ok b,.acc b{display:block;margin-bottom:3px;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+.note b{color:var(--brand)} .warn b{color:var(--warn)} .bad b{color:var(--bad)}
+.ok b{color:var(--ok)} .acc b{color:var(--acc)}
+
+.quote{margin:16px 0;padding:20px 24px;border-radius:12px;background:#1f2430;color:#fff;text-align:center}
+.quote p{margin:0;font-size:17.5px;font-weight:600;line-height:1.45}
+.quote small{display:block;margin-top:9px;opacity:.7;font-size:13px;letter-spacing:.06em}
+
+.pill{display:inline-block;font-size:12.5px;font-weight:600;padding:2px 9px;border-radius:20px;margin-right:5px}
+.pill.b{background:var(--brand-soft);color:var(--brand)}
+.pill.o{background:var(--ok-soft);color:var(--ok)}
+.pill.w{background:var(--warn-soft);color:var(--warn)}
+.pill.r{background:var(--bad-soft);color:var(--bad)}
+
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0}
+.step{background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-size:13.5px;font-weight:600}
+.step small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.step b{color:var(--brand)}
+.arw{color:var(--muted);font-weight:700;font-size:13px}
+
+/* 4 limits grid */
+.lim4{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+@media(max-width:700px){.lim4{grid-template-columns:1fr}}
+.lim4>div{border:1px solid var(--line);border-radius:11px;padding:15px;background:#fff;border-left:5px solid var(--bad)}
+.lim4 .n{font-size:11.5px;font-weight:700;letter-spacing:.06em;color:var(--bad);margin-bottom:4px}
+.lim4 strong{display:block;font-size:15px;margin-bottom:5px}
+.lim4 .en{display:block;font-size:12px;font-style:italic;color:var(--muted);margin-bottom:6px}
+.lim4 p{margin:0;font-size:13.3px;color:var(--muted)}
+
+/* prompt bloat bar */
+.bloat{margin:14px 0}
+.bloat .row{display:flex;align-items:center;gap:10px;margin-bottom:5px;font-size:13px}
+.bloat .lbl{flex:0 0 190px}
+.bloat .bar{height:22px;border-radius:4px;background:var(--brand);opacity:.85}
+.bloat .val{flex:0 0 62px;text-align:right;font-weight:700;color:var(--brand)}
+.bloat .tot{border-top:2px solid var(--ink);margin-top:8px;padding-top:8px;font-weight:700}
+
+/* pattern shapes */
+.pat4{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:14px 0}
+@media(max-width:760px){.pat4{grid-template-columns:1fr}}
+.pat4>div{border:1px solid var(--line);border-radius:12px;padding:16px;background:#fff;border-top:4px solid}
+.pat4 .p1{border-top-color:#b91c1c} .pat4 .p2{border-top-color:#2563c9}
+.pat4 .p3{border-top-color:#15803d} .pat4 .p4{border-top-color:#6b3fa0}
+.pat4 h4{margin:0 0 3px;font-size:15.5px}
+.pat4 .shape{font-size:12px;font-weight:700;letter-spacing:.05em;margin-bottom:8px;text-transform:uppercase}
+.pat4 .p1 .shape{color:#b91c1c} .pat4 .p2 .shape{color:#2563c9}
+.pat4 .p3 .shape{color:#15803d} .pat4 .p4 .shape{color:#6b3fa0}
+.pat4 p{margin:0 0 7px;font-size:13.4px}
+.pat4 .tr{font-size:12.8px;color:var(--muted);border-top:1px dashed var(--line);padding-top:7px;margin-top:2px}
+
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+@media(max-width:700px){.vs{grid-template-columns:1fr}}
+.vs>div{border-radius:11px;padding:15px 17px;border:1px solid var(--line);background:#fff}
+.vs .lgood{border-top:4px solid var(--ok)}
+.vs .lbad{border-top:4px solid var(--bad)}
+.vs .lneu{border-top:4px solid var(--acc)}
+.vs h4{margin:0 0 8px;font-size:15px}
+.vs .lgood h4{color:var(--ok)} .vs .lbad h4{color:var(--bad)} .vs .lneu h4{color:var(--acc)}
+.vs p,.vs li{font-size:14px}
+.vs ul{margin:6px 0;padding-left:19px}
+
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+@media(max-width:820px){.three{grid-template-columns:1fr}}
+.three>div{border:1px solid var(--line);border-radius:11px;padding:15px;background:#fff;border-top:4px solid var(--brand)}
+.three .k{font-size:11.5px;font-weight:700;letter-spacing:.06em;color:var(--brand);margin-bottom:5px}
+.three strong{display:block;font-size:15px;margin-bottom:6px}
+.three p{margin:0;font-size:13.3px;color:var(--muted)}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}
+@media(max-width:760px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:#fff;border:1px solid var(--line);border-radius:11px;padding:15px;text-align:center}
+.stat .n{font-size:24px;font-weight:700;color:var(--brand);line-height:1.15}
+.stat .l{font-size:12px;color:var(--muted);margin-top:5px}
+
+/* contract card */
+.contract{background:#fff;border:1px solid var(--line);border-radius:11px;overflow:hidden;margin:14px 0}
+.contract .f{display:flex;gap:12px;padding:11px 15px;border-bottom:1px solid var(--line);font-size:13.8px}
+.contract .f:last-child{border-bottom:0}
+.contract .f.add{background:var(--warn-soft)}
+.contract .fn2{flex:0 0 150px;font-weight:700;font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--brand);font-size:13px}
+.contract .f.add .fn2{color:var(--warn)}
+.contract .fd{flex:1;min-width:0;color:var(--muted)}
+
+/* escalation ladder */
+.lad3{margin:14px 0}
+.lad3>div{border:1px solid var(--line);border-radius:10px;padding:12px 15px;margin-bottom:7px;background:#fff;
+  display:flex;gap:12px;align-items:flex-start}
+.lad3 .n{flex:0 0 26px;height:26px;border-radius:50%;background:var(--brand-soft);color:var(--brand);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12.5px}
+.lad3 .b{flex:1;font-size:14px}
+.lad3 .b strong{display:block;margin-bottom:2px}
+.lad3 .b span{color:var(--muted);font-size:13.2px}
+
+/* reliability stack */
+.rel{margin:14px 0}
+.rel>div{margin:0 auto 5px;padding:11px 14px;border-radius:8px;text-align:center;font-size:13.5px;color:#fff;font-weight:600}
+.rel .r4{width:52%;background:#7f1414} .rel .r3{width:66%;background:#a01818}
+.rel .r2{width:82%;background:#b91c1c} .rel .r1{width:96%;background:#d97070;color:#5c1010}
+.rel small{display:block;font-weight:400;opacity:.9;font-size:11.5px;margin-top:2px}
+
+.qlist{margin:14px 0}
+.qi{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:10px;padding:12px 15px;margin-bottom:8px}
+.qi .n{flex:0 0 26px;height:26px;border-radius:50%;background:var(--brand-soft);color:var(--brand);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12.5px}
+.qi .b{flex:1;min-width:0;font-size:14px}
+.qi .b strong{display:block;margin-bottom:2px}
+.qi .b span{color:var(--muted);font-size:13.3px}
+
+#cheat{font-size:14px}
+#cheat h2{font-size:18px;margin:20px 0 8px;padding-top:10px}
+#cheat .card{padding:14px 16px;margin:10px 0}
+#cheat table{font-size:12.5px}
+#cheat th,#cheat td{padding:6px 8px}
+#cheat ul,#cheat ol{padding-left:19px} #cheat li{margin:3px 0}
+#cheat pre{font-size:11.5px;padding:9px 11px}
+.cheatgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:820px){.cheatgrid{grid-template-columns:1fr}}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13.5px}
+.kv dt{font-weight:600;color:var(--brand)}
+.kv dd{margin:0;color:var(--muted)}
+.printbtn{background:var(--brand);color:#fff;border:0;border-radius:8px;padding:9px 16px;
+  font:inherit;font-weight:600;font-size:14px;cursor:pointer;margin-bottom:6px}
+.printbtn:hover{background:#991717}
+
+.fcbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.fbtn{background:#fff;border:1px solid var(--line);border-radius:20px;padding:6px 15px;
+  font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;color:var(--muted)}
+.fbtn:hover{border-color:var(--brand);color:var(--brand)}
+.fbtn.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.counter{margin-left:auto;font-size:13.5px;color:var(--muted)}
+.fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.fc{perspective:1100px;height:218px;cursor:pointer}
+.fci{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.fc.flip .fci{transform:rotateY(180deg)}
+.ff,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:18px;
+  display:flex;flex-direction:column;justify-content:center;border:1px solid var(--line);overflow:auto}
+.ff{background:#fff}
+.fb{background:var(--brand);color:#fff;transform:rotateY(180deg);border-color:var(--brand)}
+.fb code{background:rgba(255,255,255,.2);color:#fff}
+.ff .tag2{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);margin-bottom:8px}
+.ff .q{font-size:15.5px;font-weight:600;line-height:1.45}
+.fb .a{font-size:13.5px;line-height:1.55}
+.hint{text-align:center;color:var(--muted);font-size:12.5px;margin-top:10px}
+
+@media print{
+  header,.tabbar,.printbtn,.hint{display:none!important}
+  .panel{display:none!important} #cheat{display:block!important;padding-top:0}
+  body{background:#fff;font-size:10.5px} .wrap{max-width:100%;padding:0}
+  .card{break-inside:avoid;border-color:#ccc} table{break-inside:avoid}
+  pre{background:#f4f4f4;color:#222;border:1px solid #ddd}
+  pre .kw,pre .st,pre .cm,pre .fn{color:#222}
+  h2{break-after:avoid}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">AICB-P1 · Ngày 9 · MCP, A2A &amp; LangGraph</p>
+    <h1>Multi-Agent &amp; Kết Nối Hệ Thống</h1>
+    <p>Bài toán đã quá lớn cho 1 agent — làm sao hệ thống vẫn rõ vai trò, dễ kiểm soát và dễ mở rộng?</p>
+  </div>
+</header>
+
+<nav class="tabbar">
+  <div class="wrap">
+    <button class="tab on" data-t="detail">Tóm tắt chi tiết</button>
+    <button class="tab" data-t="cheat">Cheat sheet</button>
+    <button class="tab" data-t="cards">Flashcard</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ==================== TAB 1 ==================== -->
+<section class="panel on" id="detail">
+
+<h3>Bốn câu hỏi trọng tâm của cả ngày</h3>
+<div class="qlist">
+  <div class="qi"><div class="n">1</div><div class="b"><strong>Khi nào một agent không còn đủ?</strong><span>Dấu hiệu nào cho biết nên chia nhỏ task — và khi nào chia nhỏ chỉ làm hệ thống rối thêm</span></div></div>
+  <div class="qi"><div class="n">2</div><div class="b"><strong>Chia việc theo kiểu nào?</strong><span>4 pattern phối hợp, mỗi pattern trị một loại phức tạp khác nhau</span></div></div>
+  <div class="qi"><div class="n">3</div><div class="b"><strong>Các agent nối với nhau ra sao?</strong><span>MCP nối agent với tool ngoài, A2A nối agent với agent — khác nhau ở đâu</span></div></div>
+  <div class="qi"><div class="n">4</div><div class="b"><strong>Hỏng thì lần ra ở đâu?</strong><span>Vì sao multi-agent khó debug, và một trace đọc được cần chứa những gì</span></div></div>
+</div>
+
+<h2><span class="num">§1</span> &nbsp;Khi một agent không còn đủ</h2>
+
+<h3>Tới giờ ta vẫn đang thêm năng lực cho MỘT agent</h3>
+<div class="three">
+  <div><div class="k">TAY CHÂN</div><strong>Tool calling</strong><p>Gọi được hàm ngoài: tra đơn hàng, mở ticket, gọi API</p></div>
+  <div><div class="k">TỰ QUYẾT</div><strong>ReAct agent</strong><p>Vòng lặp Think–Act–Observe: tự chọn tool, đọc kết quả, tự quyết bước tiếp theo</p></div>
+  <div><div class="k">TÀI LIỆU</div><strong>RAG</strong><p>Đọc tài liệu công ty và trả lời có dẫn nguồn, thay vì đoán theo trí nhớ huấn luyện</p></div>
+</div>
+<div class="bad"><b>Trần của một agent</b>Mỗi buổi trước đều là trang bị thêm cho <b>cùng một người</b>. Nhưng <b>một người giỏi tới mấy vẫn có trần: chỉ làm được một việc tại một thời điểm, và ôm càng nhiều vai thì càng dễ nhầm</b>.</div>
+<div class="note"><b>Bước tiếp theo không phải thêm tool, mà là thêm agent</b>Lập đội thì câu hỏi đổi hẳn: <b>chia vai thế nào · ai giao việc cho ai · họ trao đổi ra sao · hỏng thì biết tại khâu nào</b>.<br>Đó đúng là 4 câu hỏi của ngày hôm nay — và cũng là lý do <b>“một đội tồi thường tệ hơn một người”</b>.</div>
+
+<h3>Bốn giới hạn cốt lõi của single-agent</h3>
+<div class="lim4">
+  <div><div class="n">GIỚI HẠN 1</div><strong>Chật chỗ trong một lần suy luận</strong><span class="en">context bottleneck</span><p>Quá nhiều luật, kết quả tool và lịch sử chat chen vào cùng một lượt.</p></div>
+  <div><div class="n">GIỚI HẠN 2</div><strong>Ôm nhiều vai thì không giỏi vai nào</strong><span class="en">specialization trade-off</span><p>Càng thêm vai, prompt càng dài và <b>các luật càng dễ va nhau</b>.</p></div>
+  <div><div class="n">GIỚI HẠN 3</div><strong>Chạy nối đuôi, không chạy cùng lúc</strong><span class="en">parallelism</span><p>Nhiều việc chẳng liên quan gì nhau vẫn phải <b>xếp hàng chờ</b>.</p></div>
+  <div><div class="n">GIỚI HẠN 4</div><strong>Lỗi không có ranh giới</strong><span class="en">error boundary</span><p>Một bước sai làm bẩn luôn context chung, và vì mọi vai nằm trong một prompt, <b>không biết vai nào đã sai</b>.</p></div>
+</div>
+<div class="warn"><b>Đọc bản đồ này cho sòng phẳng</b>Riêng giới hạn 4: <b>chia agent KHÔNG làm lỗi biến mất</b> — lỗi vẫn xảy ra, <b>thậm chí nhiều chỗ hỏng hơn</b>. Cái nó đổi được là <b>mỗi lỗi có ranh giới rõ</b>.</div>
+
+<h4>Giới hạn 1 + 2: mọi vai chen vào cùng một system prompt</h4>
+<p class="sub">System prompt của một agent CS, sau vài tháng thêm dần:</p>
+<div class="bloat">
+  <div class="row"><span class="lbl">Vai trò, tone</span><span class="bar" style="width:6%"></span><span class="val">15</span></div>
+  <div class="row"><span class="lbl">Khi nào dùng tool nào (8 tool)</span><span class="bar" style="width:50%"></span><span class="val">120</span></div>
+  <div class="row"><span class="lbl">Luật retrieval</span><span class="bar" style="width:17%"></span><span class="val">40</span></div>
+  <div class="row"><span class="lbl">Luật trích nguồn</span><span class="bar" style="width:15%"></span><span class="val">35</span></div>
+  <div class="row"><span class="lbl">Luật retry</span><span class="bar" style="width:12%"></span><span class="val">30</span></div>
+  <div class="row tot"><span class="lbl">TỔNG</span><span style="flex:1"></span><span class="val">240 dòng</span></div>
+</div>
+<div class="vs">
+  <div class="lbad">
+    <h4>Giới hạn 1 — context bottleneck</h4>
+    <p>Mỗi lượt, <b>240 dòng luật + lịch sử chat + kết quả tool</b> đều nằm trong cùng một lần suy luận — kể cả câu <b>“shop mấy giờ đóng cửa?”</b>. Phần dành cho việc thật sự cần nghĩ bị ép lại.</p>
+  </div>
+  <div class="lbad">
+    <h4>Giới hạn 2 — specialization trade-off</h4>
+    <p><b>Luật va nhau:</b> “gặp lỗi thì retry” đấu với “không chắc thì hỏi lại người dùng”. Thêm <b>tool thứ 9</b> phải sửa prompt, rồi nơm nớp lo <b>bốn nhóm luật còn lại vỡ theo</b>.</p>
+  </div>
+</div>
+
+<h4>Bằng chứng cho giới hạn 1: Lost in the Middle</h4>
+<div class="acc"><b>Liu et al., TACL 2024 (arXiv:2307.03172), Stanford</b>Model dùng tốt thông tin ở <b>đầu và cuối</b> context, nhưng <b>bỏ quên bằng chứng nằm ở giữa</b> — kể cả khi nó thực sự có trong context.<br>→ <b>Nhồi thêm tài liệu vào một agent KHÔNG làm nó suy luận tốt hơn.</b></div>
+
+<h4>Giới hạn 3: trần nằm ở kiểu chạy tuần tự, không ở model</h4>
+<p class="sub">Cùng một việc — <b>đọc 40 PDF rồi viết một báo cáo có trích dẫn</b> — làm theo hai kiểu:</p>
+<div class="stats">
+  <div class="stat"><div class="n">40</div><div class="l">lượt nối đuôi nếu<br>một agent tự đọc</div></div>
+  <div class="stat"><div class="n">40</div><div class="l">agent đọc cùng lúc<br>nếu chia ra</div></div>
+  <div class="stat"><div class="n">4,5×</div><div class="l">chênh lệch<br>thời gian</div></div>
+  <div class="stat"><div class="n">1.500+</div><div class="l">tool call một<br>lần giao việc</div></div>
+</div>
+<p class="sub">Số liệu: <b>Kimi Agent Swarm, 2026</b> — hệ thống này chạy tới <b>100 agent song song</b>.</p>
+<div class="bad"><b>Câu chốt của giới hạn 3</b>Tổng thời gian tăng theo <b>SỐ BƯỚC chứ không theo độ khó</b> — mà một agent chỉ làm được một bước tại một thời điểm.<br>→ <b>Model mạnh hơn chỉ rút ngắn từng bước, không bỏ được hàng đợi.</b></div>
+
+<h3>Vài ví dụ ở các bài toán khác</h3>
+<table>
+  <tr><th style="width:190px">Bài toán</th><th>Cách chia vai</th></tr>
+  <tr><td><b>Deep research</b></td><td>Tìm rộng, rồi chia thành nhiều nhánh đào sâu song song, quay lại bổ sung nguồn khi còn mỏng</td></tr>
+  <tr><td><b>Sản xuất nội dung</b></td><td>Manager giao research, drafting, editing cho 3 agent rồi duyệt bản gộp</td></tr>
+  <tr><td><b>Customer service</b></td><td><b>1 agent đọc sentiment · 1 truy lịch sử đơn · 1 soạn trả lời</b> — trong cùng một luồng</td></tr>
+  <tr><td><b>Security testing</b></td><td>Red-team dò lỗ hổng và chain exploit, blue-team phát hiện và vá từng lỗ</td></tr>
+  <tr><td><b>Phân tích tài chính</b></td><td>Classifier nhanh quét bất thường, model lớn bình luận vĩ mô, agent thứ ba lấy giá live</td></tr>
+  <tr><td><b>Review nhiều góc</b></td><td><b>VC hoài nghi + PM kỳ cựu + chuyên gia đạo đức</b> cùng mổ một kế hoạch launch</td></tr>
+</table>
+<div class="note"><b>Điểm chung</b><b>Không phải bài toán khó hơn</b>, mà là bài toán <b>quá rộng, quá dài, hoặc cần nhiều góc nhìn</b> cho một agent — và <b>chia được thành các vai chạy song song hoặc soi lẫn nhau</b>.</div>
+
+<h3>Chia nhiều agent được gì, mất gì</h3>
+<table>
+  <tr><th style="width:170px">Tiêu chí</th><th>Single-agent</th><th>Multi-agent</th></tr>
+  <tr style="background:var(--bad-soft)"><td><b>Chi phí LLM</b></td><td>1 lần gọi mỗi lượt</td><td>Mỗi agent ≥1 lần gọi, supervisor là lần gọi riêng</td></tr>
+  <tr style="background:var(--bad-soft)"><td><b>Latency</b></td><td>Thấp, một mạch</td><td>Cao hơn vì nhiều chặng nối tiếp</td></tr>
+  <tr style="background:var(--bad-soft)"><td><b>Độ phức tạp</b></td><td>Thấp, dễ bắt đầu</td><td>Cao: <b>state, route, contract</b> phải quản</td></tr>
+  <tr style="background:var(--ok-soft)"><td><b>Khả năng debug</b></td><td>Khó: mọi thứ trộn trong 1 prompt</td><td>Rõ: trace ghi riêng theo từng agent</td></tr>
+  <tr style="background:var(--ok-soft)"><td><b>Chuyên môn hoá</b></td><td>Giỏi đều, không sâu vai nào</td><td>Mỗi worker hẹp vai, sâu hơn</td></tr>
+  <tr style="background:var(--ok-soft)"><td><b>Khả năng mở rộng</b></td><td>Thêm vai = prompt phình to</td><td>Thêm 1 worker mà không viết lại gốc</td></tr>
+</table>
+<p class="sub">Ba dòng đỏ là <b>cái mất</b>, ba dòng xanh là <b>cái được</b>.</p>
+
+<h3>Dấu hiệu NÊN chia — và khi nào ĐỪNG</h3>
+<div class="vs">
+  <div class="lgood">
+    <h4>✓ Bốn dấu hiệu nên chia</h4>
+    <ul><li>Task có <b>nhiều bước vai trò khác nhau</b>: plan, retrieve, tool use, tổng hợp</li><li>Có thể <b>chia việc độc lập</b>: 2 worker làm song song vẫn hợp lý</li><li>Cần <b>debug rõ ai làm sai</b>: route sai, retrieve sai, hay synthesis sai</li><li>Cần <b>mở rộng dần</b>: thêm 1 worker mà không viết lại prompt gốc</li></ul>
+  </div>
+  <div class="lbad">
+    <h4>✗ Khi nào ĐỪNG chia</h4>
+    <ul><li>Khi <b>mọi vai đều cần cùng một ngữ cảnh</b> — lúc đó chia chỉ <b>tốn thêm công chuyền tin</b></li><li>Đừng chia chỉ vì thấy “ngầu”. <b>Multi-agent tốn khoảng 15× token</b> so với một lượt chat<br><span class="sub">Anthropic, “How we built our multi-agent research system”, 2025</span></li></ul>
+  </div>
+</div>
+<div class="ok"><b>Checkpoint đáng nhớ</b>Một agent đang có <b>8 tool</b>. Thêm <b>tool thứ 9</b> làm prompt dài thêm <b>40 dòng luật</b> → đó là <b>tín hiệu quá tải của CẢ giới hạn 1 và 2</b>. Đây là lúc cân nhắc chuyển nhóm việc đó thành <b>một worker riêng</b>.</div>
+
+<h2><span class="num">§2</span> &nbsp;Multi-Agent Patterns</h2>
+<p class="sub">Chọn pattern giúp giải quyết <b>đúng loại phức tạp</b>, không tạo thêm phức tạp giả.</p>
+
+<div class="note"><b>Đọc hình theo hình dạng</b><b>Supervisor-worker TOẢ RA</b> · <b>Pipeline NỐI TIẾP</b> · <b>Debate HỘI TỤ</b> · <b>Hierarchical LỒNG TẦNG</b> (supervisor của các supervisor).</div>
+
+<div class="pat4">
+  <div class="p1">
+    <div class="shape">◈ Toả ra</div>
+    <h4>1 · Supervisor-Worker</h4>
+    <p><b>Dùng khi</b> yêu cầu đa dạng, khó đoán trước, và các nhánh việc <b>độc lập nhau</b>. Worker <b>không nói chuyện với nhau</b>.</p>
+    <p><b>Gọn nhất:</b> supervisor chỉ làm định tuyến — đọc ticket rồi chọn đúng một worker (refund / kỹ thuật / escalate).</p>
+    <p><b>Ví dụ thật:</b> Deep research của Anthropic — một lead agent chạy <b>3–5 subagent song song</b>, rút ngắn tới <b>90% thời gian</b>.</p>
+    <div class="tr"><b>Bẫy 1 — giao việc mơ hồ:</b> giao cho 3 worker cùng câu “tìm hiểu về đối thủ X” thì <b>cả 3 mở đúng một trang chủ và trả về gần như một bản</b>. Phải viết rõ cho từng worker.<br><b>Bẫy 2 — supervisor ôm quá nhiều:</b> vừa route vừa tự làm → <b>thành nút cổ chai và context phình đúng như một agent đơn lẻ</b>.</div>
+  </div>
+  <div class="p2">
+    <div class="shape">→ Nối tiếp</div>
+    <h4>2 · Pipeline</h4>
+    <p><b>Dùng khi</b> các bước <b>đã cố định sẵn, gần như không rẽ nhánh</b>. VD: quy trình duyệt cấp quyền truy cập (kiểm role → ghi log → cấp quyền).</p>
+    <p><b>Được gì:</b> mỗi bước test riêng được, lỗi nằm ở bước nào thấy ngay.</p>
+    <div class="tr"><b>Bẫy 1 — thời gian cộng dồn:</b> latency là <b>tổng của mọi chặng</b>; retry một bước có thể kéo chạy lại cả khúc sau.<br><b>Bẫy 2 — gãy khi yêu cầu đi chệch:</b> pipeline <b>không có chỗ để rẽ</b>.<br><b>Mẹo chuyền tin (Anthropic):</b> đừng nhét nguyên output bước trước vào prompt bước sau — <b>lưu ra ngoài rồi chuyền một tham chiếu ngắn</b> (id, đường dẫn file).</div>
+  </div>
+  <div class="p3">
+    <div class="shape">◇ Hội tụ</div>
+    <h4>3 · Debate</h4>
+    <p>Ba agent <b>đều đọc đúng một input và đều trả lời trọn vẹn</b> câu hỏi — chỉ khác nhau ở <b>vai được giao</b> (bảo mật · chi phí · trải nghiệm).</p>
+    <p><b>Khác supervisor-worker:</b> supervisor-worker chia <b>KHỐI LƯỢNG</b> (thiếu một mảnh là không đủ); debate chia <b>GÓC NHÌN</b> (bỏ một góc vẫn chạy được, chỉ dễ sót rủi ro hơn).</p>
+    <p><b>Dùng khi</b> sai một lần thì đắt, và <b>cái đáng sợ là điểm mù chứ không phải khối lượng việc</b>.</p>
+    <div class="tr"><b>Bẫy 1 — giá nhân lên:</b> ba góc nhìn là <b>ba lần token</b> cho cùng một việc.<br><b>Bẫy 2 — chỗ khó nằm ở bước cuối:</b> ba bên mâu thuẫn thì <b>ai quyết</b>? Phải chốt trước: lấy đa số, ưu tiên góc bảo mật, hay đẩy cho người duyệt.</div>
+  </div>
+  <div class="p4">
+    <div class="shape">⊞ Lồng tầng</div>
+    <h4>4 · Hierarchical</h4>
+    <p>Chính là supervisor-worker <b>lồng thêm một tầng</b>, khi số worker đã quá nhiều cho một người giao việc.</p>
+    <p><b>Dấu hiệu cần thêm tầng:</b> supervisor phải nhớ <b>quá nhiều worker và quá nhiều luật route</b> — đúng vấn đề context của §1, chỉ là đã lùi lên một tầng.</p>
+    <div class="tr"><b>Bẫy 1 — tam sao thất bản:</b> yêu cầu đi qua <b>hai lần diễn giải</b> mới tới worker.<br><b>Bẫy 2 — trace dài:</b> một lỗi giờ phải lần qua <b>ba tầng</b> mới ra thủ phạm.<br><b>Đây là pattern nên để dành</b> — hầu hết bài toán trong lớp dừng ở supervisor-worker một tầng.</div>
+  </div>
+</div>
+
+<h3>Chọn pattern bằng hai câu hỏi</h3>
+<div class="flow">
+  <span class="step"><b>Câu 1:</b> Các bước có cố định sẵn không?</span><span class="arw">CÓ →</span>
+  <span class="step">Pipeline</span>
+</div>
+<div class="flow">
+  <span class="arw">KHÔNG ↓</span>
+  <span class="step"><b>Câu 2:</b> Mỗi agent làm một mảnh khác nhau, hay cùng một việc?</span>
+  <span class="arw">mỗi agent một mảnh →</span><span class="step">Supervisor-worker</span>
+  <span class="arw">cùng một việc →</span><span class="step">Debate</span>
+</div>
+<p class="sub"><b>Còn Hierarchical?</b> Không phải một lựa chọn ngang hàng ở đây — <b>không ai mở đầu bằng nó</b>. Nó là thứ bạn <b>thêm vào sau</b>, khi supervisor đã nhớ không xuể số worker và số luật giao việc.</p>
+
+<h3>Việc to cỡ nào thì cần bao nhiêu agent</h3>
+<div class="three">
+  <div><div class="k">NHỎ</div><strong>Tra một dữ kiện</strong><p><b>1 agent, 3–10 lượt gọi tool.</b> Chia agent ở đây <b>chỉ tốn thêm</b>.</p></div>
+  <div><div class="k">VỪA</div><strong>So sánh vài lựa chọn</strong><p><b>2–4 worker</b>, mỗi worker <b>10–15 lượt gọi tool</b>.</p></div>
+  <div><div class="k">LỚN</div><strong>Quét rộng, nhiều hướng</strong><p><b>10+ worker</b>, mỗi worker một phần việc riêng, <b>ranh giới rõ</b>.</p></div>
+</div>
+<div class="warn"><b>Vì sao phải ghi rõ con số vào prompt của supervisor</b>Nếu không ghi mức này, <b>supervisor sẽ gọi thừa worker cho việc nhỏ</b>. Con số lấy từ hệ thống deep research của Anthropic — không bắt buộc, nhưng là điểm khởi đầu tốt hơn là đoán.</div>
+
+<h2><span class="num">§3</span> &nbsp;Supervisor-Worker Pattern</h2>
+<p class="sub">Ba thứ quyết định pattern này chạy được hay không: <b>vai trò · state · phiếu giao việc</b>.</p>
+
+<div class="flow">
+  <span class="step">Yêu cầu của user</span><span class="arw">→</span>
+  <span class="step"><b>Supervisor</b></span><span class="arw">→</span>
+  <span class="step">Worker tra tài liệu</span><span class="step">Worker gọi tool</span><span class="step">Worker viết trả lời</span>
+  <span class="arw">→</span><span class="step">Câu trả lời + trace</span>
+</div>
+
+<h3>Ranh giới trách nhiệm</h3>
+<div class="vs">
+  <div class="lneu">
+    <h4>Supervisor — giữ luồng quyết định</h4>
+    <ul><li>Đọc yêu cầu ban đầu, hiểu nó thuộc loại gì</li><li>Quyết định <b>worker nào nên tham gia</b></li><li>Theo dõi việc đang chạy tới đâu, gọi lại nếu hỏng</li><li>Ghép các đầu ra thành câu trả lời cuối</li></ul>
+  </div>
+  <div class="lneu">
+    <h4>Worker — giữ chuyên môn</h4>
+    <ul><li>Làm <b>một việc hẹp</b></li><li>Nhận đầu vào rõ, trả đầu ra rõ</li><li>Càng ít phụ thuộc lần gọi trước càng dễ test</li><li><b>Hỏng một worker không kéo sập cả hệ thống</b></li></ul>
+  </div>
+</div>
+<div class="acc"><b>Ranh giới dễ nhớ</b><b>Supervisor giữ luồng quyết định (decision flow); worker giữ chuyên môn (domain skill).</b><br><b>Dấu hiệu hỏng:</b> một worker vừa làm việc hẹp của nó, vừa <b>âm thầm gọi worker khác</b> — lúc đó bạn có <b>hai supervisor mà chỉ một cái được ghi trong sơ đồ</b>.</div>
+<div class="note"><b>Supervisor KHÔNG cần giỏi hơn worker</b>Việc của nó là <b>giao đúng việc, gọi đúng worker và gom kết quả</b> — không phải tự làm phần chuyên môn. <b>Supervisor tự trả lời là dấu hiệu ranh giới viết chưa đủ rõ.</b></div>
+
+<h4>Supervisor “quá thông minh” là lỗi, không phải tính năng</h4>
+<pre><span class="kw">SUPERVISOR_PROMPT</span> = <span class="st">"""</span>
+<span class="st">You are the Coordinator. ONLY task: classify the request</span>
+<span class="st">and call the right worker. Do NOT answer from your own knowledge.</span>
+
+<span class="st">If info is missing to classify -> ask the user one question.</span>
+
+<span class="st">Worker list:</span>
+<span class="st">- RetrievalWorker:  look up internal documents</span>
+<span class="st">- ToolWorker:       call systems (HR, ticketing, permissions)</span>
+<span class="st">- SynthesisWorker:  write the final answer from evidence</span>
+
+<span class="st">Return ONLY the worker name. No explanation, no making up.</span>
+<span class="st">"""</span></pre>
+<div class="warn"><b>Hai đầu cực đều hỏng</b><b>Quá nhiều tự do</b> → supervisor <b>tự trả lời, bỏ qua worker, và bịa dù worker đã trả về bằng chứng</b>.<br><b>Quá ít</b> → nó đẩy mọi thứ sang <b>một worker an toàn nhất</b> và hệ thống thành <b>một agent đơn lẻ đội lốt</b>.</div>
+
+<h3>Worker tốt: hẹp · độc lập từng lần gọi · test được</h3>
+<div class="three">
+  <div><div class="k">TÍNH CHẤT 1</div><strong>Hẹp <span style="font-weight:400;font-size:12px">specialized</span></strong><p>Một worker một việc chính.<br><b>VD:</b> “Worker tra tài liệu” <b>chỉ tra</b> — không kiêm luôn gọi hệ thống HR và viết câu trả lời.</p></div>
+  <div><div class="k">TÍNH CHẤT 2</div><strong>Độc lập <span style="font-weight:400;font-size:12px">stateless</span></strong><p>Làm được việc chỉ với đầu vào của lần gọi này.<br><b>VD:</b> supervisor gửi <b>“chính sách nghỉ phép 2025”</b> thay vì để worker tự đọc lại hội thoại đoán “cái đó” là cái gì.</p></div>
+  <div><div class="k">TÍNH CHẤT 3</div><strong>Test được <span style="font-weight:400;font-size:12px">testable</span></strong><p>Đầu vào/đầu ra rõ để chạy thử riêng.<br><b>VD:</b> worker đã hứa trả <b>3 đoạn mỗi câu hỏi</b> → <b>ném 20 câu mẫu vào, đếm số lần đoạn đúng có trong đó</b>.</p></div>
+</div>
+<div class="ok"><b>Được gì khi định nghĩa worker rõ</b>Lúc hệ thống trả lời sai, bạn <b>cô lập được ngay</b>: <b>hẹp</b> để biết nhìn vào đâu · <b>độc lập</b> để chạy lại được một mình · <b>test được</b> để so đầu ra với kết quả mong đợi.</div>
+
+<h3>State là “bảng chấm công” của hệ thống</h3>
+<div class="three">
+  <div><div class="k">CỘT 1</div><strong>Đã làm gì</strong><p><code>history</code></p></div>
+  <div><div class="k">CỘT 2</div><strong>Còn dang dở</strong><p><code>pending</code></p></div>
+  <div><div class="k">CỘT 3</div><strong>Vì sao chọn worker này</strong><p><code>decision</code></p></div>
+</div>
+<p class="sub">Chính <code>status</code> cho supervisor biết <b>khi nào dừng</b>: xong (<code>done</code>) hoặc hỏng (<code>error</code>).</p>
+<p><b>State tối thiểu cần:</b> <code>task</code> · <code>plan</code> · <code>worker_results</code> · <code>status</code> · <code>final_answer</code> · <code>trace</code></p>
+<pre><span class="kw">class</span> <span class="fn">Day09State</span>(TypedDict):
+    task: str
+    user_context: dict
+    plan: list[str]
+    retrieval_result: list[dict]
+    tool_result: dict
+    synthesis_draft: str
+    final_answer: str
+    status: str            <span class="cm"># pending|running|done|error</span>
+    need_retrieval: bool   <span class="cm"># supervisor routing flag</span>
+    need_verify: bool      <span class="cm"># supervisor routing flag</span>
+    trace: list[dict]      <span class="cm"># append-only, 7-field entries</span>
+    error: Optional[dict]  <span class="cm"># {code, reason} or None</span></pre>
+<div class="bad"><b>Thiếu trace thì mất gì</b>Chạy xong <b>không ai biết đường nào dẫn tới kết quả</b> — lỗi sinh ra ở worker tra tài liệu nhưng <b>chỉ lộ ra ở bước viết trả lời</b>, mà bạn không lần ngược được.<br>Đặc tính: <code>trace</code> <b>append-only</b> (chỉ ghi thêm, không ghi đè) · <code>error</code> là <code>{code, reason}</code> để <b>hỏng có kiểm soát thay vì im lặng</b> · <b>mỗi worker chỉ ghi vào field của mình</b>.</div>
+
+<h3>Phiếu giao việc (contract)</h3>
+<p><b>Định nghĩa:</b> bản mô tả cố định cho một lần supervisor giao việc cho worker — <b>phải gửi kèm những gì, và worker bắt buộc trả về dạng gì</b>. Hai bên <b>thoả thuận trước, không đoán lúc chạy</b>.</p>
+<div class="contract">
+  <div class="f"><div class="fn2">task</div><div class="fd">“tra_tai_lieu” — chặn worker đoán mò</div></div>
+  <div class="f"><div class="fn2">context</div><div class="fd">“chính sách nghỉ phép, áp dụng từ 2025” — chặn worker đoán mò</div></div>
+  <div class="f"><div class="fn2">constraints</div><div class="fd">[“chỉ tài liệu nội bộ”] — chặn nó lấy nguồn không được phép</div></div>
+  <div class="f"><div class="fn2">expected_output</div><div class="fd">“3 đoạn liên quan nhất” — chặn trả về sai dạng</div></div>
+  <div class="f"><div class="fn2">error</div><div class="fd"><code>{code, reason}</code> — để hỏng có kiểm soát thay vì im lặng</div></div>
+</div>
+<div class="ok"><b>Ba lợi ích của 5 field này</b>① Worker <b>test riêng được</b> vì biết đầu vào đầu ra · ② <b>Ghi được vào trace</b> · ③ <b>Thay được bằng worker khác</b> mà supervisor không phải sửa.</div>
+
+<h4>Cùng một câu hỏi, hai cách giao việc</h4>
+<p class="sub">User hỏi: <i>“nghỉ thai sản được bao lâu?”</i> — kho tài liệu có <b>nhiều bản, nhiều năm, nhiều loại hợp đồng</b>.</p>
+<div class="vs">
+  <div class="lbad">
+    <h4>✗ Chuyển thẳng câu hỏi của user</h4>
+    <p>Worker tra cả kho, <b>tự chọn bản nào hợp</b> → trúng bản <b>2023 cho nhân viên thời vụ</b>.</p>
+    <p style="margin:8px 0 0;color:var(--bad)"><b>Câu trả lời trông rất hợp lý, chỉ sai con số.</b></p>
+  </div>
+  <div class="lgood">
+    <h4>✓ Giao bằng phiếu: thêm context + constraints</h4>
+    <p>Worker <b>chỉ tra trong phạm vi được khoanh</b> → trúng bản <b>2025 cho nhân viên chính thức</b>.</p>
+  </div>
+</div>
+<div class="bad"><b>Vì sao context và constraints nằm trong phiếu</b>Câu hỏi của user nghe thì đủ, nhưng <b>thiếu đúng hai thứ chỉ supervisor mới biết</b>: <b>người hỏi thuộc diện nào</b> và <b>bản nào đang hiệu lực</b>. Không truyền xuống thì worker phải tự chọn — và <b>nó chọn im lặng, không báo lỗi</b>.</div>
+
+<h4>Phiếu giao việc nên dài bao nhiêu?</h4>
+<table>
+  <tr><th style="width:130px">Mức</th><th>Nội dung field <code>context</code></th><th>Vấn đề</th></tr>
+  <tr><td><span class="pill r">Quá ít</span></td><td>“nghỉ thai sản được bao lâu?”</td><td>Nguyên văn câu user — <b>worker phải tự chọn bản nào</b></td></tr>
+  <tr style="background:var(--ok-soft)"><td><span class="pill o">Vừa đủ</span></td><td><b>“nghỉ thai sản, nhân viên chính thức, 2025”</b></td><td>Đủ để worker khỏi đoán, <b>không thừa một chữ</b></td></tr>
+  <tr><td><span class="pill w">Quá nhiều</span></td><td>“…12 lượt hội thoại + hồ sơ nhân viên + sổ tay 40 trang”</td><td>Tốn token, và worker <b>dễ bám vào chi tiết không liên quan</b></td></tr>
+</table>
+<div class="warn"><b>Vì sao “thừa thì khó cắt” hơn “thiếu thì khó biết”</b>Bắt đầu từ <b>cột giữa</b>. <b>Thiếu thì thêm</b> — worker trả sai là biết ngay thiếu gì. <b>Thừa thì khó cắt: sau vài tháng không ai dám bỏ field nào vì không rõ worker nào còn đọc nó.</b></div>
+
+<h3>Lab: chia RAG agent Day 08 thành supervisor + workers</h3>
+<div class="flow">
+  <span class="step">Day 08<br>RAG Agent</span><span class="arw">chia vai trò →</span>
+  <span class="step">Day 09<br><b>Supervisor</b></span><span class="arw">→</span>
+  <span class="step">Worker tra tài liệu</span><span class="step">Worker viết trả lời</span><span class="step">Worker <b>kiểm chứng</b> <span class="pill b">MỚI</span></span>
+</div>
+<div class="note"><b>Thông điệp lab</b>Day 09 <b>không bắt đầu từ số 0</b>. Lấy đúng năng lực Day 08, tách thành hai worker, rồi thêm <b>một worker Day 08 chưa có: kiểm chứng</b> — đối chiếu từng câu trong bản trả lời với đoạn tài liệu đã lấy, <b>câu nào không có nguồn thì bỏ</b>.<br>Đây chính là thứ một agent đơn lẻ khó tự làm: <b>nó không giỏi tự bắt lỗi của chính mình</b>.</div>
+
+<h4>Bài mẫu: “field nào ai ghi” — chỗ sẽ hỏng đầu tiên</h4>
+<table>
+  <tr><th style="width:220px">Field</th><th>Người ghi</th></tr>
+  <tr><td><code>task</code>, <code>plan</code>, <code>status</code></td><td>supervisor</td></tr>
+  <tr><td><code>retrieval_result</code></td><td>worker tra tài liệu</td></tr>
+  <tr><td><code>draft_answer</code></td><td>worker viết trả lời</td></tr>
+  <tr style="background:var(--bad-soft)"><td><code>final_answer</code></td><td><b>HAI người cùng ghi ← khoanh tròn</b></td></tr>
+  <tr><td><code>trace[]</code></td><td>mọi worker (chỉ thêm)</td></tr>
+</table>
+<div class="bad"><b>Vấn đề phát hiện được</b><b>Worker viết trả lời và worker kiểm chứng đều muốn ghi <code>final_answer</code></b> → chạy xong <b>không ai biết bản cuối là bản nào</b>.<br><b>Cách sửa:</b> worker viết trả lời ghi <code>draft_answer</code>, <b>chỉ worker kiểm chứng được ghi <code>final_answer</code></b>.<br>→ <b>Một field một chủ</b> — nguyên tắc này giúp <b>truy được lỗi phát sinh ở đâu vì state không bị ghi đè lẫn lộn</b>.</div>
+
+<h2><span class="num">§4</span> &nbsp;MCP — Model Context Protocol</h2>
+<p class="sub">Để bên sở hữu service <b>công bố năng lực một lần, theo một chuẩn</b>, cho mọi agent.</p>
+
+<h3>Vấn đề MCP giải quyết</h3>
+<div class="vs">
+  <div class="lbad">
+    <h4>✗ Mỗi bên tự lo</h4>
+    <p><b>Ba team viết ba adapter</b> cho cùng một Service X.</p>
+    <p style="margin:8px 0 0;color:var(--bad)"><b>X đổi API → cả ba phải sửa, ai quên thì hỏng lúc chạy.</b></p>
+  </div>
+  <div class="lgood">
+    <h4>✓ X tự công bố theo chuẩn</h4>
+    <p><b>X viết một lần</b> (MCP server do X sở hữu) <b>cho mọi agent</b>.</p>
+    <p style="margin:8px 0 0;color:var(--ok)"><b>X đổi API → sửa trong server, không team nào phải sửa.</b></p>
+  </div>
+</div>
+<div class="acc"><b>Lợi cả hai chiều</b>Đây không phải chuyện tiết kiệm code, mà là chuyện <b>ai chịu trách nhiệm</b>.<br><b>Bên có service</b> công bố năng lực đúng một lần theo một chuẩn — và <b>tiếp cận được mọi agent</b>.<br><b>Bên làm agent</b> học đúng một chuẩn — và <b>dùng được mọi service đã theo chuẩn</b>.<br>→ <b>Trách nhiệm về đúng người biết rõ service nhất.</b></div>
+<div class="note"><b>Ẩn dụ: cổng USB</b><b>Agent học một chuẩn là cắm được vào mọi tool theo chuẩn đó.</b> Worker tra tài liệu không cần biết kho tài liệu chạy trên hạ tầng nào hay đăng nhập kiểu gì — nó chỉ đọc <b>surface</b> mà server công bố.<br><i>Anthropic mở MCP ngày 25/11/2024, mã nguồn mở.</i></div>
+
+<h3>Server mở ra ba nhóm</h3>
+<div class="three">
+  <div><div class="k">NHÓM 1</div><strong>Resources</strong><p><b>Dữ liệu agent ĐỌC được.</b><br>VD: file chính sách nghỉ phép 2025.<br><b>Chỉ đọc</b> — gọi lại bao nhiêu lần cũng không ảnh hưởng gì.</p></div>
+  <div><div class="k">NHÓM 2</div><strong>Tools</strong><p><b>Hành động agent GỌI được.</b><br>VD: tạo một đơn nghỉ phép trong hệ thống HR.<br><b>Thay đổi dữ liệu thật</b> — phải giới hạn quyền chặt hơn.</p></div>
+  <div><div class="k">NHÓM 3</div><strong>Prompts</strong><p><b>Mẫu câu lệnh server gợi ý sẵn.</b><br>VD: mẫu để trả lời câu hỏi chính sách.</p></div>
+</div>
+<div class="bad"><b>Vì sao Tools phải chặt hơn Resources</b><b>Gọi sai một lần là hệ thống HR phát sinh một đơn nghỉ phép mà nhân viên không hề tạo.</b> Với tool rủi ro cao thì <b>cần người xác nhận trước khi chạy</b>.</div>
+
+<h3>Agent hỏi server lúc chạy, không hard-code</h3>
+<div class="qlist">
+  <div class="qi"><div class="n">1</div><div class="b"><strong>Agent kết nối tới MCP server</strong></div></div>
+  <div class="qi"><div class="n">2</div><div class="b"><strong>Agent gọi <code>tools/list</code></strong><span>hỏi “server có tool gì?”</span></div></div>
+  <div class="qi"><div class="n">3</div><div class="b"><strong>Mỗi tool trả về <code>name</code> / <code>description</code> / <code>inputSchema</code></strong></div></div>
+  <div class="qi"><div class="n">4</div><div class="b"><strong>Agent đọc schema và chọn tool phù hợp task</strong></div></div>
+  <div class="qi"><div class="n">5</div><div class="b"><strong>Agent gọi <code>tools/call</code> kèm params đúng schema</strong></div></div>
+  <div class="qi"><div class="n">6</div><div class="b"><strong>Server thực thi và trả kết quả về agent</strong></div></div>
+</div>
+<div class="ok"><b>Vì sao quan trọng</b>Agent <b>không được lập trình sẵn để biết tool tồn tại</b>. Nó <b>phát hiện tool lúc chạy</b> — <b>thêm tool mới vào server là agent dùng được ngay, không sửa code</b>.</div>
+
+<h4>Ví dụ thật: <code>search_policy</code></h4>
+<pre>result = mcp.<span class="fn">call</span>(<span class="st">"search_policy"</span>, {
+    <span class="st">"query"</span>: <span class="st">"nghi thai san"</span>,
+    <span class="st">"employee_type"</span>: <span class="st">"chinh_thuc"</span>,   <span class="cm"># chỉ supervisor mới biết</span>
+    <span class="st">"effective_year"</span>: <span class="st">2025</span>,           <span class="cm"># chỉ supervisor mới biết</span>
+})
+<span class="cm"># {"chunks": [{"text": "Nghi thai san 6 thang...",</span>
+<span class="cm">#              "source": "hr_policy_2025.pdf#p12"}], "count": 3}</span></pre>
+<p class="sub"><b>Vì sao đáng giá:</b> đội HR đổi tài liệu thì <b>chỉ cập nhật MCP server của họ</b>; supervisor và các worker <b>không phải sửa</b>.</p>
+
+<h3>Ba lớp phòng thủ</h3>
+<div class="three">
+  <div><div class="k">LỚP 1</div><strong>Least privilege</strong><p><b>Chỉ cấp đúng quyền tối thiểu</b> cần cho việc — <b>read-ticket chứ không delete-DB</b>.</p></div>
+  <div><div class="k">LỚP 2</div><strong>Người duyệt</strong><p>Hành động nguy hiểm (hoàn tiền) <b>phải có người duyệt</b>.</p></div>
+  <div><div class="k">LỚP 3</div><strong>Chạy cách ly</strong><p>Chạy server trong <b>container cô lập (sandbox)</b>.</p></div>
+</div>
+<p class="sub"><b>Prompt injection:</b> câu lệnh độc giấu trong dữ liệu để lái agent làm việc ngoài ý muốn — agent thử gọi tool xoá dữ liệu, <b>MCP server kiểm quyền thật và CHẶN</b>.</p>
+
+<h2><span class="num">§5</span> &nbsp;A2A — Agent to Agent Communication</h2>
+<p class="sub">MCP giúp agent nói chuyện với <b>tool</b>; A2A giúp agent nói chuyện với <b>agent khác</b>.</p>
+
+<h3>Vì sao không coi agent kia như một tool cho xong?</h3>
+<div class="three">
+  <div><div class="k">ĐẶC ĐIỂM 1</div><strong>Nó tự quyết</strong><p>Có thể <b>hỏi lại</b>, hoặc <b>làm theo cách bạn không lường trước</b>.</p></div>
+  <div><div class="k">ĐẶC ĐIỂM 2</div><strong>Nó làm lâu</strong><p>Một việc chạy <b>20 phút</b> thì <b>không trả lời gọn trong một lần gọi</b>.</p></div>
+  <div><div class="k">ĐẶC ĐIỂM 3</div><strong>Nó có quyền từ chối</strong><p><b>Hết quota, ngoài phạm vi, hoặc không đủ thẩm quyền.</b></p></div>
+</div>
+<div class="vs">
+  <div class="lbad">
+    <h4>✗ Chưa có chuẩn</h4>
+    <p><b>Mỗi cặp tự bịa:</b> gọi ở đâu, gửi dạng gì, <b>báo tiến độ kiểu nào, từ chối thì trả về gì</b> (REST riêng, webhook riêng…).</p>
+  </div>
+  <div class="lgood">
+    <h4>✓ Có A2A</h4>
+    <p><b>Bên kia công bố AgentCard MỘT LẦN</b>: làm được gì, gọi ra sao — <b>ai theo chuẩn cũng giao việc được</b>.</p>
+  </div>
+</div>
+<div class="acc"><b>Một câu để nhớ</b><b>MCP trả lời “lấy năng lực ở đâu”; A2A trả lời “giao việc cho ai”.</b><br><b>Cách thử:</b> gọi xong thì bên kia có thể <b>làm khác ý bạn</b> không? <b>Tool thì không</b> — gọi là chạy đúng thế. <b>Agent thì có</b> — nó hỏi lại, chạy 20 phút rồi trả từng phần, hoặc từ chối thẳng.</div>
+
+<h3>Giao việc qua ranh giới cần thêm 4 field</h3>
+<div class="contract">
+  <div class="f"><div class="fn2">task · context</div><div class="fd">5 field cũ của §3 — trong nội bộ chừng đó là đủ</div></div>
+  <div class="f"><div class="fn2">constraints</div><div class="fd">…</div></div>
+  <div class="f"><div class="fn2">expected_output · error</div><div class="fd">…</div></div>
+  <div class="f add"><div class="fn2">+ from</div><div class="fd"><b>Ai gửi</b> — để bên kia biết có nên nhận không</div></div>
+  <div class="f add"><div class="fn2">+ deadline</div><div class="fd"><b>Hạn chót</b> — quá hạn thì bạn thôi chờ</div></div>
+  <div class="f add"><div class="fn2">+ status_url</div><div class="fd"><b>Báo tiến độ ở đâu</b>, vì việc chạy lâu</div></div>
+  <div class="f add"><div class="fn2">+ on_reject</div><div class="fd"><b>Từ chối thì trả về gì, và bạn làm gì tiếp</b></div></div>
+</div>
+<div class="warn"><b>Vì sao 5 field đủ trong nội bộ nhưng không đủ khi qua ranh giới</b>Trong nội bộ <b>bạn sở hữu cả hai đầu nên sai thì sửa cả hai</b>. Qua ranh giới thì <b>không sửa được agent bên kia, và nó không chờ bạn</b>.</div>
+<p class="sub"><b>AgentCard:</b> một tài liệu <b>JSON metadata</b> mô tả <b>skills, auth, endpoint</b>; thường phục vụ tại <code>/.well-known/agent-card.json</code>. Đúng mạch MCP — <b>bên có năng lực công bố một lần, cho mọi người dùng</b>.</p>
+
+<h3>Bốn kiểu cộng tác của A2A</h3>
+<table>
+  <tr><th style="width:200px">Kiểu</th><th style="width:150px">Hình dạng</th><th>Tương ứng pattern §2</th></tr>
+  <tr><td><b>Handover</b></td><td>Tuần tự</td><td>= <b>Pipeline</b> — A xong việc thì giao cho B</td></tr>
+  <tr><td><b>Cooperative Search</b></td><td>Song song</td><td>= <b>Supervisor-worker</b> — Lead chia cho Src 1/2/3</td></tr>
+  <tr><td><b>Joint Decision</b></td><td>Đồng thuận</td><td>= <b>Debate</b> — Tech vs Compliance rồi Chốt</td></tr>
+  <tr style="background:var(--ok-soft)"><td><b>Self-Correction</b> <span class="pill o">MỚI</span></td><td>Viết – kiểm – sửa</td><td><b>Chỉ cái này là mới</b> — A viết, B kiểm, trả về để sửa</td></tr>
+</table>
+<div class="note"><b>Ba cái đầu bạn đã gặp rồi</b>Vẫn là <b>bốn pattern của §2, chỉ khác ở chỗ bên kia không phải agent của bạn</b>.</div>
+
+<h4>Self-Correction: chặn ở 3 vòng</h4>
+<div class="flow">
+  <span class="step">Worker viết trả lời</span><span class="arw">bản nháp →</span>
+  <span class="step">Worker kiểm chứng</span><span class="arw">đạt →</span>
+  <span class="step">Trả cho user</span>
+  <span class="arw">↺ chưa đạt: gửi feedback · <b>tối đa 3 lần</b></span>
+</div>
+<div class="bad"><b>Vì sao phải chặn số vòng</b>Không chặn thì <b>hai worker đẩy qua đẩy lại mãi</b> — <b>mỗi vòng là thêm một lần gọi model, tốn tiền mà không chắc tốt hơn</b>.<br>Quá 3 vòng thì <b>dừng, trả phần chắc chắn và báo chỗ chưa có nguồn</b>.</div>
+
+<h3>Khi hai agent bất đồng: leo thang theo ba nấc</h3>
+<div class="lad3">
+  <div><div class="n">1</div><div class="b"><strong>Judge agent</strong><span>Trọng tài <b>đọc bằng chứng hai bên</b> rồi phân xử</span></div></div>
+  <div><div class="n">2</div><div class="b"><strong>Hierarchy</strong><span>Một vai được <b>ưu tiên cứng</b> theo luật — <b>Compliance luôn thắng Support</b></span></div></div>
+  <div><div class="n">3</div><div class="b"><strong>Con người</strong><span><b>Last resort</b> khi máy không tự khép được</span></div></div>
+</div>
+<p class="sub"><b>Xung đột cụ thể:</b> agent A nói được hoàn tiền; agent B nói khách vi phạm chính sách bảo mật nên không. Judge cân bằng chứng; nếu vẫn kẹt, Hierarchy cho <b>Compliance thắng</b>; còn tranh cãi về ngoại lệ thì <b>đẩy con người</b>.</p>
+
+<h3>Registry &amp; security boundary</h3>
+<div class="ok"><b>Registry giải quyết gì</b><b>Đủ nhiều agent thì không ai nhớ hết</b> — client <b>khám phá agent lúc runtime</b> qua Registry, <b>không hard-code địa chỉ từng agent</b>.</div>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Checklist security và boundary:</b></p>
+  <ul style="margin:0">
+    <li>Biết rõ <b>ai được gọi ai</b> — không phải agent nào cũng được chạm mọi capability</li>
+    <li>Biết <b>dữ liệu nào được truyền đi</b> — tránh đẩy thừa PII hoặc state nhạy cảm</li>
+    <li>Biết <b>output nào cần xác thực lại</b> — đặc biệt khi worker chạm tool ngoài</li>
+    <li><b>Đừng giả định mọi agent đều đáng tin như nhau</b> — hệ nhiều agent vẫn cần <b>trust boundary</b></li>
+  </ul>
+</div>
+
+<h2><span class="num">§6</span> &nbsp;Orchestration với LangGraph</h2>
+
+<h3>Bốn framework phổ biến</h3>
+<table>
+  <tr><th style="width:170px">Framework</th><th style="width:250px">Cách mô tả hệ thống</th><th>Điểm mạnh</th></tr>
+  <tr><td><b>CrewAI</b></td><td><b>Khai báo vai và nhiệm vụ</b>, có cấp trên–cấp dưới</td><td>Giao việc theo vai, cả nhóm cùng chạy một “crew”</td></tr>
+  <tr><td><b>AutoGen</b></td><td><b>Hội thoại nhiều lượt</b> giữa các agent</td><td>Lập trình bằng hội thoại, chat nhiều agent</td></tr>
+  <tr style="background:var(--acc-soft)"><td><b>LangGraph</b></td><td><b>Graph: node, edge, state</b> dùng chung</td><td>State graph sẵn có, hợp workflow lớn: rẽ nhánh, lặp, lưu lại được</td></tr>
+  <tr><td><b>OpenAI Agents SDK</b></td><td><b>Nhẹ: agent này chuyền việc cho agent kia</b></td><td>Ít code khai báo, có sẵn trace và định tuyến chuyền việc</td></tr>
+</table>
+<div class="note"><b>Vì sao bài này chọn LangGraph</b>Cả bốn đều dựng được supervisor-worker; khác nhau ở <b>cách chúng bắt bạn mô tả hệ thống</b>. Chọn LangGraph vì cần <b>rẽ nhánh, chèn người duyệt, và trace từng bước</b>.</div>
+
+<div class="vs">
+  <div class="lbad">
+    <h4>✗ Không framework</h4>
+    <ul><li>Routing <b>chôn trong một prompt điều phối dài</b></li><li>Không biết hệ thống đang ở bước nào</li><li>Thêm một nhánh xử lý phải <b>sửa cả prompt</b></li><li>Debug bằng cách <b>rải print</b></li></ul>
+  </div>
+  <div class="lgood">
+    <h4>✓ LangGraph</h4>
+    <ul><li>Routing thành <b>code đọc được, review được</b></li><li><b>Graph vẽ ra được</b>: thấy state đi qua đâu</li><li>State có <b>schema (TypedDict)</b></li><li>Có <b>điểm dừng rõ ràng để con người duyệt</b> (human-in-the-loop)</li></ul>
+  </div>
+</div>
+
+<h3>Node · Edge · State</h3>
+<div class="three">
+  <div><div class="k">NODE</div><strong>Là một hàm Python</strong><p><b>Nhận state và trả về state mới.</b><br>VD: <code>retrieval_worker(state)</code> đọc câu hỏi, ghi 3 đoạn tra được vào state.</p></div>
+  <div><div class="k">EDGE</div><strong>Đường đi giữa các node</strong><p>Thường nối cứng A → B. <b>Edge có điều kiện</b> là hàm <b>trả về tên node kế tiếp dựa trên state</b>.</p></div>
+  <div><div class="k">STATE</div><strong>TypedDict đi xuyên suốt graph</strong><p><b>Mỗi node đọc toàn bộ, nhưng chỉ ghi field được phép.</b></p></div>
+</div>
+<div class="acc"><b>Vì sao ranh giới “mỗi node chỉ ghi field của mình” quan trọng</b>Đó là thứ giúp bạn <b>truy được lỗi phát sinh ở đâu — state không bị ghi đè lẫn lộn</b>.</div>
+
+<pre><span class="cm"># reads need_verify / need_retrieval from Day09State</span>
+<span class="kw">def</span> <span class="fn">route_to_worker</span>(state: Day09State) -> str:
+    <span class="kw">if</span> state[<span class="st">"need_verify"</span>]:
+        <span class="kw">return</span> <span class="st">"verify_worker"</span>
+    <span class="kw">if</span> state[<span class="st">"need_retrieval"</span>]:
+        <span class="kw">return</span> <span class="st">"retrieval_worker"</span>
+    <span class="kw">return</span> <span class="st">"synthesis_worker"</span>
+
+<span class="cm"># routing is EXPLICIT code, not buried in a prompt</span>
+builder.<span class="fn">add_conditional_edges</span>(<span class="st">"supervisor"</span>, route_to_worker, {...})</pre>
+<p class="sub">Hàm route đọc thẳng cờ trên <b>cùng một</b> <code>Day09State</code> — <b>không có state thứ hai</b>. Routing nằm ở code tường minh nên <b>test được và đọc được</b>.</p>
+
+<h3>Toàn cảnh một graph</h3>
+<div class="flow">
+  <span class="step">Input State</span><span class="arw">→</span>
+  <span class="step"><b>Supervisor</b><small>conditional edges</small></span><span class="arw">→</span>
+  <span class="step">Worker tra tài liệu</span><span class="step">Worker viết trả lời</span><span class="arw">→</span>
+  <span class="step">Worker kiểm chứng<small>thiếu nguồn → viết lại</small></span><span class="arw">→</span>
+  <span class="step"><b>Người duyệt</b></span>
+</div>
+<div class="ok"><b>Điểm cần nhớ</b>LangGraph làm lộ rõ <b>route quyết định ở đâu</b> (supervisor), <b>state đi qua đâu</b> (từng edge), và <b>người duyệt chèn vào chỗ nào</b> — <b>sau worker kiểm chứng, trước khi trả kết quả</b>, tức <b>trước node nhạy cảm</b>.</div>
+
+<h2><span class="num">§7</span> &nbsp;Trace &amp; Độ tin cậy</h2>
+
+<h3>Một trace entry cần đủ 7 field</h3>
+<pre>[
+  {<span class="st">"timestamp"</span>:<span class="st">"11:40:02"</span>, <span class="st">"agent_id"</span>:<span class="st">"supervisor"</span>, <span class="st">"action"</span>:<span class="st">"route"</span>,
+   <span class="st">"input_summary"</span>:<span class="st">"nghi thai san duoc bao lau?"</span>,
+   <span class="st">"output_summary"</span>:<span class="st">"route=retrieval_worker (ly do: cau hoi chinh sach)"</span>,
+   <span class="st">"status"</span>:<span class="st">"ok"</span>, <span class="st">"latency_ms"</span>:<span class="st">180</span>},
+  {<span class="st">"timestamp"</span>:<span class="st">"11:40:03"</span>, <span class="st">"agent_id"</span>:<span class="st">"retrieval_worker"</span>, <span class="st">"action"</span>:<span class="st">"call"</span>,
+   <span class="st">"input_summary"</span>:<span class="st">"query=nghi thai san, employee_type=chinh_thuc"</span>,
+   <span class="st">"output_summary"</span>:<span class="st">"chunk=hr_policy_2025.pdf#p12"</span>,
+   <span class="st">"status"</span>:<span class="st">"ok"</span>, <span class="st">"latency_ms"</span>:<span class="st">420</span>}
+]</pre>
+<p class="sub"><b>7 field:</b> <code>timestamp</code> · <code>agent_id</code> · <code>action</code> · <code>input_summary</code> · <code>output_summary</code> · <code>status</code> · <code>latency_ms</code>.<br><b>Lưu ý:</b> <code>input_summary</code> là <b>tóm tắt, không phải toàn bộ context</b>. Entry supervisor ghi cả <b>lý do định tuyến</b>.</p>
+
+<h3>Reliability là “hỏng có kiểm soát”, không phải “không hỏng”</h3>
+<div class="rel">
+  <div class="r4">4. Tổng hợp từ phần đã thành công</div>
+  <div class="r3">3. Fallback — có đường lui khi worker hỏng</div>
+  <div class="r2">2. Retry cap — thử lại nhưng có trần</div>
+  <div class="r1">1. Worker timeout — không chờ vô hạn</div>
+</div>
+<div class="ok"><b>Graceful degradation</b>Với ticket P1 mà một worker timeout, hệ thống <b>không im lặng hỏng</b>: nó <b>trả phần đã chắc chắn, nói rõ phần còn thiếu, và báo khi không đủ tự tin thay vì đoán bừa</b>.</div>
+
+<h3>Năm ngộ nhận cần gỡ</h3>
+<table>
+  <tr><th style="width:330px">Ngộ nhận</th><th>Thực tế</th></tr>
+  <tr><td>Nhiều agent = hệ thống tốt hơn</td><td>Nhiều agent = <b>nhiều phức tạp</b>; chỉ chia vai khi thật cần</td></tr>
+  <tr><td>Supervisor phải là model to nhất</td><td><b>Supervisor chỉ cần đủ để route đúng</b>, không cần giỏi hơn worker về chuyên môn</td></tr>
+  <tr><td>MCP và A2A là một</td><td><b>MCP nối agent với tool; A2A giao việc cho agent khác</b></td></tr>
+  <tr><td>Multi-agent tự giải quyết vấn đề context</td><td><b>Vẫn phải quản context cẩn thận ở từng bước</b></td></tr>
+  <tr><td>LangGraph chỉ chạy với LangChain</td><td><b>LangGraph chạy được với nhiều framework khác</b></td></tr>
+</table>
+<p class="sub" style="text-align:center"><b>Nhớ ranh giới, đừng nhớ khẩu hiệu: nhiều agent không tự nó là tốt hơn.</b></p>
+
+<h3>4 Key Takeaways</h3>
+<div class="grid g2">
+  <div class="ok" style="margin:0"><b>1 · Vì sao chia vai</b>Multi-agent là <b>chia vai trò để hệ thống đỡ quá tải và dễ kiểm soát</b>, <b>không phải thêm agent cho “ngầu”</b>.</div>
+  <div class="ok" style="margin:0"><b>2 · Bắt đầu từ đâu</b><b>Supervisor-worker là điểm khởi đầu thực dụng</b>: route rõ, worker rõ, nối thẳng được với artifact Day 08.</div>
+  <div class="ok" style="margin:0"><b>3 · Nối với nhau</b><b>MCP nối agent với năng lực bên ngoài</b> theo chuẩn chung; <b>A2A giao việc giữa các agent</b> bằng contract rõ ràng.</div>
+  <div class="ok" style="margin:0"><b>4 · Điều phối</b><b>LangGraph biến orchestration thành graph</b> có state, routing và human-in-the-loop → dễ debug, dễ mở rộng.</div>
+</div>
+
+<div class="quote"><p>Một agent rất giỏi có thể làm nhiều việc.<br>Nhưng hệ thống tốt hơn thường bắt đầu từ câu hỏi: <b>nên chia vai trò ở đâu?</b></p><small>CÂU HỎI ĐÓNG BÀI</small></div>
+
+<h3>Glossary</h3>
+<div class="card">
+  <dl class="kv" style="grid-template-columns:auto 1fr">
+    <dt>supervisor</dt><dd>agent điều phối, chỉ route</dd>
+    <dt>worker</dt><dd>agent chuyên một vai</dd>
+    <dt>MCP</dt><dd>chuẩn nối năng lực ngoài</dd>
+    <dt>A2A</dt><dd>giao thức agent giao việc cho agent</dd>
+    <dt>AgentCard</dt><dd>JSON mô tả skills/auth/endpoint</dd>
+    <dt>checkpointer</dt><dd>lưu state theo thread để resume</dd>
+    <dt>trace</dt><dd>nhật ký đường đi của quyết định</dd>
+  </dl>
+</div>
+
+</section>
+
+<!-- ==================== TAB 2 ==================== -->
+<section class="panel" id="cheat">
+<button class="printbtn" onclick="window.print()">In cheat sheet</button>
+
+<div class="cheatgrid">
+<div>
+
+<h2>4 câu hỏi của ngày</h2>
+<div class="card">
+  <p style="margin:0">① Khi nào một agent không đủ · ② Chia việc kiểu nào · ③ Nối với nhau ra sao · ④ Hỏng thì lần ra ở đâu</p>
+</div>
+
+<h2>4 giới hạn single-agent</h2>
+<div class="card">
+  <ol style="margin:0">
+    <li><b>Chật chỗ trong một lần suy luận</b> (context bottleneck)</li>
+    <li><b>Ôm nhiều vai thì không giỏi vai nào</b> (specialization trade-off)</li>
+    <li><b>Chạy nối đuôi, không chạy cùng lúc</b> (parallelism)</li>
+    <li><b>Lỗi không có ranh giới</b></li>
+  </ol>
+  <p style="margin:8px 0 0"><b>Giới hạn 4:</b> chia agent KHÔNG làm lỗi biến mất, thậm chí nhiều chỗ hỏng hơn — cái đổi được là <b>mỗi lỗi có ranh giới rõ</b></p>
+</div>
+
+<h2>Số liệu then chốt</h2>
+<div class="card">
+  <dl class="kv">
+    <dt>240 dòng</dt><dd>prompt CS: vai/tone 15 · tool 120 · retrieval 40 · trích nguồn 35 · retry 30</dd>
+    <dt>40 PDF</dt><dd>1 agent = 40 lượt nối đuôi; chia ra = 40 agent cùng lúc</dd>
+    <dt>4,5×</dt><dd>chênh lệch thời gian (Kimi Agent Swarm 2026, 1.500+ tool call)</dd>
+    <dt>~15×</dt><dd>token multi-agent so với 1 lượt chat (Anthropic 2025)</dd>
+    <dt>3–5 subagent</dt><dd>deep research Anthropic, rút ngắn tới 90% thời gian</dd>
+  </dl>
+</div>
+
+<h2>Lost in the Middle</h2>
+<div class="card">
+  <p style="margin:0">Liu et al., <b>TACL 2024</b> — model dùng tốt <b>đầu và cuối</b>, bỏ quên bằng chứng ở <b>giữa</b>.<br>
+  → <b>Nhồi thêm tài liệu KHÔNG làm agent suy luận tốt hơn</b></p>
+</div>
+
+<h2>Nên chia / Đừng chia</h2>
+<table>
+  <tr><th>Nên chia (4 dấu hiệu)</th><th>Đừng chia</th></tr>
+  <tr><td>Nhiều bước vai trò khác nhau<br>Chia việc độc lập được<br>Cần debug rõ ai sai<br>Cần mở rộng dần</td><td><b>Mọi vai đều cần cùng ngữ cảnh</b><br>Chỉ vì thấy “ngầu”<br>(tốn ~15× token)</td></tr>
+</table>
+
+<h2>Quy mô → số agent</h2>
+<table>
+  <tr><th>Việc</th><th>Cấu hình</th></tr>
+  <tr><td>Tra một dữ kiện</td><td><b>1 agent, 3–10 lượt tool</b></td></tr>
+  <tr><td>So sánh vài lựa chọn</td><td>2–4 worker, 10–15 lượt tool</td></tr>
+  <tr><td>Quét rộng nhiều hướng</td><td>10+ worker</td></tr>
+</table>
+<p style="margin:2px 0 0"><b>Không ghi vào prompt → supervisor gọi thừa worker cho việc nhỏ</b></p>
+
+<h2>4 Pattern</h2>
+<table>
+  <tr><th>Pattern</th><th>Hình</th><th>Bẫy</th></tr>
+  <tr><td><b>Supervisor-worker</b></td><td>Toả ra</td><td>Giao việc mơ hồ (3 worker cùng mở 1 trang) · supervisor ôm quá nhiều</td></tr>
+  <tr><td><b>Pipeline</b></td><td>Nối tiếp</td><td>Thời gian cộng dồn · gãy khi yêu cầu đi chệch</td></tr>
+  <tr><td><b>Debate</b></td><td>Hội tụ</td><td>Giá nhân lên · <b>ai quyết khi mâu thuẫn</b></td></tr>
+  <tr><td><b>Hierarchical</b></td><td>Lồng tầng</td><td>Tam sao thất bản · trace dài 3 tầng</td></tr>
+</table>
+<p style="margin:2px 0 0"><b>Supervisor-worker chia KHỐI LƯỢNG · Debate chia GÓC NHÌN</b><br>Hierarchical là pattern <b>nên để dành</b></p>
+
+<h2>Chọn pattern — 2 câu hỏi</h2>
+<div class="card">
+  <p style="margin:0">① Các bước cố định sẵn? → <b>CÓ = Pipeline</b><br>
+  ② Mỗi agent một mảnh hay cùng một việc?<br>
+  → một mảnh = <b>Supervisor-worker</b> · cùng việc = <b>Debate</b></p>
+</div>
+
+<h2>Mẹo chuyền tin (Pipeline)</h2>
+<div class="card">
+  <p style="margin:0"><b>Đừng nhét nguyên output bước trước vào prompt bước sau.</b> Lưu ra ngoài rồi chuyền <b>tham chiếu ngắn</b> (id, đường dẫn file) — cách Anthropic dùng</p>
+</div>
+
+</div>
+<div>
+
+<h2>Supervisor vs Worker</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Supervisor giữ luồng quyết định (decision flow); worker giữ chuyên môn (domain skill)</b></p>
+  <p style="margin:0"><b>Dấu hiệu hỏng:</b> worker âm thầm gọi worker khác → <b>hai supervisor mà chỉ một cái trong sơ đồ</b></p>
+</div>
+
+<h2>Worker tốt — 3 tính chất</h2>
+<div class="card">
+  <dl class="kv">
+    <dt>Hẹp</dt><dd>một worker một việc chính</dd>
+    <dt>Stateless</dt><dd>gửi “chính sách nghỉ phép 2025” thay vì để nó đoán “cái đó”</dd>
+    <dt>Test được</dt><dd>hứa 3 đoạn/câu → ném 20 câu mẫu, đếm số lần trúng</dd>
+  </dl>
+</div>
+
+<h2>State</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Bảng chấm công 3 cột:</b> history · pending · decision</p>
+  <p style="margin:0 0 6px"><b>Tối thiểu:</b> task · plan · worker_results · status · final_answer · <b>trace</b></p>
+  <p style="margin:0"><code>trace</code> <b>append-only</b> · <code>error</code> = <code>{code, reason}</code> · cờ <code>need_retrieval</code>/<code>need_verify</code> do <b>supervisor</b> ghi để routing</p>
+</div>
+
+<h2>Phiếu giao việc — 5 field</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>task · context · constraints · expected_output · error</b></p>
+  <p style="margin:0 0 6px"><b>3 lợi ích:</b> test riêng được · ghi vào trace · thay worker mà supervisor không sửa</p>
+  <p style="margin:0"><b>Độ dài:</b> quá ít = nguyên văn câu user · <b>vừa đủ = “nghỉ thai sản, nhân viên chính thức, 2025”</b> · quá nhiều = 12 lượt hội thoại + sổ tay 40 trang</p>
+</div>
+
+<h2>Thiếu vs Thừa</h2>
+<div class="card">
+  <p style="margin:0"><b>Thiếu thì thêm</b> — worker trả sai là biết ngay.<br>
+  <b>Thừa thì khó cắt</b> — sau vài tháng không ai dám bỏ field nào vì không rõ worker nào còn đọc</p>
+</div>
+
+<h2>Một field một chủ</h2>
+<div class="card">
+  <p style="margin:0">Worker viết trả lời + worker kiểm chứng <b>cùng ghi <code>final_answer</code></b> → không ai biết bản cuối là bản nào.<br>
+  <b>Sửa:</b> viết trả lời ghi <code>draft_answer</code>, chỉ kiểm chứng được ghi <code>final_answer</code></p>
+</div>
+
+<h2>MCP</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Vấn đề:</b> 3 team viết 3 adapter cho cùng service X → X đổi API thì cả 3 phải sửa</p>
+  <p style="margin:0 0 6px"><b>Ẩn dụ cổng USB</b> — học một chuẩn, cắm được mọi tool theo chuẩn</p>
+  <p style="margin:0 0 6px"><b>3 nhóm:</b> Resources (đọc) · <b>Tools (thay đổi dữ liệu thật → chặt hơn)</b> · Prompts</p>
+  <p style="margin:0"><b>6 bước:</b> kết nối → <code>tools/list</code> → name/description/inputSchema → chọn tool → <code>tools/call</code> → server trả kết quả</p>
+</div>
+
+<h2>MCP security</h2>
+<div class="card">
+  <p style="margin:0"><b>3 lớp:</b> least privilege (<b>read-ticket chứ không delete-DB</b>) · người duyệt cho hành động nguy hiểm · container cô lập</p>
+</div>
+
+<h2>MCP vs A2A</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>MCP trả lời “lấy năng lực ở đâu”; A2A trả lời “giao việc cho ai”</b></p>
+  <p style="margin:0"><b>Cách thử:</b> gọi xong bên kia có làm khác ý không? Tool <b>không</b> · Agent <b>có</b></p>
+</div>
+
+<h2>A2A</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>3 đặc điểm agent ≠ tool:</b> tự quyết · làm lâu · <b>có quyền từ chối</b></p>
+  <p style="margin:0 0 6px"><b>+4 field:</b> <code>from</code> · <code>deadline</code> · <code>status_url</code> · <code>on_reject</code></p>
+  <p style="margin:0 0 6px"><b>AgentCard:</b> JSON skills/auth/endpoint tại <code>/.well-known/agent-card.json</code></p>
+  <p style="margin:0"><b>4 kiểu:</b> Handover (=pipeline) · Cooperative Search (=sup-worker) · Joint Decision (=debate) · <b>Self-Correction (MỚI)</b></p>
+</div>
+
+<h2>Xung đột — 3 nấc</h2>
+<div class="card">
+  <p style="margin:0">① <b>Judge agent</b> đọc bằng chứng hai bên → ② <b>Hierarchy</b> (Compliance luôn thắng Support) → ③ <b>Con người</b> (last resort)<br>
+  <b>Self-Correction chặn ở 3 vòng</b> — mỗi vòng thêm một lần gọi model</p>
+</div>
+
+<h2>LangGraph</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Node</b> = hàm nhận state trả state mới · <b>Edge</b> = đường đi · <b>State</b> = TypedDict xuyên suốt</p>
+  <p style="margin:0 0 6px"><b>Route:</b> <code>need_verify</code> → verify · <code>need_retrieval</code> → retrieval · mặc định synthesis</p>
+  <p style="margin:0"><b>Người duyệt chèn sau worker kiểm chứng, trước khi trả kết quả</b> (trước node nhạy cảm)</p>
+</div>
+
+<h2>Trace — 7 field</h2>
+<div class="card">
+  <p style="margin:0"><code>timestamp · agent_id · action · input_summary · output_summary · status · latency_ms</code><br>
+  <b>input_summary là TÓM TẮT, không phải toàn bộ context</b></p>
+</div>
+
+<h2>Reliability 4 tầng</h2>
+<div class="card">
+  <p style="margin:0">① Worker timeout → ② Retry cap → ③ Fallback → ④ <b>Tổng hợp từ phần đã thành công</b><br>
+  <b>Hỏng có kiểm soát, không phải không hỏng</b></p>
+</div>
+
+<h2>5 ngộ nhận</h2>
+<div class="card">
+  <ul style="margin:0">
+    <li>Nhiều agent = tốt hơn → <b>= nhiều phức tạp</b></li>
+    <li>Supervisor phải to nhất → <b>chỉ cần route đúng</b></li>
+    <li>MCP = A2A → <b>tool vs agent</b></li>
+    <li>Multi-agent tự giải context → <b>vẫn phải quản từng bước</b></li>
+    <li>LangGraph chỉ chạy LangChain → <b>chạy với nhiều framework</b></li>
+  </ul>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ==================== TAB 3 ==================== -->
+<section class="panel" id="cards">
+<div class="fcbar">
+  <button class="fbtn on" data-f="all">Tất cả</button>
+  <button class="fbtn" data-f="limit">Giới hạn 1 agent</button>
+  <button class="fbtn" data-f="pat">4 Pattern</button>
+  <button class="fbtn" data-f="sw">Supervisor-Worker</button>
+  <button class="fbtn" data-f="mcp">MCP</button>
+  <button class="fbtn" data-f="a2a">A2A</button>
+  <button class="fbtn" data-f="lg">LangGraph &amp; Trace</button>
+  <span class="counter" id="cnt"></span>
+</div>
+<div class="fcgrid" id="fcgrid"></div>
+<p class="hint">Click vào thẻ để lật · Click lần nữa để úp lại</p>
+</section>
+
+</div>
+
+<script>
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); document.getElementById(b.dataset.t).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+const CARDS=[
+ ['limit','Câu hỏi mở đầu Day 9?','“Có một agent rất giỏi nhưng bài toán đã quá lớn — <b>làm sao hệ thống vẫn rõ vai trò, dễ kiểm soát và dễ mở rộng?</b>”'],
+ ['limit','4 câu hỏi trọng tâm của ngày?','① Khi nào một agent không còn đủ · ② Chia việc theo kiểu nào · ③ Các agent nối với nhau ra sao · ④ Hỏng thì lần ra ở đâu.'],
+ ['limit','Các buổi trước đã trang bị gì cho cùng một agent?','<b>Tool calling</b> cho tay chân · <b>ReAct</b> cho quyền tự quyết · <b>RAG</b> cho tài liệu để tra cứu.'],
+ ['limit','Vì sao “một người giỏi tới mấy vẫn có trần”?','Vì <b>chỉ làm được một việc tại một thời điểm</b>, và <b>ôm càng nhiều vai thì càng dễ nhầm</b>.'],
+ ['limit','4 giới hạn cốt lõi của single-agent?','① <b>Chật chỗ trong một lần suy luận</b> (context bottleneck) · ② <b>Ôm nhiều vai thì không giỏi vai nào</b> (specialization trade-off) · ③ <b>Chạy nối đuôi, không chạy cùng lúc</b> (parallelism) · ④ <b>Lỗi không có ranh giới</b>.'],
+ ['limit','Lưu ý đặc biệt về giới hạn thứ 4?','<b>Chia agent KHÔNG làm lỗi biến mất</b>, thậm chí <b>nhiều chỗ hỏng hơn</b>. Cái nó đổi được là <b>mỗi lỗi có ranh giới rõ</b>.'],
+ ['limit','System prompt agent CS có bao nhiêu dòng và chia thế nào?','<b>240 dòng</b>: vai trò &amp; tone <b>15</b> · luật dùng tool (8 tool) <b>120</b> · luật retrieval <b>40</b> · luật trích nguồn <b>35</b> · luật retry <b>30</b>.'],
+ ['limit','Ví dụ “luật va nhau” của giới hạn 2?','Luật <b>“gặp lỗi thì retry”</b> đấu với luật <b>“không chắc thì hỏi lại người dùng”</b>.'],
+ ['limit','Lost in the Middle được dùng làm bằng chứng cho điều gì?','<b>Liu et al., TACL 2024</b> — chứng minh <b>nhồi thêm tài liệu vào một agent KHÔNG làm nó suy luận tốt hơn</b>, vì bằng chứng ở giữa dễ bị bỏ quên.'],
+ ['limit','Ví dụ 40 PDF minh họa giới hạn parallelism thế nào?','Một agent cần <b>40 lượt nối đuôi</b>; chia ra thì <b>40 agent đọc cùng lúc</b> — chênh lệch thời gian khoảng <b>4,5 lần</b> (Kimi Agent Swarm 2026, <b>1.500+ tool call</b> một lần giao việc).'],
+ ['limit','Vì sao “model mạnh hơn chỉ rút ngắn từng bước, không bỏ được hàng đợi”?','Vì tổng thời gian tăng theo <b>SỐ BƯỚC chứ không theo độ khó</b>, mà một agent chỉ làm được <b>một bước tại một thời điểm</b>.'],
+ ['limit','3 dòng “cái mất” của multi-agent?','<b>Chi phí LLM</b> (mỗi agent ≥1 lần gọi, supervisor là lần riêng) · <b>Latency</b> (nhiều chặng nối tiếp) · <b>Độ phức tạp</b> (state, route, contract phải quản).'],
+ ['limit','4 dấu hiệu NÊN chia nhỏ task?','① Task có <b>nhiều bước vai trò khác nhau</b> · ② <b>Chia được việc độc lập</b> · ③ Cần <b>debug rõ ai làm sai</b> · ④ Cần <b>mở rộng dần</b>.'],
+ ['limit','Khi nào ĐỪNG chia thành nhiều agent?','Khi <b>mọi vai đều cần cùng một ngữ cảnh</b> — lúc đó chia chỉ <b>tốn thêm công chuyền tin</b>. Và multi-agent tốn khoảng <b>15× token</b> so với một lượt chat.'],
+ ['limit','Agent có 8 tool, thêm tool thứ 9 dài thêm 40 dòng — tín hiệu gì?','<b>Tín hiệu quá tải của CẢ giới hạn 1 và 2</b> — đây là lúc cân nhắc <b>chuyển nhóm việc đó thành một worker riêng</b>.'],
+ ['limit','Điểm chung của các bài toán phù hợp multi-agent?','<b>Không phải khó hơn</b>, mà là <b>quá rộng, quá dài, hoặc cần nhiều góc nhìn</b> cho một agent.'],
+ ['limit','Ví dụ Customer service phân vai thế nào?','<b>1 agent đọc sentiment · 1 truy lịch sử đơn · 1 soạn trả lời</b> — trong cùng một luồng.'],
+ ['limit','Ví dụ “Review nhiều góc” gồm những vai nào?','<b>VC hoài nghi + PM kỳ cựu + chuyên gia đạo đức</b> cùng mổ một kế hoạch launch.'],
+
+ ['pat','4 pattern phân biệt bằng hình dạng nào?','<b>Supervisor-worker TOẢ RA</b> · <b>Pipeline NỐI TIẾP</b> · <b>Debate HỘI TỤ</b> · <b>Hierarchical LỒNG TẦNG</b>.'],
+ ['pat','Supervisor-Worker dùng khi nào?','Khi yêu cầu <b>đa dạng, khó đoán trước</b>, và các nhánh việc <b>độc lập với nhau</b>. Worker <b>không nói chuyện với nhau</b>.'],
+ ['pat','Trường hợp gọn nhất của Supervisor-Worker?','Supervisor <b>chỉ làm định tuyến</b> — đọc ticket rồi chọn đúng <b>một</b> worker: refund, kỹ thuật hoặc escalate.'],
+ ['pat','Bẫy 1 của Supervisor-Worker?','<b>Giao việc mơ hồ</b> — giao cho 3 worker cùng câu “tìm hiểu về đối thủ X” thì <b>cả 3 mở đúng một trang chủ và trả về gần như một bản</b>.'],
+ ['pat','Bẫy 2 của Supervisor-Worker?','<b>Supervisor ôm quá nhiều</b> — vừa route vừa tự làm nên <b>thành nút cổ chai và context của nó phình đúng như một agent đơn lẻ</b>.'],
+ ['pat','Pipeline dùng khi nào và 2 bẫy là gì?','Dùng khi <b>các bước đã cố định sẵn, gần như không rẽ nhánh</b> (vd duyệt cấp quyền).<br><b>Bẫy:</b> ① <b>thời gian cộng dồn</b> qua từng chặng · ② <b>gãy khi yêu cầu đi chệch</b> vì không có chỗ rẽ nhánh.'],
+ ['pat','“Mẹo chuyền tin” của Anthropic trong Pipeline?','<b>Đừng nhét nguyên output bước trước vào prompt bước sau</b> — lưu ra ngoài rồi <b>chuyền một tham chiếu ngắn</b> (id, đường dẫn file).'],
+ ['pat','Debate khác Supervisor-Worker ở điểm căn bản nào?','<b>Supervisor-worker chia KHỐI LƯỢNG</b> — thiếu một mảnh là không đủ.<br><b>Debate chia GÓC NHÌN</b> — bỏ một góc vẫn chạy được, chỉ <b>dễ sót rủi ro hơn</b>.'],
+ ['pat','Debate nên dùng khi nào?','Khi <b>sai một lần thì đắt</b>, và <b>cái đáng sợ là ĐIỂM MÙ chứ không phải khối lượng việc</b>.'],
+ ['pat','2 bẫy của Debate?','① <b>Giá nhân lên</b> — ba góc nhìn là ba lần token cho cùng một việc.<br>② <b>Chỗ khó nằm ở bước cuối</b> — ba bên mâu thuẫn thì <b>ai quyết</b>? Phải chốt trước: đa số, ưu tiên góc bảo mật, hay đẩy người duyệt.'],
+ ['pat','Hierarchical nên dùng khi nào? Dấu hiệu?','Khi có <b>nhiều nhóm việc khác hẳn nhau cần luật giao việc riêng</b>.<br><b>Dấu hiệu:</b> supervisor phải <b>nhớ quá nhiều worker và quá nhiều luật route</b>.'],
+ ['pat','Lời khuyên về Hierarchical?','<b>Đây là pattern nên để dành</b> — hầu hết bài toán trong lớp <b>dừng ở supervisor-worker một tầng</b>. Bẫy: tam sao thất bản (2 lần diễn giải) và trace dài qua 3 tầng.'],
+ ['pat','Sơ đồ “Chọn Pattern Bằng Hai Câu Hỏi”?','<b>Câu 1:</b> các bước có cố định sẵn không → <b>CÓ = Pipeline</b>.<br><b>Câu 2:</b> mỗi agent làm một mảnh khác nhau hay cùng một việc → <b>một mảnh = Supervisor-worker</b> · <b>cùng việc = Debate</b>.'],
+ ['pat','Vì sao Hierarchical không nằm trong sơ đồ 2 câu hỏi?','Vì nó <b>không phải lựa chọn ngang hàng — không ai mở đầu bằng nó</b>. Nó là thứ <b>thêm vào sau</b> khi supervisor đã nhớ không xuể số worker.'],
+ ['pat','Quy mô việc → bao nhiêu agent?','<b>Tra một dữ kiện:</b> 1 agent, 3–10 lượt tool (chia chỉ tốn thêm).<br><b>So sánh vài lựa chọn:</b> 2–4 worker, 10–15 lượt tool.<br><b>Quét rộng nhiều hướng:</b> 10+ worker.'],
+ ['pat','Vì sao phải ghi rõ mức quy mô vào prompt supervisor?','Vì nếu không ghi, <b>supervisor sẽ gọi thừa worker cho việc nhỏ</b>. Con số lấy từ hệ thống deep research của Anthropic.'],
+ ['pat','Checkpoint: trợ lý nội bộ nhận yêu cầu khó đoán — chọn gì?','<b>Supervisor-worker</b> — câu hỏi “các bước có cố định sẵn không?” trả lời là <b>KHÔNG</b> nên <b>pipeline bị loại ngay</b>.'],
+ ['pat','Checkpoint: team chọn debate cho quy trình duyệt cấp quyền — sai ở đâu?','Quy trình <b>đã cố định</b> thì không cần nhiều góc nhìn — debate chỉ <b>nhân chi phí và đẻ thêm việc hòa giải</b>. <b>Đổi sang pipeline.</b>'],
+
+ ['sw','Supervisor có cần giỏi hơn mọi worker không?','<b>KHÔNG.</b> Việc của nó là <b>giao đúng việc, gọi đúng worker và gom kết quả</b> — không phải tự làm phần chuyên môn.'],
+ ['sw','Ranh giới supervisor / worker được tóm gọn thế nào?','<b>Supervisor giữ luồng quyết định (decision flow); worker giữ chuyên môn (domain skill).</b>'],
+ ['sw','Dấu hiệu ranh giới supervisor-worker bị hỏng?','Một worker <b>vừa làm việc hẹp của nó, vừa âm thầm gọi worker khác</b> — lúc đó bạn có <b>hai supervisor mà chỉ một cái được ghi trong sơ đồ</b>.'],
+ ['sw','Chỉ thị “Return ONLY the worker name. No explanation” chặn điều gì?','Chặn supervisor <b>tự trả lời từ kiến thức riêng và bỏ qua worker</b>, hoặc <b>bịa dù worker đã có bằng chứng</b>.<br>Ngược lại, quá ít tự do thì nó đẩy mọi thứ sang một worker an toàn → <b>agent đơn lẻ đội lốt</b>.'],
+ ['sw','3 tính chất của worker tốt?','<b>Hẹp</b> (specialized) · <b>Độc lập từng lần gọi</b> (stateless) · <b>Test được</b> (testable).'],
+ ['sw','Ví dụ tính stateless của worker?','Supervisor gửi <b>“chính sách nghỉ phép 2025”</b> thay vì để worker <b>tự đọc lại hội thoại đoán “cái đó” là cái gì</b>.'],
+ ['sw','Ví dụ tính “test được” của worker tra tài liệu?','Worker đã hứa trả <b>3 đoạn mỗi câu hỏi</b> → <b>ném 20 câu mẫu vào rồi đếm số lần đoạn đúng có trong đó</b>.'],
+ ['sw','State được ví như gì, với ba cột nào?','<b>“Bảng chấm công”</b> của hệ thống: <b>đã làm gì</b> (history) · <b>còn dang dở</b> (pending) · <b>vì sao chọn worker này</b> (decision).'],
+ ['sw','State tối thiểu cần những field nào?','<code>task</code> · <code>plan</code> · <code>worker_results</code> · <code>status</code> · <code>final_answer</code> · <code>trace</code>.'],
+ ['sw','Trong Day09State, trace và error được thiết kế thế nào?','<code>trace</code> là <b>append-only</b> — chỉ ghi thêm chứ không ghi đè, entry gồm <b>7 field</b>.<br><code>error</code> là <b><code>{code, reason}</code> hoặc None</b> — để <b>hỏng có kiểm soát thay vì im lặng</b>.'],
+ ['sw','Hai cờ need_retrieval và need_verify do ai ghi, để làm gì?','Do <b>supervisor</b> ghi, dùng để <b>định tuyến (routing)</b> tới đúng worker ở bước tiếp theo.'],
+ ['sw','Thiếu field trace thì mất khả năng gì?','<b>Thứ tự worker đã chạy và đầu vào/đầu ra ở mỗi bước.</b> Lỗi lộ ra ở bước viết trả lời nhưng <b>không truy về được điểm gốc</b>.'],
+ ['sw','Phiếu giao việc (contract) là gì?','<b>Bản mô tả cố định cho một lần supervisor giao việc</b>: phải gửi kèm gì và worker bắt buộc trả về dạng gì — <b>hai bên thỏa thuận trước, không đoán lúc chạy</b>.'],
+ ['sw','5 field của phiếu giao việc?','<code>task</code> · <code>context</code> · <code>constraints</code> · <code>expected_output</code> · <code>error</code>.'],
+ ['sw','3 lợi ích của 5 field này?','① Worker <b>test riêng được</b> vì biết đầu vào đầu ra · ② <b>Ghi được vào trace</b> · ③ <b>Thay được bằng worker khác</b> mà supervisor không phải sửa.'],
+ ['sw','Vì sao chuyển thẳng câu hỏi user xuống worker là sai?','Vì <b>thiếu đúng hai thứ chỉ supervisor mới biết</b>: người hỏi thuộc diện nào và bản nào đang hiệu lực. Worker phải tự chọn — và <b>nó chọn im lặng, không báo lỗi</b> (trúng bản 2023 cho nhân viên thời vụ).'],
+ ['sw','Ba mức độ dài của field context?','<b>Quá ít:</b> nguyên văn câu user.<br><b>Vừa đủ:</b> “nghỉ thai sản, nhân viên chính thức, 2025”.<br><b>Quá nhiều:</b> 12 lượt hội thoại + hồ sơ nhân viên + sổ tay 40 trang.'],
+ ['sw','Vì sao “thừa thì khó cắt” hơn “thiếu thì khó biết”?','Vì <b>thiếu thì worker trả sai nên biết ngay</b>; còn <b>thừa thì sau vài tháng không ai dám bỏ field nào vì không rõ worker nào còn đọc nó</b>.'],
+ ['sw','Lab Day 9 tách RAG agent Day 8 thành mấy worker?','<b>Ba worker:</b> tra tài liệu · viết trả lời · <b>kiểm chứng (MỚI)</b>.<br>Worker kiểm chứng đối chiếu từng câu với đoạn tài liệu — <b>câu nào không có nguồn thì bỏ</b>. Đây là thứ agent đơn lẻ khó tự làm.'],
+ ['sw','Bài mẫu A3 phát hiện vấn đề gì khi lập bảng “field nào ai ghi”?','<b>Worker viết trả lời và worker kiểm chứng đều muốn ghi <code>final_answer</code></b> → chạy xong <b>không ai biết bản cuối là bản nào</b>.<br><b>Sửa:</b> viết trả lời ghi <code>draft_answer</code>, chỉ kiểm chứng được ghi <code>final_answer</code>.'],
+ ['sw','Nguyên tắc “một field một chủ” quan trọng vì?','Giúp <b>truy được lỗi phát sinh ở đâu</b> vì <b>state không bị ghi đè lẫn lộn giữa các node</b>.'],
+
+ ['mcp','MCP giải quyết vấn đề gì?','<b>Ba team viết ba adapter cho cùng một service X</b>; X đổi API thì <b>cả ba phải sửa, ai quên thì hỏng lúc chạy</b>.<br>→ MCP để X <b>công bố một lần theo chuẩn</b>, X đổi API thì sửa trong server, <b>không team nào phải sửa</b>.'],
+ ['mcp','“Lợi cả hai chiều” của MCP nghĩa là gì?','<b>Bên có service</b> công bố một lần theo chuẩn và <b>tiếp cận mọi agent</b>.<br><b>Bên làm agent</b> học một chuẩn và <b>dùng được mọi service theo chuẩn</b>.<br>→ <b>Trách nhiệm về đúng người biết rõ service nhất.</b>'],
+ ['mcp','MCP được ví với vật gì?','<b>Cổng USB</b> — <b>agent học một chuẩn là cắm được vào mọi tool theo chuẩn đó</b>. (Anthropic mở MCP ngày 25/11/2024, mã nguồn mở.)'],
+ ['mcp','MCP server mở ra ba nhóm nào?','<b>Resources</b> (dữ liệu đọc được) · <b>Tools</b> (hành động gọi được) · <b>Prompts</b> (mẫu câu lệnh gợi sẵn).'],
+ ['mcp','Vì sao Tools phải giới hạn quyền chặt hơn Resources?','Vì <b>Tools thay đổi dữ liệu thật</b> — <b>gọi sai một lần là hệ thống HR phát sinh đơn nghỉ phép mà nhân viên không hề tạo</b>. Resources chỉ đọc, gọi lại bao nhiêu lần cũng không sao.'],
+ ['mcp','6 bước agent làm việc với MCP server?','① Kết nối server · ② gọi <code>tools/list</code> · ③ mỗi tool trả <b>name/description/inputSchema</b> · ④ agent đọc schema và chọn tool · ⑤ gọi <code>tools/call</code> kèm params đúng schema · ⑥ server thực thi và trả kết quả.'],
+ ['mcp','Mỗi tool trả về ba thông tin nào khi gọi tools/list?','<b><code>name</code> · <code>description</code> · <code>inputSchema</code></b> — để agent đọc rồi chọn tool phù hợp với task.'],
+ ['mcp','Vì sao việc agent “hỏi server lúc chạy” lại quan trọng?','Vì agent <b>không được lập trình sẵn để biết tool tồn tại</b> — <b>thêm tool mới vào server là agent dùng được ngay, không sửa code</b>.'],
+ ['mcp','Trong ví dụ search_policy, tham số nào cho thấy nguyên tắc truyền context?','<code>employee_type="chinh_thuc"</code> và <code>effective_year=2025</code> — <b>hai thông tin chỉ supervisor mới biết</b>.'],
+ ['mcp','Lợi ích vận hành của MCP server cho tài liệu HR?','<b>Đội HR đổi tài liệu thì chỉ cập nhật MCP server của họ</b>; supervisor và các worker <b>không phải sửa</b>.'],
+ ['mcp','Ba lớp phòng thủ khi dùng MCP?','① <b>Chỉ cấp quyền tối thiểu</b> (read-ticket chứ không delete-DB) · ② <b>Hành động nguy hiểm phải có người duyệt</b> · ③ <b>Chạy server trong container cô lập</b>.'],
+ ['mcp','“read-ticket chứ không delete-DB” minh họa nguyên tắc nào?','<b>Least privilege</b> — chỉ cấp đúng quyền tối thiểu cần cho việc mà agent phải làm.'],
+
+ ['a2a','3 đặc điểm khiến agent khác hẳn tool?','① <b>Nó tự quyết</b> (có thể hỏi lại hoặc làm theo cách bạn không lường trước) · ② <b>Nó làm lâu</b> · ③ <b>Nó có quyền từ chối</b> (hết quota, ngoài phạm vi, không đủ thẩm quyền).'],
+ ['a2a','Câu tóm tắt phân biệt MCP và A2A?','<b>MCP trả lời “lấy năng lực ở đâu”; A2A trả lời “giao việc cho ai”.</b><br><b>Cách thử:</b> gọi xong bên kia có thể làm khác ý bạn không? <b>Tool thì không · Agent thì có</b>.'],
+ ['a2a','“Chưa có chuẩn” vs “có A2A” khác nhau thế nào?','<b>Chưa có chuẩn:</b> mỗi cặp <b>tự bịa cách gọi và báo tiến độ</b>.<br><b>Có A2A:</b> bên kia <b>công bố AgentCard một lần</b> — <b>ai theo chuẩn cũng giao việc được</b>.'],
+ ['a2a','4 field phải THÊM khi giao việc qua ranh giới A2A?','<code>from</code> (ai gửi) · <code>deadline</code> (hạn chót) · <code>status_url</code> (báo tiến độ ở đâu) · <code>on_reject</code> (từ chối thì trả về gì và bạn làm gì tiếp).'],
+ ['a2a','Vì sao 5 field đủ nội bộ nhưng không đủ qua ranh giới?','Vì trong nội bộ <b>bạn sở hữu cả hai đầu nên sai thì sửa cả hai</b>; qua ranh giới thì <b>không sửa được agent bên kia và nó không chờ bạn</b>.'],
+ ['a2a','AgentCard là gì và phục vụ ở đâu?','Một tài liệu <b>JSON metadata</b> mô tả <b>skills, auth, endpoint</b>; thường phục vụ tại <code>/.well-known/agent-card.json</code>.'],
+ ['a2a','4 kiểu cộng tác của A2A?','<b>Handover</b> (tuần tự) · <b>Cooperative Search</b> (song song) · <b>Joint Decision</b> (đồng thuận) · <b>Self-Correction</b> (viết–kiểm–sửa).'],
+ ['a2a','Vì sao ba kiểu cộng tác đầu “bạn đã gặp rồi”?','Vì chúng vẫn là <b>bốn pattern của §2</b> (Handover=Pipeline, Cooperative Search=Supervisor-worker, Joint Decision=Debate), <b>chỉ khác ở chỗ bên kia không phải agent của bạn</b>. <b>Chỉ Self-Correction là mới.</b>'],
+ ['a2a','Self-Correction áp dụng trên trợ lý nội bộ thế nào?','<b>Worker viết trả lời sinh bản nháp → worker kiểm chứng soi từng câu → chưa đạt thì gửi feedback bắt viết lại.</b>'],
+ ['a2a','Vì sao Self-Correction phải chặn ở 3 vòng?','Vì không chặn thì <b>hai worker đẩy qua đẩy lại mãi</b> — <b>mỗi vòng thêm một lần gọi model, tốn tiền mà không chắc tốt hơn</b>. Quá 3 vòng thì dừng, <b>trả phần chắc chắn và báo chỗ chưa có nguồn</b>.'],
+ ['a2a','3 nấc leo thang khi hai agent bất đồng?','① <b>Judge agent</b> làm trọng tài đọc bằng chứng hai bên · ② <b>Hierarchy</b> cho một vai được ưu tiên cứng · ③ <b>Con người</b> là last resort.'],
+ ['a2a','Trong ví dụ hierarchy, vai nào được ưu tiên cứng?','<b>Compliance luôn thắng Support</b> khi hai bên có kết luận trái ngược.'],
+ ['a2a','Registry trong A2A giải quyết vấn đề gì?','Khi <b>đủ nhiều agent thì không ai nhớ hết</b> — client <b>khám phá agent lúc runtime</b> thay vì <b>hard-code địa chỉ từng agent</b>.'],
+ ['a2a','Checklist security &amp; boundary gồm những mục nào?','① Biết rõ <b>ai được gọi ai</b> · ② Biết <b>dữ liệu nào được truyền đi</b> (tránh PII thừa) · ③ Biết <b>output nào cần xác thực lại</b> · ④ <b>Đừng giả định mọi agent đều đáng tin như nhau</b> — vẫn cần trust boundary.'],
+
+ ['lg','4 framework multi-agent và cách mô tả hệ thống?','<b>CrewAI</b> khai báo vai và nhiệm vụ · <b>AutoGen</b> hội thoại nhiều lượt · <b>LangGraph</b> graph node-edge-state · <b>OpenAI Agents SDK</b> chuyền việc nhẹ.'],
+ ['lg','Vì sao bài học chọn LangGraph?','Vì cần <b>rẽ nhánh, chèn người duyệt, và trace từng bước</b>. Cả bốn framework đều dựng được supervisor-worker; khác nhau ở <b>cách chúng bắt bạn mô tả hệ thống</b>.'],
+ ['lg','LangGraph khác gì so với không dùng framework?','<b>Routing thành code đọc được và review được</b> · <b>graph vẽ ra được</b> · <b>state có schema</b> (TypedDict) · <b>có điểm dừng rõ cho human-in-the-loop</b>.<br>(Không framework: routing chôn trong prompt dài, debug bằng rải print.)'],
+ ['lg','Node, Edge, State trong LangGraph?','<b>Node</b> = hàm Python nhận state trả về state mới · <b>Edge</b> = đường đi giữa các node (có loại <b>edge điều kiện</b> trả về tên node kế tiếp) · <b>State</b> = TypedDict đi xuyên suốt graph.'],
+ ['lg','Trong route_to_worker, thứ tự kiểm tra điều kiện?','Kiểm <code>need_verify</code> trước → <b>verify_worker</b>; rồi <code>need_retrieval</code> → <b>retrieval_worker</b>; <b>mặc định là synthesis_worker</b>.'],
+ ['lg','Người duyệt được chèn ở đâu trong graph?','<b>Sau worker kiểm chứng, trước khi trả kết quả</b> — tức <b>trước node nhạy cảm</b>.'],
+ ['lg','Một trace entry cần đủ 7 field nào?','<code>timestamp</code> · <code>agent_id</code> · <code>action</code> · <code>input_summary</code> · <code>output_summary</code> · <code>status</code> · <code>latency_ms</code>.<br><b><code>input_summary</code> là TÓM TẮT, không phải toàn bộ context.</b>'],
+ ['lg','Entry đầu tiên của supervisor ghi output_summary thế nào?','<code>route=retrieval_worker (ly do: cau hoi chinh sach)</code> — <b>có kèm lý do định tuyến</b>.'],
+ ['lg','4 tầng của “reliability là hỏng có kiểm soát”?','Từ dưới lên: ① <b>Worker timeout</b> (không chờ vô hạn) → ② <b>Retry cap</b> (thử lại nhưng có trần) → ③ <b>Fallback</b> (đường lui) → ④ <b>Tổng hợp từ phần đã thành công</b>.'],
+ ['lg','Graceful degradation với ticket P1 nghĩa là gì?','Khi một worker timeout, hệ thống <b>không im lặng hỏng</b>: <b>trả phần đã chắc chắn, nói rõ phần còn thiếu, và báo khi không đủ tự tin thay vì đoán bừa</b>.'],
+ ['lg','5 ngộ nhận cần gỡ về multi-agent?','① Nhiều agent = tốt hơn → <b>= nhiều phức tạp</b> · ② Supervisor phải to nhất → <b>chỉ cần route đúng</b> · ③ MCP = A2A → <b>tool vs agent</b> · ④ Multi-agent tự giải context → <b>vẫn phải quản từng bước</b> · ⑤ LangGraph chỉ chạy LangChain → <b>chạy với nhiều framework</b>.'],
+ ['lg','4 key takeaways của Day 9?','① Multi-agent là <b>chia vai để hệ đỡ quá tải</b>, không phải cho “ngầu” · ② <b>Supervisor-worker là điểm khởi đầu thực dụng</b> · ③ <b>MCP nối năng lực ngoài, A2A giao việc giữa agent</b> · ④ <b>LangGraph biến orchestration thành graph</b> có state, routing, HITL.'],
+ ['lg','Câu hỏi kết bài Day 9?','“Một agent rất giỏi có thể làm nhiều việc. Nhưng <b>hệ thống tốt hơn thường bắt đầu từ câu hỏi: nên chia vai trò ở đâu?</b>”'],
+];
+const grid=document.getElementById('fcgrid'), cnt=document.getElementById('cnt');
+const NAMES={limit:'Giới hạn 1 agent',pat:'4 Pattern',sw:'Supervisor-Worker',mcp:'MCP',a2a:'A2A',lg:'LangGraph & Trace'};
+function render(f){
+  const list=f==='all'?CARDS:CARDS.filter(c=>c[0]===f);
+  grid.innerHTML=list.map(c=>`<div class="fc"><div class="fci">
+      <div class="ff"><div class="tag2">${NAMES[c[0]]}</div><div class="q">${c[1]}</div></div>
+      <div class="fb"><div class="a">${c[2]}</div></div></div></div>`).join('');
+  cnt.textContent=list.length+' thẻ';
+  grid.querySelectorAll('.fc').forEach(el=>el.onclick=()=>el.classList.toggle('flip'));
+}
+document.querySelectorAll('.fbtn').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); render(b.dataset.f);
+});
+render('all');
+</script>
+</body>
+</html>

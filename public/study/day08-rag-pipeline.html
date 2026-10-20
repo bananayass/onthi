@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 8 — RAG Pipeline: Retrieval · Augmentation · Generation | Tóm tắt</title>
+<style>
+:root{
+  --bg:#f7f8fa; --card:#fff; --ink:#1a1d24; --muted:#5b6472; --line:#e3e7ee;
+  --brand:#0891b2; --brand-soft:#e2f4f8; --warn:#b8541a; --warn-soft:#fdf1e7;
+  --ok:#1d7a4f; --ok-soft:#e8f6ef; --bad:#c0392b; --bad-soft:#fdeceb;
+  --acc:#6b3fa0; --acc-soft:#f2ebfa;
+  --r:#2563c9; --r-soft:#e8f0fd; --a:#b8541a; --a-soft:#fdf1e7; --g:#1d7a4f; --g-soft:#e8f6ef;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+
+header{background:linear-gradient(135deg,#0891b2,#075e75);color:#fff;padding:34px 0 26px}
+header .wrap{padding-bottom:0}
+.kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;margin:0 0 6px}
+header h1{margin:0 0 8px;font-size:31px;line-height:1.2;font-weight:700}
+header p{margin:0;opacity:.9;font-size:15px}
+
+.tabbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);
+  box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.tabbar .wrap{display:flex;gap:4px;padding-top:0;padding-bottom:0}
+.tab{appearance:none;border:0;background:none;font:inherit;font-weight:600;font-size:15px;
+  padding:15px 18px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--brand);border-bottom-color:var(--brand)}
+.panel{display:none;padding-top:28px}
+.panel.on{display:block}
+
+h2{font-size:22px;margin:36px 0 4px;padding-top:14px;border-top:2px solid var(--line)}
+h2 .num{color:var(--brand);font-weight:700}
+h2:first-child{border-top:0;padding-top:0;margin-top:0}
+.sub{color:var(--muted);font-size:14.5px;margin:0 0 18px}
+h3{font-size:17px;margin:26px 0 10px}
+h4{font-size:15.5px;margin:0 0 8px}
+p{margin:10px 0}
+ul,ol{margin:10px 0;padding-left:22px}
+li{margin:5px 0}
+code{background:#eef1f6;padding:2px 6px;border-radius:4px;font-size:13.5px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:#1f2430;color:#e6e9ef;padding:13px 15px;border-radius:9px;overflow-x:auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.6;margin:12px 0}
+pre .tg{color:#c792ea} pre .st{color:#c3e88d} pre .cm{color:#7c85a3}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:820px){.g2,.g3{grid-template-columns:1fr}}
+
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:#fff;
+  border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{padding:9px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f2f5fa;font-weight:600;font-size:13px}
+tr:last-child td{border-bottom:0}
+
+.note{border-left:4px solid var(--brand);background:var(--brand-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.warn{border-left:4px solid var(--warn);background:var(--warn-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.bad{border-left:4px solid var(--bad);background:var(--bad-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.ok{border-left:4px solid var(--ok);background:var(--ok-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.acc{border-left:4px solid var(--acc);background:var(--acc-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note b,.warn b,.bad b,.ok b,.acc b{display:block;margin-bottom:3px;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+.note b{color:var(--brand)} .warn b{color:var(--warn)} .bad b{color:var(--bad)}
+.ok b{color:var(--ok)} .acc b{color:var(--acc)}
+
+.quote{margin:16px 0;padding:20px 24px;border-radius:12px;background:#1f2430;color:#fff;text-align:center}
+.quote p{margin:0;font-size:17.5px;font-weight:600;line-height:1.45}
+.quote small{display:block;margin-top:9px;opacity:.7;font-size:13px;letter-spacing:.06em}
+
+.pill{display:inline-block;font-size:12.5px;font-weight:600;padding:2px 9px;border-radius:20px;margin-right:5px}
+.pill.b{background:var(--brand-soft);color:var(--brand)}
+.pill.o{background:var(--ok-soft);color:var(--ok)}
+.pill.w{background:var(--warn-soft);color:var(--warn)}
+.pill.r{background:var(--bad-soft);color:var(--bad)}
+
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0}
+.step{background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-size:13.5px;font-weight:600}
+.step small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.step b{color:var(--brand)}
+.arw{color:var(--muted);font-weight:700;font-size:13px}
+
+/* RAG 3 pillars */
+.rag3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+@media(max-width:820px){.rag3{grid-template-columns:1fr}}
+.rag3>div{border:1px solid var(--line);border-radius:12px;padding:16px;background:#fff;border-top:5px solid}
+.rag3 .pr{border-top-color:var(--r)} .rag3 .pa{border-top-color:var(--a)} .rag3 .pg{border-top-color:var(--g)}
+.rag3 .lt{font-size:26px;font-weight:800;line-height:1;margin-bottom:6px}
+.rag3 .pr .lt{color:var(--r)} .rag3 .pa .lt{color:var(--a)} .rag3 .pg .lt{color:var(--g)}
+.rag3 strong{display:block;font-size:15px;margin-bottom:6px}
+.rag3 p{margin:0 0 8px;font-size:13.3px;color:var(--muted)}
+.rag3 ul{margin:0;padding-left:17px;font-size:12.8px;color:var(--muted)}
+
+/* token budget bar */
+.tb{display:flex;margin:14px 0 6px;border-radius:9px;overflow:hidden;border:1px solid var(--line);
+  font-size:13px;font-weight:600;text-align:center;color:#fff}
+.tb>div{padding:16px 6px}
+.tb .t1{flex:20;background:#0891b2} .tb .t2{flex:60;background:#075e75} .tb .t3{flex:20;background:#8fb9c4;color:#0b4353}
+.tbcap{display:flex;font-size:11.5px;color:var(--muted);text-align:center;margin-bottom:14px}
+.tbcap>div{padding:0 4px}
+.tbcap .t1{flex:20}.tbcap .t2{flex:60}.tbcap .t3{flex:20}
+
+/* lost in middle */
+.lim{display:flex;align-items:flex-end;gap:4px;height:100px;margin:14px 0 24px;padding:14px;
+  background:#fff;border:1px solid var(--line);border-radius:11px}
+.lim>div{flex:1;background:var(--brand);border-radius:3px 3px 0 0;position:relative}
+.lim>div span{position:absolute;bottom:-20px;left:0;right:0;text-align:center;font-size:10.5px;color:var(--muted)}
+
+/* reorder viz */
+.reo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+@media(max-width:700px){.reo{grid-template-columns:1fr}}
+.reo>div{border:1px solid var(--line);border-radius:11px;padding:14px;background:#fff}
+.reo .bl{padding:8px 12px;border-radius:7px;margin-bottom:6px;font-size:13px;font-weight:600}
+.reo .hi{background:var(--ok-soft);color:var(--ok);border:1.5px solid var(--ok)}
+.reo .lo{background:#f1f3f7;color:var(--muted)}
+.reo .pos{float:right;font-size:11px;font-weight:700;opacity:.75}
+
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+@media(max-width:700px){.vs{grid-template-columns:1fr}}
+.vs>div{border-radius:11px;padding:15px 17px;border:1px solid var(--line);background:#fff}
+.vs .lgood{border-top:4px solid var(--ok)}
+.vs .lbad{border-top:4px solid var(--bad)}
+.vs .lneu{border-top:4px solid var(--brand)}
+.vs h4{margin:0 0 8px;font-size:15px}
+.vs .lgood h4{color:var(--ok)} .vs .lbad h4{color:var(--bad)} .vs .lneu h4{color:var(--brand)}
+.vs p,.vs li{font-size:14px}
+.vs ul{margin:6px 0;padding-left:19px}
+
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+@media(max-width:820px){.three{grid-template-columns:1fr}}
+.three>div{border:1px solid var(--line);border-radius:11px;padding:15px;background:#fff;border-top:4px solid var(--brand)}
+.three .k{font-size:11.5px;font-weight:700;letter-spacing:.06em;color:var(--brand);margin-bottom:5px}
+.three strong{display:block;font-size:15px;margin-bottom:6px}
+.three p{margin:0;font-size:13.3px;color:var(--muted)}
+
+.formula{background:#1f2430;color:#fff;border-radius:10px;padding:15px 18px;margin:12px 0;
+  text-align:center;font-size:16px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.formula small{display:block;margin-top:7px;opacity:.72;font-size:12.5px;font-family:inherit}
+
+.qlist{margin:14px 0}
+.qi{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:10px;padding:12px 15px;margin-bottom:8px}
+.qi .n{flex:0 0 26px;height:26px;border-radius:50%;background:var(--brand-soft);color:var(--brand);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12.5px}
+.qi .b{flex:1;min-width:0;font-size:14px}
+.qi .b strong{display:block;margin-bottom:2px}
+.qi .b span{color:var(--muted);font-size:13.3px}
+
+#cheat{font-size:14px}
+#cheat h2{font-size:18px;margin:20px 0 8px;padding-top:10px}
+#cheat .card{padding:14px 16px;margin:10px 0}
+#cheat table{font-size:12.5px}
+#cheat th,#cheat td{padding:6px 8px}
+#cheat ul,#cheat ol{padding-left:19px} #cheat li{margin:3px 0}
+#cheat pre{font-size:11.5px;padding:9px 11px}
+.cheatgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:820px){.cheatgrid{grid-template-columns:1fr}}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13.5px}
+.kv dt{font-weight:600;color:var(--brand)}
+.kv dd{margin:0;color:var(--muted)}
+.printbtn{background:var(--brand);color:#fff;border:0;border-radius:8px;padding:9px 16px;
+  font:inherit;font-weight:600;font-size:14px;cursor:pointer;margin-bottom:6px}
+.printbtn:hover{background:#0a7490}
+
+.fcbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.fbtn{background:#fff;border:1px solid var(--line);border-radius:20px;padding:6px 15px;
+  font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;color:var(--muted)}
+.fbtn:hover{border-color:var(--brand);color:var(--brand)}
+.fbtn.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.counter{margin-left:auto;font-size:13.5px;color:var(--muted)}
+.fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.fc{perspective:1100px;height:218px;cursor:pointer}
+.fci{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.fc.flip .fci{transform:rotateY(180deg)}
+.ff,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:18px;
+  display:flex;flex-direction:column;justify-content:center;border:1px solid var(--line);overflow:auto}
+.ff{background:#fff}
+.fb{background:var(--brand);color:#fff;transform:rotateY(180deg);border-color:var(--brand)}
+.fb code{background:rgba(255,255,255,.2);color:#fff}
+.ff .tag2{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);margin-bottom:8px}
+.ff .q{font-size:15.5px;font-weight:600;line-height:1.45}
+.fb .a{font-size:13.5px;line-height:1.55}
+.hint{text-align:center;color:var(--muted);font-size:12.5px;margin-top:10px}
+
+@media print{
+  header,.tabbar,.printbtn,.hint{display:none!important}
+  .panel{display:none!important} #cheat{display:block!important;padding-top:0}
+  body{background:#fff;font-size:10.5px} .wrap{max-width:100%;padding:0}
+  .card{break-inside:avoid;border-color:#ccc} table{break-inside:avoid}
+  pre{background:#f4f4f4;color:#222;border:1px solid #ddd}
+  pre .tg,pre .st,pre .cm{color:#222}
+  .formula{background:#f4f4f4;color:#222;border:1px solid #ddd}
+  h2{break-after:avoid}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">AICB-P1 · Ngày 8</p>
+    <h1>RAG Pipeline</h1>
+    <p>Retrieval — Augmentation — Generation</p>
+  </div>
+</header>
+
+<nav class="tabbar">
+  <div class="wrap">
+    <button class="tab on" data-t="detail">Tóm tắt chi tiết</button>
+    <button class="tab" data-t="cheat">Cheat sheet</button>
+    <button class="tab" data-t="cards">Flashcard</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ==================== TAB 1 ==================== -->
+<section class="panel on" id="detail">
+
+<div class="quote"><p>“Bạn đã build agent với vector store.<br>Nhưng agent vẫn hallucinate và trả lời sai. <b>Lỗi nằm ở đâu trong pipeline?</b>”</p><small>CÂU HỎI MỞ ĐẦU</small></div>
+
+<div class="note"><b>Ý xuyên suốt cả ngày</b>Phải <b>tách bạch được lỗi thuộc về Retrieval, Augmentation hay Generation</b> rồi mới sửa đúng chỗ. Toàn bộ bài học được sắp theo đúng ba chữ <b>R–A–G</b>, và phần Evaluation cuối bài chính là công cụ để chẩn đoán.</div>
+
+<h2><span class="num">§1</span> &nbsp;Retro Day 07</h2>
+<p class="sub">Nhìn lại Indexing Pipeline hôm qua, xác định điểm cần nâng cấp, và kết nối sang Retrieval Pipeline.</p>
+
+<div class="flow">
+  <span class="step">Document<small>PDF, HTML, DB, OCR</small></span><span class="arw">→</span>
+  <span class="step">Processing<small>chunking + embedding, text processing, formatting</small></span><span class="arw">→</span>
+  <span class="step">Store<small>ID · Original Text · Vector · Metadata</small></span>
+</div>
+<p class="sub">Mỗi record cần <b>tối thiểu 4 thành phần</b>: <b>ID · Original text · Vector · Metadata</b> (source, section, date, access).</p>
+
+<div class="vs">
+  <div class="lneu">
+    <h4>Ingestion (Offline)</h4>
+    <ul><li>Document → Processing → Store</li><li>Chạy <b>batch hoặc near real-time</b></li><li>Mục tiêu: chuẩn bị dữ liệu sạch, có metadata, sẵn sàng search</li></ul>
+  </div>
+  <div class="lneu">
+    <h4>Retrieval (Runtime)</h4>
+    <ul><li>Query → Search → Filter → LLM → Answer</li><li>Chạy <b>mỗi khi user hỏi</b></li><li>Mục tiêu: tìm đúng chứng cứ, sinh câu trả lời grounded</li></ul>
+  </div>
+</div>
+<div class="acc"><b>Nguyên tắc then chốt</b>Ingestion tạo ra index. Retrieval dùng index đó để trả lời.<br><b>Chất lượng ingestion quyết định TRẦN của retrieval</b> — retrieval không thể tìm ra thông tin tốt hơn những gì đã được đưa vào index.</div>
+
+<h3>Pipeline Day 07 còn thiếu gì?</h3>
+<div class="vs">
+  <div class="lbad">
+    <h4>Day 07 — Retrieval Pipeline</h4>
+    <ul><li><b>Dense search only</b></li><li>Inject context <b>thô</b> vào prompt</li><li>Không có rerank, không có evaluation</li><li>“Có câu trả lời” nhưng <b>chưa biết đúng hay sai</b></li></ul>
+  </div>
+  <div class="lgood">
+    <h4>Day 08 — RAG Pipeline</h4>
+    <ul><li><b>Hybrid search + rerank</b></li><li><b>Augmentation:</b> đóng gói context có cấu trúc</li><li><b>Generation:</b> grounded prompt + citation</li><li><b>Evaluation:</b> đo faithfulness, relevance, recall</li></ul>
+  </div>
+</div>
+
+<h2><span class="num">§2</span> &nbsp;RAG — Retrieval-Augmented Generation</h2>
+<p class="sub">RAG không phải chỉ là gắn thêm context; nó là <b>sự phối hợp giữa retrieval system, augmentation layer và generation system</b>.</p>
+
+<h3>Ảo giác của LLM — 3 nguyên nhân</h3>
+<div class="three">
+  <div><div class="k">NGUYÊN NHÂN 1</div><strong>Kiến thức bị đóng băng</strong><p><b>Knowledge Cutoff</b> — LLM chỉ biết những gì đã xảy ra trước ngày training. Thông tin nội bộ hay sự kiện mới là <b>điểm mù</b>.</p></div>
+  <div><div class="k">NGUYÊN NHÂN 2</div><strong>Bản chất xác suất</strong><p><b>Probabilistic Nature</b> — LLM là cỗ máy dự đoán từ tiếp theo, <b>ưu tiên sự trôi chảy (fluency) hơn tính chính xác (factual accuracy)</b>.</p></div>
+  <div><div class="k">HỆ QUẢ</div><strong>Hallucination</strong><p>Khi thiếu dữ kiện, model <b>tự động “bịa”</b> ra thông tin trông rất logic và tự tin để làm hài lòng người dùng.</p></div>
+</div>
+<div class="bad"><b>Mấu chốt quan trọng nhất</b><b>LLM không biết bản thân không biết.</b> Đây là lý do chính để cần một hệ thống <b>cung cấp chứng cứ thực trước khi sinh câu trả lời</b>.</div>
+
+<h3>RAG là gì — ba trụ R·A·G</h3>
+<div class="rag3">
+  <div class="pr">
+    <div class="lt">R</div><strong>Retrieval</strong>
+    <p>Truy xuất thông tin từ kho dữ liệu ngoài (vector store, DB, search engine). <b>Tìm đúng chứng cứ, lọc nhiễu, xếp hạng relevance.</b></p>
+    <ul><li>Dense Search (Semantic)</li><li>Sparse Search (BM25)</li><li>Hybrid Search</li><li><b>Rank Fusion (RRF)</b></li><li>Reranking (Cross-encoder)</li><li><b>MMR</b> (đa dạng kết quả)</li><li>Pre-filtering (Metadata)</li><li>Query Routing · Multi-index</li><li>Parent-child Retrieval</li></ul>
+  </div>
+  <div class="pa">
+    <div class="lt">A</div><strong>Augmentation</strong>
+    <p>Đóng gói context <b>có cấu trúc</b>, gắn metadata, tách evidence vs question. <b>Giảm noise, chống “lost in the middle”.</b></p>
+    <ul><li>Context Injection</li><li><b>Document Reordering</b></li><li>Instruction Tuning</li><li>Metadata Integration</li><li>Citation Formatting</li><li>Context Compression</li><li>Token Budget Management</li><li><b>Conflict Resolution</b></li><li>Grounding Constraints · Dedup</li></ul>
+  </div>
+  <div class="pg">
+    <div class="lt">G</div><strong>Generation</strong>
+    <p>Sinh câu trả lời <b>bám sát chứng cứ</b> đã augment, kèm trích dẫn nguồn. <b>Grounded answer, citation, self-check.</b></p>
+    <ul><li>Grounded Generation</li><li>Self-correction / Self-check</li><li>Output Formatting</li><li>Citation Generation</li><li><b>Abstention (từ chối)</b></li><li>Chain-of-Thought (CoT)</li><li>LLM Selection / Routing</li><li>Safety &amp; PII Filtering</li><li>Streaming · Multi-step</li></ul>
+  </div>
+</div>
+<div class="note"><b>Công thức RAG</b><b>Tìm chứng cứ → đóng gói có cấu trúc → sinh câu trả lời grounded.</b> Kết quả <b>có thể trích dẫn và kiểm chứng</b>.</div>
+
+<h3>Khi nào cần RAG?</h3>
+<div class="vs">
+  <div class="lgood">
+    <h4>✓ Cần RAG khi</h4>
+    <ul><li>Dữ liệu nội bộ <b>thay đổi liên tục</b> (policy, SOP, ticket)</li><li>Cần câu trả lời <b>có nguồn, kiểm chứng được</b></li><li>Fine-tuning quá đắt hoặc dữ liệu quá nhạy cảm</li><li>Cần <b>giảm hallucination một cách có hệ thống</b></li></ul>
+  </div>
+  <div class="lbad">
+    <h4>✗ Chưa cần RAG khi</h4>
+    <ul><li>Câu hỏi thuộc <b>kiến thức chung</b> (LLM đã biết)</li><li><b>Không có corpus riêng</b> để truy xuất</li><li>Task <b>không cần citation</b> (creative writing, brainstorm)</li><li>Prompt engineering đơn giản đã đủ</li></ul>
+  </div>
+</div>
+
+<h3>Ba lý do doanh nghiệp BẮT BUỘC dùng RAG</h3>
+<div class="three">
+  <div><div class="k">LÝ DO 1</div><strong>Dữ liệu nội bộ = Tài sản</strong><p>Policy, SOP, hợp đồng, ticket — <b>LLM không hề biết những thứ này</b>. Fine-tuning để nhồi facts rất đắt và dễ bị <b>catastrophic forgetting</b>.</p></div>
+  <div><div class="k">LÝ DO 2</div><strong>Compliance &amp; Trách nhiệm</strong><p>Tài chính, y tế, pháp lý — câu trả lời phải có nguồn và kiểm chứng được. <b>Hallucination = rủi ro pháp lý, mất uy tín.</b> RAG cho phép <b>audit trail</b>.</p></div>
+  <div><div class="k">LÝ DO 3</div><strong>Cập nhật liên tục</strong><p>Dữ liệu thay đổi hàng ngày. <b>Fine-tuning lại model mỗi ngày? Không khả thi.</b> RAG chỉ cần cập nhật index — <b>model không cần retrain</b>.</p></div>
+</div>
+<div class="acc"><b>Ẩn dụ &amp; kết luận</b>RAG = <b>“open-book exam”</b> — mang tài liệu vào phòng thi thay vì học thuộc lòng.<br><b>RAG không phải lựa chọn — nó là YÊU CẦU BẮT BUỘC</b> khi doanh nghiệp cần AI trả lời dựa trên dữ liệu nội bộ, có trách nhiệm, và luôn cập nhật.</div>
+
+<h3>RAG Overview — offline vs runtime</h3>
+<div class="flow">
+  <span class="step"><b>OFFLINE</b> · Document → Ingestion → Vector Store<small>chunk, embed, metadata — đã xây ở Day 07</small></span>
+</div>
+<div class="flow">
+  <span class="step"><b>RUNTIME</b> · Question</span><span class="arw">→</span>
+  <span class="step">Retrieval</span><span class="arw">→</span>
+  <span class="step">Augmentation</span><span class="arw">→</span>
+  <span class="step">Generation</span><span class="arw">→</span>
+  <span class="step">Answer</span>
+</div>
+<p class="sub">Nhắc lại ba nhánh đưa data vào model: <b>In-Context</b> (dữ liệu ngắn, nhanh, không dựng hạ tầng) · <b>RAG</b> (corpus lớn, cập nhật liên tục) · <b>Fine-tuning</b> (cần style/domain riêng, đắt hơn).</p>
+
+<h2><span class="num">§3</span> &nbsp;R — Retrieval</h2>
+<p class="sub">Tìm đúng chứng cứ là bước quan trọng nhất; <b>search sai thì prompt đẹp đến đâu cũng khó cứu</b>.</p>
+
+<h3>Hai trường phái tìm kiếm cốt lõi</h3>
+<div class="vs">
+  <div class="lneu">
+    <h4>Dense Vector (Semantic)</h4>
+    <p>Vector ngắn, đặc (<b>768–1536 chiều</b>), <b>mọi chiều đều ≠ 0</b>.</p>
+    <p style="margin:8px 0"><b>Vì sao gọi “Dense”?</b> Vì embedding model <b>nén toàn bộ ngữ nghĩa vào một vector dày đặc thông tin</b>.</p>
+    <ul><li>+ Hiểu nghĩa, paraphrase, cross-lingual — “hoàn tiền” ≈ “refund”</li><li>− Bỏ lỡ keyword chính xác (mã lỗi, tên riêng)</li><li>− Phụ thuộc chất lượng embedding model</li></ul>
+    <p style="margin:8px 0 0;color:var(--bad);font-size:13.3px"><b>VD thất bại:</b> Query <b>“lỗi ERR-4012”</b> → trả về docs “lỗi hệ thống chung” thay vì đúng mã lỗi.</p>
+  </div>
+  <div class="lneu">
+    <h4>Sparse Vector (BM25 / TF-IDF)</h4>
+    <p>Vector rất dài (= kích thước từ điển) nhưng <b>hầu hết chiều = 0</b>.</p>
+    <p style="margin:8px 0"><b>Vì sao gọi “Sparse”?</b> Vì <b>chỉ các từ xuất hiện trong document mới có giá trị</b>, phần còn lại là số 0.</p>
+    <ul><li>+ Match chính xác từ khóa, mã lỗi, tên riêng</li><li>+ <b>Nhanh, không cần GPU</b></li><li>− Không hiểu đồng nghĩa, paraphrase</li></ul>
+    <p style="margin:8px 0 0;color:var(--bad);font-size:13.3px"><b>VD thất bại:</b> Query <b>“nghỉ phép”</b> → bỏ lỡ doc chỉ chứa <b>“annual leave”, “PTO”</b>.</p>
+  </div>
+</div>
+<p class="sub"><b>Corpus phù hợp:</b> Dense → câu tự nhiên, FAQ, knowledge base. Sparse → <b>policy, code, luật, log, mã ticket</b> — nơi exact term quan trọng hơn nghĩa.</p>
+<div class="ok"><b>Kết luận</b><b>Không bên nào hoàn hảo.</b> Dense mạnh về ngữ nghĩa, Sparse mạnh về từ khóa chính xác → <b>kết hợp cả hai = Hybrid Search</b>. Dense bỏ lỡ “ERR-4012” thì sparse bắt được; sparse bỏ lỡ “nghỉ phép = PTO” thì dense bắt được — <b>hai bên bù trừ điểm mù của nhau</b>.</div>
+
+<h3>Hai cách gộp kết quả: RRF vs Alpha Weighting</h3>
+<div class="vs">
+  <div class="lneu">
+    <h4>RRF — Reciprocal Rank Fusion</h4>
+    <div class="formula">RRF(d) = Σ<sub>r</sub> 1 / (k + rank<sub>r</sub>(d))<small>k mặc định = 60</small></div>
+    <ul><li><b>Chỉ dùng thứ hạng, BỎ QUA điểm số</b></li><li>Không cần tuning tham số</li></ul>
+  </div>
+  <div class="lneu">
+    <h4>Alpha Weighting — Score Fusion</h4>
+    <div class="formula">score(d) = α·s<sub>dense</sub> + (1−α)·s<sub>sparse</sub><small>cần normalize về cùng scale</small></div>
+    <ul><li><b>Cần tuning α theo domain</b></li><li>Chatbot FAQ: <b>α = 0.7–0.9</b> (thiên dense)</li><li>Code, Log, Luật: <b>α = 0.2–0.4</b> (thiên sparse)</li></ul>
+  </div>
+</div>
+<div class="ok"><b>Chọn cái nào?</b><b>Mới bắt đầu → RRF</b> (đơn giản, không cần tuning). <b>Cần kiểm soát tỷ trọng dense/sparse → Alpha weighting.</b></div>
+
+<h3>Reranking: vì sao Top-K chưa đủ?</h3>
+<div class="vs">
+  <div class="lbad">
+    <h4>Vấn đề: Retriever “thô và rộng”</h4>
+    <p>Retriever quét hàng triệu tài liệu cực nhanh, nhưng <b>chỉ đánh giá relevance sơ bộ</b>. Tài liệu đúng nhất có thể nằm ở <b>Top 10, không phải Top 1</b>.</p>
+    <p style="margin:8px 0 0;font-size:13.2px"><b>VD:</b> Query “Thủ tục xin visa” → Top 1 “Giá làm visa” · Top 2 “Lịch sử visa” · … · <b>Top 8 “Các bước làm thủ tục” ← đúng!</b></p>
+  </div>
+  <div class="lgood">
+    <h4>Giải pháp: Retrieve-and-Rerank</h4>
+    <p><b>Giai đoạn 1:</b> Search rộng → <b>Top 50–100</b>. Nhanh nhưng nhiễu.<br><b>Giai đoạn 2:</b> Đưa qua <b>Cross-encoder</b> đọc kỹ và chấm lại → <b>Top 3–5</b> cho LLM.</p>
+    <p style="margin:8px 0 0;font-size:13.2px"><code>Search top-100 → Rerank top-5 → LLM top-3</code></p>
+  </div>
+</div>
+<table>
+  <tr><th style="width:200px"></th><th>Bi-Encoder (Semantic Search)</th><th>Cross-Encoder (Reranker)</th></tr>
+  <tr><td><b>Cơ chế</b></td><td>Query và Document embed <b>riêng biệt</b>, chỉ so khoảng cách cuối cùng</td><td>Query + Document <b>ghép thành 1 input</b>, model đọc cùng lúc</td></tr>
+  <tr><td><b>Tốc độ</b></td><td>Cực nhanh, quét triệu docs (<b>pre-compute được</b>)</td><td>Chậm — <b>phải chạy model cho từng cặp</b>, không pre-compute được</td></tr>
+  <tr><td><b>Dùng cho</b></td><td>Giai đoạn 1 — quét rộng</td><td>Giai đoạn 2 — <b>chỉ dùng cho list nhỏ</b></td></tr>
+</table>
+
+<h3>MMR: chống trùng lặp trong context</h3>
+<div class="vs">
+  <div class="lbad">
+    <h4>Vấn đề: Redundancy</h4>
+    <p>Reranker đưa Top 3 lên đầu. Nhưng nếu <b>cả 3 nói cùng một ý</b>?</p>
+    <p style="margin:8px 0 0;font-size:13.2px">Chunk 1: “Hoàn tiền mất 7 ngày.”<br>Chunk 2: “Tiền sẽ về sau 7 ngày.”<br>Chunk 3: “Thời gian xử lý hoàn tiền là 7 ngày.”</p>
+    <p style="margin:8px 0 0;color:var(--bad)"><b>LLM tốn token vô ích, không có thêm dữ kiện mới.</b></p>
+  </div>
+  <div class="lgood">
+    <h4>Giải pháp: MMR</h4>
+    <p><b>Maximum Marginal Relevance</b> — chọn chunk <b>vừa liên quan vừa khác biệt</b> với những chunk đã chọn.</p>
+    <p style="margin:8px 0 0;font-size:13.3px"><b>B1:</b> Chọn chunk liên quan nhất với query.<br><b>B2:</b> Chọn chunk tiếp theo <b>liên quan query nhưng XA NHẤT so với chunk đã chọn</b>.</p>
+  </div>
+</div>
+<div class="formula">MMR = Sim(d, q) − λ · Sim(d, d<sub>selected</sub>)<small>trừ đi phần tương đồng với chunk đã chọn → càng giống cái đã có thì điểm càng thấp</small></div>
+<div class="acc"><b>Mục tiêu của retrieval</b>Không phải <b>lấy nhiều</b> — mà là <b>lấy ĐÚNG, ĐỦ, và ĐA DẠNG</b> cho augmentation.</div>
+
+<h2><span class="num">§4</span> &nbsp;A — Augmentation</h2>
+<p class="sub">Retrieval tìm chunk. <b>Augmentation đóng gói chunk thành context có cấu trúc</b> trước khi đưa vào LLM.</p>
+
+<h3>Context Injection là gì?</h3>
+<div class="vs">
+  <div class="lneu">
+    <h4>Định nghĩa</h4>
+    <p>Kỹ thuật <b>sắp xếp và định dạng</b> các chunk đã retrieve vào trong Context Window để LLM <b>dễ đọc, dễ hiểu nhất</b>.</p>
+    <p style="margin:8px 0 0;color:var(--bad)"><b>KHÔNG chỉ là nối chuỗi</b> (<code>text1 + text2</code>).</p>
+    <p style="margin:8px 0 0;color:var(--muted)"><b>Cách bạn định dạng quyết định việc LLM có tôn trọng dữ liệu đó hay không.</b></p>
+  </div>
+  <div class="lneu">
+    <h4>THE PROMPT — 4 khối theo thứ tự</h4>
+    <ol style="margin:0;padding-left:20px"><li><b>System Rules</b></li><li><b>Retrieved Documents</b></li><li><b>User Question</b></li><li><b>Constraints / Grounding</b></li></ol>
+  </div>
+</div>
+<p class="sub">Tách rõ ba phần để LLM biết: <b>đâu là “sự thật khách quan”</b> (Context/Evidence) · <b>đâu là câu hỏi người dùng</b> (Question) · <b>đâu là instruction cho model</b> (System). Dùng XML tags, Markdown headers, hoặc delimiters rõ ràng.</p>
+<pre><span class="tg">&lt;system&gt;</span>
+Answer only from the context below.
+Cite [doc_id] when possible.
+<span class="tg">&lt;/system&gt;</span>
+<span class="tg">&lt;context&gt;</span>
+<span class="st">[1] policy/refund-v4.pdf | Section 3</span>
+Yeu cau hoan tien trong 7 ngay...
+<span class="tg">&lt;/context&gt;</span>
+<span class="tg">&lt;question&gt;</span>
+Chinh sach hoan tien la gi?
+<span class="tg">&lt;/question&gt;</span></pre>
+<p class="sub">Chú ý thẻ <code>&lt;context&gt;</code> chứa <b>số thứ tự + đường dẫn file + section</b> — đó là nền tảng để LLM trích dẫn được về sau.</p>
+
+<h3>Lost in the Middle &amp; Document Reordering</h3>
+<div class="lim">
+  <div style="height:94%"><span>ĐẦU</span></div>
+  <div style="height:70%"></div>
+  <div style="height:47%"></div>
+  <div style="height:33%"></div>
+  <div style="height:28%"><span>GIỮA (Lost)</span></div>
+  <div style="height:34%"></div>
+  <div style="height:50%"></div>
+  <div style="height:73%"></div>
+  <div style="height:90%"><span>CUỐI</span></div>
+</div>
+<p class="sub"><b>LLM nhớ tốt thông tin ở đầu và cuối prompt.</b> Thông tin ở giữa dễ bị “quên” → chunk quan trọng vô tình nằm giữa thì RAG thất bại.</p>
+<div class="reo">
+  <div>
+    <h4 style="margin:0 0 9px;font-size:14px;color:var(--bad)">✗ Xếp theo thứ hạng tự nhiên</h4>
+    <div class="bl hi">Block 1 (Top 1)<span class="pos">ĐẦU</span></div>
+    <div class="bl hi" style="opacity:.55">Block 2 (Top 2)<span class="pos">GIỮA — dễ mất</span></div>
+    <div class="bl lo">Block 3<span class="pos">GIỮA</span></div>
+    <div class="bl lo">Block 4<span class="pos">CUỐI</span></div>
+  </div>
+  <div>
+    <h4 style="margin:0 0 9px;font-size:14px;color:var(--ok)">✓ Document Reordering</h4>
+    <div class="bl hi">Block 1 (Top 1)<span class="pos">ĐẦU</span></div>
+    <div class="bl lo">Block 3<span class="pos">GIỮA</span></div>
+    <div class="bl lo">Block 5<span class="pos">GIỮA</span></div>
+    <div class="bl lo">Block 4<span class="pos">GIỮA</span></div>
+    <div class="bl hi">Block 2 (Top 2)<span class="pos">CUỐI</span></div>
+  </div>
+</div>
+<div class="note"><b>Quy tắc</b><b>Top 1 đặt ở ĐẦU, Top 2 đặt ở CUỐI</b>, các block xếp hạng thấp hơn dồn vào giữa.<br>Context injection không phải chỉ nối chunk lại — <b>thứ tự, cấu trúc, và ranh giới giữa các nguồn đều ảnh hưởng chất lượng</b>.</div>
+
+<h3>Grounding &amp; Verification — 3 kỹ thuật</h3>
+<div class="three">
+  <div><div class="k">KỸ THUẬT 1</div><strong>Strict Constraints</strong><p>Ép LLM <b>chỉ được dùng context cung cấp</b>. Nếu thiếu chứng cứ → nói <b>“không đủ dữ liệu”</b> thay vì bịa.<br><i>“Only answer from the provided context. If not found, say: I don't have enough information.”</i></p></div>
+  <div><div class="k">KỸ THUẬT 2</div><strong>Metadata Integration</strong><p>Đưa thêm <b>thời gian, tác giả, phòng ban</b> vào context để LLM <b>phân biệt được văn bản cũ/mới</b>, ưu tiên nguồn mới nhất.<br><i>“If documents conflict, prefer the most recent by date.”</i></p></div>
+  <div><div class="k">KỸ THUẬT 3</div><strong>Citation Formatting</strong><p>Yêu cầu LLM trả về <b>số thứ tự tài liệu</b> (<code>[1]</code>, <code>[2]</code>) để người dùng có thể <b>kiểm chứng</b>.<br><i>“Cite [doc_id] for every claim you make.”</i></p></div>
+</div>
+<div class="acc"><b>Ý nghĩa của grounding</b><b>Grounding = “neo” LLM vào thực tế.</b> Không có grounding, model sẽ <b>tự điền khoảng trống bằng suy đoán của chính nó</b>.</div>
+
+<h3>Token Budget — context window là chiếc bánh có hạn</h3>
+<div class="tb">
+  <div class="t1">20%</div>
+  <div class="t2">60%</div>
+  <div class="t3">20%</div>
+</div>
+<div class="tbcap">
+  <div class="t1">System Prompt &amp; Rules</div>
+  <div class="t2">Retrieved Context</div>
+  <div class="t3">Headroom (Query &amp; Output)</div>
+</div>
+<p class="sub"><b>Rule of thumb: context ≤ 60% token budget.</b> Luôn giữ <b>headroom 20% cho query và output</b> — nếu context chiếm quá nhiều thì model không còn chỗ cho instruction và output, chất lượng giảm.</p>
+<div class="ok"><b>Nếu context vẫn quá dài sau khi chọn top-K</b>Dùng <b>Context Compression</b> — model nhỏ nén chunk thô, chỉ giữ ý chính. Tools: <b>LLMLingua, Recomp</b>.</div>
+
+<h2><span class="num">§5</span> &nbsp;G — Generation</h2>
+<p class="sub">Augmentation đóng gói context. <b>Generation sinh câu trả lời grounded từ context đã đóng gói.</b></p>
+
+<h3>LLM Selection — 3 tiêu chí</h3>
+<div class="vs">
+  <div class="lneu">
+    <h4>Model lớn (GPT-4, Gemini Pro)</h4>
+    <ul><li>Suy luận phức tạp, so sánh nhiều nguồn</li><li>Câu hỏi cần tổng hợp, phân tích</li><li><b>Chi phí cao, latency cao</b></li><li>Phù hợp: internal tools, <b>low-volume</b></li></ul>
+  </div>
+  <div class="lneu">
+    <h4>Model nhỏ / local (Llama 3, Mistral)</h4>
+    <ul><li>Câu hỏi đơn giản, <b>lookup trực tiếp</b></li><li>Dữ liệu nhạy cảm, cần <b>on-premise</b></li><li>Chi phí thấp, <b>latency thấp</b></li><li>Phù hợp: <b>high-volume</b>, data-sensitive</li></ul>
+  </div>
+</div>
+<p class="sub">Chọn model dựa trên <b>độ phức tạp câu hỏi · yêu cầu bảo mật · ngân sách</b>. <b>Không phải lúc nào cũng cần model lớn nhất.</b></p>
+
+<h3>Output Control — 2 nhóm</h3>
+<div class="vs">
+  <div class="lneu">
+    <h4>Formatting</h4>
+    <ul><li>Output dạng <b>Markdown, Table, hoặc JSON</b></li><li>Phục vụ tích hợp vào hệ thống khác (API, dashboard)</li><li>Dùng <code>response_format</code> hoặc instruction rõ ràng</li></ul>
+  </div>
+  <div class="lneu">
+    <h4>Safety &amp; Alignment</h4>
+    <ul><li>Đảm bảo câu trả lời <b>không vi phạm chính sách</b></li><li>Không rò rỉ dữ liệu nhạy cảm</li><li>Kiểm tra <b>PII, access level</b> trước khi trả về user</li></ul>
+  </div>
+</div>
+
+<h3>Self-Correction — vòng lặp tự sửa</h3>
+<div class="flow">
+  <span class="step">Context</span><span class="arw">→</span>
+  <span class="step">Generate Answer</span><span class="arw">→</span>
+  <span class="step">Self-Check vs Context</span><span class="arw">→</span>
+  <span class="step">Final Answer</span>
+  <span class="arw">↺ retry nếu không grounded</span>
+</div>
+<p class="sub">LLM <b>tự đánh giá câu trả lời của chính mình so với context</b> trước khi hiển thị. Nếu phát hiện suy diễn vượt chứng cứ → <b>retry hoặc abstain</b>.</p>
+
+<h3>Grounding &amp; Abstention — hai tính năng quan trọng nhất</h3>
+<div class="three">
+  <div><div class="k">1</div><strong>Strict Grounding</strong><p>Ép LLM chỉ dùng context được cấp, <b>cấm dùng kiến thức từ training</b>.<br><b>Nếu đổi context sai, model cũng phải trả lời sai theo context đó</b> — trọng tài duy nhất là dữ liệu nội bộ.</p></div>
+  <div><div class="k">2</div><strong>Forcing Citations</strong><p><b>RAG mất 50% giá trị nếu model không chỉ ra lấy từ tài liệu nào.</b><br>Chỉ thị: “Trích dẫn [doc_id] khi đưa ra tuyên bố.” → Output: “Nghỉ 14 ngày phép [doc_3].”</p></div>
+  <div><div class="k">3</div><strong>Graceful Degradation</strong><p>Khi context không chứa đáp án → <b>từ chối thay vì đoán mò</b>. Nhưng <b>không nói “Không biết” cụt lủn</b> — gợi ý bước tiếp theo: <i>“Chưa tìm thấy X. Bạn thử từ khóa Y hoặc liên hệ HR?”</i></p></div>
+</div>
+<div class="acc"><b>Câu chốt</b><b>Grounding = neo vào thực tế. Abstention = biết giới hạn.</b> Cả hai là <b>tính năng quan trọng nhất của RAG production</b>.</div>
+
+<h3>UX cho RAG — người dùng chỉ thấy output</h3>
+<p class="sub">Người dùng <b>không quan tâm MMR hay HNSW</b>. Họ chỉ nhìn giao diện cuối. <b>Thiết kế output quyết định độ tin cậy.</b></p>
+<div class="three">
+  <div><div class="k">YẾU TỐ 1</div><strong>Citations</strong><p>“Hoàn tiền trong 7 ngày <b>[1]</b>”<br>[1] Refund_Policy.pdf — Sec 3<br><b>Click [id] → popup nguồn gốc</b></p></div>
+  <div><div class="k">YẾU TỐ 2</div><strong>Confidence</strong><p>“⚠ <b>ĐỘ TIN CẬY THẤP</b> — Dữ liệu có thể không chính xác.”<br><b>Score thấp → cảnh báo user</b></p></div>
+  <div><div class="k">YẾU TỐ 3</div><strong>Streaming</strong><p>“Đang tìm trong kho HR… Đang đọc 5 tài liệu…”<br><b>RAG mất 3–5s</b> cho nhiều bước → streaming cho user <b>thấy tiến trình thay vì màn hình đơ</b></p></div>
+</div>
+<div class="ok"><b>Câu chốt</b><b>Citation + confidence + streaming biến AI từ “hộp đen” thành công cụ đáng tin cậy.</b></div>
+
+<h3>Chain-of-Thought trong Generation</h3>
+<pre><span class="tg">&lt;system&gt;</span>
+Lọc các câu liên quan trong context.
+Phân tích trong &lt;thought&gt;. Sau đó tổng hợp câu trả lời.
+<span class="tg">&lt;/system&gt;</span>
+<span class="tg">&lt;thought_process&gt;</span>
+<span class="cm">Doc_1 nói nghỉ 12 ngày (2024)</span>
+<span class="cm">Doc_3 nói nghỉ 14 ngày (2026)</span>
+<span class="cm">→ Ưu tiên doc mới nhất</span>
+<span class="tg">&lt;/thought_process&gt;</span>
+Answer: Nghỉ 14 ngày phép <span class="st">[doc_3]</span>.</pre>
+<p class="sub">Dùng cho <b>câu hỏi so sánh, suy luận logic, tổng hợp từ nhiều nguồn</b>. <b>Không cần cho câu hỏi lookup đơn giản.</b></p>
+
+<h3>Generation Failure Patterns — 3 kiểu</h3>
+<table>
+  <tr><th style="width:170px">Pattern</th><th>Ví dụ</th><th style="width:290px">Fix</th></tr>
+  <tr><td><b>Xung đột ngữ cảnh</b></td><td>2 tài liệu mâu thuẫn: <b>12 ngày vs 14 ngày phép</b>. LLM bối rối, chọn bừa hoặc cộng gộp</td><td>“Ưu tiên tài liệu <b>mới nhất</b>, hoặc <b>liệt kê cả 2 và chỉ ra mâu thuẫn</b>”</td></tr>
+  <tr><td><b>Suy diễn quá đà</b></td><td>Tài liệu: “<b>Free ship đơn 500k ở HN</b>”. User hỏi “HCM thì sao?” → LLM tự suy “HN được thì HCM chắc cũng được”</td><td>“<b>Không tự suy luận điều kiện không được đề cập rõ ràng</b>”</td></tr>
+  <tr><td><b>Bỏ qua constraints</b></td><td>Đã dặn trích dẫn [doc_id] nhưng model quên. <b>Hay gặp với model nhỏ hoặc context dài</b></td><td>Đặt rule quan trọng ở <b>CUỐI prompt</b> (gần “Answer:” nhất). <b>Giảm temperature = 0</b></td></tr>
+</table>
+<div class="bad"><b>Kỹ thuật debug quan trọng nhất</b><b>In <code>formatted_context</code> ra log.</b><br>Context <b>CÓ</b> đáp án → <b>lỗi Generation</b> (sửa prompt/model).<br>Context <b>KHÔNG</b> có đáp án → <b>lỗi Retrieval</b>.</div>
+
+<h3>Bài tập: lên chiến lược RAG</h3>
+<div class="card">
+  <p style="margin:0 0 8px">Dựa trên corpus đã chọn từ Day 07, post lên Discord theo format:</p>
+  <pre style="margin:0"><span class="cm">Domain:</span>          [VD: HR policy / E-commerce FAQ / ...]
+<span class="cm">Search:</span>          [dense / sparse / hybrid, α = ?]
+<span class="cm">Rerank:</span>          [có / không, lý do]
+<span class="cm">Prompt:</span>          [grounding rule chính]
+<span class="cm">Rủi ro lớn nhất:</span> [VD: conflict giữa policy cũ/mới]</pre>
+</div>
+
+<h2><span class="num">§6</span> &nbsp;Pre-RAG Technique — Query Transformation</h2>
+<p class="sub">Kỹ thuật <b>tiền xử lý câu hỏi</b> trước khi đưa vào RAG pipeline.</p>
+
+<h3>Pre-Filtering: thu gọn scope trước khi search</h3>
+<div class="flow">
+  <span class="step">Toàn bộ index<small>N chunks</small></span><span class="arw">→</span>
+  <span class="step"><b>Pre-Filter</b><small>metadata</small></span><span class="arw">→</span>
+  <span class="step">Subset nhỏ<small>n ≪ N</small></span><span class="arw">→</span>
+  <span class="step">Search<small>dense / hybrid</small></span>
+</div>
+<p class="sub"><b>Lọc theo metadata:</b> Department (chỉ doc phòng CS) · Date (chỉ policy còn hiệu lực) · Doc type (chỉ SOP, bỏ FAQ) · Access level (theo quyền user).</p>
+<div class="ok"><b>Lợi ích kép</b>Index lớn → search chậm và nhiều noise. Pre-filter thu gọn scope trước khi chạy vector search → <b>tăng cả TỐC ĐỘ lẫn PRECISION cùng lúc</b>.</div>
+
+<h3>Năm kỹ thuật biến đổi query</h3>
+<table>
+  <tr><th style="width:190px">Kỹ thuật</th><th>Cơ chế</th><th style="width:290px">Ví dụ</th></tr>
+  <tr><td><b>Query Expansion</b></td><td>Chữa lỗi chính tả, thêm <b>từ đồng nghĩa và thuật ngữ chuyên ngành</b> → tăng recall. <b>1 search</b></td><td>“hoàn tiền” → + “refund”, “trả hàng”, “chargeback”</td></tr>
+  <tr><td><b>Query Decomposition</b></td><td>Tách câu hỏi <b>multi-hop</b> thành nhiều câu nhỏ, search song song rồi gộp context — vì <b>một vector không thể trả lời 2 ý khác biệt cùng lúc</b></td><td>“So sánh hoàn tiền Shopee vs Tiki” → Q1 “Shopee hoàn tiền?” + Q2 “Tiki hoàn tiền?”</td></tr>
+  <tr><td><b>Step-Back Prompting</b></td><td>Khi câu hỏi <b>quá chi tiết</b>, LLM sinh câu hỏi <b>“lùi một bước”</b> (abstract) để lấy ngữ cảnh chung trước → tránh bị “lạc” trong tiểu tiết</td><td>“Lỗi 404 API Momo user 8910” → “Kiến trúc tích hợp Momo?”</td></tr>
+  <tr><td><b>Multi-Query</b></td><td>Tự động tạo <b>nhiều biến thể</b> của câu hỏi, mỗi biến thể <b>search riêng rồi gộp kết quả</b> → tăng recall, bắt chunk mà query gốc bỏ lỡ</td><td>“Chính sách hoàn tiền?” → “Refund policy?” + “Điều kiện trả hàng?” + “Thời hạn hoàn tiền?”</td></tr>
+  <tr><td><b>HyDE</b><br><span class="sub">Hypothetical Document Embeddings</span></td><td>LLM <b>sinh câu trả lời GIẢ ĐỊNH</b> cho query, rồi <b>embed câu trả lời giả đó để search</b></td><td>Query “SLA P1?” → HyDE sinh “SLA P1 là phản hồi 15 phút, xử lý 4 giờ…” rồi embed câu này</td></tr>
+</table>
+<div class="note"><b>Thứ tự đầy đủ của Query Processing</b><b>Pre-Filter</b> (metadata) → <b>Query Expansion</b> (đồng nghĩa) → <b>Decomposition</b> (tách multi-hop) → <b>Step-Back</b> (khái quát hóa) → <b>Multi-Query</b> (nhiều biến thể) → <b>HyDE</b> (giả lập answer) → <b>Search</b></div>
+<div class="warn"><b>Cảnh báo</b><b>Đừng thêm transformation chỉ vì framework có sẵn.</b> Dùng khi query <b>ngắn, mơ hồ, hoặc có nhiều alias</b>.</div>
+
+<h2><span class="num">§7</span> &nbsp;Agentic RAG</h2>
+<p class="sub">Cấp độ cao nhất: hệ thống không chỉ tìm kiếm thụ động mà <b>chủ động suy luận để giải quyết vấn đề</b>.</p>
+
+<h3>Ba dạng reasoning loop</h3>
+<div class="three">
+  <div><div class="k">LOOP 1</div><strong>Self-Query</strong><p>Agent <b>tự tách câu hỏi phức tạp</b> thành các câu hỏi nhỏ để tìm kiếm nhiều lần, rồi tổng hợp kết quả.</p></div>
+  <div><div class="k">LOOP 2</div><strong>Corrective RAG (C-RAG)</strong><p>Agent <b>tự đánh giá chất lượng tài liệu</b> tìm được. Nếu tài liệu rác → <b>tự động kích hoạt tìm kiếm Web hoặc báo lỗi</b>.</p></div>
+  <div><div class="k">LOOP 3</div><strong>Adaptive RAG</strong><p>Agent <b>tự chọn chiến thuật</b>: câu hỏi dễ → trả lời ngay; câu hỏi khó → kích hoạt tìm kiếm chuyên sâu.</p></div>
+</div>
+<div class="acc"><b>Định nghĩa</b><b>Agentic RAG = RAG + reasoning loop.</b> Agent không chỉ search 1 lần mà <b>lặp lại, tự sửa, tự quyết định chiến thuật</b>.</div>
+
+<h3>Tool Use — mở rộng chữ “R”</h3>
+<div class="flow">
+  <span class="step">Agent</span><span class="arw">→</span>
+  <span class="step">Vector Store</span>
+  <span class="step">External API<small>eDocman, JIRA</small></span>
+  <span class="step">Database<small>query</small></span>
+  <span class="step">Calculator · Code interpreter</span>
+</div>
+<div class="note"><b>Câu chốt</b><b>Agentic RAG mở rộng chữ “R” từ chỉ vector search sang BẤT KỲ nguồn dữ liệu nào agent có thể gọi được qua tool.</b></div>
+
+<h2><span class="num">§8</span> &nbsp;RAG Evaluation</h2>
+<p class="sub">Không có evaluation thì <b>không biết hệ thống đang tốt lên hay chỉ đang thay đổi cách viết câu trả lời</b>.</p>
+
+<h3>Vì sao “Vibe Check” không đủ?</h3>
+<div class="vs">
+  <div class="lbad">
+    <h4>Kiểm thử thủ công</h4>
+    <ul><li>Hỏi vài câu, thấy “ổn” → deploy</li><li><b>Không phát hiện edge case</b></li><li><b>Không biết regression</b> khi đổi config</li><li><b>Không có bằng chứng cho stakeholder</b></li></ul>
+  </div>
+  <div class="lgood">
+    <h4>Evaluation có hệ thống</h4>
+    <ul><li>Bộ test cố định, <b>chạy lại được</b></li><li>Phát hiện lỗi do <b>Retriever hay Generator</b></li><li>So sánh trước/sau khi thay đổi</li><li>Báo cáo bằng <b>số liệu</b> cho PM/sếp</li></ul>
+  </div>
+</div>
+<div class="bad"><b>Câu chốt</b>“<b>Cảm giác ổn</b>” <b>không phải metric.</b> RAG cần <b>test set + scorecard + so sánh A/B</b> để biết thực sự đang tốt lên.</div>
+
+<h3>Khung RAGAS — The Triad</h3>
+<p class="sub"><b>Không thể chấm điểm RAG bằng 1 con số duy nhất.</b> Phải tách bạch: lỗi do <b>Retriever</b> (tìm sai tài liệu)? lỗi do <b>Generator</b> (nói bậy dù có tài liệu đúng)? hay lỗi do <b>Augmentation</b> (đóng gói context sai)?</p>
+<div class="three">
+  <div><div class="k">TRỤC 1</div><strong>Context Recall</strong><p><b>Retriever có tìm ĐỦ không?</b><br>Đo: tỷ lệ thông tin cần thiết (ground truth) được tìm thấy trong retrieved context. Recall thấp = retriever <b>bỏ sót tài liệu quan trọng</b>.</p></div>
+  <div><div class="k">TRỤC 2</div><strong>Faithfulness</strong><p><b>Generator có BÁM chứng cứ không?</b><br>Đo: mỗi claim trong answer có evidence trong context không. <b>Tách answer thành statements, kiểm tra từng cái.</b> Claim không có evidence = hallucination.</p></div>
+  <div><div class="k">TRỤC 3</div><strong>Answer Relevance</strong><p><b>Câu trả lời có ĐÚNG Ý không?</b><br>Đo: <b>sinh câu hỏi NGƯỢC từ answer, so với câu hỏi gốc</b>. Có lạc đề không? Có đủ thông tin hay quá ngắn/quá dài?</p></div>
+</div>
+
+<h4>Mỗi trục thấp thì sửa ở đâu?</h4>
+<table>
+  <tr><th style="width:190px">Chỉ số thấp</th><th>Hướng khắc phục</th></tr>
+  <tr><td><b>Context Recall</b></td><td><b>Retrieval strategy</b> (hybrid, rerank) · <b>Chunking</b> (chunk quá to, thiếu metadata) · <b>Query transformation</b> (expansion, decomposition) · <b>Embedding model</b> (đổi model phù hợp domain)</td></tr>
+  <tr><td><b>Faithfulness</b></td><td><b>Generation prompt</b> (thêm strict grounding) · <b>Self-correction loop</b> · <b>Giảm temperature = 0</b> · <b>Đặt rule quan trọng ở cuối prompt</b></td></tr>
+  <tr><td><b>Answer Relevance</b></td><td><b>Prompt instruction</b> (format, scope) · <b>Augmentation</b> (context ordering, compression) · <b>Model selection</b> (model lớn hơn cho câu hỏi phức tạp)</td></tr>
+</table>
+
+<h3>RAG Triad: đọc vị lỗi qua bảng điểm</h3>
+<table>
+  <tr><th style="width:150px">Context Recall</th><th style="width:140px">Faithfulness</th><th style="width:160px">Answer Relevance</th><th>Chẩn đoán</th></tr>
+  <tr style="background:var(--ok-soft)"><td>Cao</td><td>Cao</td><td>Cao</td><td><b>Hệ thống hoạt động tốt</b></td></tr>
+  <tr><td><b>Thấp</b></td><td>Cao</td><td><b>Thấp</b></td><td><b>Sửa RETRIEVAL</b> (search sai) — hệ thống ngoan ngoãn nói “không biết” vì <b>không tìm thấy tài liệu</b></td></tr>
+  <tr><td>Cao</td><td><b>Thấp</b></td><td>Cao</td><td><b>Sửa GENERATION</b> — tìm đúng tài liệu nhưng <b>model bị ảo giác hoặc prompt viết dở</b></td></tr>
+  <tr><td>Cao</td><td>Cao</td><td><b>Thấp</b></td><td><b>Sửa AUGMENTATION</b> — context đúng nhưng <b>đóng gói sai cách</b> khiến câu trả lời lạc trọng tâm</td></tr>
+  <tr><td><b>Thấp</b></td><td><b>Thấp</b></td><td><b>Thấp</b></td><td><b>Sửa INDEXING</b> — dữ liệu gốc có vấn đề ngay từ khâu chuẩn bị</td></tr>
+</table>
+
+<h3>Case study: Hybrid Search lên bàn cân</h3>
+<div class="vs">
+  <div class="lbad">
+    <h4>V1: Dense Only</h4>
+    <ul><li>Context Recall: <b>60%</b></li><li>Bỏ lỡ mã lỗi, tên riêng, số ticket</li><li>Faithfulness trung bình vì <b>context thiếu</b></li></ul>
+  </div>
+  <div class="lgood">
+    <h4>V2: Hybrid (BM25 + Vector)</h4>
+    <ul><li>Context Recall: <b>90% (↑ 30 điểm)</b></li><li>Bắt được exact term nhờ BM25</li><li><b>Faithfulness tăng theo</b> vì context đầy đủ hơn</li></ul>
+  </div>
+</div>
+<div class="ok"><b>Kết luận</b>Chỉ cần <b>thêm BM25</b> vào pipeline, Context Recall tăng vọt. Đây là <b>thay đổi ROI CAO NHẤT cho hầu hết RAG system</b>.</div>
+
+<h3>ROI của RAG — chi phí vs chất lượng</h3>
+<div class="vs">
+  <div class="lneu">
+    <h4>Ví dụ: thêm Cross-encoder Reranker</h4>
+    <ul><li>Answer Relevance tăng <b>+5%</b></li><li>Latency tăng từ <b>1s → 4s</b></li><li>Chi phí server <b>tăng gấp đôi</b></li></ul>
+  </div>
+  <div class="lbad">
+    <h4>Bài toán của kỹ sư trưởng</h4>
+    <p><b>5% độ chính xác đó có đáng giá với:</b></p>
+    <ul><li>Trải nghiệm chậm chạp của người dùng?</li><li><b>$500/tháng</b> chi phí thêm?</li><li><b>+3s latency</b> mỗi request?</li></ul>
+  </div>
+</div>
+<div class="warn"><b>Bài học ROI</b><b>Không phải kỹ thuật nào cũng đáng thêm.</b> Mỗi cải tiến cần cân nhắc <b>quality gain vs latency vs cost</b>.</div>
+
+<h3>CI/CD cho RAG Evaluation</h3>
+<div class="flow">
+  <span class="step">Git Push</span><span class="arw">→</span>
+  <span class="step">RAGAS Eval</span><span class="arw">pass →</span>
+  <span class="step">Deploy</span>
+  <span class="arw">fail →</span>
+  <span class="step">Block</span>
+</div>
+<div class="card">
+  <ul style="margin:0">
+    <li><b>Code RAG ≠ Code Web</b> — khi deploy RAG, bạn test <b>HÀNH VI của AI</b>, không phải logic xác định</li>
+    <li>Tích hợp RAGAS vào <b>GitHub Actions</b></li>
+    <li>Mỗi lần đổi config → <b>chạy eval tự động</b></li>
+    <li><b>Faithfulness &lt; 80% → block deploy</b></li>
+  </ul>
+</div>
+<div class="acc"><b>Câu chốt</b><b>Không có eval tự động = không biết regression.</b> Treat RAG eval như <b>unit test cho AI</b>.</div>
+
+<h3>Tiếp theo &amp; bài tập</h3>
+<div class="note"><b>Ngày 9 — Multi-Agent, MCP &amp; A2A</b>“Một agent rất giỏi vẫn có giới hạn. Khi bài toán lớn hơn một vòng RAG, ta cần <b>supervisor, worker, và giao thức kết nối</b>.”<br><b>Bài tập:</b> chuẩn bị 1 use case mà single-agent <b>đang bắt đầu quá tải</b> · nghĩ trước: nếu tách 2–3 worker thì nên chia theo <b>tool, domain, hay bước xử lý</b>? · xem lại artifact Day 08 để xác định phần nào có thể thành <b>1 worker độc lập</b>.</div>
+
+</section>
+
+<!-- ==================== TAB 2 ==================== -->
+<section class="panel" id="cheat">
+<button class="printbtn" onclick="window.print()">In cheat sheet</button>
+
+<div class="cheatgrid">
+<div>
+
+<h2>Ý xuyên suốt</h2>
+<div class="card">
+  <p style="margin:0">Agent hallucinate → phải <b>tách bạch lỗi là Retrieval, Augmentation hay Generation</b> rồi mới sửa đúng chỗ</p>
+</div>
+
+<h2>Retro Day 07</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Record 4 phần:</b> ID · Original text · Vector · Metadata (source, section, date, access)</p>
+  <p style="margin:0 0 6px"><b>Ingestion</b> offline (batch/near real-time) · <b>Retrieval</b> runtime (mỗi khi user hỏi)</p>
+  <p style="margin:0"><b>Chất lượng ingestion quyết định TRẦN của retrieval</b></p>
+</div>
+
+<h2>Day 07 thiếu gì</h2>
+<div class="card">
+  <p style="margin:0">Chỉ có <b>dense search + threshold + top-k + inject thô</b>.<br>Thiếu: <b>hybrid, rerank, augmentation, evaluation</b></p>
+</div>
+
+<h2>3 nguyên nhân hallucination</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Knowledge cutoff</b> · <b>Bản chất xác suất</b> (ưu tiên fluency hơn factual accuracy) · <b>Hệ quả:</b> tự bịa</p>
+  <p style="margin:0"><b>Mấu chốt: LLM không biết bản thân không biết</b></p>
+</div>
+
+<h2>R · A · G</h2>
+<table>
+  <tr><th>Chữ</th><th>Vai trò</th></tr>
+  <tr><td><b>R</b></td><td>Truy xuất chứng cứ từ kho ngoài</td></tr>
+  <tr><td><b>A</b></td><td>Đóng gói context <b>có cấu trúc</b></td></tr>
+  <tr><td><b>G</b></td><td>Sinh câu trả lời grounded + citation</td></tr>
+</table>
+<p style="margin:2px 0 0"><b>R:</b> RRF, MMR, rerank, pre-filter · <b>A:</b> reordering, conflict resolution, token budget · <b>G:</b> abstention, CoT, streaming</p>
+
+<h2>Khi nào cần RAG</h2>
+<table>
+  <tr><th>Cần</th><th>Chưa cần</th></tr>
+  <tr><td>Data đổi liên tục<br>Cần nguồn, kiểm chứng<br>Fine-tune quá đắt<br>Giảm hallucination</td><td>Kiến thức chung<br>Không có corpus riêng<br><b>Creative writing</b><br>Prompt đơn giản đã đủ</td></tr>
+</table>
+
+<h2>3 lý do BẮT BUỘC</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Dữ liệu nội bộ = tài sản</b> (fine-tune dễ catastrophic forgetting) · <b>Compliance</b> (audit trail) · <b>Cập nhật liên tục</b> (chỉ cần re-index)</p>
+  <p style="margin:0">RAG = <b>“open-book exam”</b> · <b>không phải lựa chọn — là yêu cầu bắt buộc</b></p>
+</div>
+
+<h2>Dense vs Sparse</h2>
+<table>
+  <tr><th></th><th>Dense</th><th>Sparse (BM25)</th></tr>
+  <tr><td>Vector</td><td>768–1536, mọi chiều ≠0</td><td>Dài = từ điển, hầu hết =0</td></tr>
+  <tr><td>Mạnh</td><td>Nghĩa, paraphrase, cross-lingual</td><td>Exact keyword, <b>không cần GPU</b></td></tr>
+  <tr><td>Thất bại</td><td><b>“lỗi ERR-4012”</b></td><td><b>“nghỉ phép” ≠ “PTO”</b></td></tr>
+  <tr><td>Corpus</td><td>FAQ, KB</td><td>Policy, code, luật, log</td></tr>
+</table>
+
+<h2>RRF vs Alpha</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>RRF</b> = Σ 1/(k + rank), <b>k = 60</b>. Chỉ dùng thứ hạng, <b>bỏ qua điểm số</b>, không cần tuning</p>
+  <p style="margin:0 0 6px"><b>Alpha</b> = α·s_dense + (1−α)·s_sparse. Cần tuning theo domain</p>
+  <p style="margin:0"><b>FAQ: α = 0.7–0.9</b> · <b>Code/Log/Luật: α = 0.2–0.4</b><br>Mới bắt đầu → <b>RRF</b></p>
+</div>
+
+<h2>Rerank</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Retrieve-and-Rerank:</b> Search rộng <b>Top 50–100</b> → Cross-encoder → <b>Top 3–5</b></p>
+  <p style="margin:0"><b>Bi-Encoder:</b> embed riêng, so khoảng cách → nhanh, pre-compute được<br>
+  <b>Cross-Encoder:</b> ghép 1 input, đọc cùng lúc → chính xác hơn nhưng <b>phải chạy từng cặp</b></p>
+</div>
+
+<h2>MMR</h2>
+<div class="card">
+  <p style="margin:0 0 6px">Giải quyết <b>redundancy</b> — Top 3 cùng nói một ý</p>
+  <p style="margin:0 0 6px"><b>MMR = Sim(d,q) − λ · Sim(d, d_selected)</b></p>
+  <p style="margin:0">B1 chọn liên quan nhất · B2 chọn liên quan nhưng <b>xa nhất so với đã chọn</b><br>
+  Mục tiêu: <b>đúng, đủ, đa dạng</b> — không phải nhiều</p>
+</div>
+
+</div>
+<div>
+
+<h2>THE PROMPT — 4 khối</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>System Rules → Retrieved Documents → User Question → Constraints/Grounding</b></p>
+  <p style="margin:0">Context tag chứa: <code>[1] policy/refund-v4.pdf | Section 3</code></p>
+</div>
+
+<h2>Lost in the Middle</h2>
+<div class="card">
+  <p style="margin:0 0 6px">LLM nhớ tốt <b>đầu và cuối</b>, giữa dễ quên</p>
+  <p style="margin:0"><b>Reordering: Top 1 → ĐẦU, Top 2 → CUỐI</b>, rank thấp dồn vào giữa</p>
+</div>
+
+<h2>Grounding — 3 kỹ thuật</h2>
+<div class="card">
+  <dl class="kv">
+    <dt>Strict Constraints</dt><dd>chỉ dùng context, thiếu thì nói “không đủ dữ liệu”</dd>
+    <dt>Metadata Integration</dt><dd>thời gian/tác giả → phân biệt cũ/mới</dd>
+    <dt>Citation Formatting</dt><dd>trả [1], [2] để kiểm chứng</dd>
+  </dl>
+  <p style="margin:8px 0 0"><b>Grounding = neo LLM vào thực tế</b></p>
+</div>
+
+<h2>Token Budget</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>System 20% · Context 60% · Headroom 20%</b> (query + output)</p>
+  <p style="margin:0">Quá dài → <b>Context Compression</b>: LLMLingua, Recomp</p>
+</div>
+
+<h2>Generation</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>LLM Selection:</b> 3 tiêu chí — độ phức tạp, bảo mật, ngân sách. Model nhỏ/local cho lookup + on-premise + high-volume</p>
+  <p style="margin:0 0 6px"><b>Output Control:</b> Formatting (MD/Table/JSON) + Safety (PII, access level)</p>
+  <p style="margin:0"><b>Self-Correction:</b> Context → Generate → Self-Check vs Context → Final (retry nếu không grounded)</p>
+</div>
+
+<h2>Grounding &amp; Abstention</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Strict Grounding:</b> đổi context sai → model cũng phải trả lời sai theo. <b>Trọng tài duy nhất = dữ liệu nội bộ</b></p>
+  <p style="margin:0 0 6px"><b>Citations:</b> RAG <b>mất 50% giá trị</b> nếu không chỉ ra lấy từ tài liệu nào</p>
+  <p style="margin:0"><b>Graceful Degradation:</b> từ chối nhưng <b>gợi ý bước tiếp theo</b></p>
+</div>
+
+<h2>UX — 3 yếu tố</h2>
+<div class="card">
+  <p style="margin:0"><b>Citations · Confidence · Streaming</b><br>
+  RAG mất <b>3–5s</b> → streaming cho user thấy tiến trình<br>
+  <span style="color:var(--muted)">Biến AI từ hộp đen thành công cụ đáng tin cậy</span></p>
+</div>
+
+<h2>3 Failure Patterns</h2>
+<table>
+  <tr><th>Pattern</th><th>Fix</th></tr>
+  <tr><td><b>Xung đột</b> 12 vs 14 ngày</td><td>Ưu tiên mới nhất, hoặc liệt kê cả 2</td></tr>
+  <tr><td><b>Suy diễn quá đà</b> free ship 500k HN → HCM</td><td>“Không tự suy luận điều kiện không nêu rõ”</td></tr>
+  <tr><td><b>Bỏ qua constraints</b></td><td>Rule ở <b>cuối prompt</b>, <b>temp = 0</b></td></tr>
+</table>
+<p style="margin:2px 0 0"><b>Debug:</b> in formatted_context → có đáp án = lỗi Generation, không có = lỗi Retrieval</p>
+
+<h2>Query Transformation</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Thứ tự:</b> Pre-Filter → Expansion → Decomposition → Step-Back → Multi-Query → HyDE → Search</p>
+  <dl class="kv">
+    <dt>Expansion</dt><dd>+ đồng nghĩa (chargeback)</dd>
+    <dt>Decomposition</dt><dd>multi-hop (Shopee vs Tiki)</dd>
+    <dt>Step-Back</dt><dd>quá chi tiết → lùi 1 bước (404 Momo)</dd>
+    <dt>Multi-Query</dt><dd>nhiều biến thể, gộp kết quả</dd>
+    <dt>HyDE</dt><dd>sinh answer giả → embed answer đó</dd>
+  </dl>
+  <p style="margin:8px 0 0"><b>Pre-filter tăng cả tốc độ lẫn precision</b></p>
+</div>
+
+<h2>Agentic RAG</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Self-Query</b> (tự tách) · <b>C-RAG</b> (đánh giá tài liệu, rác thì search Web) · <b>Adaptive RAG</b> (tự chọn chiến thuật)</p>
+  <p style="margin:0"><b>= RAG + reasoning loop</b>; mở rộng “R” sang <b>bất kỳ nguồn nào gọi được qua tool</b></p>
+</div>
+
+<h2>RAGAS Triad</h2>
+<div class="card">
+  <dl class="kv">
+    <dt>Context Recall</dt><dd>Retriever tìm đủ không?</dd>
+    <dt>Faithfulness</dt><dd>Generator bám chứng cứ không? (tách statements)</dd>
+    <dt>Answer Relevance</dt><dd>Đúng ý không? (sinh câu hỏi ngược)</dd>
+  </dl>
+</div>
+
+<h2>Bảng chẩn đoán ⭐</h2>
+<table>
+  <tr><th>Recall</th><th>Faith</th><th>Relev</th><th>Sửa</th></tr>
+  <tr><td>Cao</td><td>Cao</td><td>Cao</td><td>Tốt</td></tr>
+  <tr><td><b>Thấp</b></td><td>Cao</td><td><b>Thấp</b></td><td><b>Retrieval</b></td></tr>
+  <tr><td>Cao</td><td><b>Thấp</b></td><td>Cao</td><td><b>Generation</b></td></tr>
+  <tr><td>Cao</td><td>Cao</td><td><b>Thấp</b></td><td><b>Augmentation</b></td></tr>
+  <tr><td><b>Thấp</b></td><td><b>Thấp</b></td><td><b>Thấp</b></td><td><b>Indexing</b></td></tr>
+</table>
+
+<h2>ROI</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Hybrid (thêm BM25):</b> Recall <b>60% → 90%</b> (+30 điểm) — <b>ROI cao nhất</b></p>
+  <p style="margin:0"><b>Cross-encoder Reranker:</b> Relevance <b>+5%</b>, latency <b>1s → 4s</b>, chi phí <b>×2</b> ($500/tháng, +3s)<br>
+  <span style="color:var(--muted)">Không phải kỹ thuật nào cũng đáng thêm</span></p>
+</div>
+
+<h2>CI/CD</h2>
+<div class="card">
+  <p style="margin:0">Git Push → RAGAS Eval → pass: <b>Deploy</b> / fail: <b>Block</b><br>
+  <b>Faithfulness &lt; 80% → block deploy</b><br>
+  <b>Code RAG ≠ Code Web</b> — test HÀNH VI của AI</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ==================== TAB 3 ==================== -->
+<section class="panel" id="cards">
+<div class="fcbar">
+  <button class="fbtn on" data-f="all">Tất cả</button>
+  <button class="fbtn" data-f="intro">Retro &amp; RAG là gì</button>
+  <button class="fbtn" data-f="r">R — Retrieval</button>
+  <button class="fbtn" data-f="a">A — Augmentation</button>
+  <button class="fbtn" data-f="g">G — Generation</button>
+  <button class="fbtn" data-f="pre">Query &amp; Agentic</button>
+  <button class="fbtn" data-f="eval">Evaluation</button>
+  <span class="counter" id="cnt"></span>
+</div>
+<div class="fcgrid" id="fcgrid"></div>
+<p class="hint">Click vào thẻ để lật · Click lần nữa để úp lại</p>
+</section>
+
+</div>
+
+<script>
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); document.getElementById(b.dataset.t).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+const CARDS=[
+ ['intro','Câu hỏi mở đầu Day 8 và ý nghĩa?','“Agent vẫn hallucinate — lỗi nằm ở đâu trong pipeline?”<br>→ Phải <b>tách bạch được lỗi thuộc về Retrieval, Augmentation hay Generation</b> rồi mới sửa đúng chỗ.'],
+ ['intro','Mỗi record trong store cần tối thiểu 4 thành phần nào?','<b>ID · Original text · Vector · Metadata</b> (source, section, date, access level).'],
+ ['intro','Ingestion và Retrieval khác nhau thế nào?','<b>Ingestion (offline):</b> chạy batch hoặc near real-time để chuẩn bị dữ liệu sạch, có metadata.<br><b>Retrieval (runtime):</b> chạy <b>mỗi khi user hỏi</b> để sinh câu trả lời grounded.'],
+ ['intro','“Chất lượng ingestion quyết định trần của retrieval” nghĩa là gì?','<b>Retrieval không thể tìm ra thông tin tốt hơn những gì đã được ingestion đưa vào index.</b>'],
+ ['intro','Pipeline Day 07 thiếu gì so với RAG?','Chỉ có <b>dense search + threshold + top-k + inject thô</b>. Thiếu <b>hybrid search, rerank, augmentation và evaluation</b>.'],
+ ['intro','3 nguyên nhân khiến LLM hallucinate?','① <b>Knowledge cutoff</b> — kiến thức đóng băng tại ngày training.<br>② <b>Bản chất xác suất</b> — ưu tiên fluency hơn factual accuracy.<br>③ <b>Hệ quả</b> — tự bịa thông tin trông logic và tự tin.'],
+ ['intro','Mấu chốt quan trọng nhất về hallucination?','<b>LLM không biết bản thân không biết.</b> Đây là lý do cần hệ thống <b>cung cấp chứng cứ thực</b> trước khi sinh câu trả lời.'],
+ ['intro','Ba chữ R–A–G đảm nhiệm vai trò gì?','<b>R</b> truy xuất chứng cứ từ kho ngoài · <b>A</b> đóng gói context có cấu trúc · <b>G</b> sinh câu trả lời grounded kèm trích dẫn.'],
+ ['intro','RRF và MMR thuộc nhóm nào? Document Reordering và Conflict Resolution thuộc nhóm nào?','<b>RRF và MMR → nhóm R</b> (gộp kết quả và đa dạng hóa tập chunk).<br><b>Document Reordering và Conflict Resolution → nhóm A</b> (sắp xếp và giải quyết mâu thuẫn khi đóng gói context).'],
+ ['intro','Trường hợp nào “chưa cần RAG”?','Kiến thức chung LLM đã biết · <b>không có corpus riêng</b> · task <b>không cần citation</b> (creative writing, brainstorm) · prompt engineering đơn giản đã đủ.'],
+ ['intro','Ẩn dụ mô tả RAG so với fine-tuning?','RAG là <b>“open-book exam”</b> — <b>mang tài liệu vào phòng thi thay vì học thuộc lòng</b>.'],
+ ['intro','3 lý do doanh nghiệp BẮT BUỘC dùng RAG?','① <b>Dữ liệu nội bộ là tài sản</b> (fine-tune đắt, dễ catastrophic forgetting) · ② <b>Compliance &amp; trách nhiệm</b> (cần audit trail) · ③ <b>Cập nhật liên tục</b> (chỉ cần re-index, không retrain).'],
+ ['intro','Công thức mô tả RAG?','<b>Tìm chứng cứ → đóng gói có cấu trúc → sinh câu trả lời grounded</b>, có thể <b>trích dẫn và kiểm chứng</b>.'],
+ ['intro','Trong RAG Overview, phần nào offline, phần nào runtime?','<b>Offline:</b> Document → Ingestion → Vector Store.<br><b>Runtime:</b> Question → Retrieval → Augmentation → Generation → Answer.'],
+
+ ['r','Vì sao dense vector được gọi là “dense”?','Vì embedding model <b>nén toàn bộ ngữ nghĩa vào một vector mà MỌI CHIỀU đều khác 0</b> (768–1536 chiều).<br>Ngược lại sparse có vector dài bằng từ điển nhưng <b>hầu hết chiều = 0</b>.'],
+ ['r','Ví dụ thất bại điển hình của Dense Search?','Query <b>“lỗi ERR-4012”</b> → trả về docs <b>“lỗi hệ thống chung”</b> thay vì đúng mã lỗi cần tìm.'],
+ ['r','Ví dụ thất bại điển hình của Sparse Search?','Query <b>“nghỉ phép”</b> → bỏ lỡ document chỉ chứa <b>“annual leave”</b> hoặc <b>“PTO”</b> do không hiểu đồng nghĩa.'],
+ ['r','Ưu điểm của BM25 so với Dense?','<b>Match chính xác từ khóa, mã lỗi, tên riêng</b> và <b>chạy nhanh mà không cần GPU</b>.<br>Corpus phù hợp: <b>policy, code, luật, log, mã ticket</b>.'],
+ ['r','Hybrid Search hoạt động thế nào?','<b>Chạy cả hai search song song trên cùng query rồi gộp kết quả bằng thuật toán fusion</b> — dense bắt “PTO”, sparse bắt “ERR-4012”, <b>bù trừ điểm mù của nhau</b>.'],
+ ['r','Công thức RRF và giá trị k mặc định?','<b>RRF(d) = Σ 1/(k + rank_r(d))</b>, <b>k mặc định = 60</b>.<br>Đặc điểm: <b>chỉ dùng thứ hạng, BỎ QUA điểm số</b> → không cần tuning.'],
+ ['r','Công thức Alpha Weighting và giá trị α theo domain?','<b>score = α·s_dense + (1−α)·s_sparse</b><br><b>Chatbot FAQ: α = 0.7–0.9</b> (cần hiểu ngữ nghĩa, paraphrase).<br><b>Code, Log, Luật: α = 0.2–0.4</b> (thiên exact term).'],
+ ['r','Mới bắt đầu nên chọn fusion nào?','<b>RRF</b> — vì <b>đơn giản và không cần tuning tham số</b> cho từng domain. Chỉ chuyển sang alpha weighting khi cần kiểm soát tỷ trọng dense/sparse.'],
+ ['r','Vấn đề cốt lõi khiến Top-K chưa đủ?','Retriever quét hàng triệu tài liệu cực nhanh nhưng <b>chỉ đánh giá relevance sơ bộ</b> — <b>tài liệu đúng nhất có thể nằm ở Top 10, không phải Top 1</b>.<br>VD: “Thủ tục xin visa” → đúng nằm ở <b>Top 8</b>.'],
+ ['r','Chiến lược Retrieve-and-Rerank gồm 2 giai đoạn nào?','<b>Giai đoạn 1:</b> search rộng lấy <b>Top 50–100</b> (nhanh nhưng nhiễu).<br><b>Giai đoạn 2:</b> đưa qua <b>cross-encoder</b> chấm lại còn <b>Top 3–5</b> cho LLM.'],
+ ['r','Bi-Encoder vs Cross-Encoder?','<b>Bi-Encoder:</b> embed query và document <b>riêng biệt</b> rồi so khoảng cách → nhanh, pre-compute được.<br><b>Cross-Encoder:</b> ghép chung thành <b>một input</b> để đọc cùng lúc → chính xác hơn.'],
+ ['r','Vì sao Cross-Encoder chỉ dùng cho danh sách nhỏ?','Vì phải <b>chạy model cho TỪNG CẶP query–document</b> nên <b>không thể pre-compute</b> và tốn thời gian.'],
+ ['r','MMR giải quyết vấn đề gì?','<b>Redundancy</b> — cả Top 3 chunk cùng nói một ý (“hoàn tiền mất 7 ngày” × 3 cách diễn đạt) → <b>LLM tốn token vô ích mà không có thêm dữ kiện mới</b>.'],
+ ['r','Công thức MMR và ý nghĩa?','<b>MMR = Sim(d, q) − λ · Sim(d, d_selected)</b><br>Trừ đi phần tương đồng với chunk đã chọn → <b>chunk càng giống cái đã có thì điểm càng thấp</b>.'],
+ ['r','Quy trình 2 bước của MMR?','<b>B1:</b> chọn chunk <b>liên quan nhất với query</b>.<br><b>B2:</b> chọn chunk tiếp theo <b>liên quan query nhưng XA NHẤT so với chunk đã chọn</b>.'],
+ ['r','Mục tiêu của retrieval là gì?','<b>Lấy ĐÚNG, ĐỦ, và ĐA DẠNG</b> cho augmentation — <b>chứ không phải lấy nhiều</b>.'],
+
+ ['a','Context Injection là gì và KHÔNG phải là gì?','Là kỹ thuật <b>sắp xếp và định dạng</b> chunk vào context window để LLM dễ đọc nhất.<br><b>KHÔNG chỉ là nối chuỗi</b> (<code>text1 + text2</code>). <b>Cách bạn định dạng quyết định việc LLM có tôn trọng dữ liệu đó hay không.</b>'],
+ ['a','Cấu trúc THE PROMPT gồm 4 khối theo thứ tự nào?','<b>System Rules → Retrieved Documents → User Question → Constraints/Grounding</b>'],
+ ['a','Vì sao cần tách rõ System / Context / Question?','Để LLM biết <b>đâu là sự thật khách quan</b> (Context/Evidence), <b>đâu là câu hỏi người dùng</b> (Question), <b>đâu là instruction cho model</b> (System).<br>Nếu không tách rõ, model dễ nhầm dữ liệu với chỉ thị, hoặc bỏ qua context để dùng kiến thức nền.'],
+ ['a','Thẻ &lt;context&gt; trong ví dụ prompt chứa gì?','<b>Số thứ tự + đường dẫn file + section</b>, ví dụ:<br><code>[1] policy/refund-v4.pdf | Section 3</code>'],
+ ['a','Lost in the Middle ảnh hưởng RAG thế nào?','<b>LLM nhớ tốt thông tin ở ĐẦU và CUỐI prompt</b>; chunk quan trọng nằm ở <b>giữa dễ bị quên</b> → RAG thất bại dù đã retrieve đúng.'],
+ ['a','Document Reordering sắp xếp thế nào?','Đặt <b>Top 1 ở ĐẦU và Top 2 ở CUỐI</b>, các block xếp hạng thấp hơn <b>dồn vào giữa</b>.'],
+ ['a','3 kỹ thuật grounding &amp; verification?','<b>Strict Constraints</b> (chỉ dùng context, thiếu thì nói “không đủ dữ liệu”) · <b>Metadata Integration</b> (thời gian/tác giả để phân biệt cũ-mới) · <b>Citation Formatting</b> (trả [1], [2] để kiểm chứng).'],
+ ['a','Metadata Integration giải quyết vấn đề gì?','Giúp LLM <b>phân biệt được văn bản cũ và mới</b> để <b>ưu tiên nguồn cập nhật gần nhất</b>.<br>Chỉ thị: <i>“If documents conflict, prefer the most recent by date.”</i>'],
+ ['a','Ý nghĩa của “Grounding = neo LLM vào thực tế”?','<b>Không có grounding, model sẽ tự điền khoảng trống bằng suy đoán của chính nó.</b>'],
+ ['a','Rule of thumb về token budget?','<b>System prompt 20% · Retrieved context 60% · Headroom 20%</b> (query và output).<br>Context chiếm quá nhiều → model không còn chỗ cho instruction và output → chất lượng giảm.'],
+ ['a','Headroom 20% dùng để làm gì?','Dành chỗ cho <b>query của người dùng</b> và <b>phần output mà model sẽ sinh ra</b>.'],
+ ['a','Nếu context vẫn quá dài sau khi chọn top-K?','Dùng <b>Context Compression</b> — model nhỏ nén chunk thô, chỉ giữ ý chính.<br>Tools: <b>LLMLingua, Recomp</b>.'],
+ ['a','Vai trò của Augmentation trong pipeline?','<b>Đóng gói chunk đã retrieve thành context CÓ CẤU TRÚC trước khi đưa vào LLM.</b><br>Kết luận: <b>thứ tự, cấu trúc, và ranh giới giữa các nguồn đều ảnh hưởng chất lượng</b>.'],
+
+ ['g','3 tiêu chí chọn model cho Generation?','<b>Độ phức tạp câu hỏi · yêu cầu bảo mật · ngân sách.</b><br><b>Không phải lúc nào cũng cần model lớn nhất.</b>'],
+ ['g','Model nhỏ/local phù hợp workload nào?','Câu hỏi <b>đơn giản dạng lookup</b> · dữ liệu nhạy cảm cần <b>on-premise</b> · <b>high-volume</b> và cần <b>latency thấp</b>.'],
+ ['g','Output Control gồm 2 nhóm nào?','<b>Formatting</b> (Markdown, Table, JSON, <code>response_format</code>) và <b>Safety &amp; Alignment</b> (chính sách, PII, access level).'],
+ ['g','Vòng lặp Self-Correction hoạt động thế nào?','<b>Context → Generate Answer → Self-Check vs Context → Final Answer</b>, <b>retry nếu không grounded</b>.<br>LLM tự đánh giá câu trả lời của chính mình trước khi hiển thị.'],
+ ['g','Strict Grounding được mô tả cực đoan thế nào?','<b>Nếu đổi context sai thì model cũng phải trả lời sai theo context đó</b> — <b>trọng tài duy nhất là dữ liệu nội bộ</b>, cấm dùng kiến thức từ training.'],
+ ['g','Vì sao citation quan trọng tới vậy?','<b>RAG mất 50% giá trị nếu model không chỉ ra lấy từ tài liệu nào</b> — không có citation thì người dùng <b>không kiểm chứng được</b>, mất khả năng <b>audit và truy vết</b>.'],
+ ['g','Graceful Degradation nghĩa là gì?','Khi context <b>không chứa đáp án</b> thì <b>từ chối thay vì đoán mò</b> — nhưng <b>không nói “Không biết” cụt lủn</b>, mà <b>gợi ý bước tiếp theo</b>: “Chưa tìm thấy X. Bạn thử từ khóa Y hoặc liên hệ HR?”'],
+ ['g','Hai tính năng quan trọng nhất của RAG production?','<b>Grounding</b> (neo vào thực tế) và <b>Abstention</b> (biết giới hạn).'],
+ ['g','3 yếu tố UX quan trọng cho RAG?','<b>Citations · Confidence · Streaming</b> — biến AI từ <b>“hộp đen”</b> thành công cụ đáng tin cậy.'],
+ ['g','Vì sao streaming quan trọng?','Vì <b>RAG mất 3–5s</b> cho nhiều bước → streaming cho user <b>thấy tiến trình thay vì màn hình đơ</b> (“Đang tìm trong kho HR… Đang đọc 5 tài liệu…”).'],
+ ['g','CoT trong Generation dùng cho loại câu hỏi nào?','<b>Câu hỏi so sánh, suy luận logic, tổng hợp từ nhiều nguồn</b> — <b>không cần cho lookup đơn giản</b>.<br>VD: Doc_1 nói 12 ngày (2024), Doc_3 nói 14 ngày (2026) → ưu tiên doc mới nhất.'],
+ ['g','Failure pattern “Xung đột ngữ cảnh” và cách fix?','2 tài liệu mâu thuẫn (<b>12 ngày vs 14 ngày phép</b>), LLM chọn bừa hoặc cộng gộp.<br><b>Fix:</b> rule <b>ưu tiên tài liệu mới nhất</b>, hoặc <b>liệt kê cả hai và chỉ ra mâu thuẫn</b>.'],
+ ['g','Failure pattern “Suy diễn quá đà” — ví dụ?','Tài liệu nói <b>“Free ship đơn 500k ở HN”</b>, user hỏi <b>“HCM thì sao?”</b> → model tự suy <b>“HN được thì HCM chắc cũng được”</b>.<br><b>Fix:</b> “Không tự suy luận điều kiện không được đề cập rõ ràng.”'],
+ ['g','Failure pattern “Bỏ qua constraints” hay gặp ở đâu?','Hay gặp với <b>model nhỏ hoặc context dài</b>.<br><b>Fix:</b> đặt rule quan trọng ở <b>CUỐI prompt</b> (gần “Answer:” nhất) và <b>giảm temperature = 0</b>.'],
+ ['g','Kỹ thuật debug phân biệt lỗi Retrieval hay Generation?','<b>In <code>formatted_context</code> ra log.</b><br>Context <b>CÓ</b> đáp án → <b>lỗi Generation</b> (sửa prompt/model).<br>Context <b>KHÔNG</b> có đáp án → <b>lỗi Retrieval</b>.'],
+ ['g','Format post chiến lược RAG lên Discord?','<b>Domain</b> · <b>Search</b> (dense/sparse/hybrid với α) · <b>Rerank</b> (có/không và lý do) · <b>Prompt</b> (grounding rule chính) · <b>Rủi ro lớn nhất</b>.'],
+
+ ['pre','Pre-Filtering hoạt động khi nào và lợi ích gì?','<b>Lọc metadata TRƯỚC KHI search</b>, thu gọn scope từ N chunks xuống <b>n ≪ N</b> → <b>tăng cả tốc độ lẫn precision cùng lúc</b>.<br>Lọc theo: department, date, doc type, access level.'],
+ ['pre','Multi-Query hoạt động thế nào?','<b>Tự động tạo nhiều biến thể của câu hỏi</b>, mỗi biến thể <b>search riêng rồi gộp kết quả</b> → <b>tăng recall</b>, bắt chunk mà query gốc bỏ lỡ.<br>“Chính sách hoàn tiền?” → “Refund policy?” + “Điều kiện trả hàng?” + “Thời hạn hoàn tiền?”'],
+ ['pre','HyDE hoạt động theo nguyên lý nào?','<b>LLM sinh câu trả lời GIẢ ĐỊNH cho query, rồi EMBED câu trả lời giả đó để search.</b><br>VD: “SLA P1?” → HyDE sinh “SLA P1 là phản hồi 15 phút, xử lý 4 giờ…” rồi embed câu này.'],
+ ['pre','Query Decomposition giải quyết loại câu hỏi nào?','Câu hỏi <b>phức tạp multi-hop</b> — tách thành nhiều câu nhỏ vì <b>một vector không thể trả lời 2 ý khác biệt cùng lúc</b>.<br>VD: “So sánh hoàn tiền Shopee vs Tiki” → Q1 + Q2.'],
+ ['pre','Step-Back Prompting dùng khi nào?','Khi câu hỏi <b>quá chi tiết</b> — LLM sinh câu hỏi <b>“lùi một bước”</b> (abstract) để lấy ngữ cảnh chung trước, tránh bị “lạc” trong tiểu tiết.<br>VD: “Lỗi 404 API Momo user 8910” → “Kiến trúc tích hợp Momo?”'],
+ ['pre','Thứ tự đầy đủ của Query Processing?','<b>Pre-Filter → Query Expansion → Decomposition → Step-Back → Multi-Query → HyDE → Search</b>'],
+ ['pre','Cảnh báo về query transformation?','<b>Đừng thêm transformation chỉ vì framework có sẵn.</b> Dùng khi query <b>ngắn, mơ hồ, hoặc có nhiều alias</b>.'],
+ ['pre','3 dạng reasoning loop trong Agentic RAG?','<b>Self-Query</b> (tự tách câu hỏi phức tạp) · <b>Corrective RAG (C-RAG)</b> · <b>Adaptive RAG</b>.'],
+ ['pre','C-RAG khác RAG thường ở điểm nào?','Nó <b>tự đánh giá chất lượng tài liệu tìm được</b> — nếu tài liệu rác thì <b>kích hoạt tìm kiếm Web hoặc báo lỗi</b>.'],
+ ['pre','Adaptive RAG hoạt động theo nguyên tắc nào?','<b>Tự chọn chiến thuật</b>: câu hỏi dễ → trả lời ngay; câu hỏi khó → kích hoạt tìm kiếm chuyên sâu.'],
+ ['pre','Agentic RAG mở rộng chữ “R” thế nào?','Từ <b>chỉ vector search</b> sang <b>BẤT KỲ nguồn dữ liệu nào agent có thể gọi được qua tool</b> (eDocman API, JIRA, database query, calculator, code interpreter).'],
+ ['pre','Kết luận về Agentic RAG?','<b>Agentic RAG = RAG + reasoning loop.</b> Agent không chỉ search 1 lần mà <b>lặp lại, tự sửa, tự quyết định chiến thuật</b>.'],
+
+ ['eval','Vì sao “Vibe Check” không đủ?','<b>Không phát hiện edge case</b> · <b>không biết regression</b> khi đổi config · <b>không có bằng chứng cho stakeholder</b>.<br>“Cảm giác ổn” không phải metric.'],
+ ['eval','Vì sao không chấm RAG bằng một con số duy nhất?','Vì phải <b>tách bạch lỗi do Retriever, lỗi do Generator, hay lỗi do Augmentation</b>.'],
+ ['eval','3 trục của RAGAS Triad?','<b>Context Recall</b> (Retriever tìm đủ không?) · <b>Faithfulness</b> (Generator bám chứng cứ không?) · <b>Answer Relevance</b> (câu trả lời đúng ý không?).'],
+ ['eval','Context Recall đo gì?','<b>Tỷ lệ thông tin cần thiết (ground truth) được tìm thấy trong retrieved context.</b><br>Recall thấp = retriever <b>bỏ sót tài liệu quan trọng</b>.'],
+ ['eval','Context Recall thấp thì sửa ở đâu?','<b>Retrieval strategy</b> (hybrid, rerank) · <b>chunking</b> (chunk quá to, thiếu metadata) · <b>query transformation</b> (expansion, decomposition) · <b>embedding model</b>.'],
+ ['eval','Faithfulness đo gì và tính thế nào?','Đo <b>mỗi claim trong answer có evidence trong context không</b>.<br>Cách tính: <b>tách answer thành các statements rồi kiểm tra từng cái</b>. Claim không có evidence = hallucination.'],
+ ['eval','Faithfulness thấp thì sửa ở đâu?','<b>Generation prompt</b> (thêm strict grounding) · <b>self-correction loop</b> · <b>giảm temperature = 0</b> · <b>đặt rule quan trọng ở cuối prompt</b>.'],
+ ['eval','Answer Relevance được đo bằng phương pháp nào?','<b>Sinh câu hỏi NGƯỢC từ answer rồi so với câu hỏi gốc</b> để xem có khớp không.'],
+ ['eval','Recall Thấp + Faithfulness Cao + Relevance Thấp → sửa gì?','<b>Sửa RETRIEVAL</b> (search sai) — hệ thống <b>ngoan ngoãn nói “không biết”</b> vì không tìm thấy tài liệu.'],
+ ['eval','Recall Cao + Faithfulness Thấp + Relevance Cao → sửa gì?','<b>Sửa GENERATION</b> — <b>tìm đúng tài liệu nhưng model bị ảo giác hoặc prompt viết dở</b>.'],
+ ['eval','Recall Cao + Faithfulness Cao + Relevance Thấp → sửa gì?','<b>Sửa AUGMENTATION</b> — <b>context đúng nhưng đóng gói sai cách</b> khiến câu trả lời lạc trọng tâm.'],
+ ['eval','Cả ba chỉ số đều Thấp → sửa gì?','<b>Sửa INDEXING</b> — <b>dữ liệu gốc có vấn đề ngay từ khâu chuẩn bị và đưa vào store</b>.'],
+ ['eval','Case study Hybrid Search cho kết quả gì?','<b>Context Recall tăng từ 60% lên 90%</b> (tăng <b>30 điểm phần trăm</b>), và <b>Faithfulness cũng tăng theo</b> vì context đầy đủ hơn.'],
+ ['eval','Vì sao thêm BM25 là “thay đổi ROI cao nhất”?','Vì <b>chỉ cần thêm một thành phần đơn giản</b> mà <b>Context Recall tăng vọt tới 30 điểm phần trăm</b>.'],
+ ['eval','Con số ROI của Cross-encoder Reranker?','<b>Answer Relevance tăng +5%</b>, <b>latency tăng từ 1s lên 4s</b>, <b>chi phí server tăng gấp đôi</b> ($500/tháng, +3s mỗi request).'],
+ ['eval','Bài học về ROI?','<b>Không phải kỹ thuật nào cũng đáng thêm</b>; mỗi cải tiến cần cân nhắc <b>quality gain vs latency vs cost</b>.'],
+ ['eval','CI/CD cho RAG hoạt động thế nào?','<b>Git Push → RAGAS Eval → pass thì Deploy, fail thì Block.</b><br>Ví dụ: <b>Faithfulness &lt; 80% thì chặn deploy</b>.'],
+ ['eval','Vì sao “Code RAG ≠ Code Web”?','Vì khi deploy RAG bạn <b>test HÀNH VI của AI</b>, chứ không phải logic xác định như web thông thường.<br><b>Không có eval tự động = không biết regression.</b> Treat RAG eval như <b>unit test cho AI</b>.'],
+ ['eval','Day 9 học gì và bài tập chuẩn bị?','<b>Multi-Agent, MCP &amp; A2A.</b><br>Bài tập: chuẩn bị use case mà <b>single-agent đang quá tải</b>, nghĩ cách tách 2–3 worker theo <b>tool, domain, hay bước xử lý</b>.'],
+];
+const grid=document.getElementById('fcgrid'), cnt=document.getElementById('cnt');
+const NAMES={intro:'Retro & RAG là gì',r:'R — Retrieval',a:'A — Augmentation',g:'G — Generation',pre:'Query & Agentic',eval:'Evaluation'};
+function render(f){
+  const list=f==='all'?CARDS:CARDS.filter(c=>c[0]===f);
+  grid.innerHTML=list.map(c=>`<div class="fc"><div class="fci">
+      <div class="ff"><div class="tag2">${NAMES[c[0]]}</div><div class="q">${c[1]}</div></div>
+      <div class="fb"><div class="a">${c[2]}</div></div></div></div>`).join('');
+  cnt.textContent=list.length+' thẻ';
+  grid.querySelectorAll('.fc').forEach(el=>el.onclick=()=>el.classList.toggle('flip'));
+}
+document.querySelectorAll('.fbtn').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); render(b.dataset.f);
+});
+render('all');
+</script>
+</body>
+</html>

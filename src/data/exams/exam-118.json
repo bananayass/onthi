@@ -1,0 +1,201 @@
+{
+  "id": "exam-118",
+  "title": "AICB Tự luận — Tính ROI & Chi phí AI (8 câu)",
+  "description": "8 câu tự luận có phép tính, dạng thường ra trong phần \"biện luận đầu tư\" của bài thi: ROI và thời gian hoàn vốn của một dự án agent, ROI của reranker, bốn pattern tối ưu chi phí, điểm hoà vốn của HITL, tự host so với gọi API, ROI của đầu tư eval và golden set, chi phí hai loại lỗi và ngưỡng abstention, GraphRAG so với Flat RAG. Mỗi câu đều yêu cầu ra con số cụ thể rồi mới biện luận. Đáp án mẫu viết ngắn dạng gạch đầu dòng, đủ ý để tự chấm.",
+  "durationMinutes": 60,
+  "totalPoints": 80,
+  "passingScore": 70,
+  "disclaimer": "Đề do AI biên soạn từ slide bài giảng AICB, dùng để tự ôn tập. Số liệu trong đề là giả định để luyện cách tính, không phải số liệu thật của doanh nghiệp nào. Không phải đề thi chính thức của chương trình.",
+  "course": "aicb",
+  "kind": "review",
+  "label": "Tự luận ROI",
+  "questions": [
+    {
+      "id": "ROI-01",
+      "module": "A",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Phòng pháp chế có **6 chuyên viên**, mỗi người rà **8 hợp đồng/ngày**, **250 ngày/năm**. Mỗi hợp đồng hiện tốn **45 phút**, chi phí nhân sự quy đổi **320.000đ/giờ**.\n\nBạn đề xuất trợ lý AI rà trước rồi người duyệt lại, rút thời gian mỗi hợp đồng xuống **15 phút**. Chi phí: **2.500đ tiền model mỗi hợp đồng**, **60 triệu/năm** hạ tầng, và **400 triệu** chi phí xây dựng ban đầu (trả một lần).\n\n**Yêu cầu.**\n(a) Tính chi phí hiện tại mỗi năm, chi phí sau khi có agent, khoản tiết kiệm mỗi năm, **ROI năm đầu** và **thời gian hoàn vốn**. Ghi rõ giả định.\n(b) Nêu **ba chi phí** mà phép tính trên đã bỏ sót, và giải thích vì sao mỗi khoản có thể làm đảo ngược kết luận.\n(c) Bạn trình bày con số này cho ban lãnh đạo như thế nào?",
+      "modelAnswer": "- **(a)** *Giả định*: 250 ngày/năm; agent không thay đổi số hợp đồng phải rà; người vẫn duyệt 100%.\n  - Khối lượng: 6 × 8 × 250 = **12.000 hợp đồng/năm**.\n  - **Hiện tại**: 0,75 giờ × 12.000 = 9.000 giờ × 320.000đ = **2,88 tỷ/năm**.\n  - **Sau agent**: nhân lực 0,25 × 12.000 = 3.000 giờ = **960 tr**; model 12.000 × 2.500đ = **30 tr**; hạ tầng **60 tr** → vận hành **1,05 tỷ**.\n  - **Tiết kiệm 1,83 tỷ/năm.** Chi phí năm 1 = 400 + 1.050 = **1,45 tỷ** → **ROI năm đầu = (2.880 − 1.450) / 1.450 ≈ 99%** (quy ước: lợi ích trừ tổng chi phí, chia cho tổng chi phí — nêu rõ quy ước vì chia cho riêng vốn đầu tư sẽ ra con số khác hẳn). Hoàn vốn = 400 / (1.830/12) ≈ **2,6 tháng**.\n- **(b) Ba khoản bỏ sót**:\n  1. **Chi phí của bản rà SAI** — phép tính giả định agent rà đúng nên người duyệt chỉ mất 15 phút. Bỏ sót một điều khoản bất lợi trong hợp đồng là rủi ro pháp lý, chi phí một lần có thể lớn hơn cả năm tiết kiệm. Phải nhân tỷ lệ lỗi với chi phí mỗi lần sai.\n  2. **Vận hành liên tục** — monitoring, re-index khi mẫu hợp đồng đổi, chạy eval mỗi release, cập nhật golden set, người trực. Anti-pattern \"we'll add monitoring later\" đẩy khoản này ra khỏi bảng tính.\n  3. **Automation bias và trôi theo thời gian** — người duyệt quen tin agent nên duyệt qua loa, 15 phút thành 5 phút nhưng chất lượng tụt; cộng chi phí đào tạo và giai đoạn năng suất giảm lúc đầu.\n- **(c)** Đưa **khoảng, không đưa điểm**: kịch bản thận trọng / cơ sở / lạc quan kèm giả định. Trình bày **ba cột chất lượng · chi phí · rủi ro** thay vì một con số tổng hợp — gộp thành một số là giấu đi đánh đổi mà lãnh đạo phải tự chọn. Nói bằng **ngôn ngữ nghiệp vụ** (\"hoàn vốn dưới 3 tháng, giải phóng 6.000 giờ/năm\"). Gắn vào một **gate đo được** và nêu **phương án lùi**.",
+      "rubric": [
+        "Tính đúng 12.000 hợp đồng/năm và 2,88 tỷ chi phí hiện tại",
+        "Tính đúng chi phí vận hành sau agent ≈ 1,05 tỷ (đủ ba khoản: nhân lực, model, hạ tầng)",
+        "Tính đúng tiết kiệm 1,83 tỷ/năm",
+        "Tính ROI năm đầu có tính chi phí xây dựng 400 triệu và ghi rõ công thức đã dùng ((2.880 − 1.450)/1.450 ≈ 99%)",
+        "Tính hoàn vốn ≈ 2,6 tháng và ghi rõ giả định đã dùng",
+        "Nêu chi phí của kết quả SAI và giải thích nó có thể lớn hơn toàn bộ khoản tiết kiệm",
+        "Nêu chi phí vận hành liên tục (monitoring, eval, re-index, cập nhật golden set)",
+        "Nêu một rủi ro dạng hành vi hoặc trôi theo thời gian (automation bias, drift, đào tạo)",
+        "Trình bày dạng khoảng và ba cột chất lượng/chi phí/rủi ro, không đưa một con số tổng hợp",
+        "Có gate đo được hoặc phương án lùi"
+      ],
+      "tags": [
+        "roi",
+        "day5",
+        "day13"
+      ]
+    },
+    {
+      "id": "ROI-02",
+      "module": "A",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Hệ RAG của bạn phục vụ **50.000 truy vấn/tháng**, chi phí hiện tại **900đ/truy vấn**. Bật cross-encoder rerank sẽ làm chi phí mỗi truy vấn **tăng gấp đôi** và độ trễ đi từ **1s lên 4s**, đổi lại **+5% relevance** (theo mốc Ngày 8).\n\nĐội vận hành ước tính: cứ một câu trả lời sai lọt ra ngoài thì mất trung bình **12 phút** của một nhân viên để xử lý lại, chi phí nhân sự **250.000đ/giờ**.\n\n**Yêu cầu.**\n(a) Tính chi phí tăng thêm mỗi tháng và lợi ích quy ra tiền. Kết luận có nên bật rerank không?\n(b) Tính **chi phí hoà vốn của một câu trả lời sai** — tức mỗi câu sai phải tốn ít nhất bao nhiêu tiền thì rerank mới đáng bật.\n(c) Ngoài tiền, còn yếu tố nào có thể khiến bạn vẫn KHÔNG bật rerank?",
+      "modelAnswer": "- **(a)** *Giả định quy đổi*: coi \"+5% relevance\" tương đương giảm tuyệt đối 5% số truy vấn cho câu trả lời sai. Đây là một giả định mô hình chứ không phải phép tính — relevance là điểm 0–1, không phải tỷ lệ lỗi — nên phải đo lại trên golden set trước khi tin con số cuối.\n  - **Chi phí thêm**: 900đ × 50.000 = **45 triệu/tháng**.\n  - **Lợi ích**: +5% relevance ≈ tránh được 5% × 50.000 = **2.500 câu sai/tháng**. Mỗi câu sai tốn 12 phút = 0,2 giờ × 250.000đ = **50.000đ** → **125 triệu/tháng**.\n  - **Ròng +80 triệu/tháng → nên bật.**\n- **(b)** Hoà vốn khi lợi ích = chi phí: 45.000.000 / 2.500 = **18.000đ mỗi câu sai**. Dưới mức đó thì rerank lỗ — ví dụ nếu mỗi câu sai chỉ tốn 15.000đ thì lợi ích 37,5 tr < 45 tr, **âm 7,5 triệu/tháng**.\n- Đây mới là con số đáng nhớ: không phải \"rerank có tốt không\" mà là **chi phí của một câu sai trong nghiệp vụ của bạn là bao nhiêu**.\n- **(c) Yếu tố ngoài tiền**:\n  - **Độ trễ**: 1s → 4s. Nếu đây là chatbot người dùng chờ trực tiếp thì 4s có thể vượt ngưỡng chấp nhận được — theo Amazon Rule, mỗi 100ms latency mất 1% doanh số. Nếu là luồng xử lý nền thì 4s vô hại.\n  - **Rerank vô dụng nếu chunk đúng chưa được retrieve lên** — nếu chẩn đoán cho thấy Context Recall thấp thì tiền nên đổ vào hybrid search trước, rẻ hơn và sửa đúng tầng.\n  - **Con số +5% chưa được kiểm chứng trên corpus của mình** — phải đo paired trên golden set riêng, vì Ngày 18 lại ghi mốc khác (+15–25% precision, 30–50ms).",
+      "rubric": [
+        "Tính đúng chi phí tăng thêm 45 triệu/tháng",
+        "Quy đổi đúng chi phí một câu sai = 50.000đ (12 phút × 250.000đ/giờ)",
+        "Nêu rõ bước quy đổi từ +5% relevance sang số câu sai là một GIẢ ĐỊNH, không phải phép tính, và cần đo lại trên golden set",
+        "Tính đúng lợi ích 125 triệu/tháng và kết luận nên bật",
+        "Tính đúng điểm hoà vốn 18.000đ mỗi câu sai",
+        "Diễn giải được ý nghĩa: quyết định phụ thuộc vào chi phí một câu sai trong nghiệp vụ, không phải vào bản thân kỹ thuật",
+        "Nêu độ trễ 1s→4s như một ràng buộc độc lập với tiền, có phân biệt luồng realtime với luồng nền",
+        "Nêu rerank vô dụng nếu Context Recall còn thấp — phải chẩn đoán tầng trước",
+        "Nêu phải kiểm chứng con số +5% trên golden set riêng"
+      ],
+      "tags": [
+        "roi",
+        "day8",
+        "day18"
+      ]
+    },
+    {
+      "id": "ROI-03",
+      "module": "A",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Agent của bạn chạy **2 triệu truy vấn/tháng**, chi phí trung bình **1.200đ/truy vấn**. Trong đó phần **input chiếm 60%** chi phí token.\n\nBạn định áp dụng bốn pattern tối ưu chi phí của Ngày 13: **prompt caching** (giảm 70% phần input lặp lại), **model routing** (giảm 50% đơn giá), **semantic cache** (hit rate 30%), **batch API** (rẻ một nửa, áp được cho 50% khối lượng vì phần đó không cần realtime).\n\nMột bạn trong nhóm nói: \"Bốn cái này giảm 70% + 50% + 30% + 50% là còn gần như bằng không.\"\n\n**Yêu cầu.**\n(a) Chỉ ra sai lầm trong cách tính đó.\n(b) Tính lại theo tầng cho đúng bản chất từng pattern, ra con số chi phí mỗi tháng.\n(c) Nếu chỉ được làm MỘT pattern trong quý này, bạn chọn cái nào và vì sao?",
+      "modelAnswer": "- **(a) Sai lầm**: cộng dồn phần trăm của bốn thứ **không cùng loại**. Semantic cache **loại bỏ lời gọi** (giảm SỐ LƯỢNG), ba cái còn lại **giảm đơn giá** của những lời gọi còn lại. Cache đã hit rồi thì không còn gì để routing hay caching nữa — nên phải **nhân theo tầng**, không cộng. Cộng phần trăm còn cho ra kết quả vượt 100%, tức chi phí âm, điều vô nghĩa.\n- **(b) Tính theo tầng** (baseline 2 triệu × 1.200đ = **2,4 tỷ/tháng**):\n  1. **Semantic cache 30%** → còn **1,4 triệu truy vấn** thật sự gọi model.\n  2. **Model routing −50% đơn giá** → 1.200đ còn **600đ**.\n  3. **Prompt caching**: giảm 70% của phần input (chiếm 60%) = giảm 42% → 600đ còn **≈ 348đ**.\n  4. **Batch API** cho 50% khối lượng, rẻ một nửa: 0,7 triệu × 348 = 243,6 tr; 0,7 triệu × 174 = 121,8 tr.\n  - **Tổng ≈ 365 triệu/tháng, giảm khoảng 85%** — vẫn rất lớn, nhưng không phải \"gần bằng không\".\n  - *Đối chiếu*: slide Ngày 13 nêu mốc ~77% khi áp cả bốn pattern. Chênh lệch là do bộ tham số giả định khác (ở đây routing lấy mốc −50% và cache hit 30%) — nên con số cuối luôn phải gắn với giả định, không phải một hằng số.\n- **(c)** Chọn **semantic cache**: nó nằm ở tầng cao nhất nên mọi khoản tiết kiệm phía sau đều nhân lên trên phần còn lại; lại không đụng vào chất lượng câu trả lời (ngưỡng 0,95 rất chặt). Model routing tiết kiệm nhiều hơn về đơn giá nhưng cần classifier và có rủi ro định tuyến sai câu khó sang model nhỏ — phải đo chất lượng theo slice trước khi bật.",
+      "rubric": [
+        "Chỉ ra sai lầm cộng dồn phần trăm và giải thích bằng việc chúng tác động lên hai đại lượng khác nhau",
+        "Phân biệt semantic cache giảm SỐ LƯỢNG lời gọi với ba pattern kia giảm ĐƠN GIÁ",
+        "Tính baseline đúng 2,4 tỷ/tháng",
+        "Áp semantic cache đúng thứ tự đầu tiên, còn 1,4 triệu truy vấn",
+        "Tính prompt caching đúng trên phần input 60% (giảm 42%, không phải 70%)",
+        "Áp batch API chỉ cho 50% khối lượng đủ điều kiện",
+        "Ra con số cuối hợp lý và nêu mức giảm tổng (khoảng 85%)",
+        "Chọn một pattern có lập luận về vị trí trong chuỗi hoặc về rủi ro chất lượng"
+      ],
+      "tags": [
+        "roi",
+        "day13"
+      ]
+    },
+    {
+      "id": "ROI-04",
+      "module": "A",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Trung tâm hỗ trợ xử lý **20.000 yêu cầu/tháng**. Hiện mỗi yêu cầu tốn **10 phút** của nhân viên, chi phí **240.000đ/giờ**.\n\nBạn triển khai agent với chi phí model **1.500đ/yêu cầu**. Agent xử lý trọn phần lớn, phần còn lại **escalate cho người**. Một ca escalate tốn **14 phút** (lâu hơn 10 phút vì nhân viên phải đọc lại toàn bộ ngữ cảnh agent đã trao đổi).\n\n**Yêu cầu.**\n(a) Tính **tỷ lệ escalate hoà vốn** — tức escalate tới bao nhiêu phần trăm thì hết sạch khoản tiết kiệm.\n(b) Con số đó nói lên điều gì về quyết định \"có nên đặt HITL chặt hay không\"?\n(c) Vì sao ca escalate lại tốn nhiều thời gian hơn ca xử lý tay từ đầu, và điều đó gợi ý gì cho thiết kế?",
+      "modelAnswer": "- **(a)**\n  - **Chi phí cũ**: 20.000 × (10/60) × 240.000đ = **800 triệu/tháng**.\n  - **Chi phí mới**: model 20.000 × 1.500đ = **30 triệu**, cộng escalate: mỗi ca 14/60 × 240.000đ = **56.000đ**.\n  - Hoà vốn khi 30 tr + x × 20.000 × 56.000đ = 800 tr → x = 770.000.000 / 1.120.000.000 = **≈ 68,8%**.\n- **(b)** Ngưỡng hoà vốn rất cao: **escalate tới gần 70% vẫn không lỗ**. Nghĩa là **đặt HITL chặt gần như luôn đáng về mặt tiền** — nỗi lo \"escalate nhiều thì mất hết tiết kiệm\" không có cơ sở ở dải hoạt động thực tế (thường 10–30%).\n  - Nhưng phép tính này **bỏ qua chi phí của câu trả lời SAI lọt qua** — và chính khoản đó mới là lý do đặt HITL. Nên kết luận đúng là: siết HITL, rồi nới dần theo dữ liệu, chứ không phải nới sẵn để tối ưu chi phí.\n  - Cũng phải nhớ **anti-pattern**: duyệt mọi request gây tắc nghẽn; người duyệt thiếu ngữ cảnh nên bấm cho xong (\"rubber stamp\").\n- **(c)** Escalate tốn hơn vì nhân viên phải **đọc lại ngữ cảnh agent đã tạo ra** rồi mới bắt đầu việc của mình — chi phí chuyển giao. Gợi ý thiết kế: **agent phải bàn giao có cấu trúc** — tóm tắt vấn đề, các bước đã thử, dữ liệu đã tra, lý do không kết luận được. Bàn giao tốt kéo 14 phút xuống dưới 10 phút và biến escalate thành có lợi thay vì thành phí tổn.",
+      "rubric": [
+        "Tính đúng chi phí cũ 800 triệu/tháng",
+        "Quy đổi đúng chi phí một ca escalate = 56.000đ",
+        "Lập đúng phương trình hoà vốn có cả chi phí model cố định 30 triệu",
+        "Ra tỷ lệ hoà vốn ≈ 69%",
+        "Diễn giải đúng: ngưỡng rất cao nên đặt HITL chặt là đáng, không phải đánh đổi khó",
+        "Chỉ ra phép tính bỏ qua chi phí câu trả lời sai — và đó mới là lý do thật của HITL",
+        "Nhắc anti-pattern HITL (bottleneck, rubber stamp)",
+        "Giải thích chi phí chuyển giao ngữ cảnh và đề xuất bàn giao có cấu trúc"
+      ],
+      "tags": [
+        "roi",
+        "day11",
+        "day5"
+      ]
+    },
+    {
+      "id": "ROI-05",
+      "module": "A",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Sếp hỏi: \"Sao không tự host một model open-weight cho rẻ, khỏi trả tiền API nữa?\"\n\nSố liệu: API hiện dùng có giá quy đổi **60đ / 1.000 token**. Tự host cần **2 GPU thuê 55 triệu/tháng** cộng **0,4 FTE MLOps ≈ 40 triệu/tháng**, chi phí biến đổi coi như bằng không.\n\n**Yêu cầu.**\n(a) Tính **điểm hoà vốn theo khối lượng token mỗi tháng**, và quy ra mỗi ngày.\n(b) Với một trợ lý nội bộ 300 người dùng, kết luận của bạn là gì?\n(c) Nêu ba yếu tố ngoài đơn giá token mà phép so sánh trên đã bỏ qua.",
+      "modelAnswer": "- **(a)** Chi phí cố định 55 + 40 = **95 triệu/tháng**. Hoà vốn khi tiền API bằng 95 triệu:\n  - 95.000.000 / 60đ = 1,583 triệu đơn vị nghìn-token → **≈ 1,58 tỷ token/tháng**, tức **≈ 53 triệu token/ngày**.\n- **(b)** Trợ lý nội bộ 300 người khó chạm mức đó: giả sử mỗi người 20 lượt/ngày, mỗi lượt 4.000 token → 300 × 20 × 4.000 = **24 triệu token/ngày**, mới bằng **khoảng 45%** điểm hoà vốn. **Kết luận: chưa nên tự host** — và ở dưới điểm hoà vốn thì chi phí cố định 95 triệu vẫn phải trả đủ dù dùng ít, trong khi API là trả theo mức dùng.\n- **(c) Ba yếu tố bị bỏ qua**:\n  1. **Chất lượng không tương đương** — model open-weight tự host thường yếu hơn model API cùng thời điểm; phải đo paired trên golden set của mình trước khi so giá, nếu không là so hai thứ khác nhau.\n  2. **Công việc kèm theo không nằm trong 0,4 FTE** — nâng cấp model, tối ưu suy luận, xử lý sự cố ngoài giờ, và đảm bảo độ sẵn sàng. Với API thì SLA là việc của nhà cung cấp.\n  3. **Chi phí cố định là rủi ro**: khối lượng tụt thì đơn giá thực tăng vọt; còn API co giãn theo nhu cầu.\n- **Lý do chính đáng để tự host thường KHÔNG phải giá**, mà là **dữ liệu không được rời hạ tầng** hoặc tránh vendor lock-in — nếu đó là lý do thì hãy nói thẳng như vậy thay vì biện minh bằng chi phí.",
+      "rubric": [
+        "Tính đúng chi phí cố định 95 triệu/tháng",
+        "Tính đúng điểm hoà vốn ≈ 1,58 tỷ token/tháng",
+        "Quy ra được con số theo ngày (≈ 53 triệu token/ngày)",
+        "Ước lượng khối lượng thực tế bằng một giả định rõ ràng và so với điểm hoà vốn",
+        "Kết luận chưa nên tự host, có nêu rủi ro chi phí cố định phải trả đủ dù dùng ít",
+        "Nêu chất lượng model không tương đương và phải đo paired trước khi so giá",
+        "Nêu công việc vận hành và SLA không nằm trong con số FTE",
+        "Chỉ ra lý do chính đáng để tự host thường là dữ liệu hoặc vendor lock-in, không phải giá"
+      ],
+      "tags": [
+        "roi",
+        "day1",
+        "day12"
+      ]
+    },
+    {
+      "id": "ROI-06",
+      "module": "A",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Bạn đề xuất đầu tư dựng **golden set 200 case** (mỗi case tốn 25 phút để viết `reference` và gán `gold_docs`, nhân sự 350.000đ/giờ) cộng bảo trì **20% chi phí ban đầu mỗi quý**, và chạy eval **mỗi release** với chi phí **1,6 triệu/lần** (bộ đầy đủ 200 sample cộng phần dùng judge). Đội phát hành **24 release/năm**.\n\nSếp nói: \"Eval không tạo ra giá trị gì cho khách hàng, sao phải tốn tiền?\"\n\n**Yêu cầu.**\n(a) Tính tổng chi phí eval mỗi năm.\n(b) Ước tính lợi ích và tính ROI, ghi rõ giả định về tần suất và chi phí sự cố.\n(c) Vì sao ROI của eval không thể tính giống ROI của một tính năng?",
+      "modelAnswer": "- **(a)**\n  - Xây golden set: 200 × 25 phút = 83,3 giờ × 350.000đ ≈ **29 triệu** (trả một lần).\n  - Bảo trì: 20% × 29 tr × 4 quý ≈ **23 triệu/năm**.\n  - Chạy eval: 24 × 1,6 tr = **38 triệu/năm**.\n  - **Tổng năm đầu ≈ 90,9 triệu.**\n- **(b)** *Giả định*: không có eval thì trung bình **4 sự cố hồi quy/năm** lọt lên production, mỗi sự cố tốn **60 triệu** (điều tra, rollback, xử lý khiếu nại, mất uy tín); eval chặn được **3/4** trong số đó.\n  - Lợi ích = 4 × 60 × 0,75 = **180 triệu/năm** → **ROI = (180 − 90,9) / 90,9 ≈ 98%**.\n  - Con số này **rất nhạy với giả định**: nếu chỉ 1 sự cố/năm và mỗi sự cố 20 triệu thì lợi ích 15 triệu, ROI âm nặng. Nên phải trình bày dạng **khoảng**, và điều đáng tranh luận là **tần suất × chi phí sự cố**, không phải chi phí eval.\n- **(c)** Eval là **bảo hiểm, không phải tính năng**: giá trị của nó là những sự cố **không xảy ra** — một đại lượng không quan sát trực tiếp được, nên luôn bị đánh giá thấp. Ba điểm bổ sung:\n  - Nó là **điều kiện để cải tiến có ý nghĩa**: không có golden set thì không phân biệt được \"agent tốt lên\" với \"may hơn lần trước\".\n  - **Chi phí trả một lần, dùng lại mãi** — nhưng golden set phải được **version cùng code**, nếu không thì mọi so sánh giữa các release đều vô nghĩa.\n  - Chi phí **tăng theo tuyến tính** còn rủi ro **tăng theo quy mô người dùng** — càng nhiều người dùng thì tỷ lệ ROI càng tốt.",
+      "rubric": [
+        "Tính đúng chi phí xây golden set ≈ 29 triệu",
+        "Cộng đủ ba khoản: xây, bảo trì theo quý, và chi phí chạy eval theo số release",
+        "Ra tổng chi phí năm ≈ 90,9 triệu",
+        "Ghi rõ giả định về tần suất sự cố và chi phí mỗi sự cố trước khi tính lợi ích",
+        "Tính ROI ra con số cụ thể kèm công thức, và chỉ ra nó rất nhạy với giả định",
+        "Đề xuất trình bày dạng khoảng thay vì một con số",
+        "Giải thích eval là bảo hiểm — giá trị nằm ở sự cố KHÔNG xảy ra nên khó quan sát",
+        "Nêu golden set là điều kiện để phân biệt cải tiến thật với may rủi, và phải version cùng code"
+      ],
+      "tags": [
+        "roi",
+        "day14"
+      ]
+    },
+    {
+      "id": "ROI-07",
+      "module": "A",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Đội nghiệp vụ ước lượng: một câu trả lời **SAI** lọt ra ngoài tốn trung bình **850.000đ** (khiếu nại, thực hiện cam kết sai, tổn thất uy tín). Một câu **từ chối oan** — agent nói không đủ căn cứ trong khi lẽ ra trả lời được — tốn **45.000đ** (khách phải chờ nhân viên).\n\n**Yêu cầu.**\n(a) Từ hai con số này, rút ra nguyên tắc định lượng cho việc đặt ngưỡng grounding.\n(b) Vì sao siết ngưỡng vẫn chưa phải cách tối ưu nhất để giảm cả hai loại chi phí?\n(c) Bạn theo dõi bằng những chỉ số nào để biết mình đang đặt ngưỡng đúng chỗ?",
+      "modelAnswer": "- **(a)** Tỷ số chi phí = 850.000 / 45.000 ≈ **19**. Nghĩa là **cứ chặn được 1 câu sai thì được phép từ chối oan tới 18 câu** mà vẫn hoà. Kết luận định lượng: đây là bài toán **ưu tiên precision mạnh** — siết grounding chặt, chấp nhận abstention rate cao. Đây chính là nguyên tắc \"sai mà user KHÔNG BIẾT thì cần Precision\" của Ngày 5, nhưng được neo bằng con số thay vì bằng cảm tính.\n- **(b)** Siết ngưỡng chỉ **dịch chuyển** giữa hai loại lỗi chứ không làm giảm tổng. Điểm mấu chốt: phần lớn ca **\"không đủ dữ liệu\" thực ra là lỗi RETRIEVAL, không phải Generation** — agent từ chối vì không lấy được đoạn đúng, chứ không phải vì prompt quá chặt.\n  - Vậy khoản đầu tư đúng là **cải thiện Context Recall** (hybrid search, query transformation, chunking): nó **giảm cả hai** loại lỗi cùng lúc, trong khi chỉnh ngưỡng chỉ đổi cái này lấy cái kia.\n  - Bổ sung ở tầng trải nghiệm: **graceful degradation** (từ chối kèm gợi ý bước tiếp theo), **trả lời một phần kèm citation**, và **phân tầng mức chặt theo rủi ro** của từng loại câu hỏi.\n- **(c) Chỉ số cả hai phía**:\n  - **Faithfulness / groundedness** — bắt phía bịa.\n  - **Abstention rate** đi kèm **Context Recall** — abstention cao mà recall thấp là dấu hiệu lỗi nằm ở retrieval.\n  - **Tín hiệu ngầm từ người dùng**: tỷ lệ regenerate, hỏi lại, bỏ session giữa chừng.\n  - **Lấy mẫu các câu bị từ chối rồi chấm tay**: bao nhiêu phần trăm lẽ ra trả lời được — đây là cách duy nhất đo trực tiếp chi phí từ chối oan.",
+      "rubric": [
+        "Tính đúng tỷ số ≈ 19 và diễn giải thành nguyên tắc đánh đổi cụ thể",
+        "Kết luận ưu tiên precision, chấp nhận abstention rate cao",
+        "Nối được với nguyên tắc 'sai mà user không biết thì cần precision'",
+        "Chỉ ra siết ngưỡng chỉ dịch chuyển giữa hai loại lỗi, không giảm tổng",
+        "Chỉ ra phần lớn ca không đủ dữ liệu là lỗi Retrieval và cải thiện recall giảm được CẢ HAI",
+        "Nêu graceful degradation hoặc trả lời một phần kèm citation",
+        "Đề xuất phân tầng mức chặt theo rủi ro của câu hỏi",
+        "Nêu chỉ số cả hai phía: faithfulness và abstention rate kèm Context Recall",
+        "Có tín hiệu ngầm từ người dùng hoặc lấy mẫu câu bị từ chối để chấm tay"
+      ],
+      "tags": [
+        "roi",
+        "day8",
+        "day5"
+      ]
+    },
+    {
+      "id": "ROI-08",
+      "module": "A",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Hệ hiện tại là Flat RAG: index tốn **12 triệu** một lần, truy vấn **900đ/câu**, phục vụ **40.000 truy vấn/tháng**. Bạn cân nhắc thêm GraphRAG cho các câu hỏi multi-hop: chi phí index **120 triệu** (Microsoft GraphRAG), truy vấn **2.600đ/câu**.\n\nƯớc lượng: với câu multi-hop, Flat RAG trả lời đúng **30%**, GraphRAG đúng **75%** (khớp mốc \"cao gấp 2–3 lần\" của Ngày 19). Một câu multi-hop trả lời sai dẫn tới escalate tốn **55.000đ**.\n\n**Yêu cầu.**\n(a) Tính lợi ích ròng kỳ vọng cho **mỗi câu multi-hop** khi định tuyến sang graph.\n(b) Tính **tỷ lệ câu multi-hop tối thiểu** trong tổng lưu lượng để khoản đầu tư index 120 triệu hoà vốn trong một năm.\n(c) Nếu tỷ lệ thực tế thấp hơn ngưỡng đó, bạn làm gì?",
+      "modelAnswer": "- **(a)**\n  - **Chi phí thêm mỗi câu**: 2.600 − 900 = **1.700đ**.\n  - **Lợi ích kỳ vọng**: độ đúng tăng 75% − 30% = 45 điểm → 0,45 × 55.000đ = **24.750đ**.\n  - **Ròng ≈ 23.050đ mỗi câu multi-hop** — chênh lệch đơn giá truy vấn nhỏ đến mức gần như không đáng kể so với chi phí một câu sai.\n- **(b)** Số câu cần để hoà vốn index: 120.000.000 / 23.050 ≈ **5.206 câu/năm** ≈ **434 câu/tháng**.\n  - Trên 40.000 truy vấn/tháng → **≈ 1,1%**. Chỉ cần khoảng 1% lưu lượng là multi-hop thì khoản đầu tư đã hoà vốn trong năm đầu.\n- **(c) Nếu thấp hơn ngưỡng**, theo thứ tự:\n  1. **Đổi sang LightRAG** — chi phí index thấp hơn Microsoft GraphRAG rất nhiều, kéo ngưỡng hoà vốn xuống theo.\n  2. **Giữ kiến trúc HYBRID và định tuyến**: factoid vẫn đi Flat RAG (rẻ, nhanh), chỉ multi-hop và global mới đi graph — không bao giờ thay thế Flat RAG bằng graph.\n  3. **Nếu vẫn không đủ**: chấp nhận escalate các câu multi-hop cho người, vì vài trăm câu mỗi năm thì thuê người rẻ hơn dựng và **bảo trì** graph.\n- **Lưu ý chi phí bị bỏ sót trong đề bài**: 120 triệu là index **một lần**, nhưng tài liệu đổi thì phải extract lại. Và nếu **bỏ qua bước coreference resolution thì mất 30–40% quan hệ** — đồ thị rời rạc, mức đúng 75% không đạt được trên corpus thật. Nên đo trên một mẫu trước khi cam kết toàn bộ khoản đầu tư.",
+      "rubric": [
+        "Tính đúng chi phí thêm mỗi câu 1.700đ",
+        "Tính đúng lợi ích kỳ vọng 0,45 × 55.000 = 24.750đ",
+        "Ra lợi ích ròng ≈ 23.050đ mỗi câu và nhận xét chênh lệch đơn giá là nhỏ so với chi phí một câu sai",
+        "Tính đúng số câu hoà vốn ≈ 5.200 câu/năm",
+        "Quy ra tỷ lệ ≈ 1,1% trên tổng lưu lượng",
+        "Đề xuất LightRAG như phương án chi phí index thấp hơn",
+        "Giữ kiến trúc hybrid có định tuyến, không thay thế Flat RAG",
+        "Nêu phương án lùi: escalate cho người khi khối lượng quá nhỏ",
+        "Chỉ ra chi phí re-index khi tài liệu đổi, và bỏ qua coreference resolution thì mất 30–40% quan hệ"
+      ],
+      "tags": [
+        "roi",
+        "day19",
+        "day8"
+      ]
+    }
+  ]
+}

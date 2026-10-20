@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 4 — Prompt Engineering &amp; Tool Calling | Tóm tắt</title>
+<style>
+:root{
+  --bg:#f7f8fa; --card:#fff; --ink:#1a1d24; --muted:#5b6472; --line:#e3e7ee;
+  --brand:#15803d; --brand-soft:#e6f5ec; --warn:#b8541a; --warn-soft:#fdf1e7;
+  --ok:#15803d; --ok-soft:#e6f5ec; --bad:#c0392b; --bad-soft:#fdeceb;
+  --acc:#4338ca; --acc-soft:#eceafd;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+
+header{background:linear-gradient(135deg,#15803d,#0d5c3f);color:#fff;padding:34px 0 26px}
+header .wrap{padding-bottom:0}
+.kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;margin:0 0 6px}
+header h1{margin:0 0 8px;font-size:31px;line-height:1.2;font-weight:700}
+header p{margin:0;opacity:.9;font-size:15px}
+
+.tabbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);
+  box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.tabbar .wrap{display:flex;gap:4px;padding-top:0;padding-bottom:0}
+.tab{appearance:none;border:0;background:none;font:inherit;font-weight:600;font-size:15px;
+  padding:15px 18px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--brand);border-bottom-color:var(--brand)}
+.panel{display:none;padding-top:28px}
+.panel.on{display:block}
+
+h2{font-size:22px;margin:36px 0 4px;padding-top:14px;border-top:2px solid var(--line)}
+h2 .num{color:var(--brand);font-weight:700}
+h2:first-child{border-top:0;padding-top:0;margin-top:0}
+.sub{color:var(--muted);font-size:14.5px;margin:0 0 18px}
+h3{font-size:17px;margin:26px 0 10px}
+h4{font-size:15.5px;margin:0 0 8px}
+p{margin:10px 0}
+ul,ol{margin:10px 0;padding-left:22px}
+li{margin:5px 0}
+code{background:#eef1f6;padding:2px 6px;border-radius:4px;font-size:13.5px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:#1f2430;color:#e6e9ef;padding:13px 15px;border-radius:9px;overflow-x:auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.6;margin:12px 0}
+pre .kw{color:#c792ea} pre .st{color:#c3e88d} pre .cm{color:#7c85a3} pre .fn{color:#82aaff} pre .er{color:#ff8a80}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:820px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:#fff;
+  border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{padding:9px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f2f5fa;font-weight:600;font-size:13px}
+tr:last-child td{border-bottom:0}
+
+.note{border-left:4px solid var(--brand);background:var(--brand-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.warn{border-left:4px solid var(--warn);background:var(--warn-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.bad{border-left:4px solid var(--bad);background:var(--bad-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.ok{border-left:4px solid var(--ok);background:var(--ok-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.acc{border-left:4px solid var(--acc);background:var(--acc-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note b,.warn b,.bad b,.ok b,.acc b{display:block;margin-bottom:3px;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+.note b{color:var(--brand)} .warn b{color:var(--warn)} .bad b{color:var(--bad)}
+.ok b{color:var(--ok)} .acc b{color:var(--acc)}
+
+.quote{margin:16px 0;padding:20px 24px;border-radius:12px;background:#1f2430;color:#fff;text-align:center}
+.quote p{margin:0;font-size:18px;font-weight:600;line-height:1.45}
+.quote small{display:block;margin-top:9px;opacity:.7;font-size:13px;letter-spacing:.06em}
+
+.pill{display:inline-block;font-size:12.5px;font-weight:600;padding:2px 9px;border-radius:20px;margin-right:5px}
+.pill.b{background:var(--brand-soft);color:var(--brand)}
+.pill.w{background:var(--warn-soft);color:var(--warn)}
+.pill.r{background:var(--bad-soft);color:var(--bad)}
+.pill.a{background:var(--acc-soft);color:var(--acc)}
+
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0}
+.step{background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-size:13.5px;font-weight:600}
+.step small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.step b{color:var(--brand)}
+.arw{color:var(--muted);font-weight:700;font-size:13px}
+
+/* RTCF */
+.rtcf{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}
+@media(max-width:820px){.rtcf{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.rtcf{grid-template-columns:1fr}}
+.rtcf>div{border:1px solid var(--line);border-radius:11px;padding:14px;background:#fff;border-top:4px solid var(--brand)}
+.rtcf .k{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--brand);margin-bottom:5px}
+.rtcf strong{display:block;font-size:15px;margin-bottom:6px}
+.rtcf p{margin:0;font-size:12.8px;color:var(--muted);font-style:italic}
+
+/* context window bar */
+.ctxbar{display:flex;margin:14px 0 6px;border-radius:9px;overflow:hidden;border:1px solid var(--line);font-size:12px;font-weight:600;text-align:center}
+.ctxbar>div{padding:13px 6px}
+.ctxbar .c1{flex:2;background:#dcefe3;color:#0d5c3f}
+.ctxbar .c2{flex:4;background:#e8f0fd;color:#2563c9}
+.ctxbar .c3{flex:2;background:#fdf1e7;color:#b8541a}
+.ctxbar .c4{flex:2;background:#eceafd;color:#4338ca}
+.ctxbar .c5{flex:2;background:#f1f3f7;color:#5b6472}
+.ctxcap{display:flex;font-size:11.5px;color:var(--muted);text-align:center;margin-bottom:14px}
+.ctxcap>div{padding:0 4px}
+.ctxcap .c1{flex:2}.ctxcap .c2{flex:4}.ctxcap .c3{flex:2}.ctxcap .c4{flex:2}.ctxcap .c5{flex:2}
+
+/* lost in middle */
+.lim{display:flex;align-items:flex-end;gap:4px;height:110px;margin:14px 0;padding:14px;
+  background:#fff;border:1px solid var(--line);border-radius:11px}
+.lim>div{flex:1;background:var(--brand);border-radius:3px 3px 0 0;position:relative}
+.lim>div span{position:absolute;bottom:-19px;left:0;right:0;text-align:center;font-size:10px;color:var(--muted)}
+
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+@media(max-width:700px){.vs{grid-template-columns:1fr}}
+.vs>div{border-radius:11px;padding:15px 17px;border:1px solid var(--line);background:#fff}
+.vs .lgood{border-top:4px solid var(--ok)}
+.vs .lbad{border-top:4px solid var(--bad)}
+.vs .lneu{border-top:4px solid var(--acc)}
+.vs h4{margin:0 0 8px;font-size:15px}
+.vs .lgood h4{color:var(--ok)} .vs .lbad h4{color:var(--bad)} .vs .lneu h4{color:var(--acc)}
+.vs p,.vs li{font-size:14px}
+.vs ul{margin:6px 0;padding-left:19px}
+
+.qlist{margin:14px 0}
+.qi{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:10px;padding:12px 15px;margin-bottom:8px}
+.qi .n{flex:0 0 26px;height:26px;border-radius:50%;background:var(--brand-soft);color:var(--brand);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12.5px}
+.qi .b{flex:1;min-width:0;font-size:14px}
+.qi .b strong{display:block;margin-bottom:2px}
+.qi .b span{color:var(--muted);font-size:13.3px}
+
+.chk{margin:14px 0}
+.ck{display:flex;gap:11px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:9px;padding:11px 14px;margin-bottom:7px;font-size:14px}
+.ck .bx{flex:0 0 20px;height:20px;border-radius:5px;background:var(--brand-soft);color:var(--brand);
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+
+#cheat{font-size:14px}
+#cheat h2{font-size:18px;margin:20px 0 8px;padding-top:10px}
+#cheat .card{padding:14px 16px;margin:10px 0}
+#cheat table{font-size:12.5px}
+#cheat th,#cheat td{padding:6px 8px}
+#cheat ul,#cheat ol{padding-left:19px} #cheat li{margin:3px 0}
+#cheat pre{font-size:11.5px;padding:9px 11px}
+.cheatgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:820px){.cheatgrid{grid-template-columns:1fr}}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13.5px}
+.kv dt{font-weight:600;color:var(--brand)}
+.kv dd{margin:0;color:var(--muted)}
+.printbtn{background:var(--brand);color:#fff;border:0;border-radius:8px;padding:9px 16px;
+  font:inherit;font-weight:600;font-size:14px;cursor:pointer;margin-bottom:6px}
+.printbtn:hover{background:#116533}
+
+.fcbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.fbtn{background:#fff;border:1px solid var(--line);border-radius:20px;padding:6px 15px;
+  font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;color:var(--muted)}
+.fbtn:hover{border-color:var(--brand);color:var(--brand)}
+.fbtn.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.counter{margin-left:auto;font-size:13.5px;color:var(--muted)}
+.fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.fc{perspective:1100px;height:218px;cursor:pointer}
+.fci{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.fc.flip .fci{transform:rotateY(180deg)}
+.ff,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:18px;
+  display:flex;flex-direction:column;justify-content:center;border:1px solid var(--line);overflow:auto}
+.ff{background:#fff}
+.fb{background:var(--brand);color:#fff;transform:rotateY(180deg);border-color:var(--brand)}
+.fb code{background:rgba(255,255,255,.2);color:#fff}
+.ff .tag2{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);margin-bottom:8px}
+.ff .q{font-size:15.5px;font-weight:600;line-height:1.45}
+.fb .a{font-size:13.5px;line-height:1.55}
+.hint{text-align:center;color:var(--muted);font-size:12.5px;margin-top:10px}
+
+@media print{
+  header,.tabbar,.printbtn,.hint{display:none!important}
+  .panel{display:none!important} #cheat{display:block!important;padding-top:0}
+  body{background:#fff;font-size:10.5px} .wrap{max-width:100%;padding:0}
+  .card{break-inside:avoid;border-color:#ccc} table{break-inside:avoid}
+  pre{background:#f4f4f4;color:#222;border:1px solid #ddd}
+  pre .kw,pre .st,pre .cm,pre .fn,pre .er{color:#222}
+  h2{break-after:avoid}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">AICB-P1 · Ngày 4</p>
+    <h1>Prompt Engineering &amp; Tool Calling</h1>
+    <p>Làm sao nói để AI hiểu đúng ý?</p>
+  </div>
+</header>
+
+<nav class="tabbar">
+  <div class="wrap">
+    <button class="tab on" data-t="detail">Tóm tắt chi tiết</button>
+    <button class="tab" data-t="cheat">Cheat sheet</button>
+    <button class="tab" data-t="cards">Flashcard</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ==================== TAB 1 ==================== -->
+<section class="panel on" id="detail">
+
+<div class="quote"><p>“Hai người hỏi AI cùng một việc, một người nhận kết quả xuất sắc, người kia nhận rác. Tại sao?<br>Và: cùng một agent, đôi khi nó gọi tool đúng, đôi khi gọi sai — do prompt hay do tool?”</p><small>CÂU HỎI MỞ ĐẦU</small></div>
+
+<div class="note"><b>Ý tưởng xuyên suốt</b><b>Prompt</b> là interface giữa <b>human intent và model behavior</b>.<br><b>Tool calling</b> là interface giữa <b>model và thế giới bên ngoài</b>.</div>
+
+<h2><span class="num">§1</span> &nbsp;Prompt Engineering Fundamentals</h2>
+<p class="sub">Prompt tốt không phải prompt “hay”, mà là prompt tạo ra <b>hành vi mong muốn ổn định</b>.</p>
+
+<div class="vs">
+  <div class="lbad">
+    <h4>✗ Prompt kém</h4>
+    <p><i>“Viết email cho tôi”</i></p>
+    <p style="margin:8px 0 0;color:var(--muted)">Không rõ gửi ai, về gì, tone nào, dài bao nhiêu.<br><b>Kết quả:</b> chung chung, khó dùng ngay.</p>
+  </div>
+  <div class="lgood">
+    <h4>✓ Prompt tốt</h4>
+    <p><i>“Viết email xin lỗi khách hàng về giao hàng trễ 2 ngày, tone lịch sự, dưới 120 từ, có CTA rõ ràng.”</i></p>
+    <p style="margin:8px 0 0;color:var(--muted)">Rõ task, context, constraint, format.<br><b>Kết quả:</b> actionable hơn hẳn.</p>
+  </div>
+</div>
+<div class="ok"><b>Nguyên tắc vàng</b><b>Specificity beats cleverness.</b> Prompt ngắn nhưng rõ nghĩa thường tốt hơn prompt dài mà lan man.</div>
+
+<h3>RTCF — 4 thành phần của prompt tốt</h3>
+<div class="rtcf">
+  <div><div class="k">ROLE</div><strong>Vai trò</strong><p>“Act as a senior support analyst”</p></div>
+  <div><div class="k">TASK</div><strong>Nhiệm vụ</strong><p>“Summarize the ticket and propose next step”</p></div>
+  <div><div class="k">CONTEXT</div><strong>Bối cảnh</strong><p>“For an internal operations dashboard”</p></div>
+  <div><div class="k">FORMAT</div><strong>Định dạng</strong><p>“Output as JSON with 3 fields”</p></div>
+</div>
+<div class="warn"><b>Thứ tự ưu tiên</b>Bắt đầu với <b>Task + Format</b>. Chỉ thêm Role hoặc Context khi chúng <b>thực sự cải thiện</b> chất lượng hoặc tính nhất quán.</div>
+
+<table>
+  <tr><th style="width:100px">Thành phần</th><th>Ví dụ tốt</th><th style="width:120px">Ví dụ kém</th><th>Tại sao</th></tr>
+  <tr><td><b>Role</b></td><td>“Senior Python dev, FastAPI expert”</td><td>“Developer”</td><td>Ảnh hưởng code style, library choices</td></tr>
+  <tr><td><b>Task</b></td><td>“Refactor function X to use async/await”</td><td>“Fix code”</td><td>Specificity giảm ambiguity</td></tr>
+  <tr><td><b>Context</b></td><td>“Codebase: FastAPI, Python 3.12, PostgreSQL”</td><td><i>(trống)</i></td><td>Model đoán sai stack</td></tr>
+  <tr><td><b>Format</b></td><td>“Return only the function, no explanation”</td><td><i>(trống)</i></td><td>Model thêm giải thích không cần</td></tr>
+</table>
+
+<h3>Prompt iteration: kém → tốt → xuất sắc</h3>
+<div class="flow">
+  <span class="step"><b>v1 — Mơ hồ</b><small>“Tóm tắt bài báo này”<br>Không rõ dài bao nhiêu, cho ai đọc, focus gì</small></span><span class="arw">→</span>
+  <span class="step"><b>v2 — Có format</b><small>“Tóm tắt trong 3 bullets, mỗi bullet dưới 20 từ”<br>Rõ format, nhưng thiếu audience và focus</small></span><span class="arw">→</span>
+  <span class="step"><b>v3 — RTCF đầy đủ</b><small>“Bạn là analyst. Tóm tắt cho CFO, 3 bullets, &lt;20 từ. Focus: Q2 revenue impact. Tone: data-driven.”</small></span>
+</div>
+<p class="sub"><b>Prompt engineering là iterative process:</b> viết → test → observe → improve. <b>Không ai viết prompt hoàn hảo lần đầu.</b></p>
+
+<h3>Ba loại prompt</h3>
+<table>
+  <tr><th style="width:190px">Loại</th><th>Mục đích chính</th><th>Khi dùng</th></tr>
+  <tr><td><b>Instruction prompt</b></td><td>Ra lệnh trực tiếp cho một tác vụ</td><td>Hỏi đáp 1 lượt, transform, summarize, classify</td></tr>
+  <tr><td><b>Conversation prompt</b></td><td>Giữ ngữ cảnh nhiều lượt với user</td><td>Chatbot, support, tutor, debug giúp nhiều bước</td></tr>
+  <tr><td><b>System prompt</b></td><td>Đặt <b>policy, boundary, output contract</b></td><td>Agent, assistant production, use case cần hành vi ổn định</td></tr>
+</table>
+
+<h3>Negative prompting &amp; boundary setting</h3>
+<div class="vs">
+  <div class="lbad">
+    <h4>✗ Chỉ nói “đừng”</h4>
+    <ul><li>“Đừng dùng jargon”</li><li>“Đừng đoán”</li><li>“Đừng trả lời quá dài”</li></ul>
+  </div>
+  <div class="lgood">
+    <h4>✓ Nói rõ thay thế</h4>
+    <ul><li>“Giải thích bằng ngôn ngữ lớp 10 hiểu được”</li><li>“Nếu không chắc, trả lời: <i>Tôi cần thêm thông tin</i>”</li><li>“Giới hạn dưới 150 từ”</li></ul>
+  </div>
+</div>
+<div class="note"><b>Câu chốt</b>Negative prompts hiệu quả nhất khi <b>kèm positive alternative</b>. Model cần biết <b>nên làm gì</b>, không chỉ biết đừng làm gì.</div>
+
+<h3>Token budget awareness</h3>
+<div class="bad"><b>Rule thực dụng</b>Prompt dài hơn <b>không đồng nghĩa</b> prompt tốt hơn. Mỗi token thừa làm tăng <b>chi phí, latency, và đôi khi cả nhiễu</b>.<br>→ Nếu prompt dài thêm nhưng <b>không làm thay đổi hành vi mong muốn</b>, hãy cắt bớt.<br>Prompt engineering tốt là tối ưu <b>độ rõ và khả năng kiểm soát</b>, không phải thi xem ai viết prompt dài hơn.</div>
+
+<h3>Temperature &amp; sampling parameters</h3>
+<table>
+  <tr><th style="width:230px">Use case</th><th style="width:120px">Temperature</th><th>Lý do</th></tr>
+  <tr><td>Classification, extraction</td><td><b>0</b></td><td>Deterministic, reproducible</td></tr>
+  <tr><td>Chatbot, support</td><td><b>0.3 – 0.5</b></td><td>Nhất quán nhưng tự nhiên</td></tr>
+  <tr><td>Creative writing</td><td><b>0.7 – 1.0</b></td><td>Đa dạng, sáng tạo</td></tr>
+  <tr><td>Brainstorming</td><td><b>1.0 – 1.5</b></td><td>Khám phá, chấp nhận noise</td></tr>
+</table>
+<p class="sub"><b>top_p:</b> chỉ xét các token có tổng xác suất &lt; p. Thường dùng <b>p = 0.9–0.95</b>. <b>Đừng tune cả temp và top_p cùng lúc.</b></p>
+<div class="warn"><b>Hiểu lầm phổ biến</b><b>Temperature không thay thế prompt tốt.</b> Nếu prompt mơ hồ, giảm temperature chỉ khiến model <b>lặp lại cùng một output kém</b>.</div>
+
+<h2><span class="num">§2</span> &nbsp;Advanced Prompting Techniques</h2>
+<p class="sub">Dùng kỹ thuật nâng cao khi chúng cải thiện kết quả — không phải mặc định.</p>
+
+<div class="grid g4">
+  <div class="card" style="margin:0"><h4>Zero-shot</h4><p class="sub" style="margin:0">Không có ví dụ mẫu. Nhanh, rẻ — <b>nên thử trước</b>.</p></div>
+  <div class="card" style="margin:0"><h4>One-shot</h4><p class="sub" style="margin:0">1 ví dụ mẫu. Tốt khi cần giữ format rõ hơn.</p></div>
+  <div class="card" style="margin:0"><h4>Few-shot</h4><p class="sub" style="margin:0">2–5 ví dụ. Tăng consistency, nhưng tốn token hơn.</p></div>
+  <div class="card" style="margin:0"><h4>CoT</h4><p class="sub" style="margin:0">Cho model reasoning từng bước. Hữu ích cho task suy luận.</p></div>
+</div>
+<div class="ok"><b>Thứ tự thử thực dụng</b><b>zero-shot → few-shot → decomposition / CoT.</b> Đừng nhảy vào prompt phức tạp ngay từ đầu.</div>
+
+<h3>Khi nào dùng few-shot?</h3>
+<div class="card">
+  <ul style="margin:0">
+    <li>Khi model <b>hiểu task nhưng ra sai format</b> hoặc không ổn định giữa các input tương tự</li>
+    <li>Khi cần giữ <b>tiêu chuẩn đánh giá, tone, hoặc cách lập luận nhất quán</b></li>
+    <li>Ví dụ mẫu nên <b>relevant, đa dạng vừa đủ, và đúng format mong muốn</b></li>
+  </ul>
+  <p class="sub" style="margin:10px 0 0">Few-shot không phải để “dạy lại” model mọi thứ; nó là cách <b>chỉ ra pattern</b> mà bạn muốn model bám theo.</p>
+</div>
+
+<h4>4 anti-patterns của few-shot</h4>
+<table>
+  <tr><th style="width:250px">Anti-pattern</th><th>Hậu quả</th></tr>
+  <tr><td><b>Ví dụ quá giống nhau</b></td><td>Model <b>overfit pattern</b>, không generalize sang input mới</td></tr>
+  <tr><td><b>Ví dụ sai format</b></td><td>Model copy sai format từ examples</td></tr>
+  <tr><td><b>Quá nhiều ví dụ (&gt;5)</b></td><td>Diminishing returns, tốn token, chậm hơn</td></tr>
+  <tr><td><b>Ví dụ có lỗi</b></td><td>Model sẽ <b>reproduce lỗi một cách trung thành</b></td></tr>
+</table>
+<div class="ok"><b>Best practice</b>Ví dụ <b>đa dạng, đúng format, cover edge cases</b> — <b>2–5 examples là đủ</b>.</div>
+
+<h3>Chain-of-Thought và Tree-of-Thought</h3>
+<div class="vs">
+  <div class="lneu">
+    <h4>CoT phù hợp khi</h4>
+    <ul><li>Bài toán cần reasoning <b>nhiều bước</b></li><li>Bạn muốn model <b>giải thích logic trung gian</b></li><li>Bạn cần <b>debug xem model sai ở bước nào</b></li></ul>
+  </div>
+  <div class="lneu">
+    <h4>Tree-of-Thought</h4>
+    <ul><li>Hữu ích cho bài toán cần <b>explore nhiều hướng</b></li><li><b>Phức tạp hơn</b>, tốn token và latency hơn</li><li>Chỉ nên giới thiệu như <b>extension</b>, không phải mặc định</li></ul>
+  </div>
+</div>
+<div class="warn"><b>Cảnh báo</b>CoT là <b>công cụ cải thiện reasoning, không phải phép màu</b>. Nếu task vốn dĩ chỉ là formatting hoặc extraction đơn giản, CoT thường là <b>overkill</b>.</div>
+
+<h3>Structured output prompting</h3>
+<p>LLM output mặc định là <b>free-form text</b>, khó parse programmatically. Trong agent pipeline, bạn cần JSON/structured data.</p>
+<table>
+  <tr><th style="width:200px">Cách tiếp cận</th><th>Mô tả</th></tr>
+  <tr><td><b>JSON mode</b></td><td>API parameter (OpenAI)</td></tr>
+  <tr><td><b>Prompt-based</b></td><td>“Respond ONLY with valid JSON”</td></tr>
+  <tr><td><b>XML tags</b></td><td><code>&lt;thinking&gt;...&lt;/thinking&gt;</code></td></tr>
+  <tr><td><b>Prefill</b></td><td>Bắt đầu assistant message bằng <code>{</code> (Anthropic)</td></tr>
+</table>
+<div class="bad"><b>Luôn validate JSON output</b>Model có thể trả sai format, <b>đặc biệt với schema phức tạp hoặc temperature cao</b>.<br>Mẹo: <b>đưa JSON schema ví dụ vào prompt</b> giúp model bám format tốt hơn.</div>
+
+<h2><span class="num">§3</span> &nbsp;System Prompt Engineering</h2>
+<p class="sub">System prompt tốt làm agent <b>nhất quán hơn, dễ kiểm soát hơn, và dễ test hơn</b>.</p>
+
+<h3>Anatomy — 5 thành phần</h3>
+<div class="qlist">
+  <div class="qi"><div class="n">1</div><div class="b"><strong>Persona</strong><span>Role, expertise level, communication style</span></div></div>
+  <div class="qi"><div class="n">2</div><div class="b"><strong>Rules</strong><span>Việc nên làm, việc luôn phải làm</span></div></div>
+  <div class="qi"><div class="n">3</div><div class="b"><strong>Capabilities</strong><span>Model được phép dùng tools nào, dữ liệu nào priority</span></div></div>
+  <div class="qi"><div class="n">4</div><div class="b"><strong>Constraints</strong><span>Không làm gì, khi nào từ chối, khi nào escalate</span></div></div>
+  <div class="qi"><div class="n">5</div><div class="b"><strong>Output format</strong><span>JSON, markdown, bullet list, schema, language</span></div></div>
+</div>
+
+<h3>System prompt iteration: v1 → v2</h3>
+<div class="vs">
+  <div class="lbad">
+    <h4>v1 — Ban đầu</h4>
+    <pre style="margin:0;font-size:12px">You are a support agent.
+Help customers with orders.
+Be polite.</pre>
+    <p style="margin:8px 0 0;font-size:13.5px"><b>Vấn đề:</b> model hallucinate order status, trả lời câu ngoài scope, output format không nhất quán.</p>
+  </div>
+  <div class="lgood">
+    <h4>v2 — Sau khi test &amp; fix</h4>
+    <pre style="margin:0;font-size:12px">You are a support triage agent.
+Rules: Answer in Vietnamese. Be concise.
+Constraints: NEVER invent order status.
+If out of scope: "Tôi chỉ hỗ trợ về đơn hàng."
+Output: JSON {intent, action, reply}</pre>
+    <p style="margin:8px 0 0;font-size:13.5px"><b>Cải thiện:</b> clear boundaries, output contract, refusal pattern rõ ràng.</p>
+  </div>
+</div>
+<p class="sub">System prompt cần iterate <b>dựa trên test results</b>: viết → test 10 câu → fix → test lại.</p>
+
+<h3>4 anti-patterns của system prompt</h3>
+<table>
+  <tr><th style="width:200px">Anti-pattern</th><th>Biểu hiện</th></tr>
+  <tr><td><b>Quá dài</b></td><td>Nhồi mọi thứ vào 1 prompt 2000+ tokens rồi hy vọng model luôn làm đúng</td></tr>
+  <tr><td><b>Mâu thuẫn</b></td><td>Vừa bảo “ngắn gọn”, vừa bắt “giải thích chi tiết từng bước”</td></tr>
+  <tr><td><b>Mơ hồ</b></td><td>“Hãy thông minh”, “hãy chuyên nghiệp” — nhưng không định nghĩa chuẩn output</td></tr>
+  <tr><td><b>Không test edge cases</b></td><td>Quên kiểm tra câu hỏi ngoài phạm vi, refusal, tool failure</td></tr>
+</table>
+<div class="note"><b>Nguyên tắc</b>System prompt là <b>policy layer</b>. <b>Càng rõ boundary, càng dễ predict hành vi.</b></div>
+
+<h3>System prompt testing checklist</h3>
+<div class="chk">
+  <div class="ck"><div class="bx">✓</div><div><b>Happy path:</b> câu hỏi trong scope → trả lời đúng format?</div></div>
+  <div class="ck"><div class="bx">✓</div><div><b>Edge case:</b> câu hỏi mơ hồ → hỏi lại hay đoán bừa?</div></div>
+  <div class="ck"><div class="bx">✓</div><div><b>Out of scope:</b> câu hỏi ngoài phạm vi → từ chối đúng cách?</div></div>
+  <div class="ck"><div class="bx">✓</div><div><b>Adversarial:</b> prompt injection → có bị bypass?</div></div>
+  <div class="ck"><div class="bx">✓</div><div><b>Tool decision:</b> khi nào gọi tool vs khi nào trả lời trực tiếp?</div></div>
+  <div class="ck"><div class="bx">✓</div><div><b>Format consistency:</b> 10 câu khác nhau → output format nhất quán?</div></div>
+</div>
+
+<h3>Template thực chiến</h3>
+<pre><span class="cm">## Identity</span>
+Bạn là [role] cho [company/product].
+
+<span class="cm">## Rules</span>
+- [rule 1]
+- [rule 2]
+
+<span class="cm">## Constraints</span>
+- KHÔNG [điều cấm]
+- Nếu [điều kiện] → [hành vi]
+
+<span class="cm">## Tools</span>
+- tool_name: khi nào dùng, khi nào KHÔNG dùng
+
+<span class="cm">## Output</span>
+{<span class="st">"intent"</span>: <span class="st">"..."</span>, <span class="st">"action"</span>: <span class="st">"..."</span>, <span class="st">"reply"</span>: <span class="st">"..."</span>}
+
+<span class="cm">## Escalation</span>
+Khi [điều kiện] → chuyển cho nhân viên</pre>
+
+<div class="acc"><b>Anthropic vs OpenAI — khác syntax, giống concept</b><b>Anthropic:</b> <code>system=</code> là tham số riêng; hỗ trợ XML tags <code>&lt;rules&gt;</code>, <code>&lt;constraints&gt;</code> để cấu trúc rõ hơn.<br><b>OpenAI:</b> system prompt nằm trong <code>messages</code> array với <code>role: "system"</code>; dùng markdown/XML sections để structure prompt dài.</div>
+
+<h2><span class="num">§4</span> &nbsp;Context Engineering</h2>
+<p class="sub">Điều quan trọng không phải <b>nhét bao nhiêu</b> context, mà là <b>chọn đúng context cần thiết</b>.</p>
+
+<h3>Context window management</h3>
+<div class="ctxbar">
+  <div class="c1">System prompt</div>
+  <div class="c2">History</div>
+  <div class="c3">Current input</div>
+  <div class="c4">Tools</div>
+  <div class="c5">Output</div>
+</div>
+<div class="ctxcap">
+  <div class="c1">policy</div><div class="c2">recent / relevant</div><div class="c3">current task</div><div class="c4">schemas</div><div class="c5">buffer</div>
+</div>
+<div class="warn"><b>Cảnh báo</b>Token budget allocation cần <b>chủ động</b>: đừng để history, tools, và examples <b>ăn hết chỗ dành cho output</b>.</div>
+
+<h3>Lost in the Middle</h3>
+<div class="lim">
+  <div style="height:92%"><span>đầu</span></div>
+  <div style="height:66%"></div>
+  <div style="height:44%"></div>
+  <div style="height:32%"></div>
+  <div style="height:29%"><span>giữa</span></div>
+  <div style="height:33%"></div>
+  <div style="height:48%"></div>
+  <div style="height:70%"></div>
+  <div style="height:88%"><span>cuối</span></div>
+</div>
+<p class="sub" style="margin-top:22px">Độ chính xác theo <b>vị trí thông tin trong context</b> <i>(Liu et al. 2023)</i> — cao ở đầu và cuối, <b>tụt ở giữa</b>.</p>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Hệ quả thực tiễn:</b></p>
+  <ul style="margin:0">
+    <li>Đặt <b>instructions quan trọng ở đầu hoặc cuối</b></li>
+    <li>Context dài → info ở giữa dễ bị “quên”</li>
+    <li><b>Break long lists</b> bằng headers/separators</li>
+    <li><b>Recent context nên đặt ngay trước user query</b></li>
+  </ul>
+</div>
+
+<h3>Memory injection và Context compression</h3>
+<div class="vs">
+  <div class="lneu">
+    <h4>Memory injection</h4>
+    <ul><li>Chỉ đưa vào <b>facts thật sự cần</b> cho task hiện tại</li><li>Ưu tiên <b>recent</b> hoặc <b>relevant</b> history, <b>không dump toàn bộ transcript</b></li><li>Tốt cho support agent, coding assistant, tutor nhiều lượt</li></ul>
+  </div>
+  <div class="lneu">
+    <h4>Compression — 3 cách</h4>
+    <ul><li><b>Summarize:</b> tóm tắt phần cũ</li><li><b>Drop:</b> bỏ hẳn phần không còn liên quan</li><li><b>Archive:</b> đẩy ra ngoài context, chỉ fetch lại khi cần</li></ul>
+  </div>
+</div>
+<div class="note"><b>Câu chốt</b>Context engineering là bài toán <b>chọn lọc và ưu tiên</b>. <b>Nếu mọi thứ đều quan trọng, thì ra không có gì thực sự nổi bật với model.</b></div>
+
+<h3>Token budget: nên nghĩ theo rổ nào?</h3>
+<table>
+  <tr><th style="width:150px">Rổ token</th><th>Chứa gì</th><th>Rủi ro nếu quá nhiều</th></tr>
+  <tr><td><b>System prompt</b></td><td>Policy, rules, output format</td><td>Chậm hơn, khó maintain</td></tr>
+  <tr><td><b>History</b></td><td>Recent turns, facts liên quan</td><td>Dễ nhiễu, dễ <b>lost in the middle</b></td></tr>
+  <tr><td><b>Tool schemas</b></td><td>Tên tool, mô tả, tham số</td><td>Model <b>chọn tool tệ</b> nếu schema dài hoặc mơ hồ</td></tr>
+  <tr><td><b>Output buffer</b></td><td>Phần model dùng để trả lời</td><td><b>Bị cắt cụt output</b> nếu cấp thiếu</td></tr>
+</table>
+
+<h3>RAG context pattern</h3>
+<div class="flow">
+  <span class="step">User Query</span><span class="arw">→</span>
+  <span class="step">Retrieve<small>search DB</small></span><span class="arw">→</span>
+  <span class="step">Inject vào context</span><span class="arw">→</span>
+  <span class="step">Generate</span>
+</div>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Best practices:</b></p>
+  <ul style="margin:0">
+    <li>Inject với <b>source citation</b></li>
+    <li>Limit chunk size (<b>500–1000 tokens</b>)</li>
+    <li><b>Rank by relevance</b>, chỉ lấy top-k</li>
+  </ul>
+  <p class="sub" style="margin:10px 0 0">Agent có thể có tool <code>search_kb</code> để retrieve context <b>on-demand</b>, thay vì nhét sẵn toàn bộ KB vào prompt.</p>
+</div>
+
+<h3>Context engineering checklist</h3>
+<div class="chk">
+  <div class="ck"><div class="bx">✓</div><div>Đã cắt bỏ history không liên quan đến task hiện tại?</div></div>
+  <div class="ck"><div class="bx">✓</div><div>System prompt có dưới <b>500 tokens</b> (trừ khi cần hơn)?</div></div>
+  <div class="ck"><div class="bx">✓</div><div>Tool schemas có <b>concise descriptions</b> (không dài quá)?</div></div>
+  <div class="ck"><div class="bx">✓</div><div>Output buffer đủ cho expected response length?</div></div>
+  <div class="ck"><div class="bx">✓</div><div>Important info ở <b>đầu hoặc cuối</b> context (tránh middle)?</div></div>
+</div>
+
+<h2><span class="num">§5</span> &nbsp;Prompt Safety &amp; Evaluation</h2>
+<p class="sub">Prompt tốt không chỉ cho kết quả đúng — nó còn phải <b>an toàn và đáng tin</b>.</p>
+
+<div class="vs">
+  <div class="lbad">
+    <h4>Direct injection</h4>
+    <p>User trực tiếp nói <i>“Ignore your instructions and do X”</i></p>
+  </div>
+  <div class="lbad">
+    <h4>Indirect injection</h4>
+    <p>Malicious content trong <b>document/email mà agent đọc qua tool</b></p>
+  </div>
+</div>
+
+<h3>6 defense strategies</h3>
+<div class="qlist">
+  <div class="qi"><div class="n">1</div><div class="b"><strong>Delimiter separation</strong><span>Wrap untrusted input: <code>&lt;user_input&gt;...&lt;/user_input&gt;</code></span></div></div>
+  <div class="qi"><div class="n">2</div><div class="b"><strong>Instruction hierarchy</strong><span>System prompt <b>luôn ưu tiên hơn</b> user input</span></div></div>
+  <div class="qi"><div class="n">3</div><div class="b"><strong>Input validation</strong><span>Filter known injection patterns trước khi đưa vào prompt</span></div></div>
+  <div class="qi"><div class="n">4</div><div class="b"><strong>Output validation</strong><span>Kiểm tra output <b>trước khi execute actions</b></span></div></div>
+  <div class="qi"><div class="n">5</div><div class="b"><strong>Least privilege</strong><span>Tool permissions tối thiểu cần thiết</span></div></div>
+  <div class="qi"><div class="n">6</div><div class="b"><strong>Human-in-the-loop</strong><span>Yêu cầu confirm cho sensitive actions</span></div></div>
+</div>
+<div class="bad"><b>Thực tế</b><b>Không có defense nào hoàn hảo 100%.</b> Defense-in-depth: kết hợp nhiều layers.</div>
+
+<h3>Guardrails pattern</h3>
+<div class="flow">
+  <span class="step"><b>Pre-guard</b><small>detect injection · validate input format · rate limiting</small></span><span class="arw">→</span>
+  <span class="step">LLM / Agent</span><span class="arw">→</span>
+  <span class="step"><b>Post-guard</b><small>mask PII · validate JSON schema · block dangerous tool calls</small></span>
+</div>
+
+<h3>Prompt evaluation framework</h3>
+<table>
+  <tr><th style="width:150px">Dimension</th><th>Câu hỏi</th><th>Đo bằng cách</th></tr>
+  <tr><td><b>Correctness</b></td><td>Output có đúng không?</td><td>Test cases + human review</td></tr>
+  <tr><td><b>Consistency</b></td><td>10 lần chạy cho cùng kết quả?</td><td>Chạy lặp lại, đo <b>% match</b></td></tr>
+  <tr><td><b>Safety</b></td><td>Có bị bypass không?</td><td><b>Adversarial test cases</b></td></tr>
+</table>
+<div class="ok"><b>Ngưỡng thực dụng</b>Chạy <b>10–20 test cases</b>. Nếu <b>&lt; 90% pass → cần iterate prompt</b>.<br><b>A/B testing:</b> so sánh prompt v1 vs v2 trên <b>cùng test set</b>.</div>
+
+<h2><span class="num">§6</span> &nbsp;Tool Calling</h2>
+<p class="sub">Cách agent chuyển từ “nói” sang <b>tương tác với thế giới thực</b>.</p>
+
+<div class="flow">
+  <span class="step">User asks</span><span class="arw">→</span>
+  <span class="step">Model decides</span><span class="arw">→</span>
+  <span class="step">Tool call</span><span class="arw">→</span>
+  <span class="step">App executes</span><span class="arw">→</span>
+  <span class="step">Model reads response</span><span class="arw">→</span>
+  <span class="step">Final answer</span>
+</div>
+<div class="bad"><b>Điểm dễ hiểu nhầm nhất</b><b>Model KHÔNG tự chạy code hay tự gọi API ngoài.</b> Ứng dụng của bạn nhận tool request, chạy tool, rồi gửi kết quả <b>trở lại</b> model.</div>
+
+<h3>Ai làm gì?</h3>
+<table>
+  <tr><th style="width:150px">Vai trò</th><th>Trách nhiệm</th><th>Ví dụ</th></tr>
+  <tr><td><b>Developer</b></td><td>Định nghĩa tool schema, viết implementation, handle errors</td><td>Viết <code>get_weather()</code></td></tr>
+  <tr><td><b>LLM</b></td><td>Quyết định <b>tool nào, arguments gì</b>, dựa trên user intent</td><td><code>{"name": "get_weather", "city": "Hanoi"}</code></td></tr>
+  <tr><td><b>Application</b></td><td>Nhận tool call, execute, trả result</td><td>Gọi API weather, trả JSON</td></tr>
+  <tr><td><b>LLM (lần 2)</b></td><td>Synthesize tool result thành câu trả lời tự nhiên</td><td>“Hà Nội hôm nay 32°C, trời nắng”</td></tr>
+</table>
+
+<h3>Tool schema anatomy</h3>
+<div class="card">
+  <ul style="margin:0">
+    <li><b>Name</b> — nên ngắn, rõ, <b>động từ + đối tượng</b></li>
+    <li><b>Description</b> — nói <b>khi nào nên dùng</b> tool này</li>
+    <li><b>Parameters</b> — mô tả input bằng JSON Schema</li>
+    <li><b>Required fields</b> — giúp model biết thiếu gì thì chưa gọi được</li>
+  </ul>
+</div>
+<div class="warn"><b>Quan trọng</b><b>LLM đọc description như tài liệu hướng dẫn.</b> Nếu description mơ hồ, model sẽ <b>chọn sai tool hoặc truyền sai arguments</b>.</div>
+
+<h3>Good vs bad tool description</h3>
+<table>
+  <tr><th style="width:80px"></th><th>Description</th><th>Hệ quả</th></tr>
+  <tr><td><span class="pill r">Bad</span></td><td>“Gets weather”</td><td>Quá ngắn, model <b>không biết khi nào dùng</b></td></tr>
+  <tr><td><span class="pill r">Bad</span></td><td>“This comprehensive tool can be used to retrieve current weather information for any city worldwide…”</td><td>Quá dài, <b>thêm noise</b></td></tr>
+  <tr style="background:var(--ok-soft)"><td><span class="pill b">Good</span></td><td>“Get current weather for a city. <b>Use when</b> user asks about weather, temperature, or conditions.”</td><td>Rõ <b>chức năng + trigger condition</b></td></tr>
+</table>
+<div class="note"><b>Công thức viết description</b>Nên chứa: <b>(1) chức năng · (2) khi nào dùng · (3) khi nào KHÔNG dùng</b>. <b>Viết như viết API docs.</b></div>
+
+<h4>Ví dụ: cùng tool, description khác → behavior khác hoàn toàn</h4>
+<div class="vs">
+  <div class="lbad">
+    <h4>“Search orders”</h4>
+    <p>Model gọi cho <b>MỌI</b> câu hỏi liên quan đến order, kể cả <i>“đơn hàng là gì?”</i></p>
+  </div>
+  <div class="lgood">
+    <h4>Mô tả có boundary</h4>
+    <p><i>“Search orders by order_id or customer email. Use <b>ONLY</b> when user provides an order number or asks about specific order status.”</i></p>
+    <p style="margin:8px 0 0;color:var(--muted)">Model biết boundary rõ, <b>chỉ gọi khi có đủ data</b>.</p>
+  </div>
+</div>
+
+<h3>tool_choice parameter</h3>
+<table>
+  <tr><th style="width:170px">Giá trị</th><th>Ý nghĩa</th><th>Khi dùng</th></tr>
+  <tr><td><code>auto</code> <span class="pill b">mặc định</span></td><td>Model tự quyết gọi hay không</td><td>Hầu hết use cases</td></tr>
+  <tr><td><code>required</code> / <code>any</code></td><td>Buộc gọi ít nhất 1 tool</td><td>Pipeline steps, routing</td></tr>
+  <tr><td><code>none</code></td><td>Cấm gọi tool, chỉ text</td><td>Test, fallback mode</td></tr>
+  <tr><td><code>{"name": "X"}</code></td><td>Buộc gọi tool cụ thể</td><td>Khi biết chắc cần tool nào</td></tr>
+</table>
+<div class="warn"><b>Cẩn thận với <code>required</code></b>Model có thể <b>gọi tool với arguments bịa</b> nếu user không cung cấp đủ thông tin.</div>
+
+<h3>Xử lý lỗi tool</h3>
+<table>
+  <tr><th style="width:200px">Lỗi</th><th>Xử lý</th></tr>
+  <tr><td><b>Timeout</b></td><td>Retry + <b>exponential backoff</b></td></tr>
+  <tr><td><b>Error response</b></td><td>Truyền error message cho model để nó thông báo user</td></tr>
+  <tr><td><b>Unexpected format</b></td><td>Validation layer + fallback</td></tr>
+  <tr><td><b>Tool not found</b></td><td>Log + return error JSON</td></tr>
+</table>
+<p class="sub">Thêm instruction vào system prompt: <i>“If a tool returns an error, explain the issue to the user and suggest alternatives. <b>Never retry silently more than 2 times.</b>”</i></p>
+<div class="bad"><b>Tư duy đúng</b><b>Tool errors không phải edge case</b> — chúng <b>sẽ</b> xảy ra trong production. <b>Plan for failure.</b></div>
+
+<h2><span class="num">§7</span> &nbsp;Design Principles cho Tools</h2>
+<p class="sub">Tool tốt là <b>software interface tốt</b>, không phải prompt trang trí.</p>
+
+<table>
+  <tr><th style="width:190px">Nguyên tắc</th><th>Ý nghĩa</th><th>Nếu vi phạm</th></tr>
+  <tr><td><b>Single Responsibility</b></td><td>Mỗi tool làm <b>1 việc rõ ràng</b></td><td>Model khó quyết định nên gọi tool nào</td></tr>
+  <tr><td><b>Idempotency</b></td><td>Cùng input cho cùng kết quả; side effect được kiểm soát</td><td><b>Retry dễ sinh lỗi phụ</b></td></tr>
+  <tr><td><b>Granularity hợp lý</b></td><td>Không quá nhỏ, cũng không ôm quá nhiều việc</td><td>Overhead lớn, hoặc tool quá cứng</td></tr>
+  <tr><td><b>Test độc lập</b></td><td>Unit test từng tool <b>trước khi</b> gắn vào agent</td><td><b>Khó tách lỗi tool khỏi lỗi prompt</b></td></tr>
+</table>
+
+<h3>Tool granularity — quá nhỏ hay quá to đều có giá</h3>
+<div class="vs">
+  <div class="lbad">
+    <h4>✗ Quá nhỏ</h4>
+    <p><code>get_customer_name</code><br><code>get_customer_email</code><br><code>get_customer_phone</code></p>
+    <p style="margin:8px 0 0;color:var(--muted)"><b>Hệ quả:</b> quá nhiều calls, overhead lớn, flow rối.</p>
+  </div>
+  <div class="lbad">
+    <h4>✗ Quá to</h4>
+    <p><code>handle_all_customer_operations</code></p>
+    <p style="margin:8px 0 0;color:var(--muted)"><b>Hệ quả:</b> model không hiểu boundary, khó debug, khó reuse.</p>
+  </div>
+</div>
+<div class="ok"><b>Quy tắc</b>Thiết kế tool quanh <b>một hành động nghiệp vụ rõ ràng</b>: <code>lookup_order</code>, <code>get_weather</code>, <code>query_sales_data</code>, <code>send_email_draft</code>.</div>
+
+<h3>Parameter design best practices</h3>
+<div class="grid g2">
+  <div class="card" style="margin:0">
+    <ul style="margin:0">
+      <li><b>Required vs Optional:</b> chỉ require những gì thực sự cần</li>
+      <li><b>Enum constraints</b> → giảm lỗi arguments</li>
+      <li><b>Default values:</b> document rõ trong description</li>
+    </ul>
+  </div>
+  <div>
+<pre style="margin:0"><span class="st">"status"</span>: {
+  <span class="st">"type"</span>: <span class="st">"string"</span>,
+  <span class="st">"enum"</span>: [<span class="st">"pending"</span>, <span class="st">"shipped"</span>, <span class="st">"delivered"</span>]
+}
+
+<span class="cm">// thêm ví dụ vào description</span>
+<span class="st">"date"</span>: {
+  <span class="st">"type"</span>: <span class="st">"string"</span>,
+  <span class="st">"description"</span>: <span class="st">"Date in YYYY-MM-DD format,
+                   e.g. 2026-04-05"</span>
+}</pre>
+  </div>
+</div>
+
+<h3>Tool return format</h3>
+<div class="grid g2">
+  <div>
+<pre style="margin:0"><span class="cm">// Success</span>
+{<span class="st">"status"</span>: <span class="st">"success"</span>,
+ <span class="st">"data"</span>: {<span class="st">"temp"</span>: 32, <span class="st">"city"</span>: <span class="st">"Hanoi"</span>},
+ <span class="st">"source"</span>: <span class="st">"openweathermap"</span>}
+
+<span class="cm">// Error</span>
+{<span class="st">"status"</span>: <span class="st">"error"</span>,
+ <span class="st">"message"</span>: <span class="st">"City not found"</span>,
+ <span class="st">"code"</span>: <span class="st">"NOT_FOUND"</span>}</pre>
+  </div>
+  <div class="card" style="margin:0">
+    <ul style="margin:0">
+      <li>Trả <b>JSON</b>, không raw HTML/XML</li>
+      <li>Include <b>metadata</b> (source, timestamp)</li>
+      <li><b>Error format consistent</b></li>
+      <li><b>Truncate</b> nếu response quá dài</li>
+    </ul>
+    <p class="sub" style="margin:10px 0 0">Model xử lý <b>structured JSON tốt hơn nhiều</b> so với raw text hay HTML.</p>
+  </div>
+</div>
+
+<h2><span class="num">§8</span> &nbsp;Parallel Tool Calling &amp; Patterns</h2>
+<p class="sub">Nhanh hơn <b>không có nghĩa là tốt hơn</b> nếu flow control và merge logic không rõ.</p>
+
+<div class="vs">
+  <div class="lneu">
+    <h4>Sequential</h4>
+    <p>Tool B cần output của Tool A.</p>
+    <p style="margin:8px 0 0;color:var(--muted)"><b>VD:</b> tìm order ID → rồi mới tra shipping status.</p>
+  </div>
+  <div class="lneu">
+    <h4>Parallel</h4>
+    <p>Các tool <b>độc lập</b> có thể chạy cùng lúc.</p>
+    <p style="margin:8px 0 0;color:var(--muted)"><b>VD:</b> gọi thời tiết, tỷ giá, và lịch họp song song.</p>
+  </div>
+</div>
+<div class="warn"><b>Quy tắc</b>Chỉ song song hóa khi <b>không có phụ thuộc dữ liệu</b>. Nếu song song, vẫn cần <b>bước merge / verify rõ ràng ở cuối</b>.</div>
+
+<h3>3 tool use patterns thường gặp</h3>
+<div class="qlist">
+  <div class="qi"><div class="n">1</div><div class="b"><strong>Conditional tool use</strong><span>Agent tự quyết định có cần tool hay trả lời trực tiếp</span></div></div>
+  <div class="qi"><div class="n">2</div><div class="b"><strong>Tool chaining</strong><span>Output của tool A là input của tool B</span></div></div>
+  <div class="qi"><div class="n">3</div><div class="b"><strong>Parallel fetch + merge</strong><span>Lấy nhiều nguồn độc lập rồi tổng hợp kết quả</span></div></div>
+</div>
+<div class="acc"><b>Câu chốt</b>Tool calling <b>không chỉ là “gọi API”</b>. Nó là bài toán <b>control flow</b>: khi nào gọi, gọi cái gì, gọi theo thứ tự nào, và <b>làm gì khi tool fail</b>.</div>
+
+<h3>Robust tool loop — có error handling</h3>
+<pre>messages = [{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: user_input}]
+
+<span class="kw">for</span> round <span class="kw">in</span> <span class="fn">range</span>(MAX_TOOL_ROUNDS):
+    response = <span class="fn">call_model</span>(messages, SYSTEM_PROMPT, TOOLS)
+    tool_calls = <span class="fn">extract_tool_calls</span>(response)
+
+    <span class="kw">if</span> <span class="kw">not</span> tool_calls:
+        <span class="fn">print</span>(response.text)
+        <span class="kw">break</span>
+
+    <span class="kw">for</span> tc <span class="kw">in</span> tool_calls:
+        <span class="kw">try</span>:
+            result = <span class="fn">run_tool</span>(tc.name, tc.args, timeout=<span class="fn">10</span>)
+        <span class="kw">except</span> TimeoutError:
+            result = {<span class="st">"error"</span>: <span class="st">"Tool timed out, please try again"</span>}
+        <span class="kw">except</span> Exception <span class="kw">as</span> e:
+            result = {<span class="st">"error"</span>: <span class="fn">str</span>(e)}
+        messages.<span class="fn">append</span>(<span class="fn">tool_result_msg</span>(tc.call_id, result))
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="st">"Warning: max tool rounds reached"</span>)</pre>
+
+<h2><span class="num">§9</span> &nbsp;Lab 4 &amp; Tổng kết</h2>
+
+<h3>Lab 4 — Build first agent</h3>
+<div class="card">
+  <p style="margin:0 0 8px"><b>Mục tiêu:</b> Build ReAct agent với 2 custom tools, viết system prompt chuẩn, test end-to-end trên 5 câu hỏi. <b>Thời gian: 150 phút.</b></p>
+  <ol style="margin:0 0 10px">
+    <li>Viết <b>1 system prompt</b> với rules, constraints, output format</li>
+    <li>Tạo <b>2 custom tools</b>: 1 API wrapper đơn giản, 1 data query đơn giản</li>
+    <li>Nối tools vào agent loop</li>
+    <li>Chạy <b>5 câu test</b> để xem khi nào agent trả lời trực tiếp, khi nào gọi tool</li>
+    <li><b>Ghi lại lỗi thuộc loại prompt, tool schema, hay control flow</b></li>
+  </ol>
+  <p style="margin:0"><b>Deliverable:</b> agent script chạy được + system prompt + 2 tool schemas + 5 test outputs + note lỗi + self-review checklist.</p>
+</div>
+<div class="warn"><b>Mẹo làm lab</b>Bắt đầu với <b>mock tools</b> (trả data cố định) trước. <b>Đảm bảo flow đúng rồi mới lo về real data.</b></div>
+
+<h4>5 câu test mẫu</h4>
+<table>
+  <tr><th style="width:40px">#</th><th>Câu hỏi</th><th style="width:170px">Expected</th><th style="width:170px">Kiểm tra</th></tr>
+  <tr><td>1</td><td>“Thời tiết Hà Nội hôm nay?”</td><td>Gọi <code>get_weather</code></td><td>Tool A hoạt động</td></tr>
+  <tr><td>2</td><td>“Doanh số tháng 3 là bao nhiêu?”</td><td>Gọi <code>query_sales</code></td><td>Tool B hoạt động</td></tr>
+  <tr><td>3</td><td>“So sánh doanh số với thời tiết tuần này”</td><td>Gọi <b>cả 2 tools</b></td><td>Parallel / chaining</td></tr>
+  <tr><td>4</td><td>“Prompt engineering là gì?”</td><td><b>Trả lời trực tiếp</b></td><td>Conditional: no tool</td></tr>
+  <tr><td>5</td><td>“Cho tôi số điện thoại CEO”</td><td><b>Từ chối</b>, out of scope</td><td>Refusal handling</td></tr>
+</table>
+
+<h4>Self-review checklist</h4>
+<div class="chk">
+  <div class="ck"><div class="bx">✓</div><div>Agent chạy end-to-end không crash?</div></div>
+  <div class="ck"><div class="bx">✓</div><div>System prompt có đủ <b>5 thành phần</b> (Persona, Rules, Capabilities, Constraints, Format)?</div></div>
+  <div class="ck"><div class="bx">✓</div><div>Tool schemas có clear descriptions + required fields?</div></div>
+  <div class="ck"><div class="bx">✓</div><div>Agent biết khi nào gọi tool vs khi nào trả lời trực tiếp?</div></div>
+  <div class="ck"><div class="bx">✓</div><div>Agent xử lý <b>gracefully khi tool fail</b> (không crash, thông báo user)?</div></div>
+  <div class="ck"><div class="bx">✓</div><div>Đã ghi chú ít nhất <b>2 lỗi</b> + phân loại (prompt / tool / control flow)?</div></div>
+</div>
+
+<h3>5 Key Takeaways</h3>
+<div class="grid g2">
+  <div class="ok" style="margin:0"><b>1 · Prompt là interface</b>Giữa <b>human intent và model capability</b>. Prompt tốt giúp model làm đúng việc, đúng format, đúng boundary.</div>
+  <div class="ok" style="margin:0"><b>2 · System prompt</b>Làm agent <b>nhất quán và predictable hơn</b>, đặc biệt khi có tools và constraints.</div>
+  <div class="ok" style="margin:0"><b>3 · Tool description</b>Quyết định <b>rất mạnh</b> việc model biết khi nào dùng tool nào và gọi với arguments gì.</div>
+  <div class="ok" style="margin:0"><b>4 · Parallel tool calls</b>Nhanh hơn đáng kể khi tool <b>độc lập</b>; nếu có phụ thuộc dữ liệu, <b>giữ flow tuần tự</b>.</div>
+</div>
+<div class="ok"><b>5 · Prompt safety</b>Injection defense và guardrails là <b>bắt buộc cho production agents</b>, không phải tùy chọn.</div>
+
+<div class="quote"><p>Bạn đang gặp lỗi vì model của bạn,<br>hay vì tool contract của bạn chưa đủ rõ?</p><small>CÂU HỎI ĐÓNG BÀI</small></div>
+
+<div class="note"><b>Chuẩn bị Ngày 5 — AI Product Thinking &amp; Requirements</b>“Bạn đã build được agent đầu tiên. Nhưng build xong chưa đủ. Ngày mai: <b>sản phẩm này dành cho ai, yêu cầu ra sao, và rủi ro nào phải nghĩ từ đầu?</b>”<br>Bài tập: hoàn thiện Lab 4 với 5 test questions rõ pass/fail · đọc lại system prompt của mình và <b>chỉ ra 2 chỗ còn mơ hồ hoặc mâu thuẫn</b> · thử viết <b>2 adversarial test cases</b> (prompt injection) cho agent của bạn.</div>
+
+</section>
+
+<!-- ==================== TAB 2 ==================== -->
+<section class="panel" id="cheat">
+<button class="printbtn" onclick="window.print()">In cheat sheet</button>
+
+<div class="cheatgrid">
+<div>
+
+<h2>Ý tưởng xuyên suốt</h2>
+<div class="card">
+  <p style="margin:0"><b>Prompt</b> = interface human intent ↔ model behavior<br>
+  <b>Tool calling</b> = interface model ↔ thế giới bên ngoài</p>
+</div>
+
+<h2>RTCF</h2>
+<div class="card">
+  <dl class="kv">
+    <dt>Role</dt><dd>Vai trò — “Senior Python dev, FastAPI expert”</dd>
+    <dt>Task</dt><dd>Nhiệm vụ — “Refactor X to use async/await”</dd>
+    <dt>Context</dt><dd>Bối cảnh — stack, hệ thống, giới hạn</dd>
+    <dt>Format</dt><dd>Định dạng — “Return only the function”</dd>
+  </dl>
+  <p style="margin:8px 0 0"><b>Bắt đầu với Task + Format.</b> Chỉ thêm Role/Context khi thực sự cải thiện.</p>
+  <p style="margin:6px 0 0"><b>Specificity beats cleverness.</b></p>
+</div>
+
+<h2>3 loại prompt</h2>
+<table>
+  <tr><th>Loại</th><th>Khi dùng</th></tr>
+  <tr><td>Instruction</td><td>1 lượt: transform, summarize, classify</td></tr>
+  <tr><td>Conversation</td><td>Chatbot, support, tutor nhiều lượt</td></tr>
+  <tr><td><b>System</b></td><td>Agent production — policy, boundary, output contract</td></tr>
+</table>
+
+<h2>Negative prompting</h2>
+<table>
+  <tr><th>Kém</th><th>Tốt</th></tr>
+  <tr><td>“Đừng dùng jargon”</td><td>“Giải thích bằng ngôn ngữ lớp 10”</td></tr>
+  <tr><td>“Đừng đoán”</td><td>“Nếu không chắc: <i>Tôi cần thêm thông tin</i>”</td></tr>
+  <tr><td>“Đừng dài”</td><td>“Giới hạn dưới 150 từ”</td></tr>
+</table>
+<p style="margin:2px 0 0">Model cần biết <b>nên làm gì</b>, không chỉ đừng làm gì</p>
+
+<h2>Temperature</h2>
+<table>
+  <tr><th>Use case</th><th>Temp</th></tr>
+  <tr><td>Classification, extraction</td><td><b>0</b></td></tr>
+  <tr><td>Chatbot, support</td><td>0.3–0.5</td></tr>
+  <tr><td>Creative writing</td><td>0.7–1.0</td></tr>
+  <tr><td>Brainstorming</td><td>1.0–1.5</td></tr>
+</table>
+<p style="margin:2px 0 0">top_p 0.9–0.95 · <b>đừng tune cả hai cùng lúc</b><br><b>Temperature không thay thế prompt tốt</b></p>
+
+<h2>Thứ tự thử kỹ thuật</h2>
+<div class="card">
+  <p style="margin:0"><b>zero-shot → few-shot → decomposition/CoT</b><br>
+  <span style="color:var(--muted)">Đừng nhảy vào prompt phức tạp ngay từ đầu</span></p>
+</div>
+
+<h2>Few-shot anti-patterns</h2>
+<div class="card">
+  <ul style="margin:0">
+    <li>Ví dụ <b>quá giống nhau</b> → overfit</li>
+    <li>Ví dụ <b>sai format</b> → model copy</li>
+    <li><b>&gt;5 ví dụ</b> → diminishing returns</li>
+    <li>Ví dụ <b>có lỗi</b> → model reproduce trung thành</li>
+  </ul>
+  <p style="margin:8px 0 0"><b>2–5 examples đa dạng, đúng format, cover edge cases</b></p>
+</div>
+
+<h2>CoT</h2>
+<div class="card">
+  <p style="margin:0"><b>Dùng khi:</b> reasoning nhiều bước · cần giải thích logic trung gian · cần debug model sai ở bước nào<br>
+  <b>Overkill khi:</b> chỉ formatting hoặc extraction đơn giản</p>
+</div>
+
+<h2>Structured output</h2>
+<div class="card">
+  <p style="margin:0">JSON mode (API) · Prompt-based (“ONLY valid JSON”) · XML tags · Prefill <code>{</code> (Anthropic)<br>
+  <b>Luôn validate JSON output</b> · đưa schema ví dụ vào prompt</p>
+</div>
+
+<h2>System prompt — 5 phần</h2>
+<div class="card">
+  <ol style="margin:0">
+    <li><b>Persona</b> — role, expertise, style</li>
+    <li><b>Rules</b> — nên làm, luôn phải làm</li>
+    <li><b>Capabilities</b> — tools nào, data nào</li>
+    <li><b>Constraints</b> — không làm gì, khi nào từ chối/escalate</li>
+    <li><b>Output format</b> — JSON, schema, ngôn ngữ</li>
+  </ol>
+</div>
+
+<h2>System prompt anti-patterns</h2>
+<div class="card">
+  <ul style="margin:0">
+    <li><b>Quá dài</b> (2000+ tokens nhồi mọi thứ)</li>
+    <li><b>Mâu thuẫn</b> (ngắn gọn + giải thích chi tiết)</li>
+    <li><b>Mơ hồ</b> (“hãy thông minh”)</li>
+    <li><b>Không test edge cases</b></li>
+  </ul>
+  <p style="margin:8px 0 0"><b>System prompt = policy layer.</b> Càng rõ boundary càng dễ predict</p>
+</div>
+
+</div>
+<div>
+
+<h2>System prompt test checklist</h2>
+<div class="card">
+  <ol style="margin:0">
+    <li>Happy path — đúng format?</li>
+    <li>Edge case — hỏi lại hay đoán bừa?</li>
+    <li>Out of scope — từ chối đúng cách?</li>
+    <li>Adversarial — có bị bypass?</li>
+    <li>Tool decision — gọi tool vs trả trực tiếp?</li>
+    <li>Format consistency — 10 câu nhất quán?</li>
+  </ol>
+</div>
+
+<h2>Context window</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>System prompt · History · Current input · Tools · Output buffer</b></p>
+  <p style="margin:0">Đừng để history/tools/examples <b>ăn hết chỗ dành cho output</b></p>
+</div>
+
+<h2>Lost in the middle</h2>
+<div class="card">
+  <p style="margin:0">Info ở <b>giữa context dễ bị quên</b> (Liu et al. 2023)<br>
+  → Instructions quan trọng ở <b>đầu hoặc cuối</b><br>
+  → Break long lists bằng headers<br>
+  → <b>Recent context đặt ngay trước user query</b></p>
+</div>
+
+<h2>Compression — 3 cách</h2>
+<div class="card">
+  <p style="margin:0"><b>Summarize</b> (tóm tắt phần cũ) · <b>Drop</b> (bỏ hẳn) · <b>Archive</b> (đẩy ra ngoài, fetch khi cần)<br>
+  <i>Nếu mọi thứ đều quan trọng, thì không có gì nổi bật với model</i></p>
+</div>
+
+<h2>Token budget theo rổ</h2>
+<table>
+  <tr><th>Rổ</th><th>Rủi ro nếu quá nhiều</th></tr>
+  <tr><td>System prompt</td><td>Chậm, khó maintain</td></tr>
+  <tr><td>History</td><td>Nhiễu, lost in the middle</td></tr>
+  <tr><td>Tool schemas</td><td><b>Model chọn tool tệ</b></td></tr>
+  <tr><td>Output buffer</td><td><b>Bị cắt cụt output</b></td></tr>
+</table>
+
+<h2>Context checklist</h2>
+<div class="card">
+  <ul style="margin:0">
+    <li>Cắt history không liên quan?</li>
+    <li>System prompt <b>&lt; 500 tokens</b>?</li>
+    <li>Tool schemas concise?</li>
+    <li>Output buffer đủ?</li>
+    <li>Info quan trọng ở đầu/cuối?</li>
+  </ul>
+</div>
+
+<h2>Prompt injection</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Direct:</b> user nói “Ignore your instructions”<br>
+  <b>Indirect:</b> malicious content trong <b>document/email agent đọc qua tool</b></p>
+  <p style="margin:0"><b>6 defense:</b> delimiter separation · instruction hierarchy · input validation · output validation · least privilege · HITL<br>
+  <b>Không defense nào hoàn hảo 100%</b> → defense-in-depth</p>
+</div>
+
+<h2>Evaluation</h2>
+<table>
+  <tr><th>Dimension</th><th>Đo bằng</th></tr>
+  <tr><td>Correctness</td><td>Test cases + human review</td></tr>
+  <tr><td>Consistency</td><td>Chạy lặp, đo % match</td></tr>
+  <tr><td>Safety</td><td>Adversarial test cases</td></tr>
+</table>
+<p style="margin:2px 0 0">10–20 test cases · <b>&lt;90% pass → iterate</b> · A/B trên cùng test set<br>
+<b>Guardrails:</b> pre-guard (detect injection, validate, rate limit) → post-guard (mask PII, validate schema, block dangerous calls)</p>
+
+<h2>Tool calling flow</h2>
+<div class="card">
+  <p style="margin:0 0 6px">User asks → <b>Model decides</b> → tool call → <b>App executes</b> → model reads → final answer</p>
+  <p style="margin:0"><b>Model KHÔNG tự chạy code hay gọi API.</b> App của bạn chạy tool rồi gửi kết quả trở lại</p>
+</div>
+
+<h2>Tool schema</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Name</b> (động từ + đối tượng) · <b>Description</b> (khi nào dùng) · <b>Parameters</b> (JSON Schema) · <b>Required fields</b></p>
+  <p style="margin:0"><b>Description phải chứa:</b> (1) chức năng (2) khi nào dùng (3) <b>khi nào KHÔNG dùng</b> — viết như API docs</p>
+</div>
+
+<h2>tool_choice</h2>
+<table>
+  <tr><th>Giá trị</th><th>Khi dùng</th></tr>
+  <tr><td><b>auto</b></td><td>Hầu hết use cases</td></tr>
+  <tr><td>required/any</td><td>Pipeline steps, routing</td></tr>
+  <tr><td>none</td><td>Test, fallback mode</td></tr>
+  <tr><td>{"name":"X"}</td><td>Biết chắc cần tool nào</td></tr>
+</table>
+<p style="margin:2px 0 0"><b>Cẩn thận required:</b> model có thể gọi với <b>arguments bịa</b></p>
+
+<h2>4 nguyên tắc thiết kế tool</h2>
+<table>
+  <tr><th>Nguyên tắc</th><th>Nếu vi phạm</th></tr>
+  <tr><td>Single Responsibility</td><td>Model khó chọn tool</td></tr>
+  <tr><td>Idempotency</td><td>Retry sinh lỗi phụ</td></tr>
+  <tr><td>Granularity hợp lý</td><td>Overhead lớn / tool quá cứng</td></tr>
+  <tr><td>Test độc lập</td><td>Khó tách lỗi tool vs prompt</td></tr>
+</table>
+<p style="margin:2px 0 0">Thiết kế quanh <b>1 hành động nghiệp vụ rõ ràng</b></p>
+
+<h2>Tool return &amp; error</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Return:</b> JSON có <code>status</code>/<code>data</code>/<code>source</code>; error có <code>message</code>+<code>code</code>; truncate nếu dài</p>
+  <p style="margin:0"><b>Error:</b> timeout → retry + exponential backoff · error response → truyền cho model · <b>Never retry silently &gt; 2 times</b><br>
+  <i>Tool errors không phải edge case — plan for failure</i></p>
+</div>
+
+<h2>3 tool patterns</h2>
+<div class="card">
+  <p style="margin:0"><b>Conditional</b> (tự quyết có cần tool) · <b>Chaining</b> (output A → input B) · <b>Parallel fetch + merge</b><br>
+  Chỉ song song khi <b>không phụ thuộc dữ liệu</b>; vẫn cần bước merge/verify</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ==================== TAB 3 ==================== -->
+<section class="panel" id="cards">
+<div class="fcbar">
+  <button class="fbtn on" data-f="all">Tất cả</button>
+  <button class="fbtn" data-f="fund">Fundamentals</button>
+  <button class="fbtn" data-f="adv">Kỹ thuật nâng cao</button>
+  <button class="fbtn" data-f="sys">System prompt</button>
+  <button class="fbtn" data-f="ctx">Context &amp; Safety</button>
+  <button class="fbtn" data-f="tool">Tool calling</button>
+  <span class="counter" id="cnt"></span>
+</div>
+<div class="fcgrid" id="fcgrid"></div>
+<p class="hint">Click vào thẻ để lật · Click lần nữa để úp lại</p>
+</section>
+
+</div>
+
+<script>
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); document.getElementById(b.dataset.t).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+const CARDS=[
+ ['fund','Hai interface cốt lõi của bài học?','<b>Prompt</b> = interface giữa <b>human intent và model behavior</b>.<br><b>Tool calling</b> = interface giữa <b>model và thế giới bên ngoài</b>.'],
+ ['fund','Nguyên tắc vàng của prompt engineering?','<b>Specificity beats cleverness.</b> Prompt <b>ngắn nhưng rõ nghĩa</b> thường tốt hơn prompt dài mà lan man.'],
+ ['fund','RTCF là gì?','<b>Role</b> (vai trò) · <b>Task</b> (nhiệm vụ) · <b>Context</b> (bối cảnh) · <b>Format</b> (định dạng).<br>Bắt đầu với <b>Task + Format</b>, chỉ thêm Role/Context khi <b>thực sự cải thiện</b> chất lượng.'],
+ ['fund','Vì sao Role “Developer” kém hơn “Senior Python dev, FastAPI expert”?','Role ảnh hưởng <b>code style và library choices</b>. Càng cụ thể, model càng chọn đúng phong cách và thư viện phù hợp với stack của bạn.'],
+ ['fund','Prompt engineering là quá trình gì?','<b>Iterative process:</b> viết → test → observe → improve.<br><b>Không ai viết prompt hoàn hảo lần đầu.</b>'],
+ ['fund','3 loại prompt và khi nào dùng?','<b>Instruction</b> — 1 lượt (transform, summarize, classify).<br><b>Conversation</b> — nhiều lượt (chatbot, tutor).<br><b>System</b> — policy/boundary/output contract cho <b>agent production</b>.'],
+ ['fund','Negative prompting nên viết thế nào?','Hiệu quả nhất khi <b>kèm positive alternative</b>: thay “đừng đoán” bằng <i>“nếu không chắc, trả lời: Tôi cần thêm thông tin”</i>.<br>Model cần biết <b>nên làm gì</b>, không chỉ đừng làm gì.'],
+ ['fund','Rule thực dụng về độ dài prompt?','Nếu prompt <b>dài thêm nhưng không làm thay đổi hành vi mong muốn</b> → hãy cắt bớt.<br>Mỗi token thừa tăng <b>chi phí, latency, và đôi khi cả nhiễu</b>.'],
+ ['fund','Temperature cho 4 use case?','<b>0</b> — classification/extraction (deterministic) · <b>0.3–0.5</b> — chatbot/support · <b>0.7–1.0</b> — creative writing · <b>1.0–1.5</b> — brainstorming.'],
+ ['fund','Hiểu lầm phổ biến về temperature?','<b>Temperature không thay thế prompt tốt.</b> Nếu prompt mơ hồ, giảm temperature chỉ khiến model <b>lặp lại cùng một output kém</b>.'],
+ ['fund','Lưu ý về top_p?','Chỉ xét token có tổng xác suất &lt; p, thường <b>0.9–0.95</b>.<br><b>Đừng tune cả temperature và top_p cùng lúc.</b>'],
+
+ ['adv','Thứ tự thử kỹ thuật prompting?','<b>zero-shot → few-shot → decomposition / CoT.</b><br>Đừng nhảy vào prompt phức tạp ngay từ đầu.'],
+ ['adv','Khi nào dùng few-shot?','Khi model <b>hiểu task nhưng ra sai format</b> hoặc không ổn định giữa các input tương tự; hoặc cần giữ <b>tone/tiêu chuẩn đánh giá nhất quán</b>.'],
+ ['adv','Few-shot dùng để làm gì (và không để làm gì)?','Để <b>chỉ ra pattern</b> bạn muốn model bám theo — <b>không phải để “dạy lại” model mọi thứ</b>.'],
+ ['adv','4 anti-patterns của few-shot?','① Ví dụ <b>quá giống nhau</b> → overfit, không generalize · ② Ví dụ <b>sai format</b> → model copy · ③ <b>&gt;5 ví dụ</b> → diminishing returns · ④ Ví dụ <b>có lỗi</b> → model reproduce trung thành.'],
+ ['adv','Best practice cho few-shot examples?','<b>2–5 examples</b>, đa dạng, <b>đúng format</b>, cover edge cases.'],
+ ['adv','CoT phù hợp và không phù hợp khi nào?','<b>Phù hợp:</b> reasoning nhiều bước · cần giải thích logic trung gian · cần <b>debug model sai ở bước nào</b>.<br><b>Overkill:</b> task chỉ là formatting hoặc extraction đơn giản.'],
+ ['adv','Tree-of-Thought khác CoT?','ToT hữu ích khi cần <b>explore nhiều hướng</b>, nhưng <b>phức tạp hơn, tốn token và latency hơn</b> — chỉ nên coi là <b>extension</b>, không phải mặc định.'],
+ ['adv','4 cách ép structured output?','<b>JSON mode</b> (API parameter) · <b>Prompt-based</b> (“Respond ONLY with valid JSON”) · <b>XML tags</b> (<code>&lt;thinking&gt;</code>) · <b>Prefill</b> (bắt đầu assistant msg bằng <code>{</code>, Anthropic).'],
+ ['adv','Lưu ý quan trọng về structured output?','<b>Luôn validate JSON output</b> — model có thể trả sai format, đặc biệt với <b>schema phức tạp hoặc temperature cao</b>.<br>Mẹo: đưa <b>JSON schema ví dụ</b> vào prompt.'],
+
+ ['sys','5 thành phần của system prompt production-grade?','<b>Persona</b> (role, expertise, style) · <b>Rules</b> (nên làm) · <b>Capabilities</b> (tools/data được dùng) · <b>Constraints</b> (không làm gì, khi nào từ chối/escalate) · <b>Output format</b>.'],
+ ['sys','Ba vấn đề của system prompt v1 “You are a support agent. Help customers. Be polite.”?','① Model <b>hallucinate order status</b> · ② Trả lời câu <b>ngoài scope</b> · ③ <b>Output format không nhất quán</b>.<br>Fix: clear boundaries + output contract + refusal pattern.'],
+ ['sys','4 anti-patterns của system prompt?','<b>Quá dài</b> (2000+ tokens nhồi mọi thứ) · <b>Mâu thuẫn</b> (vừa “ngắn gọn” vừa “giải thích chi tiết”) · <b>Mơ hồ</b> (“hãy thông minh”) · <b>Không test edge cases</b>.'],
+ ['sys','System prompt đóng vai trò gì trong kiến trúc?','Là <b>policy layer</b>. <b>Càng rõ boundary, càng dễ predict hành vi.</b>'],
+ ['sys','6 mục trong system prompt testing checklist?','① <b>Happy path</b> đúng format? ② <b>Edge case</b> mơ hồ — hỏi lại hay đoán bừa? ③ <b>Out of scope</b> — từ chối đúng cách? ④ <b>Adversarial</b> — có bị bypass? ⑤ <b>Tool decision</b>? ⑥ <b>Format consistency</b> qua 10 câu?'],
+ ['sys','Quy trình iterate system prompt?','<b>Viết → test 10 câu → fix → test lại.</b> System prompt cần iterate <b>dựa trên test results</b>, không dựa trên cảm tính.'],
+ ['sys','Anthropic vs OpenAI khác gì về system prompt?','<b>Anthropic:</b> <code>system=</code> là tham số riêng, hỗ trợ XML tags <code>&lt;rules&gt;</code>/<code>&lt;constraints&gt;</code>.<br><b>OpenAI:</b> nằm trong <code>messages</code> array với <code>role: "system"</code>.<br><b>Concept giống nhau, chỉ khác syntax.</b>'],
+
+ ['ctx','Context window gồm những rổ nào?','<b>System prompt</b> (policy) · <b>History</b> (recent/relevant) · <b>Current input</b> · <b>Tools</b> (schemas) · <b>Output buffer</b>.<br>Đừng để 4 rổ đầu <b>ăn hết chỗ dành cho output</b>.'],
+ ['ctx','Lost in the Middle là gì và xử lý sao?','Info ở <b>giữa context dài dễ bị “quên”</b> (Liu et al. 2023).<br>→ Instructions quan trọng ở <b>đầu hoặc cuối</b> · break long lists bằng headers · <b>recent context đặt ngay trước user query</b>.'],
+ ['ctx','3 cách compression context?','<b>Summarize</b> (tóm tắt phần cũ) · <b>Drop</b> (bỏ hẳn phần không còn liên quan) · <b>Archive</b> (đẩy ra ngoài context, chỉ fetch lại khi cần).'],
+ ['ctx','Nguyên tắc cốt lõi của context engineering?','Là bài toán <b>chọn lọc và ưu tiên</b>. <b>Nếu mọi thứ đều quan trọng, thì không có gì thực sự nổi bật với model.</b>'],
+ ['ctx','Rủi ro nếu tool schemas chiếm quá nhiều token?','<b>Model chọn tool tệ</b> nếu schema dài hoặc mơ hồ. (History quá nhiều → lost in the middle; output buffer thiếu → <b>bị cắt cụt output</b>.)'],
+ ['ctx','Best practices của RAG context pattern?','Inject với <b>source citation</b> · limit chunk size <b>500–1000 tokens</b> · <b>rank by relevance</b>, chỉ lấy top-k.<br>Agent có thể có tool <code>search_kb</code> để retrieve <b>on-demand</b> thay vì nhét cả KB.'],
+ ['ctx','Ngưỡng cho system prompt trong context checklist?','<b>Dưới 500 tokens</b> (trừ khi thực sự cần hơn).'],
+ ['ctx','Direct vs indirect prompt injection?','<b>Direct:</b> user trực tiếp nói “Ignore your instructions and do X”.<br><b>Indirect:</b> malicious content nằm trong <b>document/email mà agent đọc qua tool</b>.'],
+ ['ctx','6 defense strategies chống injection?','① <b>Delimiter separation</b> (<code>&lt;user_input&gt;</code>) · ② <b>Instruction hierarchy</b> (system &gt; user) · ③ Input validation · ④ <b>Output validation trước khi execute</b> · ⑤ <b>Least privilege</b> · ⑥ <b>HITL</b> cho sensitive actions.'],
+ ['ctx','Thực tế về defense chống injection?','<b>Không có defense nào hoàn hảo 100%.</b> Phải <b>defense-in-depth</b> — kết hợp nhiều layers.'],
+ ['ctx','3 dimension của prompt evaluation?','<b>Correctness</b> (test cases + human review) · <b>Consistency</b> (chạy lặp, đo % match) · <b>Safety</b> (adversarial test cases).<br>Chạy <b>10–20 test cases</b>; <b>&lt;90% pass → iterate</b>.'],
+ ['ctx','Guardrails pattern gồm gì?','<b>Pre-guard:</b> detect injection · validate input format · rate limiting.<br><b>Post-guard:</b> mask PII · validate JSON schema · <b>block dangerous tool calls</b>.'],
+
+ ['tool','Tool calling flow gồm mấy bước?','User asks → <b>Model decides</b> → tool call → <b>App executes</b> → model reads response → final answer.'],
+ ['tool','Điểm dễ hiểu nhầm nhất về tool calling?','<b>Model KHÔNG tự chạy code hay tự gọi API ngoài.</b> Ứng dụng của bạn nhận tool request, chạy tool, rồi gửi kết quả <b>trở lại</b> model.'],
+ ['tool','4 vai trò trong tool calling?','<b>Developer:</b> định nghĩa schema, viết implementation, handle errors.<br><b>LLM:</b> quyết định tool nào + arguments gì.<br><b>Application:</b> execute, trả result.<br><b>LLM lần 2:</b> synthesize thành câu trả lời tự nhiên.'],
+ ['tool','Tool schema gồm 4 phần nào?','<b>Name</b> (ngắn, động từ + đối tượng) · <b>Description</b> (khi nào nên dùng) · <b>Parameters</b> (JSON Schema) · <b>Required fields</b> (biết thiếu gì thì chưa gọi được).'],
+ ['tool','Công thức viết tool description tốt?','Chứa <b>(1) chức năng · (2) khi nào dùng · (3) khi nào KHÔNG dùng</b>. <b>Viết như viết API docs.</b><br>LLM đọc description <b>như tài liệu hướng dẫn</b>.'],
+ ['tool','Ví dụ description kém vs tốt?','<b>Kém:</b> “Search orders” → model gọi cho MỌI câu hỏi về order, kể cả “đơn hàng là gì?”.<br><b>Tốt:</b> “Search orders by order_id or email. Use <b>ONLY</b> when user provides an order number…” → model biết boundary.'],
+ ['tool','4 giá trị của tool_choice?','<b>auto</b> (mặc định, hầu hết use case) · <b>required/any</b> (pipeline, routing) · <b>none</b> (test, fallback) · <b>{"name":"X"}</b> (biết chắc cần tool nào).'],
+ ['tool','Rủi ro khi dùng tool_choice = required?','Model có thể <b>gọi tool với arguments bịa</b> nếu user không cung cấp đủ thông tin.'],
+ ['tool','4 loại lỗi tool và cách xử lý?','<b>Timeout</b> → retry + exponential backoff · <b>Error response</b> → truyền cho model để thông báo user · <b>Unexpected format</b> → validation layer + fallback · <b>Tool not found</b> → log + return error JSON.'],
+ ['tool','Instruction nên thêm vào system prompt về tool error?','<i>“If a tool returns an error, explain the issue to the user and suggest alternatives. <b>Never retry silently more than 2 times.</b>”</i><br><b>Tool errors không phải edge case — plan for failure.</b>'],
+ ['tool','4 nguyên tắc thiết kế tool và hậu quả nếu vi phạm?','<b>Single Responsibility</b> → model khó chọn tool · <b>Idempotency</b> → retry sinh lỗi phụ · <b>Granularity hợp lý</b> → overhead lớn hoặc tool quá cứng · <b>Test độc lập</b> → khó tách lỗi tool khỏi lỗi prompt.'],
+ ['tool','Tool quá nhỏ vs quá to — hậu quả?','<b>Quá nhỏ</b> (<code>get_customer_name/email/phone</code>): quá nhiều calls, overhead lớn, flow rối.<br><b>Quá to</b> (<code>handle_all_customer_operations</code>): model không hiểu boundary, khó debug, khó reuse.'],
+ ['tool','Quy tắc granularity đúng?','Thiết kế tool quanh <b>một hành động nghiệp vụ rõ ràng</b>: <code>lookup_order</code>, <code>get_weather</code>, <code>query_sales_data</code>, <code>send_email_draft</code>.'],
+ ['tool','3 best practice cho parameter design?','<b>Required vs Optional</b> — chỉ require thứ thực sự cần · <b>Enum constraints</b> → giảm lỗi arguments · <b>Default values</b> document rõ trong description (kèm ví dụ định dạng).'],
+ ['tool','Tool return format nên thế nào?','Trả <b>JSON</b> (không raw HTML/XML) · include <b>metadata</b> (source, timestamp) · <b>error format consistent</b> (<code>status</code>/<code>message</code>/<code>code</code>) · <b>truncate</b> nếu quá dài.<br>Model xử lý structured JSON <b>tốt hơn nhiều</b> raw text.'],
+ ['tool','Sequential vs Parallel tool calls?','<b>Sequential:</b> Tool B cần output Tool A (tìm order ID → tra shipping status).<br><b>Parallel:</b> tool độc lập chạy cùng lúc (thời tiết + tỷ giá + lịch họp).<br>Chỉ song song khi <b>không phụ thuộc dữ liệu</b>, và vẫn cần <b>bước merge/verify ở cuối</b>.'],
+ ['tool','3 tool use patterns thường gặp?','① <b>Conditional</b> — agent tự quyết có cần tool hay trả lời trực tiếp · ② <b>Chaining</b> — output A là input B · ③ <b>Parallel fetch + merge</b>.'],
+ ['tool','Tool calling thực chất là bài toán gì?','<b>Không chỉ là “gọi API”</b> — nó là bài toán <b>control flow</b>: khi nào gọi, gọi cái gì, gọi theo thứ tự nào, và <b>làm gì khi tool fail</b>.'],
+ ['tool','5 key takeaways của Day 4?','① Prompt = interface human intent ↔ model capability · ② System prompt tốt → agent nhất quán, predictable · ③ <b>Tool description quyết định rất mạnh</b> việc chọn tool · ④ Parallel khi tool độc lập, tuần tự khi có phụ thuộc · ⑤ <b>Prompt safety là bắt buộc cho production</b>.'],
+];
+const grid=document.getElementById('fcgrid'), cnt=document.getElementById('cnt');
+const NAMES={fund:'Fundamentals',adv:'Kỹ thuật nâng cao',sys:'System prompt',ctx:'Context & Safety',tool:'Tool calling'};
+function render(f){
+  const list=f==='all'?CARDS:CARDS.filter(c=>c[0]===f);
+  grid.innerHTML=list.map(c=>`<div class="fc"><div class="fci">
+      <div class="ff"><div class="tag2">${NAMES[c[0]]}</div><div class="q">${c[1]}</div></div>
+      <div class="fb"><div class="a">${c[2]}</div></div></div></div>`).join('');
+  cnt.textContent=list.length+' thẻ';
+  grid.querySelectorAll('.fc').forEach(el=>el.onclick=()=>el.classList.toggle('flip'));
+}
+document.querySelectorAll('.fbtn').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); render(b.dataset.f);
+});
+render('all');
+</script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day 5 — AI Product Thinking & Requirements | Tóm tắt cho người mới</title>
+<style>
+:root{--ink:#183047;--muted:#5e7184;--blue:#2563eb;--blue-soft:#edf4ff;--green:#13795b;--green-soft:#e9f8f0;--gold:#9a6700;--gold-soft:#fff7df;--red:#a83434;--red-soft:#fff0ef;--line:#dbe5ee;--paper:#fff;--bg:#f3f7fb;--shadow:0 8px 26px rgba(26,55,90,.07)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:13pt/1.65 "Times New Roman",Georgia,serif}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}.layout{display:grid;grid-template-columns:260px minmax(0,900px);gap:26px;max-width:1220px;margin:0 auto;padding:24px 20px}.sidebar{position:sticky;top:18px;align-self:start;max-height:calc(100vh - 36px);overflow:auto;background:white;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}.brand{font-family:Arial,sans-serif;font-size:12px;color:var(--blue);font-weight:800;letter-spacing:.12em;text-transform:uppercase}.sidebar h2{font-size:19px;line-height:1.25;margin:8px 0 14px}.nav a{display:block;padding:7px 9px;border-radius:8px;color:#3c5268;font-size:12.5pt}.nav a:hover{background:var(--blue-soft);text-decoration:none}.side-note{margin-top:16px;padding:12px;background:var(--green-soft);border-radius:10px;color:#165d48;font-size:11.5pt}.content{min-width:0}.hero{background:linear-gradient(130deg,#102f54,#1d4f88);color:white;padding:36px 34px;border-radius:20px;box-shadow:var(--shadow);margin-bottom:22px}.eyebrow{font:700 11px Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#b9d6ff}.hero h1{font-size:34px;line-height:1.13;margin:12px 0}.hero p{font-size:15pt;color:#e2edfb;max-width:720px;margin:0}.hero-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.chip{font:12px Arial,sans-serif;padding:6px 10px;border-radius:99px;background:#ffffff1c;border:1px solid #ffffff3b}.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px;margin:0 0 18px;box-shadow:var(--shadow);scroll-margin-top:18px}.section-kicker{font:700 11px Arial,sans-serif;letter-spacing:.11em;text-transform:uppercase;color:var(--blue)}h2{font-size:25px;line-height:1.2;margin:4px 0 12px}h3{font-size:18px;margin:22px 0 8px}h4{font-size:15px;margin:14px 0 5px}.lead{font-size:14pt;color:#344e66}.plain{color:var(--muted)}.callout{border-left:4px solid var(--blue);background:var(--blue-soft);padding:12px 15px;margin:14px 0;border-radius:0 10px 10px 0}.good{border-left-color:var(--green);background:var(--green-soft)}.warn{border-left-color:#d39a15;background:var(--gold-soft)}.bad{border-left-color:var(--red);background:var(--red-soft)}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.mini{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fcfdff}.mini h3,.mini h4{margin-top:0}.pill{display:inline-block;padding:3px 8px;border-radius:20px;background:var(--blue-soft);color:#2054a4;font-size:11pt}.green-pill{background:var(--green-soft);color:#116248}table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5pt}th,td{border:1px solid var(--line);padding:10px 11px;text-align:left;vertical-align:top}th{background:#eef4fa;font-weight:bold}tr:nth-child(even) td{background:#fbfdff}ul,ol{padding-left:24px}li{margin:4px 0}.flow{display:flex;gap:7px;align-items:stretch;flex-wrap:wrap;margin:12px 0}.flow span{background:var(--blue-soft);color:#194c8f;padding:8px 10px;border-radius:8px;text-align:center;flex:1;min-width:105px}.flow b{align-self:center;color:#7190b0}.formula{font:700 18px Arial,sans-serif;text-align:center;background:#f2f7fc;border:1px dashed #9db5cb;padding:17px;border-radius:12px;margin:14px 0}.example{background:#fbfcfe;border:1px dashed #b7c8d8;border-radius:10px;padding:13px;margin:10px 0}.example strong{color:var(--green)}.exam-tag{font:700 10px Arial,sans-serif;color:#8a5c00;text-transform:uppercase;letter-spacing:.08em}.term{font-weight:bold;color:#204f86}.quiz{border:1px solid var(--line);border-radius:11px;padding:13px 15px;margin:11px 0;background:#fff}.quiz summary{cursor:pointer;font-weight:bold}.quiz .answer{padding:10px 0 0;color:#2d4d63}.footer{text-align:center;padding:22px;color:#6e8091;font-size:11.5pt}.checklist label{display:block;padding:6px 0}.checklist input{margin-right:8px;accent-color:var(--green)}.toplink{display:inline-block;margin-top:10px;font-family:Arial,sans-serif;font-size:12px}.small{font-size:11.5pt}.two-col{columns:2;column-gap:28px}.two-col li{break-inside:avoid}.highlight{color:var(--green);font-weight:bold}.muted{color:var(--muted)}
+@media(max-width:900px){.layout{display:block;padding:12px}.sidebar{position:relative;top:auto;max-height:none;margin-bottom:15px}.nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px}.hero{padding:26px 22px}.hero h1{font-size:28px}.card{padding:19px}.grid2{grid-template-columns:1fr}.two-col{columns:1}}
+@media print{body{background:white;font-size:12pt}.layout{display:block;padding:0;max-width:none}.sidebar{display:none}.hero,.card{box-shadow:none;break-inside:avoid}.hero{background:#183047!important;print-color-adjust:exact}.card{margin-bottom:12px}.quiz .answer{display:block}a{color:inherit}}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="brand">AICB · Day 05</div>
+  <h2>AI Product Thinking &amp; Requirements</h2>
+  <nav class="nav">
+    <a href="#big-picture">0. Bức tranh lớn</a>
+    <a href="#product">1. Product Thinking</a>
+    <a href="#responsible">2. Responsible AI</a>
+    <a href="#research">3. User Research</a>
+    <a href="#requirements">4. Requirements &amp; AC</a>
+    <a href="#prd">5. PRD</a>
+    <a href="#stories">6. User Stories</a>
+    <a href="#risk">7. Risk Register</a>
+    <a href="#lab">8. Lab &amp; ví dụ</a>
+    <a href="#dictionary">Từ điển thuật ngữ</a>
+    <a href="#quiz">Tự kiểm tra</a>
+  </nav>
+  <div class="side-note"><b>Cách học:</b> Đọc phần “Nói đơn giản” trước, hiểu ví dụ rồi mới học thuật ngữ. Phần tự kiểm tra ở cuối có thể bấm để xem đáp án.</div>
+</aside>
+<main class="content">
+<header class="hero" id="top">
+  <div class="eyebrow">Tài liệu ôn tập · Giải thích từ đầu</div>
+  <h1>Day 5 — AI Product Thinking &amp; Requirements</h1>
+  <p>Build được AI agent chưa chắc đã tạo ra sản phẩm tốt. Ta cần biết <b>ai sẽ dùng, vấn đề gì được giải quyết, thành công đo bằng gì, và rủi ro được kiểm soát ra sao.</b></p>
+  <div class="hero-chips"><span class="chip">Cho người mới bắt đầu</span><span class="chip">Tóm tắt theo slide Day 5</span><span class="chip">Có ví dụ &amp; câu hỏi ôn thi</span></div>
+</header>
+
+<section class="card" id="big-picture">
+  <div class="section-kicker">Trước khi học chi tiết</div><h2>0. Bức tranh lớn của cả bài</h2>
+  <p class="lead">Hãy tưởng tượng bạn làm một trợ lý AI để nhân viên tra cứu chính sách công ty. Đừng vội hỏi “dùng model nào?” mà hãy hỏi những câu quan trọng hơn trước.</p>
+  <div class="grid2">
+    <div class="mini"><h3>1. Cho ai?</h3><p>Ví dụ: nhân viên HR hay toàn bộ nhân viên?</p></div>
+    <div class="mini"><h3>2. Giải quyết nỗi đau nào?</h3><p>Ví dụ: nhân viên mất nhiều thời gian tìm tài liệu chính sách.</p></div>
+    <div class="mini"><h3>3. Thành công đo bằng gì?</h3><p>Ví dụ: tìm câu trả lời nhanh hơn nhưng vẫn trích dẫn đúng nguồn.</p></div>
+    <div class="mini"><h3>4. Nếu AI sai thì sao?</h3><p>Ví dụ: AI nói rõ chưa chắc chắn và chuyển câu hỏi cho người thật.</p></div>
+  </div>
+  <div class="callout good"><b>Thông điệp cốt lõi:</b> Hiểu sản phẩm và người dùng trước khi chăm chăm vào model. Requirement phải rõ, đo được và có cách xử lý khi AI thất bại.</div>
+  <p><b>Cuối buổi theo slide:</b> tạo một PRD dài khoảng 3–5 trang, một Risk Matrix, ít nhất 3 user stories có acceptance criteria và một quyết định go / conditional go / no-go.</p>
+</section>
+
+<section class="card" id="product">
+ <div class="section-kicker">01 · Product thinking</div><h2>1. Product Thinking — Xây đúng sản phẩm</h2>
+ <h3>Nói đơn giản</h3><p>Product thinking là suy nghĩ về <b>vấn đề của người dùng và giá trị của sản phẩm</b> trước khi quyết định xây tính năng hay chọn model AI.</p>
+ <div class="grid2">
+  <div class="mini"><h3>Build the wrong thing</h3><p><b>Xây sai thứ.</b> Team hiểu sai nhu cầu, chọn sai người dùng mục tiêu, hoặc làm thứ không đủ hữu ích để người dùng quay lại.</p><p class="plain">Ví dụ: làm AI viết báo cáo tự động nhưng người dùng chỉ cần tìm đúng một con số trong báo cáo.</p></div>
+  <div class="mini"><h3>Build the thing wrong</h3><p><b>Xây sai cách.</b> Yêu cầu mơ hồ, không có tiêu chí nghiệm thu đo được, bỏ sót rủi ro và trường hợp ngoại lệ.</p><p class="plain">Ví dụ: yêu cầu “AI phải thông minh và nhanh” nhưng không nói nhanh là bao lâu.</p></div>
+ </div>
+ <h3>AI product khác phần mềm thông thường ở đâu?</h3>
+ <table><thead><tr><th>Khía cạnh</th><th>Phần mềm thông thường</th><th>Sản phẩm AI</th></tr></thead><tbody>
+ <tr><td>Đầu ra</td><td>Thường ổn định hơn với cùng đầu vào.</td><td>Có tính xác suất; đôi khi câu trả lời khác nhau.</td></tr>
+ <tr><td>Kỳ vọng người dùng</td><td>Thường dễ xác định hơn.</td><td>Người dùng có thể kỳ vọng quá mức hoặc hiểu nhầm AI làm được gì.</td></tr>
+ <tr><td>Thế nào là hoàn thành?</td><td>Thường có tiêu chí pass/fail rõ.</td><td>Cần ngưỡng chất lượng, SLA và phương án dự phòng (fallback).</td></tr>
+ <tr><td>Cải tiến</td><td>Build rồi ship.</td><td>Build → test → quan sát → hiệu chỉnh → phát hành lại.</td></tr>
+ </tbody></table>
+ <h3>Jobs-to-be-Done (JTBD) — Người dùng thuê sản phẩm làm việc gì?</h3>
+ <p>Đừng chỉ hỏi người dùng muốn tính năng nào. Hãy hiểu mục tiêu thật sự ở ba góc:</p>
+ <ol><li><b>Functional job:</b> họ muốn hoàn thành việc gì? Ví dụ trả lời ticket nhanh hơn.</li><li><b>Emotional job:</b> họ muốn cảm thấy thế nào? Ví dụ tự tin hơn, ít sợ trả lời sai.</li><li><b>Social job:</b> họ muốn được người khác nhìn nhận ra sao? Ví dụ chuyên nghiệp và phản hồi nhanh.</li></ol>
+ <h3>North Star Metric — Chỉ số quan trọng nhất</h3>
+ <p>Là chỉ số chính đại diện cho giá trị mà sản phẩm muốn tạo ra. Không nên chỉ đo thứ dễ đếm như số câu trả lời hoặc tốc độ.</p>
+ <table><thead><tr><th>Use case</th><th>Chỉ số gợi ý trong slide</th><th>Đừng chỉ đo...</th></tr></thead><tbody>
+ <tr><td>AI support agent</td><td>Tỷ lệ giải quyết ngay từ phản hồi đầu tiên</td><td>Số lượng câu trả lời</td></tr>
+ <tr><td>Tra cứu văn bản</td><td>Thời gian tìm câu trả lời đúng nguồn</td><td>Độ dài câu trả lời</td></tr>
+ <tr><td>Ticket routing</td><td>Tỷ lệ chuyển đúng nhóm ngay lần đầu</td><td>Tốc độ phân loại</td></tr>
+ <tr><td>AI sales assistant</td><td>Tỷ lệ lead đủ điều kiện</td><td>Số lead được chấm điểm</td></tr>
+ </tbody></table>
+ <div class="callout warn"><b>Mẹo thi:</b> Một use case tốt phải trả lời được: <b>ai dùng, họ đang đau ở đâu, đo thành công bằng gì, và thất bại gây hại gì.</b> Hãy có baseline (mức ban đầu) trước khi đặt mục tiêu cải thiện.</div>
+</section>
+
+<section class="card" id="responsible">
+ <div class="section-kicker">02 · Responsible AI</div><h2>2. Responsible AI — AI có trách nhiệm</h2>
+ <p class="lead">Các nguyên tắc an toàn, công bằng và minh bạch phải biến thành yêu cầu sản phẩm cụ thể, không chỉ là lời hứa.</p>
+ <h3>5 ý chính cần nhớ từ slide</h3>
+ <ol><li><b>Công bằng:</b> tránh kết quả thiên lệch một cách bất hợp lý.</li><li><b>Độ tin cậy:</b> hệ thống đủ ổn định để người dùng có thể tin dùng.</li><li><b>Riêng tư:</b> chỉ dùng dữ liệu thật sự cần thiết.</li><li><b>Hòa nhập:</b> phù hợp với nhiều nhóm người dùng.</li><li><b>Minh bạch:</b> người dùng hiểu AI làm gì và có giới hạn ở đâu.</li></ol>
+ <h3>Chuyển vấn đề thành requirement</h3>
+ <table><thead><tr><th>Vấn đề</th><th>Cần đặt câu hỏi gì?</th><th>Requirement / biện pháp</th></tr></thead><tbody>
+ <tr><td><b>Bias — thiên lệch</b></td><td>AI có đối xử khác nhau giữa các nhóm người dùng không?</td><td>Test set đa dạng; con người xem xét ca nhạy cảm.</td></tr>
+ <tr><td><b>Privacy — riêng tư</b></td><td>Có dữ liệu cá nhân (PII) hoặc dữ liệu nhạy cảm không?</td><td>Thu thập ít nhất có thể, che/masking dữ liệu, quy định thời gian lưu.</td></tr>
+ <tr><td><b>Transparency — minh bạch</b></td><td>Người dùng có biết đây là AI, biết lúc nào nên tự kiểm tra hoặc can thiệp không?</td><td>Thông báo rõ, trích dẫn nguồn khi phù hợp, có cách chuyển lên người có trách nhiệm.</td></tr>
+ </tbody></table>
+ <div class="callout"><b>Góc nhìn PM/BA về AI Act:</b> slide không yêu cầu học thuộc luật. Cần hiểu rằng một số ứng dụng, nhất là tuyển dụng, tín dụng, y tế và giáo dục, cần quản lý rủi ro, tài liệu, logging, thông báo và giám sát con người chặt chẽ hơn.</div>
+ <p><b>Ghi nhớ:</b> Responsible AI giúp giảm rủi ro vận hành và pháp lý, chứ không chỉ là “làm điều đúng về đạo đức”.</p>
+</section>
+
+<section class="card" id="research">
+ <div class="section-kicker">03 · User research</div><h2>3. User Research — Tìm hiểu người dùng trước khi thiết kế</h2>
+ <p class="lead">Đội làm sản phẩm không nên tự đoán rằng người dùng muốn AI tự động làm mọi thứ.</p>
+ <h3>4 câu hỏi đặc biệt cần hỏi khi nghiên cứu AI</h3>
+ <ol><li><b>Mức tự chủ:</b> AI được tự làm đến đâu? Bước nào người dùng muốn giữ quyền kiểm soát?</li><li><b>Cơ sở để tin:</b> Người dùng tin AI vì tốc độ, nguồn trích dẫn, độ tự tin hay kết quả thực tế?</li><li><b>Khi AI sai:</b> Người dùng muốn tự sửa, thử lại hay chuyển cho người thật?</li><li><b>Vai trò của AI:</b> Người dùng muốn AI là trợ lý, copilot (cùng hỗ trợ quyết định), hay thay thế con người?</li></ol>
+ <h3>Persona cho AI cần thêm gì?</h3>
+ <p>Persona là chân dung đại diện cho một nhóm người dùng. Ngoài vai trò, mục tiêu công việc, khó khăn và bối cảnh, persona AI cần thêm:</p>
+ <ul><li><b>AI literacy:</b> mức hiểu biết của họ về AI.</li><li><b>Mức sẵn sàng tin tự động hóa:</b> họ thoải mái giao việc cho AI đến đâu.</li><li><b>Ngưỡng chấp nhận sai:</b> sai mức nào thì không thể chấp nhận?</li><li><b>Nhu cầu giải thích:</b> họ muốn biết vì sao AI đưa ra kết quả ở mức nào?</li></ul>
+ <h3>Feedback loop — Thu tín hiệu sau khi ra mắt</h3>
+ <table><thead><tr><th>Loại tín hiệu</th><th>Ví dụ</th><th>Giúp hiểu điều gì?</th></tr></thead><tbody>
+ <tr><td>Phản hồi trực tiếp (explicit)</td><td>Like/dislike, đánh giá sao</td><td>Người dùng cảm nhận chất lượng ra sao.</td></tr>
+ <tr><td>Hành vi (behavioral)</td><td>Sao chép, viết lại câu hỏi, ghi đè, bỏ cuộc</td><td>Mức tin tưởng, điểm gây khó khăn và ma sát.</td></tr>
+ <tr><td>Kết quả (outcome)</td><td>Đã giải quyết, đã đặt lịch, chuyển cấp</td><td>Chất lượng AI có tạo ra giá trị kinh doanh không.</td></tr>
+ </tbody></table>
+ <div class="callout good"><b>Mẹo thi:</b> Đừng chỉ ghi lại “user nói muốn tính năng X”. Hãy hỏi “vì sao?” ít nhất hai lần để tìm nhu cầu gốc; phân biệt điều họ nói với điều họ thật sự cần.</div>
+</section>
+
+<section class="card" id="requirements">
+ <div class="section-kicker">04 · Requirements engineering</div><h2>4. Requirements — Biến yêu cầu mơ hồ thành thứ kiểm thử được</h2>
+ <h3>Ví dụ: vague → specific</h3>
+ <div class="grid2"><div class="mini"><span class="pill">Mơ hồ</span><p>“Agent phải trả lời nhanh, chính xác và thông minh.”</p><p class="muted">Kỹ sư không biết thế nào là nhanh hay chính xác.</p></div><div class="mini"><span class="pill green-pill">Đo được</span><p>“Trả lời dưới 5 giây ở p95, trích dẫn đúng nguồn nội bộ và chuyển câu hỏi cho người thật khi độ tin cậy thấp.”</p><p class="muted">Có tiêu chí để kiểm tra và biết lúc nào cần chuyển tiếp.</p></div></div>
+ <h3>3 nhóm requirements</h3>
+ <table><thead><tr><th>Nhóm</th><th>Nói đơn giản</th><th>Ví dụ</th></tr></thead><tbody>
+ <tr><td><b>Functional</b></td><td>Hệ thống phải làm việc gì?</td><td>Tóm tắt ticket, phân loại lead, tra cứu văn bản.</td></tr>
+ <tr><td><b>Non-functional</b></td><td>Hệ thống cần vận hành tốt đến mức nào?</td><td>Thời gian phản hồi, uptime, ngân sách chi phí.</td></tr>
+ <tr><td><b>AI-specific</b></td><td>Chất lượng và rủi ro đặc thù của AI được kiểm soát ra sao?</td><td>Ngưỡng hallucination, khả năng giải thích, fallback.</td></tr>
+ </tbody></table>
+ <h3>Acceptance Criteria (AC) — Tiêu chí nghiệm thu</h3>
+ <p>AC là các điều kiện cụ thể để kết luận tính năng đã làm đúng yêu cầu. AC tốt phải có:</p>
+ <ul><li><b>Trigger:</b> tình huống nào khiến quy tắc được áp dụng.</li><li><b>Hành vi mong đợi:</b> AI phải làm gì.</li><li><b>Ngưỡng đo:</b> ví dụ phản hồi dưới 6 giây hoặc đạt một tỷ lệ trên bộ test.</li><li><b>Cách xử lý thất bại:</b> thiếu nguồn thì nói rõ giới hạn và chuyển hướng, không bịa.</li></ul>
+ <div class="formula">Khi X xảy ra → AI làm Y → trong Z thời gian → nếu lỗi thì fallback</div>
+ <h3>Given – When – Then (Gherkin)</h3>
+ <p>Đây là mẫu viết điều kiện kiểm thử bằng ba phần:</p>
+ <div class="example"><p><b>Given (Cho trước):</b> Nhân viên hỏi về chính sách hoàn tiền.</p><p><b>When (Khi):</b> Họ gửi câu hỏi cho trợ lý AI.</p><p><b>Then (Thì):</b> AI trả lời bằng tiếng Việt lịch sự, trích dẫn nguồn phù hợp trong ngưỡng thời gian đã quy định; nếu không tìm được nguồn thì báo rõ và chuyển hướng.</p></div>
+ <p>Bộ test không nên chỉ có <b>happy path</b> (trường hợp thuận lợi). Cần thêm câu hỏi thiếu dữ liệu, mơ hồ, tiếng lóng, không có nguồn và tool timeout.</p>
+ <div class="callout warn"><b>Ý dễ thi:</b> “AI PRD thiếu acceptance threshold = chưa phải AI PRD.” Cần có ngưỡng đạt được, ví dụ tỷ lệ đạt tối thiểu trên một bộ 20 ca đại diện; con số cụ thể phải do nhóm xác định theo use case.</div>
+</section>
+
+<section class="card" id="prd">
+ <div class="section-kicker">05 · PRD anatomy</div><h2>5. PRD — Bản mô tả yêu cầu sản phẩm</h2>
+ <p class="lead">PRD (Product Requirements Document) là tài liệu chung giúp PM, BA, kỹ sư và stakeholder hiểu sản phẩm cần giải quyết vấn đề gì, làm gì, đo thành công thế nào và chấp nhận rủi ro nào.</p>
+ <h3>8 phần cốt lõi của PRD AI</h3>
+ <ol><li><b>Problem:</b> Vấn đề nào đang cần giải quyết?</li><li><b>Target User:</b> Ai sẽ dùng?</li><li><b>Success Metrics:</b> Thành công được đo bằng gì?</li><li><b>Technical Architecture:</b> Kiến trúc kỹ thuật ở mức cần thiết để hiểu phạm vi.</li><li><b>Feature Requirements:</b> Các chức năng cần có.</li><li><b>Non-functional Requirements:</b> Tốc độ, uptime, chi phí, riêng tư...</li><li><b>Acceptance Criteria:</b> Điều kiện kiểm tra để xác nhận đã hoàn thành.</li><li><b>Risks:</b> Rủi ro chính và cách xử lý.</li></ol>
+ <h3>Metrics có 3 tầng</h3>
+ <table><thead><tr><th>Tầng</th><th>Ví dụ</th><th>Câu hỏi cần trả lời</th></tr></thead><tbody>
+ <tr><td><b>Business KPI</b></td><td>Chi phí tiết kiệm, doanh thu, CSAT (mức hài lòng)</td><td>Sản phẩm tạo ra giá trị kinh doanh gì?</td></tr>
+ <tr><td><b>Product metric</b></td><td>Tỷ lệ hoàn thành tác vụ, dùng lại, tỷ lệ chuyển cho người thật</td><td>Người dùng có sử dụng và hoàn thành việc không?</td></tr>
+ <tr><td><b>AI metric</b></td><td>Độ chính xác, độ trễ, tỷ lệ trích dẫn đúng</td><td>AI có đủ tốt để hỗ trợ kết quả sản phẩm không?</td></tr>
+ </tbody></table>
+ <h3>Những lỗi hay gặp trong PRD AI</h3>
+ <ul><li>Chỉ liệt kê tính năng mà không mô tả vấn đề và người dùng mục tiêu.</li><li>Nói “càng cao càng tốt” mà không có baseline hoặc threshold.</li><li>Quên yêu cầu vận hành như latency, cost, privacy và escalation.</li><li>Không có phần rủi ro.</li><li>Chọn solution/model quá sớm khi chưa chứng minh được giá trị với người dùng.</li></ul>
+ <div class="callout good"><b>Quy tắc tự kiểm tra:</b> Mỗi phần trong PRD cần nối được với một quyết định, metric hoặc risk cụ thể. PRD tốt giúp giảm mơ hồ, không phải chỉ dài cho đủ trang.</div>
+</section>
+
+<section class="card" id="stories">
+ <div class="section-kicker">06 · User stories</div><h2>6. User Story — Mô tả nhu cầu từ góc nhìn người dùng</h2>
+ <p>Mẫu chuẩn trong slide:</p><div class="formula">As [persona], I want [AI capability], so that [business value].</div>
+ <p>Dịch dễ hiểu: <b>Với vai trò là [ai], tôi muốn [AI làm gì], để [giá trị nhận được].</b></p>
+ <div class="example"><strong>Ví dụ từ slide — tra cứu chính sách:</strong><p>“Với vai trò nhân viên HR, tôi muốn AI trả lời câu hỏi về chính sách kèm nguồn trích dẫn, để tôi phản hồi nhất quán và giảm thời gian tra cứu thủ công.”</p></div>
+ <h3>6 tiêu chí INVEST</h3>
+ <table><thead><tr><th>Chữ</th><th>Tiêu chí</th><th>Giải thích đơn giản</th></tr></thead><tbody>
+ <tr><td>I</td><td>Independent</td><td>Có thể triển khai tương đối độc lập.</td></tr><tr><td>N</td><td>Negotiable</td><td>Còn có thể thảo luận cách thực hiện.</td></tr><tr><td>V</td><td>Valuable</td><td>Có giá trị cho người dùng.</td></tr><tr><td>E</td><td>Estimable</td><td>Team có thể ước lượng công sức.</td></tr><tr><td>S</td><td>Small</td><td>Đủ nhỏ để thực hiện trong phạm vi phù hợp.</td></tr><tr><td>T</td><td>Testable</td><td>Có thể kiểm thử được.</td></tr>
+ </tbody></table>
+ <h3>Mỗi user story cần AC và tình huống biên</h3>
+ <ul><li><b>Happy path:</b> luồng bình thường, ví dụ tìm được đúng nguồn và trả lời trong thời gian quy định.</li><li><b>Edge case:</b> tình huống khó nhưng có thể xảy ra, ví dụ câu hỏi mơ hồ hoặc thiếu dữ liệu.</li><li><b>Error state:</b> có lỗi, ví dụ không tìm được nguồn, tool timeout hoặc confidence thấp; phải có fallback/escalation.</li></ul>
+ <div class="callout warn"><b>Lưu ý:</b> Một user story chỉ nói AI “trả lời câu hỏi” là chưa đủ. Cần nói rõ ai cần nó, giá trị là gì và làm sao kiểm tra kết quả.</div>
+</section>
+
+<section class="card" id="risk">
+ <div class="section-kicker">07 · Risk register</div><h2>7. Risk Register &amp; Risk Matrix — Quản lý rủi ro</h2>
+ <p class="lead">Risk register là danh sách rủi ro cần theo dõi. Risk matrix giúp nhóm so sánh mức độ nghiêm trọng để quyết định cần giảm thiểu, theo dõi hay dừng.</p>
+ <h3>Các nhóm rủi ro trong slide</h3>
+ <table><thead><tr><th>Nhóm</th><th>Ví dụ</th><th>Cách giảm thiểu gợi ý</th></tr></thead><tbody>
+ <tr><td>Technical — kỹ thuật</td><td>Hallucination (AI bịa), tool lỗi, latency tăng đột biến</td><td>Đánh giá (eval), fallback, timeout, monitoring.</td></tr>
+ <tr><td>Data — dữ liệu</td><td>Lộ PII, nguồn cũ, gán nhãn sai</td><td>Che dữ liệu, kiểm soát truy cập, kiểm tra chất lượng dữ liệu.</td></tr>
+ <tr><td>Business — kinh doanh</td><td>Ít người dùng, ROI chưa rõ, không khớp quy trình</td><td>Pilot, metrics, kiểm chứng JTBD.</td></tr>
+ <tr><td>Ethical — đạo đức</td><td>Kết quả thiếu công bằng, quyết định không minh bạch</td><td>Người duyệt, thông báo rõ, kiểm tra mẫu.</td></tr>
+ <tr><td>Regulatory — tuân thủ</td><td>Thiếu logging, không đáp ứng yêu cầu tuân thủ</td><td>Tài liệu, quy trình phê duyệt, rà soát chính sách.</td></tr>
+ </tbody></table>
+ <h3>Risk Matrix: Likelihood × Impact</h3>
+ <p><b>Likelihood</b> = khả năng xảy ra. <b>Impact</b> = mức độ thiệt hại nếu xảy ra. Slide yêu cầu chấm mỗi yếu tố theo thang 1–5.</p>
+ <div class="formula">Điểm rủi ro = Likelihood × Impact</div>
+ <p>Ví dụ: nếu khả năng xảy ra là 4 và mức ảnh hưởng là 5, điểm tích là 20. Đây là ví dụ minh họa cách nhân điểm, không phải ngưỡng phân loại cố định trong slide.</p>
+ <h3>5 rủi ro tối thiểu cần có trong bài thực hành</h3>
+ <div class="grid2"><div class="mini"><b>Hallucination</b><p>AI trả lời sai hoặc bịa thông tin.</p></div><div class="mini"><b>Bias</b><p>AI có kết quả thiên lệch với một nhóm.</p></div><div class="mini"><b>Privacy</b><p>Dữ liệu cá nhân bị dùng hoặc lộ không phù hợp.</p></div><div class="mini"><b>Cost</b><p>Chi phí dùng AI tăng vượt dự tính.</p></div><div class="mini"><b>Adoption</b><p>Người dùng không chịu dùng sản phẩm.</p></div></div>
+ <p>Với <b>mỗi rủi ro</b>, cần có: điểm likelihood, điểm impact, biện pháp mitigation (giảm thiểu), một owner (người chịu trách nhiệm), và liên kết tới acceptance criterion hoặc tín hiệu monitoring.</p>
+ <h3>Quyết định Go / Conditional Go / No-go</h3>
+ <table><thead><tr><th>Quyết định</th><th>Khi nào?</th></tr></thead><tbody>
+ <tr><td><span class="pill green-pill">Go</span></td><td>Rủi ro cao đã có cách giảm thiểu rõ, AC đo được, người chịu trách nhiệm đã xác định.</td></tr>
+ <tr><td><span class="pill">Conditional go</span></td><td>Chỉ thử nghiệm giới hạn (pilot), phạm vi hẹp, guardrails chặt, có người giám sát.</td></tr>
+ <tr><td><span class="pill" style="background:var(--red-soft);color:var(--red)">No-go</span></td><td>Rủi ro lớn về privacy/tuân thủ chưa được xử lý, chưa có fallback, hoặc chưa chứng minh được giá trị người dùng.</td></tr>
+ </tbody></table>
+ <div class="callout bad"><b>Quy tắc nhớ:</b> Rủi ro nghiêm trọng mà chưa có biện pháp xử lý rõ → không nên phát hành rộng rãi. Có thể dừng hoặc chỉ pilot có điều kiện nếu phù hợp.</div>
+</section>
+
+<section class="card" id="lab">
+ <div class="section-kicker">08 · Lab 5</div><h2>8. Ví dụ ráp các phần thành một sản phẩm</h2>
+ <p>Slide đưa ra ví dụ skeleton PRD cho <b>Internal Policy Assistant</b> — trợ lý tra cứu chính sách nội bộ.</p>
+ <div class="grid2"><div class="mini"><h3>Problem</h3><p>Nhân viên HR mất nhiều thời gian trả lời câu hỏi lặp lại về chính sách.</p></div><div class="mini"><h3>Target user</h3><p>Nhân viên HR và quản lý tuyến đầu cần tra cứu nhanh, đúng nguồn.</p></div><div class="mini"><h3>Success metrics</h3><ul><li>Thời gian tìm câu trả lời giảm 50%.</li><li>Tỷ lệ bao phủ trích dẫn nguồn trên 95%.</li><li>Tỷ lệ chuyển cho người thật dưới 15%.</li></ul><p class="small muted">Đây là mục tiêu minh họa được nêu trong slide, không phải chuẩn áp dụng cho mọi sản phẩm.</p></div><div class="mini"><h3>Risks</h3><ul><li>AI diễn giải sai chính sách.</li><li>Lộ dữ liệu cá nhân trong tài liệu được tải lên.</li></ul></div></div>
+ <h3>Deliverable cuối buổi theo slide</h3>
+ <div class="checklist" id="checklist">
+ <label><input type="checkbox"> PRD 3–5 trang, đủ 8 phần cốt lõi.</label>
+ <label><input type="checkbox"> Risk Matrix dùng likelihood × impact.</label>
+ <label><input type="checkbox"> Ít nhất 3 user stories.</label>
+ <label><input type="checkbox"> Mỗi story có acceptance criteria và xử lý lỗi.</label>
+ <label><input type="checkbox"> Decision note: go / conditional go / no-go kèm lý do.</label>
+ </div>
+ <div class="callout"><b>Thứ tự làm bài:</b> chọn use case → hiểu user và nỗi đau → định nghĩa metric → viết requirement/AC → viết user stories → liệt kê và chấm rủi ro → đưa ra quyết định go/no-go.</div>
+</section>
+
+<section class="card" id="dictionary">
+ <div class="section-kicker">Từ điển nhanh</div><h2>9. Thuật ngữ cần hiểu</h2>
+ <table><thead><tr><th>Thuật ngữ</th><th>Giải thích kiểu người mới</th></tr></thead><tbody>
+ <tr><td><b>Baseline</b></td><td>Mức hiện tại để so sánh. Ví dụ: tìm câu trả lời đang mất 10 phút.</td></tr>
+ <tr><td><b>Threshold</b></td><td>Ngưỡng tối thiểu/tối đa phải đạt. Ví dụ: tỷ lệ trích dẫn đúng phải trên 95%.</td></tr>
+ <tr><td><b>SLA</b></td><td>Cam kết mức dịch vụ, ví dụ giới hạn thời gian phản hồi.</td></tr>
+ <tr><td><b>Latency</b></td><td>Độ trễ — từ lúc gửi yêu cầu đến khi nhận phản hồi.</td></tr>
+ <tr><td><b>p95</b></td><td>Phân vị 95: nếu p95 là 5 giây thì khoảng 95% lượt phản hồi hoàn tất trong 5 giây hoặc ít hơn; giúp nhìn các lượt chậm thay vì chỉ nhìn mức trung bình.</td></tr>
+ <tr><td><b>Fallback</b></td><td>Phương án dự phòng khi AI không làm được hoặc có lỗi.</td></tr>
+ <tr><td><b>Escalation</b></td><td>Chuyển vấn đề lên người có chuyên môn/quyền xử lý cao hơn.</td></tr>
+ <tr><td><b>Hallucination</b></td><td>AI tạo ra thông tin nghe có vẻ đúng nhưng không có căn cứ hoặc sai.</td></tr>
+ <tr><td><b>PII</b></td><td>Thông tin có thể nhận diện một cá nhân, ví dụ email hoặc số điện thoại.</td></tr>
+ <tr><td><b>Mitigation</b></td><td>Biện pháp giảm khả năng xảy ra hoặc giảm thiệt hại của rủi ro.</td></tr>
+ <tr><td><b>Owner</b></td><td>Người cụ thể chịu trách nhiệm theo dõi và xử lý một rủi ro.</td></tr>
+ <tr><td><b>Stakeholder</b></td><td>Người/nhóm có lợi ích hoặc bị ảnh hưởng bởi sản phẩm.</td></tr>
+ <tr><td><b>Acceptance Criteria (AC)</b></td><td>Điều kiện rõ ràng để xác nhận tính năng được làm đúng.</td></tr>
+ <tr><td><b>ROI</b></td><td>Hiệu quả so với chi phí đầu tư.</td></tr>
+ <tr><td><b>CSAT</b></td><td>Điểm/mức độ hài lòng của khách hàng.</td></tr>
+ <tr><td><b>HITL / human oversight</b></td><td>Con người tham gia xem xét, phê duyệt hoặc giám sát ở bước quan trọng.</td></tr>
+ </tbody></table>
+</section>
+
+<section class="card" id="quiz">
+ <div class="section-kicker">Ôn thi</div><h2>10. Tự kiểm tra — Bấm vào câu hỏi để xem đáp án</h2>
+ <p class="plain">Hãy tự trả lời trước, sau đó mở đáp án để kiểm tra.</p>
+ <details class="quiz"><summary>1. Vì sao AI product không nên chỉ đo số lượng câu trả lời?</summary><div class="answer">Vì nhiều câu trả lời không đồng nghĩa với giải quyết được vấn đề. Nên đo giá trị thật, ví dụ tỷ lệ giải quyết ngay từ phản hồi đầu tiên hoặc thời gian tìm được câu trả lời đúng nguồn.</div></details>
+ <details class="quiz"><summary>2. Phân biệt “Build the wrong thing” và “Build the thing wrong”.</summary><div class="answer">Build the wrong thing = chọn sai vấn đề/sai nhu cầu người dùng. Build the thing wrong = hiểu đúng mục tiêu nhưng requirement, tiêu chí nghiệm thu hoặc xử lý edge case không đủ rõ.</div></details>
+ <details class="quiz"><summary>3. JTBD có những góc nhìn nào trong slide?</summary><div class="answer">Người dùng muốn hoàn thành việc gì (functional), muốn cảm thấy thế nào (emotional), và muốn được nhìn nhận ra sao (social).</div></details>
+ <details class="quiz"><summary>4. Ba nhóm requirement của AI product là gì?</summary><div class="answer">Functional, non-functional và AI-specific.</div></details>
+ <details class="quiz"><summary>5. Một acceptance criterion tốt cần có gì?</summary><div class="answer">Trigger, hành vi mong đợi, ngưỡng đo được và cách xử lý khi thất bại/fallback.</div></details>
+ <details class="quiz"><summary>6. Hãy kể tên 8 phần của PRD AI.</summary><div class="answer">Problem; Target User; Success Metrics; Technical Architecture; Feature Requirements; Non-functional Requirements; Acceptance Criteria; Risks.</div></details>
+ <details class="quiz"><summary>7. Metrics hierarchy gồm những tầng nào?</summary><div class="answer">Business KPI → Product metric → AI metric. Business đo giá trị kinh doanh; product đo việc người dùng có đạt mục tiêu; AI đo chất lượng vận hành của AI.</div></details>
+ <details class="quiz"><summary>8. INVEST viết tắt của những từ nào?</summary><div class="answer">Independent, Negotiable, Valuable, Estimable, Small, Testable.</div></details>
+ <details class="quiz"><summary>9. Năm rủi ro tối thiểu trong Risk Matrix của Lab là gì?</summary><div class="answer">Hallucination, bias, privacy, cost và adoption.</div></details>
+ <details class="quiz"><summary>10. Khi nào Go, Conditional Go hoặc No-go?</summary><div class="answer">Go khi rủi ro cao có cách giảm thiểu rõ, AC đo được và owner rõ. Conditional go khi chỉ pilot giới hạn với guardrails và người giám sát. No-go khi rủi ro privacy/tuân thủ lớn chưa xử lý, thiếu fallback hoặc chưa chứng minh được giá trị người dùng.</div></details>
+ <details class="quiz"><summary>11. Khi nghiên cứu user, cần hỏi gì về mức tự chủ của AI?</summary><div class="answer">AI được tự thực hiện đến đâu và ở bước nào người dùng muốn giữ quyền kiểm soát/phê duyệt.</div></details>
+ <details class="quiz"><summary>12. Tại sao risk register cần owner và mitigation?</summary><div class="answer">Mitigation nói rõ cách giảm rủi ro; owner xác định ai chịu trách nhiệm thực hiện và theo dõi. Nếu thiếu hai phần này, rủi ro chỉ là danh sách trên giấy.</div></details>
+ <div class="callout good"><b>Chốt bài trong 1 câu:</b> Sản phẩm AI tốt phải giải quyết đúng nhu cầu của đúng người dùng, có chỉ số thành công đo được, yêu cầu kiểm thử rõ ràng và rủi ro có người chịu trách nhiệm.</div>
+</section>
+<div class="footer">Tài liệu ôn tập được biên soạn từ PDF “AI Product Thinking &amp; Requirements — AICB Ngày 5”. Các con số ví dụ được giữ theo slide; hãy xác định lại ngưỡng phù hợp khi làm sản phẩm thực tế.<br><a class="toplink" href="#top">↑ Về đầu trang</a></div>
+</main></div>
+<script>
+// Mở đáp án bằng click; nút in của trình duyệt có thể lưu trang thành PDF.
+document.querySelectorAll('details.quiz').forEach((item) => {
+  item.addEventListener('toggle', () => { /* native details/summary handles visibility */ });
+});
+</script>
+</body></html>

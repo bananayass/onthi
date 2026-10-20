@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 7 — Data Foundations | Tài liệu học cho người mới</title>
+<style>
+:root{--bg:#f5f7fb;--paper:#fff;--ink:#1d2939;--muted:#58677c;--line:#dfe6ef;--blue:#315be8;--blue2:#eaf0ff;--teal:#0d9488;--teal2:#e7f8f5;--amber:#a16207;--amber2:#fff7df;--red:#b42318;--red2:#fff0ed;--shadow:0 8px 26px rgba(25,45,80,.07)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.68;font-size:16px}.hero{background:linear-gradient(135deg,#121f44,#2445a8 65%,#2779a9);color:white;padding:44px 22px 38px}.hero-inner{max-width:1100px;margin:auto}.eyebrow{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;opacity:.85;font-weight:700}.hero h1{font-size:clamp(2rem,4vw,3.3rem);line-height:1.12;margin:12px 0}.hero p{max-width:790px;font-size:1.08rem;color:#e4ecff;margin-bottom:0}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}.chip{border:1px solid #8aa5ff88;background:#ffffff14;border-radius:999px;padding:5px 11px;font-size:.84rem}.layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:24px;max-width:1200px;margin:26px auto;padding:0 18px}.toc{align-self:start;position:sticky;top:14px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);max-height:calc(100vh - 28px);overflow:auto}.toc strong{display:block;margin-bottom:10px}.toc a{display:block;text-decoration:none;color:var(--muted);font-size:.9rem;padding:6px 8px;border-radius:8px;line-height:1.35}.toc a:hover{background:var(--blue2);color:var(--blue)}.main{min-width:0}.intro,.chapter,.final-card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:26px;margin-bottom:20px;box-shadow:var(--shadow)}.chapter h2{margin:0 0 12px;font-size:1.55rem;line-height:1.25}.chapter h3{font-size:1.13rem;margin:24px 0 8px}.chapter h4{font-size:1rem;margin:15px 0 7px}.lead{color:var(--muted);font-size:1.04rem}.num{display:inline-grid;place-items:center;width:33px;height:33px;border-radius:10px;background:var(--blue2);color:var(--blue);font-weight:800;margin-right:8px;font-size:.95rem}.callout{border-left:4px solid var(--blue);background:var(--blue2);padding:13px 16px;border-radius:0 10px 10px 0;margin:16px 0}.callout.good{border-left-color:var(--teal);background:var(--teal2)}.callout.warn{border-left-color:#d97706;background:var(--amber2)}.callout.danger{border-left-color:var(--red);background:var(--red2)}.table-wrap{overflow-x:auto;margin:12px 0 16px}table{border-collapse:collapse;width:100%;min-width:570px;font-size:.94rem}th,td{border:1px solid var(--line);padding:10px 11px;text-align:left;vertical-align:top}th{background:#f0f4fa;font-weight:700}tbody tr:nth-child(even){background:#fbfcfe}code,.code{font-family:Consolas,monospace;background:#f0f3f8;padding:2px 5px;border-radius:5px;font-size:.92em}pre{overflow:auto;background:#111827;color:#e5e7eb;padding:16px;border-radius:12px;font-size:.88rem;line-height:1.55}pre code{background:transparent;padding:0;color:inherit}.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:15px 0}.step{background:#f0f5ff;border:1px solid #d7e2ff;border-radius:10px;padding:10px 12px;font-weight:700}.arrow{color:var(--blue);font-weight:bold}.mini-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:15px 0}.mini{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fcfdff}.mini strong{display:block;margin-bottom:6px}.mini p{margin:0;color:var(--muted);font-size:.93rem}.tag{display:inline-block;padding:3px 8px;border-radius:999px;background:#edf2f8;color:#46566d;font-size:.78rem;font-weight:700;margin:2px}.small{font-size:.9rem;color:var(--muted)}ul,ol{padding-left:24px}li{margin:5px 0}.formula{background:#f8fafc;border:1px dashed #b8c4d6;border-radius:10px;padding:12px 15px;font-family:Consolas,monospace;overflow-x:auto}.qa{border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden}.qa summary{cursor:pointer;padding:13px 15px;font-weight:700;background:#fbfcff}.qa .answer{padding:12px 16px;border-top:1px solid var(--line);background:white}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.toolbar button{background:var(--blue);color:white;border:0;border-radius:9px;padding:9px 12px;cursor:pointer;font-weight:700}.toolbar button.secondary{background:#e9eef6;color:#26364d}.checklist label{display:block;padding:7px 0}.checklist input{margin-right:8px;accent-color:var(--blue)}.foot{color:var(--muted);text-align:center;padding:20px;font-size:.88rem}.hidden{display:none!important}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.toc{position:relative;top:auto;max-height:none}.mini-grid{grid-template-columns:1fr}.hero{padding-top:32px}.intro,.chapter,.final-card{padding:20px}}
+@media print{body{background:white;font-size:11pt}.hero{background:#172554!important;print-color-adjust:exact}.layout{display:block;max-width:none;margin:0;padding:0}.toc,.toolbar{display:none}.intro,.chapter,.final-card{box-shadow:none;break-inside:avoid;border:1px solid #bbb;margin:12px 0;padding:16px}.chapter h2{font-size:17pt}a{color:inherit;text-decoration:none}.qa .answer{display:block}.qa summary{list-style:none}pre{white-space:pre-wrap} }
+</style>
+</head>
+<body>
+<header class="hero"><div class="hero-inner">
+<div class="eyebrow">AICB-P1 · Ngày 7 · Data Foundations</div>
+<h1>Embedding, Chunking<br>& Vector Store</h1>
+<p>Tài liệu ôn tập cho người mới bắt đầu. Mục tiêu là hiểu vì sao AI trả lời sai có thể do dữ liệu và cách tìm dữ liệu — không nhất thiết vì model yếu.</p>
+<div class="chips"><span class="chip">Giải thích từ cơ bản</span><span class="chip">Ví dụ đời thường</span><span class="chip">Các lỗi dễ ra thi</span><span class="chip">Câu hỏi tự kiểm tra</span></div>
+</div></header>
+<div class="layout">
+<nav class="toc" aria-label="Mục lục"><strong>📚 Mục lục</strong>
+<a href="#start">0. Bản đồ bài học</a><a href="#data">1. Data strategy & memory</a><a href="#embedding">2. Embedding là gì?</a><a href="#model">3. Chọn embedding model</a><a href="#extract">4. Đọc dữ liệu từ file</a><a href="#chunk">5. Chunking</a><a href="#ann">6. ANN: Flat, IVF, PQ, HNSW</a><a href="#store">7. FAISS, Chroma & vector store</a><a href="#hybrid">8. Filter, hybrid search & reranking</a><a href="#eval">9. Đo chất lượng retrieval</a><a href="#failure">10. 14 lỗi âm thầm quan trọng</a><a href="#security">11. Bảo mật & quyền riêng tư</a><a href="#lab">12. Lab 7 từng bước</a><a href="#review">13. Cheat sheet & câu hỏi</a>
+<div class="toolbar"><button class="secondary" onclick="window.print()">In / Lưu PDF</button><button class="secondary" onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">Mở đáp án</button></div>
+</nav>
+<main class="main">
+<section id="start" class="intro"><h2>Trước tiên: Day 7 đang giải quyết vấn đề gì?</h2>
+<p>Hãy tưởng tượng bạn hỏi một trợ lý mới: <b>“Chính sách đổi trả trong bao lâu?”</b> Nếu trợ lý chưa đọc đúng tài liệu chính sách, câu trả lời thông minh đến đâu cũng có thể sai. Day 7 dạy cách đưa tài liệu riêng vào dạng mà hệ thống có thể tìm kiếm và dùng làm căn cứ trả lời.</p>
+<div class="callout good"><b>Ý tưởng cốt lõi:</b> dữ liệu sạch + chia đoạn hợp lý + embedding phù hợp + tìm kiếm được đo lường tốt thường hữu ích hơn việc vội đổi sang một model đắt hơn.</div>
+<h3>Pipeline xương sống cần thuộc</h3>
+<div class="flow"><span class="step">Document</span><span class="arrow">→</span><span class="step">Chunk</span><span class="arrow">→</span><span class="step">Embed</span><span class="arrow">→</span><span class="step">Store / Index</span><span class="arrow">→</span><span class="step">Query / Retrieve</span><span class="arrow">→</span><span class="step">Inject vào prompt</span></div>
+<p class="small">Ví dụ: đọc file chính sách → chia thành các đoạn ngắn có nghĩa → đổi mỗi đoạn thành vector số → lưu vào vector store → khi có câu hỏi, tìm các đoạn liên quan → đưa đoạn đó cho LLM trả lời.</p>
+</section>
+
+<section id="data" class="chapter"><h2><span class="num">1</span>Data strategy, memory và dữ liệu cần dùng</h2>
+<p class="lead">Đầu tiên phải biết dữ liệu thuộc loại nào, vì không phải dữ liệu nào cũng nên biến thành vector.</p>
+<h3>1.1 Ba loại dữ liệu của agent</h3>
+<div class="table-wrap"><table><thead><tr><th>Loại</th><th>Nói đơn giản</th><th>Ví dụ</th><th>Cách xử lý phù hợp</th></tr></thead><tbody>
+<tr><td><b>Knowledge data</b></td><td>Thông tin tương đối ổn định, dạng văn bản dài.</td><td>FAQ, SOP, chính sách, hợp đồng, tài liệu kỹ thuật.</td><td>Thường chia chunk, embedding và lưu vector store để tìm theo ý nghĩa.</td></tr>
+<tr><td><b>Operational data</b></td><td>Dữ liệu nghiệp vụ cập nhật liên tục, thường có cấu trúc.</td><td>Trạng thái đơn hàng, tồn kho, CRM, logs.</td><td>Ưu tiên SQL hoặc function/API có kiểm soát; không embed nguyên bảng một cách máy móc.</td></tr>
+<tr><td><b>Contextual data</b></td><td>Thông tin ngắn liên quan đến người dùng hoặc phiên hiện tại.</td><td>Giỏ hàng, profile, vài lượt chat gần đây.</td><td>Đưa trực tiếp vào context khi cần; thường không cần semantic search.</td></tr>
+</tbody></table></div>
+<div class="callout"><b>Mẹo nhớ:</b> kiến thức trong tài liệu → retrieval; trạng thái mới nhất → query hệ thống nghiệp vụ; thông tin ngắn về phiên hiện tại → đưa vào context đúng lúc.</div>
+<h3>1.2 Memory khác retrieval thế nào?</h3>
+<div class="mini-grid"><div class="mini"><strong>Retrieval = tìm đúng tài liệu cho câu hỏi hiện tại</strong><p>Ví dụ: tìm điều khoản đổi trả trong chính sách.</p></div><div class="mini"><strong>Memory = giữ thông tin cần dùng qua thời gian</strong><p>Ví dụ: ghi nhớ người dùng thích câu trả lời ngắn.</p></div><div class="mini"><strong>Không phải cứ lưu là memory tốt</strong><p>Toàn bộ chat history hoặc file từng upload nhưng không được truy xuất có chủ đích có thể chỉ tạo nhiễu.</p></div></div>
+<p>Vòng đời memory theo bài: <b>Capture → Filter → Store → Retrieve</b>. Chọn điều đáng lưu, lọc PII/chất lượng/độ liên quan, lưu đúng nơi rồi lấy ra khi có ích.</p>
+<h3>1.3 Bảo vệ dữ liệu trước khi index</h3>
+<p><b>PII</b> là thông tin có thể nhận diện một cá nhân, ví dụ họ tên, số điện thoại, email, CCCD hoặc địa chỉ. Bài giảng nhấn mạnh phải cân nhắc quyền truy cập, người sở hữu/cập nhật dữ liệu, lịch re-index và che thông tin nhạy cảm trước khi embed.</p>
+<ul><li>Tên → thay bằng <code>[PERSON]</code> khi phù hợp.</li><li>Số điện thoại → thay bằng mẫu che hoặc xóa.</li><li>Email → hash hoặc loại bỏ nếu không cần.</li><li>CCCD → xóa hoàn toàn nếu không cần cho mục đích retrieval.</li><li>Địa chỉ → có thể tổng quát hóa thành khu vực.</li></ul>
+<div class="callout danger"><b>Lưu ý quan trọng:</b> embedding chỉ là dãy số, nhưng không có nghĩa là đã ẩn danh. Một số nghiên cứu cho thấy có thể khôi phục gần đúng văn bản gốc từ embedding. Hãy quản lý vector nhạy cảm như dữ liệu nhạy cảm.</div>
+</section>
+
+<section id="embedding" class="chapter"><h2><span class="num">2</span>Embedding là gì và dùng để làm gì?</h2>
+<p class="lead">Embedding là cách biến văn bản thành một dãy số để máy tính có thể so sánh nội dung theo cách gần với ý nghĩa.</p>
+<h3>2.1 Ví dụ đơn giản</h3>
+<p>Hai câu <i>“chính sách hoàn tiền”</i> và <i>“quy định đổi trả sản phẩm”</i> dùng những từ khác nhau, nhưng nghĩa gần nhau. Tìm kiếm từ khóa thuần có thể bỏ lỡ; embedding có thể đặt chúng gần nhau hơn trong một không gian vector.</p>
+<p>Ngược lại, mỗi vector thường có nhiều chiều số, chẳng hạn [0.12, -0.08, 0.91, …]. Không cần tự diễn giải từng con số. Điều quan trọng là model học cách biểu diễn sao cho tác vụ tìm kiếm hoạt động tốt.</p>
+<h3>2.2 Embedding pipeline cơ bản</h3>
+<ol><li><b>Tokenize:</b> chia văn bản thành token/subword.</li><li><b>Encoder:</b> mạng Transformer xử lý token trong ngữ cảnh.</li><li><b>Pooling:</b> gộp thông tin từ các token thành một vector đại diện cho câu/đoạn.</li></ol>
+<p>Mean pooling, last-token pooling hay [CLS] pooling là những cách gộp khác nhau. Chúng không hoàn toàn tương đương; đổi cách pooling có thể đổi hành vi và khả năng của model.</p>
+<h3>2.3 Cosine similarity và Euclidean distance</h3>
+<div class="mini-grid"><div class="mini"><strong>Cosine similarity</strong><p>So sánh hướng của hai vector. Theo quy ước phổ biến: 1 là cùng hướng, 0 vuông góc, -1 ngược hướng.</p></div><div class="mini"><strong>Euclidean distance</strong><p>Đo khoảng cách giữa hai điểm. 0 là trùng nhau; càng lớn thì càng xa.</p></div><div class="mini"><strong>Điều cần nhớ</strong><p>Cosine score cao không phải bằng chứng tuyệt đối rằng hai đoạn liên quan đúng với câu hỏi.</p></div></div>
+<div class="callout warn"><b>Bẫy thi:</b> cosine similarity là quy ước kỹ thuật hữu ích, không phải “độ liên quan thật” trong mọi trường hợp. Phải kiểm tra trên dữ liệu và tác vụ thực tế.</div>
+<h3>2.4 Lexical search và dense search</h3>
+<div class="table-wrap"><table><thead><tr><th>Cách tìm</th><th>Tìm bằng gì?</th><th>Điểm mạnh</th><th>Điểm yếu</th></tr></thead><tbody>
+<tr><td><b>Lexical: TF-IDF / BM25</b></td><td>Từ/cụm từ xuất hiện trong tài liệu, có trọng số.</td><td>Rất tốt với mã lỗi, SKU, ID, tên riêng hoặc token chính xác.</td><td>Có thể bỏ lỡ từ đồng nghĩa/diễn đạt khác.</td></tr>
+<tr><td><b>Dense: embedding</b></td><td>Độ gần của vector ngữ nghĩa.</td><td>Tìm được ý gần nhau dù câu chữ khác nhau.</td><td>Có thể làm mờ mã chính xác hoặc nhầm những thứ “nghe giống”.</td></tr>
+</tbody></table></div>
+<p><b>TF-IDF</b> tăng trọng số cho từ quan trọng; <b>BM25</b> là baseline lexical mạnh mà bài giảng khuyến nghị vẫn nên giữ. Đừng nghĩ BM25 đã lỗi thời chỉ vì đã có embedding.</p>
+<h3>2.5 Symmetric và asymmetric search; prefix/instruction</h3>
+<p><b>Symmetric:</b> so câu với câu, ví dụ tìm câu trùng lặp. <b>Asymmetric:</b> câu hỏi ngắn tìm trong đoạn tài liệu dài — đây là hình thức thường gặp trong RAG.</p>
+<p>Một số model cần chỉ dẫn/prefix khác nhau cho query và passage, ví dụ <code>query:</code> và <code>passage:</code>. Bỏ prefix có thể không báo lỗi, nhưng làm xếp hạng kém đi. Vì vậy phải đọc hướng dẫn của đúng model, không tự đoán.</p>
+</section>
+
+<section id="model" class="chapter"><h2><span class="num">3</span>Chọn embedding model như thế nào?</h2>
+<p>Không có model tốt nhất cho mọi trường hợp. Cần chọn theo dữ liệu và giới hạn của sản phẩm, không chỉ nhìn bảng xếp hạng.</p>
+<h3>3.1 Năm nhóm tiêu chí thực dụng</h3>
+<ul><li><b>Deployment:</b> chạy nội bộ/on-device hay gọi API bên ngoài? Có yêu cầu air-gapped không?</li><li><b>Max input:</b> model nhận tối đa bao nhiêu token? Vượt ngưỡng có thể bị cắt âm thầm.</li><li><b>Dimension / precision:</b> vector nhiều chiều có thể tốn RAM và dung lượng hơn; có thể cần giảm chiều/quantization nhưng phải đo chất lượng.</li><li><b>Ngôn ngữ và domain:</b> tài liệu tiếng Việt, mã nguồn, chính sách hay kỹ thuật? Điểm tiếng Anh không đảm bảo hiệu quả tiếng Việt.</li><li><b>Query shape + license:</b> câu hỏi ngắn tìm đoạn dài hay so câu với câu? Có cần dùng mã/SKU chính xác? License có phù hợp sản phẩm không?</li></ul>
+<h3>3.2 Quy trình chọn trong 20 phút theo bài</h3>
+<ol><li>Xác định độ dài chunk và loại query (có mã/ID/SKU chính xác không).</li><li>Chọn shortlist 2–3 model theo deployment và license.</li><li>Tạo bộ eval khoảng 50–100 câu hỏi từ chính corpus của mình nếu điều kiện cho phép.</li><li>Đo recall@k, dùng đúng prefix/instruction của từng model.</li><li>Sau đó mới tối ưu dimension và quantization.</li></ol>
+<div class="callout"><b>MTEB:</b> luôn đọc cả benchmark board, version, loại tác vụ, cách tính điểm và ngày đo. Hai số MTEB từ hai board/version khác nhau không nên đặt cạnh nhau rồi kết luận model nào tốt hơn.</div>
+<p><b>Với tiếng Việt:</b> dữ liệu có dấu và Unicode cần được xử lý cẩn thận. Bài giảng nhắc benchmark tiếng Việt chuyên biệt và fine-tune trên query/document tiếng Việt có thể hữu ích hơn việc chỉ dựa vào điểm tiếng Anh.</p>
+</section>
+
+<section id="extract" class="chapter"><h2><span class="num">4</span>Đọc dữ liệu từ PDF, HTML, Excel và Office</h2>
+<p class="lead">Trước khi chia chunk hay tạo embedding, cần biến file thật thành văn bản có cấu trúc đúng. Nếu parse sai, các bước sau không tự sửa được.</p>
+<h3>4.1 Ba nhóm dữ liệu, ba cách xử lý</h3>
+<div class="table-wrap"><table><thead><tr><th>Nhóm</th><th>Ví dụ</th><th>Hướng xử lý</th></tr></thead><tbody><tr><td>Unstructured</td><td>PDF scan, ảnh, chữ viết tay, transcript audio</td><td>OCR/VLM parsing, giữ layout khi cần rồi chunk theo cấu trúc.</td></tr><tr><td>Semi-structured</td><td>HTML, DOCX, PPTX, Markdown, email</td><td>Bỏ phần trang trí/nhiễu, giữ cây heading và cấu trúc.</td></tr><tr><td>Structured</td><td>Excel, CSV, SQL, JSON, log</td><td>Thường truy vấn có cấu trúc; serialize từng hàng có ngữ cảnh nếu thật sự cần retrieval.</td></tr></tbody></table></div>
+<h3>4.2 Vì sao PDF khó?</h3>
+<ul><li>PDF mô tả vị trí ký tự trên trang, không đảm bảo lưu thứ tự đọc đúng.</li><li>PDF scan chỉ là ảnh nên cần OCR; PDF tạo từ Word thường có text layer.</li><li>Bố cục hai cột, header/footer, biểu đồ và bảng có thể bị đọc sai hoặc mất quan hệ hàng–cột.</li><li>Header/footer lặp đi lặp lại có thể làm vector đại diện cho phần nhiễu thay vì nội dung.</li></ul>
+<h3>4.3 HTML, DOCX, PPTX, email</h3>
+<ul><li><b>HTML:</b> menu, banner, quảng cáo, footer có thể chiếm nhiều hơn nội dung thật. Nên bóc boilerplate trước.</li><li><b>DOCX:</b> giữ heading rất hữu ích cho chunking, nhưng comment/tracked changes/footnote có thể bị mất tùy parser.</li><li><b>PPTX:</b> thứ tự shape không phải lúc nào cũng là thứ tự đọc; speaker notes có thể chứa thông tin quan trọng.</li><li><b>Email:</b> chữ ký và các reply cũ lặp lại có thể tạo near-duplicate.</li></ul>
+<h3>4.4 Excel không đơn giản là một bảng</h3>
+<ul><li>Ô merge gây ô trống; có thể cần fill-down để khôi phục quan hệ.</li><li>Header nhiều tầng phải ghép thành tên cột đủ nghĩa.</li><li>Một sheet có thể có nhiều bảng rời rạc và ghi chú tự do.</li><li>Với retrieval, giá trị công thức thường quan trọng hơn biểu thức công thức.</li><li>Phải giữ đơn vị, ngày tháng, tiêu đề cột. Ví dụ serialize cả hàng thành <code>Q2 2026 | Doanh thu | 4,2 tỷ VND</code>, thay vì chỉ index con số <code>4.2</code>.</li></ul>
+<h3>4.5 Chuẩn hóa sau khi parse</h3>
+<ol><li>Chuẩn hóa Unicode NFC — đặc biệt quan trọng với tiếng Việt.</li><li>Bỏ header/footer lặp và dòng rác.</li><li>Nối từ bị ngắt do gạch nối cuối dòng và gộp dòng thành đoạn.</li><li>Loại trang trắng/đầu mục không giúp truy vấn và khử trùng lặp.</li><li>Giữ metadata provenance từ đầu: file nguồn, trang, heading/section, version và quyền truy cập.</li></ol>
+<div class="callout danger"><b>Provenance:</b> nguồn gốc của đoạn dữ liệu. Nếu không lưu tên file/trang/heading ngay khi parse, về sau rất khó tạo câu trả lời có trích dẫn chính xác.</div>
+</section>
+
+<section id="chunk" class="chapter"><h2><span class="num">5</span>Chunking — chia tài liệu thành đoạn</h2>
+<p><b>Chunking</b> là chia tài liệu dài thành các đoạn nhỏ hơn. Mỗi chunk được embed và index riêng, để câu hỏi tìm đúng phần cần thiết thay vì kéo cả file vào prompt.</p>
+<h3>5.1 Quá to và quá nhỏ đều có giá</h3>
+<div class="table-wrap"><table><thead><tr><th>Kích cỡ minh họa trong bài</th><th>Vấn đề</th><th>Hệ quả</th></tr></thead><tbody><tr><td>Quá lớn (ví dụ trên 1.000 token)</td><td>Nhiều chủ đề bị trộn trong một vector.</td><td>Retrieve trúng tài liệu nhưng prompt nhiễu.</td></tr><tr><td>Khoảng 200–500 token làm điểm bắt đầu</td><td>Một ý/section tương đối trọn vẹn; có overlap khi cần.</td><td>Cân bằng độ chính xác và độ đầy đủ — nhưng vẫn phải đo.</td></tr><tr><td>Quá nhỏ (ví dụ dưới 50 token)</td><td>Mất ngữ cảnh và quan hệ giữa câu.</td><td>Phải ghép quá nhiều mảnh mới đủ trả lời.</td></tr></tbody></table></div>
+<p><b>Đừng học thuộc 512 token như một luật cố định.</b> Con số 512 gắn với giới hạn của một số model cũ. Chunk phù hợp phụ thuộc embedding model, kiểu câu hỏi và dữ liệu. Câu hỏi ngắn có thể hợp chunk ngắn; câu hỏi cần ngữ cảnh rộng có thể hợp chunk dài hơn.</p>
+<h3>5.2 Các chiến lược chunking</h3>
+<div class="table-wrap"><table><thead><tr><th>Chiến lược</th><th>Nói dễ hiểu</th><th>Khi nào dùng</th></tr></thead><tbody><tr><td>Fixed-size</td><td>Cắt mỗi N ký tự/token.</td><td>Baseline đơn giản để bắt đầu.</td></tr><tr><td>Overlap</td><td>Để một phần cuối chunk cũ lặp lại ở đầu chunk mới.</td><td>Giữ ngữ cảnh qua ranh giới cắt.</td></tr><tr><td>Recursive character split</td><td>Ưu tiên cắt ở đoạn văn, xuống dòng, câu/khoảng trắng rồi mới cắt nhỏ hơn.</td><td>Baseline thực dụng phổ biến.</td></tr><tr><td>Structure-aware</td><td>Cắt theo heading, section, bảng hoặc code block.</td><td>Docs, FAQ, policy, tài liệu có cấu trúc rõ.</td></tr><tr><td>Semantic chunking</td><td>Dùng tín hiệu ngữ nghĩa để quyết định điểm cắt.</td><td>Chỉ nên tăng độ phức tạp khi đánh giá cho thấy có lợi rõ ràng.</td></tr></tbody></table></div>
+<div class="callout warn"><b>Semantic chunking không tự động tốt hơn.</b> Theo bài giảng, nghiên cứu được trích dẫn không tìm thấy cải thiện nhất quán đủ bù chi phí tính toán trong mọi tác vụ. Hãy bắt đầu bằng cách đơn giản, đo rồi mới nâng cấp.</div>
+<h3>5.3 Hai ý nâng cao cần nhận diện</h3>
+<ul><li><b>Late chunking:</b> tạo biểu diễn khi model đã nhìn văn bản rộng hơn, để chunk có thể giữ ngữ cảnh xuyên qua ranh giới.</li><li><b>Contextual retrieval:</b> thêm một phần mô tả ngữ cảnh vào mỗi chunk trước khi index, nhằm giúp kết quả dễ được tìm thấy hơn.</li></ul>
+<h3>5.4 Silent truncation (cắt âm thầm)</h3>
+<p>Nếu chunk dài hơn giới hạn input của embedding model, thư viện có thể cắt phần cuối mà không báo lỗi. Khi đó, phần thông tin bị cắt sẽ không bao giờ được tìm ra bằng vector của chunk ấy.</p>
+<div class="callout danger"><b>Cách tránh:</b> kiểm tra số token trước khi embed, biết giới hạn của đúng model, và đo lại chunk size mỗi khi đổi embedding model.</div>
+</section>
+
+<section id="ann" class="chapter"><h2><span class="num">6</span>ANN: tìm vector gần nhất nhanh hơn</h2>
+<p class="lead">Khi có rất nhiều vector, so sánh query với tất cả vector sẽ tốn thời gian. ANN (Approximate Nearest Neighbour) tìm các láng giềng gần nhất theo cách nhanh hơn, nhưng có thể không tìm được tất cả kết quả đúng.</p>
+<h3>6.1 Ba thứ luôn phải đánh đổi</h3>
+<div class="mini-grid"><div class="mini"><strong>Recall</strong><p>Có lấy được các kết quả liên quan thật không?</p></div><div class="mini"><strong>Latency</strong><p>Hệ thống trả kết quả nhanh đến mức nào?</p></div><div class="mini"><strong>Memory</strong><p>Index dùng bao nhiêu RAM hoặc disk?</p></div></div>
+<p>Không có một index chiến thắng đồng thời cả ba. ANN là lựa chọn đánh đổi, không phải “tìm kiếm ma thuật”.</p>
+<h3>6.2 Bốn cách cần biết</h3>
+<div class="table-wrap"><table><thead><tr><th>Index</th><th>Ẩn dụ</th><th>Điểm mạnh</th><th>Điểm cần trả giá</th></tr></thead><tbody>
+<tr><td><b>Flat / brute force</b></td><td>Đọc mọi cuốn sách trong thư viện.</td><td>Recall 100% theo định nghĩa; làm ground truth để so sánh.</td><td>Chậm và tốn RAM khi dữ liệu lớn.</td></tr>
+<tr><td><b>IVF</b></td><td>Chia thư viện thành khu/kệ, tìm vài khu trước.</td><td>Quét ít vector hơn.</td><td>Có thể bỏ sót; tăng <code>nprobe</code> thường tăng recall lẫn latency.</td></tr>
+<tr><td><b>PQ</b></td><td>Nén vector thành mã ngắn.</td><td>Tiết kiệm bộ nhớ mạnh.</td><td>Khoảng cách là gần đúng, có thể giảm độ chính xác.</td></tr>
+<tr><td><b>HNSW</b></td><td>Đi trên một hệ thống đường cao tốc rồi xuống đường nhỏ.</td><td>Cân bằng tốt giữa recall và tốc độ trong nhiều trường hợp; không cần bước train centroid như IVF.</td><td>Tốn thêm RAM cho graph và phải chỉnh tham số.</td></tr>
+</tbody></table></div>
+<h3>6.3 Tham số HNSW dễ gặp</h3>
+<ul><li><code>M</code>: số kết nối trong graph; tăng có thể cải thiện recall nhưng tốn memory.</li><li><code>efConstruction</code>: effort khi xây index; cao hơn có thể xây graph tốt hơn nhưng lâu hơn.</li><li><code>efSearch</code>: effort khi query; tăng thường tăng recall và latency. Đây là nút chỉnh lúc tìm kiếm, thường không cần rebuild.</li></ul>
+<h3>6.4 Quy tắc của bài giảng</h3>
+<ul><li>Luôn build Flat trước để có ground truth so sánh recall.</li><li>Dữ liệu nhỏ có thể chỉ cần Flat; không phải dự án nào cũng cần vector database lớn.</li><li>Chọn index theo giới hạn RAM, kích thước dữ liệu và SLA.</li><li>Tune dựa trên recall thực đo ở đúng k và filter thật, không sao chép con số từ tutorial.</li></ul>
+</section>
+
+<section id="store" class="chapter"><h2><span class="num">7</span>FAISS, ChromaDB và vector store</h2>
+<p><b>Vector store</b> là nơi lưu các vector cùng nội dung, ID và metadata, rồi hỗ trợ tìm các vector liên quan khi có query.</p>
+<div class="table-wrap"><table><thead><tr><th>Công cụ</th><th>Bản chất</th><th>Hiểu đơn giản</th></tr></thead><tbody><tr><td><b>FAISS</b></td><td>Thư viện index/search tối ưu tốc độ và memory.</td><td>Engine tìm kiếm mạnh, nhưng tự nó không phải database đầy đủ: không tự cung cấp schema metadata, where filter, CRUD/transaction hay access control như một hệ DB hoàn chỉnh.</td></tr><tr><td><b>ChromaDB</b></td><td>Developer-friendly vector database, thuận tiện để prototype/lab và persist dữ liệu.</td><td>Dễ bắt đầu hơn, có collection chứa documents, IDs, metadata và embedding function.</td></tr><tr><td><b>pgvector</b></td><td>Vector search trong hệ sinh thái Postgres.</td><td>Hữu ích khi dữ liệu và quyền nghiệp vụ đã nằm trong Postgres; phải theo dõi giới hạn hiệu năng/index.</td></tr><tr><td><b>Qdrant / Weaviate / Milvus...</b></td><td>Các lựa chọn khác cho nhu cầu filter, scale, multi-tenant và kiến trúc cụ thể.</td><td>Chọn theo yêu cầu, không chọn chỉ vì nổi tiếng.</td></tr></tbody></table></div>
+<h3>7.1 Bug dễ nhầm: embedding function không thống nhất</h3>
+<p>Ví dụ tạo collection bằng model embedding BGE-M3, nhưng khi mở lại collection thì vô tình dùng embedding function mặc định khác. Query vẫn chạy, nhưng vector query không còn nằm trong cùng không gian đã dùng để index; recall tụt mà khó phát hiện.</p>
+<div class="callout danger"><b>Quy tắc:</b> luôn khai báo và dùng nhất quán embedding function khi tạo, mở và truy vấn collection. Khi đổi model, cần re-embed và rebuild index; không trộn vector của hai không gian embedding khác nhau.</div>
+<h3>7.2 Cosine và normalization</h3>
+<p>Nếu dùng FAISS với inner product để mô phỏng cosine similarity, phải chuẩn hóa vector đúng cách cả lúc add và lúc query. Nếu bỏ bước normalize, hệ thống có thể ưu tiên vector có độ lớn cao thay vì hướng tương đồng.</p>
+</section>
+
+<section id="hybrid" class="chapter"><h2><span class="num">8</span>Metadata filter, hybrid search và reranking</h2>
+<h3>8.1 Metadata là gì?</h3>
+<p>Metadata là thông tin mô tả chunk ngoài phần text, ví dụ <code>source</code>, <code>page</code>, <code>category</code>, <code>version</code>, quyền truy cập hoặc ngày cập nhật. Metadata giúp giới hạn tìm kiếm đúng tài liệu, đúng khách hàng hoặc đúng phiên bản.</p>
+<h3>8.2 Filter đặt sai chỗ có thể làm mất kết quả</h3>
+<div class="table-wrap"><table><thead><tr><th>Loại filter</th><th>Cách chạy</th><th>Rủi ro</th></tr></thead><tbody><tr><td>Post-filter</td><td>Tìm ANN trước rồi mới bỏ kết quả không khớp filter.</td><td>Có thể trả ít hơn k hoặc rỗng dù tồn tại kết quả hợp lệ.</td></tr><tr><td>Pre-filter</td><td>Lọc tập tài liệu trước rồi mới search.</td><td>Đúng tập hơn, nhưng search có thể suy biến thành quét gần brute-force trên tập con.</td></tr><tr><td>In-algorithm filtering</td><td>Index biết filter ngay trong quá trình duyệt.</td><td>Có thể tốt hơn, nhưng cần engine hỗ trợ đúng cách.</td></tr></tbody></table></div>
+<div class="callout danger"><b>Vấn đề quyền truy cập:</b> không chỉ lọc sau khi tìm! Với dữ liệu nhiều tenant hoặc theo quyền từng user, cần áp filter quyền hạn trước hoặc ngay trong ANN search để tránh rò rỉ và tránh hụt kết quả.</div>
+<h3>8.3 Dense, BM25 và hybrid search</h3>
+<p>Ví dụ một khách hỏi “my package never showed up”, nhưng tài liệu viết “shipment did not arrive”. Dense embedding có thể tìm đúng vì ý nghĩa gần nhau. Nhưng với “error code E-4471” hay “SKU VN-2291-XL”, BM25 thường giỏi hơn vì cần khớp token chính xác.</p>
+<div class="mini-grid"><div class="mini"><strong>Dense</strong><p>Tốt với câu hỏi diễn đạt khác từ của tài liệu.</p></div><div class="mini"><strong>BM25 / lexical</strong><p>Tốt với mã lỗi, ID, SKU, tên riêng và từ chính xác.</p></div><div class="mini"><strong>Hybrid</strong><p>Kết hợp các cách tìm để giảm điểm yếu của từng loại.</p></div></div>
+<h3>8.4 RRF — hợp nhất theo thứ hạng</h3>
+<p><b>Reciprocal Rank Fusion (RRF)</b> hợp nhất kết quả từ nhiều hệ tìm kiếm dựa trên vị trí xếp hạng, thay vì cộng trực tiếp score thô. Lý do: score BM25 và cosine không cùng một thang đo.</p>
+<div class="formula">RRF(d) = tổng theo từng danh sách: 1 / (k + rank(d))</div>
+<p class="small">Bài giảng nêu k = 60 là giá trị mặc định phổ biến trong công thức gốc và một số hệ thống. Với người mới, chỉ cần nhớ: RRF kết hợp theo rank, không so trực tiếp score của các hệ khác nhau.</p>
+<h3>8.5 Reranking</h3>
+<p>Thường lấy top-50/100 bằng cách rẻ và nhanh (dense hoặc BM25), rồi dùng reranker để sắp xếp lại thành top-5/10 tốt hơn trước khi đưa vào prompt. Embedding cho mỗi tài liệu thường tính một lần khi index; reranking tốn tính toán lặp lại mỗi query.</p>
+<div class="callout good"><b>Công thức kiến trúc dễ nhớ:</b> candidate retrieval rộng → hybrid hợp nhất → rerank shortlist → đưa vài đoạn tốt vào context.</div>
+<h3>8.6 Long context có thay RAG không?</h3>
+<p>Theo nội dung bài giảng, không nên kết luận rằng long context đã “giết chết RAG”. Context dài vẫn có thể bị giảm chất lượng khi nhồi nhiều thông tin; RAG giúp thu hẹp corpus lớn xuống phần liên quan. Cách nghĩ thực dụng là dùng retrieval để chọn tập con rồi dùng model đọc/suy luận trên tập con đó.</p>
+</section>
+
+<section id="eval" class="chapter"><h2><span class="num">9</span>Đo chất lượng retrieval: Recall@k và các metric</h2>
+<p>Search trả về kết quả không đồng nghĩa với search đúng. Cần tạo câu hỏi kiểm thử và đo kết quả thay vì chỉ nhìn demo.</p>
+<div class="table-wrap"><table><thead><tr><th>Metric</th><th>Câu hỏi metric trả lời</th><th>Ghi nhớ</th></tr></thead><tbody><tr><td><b>Recall@k</b></td><td>Trong các tài liệu thật sự liên quan, có bao nhiêu tài liệu được tìm thấy trong top-k?</td><td>Khả năng lấy được bằng chứng liên quan; giới hạn chất lượng answer về sau.</td></tr><tr><td><b>Precision@k</b></td><td>Trong top-k đã lấy, có bao nhiêu kết quả thật sự liên quan?</td><td>Kiểm soát nhiễu và lượng context tiêu thụ.</td></tr><tr><td><b>nDCG@k</b></td><td>Kết quả liên quan có được xếp gần đầu không?</td><td>Đúng tài liệu ở vị trí đầu thường hữu ích hơn ở vị trí thấp.</td></tr><tr><td><b>MRR</b></td><td>Kết quả liên quan đầu tiên nằm ở vị trí nào?</td><td>Hợp với truy vấn chỉ cần một kết quả chính.</td></tr></tbody></table></div>
+<h3>9.1 Eval set không cần gán nhãn tay: cách làm tạm thời</h3>
+<ol><li>Lấy mẫu chunk đại diện từ các loại tài liệu.</li><li>Nhờ LLM tạo một vài câu hỏi chỉ dựa trên từng chunk, thêm persona nếu có ích.</li><li>Đánh dấu chunk nguồn là positive (kết quả đúng kỳ vọng).</li><li>Chạy retrieval và tính recall@k/MRR.</li><li>Kiểm tra thủ công một phần câu hỏi để loại câu vô nghĩa hoặc quá dễ.</li></ol>
+<div class="callout warn"><b>Hạn chế:</b> câu hỏi do LLM tạo thường dùng lại từ ngữ giống chunk gốc, nên recall đo được có thể cao hơn thực tế. Đây chỉ là floor check, không thay thế bộ query thực tế hoặc nhãn được người kiểm tra.</div>
+<p><b>Baseline:</b> so với BM25 và, khi cần, Flat exact search. Nếu không có chuẩn so sánh thì tuyên bố “recall cao” chưa có nhiều ý nghĩa.</p>
+</section>
+
+<section id="failure" class="chapter"><h2><span class="num">10</span>14 lỗi âm thầm quan trọng trong bài</h2>
+<p class="lead">Đây là phần rất đáng ôn thi. Một số lỗi không crash, không exception và vẫn trả HTTP 200 — nhưng kết quả tìm kiếm sai.</p>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Triệu chứng</th><th>Nguyên nhân thường gặp</th><th>Hướng sửa</th></tr></thead><tbody>
+<tr><td>1</td><td>“Xe hơi” không tìm được tài liệu ghi “ô tô”.</td><td>Lexical search không khớp từ.</td><td>Hybrid BM25 + dense, có thể thêm query expansion.</td></tr>
+<tr><td>2</td><td>Mã E-4471 trả về mã khác nhưng “có vẻ giống”.</td><td>Dense embedding làm mờ token chính xác.</td><td>Thêm nhánh BM25 cho mã/ID/SKU.</td></tr>
+<tr><td>3</td><td>Recall kém 5–15% nhưng không có lỗi.</td><td>Thiếu prefix/instruction query/document mà model yêu cầu.</td><td>Dùng đúng prefix và kiểm tra bằng prefix-ablation test.</td></tr>
+<tr><td>4</td><td>Phần cuối chunk không bao giờ tìm thấy.</td><td>Silent truncation vượt max input.</td><td>Đếm token trước embed và kiểm tra giới hạn model.</td></tr>
+<tr><td>5</td><td>Đổi model nhưng thứ hạng toàn index lệch.</td><td>Không re-embed khi đổi embedding model; vector thuộc không gian khác.</td><td>Re-embed, rebuild index, version hóa index.</td></tr>
+<tr><td>6</td><td>FAISS ưu tiên tài liệu dài/độ lớn vector lớn.</td><td>Quên normalize khi dùng inner product như cosine.</td><td>Chuẩn hóa cả vector lúc add lẫn query.</td></tr>
+<tr><td>7</td><td>Filtered search trả dưới k kết quả hoặc rỗng.</td><td>Post-filter loại kết quả sau khi ANN đã tìm xong.</td><td>Dùng pre-filter hoặc in-algorithm filtering phù hợp.</td></tr>
+<tr><td>8</td><td>Tăng k mà câu trả lời lại tệ hơn.</td><td>Lấy quá nhiều context; bằng chứng đúng bị chôn giữa (lost-in-the-middle).</td><td>Rerank, đưa bằng chứng tốt lên đầu, giảm k hợp lý.</td></tr>
+<tr><td>9</td><td>Recall biến động theo loại tài liệu/câu hỏi.</td><td>Chunk size không phù hợp với query hoặc model.</td><td>Đánh giá lại chunk size khi đổi model/tác vụ.</td></tr>
+<tr><td>10</td><td>Chroma recall kém dù “chưa đổi gì”.</td><td>Embedding mặc định yếu/khác với lựa chọn dự kiến.</td><td>Khai báo embedding function tường minh và kiểm tra dimension.</td></tr>
+<tr><td>11</td><td>Query rỗng sau khi restart.</td><td>Mở collection bằng embedding function khác lúc tạo.</td><td>Dùng cùng embedding function nhất quán khi mở/truy vấn.</td></tr>
+<tr><td>12</td><td>Latency tăng dần sau nhiều lần xóa/compaction.</td><td>HNSW tombstones (các vector xóa mềm vẫn gây overhead).</td><td>Lên lịch compaction/rebuild; chọn index phù hợp với tần suất xóa.</td></tr>
+<tr><td>13</td><td>Cache tự tin trả lời sai.</td><td>Cache key không version theo embedding model hoặc thiếu TTL.</td><td>Version cache key và chọn TTL theo độ biến động dữ liệu.</td></tr>
+<tr><td>14</td><td>Demo tốt nhưng production tệ.</td><td>Eval overfit cách diễn đạt của tài liệu; user thật hỏi khác hoặc cần nhiều bước.</td><td>Tạo query đa dạng theo persona và cập nhật bằng query log thực tế.</td></tr>
+</tbody></table></div>
+<div class="callout danger"><b>Thông điệp của bài:</b> “Không lỗi” không có nghĩa là “đúng”. Cách phát hiện là đánh giá retrieval bằng dữ liệu và câu hỏi đại diện, không suy luận từ việc chương trình không crash.</div>
+</section>
+
+<section id="security" class="chapter"><h2><span class="num">11</span>Bảo mật và quyền riêng tư</h2>
+<h3>11.1 Vector không mặc định là dữ liệu ẩn danh</h3>
+<ul><li><b>Embedding inversion:</b> cố khôi phục nội dung gốc hoặc gần nguyên văn từ embedding.</li><li><b>Membership inference:</b> suy đoán một đoạn dữ liệu có xuất hiện trong database hay không, dù chưa khôi phục được text.</li></ul>
+<p>Nếu sự tồn tại của một tài liệu đã nhạy cảm, việc lộ nó có nằm trong vector DB cũng là rủi ro. Vì thế không nên nghĩ “chúng ta chỉ lưu số thực nên không sao”.</p>
+<h3>11.2 Corpus poisoning và indirect prompt injection</h3>
+<p><b>Corpus poisoning</b> là đưa tài liệu độc hại vào kho dữ liệu để nó được retrieval và làm lệch câu trả lời. <b>Indirect prompt injection</b> xảy ra khi chỉ thị độc nằm trong tài liệu được retrieve, không phải trong câu user nhập trực tiếp. Bộ lọc chỉ kiểm tra input user có thể bỏ sót đường tấn công này.</p>
+<h3>11.3 Kiểm soát quyền truy cập</h3>
+<ul><li>Áp quyền theo tenant/user trước hoặc trong lúc ANN search; không chỉ lọc kết quả sau khi tìm.</li><li>Vector index phải kế thừa logic quyền truy cập của kho dữ liệu gốc, hoặc tự có cơ chế tương đương.</li><li>Giữ nguồn gốc, version và ACL trong metadata; kiểm tra quyền trước khi đưa context vào prompt.</li><li>Mask PII trước khi embed nếu dữ liệu đó không cần thiết cho mục tiêu.</li></ul>
+<div class="callout danger"><b>Nhớ:</b> retrieval là một kênh tấn công. Dữ liệu được hệ thống retrieve không tự động trở thành chỉ thị đáng tin cậy.</div>
+</section>
+
+<section id="lab" class="chapter"><h2><span class="num">12</span>Lab 7 — dựng mini retrieval pipeline</h2>
+<p>Mục tiêu của Lab 7 là biến dữ liệu riêng (FAQ/SOP/policy) thành một pipeline có thể tìm kiếm, đưa kết quả vào context và đo recall@5.</p>
+<h3>12.1 Luồng làm việc</h3>
+<div class="flow"><span class="step">1. Load & clean</span><span class="arrow">→</span><span class="step">2. Chunk</span><span class="arrow">→</span><span class="step">3. Embed & store</span><span class="arrow">→</span><span class="step">4. Query</span><span class="arrow">→</span><span class="step">5. Inject context</span><span class="arrow">→</span><span class="step">6. Eval Recall@5</span></div>
+<h3>12.2 Chunk bằng RecursiveCharacterTextSplitter</h3>
+<pre><code>from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=400,       # điểm bắt đầu, cần đánh giá lại
+    chunk_overlap=50,     # giữ một phần ngữ cảnh qua ranh giới
+    separators=["\n\n", "\n", ". ", " ", ""]
+)
+
+parts = splitter.split_text(document_text)</code></pre>
+<p class="small">Các con số 400/50 là ví dụ lab, không phải chuẩn đúng cho mọi model hoặc dữ liệu.</p>
+<h3>12.3 Embed và lưu bằng ChromaDB</h3>
+<pre><code>import chromadb
+from chromadb.utils import embedding_functions
+
+client = chromadb.PersistentClient(path="./lab7_db")
+ef = embedding_functions.SentenceTransformerEmbeddingFunction(
+    model_name="BAAI/bge-m3"
+)
+collection = client.get_or_create_collection(
+    "lab7_kb", embedding_function=ef
+)
+
+collection.add(
+    ids=[chunk_id],
+    documents=[chunk_text],
+    metadatas=[{"source": source, "category": category}]
+)</code></pre>
+<h3>12.4 Search và đưa context vào câu trả lời</h3>
+<pre><code>res = collection.query(
+    query_texts=["Chính sách đổi trả áp dụng bao lâu?"],
+    n_results=3,
+    where={"category": {"$eq": "policy"}}
+)
+context = "\n---\n".join(res["documents"][0])
+
+prompt = f"""Dựa trên nguồn sau, trả lời ngắn gọn.
+Nếu không tìm thấy, hãy nói rõ là không có thông tin.
+
+Nguồn:
+{context}
+
+Câu hỏi: Chính sách đổi trả áp dụng bao lâu?"""
+# Gửi prompt tới LLM của ứng dụng</code></pre>
+<h3>12.5 Đo Recall@5</h3>
+<p>Với mỗi query kiểm thử, biết trước chunk nào là chunk nguồn (positive). Chạy search top 5 và xem chunk nguồn có nằm trong danh sách 5 kết quả hay không. Recall@5 là tỷ lệ query mà nguồn đúng xuất hiện trong top 5, theo cách đo đơn giản của lab.</p>
+<div class="formula">Recall@5 = số query tìm được chunk nguồn trong top 5 / tổng số query kiểm thử</div>
+<div class="callout good"><b>Deliverable cuối lab:</b> script chunk/embed/index chạy được; demo semantic search với ít nhất 3 câu hỏi; hàm trả lời có retrieved context; con số recall@5; và 1–2 failure case bạn tự phát hiện.</div>
+</section>
+
+<section id="review" class="final-card"><h2><span class="num">13</span>Cheat sheet — học nhanh trước khi thi</h2>
+<div class="table-wrap"><table><thead><tr><th>Khái niệm</th><th>Nhớ một câu</th></tr></thead><tbody>
+<tr><td>Knowledge / Operational / Contextual</td><td>Tài liệu dài → retrieval; dữ liệu thay đổi như đơn hàng → SQL/API; thông tin phiên hiện tại → inject ngắn.</td></tr>
+<tr><td>Embedding</td><td>Biến text thành vector để so sánh; không phải phép màu và cosine không phải chân lý tuyệt đối.</td></tr>
+<tr><td>BM25 vs Dense</td><td>BM25 mạnh ở token chính xác; dense mạnh khi câu hỏi và tài liệu dùng cách diễn đạt khác.</td></tr>
+<tr><td>Chunking</td><td>Giữ mỗi chunk đủ một ý; bắt đầu đơn giản, đo rồi tối ưu. Không có chunk size phù hợp mọi bài.</td></tr>
+<tr><td>Silent truncation</td><td>Quá giới hạn input có thể bị cắt mà không báo lỗi.</td></tr>
+<tr><td>Flat / IVF / PQ / HNSW</td><td>Flat chuẩn ground truth; IVF chia cụm; PQ nén; HNSW graph nhiều lớp.</td></tr>
+<tr><td>FAISS / Chroma</td><td>FAISS là thư viện index/search; Chroma thuận tiện hơn cho lưu trữ/query metadata ở lab.</td></tr>
+<tr><td>Hybrid + RRF</td><td>Kết hợp dense và BM25; RRF hợp nhất theo rank, không cộng score thô.</td></tr>
+<tr><td>Recall@k / Precision@k</td><td>Recall: lấy được bao nhiêu cái đúng; Precision: trong những gì lấy, bao nhiêu cái đúng.</td></tr>
+<tr><td>Security</td><td>Embedding vẫn nhạy cảm; filter quyền phải nằm trước/trong ANN; retrieval cũng có thể mang prompt injection.</td></tr>
+<tr><td>Key takeaway</td><td>Đừng đổ lỗi cho model trước khi kiểm tra chất lượng dữ liệu và đo retrieval.</td></tr>
+</tbody></table></div>
+<h3>Tự kiểm tra — bấm câu hỏi để mở đáp án</h3>
+<details class="qa"><summary>1. Hỏi “Đơn hàng mới nhất của khách A đang ở đâu?” nên ưu tiên vector search hay SQL/API?</summary><div class="answer">SQL/API có kiểm soát, vì đây là dữ liệu nghiệp vụ thay đổi thường xuyên và cần kết quả chính xác, mới nhất.</div></details>
+<details class="qa"><summary>2. Hai câu dùng từ khác nhau nhưng cùng nghĩa — BM25 hay dense search có lợi thế?</summary><div class="answer">Dense embedding thường có lợi thế vì tìm theo độ gần ngữ nghĩa. Hybrid vẫn hữu ích để không mất khả năng tìm token chính xác.</div></details>
+<details class="qa"><summary>3. Vì sao không nên embed nguyên bảng giao dịch rồi dùng vector search để tính tổng doanh thu?</summary><div class="answer">Cộng, lọc và sắp xếp số liệu là thế mạnh của SQL/analytics, không phải similarity search.</div></details>
+<details class="qa"><summary>4. Chunk 512 token có luôn là lựa chọn tốt nhất không?</summary><div class="answer">Không. Kích cỡ phụ thuộc model embedding, loại query và độ rộng ngữ cảnh cần thiết. Bắt đầu bằng baseline rồi đo.</div></details>
+<details class="qa"><summary>5. “Silent truncation” nghĩa là gì?</summary><div class="answer">Text dài hơn giới hạn model bị cắt âm thầm, thường không có exception; phần bị cắt mất cơ hội được retrieve.</div></details>
+<details class="qa"><summary>6. IVF, PQ và HNSW khác nhau ở ý tưởng chính nào?</summary><div class="answer">IVF chia vector thành các vùng để chỉ tìm trong một số vùng; PQ nén vector; HNSW điều hướng tìm kiếm bằng graph nhiều lớp.</div></details>
+<details class="qa"><summary>7. Vì sao cần build Flat trước khi đo ANN recall?</summary><div class="answer">Flat so sánh với toàn bộ vector, cung cấp ground truth để xem index xấp xỉ đã bỏ sót bao nhiêu kết quả.</div></details>
+<details class="qa"><summary>8. Dense search và BM25: loại nào phù hợp với mã lỗi E-4471?</summary><div class="answer">BM25 thường phù hợp hơn vì mã lỗi là token cần khớp chính xác, embedding có thể xếp mã tương tự nhưng sai.</div></details>
+<details class="qa"><summary>9. RRF hợp nhất kết quả bằng cách nào?</summary><div class="answer">Theo thứ hạng của tài liệu trong từng danh sách, thay vì cộng trực tiếp các score thô không cùng thang đo.</div></details>
+<details class="qa"><summary>10. Vì sao post-filter có thể trả về dưới k kết quả?</summary><div class="answer">ANN tìm trên corpus trước, rồi filter bỏ các kết quả không được phép/không phù hợp; những kết quả phù hợp khác có thể chưa nằm trong top-k ban đầu.</div></details>
+<details class="qa"><summary>11. Nếu đổi embedding model, có thể chỉ đổi model lúc query không?</summary><div class="answer">Không. Cần re-embed dữ liệu và rebuild index để query vector và document vector thuộc cùng không gian embedding.</div></details>
+<details class="qa"><summary>12. Recall@5 đo điều gì?</summary><div class="answer">Tỷ lệ truy vấn mà tài liệu/chunk liên quan được kỳ vọng xuất hiện trong 5 kết quả đầu, theo bộ đánh giá đã xác định.</div></details>
+<details class="qa"><summary>13. Vì sao LLM-generated eval query có thể làm recall trông cao hơn thực tế?</summary><div class="answer">Câu hỏi sinh ra có thể lặp từ ngữ của chunk gốc; user thật có thể diễn đạt lại hoặc hỏi nhiều bước.</div></details>
+<details class="qa"><summary>14. Embedding có đồng nghĩa với dữ liệu đã ẩn danh không?</summary><div class="answer">Không. Embedding có thể rò rỉ hoặc cho phép suy đoán nội dung/sự hiện diện dữ liệu; cần quản lý như dữ liệu nhạy cảm khi thích hợp.</div></details>
+<details class="qa"><summary>15. Bài Day 7 khác Day 8 (RAG) ở đâu?</summary><div class="answer">Day 7 tập trung cấu trúc dữ liệu bên dưới retrieval: parse, chunk, embed, store, search và đo lỗi. Day 8 nối các kết quả retrieval thành ứng dụng RAG với query rewriting, prompt assembly, answer synthesis và citation UX.</div></details>
+<h3>Checklist trước khi chuyển sang bài tiếp theo</h3>
+<div class="checklist"><label><input type="checkbox">Tôi phân biệt được knowledge, operational, contextual data.</label><label><input type="checkbox">Tôi giải thích được embedding và sự khác nhau giữa BM25 và dense search.</label><label><input type="checkbox">Tôi hiểu vì sao parse sai, chunk sai và truncation âm thầm làm retrieval sai.</label><label><input type="checkbox">Tôi phân biệt được Flat, IVF, PQ và HNSW ở mức ý tưởng.</label><label><input type="checkbox">Tôi biết recall@k, precision@k, nDCG và MRR dùng để làm gì.</label><label><input type="checkbox">Tôi nhớ embedding vẫn có rủi ro bảo mật và quyền phải được áp dụng trong đường retrieval.</label><label><input type="checkbox">Tôi có thể mô tả pipeline Document → Chunk → Embed → Store → Query → Inject.</label></div>
+<div class="callout good"><b>Thông điệp cuối cùng của Day 7:</b> “Không báo lỗi” không có nghĩa là “đúng”. Khi agent trả lời sai, hãy kiểm tra chất lượng dữ liệu, cách chunk, embedding function, filter và retrieval metrics trước khi kết luận model yếu.</div>
+</section>
+<p class="foot">Tài liệu học được tổng hợp từ PDF Day 7 bạn cung cấp. Mình giữ lại thuật ngữ và thông điệp chính của bài, đồng thời diễn giải lại cho người mới bắt đầu.</p>
+</main></div>
+<script>
+// Keep quiz answers collapsed on first open; menu links jump to each chapter.
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',()=>{const id=a.getAttribute('href').slice(1);const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}));
+</script>
+</body></html>

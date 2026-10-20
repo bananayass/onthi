@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 10 — Data Pipeline &amp; Data Observability | Tóm tắt</title>
+<style>
+:root{
+  --bg:#f7f8fa; --card:#fff; --ink:#1a1d24; --muted:#5b6472; --line:#e3e7ee;
+  --brand:#0f766e; --brand-soft:#e6f4f1; --warn:#b8541a; --warn-soft:#fdf1e7;
+  --ok:#1d7a4f; --ok-soft:#e8f6ef; --bad:#c0392b; --bad-soft:#fdeceb;
+  --acc:#2563c9; --acc-soft:#e8f0fd;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+
+header{background:linear-gradient(135deg,#0f766e,#0b4a45);color:#fff;padding:34px 0 26px}
+header .wrap{padding-bottom:0}
+.kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;margin:0 0 6px}
+header h1{margin:0 0 8px;font-size:31px;line-height:1.2;font-weight:700}
+header p{margin:0;opacity:.9;font-size:15px}
+
+.tabbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);
+  box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.tabbar .wrap{display:flex;gap:4px;padding-top:0;padding-bottom:0}
+.tab{appearance:none;border:0;background:none;font:inherit;font-weight:600;font-size:15px;
+  padding:15px 18px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--brand);border-bottom-color:var(--brand)}
+.panel{display:none;padding-top:28px}
+.panel.on{display:block}
+
+h2{font-size:22px;margin:36px 0 4px;padding-top:14px;border-top:2px solid var(--line)}
+h2 .num{color:var(--brand);font-weight:700}
+h2:first-child{border-top:0;padding-top:0;margin-top:0}
+.sub{color:var(--muted);font-size:14.5px;margin:0 0 18px}
+h3{font-size:17px;margin:26px 0 10px}
+h4{font-size:15.5px;margin:0 0 8px}
+p{margin:10px 0}
+ul,ol{margin:10px 0;padding-left:22px}
+li{margin:5px 0}
+code{background:#eef1f6;padding:2px 6px;border-radius:4px;font-size:13.5px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:#1f2430;color:#e6e9ef;padding:13px 15px;border-radius:9px;overflow-x:auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.6;margin:12px 0}
+pre .kw{color:#c792ea} pre .st{color:#c3e88d} pre .cm{color:#7c85a3} pre .fn{color:#82aaff}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:820px){.g2,.g3{grid-template-columns:1fr}}
+
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:#fff;
+  border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{padding:9px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f2f5fa;font-weight:600;font-size:13px}
+tr:last-child td{border-bottom:0}
+
+.note{border-left:4px solid var(--brand);background:var(--brand-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.warn{border-left:4px solid var(--warn);background:var(--warn-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.bad{border-left:4px solid var(--bad);background:var(--bad-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.ok{border-left:4px solid var(--ok);background:var(--ok-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.acc{border-left:4px solid var(--acc);background:var(--acc-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note b,.warn b,.bad b,.ok b,.acc b{display:block;margin-bottom:3px;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+.note b{color:var(--brand)} .warn b{color:var(--warn)} .bad b{color:var(--bad)}
+.ok b{color:var(--ok)} .acc b{color:var(--acc)}
+
+.quote{margin:16px 0;padding:20px 24px;border-radius:12px;background:#1f2430;color:#fff;text-align:center}
+.quote p{margin:0;font-size:17.5px;font-weight:600;line-height:1.45}
+.quote small{display:block;margin-top:9px;opacity:.7;font-size:13px;letter-spacing:.06em}
+
+.pill{display:inline-block;font-size:12.5px;font-weight:600;padding:2px 9px;border-radius:20px;margin-right:5px}
+.pill.b{background:var(--brand-soft);color:var(--brand)}
+.pill.o{background:var(--ok-soft);color:var(--ok)}
+.pill.w{background:var(--warn-soft);color:var(--warn)}
+.pill.r{background:var(--bad-soft);color:var(--bad)}
+
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0}
+.step{background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-size:13.5px;font-weight:600}
+.step small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.step b{color:var(--brand)}
+.arw{color:var(--muted);font-weight:700;font-size:13px}
+
+/* 4 limits grid */
+.lim4{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+@media(max-width:700px){.lim4{grid-template-columns:1fr}}
+.lim4>div{border:1px solid var(--line);border-radius:11px;padding:15px;background:#fff;border-left:5px solid var(--bad)}
+.lim4 .n{font-size:11.5px;font-weight:700;letter-spacing:.06em;color:var(--bad);margin-bottom:4px}
+.lim4 strong{display:block;font-size:15px;margin-bottom:5px}
+.lim4 .en{display:block;font-size:12px;font-style:italic;color:var(--muted);margin-bottom:6px}
+.lim4 p{margin:0;font-size:13.3px;color:var(--muted)}
+
+/* prompt bloat bar */
+.bloat{margin:14px 0}
+.bloat .row{display:flex;align-items:center;gap:10px;margin-bottom:5px;font-size:13px}
+.bloat .lbl{flex:0 0 190px}
+.bloat .bar{height:22px;border-radius:4px;background:var(--brand);opacity:.85}
+.bloat .val{flex:0 0 62px;text-align:right;font-weight:700;color:var(--brand)}
+.bloat .tot{border-top:2px solid var(--ink);margin-top:8px;padding-top:8px;font-weight:700}
+
+/* pattern shapes */
+.pat4{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:14px 0}
+@media(max-width:760px){.pat4{grid-template-columns:1fr}}
+.pat4>div{border:1px solid var(--line);border-radius:12px;padding:16px;background:#fff;border-top:4px solid}
+.pat4 .p1{border-top-color:#0f766e} .pat4 .p2{border-top-color:#2563c9}
+.pat4 .p3{border-top-color:#15803d} .pat4 .p4{border-top-color:#6b3fa0}
+.pat4 h4{margin:0 0 3px;font-size:15.5px}
+.pat4 .shape{font-size:12px;font-weight:700;letter-spacing:.05em;margin-bottom:8px;text-transform:uppercase}
+.pat4 .p1 .shape{color:#0f766e} .pat4 .p2 .shape{color:#2563c9}
+.pat4 .p3 .shape{color:#15803d} .pat4 .p4 .shape{color:#6b3fa0}
+.pat4 p{margin:0 0 7px;font-size:13.4px}
+.pat4 .tr{font-size:12.8px;color:var(--muted);border-top:1px dashed var(--line);padding-top:7px;margin-top:2px}
+
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+@media(max-width:700px){.vs{grid-template-columns:1fr}}
+.vs>div{border-radius:11px;padding:15px 17px;border:1px solid var(--line);background:#fff}
+.vs .lgood{border-top:4px solid var(--ok)}
+.vs .lbad{border-top:4px solid var(--bad)}
+.vs .lneu{border-top:4px solid var(--acc)}
+.vs h4{margin:0 0 8px;font-size:15px}
+.vs .lgood h4{color:var(--ok)} .vs .lbad h4{color:var(--bad)} .vs .lneu h4{color:var(--acc)}
+.vs p,.vs li{font-size:14px}
+.vs ul{margin:6px 0;padding-left:19px}
+
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+@media(max-width:820px){.three{grid-template-columns:1fr}}
+.three>div{border:1px solid var(--line);border-radius:11px;padding:15px;background:#fff;border-top:4px solid var(--brand)}
+.three .k{font-size:11.5px;font-weight:700;letter-spacing:.06em;color:var(--brand);margin-bottom:5px}
+.three strong{display:block;font-size:15px;margin-bottom:6px}
+.three p{margin:0;font-size:13.3px;color:var(--muted)}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}
+@media(max-width:760px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:#fff;border:1px solid var(--line);border-radius:11px;padding:15px;text-align:center}
+.stat .n{font-size:24px;font-weight:700;color:var(--brand);line-height:1.15}
+.stat .l{font-size:12px;color:var(--muted);margin-top:5px}
+
+/* contract card */
+.contract{background:#fff;border:1px solid var(--line);border-radius:11px;overflow:hidden;margin:14px 0}
+.contract .f{display:flex;gap:12px;padding:11px 15px;border-bottom:1px solid var(--line);font-size:13.8px}
+.contract .f:last-child{border-bottom:0}
+.contract .f.add{background:var(--warn-soft)}
+.contract .fn2{flex:0 0 150px;font-weight:700;font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--brand);font-size:13px}
+.contract .f.add .fn2{color:var(--warn)}
+.contract .fd{flex:1;min-width:0;color:var(--muted)}
+
+/* escalation ladder */
+.lad3{margin:14px 0}
+.lad3>div{border:1px solid var(--line);border-radius:10px;padding:12px 15px;margin-bottom:7px;background:#fff;
+  display:flex;gap:12px;align-items:flex-start}
+.lad3 .n{flex:0 0 26px;height:26px;border-radius:50%;background:var(--brand-soft);color:var(--brand);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12.5px}
+.lad3 .b{flex:1;font-size:14px}
+.lad3 .b strong{display:block;margin-bottom:2px}
+.lad3 .b span{color:var(--muted);font-size:13.2px}
+
+/* reliability stack */
+.rel{margin:14px 0}
+.rel>div{margin:0 auto 5px;padding:11px 14px;border-radius:8px;text-align:center;font-size:13.5px;color:#fff;font-weight:600}
+.rel .r4{width:52%;background:#0b4a45} .rel .r3{width:66%;background:#0d6a63}
+.rel .r2{width:82%;background:#0f766e} .rel .r1{width:96%;background:#7fc4bd;color:#0b4a45}
+.rel small{display:block;font-weight:400;opacity:.9;font-size:11.5px;margin-top:2px}
+
+.qlist{margin:14px 0}
+.qi{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:10px;padding:12px 15px;margin-bottom:8px}
+.qi .n{flex:0 0 26px;height:26px;border-radius:50%;background:var(--brand-soft);color:var(--brand);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12.5px}
+.qi .b{flex:1;min-width:0;font-size:14px}
+.qi .b strong{display:block;margin-bottom:2px}
+.qi .b span{color:var(--muted);font-size:13.3px}
+
+#cheat{font-size:14px}
+#cheat h2{font-size:18px;margin:20px 0 8px;padding-top:10px}
+#cheat .card{padding:14px 16px;margin:10px 0}
+#cheat table{font-size:12.5px}
+#cheat th,#cheat td{padding:6px 8px}
+#cheat ul,#cheat ol{padding-left:19px} #cheat li{margin:3px 0}
+#cheat pre{font-size:11.5px;padding:9px 11px}
+.cheatgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:820px){.cheatgrid{grid-template-columns:1fr}}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13.5px}
+.kv dt{font-weight:600;color:var(--brand)}
+.kv dd{margin:0;color:var(--muted)}
+.printbtn{background:var(--brand);color:#fff;border:0;border-radius:8px;padding:9px 16px;
+  font:inherit;font-weight:600;font-size:14px;cursor:pointer;margin-bottom:6px}
+.printbtn:hover{background:#0b5c56}
+
+.fcbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.fbtn{background:#fff;border:1px solid var(--line);border-radius:20px;padding:6px 15px;
+  font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;color:var(--muted)}
+.fbtn:hover{border-color:var(--brand);color:var(--brand)}
+.fbtn.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.counter{margin-left:auto;font-size:13.5px;color:var(--muted)}
+.fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.fc{perspective:1100px;height:218px;cursor:pointer}
+.fci{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.fc.flip .fci{transform:rotateY(180deg)}
+.ff,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:18px;
+  display:flex;flex-direction:column;justify-content:center;border:1px solid var(--line);overflow:auto}
+.ff{background:#fff}
+.fb{background:var(--brand);color:#fff;transform:rotateY(180deg);border-color:var(--brand)}
+.fb code{background:rgba(255,255,255,.2);color:#fff}
+.ff .tag2{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);margin-bottom:8px}
+.ff .q{font-size:15.5px;font-weight:600;line-height:1.45}
+.fb .a{font-size:13.5px;line-height:1.55}
+.hint{text-align:center;color:var(--muted);font-size:12.5px;margin-top:10px}
+
+@media print{
+  header,.tabbar,.printbtn,.hint{display:none!important}
+  .panel{display:none!important} #cheat{display:block!important;padding-top:0}
+  body{background:#fff;font-size:10.5px} .wrap{max-width:100%;padding:0}
+  .card{break-inside:avoid;border-color:#ccc} table{break-inside:avoid}
+  pre{background:#f4f4f4;color:#222;border:1px solid #ddd}
+  pre .kw,pre .st,pre .cm,pre .fn{color:#222}
+  h2{break-after:avoid}
+}
+</style>
+<style>
+/* ===== Day 10 riêng ===== */
+.split6{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:14px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.split6>div{padding:16px 18px}
+.split6>div:first-child{background:var(--brand);color:#fff}
+.split6 .big{font-size:30px;font-weight:700;line-height:1.1}
+.split6 .lb{font-size:13px;opacity:.9;margin-top:4px}
+@media(max-width:700px){.split6{grid-template-columns:1fr}}
+
+/* cascade */
+.casc{margin:16px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px}
+.casc .row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:760px){.casc .row{grid-template-columns:1fr 1fr}}
+.casc .c{border-radius:9px;padding:11px 12px;color:#fff;font-size:13px}
+.casc .c b{display:block;font-size:13.5px;margin-bottom:3px}
+.casc .c1{background:#7fc4bd;color:#0b4a45} .casc .c2{background:#3f9e95}
+.casc .c3{background:#0f766e} .casc .c4{background:#0b4a45}
+.casc .cost{display:flex;align-items:flex-end;gap:8px;height:54px;margin-top:10px}
+.casc .cost div{flex:1;background:linear-gradient(180deg,#0f766e,#7fc4bd);border-radius:5px 5px 0 0}
+.casc .cost .b1{height:16%} .casc .cost .b2{height:34%} .casc .cost .b3{height:62%} .casc .cost .b4{height:100%}
+.casc .lg{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:6px}
+
+/* pillar strip */
+.pil5{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media(max-width:760px){.pil5{grid-template-columns:1fr 1fr}}
+.pil5>div{border:1px solid var(--line);border-top:4px solid var(--brand);border-radius:10px;padding:13px;background:#fff;text-align:center}
+.pil5 strong{display:block;font-size:14.5px;margin-bottom:4px}
+.pil5 .q{font-size:12.6px;color:var(--muted)}
+.pil5 .v{margin-top:7px;font-size:17px;font-weight:700;color:var(--bad)}
+.lineage{border:1px solid var(--line);border-left:5px solid var(--acc);border-radius:10px;background:#fff;padding:14px 16px;margin:12px 0}
+
+/* policy tiers */
+.tier3>div{border-radius:10px;padding:13px 16px;margin-bottom:8px;border:1px solid var(--line);background:#fff;border-left:6px solid}
+.tier3 .t1{border-left-color:var(--bad)} .tier3 .t2{border-left-color:var(--warn)} .tier3 .t3{border-left-color:var(--ok)}
+.tier3 h4{margin:0 0 4px;font-size:15px} .tier3 .t1 h4{color:var(--bad)} .tier3 .t2 h4{color:var(--warn)} .tier3 .t3 h4{color:var(--ok)}
+.tier3 p{margin:0;font-size:13.5px;color:var(--muted)}
+
+/* timebox */
+.tbox>div{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 15px;margin-bottom:8px}
+.tbox .t{flex:0 0 92px;font-weight:700;color:var(--brand);font-size:13.5px}
+.tbox .d{flex:1;font-size:13.8px}
+
+/* card deck for P1 discussion */
+.deck{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin:14px 0}
+@media(max-width:760px){.deck{grid-template-columns:1fr}}
+.deck>div{border:1px solid var(--line);border-radius:10px;padding:13px;background:#fff;font-size:13.4px}
+.deck .k{font-weight:700;font-size:13.5px;margin-bottom:4px;color:var(--brand)}
+.deck .trap{background:var(--bad-soft);border-color:#f0bfba}
+.deck .trap .k{color:var(--bad)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">AICB-P1 · Ngày 10 · Data Pipeline &amp; Observability</p>
+    <h1>Biết Data Hỏng Trước Khi User Biết</h1>
+    <p>Agent đọc data từ database công ty. Data đột nhiên sai — agent bắt đầu trả lời bậy. Bạn có biết không, hay đợi user báo?</p>
+  </div>
+</header>
+
+<nav class="tabbar">
+  <div class="wrap">
+    <button class="tab on" data-t="detail">Tóm tắt chi tiết</button>
+    <button class="tab" data-t="cheat">Cheat sheet</button>
+    <button class="tab" data-t="cards">Flashcard</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<section id="detail" class="panel on">
+
+<div class="acc">
+  <b>Bài này trả lời bốn câu</b>
+  ① Data đi qua những tầng nào và hỏng ở đâu mà agent vẫn chạy bình thường? ② Đo chất lượng data bằng cách nào — sáu dimension, cái nào máy tự làm được? ③ Làm sao biết data hỏng khi không ai chạy check — năm pillar và freshness SLA? ④ Biết rồi thì làm gì: halt, quarantine hay warn?
+</div>
+
+<div class="note">
+  <b>Vị trí trong mạch ba ngày</b>
+  Ngày 8 xây <b>nguồn tri thức đáng tin</b> (retrieve đúng đoạn) · Ngày 9 <b>điều phối multi-agent</b> (route và trace được) · <b>Ngày 10 cập nhật và monitor chính nguồn tri thức đó</b>. Hai ngày trước bạn xây agent đọc knowledge base — hôm nay bạn chịu trách nhiệm cho <b>cái đổ vào</b> knowledge base đó.
+</div>
+
+<h2><span class="num">01</span> · Data Pipeline — Nền Tảng Của Mọi AI Product</h2>
+<p class="sub">Đọc đúng tầng bị lỗi trước khi sửa prompt hay đổi model.</p>
+
+<div class="split6">
+  <div><div class="big">60–80%</div><div class="lb">thời gian một dự án AI thực tế là <b>data work</b> — thu thập, clean, dựng pipeline, monitor</div></div>
+  <div><div class="big" style="color:var(--muted)">20%</div><div class="lb">là phần <b>xây model / agent</b> — phần ai cũng tưởng là toàn bộ công việc</div></div>
+</div>
+
+<ul>
+  <li>Một RAG agent xuất sắc <b>vẫn hallucinate</b> nếu vector store được nạp data không clean.</li>
+  <li><b>Garbage in → garbage out</b> không phải khẩu hiệu: quality của output <b>không thể cao hơn</b> quality của input.</li>
+  <li><b>Observability</b> là cơ chế phát hiện data sai <b>trước khi user phàn nàn</b>.</li>
+</ul>
+
+<div class="note"><b>Câu hỏi xuyên suốt</b> Khi agent trả lời sai — bạn mở cái gì ra xem đầu tiên?</div>
+
+<h3>Data cascade — vì sao lỗi data luôn đắt hơn bạn nghĩ</h3>
+<p><b>Data cascade</b> = một quyết định nhỏ ở đầu nguồn, <b>trôi xuôi qua từng bước</b>, mỗi bước làm hậu quả lớn thêm — và <b>chỉ lộ ra ở cuối</b>.</p>
+<div class="casc">
+  <div class="row">
+    <div class="c c1"><b>Nguồn</b>đổi cách ghi ngày</div>
+    <div class="c c2"><b>Ingest</b>parse sai, để rỗng</div>
+    <div class="c c3"><b>Chunk + embed</b>thiếu metadata</div>
+    <div class="c c4"><b>Agent</b>trích nhầm bản cũ</div>
+  </div>
+  <div class="cost"><div class="b1"></div><div class="b2"></div><div class="b3"></div><div class="b4"></div></div>
+  <div class="lg"><span>bắt ở đây: sửa <b>một dòng code</b></span><span>bắt ở đây: <b>một sự cố + mất niềm tin</b></span></div>
+  <p style="margin:12px 0 0;font-size:13.5px;color:var(--muted)"><b>Data không có compiler.</b> Không bước nào ở giữa báo đỏ — nên nó trôi hết cả bốn bước. Chỗ duy nhất có người thấy là chỗ cuối cùng.</p>
+</div>
+<div class="warn"><b>Điều quan trọng nhất</b> Mỗi cascade đều bắt đầu bằng <b>một quyết định hợp lý tại chỗ</b>, không phải do ai cẩu thả. Nên bạn <b>không thoát khỏi nó bằng cách kêu gọi cẩn thận hơn</b> — bạn thoát bằng cách <b>gắn cảm biến sớm hơn</b>.</p></div>
+
+<h3>Triệu chứng của agent → tầng data đang hỏng</h3>
+<table>
+<tr><th style="width:36%">Triệu chứng user thấy</th><th>Tầng data cần nghi</th></tr>
+<tr><td>“Đúng fact, nhưng là <b>fact cũ</b>”</td><td><b>Freshness</b> · publish step · <b>cache vector chưa swap</b> sang bản mới</td></tr>
+<tr><td>“<b>Lẫn lộn giữa hai phiên bản</b> tài liệu”</td><td>dedupe · <b>version metadata</b> · chunk boundary</td></tr>
+<tr><td>“<b>Tự bịa</b>, nhưng nghe rất hợp lý”</td><td>thiếu grounding + retrieval gap — <b>vẫn kiểm data trước</b></td></tr>
+<tr><td>“Chỉ sai với <b>một loại ticket</b>”</td><td><b>khoanh vùng theo lineage</b>: nguồn OCR hoặc API nào?</td></tr>
+<tr><td>“Đang tốt, <b>sau deploy thì hỏng</b>”</td><td>schema / parser đổi — <b>so sánh distribution trước và sau</b></td></tr>
+</table>
+<div class="ok"><b>Nguyên tắc</b> Đo <b>freshness và volume</b> trước khi mở notebook fine-tune.</div>
+
+<h3>Ai chịu trách nhiệm phần nào? (RACI tối giản)</h3>
+<table>
+<tr><th>Vai trò</th><th>Trách nhiệm chính</th><th>Artifact bàn giao</th></tr>
+<tr><td><b>AI / Applied</b></td><td>data contract cho corpus của agent · eval before/after</td><td><code>data_contract.md</code> · golden questions</td></tr>
+<tr><td><b>Data Eng</b></td><td>ingest ổn định · modeling · pipeline SLA</td><td><code>pipeline_architecture.md</code> · lineage</td></tr>
+<tr><td><b>SRE / Platform</b></td><td>alert · on-call runbook · quota và secret</td><td><code>runbook.md</code> · dashboards</td></tr>
+<tr><td><b>Product / SME</b></td><td>định nghĩa thế nào là “đúng” · duyệt version</td><td>link tới source of truth</td></tr>
+</table>
+<p style="font-size:13.5px;color:var(--muted)"><b>SME</b> = subject matter expert — người nắm nghiệp vụ, biết chắc thế nào là đúng. <b>SLA</b> = mức cam kết về thời gian, thoả thuận trước với người dùng.</p>
+<div class="bad"><b>Ranh giới quan trọng</b> Mỗi nguồn data phải có <b>đúng một owner có tên</b>. Một người đóng nhiều vai thì được; <b>một nguồn không ai đứng tên thì không</b>.</div>
+
+<h3>Data Pipeline trong AI Stack</h3>
+<p><b>Data Pipeline</b> = chuỗi bước tự động thu thập, xử lý và phân phối data từ nguồn đến nơi agent đọc.</p>
+<div class="flow">
+  <div class="step"><b>Sources</b><small>DB · API · file · stream</small></div><span class="arw">→</span>
+  <div class="step"><b>Pipeline</b><small>ingest + transform</small></div><span class="arw">→</span>
+  <div class="step"><b>Storage</b><small>warehouse · vector store</small></div><span class="arw">→</span>
+  <div class="step"><b>Serving</b><small>API · cache</small></div><span class="arw">→</span>
+  <div class="step"><b>Agent</b><small>LLM + tools + RAG</small></div>
+</div>
+<div class="warn"><b>Chú ý</b> Bốn mũi tên này là <b>bốn chỗ data có thể hỏng mà agent vẫn chạy bình thường</b>. Không có chỗ nào tự báo lỗi.</div>
+
+<h3>ETL vs. ELT — transform trước hay sau?</h3>
+<p>Cả hai gồm đúng ba việc — <b>Extract</b> (lấy data ra khỏi nguồn) · <b>Transform</b> (biến đổi, làm sạch) · <b>Load</b> (nạp vào kho). <b>Khác nhau chỉ ở thứ tự.</b></p>
+<div class="vs">
+  <div class="lneu"><h4>ETL — transform TRƯỚC khi vào warehouse</h4>
+    <p><code>Extract → Transform (mask PII) → Warehouse</code></p>
+    <p>Dùng khi bạn <b>KHÔNG ĐƯỢC PHÉP giữ raw</b>. VD: log có số CMND — luật buộc mask trước khi lưu.</p></div>
+  <div class="lgood"><h4>ELT — ghi raw TRƯỚC, transform sau bằng SQL</h4>
+    <p><code>Extract → Warehouse (raw còn nguyên) → Transform bằng SQL</code></p>
+    <p>Dùng khi bạn <b>CHƯA CHẮC sau này xử lý kiểu gì</b>. VD: PDF policy — 3 tháng sau muốn cắt chunk kiểu khác, chạy lại SQL là xong.</p></div>
+</div>
+<div class="note"><b>Chọn bằng một câu hỏi</b> <b>Bạn có được phép giữ raw không?</b> Không → ETL, hết lựa chọn. Được → ELT — vì hôm nay bạn chưa biết ba tháng nữa sẽ muốn transform kiểu gì. <b>Giữ raw là giữ quyền đổi ý.</b></div>
+
+<h3>Batch vs. Streaming — đánh đổi gì?</h3>
+<table>
+<tr><th style="width:20%"></th><th>Batch — xử lý theo lô</th><th>Streaming — xử lý theo sự kiện</th></tr>
+<tr><td><b>Cách chạy</b></td><td>job chạy theo lịch: mỗi giờ, mỗi đêm</td><td>luồng chạy liên tục, xử lý ngay khi sự kiện tới</td></tr>
+<tr><td><b>Độ trễ</b></td><td>hàng giờ (VD trễ 7 giờ — agent chưa thấy gì)</td><td>tính bằng <b>mili-giây</b></td></tr>
+<tr><td><b>Đặc tính</b></td><td><b>rẻ, dễ chạy lại</b></td><td><b>đắt, khó debug</b></td></tr>
+<tr><td><b>Dùng cho</b></td><td>training data · report định kỳ</td><td>fraud detection · context realtime</td></tr>
+</table>
+<div class="note"><b>Chọn bằng câu hỏi này</b> <b>Data trễ 6 tiếng thì agent trả lời sai tới mức nào?</b> Trả lời được câu đó mới chọn được — <b>không phải cứ realtime là tốt hơn</b>.</div>
+
+<h3>Hoạt động khởi động — xếp 4 tình huống vào đúng ô <span class="pill b">6 phút</span></h3>
+<p>Với mỗi tình huống: chọn <b>ETL hay ELT</b>, <b>batch hay streaming</b>, kèm một dòng lý do.</p>
+<ol>
+  <li><b>Mask PII trong log</b> trước khi log vào data lake → <b>ETL</b>, vì đúng trường hợp không được phép giữ raw</li>
+  <li>Đồng bộ đêm file <code>policy/refund-v4.pdf</code> vào knowledge base</li>
+  <li>Webhook ticket P1 cần lên dashboard <b>ngay lập tức</b></li>
+  <li>File CSV hàng tháng <code>tickets/2026-02-incidents.csv</code></li>
+</ol>
+<div class="acc"><b>Bốn trục cân nhắc</b> <b>latency · governance · cost · khả năng debug</b>. Phần được chấm là câu hỏi cuối: <b>với lựa chọn của bạn, bạn đang đánh đổi cái gì?</b></div>
+
+<h2><span class="num">02</span> · Ingestion — Kéo Data Về Mà Không Mất Bản Ghi</h2>
+<p class="sub">Mỗi loại nguồn hỏng theo một kiểu riêng — và cần một cách đo riêng.</p>
+
+<table>
+<tr><th>Nguồn</th><th>Hỏng kiểu gì</th><th>Đo bằng cái gì</th></tr>
+<tr><td><b>PostgreSQL</b></td><td>timeout · <b>schema drift</b> · job kéo về <b>0 dòng</b></td><td><b>freshness</b> · <b>số dòng kéo về</b> mỗi lần chạy</td></tr>
+<tr><td><b>External API</b></td><td><b>429 rate limit</b> · auth hết hạn · pagination lệch</td><td><b>volume</b> · <b>checkpoint có nhích không</b></td></tr>
+<tr><td><b>PDF / HTML</b></td><td>OCR sai · encoding · thiếu metadata</td><td><b>% dòng bị flag review</b></td></tr>
+<tr><td><b>Webhook / stream</b></td><td><b>backpressure</b> · trùng event</td><td><b>queue depth</b> · <b>số bản ghi vào DLQ</b></td></tr>
+</table>
+<div class="ok"><b>Template dùng được ngay</b> Mỗi nguồn viết đúng một dòng: <b>source → method → check → owner</b>. <b>Nguồn nào không điền nổi cột owner là nguồn sẽ gây sự cố.</b></div>
+
+<h3>CDC vs. Snapshot — hai cách lấy thay đổi từ database</h3>
+<div class="vs">
+  <div class="lneu"><h4>Snapshot — như <b>ảnh chụp mỗi 6 giờ</b></h4>
+    <p>Job chạy theo lịch, mỗi lần <b>quét lại bảng</b> và lấy phần mới hơn lần trước.</p>
+    <p>Với mỗi dòng, nó thấy <b>trạng thái hiện tại, không thấy lịch sử</b>: doc7 tạo v1 → sửa v2 → sửa v3, nó chỉ thấy v1 rồi v3 — <b>bỏ mất v2</b>.</p>
+    <p><b>Không phát hiện được XOÁ</b>: bản ghi biến mất trông giống như chưa từng khớp điều kiện.</p></div>
+  <div class="lgood"><h4>CDC (change data capture) — như <b>video</b></h4>
+    <p>Đọc thẳng <b>log thay đổi</b> của database.</p>
+    <p>Mỗi lần data đổi là <b>một sự kiện</b>, ghi lại <b>đúng lúc nó xảy ra</b>: <code>INSERT</code> → <code>UPDATE</code> → <code>UPDATE</code> → <code>DELETE</code>.</p></div>
+</div>
+<div class="acc"><b>Ai quyết</b> Chọn cái nào là việc của <b>team quản lý database nguồn</b> — không phải của bạn.</div>
+
+<h3>429 — backoff theo cấp số nhân, cộng jitter</h3>
+<p><b>429 = “bạn gọi nhiều quá”.</b> Bên kia thường kèm header <code>Retry-After</code> — <b>đọc nó trước khi tự đoán</b>.</p>
+<ul>
+  <li><b>Backoff</b> — mỗi lần thất bại thì <b>chờ gấp đôi</b>: <b>1s → 2s → 4s → 8s</b>, để không dồn dập vào API đang quá tải.</li>
+  <li><b>Không jitter</b> — 3 worker cùng chờ đúng 2s → <b>cả 3 đập vào API cùng một khoảnh khắc → lại 429</b>.</li>
+  <li><b>Có jitter</b> — cộng thêm một chút <b>ngẫu nhiên</b> → rải ra, API thở được, cả 3 cùng qua.</li>
+</ul>
+<div class="bad"><b>Sai kinh điển</b> <b>Retry vô hạn, không backoff</b> — pipeline <b>tự DDoS chính API nguồn</b>. Bên kia chặn bạn, và <b>họ đúng</b>.</div>
+
+<h3>Pagination — cursor thay vì offset</h3>
+<p><b>Data vẫn đang đổi trong lúc bạn đọc</b> — đó là lý do cách đánh số trang lại quan trọng.</p>
+<div class="vs">
+  <div class="lbad"><h4>OFFSET — “cho tôi từ dòng thứ 3 trở đi”</h4>
+    <p>Trang 1: <code>101 · 102 · 103</code>. Có bản ghi <code>100</code> <b>chèn vào đầu</b> → mọi thứ dịch xuống một ô.</p>
+    <p>Trang 2: <code>103 · 104 · 105</code> — <b>103 bị đọc lần hai, còn 100 thì không bao giờ được đọc</b>. Và <b>không có lỗi nào bắn ra</b>.</p></div>
+  <div class="lgood"><h4>CURSOR — “lần trước tôi dừng ở 103, cho tôi phần sau nó”</h4>
+    <p>Nhớ mốc <code>id &gt; 103</code> → trang 2 là <code>104 · 105</code>. <b>Chèn bao nhiêu cũng không lệch.</b></p>
+    <p><b>Checkpoint idempotent</b>: lưu lại chính cái mốc đó (<code>last_synced_id</code>) — chạy lại thì <b>đi tiếp</b>, không kéo lại toàn bộ lịch sử.</p></div>
+</div>
+<div class="ok"><b>Một trang lỗi ≠ cả job lỗi</b> Ghi trang hỏng vào <b>DLQ</b> rồi <b>chạy lại đúng nó</b> — thay vì đánh sập cả job vì một trang.</div>
+
+<h3>File PDF / HTML — đừng embed nhầm bản policy cũ</h3>
+<div class="three">
+  <div><div class="k">HAI CÂU HỎI KHÁC NHAU</div><strong>Content hash ≠ logical version</strong>
+    <p><code>sha256</code> của bytes trả lời <b>“file có đổi không?”</b> — để bỏ qua file không đổi, khỏi embed lại. <code>policy_v4</code> trả lời câu khác hẳn: <b>“đây là bản nào?”</b><br>Thiếu cái đầu → lần chạy nào cũng embed lại tất cả. Thiếu cái sau → <b>agent không lọc được theo version</b>.</p></div>
+  <div><div class="k">CẮT CHUNK</div><strong>Theo heading, không theo số ký tự</strong>
+    <p>Cắt theo số ký tự làm agent trả lời <b>“nửa điều khoản”</b> — <b>vẫn có trích dẫn, vẫn sai nghĩa</b>.</p></div>
+  <div><div class="k">OCR</div><strong>Có điểm tin cậy</strong>
+    <p>OCR = công nghệ đọc chữ từ ảnh scan. Confidence <b>thấp thì flag lại cho người review TRƯỚC khi publish</b> — không phải sau khi user phàn nàn.</p></div>
+</div>
+<div class="acc"><b>Nối về Ngày 8</b> <b>Metadata bạn gắn ở bước này chính là thứ filter của vector store sẽ dùng.</b> Không gắn ở đây thì sau này không lọc được.</div>
+
+<h3>Queue · Backpressure · DLQ</h3>
+<div class="flow">
+  <div class="step"><b>Producer</b><small>webhook ticket · 50 event/giây</small></div><span class="arw">→</span>
+  <div class="step"><b>Queue</b><small>queue depth: dâng 30/giây</small></div><span class="arw">→</span>
+  <div class="step"><b>Consumer</b><small>parse + embed · 20 event/giây</small></div><span class="arw">→</span>
+  <div class="step"><b>DLQ</b><small>Dead Letter Queue</small></div>
+</div>
+<ul>
+  <li><b>Queue phình</b> — consumer chậm hơn producer. Đây là <b>triệu chứng, không phải nguyên nhân</b>: phải hỏi <b>consumer chậm vì cái gì</b>.</li>
+  <li><b>Backpressure</b> — cơ chế <b>ghì ngược lên producer</b>: queue gần đầy thì báo ngược <b>“chậm lại”</b>. Không có nó, <b>queue phình tới khi hết bộ nhớ rồi mất data</b>.</li>
+  <li><b>Poison message</b> — bản ghi <b>retry mấy lần cũng lỗi</b>. Không tách ra thì nó <b>chặn cả queue phía sau</b>.</li>
+  <li><b>DLQ</b> — queue riêng chứa những message đó. Nó là <b>điểm quan sát, không phải chỗ vứt rác</b>: event hỏng còn nằm đó cho bạn xem, thay vì <b>biến mất im lặng</b>.</li>
+</ul>
+<div class="warn"><b>Con số trong ví dụ</b> Ticket đổ về nhanh <b>gấp 2,5 lần</b> tốc độ xử lý → sau <b>một giờ có hơn 100.000 message nằm chờ</b>, agent đọc knowledge base cũ dần <b>mà không ai báo</b>. Đo <b>queue depth</b> và <b>số vào DLQ</b> là thấy trước khi user thấy.</div>
+
+<h3>Checkpoint — Ingestion</h3>
+<div class="qlist">
+  <div class="qi"><div class="n">1</div><div class="b"><strong>Pipeline báo “thành công” mỗi đêm nhưng data không mới. Nghi cái gì đầu tiên?</strong><span>Job chạy xong không lỗi <b>nhưng kéo về 0 dòng</b>. Với hệ thống, <b>“không có dòng mới” trông y hệt “thành công”</b> — nên phải đo <b>số dòng kéo về</b>, không chỉ đo job có chạy hay không.</span></div></div>
+  <div class="qi"><div class="n">2</div><div class="b"><strong>Vì sao cursor an toàn hơn offset?</strong><span>Vì <b>data đổi trong lúc đọc</b>. Bản ghi chèn vào giữa làm <b>offset lệch mọi trang sau</b> — đọc trùng hoặc bỏ sót, mà <b>không có lỗi nào bắn ra</b>.</span></div></div>
+  <div class="qi"><div class="n">3</div><div class="b"><strong>Queue phình liên tục. Tăng số consumer có phải là fix không?</strong><span><b>Là giảm đau, không phải fix.</b> Cần biết consumer chậm vì sao: <b>xử lý nặng</b>, <b>phụ thuộc bên ngoài chậm</b>, hay <b>đang retry một poison message mãi không xong</b>.</span></div></div>
+</div>
+
+<h2><span class="num">03</span> · Transform — Clean &amp; Chuẩn Hoá Data</h2>
+<p class="sub">Biến raw data thành thứ agent dùng được mà không phải đoán.</p>
+
+<h3>Cùng một bảng, trước và sau khi clean</h3>
+<table>
+<tr><th colspan="5">RAW</th></tr>
+<tr><th>id</th><th>title</th><th>date</th><th>content</th><th>vấn đề</th></tr>
+<tr><td>12</td><td>Refund policy</td><td>07/02/26</td><td>Refund 7 ngày</td><td><b>sai định dạng</b></td></tr>
+<tr><td>12</td><td>Refund policy</td><td>2026-02-07</td><td>Refund 7 ngày</td><td><b>trùng khoá</b></td></tr>
+<tr><td>44</td><td>Access approve</td><td>NULL</td><td>Quy trình duyệt</td><td><b>thiếu ngày</b></td></tr>
+<tr><td>58</td><td>P1 SLA</td><td>2026/02/10</td><td>SLA 2h ?</td><td><b>lỗi encoding</b></td></tr>
+</table>
+<table>
+<tr><th colspan="5">CLEANED</th></tr>
+<tr><th>id</th><th>ver</th><th>hiệu lực</th><th>status</th><th>ghi chú</th></tr>
+<tr><td>12</td><td>v4</td><td>2026-02-07</td><td><span class="pill o">active</span></td><td>giữ bản parse được</td></tr>
+<tr><td><b>44</b></td><td>v2</td><td><b>đã flag</b></td><td><span class="pill w">review</span></td><td><b>chưa embed, đợi SME</b></td></tr>
+<tr><td>58</td><td>v1</td><td>2026-02-10</td><td><span class="pill o">active</span></td><td>đã chuẩn hoá <b>NFC</b></td></tr>
+</table>
+<p style="font-size:13.5px;color:var(--muted)">Bốn thao tác: <b>parse ngày · chuẩn hoá unicode NFC</b> (gộp ký tự có dấu về một cách viết) <b>· dedupe theo khoá · check schema</b>.</p>
+<div class="bad"><b>Nguyên tắc</b> Transform là <b>code + contract</b>, <b>không phải sửa tay trong Excel năm phút trước khi demo</b>. Sửa tay thì <b>lần chạy sau lỗi lại y nguyên</b>.</div>
+
+<h3>Năm kiểu data không clean bạn sẽ gặp ở mọi dataset</h3>
+<div class="grid g2">
+  <div class="card"><h4>Năm kiểu lỗi hay gặp</h4>
+    <ul>
+      <li><b>Thiếu giá trị</b> — NULL, chuỗi rỗng, “N/A”, hoặc <b>số 0 giả làm “chưa có”</b></li>
+      <li><b>Outlier</b> — một dòng bất thường đủ để <b>kéo lệch cả embedding</b></li>
+      <li><b>Trùng lặp</b> — dedupe theo <b>hash nội dung hoặc khoá tự nhiên</b></li>
+      <li><b>Sai định dạng</b> — <code>31/12/2024</code> và <code>2024-12-31</code> trong cùng một cột</li>
+      <li><b>Lỗi encoding</b> — UTF-8 lẫn Latin-1; <b>tiếng Việt có dấu là chỗ lộ ra đầu tiên</b></li>
+    </ul></div>
+  <div class="card"><h4>Chuẩn hoá text trước khi embed</h4>
+    <ul>
+      <li><b>Unicode NFC</b> — <b>bắt buộc với tiếng Việt</b>, nếu không thì <b>hai chuỗi trông giống hệt nhau vẫn không khớp</b></li>
+      <li><b>Dọn text</b> — trim khoảng trắng thừa, bỏ tag HTML <b>nhưng giữ cấu trúc heading</b></li>
+    </ul>
+    <p><b>Check schema:</b> reject bản ghi sai schema <b>ngay ở bước nhận data</b> — thay vì để nó lọt vào rồi đi tìm nguyên nhân sau ba tuần.</p>
+    <p><b>Với giá trị thiếu:</b> bỏ, điền, hay flag — <b>chọn cách nào cũng được nhưng phải ghi vào contract</b>.</p></div>
+</div>
+
+<h3>Ba hướng xử lý: Clean — Flag — Reject</h3>
+<div class="tier3">
+  <div class="t3"><h4>CLEAN — sửa được</h4><p>trim whitespace · parse ngày về <code>YYYY-MM-DD</code> UTC · unicode NFC → <b>đi thẳng vào vector store</b></p></div>
+  <div class="t2"><h4>FLAG — cần người quyết</h4><p>thiếu ngày nhưng có nội dung · <b>OCR confidence thấp</b> → <b>chờ SME</b>; SME duyệt xong thì quay lại vector store</p></div>
+  <div class="t1"><h4>REJECT — không cứu được</h4><p>nội dung rỗng sau khi trim · trùng khoá → <b><code>quarantine.csv</code></b></p></div>
+</div>
+<div class="bad"><b>Điều kiện bắt buộc</b> Mọi bản ghi bị reject hoặc flag <b>phải được ghi lại kèm <code>run_id</code> vào <code>quarantine.csv</code></b>. <b>Xoá mà không log nghĩa là bạn vừa mất data mà không ai biết.</b></div>
+
+<h2><span class="num">04</span> · Data Quality — 6 Dimensions</h2>
+<p class="sub">Đo chất lượng data bằng code, trước khi data đi vào agent.</p>
+
+<h4>MÁY TỰ CHECK ĐƯỢC — chỉ cần nhìn vào chính bảng đó</h4>
+<table>
+<tr><th>Dimension</th><th>Đo cái gì</th><th>Phạm vi kiểm tra</th></tr>
+<tr><td><b>Validity</b></td><td>đúng type, đúng range</td><td><b>một ô</b></td></tr>
+<tr><td><b>Completeness</b></td><td>% NULL, số dòng</td><td><b>một cột</b></td></tr>
+<tr><td><b>Uniqueness</b></td><td>tỉ lệ trùng, composite key</td><td><b>cả bảng</b></td></tr>
+<tr><td><b>Consistency</b></td><td>đối chiếu chéo giữa hệ thống</td><td><b>nhiều hệ thống</b></td></tr>
+<tr><td><b>Timeliness</b></td><td>tuổi bản ghi, cập nhật cuối</td><td><b>so với đồng hồ</b></td></tr>
+<tr><td><b>Accuracy</b></td><td><b>có đúng thực tế không?</b></td><td><b>CẦN SOURCE OF TRUTH BÊN NGOÀI</b> — phải đi hỏi: SME · hệ thống gốc · chứng từ · thực địa</td></tr>
+</table>
+<div class="warn"><b>Chỗ hay nhầm</b> <b>Validity và Accuracy khác nhau.</b> <code>fare_amount = 3000</code> <b>hợp lệ</b> (là số, dương) nhưng <b>có thể không đúng thực tế</b>. Check tự động bắt được cái đầu; cái sau <b>cần source of truth bên ngoài</b>.</div>
+
+<h3>Data contract trông như thế nào</h3>
+<div class="card">
+  <h4><code>data_contract.md</code> · NYC Yellow Taxi · v3</h4>
+  <p><b>2 · Danh mục giá trị hợp lệ</b><br>
+  <code>payment_type</code>: <b>1</b> thẻ · <b>2</b> tiền mặt · <b>3</b> miễn phí · <b>4</b> tranh chấp · <b>5</b> không rõ · <b>6</b> chuyến bị huỷ <span class="pill b">6 giá trị</span></p>
+  <p><b>3 · Quy tắc nghiệp vụ</b><br>
+  “Tip chỉ được ghi khi khách trả bằng thẻ. <b>Tip tiền mặt không bao giờ vào hệ thống.</b>”<br>
+  “<b>Số tiền âm là hợp lệ</b> khi chuyến là <b>hoàn tiền</b>.”</p>
+  <p><b>4 · Những gì contract KHÔNG quy định</b><br>
+  “Không có trần cho <code>fare_amount</code>.” · “Không có quy tắc <code>total_amount</code> phải bằng tổng các khoản lẻ.”</p>
+</div>
+<div class="grid g3">
+  <div class="card"><h4>Mục 2 cho bạn cái gì</h4><p>Viết được <b>check tự động ngay hôm nay</b> — giá trị ngoài danh mục là sai, <b>không cần bàn</b>.</p></div>
+  <div class="card"><h4>Mục 3 cứu bạn khỏi cái gì</h4><p><b>Chặn nhầm data đúng.</b> Không có nó, bạn sẽ viết rule <b>chặn <code>tip = 0</code></b> và <b>chặn tiền âm</b> — <b>cả hai đều hợp lệ</b>.</p></div>
+  <div class="card"><h4>Mục 4 là mục quan trọng nhất</h4><p>Nó cho bạn <b>quyền trả lời “KHÔNG THỂ BIẾT”</b> — thay vì <b>đoán bừa rồi tự tin sai</b>.</p></div>
+</div>
+<div class="note"><b>Bản chất của contract</b> <b>Contract không mô tả data — nó dùng để PHÁN QUYẾT.</b> Thấy con số lạ, tra xem nó rơi vào <b>mục 2, 3 hay 4</b>.</div>
+
+<h3>Hoạt động A — khảo sát data thật <span class="pill b">30 phút · làm một mình</span></h3>
+<p><b>Data: 5.000 chuyến taxi vàng New York, tháng 01/2019.</b> Data thật, lỗi thật — <b>không ai cài lỗi vào đây</b>.</p>
+<ul>
+  <li><code>data_contract.md</code> — định nghĩa thế nào là một dòng “bình thường”</li>
+  <li><code>explore.py</code> — viết code của bạn trong hàm <code>your_turn()</code>. Có sẵn <b>một phát hiện làm mẫu + 5 helper</b>: <code>describe · group · cross · derive · show</code></li>
+  <li><code>worksheet.html</code> — chỗ ghi phát hiện, tự lưu trong trình duyệt</li>
+</ul>
+<p>Mỗi phát hiện phải ghi đủ <b>5 dòng</b>: <b>thấy gì · tìm bằng cách nào · dimension nào · phán quyết · cần gì để chắc chắn</b>.</p>
+<div class="tier3">
+  <div class="t1"><h4>SAI</h4><p>vi phạm điều <b>viết rõ trong contract</b></p></div>
+  <div class="t3"><h4>ĐÚNG</h4><p><b>trông lạ, nhưng contract giải thích được</b></p></div>
+  <div class="t2"><h4>KHÔNG THỂ BIẾT</h4><p><b>contract không nói gì</b> — ghi rõ <b>cần nguồn nào</b></p></div>
+</div>
+
+<h3>Great Expectations — viết quality check thành code</h3>
+<p><b>Expectation</b> = một <b>khẳng định về data mà máy check được</b> — <b>chạy được, log được, đưa vào CI được</b>.</p>
+<div class="grid g2">
+  <div class="card"><h4>Năm bước</h4>
+    <ol>
+      <li><b>Profile</b> — GX đọc data và <b>gợi ý expectation</b></li>
+      <li><b>Viết suite</b> — not-null, range giá trị, danh mục, regex</li>
+      <li><b>Validate</b> trước khi data đi tiếp</li>
+      <li><b>Report</b> — HTML data docs <b>tự sinh</b></li>
+      <li><b>Chặn</b> — pipeline <b>dừng khi suite fail</b></li>
+    </ol>
+    <div class="warn"><b>Bẫy version</b> API đã đổi, <b>bản 1.x khác hẳn 0.x</b>. Pin đúng version: <code>great-expectations==1.19.1</code></div>
+  </div>
+  <div class="card"><h4>Code mẫu</h4>
+<pre><span class="kw">import</span> great_expectations <span class="kw">as</span> gx, pandas <span class="kw">as</span> pd
+
+df    = pd.read_csv(<span class="st">"taxi_reference.csv"</span>)
+ctx   = gx.get_context(mode=<span class="st">"ephemeral"</span>)
+batch = (ctx.data_sources.add_pandas(<span class="st">"taxi"</span>)
+     .add_dataframe_asset(name=<span class="st">"trips"</span>)
+     .add_batch_definition_whole_dataframe(<span class="st">"all"</span>)
+     .get_batch(batch_parameters={<span class="st">"dataframe"</span>: df}))
+
+suite = ctx.suites.add(gx.ExpectationSuite(name=<span class="st">"s"</span>))
+suite.add_expectation(gx.expectations.
+       ExpectColumnValuesToBeBetween(
+     column=<span class="st">"passenger_count"</span>, min_value=<span class="st">1</span>, max_value=<span class="st">6</span>))
+<span class="fn">print</span>(batch.validate(suite).success)</pre>
+  </div>
+</div>
+
+<h3>Checkpoint — Data Quality</h3>
+<div class="qlist">
+  <div class="qi"><div class="n">1</div><div class="b"><strong>Suite expectation pass hết. Data đã đúng chưa?</strong><span><b>Chưa.</b> Pass nghĩa là data <b>không vi phạm những gì BẠN NGHĨ RA</b>. <b>Accuracy cần đối chiếu source of truth bên ngoài</b> — không check nào tự làm được.</span></div></div>
+  <div class="qi"><div class="n">2</div><div class="b"><strong>Vì sao <code>fare_amount</code> âm không nên để pipeline dừng?</strong><span>Vì <b>nó hợp lệ — đó là bản ghi hoàn tiền</b>. Rule chặn nó là <b>rule chưa khớp nghiệp vụ, không phải data sai</b>. Chặn kiểu đó <b>làm cả nhóm mất niềm tin vào alert</b>.</span></div></div>
+  <div class="qi"><div class="n">3</div><div class="b"><strong>Chỉ có thời gian cho một dimension — viết check cho cái nào trước?</strong><span><b>Validity</b> — <b>rẻ nhất, tự động hoàn toàn</b>, và chặn được đúng loại lỗi <b>thiết bị sinh ra nhiều nhất</b>. Nhưng phải biết rõ <b>nó không bảo vệ bạn khỏi accuracy</b>.</span></div></div>
+</div>
+
+<h2><span class="num">05</span> · Data Observability</h2>
+<p class="sub">Biết data hỏng trước khi user biết — và biết hỏng ở đâu.</p>
+
+<h4>Bốn pillar đầu — đo tại một điểm, chỉ nói “đang có sự cố”</h4>
+<div class="pil5">
+  <div><strong>Freshness</strong><div class="q">đúng lịch không?</div><div class="v">17h</div></div>
+  <div><strong>Volume</strong><div class="q">số dòng có rơi?</div><div class="v">−28%</div></div>
+  <div><strong>Distribution</strong><div class="q">giá trị có lệch?</div><div class="v">drift?</div></div>
+  <div><strong>Schema</strong><div class="q">cột có đổi?</div><div class="v" style="color:var(--ok)">OK</div></div>
+</div>
+<div class="lineage"><b>Lineage</b> — đường đi nối các điểm đo lại với nhau, để <b>lần ngược từ triệu chứng về nguyên nhân</b>:<br>
+<code>PDF nguồn → ingest → clean → chunk → vector index</code></div>
+<div class="note"><b>Vì sao lineage khác hẳn bốn cái kia</b> <b>Freshness 17h chỉ cho biết ĐANG CÓ sự cố. Chỉ lineage nói được sự cố NẰM Ở BƯỚC NÀO</b> — ở đây là <b>ingest lúc 02:00, không phải ở model</b>.</div>
+<p style="font-size:13.5px;color:var(--muted)">Công cụ đo: <b>Great Expectations</b> (quality check) · <b>Evidently</b> (drift).</p>
+
+<h3>Một sự cố thật — đọc theo đúng thứ tự</h3>
+<div class="flow">
+  <div class="step"><b>Source DB</b><small>refund-v4.pdf</small></div><span class="arw">→</span>
+  <div class="step"><b>Pipeline</b><small>sync 02:00 failed · retry exhausted</small></div><span class="arw">→</span>
+  <div class="step"><b>Vector store</b><small>cập nhật: hôm qua · freshness = 17h</small></div><span class="arw">→</span>
+  <div class="step"><b>Agent trả lời</b><small>“Refund 14 ngày” · policy thật: 7 ngày</small></div>
+</div>
+<div class="vs">
+  <div class="lbad"><h4>Không có observability</h4><p>Lần publish thành công cuối lúc <b>16:00 hôm trước</b>. Sync 02:00 <b>fail im lặng</b>. <b>09:12 user đầu tiên phàn nàn</b> — data đã cũ <b>17 tiếng</b> và <b>không ai biết</b>.</p></div>
+  <div class="lgood"><h4>Có observability</h4><p>Freshness <b>vượt threshold lúc 02:30</b>. On-call nhận alert, <b>chạy lại ingest, xong trước giờ làm việc</b>. <b>Không user nào thấy câu trả lời sai.</b></p></div>
+</div>
+<div class="bad"><b>Điểm mấu chốt</b> <b>Pipeline không hề báo lỗi.</b> Job kết thúc, log không báo gì. Thứ duy nhất sai là <b>không có gì mới</b> — và <b>“không có gì mới” trông y hệt “không có gì cần làm”</b>.</div>
+
+<h3>Freshness SLA nói bằng ngôn ngữ nghiệp vụ</h3>
+<p><b>SLA</b> = lời hứa với người dùng, <b>có con số và có thời hạn</b>. Không phải mục tiêu nội bộ — <b>vỡ là có người phải chịu trách nhiệm</b>.</p>
+<div class="vs">
+  <div class="lbad"><h4>Không viết thế này</h4><p>“pipeline chạy mỗi 4 tiếng”</p></div>
+  <div class="lgood"><h4>Viết thế này</h4><p>“<b>policy refund phải xuất hiện trong câu trả lời của agent trong vòng 4 giờ kể từ khi PDF được ký</b>”</p></div>
+</div>
+<div class="grid g2">
+  <div class="card"><h4>Đo ở đâu</h4><p><b>Tại thời điểm document ACTIVE trên vector index</b> — <b>không phải lúc file rơi vào thư mục staging</b>. <b>Đo sai điểm thì SLA xanh mà user vẫn thấy data cũ.</b></p>
+    <h4 style="margin-top:14px">Nguồn khác nhau, SLA khác nhau</h4><p>PDF policy tĩnh và luồng ticket <b>không dùng chung một threshold</b>.</p>
+    <h4 style="margin-top:14px">Nói cho user biết</h4><p>Hiển thị dòng <b>“Dữ liệu cập nhật tới: …”</b> — <b>giảm rất nhiều kỳ vọng sai</b>.</p></div>
+  <div class="card"><h4>Hai mức alert</h4>
+    <div class="warn"><b>Đi hết nửa thời gian — 2 giờ → warning</b> Vào <b>ticket queue</b>. <b>Còn kịp xử lý trong giờ hành chính.</b></div>
+    <div class="bad"><b>Hết 4 giờ → page</b> <b>Page thẳng cho người on-call, kể cả 3 giờ sáng.</b> Đã <b>vi phạm cam kết với người dùng</b>.</div>
+    <p style="font-size:13.5px;color:var(--muted)"><b>Gọi người vì user đang chịu ảnh hưởng — không phải vì job màu đỏ.</b></p></div>
+</div>
+
+<h3>“Đủ số dòng” không có nghĩa là ổn</h3>
+<table>
+<tr><th style="width:26%">Nhóm</th><th>Dấu hiệu</th></tr>
+<tr><td><b>Null rate</b></td><td><code>effective_date</code> null <b>tăng vọt sau khi đổi API</b> — schema vẫn đúng, số dòng vẫn đủ</td></tr>
+<tr><td><b>Độ dài nội dung</b></td><td><b>Chunk ngắn bất thường</b> thường là dấu hiệu <b>parser vừa hỏng</b></td></tr>
+<tr><td><b>Ngôn ngữ / nhiễu</b></td><td>Text lẫn <b>ngôn ngữ lạ</b> hoặc <b>rác OCR</b> tăng đột biến</td></tr>
+<tr><td><b>Ràng buộc chéo cột</b></td><td><code>end &lt; start</code> · <b>version mới nhỏ hơn version cũ</b> — <b>từng cột đều hợp lệ, ghép lại thì vô lý</b></td></tr>
+<tr><td><b>Thời gian tương lai</b></td><td><code>effective_date</code> <b>vượt quá hiện tại</b> — lệch múi giờ hoặc lỗi parse</td></tr>
+</table>
+<div class="bad"><b>Vì sao nhóm này khó</b> <b>Không cái nào làm pipeline fail.</b> Chúng chỉ làm <b>câu trả lời của agent tệ dần</b> — kiểu hỏng khó phát hiện nhất vì <b>không có một thời điểm hỏng rõ ràng để lần theo</b>.</div>
+
+<h3>Hoạt động B — drift detection nói thật được bao nhiêu? <span class="pill b">30 phút</span></h3>
+<p>Hai file: <code>taxi_reference.csv</code> — <b>data kỳ trước, lấy làm mốc</b> (“xưa nay data trông như thế này”) · <code>taxi_current.csv</code> — <b>data mới về, cần kiểm tra</b>.</p>
+<div class="note"><b>Định nghĩa</b> <b>Drift detection = so phân bố giá trị của hai file, xem đã đổi chưa.</b></div>
+<ol>
+  <li>Chạy <code>python3 drift.py</code>. <b>Cột nào bị đánh dấu LỆCH?</b></li>
+  <li>Đọc <code>drift.py</code> — <b>cả file 40 dòng, không dùng library ngoài</b>. Viết một câu: <b>nó thật sự đo cái gì?</b></li>
+  <li>Chạy <code>python3 drift.py fare_amount</code>, xem chi tiết từng khoảng giá trị.</li>
+  <li>Những thứ hỏng thật bạn tìm được ở hoạt động A — <b>drift có bắt được cái nào không?</b></li>
+</ol>
+<div class="warn"><b>Câu hỏi kết</b> Cột duy nhất bị đánh dấu — <b>nó có thật sự hỏng không?</b></div>
+
+<h3>Evidently — bản có người bảo trì của <code>drift.py</code></h3>
+<div class="grid g2">
+  <div class="card"><h4>Bạn vừa viết được thứ này trong 40 dòng — production thì dùng library</h4>
+    <ul>
+      <li><b>Tự chọn phép thống kê theo type của cột</b> (số, categorical, text)</li>
+      <li><b>Report HTML</b> có biểu đồ từng cột</li>
+      <li><b>Threshold cấu hình được</b>, xuất được JSON để đưa vào alert</li>
+      <li><b>Chạy được trong pipeline như một task</b></li>
+    </ul>
+    <p><code>Report([DataDriftPreset()])</code> rồi <code>save_html()</code> — <b>ba dòng</b>.</p></div>
+  <div class="card"><h4>Library không cứu bạn khỏi bài học ở hoạt động B</h4>
+    <p>Evidently <b>vẫn alert <code>passenger_count</code></b>. Nó cũng <b>vẫn im lặng trước các dòng <code>total_amount</code> lệch</b>.</p>
+    <div class="bad"><b>Bài học</b> <b>Công cụ tốt hơn không sửa được việc reference bị chọn sai và câu hỏi bị đặt sai.</b></div></div>
+</div>
+
+<h3>Nối observability với trải nghiệm người dùng</h3>
+<table>
+<tr><th style="width:30%">Chỉ số</th><th>Đo cái gì</th></tr>
+<tr><td><b>Citation freshness</b></td><td><b>Tuổi trung bình và p95</b> của <b>chunk được agent trích dẫn</b> — <b>đây là freshness user thật sự nhìn thấy</b></td></tr>
+<tr><td><b>Grounding rate</b></td><td>% câu trả lời <b>có trích dẫn nguồn hợp lệ</b></td></tr>
+<tr><td><b>Retrieval hit@k</b></td><td>Trên một <b>golden set câu hỏi nhỏ, cố định</b> — <b>chạy mỗi lần publish</b></td></tr>
+<tr><td><b>Latency ingest → publish</b></td><td>p95, <b>tách riêng khỏi latency của LLM</b>; nếu không thì <b>mọi thứ chậm đều bị đổ cho model</b></td></tr>
+</table>
+<div class="ok"><b>Thứ tự đúng</b> Khi các chỉ số này xấu đi, <b>quay lại 5 pillars trước khi tin rằng “model bị lỗi”</b>. <b>Model hiếm khi tự dưng kém đi sau một đêm — data thì có.</b></div>
+
+<div class="quote"><p>“Khi agent trả lời cũ, đừng debug model trước.<br>Freshness → Volume → Schema → Lineage → nguyên nhân.”</p><small>— THỨ TỰ TRIAGE CỦA NGÀY HÔM NAY</small></div>
+
+<h3>Thảo luận nhanh — sự cố P1 lúc 09:12 <span class="pill b">10 phút</span></h3>
+<p><b>09:12, user phàn nàn agent đang trả lời theo policy cũ.</b> Bạn mở được cả sáu thẻ. Việc của bạn: <b>chọn 4 thẻ, xếp theo thứ tự sẽ mở, và ghi con số bạn đi tìm ở mỗi thẻ kèm ngưỡng để so</b> — ví dụ “<code>freshness_hours</code> so với ngưỡng 4h”.</p>
+<div class="deck">
+  <div><div class="k">A · Freshness</div><code>freshness_hours</code> trên bảng <code>kb_documents</code></div>
+  <div><div class="k">B · Volume</div><code>rows_ingested</code> so với 7 ngày trước</div>
+  <div class="trap"><div class="k">C · Eval của model 🚩</div>điểm eval mới nhất của LLM — <b>bẫy: model không tự đổi sau một đêm</b></div>
+  <div><div class="k">D · Schema contract</div>parser PDF có drift không</div>
+  <div class="trap"><div class="k">E · Log ingest thô 🚩</div>2.000 dòng log của job đêm qua — <b>bẫy: chưa khoanh vùng thì không đọc nổi</b></div>
+  <div><div class="k">F · Lineage</div>đường đi của <code>refund-v4.pdf</code></div>
+</div>
+<div class="warn"><b>Phần điểm nằm ở đâu</b> <b>Hai thẻ là bẫy.</b> Chọn nhầm thì <b>vẫn ra câu trả lời — chỉ là mất thêm 20 phút</b>. <b>Nói được VÌ SAO bỏ chúng mới là phần điểm.</b></div>
+
+<h3>Triage có timebox — đừng mở hết mọi dashboard</h3>
+<div class="tbox">
+  <div><div class="t">0–5 phút</div><div class="d"><b>Freshness + <code>last_success_run</code>.</b> Có <b>trễ SLA</b> không?</div></div>
+  <div><div class="t">5–12 phút</div><div class="d"><b>Volume + error rate từng bước.</b> Bước nào <b>im lặng bất thường</b> hoặc <b>vọt lên</b>?</div></div>
+  <div><div class="t">12–20 phút</div><div class="d"><b>Schema / contract</b>, rồi <b>lần lineage ngược</b> về bảng hoặc file nguồn.</div></div>
+</div>
+<div class="bad"><b>Hết 20 phút chưa ra nguyên nhân?</b> <b>Chuyển sang giảm thiệt hại.</b> Rollback bản publish trước, hoặc bật banner “dữ liệu đang cập nhật”. <b>User đang chờ. Tìm nguyên nhân là việc quan trọng — nhưng không quan trọng bằng việc chặn thiệt hại lại.</b></div>
+<div class="ok"><b>Ghi lại cả ngõ cụt</b> Ghi mọi metric đã xem và kết luận từng bước — <b>kể cả bước dẫn tới ngõ cụt. Lần sau đỡ mất 20 phút đó.</b></div>
+
+<h2><span class="num">06</span> · Từ Phát Hiện Đến Chính Sách</h2>
+<p class="sub">Biết data hỏng là một chuyện — quyết định làm gì với nó là chuyện khác.</p>
+
+<h3>Không phải lỗi nào cũng đáng dừng pipeline</h3>
+<div class="tier3">
+  <div class="t1"><h4>HALT — dừng hẳn</h4><p>Để lọt thì <b>mọi thứ sau đều sai theo</b>: <b>trùng primary key · encoding hỏng · schema contract sai</b></p></div>
+  <div class="t2"><h4>QUARANTINE — tách ra</h4><p><b>Nghi ngờ</b>: <b>primary key đúng nhưng nội dung đáng ngờ · OCR confidence thấp</b> → <b>KHÔNG vào vector store agent đọc</b></p></div>
+  <div class="t3"><h4>WARN — ghi rồi đi tiếp</h4><p><b>Ghi lại là đủ</b>: <b>thiếu field không bắt buộc · sai chính tả metadata</b></p></div>
+</div>
+<div class="note"><b>Tiêu chí xếp mức</b> Hỏi <b>“cần làm gì và có chờ được không”</b> — <b>không phải hỏi lỗi nghe đáng sợ tới đâu</b>.</div>
+<div class="bad"><b>Chính sách phải viết ra</b> Ghi rõ trong <code>data_contract.md</code> mức nào ứng với lỗi nào. <b>Bảng quarantine KHÔNG được để agent đọc</b> — nếu không, <b>thứ bạn vừa tách ra vẫn đi thẳng vào câu trả lời</b>.</div>
+
+<h3>Hoạt động C — viết rule của bạn rồi chịu trách nhiệm với nó <span class="pill b">25 phút</span></h3>
+<p><code>validate.py</code> có sẵn một rule mẫu. Viết thêm <b>bốn rule</b>, dựa trên những gì bạn <b>tự tìm được ở hoạt động A</b>. Mỗi rule là <b>một dòng — không cần viết code</b>:</p>
+<pre><span class="cm"># (tên_cột, phép so sánh, giá_trị) — với in · not_null · min · max · equals</span>
+RULES = [ (<span class="st">"rate_code_id"</span>, <span class="st">"in"</span>, [<span class="st">"1"</span>,<span class="st">"2"</span>,<span class="st">"3"</span>,<span class="st">"4"</span>,<span class="st">"5"</span>,<span class="st">"6"</span>]) ]
+
+$ python3 validate.py
+LUẬT rate_code_id in ['1'...'6'] → chặn 1 dòng (0.0%)
+   ví dụ: 2019-01-22  rate=99  pay=2  fare=2.5</pre>
+<div class="warn"><b>Vế đáng đọc</b> <b>Dòng cuối — “những dòng bị chặn có điểm gì chung”</b> — mới là vế đáng đọc.</div>
+<p>Với từng rule, <b>trả lời bằng contract</b>:</p>
+<ol>
+  <li>Những dòng bị chặn <b>có thật sự hỏng không</b>, hay <b>contract cho phép chúng</b>?</li>
+  <li><b>Bao nhiêu trong số bị chặn là lỗi thật?</b> → tỉ lệ đó gọi là <b>precision</b></li>
+  <li>Rule này nên là <b>halt / quarantine / warn</b>? <b>Rule nào bạn không dám để halt — vì sao?</b></li>
+</ol>
+<div class="acc"><b>Câu hỏi phân loại quan trọng</b> <b>Rule nào là data sai, rule nào là BẠN HIỂU SAI NGHIỆP VỤ?</b></div>
+
+<h2><span class="num">07</span> · Orchestration — Đưa Pipeline Vào Vận Hành</h2>
+<p class="sub">Chạy được một lần là bài tập. <b>Chạy lại an toàn mới là sản phẩm.</b></p>
+
+<h3>Orchestrator nào cũng trả lời cùng sáu câu hỏi</h3>
+<table>
+<tr><th style="width:24%">Câu hỏi</th><th>Nội dung</th></tr>
+<tr><td><b>Trigger</b></td><td>cron, event, hay <b>đợi task trước chạy xong</b>?</td></tr>
+<tr><td><b>Retry policy</b></td><td>mấy lần, backoff ra sao, và <b>retry lại từ task lỗi hay từ đầu</b>?</td></tr>
+<tr><td><b>Data awareness</b></td><td>có <b>sensor đợi file hoặc partition xuất hiện</b> không?</td></tr>
+<tr><td><b>SLA / alert</b></td><td>thời gian chạy task, queue depth, <b>lịch chạy bị lỡ</b></td></tr>
+<tr><td><b>Observability</b></td><td>log từng task + <b>gắn <code>run_id</code> vào lineage</b></td></tr>
+<tr><td><b>Backfill</b></td><td><b>chạy lại một khoảng ngày mà không phá production</b></td></tr>
+</table>
+<div class="three">
+  <div><div class="k">BẮT ĐẦU Ở ĐÂY</div><strong>Prefect</strong><p><b>Flow là hàm Python bình thường. Ít boilerplate nhất.</b></p></div>
+  <div><div class="k">LINEAGE SẴN</div><strong>Dagster</strong><p><b>Mô hình hoá data asset, không phải task. Lineage có sẵn, không cần dựng thêm.</b></p></div>
+  <div><div class="k">HỆ SINH THÁI LỚN</div><strong>Airflow</strong><p><b>Phổ biến nhất, hệ sinh thái lớn nhất, cũng nặng nhất khi setup.</b></p></div>
+</div>
+
+<h3>Quality gate đặt ở đâu trong flow</h3>
+<div class="flow">
+  <div class="step">load</div><span class="arw">→</span>
+  <div class="step">clean</div><span class="arw">→</span>
+  <div class="step"><b>quality gate</b><small>fail → HALT / quarantine</small></div><span class="arw">→</span>
+  <div class="step">embed</div><span class="arw">→</span>
+  <div class="step">publish</div>
+</div>
+<div class="note"><b>Vì sao gate đứng TRƯỚC embed?</b> <b>Embed tốn tiền và khó rút lại.</b> Chặn ở đây <b>rẻ hơn nhiều so với dọn vector store sau đó</b>.</div>
+<div class="warn"><b>Câu hỏi khó hơn</b> <b>Drift tăng nhưng quality gate vẫn pass — hệ thống nên chặn hay chỉ báo?</b> Ba hoạt động sáng nay là để bạn tự trả lời được câu này.</div>
+
+<h3>Idempotency — hai cách chạy lại mà không nhân đôi</h3>
+<div class="vs">
+  <div class="lneu"><h4>① Upsert theo natural key</h4><p><code>(doc_id, version)</code> — <b>không sinh UUID mới mỗi lần chạy</b>. Chạy lại thì <b>ghi đè đúng bản ghi cũ, không thêm bản mới</b>.</p></div>
+  <div class="lneu"><h4>② Staging rồi đổi alias</h4><p>Nạp vào <b>collection mới</b>, xong thì <b>trỏ alias sang</b>. <b>Agent không bao giờ đọc phải collection đang nạp dở.</b></p></div>
+</div>
+<div class="bad"><b>Vì sao bắt buộc, không phải tuỳ chọn</b> <b>Retry là cơ chế mặc định của mọi orchestrator</b> — <b>pipeline của bạn SẼ chạy lại, dù bạn có thiết kế cho việc đó hay không</b>. Chạy lại để sửa data cũ mà không idempotent thì bạn <b>tự tạo ra bản trùng</b>: agent lấy được <b>cả v3 lẫn v4</b>, và <b>trả lời hai kiểu khác nhau cho cùng một câu hỏi</b>.</div>
+
+<h3>Sau sự cố: biến nó thành tài sản</h3>
+<table>
+<tr><th style="width:20%">Mục</th><th>Nội dung</th></tr>
+<tr><td><b>Symptom</b></td><td>User thấy gì? Agent trả lời sai theo kiểu nào?</td></tr>
+<tr><td><b>Detection</b></td><td><b>Metric nào đã báo</b> — hoặc <b>chưa có metric nào báo, và đó chính là lỗ hổng</b></td></tr>
+<tr><td><b>Diagnosis</b></td><td>Nguyên nhân gốc · <b>bước pipeline nào</b> · bảng hoặc file nào</td></tr>
+<tr><td><b>Mitigation</b></td><td>Đã làm gì để dừng gây hại: <b>rollback, chạy lại, tắt tính năng</b></td></tr>
+<tr><td><b>Prevention</b></td><td><b>Expectation mới · alert mới · owner có tên</b></td></tr>
+</table>
+<div class="note"><b>Dòng đáng giá nhất là Detection</b> Nếu <b>không có metric nào báo trước user</b> — thì việc cần làm sau sự cố <b>không phải là sửa bug, mà là THÊM METRIC để đo</b>. <b>Bug lần sau sẽ khác; chỗ không ai đo thì vẫn nguyên đó.</b></div>
+
+<h2><span class="num">08</span> · Tổng Kết — Bốn Điều Mang Về</h2>
+<div class="qlist">
+  <div class="qi"><div class="n">1</div><div class="b"><strong>Không có data contract thì mọi bất thường trông giống nhau</strong><span>Bạn sẽ <b>chặn nhầm data đúng</b> và <b>bỏ lọt data sai</b> — <b>cùng một lúc</b>.</span></div></div>
+  <div class="qi"><div class="n">2</div><div class="b"><strong>Drift ≠ data sai</strong><span><b>Drift chỉ nói distribution đã đổi, không nói ai đúng.</b> Nó <b>không thay được rule validate từng dòng — và ngược lại</b>.</span></div></div>
+  <div class="qi"><div class="n">3</div><div class="b"><strong>“Job chạy xong” ≠ “data đúng”</strong><span>“Job chạy xong” là <b>chuyện của chương trình</b>; “data đúng” là <b>chuyện của data</b>. Hai khẳng định khác nhau — và <b>bạn chỉ đang đo cái thứ nhất</b>.</span></div></div>
+  <div class="qi"><div class="n">4</div><div class="b"><strong>Khi agent trả lời sai, đi theo thứ tự này</strong><span><b>freshness → volume → schema → lineage, RỒI MỚI đến model.</b></span></div></div>
+</div>
+
+<div class="grid g2">
+  <div class="card"><h4>Bài tiếp theo</h4><p><b>Guardrails &amp; AI Safety</b><br>“<b>Data đúng không có nghĩa là an toàn</b> — ngày mai là <b>lớp bảo vệ ở mọi tầng</b>.”</p></div>
+  <div class="card"><h4>Bài tập về nhà</h4>
+    <ul><li><b>Đọc:</b> OWASP Top 10 for LLMs (owasp.org)</li>
+    <li><b>Suy nghĩ:</b> <b>nếu ai đó cố tình bơm data độc vào nguồn của bạn — check nào hiện tại bắt được?</b></li></ul></div>
+</div>
+
+<h3>Tài liệu tham khảo</h3>
+<ol>
+  <li><b>Hidden Technical Debt in Machine Learning Systems</b> — Sculley et al., Google, <b>NeurIPS 2015</b>. Vì sao phần lớn công sức của một hệ thống ML <b>nằm ngoài model</b>.</li>
+  <li><b>“Everyone wants to do the model work, not the data work”: Data Cascades in High-Stakes AI</b> — Sambasivan et al., <b>Google Research, CHI 2021</b>. <b>Nguồn của khái niệm data cascade.</b> Nghiên cứu định tính, <b>phỏng vấn 53 practitioner</b> — đọc như một <b>checklist chẩn đoán</b>, đừng đọc như số liệu thống kê dân số.</li>
+  <li><b>Great Expectations 1.x Documentation</b> — docs.greatexpectations.io. <b>API 1.x khác hẳn 0.x</b> — pin <code>great-expectations==1.19.1</code>.</li>
+  <li><b>Evidently Documentation</b> — docs.evidentlyai.com. Drift và distribution report; <b>bản có team bảo trì, thay cho <code>drift.py</code></b>.</li>
+  <li><b>dbt — Transform Data</b> — docs.getdbt.com. SQL transformation as code, data contract, version control cho logic data.</li>
+</ol>
+
+<div class="quote"><p>“Nếu chỉ được giữ đúng một dashboard cho hệ thống AI của mình — bạn giữ <b>‘chất lượng câu trả lời của agent’</b> hay <b>‘data observability’</b>?”</p><small>— CÂU HỎI KẾT BÀI NGÀY 10</small></div>
+
+</section>
+
+<section id="cheat" class="panel">
+<button class="printbtn" onclick="window.print()">In / Lưu PDF</button>
+<p class="sub">Bản rút gọn để ôn nhanh trước khi làm đề — mọi con số và tên gọi đều nằm ở đây.</p>
+
+<div class="cheatgrid">
+<div>
+  <h2>Định vị</h2>
+  <div class="card"><dl class="kv">
+    <dt>60–80%</dt><dd>thời gian dự án AI là data work (20% xây model/agent)</dd>
+    <dt>Data cascade</dt><dd>quyết định nhỏ đầu nguồn → trôi qua Nguồn · Ingest · Chunk+embed · Agent → chỉ lộ ở cuối. Data không có compiler</dd>
+    <dt>AI stack</dt><dd>Sources → Pipeline → Storage → Serving → Agent (4 mũi tên = 4 chỗ hỏng im lặng)</dd>
+    <dt>Câu hỏi ngày</dt><dd>khi agent trả lời sai — mở cái gì ra xem đầu tiên?</dd>
+  </dl></div>
+
+  <h2>ETL / ELT · Batch / Streaming</h2>
+  <div class="card"><dl class="kv">
+    <dt>ETL</dt><dd>transform TRƯỚC warehouse · dùng khi KHÔNG được giữ raw (mask PII/CMND)</dd>
+    <dt>ELT</dt><dd>ghi raw TRƯỚC, transform bằng SQL · dùng khi chưa chắc xử lý kiểu gì</dd>
+    <dt>Chọn</dt><dd>“Có được phép giữ raw không?” Không → ETL. Được → ELT. Giữ raw = giữ quyền đổi ý</dd>
+    <dt>Batch</dt><dd>rẻ, dễ chạy lại · training data, report định kỳ</dd>
+    <dt>Streaming</dt><dd>đắt, khó debug · fraud detection, context realtime · trễ mili-giây</dd>
+    <dt>Chọn</dt><dd>“Data trễ 6 tiếng thì agent sai tới mức nào?”</dd>
+    <dt>4 trục</dt><dd>latency · governance · cost · khả năng debug</dd>
+  </dl></div>
+
+  <h2>Ingestion</h2>
+  <div class="card"><dl class="kv">
+    <dt>Template</dt><dd>source → method → check → owner (1 dòng/nguồn)</dd>
+    <dt>PostgreSQL</dt><dd>timeout · schema drift · 0 dòng → đo freshness + số dòng</dd>
+    <dt>External API</dt><dd>429 · auth hết hạn · pagination lệch → volume + checkpoint có nhích</dd>
+    <dt>PDF/HTML</dt><dd>OCR sai · encoding · thiếu metadata → % dòng bị flag</dd>
+    <dt>Webhook</dt><dd>backpressure · trùng event → queue depth + số vào DLQ</dd>
+    <dt>Snapshot</dt><dd>ảnh chụp mỗi 6h — chỉ thấy trạng thái hiện tại, KHÔNG thấy XOÁ</dd>
+    <dt>CDC</dt><dd>đọc log thay đổi — như video, mỗi thay đổi là 1 sự kiện</dd>
+    <dt>429</dt><dd>“gọi nhiều quá” · đọc header <code>Retry-After</code> trước · backoff 1s→2s→4s→8s · JITTER để 3 worker không cùng đập lại</dd>
+    <dt>Offset</dt><dd>chèn 1 bản ghi → mọi trang sau lệch: đọc trùng / bỏ sót, không lỗi nào bắn</dd>
+    <dt>Cursor</dt><dd><code>id &gt; 103</code> · checkpoint idempotent <code>last_synced_id</code></dd>
+    <dt>Content hash</dt><dd>sha256 bytes = “file có đổi không” (bỏ qua file không đổi)</dd>
+    <dt>Logical version</dt><dd><code>policy_v4</code> = “đây là bản nào” (để agent lọc)</dd>
+    <dt>OCR thấp</dt><dd>flag cho người review TRƯỚC publish</dd>
+    <dt>Queue phình</dt><dd>triệu chứng, không phải nguyên nhân — hỏi consumer chậm vì gì</dd>
+    <dt>Backpressure</dt><dd>ghì ngược producer; không có → hết bộ nhớ, mất data</dd>
+    <dt>Poison msg</dt><dd>retry mấy cũng lỗi, chặn cả queue → tách vào DLQ</dd>
+    <dt>DLQ</dt><dd>điểm quan sát, KHÔNG phải chỗ vứt rác</dd>
+    <dt>Ví dụ queue</dt><dd>vào nhanh gấp 2,5× xử lý → 1 giờ &gt; 100.000 message chờ</dd>
+  </dl></div>
+
+  <h2>Transform</h2>
+  <div class="card"><dl class="kv">
+    <dt>4 thao tác</dt><dd>parse ngày · unicode NFC · dedupe theo khoá · check schema</dd>
+    <dt>5 kiểu bẩn</dt><dd>thiếu giá trị · outlier · trùng lặp · sai định dạng · lỗi encoding</dd>
+    <dt>NFC</dt><dd>bắt buộc với tiếng Việt — không thì 2 chuỗi trông giống hệt vẫn không khớp</dd>
+    <dt>Giá trị thiếu</dt><dd>bỏ / điền / flag — chọn gì cũng được nhưng PHẢI ghi vào contract</dd>
+    <dt>CLEAN</dt><dd>sửa được → vector store</dd>
+    <dt>FLAG</dt><dd>thiếu ngày nhưng có nội dung · OCR thấp → chờ SME</dd>
+    <dt>REJECT</dt><dd>rỗng sau trim · trùng khoá → <code>quarantine.csv</code></dd>
+    <dt>Bắt buộc</dt><dd>reject/flag phải log kèm <code>run_id</code> — xoá không log = mất data không ai biết</dd>
+    <dt>Nguyên tắc</dt><dd>Transform là code + contract, không phải sửa tay trong Excel</dd>
+  </dl></div>
+</div>
+
+<div>
+  <h2>6 Dimensions</h2>
+  <div class="card"><dl class="kv">
+    <dt>Validity</dt><dd>đúng type/range — MỘT Ô</dd>
+    <dt>Completeness</dt><dd>%NULL, số dòng — MỘT CỘT</dd>
+    <dt>Uniqueness</dt><dd>tỉ lệ trùng, composite key — CẢ BẢNG</dd>
+    <dt>Consistency</dt><dd>đối chiếu chéo — NHIỀU HỆ THỐNG</dd>
+    <dt>Timeliness</dt><dd>tuổi bản ghi — SO VỚI ĐỒNG HỒ</dd>
+    <dt>Accuracy</dt><dd>đúng thực tế? — CẦN SOURCE OF TRUTH NGOÀI (SME · hệ thống gốc · chứng từ · thực địa)</dd>
+    <dt>Ví dụ nhầm</dt><dd><code>fare_amount=3000</code> hợp lệ (Validity) nhưng có thể không đúng (Accuracy)</dd>
+    <dt>Ưu tiên 1</dt><dd>Validity — rẻ nhất, tự động hoàn toàn, bắt lỗi thiết bị nhiều nhất</dd>
+  </dl></div>
+
+  <h2>Data contract</h2>
+  <div class="card"><dl class="kv">
+    <dt>Bản chất</dt><dd>KHÔNG mô tả data — dùng để PHÁN QUYẾT</dd>
+    <dt>Mục 2</dt><dd>danh mục giá trị · <code>payment_type</code> 6 giá trị: 1 thẻ · 2 tiền mặt · 3 miễn phí · 4 tranh chấp · 5 không rõ · 6 huỷ</dd>
+    <dt>Mục 3</dt><dd>quy tắc nghiệp vụ (tip chỉ khi trả thẻ · tiền âm hợp lệ khi hoàn tiền) → cứu khỏi CHẶN NHẦM DATA ĐÚNG</dd>
+    <dt>Mục 4</dt><dd>những gì contract KHÔNG quy định → quyền trả lời “KHÔNG THỂ BIẾT”. Quan trọng nhất</dd>
+    <dt>3 phán quyết</dt><dd>SAI · ĐÚNG · KHÔNG THỂ BIẾT</dd>
+    <dt>5 dòng/phát hiện</dt><dd>thấy gì · tìm bằng cách nào · dimension nào · phán quyết · cần gì để chắc</dd>
+    <dt>Hoạt động A</dt><dd>5.000 chuyến taxi vàng NY 01/2019 · helper: describe group cross derive show</dd>
+  </dl></div>
+
+  <h2>Great Expectations · Evidently</h2>
+  <div class="card"><dl class="kv">
+    <dt>Expectation</dt><dd>khẳng định về data mà máy check được — chạy/log/CI được</dd>
+    <dt>5 bước GX</dt><dd>Profile → viết suite → validate → report HTML → chặn pipeline</dd>
+    <dt>Version</dt><dd><code>great-expectations==1.19.1</code> (1.x khác hẳn 0.x)</dd>
+    <dt>Evidently</dt><dd>bản bảo trì của <code>drift.py</code>: tự chọn thống kê theo type · report HTML · threshold cấu hình · chạy trong pipeline</dd>
+    <dt>Giới hạn</dt><dd>vẫn alert <code>passenger_count</code>, vẫn im trước <code>total_amount</code> — công cụ tốt hơn không sửa được reference sai / câu hỏi sai</dd>
+    <dt>Drift ≠ sai</dt><dd>drift chỉ nói distribution đổi, không nói ai đúng</dd>
+  </dl></div>
+
+  <h2>Observability</h2>
+  <div class="card"><dl class="kv">
+    <dt>5 pillars</dt><dd>Freshness · Volume · Distribution · Schema · Lineage</dd>
+    <dt>Lineage khác</dt><dd>4 pillar đầu chỉ nói “đang có sự cố”; chỉ lineage nói “sự cố ở BƯỚC NÀO”</dd>
+    <dt>Sự cố 09:12</dt><dd>sync 02:00 fail im lặng · freshness 17h · agent nói “refund 14 ngày” (thật: 7) · có observability thì alert 02:30</dd>
+    <dt>Điểm mấu chốt</dt><dd>“không có gì mới” trông y hệt “không có gì cần làm”</dd>
+    <dt>SLA viết</dt><dd>“policy refund xuất hiện trong câu trả lời agent trong 4 giờ kể từ khi PDF được ký”</dd>
+    <dt>Đo ở đâu</dt><dd>lúc document ACTIVE trên vector index — không phải lúc file vào staging</dd>
+    <dt>2 mức alert</dt><dd>2 giờ (nửa thời gian) → warning vào ticket queue · 4 giờ → page on-call kể cả 3h sáng</dd>
+    <dt>Nói với user</dt><dd>hiển thị “Dữ liệu cập nhật tới: …”</dd>
+    <dt>Suy giảm âm thầm</dt><dd>null rate · độ dài nội dung · ngôn ngữ/nhiễu · ràng buộc chéo cột (<code>end&lt;start</code>) · thời gian tương lai</dd>
+    <dt>UX metrics</dt><dd>citation freshness (tuổi TB + p95 chunk được trích) · grounding rate · retrieval hit@k trên golden set · latency ingest→publish p95 TÁCH khỏi LLM</dd>
+    <dt>Triage</dt><dd>freshness → volume → schema → lineage → nguyên nhân → RỒI MỚI model</dd>
+    <dt>Timebox</dt><dd>0–5’ freshness + <code>last_success_run</code> · 5–12’ volume + error rate · 12–20’ schema/contract + lineage · hết 20’ → giảm thiệt hại (rollback/banner)</dd>
+    <dt>Thẻ bẫy P1</dt><dd>C Eval model (không tự đổi sau 1 đêm) · E Log thô (chưa khoanh vùng thì không đọc nổi)</dd>
+  </dl></div>
+
+  <h2>Chính sách &amp; Orchestration</h2>
+  <div class="card"><dl class="kv">
+    <dt>HALT</dt><dd>trùng primary key · encoding hỏng · schema contract sai</dd>
+    <dt>QUARANTINE</dt><dd>PK đúng nhưng nội dung đáng ngờ · OCR thấp</dd>
+    <dt>WARN</dt><dd>thiếu field không bắt buộc · sai chính tả metadata</dd>
+    <dt>Tiêu chí</dt><dd>“cần làm gì và có chờ được không” — không phải lỗi nghe đáng sợ tới đâu</dd>
+    <dt>Cấm</dt><dd>bảng quarantine KHÔNG để agent đọc</dd>
+    <dt>Hoạt động C</dt><dd>rule = (tên_cột, phép so sánh, giá_trị) với in · not_null · min · max · equals · precision = tỉ lệ lỗi thật trong số bị chặn</dd>
+    <dt>6 câu orchestrator</dt><dd>Trigger · Retry policy · Data awareness · SLA/alert · Observability · Backfill</dd>
+    <dt>Prefect/Dagster/Airflow</dt><dd>hàm Python ít boilerplate / data asset có lineage sẵn / phổ biến nhất nhưng nặng nhất</dd>
+    <dt>Quality gate</dt><dd>đặt TRƯỚC embed — embed tốn tiền và khó rút lại</dd>
+    <dt>Idempotency</dt><dd>upsert theo <code>(doc_id, version)</code> · hoặc staging rồi đổi alias · retry là mặc định của mọi orchestrator</dd>
+    <dt>Postmortem</dt><dd>Symptom · Detection · Diagnosis · Mitigation · Prevention — Detection đáng giá nhất</dd>
+    <dt>RACI</dt><dd>AI/Applied (data_contract.md + golden questions) · Data Eng (pipeline_architecture.md + lineage) · SRE (runbook.md + dashboards) · Product/SME (link source of truth)</dd>
+    <dt>Owner</dt><dd>mỗi nguồn đúng 1 owner CÓ TÊN</dd>
+  </dl></div>
+</div>
+</div>
+</section>
+
+<section id="cards" class="panel">
+<div class="fcbar">
+  <button class="fbtn on" data-f="all">Tất cả</button>
+  <button class="fbtn" data-f="pipe">Pipeline &amp; ETL</button>
+  <button class="fbtn" data-f="ing">Ingestion</button>
+  <button class="fbtn" data-f="tr">Transform</button>
+  <button class="fbtn" data-f="dq">Data Quality</button>
+  <button class="fbtn" data-f="obs">Observability</button>
+  <button class="fbtn" data-f="pol">Chính sách &amp; Orchestration</button>
+  <span class="counter" id="cnt"></span>
+</div>
+<div class="fcgrid" id="fcgrid"></div>
+<p class="hint">Bấm vào thẻ để lật · lật lại để ẩn đáp án</p>
+</section>
+
+</div>
+
+<script>
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); document.getElementById(b.dataset.t).classList.add('on');
+  window.scrollTo(0,0);
+});
+const CARDS=[
+ ['pipe','Tỷ lệ thời gian data work trong một dự án AI thực tế?','<b>60–80% là data work</b> (thu thập, clean, dựng pipeline, monitor); <b>chỉ ~20% là xây model/agent</b>.'],
+ ['pipe','Vì sao “garbage in → garbage out” không chỉ là khẩu hiệu?','Vì <b>quality của output không thể cao hơn quality của input</b> — RAG agent xuất sắc <b>vẫn hallucinate</b> nếu vector store nạp data không clean.'],
+ ['pipe','Data cascade là gì?','<b>Một quyết định nhỏ ở đầu nguồn, trôi xuôi qua từng bước, mỗi bước làm hậu quả lớn thêm, và chỉ lộ ra ở cuối.</b><br>Bốn bước: <b>Nguồn</b> (đổi cách ghi ngày) → <b>Ingest</b> (parse sai, để rỗng) → <b>Chunk+embed</b> (thiếu metadata) → <b>Agent</b> (trích nhầm bản cũ).'],
+ ['pipe','Vì sao không thoát khỏi data cascade bằng cách “kêu gọi cẩn thận hơn”?','Vì <b>mỗi cascade đều bắt đầu bằng một quyết định HỢP LÝ TẠI CHỖ, không phải do ai cẩu thả</b>. Thoát bằng cách <b>gắn cảm biến sớm hơn</b>.'],
+ ['pipe','Vì sao data cascade trôi hết cả bốn bước?','Vì <b>data không có compiler</b> — <b>không bước nào ở giữa báo đỏ</b>. Chỗ duy nhất có người thấy là <b>chỗ cuối cùng</b>.'],
+ ['pipe','Triệu chứng “Đúng fact, nhưng là fact cũ” chỉ tới tầng nào?','<b>Freshness · publish step · cache vector chưa được hoán đổi</b> sang bản mới.'],
+ ['pipe','Triệu chứng “Chỉ sai với một loại ticket” xử lý thế nào?','<b>Khoanh vùng theo lineage</b> để xác định <b>nguồn OCR hoặc API nào</b> đang gây ra vấn đề.'],
+ ['pipe','Triệu chứng “Lẫn lộn giữa hai phiên bản tài liệu”?','<b>dedupe · version metadata · chunk boundary</b>.'],
+ ['pipe','Triệu chứng “Đang tốt, sau deploy thì hỏng”?','<b>schema / parser đổi</b> — <b>so sánh distribution trước và sau</b>.'],
+ ['pipe','Nguyên tắc triage nêu ở slide triệu chứng?','<b>Đo freshness và volume TRƯỚC khi mở notebook fine-tune.</b>'],
+ ['pipe','Bảng RACI — AI/Applied chịu gì, bàn giao gì?','Trách nhiệm: <b>data contract cho corpus của agent · eval before/after</b>.<br>Bàn giao: <b><code>data_contract.md</code> · golden questions</b>.'],
+ ['pipe','Bốn vai và artifact trong RACI tối giản?','<b>AI/Applied</b> → data_contract.md + golden questions · <b>Data Eng</b> → pipeline_architecture.md + lineage · <b>SRE/Platform</b> → runbook.md + dashboards · <b>Product/SME</b> → link tới source of truth.'],
+ ['pipe','SME là ai?','<b>Subject matter expert</b> — <b>người nắm nghiệp vụ, biết chắc thế nào là đúng</b>.'],
+ ['pipe','Ranh giới về quyền sở hữu nguồn data?','<b>Mỗi nguồn phải có đúng MỘT owner CÓ TÊN.</b> Một người đóng nhiều vai thì được; <b>nguồn không ai đứng tên thì không</b>.'],
+ ['pipe','Sơ đồ Data Pipeline trong AI Stack?','<b>Sources → Pipeline → Storage → Serving → Agent</b><br>(DB/API/file/stream → ingest+transform → warehouse/vector store → API/cache → LLM+tools+RAG)<br><b>Bốn mũi tên = bốn chỗ data hỏng mà agent vẫn chạy bình thường.</b>'],
+ ['pipe','ETL và ELT khác nhau ở đâu, dùng khi nào?','<b>Chỉ khác THỨ TỰ Transform.</b><br><b>ETL</b> transform trước khi vào warehouse — dùng khi <b>KHÔNG được giữ raw</b> (mask PII/CMND).<br><b>ELT</b> ghi raw trước rồi transform bằng SQL — dùng khi <b>chưa chắc sau này xử lý kiểu gì</b>.'],
+ ['pipe','Câu hỏi duy nhất để chọn ETL hay ELT?','<b>“Bạn có được phép giữ raw không?”</b> Không → ETL, hết lựa chọn. Được → ELT — <b>giữ raw là giữ quyền đổi ý</b>.'],
+ ['pipe','Tình huống “Mask PII trong log trước khi vào data lake” chọn gì?','<b>ETL</b> — đúng trường hợp <b>KHÔNG được phép giữ raw</b> do ràng buộc về dữ liệu cá nhân.'],
+ ['pipe','Batch vs Streaming — đặc tính và use case?','<b>Batch:</b> rẻ, dễ chạy lại → training data, report định kỳ.<br><b>Streaming:</b> đắt, khó debug, trễ mili-giây → fraud detection, context realtime.'],
+ ['pipe','Câu hỏi để chọn Batch hay Streaming?','<b>“Data trễ 6 tiếng thì agent trả lời sai tới mức nào?”</b> Trả lời được câu đó mới chọn được — <b>không phải cứ realtime là tốt hơn</b>.'],
+ ['pipe','Bốn trục cân nhắc trong hoạt động khởi động?','<b>Latency · governance · cost · khả năng debug.</b>'],
+ ['pipe','Ba ngày 8-9-10 tạo thành mạch sản phẩm thế nào?','<b>Ngày 8</b> xây nguồn tri thức đáng tin · <b>Ngày 9</b> điều phối multi-agent · <b>Ngày 10</b> cập nhật và monitor chính nguồn tri thức đó.'],
+ ['pipe','Câu hỏi mở đầu Day 10?','“<b>Agent của bạn đọc data từ database công ty. Data đột nhiên sai — agent bắt đầu trả lời bậy. Bạn có biết không, hay đợi user báo?</b>”'],
+
+ ['ing','Template quản lý nguồn data gồm những cột nào?','<b>source → method → check → owner</b>, mỗi nguồn viết đúng một dòng. <b>Nguồn nào không điền nổi cột owner là nguồn sẽ gây sự cố.</b>'],
+ ['ing','PostgreSQL hỏng kiểu gì, đo bằng gì?','Hỏng: <b>timeout · schema drift · job kéo về 0 dòng</b>.<br>Đo: <b>freshness · số dòng kéo về mỗi lần chạy</b>.'],
+ ['ing','External API hỏng kiểu gì, đo bằng gì?','Hỏng: <b>429 rate limit · auth hết hạn · pagination lệch</b>. Đo: <b>volume · checkpoint có nhích không</b>.'],
+ ['ing','Webhook/stream hỏng kiểu gì, đo bằng gì?','Hỏng: <b>backpressure · trùng event</b>. Đo: <b>queue depth · số bản ghi vào DLQ</b>.'],
+ ['ing','PDF/HTML hỏng kiểu gì, đo bằng gì?','Hỏng: <b>OCR sai · encoding · thiếu metadata</b>. Đo: <b>% dòng bị flag review</b>.'],
+ ['ing','CDC và Snapshot khác nhau căn bản ở đâu?','<b>Snapshot</b> chụp trạng thái theo lịch — <b>như ảnh chụp mỗi 6 giờ</b>.<br><b>CDC</b> đọc <b>log thay đổi</b> và ghi lại từng sự kiện — <b>như video</b>.'],
+ ['ing','Vì sao Snapshot không phát hiện được bản ghi bị xoá?','Vì mỗi lần quét nó <b>chỉ thấy trạng thái hiện tại, không thấy lịch sử</b> — <b>bản ghi biến mất trông giống như chưa từng khớp điều kiện</b>.'],
+ ['ing','Chọn CDC hay Snapshot là việc của ai?','<b>Team quản lý database nguồn</b> — không phải của bạn.'],
+ ['ing','429 nghĩa là gì, xử lý thế nào trước tiên?','Nghĩa là <b>“bạn gọi nhiều quá”</b>; bên kia thường kèm header <b><code>Retry-After</code></b> — <b>đọc nó trước khi tự đoán</b>.'],
+ ['ing','Backoff theo cấp số nhân hoạt động thế nào?','<b>Mỗi lần thất bại thì chờ gấp đôi — 1s, 2s, 4s, 8s</b> — để không dồn dập vào API đang quá tải.'],
+ ['ing','Vì sao chỉ backoff mà không jitter vẫn chưa đủ?','Vì <b>3 worker cùng chờ đúng 2s sẽ cùng đập vào API tại một khoảnh khắc và lại nhận 429</b>. Jitter <b>cộng thêm chút ngẫu nhiên để rải ra</b>.'],
+ ['ing','Sai kinh điển khi gặp 429?','<b>Retry vô hạn, không backoff</b> — <b>pipeline tự DDoS chính API nguồn</b>. Bên kia chặn bạn, và <b>họ đúng</b>.'],
+ ['ing','Vì sao pagination bằng cursor an toàn hơn offset?','Vì <b>data vẫn đang đổi trong lúc đọc</b> — <b>chèn một bản ghi làm offset lệch mọi trang sau</b>, gây <b>đọc trùng hoặc bỏ sót mà không có lỗi nào bắn ra</b>.'],
+ ['ing','Ví dụ cụ thể offset bị lệch?','Trang 1 đọc <code>101·102·103</code>; chèn <code>100</code> vào đầu → trang 2 thành <code>103·104·105</code>: <b>103 đọc lần hai, 100 không bao giờ được đọc</b>.'],
+ ['ing','Checkpoint idempotent trong pagination nghĩa là gì?','<b>Lưu lại chính cái mốc đó</b>, ví dụ <code>last_synced_id</code> — <b>chạy lại thì đi tiếp, không kéo lại toàn bộ lịch sử</b>.'],
+ ['ing','“Một trang lỗi ≠ cả job lỗi” thực hiện thế nào?','<b>Ghi trang hỏng vào DLQ rồi chạy lại đúng nó</b>, thay vì <b>đánh sập cả job vì một trang</b>.'],
+ ['ing','Content hash và logical version trả lời hai câu hỏi nào?','<b><code>sha256</code> của bytes</b> trả lời <b>“file có đổi không”</b> (bỏ qua file không đổi, khỏi embed lại).<br><b><code>policy_v4</code></b> trả lời <b>“đây là bản nào”</b> (để agent lọc theo version).'],
+ ['ing','Thiếu content hash / thiếu logical version thì sao?','Thiếu <b>content hash</b> → <b>lần chạy nào cũng embed lại tất cả</b>. Thiếu <b>logical version</b> → <b>agent không lọc được theo version</b>.'],
+ ['ing','Vì sao cắt chunk theo số ký tự nguy hiểm?','Vì agent trả lời <b>“nửa điều khoản”</b> — <b>vẫn có trích dẫn, vẫn sai nghĩa</b>. Phải <b>cắt theo heading</b>.'],
+ ['ing','OCR confidence thấp xử lý thế nào?','<b>Flag lại cho người review TRƯỚC khi publish</b> — <b>không phải sau khi user phàn nàn</b>.'],
+ ['ing','Metadata gắn ở bước ingest liên quan gì tới Ngày 8?','<b>Metadata bạn gắn ở bước này chính là thứ filter của vector store sẽ dùng</b> — <b>không gắn ở đây thì sau này không lọc được</b>.'],
+ ['ing','Queue depth phình lên nói lên điều gì?','Đây là <b>triệu chứng chứ không phải nguyên nhân</b> — <b>phải hỏi consumer chậm vì cái gì</b>.'],
+ ['ing','Backpressure là gì, không có thì sao?','<b>Ghì ngược lên producer khi queue gần đầy để báo “chậm lại”.</b> Không có nó thì <b>queue phình tới khi hết bộ nhớ rồi mất data</b>.'],
+ ['ing','Poison message là gì, DLQ đóng vai trò gì?','<b>Bản ghi retry mấy lần cũng lỗi</b> (không tách thì <b>chặn cả queue phía sau</b>).<br><b>DLQ</b> = queue riêng chứa chúng, là <b>điểm quan sát, không phải chỗ vứt rác</b>.'],
+ ['ing','Con số trong ví dụ queue?','Ticket đổ về <b>nhanh gấp 2,5 lần</b> tốc độ xử lý → sau <b>một giờ có hơn 100.000 message nằm chờ</b>, agent đọc knowledge base cũ dần <b>mà không ai báo</b>.'],
+ ['ing','Checkpoint: pipeline báo “thành công” mỗi đêm nhưng data không mới — nghi gì?','<b>Job chạy xong không lỗi nhưng kéo về 0 dòng.</b> Với hệ thống, <b>“không có dòng mới” trông y hệt “thành công”</b>.'],
+ ['ing','Queue phình liên tục — tăng consumer có phải fix?','<b>Là giảm đau, không phải fix.</b> Cần biết consumer chậm vì sao: <b>xử lý nặng · phụ thuộc bên ngoài chậm · đang retry một poison message</b>.'],
+
+ ['tr','Nguyên tắc cốt lõi của bước Transform?','<b>Transform là code + contract, KHÔNG phải sửa tay trong Excel năm phút trước khi demo.</b> Sửa tay thì <b>lần chạy sau lỗi lại y nguyên</b>.'],
+ ['tr','Bốn thao tác chuẩn trong Transform?','<b>Parse ngày · chuẩn hoá unicode NFC · dedupe theo khoá · check schema.</b>'],
+ ['tr','Trong bảng RAW→CLEANED, bản ghi id 44 được xử lý thế nào?','Chuyển sang trạng thái <b>review</b> với ghi chú <b>“chưa embed, đợi SME”</b> — vì <b>thiếu ngày nhưng có nội dung</b>.'],
+ ['tr','Năm kiểu data không clean thường gặp?','<b>Thiếu giá trị · outlier · trùng lặp · sai định dạng · lỗi encoding.</b>'],
+ ['tr','Vì sao chuẩn hoá Unicode NFC bắt buộc với tiếng Việt?','Vì nếu không thì <b>hai chuỗi trông giống hệt nhau vẫn không khớp nhau khi so sánh</b>.'],
+ ['tr','Khuyến nghị về giá trị thiếu?','<b>Bỏ, điền, hay flag — chọn cách nào cũng được nhưng PHẢI ghi vào contract.</b>'],
+ ['tr','Ba hướng xử lý một dòng data trong Transform?','<b>CLEAN</b> (sửa được) · <b>FLAG</b> (cần người quyết) · <b>REJECT</b> (không cứu được).'],
+ ['tr','Cái gì thuộc FLAG, cái gì thuộc REJECT?','<b>FLAG:</b> thiếu ngày nhưng có nội dung · OCR confidence thấp → chờ SME.<br><b>REJECT:</b> nội dung rỗng sau khi trim · trùng khoá → <code>quarantine.csv</code>.'],
+ ['tr','Điều kiện bắt buộc khi reject hoặc flag một bản ghi?','<b>Phải ghi lại kèm <code>run_id</code> vào <code>quarantine.csv</code></b> — <b>xoá mà không log nghĩa là mất data mà không ai biết</b>.'],
+ ['tr','Check schema nên đặt ở đâu?','<b>Reject bản ghi sai schema NGAY ở bước nhận data</b> — thay vì để nó lọt vào rồi <b>đi tìm nguyên nhân sau ba tuần</b>.'],
+
+ ['dq','Sáu dimensions của data quality?','<b>Validity · Completeness · Uniqueness · Consistency · Timeliness · Accuracy.</b>'],
+ ['dq','Nhóm “máy tự check được” gồm những gì, dựa trên cơ sở nào?','<b>Validity, Completeness, Uniqueness, Consistency, Timeliness</b> — <b>chỉ cần nhìn vào chính bảng đó</b>. Riêng <b>Accuracy cần source of truth bên ngoài</b>.'],
+ ['dq','Phạm vi kiểm tra của từng dimension?','<b>Validity</b> xét một ô · <b>Completeness</b> một cột · <b>Uniqueness</b> cả bảng · <b>Consistency</b> nhiều hệ thống · <b>Timeliness</b> so với đồng hồ.'],
+ ['dq','Validity vs Accuracy minh hoạ bằng ví dụ nào?','<b><code>fare_amount = 3000</code> hợp lệ vì là số dương (Validity) nhưng có thể không đúng thực tế (Accuracy).</b>'],
+ ['dq','Accuracy phải đi hỏi ai?','<b>SME · hệ thống gốc · chứng từ · thực địa</b> — không check tự động nào tự trả lời được.'],
+ ['dq','Data contract khác gì tài liệu mô tả dữ liệu?','<b>Contract KHÔNG mô tả data — nó dùng để PHÁN QUYẾT</b>: thấy con số lạ thì <b>tra xem rơi vào mục 2, 3 hay 4</b>.'],
+ ['dq','<code>payment_type</code> có bao nhiêu giá trị, là những gì?','<b>Sáu giá trị:</b> 1 thẻ · 2 tiền mặt · 3 miễn phí · 4 tranh chấp · 5 không rõ · <b>6 chuyến bị huỷ</b>.'],
+ ['dq','Mục 2 của contract cho bạn cái gì?','<b>Viết được check tự động ngay hôm nay</b> — <b>giá trị ngoài danh mục là sai, không cần bàn</b>.'],
+ ['dq','Mục 3 “Quy tắc nghiệp vụ” cứu bạn khỏi điều gì?','<b>Chặn nhầm data đúng</b> — không có nó bạn sẽ viết rule <b>chặn <code>tip = 0</code></b> và <b>chặn tiền âm</b>, <b>cả hai đều hợp lệ</b>.'],
+ ['dq','Hai quy tắc nghiệp vụ trong contract taxi?','① “<b>Tip chỉ được ghi khi khách trả bằng thẻ</b> — tip tiền mặt không bao giờ vào hệ thống.”<br>② “<b>Số tiền âm là hợp lệ khi chuyến là hoàn tiền.</b>”'],
+ ['dq','Vì sao mục 4 “Những gì contract KHÔNG quy định” là quan trọng nhất?','Vì nó <b>cho bạn quyền trả lời “KHÔNG THỂ BIẾT”</b> — thay vì <b>đoán bừa rồi tự tin sai</b>.'],
+ ['dq','Hai ví dụ trong mục 4 của contract taxi?','“<b>Không có trần cho <code>fare_amount</code></b>” · “<b>Không có quy tắc <code>total_amount</code> phải bằng tổng các khoản lẻ</b>”.'],
+ ['dq','Data trong hoạt động A là gì?','<b>5.000 chuyến taxi vàng New York, tháng 01/2019</b> — <b>data thật, lỗi thật, không ai cài lỗi vào</b>.'],
+ ['dq','Ba phán quyết được phép chọn trong hoạt động A?','<b>SAI</b> (vi phạm điều viết rõ trong contract) · <b>ĐÚNG</b> (trông lạ nhưng contract giải thích được) · <b>KHÔNG THỂ BIẾT</b> (contract không nói gì).'],
+ ['dq','Mỗi phát hiện trong hoạt động A phải ghi đủ năm dòng nào?','<b>Thấy gì · tìm bằng cách nào · dimension nào · phán quyết · cần gì để chắc chắn.</b>'],
+ ['dq','Năm helper trong <code>explore.py</code>?','<b><code>describe · group · cross · derive · show</code></b> — cùng một phát hiện làm mẫu; code của bạn viết trong hàm <code>your_turn()</code>.'],
+ ['dq','Expectation trong Great Expectations là gì?','<b>Một khẳng định về data mà máy check được</b> — <b>chạy được, log được, đưa vào CI được</b>.'],
+ ['dq','Năm bước sử dụng Great Expectations?','<b>Profile</b> (GX gợi ý expectation) → <b>viết suite</b> → <b>validate trước khi data đi tiếp</b> → <b>report HTML tự sinh</b> → <b>chặn pipeline khi suite fail</b>.'],
+ ['dq','Bẫy version của Great Expectations?','<b>API 1.x khác hẳn 0.x</b> — phải pin <b><code>great-expectations==1.19.1</code></b>.'],
+ ['dq','Suite expectation pass hết — data đã đúng chưa?','<b>Chưa.</b> Pass nghĩa là data <b>không vi phạm những gì BẠN NGHĨ RA</b>; <b>Accuracy cần đối chiếu source of truth bên ngoài</b>.'],
+ ['dq','Vì sao <code>fare_amount</code> âm không nên để pipeline dừng?','Vì <b>nó hợp lệ — đó là bản ghi hoàn tiền</b>. Rule chặn nó là <b>rule chưa khớp nghiệp vụ</b>, và <b>chặn kiểu đó làm cả nhóm mất niềm tin vào alert</b>.'],
+ ['dq','Chỉ có thời gian cho một dimension — chọn cái nào?','<b>Validity</b> — <b>rẻ nhất, tự động hoàn toàn, chặn được đúng loại lỗi thiết bị sinh ra nhiều nhất</b>; nhưng phải biết <b>nó không bảo vệ khỏi accuracy</b>.'],
+
+ ['obs','Năm pillars của data observability?','<b>Freshness · Volume · Distribution · Schema · Lineage.</b>'],
+ ['obs','Bốn pillar đầu đo gì và trả lời được gì?','<b>Freshness</b> (đúng lịch không · 17h) · <b>Volume</b> (số dòng có rơi · −28%) · <b>Distribution</b> (giá trị có lệch · drift) · <b>Schema</b> (cột có đổi).<br>Cả bốn <b>đo tại một điểm, chỉ nói “đang có sự cố”</b>.'],
+ ['obs','Vì sao Lineage khác hẳn bốn pillar còn lại?','Vì <b>freshness 17h chỉ cho biết ĐANG CÓ sự cố</b>, còn <b>chỉ lineage nói được sự cố NẰM Ở BƯỚC NÀO</b> (ingest lúc 02:00, không phải model).'],
+ ['obs','Đường lineage trong ví dụ gồm những bước nào?','<code>PDF nguồn → ingest → clean → chunk → vector index</code>.'],
+ ['obs','Công cụ nào đo quality check, công cụ nào đo drift?','<b>Great Expectations</b> cho quality check · <b>Evidently</b> cho drift.'],
+ ['obs','Diễn biến sự cố 09:12 khi KHÔNG có observability?','Lần publish thành công cuối <b>16:00 hôm trước</b> · sync <b>02:00 fail im lặng</b> · <b>09:12 user đầu tiên phàn nàn</b> — data đã cũ <b>17 tiếng</b> mà không ai biết. Agent nói <b>“Refund 14 ngày”</b> trong khi policy thật là <b>7 ngày</b>.'],
+ ['obs','Nếu CÓ observability, sự cố 09:12 diễn biến thế nào?','<b>Freshness vượt threshold lúc 02:30</b>, on-call nhận alert, <b>chạy lại ingest và xong trước giờ làm việc</b> — <b>không user nào thấy câu trả lời sai</b>.'],
+ ['obs','Điều gì khiến pipeline không hề báo lỗi trong sự cố đó?','<b>Job kết thúc, log không báo gì.</b> Thứ duy nhất sai là <b>không có gì mới</b> — mà <b>“không có gì mới” trông y hệt “không có gì cần làm”</b>.'],
+ ['obs','Freshness SLA nên viết như thế nào?','“<b>Policy refund phải xuất hiện trong câu trả lời của agent trong vòng 4 giờ kể từ khi PDF được ký</b>” — chứ không phải “pipeline chạy mỗi 4 tiếng”.'],
+ ['obs','Freshness SLA đo tại điểm nào, vì sao?','<b>Tại thời điểm document ACTIVE trên vector index</b> — không phải lúc file rơi vào thư mục staging. <b>Đo sai điểm thì SLA xanh mà user vẫn thấy data cũ.</b>'],
+ ['obs','Hai mức alert của freshness SLA?','<b>Đi hết nửa thời gian (2 giờ) → warning</b> vào ticket queue, <b>còn kịp xử lý trong giờ hành chính</b>.<br><b>Hết 4 giờ → page</b> thẳng cho người on-call, <b>kể cả 3 giờ sáng</b>.'],
+ ['obs','Vì sao page người on-call?','<b>Gọi người vì USER đang chịu ảnh hưởng — không phải vì job màu đỏ.</b>'],
+ ['obs','Slide khuyên hiển thị gì cho user về freshness?','Hiển thị dòng <b>“Dữ liệu cập nhật tới: …”</b> — <b>giảm rất nhiều kỳ vọng sai</b>.'],
+ ['obs','Năm dấu hiệu của nhóm “Đủ số dòng không có nghĩa là ổn”?','<b>Null rate</b> (effective_date null tăng vọt sau đổi API) · <b>độ dài nội dung</b> (chunk ngắn bất thường = parser hỏng) · <b>ngôn ngữ/nhiễu</b> (rác OCR) · <b>ràng buộc chéo cột</b> · <b>thời gian tương lai</b>.'],
+ ['obs','Ví dụ về “ràng buộc chéo cột”?','<code>end &lt; start</code> hoặc <b>version mới nhỏ hơn version cũ</b> — <b>từng cột đều hợp lệ, ghép lại thì vô lý</b>.'],
+ ['obs','Vì sao nhóm vấn đề âm thầm này đặc biệt khó?','Vì <b>không cái nào làm pipeline fail</b> — chúng chỉ làm <b>câu trả lời của agent tệ dần</b>, <b>không có thời điểm hỏng rõ ràng để lần theo</b>.'],
+ ['obs','Drift detection được định nghĩa thế nào trong hoạt động B?','<b>So phân bố giá trị của hai file</b> — <b><code>taxi_reference.csv</code></b> (data kỳ trước làm mốc) và <b><code>taxi_current.csv</code></b> (data mới về) — <b>xem đã đổi chưa</b>.'],
+ ['obs','Evidently là gì trong quan hệ với <code>drift.py</code>?','<b>Bản có người bảo trì của <code>drift.py</code></b>: <b>tự chọn phép thống kê theo type cột · report HTML · threshold cấu hình được · chạy được trong pipeline</b>.'],
+ ['obs','Bài học rút ra từ việc Evidently vẫn alert <code>passenger_count</code>?','<b>Công cụ tốt hơn không sửa được việc reference bị chọn sai và câu hỏi bị đặt sai.</b> (Nó cũng vẫn im lặng trước các dòng <code>total_amount</code> lệch.)'],
+ ['obs','Takeaway “Drift ≠ data sai” nghĩa là gì?','<b>Drift chỉ nói distribution đã đổi, không nói ai đúng.</b> Nó <b>không thay được rule validate từng dòng — và ngược lại</b>.'],
+ ['obs','“Citation freshness” đo cái gì?','<b>Tuổi trung bình và p95 của chunk được agent trích dẫn</b> — <b>đây là freshness user thật sự nhìn thấy</b>.'],
+ ['obs','Bốn chỉ số nối observability với UX?','<b>Citation freshness · Grounding rate</b> (% câu trả lời có trích dẫn hợp lệ) · <b>Retrieval hit@k</b> (trên golden set cố định, chạy mỗi lần publish) · <b>Latency ingest→publish</b> (p95).'],
+ ['obs','Vì sao latency ingest→publish phải tách riêng khỏi latency LLM?','Vì nếu không tách thì <b>mọi thứ chậm đều bị đổ cho model</b>.'],
+ ['obs','Thứ tự triage khi agent trả lời sai?','<b>Freshness → Volume → Schema → Lineage → nguyên nhân, RỒI MỚI đến model.</b> (Model hiếm khi tự dưng kém đi sau một đêm — data thì có.)'],
+ ['obs','Yêu cầu cụ thể khi chọn thẻ trong thảo luận P1?','<b>Chọn 4 thẻ, xếp theo thứ tự sẽ mở, và ghi con số đi tìm ở mỗi thẻ KÈM NGƯỠNG để so</b> — ví dụ “<code>freshness_hours</code> so với ngưỡng 4h”.'],
+ ['obs','Hai thẻ nào là bẫy trong thảo luận P1, vì sao?','<b>C · Eval của model</b> — <b>không tự đổi sau một đêm</b>.<br><b>E · Log ingest thô</b> (2.000 dòng) — <b>chưa khoanh vùng thì không đọc nổi</b>.'],
+ ['obs','Timebox triage chia mấy giai đoạn?','<b>Ba:</b> <b>0–5 phút</b> freshness + <code>last_success_run</code> · <b>5–12 phút</b> volume + error rate từng bước · <b>12–20 phút</b> schema/contract rồi lần lineage ngược về nguồn.'],
+ ['obs','Hết 20 phút chưa ra nguyên nhân thì làm gì?','<b>Chuyển sang giảm thiệt hại</b>: rollback bản publish trước, hoặc bật banner “dữ liệu đang cập nhật”. <b>Tìm nguyên nhân quan trọng — nhưng không quan trọng bằng chặn thiệt hại.</b>'],
+ ['obs','Vì sao phải ghi lại cả những bước dẫn tới ngõ cụt?','Vì <b>lần sau đỡ mất 20 phút đó</b> — người triage tiếp theo <b>không phải đi lại con đường đã biết là sai</b>.'],
+
+ ['pol','Ba mức chính sách xử lý lỗi data?','<b>HALT</b> (trùng primary key · encoding hỏng · schema contract sai) · <b>QUARANTINE</b> (PK đúng nhưng nội dung đáng ngờ · OCR confidence thấp) · <b>WARN</b> (thiếu field không bắt buộc · sai chính tả metadata).'],
+ ['pol','Tiêu chí quyết định mức HALT/QUARANTINE/WARN?','Hỏi <b>“cần làm gì và có chờ được không”</b> — <b>không phải hỏi lỗi nghe đáng sợ tới đâu</b>.'],
+ ['pol','Yêu cầu bắt buộc với bảng quarantine?','<b>KHÔNG được để agent đọc</b> — nếu không, <b>thứ bạn vừa tách ra vẫn đi thẳng vào câu trả lời</b>.'],
+ ['pol','Cấu trúc một rule trong hoạt động C?','Một dòng dạng <b><code>(tên_cột, phép so sánh, giá_trị)</code></b> với các phép <b><code>in · not_null · min · max · equals</code></b>.'],
+ ['pol','Precision trong hoạt động C là gì?','<b>Tỷ lệ lỗi thật trong số các dòng bị rule chặn lại.</b>'],
+ ['pol','Câu hỏi cuối của hoạt động C?','<b>Xếp mỗi rule vào halt/quarantine/warn</b> và <b>nói rõ rule nào không dám để halt cùng lý do</b>.'],
+ ['pol','Vế đáng đọc trong output của <code>validate.py</code>?','<b>Dòng cuối — “những dòng bị chặn có điểm gì chung”.</b> Và câu hỏi phân loại: <b>rule nào là data sai, rule nào là bạn hiểu sai nghiệp vụ?</b>'],
+ ['pol','Sáu câu hỏi mà orchestrator nào cũng phải trả lời?','<b>Trigger · Retry policy · Data awareness · SLA/alert · Observability · Backfill.</b>'],
+ ['pol','Ba orchestrator được so sánh?','<b>Prefect</b> — flow là hàm Python bình thường, ít boilerplate nhất, <b>bắt đầu ở đây</b> · <b>Dagster</b> — mô hình hoá <b>data asset</b>, <b>lineage có sẵn</b> · <b>Airflow</b> — <b>phổ biến nhất, hệ sinh thái lớn nhất, nặng nhất khi setup</b>.'],
+ ['pol','Quality gate nên đặt ở đâu và vì sao?','<b>TRƯỚC bước embed</b> — vì <b>embed tốn tiền và khó rút lại</b>, chặn ở đây <b>rẻ hơn nhiều so với dọn vector store sau đó</b>.'],
+ ['pol','Câu hỏi khó ở slide quality gate?','<b>Drift tăng nhưng quality gate vẫn pass — hệ thống nên chặn hay chỉ báo?</b>'],
+ ['pol','Hai cách đảm bảo idempotency?','① <b>Upsert theo natural key</b> <code>(doc_id, version)</code> — không sinh UUID mới mỗi lần chạy.<br>② <b>Staging rồi đổi alias</b> — agent không bao giờ đọc phải collection đang nạp dở.'],
+ ['pol','Vì sao idempotency là bắt buộc chứ không phải tuỳ chọn?','Vì <b>retry là cơ chế mặc định của mọi orchestrator</b> — <b>pipeline của bạn SẼ chạy lại, dù bạn có thiết kế cho việc đó hay không</b>. Không idempotent → agent lấy được <b>cả v3 lẫn v4</b>.'],
+ ['pol','Báo cáo sau sự cố gồm năm mục nào?','<b>Symptom · Detection · Diagnosis · Mitigation · Prevention.</b>'],
+ ['pol','Vì sao dòng Detection đáng giá nhất?','Vì nếu <b>không có metric nào báo trước user</b> thì việc cần làm <b>không phải sửa bug mà là THÊM METRIC</b> — <b>bug lần sau sẽ khác, chỗ không ai đo thì vẫn nguyên đó</b>.'],
+ ['pol','Bốn takeaways của Day 10?','① <b>Không có data contract thì mọi bất thường trông giống nhau</b> (chặn nhầm data đúng + bỏ lọt data sai) · ② <b>Drift ≠ data sai</b> · ③ <b>“Job chạy xong” là chuyện của chương trình, “data đúng” là chuyện của data — bạn chỉ đang đo cái thứ nhất</b> · ④ <b>freshness → volume → schema → lineage, rồi mới đến model</b>.'],
+ ['pol','Bài học tiếp theo sau Day 10?','<b>Guardrails &amp; AI Safety</b> — “<b>data đúng không có nghĩa là an toàn</b>”, lớp bảo vệ ở mọi tầng.'],
+ ['pol','Bài tập về nhà sau Day 10?','Đọc <b>OWASP Top 10 for LLMs</b>; suy nghĩ: <b>nếu ai đó cố tình bơm data độc vào nguồn của bạn — check nào hiện tại bắt được?</b>'],
+ ['pol','Tài liệu nào là nguồn gốc của khái niệm data cascade?','<b>“Everyone wants to do the model work, not the data work”: Data Cascades in High-Stakes AI</b> — <b>Sambasivan et al., Google Research, CHI 2021</b> (phỏng vấn 53 practitioner).'],
+ ['pol','Tài liệu kinh điển về technical debt của hệ ML?','<b>Hidden Technical Debt in Machine Learning Systems</b> — <b>Sculley et al., Google, NeurIPS 2015</b>: vì sao phần lớn công sức nằm <b>ngoài model</b>.'],
+ ['pol','Câu hỏi kết bài Day 10?','“<b>Nếu chỉ được giữ đúng một dashboard — bạn giữ ‘chất lượng câu trả lời của agent’ hay ‘data observability’?</b>”'],
+];
+const grid=document.getElementById('fcgrid'), cnt=document.getElementById('cnt');
+const NAMES={pipe:'Pipeline & ETL',ing:'Ingestion',tr:'Transform',dq:'Data Quality',obs:'Observability',pol:'Chính sách & Orchestration'};
+function render(f){
+  const list=f==='all'?CARDS:CARDS.filter(c=>c[0]===f);
+  grid.innerHTML=list.map(c=>`<div class="fc"><div class="fci">
+      <div class="ff"><div class="tag2">${NAMES[c[0]]}</div><div class="q">${c[1]}</div></div>
+      <div class="fb"><div class="a">${c[2]}</div></div></div></div>`).join('');
+  cnt.textContent=list.length+' thẻ';
+  grid.querySelectorAll('.fc').forEach(el=>el.onclick=()=>el.classList.toggle('flip'));
+}
+document.querySelectorAll('.fbtn').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); render(b.dataset.f);
+});
+render('all');
+</script>
+</body>
+</html>

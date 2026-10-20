@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 17 — Memory Systems for Agents | Tóm tắt</title>
+<style>
+:root{
+  --bg:#f7f8fa; --card:#fff; --ink:#1a1d24; --muted:#5b6472; --line:#e3e7ee;
+  --brand:#2f5fd0; --brand-soft:#eaf0fd; --warn:#b8541a; --warn-soft:#fdf1e7;
+  --ok:#1d7a4f; --ok-soft:#e8f6ef; --bad:#c0392b; --bad-soft:#fdeceb;
+  --purple:#6b3fa0; --purple-soft:#f2ecfa;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+
+/* ---------- header ---------- */
+header{background:linear-gradient(135deg,#2f5fd0,#5b3fb8);color:#fff;padding:34px 0 26px;margin-bottom:0}
+header .wrap{padding-bottom:0}
+.kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;margin:0 0 6px}
+header h1{margin:0 0 8px;font-size:31px;line-height:1.2;font-weight:700}
+header p{margin:0;opacity:.9;font-size:15px}
+
+/* ---------- tabs ---------- */
+.tabbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);
+  box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.tabbar .wrap{display:flex;gap:4px;padding-top:0;padding-bottom:0}
+.tab{appearance:none;border:0;background:none;font:inherit;font-weight:600;font-size:15px;
+  padding:15px 18px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--brand);border-bottom-color:var(--brand)}
+.panel{display:none;padding-top:28px}
+.panel.on{display:block}
+
+/* ---------- generic ---------- */
+h2{font-size:22px;margin:36px 0 4px;padding-top:14px;border-top:2px solid var(--line)}
+h2 .num{color:var(--brand);font-weight:700}
+h2:first-child{border-top:0;padding-top:0;margin-top:0}
+.sub{color:var(--muted);font-size:14.5px;margin:0 0 18px}
+h3{font-size:17px;margin:26px 0 10px}
+p{margin:10px 0}
+ul,ol{margin:10px 0;padding-left:22px}
+li{margin:5px 0}
+code{background:#eef1f6;padding:2px 6px;border-radius:4px;font-size:13.5px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:820px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px;background:#fff;
+  border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f2f5fa;font-weight:600;font-size:13.5px}
+tr:last-child td{border-bottom:0}
+
+.note{border-left:4px solid var(--brand);background:var(--brand-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.warn{border-left:4px solid var(--warn);background:var(--warn-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.bad{border-left:4px solid var(--bad);background:var(--bad-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.ok{border-left:4px solid var(--ok);background:var(--ok-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note b,.warn b,.bad b,.ok b{display:block;margin-bottom:3px;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+.note b{color:var(--brand)} .warn b{color:var(--warn)} .bad b{color:var(--bad)} .ok b{color:var(--ok)}
+
+.pill{display:inline-block;background:var(--brand-soft);color:var(--brand);font-size:12.5px;
+  font-weight:600;padding:2px 9px;border-radius:20px;margin-right:5px}
+.pill.p{background:var(--purple-soft);color:var(--purple)}
+.pill.o{background:var(--ok-soft);color:var(--ok)}
+.pill.w{background:var(--warn-soft);color:var(--warn)}
+
+/* memory quadrant */
+.quad{display:grid;grid-template-columns:96px 1fr 1fr;gap:8px;align-items:stretch;margin:16px 0}
+.quad .hd{background:#f2f5fa;border-radius:8px;padding:10px;font-weight:600;font-size:13px;
+  display:flex;align-items:center;justify-content:center;text-align:center}
+.quad .lb{writing-mode:vertical-rl;transform:rotate(180deg)}
+.qbox{border:1px solid var(--line);border-radius:10px;padding:14px;background:#fff}
+.qbox h4{margin:0 0 6px;font-size:15.5px}
+.qbox .be{font-size:12.5px;color:var(--brand);font-weight:600;margin-bottom:6px}
+.qbox p{margin:4px 0;font-size:13.5px;color:var(--muted)}
+
+/* layer stack */
+.stack{margin:14px 0}
+.layer{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);
+  border-radius:8px;padding:10px 14px;margin-bottom:6px;font-size:14.5px}
+.layer .n{width:24px;height:24px;flex:0 0 24px;border-radius:50%;background:var(--brand);color:#fff;
+  font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.layer .nm{font-weight:600;min-width:150px}
+.layer .ds{color:var(--muted);font-size:13.5px}
+.layer.keep{border-color:#1d7a4f;background:var(--ok-soft)}
+.layer.keep .n{background:var(--ok)}
+
+/* flow */
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0}
+.step{background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-size:13.5px;font-weight:600}
+.step small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.arw{color:var(--brand);font-weight:700}
+
+/* budget bar */
+.bar{display:flex;height:36px;border-radius:8px;overflow:hidden;border:1px solid var(--line);margin:12px 0 6px}
+.seg{display:flex;align-items:center;justify-content:center;color:#fff;font-size:12.5px;font-weight:600}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}
+
+/* ---------- cheat sheet ---------- */
+#cheat{font-size:14px}
+#cheat h2{font-size:18px;margin:20px 0 8px;padding-top:10px}
+#cheat .card{padding:14px 16px;margin:10px 0}
+#cheat table{font-size:13px}
+#cheat th,#cheat td{padding:7px 9px}
+#cheat ul{padding-left:19px} #cheat li{margin:3px 0}
+.cheatgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:820px){.cheatgrid{grid-template-columns:1fr}}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13.5px}
+.kv dt{font-weight:600;color:var(--brand)}
+.kv dd{margin:0;color:var(--muted)}
+.printbtn{background:var(--brand);color:#fff;border:0;border-radius:8px;padding:9px 16px;
+  font:inherit;font-weight:600;font-size:14px;cursor:pointer;margin-bottom:6px}
+.printbtn:hover{background:#2450b8}
+
+/* ---------- flashcards ---------- */
+.fcbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.fbtn{background:#fff;border:1px solid var(--line);border-radius:20px;padding:6px 15px;
+  font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;color:var(--muted)}
+.fbtn:hover{border-color:var(--brand);color:var(--brand)}
+.fbtn.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.counter{margin-left:auto;font-size:13.5px;color:var(--muted)}
+.fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.fc{perspective:1100px;height:200px;cursor:pointer}
+.fci{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.fc.flip .fci{transform:rotateY(180deg)}
+.ff,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:18px;
+  display:flex;flex-direction:column;justify-content:center;border:1px solid var(--line);overflow:auto}
+.ff{background:#fff}
+.fb{background:var(--brand);color:#fff;transform:rotateY(180deg);border-color:var(--brand)}
+.ff .tag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--brand);margin-bottom:8px}
+.ff .q{font-size:16px;font-weight:600;line-height:1.45}
+.fb .a{font-size:14px;line-height:1.55}
+.fb .a b{display:block;margin-bottom:5px}
+.hint{text-align:center;color:var(--muted);font-size:12.5px;margin-top:10px}
+
+@media print{
+  header,.tabbar,.printbtn,.hint{display:none!important}
+  .panel{display:none!important} #cheat{display:block!important;padding-top:0}
+  body{background:#fff;font-size:11px} .wrap{max-width:100%;padding:0}
+  .card{break-inside:avoid;border-color:#ccc} table{break-inside:avoid}
+  h2{break-after:avoid}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">AICB-P2T3 · Chương 4 — Agent Nâng Cao</p>
+    <h1>Ngày 17 — Memory Systems for Agents</h1>
+    <p>Tại sao agent quên mọi thứ sau mỗi conversation — và làm sao fix nó đúng cách?</p>
+  </div>
+</header>
+
+<nav class="tabbar">
+  <div class="wrap">
+    <button class="tab on" data-t="detail">Tóm tắt chi tiết</button>
+    <button class="tab" data-t="cheat">Cheat sheet</button>
+    <button class="tab" data-t="cards">Flashcard</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ==================== TAB 1 ==================== -->
+<section class="panel on" id="detail">
+
+<h2><span class="num">§1</span> &nbsp;Tại sao Agent “quên”?</h2>
+<p class="sub">Context window có giới hạn — và hầu hết agent không có bộ nhớ ngoài.</p>
+
+<div class="card">
+  <h3 style="margin-top:0">Stateless by default</h3>
+  <ul>
+    <li><b>LLM không có persistent state</b> — mỗi API call là một request độc lập.</li>
+    <li>User nói “tôi thích Python” ở session 1 → session 2 agent <b>không nhớ</b>.</li>
+    <li>Conversation dài trên <b>50 turns</b> → hit context limit.</li>
+  </ul>
+  <div class="warn"><b>Lưu ý</b>Đây là vấn đề <b>#1</b> khi deploy agent thực tế: user kỳ vọng agent “nhớ” — nhưng nó không.</div>
+</div>
+
+<h3>Analogy: bộ nhớ agent giống não người</h3>
+<div class="grid g2">
+  <div class="card" style="margin:0">
+    <p style="margin:0 0 6px"><span class="pill">Não người</span></p>
+    <p style="margin:4px 0"><b>Working Memory</b> → <i>consolidation</i> → <b>Long-term Memory</b></p>
+  </div>
+  <div class="card" style="margin:0">
+    <p style="margin:0 0 6px"><span class="pill o">Agent</span></p>
+    <p style="margin:4px 0"><b>Context Window</b> → <i>persist facts</i> → <b>External Store</b></p>
+  </div>
+</div>
+<table>
+  <tr><th style="width:180px">Thành phần</th><th>Ví như</th><th>Đặc tính</th></tr>
+  <tr><td><b>Context Window</b></td><td>RAM</td><td>Nhanh, tạm thời, giới hạn ~128K tokens</td></tr>
+  <tr><td><b>External Store</b></td><td>Ổ cứng</td><td>Chậm hơn, bền vững, gần như vô hạn (Redis, Vector DB)</td></tr>
+</table>
+<div class="ok"><b>Kết luận</b>Agent cần <b>cả hai</b>: fast access cho conversation hiện tại + persistent storage cho knowledge qua sessions.</div>
+
+<h2><span class="num">§2</span> &nbsp;Context Engineering Framework</h2>
+<p class="sub">7 layers of context — quản lý những gì agent “thấy”.</p>
+
+<div class="stack">
+  <div class="layer"><span class="n">1</span><span class="nm">System Context</span><span class="ds">Persona, constraints</span></div>
+  <div class="layer"><span class="n">2</span><span class="nm">Task Context</span><span class="ds">Objective, instructions</span></div>
+  <div class="layer"><span class="n">3</span><span class="nm">User Context</span><span class="ds">Preferences, history</span></div>
+  <div class="layer"><span class="n">4</span><span class="nm">Memory Context</span><span class="ds">Recalled facts, episodes</span></div>
+  <div class="layer"><span class="n">5</span><span class="nm">Retrieval Context</span><span class="ds">RAG results, documents</span></div>
+  <div class="layer"><span class="n">6</span><span class="nm">Tool Context</span><span class="ds">Function outputs, API responses</span></div>
+  <div class="layer keep"><span class="n">7</span><span class="nm">Policy Context</span><span class="ds">Guardrails, safety rules — <b>trim cuối cùng</b></span></div>
+</div>
+
+<div class="grid g2">
+  <div class="note" style="margin:0"><b>Quy tắc trim</b>Khi gần token limit: <b>trim từ dưới lên</b>. Policy context trim cuối cùng — safety không bao giờ bỏ.</div>
+  <div class="warn" style="margin:0"><b>Conflict resolution</b>User preference mâu thuẫn policy constraint → <b>policy luôn thắng</b>. Cần explicit rules trong system design.</div>
+</div>
+
+<h3>Token budget — phân bổ context window</h3>
+<div class="bar">
+  <div class="seg" style="width:50%;background:#2f5fd0">Short-term 10%</div>
+  <div class="seg" style="width:20%;background:#5b3fb8">LT 4%</div>
+  <div class="seg" style="width:15%;background:#6b3fa0">Ep 3%</div>
+  <div class="seg" style="width:15%;background:#8a5bc0">Se 3%</div>
+</div>
+<p class="sub" style="margin-top:4px">Tổng <b>20%</b> cho memory. Phần còn lại dành cho system prompt, task instructions, tool outputs và output generation.</p>
+<div class="bad"><b>Ngưỡng đỏ</b>Vượt <b>20%</b> → context bị nhiễu, accuracy giảm.</div>
+
+<h2><span class="num">§3</span> &nbsp;Cognitive Memory Model — 4 loại Memory</h2>
+<p class="sub">Phân theo hai trục: <b>Tạm thời ↔ Bền vững</b> và <b>Cá nhân ↔ Tri thức</b>.</p>
+
+<div class="quad">
+  <div class="hd"></div><div class="hd">Tạm thời</div><div class="hd">Bền vững</div>
+  <div class="hd lb">Cá nhân</div>
+  <div class="qbox">
+    <h4>Short-term (Working)</h4>
+    <div class="be">Context window buffer</div>
+    <p>Nhanh, tạm thời, ~128K tokens</p>
+  </div>
+  <div class="qbox">
+    <h4>Long-term (Declarative)</h4>
+    <div class="be">Redis, PostgreSQL</div>
+    <p>User prefs, facts qua sessions</p>
+  </div>
+  <div class="hd lb">Tri thức</div>
+  <div class="qbox">
+    <h4>Episodic</h4>
+    <div class="be">Log trải nghiệm có thứ tự</div>
+    <p>“Lần trước tôi đã làm gì?”</p>
+  </div>
+  <div class="qbox">
+    <h4>Semantic</h4>
+    <div class="be">Embeddings + Vector DB</div>
+    <p>Domain knowledge retrieval</p>
+  </div>
+</div>
+<p class="sub">Ánh xạ thuật ngữ: Working ↔ Short-term · Declarative ↔ Long-term · Episodic &amp; Semantic giữ nguyên tên gọi.</p>
+
+<h3>Short-term Memory — 3 chiến lược</h3>
+<table>
+  <tr><th style="width:150px">Chiến lược</th><th>Cách làm</th><th>Đánh giá</th></tr>
+  <tr><td><b>Buffer</b></td><td>Giữ tất cả</td><td>Đơn giản, nhưng hit limit sau ~50 turns</td></tr>
+  <tr><td><b>Summary</b></td><td>LLM tóm tắt history cũ</td><td>Ổn định, nhưng tốn thêm LLM calls</td></tr>
+  <tr style="background:var(--ok-soft)"><td><b>Sliding window</b> <span class="pill o">Best</span></td><td><code>system + summary + last K turns</code></td><td>Best tradeoff cho production</td></tr>
+</table>
+<div class="note"><b>Ngưỡng</b>Short-term memory nên chiếm <b>tối đa 10%</b> context window. Trim khi vượt — keep recent N tokens, discard oldest.</div>
+
+<h3>Long-term Memory với Redis</h3>
+<div class="flow">
+  <span class="step">Conversation kết thúc</span><span class="arw">→</span>
+  <span class="step">LLM Extract<small>key facts</small></span><span class="arw">→</span>
+  <span class="step">Redis<small>with TTL</small></span><span class="arw">→</span>
+  <span class="step">Next session<small>load profile</small></span>
+</div>
+<div class="grid g2">
+  <div class="card" style="margin:0">
+    <h4 style="margin:0 0 8px">Cấu trúc dữ liệu</h4>
+    <ul style="margin:0">
+      <li><code>Hash</code> — preferences (language, style)</li>
+      <li><code>Set</code> — facts (“biết Python, học ML”)</li>
+      <li><code>List</code> — session history (recent)</li>
+    </ul>
+    <p class="sub" style="margin:8px 0 0">Tất cả <b>O(1) reads</b> — production-ready.</p>
+  </div>
+  <div class="card" style="margin:0">
+    <h4 style="margin:0 0 8px">TTL đề xuất</h4>
+    <dl class="kv">
+      <dt>Preferences</dt><dd>90 ngày</dd>
+      <dt>Facts</dt><dd>30 ngày</dd>
+      <dt>Sessions</dt><dd>7 ngày</dd>
+    </dl>
+    <p class="sub" style="margin:8px 0 0">TTL giảm dần theo mức độ ổn định của dữ liệu.</p>
+  </div>
+</div>
+
+<h3>Memory Management Flow</h3>
+<div class="flow">
+  <span class="step">1. Buffer<small>context window</small></span><span class="arw">→</span>
+  <span class="step">2. Summarize<small>LLM call</small></span><span class="arw">→</span>
+  <span class="step">3. Extract<small>key facts</small></span><span class="arw">→</span>
+  <span class="step">4. Persist<small>Redis + Chroma</small></span>
+</div>
+<ul>
+  <li><b>Trigger:</b> token count &gt; threshold.</li>
+  <li><b>Chỉ persist sau task completion</b> — không write giữa chừng để tránh inconsistent state.</li>
+  <li><b>Conflict:</b> long-term fact mâu thuẫn short-term info → <b>recency wins</b>, flag for review.</li>
+</ul>
+
+<h2><span class="num">§4</span> &nbsp;Implementation Deep-Dive</h2>
+<p class="sub">Code-level: LangGraph nodes cho mỗi memory type.</p>
+
+<div class="grid g2">
+  <div class="card" style="margin:0">
+    <h4 style="margin:0 0 8px">MemoryState — 5 trường</h4>
+    <ul style="margin:0">
+      <li><code>messages</code> — conversation</li>
+      <li><code>user_profile</code> — long-term</li>
+      <li><code>episodes</code> — episodic</li>
+      <li><code>semantic_hits</code> — semantic</li>
+      <li><code>memory_budget</code> — tokens left</li>
+    </ul>
+  </div>
+  <div class="card" style="margin:0">
+    <h4 style="margin:0 0 8px">Priority khi inject</h4>
+    <ol style="margin:0">
+      <li>Short-term (gần nhất)</li>
+      <li>Long-term facts (user prefs)</li>
+      <li>Relevant episodes</li>
+      <li>Semantic knowledge</li>
+    </ol>
+    <p class="sub" style="margin:8px 0 0">Trim thì cắt ngược từ mức 4 lên.</p>
+  </div>
+</div>
+<p><b>Integration pattern:</b> node <code>load_memory</code> đọc 3 loại memory khi bắt đầu → inject vào system prompt theo priority → node <code>save_memory</code> ghi khi kết thúc.</p>
+
+<h3>Episodic Memory</h3>
+<p>Lưu mỗi episode dưới dạng tuple: <code>(task, trajectory, outcome, reflection)</code> — agent biết “approach X đã fail vì Y trong task tương tự”.</p>
+<div class="grid g4">
+  <div class="card" style="margin:0"><b>LRU</b><p class="sub" style="margin:4px 0 0">Xóa episode ít dùng nhất</p></div>
+  <div class="card" style="margin:0"><b>Importance decay</b><p class="sub" style="margin:4px 0 0">Score giảm theo thời gian</p></div>
+  <div class="card" style="margin:0"><b>Consolidation</b><p class="sub" style="margin:4px 0 0">Merge episodes tương tự</p></div>
+  <div class="card" style="margin:0"><b>Voyager-style</b><p class="sub" style="margin:4px 0 0">Extract strategy → skill library</p></div>
+</div>
+
+<h3>Semantic Memory</h3>
+<div class="flow">
+  <span class="step">Domain Docs</span><span class="arw">→</span>
+  <span class="step">Embed</span><span class="arw">→</span>
+  <span class="step">Chroma DB</span><span class="arw">→</span>
+  <span class="step">Query<small>cosine sim</small></span><span class="arw">→</span>
+  <span class="step">Top-K</span>
+</div>
+<p>Agent discover facts mới → add vào DB với metadata <code>source</code>, <code>confidence</code>, <code>timestamp</code>.</p>
+<div class="ok"><b>Incremental knowledge growth</b>Agent tự mở rộng knowledge base qua interactions.</div>
+
+<div class="note"><b>Unified interface</b><code>retrieve(query, types=["all"])</code> trả về merged context từ cả 4 loại memory, đã trim theo token budget.</div>
+
+<h2><span class="num">§5</span> &nbsp;Frameworks chuyên dụng &amp; Privacy</h2>
+
+<div class="grid g2">
+  <div class="card" style="margin:0">
+    <h4 style="margin:0 0 8px">Mem0</h4>
+    <ul style="margin:0">
+      <li>Auto-classify memory types</li>
+      <li>Smart retrieval: relevance + recency ranking</li>
+      <li><i>Claim:</i> 90% token reduction, 91% faster retrieval</li>
+      <li>API-first, nhanh go-to-market</li>
+    </ul>
+  </div>
+  <div class="card" style="margin:0">
+    <h4 style="margin:0 0 8px">Zep</h4>
+    <ul style="margin:0">
+      <li>Entity extraction + progressive summarization</li>
+      <li>Tự build user knowledge graph qua sessions</li>
+      <li>Multi-level summaries: turn → session → cross-session</li>
+      <li>Giảm context size tối ưu</li>
+    </ul>
+  </div>
+</div>
+<table>
+  <tr><th style="width:140px">Tiêu chí</th><th>Mem0 / Zep</th><th>Custom (Redis + Chroma)</th></tr>
+  <tr><td><b>Setup time</b></td><td>Nhanh (API)</td><td>Chậm (build from scratch)</td></tr>
+  <tr><td><b>Control</b></td><td>Hạn chế</td><td>Full control</td></tr>
+  <tr><td><b>Khi nào dùng</b></td><td>MVP, go-to-market</td><td>Production, đặc thù domain</td></tr>
+</table>
+
+<h3>Quyền riêng tư, Bảo mật &amp; GDPR</h3>
+<div class="grid g3">
+  <div class="card" style="margin:0"><b>Privacy-by-Design</b><p class="sub" style="margin:4px 0 0">Mặc định <b>không lưu PII</b>. User phải explicit opt-in.</p></div>
+  <div class="card" style="margin:0"><b>Right to be Forgotten</b><p class="sub" style="margin:4px 0 0">Yêu cầu xóa → xóa tất cả entries → <b>confirm deletion</b>.</p></div>
+  <div class="card" style="margin:0"><b>Federated Forgetting</b><p class="sub" style="margin:4px 0 0">Multi-agent: deletion phải <b>propagate</b> tới mọi agent có copy.</p></div>
+</div>
+<div class="card">
+  <b>Checklist GDPR</b>
+  <ul style="margin:8px 0 0">
+    <li>Data minimization</li><li>Purpose limitation</li><li>Storage limitation (TTL)</li>
+    <li>Consent management</li><li>Deletion verification</li>
+  </ul>
+</div>
+
+<h2><span class="num">§6</span> &nbsp;Xu hướng 2025–2026</h2>
+<p class="sub">Từ persistent profiles đến file-based identity, heartbeat loops và compiled knowledge bases.</p>
+
+<h3>1 · Cross-session memory</h3>
+<p><b>Vì sao bùng lên:</b> user không còn chấp nhận agent “mất trí nhớ” sau mỗi thread — với product assistant, sales copilot, tutor, coding agent thì trải nghiệm phải liên tục qua nhiều ngày.</p>
+<table>
+  <tr><th style="width:50%">Từ</th><th>Sang</th></tr>
+  <tr><td>Thread-scoped state</td><td>User-scoped memory namespace</td></tr>
+  <tr><td>Save chat history</td><td>Save <b>structured facts</b></td></tr>
+  <tr><td>Retrieval chỉ dựa similarity</td><td>scope + recency + relevance + provenance</td></tr>
+  <tr><td>Write-back cuối phiên</td><td>Hot path + background consolidation</td></tr>
+</table>
+<div class="bad"><b>Sai lầm phổ biến</b>Đem <b>toàn bộ transcript</b> qua session mới → token phình to, recall nhiễu, và rủi ro rò rỉ dữ liệu giữa user tăng mạnh.</div>
+<p>Memory record nên có: <code>source</code>, <code>timestamp</code>, <code>confidence</code>, <code>ttl</code>. Namespacing theo <code>user_id</code>, <code>org_id</code>, <code>topic</code>.</p>
+<div class="warn"><b>Nghiêm trọng</b>Memory gán nhầm user là <b>bug nghiêm trọng</b>. Isolation, TTL, deletion và provenance phải có từ đầu.</div>
+
+<h3>2 · Compaction + notes</h3>
+<p><b>Vấn đề gốc:</b> conversation dài làm context window bị lấp bởi phần đã “xử xong”. Agent vẫn đọc lại lịch sử, nhưng phần lớn token không còn tạo giá trị.</p>
+<div class="grid g3">
+  <div class="card" style="margin:0"><b>Recent turns</b><p class="sub" style="margin:4px 0 0">Hội thoại mới nhất còn đang nóng</p></div>
+  <div class="card" style="margin:0"><b>Session summary</b><p class="sub" style="margin:4px 0 0">Trạng thái, quyết định, blockers</p></div>
+  <div class="card" style="margin:0"><b>Durable notes</b><p class="sub" style="margin:4px 0 0">Facts/tasks đủ quan trọng → long-term</p></div>
+</div>
+<div class="flow">
+  <span class="step">1. Detect pressure<small>token budget / latency</small></span><span class="arw">→</span>
+  <span class="step">2. Summarize<small>decisions, blockers, next steps</small></span><span class="arw">→</span>
+  <span class="step">3. Extract notes<small>facts, tasks, prefs</small></span><span class="arw">→</span>
+  <span class="step">4. Rebuild context<small>summary + recent turns</small></span>
+</div>
+<p><b>Khi nào chạy:</b> chỉ khi gần token limit, khi session kéo dài, hoặc khi chuyển pha từ thảo luận sang thực thi.</p>
+<div class="warn"><b>Bẫy</b>Summary có thể <b>mơ hồ hơn</b> transcript gốc. Notes phải ưu tiên trạng thái, quyết định, TODO, constraint — thay vì tóm tắt lan man.</div>
+
+<h3>3 · Identity files như control plane</h3>
+<table>
+  <tr><th style="width:150px">File</th><th>Vai trò</th></tr>
+  <tr><td><code>AGENTS.md</code></td><td>Quy tắc làm việc, workflow, boundaries, coding/execution norms</td></tr>
+  <tr><td><code>SOUL.md</code></td><td>Identity, tone, preferred defaults, behavioral profile</td></tr>
+  <tr><td><code>MEMORY.md</code></td><td>Notes bền vững, memory schema, recap các quyết định quan trọng</td></tr>
+  <tr><td><code>TASKS.md</code></td><td>Open loops, backlog, agenda đang theo dõi</td></tr>
+</table>
+<div class="bad"><b>Đừng hiểu sai</b>Những file này <b>không phải retrieval engine</b>: không tự re-rank, không TTL, không conflict resolution, không provenance.</div>
+<div class="ok"><b>Stack tốt nhất</b>Instruction files trả lời “<b>hãy cư xử thế nào</b>”; retrieval memory trả lời “<b>nên nhớ điều gì lúc này</b>”. Cần cả hai.</div>
+
+<h3>4 · Heartbeat loops</h3>
+<p><b>Use case:</b> personal assistant, inbox triage, research copilot, coding agent có backlog dài ngày. Agent được đánh thức định kỳ để compact old context, refresh task list, write safe summaries.</p>
+<div class="bad"><b>Rủi ro</b>Heartbeat + persistent memory khiến prompt injection không chỉ phá một lượt chat mà trở thành <b>memory poisoning</b> hoặc <b>backlog poisoning</b> kéo dài nhiều phiên.</div>
+<div class="card">
+  <b>Guardrails tối thiểu</b>
+  <ul style="margin:8px 0 0">
+    <li>Allowlist rõ memory types nào được phép ghi</li>
+    <li>Gắn <code>source</code>, <code>timestamp</code>, <code>confidence</code> cho mọi durable write</li>
+    <li>Tách <i>user request</i> / <i>system rule</i> / <i>agent inference</i> thành các trường riêng</li>
+    <li>High-impact writes phải qua human review hoặc policy check</li>
+  </ul>
+</div>
+<div class="warn"><b>Nguyên tắc</b>Heartbeat <b>không được tự cho mình thêm quyền</b> — nó chỉ là cơ chế vận hành nền, không phải cánh cửa bypass policy.</div>
+
+<h3>5 · Compiled knowledge base (Karpathy “LLM Wiki”)</h3>
+<div class="flow">
+  <span class="step">Raw sources<small>papers, docs, transcripts</small></span><span class="arw">→ ingest →</span>
+  <span class="step">Persistent wiki<small>entity pages, summaries, links</small></span><span class="arw">→ govern →</span>
+  <span class="step">Curation rules<small>source, contradiction, freshness</small></span>
+</div>
+<table>
+  <tr><th style="width:50%">Plain RAG đủ tốt khi</th><th>Nên nâng lên compiled KB khi</th></tr>
+  <tr>
+    <td>Hỏi đáp 1 lần trên corpus lớn · tài liệu đổi liên tục · chưa cần curate theo entity/timeline/contradiction</td>
+    <td>Câu hỏi lặp lại nhưng vẫn phải retrieval lại từ đầu · cần theo dõi timeline, contradiction, decision history · cần audit trail thay vì chỉ top-k chunks</td>
+  </tr>
+</table>
+
+<h2><span class="num">§7</span> &nbsp;Demo, Lab &amp; Key Takeaways</h2>
+<div class="card">
+  <b>Lab #17 — Build Multi-Memory Agent với LangGraph</b> <span class="pill w">2 giờ</span>
+  <ol style="margin:8px 0 0">
+    <li>Implement 4 backends: ConversationBufferMemory, Redis, JSON episodic log, Chroma</li>
+    <li>Build memory router: chọn loại theo query intent (preference vs factual vs experience recall)</li>
+    <li>Context window management: auto-trim + priority-based eviction theo 4-level hierarchy</li>
+    <li>Benchmark: agent có/không memory trên 10 multi-turn conversations</li>
+  </ol>
+</div>
+<div class="grid g2">
+  <div class="ok" style="margin:0"><b>Takeaway 1</b>Không có “one size fits all” — production agent cần ít nhất <b>short-term + long-term</b>, thêm episodic/semantic tùy use case.</div>
+  <div class="ok" style="margin:0"><b>Takeaway 2</b>Memory retrieval quality quyết định agent quality: <b>bad retrieval = irrelevant context = wrong answer</b>.</div>
+  <div class="ok" style="margin:0"><b>Takeaway 3</b>Memory write-back cần careful design: <b>nhớ gì · khi nào ghi · xử lý conflict · TTL bao lâu</b>.</div>
+  <div class="ok" style="margin:0"><b>Takeaway 4</b>Privacy không phải afterthought — GDPR compliance cần thiết kế từ đầu (<b>Privacy-by-Design</b>).</div>
+</div>
+<div class="note"><b>Tiếp theo — Ngày 18: Production RAG</b>“Agent đã có memory, tiếp theo cần knowledge retrieval tốt hơn — tại sao RAG pipeline demo chạy tốt nhưng production chỉ đạt 60%?”</div>
+
+</section>
+
+<!-- ==================== TAB 2 ==================== -->
+<section class="panel" id="cheat">
+<button class="printbtn" onclick="window.print()">In cheat sheet</button>
+
+<div class="cheatgrid">
+
+<div>
+<h2>Vấn đề gốc</h2>
+<div class="card">
+  <ul>
+    <li>LLM <b>stateless</b> — mỗi API call độc lập</li>
+    <li>Conversation &gt;50 turns → hit context limit</li>
+    <li>Context Window = <b>RAM</b> (~128K) · External Store = <b>Ổ cứng</b></li>
+  </ul>
+</div>
+
+<h2>7 Context Layers</h2>
+<div class="card">
+  <ol style="margin:0">
+    <li>System — persona, constraints</li>
+    <li>Task — objective, instructions</li>
+    <li>User — preferences, history</li>
+    <li>Memory — recalled facts, episodes</li>
+    <li>Retrieval — RAG results</li>
+    <li>Tool — function outputs</li>
+    <li><b>Policy</b> — guardrails <span class="pill o">trim cuối</span></li>
+  </ol>
+  <p style="margin:8px 0 0"><b>Trim từ dưới lên.</b> User pref vs policy → <b>policy thắng</b>.</p>
+</div>
+
+<h2>Token budget</h2>
+<div class="card">
+  <dl class="kv">
+    <dt>Short-term</dt><dd>10%</dd>
+    <dt>Long-term facts</dt><dd>4%</dd>
+    <dt>Episodic</dt><dd>3%</dd>
+    <dt>Semantic</dt><dd>3%</dd>
+    <dt>TỔNG</dt><dd><b>20%</b> — vượt là nhiễu, giảm accuracy</dd>
+  </dl>
+</div>
+
+<h2>4 loại Memory</h2>
+<table>
+  <tr><th>Loại</th><th>Backend</th><th>Trả lời</th></tr>
+  <tr><td><b>Short-term</b></td><td>Context window</td><td>Đang nói gì?</td></tr>
+  <tr><td><b>Long-term</b></td><td>Redis/PostgreSQL</td><td>User là ai?</td></tr>
+  <tr><td><b>Episodic</b></td><td>Log có thứ tự</td><td>Lần trước làm gì?</td></tr>
+  <tr><td><b>Semantic</b></td><td>Vector DB</td><td>Kiến thức nền?</td></tr>
+</table>
+<p class="sub">Trục: Tạm thời ↔ Bền vững | Cá nhân ↔ Tri thức</p>
+
+<h2>Short-term — 3 chiến lược</h2>
+<div class="card">
+  <ul style="margin:0">
+    <li><b>Buffer</b> — giữ tất cả, hit limit ~50 turns</li>
+    <li><b>Summary</b> — LLM tóm tắt, tốn LLM calls</li>
+    <li><b>Sliding window</b> ⭐ — <code>system + summary + last K</code></li>
+  </ul>
+</div>
+
+<h2>Long-term / Redis</h2>
+<div class="card">
+  <dl class="kv">
+    <dt>Hash</dt><dd>preferences (language, style)</dd>
+    <dt>Set</dt><dd>facts</dd>
+    <dt>List</dt><dd>session history</dd>
+    <dt>TTL</dt><dd>prefs 90d · facts 30d · sessions 7d</dd>
+  </dl>
+  <p style="margin:8px 0 0">Tất cả <b>O(1) reads</b></p>
+</div>
+</div>
+
+<div>
+<h2>Memory Flow</h2>
+<div class="card">
+  <p style="margin:0"><b>Buffer → Summarize → Extract → Persist</b></p>
+  <ul style="margin:8px 0 0">
+    <li>Trigger: token count &gt; threshold</li>
+    <li>Chỉ persist <b>sau task completion</b></li>
+    <li>Conflict: <b>recency wins</b> + flag review</li>
+  </ul>
+</div>
+
+<h2>MemoryState &amp; Priority</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><code>messages · user_profile · episodes · semantic_hits · memory_budget</code></p>
+  <p style="margin:0"><b>Inject priority:</b> 1 Short-term → 2 Long-term facts → 3 Episodes → 4 Semantic</p>
+</div>
+
+<h2>Episodic</h2>
+<div class="card">
+  <p style="margin:0 0 6px">Tuple: <code>(task, trajectory, outcome, reflection)</code></p>
+  <p style="margin:0"><b>4 cơ chế:</b> LRU · Importance decay · Consolidation · Voyager-style</p>
+</div>
+
+<h2>Semantic</h2>
+<div class="card">
+  <p style="margin:0 0 6px">Docs → Embed → Chroma → cosine sim → Top-K</p>
+  <p style="margin:0">Metadata: <code>source · confidence · timestamp</code></p>
+</div>
+
+<h2>Framework vs Custom</h2>
+<table>
+  <tr><th></th><th>Mem0/Zep</th><th>Custom</th></tr>
+  <tr><td>Setup</td><td>Nhanh</td><td>Chậm</td></tr>
+  <tr><td>Control</td><td>Hạn chế</td><td>Full</td></tr>
+  <tr><td>Dùng khi</td><td>MVP</td><td>Production</td></tr>
+</table>
+
+<h2>Privacy / GDPR</h2>
+<div class="card">
+  <ul style="margin:0">
+    <li><b>Privacy-by-Design</b> — mặc định không lưu PII, cần opt-in</li>
+    <li><b>Right to be Forgotten</b> — xóa + confirm deletion</li>
+    <li><b>Federated Forgetting</b> — propagate tới mọi agent</li>
+  </ul>
+  <p style="margin:8px 0 0">Checklist: minimization · purpose · storage(TTL) · consent · deletion verification</p>
+</div>
+
+<h2>Trend 2025–2026</h2>
+<div class="card">
+  <ol style="margin:0">
+    <li><b>Cross-session memory</b> — user-scoped, structured facts</li>
+    <li><b>Compaction + notes</b> — recent turns + summary + durable notes</li>
+    <li><b>Identity files</b> — AGENTS/SOUL/MEMORY/TASKS.md</li>
+    <li><b>Heartbeat loops</b> — agent tự refresh state</li>
+    <li><b>Compiled KB</b> — LLM Wiki thay vì RAG lại từ raw</li>
+  </ol>
+</div>
+
+<h2>Bẫy cần nhớ</h2>
+<div class="card">
+  <ul style="margin:0">
+    <li>❌ Đem toàn bộ transcript qua session mới</li>
+    <li>❌ Coi identity files là retrieval engine</li>
+    <li>❌ Summary lan man mơ hồ hơn bản gốc</li>
+    <li>❌ Heartbeat tự cấp thêm quyền cho mình</li>
+    <li>❌ Memory gán nhầm user</li>
+  </ul>
+</div>
+
+<h2>4 Takeaways</h2>
+<div class="card">
+  <ol style="margin:0">
+    <li>Tối thiểu short-term + long-term</li>
+    <li>Bad retrieval = irrelevant context = wrong answer</li>
+    <li>Write-back: nhớ gì · khi nào · conflict · TTL</li>
+    <li>Privacy từ đầu, không phải afterthought</li>
+  </ol>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- ==================== TAB 3 ==================== -->
+<section class="panel" id="cards">
+<div class="fcbar">
+  <button class="fbtn on" data-f="all">Tất cả</button>
+  <button class="fbtn" data-f="basic">Nền tảng</button>
+  <button class="fbtn" data-f="types">4 loại memory</button>
+  <button class="fbtn" data-f="impl">Triển khai</button>
+  <button class="fbtn" data-f="privacy">Privacy</button>
+  <button class="fbtn" data-f="trend">Xu hướng</button>
+  <span class="counter" id="cnt"></span>
+</div>
+<div class="fcgrid" id="fcgrid"></div>
+<p class="hint">Click vào thẻ để lật · Click lần nữa để úp lại</p>
+</section>
+
+</div>
+
+<script>
+/* tabs */
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); document.getElementById(b.dataset.t).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+/* flashcards */
+const CARDS=[
+ ['basic','Vì sao agent “quên” sau mỗi conversation?','LLM <b>không có persistent state</b> — mỗi API call là một request độc lập. Session mới bắt đầu từ zero.'],
+ ['basic','Context Window và External Store ví như gì?','Context Window = <b>RAM</b> (nhanh, tạm, ~128K tokens). External Store = <b>Ổ cứng</b> (chậm hơn, bền vững, gần vô hạn — Redis, Vector DB).'],
+ ['basic','7 context layers theo thứ tự?','System → Task → User → Memory → Retrieval → Tool → <b>Policy</b>.<br>Trim từ dưới lên, Policy trim cuối cùng.'],
+ ['basic','User preference mâu thuẫn policy constraint thì sao?','<b>Policy luôn thắng.</b> Cần explicit rules trong system design, không để model tự quyết.'],
+ ['basic','Token budget cho 4 loại memory?','Short-term <b>10%</b> · Long-term facts <b>4%</b> · Episodic <b>3%</b> · Semantic <b>3%</b> = tổng <b>20%</b>.<br>Vượt 20% → context nhiễu, accuracy giảm.'],
+
+ ['types','4 loại memory phân theo hai trục nào?','<b>Tạm thời ↔ Bền vững</b> và <b>Cá nhân ↔ Tri thức</b>.'],
+ ['types','Ánh xạ thuật ngữ khoa học nhận thức?','Working ↔ <b>Short-term</b> · Declarative ↔ <b>Long-term</b> · Episodic &amp; Semantic giữ nguyên tên.'],
+ ['types','Episodic memory trả lời câu hỏi gì?','“<b>Lần trước tôi đã làm gì?</b>” — log trải nghiệm có thứ tự thời gian.'],
+ ['types','Phân biệt Episodic và Long-term?','Episodic = <b>chuỗi sự việc</b> có thứ tự (task, trajectory, outcome, reflection).<br>Long-term = <b>trạng thái tĩnh</b> (user prefs, facts).'],
+ ['types','Phân biệt Semantic và Long-term?','Cùng “Bền vững” nhưng khác trục: Semantic ở trục <b>Tri thức</b> (domain knowledge, Vector DB); Long-term ở trục <b>Cá nhân</b> (user prefs, Redis).'],
+ ['types','3 chiến lược short-term memory?','<b>Buffer</b> (giữ tất cả, hit limit ~50 turns) · <b>Summary</b> (LLM tóm tắt, tốn LLM calls) · <b>Sliding window</b> ⭐ (system + summary + last K turns).'],
+ ['types','Short-term nên chiếm bao nhiêu context window?','<b>Tối đa 10%.</b> Trim khi vượt — keep recent N tokens, discard oldest.'],
+
+ ['impl','Cấu trúc dữ liệu Redis cho long-term memory?','<b>Hash</b> → preferences (language, style)<br><b>Set</b> → facts<br><b>List</b> → session history<br>Tất cả O(1) reads.'],
+ ['impl','TTL đề xuất cho Redis?','Preferences <b>90 ngày</b> · Facts <b>30 ngày</b> · Sessions <b>7 ngày</b>. TTL giảm dần theo độ ổn định của dữ liệu.'],
+ ['impl','Memory Management Flow 4 bước?','<b>Buffer → Summarize → Extract → Persist.</b><br>Trigger: token count &gt; threshold. Chỉ persist <b>sau task completion</b>.'],
+ ['impl','Long-term fact mâu thuẫn short-term info thì sao?','<b>Recency wins</b> — thông tin mới thắng, đồng thời <b>flag for review</b> để con người xem lại.'],
+ ['impl','5 trường của MemoryState?','<code>messages</code> · <code>user_profile</code> (long-term) · <code>episodes</code> (episodic) · <code>semantic_hits</code> (semantic) · <code>memory_budget</code>.'],
+ ['impl','Thứ tự priority khi inject memory?','1. Short-term (gần nhất) → 2. Long-term facts → 3. Relevant episodes → 4. Semantic knowledge.<br>Trim thì cắt ngược từ 4 lên.'],
+ ['impl','Episodic memory lưu tuple gì?','<code>(task, trajectory, outcome, reflection)</code> — agent biết “approach X đã fail vì Y trong task tương tự”.'],
+ ['impl','4 cơ chế quản lý episodic memory?','<b>LRU</b> (xóa ít dùng) · <b>Importance decay</b> (score giảm theo thời gian) · <b>Consolidation</b> (merge tương tự) · <b>Voyager-style</b> (extract strategy → skill library).'],
+ ['impl','3 metadata khi thêm fact vào semantic memory?','<code>source</code> (truy vết) · <code>confidence</code> (độ tin cậy) · <code>timestamp</code> (độ tươi).'],
+ ['impl','Unified interface của Memory Architecture?','<code>retrieve(query, types=["all"])</code> → merged context từ cả 4 loại, đã trim theo token budget.'],
+
+ ['privacy','Mem0 mạnh ở điểm gì?','Auto-classify memory types · smart retrieval (relevance + recency) · claim 90% token reduction, 91% faster · API-first.'],
+ ['privacy','Zep mạnh ở điểm gì?','Entity extraction + progressive summarization · tự build user knowledge graph · multi-level summaries: <b>turn → session → cross-session</b>.'],
+ ['privacy','Khi nào dùng framework vs custom?','<b>Framework</b> (Mem0/Zep): setup nhanh, control hạn chế → MVP, go-to-market.<br><b>Custom</b> (Redis+Chroma): setup chậm, full control → production, đặc thù domain.'],
+ ['privacy','Privacy-by-Design nghĩa là gì?','<b>Mặc định không lưu PII.</b> User phải explicit opt-in trước khi agent ghi nhớ thông tin cá nhân.'],
+ ['privacy','Federated Forgetting là gì?','Trong multi-agent system, deletion request phải <b>propagate đến tất cả agents</b> có copy của dữ liệu.'],
+ ['privacy','5 mục checklist GDPR?','Data minimization · Purpose limitation · Storage limitation (TTL) · Consent management · Deletion verification.'],
+
+ ['trend','5 xu hướng Trend Radar 2025–2026?','1. Cross-session memory · 2. Compaction + notes · 3. Identity files · 4. Heartbeat loops · 5. Compiled knowledge base.'],
+ ['trend','Sai lầm phổ biến nhất khi làm cross-session memory?','<b>Đem toàn bộ transcript qua session mới</b> → token phình to, recall nhiễu, rủi ro rò rỉ dữ liệu giữa user tăng mạnh.'],
+ ['trend','Memory record nên có những trường nào?','<code>source</code> · <code>timestamp</code> · <code>confidence</code> · <code>ttl</code>.<br>Namespacing theo <code>user_id</code>, <code>org_id</code>, <code>topic</code>.'],
+ ['trend','Compaction giữ lại 3 lớp nào?','<b>Recent turns</b> (còn nóng) · <b>Session summary</b> (trạng thái, quyết định, blockers) · <b>Durable notes</b> (facts/tasks chuyển sang long-term).'],
+ ['trend','Pipeline compaction 4 bước?','Detect pressure → Summarize (decisions, blockers, next steps) → Extract notes → Rebuild context (summary + recent turns).'],
+ ['trend','Bẫy lớn nhất của compaction?','<b>Summary mơ hồ hơn transcript gốc.</b> Notes phải ưu tiên trạng thái, quyết định, TODO, constraint — thay vì tóm tắt lan man.'],
+ ['trend','4 identity file và vai trò?','<code>AGENTS.md</code> quy tắc/workflow · <code>SOUL.md</code> identity/tone · <code>MEMORY.md</code> notes bền vững · <code>TASKS.md</code> open loops/backlog.'],
+ ['trend','Hiểu sai phổ biến về identity files?','Coi chúng là <b>retrieval engine</b>. Thực tế: không re-rank, không TTL, không conflict resolution, không provenance.'],
+ ['trend','Ranh giới files vs retrieval memory?','Instruction files trả lời “<b>hãy cư xử thế nào</b>”; retrieval memory trả lời “<b>nên nhớ điều gì lúc này</b>”.'],
+ ['trend','Heartbeat loops hợp với use case nào?','Personal assistant · inbox triage · research copilot · <b>coding agent có backlog dài ngày</b>.'],
+ ['trend','Rủi ro chính của heartbeat loops?','Prompt injection không chỉ phá một lượt chat mà trở thành <b>memory poisoning</b> / <b>backlog poisoning</b> kéo dài nhiều phiên.'],
+ ['trend','Khi nào nâng từ RAG lên compiled KB?','Câu hỏi lặp lại nhưng vẫn retrieval lại từ đầu · cần timeline/contradiction/decision history · cần <b>audit trail</b> thay vì chỉ top-k chunks.'],
+ ['trend','4 key takeaways của Day 17?','1. Tối thiểu short-term + long-term<br>2. Bad retrieval = irrelevant context = wrong answer<br>3. Write-back: nhớ gì·khi nào·conflict·TTL<br>4. Privacy từ đầu.'],
+];
+const grid=document.getElementById('fcgrid'), cnt=document.getElementById('cnt');
+function render(f){
+  const list=f==='all'?CARDS:CARDS.filter(c=>c[0]===f);
+  grid.innerHTML=list.map(c=>`<div class="fc"><div class="fci">
+      <div class="ff"><div class="tag">${({basic:'Nền tảng',types:'4 loại memory',impl:'Triển khai',privacy:'Privacy',trend:'Xu hướng'})[c[0]]}</div><div class="q">${c[1]}</div></div>
+      <div class="fb"><div class="a">${c[2]}</div></div></div></div>`).join('');
+  cnt.textContent=list.length+' thẻ';
+  grid.querySelectorAll('.fc').forEach(el=>el.onclick=()=>el.classList.toggle('flip'));
+}
+document.querySelectorAll('.fbtn').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); render(b.dataset.f);
+});
+render('all');
+</script>
+</body>
+</html>

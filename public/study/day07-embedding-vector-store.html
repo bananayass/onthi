@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 7 — Data Foundations: Embedding &amp; Vector Store | Tóm tắt</title>
+<style>
+:root{
+  --bg:#f7f8fa; --card:#fff; --ink:#1a1d24; --muted:#5b6472; --line:#e3e7ee;
+  --brand:#1a4f8f; --brand-soft:#e8f0fa; --warn:#b8541a; --warn-soft:#fdf1e7;
+  --ok:#1d7a4f; --ok-soft:#e8f6ef; --bad:#c0392b; --bad-soft:#fdeceb;
+  --acc:#6b3fa0; --acc-soft:#f2ebfa;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+
+header{background:linear-gradient(135deg,#1a4f8f,#12325e);color:#fff;padding:34px 0 26px}
+header .wrap{padding-bottom:0}
+.kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;margin:0 0 6px}
+header h1{margin:0 0 8px;font-size:31px;line-height:1.2;font-weight:700}
+header p{margin:0;opacity:.9;font-size:15px}
+
+.tabbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);
+  box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.tabbar .wrap{display:flex;gap:4px;padding-top:0;padding-bottom:0}
+.tab{appearance:none;border:0;background:none;font:inherit;font-weight:600;font-size:15px;
+  padding:15px 18px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--brand);border-bottom-color:var(--brand)}
+.panel{display:none;padding-top:28px}
+.panel.on{display:block}
+
+h2{font-size:22px;margin:36px 0 4px;padding-top:14px;border-top:2px solid var(--line)}
+h2 .num{color:var(--brand);font-weight:700}
+h2:first-child{border-top:0;padding-top:0;margin-top:0}
+.sub{color:var(--muted);font-size:14.5px;margin:0 0 18px}
+h3{font-size:17px;margin:26px 0 10px}
+h4{font-size:15.5px;margin:0 0 8px}
+p{margin:10px 0}
+ul,ol{margin:10px 0;padding-left:22px}
+li{margin:5px 0}
+code{background:#eef1f6;padding:2px 6px;border-radius:4px;font-size:13.5px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:#1f2430;color:#e6e9ef;padding:13px 15px;border-radius:9px;overflow-x:auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.6;margin:12px 0}
+pre .kw{color:#c792ea} pre .st{color:#c3e88d} pre .cm{color:#7c85a3} pre .fn{color:#82aaff}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:820px){.g2,.g3{grid-template-columns:1fr}}
+
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:#fff;
+  border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{padding:9px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f2f5fa;font-weight:600;font-size:13px}
+tr:last-child td{border-bottom:0}
+
+.note{border-left:4px solid var(--brand);background:var(--brand-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.warn{border-left:4px solid var(--warn);background:var(--warn-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.bad{border-left:4px solid var(--bad);background:var(--bad-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.ok{border-left:4px solid var(--ok);background:var(--ok-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.acc{border-left:4px solid var(--acc);background:var(--acc-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note b,.warn b,.bad b,.ok b,.acc b{display:block;margin-bottom:3px;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+.note b{color:var(--brand)} .warn b{color:var(--warn)} .bad b{color:var(--bad)}
+.ok b{color:var(--ok)} .acc b{color:var(--acc)}
+
+.quote{margin:16px 0;padding:20px 24px;border-radius:12px;background:#1f2430;color:#fff;text-align:center}
+.quote p{margin:0;font-size:17.5px;font-weight:600;line-height:1.45}
+.quote small{display:block;margin-top:9px;opacity:.7;font-size:13px;letter-spacing:.06em}
+
+.pill{display:inline-block;font-size:12.5px;font-weight:600;padding:2px 9px;border-radius:20px;margin-right:5px}
+.pill.b{background:var(--brand-soft);color:var(--brand)}
+.pill.o{background:var(--ok-soft);color:var(--ok)}
+.pill.w{background:var(--warn-soft);color:var(--warn)}
+.pill.r{background:var(--bad-soft);color:var(--bad)}
+
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0}
+.step{background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-size:13.5px;font-weight:600}
+.step small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.step b{color:var(--brand)}
+.arw{color:var(--muted);font-weight:700;font-size:13px}
+
+/* pyramid */
+.pyr{margin:14px 0}
+.pyr>div{margin:0 auto 5px;padding:11px 14px;border-radius:8px;text-align:center;font-size:13.8px;color:#fff}
+.pyr .p4{width:46%;background:#12325e;font-weight:700}
+.pyr .p3{width:62%;background:#1a4f8f}
+.pyr .p2{width:78%;background:#3c74b4}
+.pyr .p1{width:94%;background:#8fadd0;color:#14304f}
+.pyr small{display:block;font-weight:400;opacity:.92;font-size:12px;margin-top:2px}
+
+/* chunk size comparison */
+.chk3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+@media(max-width:820px){.chk3{grid-template-columns:1fr}}
+.chk3>div{border:1px solid var(--line);border-radius:11px;padding:14px;background:#fff;border-top:4px solid}
+.chk3 .too-big{border-top-color:var(--bad)} .chk3 .just{border-top-color:var(--ok)} .chk3 .too-small{border-top-color:var(--warn)}
+.chk3 h4{margin:0 0 6px;font-size:14.5px}
+.chk3 .too-big h4{color:var(--bad)} .chk3 .just h4{color:var(--ok)} .chk3 .too-small h4{color:var(--warn)}
+.chk3 p{margin:0 0 8px;font-size:13.3px;color:var(--muted)}
+.chk3 .tk{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:700;background:#f1f3f7;color:#4a5361}
+
+/* vector space viz */
+.vsp{position:relative;height:190px;margin:14px 0;border:1px solid var(--line);border-radius:11px;background:#fff;overflow:hidden}
+.vsp .dot{position:absolute;padding:5px 11px;border-radius:20px;font-size:12.5px;font-weight:600;
+  border:1.5px solid;white-space:nowrap;transform:translate(-50%,-50%)}
+.vsp .g1{border-color:var(--ok);background:var(--ok-soft);color:var(--ok)}
+.vsp .g2{border-color:var(--acc);background:var(--acc-soft);color:var(--acc)}
+.vsp .g3{border-color:var(--warn);background:var(--warn-soft);color:var(--warn)}
+
+/* record card */
+.rec{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media(max-width:820px){.rec{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.rec{grid-template-columns:1fr}}
+.rec>div{border:1px solid var(--line);border-radius:11px;padding:13px;background:#fff;border-top:4px solid var(--brand)}
+.rec .k{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--brand);margin-bottom:5px}
+.rec strong{display:block;font-size:14px;margin-bottom:4px}
+.rec p{margin:0;font-size:12.6px;color:var(--muted)}
+
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+@media(max-width:700px){.vs{grid-template-columns:1fr}}
+.vs>div{border-radius:11px;padding:15px 17px;border:1px solid var(--line);background:#fff}
+.vs .lgood{border-top:4px solid var(--ok)}
+.vs .lbad{border-top:4px solid var(--bad)}
+.vs .lneu{border-top:4px solid var(--brand)}
+.vs h4{margin:0 0 8px;font-size:15px}
+.vs .lgood h4{color:var(--ok)} .vs .lbad h4{color:var(--bad)} .vs .lneu h4{color:var(--brand)}
+.vs p,.vs li{font-size:14px}
+.vs ul{margin:6px 0;padding-left:19px}
+
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+@media(max-width:820px){.three{grid-template-columns:1fr}}
+.three>div{border:1px solid var(--line);border-radius:11px;padding:15px;background:#fff;border-top:4px solid var(--brand)}
+.three .k{font-size:11.5px;font-weight:700;letter-spacing:.06em;color:var(--brand);margin-bottom:5px}
+.three strong{display:block;font-size:15px;margin-bottom:6px}
+.three p{margin:0;font-size:13.3px;color:var(--muted)}
+
+.qlist{margin:14px 0}
+.qi{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:10px;padding:12px 15px;margin-bottom:8px}
+.qi .n{flex:0 0 26px;height:26px;border-radius:50%;background:var(--brand-soft);color:var(--brand);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12.5px}
+.qi .b{flex:1;min-width:0;font-size:14px}
+.qi .b strong{display:block;margin-bottom:2px}
+.qi .b span{color:var(--muted);font-size:13.3px}
+
+#cheat{font-size:14px}
+#cheat h2{font-size:18px;margin:20px 0 8px;padding-top:10px}
+#cheat .card{padding:14px 16px;margin:10px 0}
+#cheat table{font-size:12.5px}
+#cheat th,#cheat td{padding:6px 8px}
+#cheat ul,#cheat ol{padding-left:19px} #cheat li{margin:3px 0}
+#cheat pre{font-size:11.5px;padding:9px 11px}
+.cheatgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:820px){.cheatgrid{grid-template-columns:1fr}}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13.5px}
+.kv dt{font-weight:600;color:var(--brand)}
+.kv dd{margin:0;color:var(--muted)}
+.printbtn{background:var(--brand);color:#fff;border:0;border-radius:8px;padding:9px 16px;
+  font:inherit;font-weight:600;font-size:14px;cursor:pointer;margin-bottom:6px}
+.printbtn:hover{background:#143f75}
+
+.fcbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.fbtn{background:#fff;border:1px solid var(--line);border-radius:20px;padding:6px 15px;
+  font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;color:var(--muted)}
+.fbtn:hover{border-color:var(--brand);color:var(--brand)}
+.fbtn.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.counter{margin-left:auto;font-size:13.5px;color:var(--muted)}
+.fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.fc{perspective:1100px;height:218px;cursor:pointer}
+.fci{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.fc.flip .fci{transform:rotateY(180deg)}
+.ff,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:18px;
+  display:flex;flex-direction:column;justify-content:center;border:1px solid var(--line);overflow:auto}
+.ff{background:#fff}
+.fb{background:var(--brand);color:#fff;transform:rotateY(180deg);border-color:var(--brand)}
+.fb code{background:rgba(255,255,255,.2);color:#fff}
+.ff .tag2{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);margin-bottom:8px}
+.ff .q{font-size:15.5px;font-weight:600;line-height:1.45}
+.fb .a{font-size:13.5px;line-height:1.55}
+.hint{text-align:center;color:var(--muted);font-size:12.5px;margin-top:10px}
+
+@media print{
+  header,.tabbar,.printbtn,.hint{display:none!important}
+  .panel{display:none!important} #cheat{display:block!important;padding-top:0}
+  body{background:#fff;font-size:10.5px} .wrap{max-width:100%;padding:0}
+  .card{break-inside:avoid;border-color:#ccc} table{break-inside:avoid}
+  pre{background:#f4f4f4;color:#222;border:1px solid #ddd}
+  pre .kw,pre .st,pre .cm,pre .fn{color:#222}
+  h2{break-after:avoid}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">AICB-P1 · Ngày 7 · Data Foundations</p>
+    <h1>Embedding &amp; Vector Store</h1>
+    <p>Agent trả lời sai vì model yếu, hay vì nó không có đúng dữ liệu để suy luận?</p>
+  </div>
+</header>
+
+<nav class="tabbar">
+  <div class="wrap">
+    <button class="tab on" data-t="detail">Tóm tắt chi tiết</button>
+    <button class="tab" data-t="cheat">Cheat sheet</button>
+    <button class="tab" data-t="cards">Flashcard</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ==================== TAB 1 ==================== -->
+<section class="panel on" id="detail">
+
+<div class="quote"><p>“Agent CS dùng GPT-4 nhưng trả sai chính sách hoàn tiền<br>— vì data là policy cũ 2023.”</p><small>CÂU HỎI MỞ ĐẦU</small></div>
+
+<div class="note"><b>Pipeline xuyên suốt cả ngày</b><b>Document → Chunk → Embed → Store → Query → Inject</b></div>
+
+<h2><span class="num">§1</span> &nbsp;Data Strategy cho sản phẩm AI</h2>
+<p class="sub">Không phải dữ liệu nào cũng nên đưa vào agent; <b>chọn đúng dữ liệu quan trọng hơn nạp thật nhiều</b>.</p>
+
+<h3>Ba cách đưa data vào model — cùng một câu hỏi</h3>
+<p class="sub">Câu hỏi: <i>“Chính sách hoàn tiền của công ty áp dụng bao lâu?”</i> — công ty có <b>800 file policy</b>.</p>
+<table>
+  <tr><th style="width:130px">Cách</th><th>Cơ chế</th><th>Ưu / Nhược</th><th style="width:180px">Dùng khi</th></tr>
+  <tr><td><b>1. In-Context</b></td><td>Dán thẳng nội dung vào prompt. <b>Không có bước embed, không có DB</b></td><td>+ Làm được trong 5 phút<br>− 800 file <b>không nhét nổi</b> vào context window</td><td>1–20 trang, ít thay đổi</td></tr>
+  <tr style="background:var(--ok-soft)"><td><b>2. RAG</b> <span class="pill o">Day 7+8</span></td><td>800 file → chunk → embed → store. Query “hoàn tiền” → tìm top-3 → nhét vào prompt. <b>Model không đổi, chỉ đổi context</b></td><td>+ Sửa policy → re-index, xong<br>+ <b>Trích được nguồn để cite</b><br>− Cần pipeline + vector store</td><td>Corpus lớn, fact hay đổi</td></tr>
+  <tr><td><b>3. Fine-tuning</b></td><td>Train lại trọng số: 5.000 cặp Q–A → training job. <b>Kiến thức nằm trong model, không nằm ở prompt</b></td><td>+ Học được giọng điệu, format riêng<br>− Policy đổi → <b>phải train lại</b><br>− Tốn GPU, cần data sạch</td><td><b>Cần style/tone, không phải để nhớ fact</b></td></tr>
+</table>
+<div class="bad"><b>Hiểu nhầm phổ biến nhất</b>Dùng fine-tuning để <b>nạp kiến thức mới</b>.<br><b>Fine-tuning dạy model CÁCH NÓI; RAG cung cấp ĐIỀU CẦN NÓI.</b> Fact thay đổi thường xuyên → chọn RAG.</div>
+
+<h3>Vì sao data quan trọng — số liệu Stanford AI Index 2025</h3>
+<table>
+  <tr><th style="width:190px">Chỉ số</th><th style="width:110px">2023</th><th style="width:110px">2024</th></tr>
+  <tr><td>AI use</td><td>55%</td><td><b>78%</b></td></tr>
+  <tr><td>GenAI</td><td>33%</td><td><b>71%</b></td></tr>
+</table>
+<p class="sub">Câu hỏi chuyển từ <b>“dùng model nào”</b> sang <b>“agent được phép biết gì”</b>. Nếu dữ liệu sai, cũ, bẩn, hoặc không truy được đúng lúc, output sẽ yếu <b>dù model mạnh</b>.</p>
+
+<h3>3 loại data agent cần</h3>
+<div class="three">
+  <div><div class="k">01</div><strong>Knowledge Data</strong><p>Tài liệu, policy, SOP, FAQ, manual, hợp đồng, bài viết nội bộ.<br><b>→ Phù hợp với retrieval</b></p></div>
+  <div><div class="k">02</div><strong>Operational Data</strong><p>Database, trạng thái đơn hàng, ticket, CRM records, logs, transactions.<br><b>→ Cần query có kiểm soát</b></p></div>
+  <div><div class="k">03</div><strong>Contextual Data</strong><p>Session history, user profile, preferences, recent actions, channel context.<br><b>→ Inject ngắn và đúng lúc</b></p></div>
+</div>
+
+<h3>Data Quality Pyramid</h3>
+<div class="pyr">
+  <div class="p4">ENRICHED<small>tag <code>category:support</code>, <code>access:public</code>, <code>quality:verified</code></small></div>
+  <div class="p3">STRUCTURED<small>chunk theo heading, gắn source <code>refund-v3.pdf</code></small></div>
+  <div class="p2">CLEANED<small>“đổi trả”, bỏ header/footer, chuẩn hóa Unicode</small></div>
+  <div class="p1">RAW<small>PDF scan lệch, OCR ra “đổi trả” thành “d0̲i trả”, HTML chứa tag rác</small></div>
+</div>
+<div class="bad"><b>Sai lầm phổ biến</b><b>Index ngay dữ liệu raw rồi kỳ vọng retrieval sẽ tự chữa mọi vấn đề.</b></div>
+
+<h2><span class="num">§2</span> &nbsp;Agent Memory Architecture</h2>
+<p class="sub">Memory không chỉ là lưu nhiều hơn; nó là quyết định xem agent <b>được nhớ gì, quên gì, và truy gì khi cần</b>.</p>
+
+<div class="vs">
+  <div class="lneu">
+    <h4>Short-term Memory</h4>
+    <ul><li>Nằm <b>trong</b> context window</li><li>Giữ lịch sử gần đây và task hiện tại</li><li><b>Rẻ để dùng, nhưng dễ đầy token</b></li><li>Phù hợp cho session logic ngắn</li></ul>
+  </div>
+  <div class="lneu">
+    <h4>Long-term Memory</h4>
+    <ul><li>Nằm <b>ngoài</b> context window</li><li>Thường là vector store, DB, profile store</li><li><b>Phải truy xuất khi cần</b></li><li>Phù hợp cho tri thức tích lũy và user history chọn lọc</li></ul>
+  </div>
+</div>
+<div class="acc"><b>Câu chốt</b><b>Context window KHÔNG phải là vector store.</b> Agent chỉ “nhớ dài hạn” khi có <b>cơ chế truy xuất hoặc lưu trữ bên ngoài</b>.</div>
+
+<h2><span class="num">§3</span> &nbsp;Chunking</h2>
+<p class="sub">Chunk là <b>đơn vị nhỏ nhất mà agent thật sự truy xuất</b>; cắt sai ở đây thì mọi bước sau đều trả giá.</p>
+
+<h3>Vì sao phải chunk?</h3>
+<div class="card">
+  <ul style="margin:0">
+    <li>Embedding model có <b>giới hạn token input</b></li>
+    <li>1 file dài → 1 vector: chỉ tìm được <b>file</b>, không tìm được <b>đoạn liên quan</b></li>
+    <li>Chunk nhỏ → retrieval chính xác hơn, inject ít nhiễu hơn</li>
+    <li>Đưa quá nhiều context không liên quan <b>làm giảm chất lượng câu trả lời</b> — model bị phân tán, tốn thêm token và latency</li>
+  </ul>
+</div>
+
+<h3>Quá to hay quá nhỏ đều trả giá</h3>
+<div class="chk3">
+  <div class="too-big"><h4>✗ Chunk quá to</h4><p>Dính nhiều chủ đề vào cùng một vector — <b>retrieve trúng nhưng inject rất nhiễu</b>.</p><span class="tk">&gt; 1000 tokens</span></div>
+  <div class="just"><h4>✓ Chunk hợp lý</h4><p>Một ý / một section trọn vẹn, có <b>overlap 10–15%</b> giữa các chunk.</p><span class="tk">200–500 tokens</span></div>
+  <div class="too-small"><h4>✗ Chunk quá nhỏ</h4><p><b>Mất ngữ cảnh</b>, retrieve nhiều mảnh rời rạc, khó tổng hợp.</p><span class="tk">&lt; 50 tokens</span></div>
+</div>
+<div class="ok"><b>Mẹo overlap</b>Khi cắt chunk, <b>lấy thêm 1–2 câu cuối của chunk trước làm phần đầu chunk sau</b> — giúp giữ ngữ cảnh tại điểm cắt.</div>
+
+<h4>Ví dụ: cùng một FAQ, ba cách chunk — query “đổi size”</h4>
+<table>
+  <tr><th style="width:130px">Cách chunk</th><th>Nội dung retrieve được</th><th>Kết quả</th></tr>
+  <tr><td><span class="pill r">Quá to</span></td><td>Q1 hoàn tiền + Q2 đổi size + Q3 ship quốc tế (cả 3)</td><td>LLM <b>bị nhiễu</b> bởi Q1, Q3</td></tr>
+  <tr style="background:var(--ok-soft)"><td><span class="pill o">Hợp lý</span></td><td>“Q2: Đổi size được không? A2: Được, trong vòng 30 ngày kể từ ngày mua.”</td><td>LLM trả lời <b>chính xác</b></td></tr>
+  <tr><td><span class="pill w">Quá nhỏ</span></td><td>“Trong 30 ngày.” hoặc “Q2: Đổi size được không?”</td><td><b>Thiếu ngữ cảnh</b>, LLM không đủ thông tin</td></tr>
+</table>
+
+<h3>Chiến lược chunking — 3 nhóm</h3>
+<h4>Nhóm nền tảng <span class="pill b">lab yêu cầu implement cả ba</span></h4>
+<table>
+  <tr><th style="width:150px">Strategy</th><th>Cách cắt</th><th>Mạnh</th><th>Yếu</th></tr>
+  <tr><td><b>Fixed-size</b></td><td>Cắt mỗi N token, overlap 10–15%</td><td>Đơn giản, chunk đều, dễ kiểm soát cost</td><td><b>Cắt giữa câu, giữa bảng</b></td></tr>
+  <tr><td><b>Recursive</b></td><td>Thử tách theo <code>\n\n</code> → <code>\n</code> → câu, đến khi vừa size</td><td>Tôn trọng ranh giới tự nhiên; <b>mặc định tốt</b></td><td>Vẫn cắt nếu 1 đoạn quá dài</td></tr>
+  <tr><td><b>Heading / structural</b></td><td>Cắt theo heading Markdown (<code>#</code>, <code>##</code>) hoặc theo section</td><td><b>Chunk trọn ý</b>, metadata section rõ</td><td>Cần tài liệu có cấu trúc tốt</td></tr>
+</table>
+
+<h4>Nhóm ngữ nghĩa</h4>
+<table>
+  <tr><th style="width:150px">Strategy</th><th>Cách cắt</th><th>Mạnh</th><th>Yếu</th></tr>
+  <tr><td><b>Semantic</b></td><td>Embed từng câu, cắt tại chỗ <b>cosine giữa 2 câu liền kề tụt mạnh</b> (topic shift)</td><td>Ranh giới đúng theo ý, không phụ thuộc heading</td><td>Tốn embedding lúc ingest; cần tune ngưỡng</td></tr>
+  <tr><td><b>Sentence-window</b></td><td><b>Index 1 câu</b>, nhưng <b>inject câu đó ±k câu</b> xung quanh</td><td>Retrieve rất chính xác, inject vẫn đủ ngữ cảnh</td><td>Số record lớn; cần lưu vị trí câu</td></tr>
+  <tr><td><b>Proposition / atomic</b></td><td>Dùng LLM viết lại đoạn thành các <b>mệnh đề độc lập</b>, mỗi mệnh đề 1 chunk</td><td>Mỗi chunk tự đủ nghĩa, <b>ít nhiễu nhất</b></td><td><b>Đắt nhất</b>; LLM có thể bóp méo nội dung</td></tr>
+</table>
+<p class="sub">Nhóm này <b>tôn trọng ngữ nghĩa thay vì đếm token</b>. Đắt hơn khi ingest (cần embed hoặc gọi LLM), nhưng thường tăng retrieval precision rõ rệt trên tài liệu dài, ít cấu trúc.</p>
+
+<h4>Nhóm chuyên biệt</h4>
+<table>
+  <tr><th style="width:170px">Strategy</th><th>Cách cắt</th><th>Mạnh</th><th>Yếu</th></tr>
+  <tr><td><b>Parent-child</b></td><td>Index chunk <b>nhỏ</b> để search, inject chunk <b>cha</b> lớn hơn</td><td>Cân bằng precision và ngữ cảnh; <b>rất phổ biến trong production</b></td><td>Cần lưu quan hệ cha–con</td></tr>
+  <tr><td><b>Hierarchical</b></td><td>Nhiều tầng: doc summary → section → paragraph, search từ trên xuống</td><td>Tốt cho corpus rất lớn, hỗ trợ <b>câu hỏi tổng hợp</b></td><td>Pipeline phức tạp, phải sinh summary</td></tr>
+  <tr><td><b>Code-aware (AST)</b></td><td>Cắt theo hàm / class bằng AST parser</td><td><b>Không bao giờ cắt giữa hàm</b>; giữ import, signature</td><td>Cần parser theo từng ngôn ngữ</td></tr>
+  <tr><td><b>Table / layout-aware</b></td><td>Giữ nguyên bảng, kèm lại header dòng cho mỗi phần bảng</td><td><b>Bảng không bị mất nghĩa khi cắt</b></td><td>Cần layout parser cho PDF</td></tr>
+</table>
+
+<h3>Cây quyết định chọn chunking</h3>
+<div class="qlist">
+  <div class="qi"><div class="n">1</div><div class="b"><strong>Tài liệu có heading / Markdown tốt</strong><span>→ <b>Heading / structural</b> (bắt đầu ở đây)</span></div></div>
+  <div class="qi"><div class="n">2</div><div class="b"><strong>Không có cấu trúc, văn bản chảy dài</strong><span>→ <b>Recursive</b>, rồi thử <b>Semantic</b></span></div></div>
+  <div class="qi"><div class="n">3</div><div class="b"><strong>Retrieval trúng chunk nhưng LLM THIẾU ngữ cảnh</strong><span>→ <b>Parent-child</b> hoặc <b>Sentence-window</b></span></div></div>
+  <div class="qi"><div class="n">4</div><div class="b"><strong>Retrieval trúng chunk nhưng LLM BỊ NHIỄU</strong><span>→ chunk nhỏ hơn, hoặc <b>Proposition</b></span></div></div>
+  <div class="qi"><div class="n">5</div><div class="b"><strong>Corpus rất lớn, có câu hỏi tổng hợp</strong><span>→ <b>Hierarchical</b></span></div></div>
+  <div class="qi"><div class="n">6</div><div class="b"><strong>Source code / PDF nhiều bảng</strong><span>→ <b>Code-aware (AST)</b> / <b>Table-aware</b></span></div></div>
+</div>
+<div class="ok"><b>Nguyên tắc</b>Bắt đầu bằng strategy <b>đơn giản nhất chạy được</b>, dựng bộ eval query, rồi mới nâng cấp <b>dựa trên số đo</b> — <b>không nhảy thẳng vào Proposition vì nghe hiện đại</b>.</div>
+
+<h2><span class="num">§4</span> &nbsp;Embeddings</h2>
+<p class="sub">Embedding biến ngôn ngữ thành <b>không gian toán học</b> để máy có thể so sánh <b>nghĩa</b> thay vì chỉ so <b>chữ</b>.</p>
+
+<div class="quote"><p>“Làm sao để máy biết hai thứ ‘giống nhau’ —<br>khi chúng không cùng ngôn ngữ, không cùng định dạng?”</p><small>BÀI TOÁN KHOẢNG CÁCH</small></div>
+
+<div class="flow">
+  <span class="step">chính sách hoàn tiền<small>text</small></span>
+  <span class="step">Ảnh mèo trên sofa<small>image</small></span>
+  <span class="step">Audio hotline<small>audio</small></span>
+  <span class="arw">→ Embedding model →</span>
+  <span class="step">vector <b>1536 chiều</b><small>cùng một không gian</small></span>
+</div>
+<p class="sub">Embedding model là <b>hàm biến dữ liệu thô thành vector số cùng kích thước</b>. Sau đó, <b>đo khoảng cách giữa các vector = đo độ giống nhau về nghĩa</b>.</p>
+
+<div class="vsp">
+  <div class="dot g1" style="left:26%;top:30%">hoàn tiền</div>
+  <div class="dot g1" style="left:38%;top:52%">refund</div>
+  <div class="dot g1" style="left:22%;top:62%">đổi trả</div>
+  <div class="dot g2" style="left:72%;top:34%">shipping</div>
+  <div class="dot g2" style="left:80%;top:56%">vận chuyển</div>
+  <div class="dot g3" style="left:54%;top:83%">thời tiết</div>
+</div>
+<p class="sub" style="text-align:center">Câu có nghĩa gần nhau sẽ <b>ở gần nhau hơn</b> trong vector space.</p>
+
+<h3>Lịch sử phát triển embedding model</h3>
+<table>
+  <tr><th style="width:170px">Thời kỳ</th><th>Ưu điểm</th><th>Nhược điểm</th></tr>
+  <tr><td><b>1990s</b><br>One-Hot / BOW</td><td>Cực kỳ đơn giản, không cần huấn luyện, xử lý nhanh</td><td><b>Ma trận thưa (sparse)</b>, tốn bộ nhớ; <b>hoàn toàn không hiểu ngữ nghĩa</b></td></tr>
+  <tr><td><b>2013</b><br>Word2Vec / GloVe</td><td><b>Vector dày (dense)</b> tối ưu lưu trữ; học được quan hệ ngữ nghĩa</td><td><b>Vector tĩnh</b>: một từ chỉ có một biểu diễn → không giải quyết <b>từ đa nghĩa</b></td></tr>
+  <tr><td><b>2018</b><br>ELMo / CoVe</td><td><b>Embedding động đầu tiên</b>: vector thay đổi theo ngữ cảnh câu (LSTM)</td><td>LSTM xử lý <b>tuần tự</b> nên chậm; ghi nhớ ngữ cảnh dài còn hạn chế</td></tr>
+  <tr style="background:var(--ok-soft)"><td><b>2019 – nay</b><br>BERT / GPT</td><td><b>Self-Attention</b> hiểu ngữ cảnh đa chiều; nền tảng cho LLM hiện đại</td><td>Yêu cầu <b>GPU</b>, chi phí triển khai cao, độ trễ lớn hơn</td></tr>
+</table>
+<p class="sub">Sự tiến hóa từ <b>vector thưa, tĩnh, không ngữ cảnh</b> sang <b>vector dày đa chiều chứa đầy đủ thông tin ngữ nghĩa</b> là bước ngoặt quyết định của NLP.</p>
+
+<h3>Cosine hay Euclidean?</h3>
+<p class="sub">Câu hỏi gốc: <b>“độ lớn của vector có mang thông tin cần so sánh hay không?”</b></p>
+<div class="vs">
+  <div class="lneu">
+    <h4>Dùng COSINE khi…</h4>
+    <p>Chỉ quan tâm <b>nội dung / hướng</b>, không quan tâm độ lớn — dữ liệu dài ngắn rất khác nhau nhưng cùng chủ đề. Vector thưa, nhiều chiều: text embedding, TF-IDF, user preference.</p>
+    <p style="margin:8px 0 0;color:var(--muted)"><b>VD:</b> “hoàn tiền” (5 từ) vs cả trang policy hoàn tiền → cosine <b>vẫn thấy giống nhau</b>.</p>
+  </div>
+  <div class="lneu">
+    <h4>Dùng EUCLIDEAN khi…</h4>
+    <p><b>Độ lớn là thông tin thật</b>, không phải nhiễu, và các chiều <b>cùng đơn vị / cùng scale</b>. Cần khoảng cách tuyệt đối: toạ độ, cảm biến, image feature, clustering (k-means).</p>
+    <p style="margin:8px 0 0;color:var(--muted)"><b>VD:</b> hai điểm GPS — 2 km và 200 km <b>khác nhau thật</b>, không được chuẩn hóa mất.</p>
+  </div>
+</div>
+<div class="ok"><b>Quy tắc thực dụng</b>Khi vector đã <b>normalize về độ dài 1</b>, cosine và Euclidean <b>xếp hạng giống nhau</b>. Phần lớn embedding model hiện đại đều trả vector đã normalize → <b>mặc định cứ dùng cosine cho text</b>.</div>
+
+<h3>Score nghĩa là gì?</h3>
+<table>
+  <tr><th style="width:230px">Câu A</th><th style="width:230px">Câu B</th><th style="width:110px">Cosine</th><th>Nghĩa</th></tr>
+  <tr><td rowspan="4">“Chính sách hoàn tiền”</td><td>“Quy định đổi trả”</td><td><b>~0.87</b></td><td>Rất gần nghĩa</td></tr>
+  <tr><td>“Refund policy”</td><td><b>~0.82</b></td><td><b>Cross-lingual!</b></td></tr>
+  <tr><td>“Cách giao hàng nhanh”</td><td>~0.52</td><td>Liên quan</td></tr>
+  <tr><td>“Thời tiết hôm nay”</td><td>~0.31</td><td>Không liên quan</td></tr>
+</table>
+<p class="sub">Embedding model hiểu nghĩa <b>cross-lingual</b>: “hoàn tiền” và “refund” gần nhau dù khác ngôn ngữ. <b>Đây là sức mạnh so với keyword search.</b></p>
+
+<h3>Embedding dùng để làm gì?</h3>
+<table>
+  <tr><th style="width:170px">Use case</th><th>Cách hoạt động</th><th>Ví dụ thực tế</th></tr>
+  <tr><td><b>Semantic search</b></td><td>Embed query + embed tài liệu, tìm cosine cao nhất</td><td>User hỏi “trả hàng” → tìm được chunk “chính sách đổi trả” <b>dù không trùng từ</b></td></tr>
+  <tr><td><b>Clustering</b></td><td>Gom các vector gần nhau thành nhóm</td><td>10.000 ticket CS → tự phân thành 15 chủ đề</td></tr>
+  <tr><td><b>Dedup</b></td><td>So cosine giữa các cặp, đánh dấu cặp &gt; threshold</td><td>Phát hiện 2 bài FAQ nội dung gần giống, gộp lại</td></tr>
+  <tr><td><b>Recommendation</b></td><td>Embed user intent + embed item, rank theo cosine</td><td>User vừa đọc “React hooks” → gợi ý “useState patterns”</td></tr>
+</table>
+<div class="bad"><b>Cảnh báo</b>Embedding <b>không tự tạo ra “sự thật”</b>. Nếu text nguồn sai, thiếu, hoặc chunk xấu thì retrieval vẫn tệ — <b>garbage in, garbage out</b>.</div>
+
+<h3>Chọn embedding model — trade-off thực tế</h3>
+<table>
+  <tr><th style="width:230px">Model</th><th style="width:110px">Dim</th><th style="width:110px">MTEB Avg</th><th>Khi nào dùng</th></tr>
+  <tr><td>text-embedding-3-small</td><td>1536</td><td>62.3</td><td>Demo, PoC, lab (rẻ, nhanh)</td></tr>
+  <tr><td>text-embedding-3-large</td><td>3072</td><td>64.6</td><td>Production cần chất lượng</td></tr>
+  <tr><td>Open-source (e5, BGE)</td><td>768–4096</td><td>61–66</td><td>Self-host, data nhạy cảm, free</td></tr>
+</table>
+<div class="warn"><b>Hai lưu ý</b><b>Không có model “tốt nhất” cho mọi use case</b> — chọn theo quality, latency, storage, language.<br>Với product thực tế, <b>model cân bằng thường tốt hơn model mạnh nhất nhưng chậm và đắt</b>. Số liệu MTEB thay đổi liên tục, luôn kiểm tra bản mới nhất.</div>
+
+<h2><span class="num">§5</span> &nbsp;Vector Store</h2>
+<p class="sub">Vector store không chỉ lưu vector; nó lưu cả <b>nguồn, metadata, và khả năng lọc</b> để retrieval có ngữ cảnh đúng.</p>
+
+<h3>Mỗi record gồm 4 thành phần</h3>
+<div class="rec">
+  <div><div class="k">01</div><strong>ID</strong><p>Định danh record</p></div>
+  <div><div class="k">02</div><strong>Original chunk</strong><p>Text gốc — dùng để <b>inject vào prompt</b></p></div>
+  <div><div class="k">03</div><strong>Embedding vector</strong><p>Dùng để <b>tìm</b> (semantic search)</p></div>
+  <div><div class="k">04</div><strong>Metadata</strong><p>Key-value: source, category, access…</p></div>
+</div>
+<div class="acc"><b>Phân biệt quan trọng</b><b>Vector dùng để TÌM. Chunk dùng để INJECT vào prompt cho LLM.</b> Hai thứ khác nhau, lưu cùng nhau.<br><i>(Search results top-k là <b>output khi query</b>, không phải thứ được lưu.)</i></div>
+
+<h3>3 tham số điều khiển retrieval</h3>
+<table>
+  <tr><th style="width:180px">Tham số</th><th>Ý nghĩa</th><th>Ví dụ</th></tr>
+  <tr><td><b>Top-k</b></td><td>Lấy bao nhiêu chunk gần nhất</td><td><code>n_results=3</code>: đủ cho câu hỏi đơn · <code>n_results=10</code>: khi cần tổng hợp nhiều nguồn</td></tr>
+  <tr><td><b>Score threshold</b></td><td>Bỏ chunk có cosine thấp hơn ngưỡng</td><td><b>0.7</b>: chỉ giữ chunk thật sự liên quan · <b>0.4</b>: chấp nhận liên quan nhẹ</td></tr>
+  <tr><td><b>Attribute filter</b></td><td>Lọc theo metadata <b>TRƯỚC KHI</b> search</td><td><code>where={"category": "support"}</code>: chỉ tìm trong tài liệu CS</td></tr>
+</table>
+<div class="ok"><b>Công thức thực dụng</b>Filter theo category <b>trước</b> → semantic search → lấy <b>top-3 có score &gt; 0.6</b>.<br><b>Retrieval tốt = chunk đúng + metadata đủ + filter hợp lý — không phải đổi model.</b></div>
+
+<h3>Vector store phổ biến — Open Source</h3>
+<table>
+  <tr><th style="width:110px">Tên</th><th style="width:150px">Dạng</th><th>Điểm mạnh</th><th>Phù hợp khi</th></tr>
+  <tr style="background:var(--ok-soft)"><td><b>Chroma</b></td><td>Embedded / server (Python)</td><td>Cài 1 dòng <code>pip</code>, API cực gọn, chạy in-memory</td><td>Học, prototype, PoC nhỏ — <b>dùng trong lab hôm nay</b></td></tr>
+  <tr><td><b>FAISS</b></td><td>Library (Meta)</td><td>Nhanh nhất cho ANN search thuần, nhiều loại index</td><td>Cần tốc độ, tự quản lý; <b>KHÔNG phải DB</b> (không metadata filter, không persistence sẵn)</td></tr>
+  <tr><td><b>Qdrant</b></td><td>Server (Rust)</td><td><b>Filter metadata mạnh</b>, hiệu năng tốt, API rõ ràng</td><td>Production tự host, cần filter phức tạp</td></tr>
+  <tr><td><b>Milvus</b></td><td>Distributed (LF AI)</td><td>Scale <b>tỉ vector</b>, GPU index, cloud-native</td><td>Corpus rất lớn, có team hạ tầng</td></tr>
+  <tr><td><b>Weaviate</b></td><td>Server (Go)</td><td><b>Hybrid search sẵn</b>, schema + module vectorizer</td><td>Cần hybrid keyword + vector</td></tr>
+  <tr><td><b>pgvector</b></td><td>Extension cho PostgreSQL</td><td>Dùng luôn DB đang có, <b>JOIN với data quan hệ</b>, ACID</td><td>Đã có Postgres và corpus vừa phải — lựa chọn “nhàm chán” nhưng rất hiệu quả</td></tr>
+</table>
+
+<h3>Vector store phổ biến — Commercial &amp; Managed</h3>
+<table>
+  <tr><th style="width:150px">Tên</th><th style="width:150px">Dạng</th><th>Điểm mạnh</th><th>Lưu ý</th></tr>
+  <tr><td><b>Pinecone</b></td><td>SaaS thuần</td><td>Managed hoàn toàn, serverless, độ tin cậy cao</td><td><b>Vendor lock-in</b>; chi phí tăng theo số vector</td></tr>
+  <tr><td><b>Elasticsearch / OpenSearch</b></td><td>Search engine + vector</td><td><b>Hybrid BM25 + vector</b> rất mạnh, hệ sinh thái lớn</td><td>Nặng để vận hành nếu chỉ cần vector</td></tr>
+  <tr><td><b>Azure AI Search</b></td><td>Managed (Microsoft)</td><td>Tích hợp sẵn pipeline ingest, OCR, hybrid</td><td>Gắn với hệ sinh thái Azure</td></tr>
+  <tr><td><b>Vertex AI Vector Search</b></td><td>Managed (Google)</td><td>Scale rất lớn, độ trễ thấp</td><td>Cấu hình index phức tạp hơn</td></tr>
+  <tr><td><b>MongoDB Atlas / Redis</b></td><td>DB có thêm vector index</td><td>Dùng luôn DB sẵn có, giảm số hệ thống</td><td>Tính năng vector ít sâu hơn DB chuyên dụng</td></tr>
+  <tr><td><b>File Search API</b> (OpenAI, Anthropic…)</td><td>Retrieval as a service</td><td><b>Không cần chunk / embed / store</b> — gọi API là xong</td><td>Ít kiểm soát chunking, metadata, và cost path</td></tr>
+</table>
+<div class="note"><b>Lời khuyên quan trọng nhất</b><b>Đổi vector store là việc tương đối dễ</b> — interface đều là <code>add / query / filter</code>. Nhưng <b>đổi embedding model thì phải RE-INDEX toàn bộ</b>.<br>→ Vì vậy <b>đừng dành quá nhiều thời gian chọn store ở giai đoạn đầu</b>.</div>
+<p class="sub"><b>Đường đi thực dụng:</b> Học/prototype → <b>Chroma</b> · Đã có Postgres → <b>pgvector</b> · Production tự host → <b>Qdrant/Weaviate</b> · Không muốn lo hạ tầng → <b>Pinecone</b> · Cần hybrid + đã có ELK → <b>Elasticsearch</b> · Tỉ vector → <b>Milvus/Vertex</b>.</p>
+
+<h2><span class="num">§6</span> &nbsp;Data Processing Pipeline</h2>
+
+<h3>Format nào tối ưu cho LLM?</h3>
+<table>
+  <tr><th style="width:150px">Format</th><th style="width:130px">Token hiệu quả</th><th>Giữ cấu trúc</th><th>Khi nào dùng</th></tr>
+  <tr style="background:var(--ok-soft)"><td><b>Markdown</b></td><td>★★★★★</td><td>Heading, list, table, bold</td><td><b>Mặc định trong nhiều trường hợp</b></td></tr>
+  <tr><td>HTML (clean)</td><td>★★★</td><td>Bảng lồng, colspan, layout phức tạp</td><td>Khi MD mất thông tin cấu trúc</td></tr>
+  <tr><td>Plain Text</td><td>★★★★</td><td>Không có cấu trúc</td><td>Email, chat log, transcript</td></tr>
+  <tr><td>JSON / YAML</td><td>★★★</td><td>Key-value, nested objects</td><td>Structured output, function calling</td></tr>
+</table>
+<div class="ok"><b>Vì sao Markdown</b>So với HTML cùng nội dung, <b>tiết kiệm ~30–50% token</b> vì không có closing tags, attributes, class names. LLM được train trên lượng lớn MD nên <b>hiểu rất tự nhiên</b>.</div>
+
+<h3>Toàn cảnh ingestion pipeline — 3 khối lớn</h3>
+<div class="three">
+  <div><div class="k">KHỐI 1</div><strong>Input Control</strong><p><b>Chọn &amp; kiểm soát nguồn.</b> Nguồn nào được index? Nhận diện MIME type → mở file → chọn extractor đúng. <b>Ai sở hữu? PII? Access level?</b></p></div>
+  <div><div class="k">KHỐI 2</div><strong>Processing Pipeline</strong><p><b>Làm sạch &amp; chuẩn hóa.</b> OCR/extract → clean header, footer, rác → structure → <b>Markdown + metadata</b></p></div>
+  <div><div class="k">KHỐI 3</div><strong>Indexing Pipeline</strong><p><b>Cắt, embed, lưu.</b> Chunking → embed → store (vector + chunk + metadata) → verify</p></div>
+</div>
+<div class="bad"><b>Nguyên tắc debug</b>Lỗi retrieval <b>thường KHÔNG sinh ra ở khối 3</b>. Nó sinh ra ở <b>khối 1</b> (index sai nguồn) hoặc <b>khối 2</b> (bỏ bước clean) — nhưng <b>chỉ lộ ra khi query</b>.<br>→ <b>Debug thì đi ngược từ 3 về 1.</b></div>
+
+<h3>Input Control — nhận diện MIME &amp; chọn extractor</h3>
+<div class="flow">
+  <span class="step">File / URL</span><span class="arw">→</span>
+  <span class="step">Detect MIME type</span><span class="arw">→</span>
+  <span class="step">Mở file (validate)</span><span class="arw">→</span>
+  <span class="step">Chọn extractor<small>pdf → PDF parser · officedocument → docx · image/* → OCR · text/html → HTML → MD</small></span>
+</div>
+<div class="vs">
+  <div class="lbad">
+    <h4>Đừng tin phần mở rộng file</h4>
+    <p><code>.pdf</code> có thể là <b>scan ảnh</b>; <code>.txt</code> có thể là <b>JSON</b>; <code>.doc</code> có thể là <b>RTF</b>. Kiểm tra <b>magic bytes / MIME thật</b>, không chỉ đọc đuôi file.</p>
+  </div>
+  <div class="lgood">
+    <h4>Fail nhanh, ghi log rõ</h4>
+    <p>Không có extractor → <b>bỏ qua và log, đừng index rác</b>. Ghi lại <code>mime</code>, <code>extractor</code>, <code>status</code> vào metadata để debug về sau.</p>
+  </div>
+</div>
+<div class="warn"><b>Sai lầm phổ biến</b><b>Bỏ qua bước Clean &amp; Structure</b>, đưa raw text thẳng vào chunking. Kết quả: chunk chứa header/footer rác, OCR lỗi, ký tự đặc biệt — <b>retrieval quality giảm rõ rệt</b>.</div>
+
+<h2><span class="num">§7</span> &nbsp;Kết nối Agent với Data</h2>
+<p class="sub">Retrieval pipeline là <b>chiếc cầu nối</b> giữa dữ liệu riêng và hành vi của agent.</p>
+
+<div class="flow">
+  <span class="step"><b>OFFLINE</b> · Ingestion<small>Document → Chunk → Embed → Store</small></span>
+  <span class="arw">·······</span>
+  <span class="step"><b>ONLINE</b> · Retrieval<small>Query → Embed → Search → Inject → LLM</small></span>
+</div>
+<div class="note"><b>Hai pha tách biệt</b><b>Ingestion chạy offline</b> khi dữ liệu thay đổi. <b>Retrieval chạy online</b> mỗi khi user hỏi.</div>
+
+<h3>Retrieval khác gì Memory?</h3>
+<div class="vs">
+  <div class="lneu">
+    <h4>Retrieval</h4>
+    <ul><li>Tìm <b>context liên quan cho câu hỏi hiện tại</b></li><li>Đọc từ <b>knowledge base</b></li><li>Trọng tâm: <b>relevance và grounding</b></li></ul>
+    <p style="margin:8px 0 0;color:var(--muted)"><b>VD:</b> hỏi “chính sách đổi trả” → tìm trong FAQ → trả lời dựa trên tài liệu.</p>
+  </div>
+  <div class="lneu">
+    <h4>Memory</h4>
+    <ul><li>Lưu <b>trạng thái, sở thích, lịch sử chọn lọc</b></li><li>Từ <b>user profile</b> hoặc interaction history</li><li>Trọng tâm: <b>continuity và personalization</b></li></ul>
+    <p style="margin:8px 0 0;color:var(--muted)"><b>VD:</b> nhớ user lần trước đã đổi size M → gợi ý “đổi lại size khác?”</p>
+  </div>
+</div>
+<p class="sub">Nhiều hệ thống dùng <b>cả hai</b>: retrieval để biết <b>domain facts</b>, memory để biết <b>user này là ai và đã làm gì trước đó</b>.</p>
+
+<h3>Failure demo: chunk xấu vs chunk tốt</h3>
+<p class="sub">Query: <i>“Chính sách đổi trả áp dụng trong bao lâu?”</i></p>
+<div class="vs">
+  <div class="lbad">
+    <h4>✗ Chunk xấu (raw, không section)</h4>
+    <p style="font-size:13.3px"><b>Retrieved</b> (cosine <b>0.61</b>): <i>“…giao hàng miễn phí đơn trên 500k. Đổi trả trong 30 ngày. Liên hệ hotline 1900…”</i></p>
+    <p style="margin:8px 0 0;font-size:13.3px"><b>LLM:</b> “Bạn có thể đổi trả và liên hệ hotline 1900…” <span style="color:var(--bad)">(nhiễu, thiếu chi tiết)</span></p>
+  </div>
+  <div class="lgood">
+    <h4>✓ Chunk tốt (theo section + metadata)</h4>
+    <p style="font-size:13.3px"><b>Retrieved</b> (cosine <b>0.89</b>): <i>“Chính sách đổi trả: Khách hàng có 30 ngày kể từ ngày nhận hàng. Sản phẩm phải còn nguyên tem.”</i></p>
+    <p style="margin:8px 0 0;font-size:13.3px"><b>LLM:</b> “30 ngày kể từ ngày nhận, sản phẩm còn nguyên tem.” <span style="color:var(--ok)">(chính xác, có nguồn)</span></p>
+  </div>
+</div>
+<div class="acc"><b>Câu chốt</b><b>Cùng model, cùng query — khác nhau hoàn toàn vì chất lượng chunk.</b></div>
+
+<h2><span class="num">§8</span> &nbsp;Key Takeaways</h2>
+<div class="grid g2">
+  <div class="ok" style="margin:0"><b>1 · Data quality</b>Thường quan trọng hơn <b>đổi sang model đắt hơn</b>.</div>
+  <div class="ok" style="margin:0"><b>2 · Embedding</b>Là <b>lớp dịch ngôn ngữ sang không gian có thể so sánh nghĩa</b>.</div>
+  <div class="ok" style="margin:0"><b>3 · Vector store</b>Là <b>bộ nhớ dài hạn có thể tìm kiếm</b> bằng ngữ nghĩa và metadata.</div>
+  <div class="ok" style="margin:0"><b>4 · Retrieval pipeline</b>Là <b>cầu nối từ dữ liệu riêng tới câu trả lời grounded</b> của agent.</div>
+</div>
+
+<h3>Mục tiêu &amp; bài tập</h3>
+<div class="card">
+  <p style="margin:0 0 8px"><b>Mục tiêu ngày 7:</b> hiểu data quality quyết định hơn model selection · phân biệt knowledge/operational/contextual data · hiểu embedding là <b>lớp biểu diễn nghĩa, không chỉ là một API call</b> · hiểu vector store lưu gì, tìm gì, lọc bằng metadata ra sao · mô tả được pipeline <b>Document → Chunk → Embed → Store → Query → Inject</b> · build được mini retrieval integration.</p>
+  <p style="margin:0"><b>Bài tập:</b> hoàn thiện <code>solution.py</code> nếu chưa pass hết tests · rà lại knowledge base (bỏ nội dung nhiễu, thêm metadata) · thử thêm <b>3 queries khó hơn, tìm failure cases mới</b>.</p>
+</div>
+<div class="note"><b>Tiếp theo — Ngày 8: RAG Pipeline</b>“Ngày 8 đi tiếp sang RAG pipeline: <b>indexing, retrieval, generation, evaluation</b>.”</div>
+
+</section>
+
+<!-- ==================== TAB 2 ==================== -->
+<section class="panel" id="cheat">
+<button class="printbtn" onclick="window.print()">In cheat sheet</button>
+
+<div class="cheatgrid">
+<div>
+
+<h2>Pipeline xuyên suốt</h2>
+<div class="card">
+  <p style="margin:0"><b>Document → Chunk → Embed → Store → Query → Inject</b></p>
+</div>
+
+<h2>3 cách đưa data vào model</h2>
+<table>
+  <tr><th>Cách</th><th>Dùng khi</th></tr>
+  <tr><td><b>In-Context</b></td><td>1–20 trang, ít thay đổi</td></tr>
+  <tr><td><b>RAG</b></td><td>Corpus lớn, fact hay đổi</td></tr>
+  <tr><td><b>Fine-tuning</b></td><td>Cần style/tone</td></tr>
+</table>
+<p style="margin:2px 0 0"><b>Fine-tuning dạy model CÁCH NÓI; RAG cung cấp ĐIỀU CẦN NÓI</b></p>
+
+<h2>3 loại data</h2>
+<div class="card">
+  <dl class="kv">
+    <dt>Knowledge</dt><dd>policy, SOP, FAQ → <b>retrieval</b></dd>
+    <dt>Operational</dt><dd>DB, đơn hàng, CRM → <b>query có kiểm soát</b></dd>
+    <dt>Contextual</dt><dd>session, profile → <b>inject ngắn, đúng lúc</b></dd>
+  </dl>
+</div>
+
+<h2>Data Quality Pyramid</h2>
+<div class="card">
+  <p style="margin:0"><b>Raw</b> (PDF scan lệch, OCR lỗi) → <b>Cleaned</b> (bỏ header/footer, chuẩn Unicode) → <b>Structured</b> (chunk theo heading, gắn source) → <b>Enriched</b> (tag category, access, quality)<br>
+  <span style="color:var(--muted)">Sai lầm: index raw rồi kỳ vọng retrieval tự chữa</span></p>
+</div>
+
+<h2>Short-term vs Long-term</h2>
+<table>
+  <tr><th>Short-term</th><th>Long-term</th></tr>
+  <tr><td>Trong context window<br>Rẻ nhưng dễ đầy token<br>Session logic ngắn</td><td>Ngoài context window<br>Vector store, DB, profile<br><b>Phải truy xuất</b></td></tr>
+</table>
+<p style="margin:2px 0 0"><b>Context window KHÔNG phải vector store</b></p>
+
+<h2>Chunk size</h2>
+<table>
+  <tr><th>Quá to</th><th>Hợp lý</th><th>Quá nhỏ</th></tr>
+  <tr><td>&gt;1000 tok<br>inject nhiễu</td><td><b>200–500 tok</b><br>overlap 10–15%</td><td>&lt;50 tok<br>mất ngữ cảnh</td></tr>
+</table>
+
+<h2>Chunking — nhóm nền tảng</h2>
+<div class="card">
+  <dl class="kv">
+    <dt>Fixed-size</dt><dd>N token + overlap. Cắt giữa câu/bảng</dd>
+    <dt>Recursive</dt><dd>\n\n → \n → câu. <b>Mặc định tốt</b></dd>
+    <dt>Heading</dt><dd>Theo #/## hoặc section. Chunk trọn ý</dd>
+  </dl>
+</div>
+
+<h2>Chunking — ngữ nghĩa</h2>
+<div class="card">
+  <dl class="kv">
+    <dt>Semantic</dt><dd>Cắt tại chỗ cosine tụt mạnh (topic shift)</dd>
+    <dt>Sentence-window</dt><dd>Index 1 câu, <b>inject ±k câu</b></dd>
+    <dt>Proposition</dt><dd>LLM viết lại thành mệnh đề độc lập. <b>Đắt nhất</b></dd>
+  </dl>
+</div>
+
+<h2>Chunking — chuyên biệt</h2>
+<div class="card">
+  <dl class="kv">
+    <dt>Parent-child</dt><dd>Search chunk <b>nhỏ</b>, inject chunk <b>cha</b>. Rất phổ biến production</dd>
+    <dt>Hierarchical</dt><dd>doc summary → section → paragraph</dd>
+    <dt>Code-aware</dt><dd>Cắt theo hàm/class bằng AST</dd>
+    <dt>Table-aware</dt><dd>Giữ bảng, kèm header dòng</dd>
+  </dl>
+</div>
+
+<h2>Cây quyết định chunking</h2>
+<div class="card">
+  <ul style="margin:0">
+    <li>Có heading tốt → <b>Heading/structural</b></li>
+    <li>Văn bản chảy dài → <b>Recursive</b> → Semantic</li>
+    <li>LLM <b>thiếu ngữ cảnh</b> → Parent-child / Sentence-window</li>
+    <li>LLM <b>bị nhiễu</b> → chunk nhỏ hơn / Proposition</li>
+    <li>Corpus lớn + câu hỏi tổng hợp → Hierarchical</li>
+  </ul>
+</div>
+
+</div>
+<div>
+
+<h2>Embedding là gì</h2>
+<div class="card">
+  <p style="margin:0">Hàm biến <b>text/ảnh/audio → vector cùng kích thước</b> (vd 1536 chiều).<br>Đo khoảng cách giữa vector = <b>đo độ giống nhau về nghĩa</b>.</p>
+</div>
+
+<h2>Lịch sử embedding</h2>
+<table>
+  <tr><th>Thời kỳ</th><th>Đặc điểm</th></tr>
+  <tr><td>1990s BOW</td><td>Sparse, <b>không hiểu ngữ nghĩa</b></td></tr>
+  <tr><td>2013 Word2Vec</td><td>Dense nhưng <b>vector tĩnh</b> → kẹt từ đa nghĩa</td></tr>
+  <tr><td>2018 ELMo</td><td><b>Động</b> theo ngữ cảnh (LSTM), nhưng chậm</td></tr>
+  <tr><td>2019+ BERT/GPT</td><td><b>Self-Attention</b>, hiểu đa chiều. Cần GPU</td></tr>
+</table>
+
+<h2>Cosine vs Euclidean</h2>
+<div class="card">
+  <p style="margin:0 0 6px">Hỏi: <b>“độ lớn vector có mang thông tin không?”</b></p>
+  <p style="margin:0 0 6px"><b>Cosine</b> — chỉ quan tâm hướng/nội dung. Text embedding, TF-IDF</p>
+  <p style="margin:0 0 6px"><b>Euclidean</b> — độ lớn là thông tin thật, cùng scale. GPS, cảm biến, k-means</p>
+  <p style="margin:0">Vector đã normalize → hai cái <b>xếp hạng giống nhau</b> → <b>mặc định cosine cho text</b></p>
+</div>
+
+<h2>Score nghĩa là gì</h2>
+<table>
+  <tr><th>Cặp</th><th>Cosine</th></tr>
+  <tr><td>hoàn tiền ↔ đổi trả</td><td>~0.87</td></tr>
+  <tr><td>hoàn tiền ↔ <b>refund</b></td><td>~0.82 <b>cross-lingual</b></td></tr>
+  <tr><td>hoàn tiền ↔ giao hàng</td><td>~0.52</td></tr>
+  <tr><td>hoàn tiền ↔ thời tiết</td><td>~0.31</td></tr>
+</table>
+
+<h2>4 use case embedding</h2>
+<div class="card">
+  <p style="margin:0"><b>Semantic search</b> · <b>Clustering</b> (10k ticket → 15 chủ đề) · <b>Dedup</b> · <b>Recommendation</b><br>
+  <span style="color:var(--muted)">Embedding không tạo ra sự thật — garbage in, garbage out</span></p>
+</div>
+
+<h2>Chọn embedding model</h2>
+<table>
+  <tr><th>Model</th><th>Dim</th><th>MTEB</th></tr>
+  <tr><td>3-small</td><td>1536</td><td>62.3</td></tr>
+  <tr><td>3-large</td><td>3072</td><td>64.6</td></tr>
+  <tr><td>e5 / BGE</td><td>768–4096</td><td>61–66</td></tr>
+</table>
+<p style="margin:2px 0 0"><b>Không có model tốt nhất cho mọi use case</b></p>
+
+<h2>Vector store — 4 thành phần</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>ID · Original chunk · Embedding vector · Metadata</b></p>
+  <p style="margin:0"><b>Vector để TÌM · Chunk để INJECT</b></p>
+</div>
+
+<h2>3 tham số retrieval</h2>
+<div class="card">
+  <dl class="kv">
+    <dt>Top-k</dt><dd>3 cho câu đơn · 10 khi cần tổng hợp</dd>
+    <dt>Threshold</dt><dd>0.7 chặt · 0.4 lỏng</dd>
+    <dt>Filter</dt><dd>Lọc metadata <b>trước khi</b> search</dd>
+  </dl>
+  <p style="margin:8px 0 0"><b>Retrieval tốt = chunk đúng + metadata đủ + filter hợp lý</b></p>
+</div>
+
+<h2>Vector store nào?</h2>
+<table>
+  <tr><th>Tình huống</th><th>Chọn</th></tr>
+  <tr><td>Học / prototype</td><td><b>Chroma</b></td></tr>
+  <tr><td>Đã có Postgres</td><td>pgvector</td></tr>
+  <tr><td>Production tự host</td><td>Qdrant / Weaviate</td></tr>
+  <tr><td>Không lo hạ tầng</td><td>Pinecone</td></tr>
+  <tr><td>Cần hybrid + có ELK</td><td>Elasticsearch</td></tr>
+  <tr><td>Tỉ vector</td><td>Milvus / Vertex</td></tr>
+</table>
+<p style="margin:2px 0 0"><b>Đổi store dễ · đổi embedding model phải RE-INDEX toàn bộ</b></p>
+
+<h2>Format cho LLM</h2>
+<div class="card">
+  <p style="margin:0"><b>Markdown</b> (mặc định) — tiết kiệm <b>~30–50% token</b> so với HTML cùng nội dung<br>
+  HTML clean (bảng phức tạp) · Plain text (chat log) · JSON (structured output)</p>
+</div>
+
+<h2>Ingestion — 3 khối</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>1. Input Control</b> — MIME type, extractor, ownership, PII<br>
+  <b>2. Processing</b> — OCR/extract → clean → structure → MD + metadata<br>
+  <b>3. Indexing</b> — chunk → embed → store → verify</p>
+  <p style="margin:0"><b>Lỗi sinh ở khối 1–2, chỉ lộ khi query → debug đi ngược từ 3 về 1</b></p>
+</div>
+
+<h2>Retrieval vs Memory</h2>
+<table>
+  <tr><th>Retrieval</th><th>Memory</th></tr>
+  <tr><td>Context cho câu hỏi hiện tại<br>Từ knowledge base<br><b>relevance + grounding</b></td><td>Trạng thái, sở thích, lịch sử<br>Từ user profile<br><b>continuity + personalization</b></td></tr>
+</table>
+
+<h2>4 Takeaways</h2>
+<div class="card">
+  <ol style="margin:0">
+    <li>Data quality &gt; đổi model đắt hơn</li>
+    <li>Embedding = lớp dịch ngôn ngữ sang không gian so sánh nghĩa</li>
+    <li>Vector store = bộ nhớ dài hạn tìm được bằng ngữ nghĩa + metadata</li>
+    <li>Retrieval pipeline = cầu nối tới câu trả lời <b>grounded</b></li>
+  </ol>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ==================== TAB 3 ==================== -->
+<section class="panel" id="cards">
+<div class="fcbar">
+  <button class="fbtn on" data-f="all">Tất cả</button>
+  <button class="fbtn" data-f="data">Data strategy</button>
+  <button class="fbtn" data-f="chunk">Chunking</button>
+  <button class="fbtn" data-f="emb">Embeddings</button>
+  <button class="fbtn" data-f="store">Vector store</button>
+  <button class="fbtn" data-f="pipe">Pipeline</button>
+  <span class="counter" id="cnt"></span>
+</div>
+<div class="fcgrid" id="fcgrid"></div>
+<p class="hint">Click vào thẻ để lật · Click lần nữa để úp lại</p>
+</section>
+
+</div>
+
+<script>
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); document.getElementById(b.dataset.t).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+const CARDS=[
+ ['data','Pipeline xuyên suốt Day 7?','<b>Document → Chunk → Embed → Store → Query → Inject</b>'],
+ ['data','3 cách đưa data vào model?','<b>In-Context</b> (dán thẳng vào prompt, không embed không DB) · <b>RAG</b> (chunk → embed → store → tìm top-k → inject) · <b>Fine-tuning</b> (train lại trọng số).'],
+ ['data','Hiểu nhầm phổ biến nhất về fine-tuning?','Dùng fine-tuning để <b>nạp kiến thức mới</b>.<br><b>Fine-tuning dạy model CÁCH NÓI; RAG cung cấp ĐIỀU CẦN NÓI.</b> Fact thay đổi thường xuyên → chọn RAG.'],
+ ['data','Ưu/nhược của In-Context?','+ Làm được trong <b>5 phút</b>, không cần pipeline.<br>− <b>800 file không nhét nổi vào context window</b>.<br>Dùng khi: 1–20 trang, ít thay đổi.'],
+ ['data','Ưu/nhược của RAG so với fine-tuning?','<b>RAG:</b> sửa policy → re-index là xong · <b>trích được nguồn để cite</b> · model không đổi, chỉ đổi context.<br><b>Fine-tuning:</b> policy đổi → <b>phải train lại</b>, tốn GPU, cần data sạch.'],
+ ['data','Số liệu Stanford AI Index 2025?','AI use: <b>55% (2023) → 78% (2024)</b>. GenAI: <b>33% → 71%</b>.<br>Câu hỏi chuyển từ “dùng model nào” sang <b>“agent được phép biết gì”</b>.'],
+ ['data','3 loại data agent cần và cách xử lý mỗi loại?','<b>Knowledge</b> (policy, SOP, FAQ) → phù hợp retrieval.<br><b>Operational</b> (DB, đơn hàng, CRM) → cần <b>query có kiểm soát</b>.<br><b>Contextual</b> (session, profile) → <b>inject ngắn và đúng lúc</b>.'],
+ ['data','4 tầng của Data Quality Pyramid?','<b>Raw</b> (PDF scan lệch, OCR lỗi, tag rác) → <b>Cleaned</b> (bỏ header/footer, chuẩn hóa Unicode) → <b>Structured</b> (chunk theo heading, gắn source) → <b>Enriched</b> (tag category/access/quality).'],
+ ['data','Sai lầm phổ biến với data pyramid?','<b>Index ngay dữ liệu raw rồi kỳ vọng retrieval sẽ tự chữa mọi vấn đề.</b>'],
+ ['data','Short-term vs Long-term memory?','<b>Short-term:</b> trong context window, rẻ nhưng <b>dễ đầy token</b>, hợp session ngắn.<br><b>Long-term:</b> ngoài context window (vector store, DB, profile), <b>phải truy xuất khi cần</b>.'],
+ ['data','Câu chốt về memory?','<b>Context window KHÔNG phải là vector store.</b> Agent chỉ “nhớ dài hạn” khi có <b>cơ chế truy xuất hoặc lưu trữ bên ngoài</b>.'],
+
+ ['chunk','Vì sao phải chunk?','① Embedding model có <b>giới hạn token</b> · ② 1 file dài → 1 vector: chỉ tìm được <b>file</b> không tìm được <b>đoạn</b> · ③ Chunk nhỏ → retrieval chính xác, inject ít nhiễu · ④ Context thừa <b>làm giảm chất lượng</b>, tốn token và latency.'],
+ ['chunk','Kích thước chunk 3 mức?','<b>&gt;1000 tok</b> — quá to, retrieve trúng nhưng <b>inject rất nhiễu</b>.<br><b>200–500 tok</b> — hợp lý, một ý/section trọn vẹn + <b>overlap 10–15%</b>.<br><b>&lt;50 tok</b> — quá nhỏ, <b>mất ngữ cảnh</b>, khó tổng hợp.'],
+ ['chunk','Mẹo overlap khi cắt chunk?','<b>Lấy thêm 1–2 câu cuối của chunk trước làm phần đầu chunk sau</b> — giúp giữ ngữ cảnh tại điểm cắt.'],
+ ['chunk','3 strategy chunking nền tảng?','<b>Fixed-size</b> (N token + overlap; cắt giữa câu/bảng) · <b>Recursive</b> (\\n\\n → \\n → câu; <b>mặc định tốt</b>) · <b>Heading/structural</b> (theo #/## hoặc section; chunk trọn ý nhưng cần tài liệu có cấu trúc).'],
+ ['chunk','Semantic chunking hoạt động thế nào?','<b>Embed từng câu, cắt tại chỗ cosine giữa 2 câu liền kề tụt mạnh</b> (topic shift).<br>Mạnh: ranh giới đúng theo ý, không phụ thuộc heading. Yếu: tốn embedding lúc ingest, cần tune ngưỡng.'],
+ ['chunk','Sentence-window là gì?','<b>Index 1 câu, nhưng inject câu đó ±k câu xung quanh.</b><br>Mạnh: retrieve rất chính xác mà inject vẫn đủ ngữ cảnh. Yếu: số record lớn, cần lưu vị trí câu.'],
+ ['chunk','Proposition / atomic chunking?','Dùng <b>LLM viết lại đoạn thành các mệnh đề độc lập</b>, mỗi mệnh đề 1 chunk.<br>Mạnh: mỗi chunk <b>tự đủ nghĩa, ít nhiễu nhất</b>. Yếu: <b>đắt nhất</b>, LLM có thể <b>bóp méo nội dung</b>.'],
+ ['chunk','Parent-child chunking?','<b>Index chunk nhỏ để search, inject chunk cha lớn hơn.</b><br>Cân bằng precision và ngữ cảnh — <b>rất phổ biến trong production</b>. Cần lưu quan hệ cha–con.'],
+ ['chunk','Code-aware và Table-aware dùng khi nào?','<b>Code-aware (AST):</b> cắt theo hàm/class → <b>không bao giờ cắt giữa hàm</b>, giữ import và signature. Cần parser theo từng ngôn ngữ.<br><b>Table-aware:</b> giữ nguyên bảng, <b>kèm lại header dòng</b> cho mỗi phần bảng.'],
+ ['chunk','Retrieval trúng chunk nhưng LLM thiếu ngữ cảnh → làm gì?','→ <b>Parent-child</b> hoặc <b>Sentence-window</b>.<br>(Ngược lại, nếu LLM <b>bị nhiễu</b> → chunk nhỏ hơn hoặc <b>Proposition</b>.)'],
+ ['chunk','Nguyên tắc chọn chunking strategy?','Bắt đầu bằng strategy <b>đơn giản nhất chạy được</b> (heading/structural), dựng bộ eval query, rồi nâng cấp <b>dựa trên số đo</b>.<br><b>Không nhảy thẳng vào Proposition vì nghe hiện đại.</b>'],
+ ['chunk','Ví dụ FAQ — query “đổi size” với 3 cách chunk?','<b>Quá to:</b> retrieve cả Q1+Q2+Q3 → LLM <b>bị nhiễu</b>.<br><b>Hợp lý:</b> retrieve đúng Q2 → trả lời <b>chính xác</b>.<br><b>Quá nhỏ:</b> chỉ “Trong 30 ngày.” → <b>thiếu ngữ cảnh</b>.'],
+
+ ['emb','Embedding model làm gì?','Là <b>hàm biến dữ liệu thô</b> (text, ảnh, audio) <b>thành vector số cùng kích thước</b> (vd 1536 chiều) trong <b>cùng một không gian</b>. Sau đó đo khoảng cách = <b>đo độ giống nhau về nghĩa</b>.'],
+ ['emb','Vì sao BOW (1990s) không đủ?','<b>Ma trận thưa (sparse)</b>, tốn bộ nhớ khi từ điển lớn, và <b>hoàn toàn không hiểu ngữ nghĩa</b> hay mối quan hệ giữa các từ.'],
+ ['emb','Hạn chế của Word2Vec/GloVe (2013)?','Vector <b>dày (dense)</b> và học được quan hệ ngữ nghĩa, nhưng là <b>vector TĨNH</b>: một từ chỉ có <b>một</b> biểu diễn → <b>không giải quyết được từ đa nghĩa</b>.'],
+ ['emb','ELMo (2018) khắc phục gì và còn hạn chế gì?','Khắc phục: <b>embedding động đầu tiên</b> — vector thay đổi theo ngữ cảnh câu.<br>Hạn chế: LSTM xử lý <b>tuần tự</b> nên chậm; ghi nhớ ngữ cảnh dài còn hạn chế.'],
+ ['emb','Cosine hay Euclidean — câu hỏi gốc là gì?','<b>“Độ lớn của vector có mang thông tin cần so sánh hay không?”</b><br>Không → <b>cosine</b> (text, TF-IDF). Có, và cùng scale → <b>Euclidean</b> (GPS, cảm biến, k-means).'],
+ ['emb','Vì sao mặc định dùng cosine cho text?','Vì khi vector đã <b>normalize về độ dài 1</b>, cosine và Euclidean <b>xếp hạng giống nhau</b> — và <b>phần lớn embedding model hiện đại đều trả vector đã normalize</b>.'],
+ ['emb','Ví dụ cosine score và ý nghĩa?','“hoàn tiền” ↔ “đổi trả” <b>~0.87</b> (rất gần) · ↔ <b>“refund” ~0.82</b> (<b>cross-lingual!</b>) · ↔ “giao hàng nhanh” ~0.52 (liên quan) · ↔ “thời tiết hôm nay” ~0.31 (không liên quan).'],
+ ['emb','Sức mạnh của embedding so với keyword search?','Hiểu nghĩa <b>cross-lingual</b> và <b>không cần trùng từ</b>: “hoàn tiền” và “refund” gần nhau dù khác ngôn ngữ; user hỏi “trả hàng” vẫn tìm được chunk “chính sách đổi trả”.'],
+ ['emb','4 use case của embedding?','<b>Semantic search</b> · <b>Clustering</b> (10.000 ticket CS → 15 chủ đề) · <b>Dedup</b> (cosine &gt; threshold → gộp) · <b>Recommendation</b> (embed intent + item, rank theo cosine).'],
+ ['emb','Cảnh báo về embedding?','<b>Embedding không tự tạo ra “sự thật”.</b> Nếu text nguồn sai, thiếu, hoặc chunk xấu thì retrieval vẫn tệ — <b>garbage in, garbage out</b>.'],
+ ['emb','Chọn embedding model thế nào?','text-embedding-3-small (1536, MTEB 62.3) cho lab · 3-large (3072, 64.6) cho production · open-source e5/BGE (768–4096, 61–66) khi self-host.<br><b>Không có model tốt nhất cho mọi use case</b> — chọn theo quality, latency, storage, language.'],
+
+ ['store','Mỗi record trong vector store gồm gì?','<b>ID · Original chunk (text gốc) · Embedding vector · Metadata (key-value).</b><br><i>Search results top-k là output khi query, không phải thứ được lưu.</i>'],
+ ['store','Phân biệt vai trò vector và chunk?','<b>Vector dùng để TÌM</b> (semantic search). <b>Chunk dùng để INJECT</b> vào prompt cho LLM.<br>Hai thứ khác nhau, lưu cùng nhau.'],
+ ['store','3 tham số điều khiển retrieval?','<b>Top-k</b> (3 cho câu đơn, 10 khi cần tổng hợp) · <b>Score threshold</b> (0.7 chặt, 0.4 lỏng) · <b>Attribute filter</b> (lọc metadata <b>TRƯỚC KHI</b> search).'],
+ ['store','Công thức retrieval thực dụng?','<b>Filter theo category trước → semantic search → lấy top-3 có score &gt; 0.6.</b><br><b>Retrieval tốt = chunk đúng + metadata đủ + filter hợp lý — không phải đổi model.</b>'],
+ ['store','Chroma phù hợp khi nào?','Embedded/server (Python), cài 1 dòng <code>pip</code>, API cực gọn, chạy in-memory → <b>học, prototype, PoC nhỏ</b>. Đây là store dùng trong lab.'],
+ ['store','FAISS mạnh gì và thiếu gì?','Mạnh: <b>nhanh nhất cho ANN search thuần</b>, nhiều loại index.<br>Thiếu: <b>KHÔNG phải DB</b> — không có metadata filter, không có persistence sẵn.'],
+ ['store','Khi nào chọn pgvector?','Khi <b>đã có Postgres và corpus vừa phải</b>. Dùng luôn DB đang có, <b>JOIN được với data quan hệ</b>, có ACID — lựa chọn “nhàm chán” nhưng <b>rất hiệu quả</b>.'],
+ ['store','Qdrant vs Milvus vs Weaviate?','<b>Qdrant</b> (Rust): filter metadata mạnh → production tự host cần filter phức tạp.<br><b>Milvus</b>: scale <b>tỉ vector</b>, GPU index → cần team hạ tầng.<br><b>Weaviate</b> (Go): <b>hybrid search sẵn</b> → cần keyword + vector.'],
+ ['store','File Search API (OpenAI/Anthropic) đánh đổi gì?','Được: <b>không cần chunk/embed/store</b> — gọi API là xong.<br>Mất: <b>ít kiểm soát chunking, metadata, và cost path</b>.'],
+ ['store','Lời khuyên quan trọng nhất khi chọn vector store?','<b>Đổi vector store là việc tương đối dễ</b> (interface đều là add/query/filter), nhưng <b>đổi embedding model thì phải RE-INDEX toàn bộ</b>.<br>→ <b>Đừng dành quá nhiều thời gian chọn store ở giai đoạn đầu.</b>'],
+ ['store','Đường đi thực dụng chọn store?','Học/prototype → <b>Chroma</b> · có Postgres → <b>pgvector</b> · production tự host → <b>Qdrant/Weaviate</b> · không lo hạ tầng → <b>Pinecone</b> · cần hybrid + có ELK → <b>Elasticsearch</b> · tỉ vector → <b>Milvus/Vertex</b>.'],
+
+ ['pipe','Format nào tối ưu cho LLM và vì sao?','<b>Markdown.</b> So với HTML cùng nội dung, tiết kiệm <b>~30–50% token</b> vì không có closing tags, attributes, class names. LLM được train trên lượng lớn MD nên <b>hiểu rất tự nhiên</b>.'],
+ ['pipe','3 khối của ingestion pipeline?','<b>1. Input Control</b> — chọn &amp; kiểm soát nguồn (MIME type, extractor, ownership, PII, access level).<br><b>2. Processing</b> — OCR/extract → clean → structure → <b>Markdown + metadata</b>.<br><b>3. Indexing</b> — chunk → embed → store → verify.'],
+ ['pipe','Nguyên tắc debug lỗi retrieval?','Lỗi <b>thường không sinh ra ở khối 3</b> — nó sinh ở <b>khối 1</b> (index sai nguồn) hoặc <b>khối 2</b> (bỏ bước clean), nhưng <b>chỉ lộ ra khi query</b>.<br>→ <b>Debug thì đi ngược từ 3 về 1.</b>'],
+ ['pipe','Vì sao “đừng tin phần mở rộng file”?','<code>.pdf</code> có thể là <b>scan ảnh</b>; <code>.txt</code> có thể là <b>JSON</b>; <code>.doc</code> có thể là <b>RTF</b>.<br>→ Kiểm tra <b>magic bytes / MIME thật</b>, không chỉ đọc đuôi file.'],
+ ['pipe','Xử lý khi không có extractor phù hợp?','<b>Fail nhanh, ghi log rõ</b> — bỏ qua và log, <b>đừng index rác</b>. Ghi lại <code>mime</code>, <code>extractor</code>, <code>status</code> vào metadata để debug về sau.'],
+ ['pipe','Sai lầm phổ biến trong processing pipeline?','<b>Bỏ qua bước Clean &amp; Structure</b>, đưa raw text thẳng vào chunking → chunk chứa header/footer rác, OCR lỗi, ký tự đặc biệt → <b>retrieval quality giảm rõ rệt</b>.'],
+ ['pipe','Ingestion và Retrieval chạy khi nào?','<b>Ingestion chạy OFFLINE</b> khi dữ liệu thay đổi. <b>Retrieval chạy ONLINE</b> mỗi khi user hỏi. <b>Hai pha này tách biệt nhau.</b>'],
+ ['pipe','Retrieval khác Memory thế nào?','<b>Retrieval:</b> tìm context cho <b>câu hỏi hiện tại</b>, đọc từ knowledge base — trọng tâm <b>relevance và grounding</b>.<br><b>Memory:</b> lưu trạng thái/sở thích/lịch sử từ user profile — trọng tâm <b>continuity và personalization</b>.'],
+ ['pipe','Failure demo — chunk xấu vs tốt cho query “đổi trả bao lâu”?','<b>Chunk xấu</b> (cosine 0.61): lẫn “giao hàng miễn phí… hotline 1900” → LLM trả lời <b>nhiễu, thiếu chi tiết</b>.<br><b>Chunk tốt</b> (cosine 0.89): đúng section policy → LLM trả lời <b>chính xác, có nguồn</b>.<br><b>Cùng model, cùng query — khác nhau vì chất lượng chunk.</b>'],
+ ['pipe','4 key takeaways của Day 7?','① <b>Data quality</b> thường quan trọng hơn đổi model đắt hơn · ② <b>Embedding</b> là lớp dịch ngôn ngữ sang không gian so sánh nghĩa · ③ <b>Vector store</b> là bộ nhớ dài hạn tìm được bằng ngữ nghĩa + metadata · ④ <b>Retrieval pipeline</b> là cầu nối tới câu trả lời <b>grounded</b>.'],
+];
+const grid=document.getElementById('fcgrid'), cnt=document.getElementById('cnt');
+const NAMES={data:'Data strategy',chunk:'Chunking',emb:'Embeddings',store:'Vector store',pipe:'Pipeline'};
+function render(f){
+  const list=f==='all'?CARDS:CARDS.filter(c=>c[0]===f);
+  grid.innerHTML=list.map(c=>`<div class="fc"><div class="fci">
+      <div class="ff"><div class="tag2">${NAMES[c[0]]}</div><div class="q">${c[1]}</div></div>
+      <div class="fb"><div class="a">${c[2]}</div></div></div></div>`).join('');
+  cnt.textContent=list.length+' thẻ';
+  grid.querySelectorAll('.fc').forEach(el=>el.onclick=()=>el.classList.toggle('flip'));
+}
+document.querySelectorAll('.fbtn').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); render(b.dataset.f);
+});
+render('all');
+</script>
+</body>
+</html>

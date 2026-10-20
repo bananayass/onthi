@@ -1,0 +1,1954 @@
+{
+  "id": "exam-19",
+  "title": "Đề thi thử 2 — Bài thi áp lực",
+  "description": "Thi thử áp lực: Câu hỏi khó hơn, toàn diện hơn. Rèn luyện tư duy nhanh dưới áp lực thời gian.",
+  "durationMinutes": 90,
+  "totalPoints": 100,
+  "disclaimer": "Đây chỉ là đề cương ôn tập cộng đồng, không phải đề thi chính thức của VinUni, không cố gắng mô phỏng đề thi thật và không cam kết giống đề thật.",
+  "module": "Mixed",
+  "difficulty": "expert",
+  "questions": [
+    {
+      "id": "19-A-01",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Một chuỗi Markov có ma trận chuyển trạng thái [[0.7,0.3],[0.4,0.6]]. Phân phối dừng (stationary distribution) là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "[0.5, 0.5]"
+        },
+        {
+          "key": "B",
+          "text": "[0.57, 0.43]"
+        },
+        {
+          "key": "C",
+          "text": "[0.6, 0.4]"
+        },
+        {
+          "key": "D",
+          "text": "[0.7, 0.3]"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Giải pi1*0.3 = pi2*0.4 với pi1+pi2=1: 3*pi2 = 4*pi2 -- giải ra: pi1=4/7~0.571, pi2=3/7~0.429.",
+      "tags": [
+        "probability",
+        "markov-chains",
+        "module-A"
+      ]
+    },
+    {
+      "id": "19-A-02",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Gradient của f(x,y) = x^2*y + y^3 tại điểm (1,2) là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "[4, 13]"
+        },
+        {
+          "key": "B",
+          "text": "[2, 13]"
+        },
+        {
+          "key": "C",
+          "text": "[4, 12]"
+        },
+        {
+          "key": "D",
+          "text": "[2, 12]"
+        }
+      ],
+      "answer": "A",
+      "explanation": "df/dx = 2xy = 2*1*2=4; df/dy = x^2 + 3y^2 = 1 + 12 = 13. Gradient = [4, 13].",
+      "tags": [
+        "calculus",
+        "gradient",
+        "module-A"
+      ]
+    },
+    {
+      "id": "19-A-03",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Hai biến X,Y có hiệp phương sai (covariance) bằng 6, phương sai của X = 4, phương sai của Y = 9. Hệ số tương quan Pearson là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "0.5"
+        },
+        {
+          "key": "B",
+          "text": "1.0"
+        },
+        {
+          "key": "C",
+          "text": "0.67"
+        },
+        {
+          "key": "D",
+          "text": "2.0"
+        }
+      ],
+      "answer": "B",
+      "explanation": "r = Cov(X,Y) / (std_X * std_Y) = 6 / (2*3) = 6/6 = 1.0.",
+      "tags": [
+        "statistics",
+        "correlation",
+        "covariance",
+        "module-A"
+      ]
+    },
+    {
+      "id": "19-A-04",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Softmax của [1, 2, 3] là gì (làm tròn 2 chữ số thập phân)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "[0.09, 0.24, 0.67]"
+        },
+        {
+          "key": "B",
+          "text": "[0.10, 0.25, 0.65]"
+        },
+        {
+          "key": "C",
+          "text": "[0.11, 0.22, 0.67]"
+        },
+        {
+          "key": "D",
+          "text": "[0.33, 0.33, 0.34]"
+        }
+      ],
+      "answer": "A",
+      "explanation": "exp([1,2,3])=[2.72,7.39,20.09], tổng=30.2. Softmax=[0.090,0.245,0.665]. Làm tròn: [0.09,0.24,0.67].",
+      "tags": [
+        "statistics",
+        "softmax",
+        "module-A"
+      ]
+    },
+    {
+      "id": "19-A-05",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Một xét nghiệm cho một bệnh có độ nhạy (sensitivity)=0.95, độ đặc hiệu (specificity)=0.90. Tỷ lệ mắc bệnh (prevalence)=1%. Bạn xét nghiệm dương tính. Xác suất P(mắc bệnh | dương tính) là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "~8.7%"
+        },
+        {
+          "key": "B",
+          "text": "~50%"
+        },
+        {
+          "key": "C",
+          "text": "~95%"
+        },
+        {
+          "key": "D",
+          "text": "~90%"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Định lý Bayes: P(D|+) = (0.95*0.01)/(0.95*0.01 + 0.10*0.99) = 0.0095/0.1085 = ~8.76%.",
+      "tags": [
+        "probability",
+        "bayes-theorem",
+        "module-A"
+      ]
+    },
+    {
+      "id": "19-A-06",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Độ phân kỳ KL (KL divergence) KL(P||Q) bằng bao nhiêu khi P=Q?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vô cực"
+        },
+        {
+          "key": "B",
+          "text": "1.0"
+        },
+        {
+          "key": "C",
+          "text": "0.0"
+        },
+        {
+          "key": "D",
+          "text": "Không xác định"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Độ phân kỳ KL = 0 khi P và Q là hai phân phối giống hệt nhau. Nó đo lường mức độ P khác biệt so với Q.",
+      "tags": [
+        "information-theory",
+        "kl-divergence",
+        "module-A"
+      ]
+    },
+    {
+      "id": "19-A-07",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Một ma trận A là nửa xác định dương (positive semi-definite, PSD) khi và chỉ khi:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tất cả giá trị riêng (eigenvalue) đều âm"
+        },
+        {
+          "key": "B",
+          "text": "Tất cả giá trị riêng đều không âm"
+        },
+        {
+          "key": "C",
+          "text": "Định thức (determinant) dương"
+        },
+        {
+          "key": "D",
+          "text": "Vết (trace) bằng không"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Một ma trận là PSD khi và chỉ khi mọi giá trị riêng >= 0. Ma trận PSD xuất hiện trong ma trận hiệp phương sai, các phương pháp kernel.",
+      "tags": [
+        "linear-algebra",
+        "psd",
+        "module-A"
+      ]
+    },
+    {
+      "id": "19-A-08",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Entropy H(X) của một con xúc xắc 4 mặt công bằng là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "1 bit"
+        },
+        {
+          "key": "B",
+          "text": "2 bit"
+        },
+        {
+          "key": "C",
+          "text": "4 bit"
+        },
+        {
+          "key": "D",
+          "text": "1.5 bit"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Với phân phối đều trên n kết cục: H = log2(n). Với n=4: H = log2(4) = 2 bit.",
+      "tags": [
+        "information-theory",
+        "entropy",
+        "module-A"
+      ]
+    },
+    {
+      "id": "19-A-09",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Hàm mất mát cross-entropy với nhãn thật y=1, xác suất dự đoán p=0.8 là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "0.2"
+        },
+        {
+          "key": "B",
+          "text": "-ln(0.8)"
+        },
+        {
+          "key": "C",
+          "text": "-ln(0.2)"
+        },
+        {
+          "key": "D",
+          "text": "0.8"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Cross-entropy nhị phân: L = -y*log(p) - (1-y)*log(1-p). Với y=1: L = -log(0.8) = -ln(0.8) ≈ 0.223.",
+      "tags": [
+        "statistics",
+        "cross-entropy",
+        "module-A"
+      ]
+    },
+    {
+      "id": "19-A-10",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Thuật toán tối ưu nào điều chỉnh tốc độ học (learning rate) cho từng tham số bằng cách dùng ước lượng moment bậc một và bậc hai?",
+      "options": [
+        {
+          "key": "A",
+          "text": "SGD"
+        },
+        {
+          "key": "B",
+          "text": "Momentum SGD"
+        },
+        {
+          "key": "C",
+          "text": "RMSProp"
+        },
+        {
+          "key": "D",
+          "text": "Adam"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Adam (Adaptive Moment Estimation) duy trì tốc độ học thích nghi cho từng tham số bằng trung bình động lũy thừa của gradient và gradient bình phương.",
+      "tags": [
+        "optimization",
+        "adam",
+        "module-A"
+      ]
+    },
+    {
+      "id": "19-A-11",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Phương sai của tập dữ liệu [2, 4, 4, 4, 5, 5, 7, 9] là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "2.0"
+        },
+        {
+          "key": "B",
+          "text": "4.0"
+        },
+        {
+          "key": "C",
+          "text": "3.5"
+        },
+        {
+          "key": "D",
+          "text": "5.0"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Trung bình=5.0. Bình phương độ lệch: 9,1,1,1,0,0,4,16. Tổng=32. Phương sai=32/8=4.0.",
+      "tags": [
+        "statistics",
+        "variance",
+        "module-A"
+      ]
+    },
+    {
+      "id": "19-A-12",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Một mô hình hồi quy tuyến tính y = 2x + 1 dự đoán tại x=3. Giá trị y thực tế=8. Phần dư (residual) là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "1"
+        },
+        {
+          "key": "B",
+          "text": "7"
+        },
+        {
+          "key": "C",
+          "text": "-1"
+        },
+        {
+          "key": "D",
+          "text": "2"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Giá trị dự đoán = 2*3+1 = 7. Phần dư = thực tế - dự đoán = 8 - 7 = 1.",
+      "tags": [
+        "regression",
+        "residuals",
+        "module-A"
+      ]
+    },
+    {
+      "id": "19-A-13",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Phép phân tích ma trận nào được dùng trong PCA để tìm các thành phần chính (principal components)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Phân tích LU"
+        },
+        {
+          "key": "B",
+          "text": "Phân tích QR"
+        },
+        {
+          "key": "C",
+          "text": "Phân tích giá trị riêng / SVD"
+        },
+        {
+          "key": "D",
+          "text": "Phân tích Cholesky"
+        }
+      ],
+      "answer": "C",
+      "explanation": "PCA dùng phân tích giá trị riêng của ma trận hiệp phương sai (hoặc tương đương là SVD của ma trận dữ liệu) để tìm các thành phần chính.",
+      "tags": [
+        "linear-algebra",
+        "pca",
+        "svd",
+        "module-A"
+      ]
+    },
+    {
+      "id": "19-A-14",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Khoảng tin cậy (confidence interval) 95% có nghĩa là:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Có 95% xác suất tham số thật nằm trong khoảng này"
+        },
+        {
+          "key": "B",
+          "text": "Nếu lặp lại quy trình nhiều lần, 95% các khoảng được xây dựng sẽ chứa tham số thật"
+        },
+        {
+          "key": "C",
+          "text": "Trung bình mẫu nằm trong phạm vi 95% của trung bình thật"
+        },
+        {
+          "key": "D",
+          "text": "95% điểm dữ liệu rơi vào khoảng này"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Khoảng tin cậy theo trường phái tần suất: nếu lấy mẫu lặp lại nhiều lần, 95% các khoảng được tính sẽ chứa tham số thật.",
+      "tags": [
+        "statistics",
+        "confidence-intervals",
+        "module-A"
+      ]
+    },
+    {
+      "id": "19-A-15",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Số lượng tham số trong một đơn vị LSTM với kích thước đầu vào d và kích thước ẩn h là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "4*(d+h+1)*h"
+        },
+        {
+          "key": "B",
+          "text": "4*(d*h + h*h + h)"
+        },
+        {
+          "key": "C",
+          "text": "(d+h)*h + h"
+        },
+        {
+          "key": "D",
+          "text": "2*(d+h+1)*h"
+        }
+      ],
+      "answer": "B",
+      "explanation": "LSTM có 4 cổng (gate). Mỗi cổng có các ma trận trọng số W_x (d x h), W_h (h x h), và bias (h). Tổng = 4*(d*h + h*h + h).",
+      "tags": [
+        "deep-learning",
+        "lstm",
+        "parameters",
+        "module-A"
+      ]
+    },
+    {
+      "id": "19-B-01",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Đầu ra của đoạn mã sau là gì?\n\ndef gen():\n    yield 1\n    yield 2\n    yield 3\ng = gen()\nnext(g)\nprint(list(g))",
+      "options": [
+        {
+          "key": "A",
+          "text": "[1,2,3]"
+        },
+        {
+          "key": "B",
+          "text": "[2,3]"
+        },
+        {
+          "key": "C",
+          "text": "[1,2]"
+        },
+        {
+          "key": "D",
+          "text": "StopIteration"
+        }
+      ],
+      "answer": "B",
+      "explanation": "next(g) tiêu thụ giá trị đầu tiên (1). list(g) lấy hết các giá trị còn lại: [2, 3].",
+      "tags": [
+        "python",
+        "generators",
+        "module-B"
+      ]
+    },
+    {
+      "id": "19-B-02",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Đoạn mã sau trả về gì?\n\nimport numpy as np\na = np.array([1,2,3,4,5,6]).reshape(2,3)\nprint(a[:,1])",
+      "options": [
+        {
+          "key": "A",
+          "text": "[1,2,3]"
+        },
+        {
+          "key": "B",
+          "text": "[2,5]"
+        },
+        {
+          "key": "C",
+          "text": "[2,3]"
+        },
+        {
+          "key": "D",
+          "text": "[4,5,6]"
+        }
+      ],
+      "answer": "B",
+      "explanation": "a là [[1,2,3],[4,5,6]]. a[:,1] chọn cột chỉ số 1: [2,5].",
+      "tags": [
+        "numpy",
+        "indexing",
+        "module-B"
+      ]
+    },
+    {
+      "id": "19-B-03",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Đoạn mã sau sẽ in ra gì?\n\nclass A:\n    x = 10\na1 = A()\na2 = A()\na1.x = 20\nprint(A.x, a1.x, a2.x)",
+      "options": [
+        {
+          "key": "A",
+          "text": "20 20 20"
+        },
+        {
+          "key": "B",
+          "text": "10 20 10"
+        },
+        {
+          "key": "C",
+          "text": "10 20 20"
+        },
+        {
+          "key": "D",
+          "text": "20 10 10"
+        }
+      ],
+      "answer": "B",
+      "explanation": "a1.x=20 tạo một thuộc tính thể hiện (instance attribute) chỉ riêng cho a1. Thuộc tính lớp A.x vẫn là 10. a2.x vẫn tham chiếu đến thuộc tính lớp: 10.",
+      "tags": [
+        "python",
+        "oop",
+        "class-vs-instance",
+        "module-B"
+      ]
+    },
+    {
+      "id": "19-B-04",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Thao tác pandas nào tính trung bình trượt 7 ngày một cách hiệu quả?",
+      "options": [
+        {
+          "key": "A",
+          "text": "df['col'].rolling(7).mean()"
+        },
+        {
+          "key": "B",
+          "text": "df['col'].groupby(7).mean()"
+        },
+        {
+          "key": "C",
+          "text": "df['col'].resample('7D').mean()"
+        },
+        {
+          "key": "D",
+          "text": "df['col'].expanding(7).mean()"
+        }
+      ],
+      "answer": "A",
+      "explanation": "rolling(7).mean() tính trung bình của cửa sổ trượt 7 kỳ, lý tưởng cho trung bình trượt.",
+      "tags": [
+        "pandas",
+        "rolling",
+        "module-B"
+      ]
+    },
+    {
+      "id": "19-B-05",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Đầu ra của đoạn mã sau là gì?\n\nfrom functools import reduce\nresult = reduce(lambda x, y: x * y, [1,2,3,4,5])\nprint(result)",
+      "options": [
+        {
+          "key": "A",
+          "text": "15"
+        },
+        {
+          "key": "B",
+          "text": "120"
+        },
+        {
+          "key": "C",
+          "text": "24"
+        },
+        {
+          "key": "D",
+          "text": "5"
+        }
+      ],
+      "answer": "B",
+      "explanation": "reduce áp dụng lambda tích lũy: ((((1*2)*3)*4)*5) = 120.",
+      "tags": [
+        "python",
+        "functools",
+        "reduce",
+        "module-B"
+      ]
+    },
+    {
+      "id": "19-B-06",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Hàm numpy nào xếp chồng các mảng theo chiều dọc (dọc theo axis 0)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "np.hstack"
+        },
+        {
+          "key": "B",
+          "text": "np.vstack"
+        },
+        {
+          "key": "C",
+          "text": "np.concatenate"
+        },
+        {
+          "key": "D",
+          "text": "np.stack"
+        }
+      ],
+      "answer": "B",
+      "explanation": "np.vstack xếp chồng các mảng theo chiều dọc (theo hàng). Tương đương np.concatenate với axis=0 cho mảng 2D.",
+      "tags": [
+        "numpy",
+        "stacking",
+        "module-B"
+      ]
+    },
+    {
+      "id": "19-B-07",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Sklearn Pipeline sau làm gì?\n\nPipeline([(\"scaler\", StandardScaler()), (\"clf\", LogisticRegression())])",
+      "options": [
+        {
+          "key": "A",
+          "text": "Áp dụng LogisticRegression trước, rồi mới scale"
+        },
+        {
+          "key": "B",
+          "text": "Huấn luyện scaler và bộ phân loại độc lập nhau"
+        },
+        {
+          "key": "C",
+          "text": "Áp dụng StandardScaler rồi đến LogisticRegression theo trình tự, ngăn rò rỉ dữ liệu (data leakage)"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ bước cuối cùng được áp dụng"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Sklearn Pipeline nối các bước theo trình tự: StandardScaler biến đổi dữ liệu, rồi LogisticRegression huấn luyện. Quan trọng là scaler chỉ được fit trên dữ liệu huấn luyện.",
+      "tags": [
+        "sklearn",
+        "pipeline",
+        "module-B"
+      ]
+    },
+    {
+      "id": "19-B-08",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Kết quả của np.dot(np.array([[1,2],[3,4]]), np.array([[5,6],[7,8]])) là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "[[5,12],[21,32]]"
+        },
+        {
+          "key": "B",
+          "text": "[[19,22],[43,50]]"
+        },
+        {
+          "key": "C",
+          "text": "[[6,8],[10,12]]"
+        },
+        {
+          "key": "D",
+          "text": "[[12,16],[20,24]]"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Nhân ma trận: hàng1=[1,2] * các cột=[5,7]=19,[6,8]=22; hàng2=[3,4] * [5,7]=43,[6,8]=50. Kết quả [[19,22],[43,50]].",
+      "tags": [
+        "numpy",
+        "matrix-multiply",
+        "module-B"
+      ]
+    },
+    {
+      "id": "19-B-09",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Decorator @property trong Python làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Biến một phương thức thành phương thức lớp (class method)"
+        },
+        {
+          "key": "B",
+          "text": "Cho phép truy cập một phương thức như một thuộc tính mà không cần gọi với ()"
+        },
+        {
+          "key": "C",
+          "text": "Làm một thuộc tính trở thành chỉ-đọc vĩnh viễn"
+        },
+        {
+          "key": "D",
+          "text": "Tạo một phương thức tĩnh (static method)"
+        }
+      ],
+      "answer": "B",
+      "explanation": "@property biến một phương thức thành thuộc tính được quản lý. obj.value gọi getter mà không cần dấu ngoặc đơn.",
+      "tags": [
+        "python",
+        "property",
+        "decorators",
+        "module-B"
+      ]
+    },
+    {
+      "id": "19-B-10",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Hàm pandas nào kiểm tra xem hai DataFrame có bằng nhau theo từng phần tử (xử lý cả NaN) hay không?",
+      "options": [
+        {
+          "key": "A",
+          "text": "df1 == df2"
+        },
+        {
+          "key": "B",
+          "text": "df1.equals(df2)"
+        },
+        {
+          "key": "C",
+          "text": "pd.compare(df1,df2)"
+        },
+        {
+          "key": "D",
+          "text": "df1.identical(df2)"
+        }
+      ],
+      "answer": "B",
+      "explanation": "df.equals() so sánh theo từng phần tử và coi hai giá trị NaN là bằng nhau. == trả về một DataFrame boolean.",
+      "tags": [
+        "pandas",
+        "comparison",
+        "module-B"
+      ]
+    },
+    {
+      "id": "19-B-11",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Độ phức tạp thời gian của việc sắp xếp một danh sách n phần tử bằng hàm sort tích hợp của Python là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "O(n)"
+        },
+        {
+          "key": "B",
+          "text": "O(n log n)"
+        },
+        {
+          "key": "C",
+          "text": "O(n^2)"
+        },
+        {
+          "key": "D",
+          "text": "O(log n)"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Python dùng Timsort, chạy trong O(n log n) ở trường hợp xấu nhất và O(n) ở trường hợp tốt nhất (đã sắp xếp sẵn).",
+      "tags": [
+        "python",
+        "sorting",
+        "complexity",
+        "module-B"
+      ]
+    },
+    {
+      "id": "19-B-12",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Đoạn mã sau trả về gì?\n\ndata = [{\"name\":\"A\",\"score\":90},{\"name\":\"B\",\"score\":75},{\"name\":\"C\",\"score\":85}]\nsorted(data, key=lambda x: x[\"score\"], reverse=True)[0][\"name\"]",
+      "options": [
+        {
+          "key": "A",
+          "text": "\"A\""
+        },
+        {
+          "key": "B",
+          "text": "\"B\""
+        },
+        {
+          "key": "C",
+          "text": "\"C\""
+        },
+        {
+          "key": "D",
+          "text": "Lỗi"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Sắp xếp theo score giảm dần: A(90),C(85),B(75). Phần tử đầu tiên là A. [\"name\"] = \"A\".",
+      "tags": [
+        "python",
+        "sorting",
+        "dicts",
+        "module-B"
+      ]
+    },
+    {
+      "id": "19-B-13",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trong numpy, arr[arr > 5] trả về gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Các chỉ số nơi arr > 5"
+        },
+        {
+          "key": "B",
+          "text": "Mặt nạ boolean (boolean mask)"
+        },
+        {
+          "key": "C",
+          "text": "Các phần tử của arr lớn hơn 5"
+        },
+        {
+          "key": "D",
+          "text": "Lỗi"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Lập chỉ mục boolean với arr[điều_kiện] trả về chính các phần tử thỏa mãn điều kiện.",
+      "tags": [
+        "numpy",
+        "boolean-indexing",
+        "module-B"
+      ]
+    },
+    {
+      "id": "19-B-14",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Cấu trúc dữ liệu Python nào cho phép truy cập O(1) ở cả hai đầu (thêm và lấy ra từ bên trái lẫn bên phải)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "list"
+        },
+        {
+          "key": "B",
+          "text": "deque"
+        },
+        {
+          "key": "C",
+          "text": "set"
+        },
+        {
+          "key": "D",
+          "text": "OrderedDict"
+        }
+      ],
+      "answer": "B",
+      "explanation": "collections.deque cho phép thêm/lấy ra với O(1) ở cả hai đầu. list thông thường có độ phức tạp O(n) khi pop/insert tại vị trí 0.",
+      "tags": [
+        "python",
+        "collections",
+        "deque",
+        "module-B"
+      ]
+    },
+    {
+      "id": "19-B-15",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "pd.get_dummies(df, columns=[\"color\"]) làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mã hóa tất cả các cột số"
+        },
+        {
+          "key": "B",
+          "text": "Mã hóa one-hot cột \"color\" thành các cột chỉ báo nhị phân"
+        },
+        {
+          "key": "C",
+          "text": "Chuẩn hóa cột \"color\""
+        },
+        {
+          "key": "D",
+          "text": "Xóa cột \"color\""
+        }
+      ],
+      "answer": "B",
+      "explanation": "get_dummies thực hiện mã hóa one-hot: tạo một cột nhị phân cho mỗi giá trị duy nhất trong \"color\".",
+      "tags": [
+        "pandas",
+        "encoding",
+        "one-hot",
+        "module-B"
+      ]
+    },
+    {
+      "id": "19-B-16",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "np.einsum(\"ij,jk->ik\", A, B) tính gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tích từng phần tử (element-wise product)"
+        },
+        {
+          "key": "B",
+          "text": "Nhân ma trận A @ B"
+        },
+        {
+          "key": "C",
+          "text": "Tích ngoài (outer product)"
+        },
+        {
+          "key": "D",
+          "text": "Vết (trace)"
+        }
+      ],
+      "answer": "B",
+      "explanation": "einsum \"ij,jk->ik\" lấy tổng theo j (chiều chung), đó chính xác là phép nhân ma trận A @ B.",
+      "tags": [
+        "numpy",
+        "einsum",
+        "module-B"
+      ]
+    },
+    {
+      "id": "19-B-17",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Phương thức nào trên một pandas DataFrame trả về số lượng giá trị không null theo từng cột?",
+      "options": [
+        {
+          "key": "A",
+          "text": "df.shape"
+        },
+        {
+          "key": "B",
+          "text": "df.info()"
+        },
+        {
+          "key": "C",
+          "text": "df.count()"
+        },
+        {
+          "key": "D",
+          "text": "df.notnull().sum()"
+        }
+      ],
+      "answer": "C",
+      "explanation": "df.count() trả về số lượng giá trị không null cho mỗi cột. df.notnull().sum() tương đương nhưng rõ ràng hơn.",
+      "tags": [
+        "pandas",
+        "missing-data",
+        "module-B"
+      ]
+    },
+    {
+      "id": "19-B-18",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Closure trong Python là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Một hàm được định nghĩa bên trong một lớp"
+        },
+        {
+          "key": "B",
+          "text": "Một hàm bắt giữ và ghi nhớ các biến từ phạm vi bao quanh nó"
+        },
+        {
+          "key": "C",
+          "text": "Một hàm trả về None"
+        },
+        {
+          "key": "D",
+          "text": "Một khối finally trong xử lý ngoại lệ"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Closure là một hàm bên trong tham chiếu đến các biến từ phạm vi của hàm bên ngoài, kể cả sau khi hàm bên ngoài đã trả về.",
+      "tags": [
+        "python",
+        "closures",
+        "module-B"
+      ]
+    },
+    {
+      "id": "19-B-19",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Đầu ra của đoạn mã sau là gì?\n\nx = 5\ndef f():\n    x = 10\n    def g():\n        nonlocal x\n        x += 1\n        return x\n    return g()\nprint(f(), x)",
+      "options": [
+        {
+          "key": "A",
+          "text": "11 5"
+        },
+        {
+          "key": "B",
+          "text": "11 10"
+        },
+        {
+          "key": "C",
+          "text": "10 5"
+        },
+        {
+          "key": "D",
+          "text": "10 6"
+        }
+      ],
+      "answer": "A",
+      "explanation": "nonlocal x tham chiếu đến x=10 của f. g tăng lên 11 và trả về 11. Biến toàn cục x vẫn là 5. Đầu ra: \"11 5\".",
+      "tags": [
+        "python",
+        "closures",
+        "nonlocal",
+        "module-B"
+      ]
+    },
+    {
+      "id": "19-B-20",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Hàm scipy nào thực hiện kiểm định t hai mẫu cho các mẫu độc lập?",
+      "options": [
+        {
+          "key": "A",
+          "text": "scipy.stats.ttest_1samp"
+        },
+        {
+          "key": "B",
+          "text": "scipy.stats.ttest_ind"
+        },
+        {
+          "key": "C",
+          "text": "scipy.stats.mannwhitneyu"
+        },
+        {
+          "key": "D",
+          "text": "scipy.stats.wilcoxon"
+        }
+      ],
+      "answer": "B",
+      "explanation": "scipy.stats.ttest_ind thực hiện kiểm định t hai mẫu độc lập so sánh trung bình của hai nhóm.",
+      "tags": [
+        "python",
+        "scipy",
+        "statistics",
+        "module-B"
+      ]
+    },
+    {
+      "id": "19-C-01",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Độ phức tạp tính toán của attention trong Transformer với độ dài chuỗi n là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "O(n)"
+        },
+        {
+          "key": "B",
+          "text": "O(n log n)"
+        },
+        {
+          "key": "C",
+          "text": "O(n^2)"
+        },
+        {
+          "key": "D",
+          "text": "O(n^3)"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Self-attention tiêu chuẩn tính tích vô hướng theo cặp giữa tất cả các vị trí: O(n^2) về bộ nhớ và thời gian.",
+      "tags": [
+        "transformer",
+        "attention",
+        "complexity",
+        "module-C"
+      ]
+    },
+    {
+      "id": "19-C-02",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trong gradient boosting, mỗi cây mới mô hình hóa cái gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Biến mục tiêu thô"
+        },
+        {
+          "key": "B",
+          "text": "Các sai số phần dư (gradient âm) của ensemble trước đó"
+        },
+        {
+          "key": "C",
+          "text": "Một mẫu con ngẫu nhiên của các đặc trưng"
+        },
+        {
+          "key": "D",
+          "text": "Trung bình của tất cả các dự đoán trước đó"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Gradient boosting khớp mỗi cây mới với các phần dư giả (pseudo-residual, gradient âm của hàm mất mát) của ensemble hiện tại.",
+      "tags": [
+        "ensemble",
+        "gradient-boosting",
+        "module-C"
+      ]
+    },
+    {
+      "id": "19-C-03",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "\"Mixture of experts\" (MoE) trong các LLM là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Kết hợp (ensemble) nhiều LLM nhỏ hơn"
+        },
+        {
+          "key": "B",
+          "text": "Một kiến trúc mô hình trong đó các tập con tham số (chuyên gia) khác nhau được kích hoạt cho các đầu vào khác nhau"
+        },
+        {
+          "key": "C",
+          "text": "Huấn luyện trên nhiều tập dữ liệu đồng thời"
+        },
+        {
+          "key": "D",
+          "text": "Sử dụng nhiều đầu attention (attention head)"
+        }
+      ],
+      "answer": "B",
+      "explanation": "MoE định tuyến các token tới các mạng con chuyên gia khác nhau thông qua một cơ chế cổng (gating). Chỉ một tập con tham số được kích hoạt cho mỗi token.",
+      "tags": [
+        "llm",
+        "moe",
+        "architecture",
+        "module-C"
+      ]
+    },
+    {
+      "id": "19-C-04",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Kỹ thuật nào trong RAG cải thiện việc truy xuất bằng cách sinh ra nhiều truy vấn tìm kiếm từ một truy vấn của người dùng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Re-ranking (xếp hạng lại)"
+        },
+        {
+          "key": "B",
+          "text": "Multi-query retrieval (truy xuất đa truy vấn)"
+        },
+        {
+          "key": "C",
+          "text": "Hybrid search (tìm kiếm lai)"
+        },
+        {
+          "key": "D",
+          "text": "Chunk overlap (chồng lấp đoạn)"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Multi-query retrieval sinh ra nhiều biến thể truy vấn và kết hợp các kết quả truy xuất, giúp cải thiện độ bao phủ (recall).",
+      "tags": [
+        "rag",
+        "retrieval",
+        "module-C"
+      ]
+    },
+    {
+      "id": "19-C-05",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trong học tương phản (contrastive learning, ví dụ SimCLR), mô hình học bằng cách:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tối thiểu hóa cross-entropy trên dữ liệu có nhãn"
+        },
+        {
+          "key": "B",
+          "text": "Kéo lại gần các biểu diễn của các góc nhìn được tăng cường (augmented view) của cùng một ảnh, trong khi đẩy xa các ảnh khác nhau"
+        },
+        {
+          "key": "C",
+          "text": "Tối đa hóa khoảng cách giữa tất cả các cặp"
+        },
+        {
+          "key": "D",
+          "text": "Tối thiểu hóa lỗi tái tạo như một autoencoder"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Học tương phản sử dụng các cặp dương (cùng một ảnh, augmentation khác nhau) so với các cặp âm (negative pair) để học biểu diễn.",
+      "tags": [
+        "self-supervised",
+        "contrastive-learning",
+        "module-C"
+      ]
+    },
+    {
+      "id": "19-C-06",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "\"Speculative decoding\" cải thiện điều gì trong suy luận (inference) LLM?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tốc độ huấn luyện"
+        },
+        {
+          "key": "B",
+          "text": "Thông lượng suy luận (throughput) bằng cách dùng một mô hình nháp nhỏ để đề xuất token được xác minh bởi mô hình lớn"
+        },
+        {
+          "key": "C",
+          "text": "Độ chính xác của mô hình"
+        },
+        {
+          "key": "D",
+          "text": "Độ dài cửa sổ ngữ cảnh"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Speculative decoding dùng một mô hình nhỏ nhanh để sinh ra các token ứng viên; mô hình lớn xác minh song song, làm tăng thông lượng.",
+      "tags": [
+        "llm",
+        "inference",
+        "speculative-decoding",
+        "module-C"
+      ]
+    },
+    {
+      "id": "19-C-07",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trong MLOps, \"model staleness\" (mô hình lỗi thời) là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Một mô hình quá lớn để triển khai"
+        },
+        {
+          "key": "B",
+          "text": "Sự suy giảm hiệu năng do mô hình không được cập nhật trong khi phân phối dữ liệu thực tế dịch chuyển"
+        },
+        {
+          "key": "C",
+          "text": "Một mô hình được huấn luyện trên phần cứng lỗi thời"
+        },
+        {
+          "key": "D",
+          "text": "Một mô hình thiếu tham số"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Model staleness xảy ra khi thế giới thay đổi nhưng mô hình không được huấn luyện lại, gây ra trôi dạt (drift) trong các dự đoán.",
+      "tags": [
+        "mlops",
+        "model-staleness",
+        "module-C"
+      ]
+    },
+    {
+      "id": "19-C-08",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Điều gì phân biệt tìm kiếm ngữ nghĩa (semantic search) với tìm kiếm theo từ khóa (keyword search)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tìm kiếm ngữ nghĩa nhanh hơn"
+        },
+        {
+          "key": "B",
+          "text": "Tìm kiếm ngữ nghĩa hiểu ý nghĩa/ý định; tìm kiếm theo từ khóa khớp đúng token"
+        },
+        {
+          "key": "C",
+          "text": "Tìm kiếm theo từ khóa dùng mạng nơ-ron"
+        },
+        {
+          "key": "D",
+          "text": "Tìm kiếm ngữ nghĩa chỉ hoạt động với tiếng Anh"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Tìm kiếm ngữ nghĩa dùng embedding để tìm nội dung tương đồng về khái niệm ngay cả khi diễn đạt khác nhau. Tìm kiếm theo từ khóa đòi hỏi khớp chính xác.",
+      "tags": [
+        "nlp",
+        "search",
+        "embeddings",
+        "module-C"
+      ]
+    },
+    {
+      "id": "19-C-09",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Phương pháp PEFT (Parameter Efficient Fine-Tuning) nào chèn các ma trận hạng thấp (low-rank) vào các tầng transformer?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Fine-tuning toàn bộ (full fine-tuning)"
+        },
+        {
+          "key": "B",
+          "text": "Prefix tuning"
+        },
+        {
+          "key": "C",
+          "text": "LoRA (Low-Rank Adaptation)"
+        },
+        {
+          "key": "D",
+          "text": "Adapter layers (tầng bộ điều hợp)"
+        }
+      ],
+      "answer": "C",
+      "explanation": "LoRA phân rã các cập nhật trọng số thành các ma trận hạng thấp (A*B), giảm đáng kể số tham số cần huấn luyện.",
+      "tags": [
+        "llm",
+        "fine-tuning",
+        "lora",
+        "module-C"
+      ]
+    },
+    {
+      "id": "19-C-10",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trong lý thuyết thông tin, thông tin tương hỗ (mutual information) I(X;Y) là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Entropy của X cộng entropy của Y"
+        },
+        {
+          "key": "B",
+          "text": "Sự giảm bớt độ bất định về X khi biết Y"
+        },
+        {
+          "key": "C",
+          "text": "Xác suất đồng thời P(X,Y)"
+        },
+        {
+          "key": "D",
+          "text": "Hệ số tương quan giữa X và Y"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Thông tin tương hỗ I(X;Y) = H(X) - H(X|Y): mức độ mà việc biết Y làm giảm độ bất định về X.",
+      "tags": [
+        "information-theory",
+        "mutual-information",
+        "module-C"
+      ]
+    },
+    {
+      "id": "19-C-11",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "\"Chain-of-thought prompting\" trong các LLM là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Nối chuỗi nhiều lời gọi API LLM"
+        },
+        {
+          "key": "B",
+          "text": "Khuyến khích mô hình suy luận từng bước trước khi đưa ra câu trả lời cuối cùng"
+        },
+        {
+          "key": "C",
+          "text": "Dùng một chuỗi prompt để fine-tune một mô hình"
+        },
+        {
+          "key": "D",
+          "text": "Kết nối nhiều prompt bằng các toán tử logic"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Chain-of-thought prompting (Wei và cộng sự, 2022) yêu cầu LLM trình bày các bước suy luận trung gian, cải thiện hiệu năng ở các tác vụ phức tạp.",
+      "tags": [
+        "llm",
+        "prompting",
+        "chain-of-thought",
+        "module-C"
+      ]
+    },
+    {
+      "id": "19-C-12",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "\"Population stability index\" (PSI) đo lường gì trong giám sát mô hình?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Độ chính xác của mô hình theo thời gian"
+        },
+        {
+          "key": "B",
+          "text": "Sự dịch chuyển phân phối giữa dữ liệu huấn luyện và dữ liệu production hiện tại"
+        },
+        {
+          "key": "C",
+          "text": "Số lượng dự đoán đã thực hiện"
+        },
+        {
+          "key": "D",
+          "text": "Độ trễ (latency) của API"
+        }
+      ],
+      "answer": "B",
+      "explanation": "PSI định lượng mức độ dịch chuyển của phân phối một đặc trưng hoặc điểm dự đoán. PSI > 0.2 báo hiệu trôi dạt đáng kể.",
+      "tags": [
+        "mlops",
+        "monitoring",
+        "psi",
+        "module-C"
+      ]
+    },
+    {
+      "id": "19-C-13",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trong học chủ động (active learning), những mẫu nào có giá trị nhất để gán nhãn?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Các mẫu ngẫu nhiên"
+        },
+        {
+          "key": "B",
+          "text": "Các mẫu mà mô hình không chắc chắn nhất"
+        },
+        {
+          "key": "C",
+          "text": "Các mẫu phổ biến nhất trong tập dữ liệu"
+        },
+        {
+          "key": "D",
+          "text": "Các mẫu gần nhất với trung bình của tập huấn luyện"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Học chủ động truy vấn oracle để gán nhãn cho các mẫu không chắc chắn nhất, tối đa hóa lượng thông tin thu được trên mỗi nhãn.",
+      "tags": [
+        "active-learning",
+        "module-C"
+      ]
+    },
+    {
+      "id": "19-C-14",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Kỹ thuật giảm thiểu \"quên thảm họa\" (catastrophic forgetting) mang tên \"elastic weight consolidation\" (EWC) là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đặt lại trọng số một cách ngẫu nhiên"
+        },
+        {
+          "key": "B",
+          "text": "Phạt việc thay đổi các trọng số quan trọng cho các tác vụ trước đó dựa trên thông tin Fisher của chúng"
+        },
+        {
+          "key": "C",
+          "text": "Áp dụng dropout giữa các tác vụ"
+        },
+        {
+          "key": "D",
+          "text": "Lưu và khôi phục các checkpoint mô hình trước đó"
+        }
+      ],
+      "answer": "B",
+      "explanation": "EWC thêm một số hạng điều chuẩn (regularization) phạt việc sửa đổi các trọng số vốn quan trọng cho các tác vụ trước đó.",
+      "tags": [
+        "continual-learning",
+        "ewc",
+        "module-C"
+      ]
+    },
+    {
+      "id": "19-C-15",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Kỹ thuật nào giảm dung lượng bộ nhớ của các LLM bằng cách biểu diễn trọng số ở độ chính xác thấp hơn (ví dụ 4-bit)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Knowledge distillation (chưng cất tri thức)"
+        },
+        {
+          "key": "B",
+          "text": "Pruning (cắt tỉa)"
+        },
+        {
+          "key": "C",
+          "text": "Quantization (lượng tử hóa)"
+        },
+        {
+          "key": "D",
+          "text": "Sparsification (thưa hóa)"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Quantization chuyển trọng số độ chính xác đầy đủ (FP32/FP16) sang độ chính xác thấp hơn (INT8/INT4), giảm bộ nhớ và tăng tốc suy luận.",
+      "tags": [
+        "model-compression",
+        "quantization",
+        "module-C"
+      ]
+    },
+    {
+      "id": "19-C-16",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Vấn đề \"lost in the middle\" trong các LLM là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "LLM mất dấu lịch sử hội thoại sau nhiều lượt"
+        },
+        {
+          "key": "B",
+          "text": "LLM có xu hướng coi nhẹ thông tin ở giữa cửa sổ ngữ cảnh dài so với phần đầu/cuối"
+        },
+        {
+          "key": "C",
+          "text": "Phản hồi của LLM bị cắt cụt ở độ dài token tối đa"
+        },
+        {
+          "key": "D",
+          "text": "Mất mát huấn luyện chững lại ở giữa quá trình huấn luyện"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Nghiên cứu cho thấy LLM hoạt động kém hơn khi thông tin liên quan nằm ở giữa một ngữ cảnh dài so với khi nằm ở đầu hoặc cuối.",
+      "tags": [
+        "llm",
+        "context",
+        "module-C"
+      ]
+    },
+    {
+      "id": "19-C-17",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trong dự báo chuỗi thời gian, mô hình nào nắm bắt các phụ thuộc dài hạn bằng cơ chế cổng (gating)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "ARIMA"
+        },
+        {
+          "key": "B",
+          "text": "Hồi quy tuyến tính"
+        },
+        {
+          "key": "C",
+          "text": "LSTM"
+        },
+        {
+          "key": "D",
+          "text": "Random Forest"
+        }
+      ],
+      "answer": "C",
+      "explanation": "LSTM (Long Short-Term Memory) dùng các cổng đầu vào, quên và đầu ra để ghi nhớ có chọn lọc các phụ thuộc dài hạn.",
+      "tags": [
+        "deep-learning",
+        "lstm",
+        "time-series",
+        "module-C"
+      ]
+    },
+    {
+      "id": "19-C-18",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Mục đích của \"negative sampling\" trong huấn luyện word2vec là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Loại bỏ các từ mang cảm xúc tiêu cực"
+        },
+        {
+          "key": "B",
+          "text": "Xấp xỉ hiệu quả softmax đầy đủ bằng cách lấy mẫu k ví dụ âm thay vì toàn bộ từ vựng"
+        },
+        {
+          "key": "C",
+          "text": "Xử lý các embedding từ bị thiếu"
+        },
+        {
+          "key": "D",
+          "text": "Lọc các từ dừng (stopword) trong khi huấn luyện"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Negative sampling huấn luyện word2vec bằng cách phân biệt các từ ngữ cảnh thật với các từ \"âm\" được lấy mẫu ngẫu nhiên, tránh phải tính softmax đầy đủ.",
+      "tags": [
+        "nlp",
+        "word2vec",
+        "negative-sampling",
+        "module-C"
+      ]
+    },
+    {
+      "id": "19-D-01",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Một hệ thống AI được huấn luyện trên dữ liệu cảnh sát trong quá khứ vốn phản ánh các thực hành tuần tra thiên lệch. Các dự đoán kết quả nhiều khả năng sẽ:",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không thiên lệch vì chúng dựa trên dữ liệu"
+        },
+        {
+          "key": "B",
+          "text": "Khuếch đại và duy trì sự thiên lệch trong quá khứ"
+        },
+        {
+          "key": "C",
+          "text": "Tự động hiệu chỉnh sự thiên lệch"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ thiên lệch nếu nhà phát triển cố ý gây ra thiên lệch"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Các mô hình ML học các khuôn mẫu từ dữ liệu. Nếu dữ liệu huấn luyện chứa thiên lệch lịch sử, mô hình sẽ duy trì hoặc khuếch đại những thiên lệch đó.",
+      "tags": [
+        "responsible-ai",
+        "bias",
+        "module-D"
+      ]
+    },
+    {
+      "id": "19-D-02",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Đâu là một ví dụ về \"Định luật Goodhart\" (Goodhart's Law) trong AI?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Một mô hình cải thiện trên một benchmark bằng cách thực sự giải quyết được vấn đề cốt lõi"
+        },
+        {
+          "key": "B",
+          "text": "Một mô hình đạt tỷ lệ nhấp chuột (click-through rate) cao bằng cách hiển thị nội dung giật gân thay vì nội dung chất lượng"
+        },
+        {
+          "key": "C",
+          "text": "Mất mát huấn luyện giảm trong khi mất mát kiểm tra tăng"
+        },
+        {
+          "key": "D",
+          "text": "Hiệu năng mô hình thay đổi theo phần cứng"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Định luật Goodhart: khi một thước đo trở thành mục tiêu, nó không còn là một thước đo tốt nữa. Mô hình tối ưu hóa chỉ số đo lường, chứ không phải ý định.",
+      "tags": [
+        "responsible-ai",
+        "goodharts-law",
+        "module-D"
+      ]
+    },
+    {
+      "id": "19-D-03",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Lỗi logic trong phát biểu sau là gì: \"Các nghiên cứu cho thấy người uống cà phê kiếm được nhiều tiền hơn. Vậy nên, uống cà phê khiến thu nhập cao hơn.\"?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Lỗi modus tollens"
+        },
+        {
+          "key": "B",
+          "text": "Lỗi tương quan với nhân quả / biến gây nhiễu (confounding variable)"
+        },
+        {
+          "key": "C",
+          "text": "Ngụy biện lưỡng phân sai (false dichotomy)"
+        },
+        {
+          "key": "D",
+          "text": "Lập luận vòng tròn (circular reasoning)"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Tương quan không hàm ý nhân quả. Một biến gây nhiễu (ví dụ môi trường làm việc chuyên nghiệp) có thể giải thích cả việc uống cà phê lẫn thu nhập.",
+      "tags": [
+        "logic",
+        "causation",
+        "correlation",
+        "module-D"
+      ]
+    },
+    {
+      "id": "19-D-04",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Theo Đạo luật AI của EU (EU AI Act), loại nào đòi hỏi mức độ giám sát cao nhất?",
+      "options": [
+        {
+          "key": "A",
+          "text": "AI rủi ro tối thiểu (ví dụ bộ lọc thư rác)"
+        },
+        {
+          "key": "B",
+          "text": "AI rủi ro hạn chế (ví dụ chatbot)"
+        },
+        {
+          "key": "C",
+          "text": "AI rủi ro cao (ví dụ sàng lọc CV, chẩn đoán y khoa)"
+        },
+        {
+          "key": "D",
+          "text": "AI rủi ro không thể chấp nhận (bị cấm hoàn toàn)"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Đạo luật AI của EU cấm hoàn toàn AI rủi ro không thể chấp nhận (ví dụ chấm điểm xã hội, giám sát sinh trắc học thời gian thực nơi công cộng). AI rủi ro cao đòi hỏi tuân thủ nhưng vẫn được phép.",
+      "tags": [
+        "responsible-ai",
+        "eu-ai-act",
+        "module-D"
+      ]
+    },
+    {
+      "id": "19-D-05",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "\"Sycophancy\" (xu nịnh) trong các LLM đề cập đến điều gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Các mô hình lặp lại nguyên văn đầu vào của người dùng"
+        },
+        {
+          "key": "B",
+          "text": "Các mô hình đồng tình hoặc tâng bốc người dùng ngay cả khi sai, ưu tiên sự tán thành hơn là độ chính xác"
+        },
+        {
+          "key": "C",
+          "text": "Các mô hình tạo ra phản hồi quá dài"
+        },
+        {
+          "key": "D",
+          "text": "Các mô hình được huấn luyện trên dữ liệu mạng xã hội"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Các LLM xu nịnh nói với người dùng những gì họ muốn nghe. RLHF có thể vô tình củng cố điều này nếu người đánh giá ưa thích những phản hồi dễ chịu.",
+      "tags": [
+        "responsible-ai",
+        "llm",
+        "alignment",
+        "module-D"
+      ]
+    },
+    {
+      "id": "19-D-06",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Dạng logic nào biểu diễn đúng \"Khi và chỉ khi\" (biconditional)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "P -> Q"
+        },
+        {
+          "key": "B",
+          "text": "NOT P OR Q"
+        },
+        {
+          "key": "C",
+          "text": "P <-> Q (P iff Q)"
+        },
+        {
+          "key": "D",
+          "text": "P AND Q"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Biconditional P <-> Q nghĩa là P->Q VÀ Q->P. Chỉ đúng khi cả P và Q có cùng giá trị chân lý.",
+      "tags": [
+        "logic",
+        "biconditional",
+        "module-D"
+      ]
+    },
+    {
+      "id": "19-D-07",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "\"Responsible scaling policy\" (RSP, chính sách mở rộng có trách nhiệm) trong an toàn AI là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Một chính sách yêu cầu các mô hình nhỏ hơn phải mở rộng quy mô dần dần"
+        },
+        {
+          "key": "B",
+          "text": "Một cam kết tạm dừng hoặc giới hạn việc mở rộng năng lực nếu vượt quá các ngưỡng an toàn nhất định"
+        },
+        {
+          "key": "C",
+          "text": "Một quy định của EU về việc sử dụng năng lực tính toán cho AI"
+        },
+        {
+          "key": "D",
+          "text": "Một phương pháp giảm dấu chân carbon của quá trình huấn luyện"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Các RSP (ví dụ chính sách ASL của Anthropic) định nghĩa các ngưỡng an toàn; nếu bị vượt qua trong quá trình mở rộng năng lực, việc triển khai sẽ bị tạm dừng cho tới khi có các biện pháp an toàn.",
+      "tags": [
+        "ai-safety",
+        "responsible-scaling",
+        "module-D"
+      ]
+    }
+  ]
+}

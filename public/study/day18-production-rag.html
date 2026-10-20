@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 18 — Production RAG | Tóm tắt</title>
+<style>
+:root{
+  --bg:#f7f8fa; --card:#fff; --ink:#1a1d24; --muted:#5b6472; --line:#e3e7ee;
+  --brand:#0f7a6b; --brand-soft:#e6f4f1; --warn:#b8541a; --warn-soft:#fdf1e7;
+  --ok:#1d7a4f; --ok-soft:#e8f6ef; --bad:#c0392b; --bad-soft:#fdeceb;
+  --off:#2f5fd0; --off-soft:#eaf0fd; --on:#8a4bbf; --on-soft:#f3ebfa;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+
+header{background:linear-gradient(135deg,#0f7a6b,#1a4d8f);color:#fff;padding:34px 0 26px}
+header .wrap{padding-bottom:0}
+.kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;margin:0 0 6px}
+header h1{margin:0 0 8px;font-size:31px;line-height:1.2;font-weight:700}
+header p{margin:0;opacity:.9;font-size:15px}
+
+.tabbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);
+  box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.tabbar .wrap{display:flex;gap:4px;padding-top:0;padding-bottom:0}
+.tab{appearance:none;border:0;background:none;font:inherit;font-weight:600;font-size:15px;
+  padding:15px 18px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--brand);border-bottom-color:var(--brand)}
+.panel{display:none;padding-top:28px}
+.panel.on{display:block}
+
+h2{font-size:22px;margin:36px 0 4px;padding-top:14px;border-top:2px solid var(--line)}
+h2 .num{color:var(--brand);font-weight:700}
+h2:first-child{border-top:0;padding-top:0;margin-top:0}
+.sub{color:var(--muted);font-size:14.5px;margin:0 0 18px}
+h3{font-size:17px;margin:26px 0 10px}
+h4{font-size:15.5px;margin:0 0 8px}
+p{margin:10px 0}
+ul,ol{margin:10px 0;padding-left:22px}
+li{margin:5px 0}
+code{background:#eef1f6;padding:2px 6px;border-radius:4px;font-size:13.5px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:820px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:#fff;
+  border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{padding:9px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f2f5fa;font-weight:600;font-size:13px}
+tr:last-child td{border-bottom:0}
+
+.note{border-left:4px solid var(--brand);background:var(--brand-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.warn{border-left:4px solid var(--warn);background:var(--warn-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.bad{border-left:4px solid var(--bad);background:var(--bad-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.ok{border-left:4px solid var(--ok);background:var(--ok-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note b,.warn b,.bad b,.ok b{display:block;margin-bottom:3px;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+.note b{color:var(--brand)} .warn b{color:var(--warn)} .bad b{color:var(--bad)} .ok b{color:var(--ok)}
+
+.pill{display:inline-block;font-size:12.5px;font-weight:600;padding:2px 9px;border-radius:20px;margin-right:5px}
+.pill.offl{background:var(--off-soft);color:var(--off)}
+.pill.onl{background:var(--on-soft);color:var(--on)}
+.pill.o{background:var(--ok-soft);color:var(--ok)}
+.pill.w{background:var(--warn-soft);color:var(--warn)}
+
+/* pipeline */
+.pipe{margin:16px 0}
+.pipe .lane{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 14px;border-radius:10px;margin-bottom:10px}
+.pipe .lane.of{background:var(--off-soft);border:1px solid #cfdcf7}
+.pipe .lane.onl{background:var(--on-soft);border:1px solid #e2d3f2}
+.pipe .tag{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;min-width:118px}
+.pipe .lane.of .tag{color:var(--off)} .pipe .lane.onl .tag{color:var(--on)}
+.node{background:#fff;border:1px solid var(--line);border-radius:7px;padding:6px 11px;font-size:13.5px;font-weight:600}
+.arw{color:var(--muted);font-weight:700;font-size:13px}
+
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0}
+.step{background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-size:13.5px;font-weight:600}
+.step small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+
+.metricbox{border:1px solid var(--line);border-radius:10px;padding:14px;background:#fff}
+.metricbox .lbl{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.metricbox .m{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.metricbox .m:last-child{border-bottom:0}
+.metricbox .m b{color:var(--brand)}
+
+.blind{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+@media(max-width:700px){.blind{grid-template-columns:1fr}}
+.blind div{border:1px solid var(--line);border-radius:10px;padding:13px;background:#fff;font-size:14px}
+.blind div b{display:block;color:var(--bad);margin-bottom:4px;font-size:13px}
+
+#cheat{font-size:14px}
+#cheat h2{font-size:18px;margin:20px 0 8px;padding-top:10px}
+#cheat .card{padding:14px 16px;margin:10px 0}
+#cheat table{font-size:12.5px}
+#cheat th,#cheat td{padding:6px 8px}
+#cheat ul,#cheat ol{padding-left:19px} #cheat li{margin:3px 0}
+.cheatgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:820px){.cheatgrid{grid-template-columns:1fr}}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13.5px}
+.kv dt{font-weight:600;color:var(--brand)}
+.kv dd{margin:0;color:var(--muted)}
+.printbtn{background:var(--brand);color:#fff;border:0;border-radius:8px;padding:9px 16px;
+  font:inherit;font-weight:600;font-size:14px;cursor:pointer;margin-bottom:6px}
+.printbtn:hover{background:#0c6357}
+
+.fcbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.fbtn{background:#fff;border:1px solid var(--line);border-radius:20px;padding:6px 15px;
+  font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;color:var(--muted)}
+.fbtn:hover{border-color:var(--brand);color:var(--brand)}
+.fbtn.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.counter{margin-left:auto;font-size:13.5px;color:var(--muted)}
+.fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.fc{perspective:1100px;height:210px;cursor:pointer}
+.fci{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.fc.flip .fci{transform:rotateY(180deg)}
+.ff,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:18px;
+  display:flex;flex-direction:column;justify-content:center;border:1px solid var(--line);overflow:auto}
+.ff{background:#fff}
+.fb{background:var(--brand);color:#fff;transform:rotateY(180deg);border-color:var(--brand)}
+.fb code{background:rgba(255,255,255,.2);color:#fff}
+.ff .tag2{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);margin-bottom:8px}
+.ff .q{font-size:15.5px;font-weight:600;line-height:1.45}
+.fb .a{font-size:13.5px;line-height:1.55}
+.hint{text-align:center;color:var(--muted);font-size:12.5px;margin-top:10px}
+
+@media print{
+  header,.tabbar,.printbtn,.hint{display:none!important}
+  .panel{display:none!important} #cheat{display:block!important;padding-top:0}
+  body{background:#fff;font-size:10.5px} .wrap{max-width:100%;padding:0}
+  .card{break-inside:avoid;border-color:#ccc} table{break-inside:avoid}
+  h2{break-after:avoid}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">AICB-P2T3 · Track 3 · Tuần 4</p>
+    <h1>Ngày 18 — Production RAG</h1>
+    <p>Từ Demo 60% Đến Production 85%+ — chẩn đoán và sửa đúng tầng, không phải thêm model mạnh hơn</p>
+  </div>
+</header>
+
+<nav class="tabbar">
+  <div class="wrap">
+    <button class="tab on" data-t="detail">Tóm tắt chi tiết</button>
+    <button class="tab" data-t="cheat">Cheat sheet</button>
+    <button class="tab" data-t="cards">Flashcard</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ==================== TAB 1 ==================== -->
+<section class="panel on" id="detail">
+
+<h2><span class="num">§1</span> &nbsp;Map &amp; Compass</h2>
+<p class="sub">Trước khi sửa: bản đồ pipeline, la bàn Error Tree.</p>
+
+<div class="pipe">
+  <div class="lane of">
+    <span class="tag">Offline · 1 lần</span>
+    <span class="node">Parse</span><span class="arw">→</span>
+    <span class="node">Chunk</span><span class="arw">→</span>
+    <span class="node">Enrich</span><span class="arw">→</span>
+    <span class="node">Embed</span><span class="arw">→</span>
+    <span class="node">Index</span>
+  </div>
+  <div class="lane onl">
+    <span class="tag">Online · mỗi query</span>
+    <span class="node">PreRAG</span><span class="arw">→</span>
+    <span class="node">Retrieve</span><span class="arw">→</span>
+    <span class="node">Rerank</span><span class="arw">→</span>
+    <span class="node">Augment</span><span class="arw">→</span>
+    <span class="node">Generate</span><span class="arw">→</span>
+    <span class="node">PostRAG</span>
+  </div>
+</div>
+<div class="warn"><b>Nguyên tắc</b>Không bước nào “an toàn” — mỗi bước đều có thể là nơi pipeline hỏng. <b>OFFLINE đặt trần chất lượng:</b> retrieval không thể tốt hơn cái đã index.</div>
+
+<h3>4 case lỗi — mỗi lỗi thuộc bước nào?</h3>
+<table>
+  <tr><th style="width:50%">Triệu chứng</th><th style="width:110px">Bước</th><th>Fix</th></tr>
+  <tr><td>User hỏi “nghỉ phép” nhưng tài liệu ghi “annual leave” → không tìm thấy</td><td><b>Retrieval</b></td><td>Query rewrite / thêm synonym</td></tr>
+  <tr><td>Top-10 có chunk đúng ở vị trí #8, nhưng LLM chỉ đọc top-3</td><td><b>Rerank</b></td><td>Cross-encoder đẩy lên top</td></tr>
+  <tr><td>Retrieve đúng chunk, nhưng câu trả lời thêm thông tin không có</td><td><b>Generate</b></td><td>Prompt chặt, hạ temperature</td></tr>
+  <tr><td>Hai chunk mâu thuẫn (policy v2 vs v3), LLM chọn bản cũ</td><td><b>Augment</b></td><td>Conflict resolution (newest-wins)</td></tr>
+</table>
+
+<h2><span class="num">§2</span> &nbsp;OFFLINE — Ingestion</h2>
+<p class="sub">Làm một lần lúc index, nhưng quyết định trần chất lượng cho mọi query về sau.</p>
+
+<h3>6 chiến lược chunking</h3>
+<table>
+  <tr><th style="width:150px">Chiến lược</th><th style="width:200px">Tham số mặc định</th><th>Khi nào dùng</th></tr>
+  <tr><td>Fixed-size</td><td>512 tokens, overlap 64</td><td>Baseline, text đồng nhất</td></tr>
+  <tr><td>Semantic</td><td>cosine threshold 0.85</td><td>Đoạn đổi chủ đề, chat log</td></tr>
+  <tr style="background:var(--ok-soft)"><td><b>Hierarchical</b> <span class="pill o">default</span></td><td>parent 2048 / child 256</td><td>Doc có cấu trúc (policy, manual)</td></tr>
+  <tr><td>Structure-aware</td><td>theo heading / table</td><td>Markdown, HTML, PDF</td></tr>
+  <tr><td>Late chunking</td><td>embed doc trước, cắt sau</td><td>Tài liệu dài, tham chiếu ngược</td></tr>
+  <tr><td>RAPTOR</td><td>cây tóm tắt đệ quy</td><td>Hỏi tổng hợp xuyên đoạn</td></tr>
+</table>
+
+<div class="grid g3">
+  <div class="card" style="margin:0">
+    <h4>Hierarchical</h4>
+    <p class="sub" style="margin:0">Mâu thuẫn Day 08: chunk nhỏ retrieve chính xác nhưng thiếu ngữ cảnh; chunk lớn đủ ngữ cảnh nhưng khó match.</p>
+    <p style="margin:8px 0 0;font-size:14px"><b>Cách làm:</b> match trên <b>child 256</b> → inject <b>parent 2048</b> vào LLM.</p>
+  </div>
+  <div class="card" style="margin:0">
+    <h4>Late chunking</h4>
+    <p class="sub" style="margin:0">Cắt trước rồi embed riêng → mỗi chunk mù phần còn lại (“điều này” là gì?).</p>
+    <p style="margin:8px 0 0;font-size:14px"><b>Cách làm:</b> embed cả doc bằng long-context encoder → pool theo ranh giới chunk.</p>
+  </div>
+  <div class="card" style="margin:0">
+    <h4>RAPTOR</h4>
+    <p class="sub" style="margin:0">Chunk phẳng luôn trả thiếu với câu hỏi tổng hợp xuyên nhiều đoạn.</p>
+    <p style="margin:8px 0 0;font-size:14px"><b>Cách làm:</b> gom chunk → LLM tóm tắt → cây. Retrieve đúng độ cao: chi tiết ở lá, tổng hợp ở nút cao.</p>
+  </div>
+</div>
+<div class="note"><b>Late chunking vs Contextual</b>Late chunking <b>không gọi LLM</b> cho mỗi chunk → rẻ hơn, nhưng cần encoder long-context (Jina-v3, nomic).</div>
+
+<h3>Contextual Embeddings (Anthropic, 2024)</h3>
+<div class="grid g2">
+  <div class="card" style="margin:0">
+    <p style="margin:0 0 8px">Ghép đoạn mô tả ngữ cảnh vào trước chunk:<br>
+      <i>“Đoạn này thuộc chính sách nghỉ phép 2026…”</i></p>
+    <p class="sub" style="margin:0">Nhồi cả document mỗi call tốn token → dùng <b>prompt caching</b>. Bổ sung, <b>không thay</b> reranking.</p>
+  </div>
+  <div class="card" style="margin:0">
+    <table style="margin:0">
+      <tr><th>Cấu hình</th><th>Lỗi retrieval</th></tr>
+      <tr><td>Contextual (embed + BM25)</td><td><b>↓ 49%</b></td></tr>
+    </table>
+    <p class="sub" style="margin:8px 0 0">Số liệu Anthropic 2024, tùy corpus. Chi phí: +1 LLM call/chunk lúc index (model rẻ).</p>
+  </div>
+</div>
+<div class="warn"><b>Đánh đổi</b>Phải chạy lại mỗi lần re-index (đổi chunking, đổi model). Corpus ngắn hoặc đã rõ thì không cần.</div>
+
+<h3>Enrichment Pipeline</h3>
+<div class="flow">
+  <span class="step">Raw chunk</span><span class="arw">→</span>
+  <span class="step">Summarization<small>lọc nhiễu, bám ý chính</small></span>
+  <span class="step">Hypothetical Q&amp;A<small>nối vocab user ↔ tài liệu</small></span>
+  <span class="step">Metadata extract<small>entity, topic, ngày, nguồn</small></span><span class="arw">→</span>
+  <span class="step">Enriched chunk</span>
+</div>
+<p class="sub">Tất cả là chi phí <b>one-time</b> lúc index. Dùng model rẻ (GPT-4o-mini, Haiku).</p>
+<div class="ok"><b>Hypothetical Q&amp;A vs HyDE</b>Cùng giải quyết vocab gap. Hypothetical Q&amp;A làm <b>OFFLINE</b> (trả tiền 1 lần); HyDE làm <b>ONLINE</b> (+1 LLM call mỗi query).</div>
+
+<h3>Matryoshka (MRL) — số chiều là cái núm vặn</h3>
+<p>Train sao cho 1 vector chứa nhiều vector lồng nhau. Cắt ngắn prefix = nhanh hơn, mất ít chất lượng. <b>Embed 1 lần, dùng nhiều ngân sách.</b></p>
+<p class="sub">Cách dùng: 128-d lọc thô (nhanh) → full-d rerank. OpenAI <code>text-embedding-3</code> hỗ trợ cắt chiều. Đổi cost/latency <b>không cần re-embed</b>.</p>
+
+<h3>Chunking theo loại dữ liệu — không có “one-size”</h3>
+<table>
+  <tr><th style="width:130px">Chiến lược</th><th>Tốt cho</th><th>Tránh khi</th><th style="width:150px">Tín hiệu RAGAS</th></tr>
+  <tr><td>Fixed-size</td><td>FAQ, doc ngắn đồng nhất</td><td>Doc cấu trúc chặt (legal)</td><td>Context Recall thấp</td></tr>
+  <tr><td>Sentence Window</td><td>KB article, HR policy</td><td>Bảng / code</td><td>Faithfulness cao</td></tr>
+  <tr><td>Hierarchical</td><td>Spec, hợp đồng, ADR</td><td>Text phẳng</td><td>Context Precision cao</td></tr>
+  <tr><td>Semantic</td><td>Corpus hỗn hợp, research</td><td>Corpus lớn (ingest chậm/đắt)</td><td>Cân bằng mọi metric</td></tr>
+  <tr><td>Layout-aware</td><td>PDF scan, report nhiều bảng</td><td>Doc text thuần</td><td>Recall ở bảng</td></tr>
+  <tr><td>Multimodal</td><td>Deck, doc nhiều diagram</td><td>Corpus chỉ text</td><td>Context Recall (ảnh)</td></tr>
+</table>
+
+<h2><span class="num">§3</span> &nbsp;ONLINE — Retrieval</h2>
+<p class="sub">Chạy lại mỗi query; mỗi vấn đề trong Error Tree có một fix riêng — không bật hết, bật đúng cái cần.</p>
+
+<h3>Hybrid + RRF (baseline)</h3>
+<div class="grid g2">
+  <div class="card" style="margin:0">
+    <table style="margin:0">
+      <tr><th></th><th>BM25</th><th>Dense</th><th>Hybrid</th></tr>
+      <tr><td>Exact keyword</td><td>✓</td><td>✗</td><td>✓</td></tr>
+      <tr><td>Synonym</td><td>✗</td><td>✓</td><td>✓</td></tr>
+      <tr><td>Latency</td><td>&lt;5ms</td><td>~20ms</td><td>~25ms</td></tr>
+    </table>
+    <p class="sub" style="margin:8px 0 0"><b>Tiếng Việt:</b> BM25 cần word segmentation (underthesea, VnCoreNLP) trước khi index.</p>
+  </div>
+  <div class="card" style="margin:0">
+    <h4>RRF Fusion</h4>
+    <p style="margin:0 0 6px;font-size:15px"><code>score(d) = Σ 1/(k + rank<sub>r</sub>(d))</code>, k = 60</p>
+    <p class="sub" style="margin:0">Không cần training, gộp rank từ nhiều nguồn khác thang điểm. Tinh chỉnh k trong khoảng 10–100.</p>
+  </div>
+</div>
+<div class="warn"><b>Vì sao vẫn miss?</b>Câu trả lời nằm ở 1 token hiếm (mã <code>X7-204</code>). RRF gộp rank ở <b>mức document</b> — cần so khớp sâu hơn, ở <b>mức token</b>.</div>
+
+<h3>Vượt hybrid — 4 kỹ thuật</h3>
+<table>
+  <tr><th style="width:180px">Kỹ thuật</th><th>Ý tưởng</th><th style="width:100px">Precision</th><th style="width:90px">Latency</th></tr>
+  <tr><td>RRF (baseline)</td><td>Gộp rank, không cần train</td><td>—</td><td>~25ms</td></tr>
+  <tr><td><b>ColBERT</b> <span class="pill onl">late interaction</span></td><td>1 vector/token, MaxSim token↔token; tốn storage multi-vector</td><td>+8–12%</td><td>~50ms</td></tr>
+  <tr><td><b>SPLADE</b> <span class="pill onl">learned sparse</span></td><td>Term expansion trên inverted index; storage gần BM25</td><td>+6–10%</td><td>~40ms</td></tr>
+  <tr><td><b>Weighted Fusion</b></td><td>Học trọng số (0.3/0.7); <b>cần label data</b></td><td>+10–15%</td><td>~80ms</td></tr>
+</table>
+<div class="grid g2">
+  <div class="card" style="margin:0">
+    <h4>SPLADE — ví dụ term expansion</h4>
+    <p style="margin:0;font-size:13.5px">BM25: <code>{annual, leave, 12, days}</code><br>
+    SPLADE: <code>{annual, leave, <b>vacation, holiday, pto</b>, 12, days}</code></p>
+    <p class="sub" style="margin:8px 0 0">Query “pto” vẫn tìm thấy. Chi phí: cần GPU lúc index.</p>
+  </div>
+  <div class="card" style="margin:0">
+    <h4>ColPali — đừng parse, hãy nhìn</h4>
+    <p class="sub" style="margin:0">Vision-LLM embed thẳng ảnh trang (patch embeddings) + late interaction. Bỏ qua cả pipeline parse → bảng/biểu/layout giữ nguyên.</p>
+    <p style="margin:8px 0 0;font-size:13.5px"><b>Dùng khi:</b> tài liệu nặng layout/bảng/scan — nơi parse luôn hỏng.</p>
+  </div>
+</div>
+<div class="note"><b>Nguyên tắc leo thang</b>Mặc định <b>Hybrid + RRF</b>. Chỉ leo lên khi RAGAS chỉ rõ điểm đau: precision tụt → ColBERT · recall do vocab → SPLADE · có label → Fusion · ảnh/PDF → ColPali. <b>Đừng bật hết</b> — mỗi cái thêm latency/storage.</div>
+
+<h3>Chọn Vector DB — dừng ở dòng đầu tiên khớp</h3>
+<table>
+  <tr><th style="width:60%">Câu hỏi</th><th>Chọn</th></tr>
+  <tr><td>Đã có Postgres, dữ liệu vừa phải?</td><td><b>pgvector</b></td></tr>
+  <tr><td>Muốn managed, zero-ops?</td><td><b>Pinecone</b></td></tr>
+  <tr><td>Cần hybrid + metadata filter (đa số ca)?</td><td><b>Qdrant</b> <span class="pill o">default</span></td></tr>
+  <tr><td>Cần quan hệ giữa nhiều entity?</td><td><b>Graph DB</b></td></tr>
+</table>
+
+<h3>Two-Stage Retrieval — recall rộng → precision hẹp</h3>
+<div class="flow">
+  <span class="step">Retriever<small>bi-encoder, nhanh</small></span><span class="arw">→ top-20 →</span>
+  <span class="step">Reranker<small>cross-encoder, chính xác</small></span><span class="arw">→ top-3 →</span>
+  <span class="step">LLM</span>
+</div>
+<div class="ok"><b>ROI</b>Tốn ~30–50ms/query, đổi lấy <b>+15–25% precision</b>. Nhưng <b>vô dụng</b> nếu chunk đúng chưa được retrieve.</div>
+
+<h3>Reranker landscape</h3>
+<table>
+  <tr><th style="width:190px">Model</th><th style="width:120px">Chi phí</th><th>Khi nào dùng</th></tr>
+  <tr><td>Qwen3-Reranker</td><td>Open-weight</td><td>Top MTEB-rerank, đa ngôn ngữ, 0.6B–8B tùy budget</td></tr>
+  <tr><td>Cohere Rerank v3.5</td><td>API ($)</td><td>Managed phổ biến, đa ngôn ngữ</td></tr>
+  <tr style="background:var(--ok-soft)"><td><b>bge-reranker-v2-m3</b></td><td>Open-weight</td><td><b>Tiếng Việt tốt</b>, 8K context, self-host</td></tr>
+  <tr><td>Jina Reranker v2</td><td>Open-weight</td><td>Đa ngôn ngữ, 8K context</td></tr>
+  <tr><td>ms-marco-MiniLM-L-12</td><td>Open-weight</td><td>Nhẹ, nhanh, thiên English</td></tr>
+  <tr><td>Flashrank</td><td>Open-weight</td><td>Siêu nhẹ, &lt;5ms, edge</td></tr>
+  <tr><td>LLM-as-Reranker</td><td>$$$</td><td>GPT-4/Claude, chất lượng cao — chậm &amp; đắt</td></tr>
+</table>
+<p class="sub">Open-weight = không phí license, <b>nhưng vẫn tốn compute</b> để self-host — không đáng kể nếu model nhỏ.</p>
+
+<h3>Control Flow — mỗi vấn đề một pattern</h3>
+<table>
+  <tr><th style="width:38%">Vấn đề</th><th style="width:110px">Tầng</th><th>Pattern</th></tr>
+  <tr><td>Query lệch vocab so với corpus</td><td>PreRAG</td><td><b>HyDE</b> — LLM sinh câu trả lời giả định rồi embed câu đó</td></tr>
+  <tr><td>Câu hỏi nhiều phần / multi-hop</td><td>PreRAG</td><td><b>Multi-Query</b> — tách thành sub-query, retrieve rồi gộp</td></tr>
+  <tr><td>Retrieve chất lượng thấp, cần fallback</td><td>PreRAG</td><td><b>Corrective RAG</b></td></tr>
+  <tr><td>Context dư thừa / mâu thuẫn</td><td>Augment</td><td>NLI filter, compression</td></tr>
+  <tr><td>Cần kiểm chứng nguồn</td><td>Augment</td><td>Citation injection</td></tr>
+</table>
+<div class="warn"><b>Lưu ý</b>Mỗi pattern PreRAG đều tốn <b>+1 LLM call mỗi query</b> — bật theo vấn đề, <b>không mặc định</b>.</div>
+
+<h3>Corrective RAG (CRAG)</h3>
+<div class="flow">
+  <span class="step">Retrieve</span><span class="arw">→</span>
+  <span class="step">Evaluator chấm điểm</span><span class="arw">→</span>
+  <span class="step">Correct<small>dùng luôn</small></span>
+  <span class="step">Ambiguous<small>viết lại query</small></span>
+  <span class="step">Wrong<small>fallback web search</small></span>
+</div>
+<p class="sub">Khi nào: corpus có lỗ hổng, câu hỏi ngoài phạm vi — <b>thà fallback còn hơn bịa</b>. Chi phí: +1 bước chấm điểm/query.</p>
+
+<h3>Augmentation — làm sạch context</h3>
+<table>
+  <tr><th style="width:170px">Bước</th><th>Vấn đề</th><th style="width:150px">Tool</th></tr>
+  <tr><td>NLI verification</td><td>Chunk lạc đề / mâu thuẫn câu hỏi → bỏ chunk “contradiction”</td><td>nli-deberta-v3</td></tr>
+  <tr><td>Compression</td><td>Prompt quá dài, nhiều nhiễu → nén, giữ ý chính</td><td>LLMLingua</td></tr>
+  <tr><td>Citation injection</td><td>Cần kiểm chứng nguồn → gắn [1][2] mỗi câu</td><td>prompt + map</td></tr>
+  <tr><td>Conflict resolution</td><td>2 chunk mâu thuẫn (v2 vs v3) → newest-wins</td><td>metadata + LLM</td></tr>
+</table>
+<div class="bad"><b>Bỏ lỡ phổ biến</b>Nhồi top-k thẳng vào prompt (như demo) <b>bỏ lỡ cả tầng này</b>. Top-k hiếm khi sạch: dư thừa, mâu thuẫn, thiếu nguồn.</div>
+
+<h2><span class="num">§4</span> &nbsp;Close the Loop &amp; Limits</h2>
+
+<h3>RAGAS — 4 metric, 2 trục</h3>
+<div class="grid g2">
+  <div class="metricbox">
+    <div class="lbl">Retrieval — lấy đúng chunk chưa?</div>
+    <div class="m"><span>Context Recall</span><b>&gt; 0.75</b></div>
+    <div class="m"><span>Context Precision</span><b>&gt; 0.75</b></div>
+    <p class="sub" style="margin:10px 0 0">Thấp → sửa tầng <b>Retrieve / Rerank</b>.</p>
+  </div>
+  <div class="metricbox">
+    <div class="lbl">Generation — trả lời đúng chưa?</div>
+    <div class="m"><span>Faithfulness</span><b>&gt; 0.85</b></div>
+    <div class="m"><span>Answer Relevancy</span><b>&gt; 0.80</b></div>
+    <p class="sub" style="margin:10px 0 0">Thấp → sửa tầng <b>Generate</b> (prompt).</p>
+  </div>
+</div>
+<div class="note"><b>Vì sao tách 2 trục</b>Một điểm tổng <b>che chỗ hỏng</b>. Tách retrieval vs generation → biết ngay tầng nào mất điểm để tra Error Tree.</div>
+
+<h3>Error Tree theo metric</h3>
+<table>
+  <tr><th style="width:230px">Metric thấp</th><th>Hành động (tầng nào)</th></tr>
+  <tr><td>Context Recall</td><td>Hybrid (+BM25), HyDE, Multi-Query, metadata filter — <b>Retrieval</b></td></tr>
+  <tr><td>Context Precision</td><td>Reranking, tăng threshold, metadata filter — <b>Rerank</b></td></tr>
+  <tr><td>Faithfulness</td><td>Prompt chặt, hạ temperature, citation — <b>Generate</b></td></tr>
+  <tr><td>Answer Relevancy</td><td>Cải thiện prompt, mở rộng context — <b>Generate</b></td></tr>
+</table>
+<div class="flow">
+  <span class="step">1. RAGAS baseline</span><span class="arw">→</span>
+  <span class="step">2. Bottom-5 fail</span><span class="arw">→</span>
+  <span class="step">3. Đọc metric thấp</span><span class="arw">→</span>
+  <span class="step">4. Tra bảng → bản đồ</span><span class="arw">→</span>
+  <span class="step">5. Sửa → so delta</span>
+</div>
+<div class="ok"><b>Thứ tự rẻ → đắt</b>recall (hybrid) → precision (rerank) → faithfulness (prompt)</div>
+
+<h3>4 điểm mù của embedding</h3>
+<div class="blind">
+  <div><b>Negation</b>“được nghỉ” vs “không được nghỉ” → cosine cao nhưng nghĩa ngược</div>
+  <div><b>Temporal</b>chính sách 2024 vs 2026 → cùng score, vector không mã hóa thời gian</div>
+  <div><b>Entity</b>“phép nhân viên” vs “phép quản lý” → vector gần nhau, dễ nhầm</div>
+  <div><b>Numerical</b>“nghỉ 12 ngày” vs “nghỉ 20 ngày” → cosine cao, nhưng con số mới là đáp án</div>
+</div>
+<div class="warn"><b>Kết luận</b>Embedding <b>không phải “kém”, mà chưa đủ</b> — một mình nó không phân biệt được phủ định / thời gian / thực thể / con số.</div>
+
+<h3>5 giải pháp bù đắp</h3>
+<table>
+  <tr><th style="width:230px">Giải pháp</th><th>Sửa được gì</th></tr>
+  <tr><td>Metadata filtering</td><td><b>Temporal &amp; numerical blindness</b> — lọc theo ngày/con số trước khi search</td></tr>
+  <tr><td>NLI verification post-retrieval</td><td><b>Negation / entity-swap</b> — kiểm entailment query ↔ chunk</td></tr>
+  <tr><td>Failure-aware routing</td><td>Phát hiện <b>loại lỗi</b> trước generate → đổi chiến lược (rewrite / decompose / từ chối)</td></tr>
+  <tr><td>GraphRAG <span class="pill w">Day 19</span></td><td>Câu hỏi quan hệ giữa nhiều entity</td></tr>
+  <tr><td>Human-in-the-loop <span class="pill w">Day 27</span></td><td>High-stakes: người duyệt trước khi trả</td></tr>
+</table>
+<div class="bad"><b>Đừng làm</b>Không phải cứ thêm data hay đổi embedding model là fix được. <b>Chẩn đoán loại lỗi trước</b>, rồi chọn đúng công cụ.</div>
+
+<h3>So sánh pipeline</h3>
+<table>
+  <tr><th style="width:150px">Pipeline</th><th>Cấu hình</th><th style="width:230px">Kỳ vọng RAGAS (minh họa)</th></tr>
+  <tr><td>A — Naive</td><td>paragraph chunk 512 + dense-only</td><td>Faithfulness ~0.70, Recall ~0.55</td></tr>
+  <tr style="background:var(--ok-soft)"><td>B — Production</td><td>hierarchical + hybrid + bge-reranker</td><td>Faithfulness &gt;0.85, Recall &gt;0.75</td></tr>
+  <tr><td>C — Tự chọn</td><td>B + 1 hoặc nhiều kỹ thuật nâng cao</td><td>đo delta vs B</td></tr>
+</table>
+<p class="sub">Cùng dữ liệu, cùng judge model — chênh lệch điểm đến phần lớn từ <b>kỹ thuật pipeline</b>.</p>
+
+<h3>Lab 18 — 5 module</h3>
+<div class="card">
+  <ol style="margin:0">
+    <li><code>m1_chunking.py</code> — semantic, hierarchical, structure-aware</li>
+    <li><code>m2_search.py</code> — BM25 Vietnamese + Dense + RRF</li>
+    <li><code>m3_rerank.py</code> — CrossEncoder rerank top-20 → top-3</li>
+    <li><code>m4_eval.py</code> — RAGAS 4 metrics + failure analysis</li>
+    <li><code>m5_enrichment.py</code> — contextual / summary / hypo-Q&amp;A</li>
+  </ol>
+  <p class="sub" style="margin:10px 0 0">2h implement + 30 phút reflection. Setup: Qdrant qua Docker. Verify: <code>pytest tests/test_m*.py</code></p>
+</div>
+
+<h3>5 Key Takeaways</h3>
+<div class="grid g2">
+  <div class="ok" style="margin:0"><b>1 · Chẩn đoán trước, sửa sau</b>RAG = OFFLINE + ONLINE; dùng Error Tree để biết tầng nào mất điểm.</div>
+  <div class="ok" style="margin:0"><b>2 · OFFLINE đặt trần</b>Hierarchical + contextual + enrichment: làm 1 lần lúc index, lợi mọi query.</div>
+  <div class="ok" style="margin:0"><b>3 · Reranking ROI cao khi recall đã đủ</b>+15–25% precision với ~30–50ms; vô dụng nếu chunk đúng chưa được retrieve.</div>
+  <div class="ok" style="margin:0"><b>4 · Đo để sửa đúng chỗ</b>RAGAS 4 metric → diagnostic tree → sửa tầng yếu.</div>
+</div>
+<div class="ok"><b>5 · Biết giới hạn</b>Embedding mù negation/temporal — chẩn đoán loại lỗi trước khi thêm data.</div>
+<div class="note"><b>Tiếp theo — Ngày 19: GraphRAG &amp; Knowledge Graphs</b>“Khi user hỏi về quan hệ giữa 5 entity, flat RAG trả lời sai — GraphRAG trả lời đúng.”</div>
+
+</section>
+
+<!-- ==================== TAB 2 ==================== -->
+<section class="panel" id="cheat">
+<button class="printbtn" onclick="window.print()">In cheat sheet</button>
+
+<div class="cheatgrid">
+<div>
+
+<h2>Bản đồ pipeline</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>OFFLINE (1 lần):</b> Parse → Chunk → Enrich → Embed → Index</p>
+  <p style="margin:0 0 6px"><b>ONLINE (mỗi query):</b> PreRAG → Retrieve → Rerank → Augment → Generate → PostRAG</p>
+  <p style="margin:0"><b>OFFLINE đặt trần</b> — retrieval không thể tốt hơn cái đã index.</p>
+</div>
+
+<h2>4 case lỗi → bước</h2>
+<table>
+  <tr><th>Triệu chứng</th><th>Bước</th></tr>
+  <tr><td>“nghỉ phép” ↔ “annual leave” không tìm thấy</td><td>Retrieval</td></tr>
+  <tr><td>Chunk đúng ở #8, LLM đọc top-3</td><td>Rerank</td></tr>
+  <tr><td>Thêm thông tin không có trong chunk</td><td>Generate</td></tr>
+  <tr><td>2 chunk mâu thuẫn, chọn bản cũ</td><td>Augment</td></tr>
+</table>
+
+<h2>Chunking</h2>
+<div class="card">
+  <dl class="kv">
+    <dt>Fixed-size</dt><dd>512 tok, overlap 64 — baseline</dd>
+    <dt>Semantic</dt><dd>cosine 0.85 — chat log</dd>
+    <dt>Hierarchical ⭐</dt><dd>parent 2048 / child 256 — default</dd>
+    <dt>Structure-aware</dt><dd>heading/table — MD, HTML</dd>
+    <dt>Late chunking</dt><dd>embed doc trước, cắt sau</dd>
+    <dt>RAPTOR</dt><dd>cây tóm tắt — hỏi tổng hợp</dd>
+  </dl>
+</div>
+
+<h2>OFFLINE enrichment</h2>
+<div class="card">
+  <ul style="margin:0">
+    <li><b>Contextual</b> (Anthropic 2024) — ↓49% lỗi retrieval (embed+BM25), +1 LLM call/chunk</li>
+    <li><b>Summarization</b> — embed bản tóm tắt cạnh chunk gốc</li>
+    <li><b>Hypothetical Q&amp;A</b> — nối vocab gap, OFFLINE (khác HyDE ONLINE)</li>
+    <li><b>Metadata extract</b> — entity, topic, ngày, nguồn → bật metadata filtering</li>
+    <li><b>MRL</b> — cắt chiều, đổi cost/latency không cần re-embed</li>
+  </ul>
+</div>
+
+<h2>Hybrid + RRF</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><code>score(d) = Σ 1/(k + rank)</code>, <b>k = 60</b></p>
+  <table style="margin:6px 0 0">
+    <tr><th></th><th>BM25</th><th>Dense</th><th>Hybrid</th></tr>
+    <tr><td>Exact</td><td>✓</td><td>✗</td><td>✓</td></tr>
+    <tr><td>Synonym</td><td>✗</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Latency</td><td>&lt;5ms</td><td>~20ms</td><td>~25ms</td></tr>
+  </table>
+  <p style="margin:6px 0 0"><b>Tiếng Việt:</b> BM25 cần word segmentation</p>
+</div>
+
+<h2>Vượt hybrid</h2>
+<table>
+  <tr><th>Kỹ thuật</th><th>Prec.</th><th>Lat.</th><th>Khi nào</th></tr>
+  <tr><td>ColBERT</td><td>+8-12%</td><td>~50ms</td><td>Precision token-level</td></tr>
+  <tr><td>SPLADE</td><td>+6-10%</td><td>~40ms</td><td>Vocab gap</td></tr>
+  <tr><td>Fusion</td><td>+10-15%</td><td>~80ms</td><td>Có label data</td></tr>
+  <tr><td>ColPali</td><td>—</td><td>—</td><td>PDF/slide không parse được</td></tr>
+</table>
+
+</div>
+<div>
+
+<h2>Vector DB</h2>
+<div class="card">
+  <ol style="margin:0">
+    <li>Đã có Postgres? → <b>pgvector</b></li>
+    <li>Managed zero-ops? → <b>Pinecone</b></li>
+    <li>Hybrid + metadata filter? → <b>Qdrant</b> ⭐</li>
+    <li>Quan hệ nhiều entity? → <b>Graph DB</b></li>
+  </ol>
+</div>
+
+<h2>Rerank</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Two-stage:</b> bi-encoder top-20 → cross-encoder → top-3</p>
+  <p style="margin:0 0 6px"><b>ROI:</b> ~30–50ms → +15–25% precision</p>
+  <p style="margin:0"><b>Model:</b> bge-reranker-v2-m3 (tiếng Việt) · Flashrank (&lt;5ms) · Cohere v3.5 (API)</p>
+</div>
+
+<h2>Control flow</h2>
+<table>
+  <tr><th>Vấn đề</th><th>Pattern</th></tr>
+  <tr><td>Query lệch vocab</td><td>HyDE</td></tr>
+  <tr><td>Câu hỏi nhiều phần</td><td>Multi-Query</td></tr>
+  <tr><td>Retrieve kém, cần fallback</td><td>CRAG</td></tr>
+  <tr><td>Context thừa/mâu thuẫn</td><td>NLI, compression</td></tr>
+  <tr><td>Cần kiểm chứng nguồn</td><td>Citation injection</td></tr>
+</table>
+<p class="sub" style="margin:4px 0 0">PreRAG = +1 LLM call/query — bật theo vấn đề</p>
+
+<h2>Augmentation</h2>
+<div class="card">
+  <dl class="kv">
+    <dt>NLI verify</dt><dd>nli-deberta-v3 — bỏ contradiction</dd>
+    <dt>Compression</dt><dd>LLMLingua — nén prompt dài</dd>
+    <dt>Citation</dt><dd>gắn [1][2] mỗi câu</dd>
+    <dt>Conflict</dt><dd>newest-wins theo metadata</dd>
+  </dl>
+</div>
+
+<h2>RAGAS 4 metric</h2>
+<div class="card">
+  <p style="margin:0 0 4px"><b>RETRIEVAL</b></p>
+  <dl class="kv">
+    <dt>Context Recall</dt><dd>&gt; 0.75 — lấy đủ chưa?</dd>
+    <dt>Context Precision</dt><dd>&gt; 0.75 — xếp hạng cao chưa?</dd>
+  </dl>
+  <p style="margin:8px 0 4px"><b>GENERATION</b></p>
+  <dl class="kv">
+    <dt>Faithfulness</dt><dd>&gt; 0.85 — bám context?</dd>
+    <dt>Answer Relevancy</dt><dd>&gt; 0.80 — đúng trọng tâm?</dd>
+  </dl>
+</div>
+
+<h2>Error Tree</h2>
+<table>
+  <tr><th>Metric thấp</th><th>Sửa</th></tr>
+  <tr><td>Context Recall</td><td>Hybrid, HyDE, Multi-Query <b>(Retrieval)</b></td></tr>
+  <tr><td>Context Precision</td><td>Rerank, threshold <b>(Rerank)</b></td></tr>
+  <tr><td>Faithfulness</td><td>Prompt chặt, temp↓, citation <b>(Generate)</b></td></tr>
+  <tr><td>Answer Relevancy</td><td>Cải prompt, mở context <b>(Generate)</b></td></tr>
+</table>
+<p class="sub" style="margin:4px 0 0"><b>Rẻ → đắt:</b> recall → precision → faithfulness</p>
+
+<h2>4 điểm mù embedding</h2>
+<div class="card">
+  <ul style="margin:0">
+    <li><b>Negation</b> — “được” vs “không được”</li>
+    <li><b>Temporal</b> — 2024 vs 2026</li>
+    <li><b>Entity</b> — nhân viên vs quản lý</li>
+    <li><b>Numerical</b> — 12 ngày vs 20 ngày</li>
+  </ul>
+  <p style="margin:8px 0 0"><b>Fix:</b> metadata filter (temporal/numerical) · NLI (negation/entity) · routing · GraphRAG · HITL</p>
+</div>
+
+<h2>Nguyên tắc vàng</h2>
+<div class="card">
+  <ul style="margin:0">
+    <li>Đừng đổi model — <b>vặn đúng tầng</b></li>
+    <li>Đừng bật hết — mỗi cái thêm latency/storage</li>
+    <li>Reranking vô dụng nếu chunk đúng chưa retrieve</li>
+    <li>Chẩn đoán loại lỗi trước khi thêm data</li>
+  </ul>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ==================== TAB 3 ==================== -->
+<section class="panel" id="cards">
+<div class="fcbar">
+  <button class="fbtn on" data-f="all">Tất cả</button>
+  <button class="fbtn" data-f="map">Bản đồ</button>
+  <button class="fbtn" data-f="offline">OFFLINE</button>
+  <button class="fbtn" data-f="online">ONLINE</button>
+  <button class="fbtn" data-f="eval">Đo &amp; Giới hạn</button>
+  <span class="counter" id="cnt"></span>
+</div>
+<div class="fcgrid" id="fcgrid"></div>
+<p class="hint">Click vào thẻ để lật · Click lần nữa để úp lại</p>
+</section>
+
+</div>
+
+<script>
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); document.getElementById(b.dataset.t).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+const CARDS=[
+ ['map','RAG gồm hai nửa nào?','<b>OFFLINE (1 lần):</b> Parse → Chunk → Enrich → Embed → Index<br><b>ONLINE (mỗi query):</b> PreRAG → Retrieve → Rerank → Augment → Generate → PostRAG'],
+ ['map','Vì sao OFFLINE “đặt trần chất lượng”?','<b>Retrieval không thể tốt hơn cái đã index.</b> Mọi kỹ thuật ONLINE chỉ làm việc trên tập chunk đã tồn tại.'],
+ ['map','“nghỉ phép” không match “annual leave” — lỗi ở bước nào?','<b>Retrieval.</b> Fix: query rewrite / thêm synonym (hoặc SPLADE ở tầng index).'],
+ ['map','Chunk đúng ở vị trí #8 nhưng LLM đọc top-3 — lỗi ở đâu?','<b>Rerank.</b> Retrieval đã thành công, vấn đề là thứ hạng → cross-encoder đẩy lên top.'],
+ ['map','2 chunk mâu thuẫn (v2 vs v3), LLM chọn bản cũ — lỗi ở đâu?','<b>Augment.</b> Fix: conflict resolution với <b>newest-wins</b> theo metadata.'],
+
+ ['offline','6 chiến lược chunking?','Fixed-size (512/64) · Semantic (cosine 0.85) · <b>Hierarchical (2048/256)</b> · Structure-aware · Late chunking · RAPTOR'],
+ ['offline','Hierarchical chunking giải mâu thuẫn gì?','Chunk nhỏ retrieve chính xác nhưng thiếu ngữ cảnh; chunk lớn ngược lại.<br><b>Giải:</b> match trên <b>child 256</b>, inject <b>parent 2048</b> vào LLM.'],
+ ['offline','Late chunking hoạt động thế nào?','Embed <b>cả document</b> bằng long-context encoder trước, rồi mới pool theo ranh giới chunk → mỗi chunk vector đã tham ngữ cảnh toàn cục.'],
+ ['offline','Late chunking khác Contextual ở đâu?','Late chunking <b>không gọi LLM</b>/chunk → rẻ hơn, nhưng cần encoder long-context (Jina-v3, nomic).'],
+ ['offline','RAPTOR giải quyết loại câu hỏi nào?','<b>Câu hỏi tổng hợp xuyên nhiều đoạn</b> mà chunk phẳng luôn trả thiếu. Gom chunk → LLM tóm tắt → cây; retrieve ở đúng độ cao.'],
+ ['offline','Contextual Embeddings đạt kết quả gì?','Anthropic 2024: contextual (embed + BM25) <b>giảm 49% lỗi retrieval</b>. Chi phí: +1 LLM call/chunk lúc index.'],
+ ['offline','Contextual có nhược điểm gì?','Phải <b>chạy lại mỗi lần re-index</b> (đổi chunking, đổi model). Corpus ngắn hoặc đã rõ thì không cần.'],
+ ['offline','4 bước enrichment pipeline?','<b>Summarization</b> · <b>Hypothetical Q&amp;A</b> · <b>Prepend context</b> · <b>Metadata extract</b><br>Tất cả one-time lúc index, dùng model rẻ.'],
+ ['offline','Hypothetical Q&amp;A khác HyDE ở đâu?','Cùng giải vocab gap. HypoQ&amp;A làm <b>OFFLINE</b> (trả tiền 1 lần cho corpus); HyDE làm <b>ONLINE</b> (+1 LLM call mỗi query).'],
+ ['offline','Matryoshka (MRL) cho phép làm gì?','1 vector chứa nhiều vector lồng nhau → cắt prefix để nhanh/rẻ hơn <b>mà không cần re-embed</b>. Ví dụ: 128-d lọc thô → full-d rerank.'],
+ ['offline','Semantic chunking nên tránh khi nào?','<b>Corpus lớn</b> — embed từng câu khiến ingest chậm và đắt.'],
+
+ ['online','Công thức RRF và k mặc định?','<code>score(d) = Σ 1/(k + rank)</code>, <b>k = 60</b> (tinh chỉnh 10–100).<br>Không cần training, gộp rank từ nguồn khác thang điểm.'],
+ ['online','Latency BM25 / Dense / Hybrid?','BM25 <b>&lt;5ms</b> · Dense <b>~20ms</b> · Hybrid <b>~25ms</b><br>BM25 bắt exact keyword, Dense bắt synonym.'],
+ ['online','Lưu ý tiếng Việt với BM25?','Cần <b>word segmentation</b> (underthesea, VnCoreNLP) trước khi index — nếu không mỗi âm tiết thành một token riêng.'],
+ ['online','Vì sao Hybrid+RRF vẫn miss mã hiếm “X7-204”?','RRF gộp rank ở <b>mức document</b> — cần so khớp sâu hơn ở <b>mức token</b> (ColBERT).'],
+ ['online','ColBERT hoạt động thế nào?','Giữ <b>1 vector / token</b>. Mỗi token query tìm token doc khớp nhất (<b>MaxSim</b>) rồi cộng lại. +8–12% precision, ~50ms, tốn storage.'],
+ ['online','SPLADE khác BM25 ở đâu?','Học trọng số từ + <b>term expansion</b>: {annual, leave} → {annual, leave, <b>vacation, holiday, pto</b>}. Vẫn chạy trên inverted index. Cần GPU lúc index.'],
+ ['online','Weighted Fusion cần gì mà RRF không cần?','<b>Label data</b> — cặp (query → doc đúng), từ người gán nhãn hoặc click-log. Mặc định dùng RRF tới khi đủ label.'],
+ ['online','ColPali tiếp cận tài liệu thế nào?','Vision-LLM <b>embed thẳng ảnh trang</b> (patch embeddings) + late interaction — <b>bỏ qua cả pipeline parse</b>. Dùng cho PDF scan/bảng biểu.'],
+ ['online','Cây quyết định chọn Vector DB?','Có Postgres → <b>pgvector</b> · Managed → <b>Pinecone</b> · Hybrid+filter → <b>Qdrant</b> ⭐ · Quan hệ entity → <b>Graph DB</b>'],
+ ['online','Two-Stage Retrieval và ROI?','Bi-encoder <b>top-20</b> → cross-encoder → <b>top-3</b>.<br>Tốn ~30–50ms, đổi lấy <b>+15–25% precision</b>. Vô dụng nếu chunk đúng chưa retrieve.'],
+ ['online','Reranker nào tốt cho tiếng Việt self-host?','<b>bge-reranker-v2-m3</b> — tiếng Việt tốt, 8K context, open-weight. (Flashrank nếu cần &lt;5ms; Cohere v3.5 nếu muốn managed.)'],
+ ['online','HyDE và Multi-Query khác nhau ở đâu?','<b>HyDE:</b> LLM sinh câu trả lời giả định rồi embed câu đó → nối vocab gap.<br><b>Multi-Query:</b> tách query phức thành sub-query rồi gộp → xử lý câu hỏi nhiều phần.'],
+ ['online','CRAG hoạt động thế nào?','Evaluator chấm điểm chunk → rẽ 3 nhánh: <b>Correct</b> dùng luôn · <b>Ambiguous</b> viết lại query · <b>Wrong</b> fallback web search.'],
+ ['online','4 bước Augmentation?','<b>NLI verification</b> (nli-deberta-v3) · <b>Compression</b> (LLMLingua) · <b>Citation injection</b> · <b>Conflict resolution</b> (newest-wins)'],
+ ['online','Nhồi top-k thẳng vào prompt bỏ lỡ gì?','Bỏ lỡ <b>cả tầng Augment</b>. Top-k hiếm khi sạch: dư thừa, mâu thuẫn, thiếu nguồn.'],
+ ['online','Nguyên tắc leo thang retriever?','Mặc định <b>Hybrid + RRF</b>. Chỉ leo lên khi RAGAS chỉ điểm đau: precision↓ → ColBERT · recall do vocab → SPLADE · có label → Fusion · ảnh/PDF → ColPali.'],
+
+ ['eval','4 metric RAGAS và ngưỡng?','<b>RETRIEVAL:</b> Context Recall &gt;0.75 · Context Precision &gt;0.75<br><b>GENERATION:</b> Faithfulness &gt;0.85 · Answer Relevancy &gt;0.80'],
+ ['eval','Vì sao phải tách 2 trục thay vì 1 điểm tổng?','<b>Một điểm tổng che chỗ hỏng.</b> Tách retrieval vs generation → biết ngay tầng nào mất điểm để tra Error Tree.'],
+ ['eval','Context Recall thấp → sửa gì?','Tầng <b>Retrieval</b>: Hybrid (+BM25), HyDE, Multi-Query, metadata filter.'],
+ ['eval','Context Precision thấp → sửa gì?','Tầng <b>Rerank</b>: reranking, tăng threshold, metadata filter.'],
+ ['eval','Faithfulness thấp → sửa gì?','Tầng <b>Generate</b>: prompt chặt, hạ temperature, thêm citation.'],
+ ['eval','Quy trình 5 bước khép kín?','(1) RAGAS baseline → (2) bottom-5 fail → (3) đọc metric thấp → (4) tra bảng ra bản đồ → (5) sửa → so delta'],
+ ['eval','Thứ tự sửa rẻ → đắt?','<b>recall (hybrid) → precision (rerank) → faithfulness (prompt)</b>'],
+ ['eval','4 điểm mù của embedding?','<b>Negation</b> (“được” vs “không được”) · <b>Temporal</b> (2024 vs 2026) · <b>Entity</b> (nhân viên vs quản lý) · <b>Numerical</b> (12 vs 20 ngày)'],
+ ['eval','5 giải pháp bù giới hạn embedding?','Metadata filtering (temporal/numerical) · NLI verification (negation/entity) · Failure-aware routing · GraphRAG (Day 19) · HITL (Day 27)'],
+ ['eval','Naive vs Production pipeline?','<b>A-Naive</b> (chunk 512 + dense-only): Faith ~0.70, Recall ~0.55<br><b>B-Production</b> (hierarchical + hybrid + bge-reranker): Faith &gt;0.85, Recall &gt;0.75'],
+ ['eval','Câu chốt của cả bài Day 18?','<b>Đừng đổi model, vặn đúng tầng.</b> Production RAG là kỹ thuật chẩn đoán + sửa đúng tầng, không phải thêm model mạnh hơn.'],
+];
+const grid=document.getElementById('fcgrid'), cnt=document.getElementById('cnt');
+const NAMES={map:'Bản đồ',offline:'OFFLINE',online:'ONLINE',eval:'Đo & Giới hạn'};
+function render(f){
+  const list=f==='all'?CARDS:CARDS.filter(c=>c[0]===f);
+  grid.innerHTML=list.map(c=>`<div class="fc"><div class="fci">
+      <div class="ff"><div class="tag2">${NAMES[c[0]]}</div><div class="q">${c[1]}</div></div>
+      <div class="fb"><div class="a">${c[2]}</div></div></div></div>`).join('');
+  cnt.textContent=list.length+' thẻ';
+  grid.querySelectorAll('.fc').forEach(el=>el.onclick=()=>el.classList.toggle('flip'));
+}
+document.querySelectorAll('.fbtn').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); render(b.dataset.f);
+});
+render('all');
+</script>
+</body>
+</html>

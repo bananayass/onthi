@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 2 — Xác định bài toán cho AI | Tóm tắt</title>
+<style>
+:root{
+  --bg:#f7f8fa; --card:#fff; --ink:#1a1d24; --muted:#5b6472; --line:#e3e7ee;
+  --brand:#0f6f8c; --brand-soft:#e4f2f6; --warn:#b8541a; --warn-soft:#fdf1e7;
+  --ok:#1d7a4f; --ok-soft:#e8f6ef; --bad:#c0392b; --bad-soft:#fdeceb;
+  --acc:#6b3fa0; --acc-soft:#f2ebfa;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+
+header{background:linear-gradient(135deg,#0f6f8c,#154a72);color:#fff;padding:34px 0 26px}
+header .wrap{padding-bottom:0}
+.kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;margin:0 0 6px}
+header h1{margin:0 0 8px;font-size:31px;line-height:1.2;font-weight:700}
+header p{margin:0;opacity:.9;font-size:15px}
+
+.tabbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);
+  box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.tabbar .wrap{display:flex;gap:4px;padding-top:0;padding-bottom:0}
+.tab{appearance:none;border:0;background:none;font:inherit;font-weight:600;font-size:15px;
+  padding:15px 18px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--brand);border-bottom-color:var(--brand)}
+.panel{display:none;padding-top:28px}
+.panel.on{display:block}
+
+h2{font-size:22px;margin:36px 0 4px;padding-top:14px;border-top:2px solid var(--line)}
+h2 .num{color:var(--brand);font-weight:700}
+h2:first-child{border-top:0;padding-top:0;margin-top:0}
+.sub{color:var(--muted);font-size:14.5px;margin:0 0 18px}
+h3{font-size:17px;margin:26px 0 10px}
+h4{font-size:15.5px;margin:0 0 8px}
+p{margin:10px 0}
+ul,ol{margin:10px 0;padding-left:22px}
+li{margin:5px 0}
+code{background:#eef1f6;padding:2px 6px;border-radius:4px;font-size:13.5px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:820px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:#fff;
+  border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{padding:9px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f2f5fa;font-weight:600;font-size:13px}
+tr:last-child td{border-bottom:0}
+
+.note{border-left:4px solid var(--brand);background:var(--brand-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.warn{border-left:4px solid var(--warn);background:var(--warn-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.bad{border-left:4px solid var(--bad);background:var(--bad-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.ok{border-left:4px solid var(--ok);background:var(--ok-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.acc{border-left:4px solid var(--acc);background:var(--acc-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note b,.warn b,.bad b,.ok b,.acc b{display:block;margin-bottom:3px;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+.note b{color:var(--brand)} .warn b{color:var(--warn)} .bad b{color:var(--bad)}
+.ok b{color:var(--ok)} .acc b{color:var(--acc)}
+
+.quote{margin:16px 0;padding:20px 24px;border-radius:12px;background:#1f2430;color:#fff;text-align:center}
+.quote p{margin:0;font-size:19px;font-weight:600;line-height:1.4}
+.quote small{display:block;margin-top:9px;opacity:.7;font-size:13px;letter-spacing:.06em}
+
+.pill{display:inline-block;font-size:12.5px;font-weight:600;padding:2px 9px;border-radius:20px;margin-right:5px}
+.pill.b{background:var(--brand-soft);color:var(--brand)}
+.pill.o{background:var(--ok-soft);color:var(--ok)}
+.pill.w{background:var(--warn-soft);color:var(--warn)}
+.pill.r{background:var(--bad-soft);color:var(--bad)}
+
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0}
+.step{background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-size:13.5px;font-weight:600}
+.step small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.step b{color:var(--brand)}
+.arw{color:var(--muted);font-weight:700;font-size:13px}
+
+/* double diamond */
+.dd{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:16px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+@media(max-width:700px){.dd{grid-template-columns:1fr}}
+.dd>div{padding:16px 18px}
+.dd .d1{background:var(--brand-soft);border-right:1px solid var(--line)}
+.dd .d2{background:var(--acc-soft)}
+.dd h4{margin:0 0 4px;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.dd .d1 h4{color:var(--brand)} .dd .d2 h4{color:var(--acc)}
+.dd .ph{display:flex;gap:10px;margin-top:10px;font-size:13.5px}
+.dd .ph b{flex:0 0 74px}
+.dd .ph span{color:var(--muted)}
+
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+@media(max-width:700px){.vs{grid-template-columns:1fr}}
+.vs>div{border-radius:11px;padding:15px 17px;border:1px solid var(--line);background:#fff}
+.vs .lgood{border-top:4px solid var(--ok)}
+.vs .lbad{border-top:4px solid var(--bad)}
+.vs .lneu{border-top:4px solid var(--brand)}
+.vs h4{margin:0 0 8px;font-size:15px}
+.vs .lgood h4{color:var(--ok)} .vs .lbad h4{color:var(--bad)} .vs .lneu h4{color:var(--brand)}
+.vs p,.vs li{font-size:14px}
+.vs ul{margin:6px 0;padding-left:19px}
+
+/* confusion matrix */
+.cm{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+@media(max-width:700px){.cm{grid-template-columns:1fr}}
+.cm>div{border:1px solid var(--line);border-radius:11px;padding:14px 16px;background:#fff}
+.cm .tp{border-left:4px solid var(--ok)} .cm .tn{border-left:4px solid var(--ok)}
+.cm .fp{border-left:4px solid var(--bad)} .cm .fn{border-left:4px solid var(--warn)}
+.cm b{display:block;font-size:12.5px;letter-spacing:.05em;margin-bottom:5px}
+.cm .tp b,.cm .tn b{color:var(--ok)} .cm .fp b{color:var(--bad)} .cm .fn b{color:var(--warn)}
+.cm p{margin:0;font-size:13.8px;color:var(--muted)}
+
+/* levels 3 mức */
+.lvls{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+@media(max-width:820px){.lvls{grid-template-columns:1fr}}
+.lvl{border:1px solid var(--line);border-radius:12px;padding:16px;background:#fff}
+.lvl .cap{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11.5px;font-weight:700;
+  letter-spacing:.05em;margin-bottom:9px}
+.lvl.l1 .cap{background:var(--ok-soft);color:var(--ok)}
+.lvl.l2 .cap{background:var(--brand-soft);color:var(--brand)}
+.lvl.l3 .cap{background:var(--acc-soft);color:var(--acc)}
+.lvl h4{margin:0 0 8px;font-size:16px}
+.lvl ul{margin:0 0 9px;padding-left:18px;font-size:13.5px}
+.lvl .ex{font-size:12.8px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+
+/* decision go/notyet/nogo */
+.dec{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+@media(max-width:820px){.dec{grid-template-columns:1fr}}
+.dec>div{border-radius:12px;padding:16px;background:#fff;border:1px solid var(--line);border-top-width:4px}
+.dec .go{border-top-color:var(--ok)} .dec .ny{border-top-color:var(--warn)} .dec .ng{border-top-color:var(--bad)}
+.dec h4{margin:0 0 3px;font-size:17px}
+.dec .go h4{color:var(--ok)} .dec .ny h4{color:var(--warn)} .dec .ng h4{color:var(--bad)}
+.dec .st{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+.dec ul{margin:0;padding-left:18px;font-size:13.5px}
+
+/* numbered question list */
+.qlist{counter-reset:q;margin:14px 0}
+.qi{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:10px;padding:12px 15px;margin-bottom:8px}
+.qi .n{flex:0 0 26px;height:26px;border-radius:50%;background:var(--brand-soft);color:var(--brand);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12.5px}
+.qi .b{flex:1;min-width:0;font-size:14px}
+.qi .b strong{display:block;margin-bottom:2px}
+.qi .b span{color:var(--muted);font-size:13.3px}
+
+.tmpl{background:#1f2430;color:#e6e9ef;border-radius:10px;padding:16px 18px;margin:12px 0;font-size:14.5px;line-height:1.75}
+.tmpl .sl{color:#82d8f5;font-weight:600}
+
+#cheat{font-size:14px}
+#cheat h2{font-size:18px;margin:20px 0 8px;padding-top:10px}
+#cheat .card{padding:14px 16px;margin:10px 0}
+#cheat table{font-size:12.5px}
+#cheat th,#cheat td{padding:6px 8px}
+#cheat ul,#cheat ol{padding-left:19px} #cheat li{margin:3px 0}
+.cheatgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:820px){.cheatgrid{grid-template-columns:1fr}}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13.5px}
+.kv dt{font-weight:600;color:var(--brand)}
+.kv dd{margin:0;color:var(--muted)}
+.printbtn{background:var(--brand);color:#fff;border:0;border-radius:8px;padding:9px 16px;
+  font:inherit;font-weight:600;font-size:14px;cursor:pointer;margin-bottom:6px}
+.printbtn:hover{background:#0b5a73}
+
+.fcbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.fbtn{background:#fff;border:1px solid var(--line);border-radius:20px;padding:6px 15px;
+  font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;color:var(--muted)}
+.fbtn:hover{border-color:var(--brand);color:var(--brand)}
+.fbtn.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.counter{margin-left:auto;font-size:13.5px;color:var(--muted)}
+.fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.fc{perspective:1100px;height:218px;cursor:pointer}
+.fci{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.fc.flip .fci{transform:rotateY(180deg)}
+.ff,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:18px;
+  display:flex;flex-direction:column;justify-content:center;border:1px solid var(--line);overflow:auto}
+.ff{background:#fff}
+.fb{background:var(--brand);color:#fff;transform:rotateY(180deg);border-color:var(--brand)}
+.fb code{background:rgba(255,255,255,.2);color:#fff}
+.ff .tag2{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);margin-bottom:8px}
+.ff .q{font-size:15.5px;font-weight:600;line-height:1.45}
+.fb .a{font-size:13.5px;line-height:1.55}
+.hint{text-align:center;color:var(--muted);font-size:12.5px;margin-top:10px}
+
+@media print{
+  header,.tabbar,.printbtn,.hint{display:none!important}
+  .panel{display:none!important} #cheat{display:block!important;padding-top:0}
+  body{background:#fff;font-size:10.5px} .wrap{max-width:100%;padding:0}
+  .card{break-inside:avoid;border-color:#ccc} table{break-inside:avoid}
+  h2{break-after:avoid}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">AI IN ACTION · Ngày 2</p>
+    <h1>Xác định bài toán cho AI</h1>
+    <p>Từ yêu cầu mơ hồ đến Problem Statement rõ ràng</p>
+  </div>
+</header>
+
+<nav class="tabbar">
+  <div class="wrap">
+    <button class="tab on" data-t="detail">Tóm tắt chi tiết</button>
+    <button class="tab" data-t="cheat">Cheat sheet</button>
+    <button class="tab" data-t="cards">Flashcard</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ==================== TAB 1 ==================== -->
+<section class="panel on" id="detail">
+
+<h3>Bốn câu hỏi trọng tâm của cả ngày</h3>
+<div class="qlist">
+  <div class="qi"><div class="n">1</div><div class="b"><strong>Bài toán có thực sự cần AI giải quyết?</strong></div></div>
+  <div class="qi"><div class="n">2</div><div class="b"><strong>Nếu có, giải pháp ở cấp độ nào: Rule, Workflow, hay Agent?</strong></div></div>
+  <div class="qi"><div class="n">3</div><div class="b"><strong>Problem Statement đã đủ rõ ràng để triển khai?</strong></div></div>
+  <div class="qi"><div class="n">4</div><div class="b"><strong>Khi nào quyết định: Go, Not Yet, hay No-Go?</strong></div></div>
+</div>
+<div class="note"><b>Ánh xạ</b>Ba bước PAIR trả lời ba câu đầu; tổng hợp ①②③ → <b>câu ④</b>.</div>
+
+<div class="quote"><p>“Do not solve the problem I am asked to solve.”</p><small>DON NORMAN · jnd.org</small></div>
+
+<h3>Ba trụ cột nền tảng của AI Product</h3>
+<p class="sub">Sản phẩm tích hợp AI bản chất vẫn là một sản phẩm hoàn chỉnh — <b>kế thừa chứ không thay thế</b> nguyên lý sản phẩm truyền thống.</p>
+<div class="grid g3">
+  <div class="card" style="margin:0"><h4>AI Engineering</h4><p class="sub" style="margin:0">Triển khai RAG, Agent, Guardrails, Evaluation và vận hành hệ thống AI thực tế. <i>(Chip Huyen)</i></p></div>
+  <div class="card" style="margin:0"><h4>Product Thinking</h4><p class="sub" style="margin:0">Xác định đúng bài toán, thấu hiểu người dùng, tránh xây tính năng không mang lại giá trị. <i>(Marty Cagan — Inspired)</i></p></div>
+  <div class="card" style="margin:0"><h4>Design Thinking</h4><p class="sub" style="margin:0">Thiết kế dựa trên mental model, feedback và tối ưu trải nghiệm khi AI sai sót. <i>(Don Norman)</i></p></div>
+</div>
+<p class="sub"><b>Sách giáo khoa hôm nay:</b> Google PAIR — <i>People + AI Guidebook</i> (6 chương). <b>Chương 1 — User Needs + Defining Success</b> là xương sống buổi sáng. Đọc thêm: Anthropic — <i>Building effective agents</i>, Google — <i>Rules of ML</i>.</p>
+
+<h3>“AI chatbot” chưa phải là một bài toán</h3>
+<div class="vs">
+  <div class="lneu">
+    <h4>Phục vụ khách hàng</h4>
+    <ul><li>Giải đáp FAQ về sản phẩm &amp; chính sách</li><li>Tư vấn và hỗ trợ mua hàng</li><li>Chăm sóc sau mua hàng</li><li>Upsell &amp; cross-sell</li></ul>
+  </div>
+  <div class="lneu">
+    <h4>Hỗ trợ nội bộ</h4>
+    <ul><li>Phân loại yêu cầu hỗ trợ (tickets)</li><li>Tra cứu thông tin nghiệp vụ nhanh</li><li>Đề xuất nháp phản hồi để con người phê duyệt</li><li>Chuyển tiếp câu hỏi phức tạp cho nhân sự</li></ul>
+  </div>
+</div>
+<div class="bad"><b>Câu chốt</b><b>Đối tượng khác nhau → workflow khác, metric khác, rủi ro khác.</b> Chưa thấu hiểu điểm đau (pain point) thì chưa đề xuất giải pháp.</div>
+
+<h2><span class="num">§1</span> &nbsp;Problem Discovery</h2>
+<p class="sub">Tìm đúng vấn đề trước khi tìm giải pháp.</p>
+
+<h3>Double Diamond <span class="pill b">Don Norman / British Design Council, 2005</span></h3>
+<div class="dd">
+  <div class="d1">
+    <h4>Diamond 1 — Tìm đúng VẤN ĐỀ</h4>
+    <div class="ph"><b>Discover</b><span>Mở rộng — khảo sát vấn đề căn bản</span></div>
+    <div class="ph"><b>Define</b><span>Thu hẹp — xác định đúng bài toán gốc</span></div>
+  </div>
+  <div class="d2">
+    <h4>Diamond 2 — Tìm đúng GIẢI PHÁP</h4>
+    <div class="ph"><b>Develop</b><span>Mở rộng — nhiều giải pháp tiềm năng</span></div>
+    <div class="ph"><b>Deliver</b><span>Thu hẹp — chọn và triển khai</span></div>
+  </div>
+</div>
+<div class="bad"><b>Câu chốt</b><b>Giải pháp xuất sắc cho sai vấn đề có thể còn tệ hơn không có giải pháp.</b><br><i>“Kỹ sư và doanh nhân được đào tạo để giải vấn đề. Nhà thiết kế được đào tạo để khám phá vấn đề thật.”</i></div>
+
+<h4>Diamond 1 — công cụ cho mỗi pha</h4>
+<div class="vs">
+  <div class="lneu">
+    <h4>DISCOVER · phân kỳ</h4>
+    <ul><li>Quan sát thực tế (Observation)</li><li>Phỏng vấn người dùng</li><li>Khảo sát (Survey)</li><li>Nhật ký hành vi (Diary Study)</li><li>Phân tích dữ liệu / log hệ thống</li><li>Bản đồ các bên liên quan</li></ul>
+  </div>
+  <div class="lneu">
+    <h4>DEFINE · hội tụ</h4>
+    <ul><li>Sơ đồ đồng cảm / Affinity Mapping</li><li>Kỹ thuật <b>5 Whys</b></li><li>Ma trận Tác động – Nỗ lực</li><li>Dot Voting</li><li><b>How Might We</b></li><li>Problem Statement</li></ul>
+  </div>
+</div>
+
+<h3>Quy trình HCD — vòng lặp 5 bước bên trong mỗi Diamond</h3>
+<div class="flow">
+  <span class="step"><b>1.</b> Observation<small>quan sát khách hàng tiềm năng trong cuộc sống bình thường</small></span><span class="arw">→</span>
+  <span class="step"><b>2.</b> Ideation<small>tạo nhiều ý tưởng, tránh phê bình</small></span><span class="arw">→</span>
+  <span class="step"><b>3.</b> Prototype<small>mẫu thử nhanh, kiểm tra trước khi build</small></span><span class="arw">→</span>
+  <span class="step"><b>4.</b> Test<small>quan sát người dùng tương tác thật</small></span><span class="arw">→</span>
+  <span class="step"><b>5.</b> Iteration<small>tinh chỉnh liên tục</small></span>
+</div>
+
+<h3>Những câu hỏi nguyên bản</h3>
+<div class="grid g3">
+  <div class="card" style="margin:0"><h4>Isaac Newton</h4><p class="sub" style="margin:0">Quả táo rơi xuống đất — vậy Mặt Trăng có đang “rơi” tự do không?</p></div>
+  <div class="card" style="margin:0"><h4>Polaroid</h4><p class="sub" style="margin:0">Tại sao không thể xem ảnh ngay lập tức sau khi chụp?</p></div>
+  <div class="card" style="margin:0"><h4>Airbnb</h4><p class="sub" style="margin:0">Liệu không gian sống bỏ trống có thể dùng làm dịch vụ lưu trú?</p></div>
+</div>
+<p class="sub" style="text-align:center"><b>Tò mò trước. Đánh giá sau.</b></p>
+
+<h3>Bộ thẻ câu hỏi #1 — Phân kỳ</h3>
+<div class="qlist">
+  <div class="qi"><div class="n">1</div><div class="b"><strong>Giả định hiển nhiên nào cần được lật lại?</strong></div></div>
+  <div class="qi"><div class="n">2</div><div class="b"><strong>Có cách tiếp cận nào hoàn toàn mới cho vấn đề?</strong></div></div>
+  <div class="qi"><div class="n">3</div><div class="b"><strong>Nếu thiết kế lại từ đầu và không bị giới hạn?</strong></div></div>
+  <div class="qi"><div class="n">4</div><div class="b"><strong>Tại sao bài toán này cần AI? Nếu không thì sao?</strong></div></div>
+  <div class="qi"><div class="n">5</div><div class="b"><strong>Quy trình nào đang tồn tại chỉ vì thói quen?</strong></div></div>
+  <div class="qi"><div class="n">6</div><div class="b"><strong>Có câu hỏi cốt lõi nào đang bị né tránh?</strong></div></div>
+</div>
+
+<h3>Ba bài học thực tế — khởi nguồn từ bài toán, không bắt đầu từ AI</h3>
+<table>
+  <tr><th style="width:150px">Case</th><th style="width:230px">Bài học</th><th>Chi tiết</th></tr>
+  <tr><td><b>Cursor</b></td><td>Lệch năng lực cốt lõi</td><td>Từ bỏ mảng AI thiết kế cơ khí (CAD) để tập trung vào AI code editor — nơi đội ngũ <b>am hiểu sâu sắc</b> quy trình nghiệp vụ</td></tr>
+  <tr><td><b>Artifact</b></td><td>Sản phẩm tốt ≠ Thị trường lớn</td><td>Ứng dụng đọc tin tích hợp AI xuất sắc, nhưng <b>quy mô thị trường quá hẹp</b> để thương mại hóa (đóng cửa 1/2024)</td></tr>
+  <tr><td><b>NotebookLM</b></td><td>Định vị đúng điểm đau</td><td>Tập trung nhu cầu hỏi đáp, tóm tắt trên tài liệu cá nhân và <b>đối chiếu nguồn gốc bằng trích dẫn</b></td></tr>
+</table>
+<div class="note"><b>Lộ trình đúng</b>Bài toán → Quy trình vận hành → Chỉ số đo lường → <b>Giải pháp AI</b></div>
+
+<h3>Tìm bài toán AI ở đâu? — 4 lăng kính</h3>
+<div class="grid g4">
+  <div class="card" style="margin:0"><h4>Repetitive</h4><p class="sub" style="margin:0">Việc lặp lại thường xuyên; công đoạn nào cần chuẩn hóa để tự động hóa?</p></div>
+  <div class="card" style="margin:0"><h4>Time-consuming</h4><p class="sub" style="margin:0">Khối lượng lớn; thời gian hao phí ở bước nào (tìm kiếm, đọc hiểu, chờ đợi, định dạng)?</p></div>
+  <div class="card" style="margin:0"><h4>AI advantage</h4><p class="sub" style="margin:0">Tác vụ đòi hỏi phân tích ngữ cảnh, xử lý ngôn ngữ tự nhiên, tổng hợp đa nguồn</p></div>
+  <div class="card" style="margin:0"><h4>User pain points</h4><p class="sub" style="margin:0">Ai đang gặp khó khăn, phàn nàn hoặc bị tắc nghẽn liên tục?</p></div>
+</div>
+
+<h3>4 Anti-patterns — dấu hiệu cảnh báo</h3>
+<table>
+  <tr><th style="width:220px">Anti-pattern</th><th>Biểu hiện</th></tr>
+  <tr><td><b>Solution-first</b><br><span class="sub">Ưu tiên giải pháp</span></td><td>Xây chatbot/agent <b>trước khi</b> làm rõ quy trình vận hành và điểm nghẽn thực tế</td></tr>
+  <tr><td><b>No baseline</b><br><span class="sub">Mơ hồ hiện trạng</span></td><td>Không lượng hóa tổn thất hiện tại → <b>mất căn cứ đánh giá</b> hiệu quả cải tiến</td></tr>
+  <tr><td><b>No evaluation</b><br><span class="sub">Bỏ qua đánh giá</span></td><td>Không thiết lập kịch bản kiểm thử, chỉ số đo lường hoặc phương án đối chứng</td></tr>
+  <tr><td><b>No boundary</b><br><span class="sub">Mập mờ ranh giới</span></td><td>Không rõ phạm vi tự chủ của AI và <b>thời điểm cần con người phê duyệt</b> (HITL)</td></tr>
+</table>
+
+<h3>Bộ thẻ câu hỏi #2 — Phỏng vấn stakeholder</h3>
+<div class="qlist">
+  <div class="qi"><div class="n">1</div><div class="b"><strong>Pain point là gì?</strong><span>Tần suất lặp lại trong ngày hoặc trong tuần ra sao?</span></div></div>
+  <div class="qi"><div class="n">2</div><div class="b"><strong>Workflow hiện tại như thế nào?</strong><span>Công cụ nào ở từng bước, ai bàn giao cho ai?</span></div></div>
+  <div class="qi"><div class="n">3</div><div class="b"><strong>Thiệt hại do vấn đề này gây ra là gì?</strong><span>Thời gian xử lý, chi phí, SLA hay tỷ lệ chuyển đổi?</span></div></div>
+  <div class="qi"><div class="n">4</div><div class="b"><strong>Hậu quả nếu hệ thống AI sai sót?</strong><span>Khâu nào cần HITL, hay AI chỉ hỗ trợ gợi ý?</span></div></div>
+  <div class="qi"><div class="n">5</div><div class="b"><strong>Ai có quyền phê duyệt (nói YES)?</strong><span>Metric và mức rủi ro nào quyết định việc đầu tư?</span></div></div>
+</div>
+<div class="warn"><b>Lưu ý</b>Nếu stakeholder <b>không mô tả được quy trình hiện tại và chi phí thiệt hại khi lỗi</b>, mọi đề xuất giải pháp AI đều chỉ là phỏng đoán thiếu căn cứ.</div>
+
+<h3>PAIR Chương 1 — Reframe câu hỏi</h3>
+<div class="card" style="text-align:center">
+  <p style="margin:0 0 10px;font-size:16px"><s style="color:var(--muted)">“Can we use AI to ______?”</s></p>
+  <p style="margin:0 0 12px;color:var(--muted)">↓ thay bằng hai câu hỏi ↓</p>
+  <div class="vs" style="margin:0">
+    <div class="lgood"><h4>“How might we solve ______?”</h4></div>
+    <div class="lgood"><h4>“Can AI solve this problem in a unique way?”</h4></div>
+  </div>
+</div>
+<div class="note"><b>Câu chốt</b><b>Hỏi về bài toán trước, về AI sau</b> — AI chỉ là một phương án trong nhiều phương án khả dĩ.</div>
+
+<h2><span class="num">§2</span> &nbsp;Problem Statement</h2>
+
+<h3>Quick Problem Card — 6 trường</h3>
+<table>
+  <tr><th style="width:230px">Trường</th><th>Nội dung</th></tr>
+  <tr><td><b>Bài toán</b> <span class="sub">problem</span></td><td>Vấn đề cụ thể cần giải quyết (<b>không bao gồm giải pháp</b>)</td></tr>
+  <tr><td><b>Đối tượng ảnh hưởng</b> <span class="sub">actor</span></td><td>Cá nhân hoặc bộ phận chịu tác động trực tiếp</td></tr>
+  <tr><td><b>Quy trình hiện tại</b> <span class="sub">workflow</span></td><td>Các bước vận hành hiện tại (gồm <b>3–7 bước</b>)</td></tr>
+  <tr><td><b>Nút thắt &amp; Tác động</b> <span class="sub">bottleneck + impact</span></td><td>Khâu gây chậm trễ, sai sót hoặc lặp lại; hệ quả cụ thể</td></tr>
+  <tr><td><b>Chỉ số đo thành công</b> <span class="sub">success metric</span></td><td>Chỉ số <b>định lượng</b> chứng minh hiệu quả cải tiến</td></tr>
+  <tr><td><b>Định hướng giải pháp</b> <span class="sub">direction</span></td><td>No AI / Rule / Workflow / Agent / Chưa xác định</td></tr>
+</table>
+
+<h4>Ví dụ đã điền — Case Weekly Report</h4>
+<div class="card">
+  <table style="margin:0">
+    <tr><td style="width:130px"><b>Bài toán</b></td><td>Mỗi thứ Hai, PM mất <b>~90 phút</b> tổng hợp Weekly Report từ Jira, Google Sheets và Slack; bước viết narrative tốn thời gian nhất và dễ làm trễ deadline</td></tr>
+    <tr><td><b>Đối tượng</b></td><td>Junior PM gửi weekly report cho Engineering Manager và CEO trước leadership sync</td></tr>
+    <tr><td><b>Quy trình</b></td><td>Export Jira → lấy metrics từ Sheets → đọc Slack recap → tổng hợp vào Docs → viết narrative → review/format → gửi email</td></tr>
+    <tr><td><b>Nút thắt</b></td><td>Viết narrative từ raw data mất <b>~25 phút</b>. Tổng flow ~90 phút/tuần/PM; team 3 PM ≈ <b>270 phút/tuần</b></td></tr>
+    <tr><td><b>Chỉ số</b></td><td>Giảm thời gian từ 90 → <b>dưới 30 phút</b>, nhưng <b>không làm tăng</b> số câu CEO/EM phải hỏi lại</td></tr>
+    <tr><td><b>Định hướng</b></td><td><b>Workflow</b> — tự động kéo và cấu trúc dữ liệu, AI hỗ trợ draft narrative, PM vẫn review/edit trước khi gửi</td></tr>
+  </table>
+</div>
+<div class="ok"><b>Điểm tinh tế của metric này</b>Nó có <b>hai vế</b>: một vế cải thiện (giảm thời gian) và một vế <b>bảo vệ chất lượng</b> (không tăng số câu hỏi lại). Metric một vế dễ bị tối ưu lệch.</div>
+
+<h3>Bộ thẻ câu hỏi #3 — Cấu trúc PS</h3>
+<div class="qlist">
+  <div class="qi"><div class="n">1</div><div class="b"><strong>Quy trình hiện tại như thế nào?</strong><span>Công cụ, các bước, cơ chế bàn giao thông tin?</span></div></div>
+  <div class="qi"><div class="n">2</div><div class="b"><strong>Nút thắt nằm ở đâu?</strong><span>Bước nào chậm, dễ sai sót, lặp lại?</span></div></div>
+  <div class="qi"><div class="n">3</div><div class="b"><strong>Hao phí hiện tại là bao nhiêu?</strong><span>Thời gian, chi phí nhân sự, SLA, cơ hội bỏ lỡ?</span></div></div>
+  <div class="qi"><div class="n">4</div><div class="b"><strong>Tiêu chí thành công đo bằng gì?</strong><span>Hiệu quả cải tiến định lượng cụ thể?</span></div></div>
+  <div class="qi"><div class="n">5</div><div class="b"><strong>Hậu quả khi xảy ra sai sót?</strong><span>Phạm vi tự quyết của AI; điểm cần con người phê duyệt?</span></div></div>
+  <div class="qi"><div class="n">6</div><div class="b"><strong>Có giải pháp phi AI đơn giản hơn?</strong><span>Quy tắc, checklist, quy trình hay tài liệu hướng dẫn?</span></div></div>
+</div>
+
+<h3>Định lượng hóa bài toán — 3 bước</h3>
+<div class="grid g3">
+  <div class="card" style="margin:0"><h4>① Baseline</h4><p class="sub" style="margin:0"><b>Hiện trạng / where we are</b><br>Mức hao phí hiện tại là bao nhiêu? Bằng con số cụ thể.</p></div>
+  <div class="card" style="margin:0"><h4>② Target</h4><p class="sub" style="margin:0"><b>Mục tiêu / where to go</b><br>Kỳ vọng cải thiện ở mức độ nào? Ngưỡng cụ thể là gì?</p></div>
+  <div class="card" style="margin:0"><h4>③ Measurement</h4><p class="sub" style="margin:0"><b>Đo lường / how we know</b><br>Chỉ số nào chứng minh hiệu quả? Cách thu thập?</p></div>
+</div>
+<table>
+  <tr><th style="width:230px">Loại</th><th>Ví dụ</th></tr>
+  <tr><td>Thời gian hoàn thành</td><td>Rút ngắn từ <b>90 phút xuống dưới 30 phút</b></td></tr>
+  <tr><td>Chất lượng công việc</td><td>Giảm tỷ lệ lỗi phân loại từ <b>20% xuống dưới 5%</b></td></tr>
+  <tr><td>Tải trọng vận hành</td><td>Cắt giảm <b>40% câu hỏi trùng lặp</b> cần Trợ giảng xử lý</td></tr>
+</table>
+<div class="bad"><b>Câu chốt</b>“<b>Nâng cao hiệu suất</b>” <b>không phải chỉ số</b> — cần gắn với hiện trạng, mục tiêu và phương pháp đo.</div>
+
+<h3>Output metric vs Input metrics</h3>
+<div class="vs">
+  <div class="lneu">
+    <h4>OUTPUT — what we optimize</h4>
+    <p class="sub" style="margin:0 0 6px">Kết quả cuối cùng</p>
+    <ul><li>Thời lượng hoàn tất quy trình giảm bao nhiêu?</li><li>Tỷ lệ sai sót / chất lượng đầu ra thay đổi thế nào?</li><li>Giá trị thực tế người dùng nhận được?</li></ul>
+  </div>
+  <div class="lneu">
+    <h4>INPUT — what we can move</h4>
+    <p class="sub" style="margin:0 0 6px">Các đòn bẩy tác động được</p>
+    <ul><li>Tỷ lệ câu hỏi được phân loại chính xác</li><li>Tỷ lệ yêu cầu được chuyển tiếp kịp thời</li><li>Thời gian TA hiệu chỉnh bản nháp</li></ul>
+  </div>
+</div>
+<p class="sub" style="text-align:center"><b>Tăng cái này → đo cái kia.</b></p>
+
+<h2><span class="num">§3</span> &nbsp;Có nên ứng dụng AI? — 3 bước PAIR</h2>
+
+<table>
+  <tr><th style="width:60px">Bước</th><th style="width:240px">Nội dung</th><th>Trả lời câu hỏi nào</th></tr>
+  <tr><td><b>①</b></td><td><b>Giao điểm: nhu cầu × thế mạnh AI</b><br><span class="sub">Bài toán có nằm trong nhóm việc AI làm tốt hơn hẳn rule/heuristic?</span></td><td>→ Câu 1: <b>có thực sự cần AI?</b></td></tr>
+  <tr><td><b>②</b></td><td><b>Automate hay Augment?</b><br><span class="sub">AI thay thế hay hỗ trợ con người?</span></td><td>→ Câu 2: <b>giải pháp ở cấp độ nào?</b></td></tr>
+  <tr><td><b>③</b></td><td><b>Reward function &amp; tiêu chí thành công</b><br><span class="sub">Định nghĩa “đúng/sai” (precision ↔ recall) và ngưỡng đo được</span></td><td>→ Câu 3: <b>PS đã đủ rõ để đo?</b></td></tr>
+</table>
+
+<h3>Bước ① — Khi nào AI có lợi thế? <span class="pill o">8 trường hợp</span></h3>
+<div class="grid g2">
+  <div class="card" style="margin:0"><h4>Gợi ý theo từng người</h4><p class="sub" style="margin:0">Mỗi người dùng nhận một nội dung gợi ý khác nhau</p></div>
+  <div class="card" style="margin:0"><h4>Dự đoán tương lai</h4><p class="sub" style="margin:0">Đoán trước sự kiện sắp xảy ra để chuẩn bị phản ứng</p></div>
+  <div class="card" style="margin:0"><h4>Cá nhân hóa</h4><p class="sub" style="margin:0">Trải nghiệm tự điều chỉnh theo từng người, ngày càng hợp hơn</p></div>
+  <div class="card" style="margin:0"><h4>Hiểu ngôn ngữ tự nhiên</h4><p class="sub" style="margin:0">Hiểu câu hỏi viết tự do bằng lời nói hằng ngày</p></div>
+  <div class="card" style="margin:0"><h4>Nhận diện cả một lớp thực thể</h4><p class="sub" style="margin:0">Nhận ra mọi đối tượng cùng loại — VD mọi khuôn mặt</p></div>
+  <div class="card" style="margin:0"><h4>Phát hiện cái hiếm &amp; biến đổi</h4><p class="sub" style="margin:0">Bắt sự kiện hiếm, thay đổi theo thời gian — VD gian lận</p></div>
+  <div class="card" style="margin:0"><h4>Agent/bot cho lĩnh vực cụ thể</h4><p class="sub" style="margin:0">Trợ lý ảo xử lý trọn một phạm vi việc chuyên biệt</p></div>
+  <div class="card" style="margin:0"><h4>Nội dung động thay giao diện tĩnh</h4><p class="sub" style="margin:0">Nội dung linh hoạt hiệu quả hơn layout cố định</p></div>
+</div>
+
+<h3>Khi nào AI KHÔNG tốt hơn? <span class="pill r">6 trường hợp</span></h3>
+<table>
+  <tr><th style="width:250px">Trường hợp</th><th>Vì sao</th></tr>
+  <tr><td><b>Cần duy trì tính dự đoán được</b></td><td>Nút Home / Cancel phải luôn nằm ở một chỗ quen thuộc — người dùng không phải đoán mỗi lần</td></tr>
+  <tr><td><b>Thông tin tĩnh, ít thay đổi</b></td><td>Nội dung cố định thì cứ hiển thị trực tiếp — không cần AI sinh lại mỗi lần</td></tr>
+  <tr><td><b>Lỗi quá tốn kém</b></td><td><b>Chi phí của một lần sai lớn hơn lợi ích của nhiều lần đúng</b></td></tr>
+  <tr><td><b>Yêu cầu minh bạch tuyệt đối</b></td><td>Mọi quyết định phải giải thích được từng bước, truy vết được</td></tr>
+  <tr><td><b>Tối ưu tốc độ &amp; chi phí thấp</b></td><td>Cần ra thị trường nhanh, vận hành rẻ — AI chỉ thêm độ trễ và chi phí</td></tr>
+  <tr><td><b>Việc giá trị cao người dùng muốn tự làm</b></td><td>Tác vụ mang ý nghĩa cá nhân mà người dùng <b>KHÔNG muốn</b> bị tự động hóa</td></tr>
+</table>
+<div class="ok"><b>Câu chốt</b><b>Rule/heuristic dễ build, dễ giải thích, dễ debug và bảo trì hơn</b> — nếu nó giải quyết được, đó là lựa chọn tối ưu.</div>
+
+<h3>Ba động lực doanh nghiệp đầu tư AI</h3>
+<div class="grid g3">
+  <div class="card" style="margin:0"><h4>01 · Sống còn</h4><p class="sub" style="margin:0">Bắt buộc tích hợp AI để duy trì lợi thế cạnh tranh trước đối thủ</p></div>
+  <div class="card" style="margin:0"><h4>02 · Hiệu quả</h4><p class="sub" style="margin:0">Giảm chi phí vận hành, tăng tốc độ xử lý, nâng cao năng suất</p></div>
+  <div class="card" style="margin:0"><h4>03 · Khám phá</h4><p class="sub" style="margin:0">Tích lũy năng lực công nghệ, tránh tụt hậu, tìm mô hình cơ hội mới</p></div>
+</div>
+<div class="warn"><b>Lưu ý</b>Nếu quy trình <b>hoàn toàn có tính xác định (deterministic)</b>, các quy tắc luật tĩnh (rule) sẽ tối ưu hơn.</div>
+
+<h3>Tự xây hay mua? — Build / Boost / Buy</h3>
+<div class="grid g3">
+  <div class="card" style="margin:0"><h4>Buy</h4><p class="sub" style="margin:0">Giải pháp may sẵn, vendor duy trì. Triển khai nhanh, <b>ít khác biệt cạnh tranh</b>, phụ thuộc roadmap vendor</p></div>
+  <div class="card" style="margin:0" ><h4>Boost <span class="pill o">đa số ở đây</span></h4><p class="sub" style="margin:0">Mua model sẵn có, cải tiến bằng dữ liệu nội bộ (fine-tune hoặc <b>RAG</b>). Đòi hỏi <b>data governance</b> tốt</p></div>
+  <div class="card" style="margin:0"><h4>Build</h4><p class="sub" style="margin:0">Tự xây model tùy biến. Kiểm soát cao nhất, <b>chi phí đắt nhất</b>, đòi hỏi đội kỹ sư AI mạnh</p></div>
+</div>
+<p class="sub"><b>Góc nhìn Chip Huyen:</b> In-house khi AI là <b>lợi thế cạnh tranh cốt lõi</b>; Buy/SaaS khi AI chỉ là <b>productivity layer</b>.</p>
+
+<h2><span class="num">§4</span> &nbsp;Rule / Workflow / Agent</h2>
+<p class="sub">Cấp độ tối ưu là <b>cấp độ đơn giản nhất đủ để giải quyết bài toán</b>.</p>
+
+<h3>Hệ thống AI = Model + Context + Planning + Tools</h3>
+<div class="grid g4">
+  <div class="card" style="margin:0"><h4>MODEL</h4><p class="sub" style="margin:0"><b>Tư duy &amp; sáng tạo</b><br>Đọc hiểu, soạn thảo, tổng hợp, phân loại, gợi ý</p></div>
+  <div class="card" style="margin:0"><h4>CONTEXT</h4><p class="sub" style="margin:0"><b>Tri thức chuyên biệt</b><br>Database, tài liệu nghiệp vụ, hồ sơ lịch sử</p></div>
+  <div class="card" style="margin:0"><h4>PLANNING</h4><p class="sub" style="margin:0"><b>Điều phối quy trình</b><br>Phân rã tác vụ phức tạp, linh hoạt điều chỉnh</p></div>
+  <div class="card" style="margin:0"><h4>TOOLS</h4><p class="sub" style="margin:0"><b>Liên kết hệ thống</b><br>CRM, database, lịch, API bên thứ ba</p></div>
+</div>
+<div class="note"><b>Câu chốt</b>Giải pháp AI là một <b>HỆ THỐNG</b> — model chỉ là một thành phần.</div>
+
+<h3>Bước ② — Automate vs Augment</h3>
+<div class="vs">
+  <div class="lneu">
+    <h4>AUTOMATE — AI làm thay</h4>
+    <p class="sub" style="margin:0 0 6px">Chọn khi:</p>
+    <ul><li>Việc <b>khó, nhàm chán, nguy hiểm</b> hoặc cần scale</li><li>Người dùng thiếu kiến thức / khả năng tự làm</li><li>Có <b>“đáp án đúng”</b> mà mọi người cùng đồng thuận</li></ul>
+    <p style="margin:8px 0 0;font-size:13.5px"><b>Đo bằng:</b> hiệu quả tăng · an toàn hơn · giảm việc tẻ nhạt</p>
+  </div>
+  <div class="lneu">
+    <h4>AUGMENT — AI hỗ trợ con người</h4>
+    <p class="sub" style="margin:0 0 6px">Chọn khi:</p>
+    <ul><li>Người dùng <b>thích tự làm</b> việc đó</li><li><b>Stakes cao</b>: tiền bạc, pháp lý, sức khỏe</li><li>Kết quả cần trách nhiệm cá nhân / social capital</li><li>Sở thích khó diễn đạt thành lời</li></ul>
+    <p style="margin:8px 0 0;font-size:13.5px"><b>Đo bằng:</b> mức độ thích thú · cảm giác kiểm soát · sáng tạo tăng</p>
+  </div>
+</div>
+<div class="warn"><b>Hai lưu ý</b>Quyết định <b>theo từng tác vụ</b>, không phải cho cả sản phẩm.<br>Việc đã automate <b>vẫn gần như luôn cần human oversight</b> — preview, edit, undo.</div>
+
+<h3>Tăng mức tự động hóa theo pha</h3>
+<div class="flow">
+  <span class="step"><b>Pha 1</b> AI chỉ gợi ý<small>AI gợi ý, TA viết lại toàn bộ</small></span><span class="arw">→</span>
+  <span class="step"><b>Pha 2</b> AI soạn nháp, TA duyệt<small>sau khi đo được chất lượng ở Pha 1</small></span><span class="arw">→</span>
+  <span class="step"><b>Pha 3</b> AI tự động có giám sát<small>chỉ cho nhóm câu hỏi đã chứng minh an toàn qua dữ liệu</small></span>
+</div>
+<div class="ok"><b>Nguyên tắc</b>Mức tự động hóa <b>tỷ lệ nghịch với rủi ro</b> — risk ↓ khi dữ liệu đánh giá ↑.<br><b>Không bật full-auto từ đầu</b> — mức tự động hóa đi lên cùng độ tin cậy. <i>(PAIR Pattern #14, #17)</i></div>
+
+<h3>Ba mức giải pháp</h3>
+<div class="note"><b>Phân biệt hai trục</b><b>Rule/Workflow/Agent</b> là cấp độ <b>KỸ THUẬT</b>. <b>Automate/Augment</b> là cấp độ <b>VAI TRÒ của con người</b> trong hệ thống. Hai trục độc lập nhau.</div>
+<div class="lvls">
+  <div class="lvl l1">
+    <span class="cap">CẤP ĐỘ 1</span>
+    <h4>Rule / Script</h4>
+    <ul><li>Đầu vào ổn định, ít thay đổi</li><li>Logic viết được thành if/else</li><li>Cần kết quả luôn đúng 100%</li><li>Quy định pháp lý / tuân thủ chặt</li></ul>
+    <div class="ex"><b>VD:</b> Tính thuế · chặn spam theo từ khóa · auto-reply theo template</div>
+  </div>
+  <div class="lvl l2">
+    <span class="cap">CẤP ĐỘ 2</span>
+    <h4>LLM Feature / Workflow</h4>
+    <ul><li>Đầu vào đa dạng, không viết hết rule được</li><li>Đầu ra cần linh hoạt (tóm tắt, dịch, phân loại)</li><li>Có cách đo chất lượng</li><li>Người có thể kiểm tra trước khi gửi</li></ul>
+    <div class="ex"><b>VD:</b> Tóm tắt email · chatbot FAQ · phân loại ticket hỗ trợ</div>
+  </div>
+  <div class="lvl l3">
+    <span class="cap">CẤP ĐỘ 3</span>
+    <h4>Agent</h4>
+    <ul><li>Nhiều bước, dùng nhiều công cụ</li><li>Tình huống thay đổi liên tục</li><li>Cần tự ra quyết định giữa các bước</li><li>Có kiểm soát rủi ro rõ ràng</li></ul>
+    <div class="ex"><b>VD:</b> Agent nghiên cứu thị trường · coding agent sửa nhiều file</div>
+  </div>
+</div>
+<div class="bad"><b>Hai câu chốt</b>Thứ tự ưu tiên thực dụng: <b>bắt đầu từ bên trái</b>, chỉ đi sang phải khi <b>giá trị tăng hơn độ phức tạp</b>.<br><b>Không bắt buộc nâng cấp tuần tự</b> Rule → Agent: dừng ở cấp tối giản nhất nếu đã đáp ứng mục tiêu.</div>
+
+<h3>Case xuyên suốt — 1000 học viên K3 &amp; K4, một tình huống ba cấp độ</h3>
+<div class="flow">
+  <span class="step">01 Học viên tắc nghẽn</span><span class="arw">→</span>
+  <span class="step">02 Gửi yêu cầu hỗ trợ</span><span class="arw">→</span>
+  <span class="step">03 Trợ giảng đọc ngữ cảnh</span><span class="arw">→</span>
+  <span class="step">04 Phản hồi / chuyển tiếp</span><span class="arw">→</span>
+  <span class="step">05 Học viên hiệu chỉnh</span>
+</div>
+<table>
+  <tr><th style="width:130px">Cấp độ</th><th>Giải pháp</th><th style="width:230px">Khi nào?</th></tr>
+  <tr><td><b>Rule</b></td><td>Tự động trả lời FAQ, gửi link thời khóa biểu · tài liệu sửa lỗi cài đặt · nhắc checklist nộp bài · câu ngoài danh mục → chuyển TA</td><td>Logic tường minh, kết quả cố định</td></tr>
+  <tr><td><b>Workflow</b></td><td>AI kiểm tra độ đầy đủ của Problem Card → yêu cầu bổ sung nếu thiếu → chuyển TA giải quyết câu phức tạp</td><td>Có quy trình rõ, AI hỗ trợ từng bước</td></tr>
+  <tr><td><b>Agent</b></td><td>Tự động theo dõi tiến độ nộp bài · phát hiện nhóm kẹt lâu · chuẩn bị câu trả lời, đề xuất TA duyệt</td><td>Tình huống động, đa công cụ</td></tr>
+</table>
+<p class="sub"><b>Bottleneck:</b> nhiều câu hỏi trùng lặp hoặc thiếu thông tin; TA mất thời gian rà soát thủ công.<br>
+<b>Metrics:</b> thời gian học viên chờ phản hồi, tỷ lệ câu hỏi trùng lặp, số học viên bị kẹt kéo dài.<br>
+<b>Risks:</b> AI hướng dẫn sai khiến học viên đi sai hướng thực hành.</p>
+<div class="warn"><b>Lưu ý thiết kế Workflow</b>Mỗi công đoạn phải <b>định nghĩa rõ đầu vào và đầu ra</b>. <b>Không thiết kế thành một chatbot phản hồi tự do.</b></div>
+
+<h3>6 Workflow Patterns — mỗi pattern là một tradeoff</h3>
+<table>
+  <tr><th style="width:190px">Pattern</th><th>Được gì</th><th>Mất gì</th></tr>
+  <tr><td><b>Prompt chaining</b></td><td>Chính xác hơn — có <b>gate</b> kiểm tra giữa các bước</td><td>Chậm hơn — độ trễ cộng dồn</td></tr>
+  <tr><td><b>Routing</b></td><td>Tối ưu chi phí — mỗi loại input một nhánh chuyên biệt</td><td>Cần phân loại đúng <b>ngay từ đầu</b></td></tr>
+  <tr><td><b>Parallelization</b></td><td>Tin cậy hơn — vote, guardrail chạy song song</td><td>Chi phí <b>nhân lên</b> theo số nhánh</td></tr>
+  <tr><td><b>Orchestrator-workers</b></td><td>Xử lý được bài toán <b>không biết trước subtasks</b></td><td>Khó kiểm thử, hành vi khó dự đoán</td></tr>
+  <tr><td><b>Evaluator-optimizer</b></td><td>Chất lượng tăng qua vòng lặp đánh giá</td><td>Cần <b>tiêu chí chấm rõ ràng</b></td></tr>
+  <tr><td><b>Agent</b></td><td>Giải được <b>bài toán mở</b></td><td>Chi phí cao, <b>lỗi cộng dồn</b></td></tr>
+</table>
+<div class="note"><b>Câu hỏi quyết định Workflow vs Agent</b>“<b>Lộ trình xử lý có viết trước được không?</b>”<br>Có → <b>Workflow</b> (code điều phối). Không → <b>Agent</b> (model tự điều phối).</div>
+<div class="acc"><b>Vì sao PM cần đọc được pattern</b>PM không cần code pattern — nhưng phải <b>đọc được sơ đồ và nói được tradeoff</b>, vì nó quyết định <b>chi phí, độ trễ, khả năng kiểm thử và dạng lỗi</b> của hệ thống — chính là đầu vào của ô <b>Boundary, Metric, HITL</b> trong Problem Statement.</div>
+
+<h3>Thang 5 câu hỏi chọn cấp độ giải pháp</h3>
+<div class="qlist">
+  <div class="qi"><div class="n">1</div><div class="b"><strong>Tần suất &amp; tác động có đủ lớn?</strong><span>Nếu thấp → xử lý thủ công hoặc hiệu chỉnh quy trình nghiệp vụ trước</span></div></div>
+  <div class="qi"><div class="n">2</div><div class="b"><strong>Logic xử lý có rành mạch?</strong><span>Nếu tường minh → ưu tiên Rule, kịch bản tự động, checklist</span></div></div>
+  <div class="qi"><div class="n">3</div><div class="b"><strong>Quy trình thực hiện có cố định?</strong><span>Nếu có → xây Workflow tích hợp AI hỗ trợ từng công đoạn</span></div></div>
+  <div class="qi"><div class="n">4</div><div class="b"><strong>Quy trình đòi hỏi tự thích ứng linh hoạt?</strong><span>Chỉ khi nhiều biến số phức tạp → mới cân nhắc Agent</span></div></div>
+  <div class="qi"><div class="n">5</div><div class="b"><strong>Giá trị có vượt trội chi phí &amp; rủi ro?</strong><span>Nếu không → đặt chốt HITL hoặc chọn Not Yet / No-Go</span></div></div>
+</div>
+<p class="sub">Đi từ trên xuống — <b>mỗi nhánh “KHÔNG” là một lần tránh được độ phức tạp không cần thiết</b>.</p>
+
+<h2><span class="num">§5</span> &nbsp;Reward function &amp; tiêu chí thành công</h2>
+<p class="sub">Bước ③ của PAIR — Case: AI gợi ý câu trả lời cho câu hỏi của 1000 học viên.</p>
+
+<p><b>Reward function</b> là công thức quyết định đâu là dự đoán “đúng”, đâu là “sai” — và chính nó <b>định hình trải nghiệm người dùng cuối</b>. Vì vậy phải thiết kế <b>liên chức năng</b>: tối thiểu UX × Product × Engineering cùng ngồi lại.</p>
+
+<h3>Bốn kết quả có thể xảy ra</h3>
+<div class="cm">
+  <div class="tp"><b>TP — TRUE POSITIVE · đúng-tích cực</b><p>Câu hỏi nghẽn thật → AI gợi ý <b>đúng</b> câu trả lời. Học viên được giải tỏa, TA đỡ tải.</p></div>
+  <div class="tn"><b>TN — TRUE NEGATIVE · đúng-tiêu cực</b><p>Câu hỏi đã có tài liệu sẵn → AI <b>không can thiệp</b>. Đúng — không cần gợi ý gì thêm.</p></div>
+  <div class="fp"><b>FP — FALSE POSITIVE · báo động giả</b><p>AI gợi ý câu trả lời <b>SAI</b> (hallucination) và gửi thẳng cho học viên → học viên đi sai hướng thực hành.</p></div>
+  <div class="fn"><b>FN — FALSE NEGATIVE · bỏ sót</b><p>Học viên đang kẹt thật nhưng AI <b>bỏ sót</b>, không gợi ý → học viên vẫn chờ lâu như cũ.</p></div>
+</div>
+<div class="bad"><b>Quyết định then chốt</b>Chi phí của FP và FN <b>KHÔNG đối xứng</b> — <b>báo cháy giả ≠ bỏ sót đám cháy</b>. Cân nhắc đánh đổi này là quyết định then chốt khi thiết kế reward function.</div>
+
+<h3>Precision ↔ Recall — đánh đổi không tránh khỏi</h3>
+<div class="vs">
+  <div class="lneu">
+    <h4>PRECISION cao — TP / (TP + FP)</h4>
+    <p><b>Ít gợi ý</b> — nhưng gợi ý nào cũng chắc đúng. Người dùng tin vào từng gợi ý nhận được.</p>
+    <p style="margin:8px 0 0;color:var(--bad)"><b>Hệ quả:</b> nhiều <b>False Negative</b> — bỏ sót học viên đang thực sự cần giúp.</p>
+  </div>
+  <div class="lneu">
+    <h4>RECALL cao — TP / (TP + FN)</h4>
+    <p><b>Bao trọn mọi trường hợp</b> cần giúp — không học viên nào bị bỏ lại phía sau.</p>
+    <p style="margin:8px 0 0;color:var(--bad)"><b>Hệ quả:</b> nhiều <b>False Positive</b> — gợi ý sai nhiều, TA phải lọc lại thủ công.</p>
+  </div>
+</div>
+<p class="sub" style="text-align:center">Vặn nút bên này lên, chất lượng bên kia xấu đi. <b>Không có cấu hình đúng tuyệt đối — phải test điểm cân bằng với chính người dùng.</b></p>
+
+<h3>Viết tiêu chí thành công mà hành động được</h3>
+<p class="sub"><b>Metric tốt = chỉ số cụ thể + ngưỡng có nghĩa + hành động cụ thể.</b> Template của PAIR:</p>
+<div class="tmpl">
+  If <span class="sl">{chỉ số cụ thể}</span> for <span class="sl">{tính năng AI}</span> <span class="sl">{drops below / goes above}</span> <span class="sl">{ngưỡng có nghĩa}</span>, we will <span class="sl">{hành động cụ thể}</span>.
+</div>
+<div class="card">
+  <p style="margin:0"><b>Ví dụ điền sẵn:</b> Nếu tỷ lệ câu trả lời AI gợi ý <b>bị TA sửa &gt; 30%</b> trong <b>2 tuần</b>, ta sẽ <b>hạ mức tự động về pha 1</b> (chỉ gợi ý, không gửi thẳng cho học viên).</p>
+</div>
+<h4>Checklist trước khi chốt metric</h4>
+<div class="grid g3">
+  <div class="card" style="margin:0"><h4>01</h4><p class="sub" style="margin:0">Metric có ý nghĩa với <b>MỌI</b> người dùng không?</p></div>
+  <div class="card" style="margin:0"><h4>02</h4><p class="sub" style="margin:0">Có nhóm nào bị <b>ảnh hưởng tiêu cực</b> không?</p></div>
+  <div class="card" style="margin:0"><h4>03</h4><p class="sub" style="margin:0">Đây là thành công của <b>ngày 1</b> — còn <b>ngày 1000</b> thì sao?</p></div>
+</div>
+<p class="sub">Và đừng quên: <b>lên lịch review metric định kỳ</b> — tiêu chí thành công cũng cần được bảo trì theo thời gian.</p>
+
+<h3>Khoảng cách giữa Demo và Production</h3>
+<p class="sub">Phản hồi chính xác trong vài lần thử <b>chưa đủ cơ sở</b> để triển khai hệ thống thực tế.</p>
+<div class="grid g4">
+  <div class="card" style="margin:0"><h4>01 · Baseline</h4><p class="sub" style="margin:0">Đối chiếu hiệu quả với quy tắc tĩnh, nhân sự hay quy trình hiện tại?</p></div>
+  <div class="card" style="margin:0"><h4>02 · Evaluation</h4><p class="sub" style="margin:0">Bộ dữ liệu kiểm thử, kịch bản biên (edge cases) và tiêu chí nghiệm thu?</p></div>
+  <div class="card" style="margin:0"><h4>03 · Controls</h4><p class="sub" style="margin:0">Logging, fallback, rollback và nhân sự chịu trách nhiệm?</p></div>
+  <div class="card" style="margin:0"><h4>04 · Operations</h4><p class="sub" style="margin:0">Ai giám sát lỗi, cập nhật tri thức nền và tối ưu hệ thống?</p></div>
+</div>
+<div class="note"><b>Tiêu chí kiểm tra PS đủ chặt</b><b>Không suy ra được test cases, eval metric và architecture boundary từ PS → PS chưa đủ chặt.</b></div>
+
+<h3>Lỗi AI được định nghĩa bởi kỳ vọng người dùng</h3>
+<p class="sub">Cùng một hệ gợi ý đúng 60% — là thành công hay thất bại? <b>Tùy vào kỳ vọng bạn đã hứa với người dùng.</b></p>
+<div class="grid g3">
+  <div class="card" style="margin:0"><h4>1 · Context errors</h4><p class="sub" style="margin:0"><b>Sai bối cảnh</b> — hệ thống chạy “đúng” nhưng giả định sai về người dùng, thời điểm hoặc bối cảnh. VD: gợi ý ôn bài giữa kỳ nghỉ.</p></div>
+  <div class="card" style="margin:0"><h4>2 · Fail states</h4><p class="sub" style="margin:0"><b>Không trả lời được</b> — hệ thống không có câu trả lời đúng cho tình huống này.</p></div>
+  <div class="card" style="margin:0"><h4>3 · Background errors</h4><p class="sub" style="margin:0"><b>Lỗi ngầm</b> — cả người dùng lẫn hệ thống đều không nhận ra (“unknown unknowns”). → Cần <b>QA chủ động</b>, không chờ người dùng báo lỗi.</p></div>
+</div>
+<div class="acc"><b>Liên hệ với Problem Statement</b>Viết <b>Boundary &amp; HITL</b> trong PS chính là <b>khai báo trước</b>: lỗi nào được phép xảy ra, lỗi nào không — và <b>ai bắt lỗi đó</b>.</div>
+
+<h3>4 pattern Human-in-the-loop</h3>
+<div class="grid g4">
+  <div class="card" style="margin:0"><h4>Làm rõ ý định</h4><p class="sub" style="margin:0">Yêu cầu bổ sung ngữ cảnh khi thông tin chưa đủ</p></div>
+  <div class="card" style="margin:0"><h4>Minh bạch thông tin</h4><p class="sub" style="margin:0">Trích dẫn nguồn minh chứng cho câu trả lời</p></div>
+  <div class="card" style="margin:0"><h4>Phê duyệt thủ công</h4><p class="sub" style="margin:0">Con người kiểm duyệt trước tác vụ rủi ro cao</p></div>
+  <div class="card" style="margin:0"><h4>Thiết lập ranh giới</h4><p class="sub" style="margin:0">Giới hạn phạm vi hoạt động tự chủ của AI</p></div>
+</div>
+
+<h4>Paths forward from failure <span class="pill b">PAIR Ch.6</span></h4>
+<table>
+  <tr><th style="width:250px">Path</th><th>Nội dung</th></tr>
+  <tr><td><b>1 · Mở kênh feedback</b></td><td>Tạo cơ hội phản hồi về chất lượng — <b>kể cả trên những output “đúng”</b></td></tr>
+  <tr><td><b>2 · Trả quyền kiểm soát</b></td><td>Khi automation thất bại, trả quyền cho người dùng — <b>kèm đủ thông tin</b> để họ tiếp quản</td></tr>
+  <tr><td><b>3 · Giả định người dùng sẽ dùng sai</b></td><td>Thiết kế để thất bại trở nên <b>“an toàn, nhàm chán”</b> — thay vì thành thảm họa</td></tr>
+</table>
+<p class="sub">Nguyên tắc thông báo lỗi: <b>“be human, not machine”</b>.</p>
+
+<h2><span class="num">§6</span> &nbsp;Problem Statement hoàn chỉnh &amp; Quyết định</h2>
+
+<h3>9 trường của một Problem Statement</h3>
+<table>
+  <tr><th colspan="2" style="background:var(--brand-soft);color:var(--brand)">6 YẾU TỐ BÀI TOÁN CỐT LÕI</th></tr>
+  <tr><td style="width:200px"><b>Actor</b> <span class="sub">đối tượng ảnh hưởng</span></td><td>Đối tượng trực tiếp chịu ảnh hưởng bởi vấn đề</td></tr>
+  <tr><td><b>Workflow</b> <span class="sub">quy trình hiện tại</span></td><td>Quy trình vận hành hiện tại gồm các bước cụ thể nào?</td></tr>
+  <tr><td><b>Bottleneck</b> <span class="sub">nút thắt</span></td><td>Khâu nào gặp tình trạng chậm trễ, sai sót, lặp lại?</td></tr>
+  <tr><td><b>Impact</b> <span class="sub">tác động</span></td><td>Tổn thất <b>lượng hóa</b> bằng thời gian, chi phí, SLA hoặc chất lượng</td></tr>
+  <tr><td><b>Success Metric</b> <span class="sub">chỉ số thành công</span></td><td>Chỉ số đo lường cụ thể để xác định sự cải thiện</td></tr>
+  <tr><td><b>Boundary</b> <span class="sub">ranh giới</span></td><td>AI <b>không được làm gì</b>; khâu nào bắt buộc có con người</td></tr>
+  <tr><th colspan="2" style="background:var(--acc-soft);color:var(--acc)">3 YẾU TỐ QUYẾT ĐỊNH AI</th></tr>
+  <tr><td><b>Điểm AI can thiệp</b> <span class="sub">entry</span></td><td>AI hỗ trợ hoặc tự động hóa ở <b>bước cụ thể nào</b>?</td></tr>
+  <tr><td><b>Mức chọn</b> <span class="sub">level</span></td><td>Rule / Workflow / Agent?</td></tr>
+  <tr><td><b>Rủi ro &amp; HITL</b> <span class="sub">safety</span></td><td>Phương án xử lý khi AI sai sót và quy trình phê duyệt thủ công</td></tr>
+</table>
+
+<h4>Ví dụ mẫu hoàn chỉnh — Hỗ trợ Lab Coach/TA</h4>
+<div class="card">
+  <table style="margin:0">
+    <tr><td style="width:170px"><b>Actor</b></td><td>Lab Coach hỗ trợ các nhóm học viên trong lớp 1000 học viên (K3 &amp; K4)</td></tr>
+    <tr><td><b>Workflow</b></td><td>Học viên đặt câu hỏi → Lab Coach nghiên cứu ngữ cảnh → Phản hồi / yêu cầu làm rõ → Học viên cập nhật bài</td></tr>
+    <tr><td><b>Bottleneck</b></td><td>Câu hỏi trùng lặp hoặc thiếu thông tin nền tảng cao; Lab Coach mất thời gian phân loại thủ công</td></tr>
+    <tr><td><b>Impact</b></td><td>Học viên chờ phản hồi lâu; Lab Coach quá tải, thiếu thời gian cho câu hỏi phức tạp</td></tr>
+    <tr><td><b>Success Metric</b></td><td>Giảm tỷ lệ câu hỏi lặp duyệt thủ công; rút ngắn thời gian phản hồi trung bình; <b>không tăng tỷ lệ định hướng sai</b></td></tr>
+    <tr><td><b>Boundary</b></td><td>AI <b>không</b> tự đánh giá/chấm điểm bài; chỉ hỗ trợ gợi ý làm rõ và điều phối quy trình</td></tr>
+    <tr><td><b>Điểm AI can thiệp</b></td><td>Ngay sau khi học viên gửi câu hỏi hoặc Problem Card thiếu thông tin ngữ cảnh</td></tr>
+    <tr><td><b>Mức chọn</b></td><td><b>Workflow</b>: AI phát hiện thông tin còn thiếu; Lab Coach phê duyệt câu hỏi chuyên sâu</td></tr>
+    <tr><td><b>Rủi ro &amp; HITL</b></td><td>AI định hướng sai → Lab Coach kiểm duyệt trước khi gửi phản hồi</td></tr>
+  </table>
+</div>
+
+<h3>Bộ thẻ câu hỏi #4 — Gate quyết định</h3>
+<div class="qlist">
+  <div class="qi"><div class="n">1</div><div class="b"><strong>Nghiệp vụ có đòi hỏi xử lý ngôn ngữ, tri thức chuyên môn hoặc suy luận?</strong></div></div>
+  <div class="qi"><div class="n">2</div><div class="b"><strong>Dữ liệu đầu vào có cung cấp đủ ngữ cảnh để AI phản hồi chính xác?</strong></div></div>
+  <div class="qi"><div class="n">3</div><div class="b"><strong>Đã thiết lập các chỉ số định lượng để đánh giá hiệu quả?</strong></div></div>
+  <div class="qi"><div class="n">4</div><div class="b"><strong>Hậu quả khi AI sai sót có nằm trong phạm vi kiểm soát?</strong></div></div>
+  <div class="qi"><div class="n">5</div><div class="b"><strong>Có giải pháp thay thế đơn giản và tối ưu chi phí hơn AI không?</strong></div></div>
+</div>
+<div class="warn"><b>Quy tắc</b>Nếu <b>phần lớn câu trả lời chưa rõ ràng</b> → quyết định: <b>Not Yet</b>.</div>
+
+<h3>Khung ra quyết định</h3>
+<div class="dec">
+  <div class="go"><h4>✓ Go</h4><div class="st">Đủ điều kiện · thực hiện</div>
+    <ul><li>Bài toán rõ ràng</li><li>Chỉ số đo lường khả thi</li><li>Điểm can thiệp AI phù hợp</li><li>Kiểm soát được rủi ro</li></ul></div>
+  <div class="ny"><h4>⏸ Not Yet</h4><div class="st">Có triển vọng · tạm hoãn</div>
+    <ul><li>Cần bổ sung dữ liệu thực tế</li><li>Chuẩn hóa quy trình</li><li>Thiết lập chỉ số</li><li>Xác định ranh giới</li></ul></div>
+  <div class="ng"><h4>✕ No-Go</h4><div class="st">Không phù hợp · không triển khai</div>
+    <ul><li>AI không mang giá trị vượt trội</li><li>Rủi ro vận hành quá cao</li><li>Giải pháp không dùng AI tối ưu hơn</li></ul></div>
+</div>
+<div class="ok"><b>Câu chốt</b>Quyết định <b>“Not Yet” thể hiện sự chín chắn</b> trong tư duy thiết kế sản phẩm, <b>không phải sự thất bại</b>.</div>
+
+<h3>Sáu nguyên tắc cốt lõi sau Day 02</h3>
+<div class="qlist">
+  <div class="qi"><div class="n">1</div><div class="b"><strong>Brief mơ hồ không thay thế Problem Statement.</strong></div></div>
+  <div class="qi"><div class="n">2</div><div class="b"><strong>Mô hình hóa workflow trước khi tích hợp AI.</strong></div></div>
+  <div class="qi"><div class="n">3</div><div class="b"><strong>Pain point phải được lượng hóa</strong><span>bằng baseline và chỉ số đo lường cụ thể</span></div></div>
+  <div class="qi"><div class="n">4</div><div class="b"><strong>Phức tạp không đồng nghĩa với hiệu quả.</strong><span>Rule/Workflow/Agent là ba cấp độ khác nhau; độ phức tạp kỹ thuật ≠ hiệu quả tối ưu</span></div></div>
+  <div class="qi"><div class="n">5</div><div class="b"><strong>Quyết định dựa trên lập luận thực tế</strong><span>Go / Not Yet / No-Go phải dựa trên số liệu kiểm thử rõ ràng</span></div></div>
+  <div class="qi"><div class="n">6</div><div class="b"><strong>Đo reward function bằng trải nghiệm người dùng, không chỉ accuracy.</strong><span>Thiết kế đánh đổi precision ↔ recall theo lợi ích người dùng và kiểm chứng với người dùng thật</span></div></div>
+</div>
+
+<h3>Phụ lục — 4 nguồn gốc của lỗi AI <span class="pill b">PAIR Ch.6</span></h3>
+<table>
+  <tr><th style="width:230px">Nguồn lỗi</th><th>Mô tả</th></tr>
+  <tr><td><b>1 · Lỗi dữ liệu &amp; dự đoán</b></td><td>Dữ liệu gán nhãn sai, suy luận kém, hoặc thiếu dữ liệu huấn luyện</td></tr>
+  <tr><td><b>2 · Lỗi đầu vào</b></td><td>Input bất ngờ ngoài thiết kế, phá vỡ thói quen của người dùng</td></tr>
+  <tr><td><b>3 · Lỗi liên quan</b></td><td>Độ tin cậy thấp, kết quả không liên quan — VD gợi ý “hoạt động vui chơi” cho chuyến đi đám tang</td></tr>
+  <tr><td><b>4 · Lỗi phân cấp hệ thống</b></td><td>Nhiều hệ thống AI cùng hoạt động và <b>xung đột tín hiệu</b> với nhau</td></tr>
+</table>
+
+</section>
+
+<!-- ==================== TAB 2 ==================== -->
+<section class="panel" id="cheat">
+<button class="printbtn" onclick="window.print()">In cheat sheet</button>
+
+<div class="cheatgrid">
+<div>
+
+<h2>4 câu hỏi của ngày</h2>
+<div class="card">
+  <ol style="margin:0">
+    <li>Bài toán có thực sự cần AI?</li>
+    <li>Cấp độ nào: Rule / Workflow / Agent?</li>
+    <li>PS đã đủ rõ để triển khai?</li>
+    <li>Go / Not Yet / No-Go?</li>
+  </ol>
+  <p style="margin:8px 0 0"><b>PAIR ①②③ → trả lời câu 1,2,3 → tổng hợp ra câu 4</b></p>
+</div>
+
+<h2>Câu quote gốc</h2>
+<div class="card">
+  <p style="margin:0"><b>“Do not solve the problem I am asked to solve.”</b> — Don Norman<br>
+  <span style="color:var(--muted)">Giải pháp xuất sắc cho sai vấn đề còn tệ hơn không có giải pháp.</span></p>
+</div>
+
+<h2>Double Diamond</h2>
+<table>
+  <tr><th>Diamond 1 — đúng VẤN ĐỀ</th><th>Diamond 2 — đúng GIẢI PHÁP</th></tr>
+  <tr><td><b>Discover</b> mở rộng<br><b>Define</b> thu hẹp</td><td><b>Develop</b> mở rộng<br><b>Deliver</b> thu hẹp</td></tr>
+</table>
+<p style="margin:2px 0 0"><b>Discover:</b> observation, interview, survey, diary study, data, stakeholder map<br>
+<b>Define:</b> affinity map, 5 Whys, impact-effort, dot voting, How Might We, PS</p>
+
+<h2>HCD 5 bước</h2>
+<div class="card">
+  <p style="margin:0">Observation → Ideation → Prototype → Test → Iteration</p>
+</div>
+
+<h2>4 lăng kính tìm bài toán</h2>
+<div class="card">
+  <p style="margin:0"><b>Repetitive</b> · <b>Time-consuming</b> · <b>AI advantage</b> · <b>User pain points</b></p>
+</div>
+
+<h2>4 Anti-patterns</h2>
+<table>
+  <tr><th>Tên</th><th>Biểu hiện</th></tr>
+  <tr><td>Solution-first</td><td>Xây chatbot trước khi rõ quy trình</td></tr>
+  <tr><td>No baseline</td><td>Không lượng hóa tổn thất hiện tại</td></tr>
+  <tr><td>No evaluation</td><td>Không có test case, metric</td></tr>
+  <tr><td>No boundary</td><td>Không rõ phạm vi tự chủ &amp; HITL</td></tr>
+</table>
+
+<h2>PAIR Reframe</h2>
+<div class="card">
+  <p style="margin:0"><s>“Can we use AI to ___?”</s> →<br>
+  ① <b>“How might we solve ___?”</b><br>
+  ② <b>“Can AI solve this in a unique way?”</b></p>
+</div>
+
+<h2>Quick Problem Card — 6 trường</h2>
+<div class="card">
+  <p style="margin:0">problem · actor · workflow (3–7 bước) · bottleneck+impact · success metric · direction</p>
+</div>
+
+<h2>Định lượng hóa</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Baseline → Target → Measurement</b></p>
+  <p style="margin:0">“Nâng cao hiệu suất” <b>không phải chỉ số</b></p>
+</div>
+
+<h2>Output vs Input metric</h2>
+<div class="card">
+  <p style="margin:0"><b>Output</b> = what we optimize (kết quả cuối)<br>
+  <b>Input</b> = what we can move (đòn bẩy)<br>
+  Tăng cái này → đo cái kia</p>
+</div>
+
+<h2>Bộ thẻ #2 — Phỏng vấn</h2>
+<div class="card">
+  <ol style="margin:0">
+    <li>Pain point &amp; tần suất?</li>
+    <li>Workflow hiện tại?</li>
+    <li>Thiệt hại (time/cost/SLA/conversion)?</li>
+    <li>Hậu quả nếu AI sai?</li>
+    <li>Ai có quyền nói YES?</li>
+  </ol>
+  <p style="margin:8px 0 0"><b>Không mô tả được workflow + chi phí lỗi → mọi đề xuất AI là phỏng đoán</b></p>
+</div>
+
+</div>
+<div>
+
+<h2>PAIR 3 bước</h2>
+<table>
+  <tr><th>Bước</th><th>Nội dung</th></tr>
+  <tr><td>①</td><td>Nhu cầu × thế mạnh AI</td></tr>
+  <tr><td>②</td><td>Automate hay Augment?</td></tr>
+  <tr><td>③</td><td>Reward function &amp; success criteria</td></tr>
+</table>
+
+<h2>AI KHÔNG tốt hơn khi</h2>
+<div class="card">
+  <ul style="margin:0">
+    <li>Cần <b>dự đoán được</b> (nút Home/Cancel)</li>
+    <li>Thông tin <b>tĩnh</b>, ít thay đổi</li>
+    <li><b>Lỗi quá tốn kém</b></li>
+    <li>Cần <b>minh bạch tuyệt đối</b></li>
+    <li>Cần <b>nhanh &amp; rẻ</b> (time-to-market)</li>
+    <li>Việc người dùng <b>muốn tự làm</b></li>
+  </ul>
+</div>
+
+<h2>Automate vs Augment</h2>
+<table>
+  <tr><th>Automate</th><th>Augment</th></tr>
+  <tr><td>Khó/nhàm chán/nguy hiểm<br>Người dùng thiếu khả năng<br>Có “đáp án đúng”</td><td>Người dùng thích tự làm<br><b>Stakes cao</b><br>Cần trách nhiệm cá nhân<br>Sở thích khó diễn đạt</td></tr>
+  <tr><td>Đo: hiệu quả, an toàn, giảm tẻ nhạt</td><td>Đo: thích thú, kiểm soát, sáng tạo</td></tr>
+</table>
+<p style="margin:2px 0 0">Quyết định <b>theo từng tác vụ</b>. Automate vẫn cần oversight.</p>
+
+<h2>Tự động hóa theo pha</h2>
+<div class="card">
+  <p style="margin:0">Pha 1 <b>AI gợi ý</b> → Pha 2 <b>AI nháp, TA duyệt</b> → Pha 3 <b>tự động có giám sát</b><br>
+  <span style="color:var(--muted)">risk ↓ khi dữ liệu đánh giá ↑ · không bật full-auto từ đầu</span></p>
+</div>
+
+<h2>3 cấp độ giải pháp</h2>
+<table>
+  <tr><th>Cấp</th><th>Khi nào</th></tr>
+  <tr><td><b>Rule</b></td><td>Input ổn định, if/else được, cần đúng 100%, pháp lý chặt</td></tr>
+  <tr><td><b>Workflow</b></td><td>Input đa dạng, output linh hoạt, đo được, người kiểm trước khi gửi</td></tr>
+  <tr><td><b>Agent</b></td><td>Nhiều bước, nhiều tool, tình huống đổi liên tục, tự quyết giữa các bước</td></tr>
+</table>
+<p style="margin:2px 0 0"><b>RWA = cấp độ KỸ THUẬT · Automate/Augment = VAI TRÒ con người</b><br>Không bắt buộc nâng tuần tự — dừng ở cấp tối giản nhất</p>
+
+<h2>6 Workflow Patterns</h2>
+<table>
+  <tr><th>Pattern</th><th>Được / Mất</th></tr>
+  <tr><td>Prompt chaining</td><td>Chính xác (có gate) / chậm</td></tr>
+  <tr><td>Routing</td><td>Rẻ / cần phân loại đúng</td></tr>
+  <tr><td>Parallelization</td><td>Tin cậy (vote) / chi phí ×n</td></tr>
+  <tr><td>Orchestrator-workers</td><td>Subtask không biết trước / khó test</td></tr>
+  <tr><td>Evaluator-optimizer</td><td>Chất lượng ↑ / cần tiêu chí chấm</td></tr>
+  <tr><td>Agent</td><td>Bài toán mở / đắt, lỗi cộng dồn</td></tr>
+</table>
+<p style="margin:2px 0 0"><b>Câu hỏi quyết định:</b> “Lộ trình có viết trước được không?”</p>
+
+<h2>Thang 5 câu chọn cấp độ</h2>
+<div class="card">
+  <ol style="margin:0">
+    <li>Tần suất &amp; tác động đủ lớn?</li>
+    <li>Logic rành mạch? → Rule</li>
+    <li>Quy trình cố định? → Workflow</li>
+    <li>Cần tự thích ứng? → Agent</li>
+    <li>Giá trị &gt; chi phí &amp; rủi ro?</li>
+  </ol>
+</div>
+
+<h2>Reward function</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>TP</b> nghẽn thật + gợi ý đúng · <b>TN</b> đã có tài liệu + không can thiệp<br>
+  <b>FP</b> gợi ý SAI gửi thẳng · <b>FN</b> đang kẹt mà bỏ sót</p>
+  <p style="margin:0 0 6px"><b>Precision</b> = TP/(TP+FP) — ít mà chắc → nhiều FN<br>
+  <b>Recall</b> = TP/(TP+FN) — bao trọn → nhiều FP</p>
+  <p style="margin:0"><b>Chi phí FP ≠ FN</b> — báo cháy giả ≠ bỏ sót đám cháy</p>
+</div>
+
+<h2>Template success criteria</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>If {chỉ số} for {tính năng} {drops below/goes above} {ngưỡng}, we will {hành động}.</b></p>
+  <p style="margin:0"><b>Checklist:</b> ① có ý nghĩa với MỌI user? ② nhóm nào bị ảnh hưởng xấu? ③ ngày 1 vs ngày 1000?</p>
+</div>
+
+<h2>3 loại lỗi AI</h2>
+<div class="card">
+  <p style="margin:0"><b>Context errors</b> (sai bối cảnh) · <b>Fail states</b> (không trả lời được) · <b>Background errors</b> (lỗi ngầm, unknown unknowns → cần QA chủ động)</p>
+</div>
+
+<h2>4 pattern HITL</h2>
+<div class="card">
+  <p style="margin:0">Làm rõ ý định · Minh bạch thông tin (trích dẫn) · Phê duyệt thủ công · Thiết lập ranh giới</p>
+</div>
+
+<h2>PS — 9 trường</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>6 bài toán:</b> Actor · Workflow · Bottleneck · Impact · Success Metric · Boundary</p>
+  <p style="margin:0"><b>3 quyết định AI:</b> Điểm can thiệp · Mức chọn · Rủi ro &amp; HITL</p>
+</div>
+
+<h2>Go / Not Yet / No-Go</h2>
+<table>
+  <tr><th>Quyết định</th><th>Điều kiện</th></tr>
+  <tr><td><b>Go</b></td><td>Bài toán rõ · metric khả thi · điểm can thiệp phù hợp · kiểm soát được rủi ro</td></tr>
+  <tr><td><b>Not Yet</b></td><td>Cần bổ sung dữ liệu · chuẩn hóa quy trình · thiết lập chỉ số · xác định ranh giới</td></tr>
+  <tr><td><b>No-Go</b></td><td>AI không vượt trội · rủi ro quá cao · giải pháp phi AI tối ưu hơn</td></tr>
+</table>
+<p style="margin:2px 0 0"><b>“Not Yet” là chín chắn, không phải thất bại</b></p>
+
+</div>
+</div>
+</section>
+
+<!-- ==================== TAB 3 ==================== -->
+<section class="panel" id="cards">
+<div class="fcbar">
+  <button class="fbtn on" data-f="all">Tất cả</button>
+  <button class="fbtn" data-f="disc">Problem Discovery</button>
+  <button class="fbtn" data-f="ps">Problem Statement</button>
+  <button class="fbtn" data-f="ai">Có nên dùng AI</button>
+  <button class="fbtn" data-f="rwa">Rule/Workflow/Agent</button>
+  <button class="fbtn" data-f="dec">Reward &amp; Quyết định</button>
+  <span class="counter" id="cnt"></span>
+</div>
+<div class="fcgrid" id="fcgrid"></div>
+<p class="hint">Click vào thẻ để lật · Click lần nữa để úp lại</p>
+</section>
+
+</div>
+
+<script>
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); document.getElementById(b.dataset.t).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+const CARDS=[
+ ['disc','4 câu hỏi trọng tâm của Day 02?','① Bài toán có thực sự cần AI? · ② Cấp độ nào: Rule/Workflow/Agent? · ③ PS đã đủ rõ để triển khai? · ④ Go / Not Yet / No-Go?<br>PAIR ①②③ trả lời 3 câu đầu → tổng hợp ra câu ④.'],
+ ['disc','Câu nói của Don Norman mở đầu bài?','<b>“Do not solve the problem I am asked to solve.”</b><br>Vì <b>giải pháp xuất sắc cho sai vấn đề còn tệ hơn không có giải pháp</b>.'],
+ ['disc','Ba trụ cột nền tảng của AI Product?','<b>AI Engineering</b> (RAG, Agent, Guardrails, Eval) · <b>Product Thinking</b> (đúng bài toán, thấu hiểu user) · <b>Design Thinking</b> (mental model, feedback, khi AI sai).<br>Sản phẩm AI <b>kế thừa</b> chứ không thay thế nguyên lý sản phẩm truyền thống.'],
+ ['disc','Vì sao “AI chatbot” chưa phải một bài toán?','Vì chưa nói rõ <b>phục vụ ai</b>: khách hàng (FAQ, tư vấn, upsell) hay nội bộ (phân loại ticket, tra cứu, soạn nháp).<br><b>Đối tượng khác nhau → workflow khác, metric khác, rủi ro khác.</b>'],
+ ['disc','Double Diamond gồm những pha nào?','<b>Diamond 1 — tìm đúng VẤN ĐỀ:</b> Discover (mở rộng) → Define (thu hẹp)<br><b>Diamond 2 — tìm đúng GIẢI PHÁP:</b> Develop (mở rộng) → Deliver (thu hẹp)'],
+ ['disc','Công cụ của pha Discover và Define?','<b>Discover (phân kỳ):</b> observation, user interview, survey, diary study, phân tích dữ liệu, stakeholder mapping.<br><b>Define (hội tụ):</b> affinity mapping, <b>5 Whys</b>, impact-effort, dot voting, <b>How Might We</b>, Problem Statement.'],
+ ['disc','5 bước của quy trình HCD?','<b>Observation → Ideation → Prototype → Test → Iteration</b><br>Vòng lặp này nằm <b>bên trong mỗi Diamond</b>.'],
+ ['disc','4 lăng kính tìm bài toán AI?','<b>Repetitive</b> (việc lặp lại) · <b>Time-consuming</b> (hao phí thời gian ở bước nào) · <b>AI advantage</b> (cần ngữ cảnh, NLP, tổng hợp đa nguồn) · <b>User pain points</b> (ai đang tắc nghẽn).'],
+ ['disc','4 anti-patterns cần tránh?','<b>Solution-first</b> (xây chatbot trước khi rõ quy trình) · <b>No baseline</b> (không lượng hóa tổn thất) · <b>No evaluation</b> (không test case/metric) · <b>No boundary</b> (không rõ phạm vi tự chủ &amp; HITL).'],
+ ['disc','5 câu hỏi phỏng vấn stakeholder?','① Pain point &amp; tần suất? ② Workflow hiện tại? ③ Thiệt hại (time/cost/SLA/conversion)? ④ Hậu quả nếu AI sai? ⑤ <b>Ai có quyền nói YES?</b>'],
+ ['disc','Dấu hiệu stakeholder chưa sẵn sàng?','Nếu họ <b>không mô tả được quy trình hiện tại và chi phí thiệt hại khi lỗi</b> → mọi đề xuất giải pháp AI đều chỉ là <b>phỏng đoán thiếu căn cứ</b>.'],
+ ['disc','PAIR reframe câu hỏi thế nào?','Thay <s>“Can we use AI to ___?”</s> bằng <b>hai</b> câu:<br>① “<b>How might we solve ___?</b>” ② “<b>Can AI solve this problem in a unique way?</b>”<br>→ Hỏi về <b>bài toán trước</b>, về AI sau.'],
+ ['disc','Ba case study và bài học?','<b>Cursor</b> — lệch năng lực cốt lõi (bỏ CAD, chọn code editor).<br><b>Artifact</b> — sản phẩm tốt ≠ thị trường lớn (đóng cửa 1/2024).<br><b>NotebookLM</b> — định vị đúng điểm đau (hỏi đáp + trích dẫn nguồn).'],
+ ['disc','Lộ trình đúng khi làm sản phẩm AI?','<b>Bài toán → Quy trình vận hành → Chỉ số đo lường → Giải pháp AI</b><br>(Không bắt đầu từ AI.)'],
+
+ ['ps','6 trường của Quick Problem Card?','<b>problem</b> (không kèm giải pháp) · <b>actor</b> · <b>workflow</b> (3–7 bước) · <b>bottleneck + impact</b> · <b>success metric</b> · <b>direction</b> (No AI/Rule/Workflow/Agent).'],
+ ['ps','Ba bước định lượng hóa bài toán?','<b>① Baseline</b> (where we are — con số cụ thể) → <b>② Target</b> (where to go — ngưỡng cụ thể) → <b>③ Measurement</b> (how we know — chỉ số &amp; cách thu thập).'],
+ ['ps','Vì sao “nâng cao hiệu suất” không phải chỉ số?','Vì nó <b>không gắn với hiện trạng, mục tiêu và phương pháp đo</b>. Chỉ số phải có baseline + target + cách đo. VD đúng: “giảm từ 90 phút xuống dưới 30 phút”.'],
+ ['ps','Output metric vs Input metrics?','<b>Output</b> = <i>what we optimize</i> — kết quả cuối (thời lượng, tỷ lệ sai sót, giá trị user nhận được).<br><b>Input</b> = <i>what we can move</i> — đòn bẩy tác động được (tỷ lệ phân loại đúng, thời gian TA sửa nháp).<br><b>Tăng cái này → đo cái kia.</b>'],
+ ['ps','Điểm tinh tế trong metric của case Weekly Report?','Metric có <b>hai vế</b>: giảm thời gian 90 → dưới 30 phút, <b>nhưng không làm tăng số câu CEO/EM phải hỏi lại</b>.<br>Metric một vế dễ bị <b>tối ưu lệch</b> (nhanh hơn nhưng chất lượng tệ đi).'],
+ ['ps','6 câu hỏi khai thác cấu trúc PS?','① Quy trình hiện tại? ② Nút thắt ở đâu? ③ Hao phí bao nhiêu? ④ Tiêu chí thành công đo bằng gì? ⑤ Hậu quả khi sai sót? ⑥ <b>Có giải pháp phi AI đơn giản hơn?</b>'],
+ ['ps','9 trường của Problem Statement hoàn chỉnh?','<b>6 bài toán cốt lõi:</b> Actor · Workflow · Bottleneck · Impact · Success Metric · <b>Boundary</b><br><b>3 quyết định AI:</b> Điểm AI can thiệp · Mức chọn (R/W/A) · Rủi ro &amp; HITL'],
+ ['ps','Boundary trong PS nghĩa là gì?','<b>AI không được làm gì</b>, và <b>khâu nào bắt buộc có con người</b>. Viết Boundary &amp; HITL chính là <b>khai báo trước</b>: lỗi nào được phép xảy ra, lỗi nào không, và ai bắt lỗi đó.'],
+ ['ps','Tiêu chí kiểm tra PS đã đủ chặt?','<b>Không suy ra được test cases, eval metric và architecture boundary từ PS → PS chưa đủ chặt.</b>'],
+
+ ['ai','Ba bước PAIR và mỗi bước trả lời câu hỏi nào?','<b>①</b> Giao điểm nhu cầu × thế mạnh AI → <i>có thực sự cần AI?</i><br><b>②</b> Automate hay Augment → <i>giải pháp ở cấp độ nào?</i><br><b>③</b> Reward function &amp; success criteria → <i>PS đã đủ rõ để đo?</i>'],
+ ['ai','Kể vài trường hợp “AI probably better”?','Gợi ý theo từng người · dự đoán tương lai · cá nhân hóa · hiểu ngôn ngữ tự nhiên · nhận diện cả lớp thực thể · <b>phát hiện cái hiếm &amp; biến đổi</b> (gian lận) · agent cho lĩnh vực cụ thể · nội dung động thay giao diện tĩnh. <i>(8 trường hợp)</i>'],
+ ['ai','6 trường hợp AI KHÔNG tốt hơn?','Cần <b>dự đoán được</b> (nút Home/Cancel) · thông tin <b>tĩnh</b> · <b>lỗi quá tốn kém</b> · cần <b>minh bạch tuyệt đối</b> · cần <b>nhanh &amp; rẻ</b> · việc người dùng <b>muốn tự làm</b>.'],
+ ['ai','Vì sao ưu tiên rule/heuristic?','Vì rule <b>dễ build, dễ giải thích, dễ debug và bảo trì hơn</b> — nếu nó giải quyết được bài toán, đó là lựa chọn <b>tối ưu</b>, không phải lựa chọn kém.'],
+ ['ai','Ba động lực doanh nghiệp đầu tư AI?','<b>① Sống còn</b> (giữ lợi thế cạnh tranh) · <b>② Hiệu quả</b> (giảm chi phí, tăng năng suất) · <b>③ Khám phá</b> (tích lũy năng lực, tránh tụt hậu).<br>Mục tiêu quyết định <b>cách xây, mức tự động hóa và quy mô đầu tư</b>.'],
+ ['ai','Build / Boost / Buy khác nhau thế nào?','<b>Buy</b> — off-the-shelf, nhanh, ít khác biệt cạnh tranh.<br><b>Boost</b> — mua model + cải tiến bằng dữ liệu nội bộ (fine-tune/RAG), cần <b>data governance</b>. <i>Đa số đội đang ở đây.</i><br><b>Build</b> — tự xây model, kiểm soát cao nhất, đắt nhất.'],
+ ['ai','Khi nào build in-house theo Chip Huyen?','Khi công nghệ AI là <b>lợi thế cạnh tranh cốt lõi</b> và yếu tố sống còn. Nếu AI chỉ là <b>productivity layer</b> → mua/SaaS.'],
+ ['ai','5 câu hỏi gate quyết định?','① Có đòi hỏi ngôn ngữ/tri thức/suy luận? ② Dữ liệu đủ ngữ cảnh? ③ Đã có chỉ số định lượng? ④ Hậu quả sai sót kiểm soát được? ⑤ Có giải pháp đơn giản hơn AI?<br><b>Phần lớn chưa rõ → Not Yet.</b>'],
+ ['ai','4 bước từ Demo đến Production?','<b>① Baseline</b> (đối chứng) · <b>② Evaluation</b> (test set, edge cases, tiêu chí nghiệm thu) · <b>③ Controls</b> (logging, fallback, rollback, người chịu trách nhiệm) · <b>④ Operations</b> (ai giám sát, cập nhật, tối ưu).'],
+
+ ['rwa','Hệ thống AI gồm 4 thành phần nào?','<b>Model</b> (tư duy) + <b>Context</b> (tri thức chuyên biệt) + <b>Planning</b> (điều phối quy trình) + <b>Tools</b> (liên kết hệ thống).<br>Giải pháp AI là một <b>HỆ THỐNG</b> — model chỉ là một thành phần.'],
+ ['rwa','Khi nào chọn Automate?','Việc <b>khó, nhàm chán, nguy hiểm</b> hoặc cần scale · người dùng <b>thiếu kiến thức/khả năng</b> tự làm · có <b>“đáp án đúng”</b> mọi người đồng thuận.<br>Đo bằng: hiệu quả tăng, an toàn hơn, giảm việc tẻ nhạt.'],
+ ['rwa','Khi nào chọn Augment?','Người dùng <b>thích tự làm</b> · <b>stakes cao</b> (tiền, pháp lý, sức khỏe) · kết quả cần <b>trách nhiệm cá nhân</b>/social capital · sở thích khó diễn đạt thành lời.<br>Đo bằng: thích thú, cảm giác kiểm soát, sáng tạo tăng.'],
+ ['rwa','Hai lưu ý về Automate/Augment?','① Quyết định <b>theo từng tác vụ</b>, không phải cho cả sản phẩm.<br>② Việc đã automate <b>vẫn gần như luôn cần human oversight</b> — preview, edit, undo.'],
+ ['rwa','Ba pha tăng mức tự động hóa?','<b>Pha 1:</b> AI chỉ gợi ý, TA viết lại toàn bộ → <b>Pha 2:</b> AI soạn nháp, TA duyệt → <b>Pha 3:</b> AI tự động có giám sát (chỉ nhóm câu hỏi đã chứng minh an toàn).<br><b>risk ↓ khi dữ liệu đánh giá ↑</b>'],
+ ['rwa','Phân biệt hai trục RWA và Automate/Augment?','<b>Rule/Workflow/Agent</b> = cấp độ <b>KỸ THUẬT</b>.<br><b>Automate/Augment</b> = cấp độ <b>VAI TRÒ của con người</b> trong hệ thống.<br>Hai trục <b>độc lập</b> nhau.'],
+ ['rwa','Khi nào chọn Rule?','Đầu vào <b>ổn định</b>, ít thay đổi · logic viết được thành <b>if/else</b> · cần kết quả <b>luôn đúng 100%</b> · quy định pháp lý/tuân thủ chặt.<br>VD: tính thuế, chặn spam theo từ khóa, auto-reply template.'],
+ ['rwa','Khi nào chọn Workflow?','Đầu vào <b>đa dạng</b>, không viết hết rule được · đầu ra cần <b>linh hoạt</b> (tóm tắt, dịch, phân loại) · <b>có cách đo chất lượng</b> · người có thể kiểm tra trước khi gửi.<br>VD: tóm tắt email, chatbot FAQ, phân loại ticket.'],
+ ['rwa','Khi nào mới cân nhắc Agent?','Nhiều bước, dùng <b>nhiều công cụ</b> · tình huống <b>thay đổi liên tục</b> · cần <b>tự ra quyết định giữa các bước</b> · <b>có kiểm soát rủi ro rõ ràng</b>.<br>Đi kèm: chi phí cao hơn, độ trễ lớn hơn, khó kiểm thử, lỗi phức tạp hơn.'],
+ ['rwa','Nguyên tắc chọn cấp độ giải pháp?','<b>Bắt đầu từ bên trái</b> (Rule), chỉ sang phải khi <b>giá trị tăng hơn độ phức tạp</b>.<br><b>Không bắt buộc nâng cấp tuần tự</b> — dừng ở cấp tối giản nhất nếu đã đáp ứng mục tiêu.'],
+ ['rwa','Lưu ý khi thiết kế Workflow?','Mỗi công đoạn phải <b>định nghĩa rõ đầu vào và đầu ra</b>.<br><b>Không thiết kế thành một chatbot phản hồi tự do</b> — lộ trình phải nằm trong tầm kiểm soát.'],
+ ['rwa','Tradeoff của Prompt chaining và Routing?','<b>Prompt chaining:</b> được độ chính xác (có gate giữa các bước) / mất độ trễ cộng dồn.<br><b>Routing:</b> được tối ưu chi phí (câu dễ đi model rẻ) / cần <b>phân loại đúng ngay từ đầu</b>.'],
+ ['rwa','Tradeoff của Parallelization và Agent?','<b>Parallelization:</b> được độ tin cậy (vote, guardrail song song) / chi phí <b>nhân lên</b> theo số nhánh.<br><b>Agent:</b> giải được bài toán mở / chi phí cao, <b>lỗi cộng dồn</b>.'],
+ ['rwa','Câu hỏi quyết định Workflow vs Agent?','“<b>Lộ trình xử lý có viết trước được không?</b>”<br>Có → <b>Workflow</b> (code điều phối). Không → <b>Agent</b> (model tự điều phối).'],
+ ['rwa','Vì sao PM cần đọc được workflow pattern?','PM không cần code — nhưng phải <b>đọc được sơ đồ và nói được tradeoff</b>, vì nó quyết định <b>chi phí, độ trễ, khả năng kiểm thử và dạng lỗi</b> — chính là đầu vào của ô <b>Boundary, Metric, HITL</b> trong PS.'],
+ ['rwa','Thang 5 câu hỏi chọn cấp độ?','① Tần suất &amp; tác động đủ lớn? ② Logic rành mạch → Rule ③ Quy trình cố định → Workflow ④ Cần tự thích ứng → Agent ⑤ Giá trị &gt; chi phí &amp; rủi ro?<br>Mỗi nhánh “KHÔNG” là một lần <b>tránh được độ phức tạp không cần thiết</b>.'],
+
+ ['dec','Reward function là gì và ai thiết kế?','<b>Công thức quyết định đâu là dự đoán “đúng”, đâu là “sai”</b> — chính nó định hình trải nghiệm người dùng cuối.<br>Phải thiết kế <b>liên chức năng</b>: tối thiểu <b>UX × Product × Engineering</b> cùng ngồi lại.'],
+ ['dec','Bốn kết quả TP/TN/FP/FN trong case TA?','<b>TP:</b> nghẽn thật → gợi ý đúng.<br><b>TN:</b> đã có tài liệu → không can thiệp.<br><b>FP:</b> gợi ý SAI gửi thẳng → học viên đi sai hướng.<br><b>FN:</b> đang kẹt thật nhưng bỏ sót → vẫn chờ lâu.'],
+ ['dec','Precision và Recall — công thức và hệ quả?','<b>Precision = TP/(TP+FP)</b> — ít gợi ý nhưng chắc đúng → nhiều <b>False Negative</b> (bỏ sót người cần giúp).<br><b>Recall = TP/(TP+FN)</b> — bao trọn mọi trường hợp → nhiều <b>False Positive</b> (TA phải lọc thủ công).'],
+ ['dec','Quyết định then chốt khi thiết kế reward function?','Chi phí của <b>FP và FN KHÔNG đối xứng</b> — <b>báo cháy giả ≠ bỏ sót đám cháy</b>.<br>Không có cấu hình đúng tuyệt đối — <b>phải test điểm cân bằng với chính người dùng</b>.'],
+ ['dec','Template viết success criteria của PAIR?','<b>If {chỉ số cụ thể} for {tính năng AI} {drops below / goes above} {ngưỡng có nghĩa}, we will {hành động cụ thể}.</b><br>VD: nếu tỷ lệ AI gợi ý bị TA sửa &gt; 30% trong 2 tuần → hạ mức tự động về pha 1.'],
+ ['dec','3 câu checklist trước khi chốt metric?','① Metric có ý nghĩa với <b>MỌI</b> người dùng không? ② Có nhóm nào bị <b>ảnh hưởng tiêu cực</b>? ③ Đây là thành công của <b>ngày 1</b> — còn <b>ngày 1000</b> thì sao?<br>+ Lên lịch <b>review metric định kỳ</b>.'],
+ ['dec','3 loại lỗi AI theo PAIR Ch.6?','<b>Context errors</b> — chạy đúng nhưng sai bối cảnh (gợi ý ôn bài giữa kỳ nghỉ).<br><b>Fail states</b> — không trả lời được.<br><b>Background errors</b> — lỗi ngầm, cả hai bên không nhận ra → cần <b>QA chủ động</b>.'],
+ ['dec','4 nguồn gốc của lỗi AI?','① Lỗi <b>dữ liệu &amp; dự đoán</b> (nhãn sai, thiếu data) · ② Lỗi <b>đầu vào</b> (input ngoài thiết kế) · ③ Lỗi <b>liên quan</b> (gợi ý vui chơi cho chuyến đi đám tang) · ④ Lỗi <b>phân cấp hệ thống</b> (nhiều AI xung đột tín hiệu).'],
+ ['dec','4 pattern Human-in-the-loop?','<b>Làm rõ ý định</b> (yêu cầu bổ sung ngữ cảnh) · <b>Minh bạch thông tin</b> (trích dẫn nguồn) · <b>Phê duyệt thủ công</b> (tác vụ rủi ro cao) · <b>Thiết lập ranh giới</b> (giới hạn phạm vi tự chủ).'],
+ ['dec','3 paths forward from failure?','① <b>Mở kênh feedback</b> — kể cả trên output “đúng”.<br>② <b>Trả quyền kiểm soát</b> kèm đủ thông tin để user tiếp quản.<br>③ <b>Giả định user sẽ dùng sai</b> — thiết kế để thất bại “an toàn, nhàm chán”.<br>Nguyên tắc báo lỗi: <b>“be human, not machine”</b>.'],
+ ['dec','Điều kiện của quyết định Go?','Bài toán <b>rõ ràng</b> · chỉ số đo lường <b>khả thi</b> · điểm can thiệp AI <b>phù hợp</b> · <b>kiểm soát được rủi ro</b>.'],
+ ['dec','Khi nào chọn Not Yet?','Có triển vọng nhưng cần: bổ sung <b>dữ liệu thực tế</b> · <b>chuẩn hóa quy trình</b> · <b>thiết lập chỉ số</b> · <b>xác định ranh giới</b>.<br><b>“Not Yet” thể hiện sự chín chắn, không phải thất bại.</b>'],
+ ['dec','Khi nào No-Go?','AI <b>không mang giá trị vượt trội</b> · rủi ro vận hành <b>quá cao</b> · <b>giải pháp không dùng AI tối ưu hơn</b>.'],
+ ['dec','6 nguyên tắc cốt lõi sau Day 02?','① Brief mơ hồ ≠ Problem Statement · ② Mô hình hóa workflow trước khi tích hợp AI · ③ Pain point phải <b>lượng hóa</b> · ④ Phức tạp ≠ hiệu quả · ⑤ Quyết định dựa trên <b>lập luận thực tế</b> · ⑥ Đo reward function bằng <b>trải nghiệm người dùng</b>, không chỉ accuracy.'],
+];
+const grid=document.getElementById('fcgrid'), cnt=document.getElementById('cnt');
+const NAMES={disc:'Problem Discovery',ps:'Problem Statement',ai:'Có nên dùng AI',rwa:'Rule/Workflow/Agent',dec:'Reward & Quyết định'};
+function render(f){
+  const list=f==='all'?CARDS:CARDS.filter(c=>c[0]===f);
+  grid.innerHTML=list.map(c=>`<div class="fc"><div class="fci">
+      <div class="ff"><div class="tag2">${NAMES[c[0]]}</div><div class="q">${c[1]}</div></div>
+      <div class="fb"><div class="a">${c[2]}</div></div></div></div>`).join('');
+  cnt.textContent=list.length+' thẻ';
+  grid.querySelectorAll('.fc').forEach(el=>el.onclick=()=>el.classList.toggle('flip'));
+}
+document.querySelectorAll('.fbtn').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); render(b.dataset.f);
+});
+render('all');
+</script>
+</body>
+</html>

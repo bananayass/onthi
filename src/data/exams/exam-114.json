@@ -1,0 +1,247 @@
+{
+  "id": "exam-114",
+  "title": "AICB Tự luận RAG 2 — Nền tảng Ngày 7 & 8",
+  "description": "10 câu tự luận tình huống về nền tảng RAG: chọn giữa In-Context, RAG và fine-tuning; đọc điểm cosine và đặt tham số retrieval; đánh giá việc đổi embedding model; chọn vector store và lọc quyền; chọn chiến lược chunking cho hai nhóm người dùng ngược nhau; thiết kế rerank và MMR; query transformation; cân bằng grounding với abstention; phân loại nguồn dữ liệu và data quality; và xử lý tràn ngân sách token.",
+  "durationMinutes": 90,
+  "totalPoints": 100,
+  "passingScore": 70,
+  "disclaimer": "Đề do AI biên soạn từ slide bài giảng AICB Ngày 7 và Ngày 8, có mở rộng sang Ngày 4 (prompt và context), Ngày 10 (data pipeline) và Ngày 18 (production RAG) ở một số ý. Đáp án mẫu là một cách trả lời tốt, không phải cách duy nhất. Quy ước tự chấm: mỗi tiêu chí trong rubric có giá trị bằng nhau — đạt từ 70% số tiêu chí trở lên thì chọn Đạt.",
+  "course": "aicb",
+  "kind": "review",
+  "label": "Tự luận RAG 2",
+  "questions": [
+    {
+      "id": "RAG2-01",
+      "module": "C",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Giám đốc marketing yêu cầu bạn làm trợ lý viết nội dung với hai đòi hỏi:\n1. \"Viết đúng giọng thương hiệu của công ty\" — họ đưa bạn 300 bài đã xuất bản làm mẫu.\n2. \"Không được nói sai chính sách khuyến mãi\" — chính sách này thay đổi gần như hàng tuần.\nNgân sách có hạn, quý này chỉ triển khai được một hướng.\n**Yêu cầu.** (a) Với mỗi đòi hỏi, chọn In-Context / RAG / Fine-tuning và giải thích; (b) nêu điều gì xảy ra nếu bạn dùng nhầm hướng cho từng đòi hỏi; (c) đề xuất kiến trúc cuối cùng và thứ tự triển khai.",
+      "modelAnswer": "- **Phân định**: fine-tuning dạy **CÁCH NÓI**, RAG cung cấp **ĐIỀU CẦN NÓI**.\n- **Giọng thương hiệu → fine-tuning**: style lặp lại, ổn định, học được từ vài trăm ví dụ.\n- **Chính sách khuyến mãi → RAG**: đổi hằng tuần, cần trích nguồn, cần đúng con số.\n- **Loại In-Context**: chỉ hợp 1–20 trang ít thay đổi, không hợp kho chính sách đổi liên tục.\n- **Dùng fine-tuning cho fact thì hỏng**: catastrophic forgetting, mỗi lần đổi chính sách phải train lại, và mất khả năng trích nguồn.\n- **Dùng RAG cho style thì hỏng**: giọng không ổn định giữa các lượt, tốn token cho ví dụ mỗi lần gọi.\n- **Đích là kết hợp cả hai**; quý này **làm RAG trước** vì rủi ro sai chính sách tốn tiền hơn giọng chưa chuẩn, lại rẻ và nhanh hơn.\n- Thử **prompt/few-shot trước khi fine-tune** — đi từ rẻ tới đắt.",
+      "rubric": [
+        "Phân định đúng: fine-tuning dạy CÁCH NÓI, RAG cung cấp ĐIỀU CẦN NÓI",
+        "Chọn fine-tuning cho giọng văn và RAG cho chính sách, kèm lý do dựa trên đặc điểm dữ liệu (style lặp lại so với fact đổi hàng tuần)",
+        "Loại In-Context với lý do đúng (1–20 trang, ít thay đổi)",
+        "Nêu hậu quả dùng fine-tuning cho fact: catastrophic forgetting, phải train lại, mất trích nguồn",
+        "Nêu hậu quả dùng RAG cho style: giọng không ổn định, tốn token cho ví dụ",
+        "Nêu kiến trúc đích là kết hợp cả hai, nhưng chỉ ra được hướng nào làm trước trong quý này",
+        "Thứ tự triển khai đi từ rẻ tới đắt, thử prompt/few-shot trước khi fine-tune"
+      ],
+      "tags": [
+        "rag",
+        "day7",
+        "rag-vs-finetune"
+      ]
+    },
+    {
+      "id": "RAG2-02",
+      "module": "A",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Bạn đo cosine similarity giữa truy vấn \"chính sách hoàn tiền\" với bốn chunk và được:\n\n```\nchunk A - \"quy định đổi trả hàng\"        0.87\nchunk B - \"refund policy for customers\"  0.82\nchunk C - \"quy trình giao hàng\"          0.52\nchunk D - \"dự báo thời tiết tuần này\"    0.31\n```\n\nĐồng nghiệp đề xuất đặt `threshold = 0.85` để \"chỉ lấy cái thật sự liên quan\".\n**Yêu cầu.** (a) Phản biện đề xuất này; (b) giải thích ý nghĩa của bốn con số trên, đặc biệt vì sao chunk B chỉ được 0.82; (c) trình bày cách bạn chọn bộ ba tham số retrieval cho hệ thống, và nêu vì sao cosine là mặc định cho text thay vì khoảng cách Euclid.",
+      "modelAnswer": "- **Threshold 0,85 loại mất chunk B (0,82)** — đúng là tài liệu cần tìm. Đây là lỗi của ngưỡng, không phải của retriever.\n- **Điểm cosine chỉ có nghĩa TƯƠNG ĐỐI** trong cùng corpus và cùng embedding model; không có mốc tuyệt đối dùng chung.\n- **0,82 là hiện tượng cross-lingual** (\"hoàn tiền\" ↔ \"refund\"), không phải kém liên quan hơn.\n- **Nhìn bước nhảy**: 0,82 → 0,52 là chỗ đứt gãy thật; đặt ngưỡng ở đó chứ không đặt theo số tròn.\n- **Ngưỡng tham khảo: 0,7 chặt / 0,4 lỏng**; top-k 3 cho câu đơn, 10 khi cần tổng hợp.\n- **Tăng precision đúng cách là metadata filter**, không phải siết threshold — dùng điều kiện xác định thay vì đoán qua một con số.\n- **Cosine bỏ qua độ lớn vector**, chỉ xét hướng — hợp lý vì độ dài văn bản không nên ảnh hưởng đến độ liên quan.\n- Vector đã normalize thì **cosine và Euclid cho cùng thứ hạng**.",
+      "rubric": [
+        "Chỉ ra threshold 0.85 loại mất chunk B — đúng tài liệu cần tìm",
+        "Nêu điểm cosine chỉ có nghĩa tương đối trong cùng corpus và cùng embedding model",
+        "Giải thích 0.82 là hiện tượng cross-lingual, không phải kém liên quan hơn",
+        "Nhận ra bước nhảy 0.82 → 0.52 và đề xuất đặt ngưỡng ở chỗ có bước nhảy",
+        "Nêu đúng ngưỡng tham khảo 0.7 chặt / 0.4 lỏng và top-k 3 hoặc 10",
+        "Đề xuất metadata filter là cách tăng precision đúng đắn hơn siết threshold, vì dùng điều kiện xác định thay vì phép đo tương tự",
+        "Giải thích cosine bằng câu hỏi 'độ lớn vector có mang thông tin không'",
+        "Nêu được vector đã normalize thì cosine và Euclid cho cùng thứ hạng"
+      ],
+      "tags": [
+        "rag",
+        "day7",
+        "cosine"
+      ]
+    },
+    {
+      "id": "RAG2-03",
+      "module": "B",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Hệ RAG tiếng Việt của bạn đang dùng `text-embedding-3-small` (1536 chiều, MTEB 62.3). Một bạn trong nhóm đề xuất đổi sang `text-embedding-3-large` (3072 chiều, MTEB 64.6) vì \"điểm cao hơn thì chắc chắn tốt hơn\". Corpus hiện có 2 triệu chunk.\n**Yêu cầu.** (a) Nêu những chi phí và rủi ro mà đề xuất này chưa tính tới; (b) mô tả cách bạn kiểm chứng xem việc đổi có đáng không, trước khi đổi; (c) nêu hai tình huống mà việc đổi embedding model KHÔNG giải quyết được vấn đề, và lúc đó nên làm gì.",
+      "modelAnswer": "- **Bắt buộc re-index toàn bộ**: hai model tạo hai không gian vector khác nhau, vector cũ không so sánh được với vector mới.\n- **Chi phí tăng**: 3072 chiều gấp đôi 1536 → dung lượng lưu trữ và độ trễ truy vấn đều tăng.\n- **MTEB là benchmark tổng hợp**, chủ yếu tiếng Anh — không nói gì về corpus tiếng Việt của mình. Chênh 62,3 so với 64,6 có thể biến mất hoặc đảo chiều trên dữ liệu thật.\n- **Kiểm chứng**: embed lại một mẫu, chạy **paired trên cùng golden set** của mình.\n- **Đo bằng Context Recall và Context Precision** có so trước/sau, chia slice.\n- **Chẩn đoán loại lỗi TRƯỚC**: nếu lỗi là bốn điểm mù (negation, temporal, entity, numerical) thì đổi model không cứu được — phải dùng metadata filter và NLI.\n- **MRL/Matryoshka**: cắt bớt số chiều để đổi cost/latency mà không phải re-embed.",
+      "rubric": [
+        "Nêu bắt buộc re-index toàn bộ và giải thích vì sao (hai không gian vector khác nhau)",
+        "Nêu chi phí lưu trữ/latency tăng do số chiều tăng gấp đôi",
+        "Chỉ ra MTEB là benchmark tổng hợp, không đo trên corpus tiếng Việt của mình",
+        "Kiểm chứng bằng golden set riêng, embed lại một mẫu, chạy paired trên cùng bộ test",
+        "Đo bằng chỉ số retrieval định lượng có so trước/sau — Context Recall và Context Precision (hoặc chỉ số về thứ hạng), không chỉ nhìn chất lượng câu trả lời cuối",
+        "Nêu bốn điểm mù embedding là giới hạn bản chất, chữa bằng metadata filter và NLI",
+        "Nêu được phải chẩn đoán loại lỗi ở tầng nào trước khi quyết định đổi model hay đổi công cụ",
+        "Nhắc MRL/Matryoshka: cắt bớt số chiều để đổi cost/latency mà không phải re-embed"
+      ],
+      "tags": [
+        "rag",
+        "day7",
+        "embedding-model"
+      ]
+    },
+    {
+      "id": "RAG2-04",
+      "module": "B",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Bạn phải chọn vector store cho một trợ lý nội bộ với các ràng buộc:\n- Công ty đã chạy PostgreSQL cho hệ thống chính, đội DevOps quen vận hành nó.\n- Corpus khoảng 800.000 chunk, dự kiến tăng lên 3 triệu trong hai năm.\n- Bắt buộc lọc theo `department` và `access_level` trước khi tìm — nhân viên không được thấy tài liệu ngoài phòng ban.\n- Ngân sách hạ tầng eo hẹp, không muốn thêm dịch vụ trả phí theo tháng.\n**Yêu cầu.** (a) Chọn vector store và biện luận; (b) nêu bốn thành phần một bản ghi trong vector store phải có và vai trò từng cái; (c) giải thích vì sao yêu cầu lọc quyền phải xử lý ở tầng retrieval chứ không phải ở tầng prompt.",
+      "modelAnswer": "- **Chọn pgvector**: công ty đã chạy Postgres nên không thêm hệ thống mới; **800K–3M vector nằm trong tầm pgvector** (ngưỡng phải lo là hàng chục triệu).\n- **Loại Pinecone** (chi phí theo tháng cho dữ liệu nội bộ), **loại Chroma** (hợp prototype, không hợp production có ràng buộc quyền).\n- **Bốn thành phần mỗi bản ghi**: ID, chunk gốc, vector, metadata.\n- **Câu chốt: vector để TÌM, chunk để INJECT** — không có chunk gốc thì không dựng lại được context.\n- **Lọc quyền ở tầng RETRIEVAL**, không ở prompt: lọc ở prompt là quá muộn, dữ liệu đã vào log và trace.\n- **Phân biệt**: luật trong prompt là luật MỀM (model có thể quên); pre-filter là **ràng buộc CỨNG** ở tầng dữ liệu.\n- Pre-filter còn **tăng tốc độ và precision** cùng lúc.\n- `access_level` phải gắn **từ khâu ingestion**, không gắn sau.\n- Đổi vector store thì dễ; **đổi embedding model mới bắt re-index toàn bộ**.",
+      "rubric": [
+        "Chọn pgvector với lý do đã có Postgres, và nêu được quy mô 800K–3M nằm trong tầm pgvector (ngưỡng phải lo là hàng tỉ vector)",
+        "Loại Pinecone/Chroma với lý do đúng (chi phí theo tháng, chỉ hợp prototype)",
+        "Nêu đủ 4 thành phần: ID, chunk gốc, vector, metadata",
+        "Nêu được câu chốt: vector để TÌM, chunk để INJECT",
+        "Lập luận lọc quyền ở retrieval vì lọc ở prompt là quá muộn, dữ liệu đã vào log/trace",
+        "Phân biệt luật mềm trong prompt với ràng buộc cứng ở tầng dữ liệu",
+        "Nêu pre-filter còn tăng tốc độ và precision",
+        "Nhắc access_level phải gắn từ khâu ingestion",
+        "Nêu câu chốt: đổi vector store thì dễ, đổi embedding model mới bắt re-index toàn bộ"
+      ],
+      "tags": [
+        "rag",
+        "day7",
+        "vector-store"
+      ]
+    },
+    {
+      "id": "RAG2-05",
+      "module": "C",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Hai nhóm dùng chung một hệ RAG nhưng báo hai lỗi ngược nhau:\n- **Nhóm A** (tra cứu quy trình): \"Agent trả lời cụt lủn, thiếu ngữ cảnh. Nó trích đúng một câu nhưng câu đó không đủ hiểu.\"\n- **Nhóm B** (tra cứu số liệu): \"Agent trả lời lan man, kéo về cả đoạn dài rồi lẫn lộn nhiều con số của nhiều mục khác nhau.\"\nHiện hệ thống đang dùng recursive chunking với target size 800 token cho cả hai.\n**Yêu cầu.** (a) Chẩn đoán nguyên nhân của từng nhóm; (b) đề xuất chiến lược chunking cho từng nhóm và giải thích cơ chế; (c) nêu cách bạn phục vụ được cả hai nhóm trên cùng một corpus mà không phải dựng hai hệ thống riêng.",
+      "modelAnswer": "- **Hai lỗi ngược nhau**: nhóm A **thiếu ngữ cảnh** (chunk quá nhỏ), nhóm B **bị nhiễu** (chunk quá lớn).\n- **Nhóm A → parent-child hoặc sentence-window**: search trên chunk NHỎ cho chính xác, rồi inject chunk LỚN cho đủ ngữ cảnh.\n- **Nhóm B → chunk nhỏ hơn + table-aware**, giữ header dòng để mỗi hàng bảng vẫn đọc được độc lập.\n- **Tham số**: 200–500 token, overlap 10–15%; parent 2048 / child 256; trên 1000 token là quá lớn, dưới 50 là quá nhỏ.\n- **Index nhiều tầng (hierarchical)** thay vì dựng hai hệ thống riêng cho hai nhóm.\n- **Routing theo dạng câu hỏi** + metadata `doc_type` gắn từ ingestion.\n- **Đo riêng hai nhóm câu hỏi**: cải thiện nhóm này dễ làm tụt nhóm kia, số tổng che mất điều đó.\n- **Proposition là cách đắt nhất**, chỉ dùng khi thật cần.",
+      "rubric": [
+        "Chẩn đoán đúng hai đầu ngược nhau: nhóm A thiếu ngữ cảnh, nhóm B bị nhiễu",
+        "Nhóm A dùng parent-child hoặc sentence-window, giải thích cơ chế search nhỏ inject lớn",
+        "Nhóm B dùng chunk nhỏ hơn và table-aware cho bảng, nêu lý do giữ header dòng",
+        "Nêu kích thước tham chiếu 200–500 token, overlap 10–15%, ngưỡng 1000 và 50 token",
+        "Đề xuất index nhiều tầng (hierarchical) thay vì dựng hai hệ thống",
+        "Có routing theo dạng câu hỏi và metadata doc_type gắn từ ingestion",
+        "Đo riêng hai nhóm câu hỏi vì cải thiện nhóm này dễ làm tụt nhóm kia, số tổng che mất",
+        "Nêu tham số parent 2048 / child 256, và Proposition là cách đắt nhất chỉ dùng khi thật cần"
+      ],
+      "tags": [
+        "rag",
+        "day7",
+        "chunking-strategy"
+      ]
+    },
+    {
+      "id": "RAG2-06",
+      "module": "B",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Hệ RAG của bạn hiện lấy top-10 rồi đưa thẳng cả 10 đoạn vào prompt. Hai vấn đề đang gặp:\n- Đoạn đúng thường nằm trong top-10 nhưng câu trả lời vẫn sai.\n- Kiểm tra thủ công thấy 3 đoạn đầu thường nói lặp gần như cùng một ý.\n**Yêu cầu.** (a) Thiết kế lại khối Retrieval và Augmentation, nêu rõ các tầng và tham số; (b) giải thích bi-encoder khác cross-encoder ở đâu và vì sao phải dùng cả hai chứ không chỉ dùng cái chính xác hơn; (c) viết công thức MMR và giải thích λ điều chỉnh cái gì.",
+      "modelAnswer": "- **Hai tầng**: retrieve rộng **top 50–100** → cross-encoder rerank xuống **top 3–5**.\n- **Tầng đầu ưu tiên recall** vì tầng sau không tạo ra được cái chưa lấy lên — reranker chỉ xếp lại thứ đã có.\n- **MMR** xử lý trùng lặp, **reordering** (Top 1 đầu / Top 2 cuối) chống lost in the middle.\n- **Bi-encoder** embed query và doc RIÊNG nên pre-compute được toàn bộ corpus; **cross-encoder** ghép chung vào một lượt nên đọc được tương tác giữa hai vế, chính xác hơn.\n- **Không dùng riêng cross-encoder**: phải tính lại cho từng cặp, chạy trên toàn corpus thì chi phí và độ trễ không chấp nhận được.\n- **Đánh đổi của rerank**: Ngày 8 ghi +5% relevance, 1s→4s, chi phí ×2; Ngày 18 ghi 30–50ms, +15–25% precision — chọn mốc nào cũng được, miễn nêu rõ.\n- **MMR**: `λ × sim(q,d) − (1−λ) × max sim(d, đã chọn)`; λ là mức phạt trùng lặp.\n- **Rerank vô dụng nếu chunk đúng chưa được retrieve lên.**",
+      "rubric": [
+        "Thiết kế hai tầng: retrieve rộng top 50–100 rồi cross-encoder xuống top 3–5",
+        "Giải thích ưu tiên recall ở tầng đầu vì tầng sau không tạo ra được cái chưa lấy",
+        "Có MMR để xử lý trùng lặp và reordering chống lost in the middle",
+        "Phân biệt đúng: bi-encoder embed riêng nên pre-compute được, cross-encoder ghép chung nên chính xác hơn",
+        "Giải thích vì sao không dùng riêng cross-encoder: chi phí và độ trễ trên toàn corpus",
+        "Nêu được đánh đổi của rerank — chấp nhận mốc Ngày 8 (+5% relevance, 1s→4s, chi phí ×2) hoặc mốc Ngày 18 (30–50ms đổi 15–25% precision)",
+        "Viết đúng công thức MMR và giải thích λ là mức phạt trùng lặp",
+        "Nhắc rerank vô dụng nếu chunk đúng chưa được retrieve lên"
+      ],
+      "tags": [
+        "rag",
+        "day8",
+        "rerank-mmr"
+      ]
+    },
+    {
+      "id": "RAG2-07",
+      "module": "C",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Bốn truy vấn sau đang cho kết quả kém trên hệ RAG chăm sóc khách hàng:\n1. \"chargeback là gì\" — tài liệu nội bộ chỉ dùng từ \"khiếu nại giao dịch\", không có từ \"chargeback\".\n2. \"so sánh chính sách đổi trả của Shopee và Tiki\" — cần thông tin từ hai tài liệu khác nhau.\n3. \"lỗi 404 khi thanh toán Momo trên app iOS phiên bản 12.4.1 thì làm sao\" — quá chi tiết, không khớp tài liệu nào.\n4. \"chính sách hoàn tiền\" — quá chung, mỗi lần retrieve ra một nhóm tài liệu khác nhau.\n**Yêu cầu.** (a) Với mỗi truy vấn, chọn kỹ thuật query transformation phù hợp và giải thích; (b) nêu thứ tự đúng của các kỹ thuật trong pipeline và vì sao thứ tự đó quan trọng; (c) nêu cái giá phải trả khi bật các kỹ thuật này và cách quyết định bật cái nào.",
+      "modelAnswer": "- **Ánh xạ**: (1) \"chargeback\" → **expansion/HyDE** (vocab gap); (2) so sánh hai chính sách → **decomposition** (multi-hop); (3) câu quá chi tiết → **step-back**; (4) câu nhiều vế → **multi-query**.\n- **Thứ tự**: Pre-Filter → Expansion → Decomposition → Step-Back → Multi-Query → HyDE → **Search**.\n- **Pre-filter đứng đầu** vì thu gọn phạm vi, tăng cả tốc độ lẫn precision.\n- **Các bước biến đổi phải đứng TRƯỚC Search** — chúng sửa câu hỏi, không sửa kết quả.\n- **Cái giá**: mỗi kỹ thuật là thêm một lần gọi LLM cho MỖI truy vấn — latency và chi phí cộng dồn.\n- **Bật theo vấn đề, không bật hết**: chẩn đoán loại lỗi rồi mới bật.\n- **Bật từng cái một rồi đo trước–sau** — bật cả loạt thì không biết cái nào có tác dụng.\n- **Rẻ hơn HyDE online**: sinh sẵn hypothetical Q&A ngay lúc index, trả tiền một lần thay vì mỗi truy vấn.",
+      "rubric": [
+        "Ánh xạ đúng cả 4: expansion/HyDE cho vocab gap, decomposition cho multi-hop, step-back cho quá chi tiết, multi-query cho quá chung",
+        "Nêu đúng thứ tự Pre-Filter → Expansion → Decomposition → Step-Back → Multi-Query → HyDE → Search",
+        "Giải thích pre-filter đứng đầu vì tăng cả tốc độ lẫn precision",
+        "Giải thích các bước biến đổi phải đứng trước Search",
+        "Nêu cái giá: mỗi kỹ thuật là thêm một lần gọi LLM mỗi truy vấn",
+        "Đề xuất bật theo vấn đề, chẩn đoán loại lỗi trước khi bật",
+        "Bật từng kỹ thuật một rồi đo trước–sau, không bật cả loạt cùng lúc",
+        "Đề xuất giải pháp offline rẻ hơn thay cho HyDE online, ví dụ sinh hypothetical Q&A ngay khi index"
+      ],
+      "tags": [
+        "rag",
+        "day8",
+        "query-transformation"
+      ]
+    },
+    {
+      "id": "RAG2-08",
+      "module": "C",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Sếp yêu cầu: \"Agent tuyệt đối không được bịa. Thà nói không biết còn hơn nói sai.\" Nhưng sau khi bạn siết grounding, người dùng bắt đầu phàn nàn: \"Hỏi gì nó cũng nói không đủ dữ liệu, dùng chẳng được việc gì.\"\n**Yêu cầu.** (a) Phân tích vì sao hai yêu cầu này mâu thuẫn nhau và đây thực chất là đánh đổi gì; (b) thiết kế hành vi của agent khi retrieval trả về kết quả yếu, sao cho vừa không bịa vừa vẫn có ích; (c) nêu các chỉ số bạn sẽ theo dõi để biết mình đang lệch về phía nào.",
+      "modelAnswer": "- **Bản chất là đánh đổi precision/recall**: siết grounding = tăng precision, giảm recall. Hai loại lỗi có chi phí khác nhau — bịa thì mất niềm tin, từ chối oan thì mất tiện ích.\n- **\"Không đủ dữ liệu\" thường là lỗi RETRIEVAL**, không phải Generation: agent từ chối vì không lấy được đoạn đúng, chứ không phải vì prompt quá chặt.\n- **Graceful degradation**: từ chối kèm gợi ý bước tiếp theo, không nói \"không biết\" cụt lủn.\n- **Trả lời một phần kèm citation** cho phần có căn cứ, nói rõ phần nào chưa có.\n- **Phân tầng theo rủi ro**: câu tra cứu thông thường nới lỏng; câu chạm cam kết tài chính thì siết + **HITL**.\n- **Thử query transformation TRƯỚC khi từ chối** (multi-query, HyDE).\n- **Chỉ số cả hai phía**: faithfulness/groundedness và **abstention rate** kèm Context Recall.\n- **Tín hiệu ngầm từ người dùng**: regenerate, hỏi lại, bỏ session giữa chừng.\n- **Lấy mẫu câu bị từ chối rồi chấm tay** xem bao nhiêu phần trăm lẽ ra trả lời được.",
+      "rubric": [
+        "Gọi đúng bản chất là đánh đổi precision/recall và chi phí hai loại lỗi khác nhau",
+        "Chỉ ra 'không đủ dữ liệu' thường là lỗi Retrieval chứ không phải Generation",
+        "Đề xuất graceful degradation: từ chối kèm gợi ý bước tiếp theo",
+        "Đề xuất trả lời một phần kèm citation thay vì bỏ trắng",
+        "Phân tầng mức chặt theo rủi ro của câu hỏi, có HITL cho trường hợp nặng",
+        "Thử query transformation trước khi từ chối",
+        "Chỉ số cả hai phía: faithfulness/groundedness và abstention rate kèm Context Recall",
+        "Có tín hiệu ngầm từ người dùng (regenerate, hỏi lại, bỏ session)",
+        "Đề xuất lấy mẫu các câu bị từ chối rồi chấm tay xem bao nhiêu phần trăm lẽ ra trả lời được"
+      ],
+      "tags": [
+        "rag",
+        "day8",
+        "abstention"
+      ]
+    },
+    {
+      "id": "RAG2-09",
+      "module": "C",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Bạn được giao xây trợ lý nội bộ với ba nguồn dữ liệu:\n- **Nguồn 1:** 1.200 file PDF quy trình, phần lớn là bản scan, OCR còn lỗi, có header/footer lặp ở mọi trang.\n- **Nguồn 2:** Database CRM chứa thông tin đơn hàng và khách hàng, cập nhật theo thời gian thực.\n- **Nguồn 3:** Hồ sơ phiên làm việc — người dùng đang xem màn hình nào, đã hỏi gì trong phiên này.\nMột bạn trong nhóm đề xuất \"embed hết cả ba nguồn vào vector store cho tiện\".\n**Yêu cầu.** (a) Phản biện đề xuất đó, phân loại ba nguồn và nêu cách đưa từng nguồn vào model; (b) với nguồn 1, mô tả đường đi từ dữ liệu thô tới dữ liệu dùng được; (c) nêu sai lầm phổ biến nhất ở khâu này và hậu quả của nó.",
+      "modelAnswer": "- **Phản biện**: không phải cái gì cũng embed — ba nguồn thuộc ba loại data khác nhau.\n- **Nguồn 1 (PDF quy trình) = Knowledge → RETRIEVAL.** Nguồn 2 (CRM) = **Operational → TOOL**. Nguồn 3 (ngữ cảnh phiên) = **Contextual → inject ngắn đúng lúc**.\n- **Không embed CRM** vì: dữ liệu realtime (embedding là ảnh chụp lúc index), cần số CHÍNH XÁC (embedding mù trước số), và có ràng buộc quyền/PII.\n- **Contextual khác Retrieval**: đây là Memory, đưa vào prompt trực tiếp chứ không đi tìm.\n- **Bốn tầng**: Raw → Cleaned → Structured → Enriched.\n- **Chuẩn hoá Unicode NFC bắt buộc với tiếng Việt**: hai chuỗi trông giống hệt vẫn khác ở tầng byte nên dedupe và tìm kiếm đều hỏng.\n- **OCR confidence thấp thì FLAG cho người review TRƯỚC khi publish**, không đẩy thẳng vào index.\n- **Sai lầm kinh điển: index raw rồi kỳ vọng retrieval tự chữa.** Chất lượng ingestion đặt TRẦN cho retrieval.\n- Lỗi sinh ở ingestion nhưng chỉ lộ ra khi query — nên debug phải đi ngược từ answer về nguồn.",
+      "rubric": [
+        "Phản biện đúng: không phải cái gì cũng embed, ba nguồn thuộc ba loại data khác nhau",
+        "Phân loại đúng Knowledge / Operational / Contextual và cách xử lý từng loại",
+        "Nêu lý do không embed CRM: dữ liệu realtime, cần số chính xác, ràng buộc quyền/PII",
+        "Nêu contextual data thì inject ngắn đúng lúc, phân biệt Retrieval với Memory",
+        "Mô tả đủ bốn tầng Raw → Cleaned → Structured → Enriched",
+        "Nêu chuẩn hoá Unicode NFC là bắt buộc với tiếng Việt",
+        "Nêu OCR confidence thấp thì flag cho người review TRƯỚC khi publish",
+        "Nêu sai lầm 'index raw rồi kỳ vọng retrieval tự chữa'",
+        "Nêu sai lầm 'index raw rồi kỳ vọng retrieval tự chữa' và chất lượng ingestion đặt trần cho retrieval",
+        "Giải thích lỗi sinh ở khâu ingestion nhưng chỉ lộ ra khi query, nên debug phải đi ngược"
+      ],
+      "tags": [
+        "rag",
+        "day7",
+        "data-quality"
+      ]
+    },
+    {
+      "id": "RAG2-10",
+      "module": "A",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Prompt RAG của bạn đang bị lỗi: `finish_reason` trả về `length`, câu trả lời bị cắt giữa chừng. Kiểm tra thấy cấu trúc hiện tại là:\n- System prompt: 1.800 token (đã tích luỹ qua 20 lần vá lỗi trong 3 tháng)\n- Context: 10 chunk × 800 token = 8.000 token\n- Lịch sử hội thoại: 18 lượt, hiện khoảng 5.400 token và tăng dần sau mỗi lượt\n- Model có context window 16.000 token\n**Yêu cầu.** (a) Tính toán và chỉ ra vấn đề nằm ở đâu; (b) đề xuất phương án cắt giảm cho từng phần, theo thứ tự ưu tiên; (c) giải thích vì sao system prompt phình lên 1.800 token là một triệu chứng chứ không chỉ là vấn đề độ dài, và cách phòng.",
+      "modelAnswer": "- **Tính**: 1.800 + 8.000 + 5.400 = **15.200 / 16.000** → chỉ còn khoảng **800 token** cho câu hỏi và toàn bộ output.\n- **`finish_reason = length`** chính là hệ quả: model chưa nói xong đã chạm trần, vì không ai chừa **output buffer**.\n- **Ngân sách 20/60/20** cho cửa sổ 16.000: system ~3.200, documents ~9.600, output ~3.200. Hiện tại system và history đang lấn phần của output.\n- **Cắt history trước** — đây là phần phình nhanh nhất: Summarize các lượt cũ / Drop lượt không liên quan / Archive ra ngoài.\n- **Giảm context bằng rerank**: top-10 xuống top-3 vừa giảm token vừa TĂNG chất lượng, khác hẳn cắt bừa.\n- **System prompt mục tiêu dưới 500 token.**\n- **Bẫy patch prompt**: mỗi lần lỗi lại thêm một câu dặn, prompt phình dần, chi phí tăng mỗi lượt gọi và các câu patch bắt đầu mâu thuẫn nhau.\n- **Chạy regression mỗi lần sửa prompt**, và cấu trúc lại system prompt theo 5 phần chuẩn.",
+      "rubric": [
+        "Tính đúng: 1.800 + 8.000 + 5.400 = 15.200 trên 16.000, chỉ còn khoảng 800 token cho câu hỏi và output",
+        "Nối được finish_reason = length với việc thiếu output buffer",
+        "Nêu ngân sách 20/60/20 và tính ra con số cụ thể cho cửa sổ 16.000",
+        "Cắt history trước bằng Summarize / Drop / Archive",
+        "Giảm context bằng rerank — nêu được đây là cách vừa giảm token vừa tăng chất lượng (không cần mô tả lại thiết kế hai tầng)",
+        "Đặt mục tiêu system prompt dưới 500 token",
+        "Gọi tên bẫy patch prompt và nêu hậu quả chi phí + mâu thuẫn giữa các câu patch",
+        "Đề xuất chạy regression mỗi lần sửa prompt và cấu trúc lại system prompt 5 phần"
+      ],
+      "tags": [
+        "rag",
+        "day8",
+        "token-budget"
+      ]
+    }
+  ]
+}

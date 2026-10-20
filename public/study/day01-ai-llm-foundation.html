@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 1 — AI &amp; LLM Foundation | Tóm tắt</title>
+<style>
+:root{
+  --bg:#f7f8fa; --card:#fff; --ink:#1a1d24; --muted:#5b6472; --line:#e3e7ee;
+  --brand:#2563c9; --brand-soft:#e8f0fd; --warn:#b8541a; --warn-soft:#fdf1e7;
+  --ok:#1d7a4f; --ok-soft:#e8f6ef; --bad:#c0392b; --bad-soft:#fdeceb;
+  --acc:#6b3fa0; --acc-soft:#f2ebfa;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+
+header{background:linear-gradient(135deg,#2563c9,#1a3d8f);color:#fff;padding:34px 0 26px}
+header .wrap{padding-bottom:0}
+.kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;margin:0 0 6px}
+header h1{margin:0 0 8px;font-size:31px;line-height:1.2;font-weight:700}
+header p{margin:0;opacity:.9;font-size:15px}
+
+.tabbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);
+  box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.tabbar .wrap{display:flex;gap:4px;padding-top:0;padding-bottom:0}
+.tab{appearance:none;border:0;background:none;font:inherit;font-weight:600;font-size:15px;
+  padding:15px 18px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--brand);border-bottom-color:var(--brand)}
+.panel{display:none;padding-top:28px}
+.panel.on{display:block}
+
+h2{font-size:22px;margin:36px 0 4px;padding-top:14px;border-top:2px solid var(--line)}
+h2 .num{color:var(--brand);font-weight:700}
+h2:first-child{border-top:0;padding-top:0;margin-top:0}
+.sub{color:var(--muted);font-size:14.5px;margin:0 0 18px}
+h3{font-size:17px;margin:26px 0 10px}
+h4{font-size:15.5px;margin:0 0 8px}
+p{margin:10px 0}
+ul,ol{margin:10px 0;padding-left:22px}
+li{margin:5px 0}
+code{background:#eef1f6;padding:2px 6px;border-radius:4px;font-size:13.5px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:#1f2430;color:#e6e9ef;padding:13px 15px;border-radius:9px;overflow-x:auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.6;margin:12px 0}
+pre .kw{color:#c792ea} pre .st{color:#c3e88d} pre .cm{color:#7c85a3} pre .nu{color:#f78c6c}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:820px){.g2,.g3{grid-template-columns:1fr}}
+
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:#fff;
+  border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{padding:9px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f2f5fa;font-weight:600;font-size:13px}
+tr:last-child td{border-bottom:0}
+
+.note{border-left:4px solid var(--brand);background:var(--brand-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.warn{border-left:4px solid var(--warn);background:var(--warn-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.bad{border-left:4px solid var(--bad);background:var(--bad-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.ok{border-left:4px solid var(--ok);background:var(--ok-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.acc{border-left:4px solid var(--acc);background:var(--acc-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note b,.warn b,.bad b,.ok b,.acc b{display:block;margin-bottom:3px;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+.note b{color:var(--brand)} .warn b{color:var(--warn)} .bad b{color:var(--bad)}
+.ok b{color:var(--ok)} .acc b{color:var(--acc)}
+
+.pill{display:inline-block;font-size:12.5px;font-weight:600;padding:2px 9px;border-radius:20px;margin-right:5px}
+.pill.b{background:var(--brand-soft);color:var(--brand)}
+.pill.o{background:var(--ok-soft);color:var(--ok)}
+.pill.w{background:var(--warn-soft);color:var(--warn)}
+.pill.r{background:var(--bad-soft);color:var(--bad)}
+
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0}
+.step{background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-size:13.5px;font-weight:600}
+.step small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.step b{color:var(--brand)}
+.arw{color:var(--muted);font-weight:700;font-size:13px}
+
+/* vòng tròn lồng nhau AI→LLM */
+.nest{margin:16px 0}
+.ring{border:2px solid var(--line);border-radius:14px;padding:13px 15px 15px;background:#fff}
+.ring>.lbl{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-bottom:10px}
+.ring>.lbl b{font-size:14px;letter-spacing:.03em}
+.ring>.lbl span{color:var(--muted);font-size:13px}
+.r1{border-color:#c7d6ef;background:#f6f9ff} .r1>.lbl b{color:#1a3d8f}
+.r2{border-color:#b9cdf0;background:#eef4ff} .r2>.lbl b{color:#2563c9}
+.r3{border-color:#c9bde8;background:#f4efff} .r3>.lbl b{color:#6b3fa0}
+.r4{border-color:#e0bcd0;background:#fdf0f7} .r4>.lbl b{color:#a83a72}
+.r5{border-color:#f0c9a8;background:#fff4ea} .r5>.lbl b{color:#b8541a}
+.r5 .ex{margin-top:8px;font-size:13px;color:var(--muted)}
+
+/* timeline */
+.tl{position:relative;margin:16px 0 16px 6px;padding-left:26px;border-left:2px solid var(--line)}
+.tl .ev{position:relative;margin-bottom:16px}
+.tl .ev::before{content:"";position:absolute;left:-33px;top:5px;width:12px;height:12px;border-radius:50%;
+  background:var(--brand);border:2px solid #fff;box-shadow:0 0 0 2px var(--brand-soft)}
+.tl .ev.win::before{background:#7b8794;box-shadow:0 0 0 2px #e8eaed}
+.tl .yr{font-weight:700;color:var(--brand);font-size:14px}
+.tl .ev.win .yr{color:#5b6472}
+.tl h4{margin:2px 0 5px;font-size:15px}
+.tl p{margin:0;font-size:13.8px;color:var(--muted);line-height:1.6}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+@media(max-width:700px){.stats{grid-template-columns:1fr}}
+.stat{background:#fff;border:1px solid var(--line);border-radius:11px;padding:15px;text-align:center}
+.stat .n{font-size:24px;font-weight:700;color:var(--brand);line-height:1.15}
+.stat .l{font-size:12.5px;color:var(--muted);margin-top:5px}
+
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+@media(max-width:700px){.vs{grid-template-columns:1fr}}
+.vs>div{border-radius:11px;padding:15px 17px;border:1px solid var(--line);background:#fff}
+.vs .lgood{border-top:4px solid var(--ok)}
+.vs .lbad{border-top:4px solid var(--bad)}
+.vs .lneu{border-top:4px solid var(--brand)}
+.vs h4{margin:0 0 8px;font-size:15px}
+.vs .lgood h4{color:var(--ok)} .vs .lbad h4{color:var(--bad)} .vs .lneu h4{color:var(--brand)}
+.vs p,.vs li{font-size:14px}
+.vs ul{margin:6px 0;padding-left:19px}
+
+/* attention demo */
+.attn{display:flex;flex-wrap:wrap;gap:6px;align-items:flex-end;margin:14px 0;padding:16px;
+  background:#fff;border:1px solid var(--line);border-radius:11px}
+.tok{display:flex;flex-direction:column;align-items:center;gap:5px}
+.tok .bar{width:100%;min-width:44px;border-radius:3px 3px 0 0;background:var(--brand)}
+.tok .w{font-size:11px;color:var(--muted);font-weight:600}
+.tok .t{font-size:13.5px;padding:4px 9px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
+.tok.hot .t{background:var(--brand-soft);border-color:var(--brand);color:var(--brand);font-weight:700}
+.tok.self .t{background:#1f2430;color:#fff;border-color:#1f2430;font-weight:700}
+
+/* token cost */
+.bill{background:#fff;border:1px solid var(--line);border-radius:11px;padding:16px;margin:14px 0;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px}
+.bill .row{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.bill .row:last-child{border-bottom:0;border-top:2px solid var(--ink);margin-top:5px;padding-top:9px;font-weight:700}
+
+.levels{display:grid;gap:10px;margin:14px 0}
+.lv{display:flex;gap:13px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:11px;padding:14px 16px}
+.lv .n{flex:0 0 62px;text-align:center;padding:5px 0;border-radius:8px;background:var(--brand-soft);
+  color:var(--brand);font-weight:700;font-size:12.5px}
+.lv .b{flex:1;min-width:0}
+.lv .b strong{display:block;font-size:15px;margin-bottom:4px}
+.lv .b p{margin:0;font-size:13.8px;color:var(--muted)}
+.lv:nth-child(1) .n{background:#eef1f6;color:#5b6472}
+.lv:nth-child(4) .n{background:var(--acc-soft);color:var(--acc)}
+
+#cheat{font-size:14px}
+#cheat h2{font-size:18px;margin:20px 0 8px;padding-top:10px}
+#cheat .card{padding:14px 16px;margin:10px 0}
+#cheat table{font-size:12.5px}
+#cheat th,#cheat td{padding:6px 8px}
+#cheat ul,#cheat ol{padding-left:19px} #cheat li{margin:3px 0}
+#cheat pre{font-size:11.5px;padding:9px 11px}
+.cheatgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:820px){.cheatgrid{grid-template-columns:1fr}}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13.5px}
+.kv dt{font-weight:600;color:var(--brand)}
+.kv dd{margin:0;color:var(--muted)}
+.printbtn{background:var(--brand);color:#fff;border:0;border-radius:8px;padding:9px 16px;
+  font:inherit;font-weight:600;font-size:14px;cursor:pointer;margin-bottom:6px}
+.printbtn:hover{background:#1d51a8}
+
+.fcbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.fbtn{background:#fff;border:1px solid var(--line);border-radius:20px;padding:6px 15px;
+  font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;color:var(--muted)}
+.fbtn:hover{border-color:var(--brand);color:var(--brand)}
+.fbtn.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.counter{margin-left:auto;font-size:13.5px;color:var(--muted)}
+.fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.fc{perspective:1100px;height:218px;cursor:pointer}
+.fci{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.fc.flip .fci{transform:rotateY(180deg)}
+.ff,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:18px;
+  display:flex;flex-direction:column;justify-content:center;border:1px solid var(--line);overflow:auto}
+.ff{background:#fff}
+.fb{background:var(--brand);color:#fff;transform:rotateY(180deg);border-color:var(--brand)}
+.fb code{background:rgba(255,255,255,.2);color:#fff}
+.ff .tag2{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);margin-bottom:8px}
+.ff .q{font-size:15.5px;font-weight:600;line-height:1.45}
+.fb .a{font-size:13.5px;line-height:1.55}
+.hint{text-align:center;color:var(--muted);font-size:12.5px;margin-top:10px}
+
+@media print{
+  header,.tabbar,.printbtn,.hint{display:none!important}
+  .panel{display:none!important} #cheat{display:block!important;padding-top:0}
+  body{background:#fff;font-size:10.5px} .wrap{max-width:100%;padding:0}
+  .card{break-inside:avoid;border-color:#ccc} table{break-inside:avoid}
+  pre{background:#f4f4f4;color:#222;border:1px solid #ddd}
+  pre .kw,pre .st,pre .cm,pre .nu{color:#222}
+  h2{break-after:avoid}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">AI IN ACTION · Ngày 1</p>
+    <h1>AI &amp; LLM Foundation</h1>
+    <p>Bạn đang dùng AI mỗi ngày — nhưng thực sự bên trong nó đang làm gì?</p>
+  </div>
+</header>
+
+<nav class="tabbar">
+  <div class="wrap">
+    <button class="tab on" data-t="detail">Tóm tắt chi tiết</button>
+    <button class="tab" data-t="cheat">Cheat sheet</button>
+    <button class="tab" data-t="cards">Flashcard</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ==================== TAB 1 ==================== -->
+<section class="panel on" id="detail">
+
+<div class="acc"><b>Thần chú xuyên suốt cả bài</b><span style="font-size:16px">“Model chỉ đoán token tiếp theo — <b>mọi thứ khác là hệ quả</b>.”</span></div>
+
+<h2><span class="num">§1</span> &nbsp;Bức tranh AI</h2>
+<p class="sub">AI, machine learning, LLM nằm ở đâu trong cùng một hệ — từ rộng đến hẹp.</p>
+
+<div class="nest">
+  <div class="ring r1">
+    <div class="lbl"><b>ARTIFICIAL INTELLIGENCE</b><span>chiếc ô lớn nhất: mọi hệ thống có yếu tố “thông minh” — kể cả hệ luật tay, robot</span></div>
+    <div class="ring r2">
+      <div class="lbl"><b>MACHINE LEARNING</b><span>học từ dữ liệu thay vì viết luật tay — lọc spam, gợi ý phim</span></div>
+      <div class="ring r3">
+        <div class="lbl"><b>DEEP LEARNING</b><span>mạng nơ-ron nhiều tầng tự học đặc trưng — nhận diện ảnh, giọng nói</span></div>
+        <div class="ring r4">
+          <div class="lbl"><b>GENERATIVE AI</b><span>sinh nội dung mới: văn bản, ảnh, code</span></div>
+          <div class="ring r5">
+            <div class="lbl"><b>LLM</b><span>model nền chuyên ngôn ngữ — tim của làn sóng hiện nay</span></div>
+            <div class="ex">GPT · Claude · Kimi</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="note"><b>Câu chốt</b>LLM <b>không phải toàn bộ AI</b> — nhưng nó là tầng nền của gần hết trải nghiệm AI bạn dùng hôm nay.</div>
+
+<h3>Ba nhóm AI chính</h3>
+<table>
+  <tr><th style="width:180px">Nhóm</th><th>Làm gì</th><th style="width:200px">Luồng</th></tr>
+  <tr><td><b>Discriminative AI</b></td><td>Giỏi phân loại, dự đoán: lọc spam, phát hiện gian lận, nhận diện ảnh</td><td><code>Input → một nhãn, một con số</code></td></tr>
+  <tr><td><b>Generative AI</b></td><td>Sinh ra thứ mới: văn bản, ảnh, code. ChatGPT, Claude, Midjourney</td><td><code>Prompt → nội dung mới</code></td></tr>
+  <tr><td><b>Agentic AI</b></td><td>Nhận mục tiêu rồi tự làm nhiều bước: lập kế hoạch, dùng công cụ, hành động</td><td><code>Goal → Plan → Action</code></td></tr>
+</table>
+<p class="sub">LLM là <b>engine chung</b> của cả Generative lẫn Agentic.</p>
+
+<h2><span class="num">§2</span> &nbsp;Lịch sử AI 70 năm</h2>
+<p class="sub">Hai lần “mùa đông” — mỗi lần là một cách tiếp cận chạm trần và phải đổi nền tảng.</p>
+
+<div class="tl">
+  <div class="ev"><div class="yr">1956</div><h4>Dartmouth Workshop</h4>
+    <p>Thuật ngữ “Artificial Intelligence” ra đời với ý tưởng: nếu trí thông minh có thể được mô tả đủ rõ, thì máy móc cũng có thể mô phỏng lại nó.</p></div>
+  <div class="ev"><div class="yr">1969</div><h4>Perceptrons — các hướng đi chạm trần</h4>
+    <p>Hướng <b>symbolic</b> (dạy máy bằng luật) đuối trước thế giới quá nhiều ngữ cảnh. Hướng <b>Perceptron</b> (học từ ví dụ) thì quá đơn giản.</p></div>
+  <div class="ev"><div class="yr">1973</div><h4>Báo cáo Lighthill</h4>
+    <p>Chính phủ Anh nhờ James Lighthill đánh giá lại toàn ngành. Kết luận thẳng: những gì AI làm được đi quá xa so với lời hứa → nguồn tiền ở Anh và Mỹ bị cắt mạnh.</p></div>
+  <div class="ev win"><div class="yr">1974–1980</div><h4>Mùa đông AI lần 1 — bùng nổ tổ hợp</h4>
+    <p>Bài toán nhỏ, ít nhánh thì máy duyệt hết được → trông “thông minh”. Nhưng thế giới thật: mỗi bước sinh ra quá nhiều nhánh.</p></div>
+  <div class="ev"><div class="yr">1980</div><h4>Hệ chuyên gia (expert system)</h4>
+    <p>Đặt lại vấn đề: “Nếu AI chỉ giải thật tốt <b>một miền hẹp</b> thì sao?” — mã hóa tri thức chuyên gia thành luật.</p></div>
+  <div class="ev win"><div class="yr">~1987</div><h4>Mùa đông AI lần 2</h4>
+    <p>Expert systems tạo giá trị thật nhưng lộ trần: tri thức phải nhập <b>bằng tay</b>, luật càng nhiều càng khó cập nhật, khó đứng vững trước ngoại lệ mới.</p></div>
+  <div class="ev"><div class="yr">2009</div><h4>Fei-Fei Li &amp; ImageNet</h4>
+    <p>Cả ngành chạy theo thuật toán khôn hơn; Fei-Fei Li chọn xây <b>dữ liệu lớn hơn</b> — 14 triệu ảnh gán nhãn tay, hơn 20.000 loại vật. Bài học: đôi khi <b>dữ liệu tốt hơn đánh bại thuật toán khôn hơn</b>.</p></div>
+  <div class="ev"><div class="yr">2012</div><h4>AlexNet</h4>
+    <p>Thắng ImageNet Challenge nhờ ba thứ hội tụ: <b>dữ liệu</b> chưa từng có, <b>kiến trúc sâu</b> (học dần từ cạnh → hình → bộ phận → đối tượng), và <b>GPU</b> đủ mạnh.</p></div>
+  <div class="ev"><div class="yr">2016</div><h4>AlphaGo &amp; nước đi số 37</h4>
+    <p>Học từ ~150.000 ván của chuyên gia để có trực giác khởi đầu → tự chơi với chính mình hàng triệu lần → <b>tự mở rộng không gian chiến lược</b> bằng nước đi chưa ai thử.</p></div>
+  <div class="ev"><div class="yr">2017</div><h4>Transformer</h4>
+    <p>Mỗi từ có thể <b>nhìn sang</b> những từ quan trọng khác trong cả câu, thay vì đi tuần tự → nền móng kỹ thuật cho GPT, BERT và toàn bộ làn sóng LLM.</p></div>
+  <div class="ev"><div class="yr">2022</div><h4>ChatGPT</h4>
+    <p>Lần đầu người dùng phổ thông trực tiếp chạm vào một model ngôn ngữ mạnh qua giao diện ai cũng hiểu → trọng tâm cả ngành dồn về cùng một trục.</p></div>
+</div>
+
+<h3>Nút thắt của RNN mà Transformer đã tháo</h3>
+<div class="vs">
+  <div class="lbad">
+    <h4>① Câu càng dài → càng quên chữ đầu</h4>
+    <p>Cả câu bị nén vào <b>MỘT vector</b> — “cổ chai”. Chữ đầu mờ dần, như người cố nhớ một câu rất dài bằng trí nhớ ngắn hạn.</p>
+  </div>
+  <div class="lbad">
+    <h4>② Từng bước một → chậm, khó mở rộng</h4>
+    <p>Muốn chữ thứ 100 phải chờ đủ 99 bước trước — <b>không song song được</b>, khó scale lên model lớn.</p>
+  </div>
+</div>
+<div class="ok"><b>Vì sao Transformer thắng</b>Không phải vì phép màu — nó tháo đúng nút thắt này: <b>cho mọi từ nhìn nhau cùng lúc</b>.</div>
+
+<h2><span class="num">§3</span> &nbsp;Bên trong LLM</h2>
+<p class="sub">Năm chặng: cỗ máy đoán token → attention → model được tạo ra → có “hiểu” không → giới hạn.</p>
+
+<h3>3A · LLM là gì — một bộ não nền, không phải một chatbot</h3>
+<p>LLM là mô hình ngôn ngữ rất lớn, thường dựa trên kiến trúc Transformer, được luyện trên <b>hàng nghìn tỷ mảnh chữ</b> để học cách đoán mảnh chữ tiếp theo trong ngữ cảnh.</p>
+<div class="flow">
+  <span class="step">1 model nền (LLM)</span><span class="arw">→</span>
+  <span class="step">Chatbot</span><span class="step">Tóm tắt tài liệu</span><span class="step">Viết code</span><span class="step">Dịch &amp; phân tích</span>
+</div>
+<div class="note"><b>Câu chốt</b>LLM = <b>bộ não ngôn ngữ dùng chung</b> cho mọi việc — sản phẩm bạn thấy chỉ là <b>lớp áo bên ngoài</b>.</div>
+
+<h3>Vòng lặp sinh văn bản</h3>
+<div class="flow">
+  <span class="step">Chấm điểm MỌI từ trong từ vựng<small>“land” 22%, “forest” 9%…</small></span><span class="arw">→</span>
+  <span class="step">Chọn theo xác suất</span><span class="arw">→</span>
+  <span class="step">Nối vào ngữ cảnh</span><span class="arw">→</span>
+  <span class="step">Chạy lại từ đầu</span>
+</div>
+<p class="sub">Đầu ra của Transformer <b>luôn là một phân bố xác suất</b>. Vòng lặp: <code>predict → append → rerun</code>.</p>
+
+<h3>Token — model không đọc “từ”, model đọc mảnh chữ</h3>
+<div class="card">
+  <p style="margin:0 0 8px">Model cắt văn bản thành <b>token</b>: có từ là một mảnh, có từ vỡ ba bốn mảnh; cả dấu câu và khoảng trắng cũng là mảnh.</p>
+  <ul style="margin:0">
+    <li><code>"Hello world"</code> ≈ <b>2 token</b></li>
+    <li><code>"Xin chào"</code> có thể tới <b>3–4 token</b></li>
+    <li><b>Tiếng Việt, code, JSON tốn token hơn tiếng Anh</b> — vì dấu thanh, ký tự đặc biệt và cấu trúc bị cắt nhỏ</li>
+  </ul>
+</div>
+<div class="warn"><b>Nhớ khi sang phần chi phí</b>Mọi thứ model làm đều quy ra token — và <b>mỗi token đều có giá</b>.</div>
+
+<h3>Context — bàn làm việc có hạn của model</h3>
+<p>Mọi thứ muốn model “thấy” phải <b>bày lên bàn</b>. Quy đổi: <b>128K token ≈ một cuốn sách 300 trang</b>; <b>1M token ≈ 4–5 cuốn sách</b> trên bàn cùng lúc.</p>
+<div class="bad"><b>Lost in the middle</b>Bàn đầy quá thì <b>đồ ở giữa bàn dễ bị bỏ sót</b> — đặt điều quan trọng ở giữa một prompt rất dài, model có thể “quên” mất. Context càng dài càng <b>tốn tiền</b> và càng <b>chậm</b> — bàn rộng không có nghĩa là dùng tốt.</div>
+
+<h3>3B · Attention — mỗi từ được “nhìn sang” những từ quan trọng khác</h3>
+<p>Thay vì đọc tuần tự, attention cho phép mỗi token: <b>quay đầu nhìn lại</b> các token trước → <b>chấm điểm mức độ liên quan</b> → <b>khóa nghĩa theo ngữ cảnh</b>.</p>
+<p class="sub">Ví dụ: <i>“Lan bỏ quyển sách vào túi vì <b>nó</b> quá dày”</i> — muốn biết “nó” là quyển sách hay cái túi, model so khớp “nó” với <b>TẤT CẢ</b> token trước đó, không chỉ token liền kề:</p>
+<div class="attn">
+  <div class="tok"><div class="bar" style="height:8px"></div><div class="w">0.05</div><div class="t">Lan</div></div>
+  <div class="tok"><div class="bar" style="height:6px"></div><div class="w">0.04</div><div class="t">bỏ</div></div>
+  <div class="tok hot"><div class="bar" style="height:52px"></div><div class="w">0.32</div><div class="t">quyển</div></div>
+  <div class="tok hot"><div class="bar" style="height:46px"></div><div class="w">0.28</div><div class="t">sách</div></div>
+  <div class="tok"><div class="bar" style="height:10px"></div><div class="w">0.06</div><div class="t">vào</div></div>
+  <div class="tok"><div class="bar" style="height:17px"></div><div class="w">0.10</div><div class="t">túi</div></div>
+  <div class="tok"><div class="bar" style="height:13px"></div><div class="w">0.08</div><div class="t">vì</div></div>
+  <div class="tok self"><div class="bar" style="height:0"></div><div class="w">← đang xét</div><div class="t">nó</div></div>
+</div>
+<p class="sub">Trọng số hướng mạnh về <b>“quyển” + “sách”</b>, không phải “túi”. Đây chính là <b>chữ T trong GPT</b>.</p>
+
+<div class="vs">
+  <div class="lbad">
+    <h4>Convolution — cửa sổ nhỏ (3 từ)</h4>
+    <p>“nó” muốn hiểu nghĩa phải nhìn tới “quyển/sách” — nhưng chúng <b>nằm ngoài cửa sổ</b> → mối liên hệ xa bị cắt.</p>
+  </div>
+  <div class="lgood">
+    <h4>Attention — mọi từ đều trong tầm nhìn</h4>
+    <p>“nó” nhìn lại <b>toàn bộ câu</b> và tự chọn từ quan trọng.</p>
+  </div>
+</div>
+<p class="sub">Cửa sổ nhỏ thì nhanh nhưng <b>mù xa</b> — attention đổi tốc độ lấy khả năng giữ ngữ cảnh dài.</p>
+
+<h3>Multi-head — nhiều con mắt chuyên môn nhìn song song</h3>
+<div class="grid g3">
+  <div class="card" style="margin:0"><h4>👁 Con mắt đại từ</h4><p class="sub" style="margin:0">“nó” là con mèo hay cái bàn</p></div>
+  <div class="card" style="margin:0"><h4>👁 Con mắt không gian</h4><p class="sub" style="margin:0">cái gì nằm trên cái gì</p></div>
+  <div class="card" style="margin:0"><h4>👁 Con mắt cú pháp</h4><p class="sub" style="margin:0">nhịp câu, dấu câu, khoảng cách</p></div>
+</div>
+<p class="sub">Một con mắt nhìn được một góc — <b>nhiều con mắt cùng nhìn mới thành “hiểu ngữ cảnh”</b>.</p>
+
+<h3>Dùng attention hiệu quả: quản context = quản sự chú ý</h3>
+<table>
+  <tr><th style="width:230px">Nguyên tắc</th><th>Vì sao</th></tr>
+  <tr><td><b>1 · Đặt điều quan trọng đầu – cuối</b></td><td>Đầu và cuối prompt được chú ý nhiều nhất; đồ ở giữa dễ bị bỏ sót — yêu cầu quan trọng <b>đừng chôn giữa</b></td></tr>
+  <tr><td><b>2 · Giữ bàn làm việc sạch</b></td><td><b>Context rác = attention rác</b>. Chat dài thì tóm tắt lại; vibe code thì đưa đúng file liên quan, không dán cả repo</td></tr>
+  <tr><td><b>3 · Cho tra sổ thay vì bắt nhớ</b></td><td>Tài liệu dài: lấy đoạn liên quan nhét vào context (<b>RAG</b>) thay vì trông chờ model nhớ hết</td></tr>
+</table>
+<div class="note"><b>Câu chốt</b>Agent mạnh <b>không phải vì context khổng lồ</b> — mà vì nó có <b>tools</b> để lấy đúng thứ vào bàn làm việc đúng lúc.</div>
+
+<h3>3C · Model được tạo ra như thế nào</h3>
+<div class="flow">
+  <span class="step"><b>①</b> Pre-training<small>“đọc cả thư viện” — hàng nghìn tỷ token</small></span><span class="arw">→</span>
+  <span class="step"><b>②</b> SFT<small>“được chỉ cách trả lời” — học theo ví dụ mẫu</small></span><span class="arw">→</span>
+  <span class="step"><b>③</b> RLHF/DPO<small>“được uốn nắn” — theo phản hồi con người</small></span><span class="arw">→</span>
+  <span class="step"><b>④</b> Luyện suy luận<small>“giải đề tự chấm” (từ ~2025)</small></span>
+</div>
+<div class="ok"><b>Vì sao cần ②③④</b>“Đọc vạn cuốn sách chưa chắc biết trả lời phỏng vấn.” Bước ④ luyện toán/code <b>có đáp án kiểm chứng được</b> (RLVR) → model biết <b>làm nháp trước khi trả lời</b>.</div>
+
+<h4>RLHF — ba bước uốn cỗ máy đoán token thành trợ lý biết nghe lời</h4>
+<div class="flow">
+  <span class="step"><b>①</b> Model viết nhiều câu trả lời<small>cùng một câu hỏi → A, B, C, D</small></span><span class="arw">→</span>
+  <span class="step"><b>②</b> Người chấm xếp hạng<small>B &gt; D &gt; A &gt; C → reward model</small></span><span class="arw">→</span>
+  <span class="step"><b>③</b> Huấn luyện theo điểm<small>tăng xác suất câu ghi điểm cao</small></span>
+</div>
+<p class="sub">Lặp lại hàng nghìn lần → cỗ máy đoán token + điểm xếp hạng của con người = trợ lý <b>helpful · harmless · honest</b>.</p>
+
+<h4>Tham số (parameter) — những “khớp nối” model học được</h4>
+<p>Những gì model “biết” nằm trong các con số cố định bên trong. Tham số <b>không phải thứ bạn chỉnh khi dùng model</b> — nó được đóng gói sẵn trong file weights. Bạn chỉ chỉnh được <b>context</b> và các <b>núm vặn lúc gọi</b> (như temperature).</p>
+<div class="vs">
+  <div class="lneu"><h4>2020 — GPT-3 · 175 tỷ</h4><p>Một <b>“bác sĩ đa năng”</b> — mọi token đều đi qua toàn bộ khớp nối (dense).</p></div>
+  <div class="lneu"><h4>2026 — Kimi K3 · 2.800 tỷ</h4><p>Một <b>“bệnh viện đa khoa”</b> — mỗi token chỉ gọi vài chuyên gia (MoE).</p></div>
+</div>
+<div class="note"><b>MoE</b>Nhiều tham số ≠ tốn hơn tuyến tính — bệnh viện lớn <b>gấp 16 lần</b> mà chi phí mỗi ca khám gần như không đổi.</div>
+
+<h3>3D · Model có thực sự “hiểu” — hay chỉ là vẹt thống kê?</h3>
+<div class="vs">
+  <div class="lneu"><h4>① Mô hình thế giới bên trong?</h4><p>Nén thế giới thành biểu diễn có cấu trúc.</p></div>
+  <div class="lneu"><h4>② Nôn lại dữ liệu huấn luyện?</h4><p>Chỉ ghép các mẫu chữ theo xác suất (“stochastic parrots”).</p></div>
+</div>
+
+<h4>Thí nghiệm Othello-GPT</h4>
+<div class="card">
+  <p style="margin:0 0 8px"><b>Đầu vào duy nhất:</b> chuỗi token biên bản ván cờ <code>C4 C3 D3 C5 D6 F4 B4 …</code></p>
+  <ul style="margin:0 0 10px">
+    <li>✗ Không được dạy luật chơi</li>
+    <li>✗ Không hề thấy bàn cờ 8×8</li>
+    <li>✗ Không biết quân trắng–đen — chỉ thấy chuỗi ký tự</li>
+  </ul>
+  <p style="margin:0"><b>Kết quả:</b> đoán được nước đi hợp lệ, tỷ lệ đi sai luật chỉ <b>~0.01%</b>. Đi hợp lệ ⇒ phải biết ô nào trắng, ô nào đen, ô nào trống → một <b>“bàn cờ ẩn” tự hình thành</b>, không ai dạy.</p>
+</div>
+<h4>Mở hộp đen kiểm chứng</h4>
+<p>Nhóm nghiên cứu gắn <b>64 “que thử” (probe)</b> vào bên trong model — mỗi que hỏi một ô: “ô này đang trắng, đen, hay trống?”</p>
+<div class="vs">
+  <div class="lgood"><h4>① Que thử đọc được toàn bộ bàn cờ</h4><p>Từ activation bên trong, probe đọc ra trạng thái từng ô — chính xác vượt xa mức ngẫu nhiên, càng giữa ván càng chính xác.</p></div>
+  <div class="lgood"><h4>② Lật một quân trong “đầu” nó → nước đi đổi theo</h4><p>Can thiệp lật màu một quân trong biểu diễn bên trong → các nước đi hợp lệ đổi theo đúng luật ⇒ nó <b>thật sự dùng</b> bàn cờ đó để chơi.</p></div>
+</div>
+<div class="acc"><b>Câu chốt</b>Model chỉ đoán token tiếp theo — nhưng <b>để đoán giỏi, nó tự xây một mô hình thế giới bên trong</b>.</div>
+
+<h3>3E · Giới hạn bẩm sinh — học giả trong bong bóng</h3>
+<div class="grid g3">
+  <div class="card" style="margin:0"><h4>🫧 Bong bóng thời gian</h4><p class="sub" style="margin:0">Model bị “đóng băng” tại ngày ngừng đọc (<b>knowledge cutoff</b>). Chuyện sau đó nó không biết — trừ khi bạn cung cấp thêm.</p></div>
+  <div class="card" style="margin:0"><h4>😐 Nói chắc như đúng rồi</h4><p class="sub" style="margin:0">Model tối ưu cho câu <b>nghe hợp lý</b>, không phải tra sự thật — nên có thể <b>tự tin mà sai</b> (hallucination).</p></div>
+  <div class="card" style="margin:0"><h4>🪑 Bàn làm việc có hạn</h4><p class="sub" style="margin:0">Context có trần; quá dài vừa tốn tiền vừa dễ bỏ sót thông tin ở giữa.</p></div>
+</div>
+<div class="bad"><b>Không phải lỗi tạm thời</b>Đó là <b>bản chất của cỗ máy đoán token</b>. Vì vậy ta cần prompt tốt, context sạch, tra sổ (RAG), tools, và <b>luôn kiểm chứng</b>.</div>
+
+<h4>Vì sao model vẫn sai: nó rất giỏi học vẹt đường tắt</h4>
+<table>
+  <tr><th style="width:230px">Bài toán</th><th>Model thực chất đã học</th></tr>
+  <tr><td>Phân loại spam</td><td>“<b>Đếm số hyperlink</b> trong email” → email sạch nhưng nhiều link vẫn bị gán spam</td></tr>
+  <tr><td>Câu chủ quan vs khách quan</td><td>“Có phải câu trích từ <b>film review</b> không” → ăn gian bằng <b>nguồn gốc</b> câu, không phải nội dung</td></tr>
+  <tr><td>Suy luận ngôn ngữ (MNLI)</td><td>“Câu có <b>động từ phủ định</b>” → đổi cấu trúc dữ liệu test là điểm tụt ngay</td></tr>
+</table>
+<div class="warn"><b>Câu chốt</b>Benchmark cao ≠ model hiểu đúng thứ bạn tưởng — <b>luôn test trên dữ liệu của chính mình</b>.</div>
+
+<h4>Model không chỉ mô hình hóa thế giới — nó mô hình hóa cả BẠN</h4>
+<p class="sub">ChatGPT nói tiếng Bồ Đào Nha với Fernanda Viégas: đầu hội thoại dùng động từ <b>giống đực</b> (“ajudá-lo”). Ngay khi bà nhắc đến chiếc váy (<i>vestido</i>), câu sau chuyển sang tính từ <b>giống cái</b> (“segura”) — nó đã <b>ngầm đoán giới tính</b> người dùng. Không ai bảo nó làm vậy.</p>
+<div class="note"><b>Hệ quả thực dụng</b>Cách bạn viết prompt cũng đang nói cho model biết <b>bạn là ai</b> — đó là lý do <b>persona và ngữ cảnh</b> trong prompt rất đáng giá.</div>
+
+<h3>Bốn cách chạm vào LLM: tiện bao nhiêu, kiểm soát bấy nhiêu</h3>
+<table>
+  <tr><th style="width:180px">Cách</th><th>Đặc điểm</th><th style="width:170px">Mức kiểm soát</th></tr>
+  <tr><td><b>Chat app</b></td><td>ChatGPT · Claude · Kimi — nhanh nhất, không cần code</td><td>Thấp nhất</td></tr>
+  <tr><td><b>Coding assistant</b></td><td>Cursor · Copilot — AI ngồi trong IDE</td><td>Trung bình thấp</td></tr>
+  <tr style="background:var(--brand-soft)"><td><b>API</b> <span class="pill b">học hôm nay</span></td><td>Gọi model bằng code</td><td>Trung bình cao</td></tr>
+  <tr><td><b>Self-host</b></td><td>Open-weight · Kimi K3 · Llama — kiểm soát dữ liệu tuyệt đối</td><td>Cao nhất</td></tr>
+</table>
+
+<h2><span class="num">§4</span> &nbsp;Từ LLM đến AI Agent</h2>
+
+<h3>Chain-of-Thought — chỉ thêm “giấy nháp”, từ sai thành đúng</h3>
+<p class="sub">Bài toán: <i>“Có 5 quả bóng tennis. Mua thêm 2 hộp, mỗi hộp 3 quả. Hỏi tổng cộng bao nhiêu quả?”</i></p>
+<div class="vs">
+  <div class="lbad"><h4>✗ Không có nháp</h4><p>Model đọc câu hỏi → bật ra đáp án ngay: <b>“Đáp án là 27 quả.”</b> — SAI</p></div>
+  <div class="lgood"><h4>✓ Có giấy nháp — “hãy nghĩ từng bước”</h4><p>“Bắt đầu có 5 quả. Mỗi hộp 3 quả × 2 hộp = 6 quả. 5 + 6 = 11.” — <b>ĐÚNG</b></p></div>
+</div>
+<p class="sub">Cùng một model, cùng một câu hỏi — cho nó được <b>viết nháp từng bước</b>, bản chất suy luận lộ ra. Đây là <b>mầm của các reasoning model</b> (o1, R1…) và của test-time compute.</p>
+
+<h3>LLM đứng một mình chưa làm được gì nhiều</h3>
+<div class="vs">
+  <div class="lbad">
+    <h4>Prompt tĩnh — một lượt hỏi đáp</h4>
+    <p><code>Prompt → LLM → Response</code></p>
+    <ul><li>✗ Không dữ liệu mới</li><li>✗ Không hành động ngoài đời</li><li>✗ Không nhớ gì sau câu trả lời</li></ul>
+  </div>
+  <div class="lgood">
+    <h4>Lớp Adaptation bao quanh bộ não</h4>
+    <ul><li><b>Context</b> — dữ liệu của mình</li><li><b>Tools</b> — search · API · database</li><li><b>Memory</b> — sổ tay ghi nhớ</li><li><b>Eval</b> — tự chấm lại chính mình</li><li><b>Guardrails</b> — lan can an toàn</li></ul>
+  </div>
+</div>
+<div class="note"><b>Câu chốt</b>Sản phẩm AI thật = <b>bộ não LLM + hệ thống bao quanh</b> — phần khó thường nằm ở <b>hệ thống</b>.</div>
+
+<h3>Bốn mức độ — mỗi bậc thêm một năng lực</h3>
+<div class="levels">
+  <div class="lv"><div class="n">LEVEL 0</div><div class="b"><strong>Bộ não suy luận</strong><p>LLM trần — không công cụ, không dữ liệu mới.</p></div></div>
+  <div class="lv"><div class="n">LEVEL 1</div><div class="b"><strong>Có kết nối</strong><p>+ tools: search web, đọc database, gọi API — <b>vượt khỏi bong bóng thời gian</b>.</p></div></div>
+  <div class="lv"><div class="n">LEVEL 2</div><div class="b"><strong>Biết lập kế hoạch</strong><p>+ tự chia mục tiêu thành nhiều bước, dùng nhiều tool nối tiếp, <b>tự kiểm tra kết quả từng bước</b>.</p></div></div>
+  <div class="lv"><div class="n">LEVEL 3</div><div class="b"><strong>Đội agent phối hợp</strong><p>+ nhiều agent chuyên biệt chia việc như một đội ngũ (multi-agent).</p></div></div>
+</div>
+<div class="acc"><b>Định nghĩa quan trọng</b>Agent <b>không phải “một loại model khác”</b> — đó là <b>LLM được đặt vào vòng làm việc có mục tiêu và hành động</b>.</div>
+
+<h3>Giải phẫu một agent — 5 bộ phận là một vòng lặp</h3>
+<div class="flow">
+  <span class="step"><b>①</b> Goal<small>mục tiêu cần đạt</small></span><span class="arw">→</span>
+  <span class="step"><b>②</b> Reasoning<small>bộ não LLM chia bước</small></span><span class="arw">→</span>
+  <span class="step"><b>③</b> Tools<small>search · API · database · code</small></span><span class="arw">→</span>
+  <span class="step"><b>④</b> Action<small>hành động ra đời thật</small></span><span class="arw">↺</span>
+  <span class="step">Memory<small>sổ tay ghi/đọc các bước</small></span>
+</div>
+<p class="sub"><b>Agent = Goal + Reasoning + Tools + Memory + Action</b> — chạy thành vòng lặp cho tới khi xong việc.</p>
+
+<h3>Voyager — agent tự xây thư viện kỹ năng</h3>
+<div class="flow">
+  <span class="step">GPT-4 · bộ não</span><span class="arw">→</span>
+  <span class="step">Viết code kỹ năng mới</span><span class="arw">→</span>
+  <span class="step">Chạy trong Minecraft<small>có feedback thật</small></span><span class="arw">→ Pass/Fail →</span>
+  <span class="step">Thư viện kỹ năng<small>đạt → cất vào; fail → sửa, làm lại</small></span>
+</div>
+<p class="sub">Task mới → truy xuất <b>top-5 skill liên quan</b> → làm nhanh hơn, ít sai hơn. Thư viện lớn dần: Mine Wood Log → Craft Sword → Craft Furnace → Build Shelter → Hunt Cow → …</p>
+<div class="ok"><b>Câu chốt</b>Agent giỏi không chỉ vì bộ não to — vì nó <b>tích lũy kỹ năng thành thư viện và tái sử dụng</b>.</div>
+
+<h2><span class="num">§5</span> &nbsp;Landscape: model hôm nay</h2>
+<p class="sub">Giá rơi, năng lực hội tụ, và cuộc đua đang diễn ra.</p>
+
+<div class="stats">
+  <div class="stat"><div class="n">~10×</div><div class="l">Giá rơi mỗi năm<br>cùng một mức năng lực</div></div>
+  <div class="stat"><div class="n">33% → ~81%</div><div class="l">SWE-bench Verified<br>chỉ trong 20 tháng</div></div>
+  <div class="stat"><div class="n">Hội tụ</div><div class="l">Model mở đang bắt kịp model đóng</div></div>
+</div>
+<div class="note"><b>Hai câu chốt</b>“Việc năm ngoái phải dùng model đắt nhất — năm nay model rẻ đã làm được.”<br>“Không còn một model bỏ xa phần còn lại — <b>chọn model là bài toán phương pháp, không phải bài toán nhớ tên</b>.”</div>
+
+<h3>Kiến trúc từ GPT-3 đến nay: cỗ máy vẫn vậy, cách nuôi đã đổi</h3>
+<p class="sub">Lõi Transformer <b>không đổi từ 2017</b> — như động cơ đốt trong: piston vẫn là piston, nhưng mọi thứ xung quanh được tối ưu điên cuồng.</p>
+<div class="vs">
+  <div class="lgood">
+    <h4>Cái gì ĐI LÊN</h4>
+    <ul>
+      <li>👁 <b>Cách đánh số ghế khôn hơn (RoPE)</b> — nhớ được câu dài mà không lẫn</li>
+      <li>📓 <b>Sổ ghi chú dùng chung (GQA/MLA)</b> — đọc context dài rẻ đi nhiều lần</li>
+      <li>🏥 <b>Bệnh viện đa khoa (MoE)</b> — 175 tỷ → 2.800 tỷ tham số, mỗi ca chỉ gọi vài chuyên gia</li>
+      <li>📚 <b>Bàn làm việc</b> — từ 2–3 trang (2K) tới 4–5 cuốn sách (1M token)</li>
+    </ul>
+  </div>
+  <div class="lbad">
+    <h4>Cái gì CHẠM TRẦN → đua chuyển hướng</h4>
+    <ul>
+      <li>📕 <b>Đọc hết sách trong thư viện (~2024)</b> — “data wall”: “to hơn + đọc nhiều hơn” không còn thắng chắc</li>
+      <li>✍️ <b>Trận đua mới ①</b> — luyện đề tự chấm (RLVR): toán có đáp số, code có test</li>
+      <li>🧠 <b>Trận đua mới ②</b> — được nghĩ kỹ (test-time compute): cùng một model, cho nháp và thời gian thì khôn hơn hẳn</li>
+    </ul>
+  </div>
+</div>
+<div class="acc"><b>Câu chốt</b>Cuộc cách mạng không phải thay động cơ — mà là: <b>nén dữ liệu hiệu quả hơn · luyện bằng bài tập tự chấm · cho model thời gian để nghĩ</b>.</div>
+
+<h3>Cuộc đua hiện tại (7/2026) — ba câu chuyện</h3>
+<table>
+  <tr><th style="width:170px">Model</th><th>Câu chuyện</th><th style="width:230px">Bài học</th></tr>
+  <tr><td><b>Claude Fable 5</b></td><td>Ra 9/6/2026, vượt mọi benchmark — <b>3 ngày sau bị Mỹ export-control tạm khóa toàn cầu</b>. Model khả dụng mạnh nhất hiện là Opus 4.8</td><td><b>Phụ thuộc một nhà cung cấp là một rủi ro</b></td></tr>
+  <tr><td><b>GPT-5.6</b></td><td>OpenAI (26/6/2026) ra 3 tầng rõ rệt: <b>Sol</b> (flagship, reasoning tối đa), <b>Terra</b> (rẻ một nửa), <b>Luna</b> (nhanh-rẻ)</td><td>Chính vendor cũng đang dạy mình <b>“chọn tầng theo việc”</b></td></tr>
+  <tr><td><b>Kimi K3</b></td><td>Moonshot (16/7/2026): 2.800 tỷ tham số MoE, context 1M, open-weight, giá chỉ $3/$15 — báo chí gọi <b>“cú sốc DeepSeek mới”</b></td><td><b>Mở đã bắt kịp đóng thật</b> — self-host không còn là chơi riêng</td></tr>
+</table>
+<div class="warn"><b>Lưu ý</b>Bản đồ này sẽ cũ trong vài tháng — thứ bền là <b>cách đọc bản đồ</b>: ai mạnh, ai rẻ, ai mở, ai bị khóa.</div>
+
+<h3>Multimodal — “token” không chỉ là chữ</h3>
+<p>Mọi thứ vừa học — token, context, attention — <b>không chỉ dùng cho chữ viết</b>. Người ta cắt ảnh thành mảnh nhỏ, cắt tiếng thành đoạn ngắn, rồi gọi chúng là “token” y như mảnh chữ và bày lên đúng cái bàn đó.</p>
+<div class="flow">
+  <span class="step">📄 văn bản → token</span>
+  <span class="step">🖼 ảnh → token</span>
+  <span class="step">🎧 audio → token</span>
+</div>
+<p class="sub">Bộ não bên trong <b>không đổi</b> — vẫn là cỗ máy đoán token tiếp theo. Chỉ khác là giờ nó “nhìn” được hình, “nghe” được tiếng.</p>
+
+<h2><span class="num">§6</span> &nbsp;Chọn model &amp; chi phí token</h2>
+
+<h3>Chọn model theo TẦNG, không chọn theo tên</h3>
+<table>
+  <tr><th style="width:230px">Tầng</th><th>Model</th><th>Dùng cho</th></tr>
+  <tr><td><b>Tầng 1 — Frontier đóng</b></td><td>Fable 5 · GPT-5.6 Sol · Opus 4.8</td><td>Đắt nhất — <b>chỉ trả cho việc thật sự khó</b>: suy luận nhiều bước, code phức tạp, tài liệu dài</td></tr>
+  <tr style="background:var(--ok-soft)"><td><b>Tầng 2 — Rẻ mà mạnh</b> <span class="pill o">★ thử trước</span></td><td>Sonnet 4.6 · Terra · Gemini 3.1 Pro · Kimi K3 · Haiku · Flash</td><td><b>Giải quyết đa số việc hằng ngày</b>: viết, code, phân tích, automation</td></tr>
+  <tr><td><b>Tầng 3 — Self-host / siêu rẻ</b></td><td>Kimi K3 open-weight · DeepSeek · Qwen</td><td>Khi cần <b>kiểm soát dữ liệu</b> hoặc <b>chi phí ở quy mô lớn</b></td></tr>
+</table>
+<div class="bad"><b>Hai lỗi đối xứng</b>✗ Việc đơn giản mà gọi frontier → <b>phí tiền</b><br>✗ Việc khó mà cố dùng rẻ → <b>kết quả tệ</b><br>→ Bắt đầu từ model <b>đủ tốt và đủ rẻ</b>, chỉ nâng tầng khi kết quả thực sự chặn use case.</div>
+
+<h3>Ba trục làm model “giỏi hơn” — tham số chỉ là MỘT trong ba</h3>
+<table>
+  <tr><th style="width:210px">Trục</th><th>Bằng chứng</th></tr>
+  <tr><td><b>1 · Pretraining scale</b></td><td>Chinchilla (70B) <b>thắng cả</b> GPT-3 (175B), Gopher (280B), MT-NLG (530B) — vì được nuôi bằng dữ liệu <b>tương xứng đúng tỉ lệ</b>. <b>To không bằng cân đối.</b></td></tr>
+  <tr><td><b>2 · Post-training</b></td><td>CÙNG 175 tỷ tham số, chỉ khác có RLHF hay không: <b>15% → 85%</b> người đánh giá ưa thích hơn</td></tr>
+  <tr><td><b>3 · Test-time / agentic compute</b></td><td>CÙNG một model (Opus 4.8), chỉ đổi harness: SWE-bench Pro <b>69.2%</b> vs Verified <b>88.6%</b> — lệch tới <b>19 điểm</b></td></tr>
+</table>
+<p class="sub">Model “giỏi hơn” không chỉ vì <b>to hơn</b> — còn vì <b>cân đối hơn · được uốn nắn hơn · được nghĩ kỹ hơn</b>.</p>
+
+<h3>Token có giá: vé vào rẻ, vé ra đắt gấp 3–5 lần</h3>
+<div class="vs">
+  <div class="lgood"><h4>Vé vào — INPUT ×1</h4><p>Chữ <b>BẠN</b> gửi đi: prompt · system instruction · context · lịch sử chat.<br><b>Rẻ</b> — model chỉ cần đọc.</p></div>
+  <div class="lbad"><h4>Vé ra — OUTPUT ×3–5</h4><p>Chữ <b>MODEL</b> viết ra — nó phải tự sinh từng mảnh một, vừa chậm vừa tốn.<br><b>Đắt</b> — model phải “vắt óc”.</p></div>
+</div>
+<div class="bill">
+  <div class="row"><span>input &nbsp; 1.150 tok × $3 / 1M</span><span>$0.00345</span></div>
+  <div class="row"><span>output &nbsp; 200 tok × $15 / 1M</span><span>$0.00300</span></div>
+  <div class="row"><span>TỔNG</span><span>≈ $0.0065</span></div>
+</div>
+<div class="note"><b>Công thức</b><code>Input tokens + Output tokens = Chi phí mỗi lần gọi</code> — <b>kiểm soát output là núm vặn lớn nhất</b>. Đọc mục <code>usage</code> trong mỗi response.</div>
+
+<h3>Prompt dài = hóa đơn dài — mọi thứ cộng dồn mỗi lần gọi</h3>
+<table>
+  <tr><th style="width:180px"></th><th>Thành phần</th><th style="width:120px">Tổng</th></tr>
+  <tr><td><b>Lần gọi thứ 1</b></td><td>50 (câu hỏi) + 300 (system prompt) + 800 (context RAG) + 200 (output)</td><td><b>1.350 tok</b></td></tr>
+  <tr><td><b>Lần gọi thứ 10</b></td><td>50 + 300 + <b>1.200 (history tích lũy)</b> + 800 + 200</td><td><b>2.550 tok</b></td></tr>
+</table>
+<div class="warn"><b>Vì sao càng chat càng đắt</b>System prompt + context <b>trả tiền lại mỗi lần gọi</b>; mỗi lượt chat cũ được gửi lại toàn bộ.<br>→ Tối ưu chi phí = tối ưu prompt + context — <b>tóm tắt lại thay vì kéo theo cả lịch sử</b>.</div>
+
+<h3>Nhiều token hơn = vừa chậm hơn, vừa đắt hơn</h3>
+<p class="sub">Context dài hơn · output dài hơn · model lớn hơn — cả ba cùng quy về <b>một thứ</b>: số token model phải đọc và sinh ra. <b>Cái gì làm chậm cũng làm đắt.</b></p>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Ví dụ tiền thật</b> — chatbot 1.000 lượt/ngày ≈ 40 triệu token/tháng:</p>
+  <p style="margin:0"><b>Haiku $36</b> &nbsp;vs&nbsp; <b>Sonnet $135</b> — gấp <b>~4 lần</b>. Chọn sai tầng là trả đắt gấp 4 lần mỗi tháng.</p>
+</div>
+
+<h3>Cùng một prompt — ba model, ba phong cách</h3>
+<table>
+  <tr><th style="width:150px">Model</th><th>Phong cách</th><th>Hợp với</th></tr>
+  <tr><td><b>Claude</b></td><td>Consulting style — mạch lạc, thiên cấu trúc</td><td>Phân tích, viết tài liệu dài</td></tr>
+  <tr><td><b>GPT</b></td><td>Ngắn gọn, tự nhiên, linh hoạt</td><td>App/chat đa dụng, hệ sinh thái lớn</td></tr>
+  <tr><td><b>Gemini / Kimi</b></td><td>Mạnh context dài, bám nhiều tài liệu</td><td>Workflow nhiều file, cửa sổ 1M token</td></tr>
+</table>
+<p class="sub">Chọn model không chỉ là chọn giá và điểm số — <b>còn là chọn phong cách</b>.</p>
+
+<h3>Benchmark có đáng tin không? — tin vừa thôi</h3>
+<div class="grid g3">
+  <div class="card" style="margin:0"><h4>① Học vẹt đường tắt</h4><p class="sub" style="margin:0">Điểm cao có thể nhờ ăn gian dữ liệu (spurious cues)</p></div>
+  <div class="card" style="margin:0"><h4>② Đề thi bão hòa</h4><p class="sub" style="margin:0">SWE-bench Verified 33% → ~81% trong 20 tháng → sắp “hết khó” để phân biệt model</p></div>
+  <div class="card" style="margin:0"><h4>③ Học tủ đề (benchmaxxing)</h4><p class="sub" style="margin:0">Luyện đúng dạng đề để ăn điểm — điểm tăng không hẳn năng lực tăng</p></div>
+</div>
+<p class="sub">Ví dụ profile không phẳng (2023): GPT-4 đỗ Bar exam ở <b>top 10%</b> — nhưng Codeforces <b>dưới 5%</b>.</p>
+<div class="bad"><b>Câu chốt</b>Benchmark là <b>tín hiệu, không phải bằng chứng</b>. Chỉ có một bài test đáng tin hoàn toàn: <b>việc của chính bạn, trên dữ liệu của chính bạn</b>.</div>
+
+<h2><span class="num">§7</span> &nbsp;Gọi API lần đầu</h2>
+<p class="sub">Gọi API = <b>điều khiển một vòng next-token từ xa</b> — không phép màu, đúng cơ chế vừa học.</p>
+
+<div class="flow">
+  <span class="step"><b>①</b> Prompt<small>system + user + context</small></span><span class="arw">→</span>
+  <span class="step"><b>②</b> API call<small>gửi request tới provider</small></span><span class="arw">→</span>
+  <span class="step"><b>③</b> Token stream<small>model sinh từng mảnh</small></span><span class="arw">→</span>
+  <span class="step"><b>④</b> Response<small>nội dung + usage + lý do dừng</small></span>
+</div>
+<div class="note"><b>Luôn kiểm soát 3 thứ cùng lúc</b>chất lượng — độ trễ — chi phí.</div>
+
+<h3>Giải phẫu một prompt: bốn lớp xếp chồng</h3>
+<table>
+  <tr><th style="width:180px">Lớp</th><th>Nội dung</th><th style="width:250px">Ví dụ</th></tr>
+  <tr><td><b>1 · System instruction</b></td><td>“Lời dặn đầu ca”: model là ai, cư xử thế nào, không được làm gì</td><td><i>“Bạn là trợ lý y khoa, trả lời ngắn gọn, không chẩn đoán…”</i></td></tr>
+  <tr><td><b>2 · User input</b></td><td>Câu hỏi / yêu cầu của người dùng trong lượt này</td><td><i>“Tóm tắt báo cáo Q1 giúp mình”</i></td></tr>
+  <tr><td><b>3 · Context bổ sung</b></td><td>Tài liệu, lịch sử chat, dữ liệu tra sổ — phần bày lên “bàn làm việc”</td><td><i>“[đính kèm: bao_cao_q1.pdf — 3 đoạn liên quan]”</i></td></tr>
+  <tr><td><b>4 · Output mong muốn</b></td><td>Dạng kết quả: gạch đầu dòng? bảng? JSON? dài bao nhiêu?</td><td><i>“3 bullet + 1 rủi ro chính, tiếng Việt”</i></td></tr>
+</table>
+<p class="sub">Viết rõ cả 4 lớp = <b>đã làm tốt một nửa “prompt engineering”</b>.</p>
+
+<h3>Giải phẫu một API call</h3>
+<div class="grid g2">
+<div>
+<p style="margin:0 0 4px;font-size:13px;font-weight:700;color:var(--muted)">📤 REQUEST — gói thư gửi đi</p>
+<pre>POST api.openai.com/v1/chat/completions
+{
+  <span class="st">"model"</span>: <span class="st">"gpt-5.6-terra"</span>,        <span class="cm">// ① số tổng đài</span>
+  <span class="st">"messages"</span>: [                     <span class="cm">// ② 3 vai trò</span>
+    { <span class="st">"role"</span>: <span class="st">"system"</span>,
+      <span class="st">"content"</span>: <span class="st">"Bạn là trợ lý tài chính…"</span> },
+    { <span class="st">"role"</span>: <span class="st">"user"</span>,
+      <span class="st">"content"</span>: <span class="st">"Tóm tắt Q1: 3 bullet + 1 rủi ro."</span> }
+  ],
+  <span class="st">"max_tokens"</span>: <span class="nu">500</span>,                 <span class="cm">// ③ trần độ dài</span>
+  <span class="st">"temperature"</span>: <span class="nu">0</span>                   <span class="cm">// ④ độ "liều"</span>
+}</pre>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:13px;font-weight:700;color:var(--muted)">📥 RESPONSE — gói thư nhận về</p>
+<pre>{
+  <span class="st">"choices"</span>: [{
+    <span class="st">"message"</span>: { <span class="st">"role"</span>: <span class="st">"assistant"</span>,
+      <span class="st">"content"</span>: <span class="st">"• Doanh thu Q1 +12%…"</span> },  <span class="cm">// ⑤</span>
+    <span class="st">"finish_reason"</span>: <span class="st">"stop"</span>            <span class="cm">// ⑥</span>
+  }],
+  <span class="st">"usage"</span>: {                          <span class="cm">// ⑦ hóa đơn</span>
+    <span class="st">"prompt_tokens"</span>: <span class="nu">1150</span>,          <span class="cm">// vé vào</span>
+    <span class="st">"completion_tokens"</span>: <span class="nu">200</span>,       <span class="cm">// vé ra</span>
+    <span class="st">"total_tokens"</span>: <span class="nu">1350</span>
+  }
+}</pre>
+</div>
+</div>
+<p class="sub"><b>⑥ finish_reason:</b> <code>stop</code> = tự kết thúc | <code>length</code> = hết hạn mức | <code>tool_calls</code> = muốn gọi tool.</p>
+<div class="warn"><b>Thói quen tốt từ ngày đầu</b>Đọc <code>usage</code> mỗi lần gọi — đừng để cuối tháng mới giật mình nhìn hóa đơn.</div>
+
+<h3>Hai núm vặn chọn từ: temperature &amp; top_p</h3>
+<table>
+  <tr><th style="width:150px">Giá trị</th><th>Hành vi</th><th>Hợp với</th></tr>
+  <tr style="background:var(--ok-soft)"><td><b>T = 0</b> <span class="pill o">mặc định an toàn</span></td><td>Luôn chọn từ chắc nhất → ổn định, lặp lại</td><td>Code &amp; phân tích</td></tr>
+  <tr><td><b>T = 1</b></td><td>Cân bằng tự nhiên — vẫn ưu tiên từ hợp lý</td><td>Hội thoại thông thường</td></tr>
+  <tr><td><b>T = 2</b></td><td>Phân bố phẳng ra → đa dạng, “phiêu”, <b>dễ lạc đề</b></td><td>Brainstorm sáng tạo</td></tr>
+</table>
+<p class="sub"><b>top_p = 0.9</b>: giữ nhóm token có xác suất cộng dồn ≥ 90%, cắt đuôi dài rồi chuẩn hóa lại. Thường <b>chỉ vặn một trong hai</b> — temperature <b>hoặc</b> top_p.</p>
+<div class="bad"><b>Lưu ý quan trọng</b>Hai núm này <b>không làm model thông minh hơn</b> — chỉ đổi <b>cách chọn từ</b>, không thêm tri thức.</div>
+
+<h3>Chatbot = vòng lặp + trí nhớ; streaming = nhả chữ từng mảnh</h3>
+<div class="flow">
+  <span class="step">user: “kể chuyện cười”</span><span class="arw">→ ① nối vào history →</span>
+  <span class="step">HISTORY<small>mình tự giữ</small></span><span class="arw">→ ② gửi TOÀN BỘ →</span>
+  <span class="step">MODEL<small>stateless</small></span><span class="arw">→ ③ nối tiếp vào history</span>
+</div>
+<div class="acc"><b>Điểm dễ hiểu nhầm nhất</b>Model <b>không nhớ gì</b> giữa hai lần gọi — <b>“trí nhớ” là do MÌNH gửi lại history mỗi lần</b>.</div>
+<p class="sub"><b>Streaming</b> là bản chất next-token nhìn tận mắt: model đoán → nhả một mảnh → đoán tiếp. Giao diện “đang gõ” chỉ là <b>lộ trình của vòng lặp</b>.</p>
+
+<h3>Hai “số tổng đài” lớn</h3>
+<table>
+  <tr><th style="width:140px">Provider</th><th>Gọi</th><th>Bóc kết quả</th></tr>
+  <tr><td><b>OpenAI</b></td><td><code>client.chat.completions.create(...)</code></td><td><code>.choices[0].message.content</code></td></tr>
+  <tr><td><b>Anthropic</b></td><td><code>client.messages.create(...)</code></td><td><code>.content[0].text</code></td></tr>
+</table>
+<p class="sub">Cùng một logic: gửi <code>messages</code>, nhận <code>content</code> + <code>usage</code>. Đổi <code>base_url</code> là code chuyển sang model <b>self-host</b> gần như nguyên vẹn.</p>
+
+<h2><span class="num">§8</span> &nbsp;Tổng kết</h2>
+
+<h3>5 ý để mang về</h3>
+<div class="grid g2">
+  <div class="ok" style="margin:0"><b>1 · Bản chất</b>LLM = cỗ máy Transformer <b>đoán token tiếp theo</b> từ context — mọi thứ khác là hệ quả.</div>
+  <div class="ok" style="margin:0"><b>2 · Cách tạo ra</b>Từ cỗ máy đoán chữ thành trợ lý: pre-training → SFT → căn chỉnh → luyện đề tự chấm &amp; được nghĩ kỹ.</div>
+  <div class="ok" style="margin:0"><b>3 · Giới hạn bẩm sinh</b>Bong bóng thời gian · nói chắc như đúng rồi · bàn làm việc có hạn → <b>đừng tin benchmark, hãy tự test</b>.</div>
+  <div class="ok" style="margin:0"><b>4 · Chọn model</b>Theo <b>tầng theo việc</b>, kiểm soát 3 núm: chất lượng — độ trễ — chi phí.</div>
+</div>
+<div class="ok"><b>5 · Gọi API</b>Là <b>điều khiển một vòng next-token từ xa</b> — kèm một mức quyền truy cập nhất định vào model.</div>
+
+<div class="acc"><b>Trả lời câu hỏi đầu ngày</b><span style="font-size:15px">“Bên trong AI đang làm gì?” — <b>một vòng lặp đoán token, được nuôi bằng dữ liệu, đang chờ bạn điều khiển.</b></span></div>
+<div class="warn"><b>Một lời nhắc mang theo</b>Dữ liệu là <b>mạch sống</b> của model nhưng cũng là phần <b>kém minh bạch nhất</b>. Model nền là điểm đòn bẩy lớn — và cũng có thể là <b>điểm lỗi lan xuống mọi ứng dụng</b>. Evaluation, guardrails và system design <b>không bao giờ là phần phụ</b>.</div>
+
+<h3>Tài nguyên nên xem trước</h3>
+<div class="card">
+  <ul style="margin:0">
+    <li><b>3Blue1Brown</b> — <i>Transformers, the tech behind LLMs</i> · giải thích Transformer bằng hình động dễ hiểu nhất hiện nay</li>
+    <li><b>3Blue1Brown</b> — <i>Attention in transformers, step-by-step</i> · phần tiếp theo, đi sâu vào attention</li>
+    <li><b>Transformer Explainer</b> — chạy GPT-2 ngay trong trình duyệt: tự chỉnh temperature, xem next-token probs và attention map</li>
+    <li><b>Karpathy</b> — <i>nanoGPT</i> &amp; <i>State of GPT</i> · giải thích lại mọi thứ bằng code chạy được</li>
+  </ul>
+</div>
+<div class="note"><b>Hai câu chốt khi nghịch Transformer Explainer</b>“Temperature đổi <b>cách model CHỌN CHỮ</b> — chứ không đổi kiến thức model có.”<br>“Attention map cho thấy model <b>NHÌN VÀO ĐÂU</b> — chứ không chứng minh model hiểu.”</div>
+
+</section>
+
+<!-- ==================== TAB 2 ==================== -->
+<section class="panel" id="cheat">
+<button class="printbtn" onclick="window.print()">In cheat sheet</button>
+
+<div class="cheatgrid">
+<div>
+
+<h2>Thần chú</h2>
+<div class="card">
+  <p style="margin:0"><b>“Model chỉ đoán token tiếp theo — mọi thứ khác là hệ quả.”</b></p>
+</div>
+
+<h2>Phân tầng AI</h2>
+<div class="card">
+  <p style="margin:0 0 6px">AI ⊃ Machine Learning ⊃ Deep Learning ⊃ Generative AI ⊃ <b>LLM</b></p>
+  <dl class="kv">
+    <dt>Discriminative</dt><dd>Input → nhãn/số (spam, gian lận)</dd>
+    <dt>Generative</dt><dd>Prompt → nội dung mới</dd>
+    <dt>Agentic</dt><dd>Goal → Plan → Action</dd>
+  </dl>
+</div>
+
+<h2>Mốc lịch sử</h2>
+<table>
+  <tr><th>Năm</th><th>Sự kiện</th></tr>
+  <tr><td>1956</td><td>Dartmouth — “AI” ra đời</td></tr>
+  <tr><td>1969</td><td>Perceptrons — symbolic &amp; perceptron chạm trần</td></tr>
+  <tr><td>1973</td><td>Báo cáo Lighthill → cắt tiền</td></tr>
+  <tr><td>74–80</td><td><b>Mùa đông 1</b> — bùng nổ tổ hợp</td></tr>
+  <tr><td>1980</td><td>Expert systems — miền hẹp, luật tay</td></tr>
+  <tr><td>~87</td><td><b>Mùa đông 2</b> — luật khó cập nhật</td></tr>
+  <tr><td>2009</td><td>ImageNet — 14tr ảnh, dữ liệu &gt; thuật toán</td></tr>
+  <tr><td>2012</td><td>AlexNet — data + deep + GPU</td></tr>
+  <tr><td>2016</td><td>AlphaGo — nước đi 37, self-play</td></tr>
+  <tr><td>2017</td><td><b>Transformer</b></td></tr>
+  <tr><td>2022</td><td>ChatGPT — đại chúng hóa</td></tr>
+</table>
+
+<h2>RNN → Transformer</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Nút thắt RNN:</b> ① nén cả câu vào 1 vector → quên chữ đầu · ② tuần tự → không song song</p>
+  <p style="margin:0"><b>Transformer:</b> cho mọi từ <b>nhìn nhau cùng lúc</b></p>
+</div>
+
+<h2>Token &amp; Context</h2>
+<div class="card">
+  <dl class="kv">
+    <dt>Token</dt><dd>mảnh chữ, không phải từ</dd>
+    <dt>"Hello world"</dt><dd>≈ 2 token</dd>
+    <dt>"Xin chào"</dt><dd>≈ 3–4 token</dd>
+    <dt>Tốn token</dt><dd>tiếng Việt, code, JSON &gt; tiếng Anh</dd>
+    <dt>128K</dt><dd>≈ sách 300 trang</dd>
+    <dt>1M</dt><dd>≈ 4–5 cuốn sách</dd>
+  </dl>
+  <p style="margin:8px 0 0"><b>Lost in the middle:</b> đồ giữa bàn dễ bị bỏ sót</p>
+</div>
+
+<h2>Attention</h2>
+<div class="card">
+  <p style="margin:0 0 6px">Mỗi token: quay đầu nhìn lại → chấm điểm liên quan → khóa nghĩa theo ngữ cảnh. Đây là <b>chữ T trong GPT</b>.</p>
+  <p style="margin:0 0 6px"><b>Multi-head:</b> nhiều “con mắt” chuyên môn (đại từ · không gian · cú pháp) nhìn song song</p>
+  <p style="margin:0"><b>3 mẹo quản context:</b> ① quan trọng đặt đầu–cuối · ② giữ bàn sạch · ③ cho tra sổ (RAG) thay vì bắt nhớ</p>
+</div>
+
+<h2>Cách tạo model</h2>
+<div class="card">
+  <ol style="margin:0">
+    <li><b>Pre-training</b> — đọc cả thư viện</li>
+    <li><b>SFT</b> — được chỉ cách trả lời</li>
+    <li><b>RLHF/DPO</b> — được uốn nắn</li>
+    <li><b>Luyện suy luận</b> (RLVR, ~2025) — giải đề tự chấm</li>
+  </ol>
+  <p style="margin:8px 0 0"><b>RLHF 3 bước:</b> viết nhiều đáp án → người xếp hạng (reward model) → tăng xác suất câu điểm cao</p>
+</div>
+
+<h2>Model có “hiểu”?</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Othello-GPT:</b> chỉ cho chuỗi nước đi, không luật, không bàn cờ → đi sai luật chỉ <b>~0.01%</b></p>
+  <p style="margin:0"><b>64 probe</b> đọc được bàn cờ trong activation; <b>lật quân trong “đầu” → nước đi đổi theo</b> ⇒ nó thật sự dùng world model</p>
+</div>
+
+</div>
+<div>
+
+<h2>3 giới hạn bẩm sinh</h2>
+<div class="card">
+  <ul style="margin:0">
+    <li><b>Bong bóng thời gian</b> — knowledge cutoff</li>
+    <li><b>Nói chắc như đúng rồi</b> — hallucination</li>
+    <li><b>Bàn làm việc có hạn</b> — context trần</li>
+  </ul>
+  <p style="margin:8px 0 0">→ Cần prompt tốt, context sạch, RAG, tools, <b>luôn kiểm chứng</b></p>
+</div>
+
+<h2>Học vẹt đường tắt</h2>
+<table>
+  <tr><th>Bài toán</th><th>Model thực chất học</th></tr>
+  <tr><td>Spam</td><td>đếm số hyperlink</td></tr>
+  <tr><td>Chủ quan/khách quan</td><td>có phải trích từ film review</td></tr>
+  <tr><td>MNLI</td><td>có động từ phủ định</td></tr>
+</table>
+
+<h2>4 cách chạm vào LLM</h2>
+<div class="card">
+  <p style="margin:0">Chat app → Coding assistant → <b>API</b> → Self-host<br>
+  <span style="color:var(--muted)">tiện dần giảm ← → kiểm soát tăng dần</span></p>
+</div>
+
+<h2>LLM → Agent</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>CoT:</b> chỉ thêm “giấy nháp” → 27 (sai) thành 11 (đúng)</p>
+  <p style="margin:0 0 6px"><b>Lớp adaptation:</b> Context · Tools · Memory · Eval · Guardrails</p>
+  <p style="margin:0 0 6px"><b>4 level:</b> L0 LLM trần → L1 có tools → L2 biết lập kế hoạch → L3 đội agent</p>
+  <p style="margin:0"><b>Agent = Goal + Reasoning + Tools + Memory + Action</b> (vòng lặp)</p>
+</div>
+
+<h2>Landscape</h2>
+<div class="card">
+  <dl class="kv">
+    <dt>~10×/năm</dt><dd>giá rơi cùng mức năng lực</dd>
+    <dt>33→81%</dt><dd>SWE-bench Verified, 20 tháng</dd>
+    <dt>Hội tụ</dt><dd>model mở bắt kịp model đóng</dd>
+  </dl>
+  <p style="margin:8px 0 0"><b>Đi lên:</b> RoPE · GQA/MLA · MoE · context 1M<br>
+  <b>Chạm trần:</b> data wall (~2024) → đua mới: RLVR + test-time compute</p>
+</div>
+
+<h2>Chọn model theo TẦNG</h2>
+<table>
+  <tr><th>Tầng</th><th>Dùng cho</th></tr>
+  <tr><td>1 · Frontier đóng</td><td>Việc thật sự khó</td></tr>
+  <tr><td><b>2 · Rẻ mà mạnh ★</b></td><td><b>Thử trước — đa số việc</b></td></tr>
+  <tr><td>3 · Self-host</td><td>Kiểm soát dữ liệu / chi phí lớn</td></tr>
+</table>
+<p style="margin:2px 0 0">✗ việc dễ gọi frontier = phí tiền · ✗ việc khó dùng rẻ = kết quả tệ</p>
+
+<h2>3 trục “giỏi hơn”</h2>
+<div class="card">
+  <ol style="margin:0">
+    <li><b>Pretraining scale</b> — Chinchilla 70B thắng 530B (cân đối &gt; to)</li>
+    <li><b>Post-training</b> — cùng 175B, RLHF: 15% → 85% ưa thích</li>
+    <li><b>Test-time compute</b> — cùng model, đổi harness: lệch 19 điểm</li>
+  </ol>
+</div>
+
+<h2>Token economy</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Input ×1</b> (model đọc) · <b>Output ×3–5</b> (model vắt óc)</p>
+  <p style="margin:0 0 6px"><code>Input tok + Output tok = chi phí mỗi lần gọi</code></p>
+  <p style="margin:0 0 6px"><b>Càng chat càng đắt:</b> system prompt + history gửi lại <b>mỗi lần</b> (1.350 → 2.550 tok)</p>
+  <p style="margin:0"><b>Tiền thật:</b> 40tr tok/tháng — Haiku $36 vs Sonnet $135 (~4×)</p>
+</div>
+
+<h2>4 lớp của prompt</h2>
+<div class="card">
+  <ol style="margin:0">
+    <li><b>System instruction</b> — model là ai</li>
+    <li><b>User input</b> — yêu cầu lượt này</li>
+    <li><b>Context bổ sung</b> — tài liệu, history, RAG</li>
+    <li><b>Output mong muốn</b> — format, độ dài</li>
+  </ol>
+</div>
+
+<h2>API call</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Request:</b> model · messages (system/user/assistant) · max_tokens · temperature</p>
+  <p style="margin:0 0 6px"><b>Response:</b> choices[0].message.content · finish_reason · <b>usage</b></p>
+  <p style="margin:0"><b>finish_reason:</b> stop | length | tool_calls</p>
+</div>
+
+<h2>temperature &amp; top_p</h2>
+<table>
+  <tr><th>T</th><th>Hành vi</th></tr>
+  <tr><td><b>0 ★</b></td><td>Ổn định — code, phân tích</td></tr>
+  <tr><td>1</td><td>Cân bằng tự nhiên</td></tr>
+  <tr><td>2</td><td>Phiêu, dễ lạc đề</td></tr>
+</table>
+<p style="margin:2px 0 0">top_p=0.9: giữ nhóm cộng dồn ≥90%. Chỉ vặn <b>một</b> trong hai.<br><b>Không làm model thông minh hơn — chỉ đổi cách chọn từ.</b></p>
+
+<h2>Chatbot &amp; streaming</h2>
+<div class="card">
+  <p style="margin:0"><b>Model stateless</b> — không nhớ gì giữa hai lần gọi. “Trí nhớ” = <b>MÌNH gửi lại history</b> mỗi lần.<br>
+  Streaming = next-token nhìn tận mắt.</p>
+</div>
+
+<h2>Benchmark: tin vừa thôi</h2>
+<div class="card">
+  <p style="margin:0">① học vẹt đường tắt · ② đề bão hòa · ③ benchmaxxing<br>
+  GPT-4: Bar exam top 10% nhưng Codeforces &lt;5%<br>
+  → <b>Chỉ test trên việc &amp; dữ liệu của chính bạn</b></p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ==================== TAB 3 ==================== -->
+<section class="panel" id="cards">
+<div class="fcbar">
+  <button class="fbtn on" data-f="all">Tất cả</button>
+  <button class="fbtn" data-f="pic">Bức tranh &amp; Lịch sử</button>
+  <button class="fbtn" data-f="in">Bên trong LLM</button>
+  <button class="fbtn" data-f="agent">Agent &amp; Landscape</button>
+  <button class="fbtn" data-f="api">Chọn model &amp; API</button>
+  <span class="counter" id="cnt"></span>
+</div>
+<div class="fcgrid" id="fcgrid"></div>
+<p class="hint">Click vào thẻ để lật · Click lần nữa để úp lại</p>
+</section>
+
+</div>
+
+<script>
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); document.getElementById(b.dataset.t).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+const CARDS=[
+ ['pic','Thần chú xuyên suốt cả bài?','<b>“Model chỉ đoán token tiếp theo — mọi thứ khác là hệ quả.”</b>'],
+ ['pic','Thứ tự lồng nhau từ rộng đến hẹp?','<b>AI</b> ⊃ <b>Machine Learning</b> ⊃ <b>Deep Learning</b> ⊃ <b>Generative AI</b> ⊃ <b>LLM</b><br>LLM không phải toàn bộ AI — nhưng là <b>tầng nền</b> của gần hết trải nghiệm AI hôm nay.'],
+ ['pic','Ba nhóm AI chính và luồng của mỗi nhóm?','<b>Discriminative:</b> Input → một nhãn/con số<br><b>Generative:</b> Prompt → nội dung mới<br><b>Agentic:</b> Goal → Plan → Action'],
+ ['pic','Deep Learning khác ML truyền thống ở đâu?','<b>Không cần con người thiết kế đặc trưng bằng tay</b> — mạng sâu TỰ học đặc trưng từ dữ liệu thô, từ đơn giản đến phức tạp.'],
+ ['pic','1956 — Dartmouth Workshop nêu ý tưởng gì?','Thuật ngữ <b>“Artificial Intelligence”</b> ra đời với ý tưởng: nếu trí thông minh <b>mô tả đủ rõ</b> thì máy móc cũng có thể mô phỏng lại.'],
+ ['pic','Nguyên nhân mùa đông AI lần 1?','<b>Bùng nổ tổ hợp</b>: bài toán nhỏ ít nhánh thì máy duyệt hết được → trông thông minh. Thế giới thật mỗi bước sinh quá nhiều nhánh. Báo cáo <b>Lighthill 1973</b> là cú hích cắt tiền.'],
+ ['pic','Expert system (1980) đặt lại vấn đề thế nào?','“Nếu AI chỉ giải thật tốt <b>một miền hẹp</b> thì sao?” — mã hóa tri thức chuyên gia thành luật, thôi theo đuổi trí tuệ tổng quát.'],
+ ['pic','Vì sao mùa đông AI lần 2?','Expert systems lộ trần: tri thức phải <b>nhập bằng tay</b>, luật càng nhiều càng khó cập nhật, <b>khó đứng vững trước ngoại lệ mới</b>.'],
+ ['pic','Bài học từ ImageNet (2009)?','Cả ngành chạy theo thuật toán khôn hơn; Fei-Fei Li xây <b>14 triệu ảnh gán nhãn tay</b>. Bài học: <b>đôi khi dữ liệu tốt hơn đánh bại thuật toán khôn hơn</b>.'],
+ ['pic','Ba thứ hội tụ làm nên AlexNet 2012?','<b>Dữ liệu</b> chưa từng có (ImageNet) + <b>kiến trúc sâu</b> (học dần cạnh → hình → bộ phận → đối tượng) + <b>GPU</b> đủ mạnh.'],
+ ['pic','AlphaGo học thế nào?','Học từ ~<b>150.000 ván</b> của chuyên gia để có trực giác khởi đầu → <b>tự chơi với chính mình hàng triệu lần</b> → tự mở rộng không gian chiến lược (nước đi 37).'],
+ ['pic','Hai nút thắt của RNN?','① Nén cả câu vào <b>MỘT vector</b> → câu dài thì quên chữ đầu (cổ chai).<br>② Tuần tự từng bước → <b>không song song được</b>, khó scale.'],
+ ['pic','Vì sao Transformer thắng?','Không phải phép màu — nó <b>tháo đúng nút thắt của RNN</b>: cho <b>mọi từ nhìn nhau cùng lúc</b> thay vì đi tuần tự.'],
+
+ ['in','LLM là gì — định nghĩa đúng?','Mô hình ngôn ngữ rất lớn (thường là Transformer), luyện trên <b>hàng nghìn tỷ mảnh chữ</b> để đoán mảnh chữ tiếp theo. Là <b>bộ não nền dùng chung</b> — chatbot chỉ là <b>lớp áo bên ngoài</b>.'],
+ ['in','Đầu ra của Transformer luôn là gì?','Một <b>phân bố xác suất</b> trên MỌI từ trong từ vựng (“land” 22%, “forest” 9%…), rồi chọn theo xác suất đó.'],
+ ['in','Vòng lặp sinh văn bản?','<code>predict → append → rerun</code> — mỗi token mới được nối vào ngữ cảnh, rồi model <b>chạy lại từ đầu</b>.'],
+ ['in','Token là gì? Cái gì tốn token hơn?','<b>Mảnh chữ</b>, không phải từ nguyên vẹn — dấu câu và khoảng trắng cũng là mảnh.<br>“Hello world” ≈ 2 tok; “Xin chào” ≈ 3–4 tok.<br><b>Tiếng Việt, code, JSON tốn token hơn tiếng Anh.</b>'],
+ ['in','Context — quy đổi và cạm bẫy?','<b>128K ≈ sách 300 trang</b>; <b>1M ≈ 4–5 cuốn sách</b>.<br>Bẫy: <b>đồ ở giữa bàn dễ bị bỏ sót</b> (lost in the middle). Context dài = tốn tiền + chậm.'],
+ ['in','Attention làm ba việc gì?','① <b>Quay đầu nhìn lại</b> các token trước · ② <b>Chấm điểm mức độ liên quan</b> · ③ <b>Khóa nghĩa theo ngữ cảnh</b>. Đây là <b>chữ T trong GPT</b>.'],
+ ['in','Ví dụ “Lan bỏ quyển sách vào túi vì nó quá dày”?','Để hiểu <b>“nó”</b>, model so khớp với <b>TẤT CẢ</b> token trước, không chỉ token liền kề → trọng số hướng mạnh về <b>“quyển” (0.32) + “sách” (0.28)</b>, không phải “túi” (0.10).'],
+ ['in','Convolution khác Attention thế nào?','<b>Convolution:</b> cửa sổ nhỏ (vd 3 từ) → nhanh nhưng <b>mù xa</b>, liên hệ xa bị cắt.<br><b>Attention:</b> mọi từ trong tầm nhìn → đổi tốc độ lấy <b>khả năng giữ ngữ cảnh dài</b>.'],
+ ['in','Multi-head attention là gì?','Nhiều “con mắt” chuyên môn nhìn cùng một câu song song: <b>con mắt đại từ</b> · <b>không gian</b> · <b>cú pháp</b>. Một con mắt một góc — nhiều con mắt mới thành “hiểu ngữ cảnh”.'],
+ ['in','3 mẹo quản context = quản sự chú ý?','① Đặt điều quan trọng <b>đầu–cuối</b>, đừng chôn giữa · ② <b>Giữ bàn sạch</b> (context rác = attention rác) · ③ <b>Cho tra sổ (RAG)</b> thay vì bắt nhớ.'],
+ ['in','Tham số là gì? Bạn chỉnh được không?','Các con số cố định model học được — như <b>khớp nối thần kinh</b>. <b>Không chỉnh được khi dùng</b> (đóng gói trong file weights); bạn chỉ chỉnh <b>context</b> và <b>núm vặn lúc gọi</b>.'],
+ ['in','Dense vs MoE — ẩn dụ?','<b>GPT-3 175 tỷ (dense)</b> = “bác sĩ đa năng”, mọi token đi qua toàn bộ khớp nối.<br><b>Kimi K3 2.800 tỷ (MoE)</b> = “bệnh viện đa khoa”, mỗi token chỉ gọi vài chuyên gia → lớn gấp 16× mà chi phí mỗi ca gần như không đổi.'],
+ ['in','4 bước tạo ra một LLM?','① <b>Pre-training</b> (đọc cả thư viện) → ② <b>SFT</b> (được chỉ cách trả lời) → ③ <b>RLHF/DPO</b> (được uốn nắn) → ④ <b>Luyện suy luận</b> RLVR (giải đề tự chấm, ~2025)'],
+ ['in','Vì sao cần bước ②③④?','“<b>Đọc vạn cuốn sách chưa chắc biết trả lời phỏng vấn</b>.” Pre-training cho kiến thức, nhưng phải uốn nắn mới thành trợ lý biết nghe lời.'],
+ ['in','RLHF ba bước?','① Model viết <b>nhiều câu trả lời</b> cho cùng câu hỏi → ② <b>Người chấm xếp hạng</b>, train <b>reward model</b> → ③ <b>Tăng xác suất</b> câu ghi điểm cao. Lặp hàng nghìn lần → helpful · harmless · honest.'],
+ ['in','Thí nghiệm Othello-GPT cho input gì?','<b>Chỉ chuỗi token biên bản ván cờ.</b> Không dạy luật, không thấy bàn cờ 8×8, không biết quân trắng–đen.'],
+ ['in','Kết quả Othello-GPT và cách kiểm chứng?','Đi sai luật chỉ <b>~0.01%</b> → phải có “bàn cờ ẩn”. Kiểm chứng: gắn <b>64 probe</b> đọc được trạng thái từng ô; <b>lật một quân trong “đầu” → nước đi đổi theo đúng luật</b> ⇒ nó thật sự dùng world model.'],
+ ['in','3 giới hạn bẩm sinh của LLM?','<b>Bong bóng thời gian</b> (knowledge cutoff) · <b>Nói chắc như đúng rồi</b> (hallucination) · <b>Bàn làm việc có hạn</b> (context trần).<br>Đây là <b>bản chất</b>, không phải lỗi tạm thời.'],
+ ['in','Ba ví dụ “học vẹt đường tắt”?','<b>Spam</b> → thực chất đếm số hyperlink · <b>Chủ quan/khách quan</b> → có phải trích từ film review · <b>MNLI</b> → có động từ phủ định.<br>⇒ Benchmark cao ≠ model hiểu đúng thứ bạn tưởng.'],
+ ['in','Model mô hình hóa cả BẠN — ví dụ?','ChatGPT nói tiếng Bồ: đầu dùng động từ <b>giống đực</b>; khi người dùng nhắc tới <b>chiếc váy</b>, câu sau chuyển sang tính từ <b>giống cái</b> — <b>tự đoán giới tính</b>, không ai bảo.<br>⇒ Persona và ngữ cảnh trong prompt rất đáng giá.'],
+ ['in','4 cách chạm vào LLM (tiện ← → kiểm soát)?','<b>Chat app</b> → <b>Coding assistant</b> → <b>API</b> → <b>Self-host</b>. Mức truy cập quyết định bạn <b>tùy biến được tới đâu</b>.'],
+
+ ['agent','Chain-of-Thought chứng minh điều gì?','Bài 5 bóng + 2 hộp × 3: không nháp → “27” <b>SAI</b>; cho nháp từng bước → “11” <b>ĐÚNG</b>.<br>Cùng model, cùng câu hỏi — <b>cho viết nháp thì bản chất suy luận lộ ra</b>. Đây là mầm của reasoning model.'],
+ ['agent','LLM đứng một mình thiếu gì?','✗ Không dữ liệu mới · ✗ Không hành động ngoài đời · ✗ Không nhớ gì sau câu trả lời.<br><b>Lớp adaptation:</b> Context · Tools · Memory · Eval · Guardrails.'],
+ ['agent','4 level từ LLM đến agent?','<b>L0</b> bộ não suy luận (LLM trần) → <b>L1</b> có tools (vượt bong bóng thời gian) → <b>L2</b> biết lập kế hoạch (tự chia bước, tự kiểm tra) → <b>L3</b> đội agent phối hợp (multi-agent)'],
+ ['agent','Agent là gì — định nghĩa chuẩn?','<b>Không phải “một loại model khác”</b> — đó là <b>LLM được đặt vào vòng làm việc có mục tiêu và hành động</b>.'],
+ ['agent','5 bộ phận của agent?','<b>Goal + Reasoning + Tools + Memory + Action</b> — chạy thành <b>vòng lặp</b> cho tới khi xong việc.'],
+ ['agent','Voyager hoạt động thế nào?','Bộ não viết code kỹ năng mới → chạy trong Minecraft có feedback thật → <b>Pass thì cất vào thư viện</b>, Fail thì sửa làm lại. Task mới → truy xuất <b>top-5 skill</b> liên quan.<br>⇒ Agent giỏi vì <b>tích lũy và tái sử dụng kỹ năng</b>.'],
+ ['agent','Ba con số của landscape?','Giá rơi <b>~10×/năm</b> cùng mức năng lực · SWE-bench Verified <b>33% → ~81%</b> trong 20 tháng · <b>Model mở đang bắt kịp model đóng</b>.'],
+ ['agent','Kiến trúc: cái gì đi lên?','<b>RoPE</b> (đánh số ghế khôn hơn) · <b>GQA/MLA</b> (sổ ghi chú dùng chung) · <b>MoE</b> (175 tỷ → 2.800 tỷ) · <b>context</b> 2K → 1M token.'],
+ ['agent','Kiến trúc: cái gì chạm trần?','<b>Data wall (~2024)</b> — đã đọc gần hết văn bản công khai → “to hơn + đọc nhiều hơn” không còn thắng chắc.<br>Đua mới: ① <b>RLVR</b> (luyện đề tự chấm) · ② <b>test-time compute</b> (được nghĩ kỹ).'],
+ ['agent','Ba câu chuyện của cuộc đua 7/2026?','<b>Fable 5</b> mạnh nhất nhưng bị export-control khóa → phụ thuộc một vendor là rủi ro.<br><b>GPT-5.6</b> ra 3 tầng Sol/Terra/Luna → vendor cũng dạy “chọn tầng theo việc”.<br><b>Kimi K3</b> mở ngang frontier → mở đã bắt kịp đóng.'],
+ ['agent','Multimodal liên quan gì tới token?','Ảnh cắt thành mảnh nhỏ, tiếng cắt thành đoạn ngắn — <b>gọi chúng là “token” y như mảnh chữ</b> và bày lên cùng cái bàn. <b>Bộ não không đổi</b>, vẫn là cỗ máy đoán token.'],
+
+ ['api','Chọn model theo tầng — 3 tầng?','<b>Tầng 1 Frontier đóng</b> (Fable 5, Sol, Opus 4.8) — chỉ cho việc thật khó.<br><b>★ Tầng 2 Rẻ mà mạnh</b> (Sonnet 4.6, Terra, Kimi K3, Haiku) — <b>thử trước</b>, đa số việc.<br><b>Tầng 3 Self-host</b> (Kimi K3 open, DeepSeek, Qwen) — kiểm soát dữ liệu/chi phí lớn.'],
+ ['api','Hai lỗi đối xứng khi chọn model?','✗ Việc đơn giản mà gọi frontier → <b>phí tiền</b><br>✗ Việc khó mà cố dùng rẻ → <b>kết quả tệ</b><br>⇒ Bắt đầu từ model <b>đủ tốt và đủ rẻ</b>, chỉ nâng tầng khi kết quả thực sự chặn use case.'],
+ ['api','Ba trục làm model “giỏi hơn”?','① <b>Pretraining scale</b> — Chinchilla 70B thắng cả 530B (cân đối &gt; to)<br>② <b>Post-training</b> — cùng 175B, RLHF đưa ưa thích từ 15% → 85%<br>③ <b>Test-time compute</b> — cùng model, đổi harness lệch <b>19 điểm</b>'],
+ ['api','Tỉ lệ giá input/output?','<b>Input ×1</b> (model chỉ đọc) · <b>Output ×3–5</b> (model phải tự sinh từng mảnh, vừa chậm vừa tốn).<br>⇒ <b>Kiểm soát output là núm vặn lớn nhất</b>.'],
+ ['api','Vì sao càng chat càng đắt?','<b>System prompt + context trả tiền lại MỖI LẦN gọi</b>, và mỗi lượt chat cũ được gửi lại toàn bộ.<br>Lần 1: 1.350 tok → Lần 10: <b>2.550 tok</b>.<br>⇒ Tóm tắt lại thay vì kéo theo cả lịch sử.'],
+ ['api','Ví dụ tiền thật của việc chọn sai tầng?','Chatbot 1.000 lượt/ngày ≈ 40 triệu token/tháng:<br><b>Haiku $36</b> vs <b>Sonnet $135</b> — gấp <b>~4 lần</b>. Slide chọn tầng không phải lý thuyết — nó là tiền thật.'],
+ ['api','4 bước của một API call?','① <b>Prompt</b> (system + user + context) → ② <b>API call</b> → ③ <b>Token stream</b> (sinh từng mảnh) → ④ <b>Response</b> (nội dung + usage + lý do dừng)'],
+ ['api','4 lớp của một prompt?','① <b>System instruction</b> (model là ai) · ② <b>User input</b> (yêu cầu lượt này) · ③ <b>Context bổ sung</b> (tài liệu, history, RAG) · ④ <b>Output mong muốn</b> (format, độ dài).<br>Viết rõ cả 4 = đã làm tốt <b>một nửa</b> prompt engineering.'],
+ ['api','Đọc gì trong response?','<code>choices[0].message.content</code> (câu trả lời) · <code>finish_reason</code> · <b><code>usage</code></b> (hóa đơn chi tiết).<br>Đọc <code>usage</code> mỗi lần gọi — <b>đừng để cuối tháng mới giật mình</b>.'],
+ ['api','Ba giá trị của finish_reason?','<code>stop</code> = tự kết thúc · <code>length</code> = hết hạn mức max_tokens · <code>tool_calls</code> = model muốn gọi tool.'],
+ ['api','temperature — 0, 1, 2 khác gì?','<b>T=0</b> luôn chọn từ chắc nhất → ổn định, hợp code &amp; phân tích (<b>mặc định an toàn</b>)<br><b>T=1</b> cân bằng tự nhiên<br><b>T=2</b> phân bố phẳng → đa dạng, “phiêu”, <b>dễ lạc đề</b>'],
+ ['api','top_p làm gì? Lưu ý quan trọng?','<b>top_p=0.9</b>: giữ nhóm token có xác suất <b>cộng dồn ≥ 90%</b>, cắt đuôi dài rồi chuẩn hóa lại. Thường chỉ vặn <b>một trong hai</b>.<br>⚠️ Cả hai <b>không làm model thông minh hơn</b> — chỉ đổi <b>cách chọn từ</b>.'],
+ ['api','“Trí nhớ” của chatbot đến từ đâu?','Model <b>stateless</b> — không nhớ gì giữa hai lần gọi.<br><b>“Trí nhớ” là do MÌNH gửi lại toàn bộ history mỗi lần gọi.</b>'],
+ ['api','Streaming thực chất là gì?','Chính là <b>bản chất next-token nhìn tận mắt</b>: model đoán → nhả một mảnh → đoán tiếp. Giao diện “đang gõ” chỉ là <b>lộ trình của vòng lặp</b>.'],
+ ['api','Cú pháp OpenAI vs Anthropic?','<b>OpenAI:</b> <code>client.chat.completions.create()</code> → <code>.choices[0].message.content</code><br><b>Anthropic:</b> <code>client.messages.create()</code> → <code>.content[0].text</code><br>Đổi <code>base_url</code> là chuyển sang self-host gần như nguyên vẹn.'],
+ ['api','Ba lý do đừng tin benchmark tuyệt đối?','① <b>Học vẹt đường tắt</b> (spurious cues) · ② <b>Đề bão hòa</b> (SWE-bench 33→81%) · ③ <b>Benchmaxxing</b> (luyện đúng dạng đề).<br>GPT-4: Bar exam <b>top 10%</b> nhưng Codeforces <b>&lt;5%</b>.'],
+ ['api','Bài test duy nhất đáng tin hoàn toàn?','<b>Việc của chính bạn, trên dữ liệu của chính bạn.</b> Benchmark là <b>tín hiệu, không phải bằng chứng</b>.'],
+ ['api','5 key takeaways của Day 1?','① LLM = cỗ máy đoán token tiếp theo · ② pre-training → SFT → căn chỉnh → luyện đề tự chấm · ③ 3 giới hạn bẩm sinh, đừng tin benchmark · ④ chọn model theo tầng, 3 núm chất lượng–độ trễ–chi phí · ⑤ gọi API = điều khiển vòng next-token từ xa.'],
+];
+const grid=document.getElementById('fcgrid'), cnt=document.getElementById('cnt');
+const NAMES={pic:'Bức tranh & Lịch sử',in:'Bên trong LLM',agent:'Agent & Landscape',api:'Chọn model & API'};
+function render(f){
+  const list=f==='all'?CARDS:CARDS.filter(c=>c[0]===f);
+  grid.innerHTML=list.map(c=>`<div class="fc"><div class="fci">
+      <div class="ff"><div class="tag2">${NAMES[c[0]]}</div><div class="q">${c[1]}</div></div>
+      <div class="fb"><div class="a">${c[2]}</div></div></div></div>`).join('');
+  cnt.textContent=list.length+' thẻ';
+  grid.querySelectorAll('.fc').forEach(el=>el.onclick=()=>el.classList.toggle('flip'));
+}
+document.querySelectorAll('.fbtn').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); render(b.dataset.f);
+});
+render('all');
+</script>
+</body>
+</html>

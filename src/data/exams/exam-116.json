@@ -1,0 +1,3114 @@
+{
+  "id": "exam-116",
+  "title": "AICB Tổng ôn Trắc nghiệm — Ngày 1 đến Ngày 14",
+  "description": "100 câu trắc nghiệm ôn tập toàn bộ Ngày 1 đến Ngày 14 (13 buổi): nền tảng LLM và attention, xác định bài toán và PAIR, ReAct và function calling, prompt engineering và tool calling, thiết kế sản phẩm AI, embedding và vector store, RAG pipeline, multi-agent với MCP và A2A, data pipeline và observability, guardrails và AI safety, cloud deployment, monitoring, và evaluation.",
+  "durationMinutes": 120,
+  "totalPoints": 100,
+  "passingScore": 70,
+  "disclaimer": "Đề do AI biên soạn từ slide bài giảng AICB, dùng để tự ôn tập. Không phải đề thi chính thức của chương trình.",
+  "course": "aicb",
+  "kind": "review",
+  "label": "Tổng ôn Ngày 1–14",
+  "questions": [
+    {
+      "id": "M-001",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Cơ chế attention làm gì với mỗi token?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Xử lý tuần tự từng token, mỗi bước phụ thuộc kết quả bước trước, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong mọi trường hợp"
+        },
+        {
+          "key": "B",
+          "text": "Quay đầu nhìn lại các token khác, chấm điểm mức liên quan, rồi khoá nghĩa theo ngữ cảnh — đây là chữ T trong GPT, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Nén toàn bộ câu thành một vector duy nhất rồi truyền sang bước sau, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Chọn ngẫu nhiên một nhóm token để tiết kiệm chi phí tính toán, nên bước kiểm tra phía sau không phát hiện ra, với mọi quy mô hệ thống"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Multi-head attention là nhiều 'con mắt' chuyên môn khác nhau — đại từ, không gian, cú pháp — nhìn song song. Phương án A và C mô tả đúng hai nút thắt của RNN mà Transformer sinh ra để giải quyết: nén cả câu vào một vector nên quên chữ đầu, và xử lý tuần tự nên không song song hoá được.",
+      "tags": [
+        "day1",
+        "attention"
+      ]
+    },
+    {
+      "id": "M-002",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Token được mô tả thế nào và tiếng Việt tốn token ra sao?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Token là một câu, nên đoạn văn 10 câu tốn đúng 10 token, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, với mọi quy mô hệ thống, theo đúng khuyến nghị, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+        },
+        {
+          "key": "B",
+          "text": "Token là một ký tự, nên số token bằng đúng số ký tự của văn bản, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, ở cả ba môi trường, dù cấu hình không đổi, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị, mà không cần sửa code"
+        },
+        {
+          "key": "C",
+          "text": "Token luôn tương ứng đúng một từ, nên tiếng Việt và tiếng Anh tốn như nhau, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả lúc tải thấp, mà không cần sửa code, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "D",
+          "text": "Token là mảnh chữ chứ không phải từ; 'Hello world' khoảng 2 token còn 'Xin chào' khoảng 3–4 token — tiếng Việt, code và JSON đều tốn token hơn tiếng Anh, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Hệ quả thực tế của việc tiếng Việt tốn token hơn: cùng một nội dung thì prompt tiếng Việt đắt hơn và chiếm nhiều context hơn. Mốc dung lượng để hình dung: 128K token khoảng một cuốn sách 300 trang, còn 1M token khoảng 4–5 cuốn.",
+      "tags": [
+        "day1",
+        "token"
+      ]
+    },
+    {
+      "id": "M-003",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Hiện tượng 'học vẹt đường tắt' được minh hoạ bằng những ví dụ nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bài toán spam thì model thực chất học đếm số hyperlink; phân loại chủ quan/khách quan thì học xem câu có phải trích từ review phim không; MNLI thì học xem có động từ phủ định hay không, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Model bị quá tải khi prompt dài nên bỏ qua phần giữa context, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi chỉ số kỹ thuật đều bình thường, với mọi quy mô hệ thống"
+        },
+        {
+          "key": "C",
+          "text": "Model học thuộc lòng toàn bộ tập huấn luyện nên không tổng quát hoá được, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Model chỉ trả lời được câu hỏi bằng tiếng Anh vì dữ liệu chủ yếu là tiếng Anh, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi đã bật đủ kiểm tra, với mọi quy mô hệ thống"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Đây là một trong ba lý do phải dè dặt với benchmark, cùng với đề bão hoà và benchmaxxing. Model đạt điểm cao mà không có năng lực tương ứng, nên chỉ có cách tự test trên việc và dữ liệu của chính bạn.",
+      "tags": [
+        "day1",
+        "benchmark"
+      ]
+    },
+    {
+      "id": "M-004",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Ba mẹo quản lý context được nêu ở Ngày 1 là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đặt thông tin quan trọng ở đầu và cuối; giữ 'bàn làm việc' sạch; và cho model tra sổ bằng RAG thay vì bắt nhớ, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Tăng context window, giảm số tài liệu, và nén bằng thuật toán, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong mọi trường hợp"
+        },
+        {
+          "key": "C",
+          "text": "Hạ temperature, giảm top_p, và cố định seed, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Chia prompt thành nhiều lần gọi, cache kết quả, và gộp lại ở cuối, trong khi ngân sách token vẫn còn dư nhiều, ở cả ba môi trường"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Ba mẹo này ứng với ba giới hạn bẩm sinh của LLM: bàn làm việc có hạn (context trần), nói chắc như đúng rồi (hallucination), và bong bóng thời gian (knowledge cutoff). Mẹo thứ ba chính là lý do RAG tồn tại.",
+      "tags": [
+        "day1",
+        "context"
+      ]
+    },
+    {
+      "id": "M-005",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "finish_reason trả về những giá trị nào và ý nghĩa là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "stop (model tự kết thúc), length (chạm giới hạn token nên bị cắt) và tool_calls (model muốn gọi tool), ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "success, error và pending — trạng thái của request, kể cả khi mọi chỉ số kỹ thuật đều bình thường, với mọi quy mô hệ thống"
+        },
+        {
+          "key": "C",
+          "text": "ok, warning và critical — mức độ nghiêm trọng của phản hồi, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "complete, partial và failed — mức độ hoàn thành của câu trả lời, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Giá trị length là triệu chứng kinh điển của việc quên chừa headroom trong ngân sách token — output bị cắt giữa chừng. Response của API còn có choices[0].message.content chứa nội dung và usage chứa số token đã dùng.",
+      "tags": [
+        "day1",
+        "api"
+      ]
+    },
+    {
+      "id": "M-006",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Chatbot 'nhớ' được hội thoại nhờ cơ chế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không có cơ chế nhớ nào trong model — model stateless, 'trí nhớ' là do MÌNH gửi lại toàn bộ history ở mỗi lần gọi, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Model được fine-tune liên tục theo từng cuộc hội thoại của người dùng, trong khi ngân sách token vẫn còn dư nhiều, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Model lưu hội thoại trong bộ nhớ nội bộ giữa các lần gọi API, kể cả khi mọi chỉ số kỹ thuật đều bình thường, với mọi quy mô hệ thống"
+        },
+        {
+          "key": "D",
+          "text": "Nhà cung cấp lưu lịch sử trên máy chủ và tự động nạp lại khi cần, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong mọi trường hợp"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Hệ quả trực tiếp: hội thoại càng dài càng đắt, vì system prompt cộng toàn bộ history bị gửi lại mỗi lượt — ví dụ từ 1.350 lên 2.550 token. Đây cũng là lý do phải có chiến lược cắt history, và là nền tảng cho toàn bộ phần memory ở Ngày 17.",
+      "tags": [
+        "day1",
+        "stateless"
+      ]
+    },
+    {
+      "id": "M-007",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Vì sao một model được huấn luyện cân đối lại thắng model lớn hơn nhiều?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì model nhỏ dễ fine-tune hơn nên chất lượng cuối cao hơn, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, dù cấu hình không đổi, trong mọi trường hợp"
+        },
+        {
+          "key": "B",
+          "text": "Vì tỷ lệ giữa số tham số và lượng dữ liệu phải cân đối — nghiên cứu Chinchilla cho thấy 70B huấn luyện đúng cách thắng 530B, tức cân đối quan trọng hơn to, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Vì model nhỏ chạy nhanh hơn nên kịp trả lời nhiều câu hơn trong cùng thời gian, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, trong mọi trường hợp"
+        },
+        {
+          "key": "D",
+          "text": "Vì model lớn luôn bị overfitting trên dữ liệu huấn luyện, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, với mọi quy mô hệ thống, trong mọi trường hợp"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Đây là một trong ba trục làm model giỏi hơn. Hai trục còn lại: post-training (cùng 175B, RLHF đưa tỷ lệ ưa thích từ 15% lên 85%) và test-time compute (cùng model, đổi harness thì lệch 19 điểm) — trục thứ ba chính là nền tảng của phần harness engineering ở Ngày 16.",
+      "tags": [
+        "day1",
+        "chinchilla"
+      ]
+    },
+    {
+      "id": "M-008",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Xu hướng giá và năng lực của LLM được mô tả thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Giá giữ nguyên còn năng lực tăng gấp đôi mỗi năm, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả lúc tải thấp"
+        },
+        {
+          "key": "B",
+          "text": "Giá rơi khoảng 10 lần mỗi năm ở cùng một mức năng lực; SWE-bench Verified đi từ 33% lên 81% trong 20 tháng; model mở đang bắt kịp model đóng, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Giá tăng theo năng lực nên chi phí luôn tỷ lệ thuận với chất lượng, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Năng lực đã chạm trần từ 2023 nên không còn cải thiện đáng kể, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Các hướng đi lên về kỹ thuật: RoPE, GQA/MLA, MoE và context 1M. Chỗ chạm trần là data wall khoảng 2024, nên cuộc đua chuyển sang RLVR và test-time compute. Hệ quả thực hành: đừng khoá kiến trúc vào một model cụ thể, vì 6 tháng nữa lựa chọn sẽ khác.",
+      "tags": [
+        "day1",
+        "landscape"
+      ]
+    },
+    {
+      "id": "M-009",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Human-Centered Design gồm năm bước nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Plan, do, check, act và standardize, trong mọi trường hợp, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, kể cả khi tài liệu nguồn còn nguyên vẹn, kể cả khi model đã cập nhật bản mới nhất, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, mà không cần sửa code"
+        },
+        {
+          "key": "B",
+          "text": "Research, design, build, test và launch, ở cả ba môi trường, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù người dùng không thấy gì bất thường, dù đội đã tuân thủ đúng quy trình nội bộ, trong suốt vòng đời dịch vụ, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "C",
+          "text": "Observation → Ideation → Prototype → Test → Iteration, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, trong khi log không ghi lại dấu hiệu nào, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        },
+        {
+          "key": "D",
+          "text": "Discover, define, develop, deliver và measure, kể cả lúc tải thấp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, dù prompt đã được viết lại rõ ràng hơn, dù cấu hình đã được rà soát lại một lượt, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Phương án D dựng trên Double Diamond nhưng gắn thêm measure — Double Diamond thật chỉ có bốn pha Discover, Define, Develop, Deliver. HCD nhấn vào việc bắt đầu từ quan sát người dùng thật chứ không từ ý tưởng, và kết thúc bằng vòng lặp chứ không phải một lần ra mắt.",
+      "tags": [
+        "day2",
+        "hcd"
+      ]
+    },
+    {
+      "id": "M-010",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Ba bước của PAIR là gì và chúng trả lời câu hỏi nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Prompt, Answer, Improve, Repeat — bốn bước tinh chỉnh prompt, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường"
+        },
+        {
+          "key": "B",
+          "text": "Bước 1 nhu cầu gặp thế mạnh AI, bước 2 chọn Automate hay Augment, bước 3 reward function và success criteria — ba bước này trả lời ba câu hỏi đầu, rồi tổng hợp thành quyết định Go / Not Yet / No-Go, ở cả ba môi trường, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, với mọi quy mô hệ thống"
+        },
+        {
+          "key": "C",
+          "text": "Plan, Act, Iterate, Review — bốn bước của vòng lặp phát triển, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ"
+        },
+        {
+          "key": "D",
+          "text": "Problem, Analysis, Implementation, Result — bốn giai đoạn của dự án, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả lúc tải thấp, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bốn câu hỏi của cả ngày: bài toán có thực sự cần AI không; cấp độ nào Rule/Workflow/Agent; Problem Statement đã đủ rõ để triển khai chưa; và Go/Not Yet/No-Go. PAIR trả lời ba câu đầu để tổng hợp ra câu thứ tư.",
+      "tags": [
+        "day2",
+        "pair"
+      ]
+    },
+    {
+      "id": "M-011",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Reframe trong PAIR chuyển câu hỏi ban đầu thành hai câu nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Từ 'Can we use AI to ___?' chuyển thành 'How might we solve ___?' và 'Can AI solve this in a unique way?', trong mọi trường hợp, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi, trong khi log không ghi lại dấu hiệu nào, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Chuyển thành 'ai là người dùng' và 'họ cần gì', kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, dù cấu hình không đổi, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, kể cả khi tài liệu nguồn còn nguyên vẹn"
+        },
+        {
+          "key": "C",
+          "text": "Chuyển thành 'model nào phù hợp' và 'chi phí bao nhiêu', kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, dù đội đã tuân thủ đúng quy trình nội bộ, dù cấu hình không đổi"
+        },
+        {
+          "key": "D",
+          "text": "Chuyển thành 'chúng ta có đủ dữ liệu không' và 'chúng ta có đủ ngân sách không', với mọi quy mô hệ thống, ở cả ba môi trường, theo đúng khuyến nghị, kể cả khi đã bật đủ kiểm tra, dù người dùng không thấy gì bất thường, trong suốt vòng đời dịch vụ"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Ý nghĩa của việc reframe: câu hỏi ban đầu đã đóng khung sẵn giải pháp là AI, nên nếu nhận nguyên khung đó mà làm thì có thể tối ưu rất giỏi cho một vấn đề không tồn tại. Câu thứ hai mới là câu kiểm tra AI có lợi thế thật hay không.",
+      "tags": [
+        "day2",
+        "reframe"
+      ]
+    },
+    {
+      "id": "M-012",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Tự động hoá theo pha được chia thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Pha 1 rule → Pha 2 workflow → Pha 3 agent, bắt buộc đi tuần tự, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        },
+        {
+          "key": "B",
+          "text": "Bật tự động toàn phần ngay từ đầu rồi giảm dần nếu có sự cố, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, dù người dùng không thấy gì bất thường, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "C",
+          "text": "Pha 1 thử nghiệm nội bộ → Pha 2 beta với 10% người dùng → Pha 3 ra mắt toàn bộ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "D",
+          "text": "Pha 1 AI gợi ý → Pha 2 AI viết nháp và người duyệt → Pha 3 tự động có giám sát; rủi ro giảm dần khi dữ liệu đánh giá tăng lên, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Nguyên tắc kèm theo rất rõ: không bật full-auto từ đầu. Đây là cách quản trị rủi ro khi bạn chưa có đủ dữ liệu để biết AI sai kiểu gì — và mỗi pha tạo ra chính dữ liệu đánh giá cần cho pha sau.",
+      "tags": [
+        "day2",
+        "pha"
+      ]
+    },
+    {
+      "id": "M-013",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Reward function được định nghĩa qua bốn ô nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Input, output, outcome và impact, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù cấu hình không đổi, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Precision, recall, F1 và accuracy, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, kể cả lúc tải thấp"
+        },
+        {
+          "key": "C",
+          "text": "Go, Not Yet, No-Go và Pending, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, với mọi quy mô hệ thống, trong mọi trường hợp"
+        },
+        {
+          "key": "D",
+          "text": "TP là nghẽn thật và gợi ý đúng; TN là đã có tài liệu và không can thiệp; FP là gợi ý SAI mà gửi thẳng; FN là đang kẹt mà bỏ sót, ở cả ba môi trường"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Bốn ô này buộc bạn định nghĩa 'đúng' và 'sai' bằng ngôn ngữ nghiệp vụ trước khi chọn metric. Từ đó mới quyết định được nghiêng về precision hay recall, vì chi phí của FP và FN không bằng nhau — báo cháy giả khác hẳn bỏ sót đám cháy.",
+      "tags": [
+        "day2",
+        "reward"
+      ]
+    },
+    {
+      "id": "M-014",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Bốn pattern HITL được nêu ở Ngày 2 là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Làm rõ ý định, minh bạch thông tin bằng trích dẫn, phê duyệt thủ công, và thiết lập ranh giới, ở cả ba môi trường, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn"
+        },
+        {
+          "key": "B",
+          "text": "Observe, orient, decide và act, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, với mọi quy mô hệ thống"
+        },
+        {
+          "key": "C",
+          "text": "Human-on-the-loop, human-in-the-loop, human-as-tiebreaker và full auto, dù cấu hình không đổi, kể cả lúc tải thấp, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, dù đội đã tuân thủ đúng quy trình nội bộ"
+        },
+        {
+          "key": "D",
+          "text": "Review, approve, reject và escalate, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong mọi trường hợp, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, với mọi quy mô hệ thống"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Bốn pattern này là câu trả lời cho ba loại lỗi AI: context errors (sai bối cảnh), fail states (không trả lời được), và background errors (lỗi ngầm thuộc nhóm unknown unknowns nên cần QA chủ động). Phương án C là các mô hình HITL của Ngày 11 — một cách phân loại khác.",
+      "tags": [
+        "day2",
+        "hitl"
+      ]
+    },
+    {
+      "id": "M-015",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Problem Statement gồm chín trường, chia thành hai nhóm nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Sáu trường về bài toán (Actor, Workflow, Bottleneck, Impact, Success Metric, Boundary) và ba quyết định về AI (điểm can thiệp, mức chọn, rủi ro và HITL), ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Nhóm bắt buộc và nhóm tuỳ chọn tuỳ theo quy mô dự án, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, trong suốt vòng đời dịch vụ, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Nhóm kỹ thuật và nhóm kinh doanh, mỗi nhóm bốn trường rưỡi, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, kể cả lúc tải thấp"
+        },
+        {
+          "key": "D",
+          "text": "Nhóm mô tả hiện trạng và nhóm mô tả tương lai mong muốn, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, với mọi quy mô hệ thống, ở cả ba môi trường"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Cách chia này phản ánh trình tự tư duy của cả ngày: phải mô tả xong bài toán bằng ngôn ngữ nghiệp vụ rồi mới ra ba quyết định kỹ thuật. Trường Boundary là chỗ chống anti-pattern 'No boundary' — không rõ phạm vi tự chủ và điểm cần con người.",
+      "tags": [
+        "day2",
+        "problem-statement"
+      ]
+    },
+    {
+      "id": "M-016",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Khi nào một bài toán nên dừng ở cấp Rule?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Khi số lượng người dùng còn ít nên chưa cần đầu tư, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp"
+        },
+        {
+          "key": "B",
+          "text": "Khi ngân sách dưới một mức nhất định nên không đủ tiền gọi model, ở cả ba môi trường, kể cả lúc tải thấp"
+        },
+        {
+          "key": "C",
+          "text": "Khi input ổn định, viết được if/else, cần đúng 100%, và có ràng buộc pháp lý chặt, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Khi đội chưa có kinh nghiệm với AI nên cần làm quen dần, với mọi quy mô hệ thống, trong mọi trường hợp"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Workflow hợp khi input đa dạng, output linh hoạt, đo được, và có người kiểm trước khi gửi. Agent chỉ cần khi nhiều bước, nhiều tool, tình huống đổi liên tục và phải tự quyết giữa các bước. Nguyên tắc: không bắt buộc nâng tuần tự, dừng ở cấp tối giản nhất đủ dùng.",
+      "tags": [
+        "day2",
+        "rule"
+      ]
+    },
+    {
+      "id": "M-017",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Bot, chatbot và agent khác nhau ở bốn chiều nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Khác ở số lượng người dùng mà mỗi loại phục vụ được, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Xử lý (if/else · sinh câu trả lời · plan-act-observe), Memory (gần như không · ngắn hạn · ngắn cộng dài hạn), Tool (hard-coded · theo chỉ định · chủ động chọn), và Cost/Risk (thấp nhất và dễ kiểm soát · trung bình có hallucination · cao vì chạy vòng lặp, thêm rủi ro tool misuse và loop), ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Khác ở ngôn ngữ lập trình, framework, hạ tầng và chi phí, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, ở cả ba môi trường, kể cả lúc tải thấp"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ khác ở model được dùng, còn kiến trúc như nhau, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong mọi trường hợp, ở cả ba môi trường"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bốn mức trên phổ: Rule-based Bot → LLM Chatbot → Reactive Agent → Autonomous Agent, với khả năng thích nghi, mức dùng tool, memory và rủi ro đều tăng dần. Chi phí và rủi ro tăng theo, nên phải có lý do rõ ràng mới đi lên mức cao hơn.",
+      "tags": [
+        "day3",
+        "spectrum"
+      ]
+    },
+    {
+      "id": "M-018",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Vì sao ReAct dạng text hay gặp lỗi 'Could not parse LLM output'?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì model không đủ lớn để tuân thủ định dạng được yêu cầu, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, với mọi quy mô hệ thống, trong mọi trường hợp"
+        },
+        {
+          "key": "B",
+          "text": "Vì Action là chuỗi text kiểu search[entity] được parse bằng regex tự viết — thiếu dấu hai chấm hay sai hoa thường là vỡ, và không có schema để validate trước, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Vì context window quá nhỏ nên phần Action bị cắt mất, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi đã bật đủ kiểm tra, dù cấu hình không đổi"
+        },
+        {
+          "key": "D",
+          "text": "Vì thư viện parser có bug chưa được vá trong các phiên bản cũ, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù cấu hình không đổi, trong mọi trường hợp"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Các biểu hiện khác của cùng vấn đề: model lặp lại Thought/Action cũ mà không tiến, và format drift khi đổi model hoặc đổi prompt. Function calling khắc phục bằng cách khai báo JSON Schema — model trả object có name và arguments, host validate được trước khi chạy.",
+      "tags": [
+        "day3",
+        "react-parse"
+      ]
+    },
+    {
+      "id": "M-019",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Structured Outputs (2024) đảm bảo điều gì và bằng cơ chế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đảm bảo model chọn đúng tool nhờ được fine-tune trên nhiều trajectory, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+        },
+        {
+          "key": "B",
+          "text": "Đảm bảo câu trả lời đúng sự thật nhờ đối chiếu với nguồn, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, trong suốt vòng đời dịch vụ, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "C",
+          "text": "Đảm bảo chi phí không vượt ngân sách nhờ giới hạn token, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, trong mọi trường hợp, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "D",
+          "text": "Đảm bảo output luôn parse được về mặt CÚ PHÁP: schema được biên dịch thành grammar dạng máy trạng thái, chỉ token hợp lệ mới được sinh — đạt 100% tuân thủ schema so với dưới 40% khi không có cơ chế này, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Đây là lớp cơ chế thứ hai. Lớp thứ nhất là fine-tuning trên hàng ngàn trajectory gọi tool, giúp model chọn đúng tool vì đúng lý do — đó là năng lực NGỮ NGHĨA, học được nhưng không có bảo đảm tuyệt đối. Hai lớp giải hai vấn đề khác nhau.",
+      "tags": [
+        "day3",
+        "structured-outputs"
+      ]
+    },
+    {
+      "id": "M-020",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "MCP giải quyết vấn đề gì về mặt số lượng tích hợp?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cho phép một agent gọi nhiều tool song song thay vì tuần tự, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, ở cả ba môi trường, kể cả lúc tải thấp"
+        },
+        {
+          "key": "B",
+          "text": "Function calling chuẩn hoá việc một model gọi một tool, nhưng mỗi vendor một định dạng nên glue code là M×N; MCP đưa về một giao thức chung nên còn M+N, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Nén schema của tool lại để tiết kiệm token trong prompt, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, dù cấu hình không đổi, trong mọi trường hợp"
+        },
+        {
+          "key": "D",
+          "text": "Giảm số lần gọi model từ N xuống 1 cho mỗi truy vấn, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, với mọi quy mô hệ thống, trong mọi trường hợp"
+        }
+      ],
+      "answer": "B",
+      "explanation": "MCP được công bố tháng 11/2024. Ẩn dụ thường dùng là cổng USB: agent học một chuẩn là cắm được vào mọi tool theo chuẩn đó. Lợi ích hai chiều — bên có service công bố một lần và tiếp cận mọi agent; bên làm agent học một chuẩn và dùng được mọi service.",
+      "tags": [
+        "day3",
+        "mcp"
+      ]
+    },
+    {
+      "id": "M-021",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Agent loop trong code mẫu kết thúc bằng gì khi vượt số vòng cho phép?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tự động gọi lại từ đầu với prompt đã được rút gọn, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Trả về một thông điệp fallback kiểu 'Reached max iterations' thay vì lặp vô hạn, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Chuyển sang một model lớn hơn để thử lại lần cuối, trong suốt vòng đời dịch vụ, trong mọi trường hợp"
+        },
+        {
+          "key": "D",
+          "text": "Ném ra exception để dừng toàn bộ tiến trình, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Vòng lặp chuẩn: gọi model, nếu output là final thì trả về, không thì chạy tool rồi nối kết quả vào messages và lặp. Giới hạn số vòng là guardrail cơ bản nhất, cùng với timeout mỗi tool, ngân sách token và chi phí, retry có kiểm soát, và fallback sang người thật.",
+      "tags": [
+        "day3",
+        "agent-loop"
+      ]
+    },
+    {
+      "id": "M-022",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Khi nào nên chuyển từ ReAct sang graph hoặc state machine?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Khi chi phí gọi model vượt ngân sách tháng, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi đã bật đủ kiểm tra, kể cả lúc tải thấp, mà không cần sửa code, dù prompt đã được viết lại rõ ràng hơn, kể cả khi tài liệu nguồn còn nguyên vẹn"
+        },
+        {
+          "key": "B",
+          "text": "Khi số người dùng vượt 1.000 mỗi ngày, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi dữ liệu đã được làm sạch kỹ, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, kể cả khi đã bật đủ kiểm tra"
+        },
+        {
+          "key": "C",
+          "text": "Ngay từ đầu, vì ReAct chỉ dùng để dạy học chứ không dùng thật, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù đội đã tuân thủ đúng quy trình nội bộ, trong mọi trường hợp"
+        },
+        {
+          "key": "D",
+          "text": "Khi số nhánh rẽ tăng lên — lúc đó vòng lặp tuyến tính không còn mô tả được luồng, cần graph có state để rẽ nhánh, chèn người duyệt và trace từng bước, trong mọi trường hợp, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi, kể cả khi đã bật đủ kiểm tra"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Ưu điểm của ReAct vẫn còn giá trị: dễ debug nhờ trace, agent tự quyết bước tiếp, và cài được safeguard ở từng vòng. Giới hạn: tốn token và latency, dễ loop, dễ gọi sai tool, và cần eval theo trace chứ không chỉ chấm câu trả lời cuối.",
+      "tags": [
+        "day3",
+        "graph"
+      ]
+    },
+    {
+      "id": "M-023",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trong bảng so sánh ReAct text với function calling, khác biệt về khả năng gọi song song là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cả hai đều chỉ gọi được một tool mỗi vòng, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong mọi trường hợp"
+        },
+        {
+          "key": "B",
+          "text": "Cả hai đều gọi được nhiều tool cùng lúc, kể cả khi mọi chỉ số kỹ thuật đều bình thường, với mọi quy mô hệ thống"
+        },
+        {
+          "key": "C",
+          "text": "ReAct text chỉ gọi một tool mỗi vòng, còn function calling hỗ trợ gọi song song nhiều tool, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "ReAct text gọi song song được còn function calling thì không, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Các khác biệt còn lại: output là text tự do so với JSON theo schema; validate thì không có so với chặn ngay lúc sinh token; lỗi điển hình là parse thất bại so với chọn sai tool; và công cụ cho dev là regex tự viết so với SDK đã có field sẵn.",
+      "tags": [
+        "day3",
+        "function-calling"
+      ]
+    },
+    {
+      "id": "M-024",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Thứ tự thử các kỹ thuật prompt được khuyến nghị là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chain-of-thought trước vì nó mạnh nhất, rồi mới giảm dần nếu không cần, ở cả ba môi trường, kể cả lúc tải thấp"
+        },
+        {
+          "key": "B",
+          "text": "Thử ngẫu nhiên rồi giữ lại cách nào cho kết quả tốt nhất, kể cả khi đã bật đủ kiểm tra, dù cấu hình không đổi"
+        },
+        {
+          "key": "C",
+          "text": "zero-shot → few-shot → decomposition hoặc CoT — đừng nhảy vào prompt phức tạp ngay từ đầu, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "few-shot → zero-shot → fine-tuning, đi từ nhiều ví dụ xuống ít dần, dù cấu hình không đổi, ở cả ba môi trường"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Lý do đi từ đơn giản: prompt phức tạp tốn token, khó bảo trì và khó biết phần nào đang có tác dụng. CoT chỉ đáng dùng khi cần suy luận nhiều bước, cần giải thích logic trung gian, hoặc cần biết model sai ở bước nào — còn với formatting hay extraction đơn giản thì nó là overkill.",
+      "tags": [
+        "day4",
+        "thu-tu"
+      ]
+    },
+    {
+      "id": "M-025",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Temperature nên đặt bao nhiêu cho từng loại tác vụ?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đặt theo độ dài output: output càng dài thì temperature càng cao, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường"
+        },
+        {
+          "key": "B",
+          "text": "Luôn để 1 vì đó là giá trị mặc định cân bằng nhất, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Classification và extraction dùng 0; chatbot và support 0,3–0,5; creative writing 0,7–1,0; brainstorming 1,0–1,5, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn"
+        },
+        {
+          "key": "D",
+          "text": "Luôn để 0 cho mọi tác vụ để đảm bảo kết quả ổn định, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Với top_p thì khoảng 0,9–0,95, và đừng tune cả hai cùng lúc. Điểm quan trọng: temperature không thay thế được một prompt tốt — nó chỉ đổi cách chọn token, không làm model thông minh hơn.",
+      "tags": [
+        "day4",
+        "temperature"
+      ]
+    },
+    {
+      "id": "M-026",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Bốn anti-pattern của few-shot prompting là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Quá ít ví dụ, ví dụ quá ngắn, ví dụ không có nhãn, và ví dụ không đủ đa dạng ngôn ngữ, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+        },
+        {
+          "key": "B",
+          "text": "Dùng ví dụ thật của khách hàng, không xin phép, không ẩn danh, và không xoá sau khi dùng, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        },
+        {
+          "key": "C",
+          "text": "Đặt ví dụ ở cuối prompt, không đánh số ví dụ, không phân cách rõ, và trộn nhiều định dạng, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "D",
+          "text": "Ví dụ quá giống nhau gây overfit; ví dụ sai format thì model copy nguyên cái sai; quá 5 ví dụ cho lợi ích giảm dần; ví dụ có lỗi thì model tái tạo lỗi rất trung thành, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù người dùng không thấy gì bất thường, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Khuyến nghị 2–5 ví dụ đa dạng, đúng format và phủ được edge case. Điểm đáng nhớ nhất là ví dụ có lỗi thì model tái tạo lỗi rất trung thành — nên chất lượng ví dụ quan trọng hơn số lượng.",
+      "tags": [
+        "day4",
+        "few-shot"
+      ]
+    },
+    {
+      "id": "M-027",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Nguyên tắc viết negative prompting đúng cách là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Viết bằng chữ in hoa để model chú ý hơn, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "B",
+          "text": "Chuyển sang chỉ dẫn DƯƠNG và đo được: thay 'đừng dùng jargon' bằng 'giải thích bằng ngôn ngữ lớp 10'; thay 'đừng đoán' bằng 'nếu không chắc hãy nói: Tôi cần thêm thông tin'; thay 'đừng dài' bằng 'giới hạn dưới 150 từ', theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+        },
+        {
+          "key": "C",
+          "text": "Lặp lại yêu cầu ba lần ở ba vị trí khác nhau trong prompt, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, ở cả ba môi trường, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị, mà không cần sửa code"
+        },
+        {
+          "key": "D",
+          "text": "Đặt tất cả các điều cấm vào một danh sách riêng ở đầu prompt, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, với mọi quy mô hệ thống, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Lý do: cấm một hành vi vẫn để lại vô số hành vi thay thế nên model phải tự đoán. Model cần biết NÊN làm gì chứ không chỉ ĐỪNG làm gì — và chỉ dẫn dương thì còn kiểm chứng được, trong khi lời cấm thì không.",
+      "tags": [
+        "day4",
+        "negative-prompting"
+      ]
+    },
+    {
+      "id": "M-028",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Prompt injection trực tiếp và gián tiếp khác nhau thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Trực tiếp chỉ xảy ra với model đóng còn gián tiếp với model mở, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Trực tiếp nhắm vào model còn gián tiếp nhắm vào cơ sở dữ liệu, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Trực tiếp là user tự gõ 'Ignore your instructions'; gián tiếp là nội dung độc hại nằm trong document hoặc email mà agent đọc qua tool, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Trực tiếp xảy ra ở tầng mạng còn gián tiếp ở tầng ứng dụng, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, trong mọi trường hợp"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Sáu lớp phòng thủ được nêu: tách biệt bằng delimiter, phân cấp chỉ dẫn, validate input, validate output, least privilege và HITL. Không lớp nào hoàn hảo 100% nên phải chồng nhiều lớp — đúng tinh thần defense in depth được đào sâu ở Ngày 11.",
+      "tags": [
+        "day4",
+        "injection"
+      ]
+    },
+    {
+      "id": "M-029",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Guardrails cho prompt được chia thành hai nhóm nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Pre-guard (phát hiện injection, validate input, rate limit) và post-guard (mask PII, validate schema, chặn lời gọi nguy hiểm), ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Nhóm tự động và nhóm thủ công do người vận hành thực hiện, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Nhóm bắt buộc và nhóm khuyến nghị tuỳ mức rủi ro, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, dù cấu hình không đổi"
+        },
+        {
+          "key": "D",
+          "text": "Nhóm miễn phí bằng code và nhóm trả phí gọi model, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, với mọi quy mô hệ thống"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Cách chia này chính là phôi thai của kiến trúc ba tầng defense in depth ở Ngày 11: input rails, LLM rails và output rails. Điểm chung: mỗi lớp bắt một loại lỗi khác nhau, và lớp sau vẫn cần dù lớp trước đã có.",
+      "tags": [
+        "day4",
+        "guardrails"
+      ]
+    },
+    {
+      "id": "M-030",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Bốn chiều đánh giá prompt và cách đo tương ứng là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Speed, cost, accuracy và scalability — đo bằng load test, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, ở cả ba môi trường, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, dù người dùng không thấy gì bất thường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "B",
+          "text": "Uptime, latency, error rate và saturation — đo bằng dashboard, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "C",
+          "text": "Precision, recall, F1 và AUC — đo bằng tập có gán nhãn, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả lúc tải thấp, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code, với mọi loại workload"
+        },
+        {
+          "key": "D",
+          "text": "Correctness đo bằng test case cộng human review; Consistency đo bằng chạy lặp rồi tính % khớp; Safety đo bằng adversarial test case — với 10–20 test case, dưới 90% pass thì phải sửa, và A/B trên cùng một test set, dù cấu hình không đổi, với mọi quy mô hệ thống, kể cả khi đã bật đủ kiểm tra, trong suốt vòng đời dịch vụ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Chiều Consistency đòi hỏi chạy NHIỀU LẦN cùng một input — đây chính là ý tưởng reliability được hệ thống hoá ở Ngày 14 bằng pass^k. Yêu cầu 'A/B trên cùng một test set' cũng là nguyên tắc so sánh paired.",
+      "tags": [
+        "day4",
+        "eval-prompt"
+      ]
+    },
+    {
+      "id": "M-031",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trong luồng tool calling, bước nào là bước model làm và bước nào là ứng dụng làm?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Model làm toàn bộ từ quyết định tới thực thi và trả kết quả, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, nên chi phí mỗi lần gọi không thay đổi, với mọi quy mô hệ thống, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+        },
+        {
+          "key": "B",
+          "text": "Nhà cung cấp model thực thi tool trên hạ tầng của họ và tính phí riêng, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, dù cấu hình không đổi, với mọi quy mô hệ thống, dù prompt đã được viết lại rõ ràng hơn, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        },
+        {
+          "key": "C",
+          "text": "Ứng dụng quyết định gọi tool nào, model chỉ định dạng lại kết quả, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù người dùng không thấy gì bất thường, trong mọi trường hợp, ở cả ba môi trường, dù cấu hình không đổi, theo đúng khuyến nghị, với mọi loại workload"
+        },
+        {
+          "key": "D",
+          "text": "Model quyết định gọi tool nào với tham số gì; ỨNG DỤNG thực thi tool rồi gửi kết quả trở lại; model đọc kết quả và sinh câu trả lời cuối, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Hiểu sai điểm này dẫn tới việc quên đặt validate và phân quyền ở phía ứng dụng — nơi mọi hành động thật sự xảy ra. Về tool_choice: auto cho hầu hết trường hợp, required hoặc any cho pipeline step và routing, none để test hoặc làm fallback.",
+      "tags": [
+        "day4",
+        "tool-calling"
+      ]
+    },
+    {
+      "id": "M-032",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Wizard of Oz MVP nghĩa là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dùng một model nhỏ giả làm model lớn để tiết kiệm chi phí thử nghiệm, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "B",
+          "text": "Tạo dữ liệu giả để demo trong khi chờ dữ liệu thật, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, với mọi quy mô hệ thống, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+        },
+        {
+          "key": "C",
+          "text": "Dựng giao diện tối giản nhưng phía sau là con người làm thủ công — như DoorDash 2013 với web tĩnh, PDF menu 8 quán và một số Google Voice chung, founder tự nhận đơn và tự đi giao, trong mọi trường hợp, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "D",
+          "text": "Thuê ngoài toàn bộ việc phát triển sản phẩm cho một đội khác, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Fireflies cũng làm tương tự: hai founder giả làm bot tên Fred, gõ tay hơn 100 cuộc họp, thu 100 đô mỗi tháng rồi gọi được 5 triệu đô seed. Bài học: kiểm chứng NHU CẦU trước khi xây tự động hoá, vì phần đắt nhất là phần có thể không ai cần.",
+      "tags": [
+        "day5",
+        "wizard-of-oz"
+      ]
+    },
+    {
+      "id": "M-033",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Bốn Leap of Faith risks và nguyên tắc chọn thứ tự test là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Data, model, prompt, eval — test theo thứ tự pipeline, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp"
+        },
+        {
+          "key": "B",
+          "text": "Precision, recall, F1, AUC — test đồng thời cả bốn, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Value (khách có mua/dùng không), Usability (user có tự biết dùng không), Feasibility (ta có build được không), Business viability (có hợp mô hình kinh doanh không) — ưu tiên test giả định vừa QUAN TRỌNG vừa có ít BẰNG CHỨNG nhất, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Cost, latency, accuracy, security — test cái rẻ nhất trước, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, với mọi quy mô hệ thống, ở cả ba môi trường"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Nguyên tắc chọn thứ tự này quan trọng hơn danh sách: nhiều đội test cái dễ test nhất chứ không phải cái rủi ro nhất, nên chứng minh được những thứ vốn đã chắc chắn trong khi giả định nguy hiểm vẫn chưa ai đụng tới.",
+      "tags": [
+        "day5",
+        "leap-of-faith"
+      ]
+    },
+    {
+      "id": "M-034",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trust calibration nói về vấn đề gì và ba trụ cột để hiệu chỉnh là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đo độ chính xác của confidence score bằng cách so với nhãn thật trên tập kiểm thử, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, kể cả khi đã bật đủ kiểm tra"
+        },
+        {
+          "key": "B",
+          "text": "Chuẩn hoá điểm tin cậy của nhiều model về cùng một thang giá trị, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp, với mọi loại workload, dù prompt đã được viết lại rõ ràng hơn, dù đội đã tuân thủ đúng quy trình nội bộ"
+        },
+        {
+          "key": "C",
+          "text": "Overtrust là tin cao hơn năng lực thật nên giao việc quá mức; distrust là tin thấp hơn nên không dùng tới; ba trụ cột hiệu chỉnh là Expectation, Explainability và Control, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, kể cả khi tài liệu nguồn còn nguyên vẹn"
+        },
+        {
+          "key": "D",
+          "text": "Tăng độ tin cậy của model bằng cách fine-tune trên dữ liệu của chính doanh nghiệp, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, trong khi log không ghi lại dấu hiệu nào, trong mọi trường hợp"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Mục tiêu không phải làm người dùng tin nhiều hơn mà tin ĐÚNG mức. Bài học Kayak minh hoạ: họ bỏ hiển thị 'Confidence 79%' vì người dùng không cần biết là 0,71 hay 0,84 — họ cần thấy hệ thống CƯ XỬ khác đi.",
+      "tags": [
+        "day5",
+        "trust"
+      ]
+    },
+    {
+      "id": "M-035",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Khung mixed initiative của Horvitz đưa ra ba lựa chọn nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Manual, semi-auto và auto — ba mức tự động hoá, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, ở cả ba môi trường, theo đúng khuyến nghị, kể cả khi đã bật đủ kiểm tra, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+        },
+        {
+          "key": "B",
+          "text": "Accept, reject và defer — ba cách xử lý gợi ý của AI, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả lúc tải thấp, mà không cần sửa code, trong suốt vòng đời dịch vụ, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "C",
+          "text": "Inaction (khi sai rất đắt), Ask (khi ý định mơ hồ và một câu hỏi giảm được rủi ro lớn) và Act (khi đủ chắc và dễ undo) — trong đó Ask thông minh nhất nhưng hay bị bỏ quên nhất, trong mọi trường hợp, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "D",
+          "text": "Explore, exploit và balance — ba chiến lược ra quyết định, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, nên bước kiểm tra phía sau không phát hiện ra, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Lý do Ask hay bị bỏ quên: hành động ngay trông 'thông minh' hơn là hỏi lại. Nhưng hướng dẫn HAX G10 nói rõ khi không chắc thì HỎI LẠI — và bớt làm đi thường là UX tốt hơn.",
+      "tags": [
+        "day5",
+        "mixed-initiative"
+      ]
+    },
+    {
+      "id": "M-036",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Ba sai lầm thiết kế sản phẩm AI được nêu là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chọn sai model, chọn sai framework và chọn sai vector store, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, với mọi quy mô hệ thống"
+        },
+        {
+          "key": "B",
+          "text": "Thiếu tài liệu, thiếu test và thiếu monitoring, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi"
+        },
+        {
+          "key": "C",
+          "text": "Giấu variance nên user báo 'bug'; đặt acceptance criteria nhị phân nên demo đẹp mà phân bố thật thì tệ; coi fallback là ý nghĩ sau cùng nên AI trả lời tệ và âm thầm bào mòn niềm tin, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp"
+        },
+        {
+          "key": "D",
+          "text": "Prompt quá dài, context quá đầy và temperature quá cao, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Ba sai lầm này ứng với ba loại thất bại mang tính xác suất: output variance (cùng input khác output), behavioral drift (vài tuần sau lệch đi), và reasoning-level failure (mọi chỉ số xanh nhưng sản phẩm vẫn không giải quyết được việc của người dùng).",
+      "tags": [
+        "day5",
+        "sai-lam"
+      ]
+    },
+    {
+      "id": "M-037",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Ba ca chuyển đổi khi viết spec cho AI là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Từ expected output sang acceptance criteria dạng TỈ LỆ (ví dụ đạt với ít nhất 90% của một tập input đại diện); từ test cases sang test DISTRIBUTIONS (khoảng 20 case messy, edge và ambiguous, lấy dần từ production trace); và từ 'works' sang 'fails by design' với một mục Failure Modes, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra"
+        },
+        {
+          "key": "B",
+          "text": "Từ chức năng sang phi chức năng, từ định tính sang định lượng, từ ngắn sang dài, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, trong mọi trường hợp, với mọi loại workload, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Từ prototype sang MVP, từ MVP sang beta, từ beta sang GA, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, dù cấu hình không đổi, với mọi quy mô hệ thống, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Từ waterfall sang agile, từ tài liệu sang code, từ cá nhân sang nhóm, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Câu chốt: PRD cho AI mà thiếu ngưỡng nghiệm thu thì chưa phải PRD cho AI. Lý do là sản phẩm AI gặp cả một PHÂN BỐ đầu vào chứ không phải vài trường hợp, nên tiêu chí nhị phân chỉ nghiệm thu được đúng một lần demo.",
+      "tags": [
+        "day5",
+        "spec"
+      ]
+    },
+    {
+      "id": "M-038",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Precision và Recall được minh hoạ bằng con số nào và dùng khi nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Precision đo tốc độ còn recall đo mức tiêu tốn tài nguyên, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi"
+        },
+        {
+          "key": "B",
+          "text": "Precision 8/13 là khi AI nói CÓ thì đúng bao nhiêu; Recall 8/10 là trong số cần tìm thì tìm được bao nhiêu — nghiêng về precision khi sai mà user KHÔNG biết, nghiêng về recall khi bỏ lọt là thảm hoạ, kể cả lúc tải thấp, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Precision 8/10 và Recall 8/13, ngược lại với phương án trên, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ"
+        },
+        {
+          "key": "D",
+          "text": "Cả hai đều là 8/13, chỉ khác cách diễn giải kết quả, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, ở cả ba môi trường, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, kể cả lúc tải thấp"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Tiêu chí chọn rất thực dụng: nếu AI sai mà người dùng không nhận ra thì phải siết precision, vì cái sai sẽ trôi thẳng vào quyết định. Nếu bỏ lọt là thảm hoạ — như bỏ sót cảnh báo an toàn — thì phải nghiêng recall, bất kể người dùng có thấy hay không.",
+      "tags": [
+        "day5",
+        "precision-recall"
+      ]
+    },
+    {
+      "id": "M-039",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Lịch sử embedding đi qua bốn giai đoạn nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Rule-based → statistical → neural → generative, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, với mọi quy mô hệ thống, dù cấu hình không đổi, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        },
+        {
+          "key": "B",
+          "text": "2013 Word2Vec → 2017 Transformer → 2020 GPT-3 → 2023 GPT-4, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "C",
+          "text": "1990s one-hot → 2005 TF-IDF → 2015 LSTM → 2020 Transformer, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, ở cả ba môi trường, theo đúng khuyến nghị, kể cả khi đã bật đủ kiểm tra, nên chi phí mỗi lần gọi không thay đổi, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+        },
+        {
+          "key": "D",
+          "text": "1990s BOW (sparse, không hiểu ngữ nghĩa) → 2013 Word2Vec (dense nhưng vector TĨNH nên kẹt từ đa nghĩa) → 2018 ELMo (động theo ngữ cảnh bằng LSTM nhưng chậm) → 2019+ BERT/GPT (self-attention, hiểu đa chiều, cần GPU), trong mọi trường hợp, với mọi loại workload, dù người dùng không thấy gì bất thường, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Bước ngoặt đáng nhớ nhất là từ vector TĨNH sang vector ĐỘNG theo ngữ cảnh: Word2Vec cho từ 'đá' một vector duy nhất bất kể là hòn đá hay đá bóng, còn từ ELMo trở đi thì vector phụ thuộc câu chứa nó.",
+      "tags": [
+        "day7",
+        "lich-su-embedding"
+      ]
+    },
+    {
+      "id": "M-040",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Sentence-window chunking hoạt động thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Gộp mọi câu trong một đoạn thành một chunk duy nhất, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, với mọi quy mô hệ thống"
+        },
+        {
+          "key": "B",
+          "text": "Cắt tại chỗ điểm cosine giữa hai câu liên tiếp tụt mạnh, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, trong mọi trường hợp"
+        },
+        {
+          "key": "C",
+          "text": "Cắt mỗi câu thành một chunk rồi index tất cả, không có gì thêm, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn"
+        },
+        {
+          "key": "D",
+          "text": "Index MỘT câu nhưng khi inject thì đưa thêm k câu ở hai bên, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, dù đội đã tuân thủ đúng quy trình nội bộ"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Đây là họ hàng gần của parent-child: cùng tách hai nhu cầu vốn cần hai kích thước khác nhau — tìm kiếm chính xác cần đơn vị nhỏ, còn LLM hiểu được thì cần ngữ cảnh xung quanh. Phương án B mô tả semantic chunking, một chiến lược khác.",
+      "tags": [
+        "day7",
+        "sentence-window"
+      ]
+    },
+    {
+      "id": "M-041",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Vì sao nên dùng Markdown làm định dạng mặc định khi đưa tài liệu vào prompt?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì Markdown là định dạng duy nhất mà LLM được huấn luyện để hiểu, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, dù cấu hình không đổi, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, với mọi quy mô hệ thống"
+        },
+        {
+          "key": "B",
+          "text": "Vì Markdown giữ được ảnh và bảng phức tạp tốt hơn HTML, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, mà không cần sửa code, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn"
+        },
+        {
+          "key": "C",
+          "text": "Vì nó tiết kiệm khoảng 30–50% token so với HTML cùng nội dung, mà vẫn giữ được cấu trúc heading và bảng ở mức đủ dùng, trong mọi trường hợp, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, dù đội đã tuân thủ đúng quy trình nội bộ"
+        },
+        {
+          "key": "D",
+          "text": "Vì Markdown hiển thị đẹp hơn khi trả kết quả cho người dùng cuối, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, kể cả lúc tải thấp, theo đúng khuyến nghị, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, với mọi quy mô hệ thống"
+        }
+      ],
+      "answer": "C",
+      "explanation": "HTML mang theo rất nhiều thẻ và thuộc tính không đóng góp ngữ nghĩa nhưng vẫn bị tính tiền và vẫn chiếm chỗ. Các lựa chọn còn lại: HTML sạch cho bảng thật sự phức tạp, plain text cho chat log, JSON khi cần output có cấu trúc.",
+      "tags": [
+        "day7",
+        "markdown"
+      ]
+    },
+    {
+      "id": "M-042",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Bốn use case chính của embedding là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Semantic search, clustering (ví dụ gom 10.000 ticket thành 15 chủ đề), dedup và recommendation, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Training, validation, testing và deployment, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, với mọi quy mô hệ thống"
+        },
+        {
+          "key": "C",
+          "text": "Indexing, caching, compression và encryption, kể cả khi mọi chỉ số kỹ thuật đều bình thường, dù cấu hình không đổi"
+        },
+        {
+          "key": "D",
+          "text": "Translation, summarization, classification và generation, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Lưu ý đi kèm: embedding không tạo ra sự thật — garbage in, garbage out. Nó chỉ là lớp dịch nội dung sang một không gian so sánh được về nghĩa, nên chất lượng dữ liệu đầu vào quyết định chất lượng mọi thứ phía sau.",
+      "tags": [
+        "day7",
+        "use-case"
+      ]
+    },
+    {
+      "id": "M-043",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Code-aware chunking cắt theo tiêu chí gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Theo comment, mỗi khối comment mở đầu một chunk mới, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, dù đội đã tuân thủ đúng quy trình nội bộ"
+        },
+        {
+          "key": "B",
+          "text": "Theo hàm hoặc class, dựa vào cây cú pháp AST, ở cả ba môi trường, theo đúng khuyến nghị, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn, kể cả lúc tải thấp"
+        },
+        {
+          "key": "C",
+          "text": "Theo file, mỗi file là một chunk bất kể độ dài, trong mọi trường hợp, với mọi loại workload, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Theo số dòng cố định, ví dụ mỗi 50 dòng một chunk, kể cả lúc tải thấp, mà không cần sửa code, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, ở cả ba môi trường"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Cùng nhóm chiến lược chuyên biệt còn có table-aware: giữ nguyên bảng và kèm header dòng, vì cắt ngang bảng làm con số mất nhãn. Nguyên tắc chung của nhóm này là tôn trọng cấu trúc vốn có của dữ liệu thay vì áp một cách cắt duy nhất cho mọi loại.",
+      "tags": [
+        "day7",
+        "code-aware"
+      ]
+    },
+    {
+      "id": "M-044",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Hierarchical chunking tổ chức tài liệu theo mấy tầng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Hai tầng: tài liệu và đoạn văn, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Không có tầng, chỉ là cách gọi khác của parent-child, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Ba tầng: tóm tắt tài liệu → tóm tắt section → đoạn văn — hợp với corpus lớn và câu hỏi tổng hợp, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Bốn tầng theo Data Quality Pyramid: raw, cleaned, structured, enriched, với mọi quy mô hệ thống, ở cả ba môi trường"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Điểm khác với parent-child: parent-child có hai mức và dùng để giải bài toán ngữ cảnh, còn hierarchical dựng nhiều mức tóm tắt để trả lời được cả câu hỏi chi tiết lẫn câu hỏi tổng hợp trên corpus lớn.",
+      "tags": [
+        "day7",
+        "hierarchical"
+      ]
+    },
+    {
+      "id": "M-045",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Vì sao short-term memory không thay thế được long-term memory?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì short-term không lưu được dữ liệu dạng số, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Vì short-term nằm trong context window nên rẻ và dễ nhưng dễ đầy, chỉ hợp hội thoại ngắn; long-term nằm ngoài context ở vector store hoặc DB nên phải truy xuất, nhưng bền và không giới hạn — context window KHÔNG phải vector store, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Vì short-term chậm hơn khi truy xuất dữ liệu cũ, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Vì short-term chỉ hoạt động với model có context window trên 128K, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, ở cả ba môi trường"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Câu chốt 'context window không phải vector store' chống lại một hiểu nhầm phổ biến là cứ tăng context window là giải quyết được mọi thứ. Thêm memory cũng không tự làm agent giỏi hơn — memory sai hoặc thừa chỉ làm nhiễu context.",
+      "tags": [
+        "day7",
+        "memory"
+      ]
+    },
+    {
+      "id": "M-046",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Ba tham số retrieval và giá trị tham khảo là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Top-k (3 cho câu đơn, 10 khi cần tổng hợp), threshold (0,7 chặt và 0,4 lỏng), và metadata filter chạy TRƯỚC khi search, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù người dùng không thấy gì bất thường, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "B",
+          "text": "Temperature 0, max_tokens 4096 và top_p 0,9, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "C",
+          "text": "Chunk size, overlap và số chiều embedding, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        },
+        {
+          "key": "D",
+          "text": "Batch size, learning rate và số epoch, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Metadata filter là tham số hay bị bỏ quên nhất nhưng lại đáng giá nhất: nó thu hẹp không gian tìm nên tăng CẢ tốc độ lẫn precision, và nó dùng điều kiện xác định thay vì phép đo tương tự. Retrieval tốt = chunk đúng cộng metadata đủ cộng filter hợp lý.",
+      "tags": [
+        "day7",
+        "retrieval-params"
+      ]
+    },
+    {
+      "id": "M-047",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Ba chữ R, A, G ứng với ba vai trò nào và mỗi vai có kỹ thuật gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Retrieve, Rank, Generate — ba bước tuần tự của pipeline, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, với mọi quy mô hệ thống, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+        },
+        {
+          "key": "B",
+          "text": "Request, Answer, Grade — ba giai đoạn của một lượt hỏi đáp, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, với mọi quy mô hệ thống, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "C",
+          "text": "Read, Analyze, Generate — đọc, phân tích rồi sinh câu trả lời, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "D",
+          "text": "R truy xuất chứng cứ từ kho ngoài (RRF, MMR, rerank, pre-filter); A đóng gói context có cấu trúc (reordering, xử lý xung đột, token budget); G sinh câu trả lời grounded có citation (abstention, CoT, streaming), dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Cách chia này quan trọng vì nó là bản đồ để chẩn đoán: khi agent hallucinate, phải tách bạch lỗi nằm ở Retrieval, Augmentation hay Generation rồi mới sửa đúng chỗ. Chữ A hay bị bỏ quên nhất nhưng lại là nơi giải quyết xung đột giữa các tài liệu.",
+      "tags": [
+        "day8",
+        "rag"
+      ]
+    },
+    {
+      "id": "M-048",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Dense vector và sparse vector khác nhau về cấu trúc thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dense có 768–1536 chiều và MỌI chiều đều khác 0; sparse dài bằng cả từ điển và HẦU HẾT các chiều bằng 0, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi"
+        },
+        {
+          "key": "B",
+          "text": "Dense có 100 chiều còn sparse có 1000 chiều, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        },
+        {
+          "key": "C",
+          "text": "Dense lưu số thực còn sparse lưu số nguyên, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "D",
+          "text": "Dense dùng cho tiếng Anh còn sparse dùng cho tiếng Việt, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Từ cấu trúc đó suy ra điểm mạnh và điểm mù: dense mạnh về nghĩa, paraphrase và cross-lingual nhưng thất bại với mã lỗi hiếm như 'ERR-4012'; sparse (BM25) khớp từ khoá chính xác và không cần GPU nhưng không biết 'nghỉ phép' với 'PTO' là một.",
+      "tags": [
+        "day8",
+        "dense-sparse"
+      ]
+    },
+    {
+      "id": "M-049",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Alpha weighting nên đặt bao nhiêu cho từng loại corpus?",
+      "options": [
+        {
+          "key": "A",
+          "text": "FAQ dùng α khoảng 0,2–0,4 còn code và log dùng α khoảng 0,7–0,9"
+        },
+        {
+          "key": "B",
+          "text": "FAQ và knowledge base dùng α khoảng 0,7–0,9 (nghiêng dense); code, log và văn bản luật dùng α khoảng 0,2–0,4 (nghiêng sparse), trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Alpha không cần đặt vì hệ thống tự học từ dữ liệu, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Luôn đặt α = 0,5 để cân bằng hai nhánh, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Nguyên tắc chọn: nội dung diễn đạt tự do thì nghiêng dense, nội dung nhiều định danh và thuật ngữ chính xác thì nghiêng sparse. Nhưng khi mới bắt đầu thì dùng RRF (score = tổng của 1/(k+rank), k = 60) vì nó chỉ dùng thứ hạng nên không cần tuning theo domain.",
+      "tags": [
+        "day8",
+        "alpha"
+      ]
+    },
+    {
+      "id": "M-050",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Vì sao cross-encoder chính xác hơn bi-encoder?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì nó ghép câu hỏi và tài liệu thành MỘT input rồi đọc cùng lúc, nên thấy được tương tác trực tiếp giữa hai bên — đổi lại phải chạy từng cặp nên không pre-compute được, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, theo đúng khuyến nghị, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, mà không cần sửa code"
+        },
+        {
+          "key": "B",
+          "text": "Vì cross-encoder có nhiều tham số hơn gấp mười lần, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, trong khi hệ thống vẫn chạy đúng thiết kế, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù người dùng không thấy gì bất thường, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "C",
+          "text": "Vì cross-encoder dùng số chiều vector lớn hơn nên biểu diễn được nhiều thông tin hơn, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+        },
+        {
+          "key": "D",
+          "text": "Vì cross-encoder được huấn luyện trên dữ liệu mới hơn, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù đội đã tuân thủ đúng quy trình nội bộ, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, trong suốt vòng đời dịch vụ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Bi-encoder embed riêng câu hỏi và tài liệu rồi so khoảng cách, nên tài liệu được embed sẵn từ trước và truy vấn rất nhanh trên hàng triệu chunk. Vì vậy kiến trúc retrieve-and-rerank dùng cả hai: bi-encoder quét rộng top 50–100, cross-encoder đọc kỹ để chọn top 3–5.",
+      "tags": [
+        "day8",
+        "cross-encoder"
+      ]
+    },
+    {
+      "id": "M-051",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Ba tiêu chí chọn LLM cho khối Generation là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Nhà cung cấp, khu vực đặt máy chủ và cam kết SLA, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Số tham số, tốc độ và điểm benchmark, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Độ phức tạp của tác vụ, yêu cầu bảo mật, và ngân sách — model nhỏ hoặc chạy tại chỗ hợp cho tra cứu đơn giản, môi trường on-premise và khối lượng lớn, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Ngôn ngữ hỗ trợ, context window và giá theo token, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, trong suốt vòng đời dịch vụ, ở cả ba môi trường"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Đi kèm là hai nhóm kiểm soát đầu ra: Formatting (Markdown, bảng hoặc JSON) và Safety (lọc PII, kiểm tra mức truy cập). Và Self-Correction có hai kiểu — thêm bước tự kiểm sau khi sinh, hoặc retry nếu phát hiện câu trả lời không grounded.",
+      "tags": [
+        "day8",
+        "llm-selection"
+      ]
+    },
+    {
+      "id": "M-052",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Graceful degradation trong RAG — theo cách Ngày 8 định nghĩa — nghĩa là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tự động chuyển sang model rẻ hơn khi tải hệ thống tăng cao"
+        },
+        {
+          "key": "B",
+          "text": "Từ chối trả lời nhưng KÈM gợi ý bước tiếp theo, thay vì để người dùng bơ vơ với một lời từ chối cụt, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Trả về câu trả lời rỗng thay vì báo lỗi cho người dùng, trong khi ngân sách token vẫn còn dư nhiều, trong mọi trường hợp"
+        },
+        {
+          "key": "D",
+          "text": "Chuyển sang model nhỏ hơn khi ngân sách sắp hết, kể cả khi mọi chỉ số kỹ thuật đều bình thường, với mọi quy mô hệ thống"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Đây là một trong ba yếu tố của grounding và abstention, cùng với strict grounding (đổi context sai thì model cũng phải trả lời sai theo — trọng tài duy nhất là dữ liệu nội bộ) và citations (RAG mất 50% giá trị nếu không chỉ ra được lấy từ tài liệu nào).",
+      "tags": [
+        "day8",
+        "degradation"
+      ]
+    },
+    {
+      "id": "M-053",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Context Compression được dùng khi nào và bằng công cụ gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Khi chi phí vượt ngân sách tháng — dùng cache để giảm số lần gọi, với mọi quy mô hệ thống, trong mọi trường hợp"
+        },
+        {
+          "key": "B",
+          "text": "Khi câu trả lời quá dài — dùng tóm tắt sau khi sinh, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Khi context vượt quá ngân sách 60% đã phân bổ — dùng LLMLingua hoặc Recomp thay vì cắt bừa, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Khi số lượng tài liệu vượt 100 — dùng clustering để gom nhóm, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Ngân sách token chuẩn: System 20%, Context 60%, Headroom 20% cho câu hỏi và output. Headroom là phần hay bị quên nhất, và triệu chứng của việc quên chính là finish_reason trả về length.",
+      "tags": [
+        "day8",
+        "compression"
+      ]
+    },
+    {
+      "id": "M-054",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trong prompt RAG, mỗi tài liệu nên được gắn tag như thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dạng đầy đủ có nguồn và vị trí, ví dụ [1] policy/refund-v4.pdf | Section 3 — để model trích dẫn lại được và người dùng kiểm chứng được, dù cấu hình không đổi, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, trong khi log không ghi lại dấu hiệu nào, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        },
+        {
+          "key": "B",
+          "text": "Gắn toàn bộ metadata dạng JSON vào đầu mỗi tài liệu, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, ở cả ba môi trường, theo đúng khuyến nghị, nên chi phí mỗi lần gọi không thay đổi, kể cả khi tài liệu nguồn còn nguyên vẹn, trong mọi trường hợp, kể cả lúc tải thấp, dù cấu hình không đổi, mà không cần sửa code, với mọi loại workload"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ cần đánh số thứ tự 1, 2, 3 là đủ, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, với mọi quy mô hệ thống, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù người dùng không thấy gì bất thường, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị, với mọi loại workload"
+        },
+        {
+          "key": "D",
+          "text": "Không cần tag, để model tự nhận biết ranh giới giữa các tài liệu, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Cấu trúc prompt bốn khối: System Rules → Retrieved Documents → User Question → Constraints/Grounding. Tag nguồn là điều kiện để có citation, mà không có citation thì RAG mất 50% giá trị vì người dùng không kiểm chứng được.",
+      "tags": [
+        "day8",
+        "prompt-structure"
+      ]
+    },
+    {
+      "id": "M-055",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Bốn giới hạn của single-agent khiến phải chuyển sang multi-agent là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không đủ RAM, không đủ CPU, không đủ băng thông và không đủ lưu trữ, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả lúc tải thấp, với mọi loại workload, kể cả khi đã bật đủ kiểm tra, dù người dùng không thấy gì bất thường"
+        },
+        {
+          "key": "B",
+          "text": "Model quá nhỏ, dữ liệu quá ít, ngân sách quá thấp và đội quá mỏng, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, trong suốt vòng đời dịch vụ"
+        },
+        {
+          "key": "C",
+          "text": "Prompt phình to tới mức các nhóm luật xung đột nhau, context bị quá tải nên hiện tượng lost in the middle, số lượng tool vượt khả năng chọn đúng, và không có ranh giới trách nhiệm rõ ràng khi lỗi xảy ra, ở cả ba môi trường, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, dù prompt đã được viết lại rõ ràng hơn"
+        },
+        {
+          "key": "D",
+          "text": "Latency cao, chi phí lớn, khó debug và khó test, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, trong mọi trường hợp, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Minh hoạ bằng con số: một system prompt hỗ trợ khách hàng phình lên 240 dòng chia theo nhiều nhóm luật, token của multi-agent gấp khoảng 15 lần một lượt chat, và agent thực hiện hơn 1.500 lượt gọi tool. Chia vai không phải để 'ngầu' mà để hệ đỡ quá tải.",
+      "tags": [
+        "day9",
+        "gioi-han"
+      ]
+    },
+    {
+      "id": "M-056",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Cách chọn giữa bốn pattern multi-agent dựa trên hai câu hỏi nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ngân sách bao nhiêu và đội có mấy người, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, kể cả lúc tải thấp"
+        },
+        {
+          "key": "B",
+          "text": "Các bước có phụ thuộc thứ tự không (có thì Pipeline), và có cần nhiều góc nhìn độc lập không (có thì Debate hoặc Supervisor-worker), ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Dùng model nào và chạy trên hạ tầng gì, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, trong mọi trường hợp, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Có bao nhiêu tool và bao nhiêu người dùng, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả lúc tải thấp, ở cả ba môi trường"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bốn pattern: Pipeline nối tiếp, Supervisor-worker toả ra, Debate hội tụ, Hierarchy lồng tầng. Mỗi cái có bẫy riêng — Pipeline thì lỗi bước đầu lan cả chuỗi; Debate thì tốn gấp nhiều lần và có thể không hội tụ.",
+      "tags": [
+        "day9",
+        "pattern"
+      ]
+    },
+    {
+      "id": "M-057",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Sáu bước agent làm việc với MCP server theo thứ tự là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Khai báo tool trong prompt → model sinh JSON → parse bằng regex → chạy hàm tương ứng, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, với mọi quy mô hệ thống, ở cả ba môi trường, theo đúng khuyến nghị, dù prompt đã được viết lại rõ ràng hơn, dù đội đã tuân thủ đúng quy trình nội bộ"
+        },
+        {
+          "key": "B",
+          "text": "Đăng ký API key → tải toàn bộ tool về máy → cache lại → chọn tool → chạy → ghi log, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp, với mọi loại workload, dù người dùng không thấy gì bất thường, kể cả khi dữ liệu đã được làm sạch kỹ"
+        },
+        {
+          "key": "C",
+          "text": "Gửi câu hỏi cho server → server tự chọn tool → server gọi model → trả câu trả lời cuối, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, trong suốt vòng đời dịch vụ, dù cấu hình không đổi, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Kết nối server → gọi tools/list → mỗi tool trả về name, description và inputSchema → agent đọc schema rồi chọn tool → gọi tools/call kèm params đúng schema → server thực thi và trả kết quả, kể cả lúc tải thấp, mà không cần sửa code, nên chi phí mỗi lần gọi không thay đổi, kể cả khi dữ liệu đã được làm sạch kỹ"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Điểm mấu chốt: agent HỎI server lúc chạy chứ không được lập trình sẵn để biết tool nào tồn tại. Nhờ vậy thêm tool mới vào server là agent dùng được ngay mà không phải sửa code — đúng tinh thần cổng USB.",
+      "tags": [
+        "day9",
+        "mcp"
+      ]
+    },
+    {
+      "id": "M-058",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Vì sao Tools trong MCP phải bị giới hạn quyền chặt hơn Resources?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì Tools chỉ hoạt động với model đóng nên rủi ro cao hơn, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "B",
+          "text": "Vì Tools tốn nhiều token hơn Resources khi gọi, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        },
+        {
+          "key": "C",
+          "text": "Vì Tools thay đổi dữ liệu thật nên gọi sai một lần là hệ thống phát sinh thao tác mà người dùng không hề tạo; Resources chỉ đọc nên gọi lại bao nhiêu lần cũng không đổi trạng thái, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi"
+        },
+        {
+          "key": "D",
+          "text": "Vì Resources chạy trên server còn Tools chạy trên máy agent, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Ba lớp phòng thủ khi dùng MCP: chỉ cấp quyền tối thiểu (read-ticket chứ không delete-DB), hành động nguy hiểm phải có người duyệt, và chạy server trong container cô lập. Nguyên tắc bao trùm là least privilege.",
+      "tags": [
+        "day9",
+        "mcp-security"
+      ]
+    },
+    {
+      "id": "M-059",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "AgentCard được phục vụ ở đâu và chứa gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Trong file cấu hình cục bộ của từng agent, chứa danh sách endpoint, với mọi quy mô hệ thống, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Tại /.well-known/agent-card.json, là tài liệu JSON metadata mô tả skills, auth và endpoint, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Trong database trung tâm, chứa lịch sử mọi lần giao việc, kể cả khi đã bật đủ kiểm tra, với mọi quy mô hệ thống"
+        },
+        {
+          "key": "D",
+          "text": "Trong header của mỗi request, chứa token xác thực, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AgentCard cho phép khám phá agent lúc runtime thay vì hard-code địa chỉ từng agent. Khi số agent đủ lớn thì cần thêm registry để tra cứu — vì lúc đó không ai nhớ hết có những agent nào.",
+      "tags": [
+        "day9",
+        "agentcard"
+      ]
+    },
+    {
+      "id": "M-060",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Bốn kiểu cộng tác của A2A là gì và cái nào là mới so với bốn pattern đã học?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Request, response, callback và webhook — chỉ webhook là mới, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Handover (tuần tự), Cooperative Search (song song), Joint Decision (đồng thuận) và Self-Correction (viết–kiểm–sửa) — chỉ Self-Correction là mới, ba cái đầu vẫn là ba pattern đã học ở phần trước, chỉ khác ở chỗ bên kia không phải agent của bạn"
+        },
+        {
+          "key": "C",
+          "text": "Sync, async, batch và stream — cả bốn đều mới, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Push, pull, poll và subscribe — chỉ subscribe là mới, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Self-Correction phải bị chặn ở 3 vòng: không chặn thì hai worker đẩy qua đẩy lại mãi, mỗi vòng thêm một lần gọi model, tốn tiền mà không chắc tốt hơn. Quá 3 vòng thì dừng, trả phần chắc chắn và báo chỗ chưa có nguồn.",
+      "tags": [
+        "day9",
+        "a2a"
+      ]
+    },
+    {
+      "id": "M-061",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Một trace entry của hệ multi-agent cần đủ bảy field nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "node, edge, state, route, retry, fallback và result, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, trong suốt vòng đời dịch vụ, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "prompt, response, embedding, score, rank, source và citation, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, ở cả ba môi trường, kể cả lúc tải thấp"
+        },
+        {
+          "key": "C",
+          "text": "user_id, session_id, model_name, temperature, max_tokens, cost và region, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, với mọi quy mô hệ thống"
+        },
+        {
+          "key": "D",
+          "text": "timestamp, agent_id, action, input_summary, output_summary, status và latency_ms — trong đó input_summary phải là TÓM TẮT chứ không phải toàn bộ context, ở cả ba môi trường"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Lý do input_summary phải là tóm tắt: nếu ghi toàn bộ context thì trace phình tới mức không đọc được. Entry của supervisor nên ghi kèm lý do định tuyến — không có lý do thì không lần ngược được vì sao đi nhánh đó.",
+      "tags": [
+        "day9",
+        "trace"
+      ]
+    },
+    {
+      "id": "M-062",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Bốn nguồn data và cách mỗi nguồn hỏng là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chỉ có hai kiểu hỏng: mất dữ liệu và sai dữ liệu, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "PostgreSQL hỏng bằng timeout, schema drift và job kéo về 0 dòng; External API hỏng bằng 429, auth hết hạn và pagination lệch; PDF/HTML hỏng bằng OCR sai, encoding và thiếu metadata; Webhook/stream hỏng bằng backpressure và trùng event, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Tất cả các nguồn đều hỏng theo cùng một kiểu là mất kết nối, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Nguồn nội bộ thì ổn định còn nguồn bên ngoài thì hay hỏng, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Mỗi kiểu hỏng cần một cách đo riêng: freshness và số dòng kéo về cho DB; volume và checkpoint có nhích không cho API; % dòng bị flag review cho tài liệu; queue depth và số bản ghi vào DLQ cho stream. Template quản lý: mỗi nguồn một dòng source → method → check → owner.",
+      "tags": [
+        "day10",
+        "nguon"
+      ]
+    },
+    {
+      "id": "M-063",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Vì sao 'job chạy xong không lỗi' không đồng nghĩa với 'data đúng'?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì job chạy trên môi trường khác với môi trường lưu dữ liệu, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong mọi trường hợp"
+        },
+        {
+          "key": "B",
+          "text": "Vì thời gian chạy job không trùng với thời gian cập nhật dữ liệu, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Vì log của job có thể bị mất trước khi ghi xuống đĩa, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi chỉ số kỹ thuật đều bình thường, với mọi quy mô hệ thống"
+        },
+        {
+          "key": "D",
+          "text": "Vì job có thể kết thúc bình thường mà kéo về 0 dòng — với hệ thống, 'không có dòng mới' trông y hệt 'thành công', nên phải đo số dòng kéo về chứ không chỉ đo job có chạy hay không, ở cả ba môi trường"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Đây là takeaway số 3 của Ngày 10: 'job chạy xong' là chuyện của chương trình, 'data đúng' là chuyện của data — hai khẳng định khác nhau, và phần lớn hệ thống chỉ đang đo cái thứ nhất. Sự cố 09:12 trong bài chính là ví dụ: sync fail im lặng, log không báo gì.",
+      "tags": [
+        "day10",
+        "job-vs-data"
+      ]
+    },
+    {
+      "id": "M-064",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Backoff theo cấp số nhân cần thêm jitter vì lý do gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì nhà cung cấp API yêu cầu phải có yếu tố ngẫu nhiên trong retry, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù cấu hình không đổi, với mọi quy mô hệ thống, kể cả khi dữ liệu đã được làm sạch kỹ, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        },
+        {
+          "key": "B",
+          "text": "Vì jitter làm giảm tổng thời gian chờ trung bình, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, trong mọi trường hợp, kể cả lúc tải thấp, với mọi loại workload, kể cả khi đã bật đủ kiểm tra, dù người dùng không thấy gì bất thường, ở cả ba môi trường, dù cấu hình không đổi, theo đúng khuyến nghị, mà không cần sửa code"
+        },
+        {
+          "key": "C",
+          "text": "Vì jitter giúp phân biệt các request của cùng một người dùng, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, ở cả ba môi trường, mà không cần sửa code, nên chi phí mỗi lần gọi không thay đổi, dù prompt đã được viết lại rõ ràng hơn, dù cấu hình không đổi, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị, với mọi loại workload"
+        },
+        {
+          "key": "D",
+          "text": "Vì nếu ba worker cùng thất bại rồi cùng chờ đúng 2 giây thì chúng sẽ cùng đập vào API tại một khoảnh khắc và lại nhận 429 — jitter rải chúng ra, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, kể cả khi tài liệu nguồn còn nguyên vẹn, trong khi log không ghi lại dấu hiệu nào, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Hiện tượng này gọi là thundering herd. Backoff chuẩn là chờ gấp đôi sau mỗi lần thất bại: 1s, 2s, 4s, 8s. Và mã 429 thường kèm header Retry-After — đọc nó trước khi tự đoán. Sai kinh điển: retry vô hạn không backoff, pipeline tự DDoS chính API nguồn.",
+      "tags": [
+        "day10",
+        "jitter"
+      ]
+    },
+    {
+      "id": "M-065",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Quality gate nên đặt ở vị trí nào trong flow và vì sao?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Song song với mọi bước, để không làm chậm pipeline, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù đội đã tuân thủ đúng quy trình nội bộ, trong mọi trường hợp, kể cả lúc tải thấp, dù cấu hình không đổi, mà không cần sửa code, với mọi loại workload"
+        },
+        {
+          "key": "B",
+          "text": "Sau bước publish, để chỉ chặn khi thật sự có vấn đề trên production, nên chi phí mỗi lần gọi không thay đổi, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "C",
+          "text": "Ngay sau bước load, để chặn sớm nhất có thể, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        },
+        {
+          "key": "D",
+          "text": "TRƯỚC bước embed — vì embed tốn tiền và khó rút lại, chặn ở đây rẻ hơn nhiều so với dọn vector store sau đó, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Flow đầy đủ: load → clean → quality gate → embed → publish, với nhánh fail đi vào HALT hoặc quarantine. Câu hỏi khó đi kèm: drift tăng nhưng quality gate vẫn pass thì hệ thống nên chặn hay chỉ báo — đây là quyết định phải cân giữa an toàn và tốc độ.",
+      "tags": [
+        "day10",
+        "quality-gate"
+      ]
+    },
+    {
+      "id": "M-066",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Ba mức chính sách xử lý lỗi data và tiêu chí xếp mức là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Low, medium, high — xếp theo số dòng bị ảnh hưởng, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong suốt vòng đời dịch vụ, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "P1, P2, P3 — xếp theo mức độ khẩn cấp của sự cố, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, kể cả khi đã bật đủ kiểm tra, dù cấu hình không đổi"
+        },
+        {
+          "key": "C",
+          "text": "HALT (trùng primary key, encoding hỏng, sai schema contract), QUARANTINE (primary key đúng nhưng nội dung đáng ngờ, OCR confidence thấp), WARN (thiếu field không bắt buộc, sai chính tả metadata) — xếp mức bằng cách hỏi 'cần làm gì và có chờ được không', không phải hỏi lỗi nghe đáng sợ tới đâu, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Error, warning, info — xếp theo mức log, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, ở cả ba môi trường, kể cả lúc tải thấp"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Ràng buộc quan trọng: bảng quarantine KHÔNG được để agent đọc, nếu không thì thứ vừa tách ra vẫn đi thẳng vào câu trả lời. Và mọi bản ghi bị reject hay flag phải được ghi lại kèm run_id — xoá mà không log nghĩa là mất data mà không ai biết.",
+      "tags": [
+        "day10",
+        "halt-quarantine-warn"
+      ]
+    },
+    {
+      "id": "M-067",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Sáu câu hỏi mà orchestrator nào cũng phải trả lời là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Who, what, when, where, why và how, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Plan, schedule, run, monitor, report và archive, trong suốt vòng đời dịch vụ, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Trigger, Retry policy, Data awareness, SLA/alert, Observability và Backfill, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Input, output, error, retry, log và alert, kể cả khi đã bật đủ kiểm tra, với mọi quy mô hệ thống"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Ba công cụ được so sánh: Prefect có flow là hàm Python bình thường nên ít boilerplate nhất, hợp để bắt đầu; Dagster mô hình hoá data asset nên có lineage sẵn; Airflow phổ biến nhất và hệ sinh thái lớn nhất nhưng cũng nặng nhất khi setup.",
+      "tags": [
+        "day10",
+        "orchestrator"
+      ]
+    },
+    {
+      "id": "M-068",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Snapshot không phát hiện được thao tác nào và vì sao?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không phát hiện được thay đổi schema vì nó chỉ đọc dữ liệu, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Không phát hiện được UPDATE vì nội dung thay đổi nhưng khoá không đổi, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả lúc tải thấp, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Không phát hiện được XOÁ — vì mỗi lần quét nó chỉ thấy trạng thái hiện tại chứ không thấy lịch sử, nên bản ghi biến mất trông giống như chưa từng khớp điều kiện, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Không phát hiện được INSERT vì bản ghi mới chưa có trong lần quét trước, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, kể cả lúc tải thấp"
+        }
+      ],
+      "answer": "C",
+      "explanation": "So sánh hình ảnh: Snapshot là ảnh chụp theo lịch (ví dụ mỗi 6 giờ) nên bỏ lỡ các trạng thái trung gian; CDC đọc thẳng log thay đổi nên như video, mỗi lần data đổi là một sự kiện được ghi lại đúng lúc nó xảy ra.",
+      "tags": [
+        "day10",
+        "cdc-snapshot"
+      ]
+    },
+    {
+      "id": "M-069",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Bốn kỹ thuật jailbreaking và cơ chế chung của chúng là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "SQL injection, XSS, CSRF và path traversal — đều nhắm vào ứng dụng web, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong mọi trường hợp"
+        },
+        {
+          "key": "B",
+          "text": "Roleplay, Encoding, Multi-turn escalation và Language switch — cơ chế chung là exploit context window, khiến model 'quên' safety instructions khi bị cuốn vào roleplay hoặc bị escalate dần dần, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Brute force, dictionary, rainbow table và credential stuffing — đều nhắm vào mật khẩu, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp"
+        },
+        {
+          "key": "D",
+          "text": "Phishing, vishing, smishing và pretexting — đều nhắm vào con người, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, với mọi quy mô hệ thống"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Encoding bypass hoạt động vì agent decode rồi đọc như instruction bình thường trong khi safety filter chỉ check text gốc. Language switch hiệu quả vì safety filter thường train trên tiếng Anh nên các ngôn ngữ ít tài nguyên như Zulu, Khmer, Lao dễ lọt hơn.",
+      "tags": [
+        "day11",
+        "jailbreak"
+      ]
+    },
+    {
+      "id": "M-070",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Bốn lớp input guardrails và nhiệm vụ từng lớp là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Authentication, authorization, accounting và auditing, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, trong suốt vòng đời dịch vụ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi"
+        },
+        {
+          "key": "B",
+          "text": "Firewall, WAF, IDS và IPS — bốn lớp bảo vệ mạng, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, nên chi phí mỗi lần gọi không thay đổi, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+        },
+        {
+          "key": "C",
+          "text": "Input Validation (length, language, format), Injection Detection (pattern cộng LLM classifier), Topic Filter (chỉ topic liên quan use case), và Rate Limiting (chống abuse, DDoS và cost explosion), kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi"
+        },
+        {
+          "key": "D",
+          "text": "Parse, validate, sanitize và normalize — bốn bước xử lý chuỗi, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Lợi ích của việc chặn sớm: input xấu bị chặn TRƯỚC khi tốn token và TRƯỚC khi LLM có cơ hội phản hồi sai. Ví dụ cấu hình rate limiting: tối đa 10 request mỗi phút cho mỗi user, kèm alert khi có spike bất thường.",
+      "tags": [
+        "day11",
+        "input-rails"
+      ]
+    },
+    {
+      "id": "M-071",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Bốn lớp output guardrails và action tương ứng là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Content Filter (redact PII, block toxic), Grounding Check (flag claim không có căn cứ, yêu cầu citation), Format Validation (reject sai schema, strip fake URL), và Human Review (queue cho người khi confidence thấp, không auto-send), ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Retry, fallback, timeout và circuit breaker, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Compress, encrypt, sign và send — bốn bước gửi phản hồi, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp"
+        },
+        {
+          "key": "D",
+          "text": "Log, alert, escalate và archive — bốn bước xử lý sự cố, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, trong suốt vòng đời dịch vụ, với mọi quy mô hệ thống"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Grounding check là lớp quan trọng nhất với các hệ RAG: nó phân biệt output grounded (mỗi claim có citation, nói rõ phần nào chưa có evidence, confidence phản ánh thực tế) với ungrounded (nói chắc mà không có nguồn, hallucinate link và số liệu).",
+      "tags": [
+        "day11",
+        "output-rails"
+      ]
+    },
+    {
+      "id": "M-072",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "EU AI Act và NIST AI RMF khác nhau ở điểm căn bản nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "EU AI Act áp dụng cho model đóng còn NIST cho model mở, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, trong khi ngân sách token vẫn còn dư nhiều, trong mọi trường hợp"
+        },
+        {
+          "key": "B",
+          "text": "Cả hai đều là khuyến nghị tự nguyện, chỉ khác khu vực ban hành, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "EU AI Act chỉ áp dụng cho công ty châu Âu còn NIST cho công ty toàn cầu, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "EU AI Act mang tính BẮT BUỘC, phân loại risk thành 4 mức Unacceptable/High/Limited/Minimal và yêu cầu transparency; NIST AI RMF là framework TỰ NGUYỆN nhưng được khuyến dùng, ở cả ba môi trường"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Phân biệt này quan trọng khi lập kế hoạch tuân thủ: EU AI Act có chế tài còn NIST là khung tham chiếu. Hai framework còn lại: UNESCO AI Ethics với 10 nguyên tắc ở phạm vi toàn cầu, và VN AI Strategy đang trong quá trình xây dựng.",
+      "tags": [
+        "day11",
+        "governance"
+      ]
+    },
+    {
+      "id": "M-073",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Red teaming mang lại bốn lợi ích nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Phát hiện 80% vấn đề trước khi deploy; rẻ hơn nhiều so với fix sau incident; tạo được adversarial test suite cho CI/CD; và xây văn hoá 'think like an attacker', trong mọi trường hợp, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, trong khi log không ghi lại dấu hiệu nào, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "B",
+          "text": "Tăng độ chính xác của model, giảm hallucination, tăng recall và tăng precision, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, ở cả ba môi trường, mà không cần sửa code, dù người dùng không thấy gì bất thường, kể cả khi tài liệu nguồn còn nguyên vẹn, dù cấu hình không đổi, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị, với mọi loại workload"
+        },
+        {
+          "key": "C",
+          "text": "Đáp ứng yêu cầu chứng chỉ ISO, SOC2, GDPR và HIPAA, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi dữ liệu đã được làm sạch kỹ, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù đội đã tuân thủ đúng quy trình nội bộ, kể cả khi model đã cập nhật bản mới nhất, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+        },
+        {
+          "key": "D",
+          "text": "Giảm chi phí hạ tầng, tăng tốc độ, giảm latency và tăng uptime, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, dù cấu hình không đổi, kể cả lúc tải thấp, với mọi loại workload, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, với mọi quy mô hệ thống, ở cả ba môi trường, trong mọi trường hợp, theo đúng khuyến nghị, mà không cần sửa code"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Quy tắc release đi kèm rất dứt khoát: safety test suite chạy MỖI RELEASE giống unit test, và agent không pass safety test thì không được deploy. Adversarial library phải được cập nhật liên tục vì kỹ thuật tấn công mới xuất hiện hàng tuần.",
+      "tags": [
+        "day11",
+        "red-team"
+      ]
+    },
+    {
+      "id": "M-074",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trong bảng adversarial library, tấn công Data Extraction cần lớp guardrail nào bắt?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Rate limiting, vì kẻ tấn công phải thử nhiều lần mới lấy được dữ liệu, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, ở cả ba môi trường, kể cả lúc tải thấp"
+        },
+        {
+          "key": "B",
+          "text": "Topic filter, vì câu hỏi nằm ngoài phạm vi cho phép, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Input injection detector, vì đây là một dạng injection, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi đã bật đủ kiểm tra, dù cấu hình không đổi"
+        },
+        {
+          "key": "D",
+          "text": "Output data leakage check — vì input của kiểu tấn công này (ví dụ 'What was the last user question?') trông hoàn toàn vô hại, thông tin chỉ lộ ra ở phần phản hồi, ở cả ba môi trường"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Ánh xạ đầy đủ: direct injection cần input injection detector; indirect injection cần output content filter; role play cần topic filter cộng LLM rails; encoding bypass cần input validation; data extraction cần output data leakage check. Nguyên tắc: chặn ở tầng mà dấu hiệu thật sự xuất hiện.",
+      "tags": [
+        "day11",
+        "adversarial"
+      ]
+    },
+    {
+      "id": "M-075",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Bốn bước của Responsible Disclosure là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ẩn lỗi → sửa âm thầm → không thông báo → theo dõi tiếp, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, với mọi quy mô hệ thống"
+        },
+        {
+          "key": "B",
+          "text": "Báo cáo lên cấp trên → chờ phê duyệt → thuê tư vấn → triển khai, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi"
+        },
+        {
+          "key": "C",
+          "text": "Rollback → điều tra → viết báo cáo → họp rút kinh nghiệm, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, với mọi quy mô hệ thống"
+        },
+        {
+          "key": "D",
+          "text": "Phát hiện lỗi (qua red team, user report hoặc monitoring) → fix nhanh (patch guardrails, thêm pattern, siết rules) → test lại bằng adversarial suite để confirm → communicate cho stakeholders và cập nhật tài liệu, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Nguyên tắc kèm theo: đừng giấu lỗi, transparent fix xây dựng trust nhiều hơn là giả vờ không có vấn đề. Bước 3 quan trọng vì fix mà không test lại thì không biết đã thật sự đóng được lỗ hổng hay chỉ chặn được đúng một biến thể.",
+      "tags": [
+        "day11",
+        "disclosure"
+      ]
+    },
+    {
+      "id": "M-076",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Ba tầng cloud services và ví dụ tương ứng là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Public, private và hybrid cloud — ba mô hình triển khai, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Compute, storage và networking — ba nhóm tài nguyên, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "SaaS là phần mềm hoàn chỉnh dùng ngay (Slack, Notion, Figma); PaaS là nền tảng deploy, bạn chỉ lo code (Cloud Run, Heroku, Vercel, Firebase); IaaS là tài nguyên thô, toàn quyền kiểm soát nhưng tốn công vận hành nhất (EC2, GCE, S3, EBS), ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Frontend, backend và database — ba tầng của ứng dụng web, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi đã bật đủ kiểm tra, với mọi quy mô hệ thống"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Trục xuyên suốt: đi từ SaaS xuống IaaS thì mức kiểm soát tăng dần nhưng công vận hành cũng tăng theo. Với PaaS, cloud lo giúp runtime, OS, scaling và patching — đó là lý do Railway và Render deploy được trong dưới 10 phút.",
+      "tags": [
+        "day12",
+        "iaas-paas-saas"
+      ]
+    },
+    {
+      "id": "M-077",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Multi-stage build trong Dockerfile mang lại lợi ích gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cho phép chạy nhiều container từ cùng một Dockerfile, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong mọi trường hợp, kể cả lúc tải thấp, với mọi loại workload, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn"
+        },
+        {
+          "key": "B",
+          "text": "Tách stage build khỏi stage runtime nên image production nhỏ hơn 5–10 lần, không chứa dev tool hay source code, ở cả ba môi trường, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn"
+        },
+        {
+          "key": "C",
+          "text": "Cho phép mỗi stage dùng một hệ điều hành khác nhau, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, trong mọi trường hợp"
+        },
+        {
+          "key": "D",
+          "text": "Chạy nhiều bước build song song nên nhanh gấp đôi, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, trong suốt vòng đời dịch vụ"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Stage 2 bắt đầu từ một image mới hoàn toàn và chỉ COPY --from=builder những gì cần chạy. Kết hợp với base image Alpine (khoảng 5MB thay vì Ubuntu 200MB) thì image cuối chỉ khoảng 120MB — đạt yêu cầu dưới 500 MB của lab.",
+      "tags": [
+        "day12",
+        "multi-stage"
+      ]
+    },
+    {
+      "id": "M-078",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Vì sao Dockerfile phải tạo và chuyển sang non-root user?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì nếu container chạy root mà bị exploit thì attacker có quyền root vào host — non-root là security baseline tối thiểu, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Vì chỉ non-root user mới ghi được vào volume gắn ngoài, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Vì Docker không cho phép process chạy dưới user root từ phiên bản 20 trở đi, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Vì user root làm container khởi động chậm hơn đáng kể, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, ở cả ba môi trường"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Cùng nhóm tối ưu còn có: pin exact version của base image thay vì dùng tag latest (vì latest đổi bất cứ lúc nào nên build hôm nay khác build tuần sau), và dùng .dockerignore để loại node_modules, .env, .git — nếu không thì .env có thể lọt vào image đẩy lên registry.",
+      "tags": [
+        "day12",
+        "non-root"
+      ]
+    },
+    {
+      "id": "M-079",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trong docker-compose, condition service_healthy khác service_started thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Hai điều kiện này tương đương, chỉ khác cách viết, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, trong suốt vòng đời dịch vụ, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "service_healthy chờ lâu hơn service_started đúng 30 giây, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, kể cả lúc tải thấp"
+        },
+        {
+          "key": "C",
+          "text": "service_started chỉ chờ container khởi chạy, còn service_healthy chờ healthcheck của service đó pass — nhờ vậy app không crash vì DB chưa sẵn sàng, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "service_healthy chỉ dùng được với database, service_started dùng cho mọi service, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, ở cả ba môi trường"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Trong file mẫu, db được đặt service_healthy với healthcheck dùng pg_isready interval 5s, còn cache Redis chỉ cần service_started. Cùng file còn minh hoạ service discovery: các service gọi nhau bằng TÊN (db, cache) và Docker DNS tự resolve.",
+      "tags": [
+        "day12",
+        "compose"
+      ]
+    },
+    {
+      "id": "M-080",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Kubernetes HPA trong ví dụ được cấu hình với ngưỡng nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không có min/max, HPA tự quyết dựa trên số request đang chờ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù đội đã tuân thủ đúng quy trình nội bộ, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+        },
+        {
+          "key": "B",
+          "text": "Min 4, max 20 pod, scale out khi CPU trên 70% và scale in khi CPU dưới 30%, pod mới sẵn sàng sau khoảng 90 giây, trong mọi trường hợp, với mọi loại workload, dù người dùng không thấy gì bất thường, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "C",
+          "text": "Min 1, max 10 pod, scale out khi CPU trên 50%, pod mới sẵn sàng sau 30 giây, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "D",
+          "text": "Min 2, max 50 pod, scale out khi RAM trên 80%, pod mới sẵn sàng sau 5 phút, nên chi phí mỗi lần gọi không thay đổi, dù cấu hình không đổi, với mọi quy mô hệ thống, dù prompt đã được viết lại rõ ràng hơn, theo đúng khuyến nghị, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, mà không cần sửa code"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Hai ngưỡng lệch nhau (70% để tăng, 30% để giảm) tạo vùng đệm chống hiện tượng bật tắt liên tục khi tải dao động quanh một mốc — điều này quan trọng vì mỗi pod mới cần khoảng 90 giây mới sẵn sàng phục vụ.",
+      "tags": [
+        "day12",
+        "hpa"
+      ]
+    },
+    {
+      "id": "M-081",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Bulkhead pattern giải quyết vấn đề gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cô lập tài nguyên theo loại request — như vách ngăn tàu thuỷ, mỗi service một thread pool riêng — nên một service chậm không làm chết thread pool chung, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Tự động khởi động lại container khi liveness probe thất bại, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, ở cả ba môi trường, kể cả lúc tải thấp"
+        },
+        {
+          "key": "C",
+          "text": "Giới hạn tổng số request mỗi giây mà hệ thống chấp nhận, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù cấu hình không đổi, trong mọi trường hợp"
+        },
+        {
+          "key": "D",
+          "text": "Ngăn request trùng lặp bằng cách gắn khoá định danh, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, với mọi quy mô hệ thống, trong mọi trường hợp"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Ví dụ: LLM_POOL tối đa 10 thread, DB_POOL và TOOL_POOL riêng. Nếu dùng chung một pool thì khi LLM API chậm 30 giây, mọi thread bị chiếm và ngay cả request chỉ cần đọc database cũng không chạy được. Phương án D mô tả idempotency, phương án B mô tả health probe, còn phương án C là rate limiting.",
+      "tags": [
+        "day12",
+        "bulkhead"
+      ]
+    },
+    {
+      "id": "M-082",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "SLI, SLO và SLA khác nhau thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cả ba là tên gọi khác nhau của cùng một khái niệm uptime, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả khi mọi chỉ số kỹ thuật đều bình thường, dù cấu hình không đổi, với mọi quy mô hệ thống, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "SLI là cam kết pháp lý, SLO là chỉ số đo được, SLA là mục tiêu nội bộ, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp, với mọi loại workload, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "SLI đo latency, SLO đo error rate, SLA đo chi phí, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ"
+        },
+        {
+          "key": "D",
+          "text": "SLI là chỉ số đo được từ hệ thống đang chạy (availability, p99 latency, error rate); SLO là mục tiêu nội bộ team tự đặt, cao hơn SLA một chút để có error budget làm đệm; SLA là cam kết pháp lý với khách hàng, vi phạm thì hoàn tiền hoặc chịu phạt, kể cả lúc tải thấp, mà không cần sửa code, trong mọi trường hợp"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Ví dụ cụ thể: SLO đặt uptime 99,9%, P99 latency dưới 500ms, error rate dưới 0,1%, error budget 8,7 giờ mỗi năm; còn SLA cam kết 99,5%, vi phạm thì credit back 10–30% hoá đơn và phản hồi sự cố critical trong dưới 4 giờ.",
+      "tags": [
+        "day12",
+        "sli-slo-sla"
+      ]
+    },
+    {
+      "id": "M-083",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Bốn nguyên tắc 12-Factor đủ cho một MVP deployment là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Codebase, Dependencies, Build/release/run và Logs, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù cấu hình không đổi"
+        },
+        {
+          "key": "B",
+          "text": "Cả 12 factor đều bắt buộc, không được bỏ qua điều nào, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Backing services, Concurrency, Disposability và Admin processes, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ"
+        },
+        {
+          "key": "D",
+          "text": "Config in env (dùng os.getenv, không hardcode API key), Port binding (đọc PORT từ env vì Railway/Render inject tự động), Stateless processes (không giữ session trên bộ nhớ instance), và Dev/prod parity, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Checklist MVP tương ứng: secrets nằm trong env vars, có endpoint GET /health, structured logging dạng JSON, và graceful shutdown xử lý SIGTERM. Riêng Stateless processes là điều kiện bắt buộc để horizontal scaling hoạt động.",
+      "tags": [
+        "day12",
+        "12-factor"
+      ]
+    },
+    {
+      "id": "M-084",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Ba pillars of observability phối hợp với nhau theo vai trò nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Metrics cho engineering, Logs cho product, Traces cho leadership, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp"
+        },
+        {
+          "key": "B",
+          "text": "Metrics phát hiện (rẻ, dùng để alert), Traces localize (tìm bottleneck), Logs tìm root cause (đắt, dùng để debug) — thiếu một trong ba thì MTTR kéo dài từ phút lên giờ, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Logs phát hiện, Metrics khoanh vùng, Traces xác nhận đã fix, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Cả ba đều dùng để alert, chỉ khác định dạng dữ liệu, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Pillar thứ tư là Profiles về CPU và memory, nhưng ít dùng cho AI vì bottleneck thường nằm ở LLM API chứ không phải code chạy tại chỗ. Ví dụ minh hoạ: metrics thấy P99 tăng lên 8s, traces chỉ ra span vector_search chiếm 6,5s, logs cho biết Pinecone timeout từ 02:47.",
+      "tags": [
+        "day13",
+        "3-pillars"
+      ]
+    },
+    {
+      "id": "M-085",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Vì sao không được dùng user_id làm metric label?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì cardinality bùng nổ: user_id 100.000 giá trị nhân model 4 nhân endpoint 20 nhân status 10 cho 8×10⁷ series — dữ liệu high-cardinality phải đưa vào logs hoặc traces, dù cấu hình không đổi, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp"
+        },
+        {
+          "key": "B",
+          "text": "Vì user_id thay đổi theo phiên nên không ổn định, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong mọi trường hợp, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "C",
+          "text": "Vì metric chỉ chấp nhận label dạng số, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+        },
+        {
+          "key": "D",
+          "text": "Vì metric label bắt buộc phải là giá trị đã được mã hoá, mà user_id thì chưa được mã hoá"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Label được phép dùng: model, env, feature, tier — những thứ có ít giá trị. Sai cardinality là cách phổ biến nhất làm sập Prometheus và nhận hoá đơn rất lớn từ nhà cung cấp SaaS mà không được báo trước.",
+      "tags": [
+        "day13",
+        "cardinality"
+      ]
+    },
+    {
+      "id": "M-086",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Bốn Golden Signals và hai signal bổ sung cho AI agent là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Latency, Traffic, Errors, Saturation — cộng thêm Cost ($/request, $/user, token usage) và Quality (hallucination rate, CSAT, groundedness), ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường"
+        },
+        {
+          "key": "B",
+          "text": "CPU, RAM, Disk, Network — cộng thêm GPU và Token throughput, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn"
+        },
+        {
+          "key": "C",
+          "text": "Rate, Errors, Duration, Utilization — cộng thêm Availability và Reliability, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "D",
+          "text": "Metrics, Logs, Traces, Profiles — cộng thêm Alerts và Dashboards, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Lý do phải thêm hai signal: agent có thể 'up' theo mọi nghĩa truyền thống — traffic OK, latency OK, error OK — nhưng vẫn trả lời sai và đốt tiền. Đây là hai failure mode riêng của AI mà monitoring truyền thống hoàn toàn bỏ qua.",
+      "tags": [
+        "day13",
+        "golden-signals"
+      ]
+    },
+    {
+      "id": "M-087",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Chiến lược log sampling điển hình cho AI agent là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Giữ 100% ERROR và WARN, 10% INFO, 1% DEBUG, 100% request chậm hơn 10 giây, và 100% request tốn hơn 1 đô — giữ 100% errors là non-negotiable, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, kể cả khi tài liệu nguồn còn nguyên vẹn"
+        },
+        {
+          "key": "B",
+          "text": "Sample đều 10% cho mọi mức log để đơn giản hoá cấu hình, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, với mọi quy mô hệ thống"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ giữ log của 1% người dùng được chọn ngẫu nhiên, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Không sample gì cả, giữ 100% mọi log để có đủ dữ liệu, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, nên chi phí mỗi lần gọi không thay đổi, trong suốt vòng đời dịch vụ"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Bài toán chi phí đứng sau: 100.000 request mỗi ngày nhân 10 log entry là 1 triệu entry, với giá khoảng 0,1 đô mỗi 1.000 entry thì thành 100 đô mỗi ngày chỉ riêng log. Sampling giảm chi phí 10–100 lần nhưng mất khả năng nhìn thấy pattern bình thường.",
+      "tags": [
+        "day13",
+        "sampling"
+      ]
+    },
+    {
+      "id": "M-088",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Alert nên dựa trên symptom hay cause, và vì sao?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Symptom — alert về tác động tới người dùng (P95 vượt SLO, error rate trên 1%, cost/hour vượt budget) thay vì nguyên nhân kỹ thuật (CPU trên 80%, RAM trên 90%) — vì cause có thể cao mà user không bị ảnh hưởng, tạo false positive rồi dần bị ignore, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Cause, vì nó cho biết chính xác thành phần nào đang hỏng nên fix nhanh hơn, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, với mọi quy mô hệ thống, trong mọi trường hợp"
+        },
+        {
+          "key": "C",
+          "text": "Cả hai với mức ưu tiên như nhau để không bỏ sót trường hợp nào, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Symptom vào ban ngày và cause vào ban đêm khi ít người trực, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong khi ngân sách token vẫn còn dư nhiều, ở cả ba môi trường"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Nguyên tắc của Google SRE: page on symptoms, not causes. Cause alert vẫn hữu ích nhưng chỉ ở vai trò thông tin bổ sung để debug SAU khi symptom alert đã fire. Và mỗi alert phải có runbook — alert không có runbook là alert không xử lý được lúc 3 giờ sáng.",
+      "tags": [
+        "day13",
+        "alert"
+      ]
+    },
+    {
+      "id": "M-089",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Bốn cost optimization pattern cho AI và mức tiết kiệm là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cache, CDN, load balancer và auto-scaling, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, trong khi hệ thống vẫn chạy đúng thiết kế, dù cấu hình không đổi"
+        },
+        {
+          "key": "B",
+          "text": "Fine-tuning, quantization, distillation và pruning model, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, với mọi quy mô hệ thống"
+        },
+        {
+          "key": "C",
+          "text": "Giảm số replica, tắt logging, nén prompt và hạ temperature, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Prompt Caching (cache system prompt và docs tĩnh, cache read rẻ hơn khoảng 10 lần); Model Routing hay Cascade (câu dễ đưa model nhỏ, câu khó đưa model lớn, giảm 40–60%); Semantic Cache (query tương tự trả lời cached khi similarity trên 0,95, hit rate 20–40%); và Batch API (việc không realtime dùng batch giá rẻ một nửa), ở cả ba môi trường"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Áp dụng cả bốn có thể đưa chi phí từ 96k xuống 22k mỗi tháng. Điều kiện để làm được là cost attribution: mọi LLM call phải có ít nhất ba tag user_id, feature và model — thiếu một trong ba thì khi được hỏi 'ai tốn tiền' sẽ không trả lời được.",
+      "tags": [
+        "day13",
+        "cost"
+      ]
+    },
+    {
+      "id": "M-090",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "OpenTelemetry gồm ba phần nào và vì sao nó quan trọng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "API (interface instrument code), SDK (implementation theo ngôn ngữ) và Collector (nhận, xử lý, export tới backend) — quan trọng vì instrument một lần là đổi backend tự do, tránh vendor lock-in, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, trong mọi trường hợp, kể cả lúc tải thấp, dù cấu hình không đổi, mà không cần sửa code, với mọi loại workload"
+        },
+        {
+          "key": "B",
+          "text": "Exporter, Processor và Sampler — ba bước xử lý telemetry, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        },
+        {
+          "key": "C",
+          "text": "Metrics, Logs và Traces — ba loại dữ liệu được định nghĩa, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "D",
+          "text": "Agent, Server và Dashboard — ba thành phần của hệ giám sát, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        }
+      ],
+      "answer": "A",
+      "explanation": "OTel là dự án đã tốt nghiệp của CNCF. Từ 2024 có GenAI Semantic Conventions dành riêng cho LLM tracing với các attribute chuẩn như gen_ai.system, gen_ai.request.model và gen_ai.usage.input_tokens — dùng namespace chuẩn thì dashboard query tái sử dụng được giữa các công cụ.",
+      "tags": [
+        "day13",
+        "otel"
+      ]
+    },
+    {
+      "id": "M-091",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Vì sao phải đọc trace trước rồi mới chọn metric?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì trace chứa sẵn mọi metric nên không cần chọn thêm, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "B",
+          "text": "Vì đọc trace nhanh hơn nghiên cứu tài liệu về các metric, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+        },
+        {
+          "key": "C",
+          "text": "Vì các metric chuẩn không áp dụng được cho tiếng Việt, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, trong suốt vòng đời dịch vụ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "D",
+          "text": "Vì chọn metric trước khi biết agent hỏng kiểu gì thì cuối cùng chỉ đo được thứ dễ đo nhất — team nào cũng có dashboard hallucination rate, rất ít team biết 45% lỗi của mình đến từ một cron re-index không chạy, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Đây là takeaway số 1 của Ngày 14. Quy trình 6 bước mượn từ grounded theory có bốn bước đầu cố ý KHÔNG nhắc tên metric nào: sample trace, open coding, axial coding, đếm tần suất — rồi mới tới bước viết eval ở cuối.",
+      "tags": [
+        "day14",
+        "bottom-up"
+      ]
+    },
+    {
+      "id": "M-092",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Open coding và axial coding khác nhau thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Open coding là ghi một dòng thô bằng ngôn ngữ của mình, chưa phân loại và CHỈ ghi lỗi đầu tiên; axial coding là gom các ghi chú thô thành category có tên, gom theo ROOT CAUSE chứ không theo triệu chứng, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi"
+        },
+        {
+          "key": "B",
+          "text": "Open coding là bước cuối còn axial coding là bước đầu, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, trong suốt vòng đời dịch vụ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "C",
+          "text": "Open coding dùng cho dữ liệu văn bản còn axial coding cho dữ liệu số, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        },
+        {
+          "key": "D",
+          "text": "Open coding do máy làm còn axial coding do người làm, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, nên chi phí mỗi lần gọi không thay đổi, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Lý do chỉ ghi lỗi đầu tiên: lỗi thứ hai trong cùng một trace thường là hệ quả của lỗi thứ nhất, đếm cả hai thì cluster lớn nhất lại là cluster sai và bạn sẽ fix nhầm chỗ. Và category chỉ dùng được khi mọi case trong nó đóng lại bằng CÙNG MỘT lần sửa.",
+      "tags": [
+        "day14",
+        "coding"
+      ]
+    },
+    {
+      "id": "M-093",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Quy tắc dừng khi đọc trace là gì và có giới hạn nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dừng khi đã tìm được ít nhất 10 category khác nhau, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, trong mọi trường hợp, kể cả lúc tải thấp, dù cấu hình không đổi, mà không cần sửa code, với mọi loại workload"
+        },
+        {
+          "key": "B",
+          "text": "Không có quy tắc dừng, phải đọc toàn bộ trace của một tuần, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "C",
+          "text": "Dừng khi đọc đủ 50 trace, đó là con số chuẩn cho mọi domain, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "D",
+          "text": "Dừng khi 20 trace liên tiếp không sinh category mới — thực tế khoảng 100 trace, tốn 2–3 giờ một người; nhưng quy tắc này KHÔNG bắt được lỗi hiếm dưới 1% traffic, những lỗi đó phải đi tìm có chủ đích, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Một lưu ý nữa: đừng chia 5 người mỗi người đọc 20 trace, vì category của mỗi người sẽ không khớp nhau. Nghiên cứu MAST cho thấy phải mất khoảng 10 giờ tranh luận trên 15 trace mới đạt được Cohen's kappa 0,88.",
+      "tags": [
+        "day14",
+        "bao-hoa"
+      ]
+    },
+    {
+      "id": "M-094",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Cohen's kappa đo cái gì và nghịch lý của nó là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đo mức tương quan giữa hai metric khác nhau, từ −1 tới 1, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, với mọi quy mô hệ thống"
+        },
+        {
+          "key": "B",
+          "text": "Đo độ chính xác của phân loại so với ground truth, từ 0 tới 100%, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ"
+        },
+        {
+          "key": "C",
+          "text": "Đo tỷ lệ đồng thuận thô, tính bằng số case trùng chia tổng số case, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi"
+        },
+        {
+          "key": "D",
+          "text": "Đo độ RÕ của định nghĩa — người khác nhìn cùng trace có dán cùng label không, chạy từ 0 tới 1 và trên 0,8 là rất chặt; nghịch lý là hai người có thể đồng thuận 95% mà kappa vẫn bằng 0 nếu nhãn quá lệch, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù cấu hình không đổi"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Điểm quan trọng: kappa KHÔNG đo phân loại đó có đúng hay không — nó chỉ nói phân loại lặp lại được, và vì thế tự động hoá được. Hệ quả thực hành của nghịch lý: bộ mẫu phải cân PASS/FAIL, vì nhãn càng lệch thì dư địa càng hẹp.",
+      "tags": [
+        "day14",
+        "kappa"
+      ]
+    },
+    {
+      "id": "M-095",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Vì sao exact match và ROUGE-L không dùng được cho câu trả lời mở?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì chúng chỉ hoạt động với tiếng Anh, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, với mọi quy mô hệ thống, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Vì chúng chạy quá chậm trên văn bản dài, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, kể cả lúc tải thấp"
+        },
+        {
+          "key": "C",
+          "text": "Vì chúng đếm từ trùng nhau nên mù trước phủ định — hai câu ngược nghĩa có thể trùng 9/10 từ, và ROUGE-L chấm cặp ngược nghĩa tới 0,90, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Vì chúng cần một đáp án chuẩn mà câu trả lời mở thì không có, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, trong mọi trường hợp"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Cosine similarity khá hơn ở chỗ bắt được paraphrase, nhưng vẫn mù trước mâu thuẫn: cặp CÙNG nghĩa được 0,93 còn cặp NGƯỢC nghĩa được 0,91 — không có ngưỡng nào tách được hai dòng đó. Kết luận: hoặc chấm được bằng code, hoặc phải trả tiền cho một model call.",
+      "tags": [
+        "day14",
+        "metric-limits"
+      ]
+    },
+    {
+      "id": "M-096",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Trục 1 xếp bảy loại output theo tiêu chí nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Theo độ dài output, từ ngắn tới dài, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, ở cả ba môi trường, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, nên chi phí mỗi lần gọi không thay đổi, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "B",
+          "text": "Theo mức độ phổ biến trong thực tế, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả lúc tải thấp, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+        },
+        {
+          "key": "C",
+          "text": "Theo cách chấm — đi từ trên xuống thì chấm ĐẮT dần và KÉM TIN CẬY dần: đáp án ngắn đóng chấm bằng exact match (chi phí 0, tin cậy cao) cho tới phiên nhiều lượt phải có traffic thật (tin cậy thấp), dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        },
+        {
+          "key": "D",
+          "text": "Theo thứ tự xuất hiện trong pipeline xử lý, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, với mọi quy mô hệ thống, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Điểm quan trọng nhất: hàng của bạn KHÔNG cố định. Bắt agent kèm id tài liệu đã dựa vào, trả JSON có cấu trúc, hoặc trích nguyên văn thay vì diễn giải — mỗi cách kéo một phần phép đo lên hàng trên, tức chấm rẻ hơn và ổn định hơn.",
+      "tags": [
+        "day14",
+        "truc-1"
+      ]
+    },
+    {
+      "id": "M-097",
+      "module": "D",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Vì sao mỗi test case chỉ chạy một lần thì không đo được reliability?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì lần chạy đầu tiên luôn chậm hơn do chưa có cache, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+        },
+        {
+          "key": "B",
+          "text": "Vì reliability có metric riêng là pass^k — đúng cả k lần không trượt lần nào — mà muốn tính được thì phải có k lần chạy của CÙNG một case; metric thì có sẵn, cái thiếu là cách chạy test, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, với mọi quy mô hệ thống, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+        },
+        {
+          "key": "C",
+          "text": "Vì một lần chạy không đủ để tính giá trị trung bình, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "D",
+          "text": "Vì công cụ eval yêu cầu tối thiểu ba lần chạy mỗi case, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Con số phải nhớ: với p = 0,9 thì pass^8 chỉ còn 0,43; muốn pass^8 đạt 0,90 thì mỗi lần chạy phải đạt 98,7%. Đó là khoảng cách giữa demo chạy được và sản phẩm dùng được — và pass@k thì ngược lại, càng chạy nhiều càng tăng nên đó là con số đem đi demo.",
+      "tags": [
+        "day14",
+        "pass-k"
+      ]
+    },
+    {
+      "id": "M-098",
+      "module": "A",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Vì sao temperature 0 vẫn không cho kết quả tất định?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì seed mặc định thay đổi theo đồng hồ hệ thống của server, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi"
+        },
+        {
+          "key": "B",
+          "text": "Vì phép cộng float trên GPU không có tính kết hợp — đổi thứ tự cộng là đổi kết quả ở bit cuối, mà thứ tự cộng phụ thuộc kích thước batch, và batch phụ thuộc vào ai đang gọi API cùng lúc với bạn, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù cấu hình không đổi"
+        },
+        {
+          "key": "C",
+          "text": "Vì model được cập nhật trọng số liên tục hằng ngày, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp"
+        },
+        {
+          "key": "D",
+          "text": "Vì nhà cung cấp cố tình thêm nhiễu để chống sao chép model, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Đây là chuyện của hạ tầng chứ không phải của model, nên seed cố định được phần sampling nhưng không cố định được phần này. Hệ quả: mỗi lần bạn báo cáo một con số từ MỘT lần chạy là đang báo cáo một mẫu cỡ 1 — cùng một agent chạy lại có thể lệch 1,5 điểm.",
+      "tags": [
+        "day14",
+        "temperature"
+      ]
+    },
+    {
+      "id": "M-099",
+      "module": "C",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Judge nên được calibrate bằng gì và dùng cho mục đích nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bằng HAI con số TPR và TNR (không phải agreement rate, vì agreement bị chi phối bởi cột đông hơn — với tỷ lệ FAIL 8% thì một hàm chỉ biết in PASS cũng đạt 92%); và chỉ đáng tin cho CHÊNH LỆCH giữa hai phiên bản, với cùng prompt và cùng golden set, ở cả ba môi trường"
+        },
+        {
+          "key": "B",
+          "text": "Bằng điểm số do chính judge tự đánh giá về độ tin cậy của mình, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Bằng số lượng case đã chấm, và dùng để thay thế hoàn toàn người chấm, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+        },
+        {
+          "key": "D",
+          "text": "Bằng agreement rate với người chấm, và dùng để báo cáo con số tuyệt đối, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Lý do delta tin được: phần judge kêu oan bám vào cả hai lần chấm như nhau nên khi trừ thì nó tự triệt tiêu. Nhưng độ lớn bị nén theo hệ số J = TPR + TNR − 1, nên hiệu đo được luôn nhỏ hơn hiệu thật.",
+      "tags": [
+        "day14",
+        "judge"
+      ]
+    },
+    {
+      "id": "M-100",
+      "module": "B",
+      "type": "mcq",
+      "points": 1,
+      "prompt": "Khi v1 đạt 66% và v2 đạt 71% trên bộ test 200 câu thì kết luận thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Kết luận v2 tốt hơn 5 điểm và tiến hành deploy, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, với mọi quy mô hệ thống, kể cả lúc tải thấp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "B",
+          "text": "Chưa kết luận được — với 200 sample thì vạch chia khoảng 11 điểm phần trăm, chênh lệch 5 điểm nhỏ hơn vạch chia nên là nhiễu chứ chưa phải kết quả, trong mọi trường hợp, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, trong khi log không ghi lại dấu hiệu nào, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+        },
+        {
+          "key": "C",
+          "text": "Kết luận không có khác biệt vì 5 điểm là quá nhỏ, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, dù cấu hình không đổi, theo đúng khuyến nghị, kể cả khi đã bật đủ kiểm tra, kể cả khi tài liệu nguồn còn nguyên vẹn, kể cả khi model đã cập nhật bản mới nhất, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, mà không cần sửa code"
+        },
+        {
+          "key": "D",
+          "text": "Kết luận v2 tốt hơn nhưng cần chạy thêm một lần nữa để xác nhận, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, ở cả ba môi trường, mà không cần sửa code, nên chi phí mỗi lần gọi không thay đổi, dù prompt đã được viết lại rõ ràng hơn, trong mọi trường hợp, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị, với mọi loại workload"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Quan hệ không tuyến tính: muốn vạch chia nhỏ đi một nửa thì cần gấp 4 lần số case, vì nhiễu chỉ co lại theo 1/√n. Ngoài ra chỉ những case DISCORDANT mới mang thông tin — trong 200 sample có thể chỉ 78 case, và McNemar test có thể cho p = 0,31 tức không được phép nói v2 tốt hơn.",
+      "tags": [
+        "day14",
+        "sample-size"
+      ]
+    }
+  ]
+}

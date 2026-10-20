@@ -1,0 +1,302 @@
+{
+  "id": "exam-115",
+  "title": "Mô phỏng Mid-Program Test — Tự luận & Code",
+  "description": "12 câu tự luận và code mô phỏng phần tự luận của bài thi giữa kỳ: hai câu RAGAS đúng theo đề thật (4 metric trong bối cảnh bảo hành, và đọc cặp Faithfulness 0,95 với Context Recall 0,60), cộng các chủ đề được báo lại — viết CI/CD, viết system prompt, tính ROI, trình bày P99, viết tool schema, thiết kế RAG pipeline, ReAct và Agentic Fit, data lake và phân loại nguồn dữ liệu, một câu code phát hiện injection, và guardrails cùng trách nhiệm pháp lý.",
+  "durationMinutes": 120,
+  "totalPoints": 120,
+  "passingScore": 70,
+  "disclaimer": "Đề mô phỏng do AI biên soạn: hai câu đầu bám theo đề thi thật được chụp lại, các câu còn lại dựng theo chủ đề mà người đã thi kể lại. Không phải đề thi chính thức. Đáp án mẫu là một cách trả lời tốt, không phải cách duy nhất — hãy tự chấm theo rubric.",
+  "course": "aicb",
+  "kind": "review",
+  "label": "Mô phỏng giữa kỳ",
+  "questions": [
+    {
+      "id": "MID-01",
+      "module": "A",
+      "type": "essay",
+      "points": 10,
+      "prompt": "Team đang build agent trả lời câu hỏi về chính sách bảo hành sản phẩm điện tử cho bộ phận CSKH.\nSau 2 tuần demo, tech lead yêu cầu: \"Trước khi production, tôi cần bằng chứng khoa học agent này tốt. Không phải cảm nhận — cần số liệu cụ thể.\" Team có: **500 câu hỏi thực từ CSKH trong 3 tháng qua**, tài liệu bảo hành đầy đủ, và budget để dùng GPT-4 làm judge.\n\n**Yêu cầu.** Nêu 4 RAGAS metrics sẽ dùng và giải thích ý nghĩa từng metric **trong bối cảnh bảo hành**.",
+      "modelAnswer": "**RETRIEVAL**\n- **Context Recall > 0,75** — đã lấy đủ điều khoản cần chưa. Câu \"máy giặt 8 tháng hỏng bo mạch\" cần đồng thời thời hạn, danh mục linh kiện VÀ danh mục loại trừ; recall thấp thì trả lời thiếu vế mà nghe vẫn hợp lý.\n- **Context Precision > 0,75** — đoạn đúng có xếp hạng cao không. Điều khoản các dòng sản phẩm rất giống nhau, precision thấp thì điều khoản tivi bị xếp trên điều khoản máy giặt.\n\n**GENERATION**\n- **Faithfulness > 0,85** — chốt chặn chống bịa điều kiện. Bịa \"đổi mới trong 30 ngày\" là tạo cam kết công ty phải chịu (vụ Air Canada).\n- **Answer Relevancy > 0,80** — có đúng trọng tâm không. Hỏi \"bao lâu sửa xong\" mà đọc lại toàn bộ điều kiện thì mọi claim đều trung thực nhưng vô ích.\n- **Hai chỉ số này không thay thế nhau**: không bịa gì thì faithfulness = 1,0, nhưng context lạc đề thì answer vẫn lạc đề.\n\n**Triển khai**: 500 câu thực CHƯA phải golden set — phải thêm `reference` và `gold_docs` (không có `gold_docs` thì không tính được metric retrieval nào). Chia **slice** từ đầu. Judge phải **calibrate bằng TPR/TNR**.",
+      "rubric": [
+        "Nêu đủ 4 metric: Context Recall, Context Precision, Faithfulness, Answer Relevancy",
+        "Chia đúng hai nhóm: hai metric retrieval và hai metric generation",
+        "Nêu ngưỡng khuyến nghị 0,75 / 0,75 / 0,85 / 0,80",
+        "Giải thích Context Recall bằng ví dụ bảo hành cụ thể (thiếu điều khoản nên trả lời thiếu vế)",
+        "Giải thích Faithfulness gắn với rủi ro bịa cam kết bảo hành, có thể dẫn vụ Air Canada",
+        "Chỉ ra Faithfulness và Answer Relevancy không thay thế nhau",
+        "Nêu 500 câu hỏi chưa phải golden set, phải bổ sung reference và gold_docs",
+        "Có nhắc calibrate judge bằng TPR/TNR hoặc chia slice"
+      ],
+      "tags": [
+        "mid",
+        "day18",
+        "ragas"
+      ]
+    },
+    {
+      "id": "MID-02",
+      "module": "A",
+      "type": "essay",
+      "points": 10,
+      "prompt": "Team đang build agent trả lời câu hỏi về chính sách bảo hành sản phẩm điện tử cho bộ phận CSKH.\nSau 2 tuần demo, tech lead yêu cầu: \"Trước khi production, tôi cần bằng chứng khoa học agent này tốt. Không phải cảm nhận — cần số liệu cụ thể.\" Team có: **500 câu hỏi thực từ CSKH trong 3 tháng qua**, tài liệu bảo hành đầy đủ, và budget để dùng GPT-4 làm judge.\n\n**Yêu cầu.** Nếu **Faithfulness = 0,95 nhưng Context Recall = 0,60**, điều này có nghĩa gì? Nên fix ở đâu?",
+      "modelAnswer": "- **Ý nghĩa**: agent trả lời rất **TRUNG THỰC trên một bộ tài liệu THIẾU**. Faithfulness 0,95 đạt; Context Recall 0,60 fail — ~40% bằng chứng chưa lấy lên. Nguy hiểm vì mọi chỉ số khâu sinh đều xanh.\n- **Điểm mù**: faithfulness đo answer có bám context, KHÔNG đo answer có đúng. Retriever lấy bản chính sách hết hiệu lực, agent tóm tắt trung thực → vẫn 0,95 dù sai. Muốn bắt phải dùng metric có ground truth: Context Recall so `gold_docs`, Answer Correctness so `reference`.\n- *Biểu hiện*: lấy được điều khoản thời hạn nhưng không lấy được danh mục loại trừ → trả lời \"còn bảo hành\" rất tự tin và có trích dẫn.\n- **Fix ở tầng RETRIEVAL** (siết prompt vô ích vì model đã bám context):\n  1. **Hybrid search** BM25 + dense, RRF k=60 — tài liệu đầy mã sản phẩm và mã linh kiện, dense mù trước định danh hiếm. Thường là nguyên nhân số một.\n  2. **Query transformation** — Multi-Query cho câu nhiều vế, HyDE khi khách dùng từ khác tài liệu.\n  3. **Xem lại chunking** — danh mục loại trừ có thể nằm ở bảng bị cắt ngang; cân nhắc hierarchical 2048/256 và table-aware.\n- Đo lại trên **cùng golden set**, so từng sample. Thứ tự: **recall → precision → faithfulness**.",
+      "rubric": [
+        "Diễn giải đúng: model trung thực trên một bộ tài liệu thiếu",
+        "Đọc đúng hai con số so với ngưỡng 0,85 và 0,75",
+        "Chỉ ra faithfulness không đo câu trả lời có đúng hay không — điểm mù của metric không có ground truth",
+        "Nêu ví dụ context sai nhưng bám sát vẫn cho faithfulness cao",
+        "Kết luận fix ở tầng RETRIEVAL, không phải Generation, có giải thích vì sao siết prompt vô ích",
+        "Đề xuất ít nhất hai kỹ thuật đúng tầng: hybrid/RRF, query transformation, chunking, contextual retrieval",
+        "Gắn được vào bối cảnh bảo hành bằng một ví dụ cụ thể",
+        "Nêu thứ tự recall → precision → faithfulness và cách kiểm chứng lại"
+      ],
+      "tags": [
+        "mid",
+        "day18",
+        "ragas"
+      ]
+    },
+    {
+      "id": "MID-03",
+      "module": "B",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Agent tra cứu bảo hành ở trên đã chạy được trên máy bạn. Tech lead giao tiếp: *\"Từ giờ mỗi lần merge vào main là phải tự động lên staging, và không ai được deploy tay lên production nữa.\"*\n**Yêu cầu.** Viết ra pipeline CI/CD cho agent này. Nêu rõ: (a) các chặng theo thứ tự và mỗi chặng chạy gì; (b) điều kiện nào chặn không cho merge; (c) chiến lược deploy lên production và cách rollback; (d) hai đặc thù của agent AI mà pipeline phần mềm thông thường không có.",
+      "modelAnswer": "- **(a) Chặng**: Trigger → Lint → Test (unit, integration, coverage) → Security (quét CVE + quét secret) → Build & Push (multi-stage, tag theo commit SHA chứ không dùng `latest`) → Deploy Staging (đúng image vừa build, smoke test) → Approve → Deploy Production (canary 5% rồi 100%).\n- **(b) Chặn merge khi**: lint chưa pass; coverage dưới 70%; có CVE critical; image trên 500 MB; có secret trong diff.\n- **Quy tắc vàng**: CI dưới 10 phút (build dưới 5) — pipeline chậm thì developer né và cơ chế kiểm soát mất tác dụng.\n- **(c) Production: canary** — phát hiện vấn đề trên traffic THẬT trước khi ảnh hưởng toàn bộ (weighted load balancing 90/10). Blue/green cũng được nếu ưu tiên rollback tức thì.\n- **Zero-downtime cần**: graceful shutdown xử lý SIGTERM, chạy migration TRƯỚC, API backward-compatible (rolling update có cả hai version cùng chạy), `readinessProbe`.\n- **Rollback dưới 5 phút**: `kubectl rollout undo`, migration down đã test, hotfix branch, audit log.\n- **(d) Hai đặc thù AI**: (1) **quality gate bằng eval, không chỉ unit test** — smoke 30 sample mỗi commit, bộ đầy đủ 200 hằng đêm, phần judge trước mỗi release, chốt ngưỡng trước và so trên CÙNG golden set; (2) **safety test + spending cap** — adversarial prompt chạy như unit test.\n- **Prompt và golden set phải version cùng code trong Git**, nếu không thì không phân biệt được \"agent tốt lên\" với \"test set dễ đi\".",
+      "rubric": [
+        "Nêu đủ chuỗi chặng từ trigger tới deploy production, có bước approve",
+        "Bước security có quét CVE và quét secret",
+        "Build image gắn tag theo commit SHA thay vì latest",
+        "Nêu ngưỡng chặn merge cụ thể (coverage, CVE, lint) và quy tắc CI dưới 10 phút",
+        "Chọn canary hoặc blue/green cho production và giải thích lý do",
+        "Nêu điều kiện zero-downtime: graceful shutdown, migration trước, API backward-compatible, readinessProbe",
+        "Rollback trong dưới 5 phút với cách cụ thể",
+        "Đặc thù AI 1: quality gate bằng eval trên golden set, không chỉ unit test",
+        "Đặc thù AI 2: safety test adversarial và/hoặc kiểm soát chi phí LLM",
+        "Nêu prompt và golden set phải được version cùng code trong Git"
+      ],
+      "tags": [
+        "mid",
+        "day12",
+        "ci-cd"
+      ]
+    },
+    {
+      "id": "MID-04",
+      "module": "B",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Bạn phải viết **system prompt** cho chính agent tra cứu bảo hành ở trên. Yêu cầu nghiệp vụ: chỉ trả lời trong phạm vi chính sách bảo hành; mọi khẳng định phải trích dẫn được; không được hứa điều chính sách không nói; khi tài liệu không đủ thì chuyển cho nhân viên CSKH.\n**Yêu cầu.** Viết system prompt hoàn chỉnh (viết thật, không mô tả), rồi giải thích ngắn gọn từng phần bạn đưa vào và vì sao.",
+      "modelAnswer": "```\n# VAI TRÒ\nTrợ lý tra cứu chính sách bảo hành cho nhân viên CSKH đang tiếp khách.\n\n# QUY TẮC\n1. CHỈ dùng thông tin trong <tai_lieu>. Không dùng kiến thức nền.\n2. Mỗi khẳng định kèm chỉ số nguồn [1], [2].\n3. Hai tài liệu mâu thuẫn: ưu tiên effective_date mới nhất, nói rõ đã chọn bản nào.\n4. Không suy rộng điều kiện sang dòng sản phẩm khác.\n5. Luôn kiểm danh mục LOẠI TRỪ trước khi kết luận \"còn được bảo hành\".\n\n# PHẠM VI\nChỉ trả lời: thời hạn, điều kiện, danh mục loại trừ, thủ tục và thời gian xử lý.\nNgoài phạm vi (giá, khuyến mãi, tư vấn sửa chữa) thì từ chối và chỉ sang bộ phận khác.\n\n# KHI KHÔNG ĐỦ DỮ LIỆU\nKHÔNG đoán. Trả: \"Không đủ căn cứ. Thiếu: <thiếu gì>. Đề nghị chuyển nhân viên bảo hành.\"\nNếu chỉ trả lời được một phần: trả phần chắc chắn kèm trích dẫn, nói rõ phần nào chưa có căn cứ.\n\n# ĐỊNH DẠNG\n{\"ket_luan\": \"<còn|không còn|không đủ căn cứ>\", \"giai_thich\": \"<2-4 câu, mỗi ý kèm [n]>\",\n \"dieu_khoan_da_dung\": [\"<clause_id>\"], \"can_chuyen_nguoi\": <true|false>}\n\n# NHẮC LẠI\nChỉ dùng <tai_lieu>. Thiếu thì nói thiếu. Không hứa điều chính sách không nói.\n```\n- **Cấu trúc 5 phần**: Persona · Rules · Phạm vi · Constraints · Output format — system prompt là policy layer.\n- Quy tắc 1–2 là **strict grounding + citation**; quy tắc 3 chống trả lời theo bản cũ; quy tắc 5 là luật nghiệp vụ vì bỏ sót danh mục loại trừ là lỗi tốn tiền nhất.\n- Viết **chỉ dẫn dương**, không viết \"đừng bịa\". Trường `dieu_khoan_da_dung` để **check bằng code**.\n- **Ràng buộc nhắc lại ở CUỐI** vì model nhớ tốt hai đầu. Đặt `temperature = 0`, giữ prompt dưới 500 token.",
+      "rubric": [
+        "Viết ra prompt thật, không chỉ mô tả",
+        "Có đủ 5 phần: Persona, Rules, Phạm vi/Capabilities, Constraints, Output format",
+        "Có strict grounding: chỉ dùng tài liệu, không dùng kiến thức nền",
+        "Bắt buộc citation dạng [n] hoặc clause_id để kiểm chứng",
+        "Có luật xử lý khi thiếu dữ liệu: không đoán, nói rõ thiếu gì, chuyển người",
+        "Có luật xử lý xung đột phiên bản hoặc chống suy diễn quá đà",
+        "Định dạng đầu ra rõ ràng, tốt nhất là JSON có schema",
+        "Nhắc lại ràng buộc quan trọng ở cuối prompt và giải thích lý do (lost in the middle)",
+        "Viết chỉ dẫn dương thay vì chỉ cấm đoán",
+        "Nêu đặt temperature 0 và giữ system prompt gọn (dưới 500 token) để tránh bẫy patch prompt"
+      ],
+      "tags": [
+        "mid",
+        "day4",
+        "system-prompt"
+      ]
+    },
+    {
+      "id": "MID-05",
+      "module": "A",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Bộ phận CSKH hiện có 12 nhân viên, mỗi người xử lý trung bình 60 câu hỏi bảo hành mỗi ngày, mất khoảng 4 phút một câu. Chi phí nhân sự khoảng 250.000 đồng cho mỗi giờ làm việc.\nAgent bạn xây tự trả lời được 70% số câu, 30% còn lại vẫn phải chuyển cho người. Chi phí gọi model khoảng 800 đồng mỗi câu. Chi phí xây dựng và vận hành hạ tầng ước tính 90 triệu đồng cho năm đầu.\n**Yêu cầu.** (a) Tính ROI năm đầu, ghi rõ giả định; (b) nêu ba chi phí ẩn mà phép tính này thường bỏ sót; (c) trình bày con số cho ban lãnh đạo theo cách nào để họ ra được quyết định.",
+      "modelAnswer": "- **(a)** *Giả định*: 250 ngày/năm; agent xử lý trọn 70%; phần chuyển người tốn thời gian như cũ.\n  - Khối lượng: 12 × 60 × 250 = **180.000 câu/năm**.\n  - Hiện tại: 4 phút = 1/15 giờ → 12.000 giờ × 250.000đ = **3,0 tỷ/năm**.\n  - Sau agent: người xử lý 30% = 54.000 câu → 3.600 giờ = **900 tr**; model 180.000 × 800đ = **144 tr**; hạ tầng **90 tr**. Tổng **1,134 tỷ**.\n  - **Tiết kiệm 1,866 tỷ/năm** · ROI = 1,866 / 0,234 ≈ **797%** · hoàn vốn **dưới 3 tuần**.\n- **(b) Ba chi phí ẩn**:\n  1. **Chi phí của câu trả lời SAI** — phép tính ngầm giả định 70% tự động đều đúng. Trả lời sai điều kiện bảo hành tạo cam kết công ty phải thực hiện (Air Canada). Phải nhân tỷ lệ lỗi với chi phí mỗi lần sai; con số đó thường lớn hơn toàn bộ khoản tiết kiệm token.\n  2. **Vận hành liên tục** — monitoring, re-index khi chính sách đổi, chạy eval mỗi release, người trực, cập nhật golden set. Anti-pattern \"we'll add monitoring later\" đẩy khoản này ra khỏi bảng tính.\n  3. **Trôi theo thời gian** — giá token đổi, model đổi, câu hỏi drift, tỷ lệ 70% tụt dần nếu không bảo trì; cộng chi phí đào tạo.\n- **(c) Trình bày**: đừng đưa **một** con số tổng hợp — làm vậy là giấu đi đánh đổi lãnh đạo phải tự chọn. Trình bày **ba cột chất lượng · chi phí · rủi ro**, đưa **khoảng** (50% / 70% / 85%) kèm giả định, nói bằng **ngôn ngữ nghiệp vụ** (\"hoàn vốn dưới 3 tuần, giải phóng ~8.400 giờ/năm\"), gắn vào một **gate đo được** (Context Recall và Faithfulness đạt ngưỡng trên 500 câu thực), và nêu **phương án lùi**: dừng ở mức trợ lý gợi ý cho nhân viên — vẫn thu phần lớn tiết kiệm mà gần như không có rủi ro cam kết sai.",
+      "rubric": [
+        "Tính đúng khối lượng 180.000 câu/năm và chi phí hiện tại khoảng 3 tỷ",
+        "Tính chi phí sau khi có agent gồm cả phần người còn lại, chi phí model và hạ tầng",
+        "Ra được con số tiết kiệm và ROI hoặc thời gian hoàn vốn",
+        "Ghi rõ giả định (số ngày làm việc, phần chuyển người tốn thời gian như cũ)",
+        "Chi phí ẩn 1: chi phí của câu trả lời SAI, có thể dẫn vụ Air Canada",
+        "Chi phí ẩn 2: vận hành liên tục — monitoring, re-index, eval, người trực",
+        "Chi phí ẩn 3: trôi theo thời gian — giá token, model đổi, drift, bảo trì",
+        "Trình bày theo kịch bản/khoảng thay vì một con số duy nhất",
+        "Gắn quyết định vào một gate đo được, và có phương án lùi (augmentation thay vì automation)"
+      ],
+      "tags": [
+        "mid",
+        "day2",
+        "roi"
+      ]
+    },
+    {
+      "id": "MID-06",
+      "module": "A",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Trong buổi review sản phẩm, bạn trình bày: *\"Latency trung bình của agent là 1,2 giây.\"* Trưởng phòng sản phẩm hỏi lại: *\"Vậy sao đội CSKH vẫn kêu chậm?\"* Bạn kiểm tra lại và thấy P50 = 0,9s, P95 = 2,1s, P99 = 8,4s.\n**Yêu cầu.** (a) Giải thích vì sao con số trung bình che mất vấn đề; (b) tính và trình bày mức độ ảnh hưởng thật tới người dùng; (c) nêu bạn sẽ đặt SLO thế nào và đo TTFT ra sao cho một agent có giao diện streaming.",
+      "modelAnswer": "- **(a)** Trung bình gộp cả phân bố nên bị kéo về phía đám đông và **ẩn giấu long tail**. P50 = 0,9s mà P99 = 8,4s nghĩa là **1 trên 100 lượt chờ hơn 8 giây** — và chính nhóm đó dễ bỏ đi nhất. Khoảng cách lớn giữa P95 (2,1s) và P99 (8,4s) cho thấy có một nhóm chậm hẳn chứ không phải hệ thống chậm đều.\n- **(b)** Xác suất gặp ít nhất một lần chạm đuôi sau N lượt = `1 − 0,99^N`.\n  - 10 lượt/phiên: `1 − 0,99¹⁰ ≈ 9,6%` → gần **1 trên 10 phiên** có ít nhất một lần chờ trên 8 giây.\n  - 12 người × 60 câu = 720 lượt/ngày → **~7 lượt mỗi ngày**, **~1.800 lượt mỗi năm**.\n  - Người dùng không trải nghiệm số trung bình, họ trải nghiệm những lần tệ nhất. **Amazon Rule**: mỗi 100ms latency mất 1% doanh số — nên P99 là KPI chính thức ở Amazon, Google, Meta.\n  - **Tail cộng dồn**: agent 5 bước thì P99 từng bước ghép lại tương đương P95 toàn luồng.\n- **(c) SLO theo phân vị**: SLI là **P95 đo end-to-end phía người dùng**; SLO \"P95 ≤ 3s trong 99,5% thời gian của 28 ngày\" (error budget ~3,6 giờ/tháng). SLO chặt hơn SLA. Với AI agent thì 99–99,5% là đủ — **đừng hứa 99,99% khi LLM API chỉ đạt 99,9%**.\n- **Đo TTFT vì có streaming**: TTFT là thứ người dùng cảm nhận — 500ms thì thấy nhanh kể cả tổng 8 giây. **Tối ưu TTFT trước, tổng sau.** Đo kèm TPOT, và **tách latency retrieval khỏi latency LLM**.\n- **Alert theo symptom** (\"P95 vượt SLO\") chứ không theo cause (\"CPU > 80%\"); mỗi alert có runbook.",
+      "rubric": [
+        "Giải thích trung bình ẩn giấu long tail, và ý nghĩa của P50/P95/P99",
+        "Chỉ ra khoảng cách P95 với P99 là dấu hiệu có nhóm chậm hẳn chứ không chậm đều",
+        "Dùng công thức 1 − 0,99^N để tính xác suất người dùng chạm đuôi",
+        "Quy ra con số thực tế theo khối lượng của đội CSKH",
+        "Dẫn được Amazon Rule hoặc ý tail latency cộng dồn trong workflow nhiều bước",
+        "Đặt SLO theo phân vị kèm cửa sổ thời gian, và SLO chặt hơn SLA",
+        "Nêu không hứa vượt độ tin cậy của LLM API mình phụ thuộc",
+        "Giải thích TTFT là thứ user cảm nhận với giao diện streaming, tối ưu TTFT trước",
+        "Nêu tách latency retrieval khỏi latency LLM, hoặc alert theo symptom kèm runbook"
+      ],
+      "tags": [
+        "mid",
+        "day13",
+        "p99"
+      ]
+    },
+    {
+      "id": "MID-07",
+      "module": "B",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Agent bảo hành cần tra được trạng thái đơn hàng và thời điểm mua để tính còn hạn bảo hành hay không. Dữ liệu này nằm trong database CRM, cập nhật theo thời gian thực.\n**Yêu cầu.** (a) Giải thích vì sao KHÔNG embed dữ liệu CRM vào vector store; (b) viết tool schema cho chức năng tra cứu này (viết thật, dạng JSON Schema); (c) mô tả luồng thực thi tool và nêu rõ ai là bên thật sự chạy tool; (d) nêu hai rủi ro bảo mật và cách chặn.",
+      "modelAnswer": "- **(a)** CRM là **Operational data**, không phải Knowledge: (1) đổi realtime — embedding là ảnh chụp lúc index; (2) cần số CHÍNH XÁC mà embedding mù trước số; (3) có ràng buộc quyền và PII; (4) truy vấn có cấu trúc thì SQL chính xác và rẻ hơn tìm gần đúng.\n- **(b)**\n```json\n{\"name\": \"tra_cuu_don_hang\",\n \"description\": \"Tra thông tin mua hàng để xác định tình trạng bảo hành. DÙNG KHI: cần ngày mua, model sản phẩm, hoặc thời hạn còn lại. KHÔNG DÙNG KHI: câu hỏi chỉ về nội dung chính sách, hoặc khách chưa cung cấp mã đơn/SĐT.\",\n \"input_schema\": {\"type\":\"object\",\"properties\":{\n   \"ma_don_hang\":{\"type\":\"string\",\"description\":\"Dạng DH-YYYY-NNNNNN. Ưu tiên nếu có.\"},\n   \"so_dien_thoai\":{\"type\":\"string\",\"description\":\"Chỉ dùng khi KHÔNG có mã đơn. 10 chữ số.\"},\n   \"ma_san_pham\":{\"type\":\"string\",\"description\":\"Dùng khi một đơn có nhiều sản phẩm.\"}},\n  \"anyOf\":[{\"required\":[\"ma_don_hang\"]},{\"required\":[\"so_dien_thoai\"]}]}}\n```\n  Ba điểm: tên là **động từ + đối tượng**; description đủ **ba vế — chức năng, khi nào dùng, khi nào KHÔNG dùng** (thiếu vế cuối là nguyên nhân agent gọi nhầm tool); **bắt buộc có ít nhất một định danh**.\n- **(c)** User hỏi → **model quyết định** gọi tool nào với tham số gì → **ỨNG DỤNG thực thi** → trả kết quả về → model sinh câu trả lời. **Model KHÔNG tự chạy code, KHÔNG tự gọi API** — nó chỉ trả object có `name` và `arguments`. Host **validate arguments theo schema trước khi thực thi**. Vòng lặp cần giới hạn số vòng, timeout và fallback.\n- **(d) Hai rủi ro**: (1) **rò rỉ đơn của khách khác** → least privilege (tài khoản DB chỉ đọc vài cột), ràng buộc phạm vi **ở tầng ứng dụng** chứ không ở prompt, redact PII trong log, rate limit chống dò mã đơn. (2) **Indirect prompt injection** từ chính dữ liệu trả về (ghi chú đơn do người ngoài nhập) — nguy hiểm hơn direct vì user không hề tấn công → tách dữ liệu khỏi chỉ dẫn bằng delimiter, validate output, HITL nếu về sau thêm tool ghi.",
+      "rubric": [
+        "Phân loại CRM là Operational data, không embed mà query qua tool",
+        "Nêu ít nhất hai lý do: dữ liệu realtime, cần số chính xác, ràng buộc PII/quyền",
+        "Viết ra schema thật dạng JSON, có name và input_schema",
+        "Description nói đủ ba vế: chức năng, khi nào dùng, khi nào KHÔNG dùng",
+        "Có ràng buộc tham số bắt buộc hoặc anyOf để tránh gọi với tham số rỗng",
+        "Nêu đúng luồng và khẳng định ỨNG DỤNG chạy tool, không phải model",
+        "Nêu host validate arguments theo schema trước khi thực thi",
+        "Rủi ro 1: vượt phạm vi / rò rỉ dữ liệu khách khác, chặn bằng least privilege và ràng buộc ở tầng ứng dụng",
+        "Rủi ro 2: indirect prompt injection từ chính dữ liệu trả về, chặn bằng tách dữ liệu với chỉ dẫn và validate output"
+      ],
+      "tags": [
+        "mid",
+        "day4",
+        "tool-schema"
+      ]
+    },
+    {
+      "id": "MID-08",
+      "module": "C",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Yêu cầu.** Thiết kế **RAG pipeline hoàn chỉnh** cho agent tra cứu bảo hành nói trên. Trình bày theo hai giai đoạn OFFLINE và ONLINE, nêu rõ từng bước làm gì và tham số chọn. Cuối cùng chỉ ra giai đoạn nào đặt trần cho chất lượng của toàn hệ thống và vì sao.",
+      "modelAnswer": "**OFFLINE — `Parse → Chunk → Enrich → Embed → Index`** (chạy lại khi tài liệu đổi)\n- **Parse**: bảng danh mục linh kiện và loại trừ xử lý riêng (cắt ngang bảng là con số mất nhãn); bản scan thì OCR ghi confidence, thấp thì flag cho người review.\n- **Chunk**: structure-aware theo heading + table-aware; điều khoản dài thì hierarchical child 256 / parent 2048. Chung: 200–500 token, overlap 10–15%.\n- **Enrich**: `source`+trang, `clause_id`, `product_line`, `effective_date`+`version`, `doc_type`. Có ngân sách thì thêm **contextual retrieval** (−49% lỗi retrieval khi kết hợp BM25).\n- **Embed**: chọn rồi cố định — đổi model là re-index toàn bộ.\n- **Index**: mỗi bản ghi có ID, chunk gốc, vector, metadata (*vector để TÌM, chunk để INJECT*). **Quality gate TRƯỚC embed.** Chạy lại phải **idempotent**: upsert theo `(doc_id, version)`.\n\n**ONLINE — `PreRAG → Retrieve → Rerank → Augment → Generate → PostRAG`**\n- **PreRAG**: pre-filter metadata trước; query transformation bật **theo vấn đề, không bật hết**.\n- **Retrieve**: hybrid — BM25 bắt mã sản phẩm, dense bắt cách diễn đạt khác; **RRF k = 60**; lấy rộng top 50–100.\n- **Rerank**: cross-encoder xuống top 3–5, cộng **MMR** bỏ trùng ý.\n- **Augment**: reordering Top 1 đầu / Top 2 cuối; prompt 4 khối; token budget **20/60/20**; xung đột theo `effective_date`.\n- **Generate**: strict grounding, temp 0, citation + `clause_id`; thiếu dữ liệu thì chuyển người.\n- **PostRAG**: validate schema, check `clause_id` bằng code, redact PII, ghi trace kèm cost/latency.\n\n**OFFLINE đặt trần** vì **retrieval không thể tốt hơn cái đã index**: bảng bị cắt ngang hay thiếu `effective_date` thì reranker chỉ xếp lại thứ đã có, và prompt không giúp model nói điều không có trong context.",
+      "rubric": [
+        "Chia đúng hai giai đoạn OFFLINE và ONLINE với các bước theo thứ tự",
+        "OFFLINE: chọn chunking phù hợp tài liệu có heading và bảng, nêu tham số",
+        "OFFLINE: gắn metadata gồm version/effective_date và clause_id, nêu mục đích",
+        "ONLINE: hybrid search với RRF k = 60 và lý do dùng RRF",
+        "ONLINE: rerank hai tầng xuống top 3–5, có MMR",
+        "ONLINE: reordering chống lost in the middle và ngân sách token 20/60/20",
+        "ONLINE: grounding, citation, abstention khi thiếu dữ liệu",
+        "Kết luận OFFLINE đặt trần và giải thích vì sao online không cứu được",
+        "Điểm cộng: quality gate trước embed hoặc idempotency khi chạy lại"
+      ],
+      "tags": [
+        "mid",
+        "day8",
+        "rag-pipeline"
+      ]
+    },
+    {
+      "id": "MID-09",
+      "module": "C",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Yêu cầu.** Trưởng nhóm hỏi: *\"Sao không dùng luôn một model to rồi bảo nó tự lo? Cần gì ReAct với agent loop cho phức tạp.\"*\nTrả lời câu hỏi này bằng cách: (a) giải thích vòng lặp ReAct hoạt động thế nào và vì sao nó dễ debug; (b) nêu tiêu chí quyết định khi nào một bài toán ĐÁNG dùng agent; (c) chỉ ra ba giới hạn của ReAct và cách khắc phục.",
+      "modelAnswer": "- **(a)** `Thought → Action → Observation` lặp tới `Final Answer`. *Ví dụ*: cần biết ngày mua → gọi `tra_cuu_don_hang` → mua 15/03/2025 → cần điều khoản thời hạn và loại trừ → tra tài liệu → kết luận.\n- **Dễ debug vì ReAct bộc lộ lý do hành động ra thành trace**: đọc được model nghĩ gì trước mỗi lời gọi tool, nên biết sai ở đâu — Thought đúng mục tiêu chưa, chọn đúng tool chưa, args hợp lệ chưa, observation thiếu field không. Model to \"tự lo\" thì mọi thứ diễn ra trong một lần sinh, sai chỉ biết đầu ra sai.\n- **Agent chỉ xuất hiện khi có VÒNG LẶP** quyết định → hành động → quan sát; có tool nhưng đi theo lộ trình cố định thì vẫn là workflow.\n- **(b) Bốn tiêu chí Agentic Fit**: Multi-step Reasoning · Tool Interaction · Dynamic Decision · Long Horizon. Thang **0–5 chatbot/rule · 6–10 augmented · 11+ mới mở agent loop**.\n- **Anti-pattern**: bài toán một bước; không có tool; cần đúng 100% deterministic; latency không chấp nhận được.\n- **Luôn benchmark rule/workflow/chatbot TRƯỚC**. Ba cấp: Rule (input ổn định, cần đúng 100%) · Workflow (input đa dạng, lộ trình cố định) · Agent (tự quyết giữa các bước) — **dừng ở cấp tối giản nhất đủ dùng**.\n- *Áp vào bài*: phải gọi tool tra đơn rồi mới biết tra điều khoản nào → bước sau phụ thuộc bước trước, đúng là bài toán agent. Nếu chỉ tra nội dung chính sách thuần thì RAG pipeline cố định đã đủ.\n- **(c) Ba giới hạn**: (1) **lỗi lan toả** — sai bước 1 kéo sai cả chuỗi → thêm lớp tự đánh giá kiểu Reflexion, trần 3 lần thử; (2) **infinite loop** — dấu hiệu trên trace là lặp cùng tool call, hỏi lại thông tin đã có, reasoning không tiến, observation không đổi → giới hạn vòng lặp, timeout, ngân sách token, fallback sang người; (3) **không backtrack** → graph có state (LangGraph). Lưu ý **function calling KHÔNG thay thế ReAct** — vòng lặp vẫn còn, chỉ là Action đáng tin hơn.",
+      "rubric": [
+        "Mô tả đúng vòng lặp Thought → Action → Observation → Final Answer",
+        "Giải thích ReAct dễ debug vì lý do hành động bộc lộ ra trace",
+        "Nêu được agent chỉ xuất hiện khi có vòng lặp quyết định–hành động–quan sát",
+        "Nêu đủ 4 tiêu chí Agentic Fit và ngưỡng 11 điểm",
+        "Nêu anti-pattern: một bước, không có tool, cần deterministic 100%, latency gắt",
+        "Nêu ba cấp Rule/Workflow/Agent và nguyên tắc dừng ở cấp tối giản nhất",
+        "Giới hạn 1: lỗi lan toả, khắc phục bằng lớp tự đánh giá kiểu Reflexion",
+        "Giới hạn 2: infinite loop, nêu dấu hiệu trên trace và guardrails tương ứng",
+        "Giới hạn 3: không backtrack, khắc phục bằng graph có state; và function calling không thay thế ReAct"
+      ],
+      "tags": [
+        "mid",
+        "day3",
+        "react"
+      ]
+    },
+    {
+      "id": "MID-10",
+      "module": "C",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Đội data đề nghị: *\"Cứ đổ hết tài liệu bảo hành, log CSKH, bản ghi cuộc gọi và dữ liệu CRM vào data lake, sau đó agent cứ thế mà đọc.\"*\n**Yêu cầu.** (a) Phản biện đề xuất này; (b) phân loại các nguồn trên và nêu cách đưa từng loại tới agent; (c) thiết kế cơ chế đảm bảo agent không trả lời theo chính sách bảo hành đã hết hiệu lực, gồm cả cách phát hiện sớm khi cơ chế đó hỏng.",
+      "modelAnswer": "- **(a)** \"Đổ hết vào một chỗ rồi agent cứ thế mà đọc\" bỏ qua ba điều: (1) **chất lượng dữ liệu đặt TRẦN cho câu trả lời** — sai lầm kinh điển là index raw rồi kỳ vọng retrieval tự chữa; (2) **không phải cái gì cũng nên retrieval**; (3) **bỏ qua quyền truy cập và PII** — log CSKH và CRM chứa thông tin cá nhân. Data lake hợp lý theo tinh thần **ELT** (giữ raw là giữ quyền đổi ý), nhưng **không phải thứ agent đọc trực tiếp**.\n- **(b) Phân loại**:\n  - **Tài liệu bảo hành → Knowledge → RETRIEVAL**, qua pipeline ba khối: Input Control → Processing (OCR/extract → clean, NFC → structure → Markdown + metadata) → Indexing (chunk → embed → store → verify).\n  - **CRM → Operational → TOOL có kiểm soát.**\n  - **Log CSKH và bản ghi cuộc gọi** — KHÔNG phải nguồn tri thức để trích dẫn (do nhân viên nói, có thể sai), nhưng là **nguyên liệu vàng cho eval**: 500 câu hỏi thực để dựng golden set và đọc trace tìm agent hỏng kiểu gì.\n  - **Ngữ cảnh phiên → Contextual → inject ngắn, đúng lúc.**\n- **(c) Chặn ở bốn tầng**: (1) **metadata bắt buộc** `effective_date`/`expiry_date`/`version` — phân biệt **content hash** (\"file có đổi không\") với **logical version** (\"đây là bản nào\"); thiếu cái sau chính là nguyên nhân lỗi. (2) **Pre-filter lúc truy vấn** — ràng buộc cứng ở tầng dữ liệu, khác dặn dò trong prompt. (3) **Luật trong prompt** — mâu thuẫn thì ưu tiên `effective_date` mới nhất. (4) **Ingestion có lịch** — scheduled re-index hoặc webhook, chạy lại phải idempotent.\n- **Phát hiện sớm**: **Freshness đo tại thời điểm document ACTIVE trên vector index** (SLA \"xuất hiện trong câu trả lời trong 4 giờ kể từ khi duyệt\"; 2h warning, 4h page); và **citation freshness** — tuổi trung bình/p95 của chunk agent TRÍCH DẪN, vì kho đã mới mà metadata hoặc filter sai thì agent vẫn dẫn chunk cũ.",
+      "rubric": [
+        "Phản biện: chất lượng dữ liệu đặt trần, không phải cái gì cũng retrieval, bỏ qua PII/quyền",
+        "Nêu data lake hợp với ELT giữ raw nhưng không phải thứ agent đọc trực tiếp",
+        "Phân loại đúng Knowledge / Operational / Contextual và cách xử lý từng loại",
+        "Chỉ ra log CSKH là nguyên liệu cho eval và golden set chứ không phải nguồn tri thức để trích dẫn",
+        "Cơ chế 1: metadata effective_date và version, phân biệt content hash với logical version",
+        "Cơ chế 2: pre-filter lúc truy vấn là ràng buộc cứng, khác dặn dò trong prompt",
+        "Cơ chế 3: scheduled re-index và idempotency khi chạy lại",
+        "Đo freshness tại thời điểm document ACTIVE trên index, không phải lúc vào staging",
+        "Có chỉ số hướng người dùng: citation freshness hoặc SLA viết bằng ngôn ngữ nghiệp vụ"
+      ],
+      "tags": [
+        "mid",
+        "day10",
+        "data-pipeline"
+      ]
+    },
+    {
+      "id": "MID-11",
+      "module": "B",
+      "type": "code",
+      "points": 10,
+      "prompt": "**Yêu cầu (câu code).** Viết hàm Python `detect_injection(user_input)` phát hiện prompt injection cơ bản bằng pattern matching, trả về `True` nếu phát hiện. Sau đó viết thêm hàm `scrub_pii(text)` che số điện thoại Việt Nam và email trước khi ghi log.\nCuối phần code, viết 2–3 câu nêu giới hạn của cách làm này và lớp phòng thủ cần bổ sung.",
+      "modelAnswer": "```python\nimport re\n\n# --- 1. Phat hien prompt injection bang pattern ---\nINJECTION_PATTERNS = [\n    r\"ignore (all )?(previous|above) instructions\",\n    r\"you are now\",\n    r\"system prompt\",\n    r\"reveal your (instructions|prompt)\",\n    r\"bo qua (moi |tat ca )?(chi dan|huong dan) (truoc|tren)\",\n    r\"quen (het |moi )?(quy tac|chi dan)\",\n]\n\ndef detect_injection(user_input: str) -> bool:\n    for pattern in INJECTION_PATTERNS:\n        if re.search(pattern, user_input, re.IGNORECASE):\n            return True\n    return False\n\n\n# --- 2. Che PII truoc khi ghi log ---\n# THU TU QUAN TRONG: cccd (12 so) phai chay TRUOC phone_vn,\n# neu khong thi phone_vn an mat 10 so dau va lo 2 so cuoi.\nPII_PATTERNS = [\n    (\"cccd\",     r\"\\b\\d{12}\\b\"),\n    (\"phone_vn\", r\"\\b(\\+84|0)\\d{9,10}\\b\"),\n    (\"email\",    r\"[\\w\\.-]+@[\\w\\.-]+\\.\\w+\"),\n]\n\ndef scrub_pii(text: str) -> str:\n    for name, pattern in PII_PATTERNS:\n        text = re.sub(pattern, f\"[REDACTED_{name.upper()}]\", text)\n    return text\n\n\nif __name__ == \"__main__\":\n    print(detect_injection(\"Ignore all previous instructions\"))     # True\n    print(detect_injection(\"May giat cua toi con bao hanh khong\"))  # False\n    print(scrub_pii(\"Lien he 0912345678 hoac a@b.com\"))\n    # -> Lien he [REDACTED_PHONE_VN] hoac [REDACTED_EMAIL]\n```\n- **Pattern matching chỉ bắt 60–70% injection cơ bản** — diễn đạt khác, mã hoá Base64, hay đổi sang ngôn ngữ ít tài nguyên là lọt.\n- **Hai bẫy đã xử lý trong code**: phải bọc `\\b` cho số điện thoại, và đặt **CCCD trước SĐT** — nếu không thì chuỗi 12 số bị khớp nhầm thành SĐT và lộ chữ số cuối.\n- **Regex PII chỉ bắt mẫu có hình dạng cố định**; tên người và địa chỉ cần công cụ nhận dạng thực thể như Microsoft Presidio.\n- **Phải defense in depth**: thêm **LLM-as-classifier**, **topic filter**, **rate limiting** ở input; và quan trọng không kém là **output guardrails**, vì indirect injection đến từ chính tài liệu agent đọc nên input của người dùng hoàn toàn vô hại.",
+      "rubric": [
+        "Viết được hàm detect_injection dùng danh sách pattern và re.search có IGNORECASE",
+        "Có ít nhất các mẫu kinh điển: ignore previous instructions, you are now, system prompt, reveal your prompt",
+        "Viết được hàm scrub_pii thay PII bằng thẻ REDACTED",
+        "Regex SĐT Việt Nam đúng dạng (+84 hoặc 0 rồi 9–10 chữ số) và regex email",
+        "Code chạy được: có return đúng kiểu, không lỗi cú pháp",
+        "Nêu giới hạn: pattern matching chỉ bắt 60–70% injection cơ bản",
+        "Nêu bổ sung LLM-as-classifier và/hoặc Presidio cho PII không có pattern cố định",
+        "Nêu cần output guardrails vì indirect injection có input vô hại",
+        "Xử lý được thứ tự pattern và word boundary để chuỗi số dài không bị khớp nhầm rồi lộ chữ số"
+      ],
+      "tags": [
+        "mid",
+        "day11",
+        "code"
+      ]
+    },
+    {
+      "id": "MID-12",
+      "module": "D",
+      "type": "essay",
+      "points": 10,
+      "prompt": "**Tình huống.** Agent bảo hành sắp lên production cho 1.000 nhân viên CSKH. Ban lãnh đạo hỏi: *\"Nếu agent trả lời sai và khách kiện thì sao? Ai chịu trách nhiệm?\"*\n**Yêu cầu.** (a) Nêu các lớp guardrails bạn sẽ dựng và mỗi lớp chặn được gì; (b) thiết kế HITL — hành động nào agent được tự quyết, hành động nào phải có người; (c) trả lời thẳng câu hỏi về trách nhiệm, và nêu bằng chứng bạn cần lưu lại.",
+      "modelAnswer": "- **(a) Defense in depth ba tầng** — mỗi tầng bắt một loại lỗi khác nhau:\n  1. **Input Rails** — validation (độ dài, format); injection detection (pattern + LLM classifier); **topic filter** (chỉ trả lời về bảo hành, từ chối tư vấn giá và kỹ thuật sửa chữa); rate limiting.\n  2. **LLM Rails** — system prompt hardening: strict grounding, cấm hứa điều chính sách không nói, cấm suy rộng sang dòng sản phẩm khác.\n  3. **Output Rails** — redact PII trước khi hiển thị và ghi log; **grounding check** (quan trọng nhất với bảo hành — flag claim không có căn cứ); format validation (`clause_id` phải tồn tại thật, check bằng code); human review khi confidence thấp.\n  - *Chỉ input rails thì output vẫn ungrounded; chỉ output rails thì tốn token xử lý input xấu.*\n- **(b) HITL theo mức rủi ro và KHẢ NĂNG HOÀN TÁC**: **on-the-loop** (làm rồi review sau) cho tra cứu nội dung chính sách — phần lớn khối lượng; **in-the-loop** (người duyệt trước) cho kết luận còn/không còn bảo hành ở ca tranh chấp, câu chạm danh mục loại trừ, **confidence dưới 0,7**, hành động không hoàn tác được; **as-tiebreaker** cho bảo hành ngoài chính sách, đổi mới, hoàn tiền.\n  - **Anti-pattern**: duyệt mọi request gây tắc nghẽn; người duyệt thiếu ngữ cảnh nên bấm cho xong; không có feedback loop. **Metric**: thời gian review, tỷ lệ approve/reject, error rate, tỷ lệ escalate.\n  - **HITL là feature làm tăng độ tin cậy, không phải thừa nhận AI yếu.**\n- **(c) Trách nhiệm thuộc về công ty triển khai** — không thuộc nhà cung cấp model, không \"thuộc về AI\". Tiền lệ **Air Canada 2024**: toà buộc hãng trả tiền theo đúng lời chatbot. Mỗi nguồn tri thức phải có **owner CÓ TÊN**.\n  - **Bằng chứng phải lưu**: **audit log tách riêng app log** (ai hỏi gì, agent trả gì, dựa `clause_id` nào, phiên bản chính sách nào, ai duyệt — append-only, không sample, retention nhiều năm); **trace đầy đủ** kèm correlation ID; **version của prompt, model và bộ tài liệu** tại thời điểm trả lời; **kết quả eval và red team report** trước mỗi release; và bằng chứng đã **hiển thị giới hạn cho người dùng** (citation, mức tin cậy, nhắc đây là thông tin tham khảo).",
+      "rubric": [
+        "Nêu đủ ba tầng Input Rails, LLM Rails, Output Rails và mỗi tầng chặn gì",
+        "Chỉ ra grounding check là lớp quan trọng nhất với bối cảnh bảo hành",
+        "Giải thích vì sao thiếu một tầng thì không đủ",
+        "Chọn mô hình HITL theo mức rủi ro và khả năng hoàn tác, gán được ví dụ cụ thể cho từng mô hình",
+        "Nêu ngưỡng confidence hoặc tiêu chí escalate cụ thể",
+        "Nêu HITL anti-patterns và metric cần đo",
+        "Trả lời thẳng trách nhiệm thuộc về công ty triển khai, dẫn được vụ Air Canada",
+        "Nêu audit log tách riêng app log, append-only, retention dài",
+        "Lưu version prompt/model/tài liệu và kết quả eval hoặc red team report"
+      ],
+      "tags": [
+        "mid",
+        "day11",
+        "guardrails"
+      ]
+    }
+  ]
+}

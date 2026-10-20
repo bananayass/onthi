@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 5 — Thiết kế sản phẩm AI cho sự không chắc chắn | Tóm tắt</title>
+<style>
+:root{
+  --bg:#f7f8fa; --card:#fff; --ink:#1a1d24; --muted:#5b6472; --line:#e3e7ee;
+  --brand:#a8365c; --brand-soft:#fbeaf0; --warn:#b8541a; --warn-soft:#fdf1e7;
+  --ok:#1d7a4f; --ok-soft:#e8f6ef; --bad:#c0392b; --bad-soft:#fdeceb;
+  --acc:#2563c9; --acc-soft:#e8f0fd;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+
+header{background:linear-gradient(135deg,#a8365c,#6d2444);color:#fff;padding:34px 0 26px}
+header .wrap{padding-bottom:0}
+.kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;margin:0 0 6px}
+header h1{margin:0 0 8px;font-size:31px;line-height:1.2;font-weight:700}
+header p{margin:0;opacity:.9;font-size:15px}
+
+.tabbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);
+  box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.tabbar .wrap{display:flex;gap:4px;padding-top:0;padding-bottom:0}
+.tab{appearance:none;border:0;background:none;font:inherit;font-weight:600;font-size:15px;
+  padding:15px 18px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--brand);border-bottom-color:var(--brand)}
+.panel{display:none;padding-top:28px}
+.panel.on{display:block}
+
+h2{font-size:22px;margin:36px 0 4px;padding-top:14px;border-top:2px solid var(--line)}
+h2 .num{color:var(--brand);font-weight:700}
+h2:first-child{border-top:0;padding-top:0;margin-top:0}
+.sub{color:var(--muted);font-size:14.5px;margin:0 0 18px}
+h3{font-size:17px;margin:26px 0 10px}
+h4{font-size:15.5px;margin:0 0 8px}
+p{margin:10px 0}
+ul,ol{margin:10px 0;padding-left:22px}
+li{margin:5px 0}
+code{background:#eef1f6;padding:2px 6px;border-radius:4px;font-size:13.5px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:820px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:#fff;
+  border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{padding:9px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f2f5fa;font-weight:600;font-size:13px}
+tr:last-child td{border-bottom:0}
+
+.note{border-left:4px solid var(--brand);background:var(--brand-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.warn{border-left:4px solid var(--warn);background:var(--warn-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.bad{border-left:4px solid var(--bad);background:var(--bad-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.ok{border-left:4px solid var(--ok);background:var(--ok-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.acc{border-left:4px solid var(--acc);background:var(--acc-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.note b,.warn b,.bad b,.ok b,.acc b{display:block;margin-bottom:3px;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+.note b{color:var(--brand)} .warn b{color:var(--warn)} .bad b{color:var(--bad)}
+.ok b{color:var(--ok)} .acc b{color:var(--acc)}
+
+.quote{margin:16px 0;padding:20px 24px;border-radius:12px;background:#1f2430;color:#fff;text-align:center}
+.quote p{margin:0;font-size:18px;font-weight:600;line-height:1.45}
+.quote small{display:block;margin-top:9px;opacity:.7;font-size:13px;letter-spacing:.06em}
+
+.pill{display:inline-block;font-size:12.5px;font-weight:600;padding:2px 9px;border-radius:20px;margin-right:5px}
+.pill.b{background:var(--brand-soft);color:var(--brand)}
+.pill.o{background:var(--ok-soft);color:var(--ok)}
+.pill.w{background:var(--warn-soft);color:var(--warn)}
+.pill.r{background:var(--bad-soft);color:var(--bad)}
+
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0}
+.step{background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-size:13.5px;font-weight:600}
+.step small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.step b{color:var(--brand)}
+.arw{color:var(--muted);font-weight:700;font-size:13px}
+
+/* fidelity ladder */
+.lad{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:16px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+@media(max-width:820px){.lad{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.lad{grid-template-columns:1fr}}
+.lad>div{padding:15px;border-right:1px solid var(--line)}
+.lad>div:last-child{border-right:0}
+.lad .n{font-size:11px;font-weight:700;letter-spacing:.06em;margin-bottom:5px}
+.lad strong{display:block;font-size:15px;margin-bottom:4px}
+.lad p{margin:0;font-size:12.8px;color:var(--muted)}
+.lad .f1{background:#fdf7f9} .lad .f1 .n{color:#c98aa4}
+.lad .f2{background:#fbeef3} .lad .f2 .n{color:#bf6386}
+.lad .f3{background:#f8e2ea} .lad .f3 .n{color:#a8365c}
+.lad .f4{background:#f2d3de} .lad .f4 .n{color:#6d2444}
+.ladbar{height:6px;border-radius:99px;margin:0 0 4px;background:linear-gradient(90deg,#fdf0f4,#a8365c)}
+.ladcap{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:12px}
+
+/* confusion matrix video */
+.cmx{display:grid;grid-template-columns:150px 1fr 1fr 130px;gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:11px;overflow:hidden;margin:14px 0;font-size:13.5px}
+@media(max-width:760px){.cmx{grid-template-columns:1fr;font-size:13px}}
+.cmx>div{background:#fff;padding:12px 13px}
+.cmx .hd{background:#f2f5fa;font-weight:600;font-size:12.5px}
+.cmx .ok2{background:var(--ok-soft)} .cmx .er{background:var(--bad-soft)}
+.cmx .mt{background:#fbfcfe;font-weight:600;color:var(--brand)}
+.cmx b{display:block;font-size:15px;margin-bottom:2px}
+.cmx small{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+@media(max-width:700px){.vs{grid-template-columns:1fr}}
+.vs>div{border-radius:11px;padding:15px 17px;border:1px solid var(--line);background:#fff}
+.vs .lgood{border-top:4px solid var(--ok)}
+.vs .lbad{border-top:4px solid var(--bad)}
+.vs .lneu{border-top:4px solid var(--acc)}
+.vs h4{margin:0 0 8px;font-size:15px}
+.vs .lgood h4{color:var(--ok)} .vs .lbad h4{color:var(--bad)} .vs .lneu h4{color:var(--acc)}
+.vs p,.vs li{font-size:14px}
+.vs ul{margin:6px 0;padding-left:19px}
+
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+@media(max-width:820px){.three{grid-template-columns:1fr}}
+.three>div{border:1px solid var(--line);border-radius:11px;padding:15px;background:#fff;border-top:4px solid var(--brand)}
+.three .k{font-size:11.5px;font-weight:700;letter-spacing:.06em;color:var(--brand);margin-bottom:5px}
+.three strong{display:block;font-size:15px;margin-bottom:6px}
+.three p{margin:0;font-size:13.3px;color:var(--muted)}
+
+.qlist{margin:14px 0}
+.qi{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:10px;padding:12px 15px;margin-bottom:8px}
+.qi .n{flex:0 0 26px;height:26px;border-radius:50%;background:var(--brand-soft);color:var(--brand);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12.5px}
+.qi .b{flex:1;min-width:0;font-size:14px}
+.qi .b strong{display:block;margin-bottom:2px}
+.qi .b span{color:var(--muted);font-size:13.3px}
+
+.trustbar{position:relative;height:120px;margin:16px 0 8px;border:1px solid var(--line);
+  border-radius:11px;background:linear-gradient(135deg,#fdeceb 0%,#fff 45%,#fff 55%,#fdf1e7 100%);overflow:hidden}
+.trustbar .diag{position:absolute;inset:0;background:
+  linear-gradient(to top right,transparent calc(50% - 1.5px),var(--ok) calc(50% - 1.5px),var(--ok) calc(50% + 1.5px),transparent calc(50% + 1.5px))}
+.trustbar span{position:absolute;font-size:12.5px;font-weight:600}
+.trustbar .a1{top:12px;left:14px;color:var(--bad)}
+.trustbar .a2{bottom:12px;right:14px;color:var(--warn)}
+.trustbar .a3{top:50%;left:50%;transform:translate(-50%,-50%);color:var(--ok);background:#fff;padding:2px 9px;border-radius:20px}
+
+#cheat{font-size:14px}
+#cheat h2{font-size:18px;margin:20px 0 8px;padding-top:10px}
+#cheat .card{padding:14px 16px;margin:10px 0}
+#cheat table{font-size:12.5px}
+#cheat th,#cheat td{padding:6px 8px}
+#cheat ul,#cheat ol{padding-left:19px} #cheat li{margin:3px 0}
+.cheatgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:820px){.cheatgrid{grid-template-columns:1fr}}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13.5px}
+.kv dt{font-weight:600;color:var(--brand)}
+.kv dd{margin:0;color:var(--muted)}
+.printbtn{background:var(--brand);color:#fff;border:0;border-radius:8px;padding:9px 16px;
+  font:inherit;font-weight:600;font-size:14px;cursor:pointer;margin-bottom:6px}
+.printbtn:hover{background:#8c2b4c}
+
+.fcbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.fbtn{background:#fff;border:1px solid var(--line);border-radius:20px;padding:6px 15px;
+  font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;color:var(--muted)}
+.fbtn:hover{border-color:var(--brand);color:var(--brand)}
+.fbtn.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.counter{margin-left:auto;font-size:13.5px;color:var(--muted)}
+.fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.fc{perspective:1100px;height:218px;cursor:pointer}
+.fci{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.fc.flip .fci{transform:rotateY(180deg)}
+.ff,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:18px;
+  display:flex;flex-direction:column;justify-content:center;border:1px solid var(--line);overflow:auto}
+.ff{background:#fff}
+.fb{background:var(--brand);color:#fff;transform:rotateY(180deg);border-color:var(--brand)}
+.fb code{background:rgba(255,255,255,.2);color:#fff}
+.ff .tag2{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);margin-bottom:8px}
+.ff .q{font-size:15.5px;font-weight:600;line-height:1.45}
+.fb .a{font-size:13.5px;line-height:1.55}
+.hint{text-align:center;color:var(--muted);font-size:12.5px;margin-top:10px}
+
+@media print{
+  header,.tabbar,.printbtn,.hint{display:none!important}
+  .panel{display:none!important} #cheat{display:block!important;padding-top:0}
+  body{background:#fff;font-size:10.5px} .wrap{max-width:100%;padding:0}
+  .card{break-inside:avoid;border-color:#ccc} table{break-inside:avoid}
+  h2{break-after:avoid}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">AI IN ACTION · Ngày 5</p>
+    <h1>Thiết kế sản phẩm AI cho sự không chắc chắn</h1>
+    <p>Từ prototype rẻ nhất → spec đúng → đo chất lượng bằng chu trình</p>
+  </div>
+</header>
+
+<nav class="tabbar">
+  <div class="wrap">
+    <button class="tab on" data-t="detail">Tóm tắt chi tiết</button>
+    <button class="tab" data-t="cheat">Cheat sheet</button>
+    <button class="tab" data-t="cards">Flashcard</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ==================== TAB 1 ==================== -->
+<section class="panel on" id="detail">
+
+<div class="note"><b>Mạch của cả ngày</b><b>§1</b> Test giả thuyết bằng prototype rẻ nhất → <b>§2</b> Viết spec đúng cho feature xác suất → <b>§3</b> Thiết kế cho sự không chắc chắn → <b>§4</b> Đo chất lượng bằng chu trình eval.</div>
+
+<h2><span class="num">§1</span> &nbsp;AI Prototyping &amp; MVP</h2>
+<p class="sub">Test giả thuyết rẻ nhất trước khi build.</p>
+
+<h3>Leap of Faith Assumptions — 4 loại rủi ro</h3>
+<table>
+  <tr><th style="width:230px">Rủi ro</th><th>Câu hỏi cần trả lời</th></tr>
+  <tr><td><b>Value risk</b></td><td>Khách có mua — hoặc chọn dùng — không?</td></tr>
+  <tr><td><b>Usability risk</b></td><td>User có tự biết cách dùng không?</td></tr>
+  <tr><td><b>Feasibility risk</b></td><td>Ta có build được không?</td></tr>
+  <tr><td><b>Business viability risk</b></td><td>Giải pháp này có hợp với business của ta không?</td></tr>
+</table>
+<div class="acc"><b>Cách đọc ma trận</b>Hai trục: <b>business importance</b> (cao/thấp) × <b>evidence</b> (mạnh/yếu).<br>Giả định <b>quan trọng nhưng bằng chứng yếu</b> = leap of faith → phải test trước tiên. Bằng chứng mạnh thì không cần test; ít quan trọng thì không đáng test.</div>
+
+<h3>Build software: từ rất đắt → rẻ hơn nhiều</h3>
+<p>Toàn bộ product lifecycle được thiết kế quanh giả định <b>“build là đắt”</b> — khi build rẻ đi, lifecycle đó phải đổi theo. Trên cùng thang <b>signal vs effort</b>, MVP và prototype giờ nằm ở chỗ trước đây chỉ có wireframe.</p>
+<div class="vs">
+  <div class="lbad">
+    <h4>😓 The old way</h4>
+    <p><b>PM → Design → Engineering</b></p>
+    <ul><li>Weeks of lag</li><li>Rigid handoffs</li><li>Limited customer engagement</li></ul>
+  </div>
+  <div class="lgood">
+    <h4>🎉 The new model</h4>
+    <p><b>PM + Design + Engineering</b></p>
+    <ul><li>Build in hours</li><li>Collaborative riffing</li><li>More customer conversations</li></ul>
+  </div>
+</div>
+<div class="note"><b>Double Diamond không đổi — tốc độ đi qua nó thay đổi</b>Nhiều ý tưởng giải pháp hơn · đồng thuận stakeholder nhanh hơn · deliver và lấy feedback nhanh hơn.<br>Prototype là <b>decision-making tool</b> cho 3 mục đích: <b>exploration · alignment · validation</b>.</div>
+<div class="quote"><p>“If you aren't prototyping with AI, you're doing it wrong”</p><small>MICROSOFT CPO</small></div>
+
+<h3>Thang fidelity</h3>
+<div class="ladbar"></div>
+<div class="ladcap"><span>LOW-FIDELITY · đúng luồng chưa? thấy rõ tính năng không?</span><span>HIGH-FIDELITY · trông như thật · test với user cuối</span></div>
+<div class="lad">
+  <div class="f1"><div class="n">01</div><strong>Sketch</strong><p>Phác thảo tự do</p></div>
+  <div class="f2"><div class="n">02</div><strong>Wireframe</strong><p>functional · structure</p></div>
+  <div class="f3"><div class="n">03</div><strong>Mockup</strong><p>style · color</p></div>
+  <div class="f4"><div class="n">04</div><strong>Prototype</strong><p>interactive · clickable</p></div>
+</div>
+<p class="sub"><b>Low-fi chốt luồng &amp; tính năng — high-fi kiểm chứng “trông như thật” với người dùng cuối.</b> Dùng high-fi quá sớm thì người xem sẽ góp ý về màu sắc thay vì về luồng.</p>
+<p class="sub">Bốn khái niệm <b>Prototype · Pilot · MVP · Proof-of-concept</b> được phân biệt trên hai trục: <b>trục ngang</b> = mức độ hoàn thiện (fidelity &amp; completion), <b>trục dọc</b> = phạm vi test (parts → whole).</p>
+
+<h3>MVP: cách nào rẻ nhất để test được giả thuyết?</h3>
+<div class="vs">
+  <div class="lneu">
+    <h4>① Using variations for brainstorming</h4>
+    <p>Từ <b>1 màn hình → 3 biến thể trong vài giờ</b>: Insight First · Momentum Mode · Sheet Reveal.</p>
+    <p style="margin:8px 0 0;color:var(--muted)">Cùng một bài toán, 3 hướng giải, <b>so sánh trước khi cược vào một</b>.</p>
+  </div>
+  <div class="lneu">
+    <h4>② Lát cắt mỏng xuyên suốt</h4>
+    <p>Không phải một tầng hoàn chỉnh.</p>
+    <p style="margin:8px 0 0;color:var(--muted)">Không build <b>“bánh xe trước, xe hơi sau”</b>. Build chiếc xe đạp chạy được ngay — nhỏ nhưng đủ cả 4 tầng.</p>
+  </div>
+</div>
+<div class="bad"><b>Vì sao “build từng mảnh” sai</b>Ván trượt → xe đạp → xe máy → ô tô: <b>mỗi bước đều đi được</b>. Còn bánh xe hoàn hảo thì <b>không chở được ai</b> — nên không sinh ra bài học nào, và toàn bộ rủi ro dồn vào lần ra mắt cuối.</div>
+
+<h3>Wizard of Oz MVP — hai case kinh điển</h3>
+<div class="card">
+  <h4>🚗 DoorDash — “Palo Alto Delivery” (2013)</h4>
+  <p style="margin:0 0 6px"><b>Giả định:</b> “Có ai cần giao đồ ăn từ quán địa phương không?”</p>
+  <p style="margin:0"><b>MVP:</b> một trang web tĩnh + PDF menu 8 quán (<b>không xin phép</b>), một số Google Voice chung đổ chuông cả 4 founder. Có cuộc gọi → tự gọi đặt món, tự lái đi giao, lấy $6. Dán tờ rơi quanh Stanford — <b>đơn đầu tiên từ khách lạ qua Google sau ~45 phút</b>.</p>
+</div>
+<div class="card">
+  <h4>📝 Fireflies — AI Wizard of Oz</h4>
+  <p style="margin:0 0 6px"><b>Giả định rủi ro nhất:</b> “Người ta có trả tiền cho ‘AI ghi chú họp’ không?”</p>
+  <p style="margin:0 0 6px"><b>MVP:</b> 2 founder tham gia cuộc họp dưới danh nghĩa một bot AI tên <b>“Fred”</b>, ngồi <b>gõ note bằng tay</b>. Làm tay hơn <b>100 cuộc họp</b>, thu <b>$100/tháng</b>.</p>
+  <p style="margin:0"><b>Kết quả:</b> seed $5M (10/2019) → kỳ lân trên $1 tỷ (6/2025).</p>
+</div>
+<div class="ok"><b>Bài học chung</b>Test <b>nhu cầu chi trả</b> trước khi xây công nghệ. Hành vi <b>bỏ tiền ra</b> là tín hiệu đáng tin hơn nhiều so với việc người dùng nói “tôi sẽ mua”.<br>Cách thứ ba cùng họ: <b>landing page + ads</b> — bán trước khi có sản phẩm, khách đăng ký mua thì gọi điện xin lỗi rồi refund.</div>
+
+<h2><span class="num">§2</span> &nbsp;Scope &amp; PRD cho AI feature</h2>
+<p class="sub">Khung 6 bước của Ailian Gan (Lead PM AI, Zoom) — ví dụ Zoom meeting summary xuyên suốt.</p>
+
+<h3>① Identify good use cases</h3>
+<div class="bad"><b>AI là cây búa đi tìm cái đinh</b>Team thường được giao sẵn “cây búa” AI rồi mới đi tìm bài toán. <b>Hãy tìm đinh tốt — đừng đóng lỗ lung tung.</b></div>
+<div class="three">
+  <div><div class="k">A</div><strong>Hiểu sâu user need</strong><p>User làm hoạt động chính nào? Pain point lớn nhất — chỗ nào complex hay tedious? Điều gì delight user tới mức họ chưa từng nghĩ tới?</p></div>
+  <div><div class="k">B</div><strong>Brainstorm theo LLM skills</strong><p>summarization · question-answering · content generation · personalization · data processing · predictive insights. Nghĩ rộng: tóm tắt không chỉ PDF — còn chat, transcript, video.</p></div>
+  <div><div class="k">C</div><strong>Chọn theo giá trị + moat</strong><p>Use case nào giải pain lớn nhất? Cái nào tạo <b>competitive moat</b> — data nào mà đối thủ có model tốt cũng không copy được?</p></div>
+</div>
+<table>
+  <tr><th style="width:200px">Use case Zoom cân nhắc</th><th>Kết luận</th></tr>
+  <tr><td>Scheduling</td><td>Khả thi, nhưng cần biết availability &amp; preferences của mọi người</td></tr>
+  <tr><td>Draft agendas</td><td>Khả thi, nhưng cần input data đủ tốt mới đề xuất được agenda hay</td></tr>
+  <tr><td>Brainstorm ideas</td><td>Khả thi, nhưng Zoom <b>đã có sẵn</b> sản phẩm whiteboard</td></tr>
+  <tr style="background:var(--ok-soft)"><td><b>Extract takeaways</b> <span class="pill o">THẮNG</span></td><td>Zoom đã có sẵn <b>transcript</b> · LLM rất giỏi tóm tắt · app bên thứ ba đang bán note-taking → <b>market demand rõ ràng</b></td></tr>
+</table>
+
+<h3>② Articulate the problem — đừng nhắc chữ AI</h3>
+<div class="acc"><b>Nguyên tắc</b>Problem statement <b>KHÔNG được nhắc chữ AI</b> — vấn đề của user không phải là “đời tôi thiếu AI”.<br>Ba câu hỏi: <b>vấn đề là gì · vì sao là vấn đề · bạn biết từ đâu?</b></div>
+<table>
+  <tr><th style="width:70px"></th><th>Phát biểu</th><th style="width:290px">Nhận xét</th></tr>
+  <tr><td><span class="pill r">✕ BAD</span></td><td>“Users don't have an automated AI notetaker for all their meetings.”</td><td>Phát biểu <b>thiếu solution = vấn đề</b>. Giả định user cần AI notetaker — nhưng tại sao? Không mô tả vấn đề nền. <b>Hỏi “why” vài lần</b></td></tr>
+  <tr><td><span class="pill w">◐ GOOD</span></td><td>“Users want a record of the key points from their meetings, but it is tedious and distracting to take thorough manual notes for every meeting.”</td><td>Tưởng tượng được nhiều giải pháp: thuê intern? bắt cả team ghi note chung? — <b>AI chỉ là phương án scalable và rẻ hơn</b></td></tr>
+  <tr style="background:var(--ok-soft)"><td><span class="pill o">✓ EVEN BETTER</span></td><td>“…a record of discussion topics, key decisions, and action items… In addition, users sometimes cannot attend a meeting, and they want a quick way to catch up.”</td><td>Gợi ý <b>nội dung cần focus</b> (decisions, action items), <b>use case phụ</b> (người vắng mặt), và <b>cách consume</b> — phải nhanh, dễ đọc</td></tr>
+</table>
+
+<h3>③ Define goals · non-goals · success metrics</h3>
+<div class="vs">
+  <div class="lneu">
+    <h4>GOALS</h4>
+    <ul><li>Đọc được recap đầy đủ &amp; chính xác — không cần đọc full transcript</li><li>Nhận được list action items + owners</li><li>Vắng mặt vẫn nắm được thông tin chính</li><li>Truy cập summary theo cách hợp workflow</li><li>Edit summary để sửa lỗi của LLM</li><li>Quản lý được ai xem summary</li></ul>
+    <p style="margin:8px 0 0;color:var(--muted)"><b>Goal không gắn với công nghệ</b> — bài toán có thể giải tốt nhất mà không cần AI.</p>
+  </div>
+  <div class="lneu">
+    <h4>NON-GOALS</h4>
+    <ul><li>Không có customizable templates cho từng loại meeting</li><li>Không bao gồm nội dung từ screen shares, chats, calendar invite hay tài liệu liên quan</li></ul>
+    <p style="margin:8px 0 0;color:var(--muted)">Ghi rõ out-of-scope: ý tưởng cho version sau · vấn đề lâu đời feature này không giải · vấn đề kề cận cần xử lý riêng.</p>
+  </div>
+</div>
+<h4>Success metrics — 3 tầng</h4>
+<div class="three">
+  <div><div class="k">USAGE</div><strong>Có ai dùng không?</strong><p>% accounts enable base setting (default off) · MAU của meeting summaries · % meetings chạy summary</p></div>
+  <div><div class="k">QUALITY</div><strong>Dùng có tốt không?</strong><p>% thumbs up vs thumbs down</p></div>
+  <div><div class="k">IMPACT</div><strong>Có tạo giá trị không?</strong><p>Khó đo → dùng <b>proxy</b>: thời gian tiết kiệm khi không cần người ghi note · <b>% meetings user vắng mặt nhưng đọc summary</b></p></div>
+</div>
+
+<h3>④a Scope the solution — mô tả user flow END-TO-END</h3>
+<p>Bao gồm cả các bước <b>KHÔNG có AI</b> — đừng chỉ định nghĩa đoạn AI. Ví dụ: detect scheduling intent trong email xong → <b>tự suggest giờ luôn, hay đưa user sang calendar app để hoàn tất?</b></p>
+<table>
+  <tr><th style="width:200px">Kiểu invoke</th><th>Ví dụ</th></tr>
+  <tr><td><b>Click a button</b></td><td>Bấm nút summarize một chat thread</td></tr>
+  <tr><td><b>One-shot prompt</b></td><td>Notion brainstorm ý tưởng · Canva tạo graphic cho post</td></tr>
+  <tr><td><b>Pre-set prompts</b></td><td>LinkedIn gợi ý takeaway questions trên mỗi post</td></tr>
+  <tr><td><b>Automated report</b></td><td>Zoom meeting summary auto-start · Slack daily recap các chat bỏ lỡ</td></tr>
+  <tr><td><b>Automated suggestions</b></td><td>Superhuman tóm tắt email 1 dòng · Vanta gợi ý trả lời questionnaire</td></tr>
+  <tr><td><b>Chatbot</b></td><td>Intercom “Fin” trả lời support · Duolingo Roleplay luyện nói</td></tr>
+</table>
+<div class="warn"><b>⚠ Đừng bắt đầu bằng chatbot</b>User gõ gì cũng được → <b>quality khó kiểm soát</b>; lại dính <b>cold start</b> — user không biết hỏi gì, hỏi thế nào, probe tiếp ra sao.<br>Cân nhắc interaction <b>non-chatbot</b> trước. Figjam: pre-set prompt ở mỗi bước + vẫn cho gõ free text → khỏi viết prompt từ đầu, template chất lượng hơn.</div>
+<div class="ok"><b>Human-in-the-loop</b>Output có thể hallucinate → quyết định sai hoặc gây hại? Thêm bước <b>review / edit / delete</b> trước khi share. LLM soạn draft email — <b>user sửa rồi mới gửi, không gửi ngay</b>.</div>
+
+<h3>④b AI-specific requirements — phần PRD không có ở feature thường</h3>
+<div class="qlist">
+  <div class="qi"><div class="n">1</div><div class="b"><strong>User input + contextual data</strong><span>Ai invoke LLM? LLM được đọc dữ liệu nào làm context — phải định <b>ranh giới data rõ ràng</b>. Notion QA đọc cả document · Loom tạo title &amp; chapters từ transcript · Intercom đọc knowledge base · M365 Copilot đọc calendar + emails + docs + contacts</span></div></div>
+  <div class="qi"><div class="n">2</div><div class="b"><strong>LLM output spec</strong><span>Output non-deterministic → mô tả <b>length · tone · format · exclusion độc lập ví dụ</b>. “What good looks like”: case <b>common · critical</b> phải đúng · <b>obscure</b> vẽ ranh giới. Mẹo: prototype câu trả lời bằng ChatGPT/Claude</span></div></div>
+  <div class="qi"><div class="n">3</div><div class="b"><strong>Feedback mechanism</strong><span><b>Thumbs up/down</b> — nhẹ, response rate cao, ít chi tiết. <b>Form scoring + open text</b> — nặng, response rate thấp, giàu chi tiết. Ghi rõ <b>data nào (input + output) gửi kèm feedback</b></span></div></div>
+  <div class="qi"><div class="n">4</div><div class="b"><strong>Quality evaluation — bar phụ thuộc RISK</strong><span>Có HITL check + output tiết kiệm nhiều thời gian → <b>bar thấp hơn</b>. Sai gây quyết định tồi/hại, long-tail offensive → <b>bar cao hơn</b>. Tìm <b>CONVERGENCE</b> giữa auto eval và manual eval</span></div></div>
+</div>
+<div class="card">
+  <p style="margin:0"><b>Ví dụ output spec — Zoom mục “Next Steps”:</b> chỉ action <b>sau</b> cuộc họp (không gồm việc trong meeting) · <b>1 action/bullet</b> · <b>có tên assignee</b> · <b>tối đa 8</b> · tone professional.</p>
+</div>
+<div class="acc"><b>PAIR — “Feedback + Control”</b>Feedback phải được <b>thiết kế ngay trong spec</b>, không gắn thêm sau khi ship — mỗi tương tác là cơ hội để hệ thống học.</div>
+
+<h3>④c Privacy · ⑤ Align engineering · ⑥ GTM</h3>
+<div class="three">
+  <div><div class="k">④C PRIVACY</div><strong>Zoom AI Companion</strong><p>Banner pop-up cho mọi participant + <b>sparkle indicator</b> · base setting <b>default off</b> tới khi admin enable · <b>kill switch</b>: host dừng bất cứ lúc nào, <b>xóa luôn transcript</b> · retention tối đa 30 ngày · data khách <b>KHÔNG dùng để train</b></p></div>
+  <div><div class="k">⑤ ENGINEERING</div><strong>Đừng over-spec</strong><p>Thảo luận ngay khi <b>draft</b> spec — đừng chờ hoàn chỉnh; sẽ có nhiều unknown. PM cần hiểu đủ để cân: <b>prompting · model selection · LLM techniques (fine-tuning, RAG) · scaling</b></p></div>
+  <div><div class="k">⑥ GTM</div><strong>Rollout theo tier</strong><p>Nội bộ → premium tier → GA (beta trước để monitor quality). <b>Pricing:</b> Zoom chọn <b>free kèm meetings license</b> — muốn AI phổ biến rộng, không để IT admin phải chọn ai được dùng AI</p></div>
+</div>
+
+<h2><span class="num">§3</span> &nbsp;Nondeterminism &amp; Human-centered design</h2>
+
+<h3>Nondeterminism là mặc định — không phải edge case</h3>
+<div class="vs">
+  <div class="lneu">
+    <h4>Ba loại failure</h4>
+    <ul><li><b>Output variance</b> — cùng input, hai lần chạy ra hai output khác nhau</li><li><b>Behavioral drift</b> — release đúng, vài tuần sau lệch; team biết qua <b>complaint của user</b>, không qua monitoring</li><li><b>Reasoning-level failure</b> — retrieval đúng, tool call đúng, trả lời trôi chảy, nhưng tổ hợp ra kết quả sai. <i>“Monitoring shows all green. But the product fails.”</i></li></ul>
+  </div>
+  <div class="lbad">
+    <h4>Ba sai lầm thiết kế</h4>
+    <ul><li><b>Giấu variance</b> — không nút regenerate, không confidence framing → user báo “bug” cho hành vi đúng kỹ thuật</li><li><b>Acceptance criteria nhị phân</b> — 3 test case xanh → ship. Nhưng vài case là <b>demo</b>, không phải <b>distribution</b></li><li><b>Fallback là ý sau cùng</b> — spec chỉ 1 dòng “display error message”. Nhưng AI vẫn trả lời, <b>chỉ là trả lời tệ, âm thầm bào mòn trust</b></li></ul>
+  </div>
+</div>
+<div class="note"><b>Câu chốt</b>Nondeterminism <b>không phải bug để sửa</b> — là <b>constraint để thiết kế vòng tránh</b>, như latency hay kích thước màn hình.</div>
+
+<h3>Spec cho feature xác suất: 3 ca chuyển đổi</h3>
+<div class="qlist">
+  <div class="qi"><div class="n">1</div><div class="b"><strong>Từ expected output → acceptance criteria dạng tỉ lệ</strong><span>✕ “The AI returns a correct summary.” → ✓ <b>“…passes this rubric on ≥90% of a representative input set.”</b> Tỉ lệ đo được, và <b>biết ngay khi nó xuống dốc</b></span></div></div>
+  <div class="qi"><div class="n">2</div><div class="b"><strong>Từ test cases → test distributions</strong><span><b>Một test case là demo. Một distribution mới là product.</b> Bắt đầu ~20 case phản ánh input thật (messy, edge, ambiguous — không chỉ happy path), lớn dần từ <b>production traces</b>, không phải từ trực giác</span></div></div>
+  <div class="qi"><div class="n">3</div><div class="b"><strong>Từ “works” → “fails by design”</strong><span>Spec phải có <b>Failure Modes section</b>: confidence thấp thì sao? tool timeout thì sao? output ngoài ngưỡng thì user thấy gì? Đây là <b>quyết định product</b> — viết vào spec, không phải thread Slack 3 tuần sau launch</span></div></div>
+</div>
+<div class="three">
+  <div><div class="k">FALLBACK 1</div><strong>Soft fallback</strong><p>Output đơn giản/hẹp hơn khi confidence thấp</p></div>
+  <div><div class="k">FALLBACK 2</div><strong>Human handoff</strong><p>Case rủi ro cao/mơ hồ → chuyển người thật</p></div>
+  <div><div class="k">FALLBACK 3</div><strong>Silent skip</strong><p>Không làm gì, <b>nhưng cũng không làm sai</b></p></div>
+</div>
+<div class="bad"><b>Tiêu chuẩn</b><b>AI PRD thiếu acceptance threshold section = chưa phải AI PRD.</b></div>
+
+<h3>HAX Playbook &amp; case BatchBuddy</h3>
+<p><b>Microsoft HAX Playbook</b> hỏi về đặc điểm hệ thống — loại hệ thống, input text/voice, có trigger rõ ràng không, input có nhiều nghĩa không, dạng output, cách tạo response (generated/selected) — rồi <b>tự suy ra các kiểu lỗi và kịch bản cần test</b> trước khi ra mắt.</p>
+<table>
+  <tr><th style="width:190px">Lớp lỗi</th><th style="width:60px">Số</th><th>Chi tiết</th></tr>
+  <tr><td>Correct operation</td><td>1</td><td>Đường chạy đúng — user hỏi deadline → bot trả đúng 20:00 22/06</td></tr>
+  <tr><td>Input errors</td><td>1</td><td>Typo: truncation · substitution · insertion · swapping</td></tr>
+  <tr><td><b>Trigger errors</b></td><td><b>3</b></td><td><b>Missed</b> (đáng nói thì im) · <b>Spurious</b> (không ai hỏi vẫn nói) · <b>Delayed</b> (nói quá trễ)</td></tr>
+  <tr><td>Delimiter errors</td><td><b>0</b></td><td><i>“0 cũng là một câu trả lời có ý nghĩa — lớp này được xét và loại trừ, không phải bị quên.”</i></td></tr>
+  <tr><td>Response generation</td><td>4</td><td>ambiguities · implausible · <b>plausible-but-incorrect</b> · inappropriate</td></tr>
+</table>
+<div class="bad"><b>SCN-08 — kiểu sai nguy hiểm nhất</b>User hỏi deadline, bot trả <b>“18:00 22/06”</b> — nghe hợp lý nhưng sai (đúng: 20:00). <b>Hợp lý nên khó bị phát hiện.</b></div>
+<div class="note"><b>Cấu hình quyết định bề mặt rủi ro</b><b>Nếu có nút bấm để hỏi thay vì bot tự đoán → 3 lỗi trigger biến mất.</b> Đổi config = đổi bản đồ lỗi.</div>
+
+<h3>Phần mềm truyền thống vs AI product</h3>
+<table>
+  <tr><th style="width:130px"></th><th>Phần mềm truyền thống</th><th>AI product</th></tr>
+  <tr><td><b>Kết quả</b></td><td>Luôn giống nhau</td><td>Mỗi lần một khác</td></tr>
+  <tr><td><b>Ví dụ</b></td><td>“Số dư của tôi?” → trả đúng số, mọi lúc</td><td>“Tóm tắt email này” → mỗi lần một bản</td></tr>
+  <tr><td><b>Kiểm thử</b></td><td>Đạt / không đạt</td><td>Chạy 100 lần → bao nhiêu lần “đủ tốt”?</td></tr>
+  <tr style="background:var(--bad-soft)"><td><b>Lỗi</b></td><td>Bug — <b>tìm và sửa được</b></td><td>Sai xác suất — <b>không sửa được, chỉ giảm được</b></td></tr>
+</table>
+<div class="acc"><b>Aishwarya Naresh Reganti</b><i>“Bạn không biết user sẽ tương tác thế nào, và cũng không biết LLM sẽ phản hồi ra sao — <b>input, output, process, cả ba đều không chắc chắn</b>.”</i><br>→ Nếu sản phẩm dùng AI, bạn đang <b>thiết kế cho uncertainty</b>.</div>
+
+<h3>Đừng hứa hẹn quá khả năng của AI</h3>
+<div class="quote"><p>“Don't let your UI write a check that your AI can't cash.”</p><small>EYTAN ADAR (2018)</small></div>
+<div class="vs">
+  <div class="lbad"><h4>✕ Auto-resolve customer issue</h4><p>UI hứa AI tự giải quyết trọn vẹn</p></div>
+  <div class="lgood"><h4>✓ Draft reply for human review</h4><p>UI đặt đúng kỳ vọng về vai trò của AI</p></div>
+</div>
+<p class="sub">Đây là <b>vấn đề về kỳ vọng, không chỉ là vấn đề về độ chính xác</b>. Nguyên tắc đầu tiên của <b>Guidelines for Human-AI Interaction</b> (Microsoft, CHI 2019 — <b>18 nguyên tắc theo 4 chặng</b>) chính là <i>“Make clear what the system can do”</i>.</p>
+
+<h3>Trust calibration</h3>
+<div class="trustbar">
+  <div class="diag"></div>
+  <span class="a1">Overtrust — user tin CAO hơn năng lực thật<br><small>giao việc quá mức, bỏ qua kiểm tra</small></span>
+  <span class="a3">Calibrated trust</span>
+  <span class="a2">Distrust — user tin THẤP hơn năng lực thật<br><small>underuse: có giá trị nhưng không được tận dụng</small></span>
+</div>
+<p class="sub">Trục dọc: <b>Trust in AI system</b> · Trục ngang: <b>AI capability</b>. Ví dụ overtrust: AI chỉ nên gợi ý nhưng UI làm user tưởng nó tự quyết được. Ví dụ distrust: AI thực ra giúp tốt nhưng user không dám dùng.</p>
+<div class="three">
+  <div><div class="k">TRỤ 1</div><strong>Expectation</strong><p>Nói rõ AI làm được gì, làm tốt tới đâu, khi nào dễ sai</p></div>
+  <div><div class="k">TRỤ 2</div><strong>Explainability</strong><p>Giúp user hiểu vì sao AI ra output này và khi nào nên nghi ngờ</p></div>
+  <div><div class="k">TRỤ 3</div><strong>Control</strong><p>Cho user sửa, bỏ qua, undo, preview, hoặc duyệt trước khi commit</p></div>
+</div>
+<p class="sub"><b>Ba phần còn lại của deck thực ra chính là unpack ba trụ này.</b></p>
+
+<h3>Augmentation vs Automation</h3>
+<div class="vs">
+  <div class="lneu">
+    <h4>Augmentation — AI hỗ trợ</h4>
+    <ul><li>Cần phán đoán, sáng tạo hoặc sở thích cá nhân</li><li>Ý định và yêu cầu của user còn <b>mơ hồ</b></li><li>User phải <b>chịu trách nhiệm</b> cho quyết định cuối</li><li><b>Sai sót có hậu quả lớn, khó phục hồi</b></li><li>Workflow dài, nhiều bước, thường xuyên thay đổi</li></ul>
+  </div>
+  <div class="lneu">
+    <h4>Automation — AI làm thay</h4>
+    <ul><li>Lặp lại, tốn thời gian hoặc ít giá trị sáng tạo</li><li>Quy trình rõ ràng; input và output dễ xác định</li><li>Hệ thống làm ổn định với <b>ít giám sát</b></li><li><b>Nếu AI sai, hậu quả thấp, dễ phát hiện hoặc dễ hoàn tác</b></li><li>User muốn giao việc vì không đủ thời gian</li></ul>
+  </div>
+</div>
+<div class="ok"><b>Con số đáng nhớ</b><b>Copilot: ~30% acceptance rate mà vẫn có 4.7M paid users (1/2026)</b> — augmentation đúng chuẩn. Từ chối 70% gợi ý vẫn là sản phẩm thành công, vì user giữ quyền lọc.</div>
+
+<h4>Mixed initiative — Eric Horvitz (CHI 1999)</h4>
+<div class="three">
+  <div><div class="k">01</div><strong>Inaction</strong><p>Chưa đủ chắc user muốn gì · <b>sai một lần là rất đắt</b> · giữ quyền quyết định cho user</p></div>
+  <div><div class="k">02</div><strong>Ask</strong><p>Có tín hiệu đúng, nhưng còn mơ hồ · <b>một câu hỏi ngắn giảm rủi ro lớn</b> · hợp việc quan trọng nhưng chưa rõ ý</p></div>
+  <div><div class="k">03</div><strong>Act</strong><p>Đủ chắc user muốn gì · <b>làm sai vẫn dễ sửa hoặc undo</b> · tự động hóa để tiết kiệm thời gian</p></div>
+</div>
+<div class="note"><b>Điểm hay bị bỏ quên</b>Horvitz coi đây là <b>bài toán quyết định dựa trên expected value</b>, không phải sở thích thiết kế. <b>Ask thường là trạng thái thông minh nhất nhưng lại hay bị bỏ quên nhất.</b></div>
+
+<h3>Design patterns theo 4 nguyên tắc</h3>
+<h4>① Làm rõ AI làm được gì</h4>
+<div class="three">
+  <div><div class="k">PATTERN</div><strong>Use explanations</strong><p>Dùng phần giải thích để user hiểu hệ thống có thể làm gì</p></div>
+  <div><div class="k">PATTERN</div><strong>Expose system controls</strong><p>Làm lộ nút, menu, tùy chọn để nhìn vào là hiểu khả năng</p></div>
+  <div><div class="k">PATTERN</div><strong>Demonstrate possible inputs</strong><p>Cho ví dụ prompt, câu hỏi, hoặc gợi ý đầu vào</p></div>
+</div>
+<p class="sub"><b>Capability cue là một phần của interaction design — không chỉ là onboarding copy.</b></p>
+<div class="acc"><b>Why Johnny Can't Prompt (CHI 2023)</b>Người dùng không chuyên: <b>không biết AI làm được/không làm được gì</b> nên cần ví dụ cụ thể · <b>khái quát hóa quá mức</b> từ một vài ví dụ hoặc lỗi nhỏ (và <b>dễ bỏ cuộc sớm</b>) · một số kỳ vọng AI hiểu chỉ dẫn <b>giống như con người hiểu</b>.</div>
+
+<h4>② Làm rõ hệ thống làm tốt đến đâu</h4>
+<table>
+  <tr><th style="width:170px">Domain</th><th>✓ Do</th><th>✕ Don't</th></tr>
+  <tr><td>✈️ Trip Planner</td><td>“Giá tham khảo tại thời điểm gợi ý — giá thực tế có thể thay đổi khi đặt”</td><td>“Đây là lựa chọn phù hợp nhất” + tổng chi phí <b>4.200.000đ</b> nói như chắc chắn</td></tr>
+  <tr><td>🍱 Food Scanner</td><td>Khoảng <b>“350–430 kcal”</b> + nói rõ là ước tính vì ảnh hơi mờ</td><td>Một con số exact <b>“387 kcal”</b> — <b>precision giả</b></td></tr>
+  <tr><td>📄 Resume Screener</td><td>“Danh sách phù hợp để bạn xem trước” + nêu giới hạn dữ liệu đầu vào</td><td><b>Auto loại ứng viên</b> (“Đã loại”) trước khi con người xem</td></tr>
+  <tr><td>🧠 Journaling AI</td><td>“Đây là quan sát từ nhật ký, <b>không phải chẩn đoán</b>”</td><td>Gắn nhãn “Burnout giai đoạn 2” như chẩn đoán chắc chắn</td></tr>
+</table>
+<p class="sub"><b>Mỗi domain cần một cách nói khác nhau — precision giả là một lỗi thiết kế.</b></p>
+
+<h4>③ Khi AI sai / không chắc chắn</h4>
+<div class="ok"><b>HAX G10 — Scope services when in doubt</b>Khi AI không chắc để hiểu người dùng, nó nên <b>HỎI LẠI</b> — thay vì cố giải quyết một câu hỏi mơ hồ. Hai pattern: <b>hỏi lại trước khi làm</b> · <b>cho phép user tùy chỉnh</b>.<br><b>Khi AI không chắc, bớt làm đi thường là UX tốt hơn.</b></div>
+<p><b>Giải thích vì sao hệ thống làm như vậy</b> — 4 cách: giải thích lý do quyết định · <b>map system input attributes to outputs</b> (yếu tố đầu vào nào ảnh hưởng mạnh) · <b>map user behaviors to outputs</b> (hành vi trước đây ảnh hưởng thế nào) · <b>what-if explanations</b> (cho user thử đổi đầu vào để xem kết quả đổi ra sao).</p>
+<div class="warn"><b>Hiển thị confidence — bài học Kayak</b>Kayak từng hiển thị <b>“Confidence 79%”</b> (2013–2019) — nay đã bỏ số %.<br><b>User không cần biết 0.71 hay 0.84 — user cần thấy hệ thống CƯ XỬ khác nhau khi độ chắc khác nhau.</b></div>
+
+<h4>④ Recovery — thiết kế khi AI sai</h4>
+<div class="grid g4">
+  <div class="card" style="margin:0"><h4>Chỉnh sửa kết quả</h4><p class="sub" style="margin:0">Cho phép user sửa trực tiếp output</p></div>
+  <div class="card" style="margin:0"><h4>Undo / Rollback</h4><p class="sub" style="margin:0">Quay lại trạng thái trước</p></div>
+  <div class="card" style="margin:0"><h4>Màn hình lỗi hướng dẫn</h4><p class="sub" style="margin:0">Cơ hội dạy cách dùng đúng</p></div>
+  <div class="card" style="margin:0"><h4>Lỗi = cơ hội xin feedback</h4><p class="sub" style="margin:0">User sẵn sàng phản hồi nhất lúc này</p></div>
+</div>
+<p class="sub"><b>Nếu AI không hoàn hảo, đừng bắt user làm lại từ đầu.</b> Error state là lúc user <b>sẵn sàng học nhất</b> — và cũng sẵn sàng phản hồi nhất.</p>
+<div class="note"><b>Trả quyền kiểm soát — 3 lối thoát</b><b>Chuyển sang người thật</b> · <b>Gợi ý bước tiếp theo</b> · <b>Có chế độ cho user tự chỉnh</b>.<br><i>“AI tốt không phải AI luôn có câu trả lời — AI tốt biết đưa user sang con đường khác khi mình không đủ khả năng.”</i></div>
+
+<h2><span class="num">§4</span> &nbsp;Evals cơ bản</h2>
+
+<h3>Sai kiểu nào tệ hơn? — AI lọc video cho app trẻ em</h3>
+<p class="sub">100 video, trong đó <b>10 video xấu thật</b>.</p>
+<div class="cmx">
+  <div class="hd"></div><div class="hd">XẤU THẬT (10)</div><div class="hd">LÀNH THẬT (90)</div><div class="hd">Chỉ số</div>
+  <div class="hd">AI đánh dấu XẤU (13)</div>
+  <div class="ok2"><b>8 ✓</b>Chặn đúng</div>
+  <div class="er"><b>5 ✗</b>Báo nhầm — video tốt bị gỡ oan</div>
+  <div class="mt">PRECISION<br><b>8/13 = 62%</b><small>Khi AI nói CÓ, đúng bao nhiêu?</small></div>
+  <div class="hd">AI cho qua (87)</div>
+  <div class="er"><b>2 ✗</b>BỎ SÓT — trẻ thấy nội dung xấu</div>
+  <div class="ok2"><b>85 ✓</b>Cho qua đúng</div>
+  <div class="mt">RECALL<br><b>8/10 = 80%</b><small>Trong số cần tìm, AI tìm được bao nhiêu?</small></div>
+</div>
+<div class="bad"><b>Kết luận</b>Lọt <b>2 video xấu</b> (trẻ thấy) tệ hơn gỡ oan <b>5 video tốt</b> → <b>cần RECALL cao</b>.</div>
+
+<h3>Precision hay Recall — phụ thuộc context</h3>
+<table>
+  <tr><th style="width:170px"></th><th>User act theo kết quả sai → <b>PRECISION</b></th><th>Bỏ lọt = mất giá trị → <b>RECALL</b></th></tr>
+  <tr><td><b>User THẤY &amp; sửa được</b></td><td><b>Legal RAG chatbot</b> — user thấy câu trả lời, nhưng sai mà act theo → hậu quả pháp lý nặng</td><td><b>Copilot, FAQ chatbot</b> — gợi ý nhiều, user tự lọc; bỏ lọt gợi ý hay = mất giá trị</td></tr>
+  <tr><td><b>User KHÔNG thấy</b></td><td><b>Spam filter, auto-send email</b> — sai mà không ai biết = nguy hiểm (email quan trọng vào spam)</td><td><b>Content mod trẻ em, fraud</b> — bỏ lọt = thảm họa, Recall bất kể user thấy hay không</td></tr>
+</table>
+<div class="acc"><b>Quy tắc rút ra</b>Sai mà user <b>KHÔNG BIẾT</b> → thường cần <b>Precision</b>. Nhưng <b>bỏ lọt = thảm họa</b> → <b>Recall</b> bất kể user thấy hay không.<br>Bài tập 5 case: lọc nội dung trẻ em · code autocomplete · AI đọc X-quang · duyệt khoản vay · gợi ý nhạc. <b>Không có đáp án tuyệt đối — chấm theo lý do thuyết phục.</b></div>
+
+<h3>Demo chạy tốt ≠ sản phẩm chạy tốt</h3>
+<div class="vs">
+  <div class="lneu">
+    <h4>Lúc demo — mọi thứ trong tầm kiểm soát</h4>
+    <ul><li>10–20 case do team tự chọn</li><li>Input “sạch”, đúng kịch bản đã chuẩn bị</li><li>Chạy vài lần thấy ổn → kết luận “xong”</li></ul>
+  </div>
+  <div class="lbad">
+    <h4>Lúc user thật dùng — không còn kiểm soát được input</h4>
+    <ul><li>Hàng nghìn câu hỏi mỗi ngày — không giống lúc demo</li><li>User hỏi theo cách team <b>chưa từng nghĩ tới</b></li><li>AI <b>chắc chắn sẽ có lúc sai</b> — vấn đề là sai bao nhiêu, sai ở đâu</li></ul>
+  </div>
+</div>
+<div class="note"><b>Câu chốt</b><b>Chất lượng AI là một PHÂN BỐ</b> — đúng bao nhiêu %, trên loại case nào. Muốn biết con số đó thì phải đo, và <b>phải đo liên tục</b>.</div>
+
+<h3>Eval khác test phần mềm thường ở chỗ nào</h3>
+<table>
+  <tr><th style="width:140px"></th><th>Test phần mềm thường</th><th>Eval cho AI</th></tr>
+  <tr><td><b>Kết quả</b></td><td>Cùng input → cùng output. Pass hoặc fail, rõ ràng</td><td>Cùng input → mỗi lần một khác. “Đúng” là chuyện <b>mức độ: đúng bao nhiêu %?</b></td></tr>
+  <tr><td><b>Bộ câu hỏi</b></td><td>Viết một lần, chạy mãi</td><td>Phải <b>lớn dần theo case thật</b> từ user — <b>không bao giờ “đủ”</b></td></tr>
+  <tr><td><b>Khi nào đo</b></td><td>Trước khi release</td><td>Trước release <b>và liên tục sau release</b> — user tạo case mới mỗi ngày</td></tr>
+</table>
+<p class="sub"><b>Precision / Recall chính là một kiểu thước đo của eval — chọn thước đo nào là một quyết định sản phẩm.</b></p>
+
+<h3>Ba giai đoạn của eval flow</h3>
+<div class="three">
+  <div><div class="k">STAGE 01 · PROTOTYPE</div><strong>Vibe Check</strong><p><b>Chấm tay, cảm tính.</b> Chạy thử 10–30 case rồi tự chấm tay. Mục đích: <b>hiểu AI hay sai kiểu gì</b> — chưa cần con số chính thức. Làm lúc còn prototype, <b>trước cả khi viết PRD</b></p></div>
+  <div><div class="k">STAGE 02 · BUILD</div><strong>Offline Eval</strong><p><b>Chấm tự động, trước ra mắt.</b> Có <b>reference dataset</b>; mỗi lần đổi prompt/model → chạy lại toàn bộ, so với phiên bản hiện tại. Qua <b>quality gate</b> mới được release. Cái từng chạy tốt nay tệ đi = <b>regression</b></p></div>
+  <div><div class="k">STAGE 03 · PRODUCTION</div><strong>Online Monitoring</strong><p><b>Theo dõi sau ra mắt.</b> User thật tạo case mới không lường trước. Gom tín hiệu: <b>thumbs up/down · user gõ lại prompt · bỏ giữa chừng</b>. Case lạ → đưa <b>ngược về</b> bộ câu hỏi chuẩn</p></div>
+</div>
+<div class="ok"><b>Vì sao gọi là CHU TRÌNH</b><b>Case thật từ online chảy ngược về bộ câu hỏi offline — bộ câu hỏi ngày càng chuẩn.</b> Vì vậy gọi là chu trình, <b>không phải chấm một lần</b>. User thật là nguồn test case tốt nhất.</div>
+
+<h3>Tài liệu buổi học</h3>
+<div class="vs">
+  <div class="lneu"><h4>PAIR Guidebook (Google)</h4><p>Thiên về <b>AI product framing</b>: chọn đúng bài toán AI, định nghĩa success, trust, feedback, graceful failure.</p></div>
+  <div class="lneu"><h4>HAX Toolkit (Microsoft)</h4><p>Thiên về <b>AI interaction design</b>: guideline, pattern, planning, và test scenario cho những failure của AI.</p></div>
+</div>
+<p class="sub">Sách nên đọc: <b>Steve Krug</b> thiên về <i>how</i> (làm sao để interface bớt rối) · <b>Don Norman</b> thiên về <i>why</i> (vì sao user không hiểu hệ thống, vì sao feedback, mapping và conceptual model lại quan trọng).</p>
+
+</section>
+
+<!-- ==================== TAB 2 ==================== -->
+<section class="panel" id="cheat">
+<button class="printbtn" onclick="window.print()">In cheat sheet</button>
+
+<div class="cheatgrid">
+<div>
+
+<h2>Mạch cả ngày</h2>
+<div class="card">
+  <p style="margin:0">Prototype rẻ nhất → spec đúng → thiết kế cho uncertainty → đo bằng chu trình eval</p>
+</div>
+
+<h2>4 Leap of Faith risks</h2>
+<table>
+  <tr><th>Rủi ro</th><th>Câu hỏi</th></tr>
+  <tr><td>Value</td><td>Khách có mua/dùng không?</td></tr>
+  <tr><td>Usability</td><td>User có tự biết dùng không?</td></tr>
+  <tr><td>Feasibility</td><td>Ta có build được không?</td></tr>
+  <tr><td>Business viability</td><td>Có hợp business không?</td></tr>
+</table>
+<p style="margin:2px 0 0">Test cái <b>quan trọng + bằng chứng yếu</b> trước</p>
+
+<h2>Thang fidelity</h2>
+<div class="card">
+  <p style="margin:0"><b>Sketch → Wireframe</b> (functional, structure) <b>→ Mockup</b> (style, color) <b>→ Prototype</b> (interactive, clickable)<br>
+  <span style="color:var(--muted)">Low-fi chốt luồng · high-fi kiểm chứng “như thật”</span></p>
+</div>
+
+<h2>MVP</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Lát cắt mỏng xuyên suốt</b>, không phải một tầng hoàn chỉnh</p>
+  <p style="margin:0">Ván trượt → xe đạp → xe máy → ô tô, <b>mỗi bước đều đi được</b>.<br>Không build “bánh xe trước, xe hơi sau”</p>
+</div>
+
+<h2>Wizard of Oz</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>DoorDash 2013:</b> web tĩnh + PDF menu 8 quán + Google Voice chung → tự gọi, tự giao, lấy $6. Đơn đầu sau ~45 phút</p>
+  <p style="margin:0"><b>Fireflies:</b> 2 founder giả làm bot “Fred”, gõ tay 100+ cuộc họp, thu $100/tháng → seed $5M → kỳ lân &gt;$1 tỷ</p>
+</div>
+
+<h2>6 bước PRD (Ailian Gan)</h2>
+<div class="card">
+  <ol style="margin:0">
+    <li><b>Identify use cases</b> — user need → LLM skills → giá trị + moat</li>
+    <li><b>Articulate problem</b> — KHÔNG nhắc chữ AI</li>
+    <li><b>Define goals</b> — goals · non-goals · metrics</li>
+    <li><b>Scope solution</b> — user flow end-to-end + AI-specific reqs + privacy</li>
+    <li><b>Align engineering</b> — đừng over-spec</li>
+    <li><b>GTM</b> — rollout tier, pricing, enablement</li>
+  </ol>
+</div>
+
+<h2>6 kiểu invoke AI</h2>
+<div class="card">
+  <p style="margin:0">Click a button · One-shot prompt · Pre-set prompts · Automated report · Automated suggestions · Chatbot<br>
+  <b>⚠ Đừng bắt đầu bằng chatbot</b> — quality khó kiểm soát + cold start</p>
+</div>
+
+<h2>4 AI-specific requirements</h2>
+<div class="card">
+  <ol style="margin:0">
+    <li><b>User input + contextual data</b> — ranh giới data rõ ràng</li>
+    <li><b>LLM output spec</b> — length·tone·format·exclusion, độc lập ví dụ</li>
+    <li><b>Feedback mechanism</b> — thumbs vs form scoring</li>
+    <li><b>Quality evaluation</b> — bar phụ thuộc RISK</li>
+  </ol>
+</div>
+
+<h2>3 tầng success metrics</h2>
+<div class="card">
+  <dl class="kv">
+    <dt>Usage</dt><dd>% enable · MAU · % meetings chạy</dd>
+    <dt>Quality</dt><dd>% thumbs up vs down</dd>
+    <dt>Impact</dt><dd>khó đo → dùng <b>proxy</b></dd>
+  </dl>
+</div>
+
+<h2>3 loại failure xác suất</h2>
+<div class="card">
+  <p style="margin:0"><b>Output variance</b> (cùng input khác output) · <b>Behavioral drift</b> (vài tuần sau lệch) · <b>Reasoning-level failure</b> (all green nhưng product fails)</p>
+</div>
+
+<h2>3 sai lầm thiết kế</h2>
+<div class="card">
+  <ul style="margin:0">
+    <li><b>Giấu variance</b> → user báo “bug”</li>
+    <li><b>Acceptance criteria nhị phân</b> → demo ≠ distribution</li>
+    <li><b>Fallback là ý sau cùng</b> → AI trả lời tệ, âm thầm bào mòn trust</li>
+  </ul>
+</div>
+
+</div>
+<div>
+
+<h2>3 ca chuyển đổi spec</h2>
+<div class="card">
+  <ol style="margin:0">
+    <li>expected output → <b>acceptance criteria dạng tỉ lệ</b> (“≥90% of a representative input set”)</li>
+    <li>test cases → <b>test distributions</b> (~20 case messy/edge/ambiguous, lớn từ production traces)</li>
+    <li>“works” → <b>“fails by design”</b> (Failure Modes section)</li>
+  </ol>
+  <p style="margin:8px 0 0"><b>AI PRD thiếu acceptance threshold = chưa phải AI PRD</b></p>
+</div>
+
+<h2>3 tầng fallback</h2>
+<div class="card">
+  <p style="margin:0"><b>Soft fallback</b> (output hẹp hơn khi confidence thấp) · <b>Human handoff</b> (rủi ro cao → người thật) · <b>Silent skip</b> (không làm gì, nhưng cũng không làm sai)</p>
+</div>
+
+<h2>BatchBuddy — 5 lớp lỗi</h2>
+<table>
+  <tr><th>Lớp</th><th>Số</th></tr>
+  <tr><td>Correct operation</td><td>1</td></tr>
+  <tr><td>Input errors</td><td>1</td></tr>
+  <tr><td><b>Trigger errors</b></td><td><b>3</b> (missed/spurious/delayed)</td></tr>
+  <tr><td>Delimiter errors</td><td>0 (xét rồi loại trừ)</td></tr>
+  <tr><td>Response generation</td><td>4</td></tr>
+</table>
+<p style="margin:2px 0 0"><b>Nút bấm thay tự đoán → 3 lỗi trigger biến mất.</b> Cấu hình quyết định bề mặt rủi ro</p>
+
+<h2>Phần mềm thường vs AI</h2>
+<table>
+  <tr><th></th><th>Thường</th><th>AI</th></tr>
+  <tr><td>Kết quả</td><td>Luôn giống</td><td>Mỗi lần một khác</td></tr>
+  <tr><td>Kiểm thử</td><td>Đạt/không</td><td>100 lần, bao nhiêu “đủ tốt”</td></tr>
+  <tr><td>Lỗi</td><td>Bug, <b>sửa được</b></td><td>Sai xác suất, <b>chỉ giảm được</b></td></tr>
+</table>
+
+<h2>Trust calibration</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Overtrust</b> — tin cao hơn năng lực → giao việc quá mức<br>
+  <b>Distrust</b> — tin thấp hơn năng lực → underuse</p>
+  <p style="margin:0"><b>3 trụ:</b> Expectation · Explainability · Control</p>
+</div>
+
+<h2>Augmentation vs Automation</h2>
+<table>
+  <tr><th>Augmentation</th><th>Automation</th></tr>
+  <tr><td>Cần phán đoán/sáng tạo<br>Ý định mơ hồ<br>User chịu trách nhiệm<br><b>Sai khó phục hồi</b></td><td>Lặp lại, tốn thời gian<br>Quy trình rõ ràng<br>Ít giám sát<br><b>Sai dễ hoàn tác</b></td></tr>
+</table>
+<p style="margin:2px 0 0"><b>Copilot: ~30% acceptance, 4.7M paid users</b></p>
+
+<h2>Mixed initiative (Horvitz)</h2>
+<div class="card">
+  <p style="margin:0"><b>Inaction</b> (sai rất đắt) · <b>Ask</b> (mơ hồ, 1 câu hỏi giảm rủi ro lớn) · <b>Act</b> (đủ chắc, dễ undo)<br>
+  <b>Ask thông minh nhất nhưng hay bị bỏ quên nhất</b></p>
+</div>
+
+<h2>Design patterns</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Làm rõ làm được gì:</b> use explanations · expose controls · demonstrate inputs</p>
+  <p style="margin:0 0 6px"><b>Làm rõ tốt đến đâu:</b> tránh <b>precision giả</b> (“350–430 kcal” chứ không “387 kcal”)</p>
+  <p style="margin:0 0 6px"><b>Khi không chắc:</b> HỎI LẠI (HAX G10) — bớt làm đi thường là UX tốt hơn</p>
+  <p style="margin:0"><b>Recovery:</b> sửa kết quả · undo · màn hình lỗi hướng dẫn · xin feedback</p>
+</div>
+
+<h2>Confidence — bài học Kayak</h2>
+<div class="card">
+  <p style="margin:0">Bỏ “Confidence 79%” (2013–2019).<br><b>User không cần biết 0.71 hay 0.84 — user cần thấy hệ thống CƯ XỬ khác đi</b></p>
+</div>
+
+<h2>Precision / Recall</h2>
+<div class="card">
+  <p style="margin:0 0 6px"><b>Precision</b> = 8/13 = khi AI nói CÓ, đúng bao nhiêu<br>
+  <b>Recall</b> = 8/10 = trong số cần tìm, tìm được bao nhiêu</p>
+  <p style="margin:0">Sai mà user <b>KHÔNG biết</b> → Precision<br>
+  <b>Bỏ lọt = thảm họa</b> → Recall (bất kể user thấy hay không)</p>
+</div>
+
+<h2>3 giai đoạn eval flow</h2>
+<table>
+  <tr><th>Stage</th><th>Nội dung</th></tr>
+  <tr><td><b>Vibe Check</b><br><small>prototype</small></td><td>10–30 case chấm tay, hiểu AI sai kiểu gì. <b>Trước cả khi viết PRD</b></td></tr>
+  <tr><td><b>Offline Eval</b><br><small>build</small></td><td>Reference dataset + quality gate. Bắt <b>regression</b></td></tr>
+  <tr><td><b>Online Monitoring</b><br><small>production</small></td><td>Thumbs · gõ lại prompt · bỏ giữa chừng. Case lạ → <b>ngược về</b> dataset</td></tr>
+</table>
+<p style="margin:2px 0 0"><b>Chu trình, không phải chấm một lần</b></p>
+
+</div>
+</div>
+</section>
+
+<!-- ==================== TAB 3 ==================== -->
+<section class="panel" id="cards">
+<div class="fcbar">
+  <button class="fbtn on" data-f="all">Tất cả</button>
+  <button class="fbtn" data-f="mvp">Prototype &amp; MVP</button>
+  <button class="fbtn" data-f="prd">Scope &amp; PRD</button>
+  <button class="fbtn" data-f="nd">Nondeterminism</button>
+  <button class="fbtn" data-f="hcai">Human-centered</button>
+  <button class="fbtn" data-f="eval">Evals</button>
+  <span class="counter" id="cnt"></span>
+</div>
+<div class="fcgrid" id="fcgrid"></div>
+<p class="hint">Click vào thẻ để lật · Click lần nữa để úp lại</p>
+</section>
+
+</div>
+
+<script>
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); document.getElementById(b.dataset.t).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+const CARDS=[
+ ['mvp','4 Leap of Faith Assumptions?','<b>Value risk</b> (khách có mua/dùng không?) · <b>Usability risk</b> (user có tự biết dùng không?) · <b>Feasibility risk</b> (ta có build được không?) · <b>Business viability risk</b> (có hợp business không?)'],
+ ['mvp','Giả định nào nên test trước tiên?','Giả định có <b>business importance CAO nhưng evidence YẾU</b>. Bằng chứng mạnh thì không cần test; ít quan trọng thì không đáng test.'],
+ ['mvp','Vì sao “build rẻ đi” buộc lifecycle phải đổi?','Vì toàn bộ lifecycle được thiết kế quanh giả định <b>“build là đắt”</b>. Trên thang <b>signal vs effort</b>, MVP và prototype giờ nằm ở chỗ trước đây chỉ có wireframe.'],
+ ['mvp','AI thay đổi Double Diamond thế nào?','<b>Bản thân Double Diamond không đổi — chỉ tốc độ đi qua nó thay đổi:</b> nhiều ý tưởng hơn, đồng thuận stakeholder nhanh hơn, deliver và lấy feedback nhanh hơn.'],
+ ['mvp','Thang fidelity 4 bậc?','<b>Sketch</b> → <b>Wireframe</b> (functional, structure) → <b>Mockup</b> (style, color) → <b>Prototype</b> (interactive, clickable).<br>Low-fi chốt luồng &amp; tính năng; high-fi kiểm chứng “trông như thật”.'],
+ ['mvp','Prototype/Pilot/MVP/PoC phân biệt trên hai trục nào?','<b>Trục ngang:</b> mức độ hoàn thiện (fidelity &amp; completion). <b>Trục dọc:</b> phạm vi test (parts → whole).'],
+ ['mvp','Nguyên tắc cốt lõi của MVP?','Tìm cách <b>rẻ nhất</b> để test được giả thuyết — build một <b>lát cắt mỏng xuyên suốt</b>, không phải một tầng hoàn chỉnh.<br>Không build “bánh xe trước, xe hơi sau”.'],
+ ['mvp','Vì sao build từng mảnh là sai?','Vì <b>user không dùng được gì cho tới bước cuối</b> → không thu được phản hồi nào suốt quá trình, và toàn bộ rủi ro dồn vào lần ra mắt cuối. Ván trượt → xe đạp → xe máy → ô tô: <b>mỗi bước đều đi được</b>.'],
+ ['mvp','MVP của DoorDash (2013)?','Web tĩnh + <b>PDF menu 8 quán (không xin phép)</b> + số Google Voice chung đổ chuông cả 4 founder → tự gọi đặt món, tự lái đi giao, lấy $6. <b>Đơn đầu tiên từ khách lạ sau ~45 phút.</b>'],
+ ['mvp','AI Wizard of Oz của Fireflies?','2 founder tham gia họp dưới danh nghĩa bot AI tên <b>“Fred”</b>, ngồi <b>gõ note bằng tay</b> hơn 100 cuộc họp, thu <b>$100/tháng</b>.<br>Kết quả: seed $5M (10/2019) → kỳ lân &gt;$1 tỷ (6/2025).'],
+ ['mvp','MVP kiểu landing page + ads test gì?','<b>Bán trước khi có sản phẩm.</b> Khách đăng ký mua → gọi điện xin lỗi rồi refund. Test <b>value risk</b> ở mức mạnh nhất vì hành vi bỏ tiền đáng tin hơn lời nói.'],
+ ['mvp','“Using variations for brainstorming” là gì?','Từ <b>1 màn hình → 3 biến thể trong vài giờ</b> (Insight First · Momentum Mode · Sheet Reveal) — cùng một bài toán, 3 hướng giải, <b>so sánh trước khi cược vào một</b>.'],
+ ['mvp','The old way vs The new model?','<b>Old:</b> PM → Design → Engineering, weeks of lag, rigid handoffs, ít tiếp xúc khách.<br><b>New:</b> PM + Design + Engineering, build in hours, collaborative riffing, nhiều cuộc trò chuyện với khách hơn.'],
+
+ ['prd','“AI là cây búa đi tìm cái đinh” cảnh báo gì?','Team thường được giao sẵn “cây búa” AI rồi mới đi tìm bài toán. <b>Hãy tìm đinh tốt — đừng đóng lỗ lung tung.</b> PAIR: bắt đầu từ user need, không từ công nghệ.'],
+ ['prd','3 bước A-B-C identify use cases?','<b>A ·</b> Hiểu sâu user need · <b>B ·</b> Brainstorm theo LLM skills (summarization, QA, content generation, personalization, data processing, predictive insights) · <b>C ·</b> Chọn theo giá trị + <b>moat</b>.'],
+ ['prd','Vì sao “Extract takeaways” thắng ở Zoom?','Hội tụ 3 yếu tố: Zoom <b>đã có sẵn transcript</b> · LLM <b>rất giỏi tóm tắt</b> · app bên thứ ba đang bán note-taking → <b>market demand rõ ràng</b>.'],
+ ['prd','Moat trong bước chọn use case nghĩa là gì?','<b>Data nào</b> (để train, để generate output) <b>mà đối thủ có model tốt cũng không copy được.</b> Với Zoom, moat là kho transcript.'],
+ ['prd','Nguyên tắc bất di bất dịch của problem statement?','<b>KHÔNG được nhắc chữ AI</b> — vấn đề của user không phải là “đời tôi thiếu AI”. Ba câu hỏi: vấn đề là gì · vì sao là vấn đề · bạn biết từ đâu?'],
+ ['prd','Vì sao “Users don\'t have an AI notetaker” là BAD?','Vì <b>phát biểu thiếu solution = vấn đề</b>. Nó giả định user cần AI notetaker mà không mô tả <b>vấn đề nền</b> hay mục tiêu của user. → Hỏi “why” vài lần để đào sâu.'],
+ ['prd','Goals trong AI PRD phải có tính chất gì?','Là <b>outcome định tính gắn với problem statement</b> — không phải solution, và <b>cũng không nhắc AI</b>. Bài toán có thể giải tốt nhất mà không cần AI.'],
+ ['prd','Non-goals ghi những gì?','<b>Out-of-scope:</b> ý tưởng cho version sau · vấn đề lâu đời feature này không giải · vấn đề kề cận cần xử lý riêng. Viết rõ để <b>ngăn scope creep</b>.'],
+ ['prd','3 tầng success metrics?','<b>Usage</b> (% enable, MAU, % meetings chạy) · <b>Quality</b> (% thumbs up vs down) · <b>Impact</b> (khó đo → dùng <b>proxy</b>, vd “% meetings user vắng mặt nhưng đọc summary”).'],
+ ['prd','Vì sao phải mô tả user flow END-TO-END?','Vì phải bao gồm cả <b>các bước KHÔNG có AI</b> — vd detect scheduling intent xong thì tự suggest giờ luôn, hay đưa user sang calendar app? Bàn giao giữa AI và phần không-AI là nơi trải nghiệm dễ gãy nhất.'],
+ ['prd','6 kiểu invoke AI?','<b>Click a button · One-shot prompt · Pre-set prompts · Automated report · Automated suggestions · Chatbot</b>'],
+ ['prd','Vì sao “đừng bắt đầu bằng chatbot”?','User gõ gì cũng được → <b>quality khó kiểm soát</b>; lại dính <b>cold start</b> — user không biết hỏi gì, hỏi thế nào, probe tiếp ra sao. Figjam giải bằng pre-set prompt + vẫn cho free text.'],
+ ['prd','Khi nào cần Human-in-the-loop?','Khi output có thể <b>hallucinate → quyết định sai hoặc gây hại</b>. Thêm bước <b>review/edit/delete</b> trước khi share. VD: LLM soạn draft email — user sửa rồi mới gửi.'],
+ ['prd','4 AI-specific requirements?','① <b>User input + contextual data</b> (ranh giới data) · ② <b>LLM output spec</b> · ③ <b>Feedback mechanism</b> · ④ <b>Quality evaluation</b>'],
+ ['prd','Vì sao output spec phải “độc lập ví dụ”?','Vì output <b>non-deterministic</b> → phải mô tả <b>length · tone · format · exclusion</b> thành tiêu chí kiểm được, không thể chỉ đưa một output mẫu.<br>VD Zoom “Next Steps”: 1 action/bullet, có assignee, tối đa 8, tone professional.'],
+ ['prd','“What good looks like” cần mô tả loại case nào?','<b>Common</b> (chất lượng thường ngày) · <b>Critical</b> (không được phép sai) · <b>Obscure</b> (vẽ ranh giới ngoài cùng).'],
+ ['prd','Thumbs up/down vs form scoring?','<b>Thumbs:</b> nhẹ, response rate cao, <b>ít chi tiết</b> vì sao tốt/xấu.<br><b>Form scoring + open text:</b> nặng, response rate thấp, <b>giàu chi tiết</b>.<br>Phải ghi rõ <b>data nào gửi kèm feedback</b>.'],
+ ['prd','Quality evaluation bar phụ thuộc gì?','<b>RISK.</b> Có HITL check + tiết kiệm nhiều thời gian → bar <b>thấp hơn</b>. Sai gây quyết định tồi/hại, long-tail offensive → bar <b>cao hơn</b>.<br>Tìm <b>CONVERGENCE</b> giữa auto eval và manual eval.'],
+ ['prd','Privacy controls của Zoom AI Companion?','Banner pop-up + <b>sparkle indicator</b> · base setting <b>default off</b> tới khi admin enable · <b>kill switch</b> (dừng + <b>xóa luôn transcript</b>) · retention 30 ngày · data khách <b>KHÔNG dùng để train</b>.'],
+
+ ['nd','3 loại failure của hệ xác suất?','<b>Output variance</b> (cùng input, khác output) · <b>Behavioral drift</b> (release đúng, vài tuần sau lệch — biết qua complaint chứ không qua monitoring) · <b>Reasoning-level failure</b> (all green nhưng product fails).'],
+ ['nd','Sai lầm “giấu variance” gây gì?','Không nút regenerate, không confidence framing → <b>user báo “bug” cho hành vi đúng kỹ thuật</b>.<br>Cách sửa: lộ ra — <i>“Here is one way to think about this”</i> + nút thử lại.'],
+ ['nd','Vì sao acceptance criteria nhị phân là sai lầm?','“AI trả lời đúng” + 3 test case xanh → ship. Nhưng vài test case là <b>DEMO chứ không phải DISTRIBUTION</b> — nó <b>giấu messy input và drift</b>.'],
+ ['nd','Vì sao “fallback là ý sau cùng” nguy hiểm?','Vì failure trong hệ nondeterministic <b>hiếm khi nhị phân</b> — AI vẫn trả lời, <b>chỉ là trả lời tệ, âm thầm bào mòn trust</b>. Không có trạng thái lỗi rõ ràng để bắt.'],
+ ['nd','Câu chốt về nondeterminism?','<b>Không phải bug để sửa — là constraint để thiết kế vòng tránh</b>, như latency hay kích thước màn hình.'],
+ ['nd','3 ca chuyển đổi khi viết spec xác suất?','① expected output → <b>acceptance criteria dạng tỉ lệ</b> · ② test cases → <b>test distributions</b> · ③ “works” → <b>“fails by design”</b>.'],
+ ['nd','Acceptance criteria dạng tỉ lệ viết thế nào?','✕ “The AI returns a correct summary.”<br>✓ <b>“The AI produces a summary that passes this rubric on ≥90% of a representative input set.”</b> — tỉ lệ đo được, và biết ngay khi nó xuống dốc.'],
+ ['nd','Test distribution bắt đầu và lớn lên thế nào?','<b>“Một test case là demo. Một distribution mới là product.”</b> Bắt đầu ~20 case phản ánh input thật (messy, edge, ambiguous), lớn dần từ <b>production traces</b>, không phải từ trực giác.'],
+ ['nd','Failure Modes section trả lời gì?','<b>Confidence thấp thì sao? Tool timeout thì sao? Output ngoài ngưỡng chấp nhận thì user thấy gì?</b> — quyết định product, viết vào spec, không phải thread Slack 3 tuần sau launch.'],
+ ['nd','3 tầng fallback?','<b>Soft fallback</b> (output đơn giản/hẹp hơn khi confidence thấp) · <b>Human handoff</b> (rủi ro cao/mơ hồ → người thật) · <b>Silent skip</b> (không làm gì, nhưng cũng không làm sai).'],
+ ['nd','Tiêu chuẩn cho AI PRD?','<b>AI PRD thiếu acceptance threshold section = chưa phải AI PRD.</b>'],
+ ['nd','HAX Playbook giúp gì?','Xác định <b>kịch bản kiểm thử quan trọng cần thực hiện trước khi ra mắt</b>, dựa trên đặc điểm hệ thống (loại hệ thống, input text/voice, có trigger rõ không, input đa nghĩa không, dạng output, generated/selected).'],
+ ['nd','5 lớp lỗi của BatchBuddy?','<b>Correct operation</b> (1) · <b>Input errors</b> (1) · <b>Trigger errors</b> (3) · <b>Delimiter errors</b> (0 — xét rồi loại trừ, không phải bị quên) · <b>Response generation</b> (4).'],
+ ['nd','3 trigger errors?','<b>Missed</b> (đáng nói thì im) · <b>Spurious</b> (không ai hỏi vẫn nói) · <b>Delayed</b> (nói quá trễ).<br><b>Nếu có nút bấm thay vì bot tự đoán → cả 3 biến mất. Cấu hình quyết định bề mặt rủi ro.</b>'],
+ ['nd','Vì sao plausible-but-incorrect nguy hiểm nhất?','Vì nó <b>nghe hợp lý nên khó bị phát hiện</b>. VD SCN-08: user hỏi deadline, bot trả “18:00 22/06” rất thuyết phục nhưng sai (đúng: 20:00). Loại <i>implausible</i> thì user nhận ra ngay.'],
+
+ ['hcai','4 khác biệt phần mềm thường vs AI product?','<b>Kết quả</b> (luôn giống vs mỗi lần một khác) · <b>Ví dụ</b> (số dư đúng mọi lúc vs tóm tắt mỗi lần một bản) · <b>Kiểm thử</b> (đạt/không vs 100 lần bao nhiêu lần “đủ tốt”) · <b>Lỗi</b> (bug sửa được vs <b>sai xác suất chỉ giảm được</b>).'],
+ ['hcai','Ba thứ nào đều không chắc chắn khi làm AI product?','<b>Input, output, process.</b> Bạn không biết user sẽ tương tác thế nào, cũng không biết LLM sẽ phản hồi ra sao. → <b>Nếu sản phẩm dùng AI, bạn đang thiết kế cho uncertainty.</b>'],
+ ['hcai','Câu của Eytan Adar về kỳ vọng?','<b>“Don\'t let your UI write a check that your AI can\'t cash.”</b><br>✕ Auto-resolve customer issue vs ✓ Draft reply for human review.<br>Đây là <b>vấn đề về kỳ vọng, không chỉ về độ chính xác</b>.'],
+ ['hcai','Trust calibration — hai trạng thái lệch?','<b>Overtrust</b> — user tin CAO hơn năng lực thật → giao việc quá mức, bỏ qua kiểm tra.<br><b>Distrust</b> — user tin THẤP hơn năng lực thật → <b>underuse</b>: có giá trị nhưng không được tận dụng.'],
+ ['hcai','3 trụ của trust calibration?','<b>Expectation</b> (nói rõ AI làm được gì, tốt tới đâu, khi nào dễ sai) · <b>Explainability</b> (vì sao ra output này, khi nào nên nghi ngờ) · <b>Control</b> (sửa, bỏ qua, undo, preview, duyệt trước khi commit).'],
+ ['hcai','Khi nào chọn Augmentation?','Cần <b>phán đoán/sáng tạo/sở thích cá nhân</b> · ý định user còn mơ hồ · user phải <b>chịu trách nhiệm</b> cho quyết định cuối · <b>sai sót hậu quả lớn khó phục hồi</b> · workflow dài nhiều bước.'],
+ ['hcai','Khi nào chọn Automation?','Lặp lại/tốn thời gian/ít giá trị sáng tạo · quy trình rõ ràng, input-output dễ xác định · hệ thống ổn định với ít giám sát · <b>sai thì hậu quả thấp, dễ phát hiện hoặc dễ hoàn tác</b> · user muốn giao việc.'],
+ ['hcai','Con số của Copilot nói lên điều gì?','<b>~30% acceptance rate mà vẫn có 4.7M paid users (1/2026)</b> — augmentation đúng chuẩn. <b>Từ chối 70% gợi ý vẫn là sản phẩm thành công</b> vì user giữ quyền lọc.'],
+ ['hcai','3 trạng thái mixed initiative của Horvitz?','<b>Inaction</b> (chưa đủ chắc, sai một lần rất đắt) · <b>Ask</b> (có tín hiệu nhưng mơ hồ, một câu hỏi ngắn giảm rủi ro lớn) · <b>Act</b> (đủ chắc, làm sai vẫn dễ undo).<br><b>Ask thông minh nhất nhưng hay bị bỏ quên nhất.</b>'],
+ ['hcai','3 pattern làm rõ “AI làm được gì”?','<b>Use explanations</b> · <b>Expose system controls</b> · <b>Demonstrate possible inputs</b>.<br><b>Capability cue là một phần của interaction design — không chỉ là onboarding copy.</b>'],
+ ['hcai','“Why Johnny Can\'t Prompt” (CHI 2023) chỉ ra gì?','Người dùng không chuyên <b>không biết AI làm được/không làm được gì</b> nên cần ví dụ cụ thể · <b>khái quát hóa quá mức</b> từ vài ví dụ hoặc lỗi nhỏ (và <b>dễ bỏ cuộc sớm</b>) · kỳ vọng AI hiểu <b>giống con người hiểu</b>.'],
+ ['hcai','Precision giả là gì — ví dụ?','Nói chính xác hơn mức hệ thống thật sự biết. ✕ “387 kcal” vs ✓ “khoảng 350–430 kcal vì ảnh hơi mờ”. ✕ “tổng 4.200.000đ” chắc chắn vs ✓ “giá tham khảo có thể thay đổi”.<br><b>Precision giả là một lỗi thiết kế.</b>'],
+ ['hcai','HAX G10 “Scope services when in doubt”?','Khi AI không chắc để hiểu người dùng, nó nên <b>HỎI LẠI</b> thay vì cố giải quyết câu hỏi mơ hồ.<br><b>“Khi AI không chắc, bớt làm đi thường là UX tốt hơn.”</b>'],
+ ['hcai','4 cách giải thích “vì sao hệ thống làm vậy”?','Giải thích lý do quyết định · <b>map input attributes → outputs</b> · <b>map user behaviors → outputs</b> · <b>what-if explanations</b> (cho user đổi đầu vào xem kết quả đổi ra sao).'],
+ ['hcai','Bài học Kayak về hiển thị confidence?','Kayak bỏ “Confidence 79%” (2013–2019). <b>User không cần biết 0.71 hay 0.84 — user cần thấy hệ thống CƯ XỬ khác nhau khi độ chắc khác nhau.</b>'],
+ ['hcai','4 pattern recovery khi AI sai?','<b>Cho phép user chỉnh sửa kết quả</b> · <b>Undo/Rollback</b> · <b>Màn hình lỗi hướng dẫn cách dùng đúng</b> · <b>Lỗi là cơ hội xin feedback</b>.<br>Error state là lúc user <b>sẵn sàng học nhất</b>.'],
+ ['hcai','3 lối thoát khi AI không đủ khả năng?','<b>Chuyển sang người thật</b> · <b>Gợi ý bước tiếp theo</b> · <b>Có chế độ cho user tự chỉnh</b>.<br><i>“AI tốt không phải AI luôn có câu trả lời — AI tốt biết đưa user sang con đường khác.”</i>'],
+
+ ['eval','Precision và Recall trong ví dụ lọc video?','100 video, 10 xấu thật. AI đánh dấu 13 → 8 đúng, 5 báo nhầm. AI cho qua 87 → 2 bỏ sót.<br><b>Precision = 8/13 = 62%</b> (khi AI nói CÓ, đúng bao nhiêu). <b>Recall = 8/10 = 80%</b> (trong số cần tìm, tìm được bao nhiêu).'],
+ ['eval','App lọc video trẻ em nên ưu tiên gì?','<b>RECALL</b> — lọt 2 video xấu (trẻ thấy) tệ hơn gỡ oan 5 video tốt. Hậu quả bỏ lọt <b>không hoàn tác được</b>, còn gỡ oan thì khiếu nại được.'],
+ ['eval','Legal RAG chatbot vs Copilot — khác gì?','Cả hai đều “user THẤY &amp; sửa được”, nhưng:<br><b>Legal RAG → PRECISION</b> (sai mà act theo → hậu quả pháp lý nặng).<br><b>Copilot → RECALL</b> (gợi ý nhiều, user tự lọc; bỏ lọt = mất giá trị).'],
+ ['eval','Quy tắc chung chọn Precision hay Recall?','Sai mà user <b>KHÔNG BIẾT</b> → thường cần <b>Precision</b> (spam filter, auto-send email).<br>Nhưng <b>bỏ lọt = thảm họa</b> → <b>Recall</b> bất kể user thấy hay không (content mod trẻ em, fraud).'],
+ ['eval','Vì sao demo tốt ≠ sản phẩm tốt?','<b>Lúc demo:</b> 10–20 case tự chọn, input “sạch”, đúng kịch bản.<br><b>Lúc user thật:</b> hàng nghìn câu/ngày, user hỏi theo cách team <b>chưa từng nghĩ tới</b>.<br><b>Chất lượng AI là một PHÂN BỐ</b> — phải đo, và đo liên tục.'],
+ ['eval','3 khác biệt eval AI vs test phần mềm?','<b>Kết quả:</b> pass/fail rõ ràng vs “đúng bao nhiêu %”.<br><b>Bộ câu hỏi:</b> viết một lần chạy mãi vs <b>lớn dần theo case thật, không bao giờ đủ</b>.<br><b>Khi nào đo:</b> trước release vs <b>trước VÀ liên tục sau release</b>.'],
+ ['eval','Vibe Check làm gì và khi nào?','Chạy thử <b>10–30 case rồi tự chấm tay</b>. Mục đích: <b>hiểu AI hay sai kiểu gì</b> — chưa cần con số chính thức. Làm lúc còn prototype, <b>TRƯỚC CẢ KHI viết PRD</b>.'],
+ ['eval','Offline Eval hoạt động thế nào?','Có <b>reference dataset</b>; mỗi lần đổi prompt/model → <b>chạy lại toàn bộ</b>, so với phiên bản hiện tại. Qua <b>quality gate</b> mới được release. Cái từng chạy tốt nay tệ đi = <b>regression</b>.'],
+ ['eval','Online Monitoring thu tín hiệu gì?','<b>Thumbs up/down · user gõ lại prompt · bỏ giữa chừng.</b> Hai tín hiệu sau là <b>tín hiệu ngầm</b> — user không báo lỗi nhưng hành vi đã nói lên sự không hài lòng. Case lạ → <b>đưa ngược về</b> bộ câu hỏi chuẩn.'],
+ ['eval','Vì sao gọi là CHU TRÌNH?','Vì <b>case thật từ online chảy ngược về bộ câu hỏi offline</b> — bộ câu hỏi ngày càng chuẩn. Vòng khép kín: production → dataset chuẩn hơn → offline eval bắt được nhiều vấn đề hơn. <b>User thật là nguồn test case tốt nhất.</b>'],
+ ['eval','PAIR vs HAX khác nhau ở đâu?','<b>PAIR (Google)</b> thiên về <b>AI product framing</b>: chọn đúng bài toán, định nghĩa success, trust, feedback, graceful failure.<br><b>HAX (Microsoft)</b> thiên về <b>AI interaction design</b>: guideline, pattern, planning, test scenario.'],
+ ['eval','Mạch tư duy của cả Ngày 5?','<b>Test giả thuyết bằng prototype rẻ nhất</b> (§1) → <b>viết spec có acceptance threshold &amp; failure modes</b> (§2) → <b>thiết kế cho uncertainty</b> bằng expectation/explainability/control (§3) → <b>đo chất lượng bằng chu trình eval 3 giai đoạn</b> (§4).'],
+];
+const grid=document.getElementById('fcgrid'), cnt=document.getElementById('cnt');
+const NAMES={mvp:'Prototype & MVP',prd:'Scope & PRD',nd:'Nondeterminism',hcai:'Human-centered',eval:'Evals'};
+function render(f){
+  const list=f==='all'?CARDS:CARDS.filter(c=>c[0]===f);
+  grid.innerHTML=list.map(c=>`<div class="fc"><div class="fci">
+      <div class="ff"><div class="tag2">${NAMES[c[0]]}</div><div class="q">${c[1]}</div></div>
+      <div class="fb"><div class="a">${c[2]}</div></div></div></div>`).join('');
+  cnt.textContent=list.length+' thẻ';
+  grid.querySelectorAll('.fc').forEach(el=>el.onclick=()=>el.classList.toggle('flip'));
+}
+document.querySelectorAll('.fbtn').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); render(b.dataset.f);
+});
+render('all');
+</script>
+</body>
+</html>
