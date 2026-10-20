@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day 3 — Từ Chatbot đến Agent (ReAct) · Ôn thi</title>
+<style>
+:root{color-scheme:light;--bg:#f4f6fb;--ink:#14213d;--mu:#44506a;--ln:#d8dfec;--w:#fff;
+--b:#2851b8;--bs:#e5ecfc;--o:#a8520a;--os:#fff0dc;--g:#17713f;--gs:#e0f4e8;--r:#b0283a;--rs:#fde9ec;--p:#6a3fb0;--ps:#efe8fc}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.75 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+nav{position:sticky;top:0;z-index:5;background:var(--w);border-bottom:1px solid var(--ln);display:flex;gap:4px;overflow-x:auto;padding:8px 14px}
+nav a{white-space:nowrap;color:var(--mu);text-decoration:none;font-size:14px;font-weight:600;padding:6px 11px;border-radius:8px}
+nav a:hover{background:var(--bs);color:var(--b)}
+.bar{height:4px;background:var(--ln)}.bar i{display:block;height:100%;width:0;background:var(--g);transition:width .2s}
+main{max-width:920px;margin:0 auto;padding:22px 16px 70px}
+.hero{background:var(--ink);color:#fff;border-radius:18px;padding:34px 30px}
+.hero h1{margin:0 0 8px;font-size:clamp(28px,5vw,42px);line-height:1.2}.hero p{margin:0;color:#c9d3ea;max-width:640px}
+.loop{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:20px;font-weight:700;font-size:15px}
+.loop span{padding:6px 12px;border-radius:99px}.loop .t{background:var(--bs);color:var(--b)}.loop .a{background:var(--os);color:var(--o)}.loop .ob{background:var(--gs);color:var(--g)}
+h2{font-size:clamp(23px,3.4vw,30px);margin:46px 0 4px;line-height:1.25;padding-bottom:8px;border-bottom:3px solid var(--c,var(--b));color:var(--c,var(--b))}
+.sub{color:var(--mu);margin:6px 0 14px}
+.card{background:var(--w);border:1px solid var(--ln);border-left:6px solid var(--c,var(--b));border-radius:12px;padding:18px 22px;margin:14px 0}
+.card h3{margin:0 0 8px;font-size:19px}.card p{margin:6px 0}.card li{margin:5px 0}
+.g2,.g3{display:grid;gap:12px}.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
+.mini{background:var(--w);border:1px solid var(--ln);border-top:4px solid var(--c,var(--b));border-radius:10px;padding:13px 15px;font-size:15.5px;line-height:1.6}
+.mini b{display:block;margin-bottom:3px}
+.note{padding:13px 16px;border-radius:10px;border-left:5px solid;margin:14px 0;font-size:16px}
+.k{background:var(--bs);border-color:var(--b)}.k:before{content:"💡 "}.w{background:var(--os);border-color:var(--o)}.w:before{content:"⚠️ "}
+.d{background:var(--rs);border-color:var(--r)}.d:before{content:"🚫 "}.s{background:var(--gs);border-color:var(--g)}.s:before{content:"✅ "}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:15.5px;line-height:1.55;background:var(--w);min-width:560px}
+th,td{border:1px solid var(--ln);padding:10px 12px;text-align:left;vertical-align:top}th{background:var(--bs);color:var(--b)}td:first-child{font-weight:700;background:#f8faff}
+.ok{color:var(--g);font-weight:700}.no{color:var(--r);font-weight:700}
+pre{background:#101a30;color:#e6ecfb;border-radius:10px;padding:14px 16px;overflow-x:auto;font:14px/1.6 ui-monospace,Menlo,Consolas,monospace;margin:10px 0}
+code{background:var(--bs);color:var(--b);padding:1px 6px;border-radius:5px;font-size:.92em}
+.big{font-size:34px;font-weight:800;line-height:1.1}
+button{font:inherit;cursor:pointer}.btn{border:1px solid var(--b);background:var(--b);color:#fff;border-radius:9px;padding:8px 16px;font-weight:650;font-size:15px}
+.btn.alt{background:var(--w);color:var(--b)}.btn:disabled{opacity:.4;cursor:default}
+:focus-visible{outline:3px solid var(--b);outline-offset:2px}
+/* trace stepper */
+.tr{display:grid;gap:8px;margin:12px 0;min-height:60px}
+.st{padding:11px 14px;border-radius:10px;border-left:6px solid;font-size:15.5px;animation:in .25s}
+.st b{display:block;font-size:13px;margin-bottom:2px}
+.st.T{background:var(--bs);border-color:var(--b)}.st.T b{color:var(--b)}.st.A{background:var(--os);border-color:var(--o)}.st.A b{color:var(--o)}
+.st.O{background:var(--gs);border-color:var(--g)}.st.O b{color:var(--g)}.st.F{background:var(--ps);border-color:var(--p)}.st.F b{color:var(--p)}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* calc */
+.sl{display:grid;grid-template-columns:150px 1fr 28px;gap:10px;align-items:center;margin:8px 0}
+input[type=range]{width:100%;accent-color:var(--b)}
+.verdict{margin-top:12px;padding:14px 16px;border-radius:10px;font-weight:700;background:var(--bs);color:var(--b)}
+/* rubric bars */
+.rb{display:grid;grid-template-columns:190px 1fr 40px;gap:10px;align-items:center;margin:7px 0;font-size:15.5px}
+.rb div{height:16px;border-radius:8px;background:var(--b)}.rb.hi div{background:var(--o)}
+/* flash + quiz */
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fc{text-align:left;background:var(--w);border:1px solid var(--ln);border-left:6px solid var(--p);border-radius:10px;padding:14px 16px;min-height:96px;color:var(--ink)}
+.fc .a{display:none;margin-top:8px;font-weight:600;color:var(--p)}.fc.on{background:var(--ps)}.fc.on .a{display:block}.fc small{display:block;color:var(--mu);margin-top:6px}
+.q{background:var(--w);border:1px solid var(--ln);border-radius:12px;padding:16px 18px;margin:12px 0}.q h3{font-size:17px;margin:0 0 10px;line-height:1.5}
+.op{display:block;width:100%;text-align:left;background:var(--w);border:1px solid var(--ln);border-radius:9px;padding:10px 13px;margin:7px 0;color:var(--ink)}
+.op:hover{border-color:var(--b);background:var(--bs)}.op.c{background:var(--gs);border-color:var(--g)}.op.c:after{content:" ✔";color:var(--g);font-weight:800}
+.op.x{background:var(--rs);border-color:var(--r)}.op.x:after{content:" ✘";color:var(--r);font-weight:800}
+.ex{display:none;margin-top:8px;padding:10px 13px;border-radius:9px;background:var(--bs);font-size:15.5px}.q.done .ex{display:block}
+.ck{display:flex;gap:10px;align-items:flex-start;padding:10px 13px;background:var(--w);border:1px solid var(--ln);border-radius:9px;margin:7px 0}
+.ck input{width:18px;height:18px;margin-top:6px;accent-color:var(--g)}.ck:has(input:checked){background:var(--gs);border-color:var(--g)}
+details{background:var(--w);border:1px solid var(--ln);border-radius:9px;margin:8px 0}summary{cursor:pointer;padding:11px 14px;font-weight:650}details>div{padding:0 14px 12px}
+@media(max-width:700px){.g2,.g3,.fg{grid-template-columns:1fr}.sl{grid-template-columns:1fr 1fr 28px}.rb{grid-template-columns:1fr 1fr 36px}.hero{padding:24px 18px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<nav>
+<a href="#s1">3 kiểu AI</a><a href="#s2">Agentic Fit</a><a href="#s3">Kiến trúc</a><a href="#s4">ReAct</a><a href="#s5">ReAct vs FC</a><a href="#s6">Agent loop</a><a href="#s7">Cost &amp; Security</a><a href="#s8">Eval</a><a href="#s9">Lab</a><a href="#s10">Tự kiểm tra</a>
+</nav>
+<div class="bar"><i id="pg"></i></div>
+<main>
+<section class="hero">
+<h1>Từ Chatbot đến Agent</h1>
+<p>Tóm tắt các phần dễ ra thi của AICB Day 3: phân loại hệ thống AI, khi nào cần agent, vòng lặp ReAct, guardrails và cách chấm lab.</p>
+<div class="loop"><span class="t">Thought: còn thiếu gì?</span>→<span class="a">Action: gọi tool nào?</span>→<span class="ob">Observation: tool trả gì?</span>→ lặp đến khi đủ</div>
+</section>
+
+<div class="card" style="--c:var(--o)"><h3>5 điều phải nhớ nếu chỉ có 10 phút</h3><ol>
+<li><b>Agent = LLM + reasoning + tools + memory/state</b>, và phải có <b>vòng lặp</b>. Gọi LLM một lần chỉ là chatbot.</li>
+<li><b>Agentic Fit:</b> tổng 11+ mới đáng thử agent; 0–5 chatbot/rule là đủ.</li>
+<li><b>ReAct</b> = Thought → Action → Observation. Dễ debug vì lộ lý do hành động.</li>
+<li>Production dùng <b>Hybrid</b>: Function Calling + reasoning trace.</li>
+<li>Agent đắt ~4.5× và chậm ~4×; cần <b>MAX_ITERATIONS</b>, 3 lớp guardrail. Trace chiếm <b>25/100</b> điểm lab.</li></ol></div>
+
+<h2 id="s1" style="--c:var(--b)">1. Ba kiểu hệ thống AI</h2>
+<p class="sub">Độ thích nghi, tool use, memory và rủi ro tăng dần: Rule-based Bot → LLM Chatbot → Agent.</p>
+<div class="tw"><table><thead><tr><th>Tiêu chí</th><th>Rule-based Bot</th><th>LLM Chatbot</th><th>Agent</th></tr></thead><tbody>
+<tr><td>Cách xử lý</td><td>If/else cố định</td><td>Sinh câu trả lời theo context</td><td>Plan → act → observe → adapt</td></tr>
+<tr><td>Linh hoạt</td><td>Thấp</td><td>Trung bình</td><td>Cao</td></tr>
+<tr><td>Memory</td><td>Gần như không có</td><td>Ngắn hạn trong context</td><td>Ngắn hạn + có thể long-term</td></tr>
+<tr><td>Tool use</td><td>Hard-coded</td><td>Gọi tool theo chỉ định</td><td>Chủ động chọn tool theo bước tiếp theo</td></tr>
+<tr><td>Cost</td><td>Thấp nhất</td><td>Trung bình</td><td>Cao (nhiều call, loop)</td></tr>
+<tr><td>Rủi ro</td><td>Logic dễ kiểm soát</td><td>Hallucination, format drift</td><td>Hallucination + tool misuse + loop</td></tr>
+<tr><td>Ví dụ</td><td>Menu IVR, form validation</td><td>FAQ, support cơ bản</td><td>Booking, research, coding assistant</td></tr></tbody></table></div>
+<div class="note k"><b>Reactive Agent</b> dùng tools + loop, quan sát theo từng bước. <b>Autonomous Agent</b> giữ long-horizon goal qua nhiều quyết định liên tiếp. Không phải mọi thứ dùng LLM đều là agent.</div>
+<div class="tw"><table><thead><tr><th>Sản phẩm</th><th>Phân loại</th><th>Vì sao</th></tr></thead><tbody>
+<tr><td>ChatGPT cơ bản</td><td>LLM Chatbot</td><td>Trả lời 1 lượt, không tool tự chủ</td></tr>
+<tr><td>ChatGPT + web + code</td><td>Hybrid</td><td>Dùng tool loop khi cần, chatbot khi đơn giản</td></tr>
+<tr><td>Siri</td><td>Rule-based + NLU</td><td>Routing cố định, ít dynamic planning</td></tr>
+<tr><td>Cursor Agent mode</td><td>Reactive Agent</td><td>Analyze → chọn tool → observe → lặp</td></tr></tbody></table></div>
+<div class="g2"><div class="mini" style="--c:var(--r)"><b>Chatbot trả lời</b>Giá vé "1.2–2.5 triệu" lấy từ training data cũ, không có nguồn, không kiểm chứng được.</div>
+<div class="mini" style="--c:var(--g)"><b>Agent trả lời</b>Dữ liệu từ API <code>search_flights</code> + <code>get_weather</code>: cụ thể, có source, verifiable.</div></div>
+
+<h2 id="s2" style="--c:var(--o)">2. Agentic Fit: bài toán có cần agent không?</h2>
+<div class="g2"><div class="mini" style="--c:var(--b)"><b>1. Multi-step Reasoning</b>Có cần chia thành nhiều bước phụ thuộc nhau?</div>
+<div class="mini" style="--c:var(--o)"><b>2. Tool Interaction</b>Có cần search, API, database, browser, file system?</div>
+<div class="mini" style="--c:var(--g)"><b>3. Dynamic Decision</b>Bước sau có phụ thuộc kết quả vừa quan sát?</div>
+<div class="mini" style="--c:var(--p)"><b>4. Long Horizon</b>Có phải giữ mục tiêu qua nhiều vòng lặp hoặc nhiều state?</div></div>
+<div class="card" style="--c:var(--o)"><h3>Thử chấm điểm một use case</h3>
+<p class="sub" style="margin-top:0">Kéo thanh trượt (1–5). Ngưỡng theo slide: 0–5 chatbot/rule, 6–10 augmented chatbot, 11+ agent.</p>
+<div class="sl"><label for="r1">Reasoning</label><input id="r1" type="range" min="1" max="5" value="3"><b id="v1">3</b></div>
+<div class="sl"><label for="r2">Tool use</label><input id="r2" type="range" min="1" max="5" value="3"><b id="v2">3</b></div>
+<div class="sl"><label for="r3">Dynamic decision</label><input id="r3" type="range" min="1" max="5" value="3"><b id="v3">3</b></div>
+<div class="verdict" id="vd"></div>
+<p class="small" style="font-size:14px;color:var(--mu)">Mẫu trong slide: FAQ nội bộ HR = 3 · Tóm tắt hợp đồng = 7 · Booking du lịch = 13 · Research đối thủ = 12 · Code assistant có test &amp; fix loop = 14.</p></div>
+<div class="g2"><div class="card" style="--c:var(--r)"><h3>Anti-patterns: dùng agent là sai bài</h3><ul>
+<li>Bài toán 1 bước: hỏi đáp, tra FAQ, phân loại cơ bản</li><li>Không có tool nào để gọi</li><li>Mọi thứ phải 100% deterministic</li><li>Không chấp nhận latency (loop 3–5 bước đã chậm)</li></ul>
+<p><b>Nguyên tắc:</b> luôn benchmark rule / workflow / chatbot trước khi mở agent loop.</p></div>
+<div class="card" style="--c:var(--o)"><h3>3 lầm tưởng về agent</h3><ul>
+<li><b>"Dùng LLM = agent"</b> sai: agent cần loop.</li><li><b>"Agent thông minh hơn = luôn tốt hơn"</b> sai: đắt ~4.5×, chậm ~4×, khó debug.</li><li><b>"Nhiều tool = mạnh hơn"</b> sai: nhiều tool dễ chọn sai; ít tool mô tả rõ tốt hơn.</li></ul></div></div>
+<div class="tw"><table><thead><tr><th>5 mức kiến trúc (tăng dần)</th><th>Cách xử lý</th><th>Ưu</th><th>Nhược</th></tr></thead><tbody>
+<tr><td>Augmented LLM</td><td>Prompt + docs/tools trong context</td><td>Nhanh, rẻ</td><td>Dữ liệu cũ</td></tr>
+<tr><td>Prompt Chaining</td><td>Search → filter → format (cố định)</td><td>Rõ ràng</td><td>Cứng nhắc</td></tr>
+<tr><td>Routing</td><td>Phân intent rồi đi path riêng</td><td>Hiệu quả</td><td>Phải define paths</td></tr>
+<tr><td>Orchestrator-Worker</td><td>Planner → workers → synthesize</td><td>Mạnh</td><td>Phức tạp</td></tr>
+<tr><td>Agent</td><td>ReAct loop: search → compare → book</td><td>Linh hoạt nhất</td><td>Đắt, cần guardrails</td></tr></tbody></table></div>
+<div class="note k">Bắt đầu từ cấu trúc đơn giản nhất đủ dùng. Agent là pattern mạnh nhưng đắt nhất về cost, eval, guardrails và vận hành.</div>
+
+<h2 id="s3" style="--c:var(--g)">3. Kiến trúc Agent</h2>
+<div class="g2"><div class="mini" style="--c:var(--b)"><b>Perception</b>Nhận user input, tool output, feedback.</div><div class="mini" style="--c:var(--p)"><b>Reasoning (LLM core)</b>Phân tích trạng thái, chọn bước tiếp theo.</div>
+<div class="mini" style="--c:var(--o)"><b>Action</b>Gọi tool (API/Search) hoặc trả final answer.</div><div class="mini" style="--c:var(--g)"><b>Memory</b>Giữ goal, facts, kết quả trung gian.</div></div>
+<p class="sub">4 khối kéo theo 4 nhóm chi phí: token, storage, API, latency.</p>
+<div class="g2"><div class="card" style="--c:var(--b)"><h3>Short-term memory</h3><ul><li>Nằm trong context window, dùng cho task hiện tại</li><li>Rẻ nhưng dễ đầy</li><li>Hợp với hội thoại ngắn, goal vài bước</li></ul></div>
+<div class="card" style="--c:var(--g)"><h3>Long-term memory</h3><ul><li>Lưu facts, preferences, state ngoài context (DB, vector store, key-value)</li><li>Cần retrieval strategy và permission model</li></ul></div></div>
+<div class="note w">Thêm memory không tự làm agent giỏi hơn. Chỉ có ích khi chiến lược đọc/ghi và quyền truy cập được thiết kế rõ.</div>
+<div class="card" style="--c:var(--g)"><h3>Tool definition tốt có 5 thành phần</h3><ol>
+<li><b>Name:</b> động từ + danh từ, ví dụ <code>search_flights</code>, không phải <code>do_stuff</code></li>
+<li><b>Description:</b> 1 câu nói tool LÀM GÌ và KHI NÀO dùng</li>
+<li><b>Parameters:</b> type, required/optional, constraints (IATA, YYYY-MM-DD)</li>
+<li><b>Return format:</b> JSON schema hoặc mô tả output rõ</li>
+<li><b>Error modes:</b> timeout, empty result, invalid input</li></ol>
+<p>Thiếu thành phần nào, agent sẽ đoán mò: chọn sai tool hoặc truyền sai args.</p></div>
+<div class="g2"><div class="mini" style="--c:var(--r)"><b>Tệ</b><code>do_stuff</code>, mô tả "Hàm tìm kiếm", args <code>input (any)</code>, không ghi return/error.</div>
+<div class="mini" style="--c:var(--g)"><b>Tốt</b><code>search_flights(origin, destination: IATA; date: YYYY-MM-DD; max_price: int VND)</code> → <code>{flights:[{airline,time,price}]}</code>; lỗi: list rỗng / TimeoutError sau 5s.</div></div>
+
+<h2 id="s4" style="--c:var(--p)">4. ReAct Pattern</h2>
+<div class="card" style="--c:var(--p)"><h3>ReAct = Reasoning + Acting</h3><p>Thay vì trả lời ngay, agent lặp: <b>Thought</b> (đang thiếu gì?) → <b>Action</b> (tool nào, tham số gì?) → <b>Observation</b> (kết quả?) → lặp đến khi đủ thông tin hoặc gặp điều kiện dừng.</p>
+<p>Dòng thời gian: CoT (2022/01) → ReAct (2022/10) → Function Calling (2023/06) → Hybrid (2024+) → Graph agents như LangGraph (2025+).</p></div>
+<div class="card" style="--c:var(--p)"><h3>Chạy thử trace: "Tìm vé HAN→HCM dưới 2 triệu + gợi ý trang phục"</h3>
+<div class="tr" id="tr"></div><button class="btn" id="nx">Bước tiếp theo</button> <button class="btn alt" id="rs">Làm lại</button></div>
+<div class="g2"><div class="card" style="--c:var(--b)"><h3>Parallel tools</h3><p><code>search_flights</code> và <code>get_weather</code> độc lập nhau: gọi đồng thời hoặc đổi thứ tự được.</p></div>
+<div class="card" style="--c:var(--o)"><h3>Chained tools</h3><p><code>check_stock → get_discount → calc_shipping</code>: mỗi bước cần output bước trước. Sai thứ tự = sai kết quả. Đây là tiêu chí <b>Dynamic Decision</b>.</p></div></div>
+<div class="card" style="--c:var(--r)"><h3>Khi tool fail: graceful degradation</h3><p>Timeout → retry 1 lần → vẫn lỗi thì <b>không bịa dữ liệu</b>, thông báo user và gợi ý kiểm tra thủ công. Trace giúp verify: không bịa, không loop vô hạn, có fallback.</p></div>
+<div class="card" style="--c:var(--r)"><h3>Bài tập: tìm 3 bug trong trace</h3>
+<pre>Action 1: get_weather(city="HCM", ...)            # trước khi có vé?
+Action 2: search_flights(origin="HAN", dest="HCM") # mã sân bay?
+Obs 2: VietJet 06:10 giá 1.75M, VNA 08:20 giá 1.95M
+Final: VietJet 06:10 giá 1.5M. Mang áo ấm dày.      # khớp observation?</pre>
+<details><summary>Xem đáp án</summary><div><b>Bug 1, sai thứ tự:</b> gọi weather trước flights; không có vé thì check thời tiết là lãng phí.<br><b>Bug 2, sai IATA:</b> phải là <code>SGN</code> (Tân Sơn Nhất), không phải <code>HCM</code>.<br><b>Bug 3, hallucination:</b> observation nói 1.75M nhưng final nói 1.5M; "áo ấm dày" khi trời 27–32°C là sai.</div></details></div>
+<div class="g2"><div class="card" style="--c:var(--g)"><h3>Ưu điểm ReAct</h3><ul><li>Dễ đọc trace và debug</li><li>Tự quyết bước tiếp theo từ observation</li><li>Hợp search / booking / investigation / coding</li><li>Có thể cài safeguard ở từng vòng</li></ul></div>
+<div class="card" style="--c:var(--r)"><h3>Giới hạn</h3><ul><li>Tốn token và latency</li><li>Dễ loop hoặc gọi sai tool</li><li>Cần eval theo trace, không chỉ final answer</li><li>Không hợp bài toán đơn giản hoặc cần deterministic tuyệt đối</li></ul></div></div>
+
+<h2 id="s5" style="--c:var(--b)">5. ReAct vs Function Calling</h2>
+<div class="note k"><b>ReAct là concept</b> (reasoning xen kẽ acting). <b>Function Calling là mechanism</b> (cách gọi tool). Hybrid kết hợp cả hai.</div>
+<div class="tw"><table><thead><tr><th></th><th>ReAct truyền thống</th><th>Native Function Calling</th><th>Hybrid (khuyến nghị)</th></tr></thead><tbody>
+<tr><td>Output</td><td>Text: Thought / Action</td><td>Structured JSON tool_call</td><td>JSON tool call + reasoning trong content</td></tr>
+<tr><td>Parsing</td><td>Regex/template, dễ vỡ</td><td>SDK parse sẵn, ổn định</td><td>SDK parse + trace giải thích</td></tr>
+<tr><td>Thấy reasoning?</td><td class="ok">Có</td><td class="no">Không (ngầm)</td><td class="ok">Có (prompt yêu cầu)</td></tr>
+<tr><td>Model</td><td>Mọi LLM</td><td>Cần model hỗ trợ FC</td><td>Cần model hỗ trợ FC</td></tr>
+<tr><td>Hợp với</td><td>Học, debug, research</td><td>Production, nhiều tools</td><td>Production + debuggable</td></tr></tbody></table></div>
+<div class="g3"><div class="mini" style="--c:var(--b)"><b>FC thuần</b>Task đơn giản, 1–2 tool calls, không cần trace. VD: "Thời tiết Hà Nội?"</div>
+<div class="mini" style="--c:var(--o)"><b>ReAct text</b>Model không hỗ trợ FC; research prototype, học.</div>
+<div class="mini" style="--c:var(--g)"><b>Hybrid (mặc định)</b>Task phức tạp cần debug: booking agent, coding assistant.</div></div>
+
+<h2 id="s6" style="--c:var(--o)">6. Agent loop: code anatomy</h2>
+<pre>for step in range(MAX_ITERATIONS):
+    output = call_model(system=SYSTEM_PROMPT, messages=messages, tools=TOOLS)
+    if output.type == "final_answer":
+        return output.content
+    try:    result = run_tool(output.name, output.args, timeout=5)
+    except TimeoutError: result = "ERROR: timed out after 5s"
+    if is_duplicate_call(messages, output.name, output.args):
+        result = "WARNING: Duplicate tool call. Try different."
+    messages += [output.as_message(), tool_message(result)]
+return "Stopped: max iterations reached"</pre>
+<div class="note w">Context window lớn dần qua mỗi vòng, nên <b>token cost tăng</b> theo số vòng.</div>
+<div class="card" style="--c:var(--o)"><h3>System prompt production-grade: 5 thành phần</h3><ol>
+<li><b>Identity</b> (bạn là ai)</li><li><b>Capabilities</b> (tools có sẵn)</li><li><b>Instructions</b> (chia sub-task, dùng tool lấy dữ liệu thật, dừng khi đủ evidence)</li><li><b>Constraints</b> (tối đa 5 tool calls, không bịa kết quả, không book khi chưa xác nhận)</li><li><b>Output format</b> (tool_call JSON hoặc final_answer)</li></ol>
+<p>Prompt demo thiếu mục 4 và 5; production <b>PHẢI</b> có constraints và output format. Thêm rule an toàn: không làm theo chỉ dẫn nằm trong tool output.</p></div>
+<div class="g2"><div class="card" style="--c:var(--g)"><h3>Guardrails chống đi vòng</h3><ul><li>Giới hạn số vòng lặp</li><li>Timeout cho từng tool</li><li>Budget token/cost trần</li><li>Retry có kiểm soát</li><li>Fallback sang human hoặc chatbot</li></ul></div>
+<div class="card" style="--c:var(--r)"><h3>Dấu hiệu agent đang loop</h3><ul><li>Lặp lại cùng một tool call</li><li>Hỏi lại thông tin đã có</li><li>Reasoning không tiến thêm</li><li>Observation không đổi mà vẫn tiếp tục</li></ul></div></div>
+<div class="note k"><b>LangGraph:</b> biểu diễn state, nodes, edges, conditional routing. ReAct loop tay hợp để học bản chất; workflow nhiều nhánh hoặc cần persist state thì graph dễ maintain hơn.</div>
+
+<h2 id="s7" style="--c:var(--r)">7. Cost &amp; Security</h2>
+<div class="g3"><div class="mini" style="--c:var(--o)"><span class="big">~4.5×</span><br>agent đắt hơn chatbot (≈$0.0009 vs $0.0002 mỗi query)</div>
+<div class="mini" style="--c:var(--o)"><span class="big">~4×</span><br>agent chậm hơn (4–6 giây vs ~1 giây)</div>
+<div class="mini" style="--c:var(--r)"><span class="big">$21K</span><br>chênh lệch mỗi tháng ở 1M query/ngày ($700/ngày)</div></div>
+<div class="note k">Câu hỏi không phải "đắt hay rẻ?" mà là <b>"accuracy gain có justify cost increase không?"</b> Nếu chatbot hallucinate 30% query, chi phí trả lời sai (refund, mất niềm tin) có thể lớn hơn chi phí agent.</div>
+<div class="card" style="--c:var(--r)"><h3>Prompt injection qua tool output</h3>
+<p>Chatbot chỉ nhận input từ user. <b>Agent nhận từ user và từ tool output (không đáng tin)</b>. Trang web có thể chứa chữ ẩn "IGNORE PREVIOUS INSTRUCTIONS…", agent đọc observation rồi làm theo. Thêm tool = thêm attack surface. Đã xảy ra: Slack AI (08/2024), Salesforce Agentforce (09/2025).</p>
+<p><b>3 guardrail cơ bản:</b> sanitize tool output trước khi đưa vào context · không gọi tool ngoài registry · human confirmation cho hành động không đảo ngược.</p></div>
+<div class="tw"><table><thead><tr><th>3 lớp defense</th><th>Làm gì</th></tr></thead><tbody>
+<tr><td>Lớp 1: Input Guard</td><td>Lọc input user: PII, injection, off-topic</td></tr>
+<tr><td>Lớp 2: Tool Guard</td><td>Sanitize tool output, whitelist tools, rate limit</td></tr>
+<tr><td>Lớp 3: Output Guard</td><td>Kiểm tra final answer: phát hiện hallucination, human review nếu rủi ro cao</td></tr></tbody></table></div>
+<div class="note s">Theo mức rủi ro: Low (FAQ) = Lớp 1 + 3 · Medium (search) = thêm Lớp 2 · High (booking) = thêm human review trước khi trả user.</div>
+
+<h2 id="s8" style="--c:var(--g)">8. Evaluation &amp; debug agent</h2>
+<p class="sub">Eval chatbot chấm answer quality. Eval agent chấm cả <b>trace quality</b> và answer quality.</p>
+<div class="card" style="--c:var(--g)"><h3>5 câu hỏi eval cho mỗi trace</h3><ol>
+<li><b>Reasoning quality:</b> mỗi Thought có justified không?</li><li><b>Tool selection:</b> chọn đúng tool? có bỏ sót?</li><li><b>Argument correctness:</b> args hợp lệ (format, type, constraints)?</li><li><b>Stopping optimality:</b> dừng quá sớm (thiếu data) hay quá muộn (lãng phí)?</li><li><b>Answer grounding:</b> final answer khớp observations hay bịa thêm?</li></ol></div>
+<div class="card" style="--c:var(--o)"><h3>Debug checklist: nhìn trace trước</h3><div class="g2"><ul><li>Thought đúng mục tiêu chưa?</li><li>Chọn đúng tool chưa?</li><li>Args có hợp lệ?</li><li>Observation có thiếu field quan trọng?</li></ul>
+<div><b>4 nơi thường phải sửa:</b><ul><li>Tool description quá mơ hồ</li><li>System prompt thiếu rule dừng</li><li>Không có safeguard retry/loop</li><li>Eval chỉ chấm final answer</li></ul></div></div>
+<p>Debug agent gần với debug distributed system hơn là chỉ tuning prompt: phải nhìn model, tool, state và orchestration.</p></div>
+<div class="g2"><div class="card" style="--c:var(--b)"><h3>Chatbot thắng khi</h3><ul><li>FAQ, support đơn giản, 1 lượt</li><li>Nhanh, rẻ, predictable, dễ kiểm soát</li></ul></div>
+<div class="card" style="--c:var(--p)"><h3>Agent thắng khi</h3><ul><li>Booking, research, coding, data analysis nhiều bước</li><li>Chậm và đắt hơn nhưng xử lý được bài khó</li></ul></div></div>
+<div class="note k"><b>Hybrid pattern:</b> triage nhanh; câu đơn giản đi chatbot path, câu phức tạp mới mở agent loop; có human/escalation khi fail. Bắt đầu bằng chatbot là mặc định tốt.</div>
+
+<h2 id="s9" style="--c:var(--b)">9. Lab 3 và rubric</h2>
+<p class="sub">Build chatbot baseline → nâng cấp ReAct agent (≥1–2 tools) → chạy 5 test cases giống nhau → vẽ flowchart. Nộp: chatbot + agent + 5 test cases + 1 trace + 1 flowchart (150 phút).</p>
+<div class="card" style="--c:var(--b)"><h3>Rubric 100 điểm</h3>
+<div class="rb hi"><span>Trace quality</span><div style="width:100%"></div><b>25</b></div>
+<div class="rb"><span>System prompt</span><div style="width:80%"></div><b>20</b></div>
+<div class="rb"><span>Test case diversity</span><div style="width:80%"></div><b>20</b></div>
+<div class="rb"><span>Tool description</span><div style="width:60%"></div><b>15</b></div>
+<div class="rb"><span>Flowchart + nhận định</span><div style="width:40%"></div><b>10</b></div>
+<div class="rb"><span>Code quality</span><div style="width:40%"></div><b>10</b></div>
+<p style="font-size:15.5px">Bonus +10: fallback path hoặc human escalation. Trace chiếm điểm cao nhất vì kỹ năng cốt lõi là <b>đánh giá agent qua trace</b>, không chỉ final answer.</p></div>
+<div class="g3"><div class="mini" style="--c:var(--b)"><b>2 case chatbot đủ tốt</b>Query 1 bước, không cần tool. VD: "Chính sách hoàn vé?"</div>
+<div class="mini" style="--c:var(--p)"><b>2 case agent vượt trội</b>Multi-step, cần tool. VD: "Tìm vé + gợi ý trang phục"</div>
+<div class="mini" style="--c:var(--r)"><b>1 edge case</b>Tool fail, input mơ hồ ("Tìm vé"), tool timeout.</div></div>
+<div class="note w">Ghi trace <b>cả khi fail</b>: đó mới là phần hay. File nộp gồm <code>chatbot.py</code>, <code>agent.py</code> (có <code>MAX_ITERATIONS</code>), <code>tools.py</code>, <code>test_cases.md</code>, <code>trace.md</code>, <code>flowchart.png</code>.</div>
+
+<h2 id="s10" style="--c:var(--p)">10. Tự kiểm tra</h2>
+<p class="sub">Nhấn thẻ để lật đáp án.</p>
+<div class="fg" id="fg"></div>
+<h2 style="--c:var(--b);margin-top:36px">Trắc nghiệm (chọn là biết đúng sai ngay)</h2>
+<div id="qz"></div><div class="verdict" id="sc">Điểm: 0 / 8</div>
+<h2 style="--c:var(--g);margin-top:36px">Checklist ôn thi</h2>
+<div id="ck"></div>
+</main>
+<script>
+(function(){
+const $=s=>document.querySelector(s);
+// Agentic fit
+const rs=['r1','r2','r3'];
+function fit(){let t=0;rs.forEach((id,i)=>{const v=+$('#'+id).value;t+=v;$('#v'+(i+1)).textContent=v});
+const m=t<=5?'Chatbot hoặc rule là đủ. Làm chatbot baseline trước.':t<=10?'Augmented chatbot: chatbot + 1–2 tool cố định.':'Agent đáng thử: ReAct agent sẽ vượt trội.';
+$('#vd').textContent='Tổng '+t+'/15: '+m}
+rs.forEach(id=>$('#'+id).addEventListener('input',fit));fit();
+// Trace stepper
+const S=[['T','Thought 1','Cần tìm chuyến bay sáng mai HAN → HCM dưới 2 triệu.'],['A','Action 1','search_flights(origin="HAN", destination="SGN", date="2026-03-18", max_price=2000000)'],['O','Observation 1','2 lựa chọn: VietJet 06:10 giá 1.75M, Vietnam Airlines 08:20 giá 1.95M.'],['T','Thought 2','User còn hỏi trang phục nếu mưa. Cần check thời tiết HCM.'],['A','Action 2','get_weather(city="Ho Chi Minh City", date="2026-03-18")'],['O','Observation 2','27–32°C, xác suất mưa 70%.'],['T','Thought 3','Đã có cả vé và thời tiết. Có thể kết luận.'],['F','Final Answer','Gợi ý chuyến 06:10 giá 1.75M; mang áo mỏng, giày dễ khô, ô gập hoặc áo mưa nhẹ.']];
+let i=0;const tr=$('#tr'),nx=$('#nx');
+function add(){if(i>=S.length)return;const d=document.createElement('div');d.className='st '+S[i][0];d.innerHTML='<b>'+S[i][1]+'</b>';d.append(S[i][2]);tr.append(d);i++;if(i>=S.length)nx.disabled=true}
+nx.onclick=add;$('#rs').onclick=()=>{tr.innerHTML='';i=0;nx.disabled=false;add()};add();
+// Flashcards
+const F=[['Agent khác chatbot ở điểm cốt lõi nào?','Có vòng lặp quyết định → hành động → quan sát → lặp. LLM gọi 1 lần = chatbot.'],['Công thức Agent?','LLM + reasoning + tools + memory/state.'],['ReAct viết tắt của gì, gồm bước nào?','Reasoning + Acting: Thought → Action → Observation, lặp đến khi đủ.'],['Ngưỡng Agentic Fit?','0–5 chatbot/rule; 6–10 augmented chatbot; 11+ agent đáng thử.'],['4 tiêu chí Agentic Fit?','Multi-step Reasoning, Tool Interaction, Dynamic Decision, Long Horizon.'],['5 thành phần tool definition?','Name, Description, Parameters, Return format, Error modes.'],['5 thành phần system prompt production?','Identity, Capabilities, Instructions, Constraints, Output format.'],['Hybrid là gì, vì sao dùng?','Native Function Calling + reasoning trace. Ổn định như FC, debug được như ReAct.'],['Agent đắt và chậm hơn bao nhiêu?','Đắt ~4.5×, chậm ~4× so với chatbot (ví dụ tìm vé).'],['3 lớp defense?','Input Guard, Tool Guard (sanitize, whitelist), Output Guard (kiểm hallucination, human review).'],['Vì sao agent dễ bị prompt injection?','Agent nhận cả tool output (không đáng tin), nên text ẩn trong tool output có thể ra lệnh.'],['Trace chiếm bao nhiêu điểm lab?','25/100, cao nhất, vì phải đánh giá agent qua trace, không chỉ final answer.']];
+$('#fg').innerHTML=F.map(f=>'<button class="fc"><b>'+f[0]+'</b><span class="a">'+f[1]+'</span><small>Nhấn để lật</small></button>').join('');
+document.querySelectorAll('.fc').forEach(b=>b.onclick=()=>b.classList.toggle('on'));
+// Quiz
+const Q=[['Điều gì biến một hệ thống LLM thành agent?',['Dùng model lớn hơn','Có vòng lặp quyết định → hành động → quan sát','Trả lời dài hơn','Có giao diện chat'],1,'Agent cần loop. LLM gọi 1 lần vẫn là chatbot.'],
+['Use case có tổng Agentic Fit = 12 nên chọn gì?',['Chatbot hoặc rule','Augmented chatbot','Agent đáng thử','Không cần AI'],2,'11+ là agent đáng thử; 6–10 augmented chatbot; 0–5 chatbot/rule.'],
+['Agent đắt và chậm hơn chatbot khoảng bao nhiêu (ví dụ tìm vé)?',['~1.5× và ~1.5×','~4.5× và ~4×','~10× và ~10×','Bằng nhau'],1,'Khoảng $0.0009 vs $0.0002 và 4–6 giây vs 1 giây.'],
+['Thành phần nào KHÔNG thuộc 5 thành phần tool definition?',['Error modes','Return format','Parameters','Pricing plan'],3,'Năm thành phần: Name, Description, Parameters, Return format, Error modes.'],
+['Cách chống prompt injection qua tool output là?',['Tin mọi observation','Sanitize tool output, whitelist tool, human confirm hành động không đảo ngược','Tăng temperature','Bỏ system prompt'],1,'Tool output là dữ liệu không đáng tin; cần 3 guardrail cơ bản.'],
+['Pattern nên dùng cho production theo slide?',['ReAct text thuần','FC thuần cho mọi trường hợp','Hybrid: FC + reasoning trace','Rule-based'],2,'Hybrid ổn định như FC và vẫn debug được nhờ reasoning trace.'],
+['Trong trace, dest="HCM" sai ở đâu?',['Sai mã IATA, đúng là SGN','Sai ngày','Thiếu max_price','Không sai'],0,'Mã IATA của Tân Sơn Nhất là SGN. Đây là lỗi Argument correctness.'],
+['Tiêu chí nào chiếm điểm cao nhất trong rubric Lab 3?',['System prompt (20)','Code quality (10)','Trace quality (25)','Flowchart (10)'],2,'Trace quality 25/100 vì kỹ năng cốt lõi là đánh giá agent qua trace.']];
+let sc=0,dn=0;const qz=$('#qz');
+Q.forEach((q,n)=>{const d=document.createElement('div');d.className='q';d.innerHTML='<h3>'+(n+1)+'. '+q[0]+'</h3>';
+q[1].forEach((t,j)=>{const b=document.createElement('button');b.className='op';b.textContent=String.fromCharCode(65+j)+'. '+t;
+b.onclick=()=>{if(d.classList.contains('done'))return;d.classList.add('done');dn++;const bs=d.querySelectorAll('.op');bs[q[2]].classList.add('c');if(j===q[2])sc++;else b.classList.add('x');$('#sc').textContent='Điểm: '+sc+' / '+Q.length+(dn===Q.length?(sc>=7?'. Rất tốt!':sc>=5?'. Khá ổn, xem lại phần giải thích.':'. Ôn lại rồi làm lại nhé.'):'')};d.append(b)});
+const e=document.createElement('div');e.className='ex';e.textContent='Giải thích: '+q[3];d.append(e);qz.append(d)});
+// Checklist
+const C=['Phân biệt Rule-based Bot, LLM Chatbot, Agent','Chấm Agentic Fit và biết ngưỡng 0–5 / 6–10 / 11+','Nêu 4 anti-patterns và 3 lầm tưởng về agent','Vẽ lại vòng Thought → Action → Observation','Phân biệt ReAct (concept) và Function Calling (mechanism), giải thích Hybrid','Viết được 5 thành phần tool definition và system prompt','Biết các guardrail: MAX_ITERATIONS, timeout, budget, fallback','Giải thích prompt injection và 3 lớp defense','Nhớ 5 câu hỏi eval trace và rubric Lab 3 (trace 25 điểm)'];
+const ck=$('#ck');let store={};try{store=JSON.parse(localStorage.getItem('d3ck')||'{}')}catch(e){}
+function pg(){const n=C.filter((_,k)=>store[k]).length;$('#pg').style.width=Math.round(n/C.length*100)+'%'}
+C.forEach((t,k)=>{const l=document.createElement('label');l.className='ck';const c=document.createElement('input');c.type='checkbox';c.checked=!!store[k];
+c.onchange=()=>{store[k]=c.checked;try{localStorage.setItem('d3ck',JSON.stringify(store))}catch(e){}pg()};l.append(c,document.createTextNode(t));ck.append(l)});pg();
+})();
+</script>
+</body>
+</html>

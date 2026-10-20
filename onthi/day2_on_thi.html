@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tài liệu tự học và ôn thi AI in Action Day 02: Problem Discovery, Problem Statement, PAIR, Rule Workflow Agent, Reward Function và đánh giá AI.">
+<title>AI in Action Day 02 — Tài liệu ôn thi</title>
+<style>
+:root{
+  --bg:#f4f7fb;--paper:#ffffff;--paper-2:#f7f9fc;--ink:#172235;--muted:#5f6d81;--line:#dfe6ef;
+  --accent:#087f8c;--accent-2:#d8f3f1;--blue:#2856a6;--blue-soft:#e8efff;--orange:#a65b10;--orange-soft:#fff0da;
+  --red:#b43d4c;--red-soft:#ffeaed;--green:#197348;--green-soft:#e1f6e9;--shadow:0 12px 34px rgba(22,40,70,.07);
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth;scroll-padding-top:82px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.68 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+button,input{font:inherit}button{cursor:pointer}
+.topbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:1440px;margin:auto;padding:12px 22px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em;white-space:nowrap}.brand-mark{width:35px;height:35px;border-radius:11px;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:900}
+.top-actions{margin-left:auto;display:flex;gap:8px;align-items:center}.btn{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:10px;padding:8px 12px;font-weight:650;font-size:14px}.btn:hover{border-color:var(--accent);transform:translateY(-1px)}
+.search-wrap{position:relative;flex:1;max-width:420px;margin-left:18px}.search-wrap input{width:100%;background:var(--paper-2);border:1px solid var(--line);color:var(--ink);border-radius:11px;padding:9px 12px 9px 36px;outline:none}.search-wrap input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-2)}.search-icon{position:absolute;left:12px;top:7px;color:var(--muted)}
+.layout{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:258px minmax(0,1fr);gap:28px;padding:25px 22px 70px}
+.sidebar{align-self:start;position:sticky;top:79px;max-height:calc(100vh - 98px);overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:var(--shadow)}.sidebar h2{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:2px 0 12px}.nav-list{list-style:none;padding:0;margin:0;display:grid;gap:3px}.nav-list a{display:block;color:var(--muted);padding:7px 9px;border-radius:8px;font-size:13px;line-height:1.4}.nav-list a:hover,.nav-list a.active{background:var(--accent-2);color:var(--accent);text-decoration:none;font-weight:750}.study-meter{border-top:1px solid var(--line);margin-top:16px;padding-top:14px}.meter-label{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-bottom:7px}.meter{height:7px;background:var(--line);border-radius:10px;overflow:hidden}.meter span{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
+main{min-width:0;max-width:990px}.hero{border:1px solid var(--line);border-radius:22px;padding:clamp(24px,4vw,44px);background:linear-gradient(135deg,var(--paper),var(--paper-2));box-shadow:var(--shadow);position:relative;overflow:hidden}.eyebrow{color:var(--accent);font-size:12px;font-weight:850;letter-spacing:.15em;text-transform:uppercase}.hero h1{font-size:clamp(30px,4.4vw,48px);line-height:1.13;letter-spacing:-.04em;margin:10px 0 14px;max-width:780px}.hero p{color:var(--muted);max-width:780px;margin:0}.hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}.chip{font-size:12px;font-weight:750;padding:5px 9px;border-radius:99px;background:var(--accent-2);color:var(--accent)}
+.hero-callout{margin-top:24px;padding:14px 16px;border-left:4px solid var(--accent);background:var(--paper);border-radius:0 11px 11px 0;font-weight:650}
+.quick-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0 34px}.quick{display:flex;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:15px}.quick-num{flex:0 0 34px;height:34px;display:grid;place-items:center;border-radius:10px;background:var(--accent-2);color:var(--accent);font-weight:900}.quick b{display:block;margin:0 0 3px}.quick p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+.section{margin-top:30px;scroll-margin-top:85px}.section-head{display:flex;gap:13px;align-items:flex-start;margin-bottom:14px}.section-num{flex:0 0 42px;height:42px;border-radius:13px;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-weight:850}.section h2{margin:0;font-size:clamp(23px,3vw,30px);letter-spacing:-.025em;line-height:1.25}.section-intro{color:var(--muted);margin:5px 0 0}.card{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:20px;margin:12px 0;box-shadow:0 5px 18px rgba(22,40,70,.025)}.card h3{font-size:19px;letter-spacing:-.015em;margin:0 0 10px}.card h4{font-size:15px;margin:18px 0 5px}.card p:first-child{margin-top:0}.card p:last-child{margin-bottom:0}.muted{color:var(--muted)}.small{font-size:13px;color:var(--muted)}
+.callout{padding:13px 15px;border-radius:10px;border:1px solid var(--line);background:var(--paper-2);margin:12px 0}.callout.key{border-left:4px solid var(--accent)}.callout.warn{border-left:4px solid var(--orange)}.callout.danger{border-left:4px solid var(--red)}.callout.success{border-left:4px solid var(--green)}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.step-card{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:15px}.step-card h3,.step-card h4{margin:0 0 6px;font-size:16px}.step-card p{margin:0;color:var(--muted);font-size:14px;line-height:1.58}.tag{display:inline-flex;padding:3px 8px;border-radius:99px;font-size:11px;font-weight:850;letter-spacing:.04em;background:var(--blue-soft);color:var(--blue);margin-bottom:7px}.tag.green{background:var(--green-soft);color:var(--green)}.tag.orange{background:var(--orange-soft);color:var(--orange)}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:14px;line-height:1.55;margin:10px 0;overflow:hidden;border:1px solid var(--line);border-radius:11px}th,td{text-align:left;vertical-align:top;padding:11px 12px;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}th:last-child,td:last-child{border-right:0}tr:last-child td{border-bottom:0}th{background:var(--paper-2);font-weight:800}td{background:var(--paper)}
+.diamond{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;position:relative}.diamond .step-card{position:relative}.diamond .step-card:not(:last-child):after{content:"→";position:absolute;right:-13px;top:40%;z-index:2;font-weight:900;color:var(--accent);font-size:18px}
+.math{font-size:23px;font-weight:850;letter-spacing:-.02em;text-align:center;padding:14px;background:var(--paper-2);border-radius:10px;border:1px solid var(--line);margin:9px 0}.two-formulas{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ps-list{counter-reset:ps;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.ps-item{counter-increment:ps;background:var(--paper-2);border:1px solid var(--line);padding:12px;border-radius:11px;min-height:95px}.ps-item:before{content:counter(ps,decimal-leading-zero);font-weight:900;color:var(--accent);font-size:12px;display:block;margin-bottom:4px}.ps-item b{display:block;margin-bottom:3px}.ps-item span{font-size:13px;color:var(--muted);line-height:1.45;display:block}
+.checklist{display:grid;gap:9px}.checkline{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper)}.checkline input{margin-top:5px;accent-color:var(--accent);width:17px;height:17px;flex-shrink:0}.checkline:has(input:checked){background:var(--accent-2)}.checkline label{cursor:pointer}.checkline strong{display:block}.checkline span{display:block;color:var(--muted);font-size:13px}
+details{border:1px solid var(--line);border-radius:11px;background:var(--paper);margin:9px 0;overflow:hidden}summary{cursor:pointer;padding:13px 15px;font-weight:750;list-style:none;display:flex;align-items:center;gap:9px}summary::-webkit-details-marker{display:none}summary:after{content:"+";margin-left:auto;color:var(--accent);font-size:20px}details[open] summary:after{content:"−"}details .detail-body{padding:0 15px 15px;color:var(--muted)}
+.quiz-question{padding:17px;border:1px solid var(--line);border-radius:13px;margin:12px 0;background:var(--paper)}.quiz-question h3{font-size:16px;margin:0 0 12px}.quiz-options{display:grid;gap:8px}.quiz-option{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:9px;padding:10px 12px;cursor:pointer;background:var(--paper)}.quiz-option:hover{border-color:var(--accent)}.quiz-option input{accent-color:var(--accent);margin-top:5px}.quiz-option.correct{border-color:var(--green);background:var(--green-soft)}.quiz-option.incorrect{border-color:var(--red);background:var(--red-soft)}.quiz-feedback{margin-top:10px;font-size:13px;color:var(--muted);display:none}.quiz-feedback.show{display:block}.quiz-actions{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0}.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}.scorebox{display:none;padding:17px;border-radius:13px;background:var(--accent-2);color:var(--ink);margin:12px 0}.scorebox.show{display:block}.scorebox strong{font-size:28px;display:block}.flash-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.flashcard{border:1px solid var(--line);border-radius:12px;background:var(--paper);padding:15px;text-align:left;color:var(--ink);min-height:105px}.flashcard .answer{display:none;color:var(--muted);margin-top:9px;font-size:14px}.flashcard.revealed{border-color:var(--accent);background:var(--accent-2)}.flashcard.revealed .answer{display:block}.flashcard .reveal-hint{display:block;color:var(--accent);font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.08em;margin-top:9px}
+.footer{margin-top:34px;padding:18px;color:var(--muted);font-size:13px;text-align:center;border-top:1px solid var(--line)}.no-results{display:none;margin:15px 0;padding:20px;border:1px dashed var(--line);border-radius:12px;color:var(--muted);background:var(--paper)}.section.hidden-by-search{display:none}
+@media(max-width:1000px){.layout{grid-template-columns:220px minmax(0,1fr);gap:18px;padding:18px 14px 50px}.sidebar{padding:12px}.topbar-inner{padding:10px 14px}.search-wrap{max-width:none;margin-left:0}.diamond{grid-template-columns:repeat(2,minmax(0,1fr))}.diamond .step-card:after{display:none}}
+@media(max-width:760px){.layout{display:block;padding:14px 12px 45px}.sidebar{position:static;max-height:none;margin-bottom:15px}.sidebar h2{margin-bottom:8px}.nav-list{grid-template-columns:repeat(2,minmax(0,1fr))}.nav-list a{font-size:12px}.study-meter{margin-top:11px;padding-top:10px}.topbar-inner{flex-wrap:wrap;gap:8px}.brand{font-size:14px}.brand-mark{width:31px;height:31px}.search-wrap{order:3;flex-basis:100%;max-width:none}.top-actions{gap:5px}.btn{font-size:12px;padding:7px 9px}.quick-grid,.grid-2,.grid-3,.two-formulas,.flash-grid{grid-template-columns:1fr}.ps-list{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding:23px 19px}.section-head{gap:10px}.section-num{flex-basis:35px;height:35px;border-radius:10px}.card{padding:15px}table{font-size:12px}th,td{padding:8px 7px}.table-scroll{overflow-x:auto}table{min-width:520px}}
+@media(max-width:400px){.nav-list{grid-template-columns:1fr}.ps-list{grid-template-columns:1fr}.top-actions .btn .long-label{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media print{.topbar,.sidebar,.top-actions,.search-wrap,.quiz-actions,.flash-hint,.footer .no-print{display:none!important}.layout{display:block;max-width:none;padding:0}.hero,.card,.quick,.section,.quiz-question{box-shadow:none;break-inside:avoid}.hero{border:0;padding:0}.section{margin-top:20px}body{background:#fff;color:#111;font-size:11pt}.card,.quick,.hero,.quiz-question,td,th{background:#fff!important;color:#111!important;border-color:#bbb!important}.muted,.small,.section-intro,.step-card p,td{color:#333!important}.section{break-before:auto}a{color:#111;text-decoration:none}}
+
+/* ===== GIAO DIỆN DỄ ĐỌC: nền sáng, chữ đậm rõ, màu có chủ đích ===== */
+:root{
+  color-scheme:light;
+  --ink:#111c2e;--muted:#3f4d63;--line:#d5dde9;--bg:#f3f6fa;
+  --blue:#1f4fa3;--blue-soft:#e6eefc;
+  --green:#12703f;--green-soft:#e0f5e9;
+  --red:#ad2335;--red-soft:#fdeaed;
+  --orange:#9a4a06;--orange-soft:#fff0d9;
+  --accent:#0b6f7c;--accent-2:#d9f1f2;
+  --c-blue:#1f4fa3;--c-teal:#0b7285;--c-purple:#6b3fb5;--c-orange:#b45309;--c-indigo:#4338ca;
+  --c-pink:#a61e6b;--c-green:#15803d;--c-amber:#92600a;--c-red:#b42335;--c-cyan:#0e7490;
+}
+body{font-size:17px;line-height:1.75;color:var(--ink)}
+.section p,.section li,.card li{line-height:1.75}
+.card li{margin:5px 0}
+.card p,.card li,td,.step-card p,.quick p{color:var(--ink)}
+.section-intro,.small,.muted{color:var(--muted)}
+td,th{font-size:15.5px;line-height:1.6;padding:12px 14px}
+.step-card p{font-size:15.5px;line-height:1.65}
+.quick p{font-size:15.5px}
+.ps-item span{font-size:14.5px;color:var(--muted);line-height:1.55}
+.nav-list a{font-size:14px;color:#2b3a52}
+.card{padding:22px 24px;margin:16px 0}
+.hero p{color:#33425a}
+
+/* Mỗi mục lớn một màu — chỉ dùng cho số, tiêu đề, viền trái */
+main{--sec:var(--accent)}
+#overview{--sec:var(--c-teal)}#discovery{--sec:var(--c-blue)}#statement{--sec:var(--c-purple)}
+#pair{--sec:var(--c-cyan)}#automation{--sec:var(--c-orange)}#solutions{--sec:var(--c-indigo)}
+#reward{--sec:var(--c-pink)}#evaluation{--sec:var(--c-green)}#uxhitl{--sec:var(--c-teal)}
+#decision{--sec:var(--c-amber)}#case{--sec:var(--c-red)}#review{--sec:var(--c-green)}
+#flashcards{--sec:var(--c-purple)}#quiz{--sec:var(--c-blue)}
+.section-head{padding-bottom:12px;border-bottom:3px solid var(--sec)}
+.section-num{background:var(--sec);color:#fff}
+.section h2{color:var(--sec)}
+.section .card{border-left:6px solid var(--sec)}
+.section .card h3{color:var(--sec);font-size:20px}
+.card li::marker{color:var(--sec);font-weight:800}
+
+/* Thẻ nhỏ: nền trắng sạch, chỉ nhãn (tag) có màu */
+.step-card{background:#fff;border:1px solid var(--line);border-top:4px solid var(--sec)}
+.step-card h4,.step-card h3{color:var(--ink)}
+.tag{background:color-mix(in srgb,var(--sec) 14%,#fff);color:var(--sec)}
+.tag.green{background:var(--green-soft);color:var(--green)}
+.tag.orange{background:var(--orange-soft);color:var(--orange)}
+.math{background:#fff;border:2px solid var(--sec);color:var(--sec)}
+
+/* Double Diamond: 2 kim cương = 2 màu */
+.diamond .step-card:nth-child(-n+2){border-top-color:var(--c-blue)}
+.diamond .step-card:nth-child(n+3){border-top-color:var(--c-green)}
+.diamond .step-card:nth-child(-n+2) .tag{background:var(--blue-soft);color:var(--blue)}
+
+/* Automate (xanh lá) vs Augment (xanh dương) */
+.grid-2>.card:nth-child(1){--sec:var(--c-green)}.grid-2>.card:nth-child(2){--sec:var(--c-blue)}
+
+/* Precision (xanh dương) vs Recall (xanh ngọc) */
+.two-formulas>.step-card:nth-child(1){--sec:var(--c-blue)}
+.two-formulas>.step-card:nth-child(2){--sec:var(--c-teal)}
+
+/* 9 trường: 6 xanh dương (bài toán) + 3 cam (quyết định AI) */
+.ps-item{background:#fff;border-left:6px solid var(--blue)}
+.ps-item:before{color:var(--blue);font-size:13px}
+.ps-item:nth-child(n+7){border-left-color:var(--c-orange);background:var(--orange-soft)}
+.ps-item:nth-child(n+7):before{color:var(--orange)}
+.ps-item b{font-size:16px}
+
+/* Bảng: tiêu đề màu, dòng sạch */
+th{background:color-mix(in srgb,var(--sec) 12%,#fff);color:var(--sec);border-bottom:2px solid var(--sec);font-size:14.5px}
+td{background:#fff}
+tbody td:first-child{background:color-mix(in srgb,var(--sec) 6%,#fff)}
+tbody tr:hover td{background:#fafcff}
+
+/* Bảng TP / FP / FN / TN */
+#reward table tbody tr:nth-child(1) td:nth-child(2){background:var(--green-soft);box-shadow:inset 6px 0 var(--green)}
+#reward table tbody tr:nth-child(1) td:nth-child(3){background:var(--orange-soft);box-shadow:inset 6px 0 var(--orange)}
+#reward table tbody tr:nth-child(2) td:nth-child(2){background:var(--red-soft);box-shadow:inset 6px 0 var(--red)}
+#reward table tbody tr:nth-child(2) td:nth-child(3){background:var(--blue-soft);box-shadow:inset 6px 0 var(--blue)}
+#reward table tbody tr:nth-child(1) td:nth-child(2) strong{color:var(--green)}
+#reward table tbody tr:nth-child(1) td:nth-child(3) strong{color:var(--orange)}
+#reward table tbody tr:nth-child(2) td:nth-child(2) strong{color:var(--red)}
+#reward table tbody tr:nth-child(2) td:nth-child(3) strong{color:var(--blue)}
+
+/* Ô lưu ý: 4 loại, nền nhạt + biểu tượng */
+.callout{color:var(--ink);padding:14px 16px;font-size:16px}
+.callout.key{background:var(--accent-2);border-left-color:var(--accent)}
+.callout.warn{background:var(--orange-soft);border-left-color:var(--orange)}
+.callout.danger{background:var(--red-soft);border-left-color:var(--red)}
+.callout.success{background:var(--green-soft);border-left-color:var(--green)}
+.callout.key:before{content:"💡 "}.callout.warn:before{content:"⚠️ "}
+.callout.danger:before{content:"🚫 "}.callout.success:before{content:"✅ "}
+
+/* Từ khóa tô màu — chỉ một nhóm nhỏ có ý nghĩa, chỉ đổi màu chữ + nền nhạt */
+.kw{font-weight:700;padding:0 .25em;border-radius:4px}
+.kw-good{color:var(--green);background:var(--green-soft)}
+.kw-bad{color:var(--red);background:var(--red-soft)}
+.kw-wait{color:var(--orange);background:var(--orange-soft)}
+
+/* Mục lục */
+.nav-list a{border-left:4px solid var(--n,transparent);padding:8px 10px}
+.nav-list a[href="#overview"]{--n:var(--c-teal)}.nav-list a[href="#discovery"]{--n:var(--c-blue)}
+.nav-list a[href="#statement"]{--n:var(--c-purple)}.nav-list a[href="#pair"]{--n:var(--c-cyan)}
+.nav-list a[href="#automation"]{--n:var(--c-orange)}.nav-list a[href="#solutions"]{--n:var(--c-indigo)}
+.nav-list a[href="#reward"]{--n:var(--c-pink)}.nav-list a[href="#evaluation"]{--n:var(--c-green)}
+.nav-list a[href="#uxhitl"]{--n:var(--c-teal)}.nav-list a[href="#decision"]{--n:var(--c-amber)}
+.nav-list a[href="#case"]{--n:var(--c-red)}.nav-list a[href="#review"]{--n:var(--c-green)}
+.nav-list a[href="#flashcards"]{--n:var(--c-purple)}.nav-list a[href="#quiz"]{--n:var(--c-blue)}
+.nav-list a:hover,.nav-list a.active{background:color-mix(in srgb,var(--n,var(--accent)) 12%,#fff);color:var(--n,var(--accent))}
+.meter span{background:var(--c-green)}
+.legend{border-top:1px solid var(--line);margin-top:16px;padding-top:12px;font-size:13px;color:var(--muted);display:grid;gap:6px}
+.legend b{font-size:12px;text-transform:uppercase;letter-spacing:.1em}
+
+/* Checklist, flashcard, trắc nghiệm */
+.checkline:has(input:checked){background:var(--green-soft);border-color:var(--green)}
+.checkline span{font-size:14.5px;color:var(--muted)}
+.flashcard{border-left:6px solid var(--sec);font-size:16px}
+.flashcard .reveal-hint{color:var(--sec);font-size:12px}
+.flashcard.revealed{background:color-mix(in srgb,var(--sec) 8%,#fff);border-color:var(--sec)}
+.flashcard.revealed .answer{color:var(--ink);font-size:15.5px;font-weight:600}
+.quiz-question{border-left:6px solid var(--sec)}
+.quiz-question h3{font-size:17px;line-height:1.5}
+.quiz-option{font-size:16px}
+.quiz-feedback.show{background:var(--blue-soft);color:var(--ink);padding:10px 14px;border-radius:9px;border-left:4px solid var(--blue);font-size:15px}
+.quiz-option.correct::after{content:" ✔";color:var(--green);font-weight:900;margin-left:auto}
+.quiz-option.incorrect::after{content:" ✘";color:var(--red);font-weight:900;margin-left:auto}
+.btn.primary{background:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><span class="brand-mark">AI</span><span>AI in Action <span style="color:var(--muted);font-weight:600">/ Day 02</span></span></div>
+    <div class="search-wrap"><span class="search-icon">⌕</span><input id="search" type="search" placeholder="Tìm khái niệm, công thức, từ khóa…" aria-label="Tìm trong tài liệu"></div>
+    <div class="top-actions"><button class="btn" type="button" onclick="window.print()" title="In hoặc lưu thành PDF">⤓ In / PDF</button></div>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar">
+    <h2>Mục lục ôn tập</h2>
+    <ul class="nav-list" id="navList">
+      <li><a href="#overview">Tổng quan</a></li>
+      <li><a href="#discovery">1. Problem Discovery</a></li>
+      <li><a href="#statement">2. Problem Statement</a></li>
+      <li><a href="#pair">3. Google PAIR</a></li>
+      <li><a href="#automation">4. Automate / Augment</a></li>
+      <li><a href="#solutions">5. Rule / Workflow / Agent</a></li>
+      <li><a href="#reward">6. Reward Function</a></li>
+      <li><a href="#evaluation">7. Evaluation & Production</a></li>
+      <li><a href="#uxhitl">8. UX & HITL</a></li>
+      <li><a href="#decision">9. Go / Not Yet / No-Go</a></li>
+      <li><a href="#case">10. Bài tập tình huống</a></li>
+      <li><a href="#review">11. Checklist ôn thi</a></li>
+      <li><a href="#flashcards">12. Flashcards</a></li>
+      <li><a href="#quiz">13. Trắc nghiệm</a></li>
+    </ul>
+    <div class="study-meter"><div class="meter-label"><span>Tiến độ checklist</span><strong id="progressText">0%</strong></div><div class="meter"><span id="progressBar"></span></div><p class="small">Tích vào phần đã ôn. Tiến độ được lưu trên trình duyệt này.</p></div>
+    <div class="legend"><b>Ý nghĩa màu</b>
+      <span><span class="kw kw-good">Xanh lá</span> đúng, nên làm</span>
+      <span><span class="kw kw-bad">Đỏ</span> sai, rủi ro</span>
+      <span><span class="kw kw-wait">Cam</span> cảnh báo, cần bổ sung</span>
+      <span>Mỗi mục lớn có một màu riêng ở số thứ tự và viền trái.</span></div>
+    
+  </aside>
+  <main id="content">
+    <section class="hero" id="overview" data-searchable>
+      <div class="eyebrow">Tài liệu ôn thi · 76 trang đã chắt lọc</div>
+      <h1>Từ yêu cầu mơ hồ đến Problem Statement rõ ràng</h1>
+      <p>Bản học nhanh theo tài liệu <strong>AI in Action — Day 02</strong>. Tập trung vào khái niệm, mô hình, công thức, cách chọn giải pháp và ví dụ dùng để trả lời câu hỏi tình huống.</p>
+      <div class="hero-chips"><span class="chip">Problem Discovery</span><span class="chip">PAIR</span><span class="chip">Rule / Workflow / Agent</span><span class="chip">Precision / Recall</span><span class="chip">Go / Not Yet / No-Go</span></div>
+      <div class="hero-callout">Nguyên tắc xuyên suốt: <strong>Hiểu đúng vấn đề → mô hình hóa workflow → lượng hóa tác động → chọn giải pháp đơn giản nhất đủ hiệu quả → kiểm thử và kiểm soát rủi ro.</strong></div>
+    </section>
+    <div class="quick-grid" data-searchable>
+      <div class="quick"><div class="quick-num">01</div><div><b>Bài toán có thực sự cần AI?</b><p>So sánh lợi ích AI với rule, quy trình hiện tại và con người.</p></div></div>
+      <div class="quick"><div class="quick-num">02</div><div><b>Nên dùng cấp độ nào?</b><p>Rule, Workflow hay Agent — không phải càng phức tạp càng tốt.</p></div></div>
+      <div class="quick"><div class="quick-num">03</div><div><b>Đã mô tả đủ rõ chưa?</b><p>Biết người gặp vấn đề, workflow, bottleneck, impact, metric và boundary.</p></div></div>
+      <div class="quick"><div class="quick-num">04</div><div><b>Quyết định ra sao?</b><p>Go nếu đủ điều kiện; Not Yet nếu cần bổ sung; No-Go nếu không phù hợp.</p></div></div>
+    </div>
+    <div class="no-results" id="noResults">Không tìm thấy nội dung phù hợp. Thử từ khóa khác, ví dụ: “Recall”, “HITL”, “Baseline”.</div>
+
+    <section class="section" id="discovery" data-searchable>
+      <div class="section-head"><div class="section-num">01</div><div><h2>Problem Discovery — Tìm đúng vấn đề</h2><p class="section-intro">Tìm hiểu nguyên nhân và điểm đau trước khi chọn công nghệ hoặc giải pháp.</p></div></div>
+      <div class="card"><h3>1.1. Double Diamond</h3><div class="diamond">
+        <div class="step-card"><span class="tag">Diamond 1 · Phân kỳ</span><h4>Discover</h4><p>Mở rộng góc nhìn: quan sát, phỏng vấn, khảo sát, nhật ký, dữ liệu.</p></div>
+        <div class="step-card"><span class="tag">Diamond 1 · Hội tụ</span><h4>Define</h4><p>Chọn lọc dữ liệu, tìm nguyên nhân gốc, xác định đúng bài toán.</p></div>
+        <div class="step-card"><span class="tag green">Diamond 2 · Phân kỳ</span><h4>Develop</h4><p>Đề xuất nhiều giải pháp tiềm năng và tạo mẫu thử.</p></div>
+        <div class="step-card"><span class="tag green">Diamond 2 · Hội tụ</span><h4>Deliver</h4><p>Chọn giải pháp, kiểm thử rồi triển khai phù hợp.</p></div>
+      </div><div class="callout key"><strong>Thứ tự phải nhớ:</strong> Discover → Define → Develop → Deliver. Giải pháp xuất sắc cho sai vấn đề vẫn có thể thất bại.</div></div>
+      <div class="card"><h3>1.2. HCD — Human-Centered Design</h3><p>Thiết kế lấy con người làm trung tâm; quan sát đúng đối tượng trong bối cảnh thật, thử nghiệm sớm và cải tiến liên tục.</p><div class="grid-3">
+        <div class="step-card"><h4>1. Observation</h4><p>Quan sát người dùng phù hợp với nhóm mục tiêu.</p></div><div class="step-card"><h4>2. Ideation</h4><p>Tạo nhiều ý tưởng, chưa vội phê bình.</p></div><div class="step-card"><h4>3. Prototype</h4><p>Tạo mẫu nhanh để kiểm tra ý tưởng.</p></div><div class="step-card"><h4>4. Test</h4><p>Quan sát cách người dùng tương tác với mẫu.</p></div><div class="step-card"><h4>5. Iteration</h4><p>Điều chỉnh và cải tiến theo phản hồi.</p></div>
+      </div></div>
+      <div class="card"><h3>1.3. Bốn lăng kính tìm bài toán</h3><div class="table-scroll"><table><thead><tr><th>Lăng kính</th><th>Câu hỏi cần đặt</th></tr></thead><tbody>
+        <tr><td><strong>Repetitive</strong><br>Tác vụ lặp lại</td><td>Việc gì xảy ra thường xuyên? Công đoạn nào cần chuẩn hóa?</td></tr>
+        <tr><td><strong>Time-consuming</strong><br>Tốn thời gian</td><td>Thời gian mất ở đâu: tìm kiếm, đọc hiểu, chờ đợi hay định dạng?</td></tr>
+        <tr><td><strong>AI Advantage</strong><br>Lợi thế AI</td><td>Có cần hiểu ngôn ngữ, ngữ cảnh hoặc tổng hợp nhiều nguồn không?</td></tr>
+        <tr><td><strong>User Pain Points</strong><br>Điểm đau</td><td>Ai gặp khó khăn, phàn nàn hoặc bị tắc nghẽn liên tục?</td></tr>
+      </tbody></table></div><div class="callout warn">Tác vụ lặp lại không đồng nghĩa với cần AI. Nếu quy tắc rõ và kết quả cố định, Rule có thể tối ưu hơn.</div></div>
+      <div class="card"><h3>1.4. Bốn anti-patterns — Sai lầm thường gặp</h3><div class="table-scroll"><table><thead><tr><th>Sai lầm</th><th>Vấn đề</th><th>Cách khắc phục</th></tr></thead><tbody>
+        <tr><td><strong>Solution-first</strong></td><td>Xây chatbot/Agent trước khi hiểu vấn đề.</td><td>Quay lại tìm pain point và workflow hiện tại.</td></tr>
+        <tr><td><strong>No baseline</strong></td><td>Không lượng hóa tổn thất hiện tại.</td><td>Đo thời gian, chi phí, tỷ lệ lỗi hoặc SLA.</td></tr>
+        <tr><td><strong>No evaluation</strong></td><td>Không có test cases và tiêu chí đo.</td><td>Thiết lập cách đánh giá trước khi triển khai.</td></tr>
+        <tr><td><strong>No boundary</strong></td><td>Không rõ AI được tự quyết đến đâu.</td><td>Xác định giới hạn và điểm cần HITL.</td></tr>
+      </tbody></table></div></div>
+      <div class="card"><h3>1.5. Câu hỏi phỏng vấn stakeholder</h3><ol>
+        <li>Pain point là gì? Tần suất xuất hiện mỗi ngày hoặc mỗi tuần?</li><li>Workflow hiện tại có những bước nào, công cụ nào và ai bàn giao cho ai?</li><li>Thiệt hại cụ thể về thời gian, tài chính, SLA hoặc tỷ lệ chuyển đổi là bao nhiêu?</li><li>Nếu AI sai thì hậu quả gì? Khâu nào cần con người kiểm soát?</li><li>Ai có quyền phê duyệt dự án? Metric và risk nào quyết định việc đầu tư?</li>
+      </ol><div class="callout key">Đổi “Can we use AI to…?” thành “How might we solve…?” trước, rồi mới hỏi AI có lợi thế đặc biệt nào để giải quyết vấn đề.</div></div>
+    </section>
+
+    <section class="section" id="statement" data-searchable>
+      <div class="section-head"><div class="section-num">02</div><div><h2>Problem Statement — Định nghĩa bài toán</h2><p class="section-intro">Mô tả vấn đề có cấu trúc, có số liệu và đủ rõ để thiết kế kiểm thử.</p></div></div>
+      <div class="card"><h3>2.1. Quick Problem Card</h3><div class="table-scroll"><table><thead><tr><th>Trường</th><th>Ý nghĩa</th></tr></thead><tbody>
+        <tr><td><strong>Problem</strong></td><td>Vấn đề cần giải quyết, không phải tên giải pháp.</td></tr><tr><td><strong>Actor</strong></td><td>Người/bộ phận chịu ảnh hưởng trực tiếp.</td></tr><tr><td><strong>Workflow</strong></td><td>Quy trình hiện tại, thường mô tả 3–7 bước.</td></tr><tr><td><strong>Bottleneck + Impact</strong></td><td>Nút thắt và tổn thất do nó gây ra.</td></tr><tr><td><strong>Success Metric</strong></td><td>Chỉ số định lượng để chứng minh cải thiện.</td></tr><tr><td><strong>Direction</strong></td><td>No AI / Rule / Workflow / Agent / chưa xác định.</td></tr>
+      </tbody></table></div></div>
+      <div class="card"><h3>2.2. Problem Statement hoàn chỉnh — 9 trường</h3><p class="muted">Học theo nhóm <strong>6 yếu tố bài toán + 3 yếu tố quyết định AI</strong>.</p><div class="ps-list">
+        <div class="ps-item"><b>Actor</b><span>Ai trực tiếp chịu ảnh hưởng?</span></div><div class="ps-item"><b>Workflow</b><span>Quy trình hiện tại gồm các bước nào?</span></div><div class="ps-item"><b>Bottleneck</b><span>Bước nào chậm, sai hoặc lặp?</span></div><div class="ps-item"><b>Impact</b><span>Tổn thất về thời gian, chi phí, SLA, chất lượng.</span></div><div class="ps-item"><b>Success Metric</b><span>Chỉ số cụ thể chứng minh cải thiện.</span></div><div class="ps-item"><b>Boundary</b><span>AI không được làm gì? Giới hạn nào bắt buộc?</span></div><div class="ps-item"><b>Điểm AI can thiệp</b><span>AI tham gia ở bước nào?</span></div><div class="ps-item"><b>Mức giải pháp</b><span>Chọn Rule, Workflow hay Agent?</span></div><div class="ps-item"><b>Rủi ro & HITL</b><span>Nếu AI sai, ai kiểm duyệt/xử lý?</span></div>
+      </div><div class="callout key"><strong>Mẹo nhớ:</strong> 6 trường đầu mô tả bài toán; 3 trường sau mô tả quyết định ứng dụng AI.</div></div>
+      <div class="card"><h3>2.3. Định lượng hóa: Baseline → Target → Measurement</h3><div class="grid-3">
+        <div class="step-card"><span class="tag">Hiện trạng</span><h4>Baseline</h4><p>Ví dụ: báo cáo mất 90 phút để hoàn thành.</p></div><div class="step-card"><span class="tag">Mục tiêu</span><h4>Target</h4><p>Ví dụ: giảm thời gian xuống dưới 30 phút.</p></div><div class="step-card"><span class="tag">Xác minh</span><h4>Measurement</h4><p>Chỉ rõ cách thu thập dữ liệu và xác minh mục tiêu.</p></div>
+      </div><p>Ví dụ khác: giảm lỗi phân loại từ 20% xuống dưới 5%; giảm 40% câu hỏi trùng lặp mà trợ giảng cần xử lý.</p><div class="callout warn">“Nâng cao hiệu suất” chưa phải metric tốt. Phải có con số, ngưỡng mục tiêu và cách đo.</div></div>
+      <div class="card"><h3>2.4. Output Metric vs Input Metric</h3><div class="table-scroll"><table><thead><tr><th>Loại</th><th>Đo lường</th><th>Ví dụ</th></tr></thead><tbody><tr><td><strong>Output Metric</strong></td><td>Kết quả cuối cùng</td><td>Thời gian xử lý, tỷ lệ lỗi, chất lượng đầu ra.</td></tr><tr><td><strong>Input Metric</strong></td><td>Đòn bẩy tác động đến kết quả</td><td>Độ chính xác phân loại, thời gian sửa bản nháp, tỷ lệ chuyển tiếp đúng.</td></tr></tbody></table></div></div>
+    </section>
+
+    <section class="section" id="pair" data-searchable>
+      <div class="section-head"><div class="section-num">03</div><div><h2>Google PAIR — Có nên dùng AI?</h2><p class="section-intro">People + AI Research: thiết kế sản phẩm AI lấy con người làm trung tâm.</p></div></div>
+      <div class="card"><h3>3.1. Ba bước quyết định</h3><div class="grid-3">
+        <div class="step-card"><span class="tag">Bước 1</span><h4>Nhu cầu × thế mạnh AI</h4><p>AI có giải quyết tốt hơn rule/heuristic không?</p></div><div class="step-card"><span class="tag">Bước 2</span><h4>Automate hay Augment?</h4><p>AI làm thay hay hỗ trợ con người?</p></div><div class="step-card"><span class="tag">Bước 3</span><h4>Reward function</h4><p>Định nghĩa đúng/sai và tiêu chí thành công.</p></div>
+      </div></div>
+      <div class="card"><h3>3.2. Tám trường hợp AI có thể có lợi thế</h3><ol><li>Recommendation — gợi ý cho từng người.</li><li>Prediction — dự đoán sự kiện tương lai.</li><li>Personalization — cá nhân hóa trải nghiệm.</li><li>Natural language — hiểu ngôn ngữ tự nhiên.</li><li>Nhận diện một lớp thực thể — ví dụ mọi khuôn mặt.</li><li>Phát hiện sự kiện hiếm hoặc biến đổi — ví dụ gian lận.</li><li>Agent/bot chuyên biệt cho một lĩnh vực.</li><li>Dynamic content — nội dung linh hoạt thay cho giao diện tĩnh cố định.</li></ol></div>
+      <div class="card"><h3>3.3. Sáu trường hợp AI có thể không tốt hơn</h3><ul><li>Cần giao diện dễ dự đoán và vị trí cố định.</li><li>Thông tin tĩnh, ít thay đổi.</li><li>Lỗi quá tốn kém.</li><li>Cần minh bạch tuyệt đối và truy vết từng bước.</li><li>Ưu tiên tốc độ và chi phí thấp.</li><li>Người dùng muốn tự thực hiện tác vụ.</li></ul><div class="callout key">Nếu Rule/heuristic giải quyết triệt để bài toán, dễ giải thích, dễ debug và rẻ hơn thì ưu tiên Rule.</div></div>
+      <div class="card"><h3>3.4. Buy — Boost — Build</h3><div class="table-scroll"><table><thead><tr><th>Hướng</th><th>Làm gì?</th><th>Điểm đánh đổi</th></tr></thead><tbody><tr><td><strong>Buy</strong></td><td>Dùng giải pháp có sẵn của nhà cung cấp.</td><td>Nhanh, ít tùy biến; phụ thuộc vendor.</td></tr><tr><td><strong>Boost</strong></td><td>Dùng model có sẵn, bổ sung dữ liệu nội bộ bằng RAG/fine-tuning.</td><td>Cần quản trị dữ liệu tốt.</td></tr><tr><td><strong>Build</strong></td><td>Tự xây mô hình tùy biến.</td><td>Kiểm soát cao nhưng đắt, cần đội AI mạnh.</td></tr></tbody></table></div><p>Build in-house phù hợp hơn khi AI là lợi thế cạnh tranh cốt lõi; Buy/SaaS khi AI chủ yếu giúp tăng năng suất.</p></div>
+    </section>
+
+    <section class="section" id="automation" data-searchable>
+      <div class="section-head"><div class="section-num">04</div><div><h2>Automate vs Augment</h2><p class="section-intro">Hai cách xác định vai trò AI, không phải hai cấp độ kỹ thuật.</p></div></div>
+      <div class="grid-2">
+        <div class="card"><span class="tag green">AI làm thay</span><h3>Automate</h3><p>Phù hợp với việc nhàm chán, khó, nguy hiểm, cần scale hoặc có đáp án đúng được thống nhất.</p><p><strong>Đo thành công:</strong> hiệu quả tăng, an toàn hơn, giảm việc tẻ nhạt.</p></div>
+        <div class="card"><span class="tag">AI hỗ trợ</span><h3>Augment</h3><p>Phù hợp khi con người muốn tự làm, công việc rủi ro cao hoặc cần trách nhiệm cá nhân.</p><p><strong>Đo thành công:</strong> kiểm soát tốt hơn, sáng tạo tăng, trải nghiệm tốt hơn.</p></div>
+      </div>
+      <div class="card"><h3>Tăng mức tự động hóa theo pha</h3><div class="table-scroll"><table><thead><tr><th>Pha</th><th>AI</th><th>Con người</th></tr></thead><tbody><tr><td>1 — Gợi ý</td><td>Đọc câu hỏi, gợi ý câu trả lời.</td><td>Trợ giảng tự viết lại.</td></tr><tr><td>2 — Soạn nháp</td><td>Soạn nháp sau khi đã đo được chất lượng.</td><td>Kiểm tra và chỉnh sửa trước khi gửi.</td></tr><tr><td>3 — Tự động có giám sát</td><td>Tự xử lý nhóm tình huống đã chứng minh an toàn.</td><td>Giám sát và can thiệp khi cần.</td></tr></tbody></table></div><div class="callout warn">Không bật full-auto ngay từ đầu. Tăng tự động hóa theo độ tin cậy và bằng chứng đánh giá.</div></div>
+    </section>
+
+    <section class="section" id="solutions" data-searchable>
+      <div class="section-head"><div class="section-num">05</div><div><h2>Rule / Workflow / Agent</h2><p class="section-intro">Chọn cấp độ đơn giản nhất đủ giải quyết bài toán.</p></div></div>
+      <div class="card"><div class="table-scroll"><table><thead><tr><th>Tiêu chí</th><th>Rule / Script</th><th>Workflow</th><th>Agent</th></tr></thead><tbody>
+        <tr><td><strong>Logic</strong></td><td>Rõ ràng, cố định, if/else.</td><td>Các bước định trước, một số bước cần AI.</td><td>Tự lập kế hoạch và điều chỉnh.</td></tr>
+        <tr><td><strong>Input</strong></td><td>Ổn định, ít thay đổi.</td><td>Đa dạng, cần xử lý ngôn ngữ/ngữ cảnh.</td><td>Thay đổi liên tục, nhiều biến số.</td></tr>
+        <tr><td><strong>Công cụ</strong></td><td>Thường ít.</td><td>Tích hợp theo từng bước.</td><td>Có thể điều phối nhiều công cụ.</td></tr>
+        <tr><td><strong>Ví dụ</strong></td><td>Thiếu file → nhắc checklist.</td><td>AI kiểm tra form → yêu cầu bổ sung → chuyển người duyệt.</td><td>Theo dõi nhiều kênh, phát hiện vấn đề và đề xuất hành động.</td></tr>
+        <tr><td><strong>Đánh đổi</strong></td><td>Ít linh hoạt hơn.</td><td>Phải thiết kế rõ I/O và từng bước.</td><td>Chi phí/độ trễ cao; khó kiểm thử, lỗi có thể cộng dồn.</td></tr>
+      </tbody></table></div><div class="callout key"><strong>Không bắt buộc nâng cấp tuần tự Rule → Workflow → Agent.</strong> Nếu Rule đã đạt mục tiêu thì dừng ở Rule.</div></div>
+      <div class="card"><h3>5.1. Năm câu hỏi chọn giải pháp</h3><ol><li>Tần suất và tác động có đủ lớn không? Nếu thấp, cải tiến quy trình trước.</li><li>Logic xử lý có rõ ràng không? Nếu có, ưu tiên Rule.</li><li>Quy trình có cố định không? Nếu có nhưng cần AI tại một số bước, cân nhắc Workflow.</li><li>Có cần tự thích ứng với nhiều biến số? Khi đó mới cân nhắc Agent.</li><li>Giá trị có vượt chi phí và rủi ro? Nếu không, thêm HITL hoặc chọn Not Yet/No-Go.</li></ol></div>
+      <div class="card"><h3>5.2. Sáu Workflow Patterns</h3><div class="table-scroll"><table><thead><tr><th>Pattern</th><th>Cách hoạt động</th><th>Trade-off</th></tr></thead><tbody>
+        <tr><td><strong>Prompt Chaining</strong></td><td>Nhiều bước LLM nối tiếp, có gate kiểm tra.</td><td>Chính xác hơn nhưng tăng độ trễ.</td></tr><tr><td><strong>Routing</strong></td><td>Phân loại input rồi đưa vào nhánh chuyên biệt.</td><td>Tối ưu chi phí nhưng phụ thuộc phân loại ban đầu.</td></tr><tr><td><strong>Parallelization</strong></td><td>Chạy nhiều nhánh song song, sau đó tổng hợp/vote.</td><td>Có thể tăng tin cậy nhưng tăng chi phí.</td></tr><tr><td><strong>Orchestrator-Workers</strong></td><td>Điều phối phân việc động cho nhiều workers.</td><td>Xử lý subtask không biết trước nhưng khó kiểm thử.</td></tr><tr><td><strong>Evaluator-Optimizer</strong></td><td>Một mô hình tạo, một mô hình đánh giá và phản hồi để sửa.</td><td>Cần tiêu chí chấm rõ ràng.</td></tr><tr><td><strong>Agent</strong></td><td>Lập kế hoạch → gọi tools → nhận feedback → lặp.</td><td>Linh hoạt nhưng đắt và có thể tích lũy lỗi.</td></tr>
+      </tbody></table></div></div>
+      <div class="card"><h3>5.3. AI System gồm 4 thành phần</h3><div class="math">AI System = Model + Context + Planning + Tools</div><div class="grid-2"><div class="step-card"><h4>Model</h4><p>Đọc hiểu, tổng hợp, phân loại, tạo gợi ý.</p></div><div class="step-card"><h4>Context</h4><p>Tài liệu, dữ liệu nghiệp vụ, lịch sử.</p></div><div class="step-card"><h4>Planning</h4><p>Phân rã và điều phối công việc.</p></div><div class="step-card"><h4>Tools</h4><p>Kết nối API, database và dịch vụ ngoài.</p></div></div></div>
+    </section>
+
+    <section class="section" id="reward" data-searchable>
+      <div class="section-head"><div class="section-num">06</div><div><h2>Reward Function, Precision và Recall</h2><p class="section-intro">Định nghĩa đúng/sai theo giá trị và trải nghiệm người dùng, không chỉ nhìn accuracy.</p></div></div>
+      <div class="card"><h3>6.1. Bốn kết quả TP, TN, FP, FN</h3><div class="table-scroll"><table><thead><tr><th></th><th>Thực tế cần can thiệp</th><th>Thực tế không cần can thiệp</th></tr></thead><tbody><tr><td><strong>AI báo cần can thiệp</strong></td><td><strong>TP — True Positive</strong><br>Phát hiện đúng, gợi ý đúng.</td><td><strong>FP — False Positive</strong><br>Báo động giả; gợi ý sai, cần người lọc lại.</td></tr><tr><td><strong>AI báo không cần can thiệp</strong></td><td><strong>FN — False Negative</strong><br>Bỏ sót người thực sự cần giúp.</td><td><strong>TN — True Negative</strong><br>Nhận đúng trường hợp không cần can thiệp.</td></tr></tbody></table></div><div class="callout warn"><strong>Mẹo nhớ:</strong> FP = báo động giả. FN = bỏ sót.</div></div>
+      <div class="card"><h3>6.2. Hai công thức cần thuộc</h3><div class="two-formulas"><div class="step-card"><span class="tag">Precision</span><div class="math">TP / (TP + FP)</div><p>Trong các trường hợp AI dự đoán là cần can thiệp, bao nhiêu trường hợp đúng?</p><p><strong>Precision cao:</strong> ít gợi ý sai hơn.</p></div><div class="step-card"><span class="tag green">Recall</span><div class="math">TP / (TP + FN)</div><p>Trong các trường hợp thật sự cần can thiệp, AI phát hiện được bao nhiêu?</p><p><strong>Recall cao:</strong> bỏ sót ít hơn.</p></div></div></div>
+      <div class="card"><h3>6.3. Đánh đổi Precision ↔ Recall</h3><ul><li>Ưu tiên Precision khi muốn các gợi ý được đưa ra có độ tin cậy cao.</li><li>Ưu tiên Recall khi muốn hạn chế bỏ sót những trường hợp thực sự cần giúp.</li><li>Không có điểm cân bằng tối ưu cho mọi bài toán; phải xét chi phí FP/FN và kiểm chứng với người dùng.</li></ul></div>
+      <div class="card"><h3>6.4. Tiêu chí thành công có thể hành động</h3><p>Mẫu: Nếu <strong>[metric]</strong> của <strong>[tính năng]</strong> vượt/giảm qua <strong>[ngưỡng]</strong>, chúng ta sẽ <strong>[hành động cụ thể]</strong>.</p><div class="callout key">Ví dụ theo slide: Nếu tỷ lệ câu trả lời AI bị trợ giảng sửa vượt 30% trong 2 tuần, hạ tự động hóa về Pha 1 — chỉ gợi ý, không gửi thẳng cho học viên.</div><p>Một metric tốt cần có chỉ số cụ thể, ngưỡng có ý nghĩa và hành động phản ứng. Cần xem xét nhóm người dùng bị ảnh hưởng và định kỳ rà soát metric.</p></div>
+    </section>
+
+    <section class="section" id="evaluation" data-searchable>
+      <div class="section-head"><div class="section-num">07</div><div><h2>Evaluation và khoảng cách Demo → Production</h2><p class="section-intro">Một vài lần demo thành công chưa chứng minh hệ thống sẵn sàng vận hành thực tế.</p></div></div>
+      <div class="card"><h3>7.1. Bốn thành phần chuẩn bị trước khi vận hành</h3><div class="grid-2"><div class="step-card"><span class="tag">01</span><h4>Baseline</h4><p>So sánh với rule, con người hoặc quy trình hiện tại.</p></div><div class="step-card"><span class="tag">02</span><h4>Evaluation</h4><p>Bộ dữ liệu kiểm thử, test cases, edge cases, tiêu chí nghiệm thu.</p></div><div class="step-card"><span class="tag">03</span><h4>Controls</h4><p>Logging, fallback, rollback và cơ chế kiểm soát.</p></div><div class="step-card"><span class="tag">04</span><h4>Operations</h4><p>Người giám sát, cập nhật tri thức và cải tiến liên tục.</p></div></div></div>
+      <div class="card"><h3>7.2. Từ Problem Statement tới Eval Plan</h3><div class="grid-3"><div class="step-card"><h4>1. Input</h4><p>Problem Statement đủ các trường, gồm boundary và HITL.</p></div><div class="step-card"><h4>2. Test cases</h4><p>Dữ liệu thực tế và các trường hợp biên.</p></div><div class="step-card"><h4>3. Success</h4><p>Pass / Fail / chuyển cho người kiểm duyệt.</p></div></div><div class="callout warn">Nếu không suy ra được test cases, eval metrics và boundary từ Problem Statement, bản mô tả vấn đề chưa đủ chặt chẽ.</div></div>
+      <div class="card"><h3>7.3. Ba loại lỗi theo PAIR</h3><div class="table-scroll"><table><thead><tr><th>Loại lỗi</th><th>Ý nghĩa</th><th>Ví dụ/điểm cần nhớ</th></tr></thead><tbody><tr><td><strong>Context errors</strong></td><td>Giả định sai về người dùng, thời điểm hoặc hoàn cảnh.</td><td>Hệ thống có thể xử lý đúng theo giả định nhưng không phù hợp bối cảnh.</td></tr><tr><td><strong>Fail states</strong></td><td>Không trả lời được hoặc không có câu trả lời phù hợp.</td><td>Cần báo rõ và có đường chuyển tiếp.</td></tr><tr><td><strong>Background errors</strong></td><td>Lỗi ngầm mà người dùng và hệ thống không nhận ra.</td><td>Cần QA chủ động, không chỉ chờ người dùng báo lỗi.</td></tr></tbody></table></div></div>
+      <div class="card"><h3>7.4. Bốn nguồn gốc lỗi AI trong phần đọc thêm</h3><ol><li>Lỗi dữ liệu và dự đoán: nhãn sai, suy luận yếu, thiếu dữ liệu huấn luyện.</li><li>Lỗi đầu vào: input bất ngờ ngoài thiết kế.</li><li>Lỗi liên quan: độ tin cậy thấp hoặc kết quả không phù hợp.</li><li>Lỗi phân cấp hệ thống: nhiều hệ thống AI cùng hoạt động nhưng xung đột tín hiệu.</li></ol></div>
+    </section>
+
+    <section class="section" id="uxhitl" data-searchable>
+      <div class="section-head"><div class="section-num">08</div><div><h2>UX và Human-in-the-loop</h2><p class="section-intro">Thiết kế chốt chặn khi thiếu dữ liệu, độ tin cậy thấp hoặc hành động có rủi ro cao.</p></div></div>
+      <div class="card"><h3>8.1. Bốn pattern HITL</h3><div class="grid-2"><div class="step-card"><h4>1. Làm rõ ý định</h4><p>Yêu cầu người dùng bổ sung ngữ cảnh nếu dữ liệu chưa đủ.</p></div><div class="step-card"><h4>2. Minh bạch thông tin</h4><p>Đưa trích dẫn nguồn hoặc bằng chứng hỗ trợ câu trả lời.</p></div><div class="step-card"><h4>3. Phê duyệt thủ công</h4><p>Con người duyệt trước tác vụ rủi ro cao.</p></div><div class="step-card"><h4>4. Thiết lập ranh giới</h4><p>Giới hạn những gì AI được phép tự quyết hoặc thực hiện.</p></div></div></div>
+      <div class="card"><h3>8.2. Khi automation thất bại</h3><ol><li><strong>Mở kênh feedback:</strong> cho người dùng phản hồi cả khi đầu ra có vẻ đúng.</li><li><strong>Trả quyền kiểm soát:</strong> giúp người dùng tiếp quản khi tự động hóa hỏng, kèm đủ thông tin.</li><li><strong>Thiết kế thất bại an toàn:</strong> giả định người dùng có thể dùng sai và ngăn lỗi nhỏ thành hậu quả nghiêm trọng.</li></ol><div class="callout key">UX không chỉ là làm giao diện đẹp. Nó còn giúp người dùng hiểu giới hạn AI, phát hiện vấn đề và lấy lại quyền kiểm soát.</div></div>
+    </section>
+
+    <section class="section" id="decision" data-searchable>
+      <div class="section-head"><div class="section-num">09</div><div><h2>Go / Not Yet / No-Go</h2><p class="section-intro">Ra quyết định dựa trên tính khả thi của Problem Statement, bằng chứng và mức độ kiểm soát rủi ro.</p></div></div>
+      <div class="grid-3"><div class="card"><span class="tag green">Go</span><h3>Thực hiện</h3><p>Bài toán rõ, metric đo được, điểm AI phù hợp, rủi ro kiểm soát được.</p></div><div class="card"><span class="tag orange">Not Yet</span><h3>Tạm hoãn</h3><p>Có triển vọng nhưng cần thêm dữ liệu, chuẩn hóa quy trình, thiết lập metric hoặc boundary.</p></div><div class="card"><span class="tag" style="background:var(--red-soft);color:var(--red)">No-Go</span><h3>Không triển khai</h3><p>AI không tạo giá trị vượt trội, rủi ro quá cao hoặc giải pháp phi AI tốt hơn.</p></div></div>
+      <div class="card"><h3>9.1. Năm câu hỏi readiness gate</h3><ol><li>Nghiệp vụ có cần ngôn ngữ, tri thức chuyên môn hoặc suy luận không?</li><li>Dữ liệu đầu vào có đủ ngữ cảnh để AI phản hồi tốt không?</li><li>Đã thiết lập metric định lượng chưa?</li><li>Hậu quả khi AI sai có kiểm soát được không?</li><li>Có cách đơn giản hơn và tối ưu chi phí hơn AI không?</li></ol><div class="callout success"><strong>Ghi nhớ:</strong> Not Yet không phải thất bại; đó là quyết định chín chắn khi chưa đủ bằng chứng.</div></div>
+      <div class="card"><h3>9.2. Sáu nguyên tắc chốt buổi học</h3><ol><li>Brief mơ hồ không thay thế Problem Statement.</li><li>Mô hình hóa workflow trước khi tích hợp AI.</li><li>Pain point phải được lượng hóa bằng baseline và metric.</li><li>Phức tạp không đồng nghĩa hiệu quả.</li><li>Go / Not Yet / No-Go dựa trên lý luận thực tế và số liệu kiểm thử.</li><li>Reward function cần đo trải nghiệm người dùng, không chỉ accuracy; cân nhắc Precision ↔ Recall.</li></ol></div>
+    </section>
+
+    <section class="section" id="case" data-searchable>
+      <div class="section-head"><div class="section-num">10</div><div><h2>Bài tập tình huống — 1.000 học viên</h2><p class="section-intro">Khung mẫu để áp dụng lý thuyết vào câu hỏi tự luận.</p></div></div>
+      <div class="card"><h3>Problem Statement mẫu: hỗ trợ Lab Coach / trợ giảng</h3><div class="table-scroll"><table><tbody>
+        <tr><th>Actor</th><td>Lab Coach hỗ trợ các nhóm học viên trong lớp 1.000 học viên.</td></tr>
+        <tr><th>Workflow</th><td>Học viên hỏi → Lab Coach đọc ngữ cảnh → phản hồi/yêu cầu làm rõ → học viên cập nhật bài.</td></tr>
+        <tr><th>Bottleneck</th><td>Câu hỏi trùng lặp hoặc thiếu thông tin nền; phân loại thủ công tốn thời gian.</td></tr>
+        <tr><th>Impact</th><td>Học viên chờ lâu; trợ giảng quá tải, ít thời gian cho câu hỏi khó.</td></tr>
+        <tr><th>Success Metric</th><td>Giảm câu hỏi trùng lặp xử lý thủ công; giảm thời gian phản hồi; không tăng tỷ lệ định hướng sai.</td></tr>
+        <tr><th>Boundary</th><td>AI không tự đánh giá/chấm điểm bài; chỉ hỗ trợ làm rõ thông tin và điều phối quy trình.</td></tr>
+        <tr><th>Điểm AI can thiệp</th><td>Sau khi học viên gửi câu hỏi/Problem Card thiếu ngữ cảnh.</td></tr>
+        <tr><th>Mức giải pháp</th><td>Workflow: AI phát hiện thông tin thiếu; Lab Coach duyệt câu hỏi chuyên sâu.</td></tr>
+        <tr><th>Rủi ro & HITL</th><td>AI có thể định hướng sai; Lab Coach kiểm duyệt trước khi gửi phản hồi.</td></tr>
+      </tbody></table></div></div>
+      <div class="card"><h3>Vì sao chọn Workflow?</h3><ul><li>Rule đơn giản khó xử lý toàn bộ biến thể câu hỏi và thiếu ngữ cảnh.</li><li>Quy trình hỗ trợ vẫn có thể định nghĩa theo các bước cụ thể; AI chỉ cần hỗ trợ tại những bước cần hiểu ngôn ngữ.</li><li>Chưa có bằng chứng rằng cần Agent tự lập kế hoạch đa công cụ linh hoạt.</li><li>Workflow dễ kiểm soát hơn và có thể để con người duyệt đầu ra rủi ro.</li></ul><div class="callout key"><strong>Cấu trúc trả lời tình huống:</strong> Mô tả vấn đề → nêu baseline/impact → đề xuất cấp độ → giải thích vì sao không chọn cấp khác → metric → boundary/HITL → Go/Not Yet/No-Go.</div></div>
+    </section>
+
+    <section class="section" id="review" data-searchable>
+      <div class="section-head"><div class="section-num">11</div><div><h2>Checklist ôn thi</h2><p class="section-intro">Đánh dấu từng nội dung sau khi bạn có thể giải thích lại bằng lời của mình.</p></div></div>
+      <div class="card"><h3>Ưu tiên 1 — Phải nắm vững</h3><div class="checklist">
+        <div class="checkline"><input type="checkbox" id="c1" data-progress><label for="c1"><strong>Problem Statement — 9 trường</strong><span>Phân biệt 6 yếu tố bài toán và 3 yếu tố quyết định AI.</span></label></div>
+        <div class="checkline"><input type="checkbox" id="c2" data-progress><label for="c2"><strong>Rule / Workflow / Agent</strong><span>Điều kiện chọn, ví dụ, điểm mạnh/yếu, lý do chọn trong tình huống.</span></label></div>
+        <div class="checkline"><input type="checkbox" id="c3" data-progress><label for="c3"><strong>TP / TN / FP / FN</strong><span>Nhận diện 4 trường hợp trong ví dụ thực tế.</span></label></div>
+        <div class="checkline"><input type="checkbox" id="c4" data-progress><label for="c4"><strong>Precision và Recall</strong><span>Thuộc công thức và giải thích trade-off.</span></label></div>
+        <div class="checkline"><input type="checkbox" id="c5" data-progress><label for="c5"><strong>Go / Not Yet / No-Go</strong><span>Biết điều kiện lựa chọn từng phương án.</span></label></div>
+      </div></div>
+      <div class="card"><h3>Ưu tiên 2 — Hiểu và vận dụng</h3><div class="checklist">
+        <div class="checkline"><input type="checkbox" id="c6" data-progress><label for="c6"><strong>Double Diamond và HCD</strong><span>Thuộc thứ tự và mục đích mỗi bước.</span></label></div>
+        <div class="checkline"><input type="checkbox" id="c7" data-progress><label for="c7"><strong>Baseline → Target → Measurement</strong><span>Tạo được metric có số liệu và cách đo.</span></label></div>
+        <div class="checkline"><input type="checkbox" id="c8" data-progress><label for="c8"><strong>Automate vs Augment</strong><span>Phân biệt vai trò AI với cấp độ kỹ thuật.</span></label></div>
+        <div class="checkline"><input type="checkbox" id="c9" data-progress><label for="c9"><strong>PAIR — khi AI có/không có lợi thế</strong><span>Biết khi nào giải pháp phi AI phù hợp hơn.</span></label></div>
+        <div class="checkline"><input type="checkbox" id="c10" data-progress><label for="c10"><strong>Evaluation, UX và HITL</strong><span>Hiểu test cases, edge cases, fallback, logging và phê duyệt.</span></label></div>
+        <div class="checkline"><input type="checkbox" id="c11" data-progress><label for="c11"><strong>Workflow patterns</strong><span>Nhớ Prompt Chaining, Routing, Parallelization và các pattern nâng cao.</span></label></div>
+        <div class="checkline"><input type="checkbox" id="c12" data-progress><label for="c12"><strong>Làm lại tình huống 1.000 học viên</strong><span>Viết được Problem Statement 9 trường và giải thích lựa chọn Workflow.</span></label></div>
+      </div><div class="quiz-actions"><button class="btn" id="resetProgress">Đặt lại checklist</button></div></div>
+    </section>
+
+    <section class="section" id="flashcards" data-searchable>
+      <div class="section-head"><div class="section-num">12</div><div><h2>Flashcards — Nhấn để xem đáp án</h2><p class="section-intro">Tự kiểm tra khả năng nhớ nhanh các khái niệm trước khi thi.</p></div></div>
+      <div class="flash-grid">
+        <button class="flashcard" type="button"><strong>Double Diamond có thứ tự nào?</strong><span class="reveal-hint">Nhấn để lật</span><span class="answer">Discover → Define → Develop → Deliver.</span></button>
+        <button class="flashcard" type="button"><strong>Problem Statement có bao nhiêu trường?</strong><span class="reveal-hint">Nhấn để lật</span><span class="answer">9 trường: 6 yếu tố bài toán + 3 yếu tố quyết định AI.</span></button>
+        <button class="flashcard" type="button"><strong>Baseline / Target / Measurement?</strong><span class="reveal-hint">Nhấn để lật</span><span class="answer">Hiện trạng → mục tiêu → cách đo và xác minh.</span></button>
+        <button class="flashcard" type="button"><strong>FP là gì?</strong><span class="reveal-hint">Nhấn để lật</span><span class="answer">False Positive — báo động giả, AI báo có nhưng thực tế không cần/không đúng.</span></button>
+        <button class="flashcard" type="button"><strong>FN là gì?</strong><span class="reveal-hint">Nhấn để lật</span><span class="answer">False Negative — bỏ sót trường hợp thực tế cần được phát hiện.</span></button>
+        <button class="flashcard" type="button"><strong>Precision đo gì?</strong><span class="reveal-hint">Nhấn để lật</span><span class="answer">TP/(TP+FP): trong các dự đoán dương tính, tỷ lệ bao nhiêu là đúng.</span></button>
+        <button class="flashcard" type="button"><strong>Recall đo gì?</strong><span class="reveal-hint">Nhấn để lật</span><span class="answer">TP/(TP+FN): trong các trường hợp dương tính thực tế, phát hiện được bao nhiêu.</span></button>
+        <button class="flashcard" type="button"><strong>HITL dùng để làm gì?</strong><span class="reveal-hint">Nhấn để lật</span><span class="answer">Cho con người tham gia làm rõ, kiểm duyệt hoặc quyết định tại bước có rủi ro/cần kiểm soát.</span></button>
+        <button class="flashcard" type="button"><strong>Khi nào chọn Not Yet?</strong><span class="reveal-hint">Nhấn để lật</span><span class="answer">Bài toán có triển vọng nhưng còn thiếu dữ liệu, baseline, metric hoặc boundary.</span></button>
+        <button class="flashcard" type="button"><strong>Quy tắc chọn cấp độ giải pháp?</strong><span class="reveal-hint">Nhấn để lật</span><span class="answer">Bắt đầu với giải pháp đơn giản nhất; chỉ tăng phức tạp khi giá trị bổ sung xứng đáng.</span></button>
+      </div>
+    </section>
+
+    <section class="section" id="quiz" data-searchable>
+      <div class="section-head"><div class="section-num">13</div><div><h2>Trắc nghiệm tự kiểm tra</h2><p class="section-intro">Chọn đáp án rồi bấm “Chấm điểm”. Có giải thích cho từng câu.</p></div></div>
+      <div class="card"><div id="quizContainer"></div><div class="quiz-actions"><button class="btn primary" type="button" id="gradeQuiz">Chấm điểm</button><button class="btn" type="button" id="retryQuiz">Làm lại</button></div><div id="scorebox" class="scorebox" aria-live="polite"></div></div>
+    </section>
+    <div class="footer">AI in Action · Day 02 — Tài liệu học nhanh được biên soạn từ file day2.pdf bạn cung cấp.<br>Gợi ý: làm flashcards, tự trả lời các câu hỏi, rồi luyện một bài toán theo đủ 9 trường Problem Statement.</div>
+  </main>
+</div>
+<script>
+(function(){
+
+  // Checklist progress is stored locally in this browser.
+  const checks=[...document.querySelectorAll('[data-progress]')];
+  checks.forEach(c=>{c.checked=localStorage.getItem('day2-'+c.id)==='1';c.addEventListener('change',()=>{localStorage.setItem('day2-'+c.id,c.checked?'1':'0');updateProgress();});});
+  function updateProgress(){const done=checks.filter(c=>c.checked).length;const pct=Math.round(done/checks.length*100);document.getElementById('progressText').textContent=pct+'%';document.getElementById('progressBar').style.width=pct+'%';}
+  updateProgress();
+  document.getElementById('resetProgress').addEventListener('click',()=>{checks.forEach(c=>{c.checked=false;localStorage.removeItem('day2-'+c.id)});updateProgress();});
+
+  // Search over the main learning sections.
+  const search=document.getElementById('search');const sections=[...document.querySelectorAll('main > .section, #overview, .quick-grid')];
+  search.addEventListener('input',()=>{const q=search.value.trim().toLocaleLowerCase('vi');let count=0;sections.forEach(sec=>{const match=!q||sec.innerText.toLocaleLowerCase('vi').includes(q);sec.classList.toggle('hidden-by-search',!match);if(match)count++;});document.getElementById('noResults').style.display=count?'none':'block';});
+
+  // Active navigation link while scrolling.
+  const navLinks=[...document.querySelectorAll('.nav-list a')];
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}});},{rootMargin:'-20% 0px -70% 0px'});
+  document.querySelectorAll('main section[id]').forEach(s=>obs.observe(s));
+
+  // Flashcards.
+  document.querySelectorAll('.flashcard').forEach(card=>card.addEventListener('click',()=>card.classList.toggle('revealed')));
+
+  // Quiz data is based on the study notes above.
+  const questions=[
+    {q:'Double Diamond có bốn bước theo đúng thứ tự nào?',o:['Define → Discover → Deliver → Develop','Discover → Define → Develop → Deliver','Discover → Develop → Define → Deliver','Observe → Ideate → Test → Launch'],a:1,e:'Diamond 1 tìm đúng vấn đề: Discover, Define. Diamond 2 tìm đúng giải pháp: Develop, Deliver.'},
+    {q:'Một công việc có quy tắc if/else rõ ràng và đầu vào ổn định. Nên ưu tiên gì?',o:['Agent','Workflow nhiều mô hình','Rule/Script','Tự xây mô hình tùy biến'],a:2,e:'Quy tắc đơn giản và xác định nên ưu tiên Rule, tránh độ phức tạp không cần thiết.'},
+    {q:'AI bỏ sót một học viên thực sự cần hỗ trợ. Đây là trường hợp nào?',o:['True Positive','True Negative','False Positive','False Negative'],a:3,e:'FN là trường hợp thực sự cần can thiệp nhưng hệ thống bỏ sót.'},
+    {q:'Công thức Precision là gì?',o:['TP / (TP + FN)','TP / (TP + FP)','FP / (TP + FP)','TN / (TN + FN)'],a:1,e:'Precision = TP/(TP+FP): tỷ lệ dự đoán dương tính đúng trong tất cả dự đoán dương tính.'},
+    {q:'Khi nào nên chọn Not Yet?',o:['Khi đã chứng minh đầy đủ hiệu quả và kiểm soát rủi ro','Khi AI chắc chắn không mang lại giá trị','Khi bài toán có triển vọng nhưng còn thiếu dữ liệu hoặc tiêu chí đo','Khi một Rule đơn giản đã giải quyết triệt để và không cần AI'],a:2,e:'Not Yet nghĩa là cần bổ sung điều kiện trước khi quyết định tiếp tục; không đồng nghĩa thất bại.'},
+    {q:'Problem Statement hoàn chỉnh có cấu trúc nào trong tài liệu?',o:['Chỉ có Problem, Model, API','6 yếu tố bài toán + 3 yếu tố quyết định AI','Chỉ có Actor, Metric và Model','Model + Context + Planning + Tools'],a:1,e:'Chín trường gồm sáu yếu tố bài toán và ba yếu tố quyết định cách ứng dụng AI.'},
+    {q:'Workflow khác Agent chủ yếu ở điểm nào?',o:['Workflow không bao giờ dùng AI','Agent luôn rẻ hơn Workflow','Workflow có các bước điều phối xác định trước; Agent có thể tự điều phối và thích ứng','Agent không dùng công cụ'],a:2,e:'Khác biệt trọng tâm nằm ở việc lộ trình được định trước bằng code hay do model tự điều phối linh hoạt.'},
+    {q:'Vì sao demo thành công vài lần chưa đủ để đưa AI vào production?',o:['Vì không thể đo chất lượng AI','Vì cần baseline, evaluation, controls và kế hoạch vận hành','Vì luôn phải tự xây mô hình mới','Vì production không dùng được workflow'],a:1,e:'Cần kiểm thử trên dữ liệu và trường hợp biên, có phương án dự phòng, truy vết và giám sát liên tục.'},
+    {q:'Recall cao tập trung vào điều gì?',o:['Giảm False Positive bằng mọi giá','Phát hiện đủ nhiều trường hợp dương tính thực tế, giảm False Negative','Giảm chi phí model','Đảm bảo mọi đầu ra luôn đúng 100%'],a:1,e:'Recall = TP/(TP+FN). Recall cao nghĩa là bỏ sót ít trường hợp dương tính thực tế hơn.'},
+    {q:'Điều nào mô tả đúng HITL?',o:['Để AI tự quyết mọi việc','Tắt toàn bộ AI khi gặp câu hỏi khó','Đưa con người vào bước làm rõ, duyệt hoặc quyết định khi cần kiểm soát','Chỉ đo tốc độ phản hồi'],a:2,e:'HITL giúp con người kiểm duyệt hoặc tiếp quản các bước cần trách nhiệm và kiểm soát rủi ro.'}
+  ];
+  const quizContainer=document.getElementById('quizContainer');
+  function renderQuiz(){quizContainer.innerHTML='';questions.forEach((item,i)=>{const q=document.createElement('div');q.className='quiz-question';q.dataset.index=i;const h=document.createElement('h3');h.textContent=(i+1)+'. '+item.q;q.appendChild(h);const opts=document.createElement('div');opts.className='quiz-options';item.o.forEach((label,j)=>{const l=document.createElement('label');l.className='quiz-option';const inp=document.createElement('input');inp.type='radio';inp.name='q'+i;inp.value=j;const span=document.createElement('span');span.textContent=String.fromCharCode(65+j)+'. '+label;l.append(inp,span);opts.appendChild(l);});q.appendChild(opts);const fb=document.createElement('div');fb.className='quiz-feedback';fb.id='feedback'+i;q.appendChild(fb);quizContainer.appendChild(q);});document.getElementById('scorebox').classList.remove('show');document.getElementById('scorebox').innerHTML='';}
+  function grade(){let answered=0,correct=0;questions.forEach((item,i)=>{const q=quizContainer.querySelector('[data-index="'+i+'"]');const chosen=q.querySelector('input:checked');const fb=q.querySelector('.quiz-feedback');q.querySelectorAll('.quiz-option').forEach((lab,j)=>{lab.classList.remove('correct','incorrect');if(j===item.a)lab.classList.add('correct');if(chosen&&Number(chosen.value)===j&&j!==item.a)lab.classList.add('incorrect');});if(chosen){answered++;if(Number(chosen.value)===item.a)correct++;}fb.textContent='Đáp án: '+String.fromCharCode(65+item.a)+'. '+item.e;fb.classList.add('show');});const box=document.getElementById('scorebox');box.innerHTML='<strong>'+correct+' / '+questions.length+' câu đúng</strong><span>Bạn đã trả lời '+answered+'/'+questions.length+' câu. '+(correct>=8?'Rất tốt — hãy thử áp dụng vào bài toán tình huống.':correct>=5?'Khá ổn — xem lại phần giải thích của các câu sai.':'Ôn lại công thức, bảng so sánh và làm lại lần nữa.')+'</span>';box.classList.add('show');}
+  document.getElementById('gradeQuiz').addEventListener('click',grade);document.getElementById('retryQuiz').addEventListener('click',renderQuiz);renderQuiz();
+})();
+</script>
+<script>
+/* Chỉ tô màu TP/TN/FP/FN và Go / Not Yet / No-Go; không tô trong tiêu đề */
+(function(){
+  const cls={'No-Go':'bad','Not Yet':'wait','Go':'good','TP':'good','TN':'good','FP':'bad','FN':'bad'};
+  const re=/(?<![\w-])(No-Go|Not Yet|Go|TP|TN|FP|FN)(?![\w-])/g;
+  const main=document.querySelector('main');
+  const skip='script,style,button,input,h1,h2,h3,h4,th,.tag,.kw,.section-num,#quizContainer,.reveal-hint';
+  const w=document.createTreeWalker(main,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentElement.closest(skip)||!/(No-Go|Not Yet|\bGo\b|\bTP\b|\bTN\b|\bFP\b|\bFN\b)/.test(n.nodeValue)?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT});
+  const nodes=[];while(w.nextNode())nodes.push(w.currentNode);
+  nodes.forEach(n=>{const t=n.nodeValue,f=document.createDocumentFragment();let last=0,m;re.lastIndex=0;
+    while((m=re.exec(t))){f.append(t.slice(last,m.index));const s=document.createElement('span');s.className='kw kw-'+cls[m[1]];s.textContent=m[1];f.append(s);last=m.index+m[0].length;}
+    f.append(t.slice(last));n.replaceWith(f);});
+})();
+</script>
+</body>
+</html>
