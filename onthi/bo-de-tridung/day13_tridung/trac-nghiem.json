@@ -7,1562 +7,1562 @@
     {
       "id": "D13-001",
       "type": "mcq",
-      "prompt": "Ba câu chuyện có thật mở đầu Ngày 13 là gì?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Monitoring?",
       "options": [
         {
           "key": "A",
-          "text": "Ba sự cố mất điện trung tâm dữ liệu khiến dịch vụ gián đoạn nhiều giờ, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, với mọi quy mô hệ thống, ở cả ba môi trường"
+          "text": "Chỉ lưu văn bản hội thoại thô"
         },
         {
           "key": "B",
-          "text": "Ba vụ rò rỉ dữ liệu người dùng do thiếu mã hoá ở tầng lưu trữ, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp"
+          "text": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không"
         },
         {
           "key": "C",
-          "text": "CFO hỏi vì sao hoá đơn OpenAI tháng này $45.000 mà không ai trả lời được; chatbot ngân hàng viral trên Twitter vì trả lời xúc phạm, phát hiện sau 6 giờ; agent chạy bình thường nhưng engagement giảm 30% suốt 2 tuần mà không alert nào fire, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Ba lần deploy thất bại do thiếu migration strategy và phải rollback, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong suốt vòng đời dịch vụ, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Ba câu chuyện tương ứng ba lỗ hổng khác nhau: không attribute được chi phí, không phát hiện được lỗi chất lượng, và không có baseline để nhận ra suy giảm chậm. Chúng dẫn thẳng tới luận điểm rằng AI agent cần Cost và Quality bên cạnh bốn golden signal truyền thống.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-002",
       "type": "mcq",
-      "prompt": "Monitoring và Observability khác nhau thế nào?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Logging?",
       "options": [
         {
           "key": "A",
-          "text": "Monitoring là công cụ mã nguồn mở, observability là dịch vụ trả phí, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, trong suốt vòng đời dịch vụ, dù cấu hình không đổi"
+          "text": "Chỉ vẽ biểu đồ tổng quan"
         },
         {
           "key": "B",
-          "text": "Monitoring dùng cho hạ tầng còn observability dùng cho ứng dụng, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi đã bật đủ kiểm tra, với mọi quy mô hệ thống"
+          "text": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit"
         },
         {
           "key": "C",
-          "text": "Monitoring chạy theo thời gian thực còn observability chạy theo lô mỗi đêm, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, với mọi quy mô hệ thống, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Monitoring đo các metric biết trước sẽ cần và trả lời câu hỏi đã định sẵn (known-unknowns); observability là hệ thống phát ra đủ data để hỏi câu hỏi MỚI (unknown-unknowns), ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Ví dụ của monitoring là 'CPU có vượt 80% không' hay 'uptime bao nhiêu'. Ví dụ của observability là 'vì sao user X với feature Y, model Z, trong tháng W lại có latency cao'. AI agent có rất nhiều unknown-unknowns — prompt mới, model drift, sự sáng tạo của người dùng — nên observability quan trọng hơn monitoring đơn thuần.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-003",
       "type": "mcq",
-      "prompt": "MTTD và MTTR khác nhau ở chỗ nào?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Tracing?",
       "options": [
         {
           "key": "A",
-          "text": "MTTD dành cho lỗi hạ tầng còn MTTR dành cho lỗi ứng dụng, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "MTTD đo trung bình mỗi tháng còn MTTR đo trung bình mỗi năm, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool"
         },
         {
           "key": "C",
-          "text": "MTTD là thời gian từ khi sự cố xảy ra đến khi phát hiện; MTTR là từ khi phát hiện đến khi fix xong, ở cả ba môi trường"
+          "text": "Xóa request ID để bảo mật"
         },
         {
           "key": "D",
-          "text": "MTTD là thời gian deploy còn MTTR là thời gian rollback, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "Vòng lặp control theory được vẽ là: Agent System → Observe (metrics) → Analyze (compare) → Act (fix/scale) rồi quay lại. Monitoring tốt nghĩa là giảm MTTD xuống mức phút chứ không phải ngày. Không có observability thì MTTD chính bằng thời gian chờ user phản ánh.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-004",
       "type": "mcq",
-      "prompt": "Sau Ngày 12 agent đã có gì và Ngày 13 bổ sung câu hỏi nào?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Latency percentile?",
       "options": [
         {
           "key": "A",
-          "text": "Đã có evaluation pipeline, Ngày 13 bổ sung phần alerting, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, kể cả lúc tải thấp, mà không cần sửa code, trong mọi trường hợp"
+          "text": "Chỉ dùng trung bình để bỏ qua outlier"
         },
         {
           "key": "B",
-          "text": "Đã có agent deployed trên cloud, public URL, health check và basic authentication — nhưng chưa trả lời được agent đang chậm hay nhanh (P99), tốn bao nhiêu tiền mỗi user mỗi ngày, bao nhiêu request fail và loại lỗi gì, câu trả lời có đúng không, và khi nào cần scale up, dù cấu hình không đổi, với mọi quy mô hệ thống, ở cả ba môi trường"
+          "text": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối"
         },
         {
           "key": "C",
-          "text": "Đã có guardrails, Ngày 13 bổ sung phần bảo mật tầng mạng, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, trong mọi trường hợp, với mọi loại workload, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Đã có monitoring đầy đủ, Ngày 13 chỉ bổ sung dashboard cho leadership, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Lưu ý đặc thù của AI được nêu ngay sau đó: không có monitoring thì bạn chỉ biết agent hỏng khi user phàn nàn — mà với AI agent, user thường không phàn nàn, họ im lặng rời đi. Đó là lý do implicit signal quan trọng hơn explicit signal.",
-      "source": "exam-110.json"
+      "explanation": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-005",
       "type": "mcq",
-      "prompt": "Ba pillars of observability và pillar thứ tư là gì?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Quality metric?",
       "options": [
         {
           "key": "A",
-          "text": "Metrics (bao nhiêu, bao lâu — rẻ, dùng để alert), Logs (chuyện gì xảy ra — đắt, dùng để debug), Traces (tại sao, hành trình request — vừa phải, dùng để tìm root cause); pillar thứ tư là Profiles (CPU/memory, phân tích tốn ở dòng code nào) nhưng ít dùng cho AI, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Alert, Dashboard và Runbook, cộng thêm On-call rotation là trụ cột thứ tư, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong khi ngân sách token vẫn còn dư nhiều, ở cả ba môi trường"
+          "text": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime"
         },
         {
           "key": "C",
-          "text": "Prometheus, Grafana và Loki, cộng thêm Jaeger là công cụ thứ tư, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, với mọi quy mô hệ thống"
+          "text": "Chỉ đếm số request"
         },
         {
           "key": "D",
-          "text": "Latency, Traffic và Errors, cộng thêm Saturation là pillar thứ tư, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Profiles ít dùng cho AI vì bottleneck thường nằm ở LLM API chứ không phải code chạy tại chỗ. Ba pillar chính bổ trợ nhau: Metrics phát hiện, Traces khoanh vùng, Logs tìm nguyên nhân gốc — thiếu một trong ba thì MTTR kéo dài từ phút lên giờ.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-006",
       "type": "mcq",
-      "prompt": "Cardinality là gì và vì sao nó khiến metrics đắt đỏ?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Alert rule?",
       "options": [
         {
           "key": "A",
-          "text": "Là độ sâu tối đa của cây trace trong một request, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả khi đã bật đủ kiểm tra, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, theo đúng khuyến nghị, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, mà không cần sửa code"
+          "text": "Báo động cho mọi dao động nhỏ"
         },
         {
           "key": "B",
-          "text": "Là số tổ hợp unique của các label; ví dụ metric llm_latency có user_id 100.000 giá trị × model 4 × endpoint 20 × status 10 = 8×10⁷ series, mà với Prometheus mỗi series khoảng 500 bytes cho mỗi lần scrape 15 giây thì riêng một lần scrape đã khoảng 40GB — hoàn toàn không khả thi, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích"
         },
         {
           "key": "C",
-          "text": "Là tần suất lấy mẫu của hệ thống giám sát, tính bằng số lần mỗi phút, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả lúc tải thấp, mà không cần sửa code, nên chi phí mỗi lần gọi không thay đổi, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Là số lượng metric khác nhau mà hệ thống thu thập mỗi giây, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, ở cả ba môi trường, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, với mọi quy mô hệ thống, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị, mà không cần sửa code"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Con số 40GB đó là cho MỘT lần scrape chứ không phải cho cả giờ, nên quy mô thực tế còn lớn hơn nhiều bậc. Quy tắc đi kèm: KHÔNG dùng user_id, request_id hay email làm metric label; CÓ thể dùng model, env, feature, tier. Dữ liệu high-cardinality phải đưa vào logs hoặc traces chứ không phải metrics, và nên sampling 1–10% cho AI workload.",
-      "source": "exam-110.json"
+      "explanation": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-007",
       "type": "mcq",
-      "prompt": "Sai cardinality gây hậu quả gì trong thực tế?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Cardinality?",
       "options": [
         {
           "key": "A",
-          "text": "Là cách phổ biến nhất làm sập Prometheus và nhận hoá đơn $40.000 mỗi tháng từ Datadog mà không được báo trước, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, dù đội đã tuân thủ đúng quy trình nội bộ"
+          "text": "Tăng vô hạn label theo user ID"
         },
         {
           "key": "B",
-          "text": "Làm mất dữ liệu lịch sử của các metric cũ hơn 30 ngày, nên bước kiểm tra phía sau không phát hiện ra, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường"
+          "text": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải"
         },
         {
           "key": "C",
-          "text": "Làm alert bị trễ khoảng vài phút so với thời điểm sự cố, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, ở cả ba môi trường, theo đúng khuyến nghị, kể cả khi đã bật đủ kiểm tra, nên chi phí mỗi lần gọi không thay đổi, với mọi quy mô hệ thống"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Làm dashboard hiển thị sai đơn vị đo nên đọc nhầm kết quả, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong mọi trường hợp, với mọi loại workload, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Vấn đề nằm ở chỗ chi phí tăng theo cấp số nhân với số label chứ không phải theo lượng traffic — thêm một label có 100.000 giá trị là nhân toàn bộ số series lên 100.000 lần. Đó là lý do quy tắc 'user_id vào logs, không vào metric label' phải được tuân thủ ngay từ đầu.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-008",
       "type": "mcq",
-      "prompt": "Trong ví dụ alert lúc 3h sáng 'P99 latency > 8s suốt 10 phút', ba pillar phối hợp thế nào?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Runbook?",
       "options": [
         {
           "key": "A",
-          "text": "Metrics tìm root cause, Traces gửi alert, Logs vẽ dashboard, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Nêu bước triage, ownership và xử lý khi alert kích hoạt"
         },
         {
           "key": "B",
-          "text": "Logs phát hiện trước, Metrics khoanh vùng, Traces xác nhận đã fix xong, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Chỉ liệt kê tên dashboard"
         },
         {
           "key": "C",
-          "text": "Cả ba đều báo cùng một thông tin, chỉ khác định dạng hiển thị, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Metrics cho thấy P99 tăng từ 2s lên 8s trong 10 phút mà error rate vẫn 0% → biết có vấn đề nhưng chưa biết vì sao; Traces cho 10 request chậm nhất cho thấy span vector_search chiếm 6,5s (bình thường 200ms) → bottleneck ở retrieval chứ không phải LLM; Logs tại service retrieval báo 'Pinecone request timeout after 6000ms' từ 02:47 → root cause là Pinecone gặp sự cố, cần chuyển sang fallback vector DB, kể cả lúc tải thấp, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Công thức cần nhớ: Metrics → phát hiện, Traces → localize, Logs → root cause. Chi tiết đáng chú ý là error rate vẫn 0% — hệ thống không hề báo lỗi, chỉ chậm đi, nên nếu chỉ theo dõi error rate thì sự cố này hoàn toàn vô hình.",
-      "source": "exam-110.json"
+      "answer": "A",
+      "explanation": "Nêu bước triage, ownership và xử lý khi alert kích hoạt. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-009",
       "type": "mcq",
-      "prompt": "Bốn rủi ro của việc không monitoring là gì?",
+      "prompt": "Trong một dự án AI, cách áp dụng Monitoring nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Chi phí hạ tầng tăng, hiệu năng giảm, bảo mật yếu và tài liệu thiếu, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, kể cả khi đã bật đủ kiểm tra"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Vi phạm GDPR, mất chứng chỉ ISO, bị phạt hành chính và mất hợp đồng, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, trong mọi trường hợp, kể cả lúc tải thấp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ"
+          "text": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không"
         },
         {
           "key": "C",
-          "text": "Không scale được, không deploy được, không rollback được và không backup được, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, ở cả ba môi trường, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, kể cả lúc tải thấp"
+          "text": "Chỉ lưu văn bản hội thoại thô"
         },
         {
           "key": "D",
-          "text": "Agent trả lời sai mà không ai biết đến khi mất user; token cost tăng dần không alert nên cuối tháng bill gấp 5 lần dự kiến; latency P95 tăng 10ms mỗi tuần nên 6 tuần sau chậm gấp đôi mà không có baseline để ai để ý; và 'agent sai hôm qua' không log không trace nên không reproduce được, không fix được, dù cấu hình không đổi, với mọi quy mô hệ thống, kể cả khi dữ liệu đã được làm sạch kỹ"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "D",
-      "explanation": "Rủi ro thứ ba là kiểu nguy hiểm nhất vì nó không có thời điểm hỏng rõ ràng. Slide nhắc lại vụ Air Canada 2024: chatbot tư vấn sai chính sách và toà buộc công ty trả tiền theo đúng câu chatbot đã nói — không monitoring nghĩa là không có gì để phòng vệ.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-010",
       "type": "mcq",
-      "prompt": "SLI, SLO, SLA và Error Budget khác nhau thế nào với ví dụ cụ thể cho agent?",
+      "prompt": "Trong một dự án AI, cách áp dụng Logging nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "SLI là một metric đo lường được (P95 latency = 2,3s); SLO là mục tiêu nội bộ cho SLI (P95 ≤ 3s trong 99,5% thời gian của 28 ngày); SLA là cam kết với khách hàng có phạt (99% uptime, nếu không thì refund 10%); Error Budget là dung sai cho phép SLO sai lệch (100% − 99,5% = 0,5% = 3,6 giờ mỗi tháng), dù cấu hình không đổi, trong suốt vòng đời dịch vụ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "SLI đo latency, SLO đo cost, SLA đo quality, error budget đo saturation, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, ở cả ba môi trường, theo đúng khuyến nghị, kể cả khi đã bật đủ kiểm tra, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit"
         },
         {
           "key": "C",
-          "text": "Cả bốn đều đo uptime, chỉ khác đơn vị thời gian tính toán, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, với mọi quy mô hệ thống, trong mọi trường hợp, với mọi loại workload, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị, mà không cần sửa code"
+          "text": "Chỉ vẽ biểu đồ tổng quan"
         },
         {
           "key": "D",
-          "text": "SLI là cam kết với khách, SLO là chỉ số đo được, SLA là mục tiêu nội bộ, error budget là ngân sách tiền, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả lúc tải thấp, mà không cần sửa code, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị, với mọi loại workload"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Nguyên tắc kèm theo: SLO phải chặt hơn SLA để có đệm không bao giờ vi phạm SLA. Cách dùng error budget: còn nhiều budget thì được phép deploy mạo hiểm, hết budget thì freeze và chỉ fix bug.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-011",
       "type": "mcq",
-      "prompt": "Bảng error budget math cho các mức SLO như thế nào?",
+      "prompt": "Trong một dự án AI, cách áp dụng Tracing nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "99,99% cho 25,9 giây mỗi tháng còn 99,999% cho 4,32 phút mỗi tháng, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, trong mọi trường hợp, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn"
+          "text": "Xóa request ID để bảo mật"
         },
         {
           "key": "B",
-          "text": "99% cho 7,2 giờ mỗi tháng; 99,5% cho 3,6 giờ; 99,9% (3 nines) cho 43,2 phút; 99,99% (4 nines) cho 4,32 phút; 99,999% (5 nines) chỉ còn 25,9 giây, dù cấu hình không đổi, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, với mọi quy mô hệ thống"
+          "text": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool"
         },
         {
           "key": "C",
-          "text": "Mọi mức SLO đều cho khoảng 1 giờ downtime mỗi tháng, chỉ khác cách phân bổ, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả lúc tải thấp, với mọi quy mô hệ thống, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "99% cho 43,2 phút mỗi tháng và 99,9% cho 7,2 giờ mỗi tháng, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, theo đúng khuyến nghị, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi, với mọi quy mô hệ thống"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Lưu ý quan trọng: mỗi lần thêm một 'nine' tốn gấp 10 lần tiền. Với AI agent thực tế, SLO 99%–99,5% là đủ — và slide cảnh báo đừng hứa 99,99% khi chính LLM API bạn phụ thuộc chỉ đạt 99,9%. Bạn không thể đáng tin hơn thành phần kém tin nhất trong chuỗi.",
-      "source": "exam-110.json"
+      "explanation": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-012",
       "type": "mcq",
-      "prompt": "Bốn Golden Signals của Google SRE và hai signal bổ sung cho AI agent là gì?",
+      "prompt": "Trong một dự án AI, cách áp dụng Latency percentile nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "CPU, RAM, Disk và Network; cộng thêm GPU và Token throughput, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, với mọi quy mô hệ thống, theo đúng khuyến nghị, kể cả khi đã bật đủ kiểm tra, kể cả khi tài liệu nguồn còn nguyên vẹn, kể cả khi model đã cập nhật bản mới nhất, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối"
         },
         {
           "key": "B",
-          "text": "Rate, Errors, Duration và Utilization; cộng thêm Availability và Reliability, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả lúc tải thấp, mà không cần sửa code, nên chi phí mỗi lần gọi không thay đổi, dù prompt đã được viết lại rõ ràng hơn, trong mọi trường hợp, ở cả ba môi trường, dù cấu hình không đổi, theo đúng khuyến nghị, với mọi loại workload"
+          "text": "Chỉ dùng trung bình để bỏ qua outlier"
         },
         {
           "key": "C",
-          "text": "Latency, Traffic (QPS), Errors và Saturation; cộng thêm Cost ($/request, $/user, token usage) và Quality (hallucination rate, user CSAT, groundedness score), trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Metrics, Logs, Traces và Profiles; cộng thêm Alerts và Dashboards, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, dù cấu hình không đổi, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, trong khi log không ghi lại dấu hiệu nào, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị, mà không cần sửa code"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Lý do phải thêm hai signal: agent có thể 'up' theo mọi nghĩa truyền thống — traffic OK, latency OK, error OK — nhưng vẫn trả lời sai và đốt tiền. Đây là hai failure mode riêng của AI mà monitoring truyền thống hoàn toàn bỏ qua.",
-      "source": "exam-110.json"
+      "answer": "A",
+      "explanation": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-013",
       "type": "mcq",
-      "prompt": "RED và USE là hai phương pháp observability khác nhau thế nào?",
+      "prompt": "Trong một dự án AI, cách áp dụng Quality metric nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "RED do Google đề xuất còn USE do Amazon đề xuất, nội dung tương đương nhau, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi dữ liệu đã được làm sạch kỹ, dù cấu hình không đổi, với mọi quy mô hệ thống, ở cả ba môi trường"
+          "text": "Chỉ đếm số request"
         },
         {
           "key": "B",
-          "text": "RED dùng cho môi trường production còn USE dùng cho staging, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ"
+          "text": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime"
         },
         {
           "key": "C",
-          "text": "RED đo chất lượng còn USE đo chi phí vận hành, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, kể cả lúc tải thấp, mà không cần sửa code, trong mọi trường hợp"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "RED là request-centric (Rate requests/giây, Errors error rate, Duration latency P50/P95/P99) nhìn từ góc user; USE là resource-centric (Utilization tài nguyên dùng bao nhiêu %, Saturation có queue/chờ không, Errors lỗi của resource) nhìn từ góc tài nguyên, trong mọi trường hợp, với mọi loại workload, dù cấu hình không đổi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Hai phương pháp bổ trợ nhau trong chẩn đoán: agent chậm được phát hiện bằng RED (Duration P95 tăng), rồi debug bằng USE (LLM rate limit utilization đạt 95% nên đang bị throttle) và hành động là nâng tier hoặc dùng fallback.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-014",
       "type": "mcq",
-      "prompt": "Các metric AI-specific về performance mà monitoring truyền thống không có là gì?",
+      "prompt": "Trong một dự án AI, cách áp dụng Alert rule nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "TTFT (Time To First Token), TPOT (Time Per Output Token), tokens/sec và context fill % (dùng bao nhiêu phần window), ở cả ba môi trường, mà không cần sửa code, nên chi phí mỗi lần gọi không thay đổi, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị, với mọi loại workload"
+          "text": "Báo động cho mọi dao động nhỏ"
         },
         {
           "key": "B",
-          "text": "P50, P95 và P99 latency, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, với mọi quy mô hệ thống, dù cấu hình không đổi, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích"
         },
         {
           "key": "C",
-          "text": "QPS, uptime và queue depth, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, trong mọi trường hợp, kể cả lúc tải thấp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, dù cấu hình không đổi, theo đúng khuyến nghị, mà không cần sửa code"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Cost per request, cost per user và cost per feature, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, theo đúng khuyến nghị, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Metric truyền thống gồm latency end-to-end, throughput, queue depth và uptime. Điểm mấu chốt: với streaming UI, user cảm nhận TTFT chứ không phải total latency — TTFT 500ms thì thấy nhanh kể cả tổng 8 giây, còn TTFT 3s thì thấy lag kể cả tổng chỉ 4 giây. Vì vậy hãy tối ưu TTFT trước total.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-015",
       "type": "mcq",
-      "prompt": "Vì sao P99 quan trọng, và xác suất user gặp phải tail latency được tính thế nào?",
+      "prompt": "Trong một dự án AI, cách áp dụng Cardinality nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Vì agent có P99 = 5s và user chat 10 lượt thì xác suất gặp ít nhất một lần chậm là 1 − 0,99¹⁰ ≈ 9,6% — với 1.000 user mỗi ngày thì 96 người bức xúc, và chính họ là người tweet tiêu cực, churn và complain, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Vì P99 dễ đo hơn average nên các công cụ đều mặc định hiển thị nó, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải"
         },
         {
           "key": "C",
-          "text": "Vì chỉ 1% user bị ảnh hưởng nên có thể bỏ qua an toàn, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù cấu hình không đổi, kể cả lúc tải thấp, trong mọi trường hợp, mà không cần sửa code, với mọi loại workload"
+          "text": "Tăng vô hạn label theo user ID"
         },
         {
           "key": "D",
-          "text": "Vì P99 luôn bằng khoảng 3 lần P50 nên dùng để ước lượng nhanh, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "A",
-      "explanation": "Công thức tổng quát là 1 − 0,99^N với N là số lượt dùng. Amazon Rule được trích: mỗi 100ms latency làm họ mất 1% doanh số, nên P99 và P99.9 là KPI chính thức tại Amazon, Google, Meta. Tail latency còn cộng dồn nhanh trong agentic workflow — 5 bước × P99 tương đương P95 của toàn bộ.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-016",
       "type": "mcq",
-      "prompt": "Vì sao trung bình (average) che giấu vấn đề?",
+      "prompt": "Trong một dự án AI, cách áp dụng Runbook nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Vì average bị làm nhiễu bởi các request bị timeout và bị loại bỏ, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Vì average ẩn giấu long tail: nếu P50 là 800ms nhưng P99 là 5s thì 1 trên 100 user phải chờ rất lâu, và họ là nhóm dễ churn nhất, ở cả ba môi trường"
+          "text": "Nêu bước triage, ownership và xử lý khi alert kích hoạt"
         },
         {
           "key": "C",
-          "text": "Vì average luôn thấp hơn P50 nên tạo ấn tượng sai về tốc độ, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, ở cả ba môi trường"
+          "text": "Chỉ liệt kê tên dashboard"
         },
         {
           "key": "D",
-          "text": "Vì average chỉ tính được khi số lượng request là số chẵn, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Ví dụ số liệu trong slide: P50 = 800ms (nửa số request nhanh hơn), P95 = 2,1s, P99 = 5,3s. Ba con số này vẽ nên bức tranh hoàn toàn khác so với một con số trung bình duy nhất — và nhóm chịu ảnh hưởng nặng nhất lại chính là nhóm dễ mất nhất.",
-      "source": "exam-110.json"
+      "explanation": "Nêu bước triage, ownership và xử lý khi alert kích hoạt. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-017",
       "type": "mcq",
-      "prompt": "Kim tự tháp 4 tầng quality metrics gồm những gì từ dưới lên?",
+      "prompt": "Khi đội ngũ bỏ qua Monitoring, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "L1 Metrics, L2 Logs, L3 Traces, L4 Profiles, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, trong suốt vòng đời dịch vụ, trong mọi trường hợp, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "L1 Automated Heuristic (format, length, toxicity, PII leak), L2 LLM-as-Judge (relevance, faithfulness — RAGAS), L3 User Signal (thumbs up/down, CSAT, follow-up), L4 Outcome (task success, revenue, retention), ở cả ba môi trường, theo đúng khuyến nghị, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không"
         },
         {
           "key": "C",
-          "text": "L1 Unit test, L2 Integration test, L3 E2E test, L4 Production monitoring, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Chỉ lưu văn bản hội thoại thô"
         },
         {
           "key": "D",
-          "text": "L1 Outcome, L2 User Signal, L3 LLM-as-Judge, L4 Automated Heuristic, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Đánh đổi giữa các tầng: L1 rẻ và realtime nhưng không nói được chất lượng thực; L4 là ground truth nhưng lag hàng tuần. Production cần cả bốn — L1 và L2 để alert, L3 và L4 để xác nhận xu hướng.",
-      "source": "exam-110.json"
+      "explanation": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-018",
       "type": "mcq",
-      "prompt": "Bốn pattern phát hiện hallucination là gì?",
+      "prompt": "Khi đội ngũ bỏ qua Logging, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Prompt engineering, fine-tuning, RAG và guardrails, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, kể cả khi model đã cập nhật bản mới nhất, nên chi phí mỗi lần gọi không thay đổi, dù người dùng không thấy gì bất thường, kể cả khi dữ liệu đã được làm sạch kỹ"
+          "text": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit"
         },
         {
           "key": "B",
-          "text": "Temperature 0, top_p 0.9, seed cố định và max_tokens giới hạn, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, trong khi log không ghi lại dấu hiệu nào, kể cả khi tài liệu nguồn còn nguyên vẹn, kể cả lúc tải thấp, ở cả ba môi trường"
+          "text": "Chỉ vẽ biểu đồ tổng quan"
         },
         {
           "key": "C",
-          "text": "Groundedness cho RAG (check từng claim có trong retrieved context không, dùng RAGAS faithfulness hoặc TruLens); Self-consistency (gọi LLM 3 lần với temp 0,7, nếu ba câu trả lời mâu thuẫn thì nghi ngờ — cost gấp 3 nên chỉ dùng cho sample 1%); Entity verification (extract tên, số, ngày rồi cross-check với DB/API đáng tin, dùng cho finance và medical); User feedback loop (nút 'Was this helpful?', click regenerate là tín hiệu hallucination — chậm nhưng rẻ và thật), ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Regex, schema validation, unit test và integration test, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, dù đội đã tuân thủ đúng quy trình nội bộ, dù cấu hình đã được rà soát lại một lượt, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Điểm quan trọng: không có một metric duy nhất nào bắt được hallucination, phải kết hợp. Slide nhắc lại vụ Air Canada — chatbot tư vấn chính sách bereavement fare không tồn tại; nếu có groundedness check đối chiếu với policy DB thật thì câu trả lời đã bị chặn từ đầu, tránh được kiện tụng.",
-      "source": "exam-110.json"
+      "answer": "A",
+      "explanation": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-019",
       "type": "mcq",
-      "prompt": "Công thức cost per request cho LLM gồm những thành phần nào?",
+      "prompt": "Khi đội ngũ bỏ qua Tracing, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Số request nhân với đơn giá cố định của từng model, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Chỉ có input token nhân đơn giá vì output được tính gộp vào input, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù người dùng không thấy gì bất thường, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool"
         },
         {
           "key": "C",
-          "text": "Ba thành phần cộng lại: (input tokens / 10⁶) × giá input + (output tokens / 10⁶) × giá output + (cache tokens / 10⁶) × giá cache read, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, trong suốt vòng đời dịch vụ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Xóa request ID để bảo mật"
         },
         {
           "key": "D",
-          "text": "Thời gian xử lý nhân với đơn giá theo giây giống như thuê máy chủ, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, trong suốt vòng đời dịch vụ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Ví dụ Claude Sonnet 4.5 (2026): input $3/M, output $15/M, cache write $3,75/M, cache read $0,30/M — tức cache read rẻ hơn input 10 lần. Một request RAG điển hình có 8.000 token system + docs, 200 token query, 500 token output, thành khoảng $0,0246 + $0,0075 = $0,032 mỗi request.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-020",
       "type": "mcq",
-      "prompt": "Với 100.000 request mỗi ngày, chi phí thay đổi thế nào khi bật prompt cache?",
+      "prompt": "Khi đội ngũ bỏ qua Latency percentile, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Từ $500/ngày lên $2.000/ngày vì phải trả thêm phí ghi cache, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối"
         },
         {
           "key": "B",
-          "text": "Từ $10k/ngày xuống $9k/ngày, tiết kiệm khoảng 10%, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn"
+          "text": "Chỉ dùng trung bình để bỏ qua outlier"
         },
         {
           "key": "C",
-          "text": "Từ $3.200/ngày tức $96k/tháng, nếu prompt cache đạt hit rate rất cao cho phần system thì giảm còn khoảng $1.100/ngày — tiết kiệm cỡ $63k mỗi tháng, kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả khi dữ liệu đã được làm sạch kỹ"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Không đổi vì cache chỉ giảm latency chứ không giảm chi phí, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Con số này giải thích vì sao prompt caching đứng đầu danh sách bốn cost optimization pattern. Phần được cache là system prompt và tài liệu tĩnh — thứ lặp lại y hệt ở mọi request, chiếm phần lớn input token của một RAG agent.",
-      "source": "exam-110.json"
+      "answer": "A",
+      "explanation": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-021",
       "type": "mcq",
-      "prompt": "Sáu chiều cost attribution và tag tương ứng là gì?",
+      "prompt": "Khi đội ngũ bỏ qua Quality metric, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Theo team, theo sprint, theo epic và theo story point, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường"
+          "text": "Chỉ đếm số request"
         },
         {
           "key": "B",
-          "text": "Chỉ cần một chiều duy nhất là tổng chi phí theo ngày, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, trong khi ngân sách token vẫn còn dư nhiều, ở cả ba môi trường"
+          "text": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime"
         },
         {
           "key": "C",
-          "text": "Theo region, theo availability zone và theo instance type, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Per user (user_id), per feature (feature='summary'), per model (model='claude-sonnet-4-5'), per tenant (tenant_id), per env (env='prod') và per cohort (plan='enterprise'), ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Mục đích từng chiều: per user để biết power user và tính pricing; per feature để ưu tiên tối ưu; per model để so cost/value; per tenant để bill multi-tenant; per env để tách nhiễu dev/staging; per cohort để phân tích biên lợi nhuận. Quy tắc tối thiểu: mọi LLM call phải có ít nhất ba tag user_id, feature và model.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-022",
       "type": "mcq",
-      "prompt": "Bốn cost optimization pattern và mức tiết kiệm của chúng là gì?",
+      "prompt": "Khi đội ngũ bỏ qua Alert rule, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Prompt Caching (cache system prompt và docs tĩnh, Anthropic rẻ hơn 10 lần khi cache read → giảm 70% cost); Model Routing/Cascade (câu dễ đưa Haiku, câu khó đưa Sonnet, dùng classifier nhẹ để quyết định → giảm 40–60%); Semantic Cache (query tương tự thì trả lời cached khi embedding similarity trên 0,95 → hit rate 20–40%); Batch API (việc không realtime như tóm tắt ban đêm thì dùng batch giá rẻ một nửa → 50% offline work), ở cả ba môi trường"
+          "text": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích"
         },
         {
           "key": "B",
-          "text": "Tăng cache TTL, giảm số lần retry, tắt logging và giảm số replica, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, trong khi log không ghi lại dấu hiệu nào, dù người dùng không thấy gì bất thường, ở cả ba môi trường"
+          "text": "Báo động cho mọi dao động nhỏ"
         },
         {
           "key": "C",
-          "text": "Fine-tuning, quantization, distillation và pruning model, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, dù đội đã tuân thủ đúng quy trình nội bộ, trong mọi trường hợp, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Nén prompt, rút ngắn output, giảm top_k và hạ temperature — tổng cộng giảm 20%, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "A",
-      "explanation": "Áp dụng cả bốn pattern đưa chi phí từ $96k xuống $22k mỗi tháng, tức tiết kiệm 77%. Slide gọi đây là FinOps for AI và mô tả nó là kỹ năng hot của năm 2026.",
-      "source": "exam-110.json"
+      "explanation": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-023",
       "type": "mcq",
-      "prompt": "Vì sao 'error rate 5%' là con số không đủ để hành động?",
+      "prompt": "Khi đội ngũ bỏ qua Cardinality, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Vì không biết là loại lỗi gì — không có taxonomy thì không fix được; phải track trường error_type trong mỗi log để khi alert fire là biết ngay gọi ai, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Vì error rate phải luôn được tính theo P99 chứ không phải trung bình, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải"
         },
         {
           "key": "C",
-          "text": "Vì 5% là ngưỡng quá thấp, thực tế phải trên 10% mới đáng lo, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị, mà không cần sửa code"
+          "text": "Tăng vô hạn label theo user ID"
         },
         {
           "key": "D",
-          "text": "Vì con số này không tính các request bị timeout ở tầng gateway, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Bảy loại lỗi và cách xử lý: LLM API 5xx (retry exponential backoff, fallback model); LLM timeout (circuit breaker, client timeout ngắn hơn server); Tool call failed (retry, graceful degradation); Tool schema invalid (re-prompt kèm error feedback); Guardrail block (log + thông báo thân thiện); Empty response (đổi prompt, escalate lên người); Context overflow (truncate, tóm tắt history).",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-024",
       "type": "mcq",
-      "prompt": "Implicit signal nào được cho là predictor tốt nhất cho churn?",
+      "prompt": "Khi đội ngũ bỏ qua Runbook, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Regenerate rate — user bấm 'thử lại' — còn tốt hơn cả thumbs down, vì user không bấm thumbs down mà họ chỉ rời đi, ở cả ba môi trường"
+          "text": "Nêu bước triage, ownership và xử lý khi alert kích hoạt"
         },
         {
           "key": "B",
-          "text": "NPS quarterly — vì được khảo sát định kỳ nên đáng tin cậy nhất, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, với mọi quy mô hệ thống"
+          "text": "Chỉ liệt kê tên dashboard"
         },
         {
           "key": "C",
-          "text": "Session length — thời gian dùng càng lâu thì khả năng rời đi càng cao, trong khi ngân sách token vẫn còn dư nhiều, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Thumbs down rate — vì đây là tín hiệu trực tiếp và rõ ràng nhất, kể cả khi mọi chỉ số kỹ thuật đều bình thường, dù cấu hình không đổi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "A",
-      "explanation": "Explicit signal gồm thumbs up/down gắn vào mỗi response, CSAT survey hằng tuần, NPS hằng quý và escalation rate — tín hiệu rõ nhưng tỷ lệ phản hồi dưới 5%. Implicit signal quan trọng hơn: regenerate rate, session length, follow-up rate, conversion, và return rate trong 7 ngày.",
-      "source": "exam-110.json"
+      "explanation": "Nêu bước triage, ownership và xử lý khi alert kích hoạt. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-025",
       "type": "mcq",
-      "prompt": "Ba loại drift cần monitor và cách phát hiện là gì?",
+      "prompt": "Mục tiêu chính của Monitoring trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Data drift (phân bố input đổi, user hỏi kiểu mới), Concept drift (mapping input→output đổi, ví dụ có luật mới) và Model drift (nhà cung cấp update model nên hành vi đổi); phát hiện bằng Population Stability Index, KL-divergence giữa các phân bố, hoặc embedding drift đo bằng cosine similarity, trong mọi trường hợp, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Schema drift, format drift và version drift — phát hiện bằng validation, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, ở cả ba môi trường, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không"
         },
         {
           "key": "C",
-          "text": "Latency drift, cost drift và traffic drift — phát hiện bằng cách so với tuần trước, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, kể cả lúc tải thấp, với mọi loại workload, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Chỉ lưu văn bản hội thoại thô"
         },
         {
           "key": "D",
-          "text": "Prompt drift, context drift và output drift — phát hiện bằng cách chạy lại golden set, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, dù cấu hình không đổi, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, mà không cần sửa code"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Cách đọc chỉ số PSI: dưới 0,1 là ổn định, 0,1–0,25 là drift nhẹ, trên 0,25 là đáng kể và cần retrain. Case 2024 được nhắc: OpenAI âm thầm update GPT-4 khiến format output đổi và nhiều pipeline hỏng trong im lặng — không drift monitoring thì không biết.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-026",
       "type": "mcq",
-      "prompt": "Bảng 'metric nào cho ai' phân chia thế nào?",
+      "prompt": "Mục tiêu chính của Logging trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mọi stakeholder đều xem cùng một dashboard để thống nhất thông tin, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, kể cả khi dữ liệu đã được làm sạch kỹ, trong mọi trường hợp, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Chỉ vẽ biểu đồ tổng quan"
         },
         {
           "key": "B",
-          "text": "Phân theo mức độ chi tiết: leadership xem raw log, engineering xem tổng hợp, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường, theo đúng khuyến nghị, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit"
         },
         {
           "key": "C",
-          "text": "Chỉ engineering cần metric, các bộ phận khác chỉ cần báo cáo hằng tháng, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, kể cả khi đã bật đủ kiểm tra, kể cả lúc tải thấp, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Engineering xem latency P95/P99, error rate, tool call failure và saturation; Product xem CSAT, task completion, hallucination rate và regenerate rate; Finance/Ops xem cost/day, tokens/request, cost by model và attribution; Leadership xem adoption rate, cost vs value, uptime và user growth; Security/Legal xem PII leak rate, audit log completeness và data retention, dù cấu hình không đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Nguyên tắc kèm theo: dashboard cho stakeholder phải nói bằng ngôn ngữ business — 'P95 = 2,1s' nên viết thành '95% user nhận trả lời trong 2 giây'. Đây cũng là cơ sở cho thiết kế dashboard 3 layer ở phần sau.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-027",
       "type": "mcq",
-      "prompt": "Structured log khác unstructured log ở chỗ nào?",
+      "prompt": "Mục tiêu chính của Tracing trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Structured log ngắn hơn nên tiết kiệm dung lượng lưu trữ, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, với mọi quy mô hệ thống, trong mọi trường hợp"
+          "text": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool"
         },
         {
           "key": "B",
-          "text": "Structured log chỉ ghi lỗi còn unstructured ghi mọi sự kiện, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong suốt vòng đời dịch vụ, ở cả ba môi trường"
+          "text": "Xóa request ID để bảo mật"
         },
         {
           "key": "C",
-          "text": "Structured log được mã hoá nên an toàn hơn khi lưu trữ dài hạn, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, dù cấu hình không đổi, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Unstructured là dòng text tự do nên khó search và khó filter; structured là JSON có các trường xác định (ts, level, correlation_id, user_id, event, latency_ms, tokens_in/out, cost_usd, model, feature) nên query và aggregate được, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Ví dụ unstructured: '2026-03-18 10:23:45 INFO Agent responded to query'. Ví dụ structured: một object JSON có đủ các trường trên. Khác biệt căn bản là log trở thành DATA có thể truy vấn thay vì văn bản phải đọc bằng mắt — nền tảng để debug AI agent ở quy mô lớn.",
-      "source": "exam-110.json"
+      "answer": "A",
+      "explanation": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-028",
       "type": "mcq",
-      "prompt": "Log schema 3 tier được thiết kế thế nào?",
+      "prompt": "Mục tiêu chính của Latency percentile trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Tier 1 Required (ts theo ISO 8601, level INFO/WARN/ERROR, correlation_id, service name, event type); Tier 2 Context (user_id đã hash, session_id, feature, model, env); Tier 3 Payload (latency_ms, tokens_in/out, cost_usd, error_type, tool_name), ở cả ba môi trường"
+          "text": "Chỉ dùng trung bình để bỏ qua outlier"
         },
         {
           "key": "B",
-          "text": "Tier 1 Debug, Tier 2 Info, Tier 3 Error — phân theo mức độ nghiêm trọng, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, với mọi quy mô hệ thống, trong mọi trường hợp"
+          "text": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối"
         },
         {
           "key": "C",
-          "text": "Tier 1 Local, Tier 2 Staging, Tier 3 Production — phân theo môi trường, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Tier 1 Metrics, Tier 2 Logs, Tier 3 Traces — phân theo pillar, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Khuyến nghị đi kèm: viết schema thành Pydantic model hoặc JSON Schema và validate trước khi emit. Lý do rất thực tế — nếu mỗi service log một kiểu khác nhau thì không build được dashboard nào cả.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-029",
       "type": "mcq",
-      "prompt": "Vì sao dùng contextvars trong structlog?",
+      "prompt": "Mục tiêu chính của Quality metric trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Vì contextvars nén dữ liệu log nên giảm chi phí lưu trữ, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Vì contextvars tự động gửi log về Datadog mà không cần cấu hình, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, ở cả ba môi trường"
+          "text": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime"
         },
         {
           "key": "C",
-          "text": "Vì contextvars an toàn với asyncio — mỗi request có context riêng, không bị lẫn giữa các request đồng thời; sau khi bind_contextvars thì mọi lời gọi log tự động kèm correlation_id, user_id và feature, ở cả ba môi trường"
+          "text": "Chỉ đếm số request"
         },
         {
           "key": "D",
-          "text": "Vì contextvars là cách duy nhất để ghi log ở định dạng JSON, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "Mẫu code chuẩn: clear_contextvars() ở đầu mỗi request, rồi bind_contextvars với correlation_id lấy 8 ký tự đầu của uuid4, user_id và feature. Từ đó trở đi log.info('request_received', query_len=...) tự động mang theo ba trường này mà không phải truyền tay.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-030",
       "type": "mcq",
-      "prompt": "Correlation ID hoạt động thế nào và chuẩn quốc tế của nó là gì?",
+      "prompt": "Mục tiêu chính của Alert rule trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Correlation ID chỉ dùng trong một service, không truyền qua ranh giới mạng, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, ở cả ba môi trường"
+          "text": "Báo động cho mọi dao động nhỏ"
         },
         {
           "key": "B",
-          "text": "Một ID duy nhất được truyền xuyên suốt Client → API Gateway → Agent → RAG Service → LLM Provider, mọi log entry đều có trường này nên grep một ID ra được toàn bộ hành trình; chuẩn quốc tế là HTTP header traceparent theo W3C Trace Context, ở cả ba môi trường"
+          "text": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích"
         },
         {
           "key": "C",
-          "text": "Mỗi service tự sinh một ID riêng rồi ghép lại lúc phân tích, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi đã bật đủ kiểm tra, dù cấu hình không đổi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "ID được sinh ở tầng database rồi truyền ngược lên các tầng trên, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, trong suốt vòng đời dịch vụ, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Mọi framework hiện đại như FastAPI và Express đều hỗ trợ traceparent. Đây chính là sợi chỉ nối ba pillar lại với nhau: có correlation ID thì từ một metric bất thường có thể lần ra trace, rồi từ trace lần ra log của đúng request đó.",
-      "source": "exam-110.json"
+      "explanation": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-031",
       "type": "mcq",
-      "prompt": "Những gì NÊN log và KHÔNG NÊN log?",
+      "prompt": "Mục tiêu chính của Cardinality trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Nên log mọi thứ để có đủ dữ liệu, chỉ mã hoá phần nhạy cảm, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, kể cả lúc tải thấp, mà không cần sửa code, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Nên log full prompt và full response để reproduce được mọi tình huống, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, dù cấu hình không đổi, trong mọi trường hợp, ở cả ba môi trường, kể cả lúc tải thấp, theo đúng khuyến nghị, mà không cần sửa code"
+          "text": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải"
         },
         {
           "key": "C",
-          "text": "Chỉ nên log lỗi, mọi thứ khác đều là nhiễu không cần thiết, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, ở cả ba môi trường, với mọi loại workload, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Tăng vô hạn label theo user ID"
         },
         {
           "key": "D",
-          "text": "NÊN: input đã sanitize (độ dài, topic), output summary không phải full text, tool calls và results dạng metadata, latency/tokens/cost, errors và stack traces, correlation ID và hashed user ID. KHÔNG: PII (tên, SĐT, CCCD, email), full prompt chứa dữ liệu nhạy cảm, API keys và tokens, thẻ tín dụng và tài khoản ngân hàng, full raw user input, DEBUG verbose ở production, theo đúng khuyến nghị, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "D",
-      "explanation": "Hậu quả pháp lý được nêu rõ: log PII là vi phạm GDPR, PDPA, CCPA và mức phạt GDPR có thể lên tới 4% doanh thu toàn cầu. Nguyên tắc: sanitize TRƯỚC khi log, không phải sau khi bị audit.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-032",
       "type": "mcq",
-      "prompt": "Hai cách scrub PII được nêu là gì?",
+      "prompt": "Mục tiêu chính của Runbook trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mã hoá AES toàn bộ nội dung log rồi giải mã khi cần đọc, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường"
+          "text": "Chỉ liệt kê tên dashboard"
         },
         {
           "key": "B",
-          "text": "Băm SHA-256 toàn bộ nội dung request trước khi ghi xuống, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong mọi trường hợp"
+          "text": "Nêu bước triage, ownership và xử lý khi alert kích hoạt"
         },
         {
           "key": "C",
-          "text": "Chỉ giữ 3 ký tự đầu và 3 ký tự cuối của mọi trường văn bản, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, nên bước kiểm tra phía sau không phát hiện ra, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Regex nhanh cho các pattern phổ biến (email, phone_vn theo mẫu (+84|0)\\d{9,10}, cccd theo mẫu 12 chữ số, credit_card 4 nhóm 4 chữ số) thay bằng [REDACTED_...]; và Microsoft Presidio dựa trên NER với AnalyzerEngine cùng AnonymizerEngine, robust hơn, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Regex nhanh nhưng chỉ bắt được pattern đã biết; Presidio dùng nhận dạng thực thể nên bắt được tên người và địa chỉ — những thứ không có pattern cố định. Lỗi thường gặp khi triển khai là đặt sai thứ tự processor: scrubber phải chạy TRƯỚC JSONRenderer.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Nêu bước triage, ownership và xử lý khi alert kích hoạt. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-033",
       "type": "mcq",
-      "prompt": "Năm log level và mức nào chạy ở production?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Monitoring?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ có ba level INFO, WARN, ERROR và cả ba đều chạy ở production, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Chỉ lưu văn bản hội thoại thô"
         },
         {
           "key": "B",
-          "text": "DEBUG (dev only, full prompt và intermediate state — production chỉ sample 1%), INFO (normal flow, request received/response sent — có ở prod), WARN (degraded nhưng vẫn chạy, retry thành công hoặc dùng fallback — có ở prod), ERROR (failed cần attention, tool call timeout — có ở prod và alert), CRITICAL (system-level failure, DB unreachable hoặc all models down — có ở prod và page), ở cả ba môi trường"
+          "text": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không"
         },
         {
           "key": "C",
-          "text": "TRACE, DEBUG, INFO, WARN và FATAL — production chạy từ TRACE trở lên, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "DEBUG luôn bật ở production để có đủ dữ liệu khi cần điều tra, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, kể cả lúc tải thấp, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Production chạy ở mức INFO. Khi cần debug cụ thể thì tạm bật DEBUG cho đúng request ID đó rồi tắt đi — không để DEBUG luôn bật vì log volume tăng 100 lần và hoá đơn tăng theo.",
-      "source": "exam-110.json"
+      "explanation": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-034",
       "type": "mcq",
-      "prompt": "Bài toán chi phí log và ba chiến lược sampling là gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Logging?",
       "options": [
         {
           "key": "A",
-          "text": "100.000 request/ngày × 10 log entry mỗi request = 1 triệu entry/ngày, Elastic hoặc Datadog tính $0,10 mỗi 1.000 entry thành $100/ngày chỉ riêng log; ba chiến lược là head sampling (quyết định ngay khi trace bắt đầu — rẻ nhưng có thể miss error), tail sampling (quyết định sau khi trace xong — đắt nhưng giữ được 100% errors) và reservoir sampling (giữ N mẫu uniform), ở cả ba môi trường"
+          "text": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit"
         },
         {
           "key": "B",
-          "text": "Log luôn miễn phí vì được lưu trên đĩa cứng của chính máy chủ, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường"
+          "text": "Chỉ vẽ biểu đồ tổng quan"
         },
         {
           "key": "C",
-          "text": "Chỉ cần nén log bằng gzip là giảm được 90% chi phí, không cần sampling, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên kiểm thử nội bộ vẫn hiển thị màu xanh, với mọi quy mô hệ thống, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Chi phí log không đáng kể so với chi phí gọi LLM nên không cần sampling, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "A",
-      "explanation": "Chiến lược điển hình cho AI agent: giữ 100% ERROR và WARN, 10% INFO cho request bình thường, 1% DEBUG, 100% request chậm hơn 10 giây (tail sampling theo latency) và 100% request tốn hơn $1 (outlier theo chi phí).",
-      "source": "exam-110.json"
+      "explanation": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-035",
       "type": "mcq",
-      "prompt": "Vì sao 'giữ 100% errors' được gọi là non-negotiable?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Tracing?",
       "options": [
         {
           "key": "A",
-          "text": "Vì nhà cung cấp log không tính phí cho các entry ở mức ERROR, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, với mọi quy mô hệ thống, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Vì sampling giảm chi phí 10–100 lần nhưng làm mất khả năng nhìn thấy pattern bình thường; riêng error là dữ liệu debug quan trọng nhất nên không được lấy mẫu, ở cả ba môi trường"
+          "text": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool"
         },
         {
           "key": "C",
-          "text": "Vì luật pháp yêu cầu lưu trữ đầy đủ mọi lỗi trong 7 năm, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, trong suốt vòng đời dịch vụ, ở cả ba môi trường"
+          "text": "Xóa request ID để bảo mật"
         },
         {
           "key": "D",
-          "text": "Vì error log nhẹ hơn info log nên không ảnh hưởng chi phí, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Đánh đổi của sampling là: tiết kiệm rất nhiều tiền nhưng đổi lấy việc không còn thấy được toàn cảnh của luồng bình thường. Chấp nhận được với INFO vì các request thành công khá giống nhau; không chấp nhận được với ERROR vì mỗi lỗi thường là một tình huống riêng.",
-      "source": "exam-110.json"
+      "explanation": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-036",
       "type": "mcq",
-      "prompt": "Năm log aggregation stack và trường hợp dùng của chúng là gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Latency percentile?",
       "options": [
         {
           "key": "A",
-          "text": "S3, GCS, Blob, EBS và EFS — năm dịch vụ lưu trữ, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, dù đội đã tuân thủ đúng quy trình nội bộ, với mọi quy mô hệ thống"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "ELK (Elasticsearch, Logstash, Kibana — full-text search mạnh, query phức tạp, tự host OSS); Loki (Loki, Promtail, Grafana — label-based giống Prometheus, rẻ, tự host OSS); Datadog Logs (SaaS, setup nhanh, alert tốt, $0,10/GB, đắt ở scale); CloudWatch (AWS native, tích hợp IAM, $0,50/GB ingest); BigQuery (GCP data warehouse, analytics SQL, long retention, $0,02/GB scan), ở cả ba môi trường"
+          "text": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối"
         },
         {
           "key": "C",
-          "text": "Prometheus, Grafana, Jaeger, Tempo và Zipkin — năm công cụ tracing, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường"
+          "text": "Chỉ dùng trung bình để bỏ qua outlier"
         },
         {
           "key": "D",
-          "text": "Langfuse, LangSmith, Helicone, Phoenix và Galileo — năm công cụ LLM, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Khuyến nghị cho lab: Langfuse tự nó là log store cho LLM call và có SaaS free tier. Dev local thì stdout JSON cộng jq là đủ; chỉ khi scale up mới cần ELK hoặc Loki. Đây là tinh thần YAGNI được nhắc lại nhiều lần trong bài.",
-      "source": "exam-110.json"
+      "explanation": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-037",
       "type": "mcq",
-      "prompt": "Audit log khác app log ở những điểm nào?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Quality metric?",
       "options": [
         {
           "key": "A",
-          "text": "Audit log lưu trên cùng hệ thống với app log nhưng ở index riêng, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra"
+          "text": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime"
         },
         {
           "key": "B",
-          "text": "App log phục vụ debug và performance, retention 30–90 ngày, có thể sample, có thể sửa/xoá, dev team truy cập; Audit log phục vụ compliance và forensics, retention 2–7 năm tuỳ ngành, KHÔNG sample, append-only không sửa được, chỉ compliance officer được truy cập, dù cấu hình không đổi, với mọi quy mô hệ thống, ở cả ba môi trường"
+          "text": "Chỉ đếm số request"
         },
         {
           "key": "C",
-          "text": "Audit log ghi ít trường hơn nên nhẹ hơn app log, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong mọi trường hợp, với mọi loại workload, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Audit log chỉ ghi các thao tác thất bại còn app log ghi mọi thứ, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Sai lầm phổ biến được cảnh báo: trộn audit log vào app log nên khi cần điều tra thì thiếu dữ liệu. Cách làm đúng là tách riêng ngay từ ngày đầu — dùng S3 bucket bật Object Lock, hoặc một audit service chuyên biệt.",
-      "source": "exam-110.json"
+      "answer": "A",
+      "explanation": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-038",
       "type": "mcq",
-      "prompt": "Trace, Span và Context propagation được định nghĩa thế nào?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Alert rule?",
       "options": [
         {
           "key": "A",
-          "text": "Trace là biểu đồ, span là trục thời gian, context là chú thích trên biểu đồ, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, ở cả ba môi trường, theo đúng khuyến nghị, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Báo động cho mọi dao động nhỏ"
         },
         {
           "key": "B",
-          "text": "Trace đo latency, span đo cost, context lưu thông tin user, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong suốt vòng đời dịch vụ, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích"
         },
         {
           "key": "C",
-          "text": "Trace là một dòng log, span là một trường trong log, context là metadata đính kèm, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Trace là toàn bộ request end-to-end có trace_id duy nhất; Span là một đơn vị công việc trong trace, có span_id và parent_span_id; Context propagation là cơ chế truyền trace_id qua các ranh giới như HTTP header hoặc queue message, trong mọi trường hợp, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Một span chứa: name (ví dụ llm.generate), start_time và duration, attributes dạng key-value (model, tokens), status OK hoặc ERROR, events là các log gắn vào span, và links tới các span liên quan như retry. Trace là một CÂY — root span là entry point, child span là các bước con.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-039",
       "type": "mcq",
-      "prompt": "Trong ví dụ waterfall view, tổng request 2500ms được phân bổ thế nào?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Cardinality?",
       "options": [
         {
           "key": "A",
-          "text": "Parse 50ms, Retrieval 600ms (gồm Embed 200ms và Search 350ms), LLM Call 1400ms (Generate 1200ms) và Post 100ms, ở cả ba môi trường"
+          "text": "Tăng vô hạn label theo user ID"
         },
         {
           "key": "B",
-          "text": "Toàn bộ 2500ms nằm ở bước Parse vì phải xử lý input rất lớn, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, với mọi quy mô hệ thống"
+          "text": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải"
         },
         {
           "key": "C",
-          "text": "Retrieval chiếm 2000ms còn LLM chỉ 300ms, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Parse 500ms, Retrieval 1000ms, LLM 1000ms — chia gần đều ba bước, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Mỗi hàng ngang là một span, tất cả span của một request tạo thành một trace, và nhìn cây là biết ngay bottleneck ở đâu. Trong ví dụ agent pipeline khác của cùng bài, LLM Generate chiếm 67% latency nên muốn tối ưu thì bắt đầu từ đó: model nhỏ hơn, prompt ngắn hơn, streaming, hoặc chạy song song RAG với LLM warmup.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-040",
       "type": "mcq",
-      "prompt": "OpenTelemetry gồm ba phần nào và vì sao quan trọng?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Runbook?",
       "options": [
         {
           "key": "A",
-          "text": "Metrics, Logs và Traces — ba loại dữ liệu mà chuẩn này định nghĩa, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Agent, Server và Dashboard — ba thành phần của một hệ giám sát, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, ở cả ba môi trường"
+          "text": "Nêu bước triage, ownership và xử lý khi alert kích hoạt"
         },
         {
           "key": "C",
-          "text": "API (interface để instrument code, không phụ thuộc ngôn ngữ), SDK (implementation cho từng ngôn ngữ như Python, Go, Java) và Collector (nhận, xử lý, export data tới backend như Jaeger, Tempo, Datadog); quan trọng vì instrument một lần là đổi backend tự do, tránh vendor lock-in, ở cả ba môi trường"
+          "text": "Chỉ liệt kê tên dashboard"
         },
         {
           "key": "D",
-          "text": "Exporter, Processor và Sampler — ba bước xử lý dữ liệu telemetry, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, với mọi quy mô hệ thống, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "OTel là dự án đã tốt nghiệp của CNCF (2024). Ngoài chống vendor lock-in, nó còn cung cấp auto-instrumentation cho FastAPI, requests, SQLAlchemy, và từ 2024 có GenAI Semantic Conventions dành riêng cho LLM tracing. Học OTel một lần là dùng được Langfuse, Datadog, Jaeger, New Relic vì tất cả đều nhận giao thức OTLP.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Nêu bước triage, ownership và xử lý khi alert kích hoạt. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-041",
       "type": "mcq",
-      "prompt": "Các attribute chuẩn của OTel GenAI Semantic Conventions là gì?",
+      "prompt": "Nếu cần ra quyết định về Monitoring, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "gen_ai.system (anthropic, openai, google), gen_ai.request.model, gen_ai.request.temperature, gen_ai.request.max_tokens, gen_ai.usage.input_tokens, gen_ai.usage.output_tokens, gen_ai.response.finish_reasons (stop, length, tool_use) và gen_ai.operation.name (chat, completion, embeddings), trong mọi trường hợp, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Chỉ lưu văn bản hội thoại thô"
         },
         {
           "key": "B",
-          "text": "trace_id, span_id, parent_span_id và correlation_id, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, dù cấu hình không đổi, trong suốt vòng đời dịch vụ, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không"
         },
         {
           "key": "C",
-          "text": "llm.provider, llm.model, llm.tokens và llm.cost, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, với mọi quy mô hệ thống, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "ai.system, ai.request và ai.response — ba nhóm attribute chính, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, ở cả ba môi trường, theo đúng khuyến nghị, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Lợi ích của việc dùng namespace gen_ai.* là dashboard query tái sử dụng được giữa các công cụ. Slide cảnh báo tránh đặt tên tuỳ ý như my_model vì như vậy sẽ không tương tác được với hệ sinh thái.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-042",
       "type": "mcq",
-      "prompt": "Auto-instrumentation của OpenTelemetry hoạt động thế nào?",
+      "prompt": "Nếu cần ra quyết định về Logging, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Tự động phân tích mã nguồn lúc build rồi chèn thêm mã theo dõi vào binary, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, trong mọi trường hợp, với mọi loại workload, trong suốt vòng đời dịch vụ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit"
         },
         {
           "key": "B",
-          "text": "Chạy một agent riêng bắt gói tin mạng để suy ra các lời gọi API, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả khi đã bật đủ kiểm tra, dù cấu hình không đổi, với mọi quy mô hệ thống, trong suốt vòng đời dịch vụ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Chỉ vẽ biểu đồ tổng quan"
         },
         {
           "key": "C",
-          "text": "Phải thêm decorator vào từng hàm cần theo dõi trong mã nguồn, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Cài các gói opentelemetry-distro, exporter-otlp và instrumentation cho từng thư viện, rồi chạy bằng lệnh opentelemetry-instrument --traces_exporter otlp uvicorn app:main — code ứng dụng giữ nguyên, không có boilerplate OTel, mà mọi HTTP request và LLM call đều tự động tạo span, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "So sánh với manual instrumentation: cách thủ công cần setup TracerProvider, BatchSpanProcessor, OTLPSpanExporter một lần lúc khởi động rồi bọc từng hàm bằng tracer.start_as_current_span kèm set_attribute. Auto-instrumentation đánh đổi độ chi tiết lấy tốc độ triển khai.",
-      "source": "exam-110.json"
+      "answer": "A",
+      "explanation": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-043",
       "type": "mcq",
-      "prompt": "Bốn bottleneck pattern trong trace và cách sửa là gì?",
+      "prompt": "Nếu cần ra quyết định về Tracing, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Cold start, warm up, throttle và quota — đều sửa bằng cách nâng tier dịch vụ, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, kể cả khi model đã cập nhật bản mới nhất, dù cấu hình đã được rà soát lại một lượt, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Xóa request ID để bảo mật"
         },
         {
           "key": "B",
-          "text": "Sequential dependency (A→B→C tổng bằng tổng các bước, sửa bằng parallelize nếu không phụ thuộc); N+1 queries (loop gọi API/DB nhiều lần, trace hiện nhiều span ngắn cùng tên, sửa bằng batch API hoặc pre-fetch); Waiting không phải CPU (span dài nhưng CPU idle — LLM API, DB, network — sửa bằng parallelize, cache, timeout); Retry storm (nhiều span retry trong một trace do backoff quá ngắn và không jitter, sửa bằng exponential backoff và circuit breaker), ở cả ba môi trường"
+          "text": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool"
         },
         {
           "key": "C",
-          "text": "Memory leak, CPU spike, disk full và network partition — đều sửa bằng scale up, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, trong khi log không ghi lại dấu hiệu nào, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Slow query, missing index, N+1 và full table scan — đều sửa bằng cách thêm index, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, dù đội đã tuân thủ đúng quy trình nội bộ, với mọi quy mô hệ thống, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Hai câu hỏi rút gọn cho 80% việc tối ưu: nhìn span dài nhất rồi hỏi 'có parallelize được không', nhìn nhiều span ngắn lặp lại rồi hỏi 'có batch được không'.",
-      "source": "exam-110.json"
+      "explanation": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-044",
       "type": "mcq",
-      "prompt": "Bốn công cụ LLM observability hàng đầu khác nhau thế nào?",
+      "prompt": "Nếu cần ra quyết định về Latency percentile, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Bốn công cụ này đều là sản phẩm thương mại đóng, không có bản mã nguồn mở, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, kể cả khi model đã cập nhật bản mới nhất, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Chỉ dùng trung bình để bỏ qua outlier"
         },
         {
           "key": "B",
-          "text": "Langfuse (full stack: tracing, eval, prompts, cost — hợp self-host và framework-agnostic, free tier cộng cloud paid, OSS giấy phép MIT); LangSmith (gắn chặt LangChain, có playground và datasets — hợp người dùng LangChain, tính theo seat, không phải OSS); Helicone (proxy approach, không cần đổi code — hợp tích hợp nhanh, tính theo usage, OSS Apache); Arize Phoenix (OpenTelemetry-native, OSS — hợp nghiên cứu và eval workflow, miễn phí, Apache), ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối"
         },
         {
           "key": "C",
-          "text": "Langfuse chỉ làm cost, LangSmith chỉ làm tracing, Helicone chỉ làm eval, Phoenix chỉ làm dashboard, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, trong khi log không ghi lại dấu hiệu nào, trong mọi trường hợp, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Cả bốn đều tương đương, chỉ khác giao diện người dùng, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, dù đội đã tuân thủ đúng quy trình nội bộ, dù cấu hình đã được rà soát lại một lượt, dù cấu hình không đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Slide khuyến nghị chọn Langfuse vì open source, có free cloud tier, framework-agnostic và đã hỗ trợ OTel GenAI conventions, đồng thời có UI tốt nhất cho các tính năng chuyên về LLM.",
-      "source": "exam-110.json"
+      "explanation": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-045",
       "type": "mcq",
-      "prompt": "Tích hợp Langfuse cần những gì trong code?",
+      "prompt": "Nếu cần ra quyết định về Quality metric, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Phải viết lại toàn bộ hàm theo interface riêng của Langfuse, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Phải dựng một proxy đứng trước LLM API rồi trỏ base_url về proxy đó, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi"
+          "text": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime"
         },
         {
           "key": "C",
-          "text": "Chỉ cần cài SDK, mọi thứ khác tự động không cần sửa dòng nào, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp"
+          "text": "Chỉ đếm số request"
         },
         {
           "key": "D",
-          "text": "Decorator @observe() trên hàm, langfuse_context.update_current_trace để gắn user_id và tags như prod hay rag, và update_current_observation để gắn metadata (doc_count) cùng usage_details (input và output tokens), trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "D",
-      "explanation": "Phương án B mô tả cách tiếp cận của Helicone. Sau khi tích hợp, Langfuse hiển thị ngay latency, input/output, cost (nhờ bảng giá model có sẵn) và trace waterfall — đó là lý do nó được gọi là tích hợp '5 dòng code'.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-046",
       "type": "mcq",
-      "prompt": "Trong case debug thực tế, quy trình từ 'agent chậm đôi khi' đến root cause diễn ra thế nào?",
+      "prompt": "Nếu cần ra quyết định về Alert rule, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Đọc toàn bộ log của 24 giờ qua rồi tìm các dòng có chữ timeout, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, trong khi log không ghi lại dấu hiệu nào, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường"
+          "text": "Báo động cho mọi dao động nhỏ"
         },
         {
           "key": "B",
-          "text": "Chạy load test để tái hiện tình huống rồi profile CPU của service, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, kể cả khi model đã cập nhật bản mới nhất, dù cấu hình đã được rà soát lại một lượt, dù cấu hình không đổi, ở cả ba môi trường"
+          "text": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích"
         },
         {
           "key": "C",
-          "text": "Tăng số replica lên gấp đôi rồi theo dõi xem có hết chậm không, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, dù đội đã tuân thủ đúng quy trình nội bộ, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Metrics nói P95 = 2,3s là OK nhưng P99 = 12s không OK → filter trace duration trên 10s trong 24h được 47 trace → nhóm theo feature tag thì 42/47 thuộc feature legal_qa → mở waterfall một trace thấy LLM span 800ms còn RAG span 10,2s → drill vào thấy sub-span vector_search mất 9,8s với query dài 4.200 token → root cause là user dán full document vào query → fix bằng cách truncate query xuống 500 token trước khi embedding và thêm cảnh báo cho user, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Bài học rút ra: không có trace thì chỉ biết 'đôi khi chậm', không biết bước nào và không biết pattern nào. Với trace, quãng đường từ báo lỗi tới root cause chỉ mất 10 phút.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-047",
       "type": "mcq",
-      "prompt": "Alert nên dựa trên symptom hay cause, và vì sao?",
+      "prompt": "Nếu cần ra quyết định về Cardinality, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Dựa trên symptom — alert về tác động tới user (P95 latency vượt SLO, error rate trên 1%, cost/hour vượt budget, hallucination rate tăng đột biến) thay vì nguyên nhân kỹ thuật (CPU trên 80%, RAM trên 90%, disk trên 85%, LLM API retry count trên 5) — vì cause có thể cao mà user không bị ảnh hưởng, tạo false positive và dần bị ignore, dù cấu hình không đổi, trong suốt vòng đời dịch vụ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải"
         },
         {
           "key": "B",
-          "text": "Dựa trên cause vì nó cho biết chính xác thành phần nào đang hỏng, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, kể cả lúc tải thấp, theo đúng khuyến nghị, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Tăng vô hạn label theo user ID"
         },
         {
           "key": "C",
-          "text": "Dựa trên cả hai với mức ưu tiên như nhau để không bỏ sót gì, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, ở cả ba môi trường, mà không cần sửa code, với mọi quy mô hệ thống, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Dựa trên cause vào ban ngày và symptom vào ban đêm, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, trong khi hệ thống vẫn chạy đúng thiết kế, trong mọi trường hợp, với mọi loại workload, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "A",
-      "explanation": "Nguyên tắc của Google SRE: 'Page on symptoms, not causes.' Cause alert vẫn hữu ích nhưng chỉ ở vai trò thông tin bổ sung để debug SAU khi symptom alert đã fire, chứ không phải để đánh thức người trực lúc 3 giờ sáng.",
-      "source": "exam-110.json"
+      "explanation": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-048",
       "type": "mcq",
-      "prompt": "Multi-window multi-burn-rate alerting của Google hoạt động thế nào?",
+      "prompt": "Nếu cần ra quyết định về Runbook, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Kết hợp hai cửa sổ với hai burn rate: Page (critical) dùng short window 5 phút và long window 1 giờ với burn rate 14,4 lần; Ticket (warn) dùng 30 phút và 6 giờ với burn rate 6 lần — alert chỉ fire khi CẢ HAI cửa sổ cùng vượt ngưỡng, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Chạy hai alert độc lập rồi lấy alert nào fire trước, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Nêu bước triage, ownership và xử lý khi alert kích hoạt"
         },
         {
           "key": "C",
-          "text": "Đo error rate trong 1 phút rồi nhân với 60 để suy ra mức của cả giờ, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, trong mọi trường hợp, ở cả ba môi trường"
+          "text": "Chỉ liệt kê tên dashboard"
         },
         {
           "key": "D",
-          "text": "So sánh error rate hiện tại với cùng giờ này của tuần trước, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "A",
-      "explanation": "Ý nghĩa của 'burn rate 14,4 lần': nếu error giữ ở mức này thì error budget cả tháng sẽ cháy hết trong 2 ngày thay vì 30 ngày. Short window giúp phản ứng nhanh với spike thật, long window lọc nhiễu ngắn. Nguồn: Google SRE Workbook chương 5.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Nêu bước triage, ownership và xử lý khi alert kích hoạt. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-049",
       "type": "mcq",
-      "prompt": "Một alert tốt phải chứa những gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Monitoring?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ cần tên metric và giá trị hiện tại là đủ để người trực hành động, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Chỉ lưu văn bản hội thoại thô"
         },
         {
           "key": "B",
-          "text": "Title rõ ràng ([P1] Agent P95 latency > 5s cho feature=summary), severity (P1 page ngay / P2 trong giờ hành chính / P3 ticket), impact statement (5% user đang bị chậm trên 5s), current value (P95 = 6,3s, bình thường 1,8s, threshold 5s), dashboard link đã pre-filter theo feature và 1 giờ gần nhất, trace link tới 10 trace chậm nhất, runbook link, và on-call owner, trong mọi trường hợp, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không"
         },
         {
           "key": "C",
-          "text": "Toàn bộ log của 15 phút trước thời điểm alert để có đủ ngữ cảnh, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên chi phí mỗi lần gọi không thay đổi, kể cả lúc tải thấp, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Ảnh chụp màn hình dashboard tại thời điểm alert fire, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, trong khi hệ thống vẫn chạy đúng thiết kế, kể cả khi dữ liệu đã được làm sạch kỹ, dù cấu hình không đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Lưu ý dứt khoát của slide: alert không có runbook là alert không thể xử lý lúc 3 giờ sáng. Viết runbook là MỘT PHẦN của công việc tạo alert, không phải thứ tuỳ chọn làm sau.",
-      "source": "exam-110.json"
+      "explanation": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-050",
       "type": "mcq",
-      "prompt": "Bộ alert rule tối thiểu cho AI agent gồm những gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Logging?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ alert về chi phí vì đó là thứ duy nhất không tự phục hồi được, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, kể cả khi model đã cập nhật bản mới nhất, nên chi phí mỗi lần gọi không thay đổi, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp"
+          "text": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit"
         },
         {
           "key": "B",
-          "text": "Latency P95 trên 5s trong 30 phút → P2 Slack investigate trace; Error rate trên 5% trong 5 phút → P1 Slack + PagerDuty rollback; Hourly cost trên $50 (gấp đôi budget) → P2 email check users/features; Daily cost vượt budget → P1 email + SMS kill switch; Tool call failure trên 10% trong 15 phút → P2 Slack check tool provider; Hallucination rate trên baseline cộng 2σ → P2 Slack review outputs; Uptime dưới 99% trong 1 giờ → P1 PagerDuty incident response, ở cả ba môi trường"
+          "text": "Chỉ vẽ biểu đồ tổng quan"
         },
         {
           "key": "C",
-          "text": "Chỉ cần hai alert: service down và error rate cao, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, dù đội đã tuân thủ đúng quy trình nội bộ, dù cấu hình đã được rà soát lại một lượt, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Mỗi metric trong dashboard nên có một alert tương ứng, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, trong khi log không ghi lại dấu hiệu nào, kể cả khi tài liệu nguồn còn nguyên vẹn, kể cả lúc tải thấp, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Hai tiêu chí lọc alert: alert phải actionable — không biết phải làm gì thì redesign hoặc bỏ; và alert nào không fire trong 90 ngày thì bỏ. Đáng chú ý là có tới hai alert về chi phí, phản ánh đặc thù của AI.",
-      "source": "exam-110.json"
+      "answer": "A",
+      "explanation": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-051",
       "type": "mcq",
-      "prompt": "Alert fatigue xảy ra khi nào và tránh bằng cách gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Tracing?",
       "options": [
         {
           "key": "A",
-          "text": "Khi quá nhiều alert không quan trọng, nhận alert 24/7 kể cả đêm, mọi người bắt đầu ignore, alert thật lẫn trong nhiễu và team mất tin tưởng; tránh bằng cách chỉ alert khi cần hành động ngay, phân severity rõ ràng, route đúng người đúng channel, review và tuning hằng tuần, auto-resolve khi metric hồi phục, và dedup trong cửa sổ thời gian, ở cả ba môi trường"
+          "text": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool"
         },
         {
           "key": "B",
-          "text": "Khi alert được gửi qua email thay vì Slack nên dễ bị bỏ sót, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Xóa request ID để bảo mật"
         },
         {
           "key": "C",
-          "text": "Khi ngưỡng alert đặt quá cao nên chỉ fire lúc sự cố đã nghiêm trọng, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Khi hệ thống có quá ít alert nên đội ngũ mất cảnh giác, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong mọi trường hợp, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "A",
-      "explanation": "Cảnh báo mạnh của slide: nếu team thường xuyên ignore alert thì hệ thống alerting đang TỆ HƠN là không có alert — vì alert thật sẽ bị bỏ lỡ trong khi mọi người vẫn tưởng mình đang được bảo vệ. Ít alert chất lượng tốt hơn nhiều alert vô nghĩa.",
-      "source": "exam-110.json"
+      "explanation": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-052",
       "type": "mcq",
-      "prompt": "Dashboard 3 layer được thiết kế cho ai và chứa gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Latency percentile?",
       "options": [
         {
           "key": "A",
-          "text": "Layer 1 cho dev, Layer 2 cho QA, Layer 3 cho khách hàng, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, ở cả ba môi trường, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù người dùng không thấy gì bất thường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Layer 1 metrics, Layer 2 logs, Layer 3 traces — theo ba pillar, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, với mọi quy mô hệ thống, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối"
         },
         {
           "key": "C",
-          "text": "Layer 1 Overview (health status, uptime, key alerts) cho leadership; Layer 2 Detail (4 golden signals cộng Cost và Quality) cho engineering; Layer 3 Drill-down (individual traces, log search, root cause) cho debugging, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Chỉ dùng trung bình để bỏ qua outlier"
         },
         {
           "key": "D",
-          "text": "Layer 1 realtime, Layer 2 hằng ngày, Layer 3 hằng tháng, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả lúc tải thấp, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "Lý do phải tách: mỗi stakeholder chỉ cần nhìn một layer. Leadership cần overview chứ không cần trace; engineer cần drill-down chứ không cần biểu đồ doanh thu. Dùng chung một dashboard cho tất cả thì kết cục là không ai nhìn cả.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-053",
       "type": "mcq",
-      "prompt": "Bố cục chuẩn của Dashboard Layer 2 gồm những panel nào?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Quality metric?",
       "options": [
         {
           "key": "A",
-          "text": "Ba panel tương ứng ba pillar metrics, logs và traces, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, ở cả ba môi trường"
+          "text": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime"
         },
         {
           "key": "B",
-          "text": "Mười hai panel phủ mọi metric mà hệ thống thu thập được, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Chỉ đếm số request"
         },
         {
           "key": "C",
-          "text": "Bốn panel đúng theo bốn golden signal, không thêm gì khác, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả lúc tải thấp, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Sáu panel: Latency P50/P95/P99 (time-series), Traffic QPS (time-series), Error rate % (time-series kèm breakdown), Cost $/hour (cumulative kèm forecast), Tokens in/out (stacked) và Hallucination % (sampled, weekly), ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Giới hạn 6 panel là có chủ đích: nhiều panel hơn thì không ai đọc hết. Mục tiêu là nhìn 5 giây biết được trạng thái sức khoẻ; muốn chi tiết hơn thì click xuống layer 3. Hai panel Cost và Hallucination chính là hai signal bổ sung riêng cho AI.",
-      "source": "exam-110.json"
+      "answer": "A",
+      "explanation": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-054",
       "type": "mcq",
-      "prompt": "Năm anti-pattern khi thiết kế dashboard là gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Alert rule?",
       "options": [
         {
           "key": "A",
-          "text": "Dùng màu sắc quá nhiều, font quá nhỏ, thiếu chú thích, không responsive và không có dark mode, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích"
         },
         {
           "key": "B",
-          "text": "Quá ít panel, quá ít metric, quá ít alert, quá ít người xem và quá ít dữ liệu lịch sử, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, trong khi log không ghi lại dấu hiệu nào, trong mọi trường hợp, kể cả lúc tải thấp, ở cả ba môi trường, dù cấu hình không đổi, theo đúng khuyến nghị, mà không cần sửa code"
+          "text": "Báo động cho mọi dao động nhỏ"
         },
         {
           "key": "C",
-          "text": "Không có logo công ty, không có tên người tạo, không có ngày cập nhật, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, kể cả khi model đã cập nhật bản mới nhất, dù cấu hình đã được rà soát lại một lượt, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Wall of metrics (30 panel không ai nhìn hết — giới hạn 6–8 panel mỗi layer); time range mặc định quá dài (nên mặc định 1 giờ cho ops dashboard chứ không phải 1 tháng vì sẽ che mất spike); không có đường baseline hay threshold (nhìn P95 = 2,1s không biết tốt hay xấu — luôn vẽ đường SLO lên chart); metric không có đơn vị hay ngữ cảnh ('Cost: 1250' là USD hay gì, mỗi ngày hay mỗi tháng); và không auto-refresh (ops dashboard cần làm mới mỗi 15–30 giây), dù cấu hình không đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Bài kiểm tra nhanh được đề xuất: đưa dashboard cho người ngoài team xem 30 giây, họ có nói được 'hệ thống đang OK' hay 'đang có vấn đề ở X' không. Nếu không thì phải thiết kế lại.",
-      "source": "exam-110.json"
+      "answer": "A",
+      "explanation": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-055",
       "type": "mcq",
-      "prompt": "Landscape công cụ LLM observability 2026 phân loại thế nào?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Cardinality?",
       "options": [
         {
           "key": "A",
-          "text": "Phân theo quy mô doanh nghiệp: startup, SME và enterprise, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, kể cả khi model đã cập nhật bản mới nhất, dù cấu hình đã được rà soát lại một lượt, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải"
         },
         {
           "key": "B",
-          "text": "LLM-native (Langfuse, LangSmith — mạnh về prompt, eval, cost; theo dõi Helicone và Phoenix); APM truyền thống (Datadog, New Relic — mạnh về infra cộng app cộng AI; theo dõi Honeycomb và Lightstep); OSS self-host (Jaeger, Tempo, Loki — không khoá chân nhà cung cấp; theo dõi SigNoz); Cost-focused (Helicone, OpenMeter — token accounting; theo dõi Vellum); Eval-focused (Arize Phoenix, Patronus — quality và drift; theo dõi Galileo), ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Tăng vô hạn label theo user ID"
         },
         {
           "key": "C",
-          "text": "Phân theo ngôn ngữ lập trình mà công cụ hỗ trợ, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, trong khi log không ghi lại dấu hiệu nào, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Chỉ có hai nhóm: công cụ mã nguồn mở và công cụ thương mại, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, dù đội đã tuân thủ đúng quy trình nội bộ, với mọi quy mô hệ thống, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Xu hướng hội tụ được nêu: APM truyền thống đang thêm tính năng LLM, còn công cụ LLM-native đang thêm tracing hạ tầng. Trong 12 tháng tới, OpenTelemetry GenAI semconv sẽ trở thành chuẩn chung của cả hai phía.",
-      "source": "exam-110.json"
+      "answer": "A",
+      "explanation": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-056",
       "type": "mcq",
-      "prompt": "Decision framework chọn công cụ observability dựa trên sáu câu hỏi nào?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Runbook?",
       "options": [
         {
           "key": "A",
-          "text": "Dựa trên việc công cụ có phải mã nguồn mở hay không, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, kể cả khi model đã cập nhật bản mới nhất, nên chi phí mỗi lần gọi không thay đổi, kể cả khi dữ liệu đã được làm sạch kỹ, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp"
+          "text": "Nêu bước triage, ownership và xử lý khi alert kích hoạt"
         },
         {
           "key": "B",
-          "text": "Chỉ dựa trên giá và số lượng tính năng được quảng cáo, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, dù đội đã tuân thủ đúng quy trình nội bộ, dù cấu hình đã được rà soát lại một lượt, dù người dùng không thấy gì bất thường, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp"
+          "text": "Chỉ liệt kê tên dashboard"
         },
         {
           "key": "C",
-          "text": "Dựa trên bảng xếp hạng của các trang đánh giá công nghệ, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, trong khi log không ghi lại dấu hiệu nào, kể cả khi tài liệu nguồn còn nguyên vẹn, dù prompt đã được viết lại rõ ràng hơn, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Team size (1–5 dùng SaaS free tier, 5–50 SaaS paid, trên 50 hybrid hoặc self-host); Compliance (HIPAA/PCI thì self-host, GDPR thì SaaS region EU, không có thì tuỳ); Existing stack (đang Datadog thì ở lại và thêm AI addon, đang LangChain thì LangSmith, agnostic thì Langfuse); Budget mỗi tháng ($0 dùng Langfuse cloud free, $100–500 dùng LangSmith hoặc Helicone, trên $500 dùng Datadog full stack); Skill set (Python-heavy thì Langfuse, infra ops thì Grafana, non-dev thì Datadog); Evaluation (cần quality thì Phoenix hoặc LangSmith, chỉ cần cost thì Helicone, full stack thì Langfuse), ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Kết luận của phần này: không có 'best tool' mà chỉ có best tool cho team, use case và budget cụ thể. Slide cảnh báo đừng sao chép stack của FAANG vì họ có đội hạ tầng 50 người.",
-      "source": "exam-110.json"
+      "answer": "A",
+      "explanation": "Nêu bước triage, ownership và xử lý khi alert kích hoạt. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-057",
       "type": "mcq",
-      "prompt": "Case study Notion AI đã tối ưu chi phí như thế nào?",
+      "prompt": "Trong vận hành thực tế, Monitoring giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Giảm số lượng tính năng AI xuống còn một nửa để tiết kiệm, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, kể cả khi model đã cập nhật bản mới nhất, nên chi phí mỗi lần gọi không thay đổi, kể cả khi dữ liệu đã được làm sạch kỹ, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Chuyển toàn bộ sang self-host model mã nguồn mở nên bỏ hẳn chi phí API, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, dù đội đã tuân thủ đúng quy trình nội bộ, dù cấu hình đã được rà soát lại một lượt, dù người dùng không thấy gì bất thường, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp"
+          "text": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không"
         },
         {
           "key": "C",
-          "text": "Insight từ monitoring: 70% query là 'summarize' với prompt giống nhau, 15% user chiếm 60% cost (power user với doc dài), và regenerate rate cao ở feature 'writing assist'. Bốn hành động theo thứ tự ROI: prompt cache cho system prompt của mọi feature giảm 40% input cost; route feature summary qua model nhỏ hơn (Haiku tier) giảm 60% cost cho feature đó; per-user rate limit cho free tier để hạn chế lạm dụng; cải thiện prompt cho writing assist giảm regenerate 35%. Kết quả: cost trên MAU giảm 58% trong 3 tháng mà không giảm quality metric, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Chỉ lưu văn bản hội thoại thô"
         },
         {
           "key": "D",
-          "text": "Đàm phán lại hợp đồng với nhà cung cấp để được giảm giá 50%, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, trong khi log không ghi lại dấu hiệu nào, kể cả khi tài liệu nguồn còn nguyên vẹn, dù prompt đã được viết lại rõ ràng hơn, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "Bối cảnh ban đầu: chi phí OpenAI chiếm khoảng 30% doanh thu. Điều làm được tất cả những việc trên là nhờ có monitoring chi tiết theo feature, theo user và theo model — đúng ba tag tối thiểu đã nêu ở phần cost attribution.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-058",
       "type": "mcq",
-      "prompt": "Case study Replit phát hiện vấn đề chất lượng bằng cách nào?",
+      "prompt": "Trong vận hành thực tế, Logging giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bằng khảo sát người dùng hằng tuần với mẫu 1.000 người, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, dù đội đã tuân thủ đúng quy trình nội bộ, dù cấu hình đã được rà soát lại một lượt, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp"
+          "text": "Chỉ vẽ biểu đồ tổng quan"
         },
         {
           "key": "B",
-          "text": "Bằng cách so sánh output của model mới với model cũ trên 200 mẫu, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, kể cả khi model đã cập nhật bản mới nhất, nên chi phí mỗi lần gọi không thay đổi, dù người dùng không thấy gì bất thường, kể cả khi đã bật đủ kiểm tra"
+          "text": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit"
         },
         {
           "key": "C",
-          "text": "User báo 'suggestions tệ hơn tuần trước' trong khi engineering metrics đều xanh; insight từ monitoring cho thấy regenerate rate tăng từ 12% lên 23% trong 2 tuần (implicit signal), thumbs-down tăng chậm hơn vì user ít bấm, và đặc biệt xảy ra với Python và JavaScript. Điều tra bằng trace: filter trace các case regenerate thấy đang xảy ra context truncation; đổi tokenizer version tuần trước khiến số token đếm khác 10%; ngưỡng truncation không được cập nhật nên cắt giữa câu, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Bằng cách chạy lại toàn bộ bộ test tự động sau mỗi lần deploy, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, trong khi log không ghi lại dấu hiệu nào, kể cả khi tài liệu nguồn còn nguyên vẹn, với mọi quy mô hệ thống, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Hành động: revert tokenizer và thêm integration test cho việc đếm token. Bài học được rút ra: implicit signal như regenerate là cảnh báo sớm, còn explicit signal như thumbs down thì quá chậm — cần cả hai.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-059",
       "type": "mcq",
-      "prompt": "Bảy anti-pattern từ industry là gì?",
+      "prompt": "Trong vận hành thực tế, Tracing giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bảy lỗi liên quan tới cấu hình sai của Prometheus và Grafana, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, dù đội đã tuân thủ đúng quy trình nội bộ, dù cấu hình đã được rà soát lại một lượt, dù người dùng không thấy gì bất thường, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "'We'll add monitoring later' (later = never, phải thêm ngay từ MVP); log full prompt và response (vi phạm GDPR, hoá đơn lưu trữ tăng vọt — phải sanitize và sample); alert trên mọi metric 'quan trọng' (50 alert dẫn tới alert fatigue rồi ignore); không có runbook (alert fire lúc 3h sáng, kỹ sư trẻ lúng túng phải escalate lên senior); monitoring dev khác prod config (lỗi ở prod không tái hiện được vì dev setup khác); chỉ đo performance quên cost (cuối tháng mới biết đốt tiền); và tin mặc định của vendor (telemetry mặc định của LangChain có thể log dữ liệu nhạy cảm — phải đọc docs trước khi deploy), ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool"
         },
         {
           "key": "C",
-          "text": "Bảy loại lỗi hạ tầng thường gặp khi vận hành Kubernetes, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, trong khi log không ghi lại dấu hiệu nào, kể cả khi tài liệu nguồn còn nguyên vẹn, dù prompt đã được viết lại rõ ràng hơn, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp"
+          "text": "Xóa request ID để bảo mật"
         },
         {
           "key": "D",
-          "text": "Bảy sai lầm trong việc chọn nhà cung cấp cloud, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, kể cả khi model đã cập nhật bản mới nhất, nên chi phí mỗi lần gọi không thay đổi, kể cả khi dữ liệu đã được làm sạch kỹ, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Anti-pattern số 1 được đánh giá là phổ biến nhất và tai hại nhất. Kết luận: monitoring không phải feature phụ mà là phần cốt lõi của hệ thống production, ngang hàng với authentication.",
-      "source": "exam-110.json"
+      "explanation": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     },
     {
       "id": "D13-060",
       "type": "mcq",
-      "prompt": "Lab 13 chia thành mấy phase và nội dung từng phase là gì?",
+      "prompt": "Trong vận hành thực tế, Latency percentile giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Hai phase: cài đặt công cụ và viết báo cáo, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, dù đội đã tuân thủ đúng quy trình nội bộ, dù cấu hình đã được rà soát lại một lượt, dù người dùng không thấy gì bất thường, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Một phase duy nhất kéo dài 90 phút không chia nhỏ, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, kể cả khi model đã cập nhật bản mới nhất, nên chi phí mỗi lần gọi không thay đổi, kể cả khi dữ liệu đã được làm sạch kỹ, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù đội đã tuân thủ đúng quy trình nội bộ"
+          "text": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối"
         },
         {
           "key": "C",
-          "text": "Bốn phase tương ứng bốn golden signal, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, trong khi log không ghi lại dấu hiệu nào, kể cả khi tài liệu nguồn còn nguyên vẹn, dù prompt đã được viết lại rõ ràng hơn, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, với mọi quy mô hệ thống"
+          "text": "Chỉ dùng trung bình để bỏ qua outlier"
         },
         {
           "key": "D",
-          "text": "Ba phase: A Instrumentation 30 phút (setup Langfuse free cloud tier lấy API key, thêm structlog cho JSON logging cùng correlation ID với contextvars, tích hợp decorator @observe() cho 3 hàm chính, thêm tag user_id/feature/model/env); B Dashboard + Alerts 30 phút (định nghĩa SLO cho P95 latency, error rate và daily cost budget; build dashboard Layer 2 tối thiểu 6 panel; cấu hình 3 alert rule kèm runbook link); C Validation 30 phút (gửi 10–20 request đa dạng rồi kiểm tra trace xuất hiện, inject một failure bằng bad prompt để verify alert fire, viết blueprint document 1 trang gồm SLO, architecture và playbook), ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Deliverable cuối ngày gồm: một structured logging pipeline (JSON, correlation ID, PII sanitized, 3 log level); một tích hợp Langfuse hoặc LangSmith với ít nhất 10 trace có tag cost, latency và quality; một dashboard 6 panel tối thiểu; một SLO definition kèm alert rule symptom-based có runbook link; và một trang blueprint document.",
-      "source": "exam-110.json"
+      "answer": "B",
+      "explanation": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html"
     }
   ]
 }

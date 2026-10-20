@@ -14,1680 +14,1680 @@
     {
       "id": "D08-001",
       "type": "mcq",
-      "prompt": "Theo slide Retro, pipeline Day 07 còn thiếu những thành phần nào so với RAG pipeline hoàn chỉnh?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Hybrid retrieval?",
       "options": [
         {
           "key": "A",
-          "text": "Thiếu bước tiền xử lý tài liệu như OCR và làm sạch nên chất lượng chunk chưa đạt yêu cầu tối thiểu"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Thiếu hybrid search, rerank, augmentation và evaluation — chỉ có dense search, threshold, top-k rồi inject thô"
+          "text": "Kết hợp sparse và dense retrieval để bao phủ cả từ khóa lẫn ngữ nghĩa"
         },
         {
           "key": "C",
-          "text": "Thiếu cơ chế phân quyền truy cập và kiểm soát PII nên chưa thể triển khai cho môi trường doanh nghiệp"
+          "text": "Chỉ lấy kết quả đầu tiên của một nguồn"
         },
         {
           "key": "D",
-          "text": "Thiếu chunking, embedding và metadata nên chưa lưu đủ thông tin cần thiết cho mỗi record trong store"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Slide ghi rõ: 'Pipeline Day 07 chỉ có dense search + threshold + top-k + inject thô vào LLM. Chưa có hybrid, rerank, augmentation, hay evaluation.' Day 08 nâng cấp thành RAG đầy đủ: R (search + rerank) → A (đóng gói context) → G (sinh câu trả lời grounded) và bổ sung tầng evaluation.",
-      "source": "exam-98.json",
+      "explanation": "Kết hợp sparse và dense retrieval để bao phủ cả từ khóa lẫn ngữ nghĩa. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-002",
       "type": "mcq",
-      "prompt": "Mỗi record trong store cần tối thiểu bốn thành phần nào theo nhắc lại Day 07?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về RRF?",
       "options": [
         {
           "key": "A",
-          "text": "Chunk gốc, tóm tắt tự động, nhãn phân loại chủ đề và mức độ tin cậy do hệ thống chấm"
+          "text": "Bỏ các nguồn có kết quả khác nhau"
         },
         {
           "key": "B",
-          "text": "ID, original text, vector và metadata gồm source, section, date cùng với access level"
+          "text": "Hợp nhất nhiều bảng xếp hạng dựa trên thứ hạng thay vì so trực tiếp score khác thang"
         },
         {
           "key": "C",
-          "text": "Query, embedding vector, điểm cosine và thứ hạng của kết quả trong lần truy vấn gần nhất"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Tên file nguồn, số trang, số thứ tự chunk và thời điểm tài liệu được index lần cuối"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Slide nhắc lại: 'Mỗi record trong store cần tối thiểu: ID · Original text · Vector · Metadata (source, section, date, access).' Bốn thành phần này phục vụ bốn mục đích khác nhau: ID để tra cứu, original text để inject vào prompt, vector để search, và metadata để filter cùng truy vết nguồn.",
-      "source": "exam-98.json",
+      "explanation": "Hợp nhất nhiều bảng xếp hạng dựa trên thứ hạng thay vì so trực tiếp score khác thang. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-003",
       "type": "mcq",
-      "prompt": "Ingestion pipeline và Retrieval pipeline khác nhau ở điểm nào về thời điểm chạy và mục tiêu?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Reranking?",
       "options": [
         {
           "key": "A",
-          "text": "Ingestion chạy batch hoặc near real-time để chuẩn bị dữ liệu sạch, retrieval chạy mỗi khi user hỏi để sinh câu trả lời grounded"
+          "text": "Dùng mô hình mạnh hơn sắp lại một tập ứng viên nhỏ"
         },
         {
           "key": "B",
-          "text": "Cả hai đều chạy runtime nhưng ingestion ưu tiên độ chính xác còn retrieval ưu tiên tốc độ phản hồi cho user"
+          "text": "Thay thế hoàn toàn bước retrieval"
         },
         {
           "key": "C",
-          "text": "Ingestion chạy runtime mỗi khi user hỏi với mục tiêu tìm chứng cứ, còn retrieval chạy batch để chuẩn bị dữ liệu sạch"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Cả hai đều chạy offline theo lịch định kỳ nhưng khác nhau về nguồn dữ liệu đầu vào và cách xử lý được áp dụng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "A",
-      "explanation": "Slide phân biệt: Ingestion (Offline) — Document → Processing → Store, chạy batch hoặc near real-time, mục tiêu chuẩn bị dữ liệu sạch có metadata sẵn sàng search. Retrieval (Runtime) — Query → Search → Filter → LLM → Answer, chạy mỗi khi user hỏi, mục tiêu tìm đúng chứng cứ và sinh câu trả lời grounded.",
-      "source": "exam-98.json",
+      "explanation": "Dùng mô hình mạnh hơn sắp lại một tập ứng viên nhỏ. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-004",
       "type": "mcq",
-      "prompt": "Phát biểu 'Chất lượng ingestion quyết định trần của retrieval' nghĩa là gì?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về MMR?",
       "options": [
         {
           "key": "A",
-          "text": "Retrieval không thể tìm ra thông tin tốt hơn những gì đã được ingestion đưa vào index"
+          "text": "Cân bằng độ liên quan và tính đa dạng của context"
         },
         {
           "key": "B",
-          "text": "Ingestion và retrieval phải dùng chung embedding model để đảm bảo vector nằm cùng không gian"
+          "text": "Luôn lấy các chunk giống hệt nhau"
         },
         {
           "key": "C",
-          "text": "Chi phí của ingestion luôn cao hơn retrieval nên cần tối ưu ingestion trước khi tối ưu retrieval"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Ingestion cần chạy nhanh hơn retrieval để không làm nghẽn luồng xử lý câu hỏi của người dùng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "A",
-      "explanation": "Ingestion tạo ra index; retrieval chỉ có thể làm việc với những gì đã có trong index đó. Nếu tài liệu bị chunk sai, thiếu metadata, hay bỏ sót nguồn quan trọng thì không thuật toán search nào cứu được. Đây là lý do slide nhấn mạnh phải nhìn lại indexing pipeline trước khi nâng cấp retrieval.",
-      "source": "exam-98.json",
+      "explanation": "Cân bằng độ liên quan và tính đa dạng của context. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-005",
       "type": "mcq",
-      "prompt": "Ba nguyên nhân khiến LLM hallucinate theo slide 'Ảo Giác Của LLM' là gì?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Grounding?",
       "options": [
         {
           "key": "A",
-          "text": "Dữ liệu huấn luyện còn nhiễu, thuật toán tối ưu chưa hội tụ và kiến trúc Transformer vẫn còn nhiều hạn chế"
+          "text": "Khuyến khích model suy đoán khi thiếu nguồn"
         },
         {
           "key": "B",
-          "text": "Context window quá nhỏ, temperature đặt quá cao và prompt thiếu ví dụ mẫu để model có thể bám theo khi sinh"
+          "text": "Buộc câu trả lời dựa trên bằng chứng được truy xuất"
         },
         {
           "key": "C",
-          "text": "Người dùng đặt câu hỏi mơ hồ, các tài liệu nguồn mâu thuẫn nhau và model không có sẵn cơ chế từ chối trả lời"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Kiến thức bị đóng băng tại knowledge cutoff, bản chất xác suất ưu tiên fluency hơn factual accuracy, và hệ quả là tự bịa thông tin"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Slide nêu 3 yếu tố: (1) Knowledge Cutoff — LLM chỉ biết những gì xảy ra trước ngày training, thông tin nội bộ hay sự kiện mới là điểm mù; (2) Probabilistic Nature — LLM là cỗ máy dự đoán từ tiếp theo, ưu tiên sự trôi chảy hơn tính chính xác; (3) Hệ quả — khi thiếu dữ kiện, model tự động bịa ra thông tin trông rất logic và tự tin.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Buộc câu trả lời dựa trên bằng chứng được truy xuất. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-006",
       "type": "mcq",
-      "prompt": "Mấu chốt quan trọng nhất về hallucination được slide nhấn mạnh là gì?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Abstention?",
       "options": [
         {
           "key": "A",
-          "text": "LLM không biết bản thân không biết — đây là lý do cần hệ thống cung cấp chứng cứ thực"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "LLM luôn báo lỗi rõ ràng khi gặp câu hỏi nằm ngoài phạm vi kiến thức đã được huấn luyện"
+          "text": "Từ chối hoặc hỏi thêm khi bằng chứng không đủ"
         },
         {
           "key": "C",
-          "text": "Hallucination chỉ xảy ra với các model nhỏ, còn model frontier hầu như đã khắc phục được"
+          "text": "Tự tin trả lời mọi câu hỏi"
         },
         {
           "key": "D",
-          "text": "Tăng temperature lên cao sẽ giúp model thừa nhận giới hạn kiến thức của chính nó tốt hơn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "A",
-      "explanation": "Slide ghi: 'LLM không biết bản thân không biết. Đây là lý do chính để cần một hệ thống cung cấp chứng cứ thực trước khi sinh câu trả lời.' Điểm nguy hiểm không phải là model sai, mà là model sai một cách tự tin và trôi chảy — người dùng không có tín hiệu nào để nghi ngờ. RAG giải quyết bằng cách đưa chứng cứ vào trước khi sinh.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Từ chối hoặc hỏi thêm khi bằng chứng không đủ. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-007",
       "type": "mcq",
-      "prompt": "Ba thành phần R–A–G trong RAG lần lượt đảm nhiệm vai trò gì?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Lost in the middle?",
       "options": [
         {
           "key": "A",
-          "text": "R truy xuất chứng cứ từ kho ngoài, A đóng gói context có cấu trúc, G sinh câu trả lời grounded kèm trích dẫn"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "R nén dữ liệu đầu vào, A phân tích ngữ nghĩa của văn bản, G tối ưu định dạng đầu ra cho hệ thống tích hợp"
+          "text": "Thông tin ở giữa context dài dễ bị model chú ý kém hơn"
         },
         {
           "key": "C",
-          "text": "R xếp hạng tài liệu theo độ liên quan, A kiểm tra tính chính xác, G tạo báo cáo tổng hợp cho người dùng cuối"
+          "text": "Chỉ xảy ra khi không có chunk nào"
         },
         {
           "key": "D",
-          "text": "R lọc nhiễu khỏi kết quả, A dịch ngôn ngữ khi cần, G sinh nhiều phương án trả lời để người dùng lựa chọn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "A",
-      "explanation": "Slide định nghĩa: R (Retrieval) — truy xuất thông tin từ kho dữ liệu ngoài, tìm đúng chứng cứ, lọc nhiễu, xếp hạng relevance. A (Augmentation) — tăng cường prompt, đóng gói context có cấu trúc, gắn metadata, tách evidence với question để giảm noise và chống lost in the middle. G (Generation) — sinh câu trả lời bám sát chứng cứ, kèm citation và self-check.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Thông tin ở giữa context dài dễ bị model chú ý kém hơn. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-008",
       "type": "mcq",
-      "prompt": "Kỹ thuật nào sau đây thuộc nhóm R (Retrieval) theo bản đồ tổng quan của slide?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về RAGAS?",
       "options": [
         {
           "key": "A",
-          "text": "Context Compression và Token Budget Management dùng để quản lý dung lượng prompt"
+          "text": "Nhóm metric chẩn đoán chất lượng retrieval, context và câu trả lời RAG"
         },
         {
           "key": "B",
-          "text": "Citation Formatting và Conflict Resolution dùng để xử lý mâu thuẫn giữa các nguồn"
+          "text": "Một vector database"
         },
         {
           "key": "C",
-          "text": "Self-correction và Abstention dùng để kiểm soát chất lượng câu trả lời cuối cùng"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Rank Fusion (RRF) và MMR dùng để gộp kết quả và đa dạng hóa tập chunk trả về"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Nhóm R gồm: Dense Search, Sparse Search (BM25), Hybrid Search, Rank Fusion (RRF), Reranking (Cross-encoder), MMR, Pre-filtering, Query Routing, Multi-index Search, Parent-child Retrieval. Phương án A và D thuộc nhóm A (Augmentation), phương án C thuộc nhóm G (Generation).",
-      "source": "exam-98.json",
+      "answer": "A",
+      "explanation": "Nhóm metric chẩn đoán chất lượng retrieval, context và câu trả lời RAG. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-009",
       "type": "mcq",
-      "prompt": "Kỹ thuật 'Document Reordering' và 'Conflict Resolution' thuộc nhóm nào trong R–A–G?",
+      "prompt": "Trong một dự án AI, cách áp dụng Hybrid retrieval nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Không thuộc nhóm nào mà là kỹ thuật tiền xử lý được áp dụng ở giai đoạn ingestion"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Nhóm G vì chúng quyết định cách model tổng hợp thông tin thành câu trả lời cuối cùng"
+          "text": "Kết hợp sparse và dense retrieval để bao phủ cả từ khóa lẫn ngữ nghĩa"
         },
         {
           "key": "C",
-          "text": "Nhóm R vì chúng ảnh hưởng trực tiếp đến thứ hạng của tài liệu trong kết quả tìm kiếm"
+          "text": "Chỉ lấy kết quả đầu tiên của một nguồn"
         },
         {
           "key": "D",
-          "text": "Nhóm A vì chúng xử lý việc sắp xếp và giải quyết mâu thuẫn khi đóng gói context"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "D",
-      "explanation": "Nhóm A (Augmentation) gồm: Context Injection, Document Reordering, Instruction Tuning, Metadata Integration, Citation Formatting, Context Compression, Token Budget Management, Conflict Resolution, Grounding Constraints, Context Deduplication. Đây đều là các thao tác trên tập chunk ĐÃ retrieve, trước khi đưa vào LLM.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Kết hợp sparse và dense retrieval để bao phủ cả từ khóa lẫn ngữ nghĩa. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-010",
       "type": "mcq",
-      "prompt": "Trường hợp nào sau đây được slide xếp vào nhóm 'Chưa cần RAG'?",
+      "prompt": "Trong một dự án AI, cách áp dụng RRF nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Fine-tuning quá đắt hoặc dữ liệu thuộc loại quá nhạy cảm để đưa đi train"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Dữ liệu nội bộ như policy, SOP và ticket thay đổi liên tục theo từng tuần"
+          "text": "Hợp nhất nhiều bảng xếp hạng dựa trên thứ hạng thay vì so trực tiếp score khác thang"
         },
         {
           "key": "C",
-          "text": "Task sáng tạo như creative writing hoặc brainstorm vốn không cần citation"
+          "text": "Bỏ các nguồn có kết quả khác nhau"
         },
         {
           "key": "D",
-          "text": "Cần câu trả lời có nguồn rõ ràng và người dùng phải kiểm chứng lại được"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Slide liệt kê 'Chưa cần RAG khi': câu hỏi thuộc kiến thức chung mà LLM đã biết; không có corpus riêng để truy xuất; task không cần citation (creative writing, brainstorm); và prompt engineering đơn giản đã đủ. Ba phương án còn lại đều thuộc nhóm 'Cần RAG'.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Hợp nhất nhiều bảng xếp hạng dựa trên thứ hạng thay vì so trực tiếp score khác thang. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-011",
       "type": "mcq",
-      "prompt": "Slide dùng phép ẩn dụ nào để mô tả RAG so với fine-tuning?",
+      "prompt": "Trong một dự án AI, cách áp dụng Reranking nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "RAG là gia sư riêng còn fine-tuning là lớp học đại trà cho nhiều học viên"
+          "text": "Dùng mô hình mạnh hơn sắp lại một tập ứng viên nhỏ"
         },
         {
           "key": "B",
-          "text": "RAG là open-book exam — mang tài liệu vào phòng thi thay vì học thuộc lòng"
+          "text": "Thay thế hoàn toàn bước retrieval"
         },
         {
           "key": "C",
-          "text": "RAG là thư viện tham khảo còn fine-tuning là bộ nhớ ngắn hạn của con người"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "RAG là học thuộc lòng còn fine-tuning là mang tài liệu vào phòng thi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Slide ghi: 'Fine-tuning để nhồi facts rất đắt và dễ bị catastrophic forgetting. RAG = open-book exam — mang tài liệu vào phòng thi thay vì học thuộc lòng.' Ẩn dụ này giải thích vì sao RAG phù hợp với fact hay thay đổi: bạn chỉ cần cập nhật tài liệu mang vào, không cần học lại từ đầu.",
-      "source": "exam-98.json",
+      "answer": "A",
+      "explanation": "Dùng mô hình mạnh hơn sắp lại một tập ứng viên nhỏ. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-012",
       "type": "mcq",
-      "prompt": "Ba lý do khiến doanh nghiệp BẮT BUỘC phải dùng RAG theo slide là gì?",
+      "prompt": "Trong một dự án AI, cách áp dụng MMR nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Model open-source đã đủ mạnh, hạ tầng vector store đã rẻ, và cộng đồng hỗ trợ đông đảo"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Dữ liệu nội bộ là tài sản, yêu cầu compliance và trách nhiệm, và nhu cầu cập nhật liên tục"
+          "text": "Cân bằng độ liên quan và tính đa dạng của context"
         },
         {
           "key": "C",
-          "text": "Chi phí thấp hơn, tốc độ nhanh hơn và độ chính xác cao hơn so với mọi phương án khác"
+          "text": "Luôn lấy các chunk giống hệt nhau"
         },
         {
           "key": "D",
-          "text": "Giảm phụ thuộc vendor, tránh vấn đề bản quyền dữ liệu và dễ dàng chuyển đổi giữa các model"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Ba lý do: (1) Dữ liệu nội bộ = tài sản — policy, SOP, hợp đồng, ticket, báo cáo mà LLM không hề biết; (2) Compliance & trách nhiệm — ngành tài chính, y tế, pháp lý cần câu trả lời có nguồn và audit trail, hallucination là rủi ro pháp lý; (3) Cập nhật liên tục — dữ liệu thay đổi hàng ngày, fine-tune lại mỗi ngày là không khả thi, RAG chỉ cần cập nhật index.",
-      "source": "exam-98.json",
+      "explanation": "Cân bằng độ liên quan và tính đa dạng của context. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-013",
       "type": "mcq",
-      "prompt": "Vì sao slide kết luận 'RAG không phải lựa chọn — nó là yêu cầu bắt buộc'?",
+      "prompt": "Trong một dự án AI, cách áp dụng Grounding nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Vì fine-tuning đã bị chứng minh là hoàn toàn không hiệu quả trong mọi tình huống triển khai thực tế hiện nay"
+          "text": "Buộc câu trả lời dựa trên bằng chứng được truy xuất"
         },
         {
           "key": "B",
-          "text": "Vì mọi framework AI hiện đại đều đã tích hợp sẵn RAG nên doanh nghiệp không dùng sẽ là một sự lãng phí lớn"
+          "text": "Khuyến khích model suy đoán khi thiếu nguồn"
         },
         {
           "key": "C",
-          "text": "Vì các cơ quan quản lý đã ban hành quy định bắt buộc sử dụng RAG cho mọi hệ thống AI phục vụ doanh nghiệp"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Vì khi doanh nghiệp cần AI trả lời dựa trên dữ liệu nội bộ, có trách nhiệm và luôn cập nhật thì không có phương án thay thế"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Slide ghi: 'RAG không phải lựa chọn — nó là yêu cầu bắt buộc khi doanh nghiệp cần AI trả lời dựa trên dữ liệu nội bộ, có trách nhiệm, và luôn cập nhật.' Lưu ý điều kiện 'khi' — RAG bắt buộc trong ngữ cảnh doanh nghiệp cụ thể đó, chứ không phải bắt buộc cho mọi ứng dụng AI.",
-      "source": "exam-98.json",
+      "answer": "A",
+      "explanation": "Buộc câu trả lời dựa trên bằng chứng được truy xuất. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-014",
       "type": "mcq",
-      "prompt": "Trong sơ đồ RAG Overview, phần nào chạy offline và phần nào chạy runtime?",
+      "prompt": "Trong một dự án AI, cách áp dụng Abstention nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Offline là Retrieval và Generation chạy theo lô; runtime là Ingestion và cập nhật Vector Store định kỳ"
+          "text": "Tự tin trả lời mọi câu hỏi"
         },
         {
           "key": "B",
-          "text": "Offline gồm Question và Retrieval; runtime gồm Augmentation, Generation và Answer trả về cho người dùng"
+          "text": "Từ chối hoặc hỏi thêm khi bằng chứng không đủ"
         },
         {
           "key": "C",
-          "text": "Offline là Document → Ingestion → Vector Store; runtime là Question → Retrieval → Augmentation → Generation → Answer"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Offline gồm toàn bộ RAG Pipeline đã dựng sẵn; runtime chỉ là bước hiển thị kết quả cuối cho người dùng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Slide ghi: 'Offline: Document → Ingestion → Vector Store (đã xây ở Day 07). Runtime: Question → Retrieval → Augmentation → Generation → Answer.' Phân biệt này quan trọng vì chi phí và ràng buộc độ trễ của hai pha hoàn toàn khác nhau — offline có thể chạy hàng giờ, runtime phải trả lời trong vài giây.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Từ chối hoặc hỏi thêm khi bằng chứng không đủ. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-015",
       "type": "mcq",
-      "prompt": "Theo slide, khi nào nên chọn In-Context thay vì RAG?",
+      "prompt": "Trong một dự án AI, cách áp dụng Lost in the middle nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Khi corpus lớn nhưng ít thay đổi và không cần trích dẫn nguồn cho câu trả lời"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Khi dữ liệu quá nhạy cảm không được phép lưu trữ trong bất kỳ hệ thống nào"
+          "text": "Thông tin ở giữa context dài dễ bị model chú ý kém hơn"
         },
         {
           "key": "C",
-          "text": "Khi dữ liệu ngắn, ít và cần triển khai nhanh mà không dựng hạ tầng phức tạp"
+          "text": "Chỉ xảy ra khi không có chunk nào"
         },
         {
           "key": "D",
-          "text": "Khi cần model học được style và tone riêng phù hợp với thương hiệu doanh nghiệp"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "Slide ghi: 'In-Context: nhét thẳng vào prompt (ít dữ liệu, nhanh). RAG: tìm từ corpus lớn rồi inject (nhiều dữ liệu, cập nhật liên tục). Finetuning: huấn luyện lại model (cần style/domain riêng, đắt hơn).' Đây là cùng khung ba nhánh đã học ở Day 07.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Thông tin ở giữa context dài dễ bị model chú ý kém hơn. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-016",
       "type": "mcq",
-      "prompt": "Slide mô tả RAG bằng công thức nào?",
+      "prompt": "Trong một dự án AI, cách áp dụng RAGAS nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Tăng số lượng chunk retrieve → tăng recall → tăng chất lượng câu trả lời cuối cùng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Chọn model mạnh nhất → viết prompt tốt nhất → nhận được câu trả lời chính xác nhất"
+          "text": "Nhóm metric chẩn đoán chất lượng retrieval, context và câu trả lời RAG"
         },
         {
           "key": "C",
-          "text": "Nén toàn bộ knowledge base → đưa vào context window → để model tự chọn thông tin cần dùng"
+          "text": "Một vector database"
         },
         {
           "key": "D",
-          "text": "Tìm chứng cứ → đóng gói có cấu trúc → sinh câu trả lời grounded, có thể trích dẫn và kiểm chứng"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "D",
-      "explanation": "Slide kết luận phần định nghĩa: 'RAG = tìm chứng cứ → đóng gói có cấu trúc → sinh câu trả lời grounded. Kết quả có thể trích dẫn và kiểm chứng.' Ba động từ này tương ứng chính xác với R, A, G. Điểm nhấn cuối — 'trích dẫn và kiểm chứng' — là giá trị mà chỉ RAG mang lại, fine-tuning không có.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Nhóm metric chẩn đoán chất lượng retrieval, context và câu trả lời RAG. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-017",
       "type": "mcq",
-      "prompt": "Vì sao slide nhấn mạnh 'RAG không phải chỉ là gắn thêm context'?",
+      "prompt": "Khi đội ngũ bỏ qua Hybrid retrieval, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Vì cần phải fine-tune model song song thì RAG mới phát huy được hiệu quả tối đa"
+          "text": "Chỉ lấy kết quả đầu tiên của một nguồn"
         },
         {
           "key": "B",
-          "text": "Vì bắt buộc phải có tầng agent điều phối thì pipeline mới hoạt động đúng thiết kế"
+          "text": "Kết hợp sparse và dense retrieval để bao phủ cả từ khóa lẫn ngữ nghĩa"
         },
         {
           "key": "C",
-          "text": "Vì nó là sự phối hợp giữa retrieval system, augmentation layer và generation system"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Vì phải dùng vector store thương mại thay vì các giải pháp open-source miễn phí"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Tiêu đề phần 02 ghi: 'RAG không phải chỉ là gắn thêm context; nó là sự phối hợp giữa retrieval system, augmentation layer, và generation system.' Nhiều người hiểu RAG chỉ là 'tìm rồi dán vào prompt', bỏ qua rằng mỗi tầng đều có kỹ thuật riêng và mỗi tầng đều có thể là nguồn lỗi riêng biệt.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Kết hợp sparse và dense retrieval để bao phủ cả từ khóa lẫn ngữ nghĩa. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-018",
       "type": "mcq",
-      "prompt": "Câu hỏi mở đầu Day 8 'agent vẫn hallucinate và trả lời sai, lỗi nằm ở đâu trong pipeline?' dẫn tới bài học nào?",
+      "prompt": "Khi đội ngũ bỏ qua RRF, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Phải nâng cấp lên model có khả năng suy luận mạnh hơn để giảm tỷ lệ hallucination"
+          "text": "Hợp nhất nhiều bảng xếp hạng dựa trên thứ hạng thay vì so trực tiếp score khác thang"
         },
         {
           "key": "B",
-          "text": "Phải giảm temperature xuống 0 để loại bỏ hoàn toàn tính ngẫu nhiên khi sinh văn bản"
+          "text": "Bỏ các nguồn có kết quả khác nhau"
         },
         {
           "key": "C",
-          "text": "Phải tách bạch được lỗi thuộc về Retrieval, Augmentation hay Generation rồi mới sửa đúng chỗ"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Phải tăng số lượng tài liệu trong vector store để model có nhiều chứng cứ hơn"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Đây là mạch xuyên suốt Day 8, kết tinh ở khung RAGAS Triad: Context Recall đo Retriever, Faithfulness đo Generator, Answer Relevance đo tổng thể. Bảng chẩn đoán cho phép đọc vị lỗi qua tổ hợp điểm số. Câu hỏi kết bài cũng lặp lại ý này: 'Bạn đang thiếu model mạnh hơn, hay đang thiếu một pipeline retrieval, augmentation, và evaluation đủ kỷ luật?'",
-      "source": "exam-98.json",
+      "answer": "A",
+      "explanation": "Hợp nhất nhiều bảng xếp hạng dựa trên thứ hạng thay vì so trực tiếp score khác thang. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-019",
       "type": "mcq",
-      "prompt": "Vì sao dense vector được gọi là 'dense' (dày đặc)?",
+      "prompt": "Khi đội ngũ bỏ qua Reranking, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Vì số chiều rất lớn bằng kích thước từ điển nên chiếm nhiều dung lượng lưu trữ"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Vì thuật toán tính toán yêu cầu mật độ phép nhân ma trận cao hơn phương pháp khác"
+          "text": "Dùng mô hình mạnh hơn sắp lại một tập ứng viên nhỏ"
         },
         {
           "key": "C",
-          "text": "Vì embedding model nén toàn bộ ngữ nghĩa vào một vector mà mọi chiều đều khác 0"
+          "text": "Thay thế hoàn toàn bước retrieval"
         },
         {
           "key": "D",
-          "text": "Vì nhiều tài liệu được gộp chung vào cùng một vector duy nhất để tiết kiệm bộ nhớ"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Slide giải thích: dense vector ngắn (768–1536 chiều) nhưng mọi chiều đều có giá trị khác 0 — 'vì embedding model nén toàn bộ ngữ nghĩa vào một vector dày đặc thông tin'. Ngược lại sparse vector rất dài (bằng kích thước từ điển) nhưng hầu hết chiều bằng 0, chỉ các từ xuất hiện trong document mới có giá trị.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Dùng mô hình mạnh hơn sắp lại một tập ứng viên nhỏ. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-020",
       "type": "mcq",
-      "prompt": "Ví dụ thất bại điển hình của Dense Search được nêu trong slide là gì?",
+      "prompt": "Khi đội ngũ bỏ qua MMR, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Query 'nghỉ phép' bỏ lỡ tài liệu chỉ chứa 'annual leave' hoặc 'PTO' vì khác từ vựng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Query 'lỗi ERR-4012' trả về docs 'lỗi hệ thống chung' thay vì đúng mã lỗi cần tìm"
+          "text": "Cân bằng độ liên quan và tính đa dạng của context"
         },
         {
           "key": "C",
-          "text": "Query quá dài vượt giới hạn token nên embedding model cắt bớt phần cuối câu hỏi"
+          "text": "Luôn lấy các chunk giống hệt nhau"
         },
         {
           "key": "D",
-          "text": "Query bằng tiếng Việt không tìm được tài liệu tiếng Anh do khác biệt ngôn ngữ nguồn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Slide nêu VD thất bại của Dense: 'Query lỗi ERR-4012 → trả về docs lỗi hệ thống chung thay vì đúng mã lỗi.' Nguyên nhân: embedding mã hóa Ý NGHĨA nên mã lỗi cụ thể bị hòa vào khái niệm chung 'lỗi'. Phương án A là ví dụ thất bại của Sparse/BM25, còn phương án D thì ngược lại — cross-lingual chính là điểm MẠNH của dense.",
-      "source": "exam-98.json",
+      "explanation": "Cân bằng độ liên quan và tính đa dạng của context. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-021",
       "type": "mcq",
-      "prompt": "Ví dụ thất bại điển hình của Sparse Search (BM25) là gì?",
+      "prompt": "Khi đội ngũ bỏ qua Grounding, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Query 'nghỉ phép' bỏ lỡ document chỉ chứa 'annual leave' hoặc 'PTO' do không hiểu đồng nghĩa"
+          "text": "Khuyến khích model suy đoán khi thiếu nguồn"
         },
         {
           "key": "B",
-          "text": "Query 'ERR-4012' bị hiểu thành mã lỗi tương tự nên trả về nhầm tài liệu khác nhóm"
+          "text": "Buộc câu trả lời dựa trên bằng chứng được truy xuất"
         },
         {
           "key": "C",
-          "text": "Query dạng câu hỏi tự nhiên bị tách từ sai nên kết quả trả về hoàn toàn ngẫu nhiên"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Query chứa nhiều từ đồng nghĩa khiến điểm TF-IDF bị phân tán giữa các tài liệu"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Slide nêu VD thất bại của Sparse: 'Query nghỉ phép → bỏ lỡ doc chỉ chứa annual leave, PTO.' BM25 chỉ đếm tần suất từ nên hai cách diễn đạt cùng nghĩa nhưng khác chữ sẽ không match. Ngược lại, mã lỗi ERR-4012 lại là thế mạnh của BM25 vì đây là exact term.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Buộc câu trả lời dựa trên bằng chứng được truy xuất. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-022",
       "type": "mcq",
-      "prompt": "Ưu điểm của Sparse Search (BM25) so với Dense Search là gì?",
+      "prompt": "Khi đội ngũ bỏ qua Abstention, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Tự động điều chỉnh trọng số theo domain nên không cần tuning cho từng lĩnh vực"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Match chính xác từ khóa, mã lỗi, tên riêng và chạy nhanh mà không cần đến GPU"
+          "text": "Từ chối hoặc hỏi thêm khi bằng chứng không đủ"
         },
         {
           "key": "C",
-          "text": "Tìm được tài liệu cross-lingual mà không cần bước dịch tường minh nào ở giữa"
+          "text": "Tự tin trả lời mọi câu hỏi"
         },
         {
           "key": "D",
-          "text": "Hiểu được paraphrase và ngữ cảnh nên phù hợp với câu hỏi tự nhiên của người dùng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Slide liệt kê ưu điểm Sparse: '+ Match chính xác từ khóa, mã lỗi, tên riêng; + Nhanh, không cần GPU'. Nhược điểm: '– Không hiểu đồng nghĩa, paraphrase; – hoàn tiền ≠ refund'. Phương án A và B đều là ưu điểm của Dense chứ không phải Sparse.",
-      "source": "exam-98.json",
+      "explanation": "Từ chối hoặc hỏi thêm khi bằng chứng không đủ. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-023",
       "type": "mcq",
-      "prompt": "Corpus loại nào phù hợp nhất với Lexical Search (BM25)?",
+      "prompt": "Khi đội ngũ bỏ qua Lost in the middle, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Nội dung marketing và mô tả sản phẩm với nhiều cách diễn đạt sáng tạo phong phú"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Policy, code, luật, log, mã ticket — nơi exact term quan trọng hơn ngữ nghĩa"
+          "text": "Thông tin ở giữa context dài dễ bị model chú ý kém hơn"
         },
         {
           "key": "C",
-          "text": "Tài liệu đa ngôn ngữ cần tìm chéo giữa tiếng Việt, tiếng Anh và các thứ tiếng khác"
+          "text": "Chỉ xảy ra khi không có chunk nào"
         },
         {
           "key": "D",
-          "text": "FAQ và knowledge base chứa nhiều câu hỏi diễn đạt tự nhiên theo nhiều cách khác nhau"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Slide ghi cho Lexical Search: 'Policy, code, luật, log, mã ticket — nơi exact term quan trọng hơn nghĩa.' Còn Dense Search phù hợp với 'corpus nhiều câu tự nhiên, FAQ, knowledge base' nhưng được lưu ý là 'baseline tốt nhưng không đủ cho production'.",
-      "source": "exam-98.json",
+      "explanation": "Thông tin ở giữa context dài dễ bị model chú ý kém hơn. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-024",
       "type": "mcq",
-      "prompt": "Hybrid Search hoạt động theo cơ chế nào?",
+      "prompt": "Khi đội ngũ bỏ qua RAGAS, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Kết hợp hai embedding model khác nhau rồi lấy trung bình vector của cả hai model"
+          "text": "Một vector database"
         },
         {
           "key": "B",
-          "text": "Luân phiên dùng dense và sparse theo từng loại query được phân loại tự động trước đó"
+          "text": "Nhóm metric chẩn đoán chất lượng retrieval, context và câu trả lời RAG"
         },
         {
           "key": "C",
-          "text": "Chạy cả hai search song song trên cùng query rồi gộp kết quả bằng thuật toán fusion"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Chạy dense search trước, nếu điểm thấp hơn ngưỡng thì mới chuyển sang sparse search"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Slide mô tả: 'Chạy cả hai search song song trên cùng query; Gộp kết quả bằng thuật toán fusion; Giữ cả nghĩa (dense) lẫn keyword (sparse).' Lý do cần: dense bỏ lỡ 'ERR-4012' thì sparse bắt được; sparse bỏ lỡ 'nghỉ phép' = 'PTO' thì dense bắt được — hybrid bù trừ điểm mù của nhau.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Nhóm metric chẩn đoán chất lượng retrieval, context và câu trả lời RAG. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-025",
       "type": "mcq",
-      "prompt": "Công thức RRF (Reciprocal Rank Fusion) có đặc điểm gì và giá trị k mặc định là bao nhiêu?",
+      "prompt": "Mục tiêu chính của Hybrid retrieval trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ dùng thứ hạng và bỏ qua điểm số, k thường được chọn mặc định là 60"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Nhân điểm dense với điểm sparse rồi lấy căn bậc hai, k là số lượng kết quả giữ lại"
+          "text": "Kết hợp sparse và dense retrieval để bao phủ cả từ khóa lẫn ngữ nghĩa"
         },
         {
           "key": "C",
-          "text": "Lấy trung bình cộng có trọng số của hai nguồn điểm, k được tuning theo từng domain"
+          "text": "Chỉ lấy kết quả đầu tiên của một nguồn"
         },
         {
           "key": "D",
-          "text": "Dùng điểm số trực tiếp sau khi normalize về cùng scale, k thường được đặt bằng 10"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Slide ghi công thức RRF(d) = Σr 1/(k + rankr(d)), với đặc điểm: 'Chỉ dùng thứ hạng, bỏ qua điểm số' và 'k thường được chọn mặc định là 60'. Ưu điểm lớn nhất là không cần normalize điểm số giữa hai hệ thống có thang đo khác nhau — chỉ cần biết thứ tự.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Kết hợp sparse và dense retrieval để bao phủ cả từ khóa lẫn ngữ nghĩa. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-026",
       "type": "mcq",
-      "prompt": "Alpha Weighting trong hybrid search dùng công thức nào và cần lưu ý gì?",
+      "prompt": "Mục tiêu chính của RRF trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "score = α·s_dense + (1−α)·s_sparse; cần tuning α theo domain vì mỗi lĩnh vực khác nhau"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "score = α·rank_dense × (1−α)·rank_sparse; α luôn được cố định ở mức 0.5 cho mọi trường hợp"
+          "text": "Hợp nhất nhiều bảng xếp hạng dựa trên thứ hạng thay vì so trực tiếp score khác thang"
         },
         {
           "key": "C",
-          "text": "score = max(s_dense, s_sparse) với α quyết định ngưỡng chọn giữa hai nguồn điểm"
+          "text": "Bỏ các nguồn có kết quả khác nhau"
         },
         {
           "key": "D",
-          "text": "score = 1/(α + rank); α tương đương tham số k trong công thức RRF chuẩn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "A",
-      "explanation": "Slide ghi: score(d) = α · s_dense + (1−α) · s_sparse, 'Dùng điểm số trực tiếp đã được normalize về cùng scale; Cần tuning α theo domain'. Ví dụ cụ thể: Chatbot FAQ α = 0.7–0.9 (thiên về dense vì cần hiểu nghĩa); Code, Log, Luật α = 0.2–0.4 (thiên về sparse vì cần exact term).",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Hợp nhất nhiều bảng xếp hạng dựa trên thứ hạng thay vì so trực tiếp score khác thang. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-027",
       "type": "mcq",
-      "prompt": "Theo slide, chatbot FAQ nên đặt α trong khoảng nào và vì sao?",
+      "prompt": "Mục tiêu chính của Reranking trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "α = 0.2–0.4 vì cần ưu tiên khớp chính xác từ khóa trong câu hỏi của người dùng"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "α = 0.7–0.9 vì FAQ cần hiểu ngữ nghĩa và paraphrase nên thiên về dense search"
+          "text": "Dùng mô hình mạnh hơn sắp lại một tập ứng viên nhỏ"
         },
         {
           "key": "C",
-          "text": "α = 1.0 để tắt hoàn toàn sparse search vì BM25 không có giá trị với dữ liệu FAQ"
+          "text": "Thay thế hoàn toàn bước retrieval"
         },
         {
           "key": "D",
-          "text": "α = 0.5 cố định để cân bằng tuyệt đối giữa hai phương pháp tìm kiếm khác nhau"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Slide nêu: Chatbot FAQ α = 0.7–0.9; Code, Log, Luật α = 0.2–0.4. Vì α nhân với s_dense, nên α cao nghĩa là ưu tiên dense. FAQ có nhiều cách diễn đạt cùng một ý nên cần semantic; ngược lại code và luật có thuật ngữ chính xác nên cần lexical.",
-      "source": "exam-98.json",
+      "explanation": "Dùng mô hình mạnh hơn sắp lại một tập ứng viên nhỏ. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-028",
       "type": "mcq",
-      "prompt": "Khi mới bắt đầu triển khai hybrid search, slide khuyên chọn phương pháp fusion nào?",
+      "prompt": "Mục tiêu chính của MMR trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Alpha weighting vì cho phép kiểm soát chính xác tỷ trọng giữa dense và sparse"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Không dùng fusion mà chạy riêng hai pipeline rồi hiển thị song song cho user"
+          "text": "Cân bằng độ liên quan và tính đa dạng của context"
         },
         {
           "key": "C",
-          "text": "RRF vì đơn giản và không cần tuning tham số cho từng domain cụ thể"
+          "text": "Luôn lấy các chunk giống hệt nhau"
         },
         {
           "key": "D",
-          "text": "Kết hợp cả hai phương pháp rồi so sánh kết quả để chọn ra cái tốt hơn"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Slide kết luận: 'Mới bắt đầu → RRF (đơn giản, không cần tuning). Cần kiểm soát tỷ trọng dense/sparse → Alpha weighting.' RRF chỉ dùng thứ hạng nên không cần lo việc normalize điểm số giữa hai hệ thống — bớt được một biến phải tinh chỉnh.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Cân bằng độ liên quan và tính đa dạng của context. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-029",
       "type": "mcq",
-      "prompt": "Vấn đề cốt lõi khiến Top-K từ retriever chưa đủ là gì?",
+      "prompt": "Mục tiêu chính của Grounding trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Retriever không hỗ trợ lọc metadata trước khi search nên kết quả luôn chứa tài liệu nằm ngoài phạm vi cần tìm"
+          "text": "Khuyến khích model suy đoán khi thiếu nguồn"
         },
         {
           "key": "B",
-          "text": "Retriever tính điểm dựa trên độ dài của tài liệu nên luôn thiên vị các document ngắn hơn document dài"
+          "text": "Buộc câu trả lời dựa trên bằng chứng được truy xuất"
         },
         {
           "key": "C",
-          "text": "Retriever quét hàng triệu tài liệu cực nhanh nhưng chỉ đánh giá relevance sơ bộ, tài liệu đúng nhất có thể nằm ở Top 10"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Retriever chỉ trả về được tối đa 10 kết quả cho mỗi truy vấn nên không bao phủ hết corpus lớn hàng triệu tài liệu"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Slide mô tả: 'Retriever thô và rộng — quét hàng triệu tài liệu cực nhanh, nhưng đánh giá sự liên quan sơ bộ. Tài liệu đúng nhất có thể nằm ở Top 10, không phải Top 1.' Ví dụ query 'Thủ tục xin visa': Top 1 là 'Giá làm visa', Top 2 là 'Lịch sử visa', nhưng Top 8 mới là 'Các bước làm thủ tục' — đúng cái cần.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Buộc câu trả lời dựa trên bằng chứng được truy xuất. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-030",
       "type": "mcq",
-      "prompt": "Chiến lược Retrieve-and-Rerank gồm hai giai đoạn nào?",
+      "prompt": "Mục tiêu chính của Abstention trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Giai đoạn 1 search rộng lấy Top 50–100, giai đoạn 2 đưa qua cross-encoder chấm lại còn Top 3–5"
+          "text": "Tự tin trả lời mọi câu hỏi"
         },
         {
           "key": "B",
-          "text": "Giai đoạn 1 lọc theo access level, giai đoạn 2 xếp hạng theo độ mới của tài liệu"
+          "text": "Từ chối hoặc hỏi thêm khi bằng chứng không đủ"
         },
         {
           "key": "C",
-          "text": "Giai đoạn 1 gọi LLM đánh giá, giai đoạn 2 dùng embedding model xác nhận lại kết quả"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Giai đoạn 1 rerank sơ bộ bằng metadata, giai đoạn 2 mới chạy vector search chính thức"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Slide mô tả: 'Giai đoạn 1: Search rộng → Top 50–100. Nhanh nhưng nhiễu. Giai đoạn 2: Đưa qua Cross-encoder đọc kỹ và chấm lại → Top 3–5 cho LLM.' Sơ đồ minh họa: Search top-100 → Rerank top-5 → LLM top-3. Ý tưởng là dùng model rẻ để lọc rộng, model đắt để chọn tinh.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Từ chối hoặc hỏi thêm khi bằng chứng không đủ. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-031",
       "type": "mcq",
-      "prompt": "Bi-Encoder và Cross-Encoder khác nhau về cơ chế như thế nào?",
+      "prompt": "Mục tiêu chính của Lost in the middle trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bi-Encoder embed query và document riêng biệt rồi so khoảng cách, Cross-Encoder ghép chung thành một input để đọc cùng lúc"
+          "text": "Chỉ xảy ra khi không có chunk nào"
         },
         {
           "key": "B",
-          "text": "Bi-Encoder dùng hai model khác nhau cho query và document, còn Cross-Encoder dùng chung một model duy nhất"
+          "text": "Thông tin ở giữa context dài dễ bị model chú ý kém hơn"
         },
         {
           "key": "C",
-          "text": "Bi-Encoder ghép query và document thành một input duy nhất, còn Cross-Encoder embed riêng biệt rồi so khoảng cách"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Bi-Encoder chạy được trên CPU thông thường còn Cross-Encoder bắt buộc phải chạy trên GPU chuyên dụng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Slide phân biệt: 'Semantic Search (Bi-Encoder) — Query và Document embed riêng biệt, chỉ so khoảng cách cuối cùng. Cực nhanh, quét triệu docs. Cross-Encoder (Reranker) — Query + Document ghép thành 1 input, model đọc cùng lúc. Chính xác hơn nhưng chậm → chỉ dùng cho list nhỏ.' Bi-encoder cho phép pre-compute vector, cross-encoder thì không.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Thông tin ở giữa context dài dễ bị model chú ý kém hơn. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-032",
       "type": "mcq",
-      "prompt": "Vì sao Cross-Encoder chính xác hơn nhưng chỉ dùng được cho danh sách nhỏ?",
+      "prompt": "Mục tiêu chính của RAGAS trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Vì nó yêu cầu tài liệu phải được gán nhãn thủ công trước khi đưa vào xếp hạng lại"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Vì nó chỉ hỗ trợ tiếng Anh nên phải dịch tài liệu trước khi đưa vào mô hình"
+          "text": "Nhóm metric chẩn đoán chất lượng retrieval, context và câu trả lời RAG"
         },
         {
           "key": "C",
-          "text": "Vì nó chỉ hoạt động với tài liệu ngắn dưới 500 token nên không xử lý được văn bản dài"
+          "text": "Một vector database"
         },
         {
           "key": "D",
-          "text": "Vì phải chạy model cho từng cặp query–document nên không thể pre-compute và tốn thời gian"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Bi-encoder embed document một lần lúc index, sau đó chỉ cần so khoảng cách — cực nhanh. Cross-encoder phải chạy model đầy đủ cho MỖI cặp query-document tại thời điểm truy vấn, không tận dụng được tính toán trước. Với 100 candidate thì phải chạy 100 lần forward pass, nên chỉ khả thi với danh sách đã lọc.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Nhóm metric chẩn đoán chất lượng retrieval, context và câu trả lời RAG. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-033",
       "type": "mcq",
-      "prompt": "MMR (Maximum Marginal Relevance) giải quyết vấn đề gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Hybrid retrieval?",
       "options": [
         {
           "key": "A",
-          "text": "Tài liệu quan trọng bị xếp ở giữa prompt nên model rất dễ bỏ sót khi đọc phần context được inject vào"
+          "text": "Chỉ lấy kết quả đầu tiên của một nguồn"
         },
         {
           "key": "B",
-          "text": "Redundancy — cả Top 3 chunk cùng nói một ý khiến LLM tốn token vô ích mà không có thêm dữ kiện mới"
+          "text": "Kết hợp sparse và dense retrieval để bao phủ cả từ khóa lẫn ngữ nghĩa"
         },
         {
           "key": "C",
-          "text": "Điểm cosine của các chunk quá gần nhau nên hệ thống không phân biệt được đâu là kết quả thực sự tốt hơn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Chunk có độ dài chênh lệch lớn khiến việc phân bổ token budget cho prompt trở nên khó kiểm soát"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Slide nêu vấn đề: 'Reranker đưa Top 3 lên đầu. Nhưng nếu cả 3 nói cùng một ý thì sao?' với ví dụ ba chunk đều nói hoàn tiền mất 7 ngày bằng ba cách diễn đạt. 'LLM tốn token vô ích, không có thêm dữ kiện mới.' MMR chọn chunk vừa liên quan vừa khác biệt với những chunk đã chọn.",
-      "source": "exam-98.json",
+      "explanation": "Kết hợp sparse và dense retrieval để bao phủ cả từ khóa lẫn ngữ nghĩa. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-034",
       "type": "mcq",
-      "prompt": "Công thức MMR = Sim(d, q) − λ · Sim(d, d_selected) có ý nghĩa gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về RRF?",
       "options": [
         {
           "key": "A",
-          "text": "Chia điểm tương đồng cho khoảng cách tới centroid của cụm để chuẩn hóa kết quả"
+          "text": "Bỏ các nguồn có kết quả khác nhau"
         },
         {
           "key": "B",
-          "text": "Cộng điểm tương đồng với query và điểm khác biệt với tài liệu đã chọn để tăng recall"
+          "text": "Hợp nhất nhiều bảng xếp hạng dựa trên thứ hạng thay vì so trực tiếp score khác thang"
         },
         {
           "key": "C",
-          "text": "Trừ đi phần tương đồng với chunk đã chọn nên chunk càng giống cái đã có thì điểm càng thấp"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Nhân điểm tương đồng với hệ số λ để điều chỉnh trọng số của từng nguồn kết quả"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Vế đầu Sim(d, q) thưởng cho độ liên quan với câu hỏi. Vế sau −λ·Sim(d, d_selected) PHẠT những chunk quá giống với chunk đã được chọn. Kết quả: chunk vừa liên quan vừa mang thông tin mới sẽ được ưu tiên. Tham số λ điều chỉnh mức độ ưu tiên đa dạng so với độ liên quan thuần túy.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Hợp nhất nhiều bảng xếp hạng dựa trên thứ hạng thay vì so trực tiếp score khác thang. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-035",
       "type": "mcq",
-      "prompt": "Quy trình hai bước của MMR được mô tả thế nào?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Reranking?",
       "options": [
         {
           "key": "A",
-          "text": "B1 loại bỏ hết chunk trùng lặp hoàn toàn, B2 xếp hạng phần còn lại theo điểm cosine giảm dần từ cao xuống thấp"
+          "text": "Thay thế hoàn toàn bước retrieval"
         },
         {
           "key": "B",
-          "text": "B1 tính điểm trung bình của toàn bộ tập chunk, B2 chỉ giữ lại những chunk có điểm nằm trên mức trung bình đó"
+          "text": "Dùng mô hình mạnh hơn sắp lại một tập ứng viên nhỏ"
         },
         {
           "key": "C",
-          "text": "B1 chọn chunk liên quan nhất với query, B2 chọn chunk tiếp theo liên quan query nhưng xa nhất so với chunk đã chọn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "B1 gom các chunk thành từng cụm theo chủ đề, B2 lấy chunk đại diện của mỗi cụm đưa vào context cuối cùng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Slide mô tả: 'B1: Chọn chunk liên quan nhất với Query. B2: Chọn chunk tiếp theo liên quan Query nhưng xa nhất so với chunk đã chọn.' Đây là thuật toán tham lam (greedy) chạy lặp: mỗi vòng chọn một chunk tối ưu hóa cân bằng giữa relevance và diversity.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Dùng mô hình mạnh hơn sắp lại một tập ứng viên nhỏ. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-036",
       "type": "mcq",
-      "prompt": "Mục tiêu của retrieval theo kết luận slide MMR là gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về MMR?",
       "options": [
         {
           "key": "A",
-          "text": "Lấy chunk từ càng nhiều nguồn tài liệu khác nhau càng tốt để tăng độ tin cậy"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Lấy đúng, đủ, và đa dạng cho augmentation chứ không phải lấy nhiều"
+          "text": "Cân bằng độ liên quan và tính đa dạng của context"
         },
         {
           "key": "C",
-          "text": "Lấy càng nhiều chunk càng tốt để đảm bảo không bỏ sót bất kỳ thông tin quan trọng nào"
+          "text": "Luôn lấy các chunk giống hệt nhau"
         },
         {
           "key": "D",
-          "text": "Lấy chunk có điểm cosine cao nhất bất kể nội dung có trùng lặp với nhau hay không"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Slide ghi: 'Mục tiêu retrieval không phải lấy nhiều, mà là lấy đúng, đủ, và đa dạng cho augmentation.' Ba tiêu chí này tương ứng với ba kỹ thuật: hybrid search cho 'đúng', reranking cho 'đủ' chất lượng, và MMR cho 'đa dạng'.",
-      "source": "exam-98.json",
+      "explanation": "Cân bằng độ liên quan và tính đa dạng của context. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-037",
       "type": "mcq",
-      "prompt": "Pre-Filtering hoạt động ở thời điểm nào và mang lại lợi ích gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Grounding?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ áp dụng ở bước ingestion để quyết định tài liệu nào được phép đưa vào index của vector store"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Lọc metadata trước khi search, thu gọn scope từ N chunks xuống n ≪ N, tăng cả tốc độ lẫn precision"
+          "text": "Buộc câu trả lời dựa trên bằng chứng được truy xuất"
         },
         {
           "key": "C",
-          "text": "Song song với vector search rồi lấy phần giao của hai tập kết quả thu được từ hai luồng xử lý khác nhau"
+          "text": "Khuyến khích model suy đoán khi thiếu nguồn"
         },
         {
           "key": "D",
-          "text": "Sau khi search xong thì dùng để sắp xếp lại kết quả theo thứ tự ưu tiên đã định nghĩa trong metadata"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Slide mô tả sơ đồ: Toàn bộ index N chunks → Pre-Filter metadata → Subset nhỏ n ≪ N → Search dense/hybrid. Kết luận: 'Index lớn → search chậm và nhiều noise. Pre-filter thu gọn scope trước khi chạy vector search, giúp tăng tốc và tăng precision cùng lúc.' Các tiêu chí lọc: department, date, doc type, access level.",
-      "source": "exam-98.json",
+      "explanation": "Buộc câu trả lời dựa trên bằng chứng được truy xuất. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-038",
       "type": "mcq",
-      "prompt": "Multi-Query transformation hoạt động thế nào và mang lại lợi ích gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Abstention?",
       "options": [
         {
           "key": "A",
-          "text": "Hỏi lại người dùng nhiều lần để làm rõ ý định trước khi thực hiện tìm kiếm thực sự"
+          "text": "Tự tin trả lời mọi câu hỏi"
         },
         {
           "key": "B",
-          "text": "Gửi cùng một query tới nhiều vector store khác nhau rồi hợp nhất kết quả cuối cùng"
+          "text": "Từ chối hoặc hỏi thêm khi bằng chứng không đủ"
         },
         {
           "key": "C",
-          "text": "Tự động tạo nhiều biến thể của câu hỏi, mỗi biến thể search riêng rồi gộp kết quả để tăng recall"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Chia query thành nhiều phần nhỏ theo từ khóa rồi tìm kiếm từng phần một cách tuần tự"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Slide mô tả Multi-Query: 'Tự động tạo nhiều biến thể của câu hỏi; Mỗi biến thể search riêng → gộp kết quả; Tăng recall: bắt chunk mà query gốc bỏ lỡ.' Ví dụ: 'Chính sách hoàn tiền' → 'refund policy' + 'điều kiện trả hàng' + 'thời hạn hoàn tiền'.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Từ chối hoặc hỏi thêm khi bằng chứng không đủ. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-039",
       "type": "mcq",
-      "prompt": "HyDE (Hypothetical Document Embeddings) hoạt động theo nguyên lý nào?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Lost in the middle?",
       "options": [
         {
           "key": "A",
-          "text": "Dự đoán trước các câu hỏi có thể xuất hiện rồi cache sẵn kết quả tìm kiếm tương ứng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Embed câu hỏi rồi so sánh trực tiếp với embedding của toàn bộ tài liệu trong store"
+          "text": "Thông tin ở giữa context dài dễ bị model chú ý kém hơn"
         },
         {
           "key": "C",
-          "text": "Tạo tài liệu giả rồi thêm vào index để tăng khả năng match với các câu hỏi tương tự"
+          "text": "Chỉ xảy ra khi không có chunk nào"
         },
         {
           "key": "D",
-          "text": "LLM sinh câu trả lời giả định cho query, rồi embed câu trả lời giả đó để search"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "D",
-      "explanation": "Slide mô tả HyDE: 'LLM sinh câu trả lời giả định cho query; Embed câu trả lời giả → search bằng vector đó.' Ví dụ: Query 'SLA P1?' → HyDE sinh 'SLA P1 là phản hồi 15 phút, xử lý 4 giờ...' rồi dùng vector của câu này để tìm. Lý do hiệu quả: câu trả lời giả gần với văn phong của tài liệu thật hơn là câu hỏi ngắn.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Thông tin ở giữa context dài dễ bị model chú ý kém hơn. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-040",
       "type": "mcq",
-      "prompt": "Query Decomposition giải quyết loại câu hỏi nào và vì sao cần thiết?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về RAGAS?",
       "options": [
         {
           "key": "A",
-          "text": "Câu hỏi quá chi tiết nên cần lùi lại một bước để lấy bối cảnh rộng hơn trước khi tiến hành trả lời"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Câu hỏi phức tạp multi-hop, tách thành nhiều câu nhỏ vì một vector không trả lời được 2 ý khác biệt cùng lúc"
+          "text": "Nhóm metric chẩn đoán chất lượng retrieval, context và câu trả lời RAG"
         },
         {
           "key": "C",
-          "text": "Câu hỏi có lỗi chính tả nên cần sửa và bổ sung thêm từ đồng nghĩa trước khi đưa vào hệ thống tìm kiếm"
+          "text": "Một vector database"
         },
         {
           "key": "D",
-          "text": "Câu hỏi quá ngắn nên cần mở rộng thành nhiều biến thể khác nhau để tăng khả năng bắt trúng chunk đúng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Slide mô tả Query Decomposition: 'Tách câu hỏi phức tạp (multi-hop) thành nhiều câu hỏi nhỏ, search song song, rồi gộp context. Một vector không thể trả lời 2 ý khác biệt cùng lúc.' Ví dụ: 'So sánh hoàn tiền Shopee vs Tiki' → Q1 'Shopee hoàn tiền?' + Q2 'Tiki hoàn tiền?'. Phương án A là Query Expansion, B là Step-Back.",
-      "source": "exam-98.json",
+      "explanation": "Nhóm metric chẩn đoán chất lượng retrieval, context và câu trả lời RAG. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-041",
       "type": "mcq",
-      "prompt": "Step-Back Prompting được dùng trong tình huống nào?",
+      "prompt": "Nếu cần ra quyết định về Hybrid retrieval, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Khi câu hỏi quá chi tiết, LLM sinh câu hỏi lùi một bước để lấy ngữ cảnh chung trước"
+          "text": "Chỉ lấy kết quả đầu tiên của một nguồn"
         },
         {
           "key": "B",
-          "text": "Khi kết quả tìm kiếm quá ít, cần nới lỏng điều kiện lọc metadata để mở rộng phạm vi"
+          "text": "Kết hợp sparse và dense retrieval để bao phủ cả từ khóa lẫn ngữ nghĩa"
         },
         {
           "key": "C",
-          "text": "Khi câu hỏi dùng sai thuật ngữ, cần bổ sung từ đồng nghĩa để tăng độ phủ tìm kiếm"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Khi câu hỏi chứa nhiều ý cần tách ra để tìm kiếm riêng biệt rồi tổng hợp lại"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Slide mô tả Step-Back: 'Khi câu hỏi quá chi tiết, LLM sinh câu hỏi lùi một bước (abstract) để lấy ngữ cảnh chung trước. Tránh bị lạc trong tiểu tiết.' Ví dụ: 'Lỗi 404 API Momo user 8910' → lùi thành 'Kiến trúc tích hợp Momo?' vì knowledge base khó có tài liệu về đúng user 8910.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Kết hợp sparse và dense retrieval để bao phủ cả từ khóa lẫn ngữ nghĩa. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-042",
       "type": "mcq",
-      "prompt": "Thứ tự đầy đủ của các kỹ thuật Query Processing theo slide là gì?",
+      "prompt": "Nếu cần ra quyết định về RRF, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Pre-Filter → Query Expansion → Decomposition → Step-Back → Multi-Query → HyDE → Search"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Query Expansion → Pre-Filter → Multi-Query → HyDE → Decomposition → Step-Back → Search"
+          "text": "Hợp nhất nhiều bảng xếp hạng dựa trên thứ hạng thay vì so trực tiếp score khác thang"
         },
         {
           "key": "C",
-          "text": "HyDE → Multi-Query → Step-Back → Decomposition → Query Expansion → Pre-Filter → Search"
+          "text": "Bỏ các nguồn có kết quả khác nhau"
         },
         {
           "key": "D",
-          "text": "Search → Pre-Filter → Query Expansion → Decomposition → Step-Back → Multi-Query → HyDE"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "A",
-      "explanation": "Slide tổng kết: 'Pre-Filter (metadata) → Query Expansion (đồng nghĩa) → Decomposition (tách multi-hop) → Step-Back (khái quát hóa) → Multi-Query (nhiều biến thể) → HyDE (giả lập answer) → Search.' Logic thứ tự: thu gọn phạm vi trước, rồi biến đổi query dần từ đơn giản đến phức tạp, cuối cùng mới thực hiện tìm kiếm.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Hợp nhất nhiều bảng xếp hạng dựa trên thứ hạng thay vì so trực tiếp score khác thang. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-043",
       "type": "mcq",
-      "prompt": "Lời cảnh báo của slide về việc áp dụng query transformation là gì?",
+      "prompt": "Nếu cần ra quyết định về Reranking, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Đừng thêm transformation chỉ vì framework có sẵn; dùng khi query ngắn, mơ hồ hoặc có nhiều alias"
+          "text": "Dùng mô hình mạnh hơn sắp lại một tập ứng viên nhỏ"
         },
         {
           "key": "B",
-          "text": "Chỉ nên dùng transformation với các model lớn vì model nhỏ không xử lý được yêu cầu phức tạp dạng này"
+          "text": "Thay thế hoàn toàn bước retrieval"
         },
         {
           "key": "C",
-          "text": "Nên áp dụng đồng thời tất cả các kỹ thuật transformation để đạt được chỉ số recall cao nhất có thể"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Query transformation làm tăng độ chính xác nhưng phải chấp nhận đánh đổi bằng việc giảm đáng kể độ phủ"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "A",
-      "explanation": "Slide ghi: 'Đừng thêm transformation chỉ vì framework có sẵn. Dùng khi query ngắn, mơ hồ, hoặc có nhiều alias.' Mỗi transformation đều tốn thêm một lần gọi LLM và tăng latency, nên phải có lý do cụ thể chứ không phải vì công cụ hỗ trợ.",
-      "source": "exam-98.json",
+      "explanation": "Dùng mô hình mạnh hơn sắp lại một tập ứng viên nhỏ. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-044",
       "type": "mcq",
-      "prompt": "Context Injection được định nghĩa là gì và điều gì bị nhấn mạnh là 'không chỉ là'?",
+      "prompt": "Nếu cần ra quyết định về MMR, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Kỹ thuật chọn chunk phù hợp nhất; không chỉ là lấy chunk có điểm cosine cao nhất"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Kỹ thuật thêm metadata vào chunk; không chỉ là ghi tên file nguồn vào đầu mỗi đoạn"
+          "text": "Cân bằng độ liên quan và tính đa dạng của context"
         },
         {
           "key": "C",
-          "text": "Kỹ thuật nén chunk để tiết kiệm token; không chỉ là cắt bớt chữ mà còn giữ lại ý chính"
+          "text": "Luôn lấy các chunk giống hệt nhau"
         },
         {
           "key": "D",
-          "text": "Kỹ thuật sắp xếp và định dạng chunk vào context window; không chỉ là nối chuỗi text1 + text2"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Slide định nghĩa: 'Kỹ thuật sắp xếp và định dạng các chunk dữ liệu (đã retrieve) vào trong Context Window của LLM để nó dễ đọc, dễ hiểu nhất. KHÔNG CHỈ LÀ NỐI CHUỖI (text1 + text2). Cách bạn định dạng quyết định việc LLM có tôn trọng dữ liệu đó hay không.'",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Cân bằng độ liên quan và tính đa dạng của context. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-045",
       "type": "mcq",
-      "prompt": "Cấu trúc THE PROMPT trong slide Context Injection gồm bốn khối theo thứ tự nào?",
+      "prompt": "Nếu cần ra quyết định về Grounding, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Constraints/Grounding → User Question → System Rules → Retrieved Documents"
+          "text": "Khuyến khích model suy đoán khi thiếu nguồn"
         },
         {
           "key": "B",
-          "text": "System Rules → Retrieved Documents → User Question → Constraints/Grounding"
+          "text": "Buộc câu trả lời dựa trên bằng chứng được truy xuất"
         },
         {
           "key": "C",
-          "text": "User Question → System Rules → Retrieved Documents → Constraints/Grounding"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Retrieved Documents → System Rules → Constraints/Grounding → User Question"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Slide vẽ THE PROMPT theo thứ tự từ trên xuống: [System Rules] → [Retrieved Documents] → [User Question] → [Constraints/Grounding]. Lưu ý thiết kế: constraints được đặt CUỐI cùng, gần vị trí model bắt đầu sinh câu trả lời nhất — đây là kỹ thuật chống việc model quên rule khi context dài.",
-      "source": "exam-98.json",
+      "explanation": "Buộc câu trả lời dựa trên bằng chứng được truy xuất. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-046",
       "type": "mcq",
-      "prompt": "Vì sao cần tách rõ ba phần System / Context / Question trong prompt?",
+      "prompt": "Nếu cần ra quyết định về Abstention, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Để LLM biết đâu là sự thật khách quan, đâu là câu hỏi người dùng, đâu là instruction cho model"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Để có thể cache riêng phần system prompt và tái sử dụng cho nhiều truy vấn khác nhau"
+          "text": "Từ chối hoặc hỏi thêm khi bằng chứng không đủ"
         },
         {
           "key": "C",
-          "text": "Để giảm tổng số token phải gửi lên API và tiết kiệm chi phí cho mỗi lần gọi model"
+          "text": "Tự tin trả lời mọi câu hỏi"
         },
         {
           "key": "D",
-          "text": "Để hệ thống dễ dàng log lại từng phần riêng biệt phục vụ mục đích kiểm toán về sau"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Slide ghi: 'Viết chỉ dẫn rõ ràng để LLM biết: Đâu là sự thật khách quan (Context/Evidence); Đâu là câu hỏi của người dùng (Question); Đâu là instruction cho model (System). Dùng XML tags, Markdown headers, hoặc delimiters rõ ràng để tách các phần.' Không tách rõ thì model dễ nhầm nội dung tài liệu thành mệnh lệnh.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Từ chối hoặc hỏi thêm khi bằng chứng không đủ. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-047",
       "type": "mcq",
-      "prompt": "Trong ví dụ prompt của slide, thẻ <context> chứa nội dung như thế nào?",
+      "prompt": "Nếu cần ra quyết định về Lost in the middle, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Chứa số thứ tự, đường dẫn file và section, ví dụ [1] policy/refund-v4.pdf | Section 3"
+          "text": "Thông tin ở giữa context dài dễ bị model chú ý kém hơn"
         },
         {
           "key": "B",
-          "text": "Chứa embedding vector dạng số để model tự tính toán lại độ liên quan khi cần"
+          "text": "Chỉ xảy ra khi không có chunk nào"
         },
         {
           "key": "C",
-          "text": "Chứa toàn bộ tài liệu gốc để model có đủ bối cảnh trước khi trả lời câu hỏi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Chỉ chứa text thuần của chunk mà không kèm bất kỳ thông tin định danh nào khác"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "A",
-      "explanation": "Ví dụ trong slide: <context>[1] policy/refund-v4.pdf | Section 3 — Yeu cau hoan tien trong 7 ngay...</context>. Ba thành phần: số thứ tự [1] để model cite, đường dẫn file để truy vết, và section để định vị chính xác. System prompt đi kèm: 'Answer only from the context below. Cite [doc_id] when possible.'",
-      "source": "exam-98.json",
+      "explanation": "Thông tin ở giữa context dài dễ bị model chú ý kém hơn. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-048",
       "type": "mcq",
-      "prompt": "Hiện tượng 'Lost in the Middle' ảnh hưởng đến RAG như thế nào?",
+      "prompt": "Nếu cần ra quyết định về RAGAS, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Context window bị chia đôi khiến nửa sau không được model xử lý một cách đầy đủ"
+          "text": "Nhóm metric chẩn đoán chất lượng retrieval, context và câu trả lời RAG"
         },
         {
           "key": "B",
-          "text": "Chunk có điểm cosine trung bình bị loại khỏi kết quả nên bỏ sót thông tin quan trọng"
+          "text": "Một vector database"
         },
         {
           "key": "C",
-          "text": "Embedding model đánh giá thấp các đoạn văn nằm giữa tài liệu so với đầu và cuối"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "LLM nhớ tốt thông tin ở đầu và cuối prompt, chunk quan trọng nằm giữa dễ bị quên"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Slide ghi: 'LLM nhớ tốt thông tin ở đầu và cuối prompt. Thông tin ở giữa dễ bị quên. Chunk quan trọng vô tình nằm giữa → RAG thất bại.' Đây là nghiên cứu Liu et al. 2023 được liệt kê trong tài liệu tham khảo, cũng đã xuất hiện ở Day 4 và Day 7.",
-      "source": "exam-98.json",
+      "answer": "A",
+      "explanation": "Nhóm metric chẩn đoán chất lượng retrieval, context và câu trả lời RAG. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-049",
       "type": "mcq",
-      "prompt": "Kỹ thuật Document Reordering sắp xếp các block theo mô hình nào?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Hybrid retrieval?",
       "options": [
         {
           "key": "A",
-          "text": "Xếp theo thứ tự điểm số giảm dần từ trên xuống dưới để model đọc cái tốt nhất trước"
+          "text": "Chỉ lấy kết quả đầu tiên của một nguồn"
         },
         {
           "key": "B",
-          "text": "Xếp theo thời gian tài liệu từ cũ đến mới để model nắm được diễn biến thay đổi"
+          "text": "Kết hợp sparse và dense retrieval để bao phủ cả từ khóa lẫn ngữ nghĩa"
         },
         {
           "key": "C",
-          "text": "Xếp ngẫu nhiên để tránh model bị thiên vị bởi vị trí của tài liệu trong context"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Đặt Top 1 ở đầu và Top 2 ở cuối, các block xếp hạng thấp hơn dồn vào giữa"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Sơ đồ trong slide minh họa: ĐẦU = Block 1 (Top 1); GIỮA = Block 3, Block 5, Block 4; CUỐI = Block 2 (Top 2). Nguyên lý: tận dụng hai vùng model chú ý tốt nhất (đầu và cuối) cho hai chunk quan trọng nhất, dồn các chunk kém quan trọng hơn vào vùng giữa vốn dễ bị bỏ sót.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Kết hợp sparse và dense retrieval để bao phủ cả từ khóa lẫn ngữ nghĩa. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-050",
       "type": "mcq",
-      "prompt": "Kỹ thuật Strict Constraints trong grounding yêu cầu điều gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng RRF?",
       "options": [
         {
           "key": "A",
-          "text": "Đưa thêm thời gian, tác giả, phòng ban vào context để LLM phân biệt văn bản cũ và mới"
+          "text": "Bỏ các nguồn có kết quả khác nhau"
         },
         {
           "key": "B",
-          "text": "Giới hạn độ dài câu trả lời để tránh model lan man ra ngoài phạm vi câu hỏi ban đầu"
+          "text": "Hợp nhất nhiều bảng xếp hạng dựa trên thứ hạng thay vì so trực tiếp score khác thang"
         },
         {
           "key": "C",
-          "text": "Yêu cầu LLM trả về số thứ tự tài liệu như [1], [2] để người dùng có thể kiểm chứng"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Ép LLM chỉ được dùng context cung cấp; nếu thiếu chứng cứ thì nói 'không đủ dữ liệu' thay vì bịa"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Slide mô tả Strict Constraints với câu lệnh mẫu: 'Only answer from the provided context. If not found, say: I don't have enough information.' Phương án A mô tả Metadata Integration, phương án B mô tả Citation Formatting — đây là ba kỹ thuật grounding song song trong cùng một slide.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Hợp nhất nhiều bảng xếp hạng dựa trên thứ hạng thay vì so trực tiếp score khác thang. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-051",
       "type": "mcq",
-      "prompt": "Metadata Integration trong grounding giúp giải quyết vấn đề gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Reranking?",
       "options": [
         {
           "key": "A",
-          "text": "Giúp LLM phân biệt được văn bản cũ và mới để ưu tiên nguồn cập nhật gần nhất"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Giúp người dùng click vào để xem nguồn gốc chính xác của từng tuyên bố trong câu trả lời"
+          "text": "Dùng mô hình mạnh hơn sắp lại một tập ứng viên nhỏ"
         },
         {
           "key": "C",
-          "text": "Giúp hệ thống tự động loại bỏ các tài liệu không đủ điều kiện trước khi đưa vào prompt"
+          "text": "Thay thế hoàn toàn bước retrieval"
         },
         {
           "key": "D",
-          "text": "Giúp giảm số token phải đưa vào context bằng cách thay thế text bằng mã định danh"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Slide mô tả: 'Đưa thêm thời gian, tác giả, phòng ban vào context để LLM phân biệt được văn bản cũ/mới, ưu tiên nguồn mới nhất' với câu lệnh mẫu 'If documents conflict, prefer the most recent by date.' Đây là cách xử lý xung đột giữa các phiên bản policy khác nhau.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Dùng mô hình mạnh hơn sắp lại một tập ứng viên nhỏ. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-052",
       "type": "mcq",
-      "prompt": "Ý nghĩa của phát biểu 'Grounding = neo LLM vào thực tế' là gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng MMR?",
       "options": [
         {
           "key": "A",
-          "text": "Không có grounding, model sẽ luôn trả lời quá ngắn và thiếu chi tiết cần thiết"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Không có grounding, model chạy chậm hơn vì phải tự tìm kiếm thông tin bổ sung"
+          "text": "Cân bằng độ liên quan và tính đa dạng của context"
         },
         {
           "key": "C",
-          "text": "Không có grounding, model sẽ tự điền khoảng trống bằng suy đoán của chính nó"
+          "text": "Luôn lấy các chunk giống hệt nhau"
         },
         {
           "key": "D",
-          "text": "Không có grounding, model sẽ từ chối trả lời mọi câu hỏi vì thiếu cơ sở dữ liệu"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Slide kết luận: 'Grounding = neo LLM vào thực tế. Không có grounding, model sẽ tự điền khoảng trống bằng suy đoán.' Đây chính là cơ chế hallucination đã nêu ở đầu bài — LLM ưu tiên fluency nên khi thiếu dữ kiện nó vẫn sinh ra câu trôi chảy bằng cách đoán.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Cân bằng độ liên quan và tính đa dạng của context. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-053",
       "type": "mcq",
-      "prompt": "Rule of thumb về phân bổ token budget trong RAG là gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Grounding?",
       "options": [
         {
           "key": "A",
-          "text": "System prompt 40%, retrieved context 40%, headroom cho query và output 20%"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "System prompt 20%, retrieved context 60%, headroom cho query và output 20%"
+          "text": "Buộc câu trả lời dựa trên bằng chứng được truy xuất"
         },
         {
           "key": "C",
-          "text": "System prompt 10%, retrieved context 80%, headroom cho query và output 10%"
+          "text": "Khuyến khích model suy đoán khi thiếu nguồn"
         },
         {
           "key": "D",
-          "text": "System prompt 30%, retrieved context 50%, headroom cho query và output 20%"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Slide vẽ biểu đồ: 20% System Prompt & Rules — 60% Retrieved Context — 20% Headroom (Query & Output). Rule of thumb ghi rõ: 'context ≤ 60% token budget. Luôn giữ headroom cho query và output.' Nếu context chiếm quá nhiều, model không còn chỗ cho instruction và output nên chất lượng giảm.",
-      "source": "exam-98.json",
+      "explanation": "Buộc câu trả lời dựa trên bằng chứng được truy xuất. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-054",
       "type": "mcq",
-      "prompt": "Nếu context vẫn quá dài sau khi đã chọn top-K, giải pháp được đề xuất là gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Abstention?",
       "options": [
         {
           "key": "A",
-          "text": "Chia câu hỏi thành nhiều lượt gọi API riêng biệt rồi tổng hợp các câu trả lời lại thành kết quả cuối cùng"
+          "text": "Từ chối hoặc hỏi thêm khi bằng chứng không đủ"
         },
         {
           "key": "B",
-          "text": "Context Compression — dùng model nhỏ nén chunk thô chỉ giữ ý chính, với tool như LLMLingua hoặc Recomp"
+          "text": "Tự tin trả lời mọi câu hỏi"
         },
         {
           "key": "C",
-          "text": "Tăng kích thước context window bằng cách chuyển sang model có giới hạn token lớn hơn nhiều so với hiện tại"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Giảm số lượng chunk retrieve xuống còn một nửa và chấp nhận đánh mất một phần thông tin quan trọng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Slide ghi: 'Nếu context vẫn quá dài sau khi chọn top-K, có thể dùng Context Compression — model nhỏ nén chunk thô, chỉ giữ ý chính. Tools: LLMLingua, Recomp.' Ý tưởng: dùng model rẻ để nén, tiết kiệm token cho model đắt ở bước generation.",
-      "source": "exam-98.json",
+      "answer": "A",
+      "explanation": "Từ chối hoặc hỏi thêm khi bằng chứng không đủ. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-055",
       "type": "mcq",
-      "prompt": "Kết luận của slide Lost in the Middle về context injection là gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Lost in the middle?",
       "options": [
         {
           "key": "A",
-          "text": "Nên đưa càng ít chunk vào context càng tốt để tránh hoàn toàn hiện tượng lost in the middle xảy ra"
+          "text": "Chỉ xảy ra khi không có chunk nào"
         },
         {
           "key": "B",
-          "text": "Context injection không phải chỉ nối chunk lại; thứ tự, cấu trúc và ranh giới giữa các nguồn đều ảnh hưởng chất lượng"
+          "text": "Thông tin ở giữa context dài dễ bị model chú ý kém hơn"
         },
         {
           "key": "C",
-          "text": "Nên lặp lại chunk quan trọng ở cả đầu và cuối prompt để chắc chắn rằng model không bỏ sót thông tin"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Chỉ cần đưa đúng chunk vào prompt là đủ, còn thứ tự sắp xếp giữa các chunk không ảnh hưởng gì đáng kể"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Slide ghi: 'Context injection không phải chỉ nối chunk lại. Thứ tự, cấu trúc, và ranh giới giữa các nguồn đều ảnh hưởng đến chất lượng.' Ba yếu tố này tương ứng với ba kỹ thuật: Document Reordering (thứ tự), prompt structure với XML tags (cấu trúc), và delimiters (ranh giới).",
-      "source": "exam-98.json",
+      "explanation": "Thông tin ở giữa context dài dễ bị model chú ý kém hơn. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-056",
       "type": "mcq",
-      "prompt": "Vai trò của Augmentation trong pipeline RAG được mô tả thế nào?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng RAGAS?",
       "options": [
         {
           "key": "A",
-          "text": "Sinh câu trả lời cuối cùng bám sát chứng cứ và kèm theo trích dẫn nguồn tài liệu"
+          "text": "Một vector database"
         },
         {
           "key": "B",
-          "text": "Đánh giá chất lượng câu trả lời so với chứng cứ và quyết định có cần retry hay không"
+          "text": "Nhóm metric chẩn đoán chất lượng retrieval, context và câu trả lời RAG"
         },
         {
           "key": "C",
-          "text": "Tìm chunk liên quan nhất trong vector store dựa trên độ tương đồng ngữ nghĩa của câu hỏi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Đóng gói chunk đã retrieve thành context có cấu trúc trước khi đưa vào LLM"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Tiêu đề phần A ghi: 'Retrieval tìm chunk. Augmentation đóng gói chunk thành context có cấu trúc trước khi đưa vào LLM.' Đây là tầng trung gian thường bị bỏ qua — nhiều người nhảy thẳng từ retrieval sang generation mà không xử lý thứ tự, cấu trúc và token budget.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Nhóm metric chẩn đoán chất lượng retrieval, context và câu trả lời RAG. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-057",
       "type": "mcq",
-      "prompt": "Kỹ thuật Citation Formatting yêu cầu LLM làm gì?",
+      "prompt": "Trong vận hành thực tế, Hybrid retrieval giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Xếp hạng độ tin cậy của từng nguồn tài liệu theo thang điểm từ một đến năm"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Tóm tắt nội dung của từng tài liệu nguồn trước khi đưa ra kết luận tổng hợp"
+          "text": "Kết hợp sparse và dense retrieval để bao phủ cả từ khóa lẫn ngữ nghĩa"
         },
         {
           "key": "C",
-          "text": "Ghi lại toàn bộ đường dẫn file đầy đủ vào cuối mỗi đoạn văn của câu trả lời"
+          "text": "Chỉ lấy kết quả đầu tiên của một nguồn"
         },
         {
           "key": "D",
-          "text": "Trả về số thứ tự tài liệu như [1], [2] để người dùng có thể kiểm chứng lại nguồn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "D",
-      "explanation": "Slide mô tả Citation Formatting: 'Yêu cầu LLM trả về số thứ tự tài liệu (ví dụ: [1], [2]) để người dùng có thể kiểm chứng (verify)' với câu lệnh mẫu 'Cite [doc_id] for every claim you make.' Số thứ tự này khớp với đánh số trong khối <context> đã inject.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Kết hợp sparse và dense retrieval để bao phủ cả từ khóa lẫn ngữ nghĩa. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-058",
       "type": "mcq",
-      "prompt": "Phần 'Headroom' 20% trong token budget dùng để làm gì?",
+      "prompt": "Trong vận hành thực tế, RRF giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Dành chỗ cho query của người dùng và phần output mà model sẽ sinh ra"
+          "text": "Hợp nhất nhiều bảng xếp hạng dựa trên thứ hạng thay vì so trực tiếp score khác thang"
         },
         {
           "key": "B",
-          "text": "Chứa metadata và thông tin trích dẫn nguồn kèm theo mỗi chunk được inject"
+          "text": "Bỏ các nguồn có kết quả khác nhau"
         },
         {
           "key": "C",
-          "text": "Dự phòng cho trường hợp context bị nén không thành công ở bước compression"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Lưu trữ lịch sử hội thoại của các lượt trao đổi trước đó trong cùng một phiên"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "A",
-      "explanation": "Biểu đồ ghi rõ: 'Headroom (Query & Output)' chiếm 20%. Đây là phần bắt buộc phải chừa lại — nếu context chiếm hết thì model không đủ chỗ sinh câu trả lời đầy đủ, dẫn tới output bị cắt cụt giữa chừng.",
-      "source": "exam-98.json",
+      "explanation": "Hợp nhất nhiều bảng xếp hạng dựa trên thứ hạng thay vì so trực tiếp score khác thang. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-059",
       "type": "mcq",
-      "prompt": "Vì sao slide nói 'Cách bạn định dạng quyết định việc LLM có tôn trọng dữ liệu đó hay không'?",
+      "prompt": "Trong vận hành thực tế, Reranking giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Vì định dạng sai sẽ khiến API trả về lỗi ngay lập tức và không xử lý được yêu cầu đã gửi lên server"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Vì LLM chỉ chấp nhận dữ liệu ở định dạng JSON hoặc XML chuẩn, còn các định dạng khác đều bị bỏ qua"
+          "text": "Dùng mô hình mạnh hơn sắp lại một tập ứng viên nhỏ"
         },
         {
           "key": "C",
-          "text": "Vì nếu không tách rõ ranh giới, model dễ nhầm lẫn giữa dữ liệu và chỉ thị, hoặc bỏ qua context để dùng kiến thức nền"
+          "text": "Thay thế hoàn toàn bước retrieval"
         },
         {
           "key": "D",
-          "text": "Vì mỗi định dạng khác nhau sẽ tiêu tốn số lượng token khác nhau khi được đưa qua bước tokenize"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Model đọc toàn bộ prompt như một chuỗi liên tục. Nếu chunk được nối thô mà không có delimiter, model không phân biệt được đâu là bằng chứng cần bám và đâu là chỉ thị. Slide khuyến nghị dùng XML tags, Markdown headers hoặc delimiters rõ ràng, và đặt grounding constraints ở cuối prompt để model không quên.",
-      "source": "exam-98.json",
+      "answer": "B",
+      "explanation": "Dùng mô hình mạnh hơn sắp lại một tập ứng viên nhỏ. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D08-060",
       "type": "mcq",
-      "prompt": "Theo slide LLM Selection, model nhỏ hoặc local phù hợp với loại workload nào?",
+      "prompt": "Trong vận hành thực tế, MMR giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Câu hỏi mở đòi hỏi khả năng sáng tạo và diễn đạt tự nhiên như con người viết"
+          "text": "Cân bằng độ liên quan và tính đa dạng của context"
         },
         {
           "key": "B",
-          "text": "Internal tools với lượng truy vấn thấp nhưng đòi hỏi chất lượng phân tích cao nhất"
+          "text": "Luôn lấy các chunk giống hệt nhau"
         },
         {
           "key": "C",
-          "text": "Suy luận phức tạp cần so sánh và tổng hợp thông tin từ rất nhiều nguồn khác nhau"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Câu hỏi đơn giản dạng lookup, dữ liệu nhạy cảm cần on-premise, high-volume và cần latency thấp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Slide phân chia: Model lớn (GPT-4, Gemini Pro) cho suy luận phức tạp, câu hỏi cần tổng hợp phân tích, chi phí và latency cao, phù hợp internal tools low-volume. Model nhỏ/local (Llama 3, Mistral) cho câu hỏi đơn giản lookup trực tiếp, dữ liệu nhạy cảm cần on-premise, chi phí và latency thấp, phù hợp high-volume data-sensitive.",
-      "source": "exam-98.json",
+      "answer": "A",
+      "explanation": "Cân bằng độ liên quan và tính đa dạng của context. Nội dung được biên soạn từ tài liệu Day8_RAG_Pipeline_Beginner_Notes.html của Ngày 8.",
+      "source": "onthi/Day8_RAG_Pipeline_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },

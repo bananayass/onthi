@@ -7,1562 +7,1562 @@
     {
       "id": "D12-001",
       "type": "mcq",
-      "prompt": "Cloud Infrastructure được định nghĩa thế nào theo slide?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Container?",
       "options": [
         {
           "key": "A",
-          "text": "Một phần mềm quản lý máy chủ ảo cài đặt trên hạ tầng có sẵn của công ty, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường"
+          "text": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường"
         },
         {
           "key": "B",
-          "text": "Tập hợp tài nguyên điện toán — máy chủ, mạng, lưu trữ, ảo hóa — cung cấp qua internet theo mô hình pay-as-you-go, ở cả ba môi trường"
+          "text": "Là một virtual machine đầy đủ hệ điều hành"
         },
         {
           "key": "C",
-          "text": "Dịch vụ thuê ngoài đội ngũ vận hành hệ thống theo hợp đồng dài hạn, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Một trung tâm dữ liệu vật lý do doanh nghiệp tự đầu tư và tự vận hành toàn bộ, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Điểm cốt lõi là ba đặc tính: tài nguyên điện toán cung cấp qua internet, trả tiền theo mức dùng thực tế, và không cần đầu tư phần cứng nên linh hoạt mở rộng theo nhu cầu. Ba trụ cột được liệt kê ngay sau đó là Compute, Storage và Networking.",
-      "source": "exam-109.json"
+      "answer": "A",
+      "explanation": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-002",
       "type": "mcq",
-      "prompt": "Ba nhóm tài nguyên chính của Cloud Infrastructure là gì?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Docker image?",
       "options": [
         {
           "key": "A",
-          "text": "Frontend, Backend và Database, ở cả ba môi trường, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, nên chi phí mỗi lần gọi không thay đổi, kể cả khi model đã cập nhật bản mới nhất, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Region, Availability Zone và Data center, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, trong khi log không ghi lại dấu hiệu nào, trong mọi trường hợp, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Là mẫu bất biến dùng để tạo container"
         },
         {
           "key": "C",
-          "text": "IaaS, PaaS và SaaS, trong mọi trường hợp, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, dù đội đã tuân thủ đúng quy trình nội bộ, theo đúng khuyến nghị, ở cả ba môi trường, kể cả lúc tải thấp, mà không cần sửa code, với mọi loại workload"
+          "text": "Là log runtime thay đổi liên tục"
         },
         {
           "key": "D",
-          "text": "Compute, Storage và Networking, kể cả lúc tải thấp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn, dù cấu hình đã được rà soát lại một lượt, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Compute là virtual machines, containers, serverless — xử lý logic ứng dụng từ vài request mỗi ngày đến hàng triệu concurrent user. Storage gồm object storage, block storage, data warehouse. Networking gồm VPC, Load Balancer, CDN, DNS, VPN. IaaS/PaaS/SaaS là ba TẦNG dịch vụ, không phải ba nhóm tài nguyên.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Là mẫu bất biến dùng để tạo container. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-003",
       "type": "mcq",
-      "prompt": "Độ bền (durability) của object storage trên cloud được nêu là bao nhiêu?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Secrets management?",
       "options": [
         {
           "key": "A",
-          "text": "99,9% — tức 3 số 9, với mọi quy mô hệ thống"
+          "text": "Ghi API key trực tiếp trong frontend"
         },
         {
           "key": "B",
-          "text": "99,99% — tức 4 số 9, dù cấu hình không đổi"
+          "text": "Lưu credential ngoài source code và cấp theo quyền tối thiểu"
         },
         {
           "key": "C",
-          "text": "100% — được nhà cung cấp cam kết tuyệt đối"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "99,999999999% — tức 11 số 9, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Mười một số 9 là mức durability tiêu chuẩn của object storage như S3, GCS, Blob — xác suất mất một object gần như bằng không. Đây là lý do object storage thay thế hoàn toàn on-premise storage cho dataset và checkpoint lớn. Đừng nhầm durability (độ bền dữ liệu) với availability (khả năng truy cập).",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Lưu credential ngoài source code và cấp theo quyền tối thiểu. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-004",
       "type": "mcq",
-      "prompt": "Tầng Physical Layer của cloud gồm những thành phần nào?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Async request?",
       "options": [
         {
           "key": "A",
-          "text": "Regions & AZs, Data centers, Bare metal và Network backbone, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, trong khi log không ghi lại dấu hiệu nào, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Giữ kết nối đồng bộ vô hạn"
         },
         {
           "key": "B",
-          "text": "Object storage, block storage, file storage và managed DB, trong mọi trường hợp, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP"
         },
         {
           "key": "C",
-          "text": "Virtual machines, containers và serverless functions, ở cả ba môi trường, theo đúng khuyến nghị, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, với mọi quy mô hệ thống, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "VPC, Load Balancer, CDN và DNS, trong suốt vòng đời dịch vụ, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Regions & AZs là vùng địa lý độc lập với nhiều availability zone để đảm bảo HA; Data centers là toà nhà vật lý có nguồn điện, làm mát, bảo mật; Bare metal là máy chủ vật lý gồm GPU cluster và CPU host; Network backbone là cáp quang riêng nối các region, có InfiniBand riêng cho GPU cluster.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-005",
       "type": "mcq",
-      "prompt": "Ba tầng Cloud Services theo thứ tự từ trên xuống là gì?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Authentication?",
       "options": [
         {
           "key": "A",
-          "text": "SaaS (phần mềm hoàn chỉnh) → PaaS (chỉ lo code) → IaaS (tài nguyên thô, toàn quyền kiểm soát), ở cả ba môi trường"
+          "text": "Chỉ ẩn URL endpoint"
         },
         {
           "key": "B",
-          "text": "PaaS → IaaS → SaaS, với PaaS kiểm soát nhiều nhất, trong khi ngân sách token vẫn còn dư nhiều, ở cả ba môi trường"
+          "text": "Xác thực danh tính trước khi cho dùng agent hoặc tool"
         },
         {
           "key": "C",
-          "text": "IaaS → PaaS → SaaS, với IaaS là tầng phần mềm hoàn chỉnh dùng ngay, với mọi quy mô hệ thống, trong mọi trường hợp"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "SaaS → IaaS → PaaS, xếp theo mức độ tự động hoá tăng dần, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "SaaS là phần mềm hoàn chỉnh dùng ngay qua trình duyệt — Slack, Salesforce, Notion, Figma, Datadog. PaaS là nền tảng để deploy ứng dụng, bạn chỉ lo code còn runtime, OS, scaling, patching do cloud xử lý — Cloud Run, App Engine, Heroku, Vercel, Firebase. IaaS là tài nguyên thô: EC2, GCE, Azure VMs, S3, EBS — linh hoạt nhất nhưng tốn công vận hành nhất.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Xác thực danh tính trước khi cho dùng agent hoặc tool. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-006",
       "type": "mcq",
-      "prompt": "Trong 6 layer của một ứng dụng AI hiện đại, Layer 02 là gì?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về CI/CD?",
       "options": [
         {
           "key": "A",
-          "text": "Backend Services — chat service, RAG service, tool service và async worker, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường"
+          "text": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường"
         },
         {
           "key": "B",
-          "text": "API Gateway & Security — routing, throttling, authentication (JWT/OAuth 2.0), rate limiting per-user quota, DDoS protection, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù người dùng không thấy gì bất thường, với mọi quy mô hệ thống"
+          "text": "Deploy thủ công không cần test"
         },
         {
           "key": "C",
-          "text": "Client Layer — web app, mobile app và 3rd party API, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, nên chi phí mỗi lần gọi không thay đổi, với mọi quy mô hệ thống"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Data Layer — vector DB, relational DB, cache và message queue, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, dù cấu hình không đổi, với mọi quy mô hệ thống, dù prompt đã được viết lại rõ ràng hơn, dù đội đã tuân thủ đúng quy trình nội bộ"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Layer 01 là Client (React/Next.js, iOS/Android, webhook B2B). Layer 02 là API Gateway & Security. Layer 03 là Backend Services gồm chat service giữ conversation history, RAG service làm context injection, tool service gọi web search và external API, async worker chạy background job. Các layer sau là Data Layer rồi Cloud Infrastructure.",
-      "source": "exam-109.json"
+      "answer": "A",
+      "explanation": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-007",
       "type": "mcq",
-      "prompt": "Ba nhà cung cấp AWS, Google Cloud và Azure chiếm bao nhiêu thị phần cloud toàn cầu?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Rollback?",
       "options": [
         {
           "key": "A",
-          "text": "Khoảng 40%, phần còn lại thuộc về các nhà cung cấp khu vực, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Đúng 50%, chia đều cho ba bên, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi, dù đội đã tuân thủ đúng quy trình nội bộ"
+          "text": "Quay về phiên bản ổn định khi phát hiện lỗi production"
         },
         {
           "key": "C",
-          "text": "Khoảng 85%, gần như độc quyền toàn thị trường, ở cả ba môi trường, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, kể cả khi đã bật đủ kiểm tra"
+          "text": "Xóa toàn bộ log để làm lại"
         },
         {
           "key": "D",
-          "text": "Hơn 65%, trong đó Azure khoảng 23% và Google Cloud khoảng 12%, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, kể cả khi đã bật đủ kiểm tra"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Slide nêu ba ông lớn chiếm hơn 65% thị phần, Azure khoảng 23% và GCP khoảng 12%. Điểm quan trọng hơn con số: mỗi nhà cung cấp có điểm mạnh riêng nhưng các core service đều tương đương — EC2/GCE/Azure VMs cho compute, S3/GCS/Blob cho storage, Bedrock/Vertex AI/Azure OpenAI cho AI.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Quay về phiên bản ổn định khi phát hiện lỗi production. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-008",
       "type": "mcq",
-      "prompt": "Dịch vụ AI/ML tương ứng của AWS, Google Cloud và Azure lần lượt là gì?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Cost guard?",
       "options": [
         {
           "key": "A",
-          "text": "Bedrock và SageMaker · Vertex AI và Gemini · Azure OpenAI và ML Studio"
+          "text": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model"
         },
         {
           "key": "B",
-          "text": "SageMaker và Lambda · BigQuery và Spanner · CosmosDB và Azure SQL"
+          "text": "Chờ hóa đơn cuối tháng rồi mới xem"
         },
         {
           "key": "C",
-          "text": "EC2 và ECS · Cloud Run và GKE · AKS và App Service, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "CloudFront và Route53 · Cloud CDN và Cloud DNS · Azure CDN và VNet"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "A",
-      "explanation": "Phương án B trộn compute với database, C toàn compute, D toàn networking. Nhớ theo nhóm: compute (EC2/Lambda/ECS · GCE/Cloud Run/GKE · VMs/AKS/App Service), storage (S3/EBS/Glacier · GCS/Persistent Disk · Blob/Queue/Table), database (RDS/DynamoDB/Aurora · Cloud SQL/Spanner/BigQuery · Azure SQL/CosmosDB).",
-      "source": "exam-109.json"
+      "explanation": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-009",
       "type": "mcq",
-      "prompt": "Mô hình tính tiền của Railway có đặc điểm gì?",
+      "prompt": "Trong một dự án AI, cách áp dụng Container nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Tính theo số ghế người dùng trong team, cố định hàng tháng, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Tính theo giây dựa trên CPU và RAM thực tế dùng; app không có traffic thì tốn gần như $0, ở cả ba môi trường"
+          "text": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường"
         },
         {
           "key": "C",
-          "text": "Miễn phí hoàn toàn cho mọi workload dưới 100GB băng thông mỗi tháng, trong mọi trường hợp, ở cả ba môi trường"
+          "text": "Là một virtual machine đầy đủ hệ điều hành"
         },
         {
           "key": "D",
-          "text": "Tính theo gói dịch vụ cho từng service, không có ngưỡng credit, với mọi quy mô hệ thống, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Railway dùng usage-based billing tính theo giây và scale to zero, nên rất hợp workload không đều như dev, staging, AI batch job. Đối lập là Render dùng plan-based per service, không có credit threshold gây dừng service bất ngờ, nên dễ dự đoán ngân sách — và Render đã bỏ per-seat fee từ 2026.",
-      "source": "exam-109.json"
+      "explanation": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-010",
       "type": "mcq",
-      "prompt": "Điểm khác biệt về region và độ tin cậy giữa Railway và Render là gì?",
+      "prompt": "Trong một dự án AI, cách áp dụng Docker image nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Railway chạy hoàn toàn trên AWS còn Render chạy trên bare-metal tự xây, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả lúc tải thấp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Là mẫu bất biến dùng để tạo container"
         },
         {
           "key": "B",
-          "text": "Cả hai đều đa region, nhưng Render trưởng thành hơn về uptime và SLA với US Oregon/Ohio, EU Frankfurt, Singapore nên hợp app cần hiện diện EU/APAC; Railway từng có outage ở EU West tháng 12/2025, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Là log runtime thay đổi liên tục"
         },
         {
           "key": "C",
-          "text": "Cả hai chỉ có region tại Mỹ, muốn phục vụ châu Á phải tự dựng CDN, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, ở cả ba môi trường, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, trong suốt vòng đời dịch vụ, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Railway đa region hơn hẳn Render nên phù hợp production hơn, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, trong mọi trường hợp, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường, kể cả lúc tải thấp, theo đúng khuyến nghị, mà không cần sửa code"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Railway chạy trên Railway Metal (bare-metal tự xây) kết hợp Google Cloud, có region US West/East, EU West, Asia Pacific và chọn được region cho từng service — nhưng slide lưu ý đã có outage ở EU West vào 12/2025 nên cần kiểm tra kỹ uptime SLA cho production. Render mature hơn, documentation tốt hơn, uptime và SLA ổn định hơn.",
-      "source": "exam-109.json"
+      "answer": "A",
+      "explanation": "Là mẫu bất biến dùng để tạo container. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-011",
       "type": "mcq",
-      "prompt": "Railway hỗ trợ GPU ở mức nào?",
+      "prompt": "Trong một dự án AI, cách áp dụng Secrets management nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Hỗ trợ GPU nhưng phải liên hệ đội bán hàng và ký hợp đồng năm, dù cấu hình không đổi, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, trong khi log không ghi lại dấu hiệu nào, theo đúng khuyến nghị, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Hỗ trợ hơn 50 model GPU, từ RTX 3060 đến B200, kể cả lúc tải thấp, mà không cần sửa code, nên chi phí mỗi lần gọi không thay đổi, dù prompt đã được viết lại rõ ràng hơn, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường, trong mọi trường hợp"
+          "text": "Lưu credential ngoài source code và cấp theo quyền tối thiểu"
         },
         {
           "key": "C",
-          "text": "Chỉ hỗ trợ đúng một dòng GPU dành cho inference nhẹ, ở cả ba môi trường, theo đúng khuyến nghị, kể cả khi dữ liệu đã được làm sạch kỹ, dù đội đã tuân thủ đúng quy trình nội bộ, dù cấu hình đã được rà soát lại một lượt, kể cả lúc tải thấp, trong mọi trường hợp"
+          "text": "Ghi API key trực tiếp trong frontend"
         },
         {
           "key": "D",
-          "text": "Không hỗ trợ GPU, chỉ có CPU và RAM, với mọi quy mô hệ thống, trong mọi trường hợp, với mọi loại workload, kể cả khi đã bật đủ kiểm tra, kể cả khi tài liệu nguồn còn nguyên vẹn, kể cả khi model đã cập nhật bản mới nhất, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Ngoài GPU, Railway còn cung cấp PostgreSQL, Redis, MongoDB và MySQL dưới dạng managed service. Đây là một lý do Railway được đánh giá có developer experience tốt nhất nhóm: deploy từ GitHub trong vài giây, không cần credit card, CLI mạnh, interface hiện đại.",
-      "source": "exam-109.json"
+      "explanation": "Lưu credential ngoài source code và cấp theo quyền tối thiểu. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-012",
       "type": "mcq",
-      "prompt": "Sáu giai đoạn từ localhost đến production theo đúng thứ tự là gì?",
+      "prompt": "Trong một dự án AI, cách áp dụng Async request nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Local Development → Staging → Version Control → CD → CI → Monitor, theo đúng khuyến nghị, trong mọi trường hợp"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Local Development → Version Control & Code Review → CI → Staging → CD → Monitor & Observe, ở cả ba môi trường"
+          "text": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP"
         },
         {
           "key": "C",
-          "text": "Local Development → CI → CD → Staging → Version Control → Monitor, với mọi quy mô hệ thống, ở cả ba môi trường"
+          "text": "Giữ kết nối đồng bộ vô hạn"
         },
         {
           "key": "D",
-          "text": "Version Control → Local Development → Staging → CI → Monitor → CD, dù cấu hình không đổi, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Thứ tự này phản ánh dòng chảy của code: viết trên máy, đưa qua Git và review, chạy pipeline kiểm tra tự động, thử ở môi trường giống production, rồi mới deploy — và deploy không phải điểm kết thúc mà là điểm bắt đầu theo dõi. Không có quy trình thì hậu quả là deploy thẳng lên prod, downtime, mất data, bug fix khẩn cấp lúc 2 giờ sáng.",
-      "source": "exam-109.json"
+      "explanation": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-013",
       "type": "mcq",
-      "prompt": "Ở bước CI, pipeline gồm những bước nào và cần đạt metric gì?",
+      "prompt": "Trong một dự án AI, cách áp dụng Authentication nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Lint → Unit tests → Integration tests → Build Docker image → Security scan (Trivy); build dưới 5 phút, coverage trên 70%, 0 critical CVE, lint pass 100%, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Code review → Merge → Tag → Release → Notify; coverage trên 90% là bắt buộc, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường"
+          "text": "Xác thực danh tính trước khi cho dùng agent hoặc tool"
         },
         {
           "key": "C",
-          "text": "Build → Deploy → Test → Monitor → Rollback; build time dưới 30 phút, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường"
+          "text": "Chỉ ẩn URL endpoint"
         },
         {
           "key": "D",
-          "text": "Format → Compile → Package → Sign → Publish; thời gian không giới hạn, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Nguyên tắc của CI là mỗi lần push code là pipeline tự động chạy, và nếu bất kỳ bước nào fail thì không được merge — mục tiêu là phát hiện lỗi sớm nhất có thể, trước khi vào staging hay production. Tool thường dùng: GitHub Actions, GitLab CI, CircleCI, và Jenkins (legacy).",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Xác thực danh tính trước khi cho dùng agent hoặc tool. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-014",
       "type": "mcq",
-      "prompt": "Môi trường staging phải có những gì?",
+      "prompt": "Trong một dự án AI, cách áp dụng CI/CD nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Cùng database với production để test được trên dữ liệu thật, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Chỉ cần cùng source code, còn hạ tầng có thể khác hoàn toàn, kể cả khi model đã cập nhật bản mới nhất, ở cả ba môi trường"
+          "text": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường"
         },
         {
           "key": "C",
-          "text": "Cùng Docker image, cùng Kubernetes config, env vars riêng biệt, dữ liệu anonymized và SSL certificate, ở cả ba môi trường"
+          "text": "Deploy thủ công không cần test"
         },
         {
           "key": "D",
-          "text": "Cấu hình tối giản nhất có thể để tiết kiệm chi phí vận hành, trong khi log không ghi lại dấu hiệu nào, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "Staging là 'production thứ hai' để QA, UAT và demo khách hàng nội bộ trước khi release, nên phải giống production nhất có thể — chỉ khác ở chỗ dữ liệu là fake hoặc đã anonymize. Dùng chung DB với production là một trong sáu lỗi phổ biến nhất được cảnh báo. Chi phí staging thường khoảng 10–20% chi phí production.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-015",
       "type": "mcq",
-      "prompt": "Các chiến lược deploy được nêu ở bước CD gồm những gì?",
+      "prompt": "Trong một dự án AI, cách áp dụng Rollback nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Vertical scaling, horizontal scaling, auto-scaling và manual scaling, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường"
+          "text": "Xóa toàn bộ log để làm lại"
         },
         {
           "key": "B",
-          "text": "Big bang, hotfix, manual patch và direct push, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn"
+          "text": "Quay về phiên bản ổn định khi phát hiện lỗi production"
         },
         {
           "key": "C",
-          "text": "Rolling update, Blue/Green deploy, Canary release (5% rồi lên 100%), feature flags và immutable infra, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Fork, merge, rebase và cherry-pick, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Nguyên tắc kèm theo rất dứt khoát: không bao giờ deploy thủ công bằng tay, mọi thứ phải qua pipeline, có audit log và có khả năng rollback trong dưới 5 phút. Rollback plan gồm git revert rồi redeploy, K8s rollout undo, DB migration down, và hotfix branch.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Quay về phiên bản ổn định khi phát hiện lỗi production. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-016",
       "type": "mcq",
-      "prompt": "Điều kiện để zero-downtime deploy hoạt động được là gì?",
+      "prompt": "Trong một dự án AI, cách áp dụng Cost guard nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Tăng gấp đôi số instance trước mỗi lần deploy rồi giảm lại sau, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, với mọi quy mô hệ thống, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Chờ hóa đơn cuối tháng rồi mới xem"
         },
         {
           "key": "B",
-          "text": "Tắt load balancer trong lúc deploy rồi bật lại khi hoàn tất, nên chi phí mỗi lần gọi không thay đổi, dù cấu hình không đổi, với mọi quy mô hệ thống, dù đội đã tuân thủ đúng quy trình nội bộ, dù cấu hình đã được rà soát lại một lượt, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model"
         },
         {
           "key": "C",
-          "text": "Graceful shutdown, chạy DB migration trước, API backward-compatible và readinessProbe trên K8s, kể cả lúc tải thấp, mà không cần sửa code, dù người dùng không thấy gì bất thường, trong khi log không ghi lại dấu hiệu nào, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Deploy vào ban đêm khi lượng truy cập thấp nhất trong ngày, kể cả khi dữ liệu đã được làm sạch kỹ, trong mọi trường hợp, với mọi loại workload, kể cả khi tài liệu nguồn còn nguyên vẹn, kể cả khi model đã cập nhật bản mới nhất, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Graceful shutdown để container đang chạy hoàn thành nốt request; migration chạy trước để schema sẵn sàng; API phải tương thích ngược vì trong lúc rolling update có cả version cũ và mới cùng phục vụ; readinessProbe để load balancer chỉ gửi traffic vào pod đã thật sự sẵn sàng. Thiếu bất kỳ điều kiện nào thì 'zero-downtime' chỉ là tên gọi.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-017",
       "type": "mcq",
-      "prompt": "Bảng so sánh Local / Staging / Production khác nhau thế nào ở khâu rollback?",
+      "prompt": "Khi đội ngũ bỏ qua Container, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Cả ba đều dùng chung một cơ chế rollback qua Git, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, ở cả ba môi trường"
+          "text": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường"
         },
         {
           "key": "B",
-          "text": "Local dùng git stash hoặc Ctrl+Z; staging redeploy build trước đó; production dùng K8s rollout undo trong dưới 2 phút, ở cả ba môi trường"
+          "text": "Là một virtual machine đầy đủ hệ điều hành"
         },
         {
           "key": "C",
-          "text": "Local không rollback được, staging và production đều dùng K8s rollout undo, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Chỉ production mới cần rollback, hai môi trường kia thì xoá đi làm lại, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Con số 2 phút là thời gian thực tế của K8s rollout undo, còn 'dưới 5 phút' ở phần CD là ngưỡng cam kết chung cho mọi cách rollback. Bảng còn khác ở nhiều tiêu chí: database (SQLite/local PG · managed DB dữ liệu giả · managed DB dữ liệu thật), secrets (.env.local · .env.staging trong vault · Secret Manager/Vault), SSL (thường không có · Let's Encrypt · bắt buộc), logging (console.log · structured logs · centralized Datadog), scaling (không có · minimal · auto-scaling), chi phí ($0 · 10–20% prod · full cost).",
-      "source": "exam-109.json"
+      "answer": "A",
+      "explanation": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-018",
       "type": "mcq",
-      "prompt": "Vì sao commit API key lên GitHub vẫn nguy hiểm ngay cả khi đã xoá đi?",
+      "prompt": "Khi đội ngũ bỏ qua Docker image, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Vì lịch sử commit vẫn còn và bot quét GitHub 24/7, ở cả ba môi trường, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, kể cả khi tài liệu nguồn còn nguyên vẹn, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị, mà không cần sửa code"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Vì GitHub tự động gửi thông báo công khai mỗi khi có secret bị xoá, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Là mẫu bất biến dùng để tạo container"
         },
         {
           "key": "C",
-          "text": "Vì repository sẽ tự động chuyển sang chế độ public sau khi xoá, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, trong khi log không ghi lại dấu hiệu nào, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Là log runtime thay đổi liên tục"
         },
         {
           "key": "D",
-          "text": "Vì khoá bị xoá sẽ không thể tạo lại được nữa trên nhà cung cấp, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, với mọi quy mô hệ thống, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Xoá file ở commit mới không xoá được nội dung ở commit cũ, và bot dò secret trên GitHub chạy liên tục — khoá thường bị lạm dụng trong vài phút. Cách phòng: dùng .gitignore, Secret Manager, cộng thêm git-secrets hook chặn ngay lúc commit. Đây là lỗi đầu tiên trong sáu lỗi phổ biến nhất gây outage production.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Là mẫu bất biến dùng để tạo container. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-019",
       "type": "mcq",
-      "prompt": "Vì sao 'không có health check' lại nguy hiểm với hệ thống có load balancer?",
+      "prompt": "Khi đội ngũ bỏ qua Secrets management, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Vì chi phí vận hành tăng do phải thêm một endpoint mới, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, trong khi log không ghi lại dấu hiệu nào"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Vì Kubernetes sẽ từ chối khởi động pod nếu thiếu health check, kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả lúc tải thấp, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, kể cả khi tài liệu nguồn còn nguyên vẹn"
+          "text": "Lưu credential ngoài source code và cấp theo quyền tối thiểu"
         },
         {
           "key": "C",
-          "text": "Vì container vẫn 'chạy' trong khi app bên trong đã crash, load balancer tiếp tục gửi traffic vào và 100% request fail, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi model đã cập nhật bản mới nhất, ở cả ba môi trường"
+          "text": "Ghi API key trực tiếp trong frontend"
         },
         {
           "key": "D",
-          "text": "Vì load balancer sẽ tự dừng gửi traffic khi không tìm thấy endpoint /health, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, nên chi phí mỗi lần gọi không thay đổi, trong suốt vòng đời dịch vụ"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Load balancer chỉ biết container còn sống hay không, chứ không biết ứng dụng bên trong có phục vụ được hay không. Cách sửa là thêm endpoint /health cùng liveness probe và readiness probe trên Kubernetes. Lỗi này nằm cùng nhóm với 'không có migration strategy' và 'biết lỗi từ khách hàng'.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Lưu credential ngoài source code và cấp theo quyền tối thiểu. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-020",
       "type": "mcq",
-      "prompt": "Trong Production Checklist, mục CORS được yêu cầu như thế nào?",
+      "prompt": "Khi đội ngũ bỏ qua Async request, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Tắt hoàn toàn CORS vì API gateway đã lo phần này, ở cả ba môi trường, mà không cần sửa code, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, trong khi log không ghi lại dấu hiệu nào, kể cả khi đã bật đủ kiểm tra"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Chỉ cho phép đúng những origin cần thiết, không để wildcard *, dù cấu hình không đổi, với mọi quy mô hệ thống, kể cả khi dữ liệu đã được làm sạch kỹ, dù đội đã tuân thủ đúng quy trình nội bộ, dù cấu hình đã được rà soát lại một lượt"
+          "text": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP"
         },
         {
           "key": "C",
-          "text": "Chỉ bật CORS ở môi trường staging, tắt ở production, kể cả lúc tải thấp, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi, kể cả khi tài liệu nguồn còn nguyên vẹn, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường"
+          "text": "Giữ kết nối đồng bộ vô hạn"
         },
         {
           "key": "D",
-          "text": "Cho phép wildcard * để mọi client tích hợp được dễ dàng, trong mọi trường hợp, theo đúng khuyến nghị, kể cả khi đã bật đủ kiểm tra, dù người dùng không thấy gì bất thường, kể cả khi model đã cập nhật bản mới nhất, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Nhóm Security còn có: secrets không nằm trong codebase, HTTPS/TLS bật và HTTP tự redirect, rate limiting bật ở API Gateway, dependency scan không có CVE critical (Snyk, Trivy), và mọi endpoint cần auth đều được bảo vệ. Ba nhóm còn lại của checklist là Reliability, Performance và Observability.",
-      "source": "exam-109.json"
+      "explanation": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-021",
       "type": "mcq",
-      "prompt": "Theo Production Checklist của slide, nhóm Performance yêu cầu load test ở mức nào?",
+      "prompt": "Khi đội ngũ bỏ qua Authentication, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Với traffic gấp 10 lần dự kiến để chắc chắn tuyệt đối"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Với traffic gấp 2 lần dự kiến, với mọi quy mô hệ thống"
+          "text": "Xác thực danh tính trước khi cho dùng agent hoặc tool"
         },
         {
           "key": "C",
-          "text": "Bằng đúng lượng traffic dự kiến ở thời điểm ra mắt"
+          "text": "Chỉ ẩn URL endpoint"
         },
         {
           "key": "D",
-          "text": "Bằng một nửa traffic dự kiến để tiết kiệm chi phí"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Nhóm Performance còn yêu cầu: đã thêm DB index cho các query phổ biến và kiểm bằng EXPLAIN ANALYZE, đã implement caching bằng Redis cho data ít thay đổi, assets được nén và phân phối qua CDN, connection pooling cấu hình đúng, và mọi external API call đều có timeout.",
-      "source": "exam-109.json"
+      "explanation": "Xác thực danh tính trước khi cho dùng agent hoặc tool. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-022",
       "type": "mcq",
-      "prompt": "Bốn nguyên tắc 12-Factor đủ cho một MVP deployment là gì?",
+      "prompt": "Khi đội ngũ bỏ qua CI/CD, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Config in env, Port binding, Stateless processes và Dev/prod parity, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Codebase, Dependencies, Build/release/run và Logs, ở cả ba môi trường, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, dù đội đã tuân thủ đúng quy trình nội bộ, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị, mà không cần sửa code"
+          "text": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường"
         },
         {
           "key": "C",
-          "text": "Cả 12 factor đều bắt buộc, không được bỏ qua bất kỳ điều nào, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, với mọi quy mô hệ thống, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Deploy thủ công không cần test"
         },
         {
           "key": "D",
-          "text": "Backing services, Concurrency, Disposability và Admin processes, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, trong khi log không ghi lại dấu hiệu nào, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "A",
-      "explanation": "Slide nói rõ đừng cố học hết 12 factor ngay, bốn cái này là đủ cho MVP. Config in env nghĩa là không hardcode API key mà dùng os.getenv() cho mọi config. Port binding là đọc PORT từ env var vì Railway/Render inject tự động. Stateless processes là agent không giữ session trên bộ nhớ instance. Dev/prod parity là giữ khoảng cách nhỏ nhất giữa ba môi trường.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-023",
       "type": "mcq",
-      "prompt": "Production Checklist rút gọn cho MVP gồm bốn mục nào?",
+      "prompt": "Khi đội ngũ bỏ qua Rollback, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Unit test, integration test, E2E test và load test, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, ở cả ba môi trường"
+          "text": "Quay về phiên bản ổn định khi phát hiện lỗi production"
         },
         {
           "key": "B",
-          "text": "Auto-scaling, CDN, load balancer và multi-region, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường"
+          "text": "Xóa toàn bộ log để làm lại"
         },
         {
           "key": "C",
-          "text": "Secrets trong env vars, health check endpoint GET /health, structured logging dạng JSON và graceful shutdown xử lý SIGTERM, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Backup, restore, replication và disaster recovery, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Bốn mục này tương ứng gần như một-một với bốn factor được chọn: secrets ứng với config in env; health check và graceful shutdown là điều kiện để chạy được trong môi trường container có rolling update; structured logging là điều kiện để quan sát được ở Ngày 13.",
-      "source": "exam-109.json"
+      "answer": "A",
+      "explanation": "Quay về phiên bản ổn định khi phát hiện lỗi production. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-024",
       "type": "mcq",
-      "prompt": "Docker khác máy ảo (VM) ở điểm căn bản nào?",
+      "prompt": "Khi đội ngũ bỏ qua Cost guard, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Docker lưu trữ dữ liệu bền hơn VM nhờ có volume, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Docker cần nhiều RAM hơn VM nhưng bù lại khởi động nhanh hơn, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, ở cả ba môi trường, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, kể cả khi tài liệu nguồn còn nguyên vẹn, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model"
         },
         {
           "key": "C",
-          "text": "Docker chạy được trên mọi hệ điều hành còn VM chỉ chạy trên Linux, kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả lúc tải thấp, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Chờ hóa đơn cuối tháng rồi mới xem"
         },
         {
           "key": "D",
-          "text": "Docker dùng chung kernel của host OS nên overhead thấp hơn nhiều — một máy chạy được hàng trăm container song song, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "D",
-      "explanation": "Chính vì dùng chung kernel nên container nhẹ hơn VM và khởi động trong mili-giây. Docker đóng gói ứng dụng cùng toàn bộ môi trường — OS libraries, runtime, dependencies, config — thành một image bất biến, và image đó chạy thành container giống hệt nhau ở mọi máy. Đó là cách nó giải quyết bài toán 'chạy được trên máy tôi nhưng không chạy được trên server'.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-025",
       "type": "mcq",
-      "prompt": "Những khái niệm nền tảng của Docker và ý nghĩa của chúng là gì?",
+      "prompt": "Mục tiêu chính của Container trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Image, Layer, Cache, Tag và Digest — năm thành phần của một bản build, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Là một virtual machine đầy đủ hệ điều hành"
         },
         {
           "key": "B",
-          "text": "Build, Ship, Run, Scale và Monitor — năm giai đoạn vòng đời container, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường"
+          "text": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường"
         },
         {
           "key": "C",
-          "text": "Dockerfile (công thức), Image (bản thiết kế đóng băng), Container (instance đang chạy), Volume (ổ cứng gắn ngoài), Network (mạng nội bộ giữa container) và Registry (kho lưu image), ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Dockerfile, Compose, Swarm, Registry và Volume — năm công cụ CLI khác nhau, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Image là snapshot bất biến của filesystem cộng metadata, được build từ Dockerfile, mỗi lệnh tạo một layer và layer được cache để build nhanh hơn. Container là process đang chạy tạo từ image, cô lập về filesystem, network và process. Volume giữ data tồn tại lâu dài vì data trong container mất khi container bị xoá. Registry là Docker Hub hoặc ECR.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-026",
       "type": "mcq",
-      "prompt": "Workflow Docker Build → Ship → Run gồm những lệnh nào theo thứ tự?",
+      "prompt": "Mục tiêu chính của Docker image trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "docker run → docker build → docker push → docker pull → docker exec, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "docker init → docker commit → docker export → docker import → docker start, nên bước kiểm tra phía sau không phát hiện ra, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, trong suốt vòng đời dịch vụ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Là mẫu bất biến dùng để tạo container"
         },
         {
           "key": "C",
-          "text": "docker compose up → docker build → docker tag → docker save → docker load, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Là log runtime thay đổi liên tục"
         },
         {
           "key": "D",
-          "text": "Viết Dockerfile → docker build → docker run (test local) → docker push (lên registry) → docker pull → docker run (production), kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù người dùng không thấy gì bất thường, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Mạch của workflow là: viết công thức, tạo image, thử ngay trên máy, đẩy lên kho, máy đích kéo về, rồi chạy. Chính vì image là bất biến nên thứ chạy ở production đúng là thứ đã test ở local — đó là ý nghĩa của khẩu hiệu 'build once, run anywhere'.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Là mẫu bất biến dùng để tạo container. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-027",
       "type": "mcq",
-      "prompt": "Vì sao Dockerfile nên COPY package*.json TRƯỚC rồi mới COPY toàn bộ source code?",
+      "prompt": "Mục tiêu chính của Secrets management trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Vì Docker yêu cầu file cấu hình phải nằm ở layer đầu tiên, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, với mọi loại workload, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị, mà không cần sửa code"
+          "text": "Lưu credential ngoài source code và cấp theo quyền tối thiểu"
         },
         {
           "key": "B",
-          "text": "Vì như vậy image sẽ nhỏ hơn khoảng 5 lần so với cách ngược lại, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Ghi API key trực tiếp trong frontend"
         },
         {
           "key": "C",
-          "text": "Vì tận dụng layer caching: dependencies ít đổi hơn code, nên nếu package.json không đổi thì bước cài đặt không phải chạy lại, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Vì npm ci sẽ báo lỗi nếu thư mục đã có sẵn source code, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, ở cả ba môi trường, theo đúng khuyến nghị, kể cả khi đã bật đủ kiểm tra, nên chi phí mỗi lần gọi không thay đổi, với mọi quy mô hệ thống, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Docker cache theo từng layer và invalidate mọi layer phía sau khi có một layer đổi. Copy toàn bộ code trước thì mỗi lần sửa một dòng code là npm install phải chạy lại từ đầu — cache miss mỗi lần build. Ngoài ra nên dùng npm ci thay vì npm install vì nó deterministic và nhanh hơn trong CI/CD.",
-      "source": "exam-109.json"
+      "answer": "A",
+      "explanation": "Lưu credential ngoài source code và cấp theo quyền tối thiểu. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-028",
       "type": "mcq",
-      "prompt": "Multi-stage build trong Dockerfile mang lại lợi ích gì?",
+      "prompt": "Mục tiêu chính của Async request trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Cho phép mỗi stage dùng một hệ điều hành khác nhau để tăng tính tương thích, kể cả khi dữ liệu đã được làm sạch kỹ, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Chạy nhiều bước build song song nên thời gian build giảm một nửa, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong mọi trường hợp, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi, với mọi quy mô hệ thống"
+          "text": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP"
         },
         {
           "key": "C",
-          "text": "Cho phép chạy nhiều container từ cùng một Dockerfile, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, kể cả lúc tải thấp"
+          "text": "Giữ kết nối đồng bộ vô hạn"
         },
         {
           "key": "D",
-          "text": "Tách stage build khỏi stage runtime nên image production nhỏ hơn 5–10 lần, không chứa dev tool hay source code, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "D",
-      "explanation": "Stage 1 dùng để cài dependency và build; stage 2 bắt đầu từ một image mới hoàn toàn và chỉ COPY --from=builder những gì cần chạy. Nhờ vậy image cuối không mang theo build tool, dev dependencies hay source. Slide đưa con số ví dụ: image size khoảng 120MB. Kết hợp với base image Alpine (5MB) thay vì Ubuntu (200MB).",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-029",
       "type": "mcq",
-      "prompt": "Vì sao Dockerfile phải tạo và chuyển sang non-root user trước khi chạy app?",
+      "prompt": "Mục tiêu chính của Authentication trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Vì chỉ non-root user mới ghi được vào volume gắn ngoài, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, ở cả ba môi trường"
+          "text": "Chỉ ẩn URL endpoint"
         },
         {
           "key": "B",
-          "text": "Vì user root làm container khởi động chậm hơn đáng kể, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, ở cả ba môi trường"
+          "text": "Xác thực danh tính trước khi cho dùng agent hoặc tool"
         },
         {
           "key": "C",
-          "text": "Vì nếu container chạy root mà bị exploit thì attacker có quyền root vào host — non-root là security baseline tối thiểu, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Vì Docker không cho phép process chạy dưới user root kể từ phiên bản 20, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Lệnh điển hình là addgroup -S appgroup && adduser -S appuser -G appgroup rồi USER appuser đặt trước CMD. Cùng nhóm tối ưu bảo mật và kích thước còn có: pin exact version của base image (node:20.15.1-alpine3.20) thay vì dùng tag latest, và dùng .dockerignore để loại node_modules, .env, .git, dist, README.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Xác thực danh tính trước khi cho dùng agent hoặc tool. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-030",
       "type": "mcq",
-      "prompt": "EXPOSE trong Dockerfile có tác dụng gì?",
+      "prompt": "Mục tiêu chính của CI/CD trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Chuyển hướng toàn bộ traffic của host vào port được khai báo, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, dù đội đã tuân thủ đúng quy trình nội bộ, dù cấu hình đã được rà soát lại một lượt, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Tự động mở port trên máy host ngay khi container khởi động, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù người dùng không thấy gì bất thường, kể cả khi model đã cập nhật bản mới nhất, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường"
         },
         {
           "key": "C",
-          "text": "Bắt buộc phải có, nếu thiếu thì container không nhận được request nào, dù cấu hình không đổi, với mọi quy mô hệ thống, dù prompt đã được viết lại rõ ràng hơn, kể cả khi tài liệu nguồn còn nguyên vẹn, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Deploy thủ công không cần test"
         },
         {
           "key": "D",
-          "text": "Chỉ là tài liệu khai báo port, không tự publish port ra ngoài, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, nên chi phí mỗi lần gọi không thay đổi, trong khi log không ghi lại dấu hiệu nào, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Muốn thật sự publish port thì phải dùng cờ -p khi chạy, ví dụ docker run -p 3000:3000 myapp:v1 để map port 3000 của host sang 3000 của container. Cũng trong Dockerfile, HEALTHCHECK với --interval và --timeout giúp Docker và Kubernetes biết container có thật sự healthy không, còn CMD dạng JSON array tránh được shell wrapping.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-031",
       "type": "mcq",
-      "prompt": "Trong docker-compose, dùng depends_on với condition: service_healthy thay vì service_started để làm gì?",
+      "prompt": "Mục tiêu chính của Rollback trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Để Docker tự động restart service khi nó bị crash, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Để app chỉ start sau khi DB đã báo healthy, tránh app crash vì DB chưa sẵn sàng, ở cả ba môi trường"
+          "text": "Quay về phiên bản ổn định khi phát hiện lỗi production"
         },
         {
           "key": "C",
-          "text": "Để hai service dùng chung một volume dữ liệu, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Xóa toàn bộ log để làm lại"
         },
         {
           "key": "D",
-          "text": "Để container database khởi động nhanh hơn container ứng dụng, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "service_started chỉ đợi container khởi chạy, còn service_healthy đợi healthcheck của service đó pass — ví dụ healthcheck của Postgres dùng pg_isready với interval 5s. Đây là lý do compose file mẫu đặt db là service_healthy còn cache (Redis) chỉ cần service_started.",
-      "source": "exam-109.json"
+      "explanation": "Quay về phiên bản ổn định khi phát hiện lỗi production. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-032",
       "type": "mcq",
-      "prompt": "Service discovery trong Docker Compose network hoạt động thế nào?",
+      "prompt": "Mục tiêu chính của Cost guard trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Các service gọi nhau bằng TÊN service (db, cache) và Docker DNS tự resolve, không cần biết IP, kể cả lúc tải thấp, mà không cần sửa code, dù người dùng không thấy gì bất thường, với mọi quy mô hệ thống"
+          "text": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model"
         },
         {
           "key": "B",
-          "text": "Mỗi service phải đăng ký với một registry riêng như Consul, kể cả khi dữ liệu đã được làm sạch kỹ, trong mọi trường hợp, với mọi loại workload, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường"
+          "text": "Chờ hóa đơn cuối tháng rồi mới xem"
         },
         {
           "key": "C",
-          "text": "Phải khai báo IP tĩnh cho từng container trong file compose, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù đội đã tuân thủ đúng quy trình nội bộ"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Chỉ gọi được qua localhost kèm số port đã map ra host, nên chi phí mỗi lần gọi không thay đổi, dù cấu hình không đổi, với mọi quy mô hệ thống, kể cả khi tài liệu nguồn còn nguyên vẹn, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "A",
-      "explanation": "Vì vậy DATABASE_URL trong compose viết là postgresql://user:pass@db:5432/mydb — chữ db chính là tên service. Cùng file mẫu còn minh hoạ: secrets inject qua ${ANTHROPIC_KEY} từ file .env hoặc shell, không bao giờ hardcode; volume pg_data và redis_data giữ data khi container restart hay rebuild.",
-      "source": "exam-109.json"
+      "explanation": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-033",
       "type": "mcq",
-      "prompt": "Lệnh docker compose down -v khác docker compose down ở chỗ nào?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Container?",
       "options": [
         {
           "key": "A",
-          "text": "down -v xoá cả volume nên reset hoàn toàn dữ liệu; down chỉ dừng và xoá container, volume vẫn giữ, ở cả ba môi trường"
+          "text": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường"
         },
         {
           "key": "B",
-          "text": "Hai lệnh hoàn toàn tương đương, -v chỉ là bí danh viết tắt, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Là một virtual machine đầy đủ hệ điều hành"
         },
         {
           "key": "C",
-          "text": "down -v chỉ dừng container còn down thì xoá luôn image, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "down -v chạy ở chế độ verbose để in thêm log chi tiết, trong khi ngân sách token vẫn còn dư nhiều, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "A",
-      "explanation": "Đây là cặp lệnh dễ gây mất dữ liệu nhất. Các lệnh compose khác đáng nhớ: up -d khởi động toàn bộ stack chạy nền, up --build rebuild image rồi mới start sau khi sửa code, logs -f app xem log realtime, exec db psql -U user vào CLI của Postgres, và scale worker=4 tăng lên 4 instance.",
-      "source": "exam-109.json"
+      "explanation": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-034",
       "type": "mcq",
-      "prompt": "Lệnh docker system prune -a dùng để làm gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Docker image?",
       "options": [
         {
           "key": "A",
-          "text": "Xoá toàn bộ container đang chạy và khởi động lại Docker daemon, dù cấu hình không đổi, với mọi quy mô hệ thống, kể cả khi dữ liệu đã được làm sạch kỹ, dù đội đã tuân thủ đúng quy trình nội bộ, dù cấu hình đã được rà soát lại một lượt, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Quét lỗ hổng bảo mật trong tất cả image trên máy, kể cả lúc tải thấp, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, kể cả khi tài liệu nguồn còn nguyên vẹn, trong khi log không ghi lại dấu hiệu nào, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Là mẫu bất biến dùng để tạo container"
         },
         {
           "key": "C",
-          "text": "Nén tất cả image hiện có để tiết kiệm băng thông khi push, ở cả ba môi trường, mà không cần sửa code, nên chi phí mỗi lần gọi không thay đổi, dù prompt đã được viết lại rõ ràng hơn, trong khi hệ thống vẫn chạy đúng thiết kế, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Là log runtime thay đổi liên tục"
         },
         {
           "key": "D",
-          "text": "Dọn dẹp image và container không dùng, giải phóng dung lượng đĩa, trong mọi trường hợp, với mọi loại workload, kể cả khi đã bật đủ kiểm tra, dù người dùng không thấy gì bất thường, kể cả khi model đã cập nhật bản mới nhất, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Các lệnh cơ bản khác: docker build -t myapp:v1 . để build và gắn tag, docker run -d --name api để chạy nền có đặt tên, docker exec -it api sh để vào terminal bên trong container, docker logs -f api để xem log theo thời gian thực, docker ps -a để liệt kê cả container đã dừng.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Là mẫu bất biến dùng để tạo container. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-035",
       "type": "mcq",
-      "prompt": "API Gateway được định nghĩa là gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Secrets management?",
       "options": [
         {
           "key": "A",
-          "text": "Một thư viện client giúp gọi nhiều API cùng lúc theo lô, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, trong mọi trường hợp, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị, mà không cần sửa code"
+          "text": "Lưu credential ngoài source code và cấp theo quyền tối thiểu"
         },
         {
           "key": "B",
-          "text": "Một lớp cache đặt giữa ứng dụng và cơ sở dữ liệu, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, với mọi quy mô hệ thống, theo đúng khuyến nghị, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Ghi API key trực tiếp trong frontend"
         },
         {
           "key": "C",
-          "text": "Một dịch vụ DNS phân giải tên miền thành địa chỉ của các microservice, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Reverse proxy thông minh đứng trước tất cả backend service, tập trung hoá auth, logging, rate limiting, SSL termination và request transformation, dù cấu hình không đổi, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Thay vì client gọi trực tiếp vào từng service, mọi request đều đi qua một điểm duy nhất — nhờ vậy các mối quan tâm cắt ngang được xử lý tập trung thay vì lặp lại ở mỗi service. Đây là 'cổng vào duy nhất' của mọi hệ thống hiện đại.",
-      "source": "exam-109.json"
+      "answer": "A",
+      "explanation": "Lưu credential ngoài source code và cấp theo quyền tối thiểu. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-036",
       "type": "mcq",
-      "prompt": "Vòng đời một request đi qua API Gateway theo thứ tự nào?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Async request?",
       "options": [
         {
           "key": "A",
-          "text": "Client → Rate Limiting → SSL/TLS → Routing → AuthZ → WAF → Backend, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP"
         },
         {
           "key": "B",
-          "text": "Client → Routing → WAF → Rate Limiting → SSL → Backend, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi"
+          "text": "Giữ kết nối đồng bộ vô hạn"
         },
         {
           "key": "C",
-          "text": "Client → SSL/TLS termination → WAF (OWASP rules) → AuthN → Rate Limiting → AuthZ (RBAC) → Routing & Transform (header inject) → Backend Service, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Client → Backend → WAF → AuthN → Rate Limiting → Routing, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả lúc tải thấp, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Thứ tự này có logic: giải mã TLS trước để đọc được nội dung, chặn tấn công theo OWASP rule, xác thực xem là ai, giới hạn tần suất theo user hoặc IP, phân quyền xem được làm gì, rồi mới định tuyến và biến đổi request trước khi chuyển tới service. Đặt rate limiting sau xác thực để giới hạn được theo từng user chứ không chỉ theo IP.",
-      "source": "exam-109.json"
+      "answer": "A",
+      "explanation": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-037",
       "type": "mcq",
-      "prompt": "Vì sao ứng dụng AI đặc biệt nhạy cảm về mặt bảo mật tại API Gateway?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Authentication?",
       "options": [
         {
           "key": "A",
-          "text": "Vì dữ liệu huấn luyện được lưu trực tiếp trên gateway nên cần bảo vệ, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, dù cấu hình không đổi"
+          "text": "Xác thực danh tính trước khi cho dùng agent hoặc tool"
         },
         {
           "key": "B",
-          "text": "Vì mô hình AI không hỗ trợ giao thức HTTPS nên phải mã hoá ở tầng gateway, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường"
+          "text": "Chỉ ẩn URL endpoint"
         },
         {
           "key": "C",
-          "text": "Vì LLM không thể xử lý được nhiều request đồng thời nên cần hàng đợi, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi mọi chỉ số kỹ thuật đều bình thường, dù cấu hình không đổi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Vì prompt injection, model abuse (chi phí cao), data exfiltration qua LLM và PII leakage — một request độc hại không bị chặn có thể tiêu tốn hàng trăm USD API cost hoặc lộ dữ liệu người dùng, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Điểm khác biệt so với API thông thường là chi phí: một vòng lặp gọi model bị lạm dụng đốt tiền rất nhanh, trong khi một API CRUD bị gọi nhiều chỉ tốn CPU. Kết luận của slide: security phải là tầng đầu tiên, không phải afterthought.",
-      "source": "exam-109.json"
+      "answer": "A",
+      "explanation": "Xác thực danh tính trước khi cho dùng agent hoặc tool. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-038",
       "type": "mcq",
-      "prompt": "Sáu chức năng lõi của API Gateway là gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về CI/CD?",
       "options": [
         {
           "key": "A",
-          "text": "Build, Test, Deploy, Monitor, Scale và Rollback, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường"
         },
         {
           "key": "B",
-          "text": "Authentication, Rate Limiting, Routing & Load Balancing, Request/Response Transform, Caching và Logging & Tracing, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Deploy thủ công không cần test"
         },
         {
           "key": "C",
-          "text": "Lint, Unit test, Integration test, Build, Security scan và Deploy, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Compute, Storage, Networking, Security, Monitoring và Billing, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Authentication verify JWT, API key hoặc OAuth token trước khi request đến service nên service không phải tự implement auth. Transform thêm/xoá/đổi header và inject metadata như X-User-Id, X-Tenant. Caching đặc biệt hữu ích cho AI app: cache embedding lookup và FAQ response, trả 304 Not Modified tức thì.",
-      "source": "exam-109.json"
+      "answer": "A",
+      "explanation": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-039",
       "type": "mcq",
-      "prompt": "Rate limiting ở API Gateway bảo vệ điều gì với ứng dụng AI?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Rollback?",
       "options": [
         {
           "key": "A",
-          "text": "Bảo vệ mô hình khỏi bị sao chép trọng số qua API công khai, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Bảo vệ băng thông mạng của trung tâm dữ liệu khỏi nghẽn, trong mọi trường hợp, ở cả ba môi trường"
+          "text": "Quay về phiên bản ổn định khi phát hiện lỗi production"
         },
         {
           "key": "C",
-          "text": "Bảo vệ cơ sở dữ liệu khỏi các câu truy vấn không có index, kể cả lúc tải thấp, ở cả ba môi trường"
+          "text": "Xóa toàn bộ log để làm lại"
         },
         {
           "key": "D",
-          "text": "Bảo vệ backend khỏi quá tải và tránh lạm dụng LLM API — tức tiết kiệm chi phí, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "D",
-      "explanation": "Ví dụ cấu hình theo tier: 100 request/phút cho free tier, 1000 request/phút cho pro tier, và chỉ 10 request/phút cho request chưa xác thực. Với quota theo ngày của một AI chat app: Free 10/ngày, Starter 100/ngày, Pro 500/ngày, Enterprise không giới hạn — vừa bảo vệ chi phí LLM vừa tạo động lực nâng gói.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Quay về phiên bản ổn định khi phát hiện lỗi production. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-040",
       "type": "mcq",
-      "prompt": "Ba thuật toán rate limiting và đặc điểm của chúng là gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Cost guard?",
       "options": [
         {
           "key": "A",
-          "text": "Round Robin (phân phối đều), Least Connections (ít kết nối nhất) và IP Hash (dính phiên), nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, với mọi quy mô hệ thống"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "FIFO, LIFO và Priority Queue — xếp theo thứ tự đến của request, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, trong suốt vòng đời dịch vụ"
+          "text": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model"
         },
         {
           "key": "C",
-          "text": "Exponential backoff, linear backoff và jitter — ba cách giãn thời gian chờ, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ"
+          "text": "Chờ hóa đơn cuối tháng rồi mới xem"
         },
         {
           "key": "D",
-          "text": "Token Bucket (cho phép burst ngắn, phổ biến nhất, dùng cho API quota), Sliding Window (chính xác hơn Fixed Window, track timestamp từng request) và Leaky Bucket (output rate cố định, làm mượt traffic, bảo vệ downstream), dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Mỗi thuật toán có đánh đổi riêng về độ chính xác, bộ nhớ và khả năng xử lý burst. Token Bucket là lựa chọn phổ biến nhất cho API quota vì chấp nhận được đợt tăng ngắn. Phương án A là các thuật toán LOAD BALANCING, một khái niệm khác.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-041",
       "type": "mcq",
-      "prompt": "JWT gồm ba phần nào và signature được tạo ra sao?",
+      "prompt": "Nếu cần ra quyết định về Container, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Header, Body và Footer — nối bằng dấu chấm, mã hoá AES, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù người dùng không thấy gì bất thường"
+          "text": "Là một virtual machine đầy đủ hệ điều hành"
         },
         {
           "key": "B",
-          "text": "Header.Payload.Signature mã hoá Base64URL, với Signature = HMACSHA256(base64(header) + '.' + base64(payload), SECRET_KEY), dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, trong suốt vòng đời dịch vụ"
+          "text": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường"
         },
         {
           "key": "C",
-          "text": "Token, Refresh và Expiry — ba chuỗi độc lập gửi trong ba header khác nhau, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Payload, Claims và Scope — mỗi phần mã hoá riêng bằng RSA, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, với mọi quy mô hệ thống"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Header chứa {alg: HS256, typ: JWT}. Payload chứa claims như sub (user_123), name, role, iat và exp. Signature khiến token không thể giả mạo nếu không có secret key. Lưu ý Base64URL là mã hoá chứ không phải mã mật — ai cũng đọc được payload, nên đừng đặt dữ liệu nhạy cảm vào đó.",
-      "source": "exam-109.json"
+      "explanation": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-042",
       "type": "mcq",
-      "prompt": "Luồng JWT authentication gồm những bước nào?",
+      "prompt": "Nếu cần ra quyết định về Docker image, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Client gửi username và password trong mọi request → gateway hash rồi so với DB, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, dù cấu hình không đổi, với mọi quy mô hệ thống, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Client tạo token → server lưu vào DB → mỗi request server so token với bản trong DB, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong mọi trường hợp, với mọi loại workload, ở cả ba môi trường"
+          "text": "Là mẫu bất biến dùng để tạo container"
         },
         {
           "key": "C",
-          "text": "User login → server verify credentials và trả access_token (15 phút) + refresh_token (7 ngày) → client gửi Authorization: Bearer trong mọi request → gateway decode, verify signature, check expiry, extract user_id và roles mà KHÔNG cần gọi DB → hết hạn thì dùng refresh_token lấy token mới, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ"
+          "text": "Là log runtime thay đổi liên tục"
         },
         {
           "key": "D",
-          "text": "User login → server lưu session vào Redis → client gửi session_id → gateway tra Redis mỗi request, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Ưu điểm lớn nhất của JWT là gateway verify được bằng chữ ký mà không phải truy vấn database ở mỗi request — đó là lý do nó hợp với hệ nhiều service. Đổi lại, thu hồi token trước hạn khó hơn, nên access_token thường có thời hạn ngắn.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Là mẫu bất biến dùng để tạo container. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-043",
       "type": "mcq",
-      "prompt": "API Key flow khác JWT flow ở những điểm nào?",
+      "prompt": "Nếu cần ra quyết định về Secrets management, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "API key được ký bằng secret key giống JWT nên gateway không cần tra cứu gì, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong khi ngân sách token vẫn còn dư nhiều, trong mọi trường hợp"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Developer tạo key qua dashboard, server hash rồi lưu DB; gateway hash key rồi lookup trong Redis cache hoặc DB; mỗi key có quota riêng theo plan để theo dõi usage và billing; key bị lộ thì revoke ngay, và hỗ trợ nhiều key mỗi account để xoay vòng không downtime, ở cả ba môi trường"
+          "text": "Lưu credential ngoài source code và cấp theo quyền tối thiểu"
         },
         {
           "key": "C",
-          "text": "API key chỉ dùng được cho request nội bộ giữa các microservice, không dùng được từ bên ngoài, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, với mọi quy mô hệ thống, trong mọi trường hợp"
+          "text": "Ghi API key trực tiếp trong frontend"
         },
         {
           "key": "D",
-          "text": "API key có thời hạn ngắn hơn JWT và tự động xoay vòng mỗi 15 phút, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi mọi chỉ số kỹ thuật đều bình thường, với mọi quy mô hệ thống"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "JWT hợp cho xác thực người dùng cuối, còn API key hợp cho service-to-service và B2B. Điểm khác căn bản: JWT verify bằng chữ ký nên không cần tra cứu, còn API key phải lookup — vì vậy người ta cache trong Redis để có fast path.",
-      "source": "exam-109.json"
+      "explanation": "Lưu credential ngoài source code và cấp theo quyền tối thiểu. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-044",
       "type": "mcq",
-      "prompt": "Bốn công cụ API Gateway được so sánh và điểm mạnh của chúng là gì?",
+      "prompt": "Nếu cần ra quyết định về Async request, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Prometheus, Grafana, Loki và Jaeger — bốn công cụ quan sát, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, với mọi quy mô hệ thống, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Railway, Render, Cloud Run và Lambda — bốn nền tảng deploy, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong mọi trường hợp"
+          "text": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP"
         },
         {
           "key": "C",
-          "text": "Docker, Kubernetes, Terraform và Ansible — bốn công cụ hạ tầng, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Giữ kết nối đồng bộ vô hạn"
         },
         {
           "key": "D",
-          "text": "Kong (open source self-hosted, plugin phong phú, hiệu năng cao nhờ nhân Nginx), AWS API Gateway (managed, tích hợp Lambda, nhưng khoá chân vào AWS và đắt ở traffic cao), Cloudflare (edge + CDN + WAF, chống DDoS tốt nhất, hơn 300 PoP) và Traefik (auto-discover K8s service, Let's Encrypt tự động), ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "D",
-      "explanation": "Mỗi lựa chọn có nhược điểm rõ ràng: Kong cần tự vận hành và cấu hình phức tạp; AWS API Gateway gây vendor lock-in; Cloudflare ít linh hoạt hơn Kong và chi phí leo thang khi scale; Traefik có ít plugin hơn Kong và tài liệu phức tạp.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-045",
       "type": "mcq",
-      "prompt": "Vertical scaling và horizontal scaling khác nhau thế nào?",
+      "prompt": "Nếu cần ra quyết định về Authentication, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Vertical dùng cho web app còn horizontal chỉ dùng cho database, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ"
+          "text": "Xác thực danh tính trước khi cho dùng agent hoặc tool"
         },
         {
           "key": "B",
-          "text": "Vertical là nâng cấp phần cứng của một máy (t3.micro lên t3.2xlarge), thường phải restart, giới hạn bởi máy lớn nhất, chi phí phi tuyến và đắt dần; Horizontal là thêm nhiều máy chạy song song, zero downtime, gần như không giới hạn, chi phí tuyến tính nhưng yêu cầu app phải stateless, kể cả lúc tải thấp, mà không cần sửa code, trong mọi trường hợp"
+          "text": "Chỉ ẩn URL endpoint"
         },
         {
           "key": "C",
-          "text": "Vertical là thêm nhiều máy nhỏ, horizontal là nâng cấp một máy lớn, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong mọi trường hợp, với mọi loại workload, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Cả hai đều yêu cầu app stateless và đều có chi phí tuyến tính, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả khi đã bật đủ kiểm tra, dù cấu hình không đổi, với mọi quy mô hệ thống, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Vertical hợp cho database, legacy app và các tình huống cần fix nhanh; horizontal hợp cho web service, API, microservice và là lựa chọn bắt buộc khi cần HA lâu dài. Ràng buộc 'app phải stateless' chính là lý do 12-Factor đặt Stateless processes vào nhóm bốn nguyên tắc tối thiểu.",
-      "source": "exam-109.json"
+      "answer": "A",
+      "explanation": "Xác thực danh tính trước khi cho dùng agent hoặc tool. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-046",
       "type": "mcq",
-      "prompt": "Kubernetes HPA trong ví dụ được cấu hình với các ngưỡng nào?",
+      "prompt": "Nếu cần ra quyết định về CI/CD, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Không có min/max, HPA tự quyết hoàn toàn dựa trên số request đang chờ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường"
+          "text": "Deploy thủ công không cần test"
         },
         {
           "key": "B",
-          "text": "Min 4 pod, max 40 pod, scale out khi RAM trên 80%, pod mới sẵn sàng sau 5 phút, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường"
+          "text": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường"
         },
         {
           "key": "C",
-          "text": "Min 1 pod, max 10 pod, scale out khi CPU trên 50%, pod mới sẵn sàng sau 30 giây, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Min 4 pod, max 20 pod, scale out khi CPU trên 70% và scale in khi CPU dưới 30%, pod mới sẵn sàng sau khoảng 90 giây, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Cơ chế là: traffic tăng đột biến thì K8s tự scale out, spike qua đi thì scale in. Hai ngưỡng lệch nhau (70% để tăng, 30% để giảm) tạo vùng đệm chống hiện tượng bật tắt liên tục. Con số 90 giây để pod mới sẵn sàng cũng chính là ngưỡng dùng trong chaos test 'K8s restart pod trong dưới 90s'.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-047",
       "type": "mcq",
-      "prompt": "Ba chiến lược zero-downtime deployment khác nhau thế nào về tài nguyên và rollback?",
+      "prompt": "Nếu cần ra quyết định về Rollback, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Rolling update tốn gấp đôi tài nguyên, Blue/Green tốn ít nhất, Canary không rollback được, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Xóa toàn bộ log để làm lại"
         },
         {
           "key": "B",
-          "text": "Rolling update thay từng instance một, tài nguyên bình thường, rollback chậm; Blue/Green duy trì hai môi trường giống hệt và switch bằng DNS hoặc load balancer nên rollback tức thì nhưng tốn gấp đôi tài nguyên; Canary đưa version mới cho 5–10% user trước, theo dõi metric rồi mới rollout 100%, ở cả ba môi trường, theo đúng khuyến nghị, nên chi phí mỗi lần gọi không thay đổi, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Quay về phiên bản ổn định khi phát hiện lỗi production"
         },
         {
           "key": "C",
-          "text": "Cả ba đều cần gấp đôi tài nguyên và rollback mất khoảng 5 phút, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, với mọi quy mô hệ thống, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Chỉ Blue/Green mới là zero-downtime, hai chiến lược còn lại đều có gián đoạn ngắn, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả khi đã bật đủ kiểm tra, dù cấu hình không đổi, trong suốt vòng đời dịch vụ, với mọi quy mô hệ thống, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Rolling update là chiến lược mặc định của Kubernetes vì luôn có instance đang phục vụ. Blue/Green đổi rollback lấy chi phí. Canary đổi tốc độ rollout lấy khả năng kiểm soát rủi ro — nó là chiến lược duy nhất phát hiện được vấn đề trên traffic thật trước khi ảnh hưởng toàn bộ người dùng.",
-      "source": "exam-109.json"
+      "explanation": "Quay về phiên bản ổn định khi phát hiện lỗi production. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-048",
       "type": "mcq",
-      "prompt": "Bốn thuật toán load balancing và trường hợp dùng phù hợp là gì?",
+      "prompt": "Nếu cần ra quyết định về Cost guard, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Rolling, Blue/Green, Canary và Feature flag — bốn cách phân phối phiên bản, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, dù cấu hình không đổi, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "FIFO cho hàng đợi, LIFO cho stack, Priority cho việc gấp, Random cho thử nghiệm, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model"
         },
         {
           "key": "C",
-          "text": "Round Robin (phân phối đều tuần tự, hợp stateless API đồng đều), Least Connections (gửi tới server ít kết nối nhất, hợp long-running request và AI inference), IP Hash (cùng IP tới cùng server, hợp stateful app và WebSocket) và Weighted (phân phối theo tỷ lệ, dùng cho canary 90/10 và phần cứng không đồng nhất), ở cả ba môi trường"
+          "text": "Chờ hóa đơn cuối tháng rồi mới xem"
         },
         {
           "key": "D",
-          "text": "Token Bucket cho API quota, Sliding Window cho giới hạn chặt, Leaky Bucket cho downstream, Fixed Window cho thống kê, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Least Connections quan trọng với AI vì thời lượng mỗi request rất khác nhau — Round Robin sẽ phân phối kém khi có request kéo dài. Weighted chính là cơ chế kỹ thuật đứng sau canary deployment: tỷ lệ 90/10 nghĩa là 10% traffic đi vào version mới.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-049",
       "type": "mcq",
-      "prompt": "Circuit Breaker hoạt động qua những trạng thái nào?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Container?",
       "options": [
         {
           "key": "A",
-          "text": "START → RETRY → FAIL → RESTART, mỗi trạng thái tương ứng một lần thử, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, với mọi quy mô hệ thống, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "GREEN → YELLOW → RED, chuyển trạng thái theo mức sử dụng CPU, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, trong suốt vòng đời dịch vụ, với mọi quy mô hệ thống"
+          "text": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường"
         },
         {
           "key": "C",
-          "text": "OPEN → CLOSED → OPEN, lặp lại theo chu kỳ cố định 60 giây, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi đã bật đủ kiểm tra, với mọi quy mô hệ thống"
+          "text": "Là một virtual machine đầy đủ hệ điều hành"
         },
         {
           "key": "D",
-          "text": "CLOSED (bình thường) → khi error rate vượt 50% thì OPEN, chặn hẳn không gọi vào service lỗi → sau 30 giây chuyển HALF-OPEN thử một request → thành công thì về CLOSED, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Mục đích là ngăn cascade failure lan rộng: khi service phía sau đang hỏng, việc tiếp tục gọi vào chỉ làm chậm chính bạn và làm nặng thêm cho họ. Trạng thái HALF-OPEN là cách thăm dò an toàn — chỉ một request được thử, không mở lại toàn bộ ngay.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-050",
       "type": "mcq",
-      "prompt": "Bulkhead pattern giải quyết vấn đề gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Docker image?",
       "options": [
         {
           "key": "A",
-          "text": "Ngăn request trùng lặp bằng cách gắn khoá định danh cho mỗi lần gọi, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, dù người dùng không thấy gì bất thường, với mọi quy mô hệ thống, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Tự động khởi động lại container khi liveness probe thất bại, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả lúc tải thấp, theo đúng khuyến nghị, kể cả khi đã bật đủ kiểm tra, kể cả khi tài liệu nguồn còn nguyên vẹn, kể cả khi model đã cập nhật bản mới nhất, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Là mẫu bất biến dùng để tạo container"
         },
         {
           "key": "C",
-          "text": "Cô lập tài nguyên theo loại request — như vách ngăn tàu thuỷ, mỗi service một thread pool riêng — nên một service chậm không làm chết thread pool chung, trong mọi trường hợp, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Là log runtime thay đổi liên tục"
         },
         {
           "key": "D",
-          "text": "Giới hạn tổng số request mỗi giây mà hệ thống chấp nhận, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, với mọi quy mô hệ thống, dù cấu hình không đổi, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, trong khi log không ghi lại dấu hiệu nào, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "Ví dụ trong slide: LLM_POOL tối đa 10 thread, DB_POOL và TOOL_POOL riêng. Nếu dùng chung một pool thì khi LLM API chậm 30 giây, mọi thread bị chiếm và cả các request chỉ cần đọc database cũng không chạy được. Phương án A mô tả idempotency, phương án D mô tả health probe.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Là mẫu bất biến dùng để tạo container. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-051",
       "type": "mcq",
-      "prompt": "Idempotency quan trọng nhất trong tình huống nào và thực hiện bằng cách gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Secrets management?",
       "options": [
         {
           "key": "A",
-          "text": "Khi scale ngang, thực hiện bằng cách đồng bộ session giữa các instance, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Ghi API key trực tiếp trong frontend"
         },
         {
           "key": "B",
-          "text": "Khi cần cân bằng tải, thực hiện bằng thuật toán IP Hash, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Lưu credential ngoài source code và cấp theo quyền tối thiểu"
         },
         {
           "key": "C",
-          "text": "Khi retry — gọi lại nhiều lần phải cho kết quả giống nhau, không tạo bản ghi trùng; thực hiện bằng Idempotency-Key trong header, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, trong suốt vòng đời dịch vụ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Khi cần tăng tốc độ đọc dữ liệu, thực hiện bằng cache Redis, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù người dùng không thấy gì bất thường, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Ví dụ trong slide rất rõ: với Idempotency-Key là một UUID, lần gọi thứ nhất tạo payment, lần gọi thứ hai trả về đúng kết quả cũ chứ không tạo payment mới. Vì retry là hành vi mặc định của mọi cơ chế chống lỗi, thiếu idempotency là tự tạo ra bản ghi trùng.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Lưu credential ngoài source code và cấp theo quyền tối thiểu. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-052",
       "type": "mcq",
-      "prompt": "Các giá trị timeout được khuyến nghị trong slide là gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Async request?",
       "options": [
         {
           "key": "A",
-          "text": "connect_timeout 30s và read_timeout 2s, vì kết nối là bước chậm nhất, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Mọi external call đặt chung 5 giây để đơn giản hoá cấu hình, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường"
+          "text": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP"
         },
         {
           "key": "C",
-          "text": "connect_timeout 2s, read_timeout 30s cho LLM stream, và total 35s — mỗi external call đều phải có timeout, ở cả ba môi trường"
+          "text": "Giữ kết nối đồng bộ vô hạn"
         },
         {
           "key": "D",
-          "text": "Không đặt timeout mà dùng circuit breaker thay thế hoàn toàn, trong khi ngân sách token vẫn còn dư nhiều, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Nguyên tắc là không chờ vô hạn. Kết nối phải nhanh nên connect_timeout ngắn; còn LLM có thể mất hơn 30 giây nên cần stream response và đặt read_timeout hợp lý cho từng loại call. Đặt cùng một con số cho mọi loại call là sai vì gọi database và gọi LLM có đặc tính hoàn toàn khác nhau.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-053",
       "type": "mcq",
-      "prompt": "Ba loại probe của Kubernetes làm gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Authentication?",
       "options": [
         {
           "key": "A",
-          "text": "livenessProbe chạy lúc build, readinessProbe lúc deploy, startupProbe lúc scale, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, trong suốt vòng đời dịch vụ, trong mọi trường hợp"
+          "text": "Xác thực danh tính trước khi cho dùng agent hoặc tool"
         },
         {
           "key": "B",
-          "text": "livenessProbe kiểm tra /health và restart pod nếu fail; readinessProbe kiểm tra /ready và loại pod khỏi load balancer nếu chưa sẵn sàng; startupProbe cho phép ứng dụng khởi tạo chậm, ở cả ba môi trường"
+          "text": "Chỉ ẩn URL endpoint"
         },
         {
           "key": "C",
-          "text": "Cả ba đều restart pod khi thất bại, chỉ khác nhau ở khoảng thời gian kiểm tra, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "livenessProbe đo CPU, readinessProbe đo RAM, startupProbe đo disk, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Phân biệt hai probe đầu là điểm hay nhầm nhất: liveness trả lời 'có cần khởi động lại không', readiness trả lời 'có nên gửi traffic vào không'. Nhờ cặp này mà Kubernetes tự chữa lỗi mà không cần can thiệp thủ công — pod treo thì restart, pod chưa sẵn sàng thì lấy ra khỏi load balancer.",
-      "source": "exam-109.json"
+      "answer": "A",
+      "explanation": "Xác thực danh tính trước khi cho dùng agent hoặc tool. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-054",
       "type": "mcq",
-      "prompt": "SLI, SLO và SLA khác nhau thế nào?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng CI/CD?",
       "options": [
         {
           "key": "A",
-          "text": "SLI là cam kết pháp lý, SLO là chỉ số đo được, SLA là mục tiêu nội bộ, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, trong mọi trường hợp, kể cả lúc tải thấp, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi"
+          "text": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường"
         },
         {
           "key": "B",
-          "text": "SLI là chỉ số đo lường thực tế quan sát được từ hệ thống (raw data); SLO là mục tiêu nội bộ team tự đặt, thường cao hơn SLA một chút để có error budget làm đệm; SLA là cam kết pháp lý với khách hàng, vi phạm thì hoàn tiền hoặc chịu phạt, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường"
+          "text": "Deploy thủ công không cần test"
         },
         {
           "key": "C",
-          "text": "Cả ba là tên gọi khác nhau của cùng một khái niệm uptime, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả khi dữ liệu đã được làm sạch kỹ, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, kể cả khi đã bật đủ kiểm tra"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "SLI đo latency, SLO đo error rate, SLA đo cost — mỗi cái đo một loại metric riêng, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, ở cả ba môi trường, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, trong suốt vòng đời dịch vụ"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Ví dụ cụ thể: SLI là availability = successful_req/total_req * 100, p99_latency = 234ms, error_rate = 0,08%. SLO là uptime target 99,9%, P99 latency dưới 500ms, error rate dưới 0,1%, error budget 8,7 giờ mỗi năm. SLA là guaranteed 99,5%, vi phạm thì credit back 10–30% hoá đơn, response time dưới 4 giờ với sự cố critical.",
-      "source": "exam-109.json"
+      "answer": "A",
+      "explanation": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-055",
       "type": "mcq",
-      "prompt": "Chaos Monkey của Netflix hoạt động theo triết lý nào?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Rollback?",
       "options": [
         {
           "key": "A",
-          "text": "Tự động kill ngẫu nhiên server trong production — thà tự phá có kiểm soát để tìm điểm yếu, còn hơn để production thật phá bất ngờ, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường"
+          "text": "Xóa toàn bộ log để làm lại"
         },
         {
           "key": "B",
-          "text": "Chạy load test định kỳ với traffic gấp mười lần bình thường, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, nên chi phí mỗi lần gọi không thay đổi, với mọi quy mô hệ thống"
+          "text": "Quay về phiên bản ổn định khi phát hiện lỗi production"
         },
         {
           "key": "C",
-          "text": "Tự động rollback mọi deploy có error rate tăng trong 5 phút đầu, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong mọi trường hợp, với mọi loại workload, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Chặn toàn bộ traffic vào một region để kiểm tra khả năng chuyển vùng, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, dù đội đã tuân thủ đúng quy trình nội bộ"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Các loại chaos experiment gồm: pod kill (K8s có tự restart và traffic có bị ảnh hưởng không), network latency (inject 2 giây delay vào call tới DB — app có timeout và fallback đúng không), memory pressure (fill RAM tới 90%), dependency down (tắt Redis/DB — circuit breaker có kích hoạt không), disk full (fill /tmp).",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Quay về phiên bản ổn định khi phát hiện lỗi production. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-056",
       "type": "mcq",
-      "prompt": "Kết quả kỳ vọng khi chạy chaos experiment trên một hệ thống resilient là gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Cost guard?",
       "options": [
         {
           "key": "A",
-          "text": "Auto-recovery (K8s restart pod trong dưới 90s, traffic tự chuyển sang pod healthy), circuit breaker mở khi error rate vượt ngưỡng và trả fallback ngay, graceful degradation (cache miss thì serve stale data thay vì trả lỗi 500), kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả khi đã bật đủ kiểm tra"
+          "text": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model"
         },
         {
           "key": "B",
-          "text": "Alert được gửi tới on-call và một kỹ sư xử lý trong vòng 15 phút, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, ở cả ba môi trường, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả lúc tải thấp"
+          "text": "Chờ hóa đơn cuối tháng rồi mới xem"
         },
         {
           "key": "C",
-          "text": "Hệ thống dừng hoàn toàn để bảo toàn dữ liệu rồi được khôi phục thủ công, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả lúc tải thấp, với mọi loại workload, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Mọi request đều thành công vì hệ thống có đủ dự phòng, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, dù cấu hình không đổi, trong mọi trường hợp, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "A",
-      "explanation": "Điểm mấu chốt là hệ thống tự phục hồi chứ không cần người can thiệp. Công cụ để chạy: Chaos Monkey, LitmusChaos (K8s native), Gremlin (enterprise), AWS FIS. GameDay là buổi chạy chaos experiment có kế hoạch, có team sẵn sàng và có rollback plan chuẩn bị trước.",
-      "source": "exam-109.json"
+      "explanation": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-057",
       "type": "mcq",
-      "prompt": "Ba tier deployment và thời điểm chuyển giữa chúng là gì?",
+      "prompt": "Trong vận hành thực tế, Container giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Tier 1 Railway/Render/Fly.io (deploy dưới 10 phút, có free tier, zero config — dành cho MVP, demo, học); Tier 2 AWS ECS/GCP Cloud Run (enterprise-grade, auto-scaling, CI/CD — khi cần scale); Tier 3 Kubernetes self-managed (full control, vận hành phức tạp — khi lớn hơn nữa), ở cả ba môi trường, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Tier 1 local, Tier 2 staging, Tier 3 production — ba môi trường triển khai, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong mọi trường hợp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, trong suốt vòng đời dịch vụ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường"
         },
         {
           "key": "C",
-          "text": "Tier 1 Kubernetes, Tier 2 Cloud Run, Tier 3 Railway — đi từ khó tới dễ, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả lúc tải thấp, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, trong mọi trường hợp, theo đúng khuyến nghị, mà không cần sửa code"
+          "text": "Là một virtual machine đầy đủ hệ điều hành"
         },
         {
           "key": "D",
-          "text": "Tier 1 IaaS, Tier 2 PaaS, Tier 3 SaaS — đi theo ba tầng dịch vụ cloud, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "A",
-      "explanation": "Thông điệp của tier model trùng với takeaway 'start simple, migrate later': dùng Railway hoặc Render cho MVP vì deploy dưới 10 phút, chỉ chuyển sang AWS/GCP khi business thật sự cần scale. Nhảy thẳng vào Kubernetes khi chưa có người dùng là tự tạo gánh nặng vận hành.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-058",
       "type": "mcq",
-      "prompt": "Vì sao serverless như Lambda thường không phù hợp cho AI agent cần phản hồi nhanh?",
+      "prompt": "Trong vận hành thực tế, Docker image giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Vì Lambda giới hạn dung lượng bộ nhớ ở mức 128MB nên không nạp nổi model, kể cả khi đã bật đủ kiểm tra, với mọi quy mô hệ thống"
+          "text": "Là log runtime thay đổi liên tục"
         },
         {
           "key": "B",
-          "text": "Vì cold start mất 5–15 giây; container-based như Railway/Render thường tốt hơn cho agent cần trả lời nhanh, ở cả ba môi trường"
+          "text": "Là mẫu bất biến dùng để tạo container"
         },
         {
           "key": "C",
-          "text": "Vì Lambda không hỗ trợ ngôn ngữ Python và các thư viện AI phổ biến, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Vì Lambda tính tiền theo giờ nên đắt hơn nhiều so với container, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Bảng so sánh nền tảng: Railway deploy dưới 5 phút và tính theo mức dùng, Render dưới 10 phút và tính theo gói, Cloud Run 10–15 phút tính theo request, Lambda 15–20 phút tính theo lần gọi. Cả bốn đều auto-scaling; Railway và Render đơn giản, Cloud Run và Lambda ở mức trung bình.",
-      "source": "exam-109.json"
+      "explanation": "Là mẫu bất biến dùng để tạo container. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-059",
       "type": "mcq",
-      "prompt": "Năm bước deploy lên Railway là gì?",
+      "prompt": "Trong vận hành thực tế, Secrets management giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "railway login && railway init → kết nối GitHub repo (Railway tự detect Dockerfile hoặc Nixpacks) → set environment variables → bấm Deploy hoặc railway up → nhận public URL qua railway domain, ở cả ba môi trường"
+          "text": "Ghi API key trực tiếp trong frontend"
         },
         {
           "key": "B",
-          "text": "Tạo VM → cài Docker → copy code lên server → chạy docker run → cấu hình Nginx, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường"
+          "text": "Lưu credential ngoài source code và cấp theo quyền tối thiểu"
         },
         {
           "key": "C",
-          "text": "Đăng ký tài khoản → nạp tiền → chọn region → chọn cấu hình máy → chờ cấp phát, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Viết Dockerfile → push lên Docker Hub → tạo cluster K8s → apply manifest → expose service, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, với mọi quy mô hệ thống, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "File railway.toml khai báo builder là NIXPACKS, startCommand chạy uvicorn với --host 0.0.0.0 --port $PORT, healthcheckPath là /health, và restartPolicyType là ON_FAILURE. Lưu ý quan trọng: Railway inject PORT tự động nên agent BẮT BUỘC phải đọc os.getenv('PORT') thay vì hardcode.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Lưu credential ngoài source code và cấp theo quyền tối thiểu. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     },
     {
       "id": "D12-060",
       "type": "mcq",
-      "prompt": "Continuous Delivery khác Continuous Deployment ở điểm nào?",
+      "prompt": "Trong vận hành thực tế, Async request giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Delivery chạy trên staging còn Deployment chạy trên production, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, dù cấu hình không đổi, với mọi quy mô hệ thống, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Delivery dùng cho backend còn Deployment dùng cho frontend, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, với mọi quy mô hệ thống"
+          "text": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP"
         },
         {
           "key": "C",
-          "text": "Delivery tạo ra artifact đã test xong, sẵn sàng deploy bất cứ lúc nào nhưng cần người bấm approve — hợp team cần kiểm soát thủ công; Deployment thì merge vào main là deploy thẳng lên production, không cần ai duyệt — hợp team có test coverage cao và monitoring tốt, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ"
+          "text": "Giữ kết nối đồng bộ vô hạn"
         },
         {
           "key": "D",
-          "text": "Hai thuật ngữ hoàn toàn đồng nghĩa, chỉ khác cách gọi theo vùng, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "Cả hai đều tự động hoá toàn bộ đường đi từ push code tới production, khác nhau đúng ở một nút bấm. Điều kiện để chọn Deployment không phải là quy mô team mà là mức độ tin cậy của test và monitoring — thiếu hai thứ đó thì deploy tự động chỉ làm lỗi lan nhanh hơn.",
-      "source": "exam-109.json"
+      "answer": "B",
+      "explanation": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html"
     }
   ]
 }

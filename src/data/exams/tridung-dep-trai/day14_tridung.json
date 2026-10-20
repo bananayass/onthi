@@ -14,1680 +14,1680 @@
     {
       "id": "D14-001",
       "type": "mcq",
-      "prompt": "Câu hỏi mở đầu Ngày 14 là gì?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Evaluation objective?",
       "options": [
         {
           "key": "A",
-          "text": "Bạn vừa sửa prompt cho agent, điểm trên bộ test tăng từ 66% lên 71% — vậy đã đủ để deploy chưa?, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Agent chạy tốt trên localhost, khi nào 100 người dùng được?, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric"
         },
         {
           "key": "C",
-          "text": "Agent trả lời sai, bạn mở cái gì ra xem đầu tiên?, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường"
+          "text": "Chọn metric dễ đẹp nhất rồi mới tìm mục tiêu"
         },
         {
           "key": "D",
-          "text": "Nếu user hỏi cách hack hệ thống thì agent sẽ trả lời gì?, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "A",
-      "explanation": "Câu hỏi này đóng khung cả ngày: có điểm rồi vẫn chưa đủ để quyết định. Hai câu hỏi phải trả lời thêm là 'chênh lệch 5 điểm có thật hay chỉ là nhiễu' (phần cỡ mẫu) và 'số tổng có đang che một slice đi xuống không' (phần slice).",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-002",
       "type": "mcq",
-      "prompt": "Ba thứ dùng lại được sau khi đổi model là gì?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Benchmark?",
       "options": [
         {
           "key": "A",
-          "text": "Dashboard, alert rule và runbook, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Trace đã gán nhãn (chuyên gia label một lần, dùng lại cho mọi phiên bản sau); judge đã hiệu chuẩn (hai con số TPR và TNR calibrate một lần); và taxonomy lỗi của chính domain (bảng phân loại tự dựng từ data của mình, không có sẵn để tải về), ở cả ba môi trường"
+          "text": "Tập case và cách chấm chuẩn để so sánh nhất quán"
         },
         {
           "key": "C",
-          "text": "Vector store, embedding model và chunking strategy, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường"
+          "text": "Một demo gồm vài ví dụ thành công"
         },
         {
           "key": "D",
-          "text": "Prompt template, few-shot examples và system message, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Lập luận đi kèm: model thì đối thủ gọi cùng một API, trả cùng một giá là có ngay; ba thứ này thì không. Đó là lý do phần lớn thời gian của ngày dành cho dữ liệu và quy trình chứ không phải cho tên các metric.",
-      "source": "exam-111.json",
+      "explanation": "Tập case và cách chấm chuẩn để so sánh nhất quán. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-003",
       "type": "mcq",
-      "prompt": "Trong ví dụ 100 trace, phân bố nguyên nhân lỗi như thế nào?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Evaluation dataset?",
       "options": [
         {
           "key": "A",
-          "text": "Ba cluster đều nhau, mỗi cái khoảng 33%, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, ở cả ba môi trường, theo đúng khuyến nghị, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "90% lỗi đến từ prompt, 10% từ hạ tầng, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, kể cả lúc tải thấp, mà không cần sửa code, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Phải đại diện các use case, edge case và rủi ro quan trọng"
         },
         {
           "key": "C",
-          "text": "71 failure case chia thành: policy hết hiệu lực 45% (32 sample, do ingest thiếu re-index), cite sai điều khoản 30% (21 sample, do chunk cắt giữa điều khoản), và sai ngôn ngữ cộng bịa liên hệ 25% (18 sample, do prompt và guardrail) — hai cluster đầu chiếm 53 sample tức 75% và đều phải sửa ở tầng data pipeline, dù cấu hình không đổi, với mọi quy mô hệ thống, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Chỉ gồm các ví dụ model trả lời đúng"
         },
         {
           "key": "D",
-          "text": "Toàn bộ lỗi đều nằm ở tầng retrieval, không có lỗi nào ở prompt, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, trong mọi trường hợp, với mọi loại workload, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Điểm quan trọng nhất: hai root cause lớn nhất — ingest thiếu re-index và chunk cắt giữa điều khoản — KHÔNG có trong bất kỳ bộ tiêu chí dựng sẵn nào. Chúng chỉ hiện ra khi đọc trace rồi cluster. Sửa prompt chỉ chạm được phần rìa của cluster thứ hai.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Phải đại diện các use case, edge case và rủi ro quan trọng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-004",
       "type": "mcq",
-      "prompt": "Bốn trên năm triệu chứng nằm ở tầng nào so với prompt?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về LLM-as-a-Judge?",
       "options": [
         {
           "key": "A",
-          "text": "Ba ở tầng model và hai ở tầng hạ tầng mạng, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, dù cấu hình không đổi, với mọi quy mô hệ thống, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Bốn triệu chứng nằm ở tầng output, chỉ một ở tầng nguồn doc, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, trong mọi trường hợp, với mọi loại workload, dù cấu hình không đổi"
+          "text": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy"
         },
         {
           "key": "C",
-          "text": "Cả năm triệu chứng đều nằm ở tầng prompt nên sửa prompt là đủ, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, kể cả lúc tải thấp, mà không cần sửa code, ở cả ba môi trường"
+          "text": "Chấp nhận điểm chấm không cần rubric"
         },
         {
           "key": "D",
-          "text": "Nằm DƯỚI tầng prompt: 'chỉ sai với khách hỏi về giá' ở nguồn doc; 'trả lời theo policy cũ' ở ingest/index; 'tuần trước ổn tuần này hỏng' ở ingest/index; 'trích dẫn có nhưng dẫn sai điều khoản' ở retrieval — chỉ 'hỏi tiếng Việt trả lời tiếng Anh' mới thuộc tầng prompt, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "D",
-      "explanation": "Lý do dễ nhầm được nêu thẳng: triệu chứng nào nghe cũng như lỗi prompt, vì prompt là thứ duy nhất sửa được trong 5 phút. Nguyên nhân cụ thể của bốn cái dưới: PDF scan và OCR hỏng, thiếu scheduled re-index, chunk cắt giữa điều khoản.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-005",
       "type": "mcq",
-      "prompt": "Bẫy patch prompt diễn ra như thế nào?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về RAGAS?",
       "options": [
         {
           "key": "A",
-          "text": "Prompt bị chia thành nhiều file nên khó quản lý phiên bản, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả khi dữ liệu đã được làm sạch kỹ, trong mọi trường hợp, với mọi loại workload, dù cấu hình không đổi, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG"
         },
         {
           "key": "B",
-          "text": "Prompt bị dịch sang tiếng Anh nên model hiểu sai ý người dùng Việt, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, trong mọi trường hợp"
+          "text": "Thay thế hoàn toàn đánh giá con người"
         },
         {
           "key": "C",
-          "text": "User báo agent sai giờ mở cửa, engineer thêm câu 'luôn kiểm tra kỹ giờ làm việc' vào system prompt; sau 20 lần như vậy trong 3 tháng, system prompt phình từ 400 lên 1.800 token, cost phần input tăng 4,5 lần, và 3 câu patch mâu thuẫn nhau mà không ai biết model đang nghe theo câu nào, dù cấu hình không đổi, với mọi quy mô hệ thống, trong mọi trường hợp, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Prompt bị nén lại quá ngắn nên model mất ngữ cảnh cần thiết, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, kể cả lúc tải thấp, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Vấn đề cộng thêm: không ai chạy regression — tức chạy lại toàn bộ case cũ — để biết câu patch thứ 12 có phá case của câu patch thứ 5 hay không. Mỗi câu patch fix đúng một case, nhưng chi phí và rủi ro thì cộng dồn.",
-      "source": "exam-111.json",
+      "answer": "A",
+      "explanation": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-006",
       "type": "mcq",
-      "prompt": "Top-down và bottom-up khác nhau thế nào trong việc chọn metric?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Slice evaluation?",
       "options": [
         {
           "key": "A",
-          "text": "Top-down chính xác hơn nên luôn nên chọn top-down, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, ở cả ba môi trường, trong mọi trường hợp, với mọi loại workload, với mọi quy mô hệ thống"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Hai cách này loại trừ nhau, chọn một thì phải bỏ hẳn cái kia, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả khi đã bật đủ kiểm tra, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, với mọi quy mô hệ thống"
+          "text": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ"
         },
         {
           "key": "C",
-          "text": "Top-down dùng cho model đóng còn bottom-up dùng cho model mở, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ"
+          "text": "Gộp tất cả điểm thành một số duy nhất"
         },
         {
           "key": "D",
-          "text": "Top-down là lấy sẵn một bộ tiêu chí như hallucination, toxicity, relevance — dùng khi chưa có traffic, chưa có log, tức tuần đầu của sản phẩm; Bottom-up là đọc trace thật, ghi lỗi bằng ngôn ngữ của mình, cluster rồi mới chọn metric — dùng khi đã có trace, 20 cái cũng đủ để bắt đầu, dù cấu hình không đổi, với mọi quy mô hệ thống, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Cái giá của top-down: đúng hai root cause lớn nhất chiếm 75% số lỗi lại không có trong bất kỳ bộ tiêu chí sẵn nào. Và không phải chọn một bỏ một — tuần đầu chạy top-down để có cái mà đo, gom đủ log rồi chuyển sang bottom-up, khi đó bộ tiêu chí ban đầu chỉ còn là một phần nhỏ trong danh sách.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-007",
       "type": "mcq",
-      "prompt": "Sáu bước mượn từ grounded theory là gì?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Calibration?",
       "options": [
         {
           "key": "A",
-          "text": "Đặt giả thuyết → thiết kế thí nghiệm → thu số liệu → kiểm định → kết luận → công bố, ở cả ba môi trường, mà không cần sửa code, nên chi phí mỗi lần gọi không thay đổi, kể cả khi tài liệu nguồn còn nguyên vẹn, trong khi hệ thống vẫn chạy đúng thiết kế, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Làm model luôn trả lời chắc chắn"
         },
         {
           "key": "B",
-          "text": "Sample trace → Open coding → Axial coding → Đếm tần suất → Dừng khi bão hoà → Giờ mới viết eval, theo đúng khuyến nghị, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, kể cả khi model đã cập nhật bản mới nhất, trong suốt vòng đời dịch vụ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng"
         },
         {
           "key": "C",
-          "text": "Chọn metric → chạy test → đọc kết quả → sửa prompt → chạy lại → deploy, với mọi quy mô hệ thống, kể cả lúc tải thấp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, dù đội đã tuân thủ đúng quy trình nội bộ, dù cấu hình đã được rà soát lại một lượt, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Thu thập data → làm sạch → gán nhãn → huấn luyện → đánh giá → triển khai, dù cấu hình không đổi, trong mọi trường hợp, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, trong khi log không ghi lại dấu hiệu nào, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, theo đúng khuyến nghị, mà không cần sửa code"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Bốn bước đầu KHÔNG có một tên metric nào — đó là chủ ý. Open coding là ghi thô chưa phân loại; axial coding là gom ghi chú thô thành category có tên. Đầu ra của bước 3 là taxonomy lỗi: tập các category có tên, mỗi cái kèm định nghĩa đủ rõ để hai người đọc cùng một trace dán cùng một nhãn.",
-      "source": "exam-111.json",
+      "explanation": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-008",
       "type": "mcq",
-      "prompt": "Vì sao bước 'viết eval' lại đứng cuối cùng?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Failure analysis?",
       "options": [
         {
           "key": "A",
-          "text": "Vì viết eval là bước tốn nhiều thời gian nhất nên để sau cùng, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, ở cả ba môi trường, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù người dùng không thấy gì bất thường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân"
         },
         {
           "key": "B",
-          "text": "Vì cần có kết quả từ production trước mới viết được eval, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả lúc tải thấp, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code, với mọi loại workload"
+          "text": "Chỉ đọc các câu trả lời hay nhất"
         },
         {
           "key": "C",
-          "text": "Vì chọn metric trước khi biết agent của mình hỏng kiểu gì thì cuối cùng chỉ đo được thứ dễ đo nhất — team nào cũng có dashboard hallucination rate, rất ít team biết 45% lỗi của mình đến từ một cron re-index không chạy, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị, mà không cần sửa code"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Vì eval chỉ có ý nghĩa khi đã có ít nhất hai phiên bản để so sánh, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, trong suốt vòng đời dịch vụ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị, mà không cần sửa code"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Đây là luận điểm trung tâm của cả ngày và cũng là takeaway số 1: đọc trace trước, chọn metric sau. Bảng tần suất lỗi mới là thứ quyết định đo cái gì. Bốn bước đầu của quy trình — sample trace, open coding, axial coding và đếm tần suất — cố ý không nhắc tên metric nào, vì bảng tần suất lỗi mới là thứ quyết định đo cái gì ở bước cuối.",
-      "source": "exam-111.json",
+      "answer": "A",
+      "explanation": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-009",
       "type": "mcq",
-      "prompt": "Năm nguồn để sample trace là gì và tỷ lệ random tối thiểu bao nhiêu?",
+      "prompt": "Trong một dự án AI, cách áp dụng Evaluation objective nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Lấy 100% các case có thumbs-down và 100% case có latency cao, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, dù đội đã tuân thủ đúng quy trình nội bộ, trong mọi trường hợp, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Random thuần (rút đều từ toàn bộ traffic), cluster rồi lấy đại diện (mỗi cluster 2–3 case để khỏi đọc đi đọc lại 50 trace cùng tình huống), outlier (p99 latency, nhiều tool call nhất, response dài nhất), đã bị flag (guardrail chặn hoặc automated check báo đỏ), và user feedback xấu (thumbs-down, hỏi lại ngay sau đó, bỏ session giữa chừng) — giữ ít nhất 30% random trong mỗi batch, mà không cần sửa code, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric"
         },
         {
           "key": "C",
-          "text": "Chỉ cần lấy các case đã bị flag vì đó là nơi chắc chắn có lỗi, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường, dù cấu hình không đổi, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị, mà không cần sửa code"
+          "text": "Chọn metric dễ đẹp nhất rồi mới tìm mục tiêu"
         },
         {
           "key": "D",
-          "text": "Lấy toàn bộ trace của một ngày để đảm bảo không bỏ sót gì, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, kể cả lúc tải thấp, theo đúng khuyến nghị, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Lý do phải giữ phần random: chỉ đọc case đã bị flag thì chỉ gặp lại đúng những lỗi hệ thống vốn đã bắt được. Random là nguồn DUY NHẤT trong năm nguồn không bị lọc qua thứ hệ thống đã biết cách bắt.",
-      "source": "exam-111.json",
+      "explanation": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-010",
       "type": "mcq",
-      "prompt": "Nguyên tắc của bước Open coding là gì?",
+      "prompt": "Trong một dự án AI, cách áp dụng Benchmark nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Ghi lại toàn bộ input và output của mỗi trace để phân tích sau, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn, trong mọi trường hợp"
+          "text": "Một demo gồm vài ví dụ thành công"
         },
         {
           "key": "B",
-          "text": "Đọc trace kèm checklist tiêu chuẩn để không bỏ sót loại lỗi nào, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, nên chi phí mỗi lần gọi không thay đổi, kể cả khi đã bật đủ kiểm tra"
+          "text": "Tập case và cách chấm chuẩn để so sánh nhất quán"
         },
         {
           "key": "C",
-          "text": "Đọc từng trace, ghi một dòng bằng ngôn ngữ của mình, chưa đặt tên category, chưa mở checklist — và chỉ ghi LỖI ĐẦU TIÊN, trong mọi trường hợp, với mọi loại workload, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Chấm điểm mỗi trace theo thang 1–5 rồi lấy trung bình, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, dù đội đã tuân thủ đúng quy trình nội bộ"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Lý do chỉ ghi lỗi đầu tiên: lỗi thứ hai trong cùng một trace thường là hệ quả của lỗi thứ nhất, đếm cả hai thì cluster lớn nhất lại là cluster sai và bạn sẽ fix nhầm chỗ. Lý do không mở checklist: bạn sẽ chỉ tìm thấy đúng những gì có sẵn trong checklist.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Tập case và cách chấm chuẩn để so sánh nhất quán. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-011",
       "type": "mcq",
-      "prompt": "Axial coding gom các ghi chú theo tiêu chí nào?",
+      "prompt": "Trong một dự án AI, cách áp dụng Evaluation dataset nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Theo thời điểm xảy ra để thấy được xu hướng theo thời gian"
+          "text": "Phải đại diện các use case, edge case và rủi ro quan trọng"
         },
         {
           "key": "B",
-          "text": "Theo triệu chứng mà người dùng mô tả, với mọi quy mô hệ thống"
+          "text": "Chỉ gồm các ví dụ model trả lời đúng"
         },
         {
           "key": "C",
-          "text": "Theo mức độ nghiêm trọng, từ nhẹ tới nặng, trong mọi trường hợp"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Theo ROOT CAUSE — tức theo chỗ phải sửa, không theo triệu chứng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Ví dụ về cái sai: gộp q_042 (cite điều khoản không liên quan) với q_045 (bịa số hotline) vì cả hai 'bịa thông tin' thì được một cluster to mà không sửa được — một cái ở chunking, một cái ở prompt. Category chỉ dùng được khi MỌI case trong nó đóng lại bằng CÙNG MỘT lần sửa.",
-      "source": "exam-111.json",
+      "answer": "A",
+      "explanation": "Phải đại diện các use case, edge case và rủi ro quan trọng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-012",
       "type": "mcq",
-      "prompt": "Test nhanh để biết một category đã đủ hẹp chưa là gì?",
+      "prompt": "Trong một dự án AI, cách áp dụng LLM-as-a-Judge nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Category phải ánh xạ được vào một metric có sẵn trong RAGAS, kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả lúc tải thấp, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, trong khi log không ghi lại dấu hiệu nào, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Category phải được ít nhất hai người đồng ý về tên gọi, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy"
         },
         {
           "key": "C",
-          "text": "Đọc tên category xong, viết được ngay một câu hỏi pass/fail cho nó chưa — chưa viết được thì mới chỉ là một cảm nhận, ở cả ba môi trường, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, nên chi phí mỗi lần gọi không thay đổi, trong suốt vòng đời dịch vụ, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Chấp nhận điểm chấm không cần rubric"
         },
         {
           "key": "D",
-          "text": "Category phải có ít nhất 10 case thì mới coi là đủ hẹp, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "Ví dụ quá rộng: 'hallucination', 'chất lượng kém', 'không hữu ích'. Ví dụ đủ hẹp: 'cite điều khoản không hỗ trợ câu khẳng định', 'trả lời tiếng Anh khi user viết tiếng Việt', 'dùng bản policy đã hết hiệu lực', 'lộ internal ID ra ngoài'. Hai cái sau viết được thành regex nên không cần judge.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-013",
       "type": "mcq",
-      "prompt": "Quy tắc dừng khi đọc trace là gì và thực tế rơi vào khoảng bao nhiêu?",
+      "prompt": "Trong một dự án AI, cách áp dụng RAGAS nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Dừng khi 20 trace liên tiếp không sinh category mới; thực tế rơi vào khoảng 100 trace, tốn 2–3 giờ một người — và đừng chia 5 người mỗi người đọc 20 trace vì category của mỗi người sẽ không khớp nhau, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Không có quy tắc dừng, phải đọc toàn bộ trace của một tuần, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG"
         },
         {
           "key": "C",
-          "text": "Dừng khi đã tìm được ít nhất 10 category khác nhau, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, trong mọi trường hợp, kể cả lúc tải thấp, dù cấu hình không đổi, mà không cần sửa code, với mọi loại workload"
+          "text": "Thay thế hoàn toàn đánh giá con người"
         },
         {
           "key": "D",
-          "text": "Dừng khi đọc đủ 50 trace, đó là con số chuẩn cho mọi domain, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "A",
-      "explanation": "Cảnh báo quan trọng: quy tắc này KHÔNG bắt được lỗi hiếm. Lỗi xuất hiện ở dưới 1% traffic gần như không rơi vào mẫu, nên đường cong phẳng không có nghĩa là đã thấy hết. Lỗi hiếm phải đi tìm có chủ đích bằng cách lọc theo triệu chứng.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-014",
       "type": "mcq",
-      "prompt": "Nghiên cứu MAST đã làm gì và kết quả κ là bao nhiêu?",
+      "prompt": "Trong một dự án AI, cách áp dụng Slice evaluation nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Huấn luyện một model phân loại lỗi tự động, đạt độ chính xác 88%, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, trong khi ngân sách token vẫn còn dư nhiều, kể cả lúc tải thấp, mà không cần sửa code, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Ba người cùng label độc lập một bộ 5 trace, họp về chỗ lệch nhau, sửa định nghĩa, lặp 3 vòng — tổng 15 trace và khoảng 10 giờ tranh luận về câu chữ; kết quả Cohen's kappa κ = 0,88; đem taxonomy sang 2 framework và 2 benchmark chưa từng dùng thì κ = 0,79, trong mọi trường hợp, với mọi loại workload, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ"
         },
         {
           "key": "C",
-          "text": "Khảo sát 53 practitioner về các loại lỗi họ gặp trong hệ multi-agent, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, dù đội đã tuân thủ đúng quy trình nội bộ, dù cấu hình không đổi, với mọi quy mô hệ thống, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Gộp tất cả điểm thành một số duy nhất"
         },
         {
           "key": "D",
-          "text": "So sánh 4 công cụ eval trên cùng một bộ 200 test case, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Ý nghĩa của κ = 0,79 trên dữ liệu mới: taxonomy không chỉ đúng riêng với bộ dữ liệu đã dựng ra nó. Mười giờ cho 15 trace nghe rất đắt, nhưng đó là chi phí trả MỘT LẦN để mọi lần label sau đó nhất quán — và để tự động hoá được.",
-      "source": "exam-111.json",
+      "explanation": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-015",
       "type": "mcq",
-      "prompt": "Cohen's kappa đo cái gì và thang giá trị ra sao?",
+      "prompt": "Trong một dự án AI, cách áp dụng Calibration nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Đo độ chính xác của phân loại so với ground truth, từ 0 đến 100%, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, với mọi quy mô hệ thống"
+          "text": "Làm model luôn trả lời chắc chắn"
         },
         {
           "key": "B",
-          "text": "Đo tỷ lệ đồng thuận thô giữa hai người chấm, tính bằng số case trùng chia tổng, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, kể cả khi đã bật đủ kiểm tra"
+          "text": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng"
         },
         {
           "key": "C",
-          "text": "Đo độ RÕ của định nghĩa — người khác nhìn cùng trace có dán cùng label không; chạy từ 0 (chỉ bằng may rủi) đến 1 (khớp hoàn toàn), trên 0,8 là rất chặt, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, kể cả khi dữ liệu đã được làm sạch kỹ"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Đo mức độ tương quan giữa hai metric khác nhau, từ −1 đến 1, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả lúc tải thấp, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Điểm nhấn: κ KHÔNG đo độ chính xác của phân loại — nó chỉ nói phân loại đó LẶP LẠI được, và vì thế tự động hoá được. Công thức κ = (po − pe)/(1 − pe), trong đó pe là mức trùng nhau kỳ vọng nếu cả hai không nhìn nội dung.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-016",
       "type": "mcq",
-      "prompt": "Nghịch lý của Cohen's kappa được minh hoạ thế nào?",
+      "prompt": "Trong một dự án AI, cách áp dụng Failure analysis nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Hai người chấm ngược nhau hoàn toàn nhưng κ vẫn bằng 1, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, dù đội đã tuân thủ đúng quy trình nội bộ, trong mọi trường hợp, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân"
         },
         {
           "key": "B",
-          "text": "κ tăng lên khi thêm người chấm thứ ba vào nhóm, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, với mọi loại workload, trong suốt vòng đời dịch vụ, kể cả khi tài liệu nguồn còn nguyên vẹn, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Chỉ đọc các câu trả lời hay nhất"
         },
         {
           "key": "C",
-          "text": "20 trace, A gắn cờ 1 case còn B không gắn cờ case nào — trùng nhau 19/20 nên po = 0,95, nhưng pe cũng bằng 0,95 nên κ = 0; nhãn càng lệch thì pe càng cao, dư địa càng hẹp, kể cả lúc tải thấp, theo đúng khuyến nghị, kể cả khi đã bật đủ kiểm tra, dù người dùng không thấy gì bất thường, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "κ luôn bằng 0 khi số case là số lẻ, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Hệ quả thực hành được rút ra: bộ mẫu phải cân PASS/FAIL. Nếu 95% case đều là PASS thì hai người chấm bừa cũng trùng nhau 90% mà không chứng minh được định nghĩa rõ ràng. Đây cũng là lý do phần calibration judge nhấn mạnh phải lấy đủ case FAIL chứ không phải đủ case.",
-      "source": "exam-111.json",
+      "answer": "A",
+      "explanation": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-017",
       "type": "mcq",
-      "prompt": "5 Whys trong Ngày 14 chạy trên cái gì và dừng ở đâu?",
+      "prompt": "Khi đội ngũ bỏ qua Evaluation objective, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Chạy trên khảo sát người dùng, dừng khi đạt đồng thuận, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, trong mọi trường hợp, với mọi loại workload, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Chạy trên TRACE: answer không dựa trên đúng doc → retrieval không lấy được bản policy mới → bản mới chưa được index vào vector store → ingest pipeline không có scheduled re-index; '5 Whys' là tên phương pháp chứ không phải hạn mức, dừng khi chạm tới thứ mình sửa được, dù cấu hình không đổi, với mọi quy mô hệ thống, ở cả ba môi trường"
+          "text": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric"
         },
         {
           "key": "C",
-          "text": "Chạy trên tài liệu thiết kế, dừng khi tìm được người chịu trách nhiệm, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ"
+          "text": "Chọn metric dễ đẹp nhất rồi mới tìm mục tiêu"
         },
         {
           "key": "D",
-          "text": "Chạy trên phỏng đoán của đội, dừng sau đúng 5 câu hỏi, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, kể cả lúc tải thấp, mà không cần sửa code, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Mỗi bước là một lần lần ngược lên một tầng trong trace: answer → retrieved_docs → index_ts → cron log. Lưu ý kỹ thuật: nhiều hệ thống chỉ log summary của input/output, nhưng bước 1 cần full text — thiếu nó thì 5 Whys chỉ là đoán.",
-      "source": "exam-111.json",
+      "explanation": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-018",
       "type": "mcq",
-      "prompt": "Ba bước từ failure mode sang metric là gì?",
+      "prompt": "Khi đội ngũ bỏ qua Benchmark, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Định nghĩa SLO → đo SLI → so với ngưỡng, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, ở cả ba môi trường, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Failure mode (từ bảng tần suất) → câu hỏi kiểm được trả lời bằng đúng/sai → metric (cách rẻ nhất để trả lời câu hỏi đó), trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, dù cấu hình không đổi"
+          "text": "Tập case và cách chấm chuẩn để so sánh nhất quán"
         },
         {
           "key": "C",
-          "text": "Đặt giả thuyết → chạy A/B test → đọc p-value, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, trong mọi trường hợp"
+          "text": "Một demo gồm vài ví dụ thành công"
         },
         {
           "key": "D",
-          "text": "Chọn metric → thu thập data → tính điểm, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả lúc tải thấp, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Ví dụ minh hoạ: failure mode 'dùng bản policy hết hiệu lực' với 32 case → câu hỏi 'bản policy đúng có nằm trong 5 doc lấy về không' → metric hit rate@5, chấm bằng code không cần judge. Bỏ bước giữa thì metric không gắn với failure mode nào cụ thể.",
-      "source": "exam-111.json",
+      "explanation": "Tập case và cách chấm chuẩn để so sánh nhất quán. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-019",
       "type": "mcq",
-      "prompt": "Vì sao ROUGE-L và cosine similarity đều không phân biệt được câu ngược nghĩa?",
+      "prompt": "Khi đội ngũ bỏ qua Evaluation dataset, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Vì cả hai chỉ hoạt động với tiếng Anh, không hoạt động với tiếng Việt, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Chỉ gồm các ví dụ model trả lời đúng"
         },
         {
           "key": "B",
-          "text": "Vì cả hai đều bỏ qua thứ tự từ trong câu, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Phải đại diện các use case, edge case và rủi ro quan trọng"
         },
         {
           "key": "C",
-          "text": "Vì exact match và ROUGE-L đếm từ trùng nên mù trước phủ định ('Agent không bao giờ nên hoàn tiền' vs 'Agent nên hoàn tiền' được ROUGE-L 0,90); còn cosine bắt được paraphrase nhưng vẫn mù trước mâu thuẫn vì đổi một từ thì vector gần như không dịch chuyển ('Tôi yêu thích Vision Pro' vs 'Tôi căm ghét Vision Pro' được 0,91), ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Vì hai metric này chỉ dùng được cho văn bản ngắn dưới 20 từ, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, nên bước kiểm tra phía sau không phát hiện ra, với mọi quy mô hệ thống, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Con số quyết định: cặp CÙNG nghĩa ('Vị CEO đã mua ô tô mới' vs 'Ông chủ đã tậu xe hơi mới') được 0,93, còn cặp NGƯỢC nghĩa được 0,91 — không có threshold nào tách được hai dòng đó. Kết luận: hoặc chạy được bằng code, hoặc trả tiền cho một model call.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Phải đại diện các use case, edge case và rủi ro quan trọng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-020",
       "type": "mcq",
-      "prompt": "Trục 1 — loại output quyết định cách chấm — xếp bảy hàng theo thứ tự nào?",
+      "prompt": "Khi đội ngũ bỏ qua LLM-as-a-Judge, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Đáp án ngắn đóng (exact match, chi phí 0, tin cậy cao) → chạy được như code/SQL/JSON/tool call (chạy thử, parse, đối chiếu schema, chi phí 0, tin cậy cao) → danh sách có thứ hạng (hit rate@k, MRR, NDCG, chi phí 0, tin cậy cao) → văn bản dài có trích nguồn (tách từng ý kiểm với nguồn, gọi model, tin cậy trung bình) → văn bản mở không có đáp án chuẩn (so hai bản hoặc chấm theo bảng tiêu chí, gọi model ×2 để đảo thứ tự, tin cậy thấp) → chuỗi hành động đổi trạng thái (so trạng thái cuối, phải dựng môi trường, tin cậy trung bình) → phiên nhiều lượt (tỷ lệ giải quyết, số lượt, bỏ giữa chừng, cần traffic thật, tin cậy thấp), ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy"
         },
         {
           "key": "B",
-          "text": "Xếp ngẫu nhiên vì mọi loại output đều chấm được như nhau, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, kể cả khi model đã cập nhật bản mới nhất, nên chi phí mỗi lần gọi không thay đổi, kể cả khi dữ liệu đã được làm sạch kỹ, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp"
+          "text": "Chấp nhận điểm chấm không cần rubric"
         },
         {
           "key": "C",
-          "text": "Xếp theo độ dài output từ ngắn tới dài, không liên quan tới chi phí, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, dù đội đã tuân thủ đúng quy trình nội bộ, dù cấu hình đã được rà soát lại một lượt, dù người dùng không thấy gì bất thường, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Xếp theo mức độ phổ biến của từng loại output trong thực tế, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, trong khi log không ghi lại dấu hiệu nào, kể cả khi tài liệu nguồn còn nguyên vẹn, dù prompt đã được viết lại rõ ràng hơn, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "A",
-      "explanation": "Đi từ trên xuống thì chấm đắt dần và kém tin cậy dần. Điểm quan trọng: hàng của bạn KHÔNG cố định — bắt agent kèm id tài liệu đã dựa vào, trả JSON có cấu trúc, hoặc trích nguyên văn thay vì diễn giải, mỗi cách đều kéo một phần phép đo lên hàng trên.",
-      "source": "exam-111.json",
+      "explanation": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-021",
       "type": "mcq",
-      "prompt": "Trục 2 — mỗi tính chất cần một cách chạy test khác nhau — gồm những gì?",
+      "prompt": "Khi đội ngũ bỏ qua RAGAS, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Không lặp gì, mỗi sample chạy đúng 1 lần → đo Correctness (đúng không); cùng một sample chạy k = 5 lần → đo Reliability (đúng mọi lần không); claim đối chiếu với nguồn → đo Groundedness (có bịa không); đếm bước, token, giây → đo Efficiency (tốn bao nhiêu), ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Latency, throughput, cost và quality — bốn chiều đo của production, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường"
+          "text": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG"
         },
         {
           "key": "C",
-          "text": "Correctness, Precision, Recall và F1 — bốn metric của bài toán phân loại, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Thay thế hoàn toàn đánh giá con người"
         },
         {
           "key": "D",
-          "text": "Faithfulness, answer relevancy, context recall và context precision, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Chỗ hay nhầm được nêu rõ: mỗi test case chỉ chạy MỘT LẦN thì không metric nào đo được reliability, kể cả metric có tên nghe rất hợp. Muốn có pass^k thì phải có k lần chạy của cùng một case.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-022",
       "type": "mcq",
-      "prompt": "pass@k và pass^k khác nhau thế nào với p = 0,9?",
+      "prompt": "Khi đội ngũ bỏ qua Slice evaluation, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "pass@k là đúng ít nhất một trong k lần = 1 − (1 − p)^k, càng chạy nhiều càng TĂNG — con số bạn khoe lúc demo; pass^k là đúng cả k lần không trượt lần nào = p^k, càng chạy nhiều càng GIẢM — con số bạn phải sống chung ở production; với p = 0,9 thì pass^8 chỉ còn 0,43, kể cả lúc tải thấp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ"
+          "text": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ"
         },
         {
           "key": "B",
-          "text": "pass@k dùng cho code còn pass^k dùng cho văn bản, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi"
+          "text": "Gộp tất cả điểm thành một số duy nhất"
         },
         {
           "key": "C",
-          "text": "Hai chỉ số này bằng nhau khi p lớn hơn 0,8, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, ở cả ba môi trường, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, kể cả lúc tải thấp"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "pass@k đo độ chính xác còn pass^k đo độ trễ trung bình, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong mọi trường hợp, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, kể cả khi đã bật đủ kiểm tra"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "A",
-      "explanation": "Con số phải nhớ: muốn pass^8 ≥ 0,90 thì mỗi lần chạy phải đạt 98,7% — đó là khoảng cách giữa demo chạy được và sản phẩm dùng được. Lưu ý các lần chạy trên cùng một task thường tương quan nên p^k là cận dưới.",
-      "source": "exam-111.json",
+      "explanation": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-023",
       "type": "mcq",
-      "prompt": "Vì sao temperature 0 vẫn không cho kết quả cố định?",
+      "prompt": "Khi đội ngũ bỏ qua Calibration, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Vì seed mặc định thay đổi theo thời gian hệ thống của server, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, với mọi quy mô hệ thống"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Vì model được cập nhật liên tục nên trọng số thay đổi hằng ngày, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, trong suốt vòng đời dịch vụ, ở cả ba môi trường"
+          "text": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng"
         },
         {
           "key": "C",
-          "text": "Vì phép cộng float trên GPU không có tính kết hợp — đổi thứ tự cộng là đổi kết quả ở bit cuối, mà thứ tự cộng phụ thuộc kích thước batch, và batch phụ thuộc vào ai đang gọi API cùng lúc với bạn; logits lệch vài bit khiến chỗ nào top-2 token sát điểm thì thứ tự bị lật, rồi decode autoregressive nên mọi thứ phía sau lệch theo, ở cả ba môi trường"
+          "text": "Làm model luôn trả lời chắc chắn"
         },
         {
           "key": "D",
-          "text": "Vì API nhà cung cấp tự thêm nhiễu để chống việc sao chép model, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Đây là chuyện của hạ tầng chứ không phải của model, nên seed cố định được phần sampling nhưng không cố định được phần này. Hệ quả: mỗi lần bạn báo cáo một con số từ MỘT lần chạy là bạn đang báo cáo một mẫu cỡ 1.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-024",
       "type": "mcq",
-      "prompt": "Với agent có quyền ghi, ba loại case bắt buộc phải có trong test set là gì?",
+      "prompt": "Khi đội ngũ bỏ qua Failure analysis, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Case ngắn, case trung bình và case dài, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, nên bước kiểm tra phía sau không phát hiện ra, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, với mọi quy mô hệ thống, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân"
         },
         {
           "key": "B",
-          "text": "Thiếu tham số bắt buộc; tham số mơ hồ (ví dụ 'đơn tháng trước' khi có hai đơn); và tham số user đưa nhưng sai — cả ba chấm bằng một câu có/không: agent có hỏi lại không, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Chỉ đọc các câu trả lời hay nhất"
         },
         {
           "key": "C",
-          "text": "Case tiếng Việt, case tiếng Anh và case song ngữ, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Case thành công, case thất bại và case timeout, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Bằng chứng trong slide: user nói 'hủy đơn gần nhất của tôi' mà không đưa mã đơn, agent gọi cancel_order(order_id='12345') — đúng tool, sai tham số, và 12345 là đơn của người khác. Thứ cần đo không phải 'có chọn đúng tool không' mà 'có biết dừng lại để hỏi không'.",
-      "source": "exam-111.json",
+      "answer": "A",
+      "explanation": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-025",
       "type": "mcq",
-      "prompt": "Vì sao đơn vị chấm phải là cả session chứ không phải từng lượt?",
+      "prompt": "Mục tiêu chính của Evaluation objective trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Vì chấm từng lượt tốn nhiều lần gọi model hơn nên đắt hơn, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, ở cả ba môi trường, trong mọi trường hợp, với mọi quy mô hệ thống, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị, mà không cần sửa code"
+          "text": "Chọn metric dễ đẹp nhất rồi mới tìm mục tiêu"
         },
         {
           "key": "B",
-          "text": "Vì công cụ eval chỉ hỗ trợ chấm theo session, không chấm theo lượt, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả khi đã bật đủ kiểm tra, kể cả lúc tải thấp, với mọi loại workload, dù cấu hình không đổi, ở cả ba môi trường, trong mọi trường hợp, theo đúng khuyến nghị, mà không cần sửa code"
+          "text": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric"
         },
         {
           "key": "C",
-          "text": "Vì các lượt trong một session luôn có độ khó như nhau, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, dù cấu hình không đổi, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, mà không cần sửa code"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Vì điểm từng lượt không cộng lại thành điểm session: user nói 'tôi chỉ muốn chuyến bay dưới $500' ở lượt 1, tới lượt 5 hỏi 'còn chuyến đi Tokyo thì sao' và agent trả lời '$1.200' — chấm riêng lượt 5 thì đúng, đủ, lịch sự nên PASS, nhưng chấm cả session thì agent đã quên ràng buộc nên FAIL, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Hai hướng hỏng ngược nhau đều bị trung bình che mất: 5/5 lượt PASS mà session vẫn FAIL như ví dụ trên; hoặc lượt 2 FAIL khiến mọi lượt sau vô nghĩa dù chấm ra điểm đẹp vì agent đã đi sai nhánh từ đó. Hệ quả: một test case của hàng này là một kịch bản nhiều lượt cộng một trạng thái đích.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-026",
       "type": "mcq",
-      "prompt": "Ví dụ về gate nhìn số tổng cho qua regression của một slice là gì?",
+      "prompt": "Mục tiêu chính của Benchmark trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Tổng và các slice đều tăng đúng cùng một mức 5 điểm, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Cùng một bản v2: tổng 200 sample tăng từ 66% lên 71%, slice EN 120 sample tăng từ 68% lên 79%, nhưng slice VI 80 sample GIẢM từ 63% xuống 59% — tổng tăng 5 điểm mà tiếng Việt tụt 4 điểm, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, với mọi quy mô hệ thống, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Tập case và cách chấm chuẩn để so sánh nhất quán"
         },
         {
           "key": "C",
-          "text": "Tổng giảm 5 điểm nhưng cả hai slice đều tăng, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, với mọi loại workload, trong suốt vòng đời dịch vụ, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Một demo gồm vài ví dụ thành công"
         },
         {
           "key": "D",
-          "text": "Cả hai slice đều giảm nhưng tổng vẫn tăng nhờ thêm sample mới, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, kể cả khi đã bật đủ kiểm tra, nên chi phí mỗi lần gọi không thay đổi, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Hệ quả cho lúc XÂY test set: muốn đọc riêng từng slice thì phải chia slice từ đầu và mỗi slice phải đủ sample. Không chia từ đầu thì lúc đọc kết quả chẳng có gì để tách — bạn chỉ còn đúng một con số trong tay.",
-      "source": "exam-111.json",
+      "explanation": "Tập case và cách chấm chuẩn để so sánh nhất quán. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-027",
       "type": "mcq",
-      "prompt": "Hai chỗ hay sai trong Hoạt động 1 là gì?",
+      "prompt": "Mục tiêu chính của Evaluation dataset trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Dùng công cụ sai và không cài đúng phiên bản thư viện, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, kể cả lúc tải thấp, mà không cần sửa code"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Viết test case quá dễ nên điểm luôn đạt 100%, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, dù đội đã tuân thủ đúng quy trình nội bộ, trong mọi trường hợp, ở cả ba môi trường"
+          "text": "Phải đại diện các use case, edge case và rủi ro quan trọng"
         },
         {
           "key": "C",
-          "text": "Chọn quá nhiều metric và không đủ thời gian chạy hết, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường, theo đúng khuyến nghị"
+          "text": "Chỉ gồm các ví dụ model trả lời đúng"
         },
         {
           "key": "D",
-          "text": "Xếp nhầm hàng vì nhìn sản phẩm thay vì nhìn output (sản phẩm là chatbot không có nghĩa output là văn bản mở — phần lớn agent trả về nhiều mảnh: một đoạn văn, kèm danh sách tài liệu, kèm tool call, mỗi mảnh một hàng và hai mảnh dưới chấm được bằng code); và chọn metric xong mới hỏi lấy dữ liệu ở đâu (ghi 'đo reliability' mà mỗi case chỉ chạy một lần thì không có gì để tính), dù cấu hình không đổi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "D",
-      "explanation": "Nhắc lại nguyên tắc: hàng của bạn là thứ SỬA ĐƯỢC. Kéo lên hàng trên gần như luôn là đổi sản phẩm chứ không phải đổi cách chấm — bắt agent trả id tài liệu, ép schema, buộc trích nguyên văn. Mỗi lần kéo lên một hàng là phép chấm rẻ đi, ổn định hơn, và bớt phụ thuộc vào judge.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Phải đại diện các use case, edge case và rủi ro quan trọng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-028",
       "type": "mcq",
-      "prompt": "Slice được định nghĩa thế nào và quyết định nào không sửa lại được?",
+      "prompt": "Mục tiêu chính của LLM-as-a-Judge trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Slice là một tập con ngẫu nhiên được rút ra lúc chấm điểm, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Chấp nhận điểm chấm không cần rubric"
         },
         {
           "key": "B",
-          "text": "Slice là kết quả của việc phân cụm tự động bằng embedding, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, kể cả lúc tải thấp, ở cả ba môi trường"
+          "text": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy"
         },
         {
           "key": "C",
-          "text": "Slice là một nhóm sample trong golden set, ví dụ toàn bộ case tiếng Việt; chia theo ngôn ngữ, loại câu hỏi, độ khó, nhóm người dùng hoặc nguồn tài liệu — và việc chia nhóm là quyết định làm LÚC XÂY, xong rồi mới muốn tách thì phải viết thêm case vì không có cách nào tách một tập đã trộn, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Slice là phần dữ liệu được giữ lại để kiểm tra cuối cùng, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Cách dùng: lúc xây thì chia test set theo nhóm rồi đảm bảo mỗi nhóm đủ số case; lúc chấm thì đọc điểm riêng từng nhóm thay vì chỉ nhìn số tổng, để lôi ra chỗ tụt bị số trung bình che đi.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-029",
       "type": "mcq",
-      "prompt": "Vì sao slice nhỏ cần chênh lệch lớn hơn mới kết luận được?",
+      "prompt": "Mục tiêu chính của RAGAS trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Vì bộ test giống cái cân — càng ít sample thì vạch chia càng thô: 200 sample nhìn ra được chênh lệch từ 11 điểm, còn slice tiếng Việt 80 sample chỉ nhìn ra được từ 17 điểm; nên mức tụt 4 điểm của slice đó nhỏ hơn vạch chia của chính nó, chưa kết luận được gì, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ"
+          "text": "Thay thế hoàn toàn đánh giá con người"
         },
         {
           "key": "B",
-          "text": "Vì slice nhỏ thường chứa các case khó hơn mức trung bình, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù cấu hình không đổi"
+          "text": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG"
         },
         {
           "key": "C",
-          "text": "Vì slice nhỏ có phương sai thấp hơn nên khó thấy khác biệt, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, trong mọi trường hợp, với mọi loại workload, trong suốt vòng đời dịch vụ"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Vì công cụ thống kê không hỗ trợ mẫu dưới 100 sample, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, dù cấu hình không đổi, với mọi quy mô hệ thống, kể cả khi đã bật đủ kiểm tra"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Hai hệ quả đi kèm: chia càng nhiều slice thì mỗi slice càng ít case và vạch chia càng thô; đồng thời đọc nhiều slice cùng lúc thì khả năng có một slice trông bất thường hoàn toàn do may rủi cũng tăng theo — tên gọi để tra thêm là multiple comparisons.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-030",
       "type": "mcq",
-      "prompt": "Slice nên dùng để làm gì và khi nào mới dùng làm gate?",
+      "prompt": "Mục tiêu chính của Slice evaluation trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Slice dùng để chia việc cho các thành viên trong nhóm cùng chấm, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Slice luôn dùng được làm gate ngay từ đầu vì nó chính xác hơn số tổng, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp"
+          "text": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ"
         },
         {
           "key": "C",
-          "text": "Slice dùng để CHẨN ĐOÁN — biết nên đi đọc trace ở đâu; muốn dùng một slice làm gate chặn deploy thì phải viết thêm case riêng cho slice đó cho tới khi vạch chia của nó đủ nhỏ, ở cả ba môi trường"
+          "text": "Gộp tất cả điểm thành một số duy nhất"
         },
         {
           "key": "D",
-          "text": "Slice chỉ dùng để báo cáo cho leadership, không dùng trong kỹ thuật, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Phân biệt này quan trọng: chẩn đoán chấp nhận được tín hiệu yếu vì bước tiếp theo là đi đọc trace để xác minh; còn gate thì chặn hay không chặn deploy nên phải dựa trên bằng chứng đủ mạnh. Trong ví dụ, muốn slice tiếng Việt phát hiện được chênh lệch 4 điểm thì cần khoảng 1.500 sample.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-031",
       "type": "mcq",
-      "prompt": "Contamination là gì và rủi ro theo nguồn ra sao?",
+      "prompt": "Mục tiêu chính của Calibration trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Là việc trộn lẫn dữ liệu train và test trong cùng một file, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Làm model luôn trả lời chắc chắn"
         },
         {
           "key": "B",
-          "text": "Là model đã nhìn thấy test set của bạn trong lúc training nên điểm cao không còn phản ánh năng lực; dữ liệu nội bộ chưa công khai thì rủi ro thấp, còn benchmark công khai thì càng phổ biến và càng cũ thì rủi ro càng cao, ở cả ba môi trường"
+          "text": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng"
         },
         {
           "key": "C",
-          "text": "Là việc nhiều người cùng sửa golden set gây xung đột phiên bản, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả lúc tải thấp, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Là hiện tượng dữ liệu bị nhiễu do lỗi thu thập, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Cách phát hiện và phòng: hỏi lại cùng nội dung bằng paraphrase — tụt mạnh là một dấu hiệu (dù cũng có thể model chỉ kém bền với cách diễn đạt); giữ test set private không đẩy lên repo công khai; mỗi quý thay 20% test set nhưng chỉ ở phần xoay vòng, giữ lõi so sánh đóng băng.",
-      "source": "exam-111.json",
+      "explanation": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-032",
       "type": "mcq",
-      "prompt": "Test set phải được version và mở rộng theo nguyên tắc nào?",
+      "prompt": "Mục tiêu chính của Failure analysis trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ thêm case mới khi có yêu cầu từ khách hàng, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, nên bước kiểm tra phía sau không phát hiện ra, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Xoá toàn bộ test set cũ mỗi quý rồi viết lại từ đầu, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong mọi trường hợp"
+          "text": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân"
         },
         {
           "key": "C",
-          "text": "Giữ nguyên test set suốt vòng đời sản phẩm để so sánh công bằng, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Chỉ đọc các câu trả lời hay nhất"
         },
         {
           "key": "D",
-          "text": "Mỗi sprint thêm failure case mới tìm được vào một slice riêng để không làm lệch phân bố tập chính; mỗi lần thêm thì bump version và commit vào Git cùng code; khi báo cáo điểm luôn kèm version test set; và tách làm hai phần — một lõi so sánh đóng băng để so v1 với v2, và một phần xoay vòng để test set không cũ đi, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "D",
-      "explanation": "Hai rủi ro đối xứng được nêu: không có version thì không phân biệt được 'agent tốt lên' với 'test set dễ đi'; còn test set đứng yên nhiều tháng thì team dần chỉ sửa đúng những case nằm trong đó — điểm vẫn tăng đều nhưng sản phẩm thì không.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-033",
       "type": "mcq",
-      "prompt": "Synthetic data nên sinh khi nào và theo cách nào?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Evaluation objective?",
       "options": [
         {
           "key": "A",
-          "text": "Sinh ngẫu nhiên rồi lọc bằng LLM cho tới khi đủ số lượng cần, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, nên chi phí mỗi lần gọi không thay đổi, trong mọi trường hợp, với mọi loại workload, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Sinh SAU khi đã có taxonomy: viết tay 30 case thì được, 300 thì không; sinh theo lưới sau khi đã có bảng tần suất lỗi — ví dụ 5 tính năng × 3 scenario (exact match / nhiều kết quả / zero result) × 2 nhóm user = 30 ô, mỗi ô 10 case thành 300, dù cấu hình không đổi, với mọi quy mô hệ thống, ở cả ba môi trường"
+          "text": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric"
         },
         {
           "key": "C",
-          "text": "Sinh ngay từ đầu để có đủ dữ liệu trước khi bắt đầu phân tích, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ"
+          "text": "Chọn metric dễ đẹp nhất rồi mới tìm mục tiêu"
         },
         {
           "key": "D",
-          "text": "Sinh bằng cách dịch test set tiếng Anh có sẵn sang tiếng Việt, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả lúc tải thấp, mà không cần sửa code, trong mọi trường hợp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Sinh khi chưa có taxonomy thì toàn rơi vào chỗ chẳng cần đến: câu dễ, câu chép nguyên văn tài liệu, câu không user nào hỏi. Bước không được bỏ: với mỗi câu sinh ra phải kiểm chứng nó thật sự rơi vào ô kịch bản đã định — không có bước này thì grid chỉ là cái tên.",
-      "source": "exam-111.json",
+      "explanation": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-034",
       "type": "mcq",
-      "prompt": "Pipeline sinh synthetic test case gồm những bước nào và giữ lại bao nhiêu?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Benchmark?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ có hai bước: sinh câu hỏi và sinh đáp án, không cần lọc, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, với mọi quy mô hệ thống"
+          "text": "Một demo gồm vài ví dụ thành công"
         },
         {
           "key": "B",
-          "text": "Sinh 1.000 câu rồi giữ lại toàn bộ vì đều do LLM tạo nên chất lượng đồng đều, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù người dùng không thấy gì bất thường"
+          "text": "Tập case và cách chấm chuẩn để so sánh nhất quán"
         },
         {
           "key": "C",
-          "text": "Lấy câu hỏi từ log production rồi sinh đáp án bằng model mạnh nhất, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, dù cấu hình không đổi, với mọi quy mô hệ thống, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Trích khái niệm từ chunk → sinh câu hỏi → sinh đáp án → lọc → test case dùng được; bộ lọc loại câu trả lời được mà không cần mở tài liệu, câu mơ hồ, câu trùng ý và câu có đáp án sai — giữ lại 30–50%, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, nên chi phí mỗi lần gọi không thay đổi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Lợi thế đặc biệt của case sinh từ chunk: câu hỏi sinh từ chunk nào thì chunk đó chính là gold_docs — ground truth cho retrieval, khỏi phải gán tay. Đây là lý do trường gold_docs xuất hiện sẵn trong golden set mà không tốn thêm công.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Tập case và cách chấm chuẩn để so sánh nhất quán. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-035",
       "type": "mcq",
-      "prompt": "Trong Hoạt động 2, đáp án chuẩn trông thế nào tuỳ theo loại output?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Evaluation dataset?",
       "options": [
         {
           "key": "A",
-          "text": "Luôn là một cặp (input, output) lấy từ log production, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong khi ngân sách token vẫn còn dư nhiều, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Luôn là một đoạn văn mẫu do chuyên gia viết, bất kể loại output, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp"
+          "text": "Phải đại diện các use case, edge case và rủi ro quan trọng"
         },
         {
           "key": "C",
-          "text": "Luôn là điểm số từ 1 đến 5 do người chấm gán, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả khi mọi chỉ số kỹ thuật đều bình thường, với mọi quy mô hệ thống"
+          "text": "Chỉ gồm các ví dụ model trả lời đúng"
         },
         {
           "key": "D",
-          "text": "Đáp án ngắn → một chuỗi hoặc một nhãn; code/JSON/tool call → chạy thử thấy đúng; danh sách xếp thứ tự → id của tài liệu đúng; đoạn văn có trích nguồn → đoạn văn trong tài liệu; đoạn văn tự do → KHÔNG có đáp án chuẩn, bảng tiêu chí thay thế, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Yêu cầu của hoạt động: bước 1 đoán ba kiểu lỗi trong 10 phút, mỗi kiểu phải hẹp đến mức nhìn một câu trả lời là nói được ngay đạt hay không đạt; bước 2 viết 10 test case trong 20 phút, mỗi case ghi rõ nhắm kiểu lỗi nào, và ít nhất 2 case nhắm kiểu nặng nhất.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Phải đại diện các use case, edge case và rủi ro quan trọng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-036",
       "type": "mcq",
-      "prompt": "Chỗ khó nhất của Hoạt động 2 là gì và nó nói lên điều gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về LLM-as-a-Judge?",
       "options": [
         {
           "key": "A",
-          "text": "Thống nhất giữa các thành viên về thang điểm chấm, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, ở cả ba môi trường"
+          "text": "Chấp nhận điểm chấm không cần rubric"
         },
         {
           "key": "B",
-          "text": "Thu thập đủ 10 case từ log production trong 20 phút, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy"
         },
         {
           "key": "C",
-          "text": "Viết đáp án chuẩn: nếu thấy dễ thì sản phẩm chấm được bằng code — rẻ, nhanh, tin được; nếu viết mãi không ra thì không phải do nhóm làm ẩu mà vì sản phẩm trả ra đoạn văn tự do, loại không có một đáp án đúng duy nhất, nghĩa là về sau mọi phép chấm đều phải nhờ một model khác chấm hộ, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Chọn đúng công cụ để chạy test tự động, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong suốt vòng đời dịch vụ, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Biết điều đó hôm nay đáng giá hơn nhớ tên một metric, vì nó đổi cách thiết kế sản phẩm: bắt agent kèm trích dẫn, trả về đúng cấu trúc, điền đủ trường bắt buộc — để phần nào chấm được bằng code thì chấm bằng code.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-037",
       "type": "mcq",
-      "prompt": "Metric retrieval nào là order-unaware và nào là order-aware?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về RAGAS?",
       "options": [
         {
           "key": "A",
-          "text": "Tất cả metric retrieval đều tính đến thứ hạng của tài liệu, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, ở cả ba môi trường, theo đúng khuyến nghị, kể cả khi đã bật đủ kiểm tra, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Order-unaware: hit rate@k (nhị phân, top-k có doc đúng nào không), recall@k và precision@k (tỷ lệ lấy được bao nhiêu phần doc đúng và bao nhiêu phần kết quả trả về là đúng). Order-aware: MRR và NDCG — quan tâm nó đứng hạng mấy, vì thứ hạng quyết định model có đọc tới nó hay không, dù cấu hình không đổi, trong suốt vòng đời dịch vụ, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG"
         },
         {
           "key": "C",
-          "text": "Chỉ có precision@k quan tâm tới thứ tự, các metric khác thì không, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, với mọi quy mô hệ thống, trong mọi trường hợp, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Thay thế hoàn toàn đánh giá con người"
         },
         {
           "key": "D",
-          "text": "MRR và NDCG là order-unaware còn hit rate là order-aware, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Ví dụ số liệu: cùng một retriever, 4 query, hạng của doc đúng đầu tiên là 1, 2, 5 và không có → HitRate@10 = 3/4 = 0,750 (ba phần tư số query có bằng chứng) nhưng MRR = 1,700/4 = 0,425 (trung bình nó nằm khá sâu). Cả hai đều cần trường gold_docs.",
-      "source": "exam-111.json",
+      "explanation": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-038",
       "type": "mcq",
-      "prompt": "Vì sao metric retrieval phải phạt theo thứ hạng?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Slice evaluation?",
       "options": [
         {
           "key": "A",
-          "text": "Vì công thức có phạt theo hạng cho ra con số đẹp hơn về mặt toán học, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Vì thứ hạng cao giúp giảm số token phải đưa vào prompt, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ"
         },
         {
           "key": "C",
-          "text": "Vì model thật sự không đọc phần giữa context — hiện tượng lost in the middle: retriever tìm đúng doc nhưng xếp nó hạng 15/20 thì xét kết quả cuối cùng cũng như không tìm thấy, nên hit rate@20 sẽ báo 'ổn' đúng lúc hệ thống đang hỏng, ở cả ba môi trường"
+          "text": "Gộp tất cả điểm thành một số duy nhất"
         },
         {
           "key": "D",
-          "text": "Vì các nhà cung cấp vector DB tính phí theo thứ hạng trả về, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, trong suốt vòng đời dịch vụ, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Đồ thị trong slide cho thấy độ chính xác trả lời cao khi bằng chứng nằm ở đầu hoặc cuối context window và tụt hẳn khi nó nằm giữa. Đây chính là lý do kỹ thuật reordering ở Ngày 8 đặt Top 1 lên đầu và Top 2 xuống cuối.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-039",
       "type": "mcq",
-      "prompt": "MRR giả định điều gì và dùng sai trong trường hợp nào?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Calibration?",
       "options": [
         {
           "key": "A",
-          "text": "Giả định người đọc rà từ trên xuống, gặp kết quả đúng đầu tiên là dừng, và càng phải rà sâu thì kết quả đó càng ít giá trị — dùng đúng khi generator chỉ cần một nguồn tốt là soạn được câu trả lời đầy đủ; dùng sai khi câu trả lời cần tổng hợp nhiều nguồn, vì lúc đó hạng của nguồn thứ hai và thứ ba mới quyết định mà MRR không nhìn tới chúng, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Giả định mọi doc đều có mức liên quan như nhau, dùng sai khi có nhãn theo mức, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong mọi trường hợp"
+          "text": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng"
         },
         {
           "key": "C",
-          "text": "Giả định người đọc quét từ dưới lên, dùng sai khi context ngắn, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Làm model luôn trả lời chắc chắn"
         },
         {
           "key": "D",
-          "text": "Giả định mọi query đều có đúng một doc liên quan, dùng sai khi corpus lớn, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, kể cả khi đã bật đủ kiểm tra, với mọi quy mô hệ thống"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Ví dụ minh hoạ: 'Chính sách này áp dụng cho hạng thẻ nào' cần một doc nên MRR hợp lý; còn 'So sánh phí ba gói' cần ba doc, và MRR sẽ khen một retriever chỉ lấy đúng một gói. Công thức MRR = trung bình của 1/r* với r* là hạng của doc đúng đầu tiên.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-040",
       "type": "mcq",
-      "prompt": "NDCG được định nghĩa thế nào và hạng 1 xuống hạng 5 mất bao nhiêu giá trị?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Failure analysis?",
       "options": [
         {
           "key": "A",
-          "text": "Là xác suất doc đúng xuất hiện trong top-k, không liên quan tới thứ hạng, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường"
+          "text": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân"
         },
         {
           "key": "B",
-          "text": "Là tỷ lệ doc đúng trong top-k, hạng 5 mất khoảng 20% giá trị, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi mọi chỉ số kỹ thuật đều bình thường, dù cấu hình không đổi"
+          "text": "Chỉ đọc các câu trả lời hay nhất"
         },
         {
           "key": "C",
-          "text": "Là tổng điểm relevance của mọi doc trong top-k, mỗi doc bị chiết khấu theo hạng bằng 1/log₂(i+1), rồi chia cho điểm của thứ tự xếp tốt nhất có thể — kết quả nằm trong [0,1]; hạng 1 xuống hạng 5 thì còn 39%, tức mất 61% giá trị, và tới hạng 10 chỉ còn 0,29, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Là trung bình cộng của precision tại mọi vị trí có doc đúng, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, với mọi quy mô hệ thống"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Điều kiện để NDCG có nghĩa: nhãn phải chấm theo MỨC (0 không liên quan, 1 liên quan xa, 2 liên quan, 3 trả lời thẳng), hoặc một query có nhiều doc đúng. Nếu chỉ có nhãn nhị phân và mỗi query một doc đúng thì MRR đã đủ.",
-      "source": "exam-111.json",
+      "answer": "A",
+      "explanation": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-041",
       "type": "mcq",
-      "prompt": "Vì sao phải chuẩn hoá DCG thành NDCG?",
+      "prompt": "Nếu cần ra quyết định về Evaluation objective, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Vì query A có 5 doc liên quan còn query B chỉ có 1 thì DCG của A luôn cao hơn — không phải vì retriever giỏi hơn mà vì có sẵn nhiều doc đúng để lấy hơn; cộng DCG thô qua nhiều query là cộng hai đơn vị khác nhau, nên phải chia cho IDCG (DCG của thứ tự lý tưởng của chính query đó) để đưa mọi query về cùng thang, dù cấu hình không đổi, với mọi quy mô hệ thống, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Vì DCG thay đổi theo số chiều của embedding nên khó so sánh, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, nên bước kiểm tra phía sau không phát hiện ra, kể cả lúc tải thấp, mà không cần sửa code, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric"
         },
         {
           "key": "C",
-          "text": "Vì DCG có thể âm khi relevance bằng 0, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, ở cả ba môi trường, theo đúng khuyến nghị, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Chọn metric dễ đẹp nhất rồi mới tìm mục tiêu"
         },
         {
           "key": "D",
-          "text": "Vì DCG không tính được khi k lớn hơn số doc trong corpus, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, kể cả khi tài liệu nguồn còn nguyên vẹn, trong mọi trường hợp, với mọi loại workload, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "A",
-      "explanation": "Sau khi chuẩn hoá, giá trị 1,0 nghĩa là không thể xếp tốt hơn nữa — kể cả với query chỉ có một doc đúng. Ba bước: tính DCG@k, tính IDCG trên thứ tự tốt nhất có thể, rồi chia.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-042",
       "type": "mcq",
-      "prompt": "Faithfulness được tính thế nào và ba nhãn NLI là gì?",
+      "prompt": "Nếu cần ra quyết định về Benchmark, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Cho một LLM chấm điểm answer từ 1 đến 5 dựa trên context, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, kể cả khi model đã cập nhật bản mới nhất, nên chi phí mỗi lần gọi không thay đổi, dù người dùng không thấy gì bất thường, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Một demo gồm vài ví dụ thành công"
         },
         {
           "key": "B",
-          "text": "So sánh toàn bộ answer với toàn bộ context bằng cosine similarity, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, dù đội đã tuân thủ đúng quy trình nội bộ, dù cấu hình đã được rà soát lại một lượt, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Tập case và cách chấm chuẩn để so sánh nhất quán"
         },
         {
           "key": "C",
-          "text": "Đếm số từ trong answer xuất hiện trong context chia tổng số từ, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, trong khi log không ghi lại dấu hiệu nào, kể cả khi tài liệu nguồn còn nguyên vẹn, kể cả lúc tải thấp, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Tách answer thành từng claim rồi đối chiếu từng claim với context; ba nhãn NLI là entailment (context nói điều đó), contradiction (context nói ngược lại) và neutral (context không nhắc gì). Ví dụ: context nói 'đơn hàng được hoàn trong 30 ngày kể từ ngày giao, hàng flash-sale không áp dụng', answer nói 'bạn được hoàn trong 30 ngày và bên em sẽ hoàn 100% phí ship' → claim 1 entailment, claim 2 neutral vì phí ship không có trong context → faithfulness = 1/2 = 0,50, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Nhận xét quan trọng: phần lớn hallucination rơi vào nhãn NEUTRAL chứ không phải contradiction — model bịa THÊM là chính, ít khi nói ngược hẳn context. Vì vậy chỉ kiểm mâu thuẫn thì bỏ sót phần lớn.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Tập case và cách chấm chuẩn để so sánh nhất quán. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-043",
       "type": "mcq",
-      "prompt": "Vì sao faithfulness 0,95 vẫn có thể đi cùng một câu trả lời sai?",
+      "prompt": "Nếu cần ra quyết định về Evaluation dataset, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Vì ngưỡng 0,95 quá thấp, phải đạt 0,99 mới đáng tin, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Vì retriever lấy về bản policy đã hết hiệu lực từ 03/2026 và agent tóm tắt bản đó trung thực từng chữ — faithfulness đo agent bám context tới đâu, KHÔNG đo câu trả lời có đúng hay không, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, trong suốt vòng đời dịch vụ"
+          "text": "Phải đại diện các use case, edge case và rủi ro quan trọng"
         },
         {
           "key": "C",
-          "text": "Vì faithfulness chỉ đo được với câu trả lời ngắn dưới 50 từ, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, với mọi quy mô hệ thống"
+          "text": "Chỉ gồm các ví dụ model trả lời đúng"
         },
         {
           "key": "D",
-          "text": "Vì công thức tính faithfulness làm tròn số nên có sai lệch, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Đây là điểm mù của các metric không có ground truth. Muốn bắt được thì phải dùng metric CÓ ground truth: context recall so với gold_docs, answer correctness so với reference. Đúng 32 case đầu bảng tần suất rơi vào đây — một dashboard chỉ có faithfulness sẽ báo xanh suốt cả 32 case.",
-      "source": "exam-111.json",
+      "explanation": "Phải đại diện các use case, edge case và rủi ro quan trọng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-044",
       "type": "mcq",
-      "prompt": "Bốn điểm đo trên một pipeline RAG nằm ở đâu?",
+      "prompt": "Nếu cần ra quyết định về LLM-as-a-Judge, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Cả bốn đều đo ở bước cuối cùng sau khi có answer, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, dù cấu hình không đổi, với mọi quy mô hệ thống, theo đúng khuyến nghị, kể cả lúc tải thấp, trong mọi trường hợp, mà không cần sửa code, với mọi loại workload"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Bốn điểm đo tương ứng bốn tầng của quality pyramid ở Ngày 13, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, trong khi ngân sách token vẫn còn dư nhiều, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy"
         },
         {
           "key": "C",
-          "text": "Hai điểm ở retrieval và hai điểm ở guardrail, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù cấu hình không đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, mà không cần sửa code"
+          "text": "Chấp nhận điểm chấm không cần rubric"
         },
         {
           "key": "D",
-          "text": "Question → Retriever: context recall (lấy đủ bằng chứng chưa); Retriever → Context: context precision (lấy về có lẫn rác không); Context → Generator: faithfulness (có bám context không); Generator → Answer: answer relevancy (có đúng câu hỏi không), kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Điểm quan trọng: ba trong bốn điểm KHÔNG sửa bằng prompt — context recall sửa ở top-k và embedding, context precision sửa ở reranker, faithfulness sửa ở chunking trước rồi mới tới prompt. Và hai chỉ số cuối không thay thế nhau: agent chỉ dùng context không bịa gì thì faithfulness 1,0, nhưng nếu context không liên quan tới câu hỏi thì answer vẫn lạc đề.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-045",
       "type": "mcq",
-      "prompt": "Khi HitRate@5 là 0,95 mà user vẫn kêu sai thì nhìn tiếp cái gì?",
+      "prompt": "Nếu cần ra quyết định về RAGAS, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Nhìn temperature vì model đang sinh quá ngẫu nhiên, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, ở cả ba môi trường, theo đúng khuyến nghị, kể cả khi đã bật đủ kiểm tra, với mọi quy mô hệ thống"
+          "text": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG"
         },
         {
           "key": "B",
-          "text": "Nhìn lại chunking strategy vì chunk có thể cắt sai chỗ, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả lúc tải thấp, mà không cần sửa code, trong suốt vòng đời dịch vụ, ở cả ba môi trường"
+          "text": "Thay thế hoàn toàn đánh giá con người"
         },
         {
           "key": "C",
-          "text": "Nhìn số lượng token trong prompt vì có thể đã vượt context window, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi tài liệu nguồn còn nguyên vẹn, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Nhìn THỨ HẠNG — doc đúng có thể đang nằm hạng 15 trong top-20, có mặt nhưng model không đọc tới; xem MRR trước rồi tới faithfulness để biết generator có thật sự dùng doc đó không, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Đây là chuỗi chẩn đoán chuẩn của phần retrieval: hit rate trả lời 'có lấy được không', MRR trả lời 'nó nằm ở đâu', faithfulness trả lời 'generator có dùng nó không'. Thiếu bước giữa thì rất dễ kết luận nhầm rằng retrieval đã ổn.",
-      "source": "exam-111.json",
+      "answer": "A",
+      "explanation": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-046",
       "type": "mcq",
-      "prompt": "Vì sao gold_docs là trường bắt buộc trong golden set?",
+      "prompt": "Nếu cần ra quyết định về Slice evaluation, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Vì công cụ RAGAS bắt buộc phải có trường này mới chạy được, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị, với mọi loại workload"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Vì cần gold_docs để tính chi phí lưu trữ của vector database, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ"
         },
         {
           "key": "C",
-          "text": "Vì gold_docs dùng để huấn luyện lại embedding model định kỳ, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị, mà không cần sửa code"
+          "text": "Gộp tất cả điểm thành một số duy nhất"
         },
         {
           "key": "D",
-          "text": "Vì không có nó thì không tính được retrieval metric nào, và buộc phải suy chất lượng retrieval từ chất lượng answer — đúng cái suy luận đã bị bác bằng ví dụ faithfulness 0,95 trên câu trả lời sai, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù cấu hình không đổi, kể cả lúc tải thấp, trong mọi trường hợp, mà không cần sửa code, với mọi loại workload"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Trường này lẽ ra rất tốn công gán tay, nhưng nếu test case được sinh từ chunk thì chunk đó chính là gold_docs — đó là lợi thế của cách sinh synthetic data đã nêu ở phần trước.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-047",
       "type": "mcq",
-      "prompt": "Judge chỉ nên dùng cho loại kiểm tra nào?",
+      "prompt": "Nếu cần ra quyết định về Calibration, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Dùng cho mọi loại kiểm tra vì judge linh hoạt hơn code, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, kể cả khi tài liệu nguồn còn nguyên vẹn, trong mọi trường hợp, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Chỉ dùng cho các kiểm tra về format và độ dài, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, trong khi hệ thống vẫn chạy đúng thiết kế, ở cả ba môi trường, mà không cần sửa code, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng"
         },
         {
           "key": "C",
-          "text": "Chỉ dùng cho thứ code KHÔNG check được: câu này có trả lời đúng ý user hỏi không, lập luận có chỗ hổng không, giọng văn đã phù hợp với một khách hàng đang bực chưa. Còn code check được miễn phí: JSON parse được không, đúng schema không, có citation không, clause_id có tồn tại thật không, số từ, có chứa từ cấm không, trả lời đúng ngôn ngữ của câu hỏi không, dù cấu hình không đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Làm model luôn trả lời chắc chắn"
         },
         {
           "key": "D",
-          "text": "Chỉ dùng khi không có ai trong team đủ chuyên môn để chấm tay, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên kiểm thử nội bộ vẫn hiển thị màu xanh, kể cả lúc tải thấp, theo đúng khuyến nghị, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "Nối lại với trục 1: trong 4 failure mode ở bảng tần suất, 2 cái check được bằng regex — sai ngôn ngữ và lộ internal ID. Đừng trả tiền judge cho hai cái đó. Kiểm tra bằng code thì deterministic, chạy được trong CI và không cần calibration.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-048",
       "type": "mcq",
-      "prompt": "Bốn thứ bắt buộc trong một judge prompt là gì?",
+      "prompt": "Nếu cần ra quyết định về Failure analysis, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Nhiệt độ, số token tối đa, seed và định dạng đầu ra, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Tên model, phiên bản prompt, ngày chạy và người phụ trách, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, trong khi hệ thống vẫn chạy đúng thiết kế, kể cả lúc tải thấp, mà không cần sửa code, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân"
         },
         {
           "key": "C",
-          "text": "Persona ('bạn là người chấm khắt khe', không phải trợ lý thân thiện); tách khối rõ ràng (question / retrieved context / agent answer, phân định bằng tag); một criterion duy nhất mỗi lần chấm ('chỉ đánh giá faithfulness, bỏ qua giọng văn và format'); và cùng context mà người chấm nhìn thấy (user metadata, trạng thái đơn hàng, thời điểm request), dù cấu hình không đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Chỉ đọc các câu trả lời hay nhất"
         },
         {
           "key": "D",
-          "text": "Few-shot examples, chain-of-thought, self-consistency và ensemble, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, ở cả ba môi trường, theo đúng khuyến nghị, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "Điểm 4 là chỗ hay bỏ sót nhất: người chấm nhìn thấy đơn hàng đang ở trạng thái 'đã giao' còn judge thì không, rồi bạn kết luận 'judge chấm lệch với người' trong khi thật ra judge đang trả lời một câu hỏi khác hẳn.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-049",
       "type": "mcq",
-      "prompt": "Vì sao nên dùng PASS/FAIL thay vì thang 1–5?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Evaluation objective?",
       "options": [
         {
           "key": "A",
-          "text": "Vì thang 1–5 tốn nhiều token hơn nên đắt hơn, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, với mọi quy mô hệ thống"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Vì PASS/FAIL cho phép tính trung bình chính xác hơn, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, nên bước kiểm tra phía sau không phát hiện ra, với mọi quy mô hệ thống, ở cả ba môi trường"
+          "text": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric"
         },
         {
           "key": "C",
-          "text": "Vì thang 1–5 không tương thích với các công cụ eval phổ biến, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Chọn metric dễ đẹp nhất rồi mới tìm mục tiêu"
         },
         {
           "key": "D",
-          "text": "Vì ranh giới giữa 3 và 4 không ai định nghĩa được kể cả người chấm; hai người chấm lệch nhau một bậc là chuyện thường và agreement tụt là lỗi của THANG ĐO chứ không phải rubric viết kém; và tuy vẫn tính được TPR/TNR từ thang 1–5 nhưng phải tự chọn một lằn ranh (≥4 là PASS?) mà không ai bảo vệ được lằn ranh đó, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "D",
-      "explanation": "Cách làm thay thế khi cần nhiều mức: dùng NHIỀU criterion PASS/FAIL chứ đừng dùng một thang mờ. Ví dụ rubric FAIL nếu rơi vào một trong bốn: mâu thuẫn với context; nêu điều khoản không có trong context; thêm cam kết không có trong context; trả lời chung chung khi user hỏi tình huống cụ thể. PASS kể cả khi diễn đạt khác reference, ngắn hơn, hay thiếu lời chào.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-050",
       "type": "mcq",
-      "prompt": "Vì sao verdict phải là token cuối cùng trong output của judge?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Benchmark?",
       "options": [
         {
           "key": "A",
-          "text": "Vì quy ước của OpenAI yêu cầu trường kết luận phải nằm cuối cùng, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, với mọi quy mô hệ thống, trong mọi trường hợp"
+          "text": "Tập case và cách chấm chuẩn để so sánh nhất quán"
         },
         {
           "key": "B",
-          "text": "Vì model sinh từ trái sang phải nên token ra trước ràng buộc mọi token ra sau — judge in 'FAIL' ngay dòng đầu thì toàn bộ phần sau chỉ còn là lời biện minh cho chữ FAIL đó; đảo thứ tự hai dòng reasoning và verdict là đổi kết quả chấm, ở cả ba môi trường"
+          "text": "Một demo gồm vài ví dụ thành công"
         },
         {
           "key": "C",
-          "text": "Vì các công cụ parse output đều đọc từ dòng cuối lên, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Vì để verdict ở cuối giúp tiết kiệm token khi cắt ngắn output, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, trong suốt vòng đời dịch vụ, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Cấu trúc output chuẩn: reasoning (lập luận từng bước, viết TRƯỚC) → verdict (PASS hoặc FAIL) → clause_id (id điều khoản đã dựa vào, hoặc 'none'). Trường clause_id không dùng để chấm mà để check bằng code rằng điều khoản đó có thật — một criterion nữa không phải trả tiền judge.",
-      "source": "exam-111.json",
+      "answer": "A",
+      "explanation": "Tập case và cách chấm chuẩn để so sánh nhất quán. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-051",
       "type": "mcq",
-      "prompt": "Bốn loại bias của LLM judge và chi phí sửa chúng là gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Evaluation dataset?",
       "options": [
         {
           "key": "A",
-          "text": "Bốn loại bias đều phải đổi sang model mạnh hơn mới sửa được, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, trong khi log không ghi lại dấu hiệu nào, kể cả khi tài liệu nguồn còn nguyên vẹn, dù prompt đã được viết lại rõ ràng hơn, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp"
+          "text": "Chỉ gồm các ví dụ model trả lời đúng"
         },
         {
           "key": "B",
-          "text": "Bốn loại bias đều sửa được miễn phí bằng cách chỉnh rubric, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, dù đội đã tuân thủ đúng quy trình nội bộ, dù cấu hình đã được rà soát lại một lượt, dù người dùng không thấy gì bất thường, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp"
+          "text": "Phải đại diện các use case, edge case và rủi ro quan trọng"
         },
         {
           "key": "C",
-          "text": "Position (answer đứng trước được ưu ái kể cả khi hai answer ngang nhau — fix bằng chạy cả hai thứ tự rồi lấy trung bình, tốn gấp đôi API call); Verbosity (answer dài hơn được điểm cao hơn — fix bằng rubric nói rõ ngắn gọn vẫn PASS và đo length thành metric riêng, miễn phí); Self-preference (model ưu ái văn phong do chính nó sinh ra — fix bằng dùng judge khác nhà cung cấp với generator, miễn phí); Format (markdown table, chữ in đậm, câu 'let's think step by step' đều kéo điểm lên — fix bằng normalize format trước khi chấm, miễn phí), ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Chỉ có hai loại bias là position và verbosity, hai cái còn lại là huyền thoại, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, kể cả khi model đã cập nhật bản mới nhất, nên chi phí mỗi lần gọi không thay đổi, kể cả khi dữ liệu đã được làm sạch kỹ, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Con số đáng nhớ về position bias: có model khi đảo thứ tự A/B chỉ giữ nguyên kết luận 23,8% số lần — trong khi đoán bừa cũng nhất quán 50%, tức model này đang bám VỊ TRÍ chứ không bám nội dung. Ba trong bốn fix không tốn gì; cái duy nhất tốn tiền lại chữa được bias nặng nhất, nên nếu chỉ làm được một việc thì làm cái đó.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Phải đại diện các use case, edge case và rủi ro quan trọng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-052",
       "type": "mcq",
-      "prompt": "Thêm reference answer cải thiện độ chính xác của judge bao nhiêu?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng LLM-as-a-Judge?",
       "options": [
         {
           "key": "A",
-          "text": "Sai 14/20 khi judge chấm thẳng không có CoT → còn 6/20 khi bắt viết reasoning trước → còn 3/20 khi đưa thêm reference answer, ở cả ba môi trường, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi tài liệu nguồn còn nguyên vẹn"
+          "text": "Chấp nhận điểm chấm không cần rubric"
         },
         {
           "key": "B",
-          "text": "Từ 3/20 lên 14/20 vì reference làm judge bị neo vào một cách diễn đạt, kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả lúc tải thấp, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, theo đúng khuyến nghị"
+          "text": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy"
         },
         {
           "key": "C",
-          "text": "Giảm một nửa số lần sai nhưng tăng gấp ba chi phí mỗi lần chấm, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, dù cấu hình không đổi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Không cải thiện đáng kể, chỉ tốn thêm công viết reference, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Cùng model, cùng tập bài toán, chỉ đổi cách hỏi — 20 phép so cặp trên 10 bài toán đủ thấy chiều nhưng chưa đủ xếp hạng ba cách. Lý do can thiệp này mạnh nhất: có reference thì judge so với một mốc có sẵn; không có reference thì judge phải tự phán đoán đúng/sai bằng kiến thức của chính nó, và đó là chỗ nó sai nhiều nhất.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-053",
       "type": "mcq",
-      "prompt": "Quy trình calibration judge diễn ra thế nào với ví dụ 200 case?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng RAGAS?",
       "options": [
         {
           "key": "A",
-          "text": "Cho 200 case vào model rồi lấy độ tin cậy do model tự báo, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, dù cấu hình không đổi, với mọi quy mô hệ thống, theo đúng khuyến nghị, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, mà không cần sửa code"
+          "text": "Thay thế hoàn toàn đánh giá con người"
         },
         {
           "key": "B",
-          "text": "Chia 200 case thành train và test rồi fine-tune judge trên phần train, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG"
         },
         {
           "key": "C",
-          "text": "Cho judge chấm 200 case rồi so với điểm trung bình của ba judge khác, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Một người chấm tay 200 output của agent và tìm ra 30 case FAIL thật, tức tỷ lệ lỗi thật 15%; cho judge chấm đúng 200 case đó thì nó bắt được 24/30 case FAIL thật và bắt oan 17/170 case vốn không có vấn đề gì — thành bảng 2×2 với judge FAIL 41 và judge PASS 159, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Bảng này có đúng cấu trúc 2×2 đã gặp ở phần đầu khi hai người cùng label một tập trace, chỉ đổi nhãn hàng và cột. Ô xanh là chỗ judge và người đồng ý, ô đỏ là chỗ lệch nhau.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-054",
       "type": "mcq",
-      "prompt": "TPR và TNR được tính thế nào từ bảng calibration và vì sao không report agreement?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Slice evaluation?",
       "options": [
         {
           "key": "A",
-          "text": "TPR = 24/41 và TNR = 153/159, tính theo hàng của bảng, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù người dùng không thấy gì bất thường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "TPR = 41/200 và TNR = 159/200, tức tỷ lệ trên tổng số case, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi"
+          "text": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ"
         },
         {
           "key": "C",
-          "text": "TPR = 24/30 = 0,80 (bắt được bao nhiêu case FAIL thật), TNR = 153/170 = 0,90 (tha đúng bao nhiêu case ổn); không report agreement vì lỗi hiếm không làm đẹp được hai con số này — mỗi con số tính riêng trên một cột, dù cấu hình không đổi, với mọi quy mô hệ thống, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Gộp tất cả điểm thành một số duy nhất"
         },
         {
           "key": "D",
-          "text": "TPR và TNR là hai tên gọi khác của cùng một chỉ số agreement, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, trong suốt vòng đời dịch vụ, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "Chi phí và độ bền: người chấm tay một lần 200 case mất khoảng 4 giờ; TPR/TNR thu được dùng lại cho các version agent sau, miễn là không đổi judge và không sửa prompt. Nhưng chúng đo trên phân bố output của v1, nên agent đổi đáng kể thì TPR trôi và phải lấy mẫu nhỏ đo lại.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-055",
       "type": "mcq",
-      "prompt": "Vì sao agreement 88,5% của judge lại không có ý nghĩa trong ví dụ?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Calibration?",
       "options": [
         {
           "key": "A",
-          "text": "Vì agreement chỉ tính được khi hai bên cùng dùng thang PASS/FAIL, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, kể cả lúc tải thấp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Vì một hàm chỉ biết in PASS cũng đạt 85% (170/200) — chênh nhau chỉ 3,5 điểm; nếu tỷ lệ FAIL chỉ 8% thì hàm đó còn đạt 92%, trong mọi trường hợp, với mọi loại workload, kể cả khi dữ liệu đã được làm sạch kỹ, kể cả khi đã bật đủ kiểm tra"
+          "text": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng"
         },
         {
           "key": "C",
-          "text": "Vì agreement không tính tới các case mà judge từ chối chấm, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, ở cả ba môi trường"
+          "text": "Làm model luôn trả lời chắc chắn"
         },
         {
           "key": "D",
-          "text": "Vì 88,5% là con số quá thấp so với chuẩn ngành là 95%, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, nên chi phí mỗi lần gọi không thay đổi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Đây là lý do phải tách TPR và TNR ra xem riêng: agreement gộp cả hai cột nên bị chi phối bởi cột đông hơn. Với dữ liệu lệch — mà lỗi thì thường hiếm — agreement gần như luôn cao và gần như luôn vô nghĩa.",
-      "source": "exam-111.json",
+      "explanation": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-056",
       "type": "mcq",
-      "prompt": "Công thức liên hệ giữa tỷ lệ FAIL judge báo và tỷ lệ FAIL thật là gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Failure analysis?",
       "options": [
         {
           "key": "A",
-          "text": "p̂ = p / TNR, tức chia cho tỷ lệ tha đúng, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi đã bật đủ kiểm tra, trong mọi trường hợp"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "p̂ = TPR·p + (1 − TNR)(1 − p), gom lại thành p̂ = (1 − TNR) + J·p với J = TPR + TNR − 1 gọi là Youden's J; với TPR 0,80 và TNR 0,90 thì J = 0,70, ở cả ba môi trường"
+          "text": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân"
         },
         {
           "key": "C",
-          "text": "p̂ = p × TPR, tức judge luôn báo thấp hơn thực tế, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, trong mọi trường hợp, ở cả ba môi trường"
+          "text": "Chỉ đọc các câu trả lời hay nhất"
         },
         {
           "key": "D",
-          "text": "p̂ = p + (1 − TNR), tức sai lệch là một hằng số cộng thêm, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Kiểm chứng trên chính dữ liệu: judge gắn FAIL 41 case tức 20,5%; đảo ngược ra p = (0,205 − 0,10)/0,70 = 0,15, đúng bằng tỷ lệ lỗi thật đã đo tay là 30/200. Nhưng đừng đem con số đảo ngược đi báo cáo vì TPR/TNR chỉ đo từ 30 và 170 case nên sai số lớn.",
-      "source": "exam-111.json",
+      "explanation": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-057",
       "type": "mcq",
-      "prompt": "Khoảng tin cậy của TPR đo từ 30 case rộng bao nhiêu so với TNR đo từ 170 case?",
+      "prompt": "Trong vận hành thực tế, Evaluation objective giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "TPR 0,80 đo từ 30 case cho khoảng 0,66–0,94 tức rộng 28 điểm, còn TNR 0,90 đo từ 170 case chỉ rộng 9 điểm — thanh trên dài gấp ba, dù cấu hình không đổi, với mọi quy mô hệ thống, dù người dùng không thấy gì bất thường, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "TPR hẹp hơn vì mẫu nhỏ thì phương sai nhỏ, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, kể cả lúc tải thấp, mà không cần sửa code, kể cả khi đã bật đủ kiểm tra, kể cả khi tài liệu nguồn còn nguyên vẹn, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric"
         },
         {
           "key": "C",
-          "text": "TPR rộng gấp đôi TNR, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi dữ liệu đã được làm sạch kỹ, trong mọi trường hợp, với mọi loại workload, nên chi phí mỗi lần gọi không thay đổi, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Chọn metric dễ đẹp nhất rồi mới tìm mục tiêu"
         },
         {
           "key": "D",
-          "text": "Hai khoảng rộng như nhau vì cùng một cách đo, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, ở cả ba môi trường, theo đúng khuyến nghị, trong suốt vòng đời dịch vụ, dù prompt đã được viết lại rõ ràng hơn, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, mà không cần sửa code"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Hai hệ quả thực hành: đừng report điểm tới hai chữ số thập phân với phép đo thô đến vậy; và khi lấy mẫu calibration hãy lấy đủ case FAIL chứ không phải đủ case — 200 case ngẫu nhiên với tỷ lệ lỗi 3% chỉ cho 6 case FAIL, không đủ kết luận gì về TPR. Khoảng Wald ở n nhỏ còn lạc quan, khoảng thật rộng hơn.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-058",
       "type": "mcq",
-      "prompt": "Vì sao judge dùng được để so hai version nhưng không dùng được để báo cáo con số tuyệt đối?",
+      "prompt": "Trong vận hành thực tế, Benchmark giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Vì phần judge kêu oan — hệ số chặn (1 − TNR) — bám vào cả hai lần chấm như nhau nên khi trừ thì nó tự mất: p̂₂ − p̂₁ = J(p₂ − p₁); dấu tin được và p-value không bị thổi phồng, nhưng độ lớn bị nén vì J = 0,70 < 1 nên hiệu đo được luôn nhỏ hơn hiệu thật đúng 30%, trong mọi trường hợp, theo đúng khuyến nghị, kể cả khi đã bật đủ kiểm tra, ở cả ba môi trường"
+          "text": "Một demo gồm vài ví dụ thành công"
         },
         {
           "key": "B",
-          "text": "Vì judge chỉ chấm được tối đa 100 case mỗi lần chạy, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, dù cấu hình không đổi, với mọi quy mô hệ thống, kể cả khi dữ liệu đã được làm sạch kỹ"
+          "text": "Tập case và cách chấm chuẩn để so sánh nhất quán"
         },
         {
           "key": "C",
-          "text": "Vì con số tuyệt đối thay đổi theo phiên bản model của nhà cung cấp, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả khi mọi chỉ số kỹ thuật đều bình thường, ở cả ba môi trường, mà không cần sửa code, nên chi phí mỗi lần gọi không thay đổi, kể cả lúc tải thấp"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Vì so sánh hai version không cần độ chính xác cao bằng báo cáo, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, kể cả lúc tải thấp, với mọi loại workload, trong suốt vòng đời dịch vụ, kể cả khi đã bật đủ kiểm tra"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Ví dụ số: judge chấm v1 được 15% lỗi, v2 được 11%, hiệu 4 điểm. Chia ngược cho J thì hiệu thật là 0,04/0,70 = 5,7 điểm. Phép trừ này hỏng khi judge chấm hai version bằng thước khác nhau — ví dụ v2 dài dòng hơn mà judge có verbosity bias.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Tập case và cách chấm chuẩn để so sánh nhất quán. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-059",
       "type": "mcq",
-      "prompt": "Bốn việc người vẫn phải làm dù đã có judge là gì?",
+      "prompt": "Trong vận hành thực tế, Evaluation dataset giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Label golden set (200 case, 4 giờ; TPR/TNR dùng cho nhiều lần chạy, đo lại bằng mẫu nhỏ khi agent đổi đáng kể); viết rubric (SAU khi đã chấm một ít data — cần criteria mới chấm được nhưng phải chấm rồi mới biết criteria là gì, nên rubric là OUTPUT của quá trình chứ không phải input); xử những case bất đồng (judge gánh số lượng, người gánh phần khó); và đọc lại reasoning của judge, dù cấu hình không đổi, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, theo đúng khuyến nghị"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Viết code, chạy test, đọc kết quả và deploy, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong khi độ trễ vẫn nằm trong ngưỡng cam kết, trong khi hệ thống vẫn chạy đúng thiết kế, kể cả khi đã bật đủ kiểm tra, kể cả lúc tải thấp, ở cả ba môi trường, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Phải đại diện các use case, edge case và rủi ro quan trọng"
         },
         {
           "key": "C",
-          "text": "Chọn model, viết prompt, đặt temperature và parse output, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, trong khi ngân sách token vẫn còn dư nhiều, nên nhóm vận hành không nhận cảnh báo nào, dù đội đã tuân thủ đúng quy trình nội bộ, ở cả ba môi trường, kể cả lúc tải thấp, trong mọi trường hợp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Chỉ gồm các ví dụ model trả lời đúng"
         },
         {
           "key": "D",
-          "text": "Thu thập data, làm sạch, gán nhãn và huấn luyện, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, nên bước kiểm tra phía sau không phát hiện ra, nên kiểm thử nội bộ vẫn hiển thị màu xanh, trong suốt vòng đời dịch vụ, trong mọi trường hợp, ở cả ba môi trường, kể cả lúc tải thấp, dù cấu hình không đổi, theo đúng khuyến nghị"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Câu chuyện ở Honeycomb: một domain expert sau ba vòng đọc reasoning của judge đã nói 'nó khiến tôi nhận ra chính mình cũng không nhất quán ở một số edge case'. Vòng lặp hội tụ về trên 90% agreement, và phần lớn công là sửa tiêu chuẩn của NGƯỜI chứ không phải sửa judge.",
-      "source": "exam-111.json",
+      "answer": "B",
+      "explanation": "Phải đại diện các use case, edge case và rủi ro quan trọng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D14-060",
       "type": "mcq",
-      "prompt": "Guardrail và eval khác nhau ở những chiều nào?",
+      "prompt": "Trong vận hành thực tế, LLM-as-a-Judge giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Guardrail do đội bảo mật làm còn eval do đội chất lượng làm, dù kết quả đo trên tập mẫu đại diện vẫn đạt ngưỡng đã cam kết trước đó, dù khối lượng truy vấn mỗi ngày vẫn giữ ổn định như các tuần trước đó, kể cả trong môi trường thử nghiệm khép kín có kiểm soát chặt đầu vào, ở cả ba môi trường, kể cả lúc tải thấp"
+          "text": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy"
         },
         {
           "key": "B",
-          "text": "Guardrail chạy trong lúc request đang chạy, chặn output, tối ưu cho latency thấp, sai thì thà chặn nhầm còn hơn để lọt, ngân sách vài chục ms; Eval chạy theo batch trước khi ship, không chặn gì mà chỉ ra số, tối ưu cho độ chính xác của phép đo, sai thì thà báo chậm mà đúng, được chạy 30 phút, ở cả ba môi trường"
+          "text": "Chấp nhận điểm chấm không cần rubric"
         },
         {
           "key": "C",
-          "text": "Guardrail dùng model lớn còn eval dùng model nhỏ, nên báo cáo vận hành cuối kỳ vẫn không ghi nhận bất kỳ sự cố nào đáng kể, mà không đòi hỏi phải điều chỉnh lại kiến trúc hệ thống đang vận hành, và kết luận này không thay đổi khi chuyển sang một nhà cung cấp khác, trong suốt vòng đời dịch vụ, ở cả ba môi trường"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Guardrail chạy ở production còn eval chỉ chạy ở môi trường staging, trong khi quyền truy cập vẫn được cấp đúng phạm vi tối thiểu cần thiết, kể cả khi mọi lớp kiểm tra tự động sẵn có đều đã được bật lên đầy đủ, kể cả khi mọi chỉ số kỹ thuật đều bình thường, kể cả khi dữ liệu đã được làm sạch kỹ, ở cả ba môi trường"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Cùng một kỹ thuật LLM chấm nhưng đứng ở hai chỗ với hai mục tiêu khác nhau. Chỗ hay nhầm: faithfulness KHÔNG phải guardrail mà là phép đo — đem một phép đo phải tách từng claim rồi kiểm từng claim đi chặn realtime thì vừa chậm vừa chặn nhầm; ngược lại đem guardrail đi report chất lượng thì đang đo cái filter chứ không đo sản phẩm.",
-      "source": "exam-111.json",
+      "answer": "A",
+      "explanation": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },

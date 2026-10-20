@@ -14,1680 +14,1680 @@
     {
       "id": "D09-001",
       "type": "mcq",
-      "prompt": "Mỗi tool trong MCP trả về ba thông tin nào khi agent gọi tools/list?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Multi-agent?",
       "options": [
         {
           "key": "A",
-          "text": "endpoint, method và authentication để agent biết cách gửi yêu cầu tới đúng địa chỉ"
+          "text": "Phân chia vai trò khi một agent không đủ khả năng hoặc khó kiểm soát"
         },
         {
           "key": "B",
-          "text": "version, owner và last_updated để agent đánh giá độ tin cậy của tool trước khi dùng"
+          "text": "Tạo nhiều agent cho mọi tác vụ đơn giản"
         },
         {
           "key": "C",
-          "text": "cost, latency và rate_limit để agent cân nhắc chi phí trước khi quyết định gọi tool"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "name, description và inputSchema để agent đọc rồi chọn tool phù hợp với task"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Ba trường này tương ứng ba câu hỏi agent cần trả lời: tool tên gì (name), dùng khi nào (description), và truyền tham số ra sao (inputSchema). Đây cũng chính là cấu trúc tool schema đã học ở Day 4 — MCP chuẩn hóa cách công bố nó cho mọi client.",
-      "source": "exam-100.json",
+      "answer": "A",
+      "explanation": "Phân chia vai trò khi một agent không đủ khả năng hoặc khó kiểm soát. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-002",
       "type": "mcq",
-      "prompt": "Vì sao slide nói phiếu giao việc 'thừa thì khó cắt' hơn là 'thiếu thì khó thêm'?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Supervisor-worker?",
       "options": [
         {
           "key": "A",
-          "text": "Vì hệ thống kiểm thử tự động chỉ phát hiện được lỗi thiếu dữ liệu chứ không phát hiện được dữ liệu dư, nên state bị ghi đè giữa các bước xử lý"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Vì việc thêm field mới đòi hỏi phải sửa cả supervisor lẫn worker trong khi bỏ field chỉ cần sửa một bên, kể cả khi status đã chuyển sang trạng thái done"
+          "text": "Supervisor phân công, kiểm tra và tổng hợp kết quả của worker"
         },
         {
           "key": "C",
-          "text": "Vì các field thừa vẫn tiêu tốn token nhưng không gây lỗi nên không có động lực nào để loại bỏ chúng, trong khi trace vẫn giữ nguyên thứ tự thời gian"
+          "text": "Mọi worker tự đổi quyền của nhau"
         },
         {
           "key": "D",
-          "text": "Vì thiếu thì worker trả sai nên biết ngay, còn thừa thì sau vài tháng không ai dám bỏ field nào vì không rõ worker nào còn đọc nó"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Đây là lập luận về tính bất đối xứng của phản hồi: thiếu tạo ra tín hiệu rõ ràng (worker trả sai) nên tự sửa được; thừa thì im lặng, tích tụ dần và tạo ra nỗi sợ thay đổi. Vì vậy slide khuyên khởi điểm ở mức tối thiểu rồi bổ sung theo nhu cầu thực tế.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Supervisor phân công, kiểm tra và tổng hợp kết quả của worker. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-003",
       "type": "mcq",
-      "prompt": "Ranh giới trách nhiệm giữa supervisor và worker được tóm gọn thế nào?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Pipeline pattern?",
       "options": [
         {
           "key": "A",
-          "text": "Supervisor giữ luồng quyết định (decision flow), worker giữ chuyên môn (domain skill)"
+          "text": "Cho mọi agent tranh luận vô thời hạn"
         },
         {
           "key": "B",
-          "text": "Supervisor giữ dữ liệu chung, worker giữ kết quả riêng của từng lần chạy độc lập"
+          "text": "Chuyển đầu ra qua các bước chuyên môn theo thứ tự rõ ràng"
         },
         {
           "key": "C",
-          "text": "Supervisor giữ trace toàn hệ thống, worker giữ log chi tiết của riêng từng bước xử lý"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Supervisor giữ kết nối tới tool ngoài, worker giữ phần suy luận và sinh câu trả lời"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Slide dùng đúng cặp thuật ngữ này làm 'ranh giới dễ nhớ'. Dấu hiệu hỏng được nêu kèm: một worker vừa làm việc hẹp của nó vừa âm thầm gọi worker khác — lúc đó bạn có hai supervisor mà chỉ một cái được ghi trong sơ đồ, khiến trace không phản ánh đúng luồng thật.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Chuyển đầu ra qua các bước chuyên môn theo thứ tự rõ ràng. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-004",
       "type": "mcq",
-      "prompt": "Năm trường của phiếu giao việc là gì?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về MCP?",
       "options": [
         {
           "key": "A",
-          "text": "task, context, constraints, expected_output, error"
+          "text": "Chuẩn kết nối model với tools, resources và prompts bên ngoài"
         },
         {
           "key": "B",
-          "text": "task, plan, worker_results, status, final_answer"
+          "text": "Giao thức chỉ để chat giữa hai người dùng"
         },
         {
           "key": "C",
-          "text": "timestamp, agent_id, action, input_summary, status"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "from, deadline, status_url, on_reject, expected_output"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "A",
-      "explanation": "Ví dụ trong slide: task 'tra_tai_lieu', context 'chính sách nghỉ phép áp dụng từ 2025', constraints ['chỉ tài liệu nội bộ'], expected_output '3 đoạn liên quan nhất', error {code, reason}. Phương án B là bốn trường PHẢI THÊM khi giao việc qua A2A, phương án C là state, phương án D là trace entry.",
-      "source": "exam-100.json",
+      "explanation": "Chuẩn kết nối model với tools, resources và prompts bên ngoài. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-005",
       "type": "mcq",
-      "prompt": "Supervisor có cần giỏi hơn mọi worker không, theo Day 9?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về A2A?",
       "options": [
         {
           "key": "A",
-          "text": "Có — supervisor phải hiểu mọi lĩnh vực để kiểm tra lại kết quả mà các worker trả về"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Có — vì supervisor là điểm quyết định cuối cùng nên cần dùng model mạnh nhất trong hệ"
+          "text": "Chuẩn giao tiếp giữa các agent độc lập với năng lực được công bố"
         },
         {
           "key": "C",
-          "text": "Không — việc của nó là giao đúng việc, gọi đúng worker và gom kết quả, không phải tự làm phần chuyên môn"
+          "text": "Cơ chế thay thế database"
         },
         {
           "key": "D",
-          "text": "Tùy trường hợp — với hệ dưới ba worker thì không cần, còn từ bốn worker trở lên thì cần"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "Đáp án checkpoint Section 3 và cũng là một trong 5 ngộ nhận cần gỡ: 'Supervisor phải là model to nhất' là ngộ nhận, thực tế 'supervisor chỉ cần đủ để route đúng'. Slide bổ sung: supervisor tự trả lời là dấu hiệu ranh giới viết chưa đủ rõ.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Chuẩn giao tiếp giữa các agent độc lập với năng lực được công bố. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-006",
       "type": "mcq",
-      "prompt": "Trường hợp nào slide khuyên ĐỪNG chia thành nhiều agent?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về AgentCard?",
       "options": [
         {
           "key": "A",
-          "text": "Khi có nhiều bước có thể chạy song song mà không phụ thuộc kết quả của nhau"
+          "text": "Là lịch sử chat bí mật"
         },
         {
           "key": "B",
-          "text": "Khi hệ thống cần xử lý nhiều loại yêu cầu khác nhau và khó đoán trước được luồng xử lý"
+          "text": "Mô tả năng lực, endpoint và cách tương tác của một agent"
         },
         {
           "key": "C",
-          "text": "Khi cần biết chính xác khâu nào gây ra lỗi để có thể sửa nhanh trong môi trường production"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Khi mọi vai đều cần cùng một ngữ cảnh — lúc đó chia chỉ tốn thêm công chuyền tin"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Slide nêu hai trường hợp ĐỪNG chia: (1) khi mọi vai đều cần cùng một ngữ cảnh — chia ra thì phải tốn công chuyền ngữ cảnh qua lại giữa các agent mà không thu được lợi ích gì; (2) đừng chia chỉ vì thấy 'ngầu', vì multi-agent tốn khoảng 15× token nên nếu một agent đã đủ thì giữ đơn giản sẽ rẻ và ổn định hơn.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Mô tả năng lực, endpoint và cách tương tác của một agent. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-007",
       "type": "mcq",
-      "prompt": "State được ví như 'bảng chấm công' của hệ thống với ba cột nào?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về LangGraph state?",
       "options": [
         {
           "key": "A",
-          "text": "Đầu vào nhận được, đầu ra trả về, và mã lỗi nếu quá trình xử lý thất bại giữa chừng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Thời gian bắt đầu, thời gian kết thúc, và tổng chi phí token cho mỗi lần gọi worker"
+          "text": "Lưu trạng thái luồng điều phối giữa các node agent"
         },
         {
           "key": "C",
-          "text": "Tên worker, mức độ ưu tiên của tác vụ, và trạng thái phê duyệt của người giám sát"
+          "text": "Xóa mọi thông tin sau mỗi tool call"
         },
         {
           "key": "D",
-          "text": "Đã làm gì (history), còn dang dở (pending), và vì sao chọn worker này (decision)"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "D",
-      "explanation": "Ba cột này trả lời ba câu hỏi khác nhau về tiến trình. Mẩu state mẫu trong slide có đủ cả ba: history ghi 'retrieval_worker: 3 đoạn từ hr_policy_2025.pdf', pending ghi 'synthesis_worker', decision ghi lý do định tuyến. Slide nhấn mạnh chính trường status cho supervisor biết khi nào dừng — done hoặc error.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Lưu trạng thái luồng điều phối giữa các node agent. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-008",
       "type": "mcq",
-      "prompt": "Trường on_reject trong contract A2A quy định điều gì?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Trace?",
       "options": [
         {
           "key": "A",
-          "text": "Điều kiện nào thì agent bên kia được phép từ chối nhận yêu cầu từ hệ thống của bạn"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Số lần tối đa được phép gửi lại yêu cầu sau khi bị từ chối trước khi bỏ cuộc hẳn"
+          "text": "Theo dõi route, trạng thái và tool call để xác định lỗi hệ thống"
         },
         {
           "key": "C",
-          "text": "Từ chối thì trả về gì, và bạn làm gì tiếp theo sau khi nhận được từ chối đó"
+          "text": "Chỉ hiển thị thời gian bắt đầu"
         },
         {
           "key": "D",
-          "text": "Danh sách agent thay thế sẽ được gọi tự động khi agent chính từ chối nhận việc"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "on_reject ánh xạ tới đặc điểm 'nó có quyền từ chối' — vì hết quota, ngoài phạm vi, hoặc không đủ thẩm quyền. Điểm mấu chốt là contract phải quy định trước cả định dạng phản hồi từ chối lẫn hành động tiếp theo của bên giao việc, thay vì để hệ thống rơi vào trạng thái treo không xác định.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Theo dõi route, trạng thái và tool call để xác định lỗi hệ thống. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-009",
       "type": "mcq",
-      "prompt": "Theo slide 'Phiếu giao việc nên dài bao nhiêu', ba mức được minh họa thế nào?",
+      "prompt": "Trong một dự án AI, cách áp dụng Multi-agent nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Quá ít là một từ khóa, vừa đủ là một câu, quá nhiều là một đoạn văn dài trên trăm từ, dù mỗi field vẫn chỉ có một worker được phép ghi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Quá ít là nguyên văn câu user, vừa đủ là 'nghỉ thai sản, nhân viên chính thức, 2025', quá nhiều là 12 lượt hội thoại cộng hồ sơ nhân viên cộng sổ tay 40 trang"
+          "text": "Phân chia vai trò khi một agent không đủ khả năng hoặc khó kiểm soát"
         },
         {
           "key": "C",
-          "text": "Quá ít là dưới 10 token, vừa đủ là khoảng 50 token, quá nhiều là vượt quá 500 token cho một field, trong khi trace vẫn giữ nguyên thứ tự thời gian"
+          "text": "Tạo nhiều agent cho mọi tác vụ đơn giản"
         },
         {
           "key": "D",
-          "text": "Quá ít là chưa có constraints, vừa đủ là có constraints, quá nhiều là có thêm ví dụ mẫu, nên state bị ghi đè giữa các bước xử lý, nên state bị ghi đè giữa các bước xử lý"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Ba mức được minh họa trên cùng field context của worker tra tài liệu. Hại của mức 'quá nhiều': tốn token và worker dễ bám vào chi tiết không liên quan. Cách làm được khuyến nghị: bắt đầu từ cột giữa, thiếu thì thêm vì worker trả sai là biết ngay thiếu gì; thừa thì khó cắt vì sau vài tháng không ai dám bỏ field nào.",
-      "source": "exam-100.json",
+      "explanation": "Phân chia vai trò khi một agent không đủ khả năng hoặc khó kiểm soát. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-010",
       "type": "mcq",
-      "prompt": "Một trace entry cần đủ 7 field nào?",
+      "prompt": "Trong một dự án AI, cách áp dụng Supervisor-worker nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "user_id, session_id, request_id, worker_id, start_time, end_time, status"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "node_name, edge_from, edge_to, state_before, state_after, duration, result"
+          "text": "Supervisor phân công, kiểm tra và tổng hợp kết quả của worker"
         },
         {
           "key": "C",
-          "text": "timestamp, agent_id, action, input_summary, output_summary, status, latency_ms"
+          "text": "Mọi worker tự đổi quyền của nhau"
         },
         {
           "key": "D",
-          "text": "task, context, constraints, expected_output, error, from, deadline"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "Ví dụ trace trong slide có đủ bảy trường cho mỗi entry. Lưu ý quan trọng được nhấn mạnh: input_summary là TÓM TẮT, không phải toàn bộ context — nếu ghi nguyên context thì trace phình to và mất tác dụng làm công cụ đọc nhanh.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Supervisor phân công, kiểm tra và tổng hợp kết quả của worker. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-011",
       "type": "mcq",
-      "prompt": "Ví dụ về tính 'test được' của worker tra tài liệu trong slide là gì?",
+      "prompt": "Trong một dự án AI, cách áp dụng Pipeline pattern nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Chạy worker trên môi trường staging trong một tuần rồi so sánh với kết quả của hệ thống cũ"
+          "text": "Cho mọi agent tranh luận vô thời hạn"
         },
         {
           "key": "B",
-          "text": "Yêu cầu người dùng đánh giá chất lượng câu trả lời theo thang điểm từ một tới năm sao"
+          "text": "Chuyển đầu ra qua các bước chuyên môn theo thứ tự rõ ràng"
         },
         {
           "key": "C",
-          "text": "Cho hai worker khác nhau cùng xử lý một câu hỏi rồi đối chiếu kết quả xem có khớp không"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Worker đã hứa trả 3 đoạn mỗi câu hỏi: ném 20 câu mẫu vào rồi đếm số lần đoạn đúng có trong đó"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Test được đòi hỏi đầu vào và đầu ra rõ ràng để chạy thử riêng TRƯỚC KHI cắm vào supervisor. Ví dụ này cụ thể hóa: có cam kết đầu ra (3 đoạn), có bộ test (20 câu mẫu), và có tiêu chí đo được (đếm số lần đoạn đúng xuất hiện).",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Chuyển đầu ra qua các bước chuyên môn theo thứ tự rõ ràng. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-012",
       "type": "mcq",
-      "prompt": "Bốn dấu hiệu NÊN chia nhỏ task cho nhiều agent là gì?",
+      "prompt": "Trong một dự án AI, cách áp dụng MCP nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Task có nhiều bước vai trò khác nhau, chia được việc độc lập, cần debug rõ ai làm sai, và cần mở rộng dần"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Ngân sách dự án lớn, đội ngũ đông người, hạ tầng sẵn sàng, và ban lãnh đạo đã phê duyệt kế hoạch"
+          "text": "Chuẩn kết nối model với tools, resources và prompts bên ngoài"
         },
         {
           "key": "C",
-          "text": "Số lượng người dùng tăng nhanh, dữ liệu nhiều, yêu cầu phức tạp, và thời gian phản hồi phải rất ngắn"
+          "text": "Giao thức chỉ để chat giữa hai người dùng"
         },
         {
           "key": "D",
-          "text": "Model hiện tại đã đạt giới hạn, chi phí API quá cao, độ trễ vượt ngưỡng, và tỷ lệ lỗi tăng dần"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "A",
-      "explanation": "Checklist trong slide: (1) task có nhiều bước vai trò khác nhau như plan, retrieve, tool use, tổng hợp; (2) có thể chia việc độc lập để 2 worker làm song song vẫn hợp lý; (3) cần debug rõ ai làm sai — route sai, retrieve sai hay synthesis sai; (4) cần mở rộng dần, thêm một worker mà không viết lại cả prompt gốc.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Chuẩn kết nối model với tools, resources và prompts bên ngoài. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-013",
       "type": "mcq",
-      "prompt": "Debate pattern khác Supervisor-Worker ở điểm căn bản nào?",
+      "prompt": "Trong một dự án AI, cách áp dụng A2A nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Supervisor-worker chia KHỐI LƯỢNG nên thiếu một mảnh là không đủ; debate chia GÓC NHÌN nên bỏ một góc vẫn chạy được, chỉ dễ sót rủi ro hơn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Debate dùng nhiều model khác nhau còn supervisor-worker dùng chung một model cho mọi agent, nên độ phức tạp phối hợp tăng lên đáng kể"
+          "text": "Chuẩn giao tiếp giữa các agent độc lập với năng lực được công bố"
         },
         {
           "key": "C",
-          "text": "Supervisor-worker cần agent điều phối còn debate để các agent tự thương lượng với nhau trực tiếp, kể cả khi các nhánh việc hoàn toàn độc lập nhau"
+          "text": "Cơ chế thay thế database"
         },
         {
           "key": "D",
-          "text": "Debate chạy tuần tự từng agent một còn supervisor-worker luôn chạy tất cả worker song song, kể cả khi các nhánh việc hoàn toàn độc lập nhau"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Đây là phân biệt tinh tế nhất trong Section 2. Hệ quả: bước cuối cũng khác nhau — supervisor-worker GHÉP MẢNH lại thành kết quả đủ, còn debate phải XỬ LÝ Ý KIẾN TRÁI NHAU. Trong debate, ba agent đều đọc đúng một input và đều trả lời trọn vẹn câu hỏi, chỉ khác nhau ở vai được giao.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Chuẩn giao tiếp giữa các agent độc lập với năng lực được công bố. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-014",
       "type": "mcq",
-      "prompt": "Trong ví dụ trace, entry đầu tiên của supervisor ghi output_summary như thế nào?",
+      "prompt": "Trong một dự án AI, cách áp dụng AgentCard nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "route=retrieval_worker, không kèm lý do vì lý do đã nằm trong trường action"
+          "text": "Mô tả năng lực, endpoint và cách tương tác của một agent"
         },
         {
           "key": "B",
-          "text": "Danh sách tất cả worker khả dụng kèm điểm phù hợp của từng worker với yêu cầu"
+          "text": "Là lịch sử chat bí mật"
         },
         {
           "key": "C",
-          "text": "route=retrieval_worker (ly do: cau hoi chinh sach) — có kèm lý do định tuyến"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "status=ok cùng với latency_ms=180 để đo hiệu năng của bước định tuyến"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Việc ghi kèm lý do định tuyến rất quan trọng khi debug: nếu supervisor route sai, bạn cần biết nó đã hiểu yêu cầu như thế nào chứ không chỉ biết nó đã chọn worker nào. Đây cũng chính là cột 'decision' trong ẩn dụ bảng chấm công ở Section 3.",
-      "source": "exam-100.json",
+      "answer": "A",
+      "explanation": "Mô tả năng lực, endpoint và cách tương tác của một agent. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-015",
       "type": "mcq",
-      "prompt": "Sáu bước trong luồng agent làm việc với MCP server là gì?",
+      "prompt": "Trong một dự án AI, cách áp dụng LangGraph state nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Tra registry, lấy AgentCard, kiểm tra quyền, gửi contract, chờ status_url, nhận kết quả cuối, nên mỗi cặp agent phải tự thỏa thuận riêng, dù server đã công bố năng lực theo đúng chuẩn"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Kết nối server, gọi tools/list để hỏi có tool gì, mỗi tool trả về name/description/inputSchema, agent đọc schema và chọn tool, gọi tools/call kèm params, server thực thi và trả kết quả"
+          "text": "Lưu trạng thái luồng điều phối giữa các node agent"
         },
         {
           "key": "C",
-          "text": "Đọc file cấu hình, khởi tạo client, kiểm tra phiên bản, gửi yêu cầu, nhận phản hồi, ghi log, kể cả khi quyền truy cập đã bị giới hạn tối thiểu, nên mỗi cặp agent phải tự thỏa thuận riêng"
+          "text": "Xóa mọi thông tin sau mỗi tool call"
         },
         {
           "key": "D",
-          "text": "Đăng ký agent, xác thực danh tính, tải danh sách tool, cache lại cấu hình, gọi tool, ngắt kết nối, dù server đã công bố năng lực theo đúng chuẩn, trong khi client vẫn khám phá được tool lúc chạy"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Sáu bước này thể hiện đặc tính quan trọng nhất của MCP: agent PHÁT HIỆN tool lúc chạy chứ không hard-code. Phương án D mô tả luồng A2A với registry và AgentCard — một khái niệm khác trong cùng bài học.",
-      "source": "exam-100.json",
+      "explanation": "Lưu trạng thái luồng điều phối giữa các node agent. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-016",
       "type": "mcq",
-      "prompt": "Theo bảng so sánh single-agent và multi-agent, ba dòng nào là 'cái mất' của multi-agent?",
+      "prompt": "Trong một dự án AI, cách áp dụng Trace nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Chi phí LLM, latency, và độ phức tạp về quản lý state, route cùng contract"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Khả năng debug, chuyên môn hóa, và khả năng mở rộng khi thêm vai trò mới vào hệ thống"
+          "text": "Theo dõi route, trạng thái và tool call để xác định lỗi hệ thống"
         },
         {
           "key": "C",
-          "text": "Thời gian phát triển ban đầu, chi phí hạ tầng, và số lượng nhân sự cần cho dự án"
+          "text": "Chỉ hiển thị thời gian bắt đầu"
         },
         {
           "key": "D",
-          "text": "Chất lượng câu trả lời, độ ổn định khi vận hành, và mức độ hài lòng của người dùng cuối"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Bảng chia rõ: ba dòng đầu là cái MẤT — chi phí LLM (mỗi agent ít nhất một lần gọi, supervisor là lần gọi riêng), latency (cao hơn vì nhiều chặng nối tiếp), độ phức tạp (phải quản state, route, contract). Ba dòng dưới là cái ĐƯỢC — debug rõ, chuyên môn hóa sâu, mở rộng mà không viết lại prompt gốc.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Theo dõi route, trạng thái và tool call để xác định lỗi hệ thống. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-017",
       "type": "mcq",
-      "prompt": "Bẫy thứ hai của Supervisor-Worker là gì?",
+      "prompt": "Khi đội ngũ bỏ qua Multi-agent, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Worker tự ý gọi worker khác khiến sơ đồ thực tế khác với sơ đồ thiết kế ban đầu"
+          "text": "Phân chia vai trò khi một agent không đủ khả năng hoặc khó kiểm soát"
         },
         {
           "key": "B",
-          "text": "Số lượng worker tăng quá nhanh làm chi phí gọi model vượt ngoài ngân sách dự kiến"
+          "text": "Tạo nhiều agent cho mọi tác vụ đơn giản"
         },
         {
           "key": "C",
-          "text": "Supervisor vừa route vừa tự làm nên thành nút cổ chai và context của nó phình đúng như một agent đơn lẻ"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Kết quả từ các worker có định dạng khác nhau nên bước gộp cuối cùng rất khó thực hiện"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Bẫy 'supervisor ôm quá nhiều' phá hỏng chính mục đích của việc chia vai: nếu supervisor tự làm phần chuyên môn thì context của nó lại chứa mọi thứ, quay về đúng bài toán context bottleneck của Section 1. Slide sau đó khẳng định supervisor 'không cần giỏi hơn worker'.",
-      "source": "exam-100.json",
+      "answer": "A",
+      "explanation": "Phân chia vai trò khi một agent không đủ khả năng hoặc khó kiểm soát. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-018",
       "type": "mcq",
-      "prompt": "Trong ví dụ đọc 40 PDF rồi viết báo cáo, con số nào minh họa giới hạn parallelism?",
+      "prompt": "Khi đội ngũ bỏ qua Supervisor-worker, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Một agent cần 40 lượt nối đuôi, chia ra thì 40 agent đọc cùng lúc, chênh lệch thời gian khoảng 4,5 lần"
+          "text": "Supervisor phân công, kiểm tra và tổng hợp kết quả của worker"
         },
         {
           "key": "B",
-          "text": "Một agent cần 40 lượt nối đuôi, chia ra thì 4 agent đọc cùng lúc, chênh lệch khoảng 2 lần"
+          "text": "Mọi worker tự đổi quyền của nhau"
         },
         {
           "key": "C",
-          "text": "Một agent cần 20 lượt nối đuôi, chia ra thì 20 agent đọc cùng lúc, chênh lệch khoảng 8 lần"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Một agent cần 100 lượt nối đuôi, chia ra thì 10 agent đọc cùng lúc, chênh lệch khoảng 10 lần"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "A",
-      "explanation": "Số liệu trong slide: 40 lượt nối đuôi nếu một agent tự đọc, 40 agent đọc cùng lúc nếu chia ra, chênh lệch thời gian 4,5× và 1.500+ tool call một lần giao việc. Nguồn: Kimi Agent Swarm 2026 — hệ thống chạy tới 100 agent song song.",
-      "source": "exam-100.json",
+      "explanation": "Supervisor phân công, kiểm tra và tổng hợp kết quả của worker. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-019",
       "type": "mcq",
-      "prompt": "Ba đặc điểm khiến agent khác hẳn tool, buộc A2A phải khác MCP là gì?",
+      "prompt": "Khi đội ngũ bỏ qua Pipeline pattern, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Nó chạy trên hạ tầng khác, dùng ngôn ngữ khác, và có định dạng dữ liệu khác với hệ của bạn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Nó tự quyết (có thể hỏi lại hoặc làm theo cách bạn không lường trước), nó làm lâu, và nó có quyền từ chối"
+          "text": "Chuyển đầu ra qua các bước chuyên môn theo thứ tự rõ ràng"
         },
         {
           "key": "C",
-          "text": "Nó có bộ nhớ riêng, có thể học từ các lần gọi trước, và thay đổi hành vi theo thời gian"
+          "text": "Cho mọi agent tranh luận vô thời hạn"
         },
         {
           "key": "D",
-          "text": "Nó tốn nhiều token hơn, phản hồi chậm hơn, và cần xác thực phức tạp hơn so với gọi tool"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Slide giải thích cụ thể từng đặc điểm: tự quyết nên có thể hỏi lại hoặc làm khác ý; làm lâu nên một việc chạy 20 phút thì không trả lời gọn trong một lần gọi; có quyền từ chối vì hết quota, ngoài phạm vi, hoặc không đủ thẩm quyền. 'Ba thứ đó phải nằm trong cách giao tiếp ngay từ đầu.'",
-      "source": "exam-100.json",
+      "explanation": "Chuyển đầu ra qua các bước chuyên môn theo thứ tự rõ ràng. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-020",
       "type": "mcq",
-      "prompt": "Theo slide quy mô, việc 'tra một dữ kiện' nên dùng bao nhiêu agent?",
+      "prompt": "Khi đội ngũ bỏ qua MCP, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "1 supervisor và 2 worker để có thể kiểm chứng chéo kết quả trước khi trả về"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "10+ worker, mỗi worker phụ trách một phần việc riêng với ranh giới rõ ràng"
+          "text": "Chuẩn kết nối model với tools, resources và prompts bên ngoài"
         },
         {
           "key": "C",
-          "text": "2–4 worker, mỗi worker khoảng 10–15 lượt gọi tool để đảm bảo độ phủ"
+          "text": "Giao thức chỉ để chat giữa hai người dùng"
         },
         {
           "key": "D",
-          "text": "1 agent với 3–10 lượt gọi tool; chia agent ở mức này chỉ tốn thêm"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "D",
-      "explanation": "Ba mức trong slide: tra một dữ kiện → 1 agent, 3–10 lượt gọi tool; so sánh vài lựa chọn → 2–4 worker, mỗi worker 10–15 lượt; quét rộng nhiều hướng → 10+ worker. Slide giải thích vì sao phải ghi con số vào prompt supervisor: nếu không, nó sẽ gọi thừa worker cho việc nhỏ.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Chuẩn kết nối model với tools, resources và prompts bên ngoài. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-021",
       "type": "mcq",
-      "prompt": "Bốn giới hạn cốt lõi của single-agent theo slide là gì?",
+      "prompt": "Khi đội ngũ bỏ qua A2A, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Không hỗ trợ đa ngôn ngữ, không xử lý được ảnh, không chạy offline, và không tích hợp được hệ thống cũ, dù supervisor vẫn định tuyến đúng worker cần gọi"
+          "text": "Cơ chế thay thế database"
         },
         {
           "key": "B",
-          "text": "Thiếu bộ nhớ dài hạn, không gọi được tool ngoài, không đọc được tài liệu, và không tự đánh giá được, kể cả khi số worker được giới hạn dưới năm"
+          "text": "Chuẩn giao tiếp giữa các agent độc lập với năng lực được công bố"
         },
         {
           "key": "C",
-          "text": "Chật chỗ trong một lần suy luận, ôm nhiều vai thì không giỏi vai nào, chạy nối đuôi không chạy cùng lúc, và lỗi không có ranh giới"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Chi phí cao, độ trễ lớn, khó mở rộng quy mô, và phụ thuộc hoàn toàn vào một nhà cung cấp model, nên ranh giới vai trò giữa các agent bị mờ đi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Bốn giới hạn: (1) context bottleneck — quá nhiều luật, kết quả tool và lịch sử chat chen vào cùng một lượt; (2) specialization trade-off — càng thêm vai thì prompt càng dài và luật càng dễ va nhau; (3) parallelism — nhiều việc không liên quan vẫn phải xếp hàng chờ; (4) lỗi không có ranh giới — một bước sai làm bẩn context chung và không biết vai nào đã sai.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Chuẩn giao tiếp giữa các agent độc lập với năng lực được công bố. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-022",
       "type": "mcq",
-      "prompt": "Vì sao slide nói ba kiểu cộng tác đầu của A2A 'bạn đã gặp rồi'?",
+      "prompt": "Khi đội ngũ bỏ qua AgentCard, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Vì chúng đều đã được cài đặt sẵn trong các framework phổ biến nên không cần tự viết lại"
+          "text": "Là lịch sử chat bí mật"
         },
         {
           "key": "B",
-          "text": "Vì chúng là các mẫu thiết kế kinh điển đã tồn tại từ lâu trong lĩnh vực hệ phân tán"
+          "text": "Mô tả năng lực, endpoint và cách tương tác của một agent"
         },
         {
           "key": "C",
-          "text": "Vì chúng vẫn là bốn pattern của Section 2, chỉ khác ở chỗ bên kia không phải agent của bạn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Vì cả ba đều đã được minh họa trong phần MCP với các ví dụ tương tự về tool calling"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Ánh xạ cụ thể: Handover là pipeline, Cooperative Search là supervisor-worker, Joint Decision là debate. Điểm khác biệt duy nhất là ranh giới sở hữu — bạn không sửa được agent bên kia, nên phải bổ sung bốn trường from, deadline, status_url, on_reject vào contract.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Mô tả năng lực, endpoint và cách tương tác của một agent. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-023",
       "type": "mcq",
-      "prompt": "Bẫy thứ nhất của Supervisor-Worker được minh họa bằng ví dụ nào?",
+      "prompt": "Khi đội ngũ bỏ qua LangGraph state, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Ba worker chạy song song nhưng kết quả mâu thuẫn nhau và không có cơ chế nào để hòa giải"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Worker chạy quá lâu khiến supervisor timeout và phải khởi động lại toàn bộ quy trình từ đầu"
+          "text": "Lưu trạng thái luồng điều phối giữa các node agent"
         },
         {
           "key": "C",
-          "text": "Giao cho 3 worker cùng câu 'tìm hiểu về đối thủ X' thì cả 3 mở đúng một trang chủ và trả về gần như một bản"
+          "text": "Xóa mọi thông tin sau mỗi tool call"
         },
         {
           "key": "D",
-          "text": "Supervisor phải nhớ quá nhiều worker nên không định tuyến chính xác được yêu cầu của người dùng"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "Đây là bẫy 'giao việc mơ hồ'. Cách chữa theo slide: phải viết rõ cho từng worker làm gì, trả về dạng gì, được dùng tool nào, và phần nào của người khác thì đừng đụng — ví dụ worker 1 lấy bảng giá, worker 2 lấy đánh giá người dùng, worker 3 lấy tin tuyển dụng.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Lưu trạng thái luồng điều phối giữa các node agent. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-024",
       "type": "mcq",
-      "prompt": "Sự khác biệt giữa 'chưa có chuẩn' và 'có A2A' được minh họa thế nào?",
+      "prompt": "Khi đội ngũ bỏ qua Trace, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Chưa có chuẩn thì mỗi cặp tự bịa cách gọi và báo tiến độ; có A2A thì bên kia công bố AgentCard một lần cho ai theo chuẩn cũng giao việc được"
+          "text": "Chỉ hiển thị thời gian bắt đầu"
         },
         {
           "key": "B",
-          "text": "Chưa có chuẩn thì phải viết adapter cho từng agent, có A2A thì framework tự sinh adapter tương ứng, trong khi client vẫn khám phá được tool lúc chạy"
+          "text": "Theo dõi route, trạng thái và tool call để xác định lỗi hệ thống"
         },
         {
           "key": "C",
-          "text": "Chưa có chuẩn thì không kiểm soát được quyền truy cập, có A2A thì mọi agent đều phải xác thực trước, dù server đã công bố năng lực theo đúng chuẩn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Chưa có chuẩn thì agent gọi trực tiếp qua REST, có A2A thì mọi lời gọi đi qua một message queue trung tâm, trong khi client vẫn khám phá được tool lúc chạy"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Sơ đồ so sánh: bên trái agent của bạn nối tới agent team B qua 'REST riêng' và tới team C qua 'webhook riêng'; bên phải cả hai đều công bố AgentCard. Slide liệt kê bốn thứ mỗi cặp phải tự bịa khi chưa có chuẩn: gọi ở đâu, gửi dạng gì, báo tiến độ kiểu nào, từ chối thì trả về gì.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Theo dõi route, trạng thái và tool call để xác định lỗi hệ thống. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-025",
       "type": "mcq",
-      "prompt": "Bốn key takeaway của Day 9 là gì?",
+      "prompt": "Mục tiêu chính của Multi-agent trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Chọn model đúng, viết prompt tốt, đo bằng chỉ số rõ ràng, và triển khai theo từng giai đoạn nhỏ, kể cả khi số worker được giới hạn dưới năm, trong khi trace vẫn ghi đủ các bước đã chạy qua, nên ranh giới vai trò giữa các agent bị mờ đi"
+          "text": "Phân chia vai trò khi một agent không đủ khả năng hoặc khó kiểm soát"
         },
         {
           "key": "B",
-          "text": "Multi-agent là chia vai để hệ đỡ quá tải chứ không phải cho ngầu; supervisor-worker là điểm khởi đầu thực dụng; MCP nối agent với năng lực ngoài còn A2A giao việc giữa agent; LangGraph biến orchestration thành graph dễ debug"
+          "text": "Tạo nhiều agent cho mọi tác vụ đơn giản"
         },
         {
           "key": "C",
-          "text": "Hiểu giới hạn của một agent, học đủ bốn pattern, thuộc lòng bảy trường của trace, và làm xong bài lab cuối buổi, kể cả khi số worker được giới hạn dưới năm, kể cả khi số worker được giới hạn dưới năm, kể cả khi số worker được giới hạn dưới năm"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Chia càng nhiều agent càng tốt, dùng model mạnh cho supervisor, chuẩn hóa mọi giao tiếp, và tự động hóa hoàn toàn, kể cả khi số worker được giới hạn dưới năm, kể cả khi số worker được giới hạn dưới năm"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Bốn takeaway này tương ứng bốn câu hỏi trọng tâm đặt ra ở đầu buổi. Takeaway thứ hai nhấn mạnh supervisor-worker 'nối thẳng được với artifact Day 08' — tức lab Day 9 tách chính RAG agent của Day 8 thành ba worker.",
-      "source": "exam-100.json",
+      "answer": "A",
+      "explanation": "Phân chia vai trò khi một agent không đủ khả năng hoặc khó kiểm soát. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-026",
       "type": "mcq",
-      "prompt": "Vì sao vòng lặp Self-Correction phải bị chặn ở 3 vòng?",
+      "prompt": "Mục tiêu chính của Supervisor-worker trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Vì hầu hết hệ thống có giới hạn timeout mặc định tương ứng với thời gian chạy 3 vòng, kể cả khi quyền truy cập đã bị giới hạn tối thiểu"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Vì sau 3 vòng thì chất lượng đã đạt mức tối ưu và không thể cải thiện thêm được nữa, nên mỗi cặp agent phải tự thỏa thuận riêng"
+          "text": "Supervisor phân công, kiểm tra và tổng hợp kết quả của worker"
         },
         {
           "key": "C",
-          "text": "Vì worker kiểm chứng chỉ lưu được tối đa 3 phiên bản bản nháp để so sánh với nhau, dù server đã công bố năng lực theo đúng chuẩn"
+          "text": "Mọi worker tự đổi quyền của nhau"
         },
         {
           "key": "D",
-          "text": "Vì không chặn thì hai worker đẩy qua đẩy lại mãi — mỗi vòng thêm một lần gọi model, tốn tiền mà không chắc tốt hơn"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Slide nêu cách xử lý khi chạm trần: 'Quá 3 vòng thì dừng, trả phần chắc chắn và báo chỗ chưa có nguồn.' Đây chính là graceful degradation — thà trả kết quả không đầy đủ nhưng minh bạch còn hơn lặp vô hạn hoặc trả kết quả đầy đủ mà không đáng tin.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Supervisor phân công, kiểm tra và tổng hợp kết quả của worker. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-027",
       "type": "mcq",
-      "prompt": "Pipeline pattern phù hợp nhất với loại bài toán nào?",
+      "prompt": "Mục tiêu chính của Pipeline pattern trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Yêu cầu đa dạng và khó đoán trước nên cần một agent đọc rồi chọn worker phù hợp"
+          "text": "Chuyển đầu ra qua các bước chuyên môn theo thứ tự rõ ràng"
         },
         {
           "key": "B",
-          "text": "Số lượng worker quá lớn nên cần thêm một tầng điều phối trung gian giữa supervisor và worker"
+          "text": "Cho mọi agent tranh luận vô thời hạn"
         },
         {
           "key": "C",
-          "text": "Bài toán cần nhiều góc nhìn khác nhau vì sai một lần thì hậu quả rất nặng nề"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Các bước đã cố định sẵn, gần như không rẽ nhánh — ví dụ quy trình duyệt cấp quyền truy cập"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Ví dụ trong slide là quy trình duyệt cấp quyền: kiểm role → ghi log → cấp quyền, luôn chạy theo đúng thứ tự đó. Lợi ích được nêu: mỗi bước test riêng được và lỗi nằm ở bước nào thì thấy ngay.",
-      "source": "exam-100.json",
+      "answer": "A",
+      "explanation": "Chuyển đầu ra qua các bước chuyên môn theo thứ tự rõ ràng. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-028",
       "type": "mcq",
-      "prompt": "Vì sao phiếu giao việc 5 trường là đủ trong nội bộ nhưng không đủ khi qua ranh giới?",
+      "prompt": "Mục tiêu chính của MCP trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Vì qua ranh giới thì độ trễ mạng cao hơn nên cần thêm cơ chế thử lại và timeout riêng, kể cả khi quyền truy cập đã bị giới hạn tối thiểu"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Vì bên ngoài không tin tưởng bạn nên cần thêm trường xác thực và chữ ký số cho mỗi yêu cầu, nên mỗi cặp agent phải tự thỏa thuận riêng"
+          "text": "Chuẩn kết nối model với tools, resources và prompts bên ngoài"
         },
         {
           "key": "C",
-          "text": "Vì trong nội bộ bạn sở hữu cả hai đầu nên sai thì sửa cả hai; qua ranh giới thì không sửa được agent bên kia và nó không chờ bạn"
+          "text": "Giao thức chỉ để chat giữa hai người dùng"
         },
         {
           "key": "D",
-          "text": "Vì agent bên ngoài dùng định dạng dữ liệu khác nên cần thêm trường mô tả cấu trúc đầu vào, trong khi client vẫn khám phá được tool lúc chạy"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Slide nêu chính xác lập luận này. Hai vế đều quan trọng: 'không sửa được agent bên kia' nghĩa là mọi thỏa thuận phải nằm trong contract; 'nó không chờ bạn' nghĩa là phải có deadline và cơ chế theo dõi tiến độ bất đồng bộ thay vì giả định gọi xong là có kết quả ngay.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Chuẩn kết nối model với tools, resources và prompts bên ngoài. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-029",
       "type": "mcq",
-      "prompt": "Bốn kiểu cộng tác của A2A là gì?",
+      "prompt": "Mục tiêu chính của A2A trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Broadcast, Request-Reply, Publish-Subscribe và Streaming theo bốn mô hình truyền tin cơ bản, nên mỗi cặp agent phải tự thỏa thuận riêng"
+          "text": "Chuẩn giao tiếp giữa các agent độc lập với năng lực được công bố"
         },
         {
           "key": "B",
-          "text": "Sequential, Parallel, Conditional và Recursive theo bốn cách tổ chức luồng thực thi, nên mỗi cặp agent phải tự thỏa thuận riêng"
+          "text": "Cơ chế thay thế database"
         },
         {
           "key": "C",
-          "text": "Delegate, Escalate, Negotiate và Arbitrate theo bốn mức độ tương tác giữa các agent, dù server đã công bố năng lực theo đúng chuẩn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Handover (tuần tự), Cooperative Search (song song), Joint Decision (đồng thuận) và Self-Correction (viết–kiểm–sửa)"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Slide chỉ ra ba cái đầu chính là ba pattern đã học ở Section 2 nhưng áp dụng qua ranh giới: Handover là pipeline, Cooperative Search là supervisor-worker, Joint Decision là debate. 'Chỉ Self-Correction là mới: một agent viết, một agent khác soi và trả về để sửa.'",
-      "source": "exam-100.json",
+      "answer": "A",
+      "explanation": "Chuẩn giao tiếp giữa các agent độc lập với năng lực được công bố. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-030",
       "type": "mcq",
-      "prompt": "Ví dụ 'read-ticket chứ không delete-DB' minh họa nguyên tắc nào?",
+      "prompt": "Mục tiêu chính của AgentCard trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Human-in-the-loop — mọi hành động nguy hiểm đều cần con người phê duyệt trước khi thực thi"
+          "text": "Là lịch sử chat bí mật"
         },
         {
           "key": "B",
-          "text": "Sandbox isolation — chạy server trong môi trường cô lập để hạn chế phạm vi thiệt hại"
+          "text": "Mô tả năng lực, endpoint và cách tương tác của một agent"
         },
         {
           "key": "C",
-          "text": "Least privilege — chỉ cấp đúng quyền tối thiểu cần cho việc mà agent phải làm"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Defense in depth — kết hợp nhiều lớp phòng thủ vì không lớp nào là hoàn hảo tuyệt đối"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Đây là lớp phòng thủ thứ nhất trong ba lớp. Ý nghĩa thực tiễn: ngay cả khi prompt injection lái được agent thử một hành động phá hoại, nó cũng không có quyền để thực hiện — phòng thủ nằm ở tầng phân quyền của server chứ không phụ thuộc vào việc agent có bị lừa hay không.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Mô tả năng lực, endpoint và cách tương tác của một agent. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-031",
       "type": "mcq",
-      "prompt": "Vì sao slide khuyên phải ghi rõ mức quy mô vào prompt của supervisor?",
+      "prompt": "Mục tiêu chính của LangGraph state trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Để mỗi worker biết được nó là một trong bao nhiêu worker đang cùng xử lý một yêu cầu"
+          "text": "Xóa mọi thông tin sau mỗi tool call"
         },
         {
           "key": "B",
-          "text": "Để supervisor tính toán trước được tổng chi phí token và báo cáo cho người vận hành hệ thống"
+          "text": "Lưu trạng thái luồng điều phối giữa các node agent"
         },
         {
           "key": "C",
-          "text": "Để hệ thống tự động dừng khi số lượng worker vượt quá giới hạn hạ tầng cho phép chạy"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Vì nếu không ghi, supervisor sẽ gọi thừa worker cho việc nhỏ — con số lấy từ hệ thống deep research của Anthropic"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Slide nêu lý do rất thực dụng: supervisor không tự biết khi nào một agent là đủ. Con số 3–10 lượt tool, 2–4 worker, 10+ worker được lấy từ Anthropic 'How we built our multi-agent research system' 2025, và slide lưu ý đây 'không phải bắt buộc, nhưng là điểm khởi đầu tốt hơn là đoán'.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Lưu trạng thái luồng điều phối giữa các node agent. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-032",
       "type": "mcq",
-      "prompt": "Ngộ nhận 'Supervisor phải là model to nhất' được đính chính thế nào?",
+      "prompt": "Mục tiêu chính của Trace trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Supervisor cần model to nhất vì nó phải kiểm tra lại toàn bộ kết quả mà worker trả về"
+          "text": "Theo dõi route, trạng thái và tool call để xác định lỗi hệ thống"
         },
         {
           "key": "B",
-          "text": "Supervisor nên dùng model to nhất nhưng chỉ khi hệ thống có trên năm worker khác nhau"
+          "text": "Chỉ hiển thị thời gian bắt đầu"
         },
         {
           "key": "C",
-          "text": "Supervisor và worker nên dùng chung một model để đảm bảo tính nhất quán trong cách hiểu"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Supervisor chỉ cần đủ để route đúng, không cần giỏi hơn worker về chuyên môn"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Đây là một trong 5 ngộ nhận trong bảng tổng kết. Nó nhất quán với slide 'Supervisor chia việc rồi gom — không cần giỏi hơn worker': việc của supervisor là giao đúng việc, gọi đúng worker, và gom đầu ra, chứ không phải tự làm phần chuyên môn.",
-      "source": "exam-100.json",
+      "answer": "A",
+      "explanation": "Theo dõi route, trạng thái và tool call để xác định lỗi hệ thống. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-033",
       "type": "mcq",
-      "prompt": "Trong Day09State bằng code, trường trace được mô tả với đặc tính gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Multi-agent?",
       "options": [
         {
           "key": "A",
-          "text": "encrypted — mã hóa toàn bộ nội dung để bảo vệ dữ liệu nhạy cảm trong quá trình chạy"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "auto-expire — tự xóa các entry cũ hơn một giờ để tránh state phình quá lớn"
+          "text": "Phân chia vai trò khi một agent không đủ khả năng hoặc khó kiểm soát"
         },
         {
           "key": "C",
-          "text": "read-only — chỉ supervisor được đọc còn worker không được truy cập vào nội dung"
+          "text": "Tạo nhiều agent cho mọi tác vụ đơn giản"
         },
         {
           "key": "D",
-          "text": "append-only — chỉ ghi thêm chứ không ghi đè, với các entry gồm 7 field"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "D",
-      "explanation": "Comment trong code ghi 'append-only, 7-field entries'. Đặc tính chỉ-ghi-thêm là điều kiện để trace tái dựng được luồng: nếu cho phép ghi đè thì một worker có thể xóa dấu vết của worker trước, phá vỡ khả năng truy nguyên nhân lỗi.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Phân chia vai trò khi một agent không đủ khả năng hoặc khó kiểm soát. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-034",
       "type": "mcq",
-      "prompt": "Câu hỏi kết bài Day 9 gợi ý điều gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Supervisor-worker?",
       "options": [
         {
           "key": "A",
-          "text": "Một agent rất giỏi có thể làm nhiều việc, nhưng hệ thống tốt hơn thường bắt đầu từ câu hỏi nên chia vai trò ở đâu"
+          "text": "Mọi worker tự đổi quyền của nhau"
         },
         {
           "key": "B",
-          "text": "Việc chọn framework orchestration là quyết định quan trọng nhất khi xây hệ thống multi-agent"
+          "text": "Supervisor phân công, kiểm tra và tổng hợp kết quả của worker"
         },
         {
           "key": "C",
-          "text": "Muốn hệ thống tốt hơn thì trước hết phải đầu tư vào việc nâng cấp model lên phiên bản mạnh nhất"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Số lượng agent trong hệ thống nên tỷ lệ thuận với độ phức tạp của bài toán cần giải quyết"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Câu kết này lặp lại thông điệp xuyên suốt: giá trị của multi-agent không nằm ở việc có nhiều agent hơn mà ở việc ranh giới vai trò được vẽ đúng chỗ. Nó cũng nhất quán với ngộ nhận đầu tiên trong bảng — 'nhiều agent = nhiều phức tạp; chỉ chia vai khi thật cần'.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Supervisor phân công, kiểm tra và tổng hợp kết quả của worker. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-035",
       "type": "mcq",
-      "prompt": "Năm trường của phiếu giao việc mang lại ba lợi ích nào theo slide?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Pipeline pattern?",
       "options": [
         {
           "key": "A",
-          "text": "Tự động thử lại khi lỗi, chuyển hướng khi worker quá tải, và cân bằng tải giữa các worker, dù mỗi field vẫn chỉ có một worker được phép ghi"
+          "text": "Cho mọi agent tranh luận vô thời hạn"
         },
         {
           "key": "B",
-          "text": "Worker test riêng được vì biết đầu vào đầu ra, ghi được vào trace, và thay được bằng worker khác mà supervisor không phải sửa"
+          "text": "Chuyển đầu ra qua các bước chuyên môn theo thứ tự rõ ràng"
         },
         {
           "key": "C",
-          "text": "Giảm token, tăng tốc độ xử lý, và cho phép nhiều worker chạy song song trên cùng dữ liệu, nên state bị ghi đè giữa các bước xử lý"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Bảo mật dữ liệu, kiểm soát quyền truy cập, và ghi log đầy đủ cho mục đích kiểm toán, trong khi trace vẫn giữ nguyên thứ tự thời gian"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Ba lợi ích này chính là ba lý do khiến contract đáng công viết. Lợi ích thứ ba đặc biệt quan trọng cho khả năng mở rộng: vì supervisor chỉ biết contract chứ không biết cách worker thực hiện, nên có thể thay worker mới mà không đụng vào code của supervisor.",
-      "source": "exam-100.json",
+      "explanation": "Chuyển đầu ra qua các bước chuyên môn theo thứ tự rõ ràng. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-036",
       "type": "mcq",
-      "prompt": "Trong ví dụ code route_to_worker, thứ tự kiểm tra điều kiện là gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về MCP?",
       "options": [
         {
           "key": "A",
-          "text": "Kiểm need_retrieval trước, rồi need_verify, cuối cùng mặc định về synthesis_worker, trong khi trace vẫn ghi đủ các bước đã chạy qua"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Kiểm need_verify trước trả về verify_worker, rồi need_retrieval trả về retrieval_worker, mặc định là synthesis_worker"
+          "text": "Chuẩn kết nối model với tools, resources và prompts bên ngoài"
         },
         {
           "key": "C",
-          "text": "Kiểm cả hai cờ cùng lúc rồi chọn worker có mức ưu tiên cao hơn theo cấu hình đã định, trong khi trace vẫn ghi đủ các bước đã chạy qua"
+          "text": "Giao thức chỉ để chat giữa hai người dùng"
         },
         {
           "key": "D",
-          "text": "Kiểm trạng thái status trước, nếu chưa xong thì mới kiểm tới hai cờ định tuyến còn lại, dù supervisor vẫn định tuyến đúng worker cần gọi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Code trong slide kiểm need_verify trước tiên, sau đó need_retrieval, và mặc định trả về synthesis_worker. Slide nhấn mạnh 'Một schema': hàm route đọc thẳng các cờ trên cùng Day09State, không có state thứ hai — nhờ đó routing nằm ở code tường minh nên test được và đọc được.",
-      "source": "exam-100.json",
+      "explanation": "Chuẩn kết nối model với tools, resources và prompts bên ngoài. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-037",
       "type": "mcq",
-      "prompt": "Trong bài mẫu A3, vấn đề gì được phát hiện khi lập bảng 'field nào ai ghi'?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về A2A?",
       "options": [
         {
           "key": "A",
-          "text": "Trường trace bị nhiều worker cùng ghi nên thứ tự các entry không còn phản ánh đúng luồng chạy"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Worker viết trả lời và worker kiểm chứng đều muốn ghi final_answer nên chạy xong không ai biết bản cuối là bản nào"
+          "text": "Chuẩn giao tiếp giữa các agent độc lập với năng lực được công bố"
         },
         {
           "key": "C",
-          "text": "Trường status bị cả supervisor lẫn worker cùng cập nhật dẫn tới trạng thái không nhất quán"
+          "text": "Cơ chế thay thế database"
         },
         {
           "key": "D",
-          "text": "Trường retrieval_result bị worker viết trả lời sửa đổi làm mất bằng chứng gốc để kiểm chứng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Cách sửa được nêu: worker viết trả lời ghi draft_answer, chỉ worker kiểm chứng được ghi final_answer. Nguyên tắc rút ra là 'Một field một chủ'. Lưu ý trace là ngoại lệ hợp lệ vì nó append-only nên nhiều worker cùng ghi thêm không gây xung đột.",
-      "source": "exam-100.json",
+      "explanation": "Chuẩn giao tiếp giữa các agent độc lập với năng lực được công bố. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-038",
       "type": "mcq",
-      "prompt": "Slide nói 'một đội tồi thường tệ hơn một người'. Hàm ý của câu này là gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về AgentCard?",
       "options": [
         {
           "key": "A",
-          "text": "Chia vai sai cách còn tệ hơn không chia; bốn câu hỏi về chia vai, giao việc, trao đổi và truy lỗi phải trả lời được trước"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Đội càng đông thì chất lượng càng giảm nên cần giới hạn số lượng worker dưới năm cho mọi hệ thống"
+          "text": "Mô tả năng lực, endpoint và cách tương tác của một agent"
         },
         {
           "key": "C",
-          "text": "Chỉ nên chia thành tối đa hai agent để tránh rủi ro phối hợp trở nên quá phức tạp khi vận hành"
+          "text": "Là lịch sử chat bí mật"
         },
         {
           "key": "D",
-          "text": "Nên luôn giữ hệ thống ở dạng một agent duy nhất vì multi-agent chưa đủ trưởng thành để dùng thật"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Slide đặt câu này ngay sau khi nêu bốn câu hỏi cần trả lời khi lập đội: chia vai thế nào, ai giao việc cho ai, họ trao đổi ra sao, và hỏng thì biết tại khâu nào. Nếu không trả lời được bốn câu đó thì việc chia vai tạo thêm chi phí phối hợp mà không thu được lợi ích — kết quả tệ hơn giữ một agent.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Mô tả năng lực, endpoint và cách tương tác của một agent. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-039",
       "type": "mcq",
-      "prompt": "Ba tính chất của một worker tốt là gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về LangGraph state?",
       "options": [
         {
           "key": "A",
-          "text": "Thông minh, linh hoạt, và có bộ nhớ dài hạn để học từ các lần chạy trước đó"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Có quyền truy cập đầy đủ, chạy song song được, và tự động thử lại khi gặp lỗi"
+          "text": "Lưu trạng thái luồng điều phối giữa các node agent"
         },
         {
           "key": "C",
-          "text": "Nhanh, rẻ, và có khả năng xử lý được nhiều loại yêu cầu khác nhau trong cùng một lần gọi"
+          "text": "Xóa mọi thông tin sau mỗi tool call"
         },
         {
           "key": "D",
-          "text": "Hẹp (specialized), độc lập từng lần gọi (stateless), và test được (testable)"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Slide giải thích lợi ích của ba tính chất này gắn liền với nhau: hẹp để biết nhìn vào đâu khi lỗi, độc lập để chạy lại được một mình, test được để so đầu ra với kết quả mong đợi. Nhờ đó khi hệ thống trả lời sai bạn cô lập được ngay bằng cách chạy riêng worker đó với đúng đầu vào của nó.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Lưu trạng thái luồng điều phối giữa các node agent. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-040",
       "type": "mcq",
-      "prompt": "AgentCard là gì và thường được phục vụ ở đâu?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Trace?",
       "options": [
         {
           "key": "A",
-          "text": "Một chứng chỉ số xác nhận danh tính của agent do một tổ chức trung gian cấp phát"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Một bản ghi trong registry chứa lịch sử các lần agent đó được gọi và tỷ lệ thành công"
+          "text": "Theo dõi route, trạng thái và tool call để xác định lỗi hệ thống"
         },
         {
           "key": "C",
-          "text": "Một tài liệu JSON metadata mô tả skills, auth, endpoint; thường phục vụ tại /.well-known/agent-card.json"
+          "text": "Chỉ hiển thị thời gian bắt đầu"
         },
         {
           "key": "D",
-          "text": "Một tệp cấu hình local liệt kê các agent mà hệ thống của bạn được phép giao việc cho"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "Slide nhấn mạnh AgentCard 'đúng mạch MCP — bên có năng lực công bố một lần, cho mọi người dùng'. Nhờ có AgentCard, client khám phá agent lúc runtime qua Registry thay vì hard-code địa chỉ từng agent như trong một codebase.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Theo dõi route, trạng thái và tool call để xác định lỗi hệ thống. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-041",
       "type": "mcq",
-      "prompt": "Bốn pattern multi-agent được phân biệt bằng hình dạng nào theo slide?",
+      "prompt": "Nếu cần ra quyết định về Multi-agent, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Supervisor-worker hội tụ, Pipeline lồng tầng, Debate toả ra, Hierarchical nối tiếp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Supervisor-worker toả ra, Pipeline nối tiếp, Debate hội tụ, Hierarchical lồng tầng"
+          "text": "Phân chia vai trò khi một agent không đủ khả năng hoặc khó kiểm soát"
         },
         {
           "key": "C",
-          "text": "Supervisor-worker lồng tầng, Pipeline hội tụ, Debate nối tiếp, Hierarchical toả ra"
+          "text": "Tạo nhiều agent cho mọi tác vụ đơn giản"
         },
         {
           "key": "D",
-          "text": "Supervisor-worker nối tiếp, Pipeline toả ra, Debate lồng tầng, Hierarchical hội tụ về một điểm"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Slide gợi ý 'đọc hình theo hình dạng': supervisor-worker TOẢ RA từ một điểm giao việc; pipeline NỐI TIẾP A→B→C; debate HỘI TỤ vì ba agent cùng làm rồi gộp lại một bước tổng hợp; hierarchical LỒNG TẦNG vì có supervisor của các supervisor.",
-      "source": "exam-100.json",
+      "explanation": "Phân chia vai trò khi một agent không đủ khả năng hoặc khó kiểm soát. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-042",
       "type": "mcq",
-      "prompt": "Theo checkpoint, một trợ lý nội bộ nhận đủ loại yêu cầu khó đoán trước nên chọn pattern nào?",
+      "prompt": "Nếu cần ra quyết định về Supervisor-worker, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Supervisor-worker, vì câu hỏi 'các bước có cố định sẵn không' trả lời là không nên pipeline bị loại ngay"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Debate, vì yêu cầu đa dạng đòi hỏi nhiều góc nhìn khác nhau để không bỏ sót trường hợp"
+          "text": "Supervisor phân công, kiểm tra và tổng hợp kết quả của worker"
         },
         {
           "key": "C",
-          "text": "Hierarchical, vì trợ lý nội bộ phục vụ nhiều phòng ban với nghiệp vụ khác nhau hoàn toàn"
+          "text": "Mọi worker tự đổi quyền của nhau"
         },
         {
           "key": "D",
-          "text": "Pipeline, vì trợ lý nội bộ thường có quy trình xử lý chuẩn cho từng loại yêu cầu"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "A",
-      "explanation": "Đáp án checkpoint đi theo đúng cây quyết định: yêu cầu khó đoán trước nghĩa là các bước KHÔNG cố định, loại pipeline ngay ở câu hỏi đầu. Tiếp theo, mỗi loại yêu cầu cần một chuyên môn khác nhau (một mảnh khác nhau) chứ không phải nhiều góc nhìn cho cùng một việc, nên chọn supervisor-worker.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Supervisor phân công, kiểm tra và tổng hợp kết quả của worker. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-043",
       "type": "mcq",
-      "prompt": "Trong ví dụ 'nghỉ thai sản được bao lâu?', vì sao chuyển thẳng câu hỏi của user xuống worker lại nguy hiểm?",
+      "prompt": "Nếu cần ra quyết định về Pipeline pattern, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Vì câu hỏi quá ngắn nên embedding không đủ thông tin để tìm được đoạn tài liệu liên quan"
+          "text": "Chuyển đầu ra qua các bước chuyên môn theo thứ tự rõ ràng"
         },
         {
           "key": "B",
-          "text": "Vì worker sẽ trả về lỗi do không hiểu được cách diễn đạt tự nhiên trong câu hỏi"
+          "text": "Cho mọi agent tranh luận vô thời hạn"
         },
         {
           "key": "C",
-          "text": "Vì worker sẽ tra toàn bộ kho tài liệu làm tăng chi phí và độ trễ của toàn bộ hệ thống"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Vì worker phải tự chọn bản nào giữa nhiều năm và nhiều loại hợp đồng — và nó chọn im lặng, không báo lỗi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Đây là điểm nguy hiểm nhất: kết quả là 'câu trả lời trông rất hợp lý, chỉ sai con số' — trúng bản 2023 cho nhân viên thời vụ thay vì bản 2025 cho nhân viên chính thức. Slide giải thích: câu hỏi của user thiếu đúng hai thứ chỉ supervisor mới biết là người hỏi thuộc diện nào và bản nào đang hiệu lực. Đó là lý do context và constraints nằm trong phiếu.",
-      "source": "exam-100.json",
+      "answer": "A",
+      "explanation": "Chuyển đầu ra qua các bước chuyên môn theo thứ tự rõ ràng. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-044",
       "type": "mcq",
-      "prompt": "Vấn đề mà MCP giải quyết được mô tả bằng tình huống nào?",
+      "prompt": "Nếu cần ra quyết định về MCP, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Một service bị quá tải khi có quá nhiều agent gọi cùng lúc mà không có cơ chế giới hạn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Ba agent cùng gọi một service nhưng mỗi agent nhận về định dạng dữ liệu khác nhau"
+          "text": "Chuẩn kết nối model với tools, resources và prompts bên ngoài"
         },
         {
           "key": "C",
-          "text": "Agent không biết service nào đang khả dụng nên phải thử lần lượt từng service cho tới khi thành công"
+          "text": "Giao thức chỉ để chat giữa hai người dùng"
         },
         {
           "key": "D",
-          "text": "Ba team viết ba adapter cho cùng một service X; X đổi API thì cả ba phải sửa, ai quên thì hỏng lúc chạy"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Slide so sánh hai mô hình: 'mỗi bên tự lo' với ba adapter trùng lặp, và 'X tự công bố theo chuẩn' với một MCP server do chính X sở hữu. Lợi ích cốt lõi không phải tiết kiệm code mà là chuyển trách nhiệm: X viết một lần cho mọi agent, X đổi API thì sửa trong server chứ không team nào phải sửa.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Chuẩn kết nối model với tools, resources và prompts bên ngoài. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-045",
       "type": "mcq",
-      "prompt": "Theo slide mở đầu, các buổi học trước đã lần lượt trang bị gì cho cùng một agent?",
+      "prompt": "Nếu cần ra quyết định về A2A, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Nhiều model chạy song song, cơ chế bỏ phiếu, và tầng điều phối trung gian giữa chúng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Giao diện người dùng, hệ thống phân quyền, và hạ tầng giám sát hoạt động theo thời gian thực"
+          "text": "Chuẩn giao tiếp giữa các agent độc lập với năng lực được công bố"
         },
         {
           "key": "C",
-          "text": "Tool calling cho tay chân, ReAct cho quyền tự quyết, và RAG cho tài liệu để tra cứu"
+          "text": "Cơ chế thay thế database"
         },
         {
           "key": "D",
-          "text": "Bộ nhớ dài hạn, khả năng học liên tục, và cơ chế tự đánh giá kết quả sau mỗi lần chạy"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "Slide mô tả cùng 'một người' được trang bị dần: tool calling giúp gọi được hàm ngoài (tra đơn hàng, mở ticket, gọi API); ReAct agent cho vòng lặp Think–Act–Observe để tự chọn tool và tự quyết bước tiếp theo; RAG cho khả năng đọc tài liệu công ty và trả lời có dẫn nguồn thay vì đoán theo trí nhớ huấn luyện.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Chuẩn giao tiếp giữa các agent độc lập với năng lực được công bố. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-046",
       "type": "mcq",
-      "prompt": "Ngộ nhận 'LangGraph chỉ chạy với LangChain' được đính chính ra sao?",
+      "prompt": "Nếu cần ra quyết định về AgentCard, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "LangGraph chạy được độc lập nhưng sẽ mất tính năng state graph nếu không có LangChain"
+          "text": "Là lịch sử chat bí mật"
         },
         {
           "key": "B",
-          "text": "LangGraph chạy được với nhiều framework khác, dù supervisor vẫn định tuyến đúng worker cần gọi"
+          "text": "Mô tả năng lực, endpoint và cách tương tác của một agent"
         },
         {
           "key": "C",
-          "text": "LangGraph thực ra là một phần không tách rời của LangChain nên bắt buộc phải dùng chung"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "LangGraph chỉ chạy với LangChain ở phiên bản cũ, còn bản mới đã tách hoàn toàn ra riêng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Đây là ngộ nhận thứ năm trong bảng. Nó quan trọng về mặt quyết định kiến trúc: bạn có thể dùng LangGraph cho phần orchestration mà vẫn giữ nguyên phần còn lại của hệ thống, thay vì phải chuyển toàn bộ codebase sang hệ sinh thái LangChain.",
-      "source": "exam-100.json",
+      "explanation": "Mô tả năng lực, endpoint và cách tương tác của một agent. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-047",
       "type": "mcq",
-      "prompt": "Trong ví dụ Customer service của slide, ba agent được phân vai thế nào?",
+      "prompt": "Nếu cần ra quyết định về LangGraph state, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Một agent nhận ticket, một phân loại mức ưu tiên, một chuyển cho bộ phận phù hợp xử lý"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Một agent đọc sentiment, một truy lịch sử đơn, một soạn trả lời — trong cùng một luồng"
+          "text": "Lưu trạng thái luồng điều phối giữa các node agent"
         },
         {
           "key": "C",
-          "text": "Một agent xử lý tiếng Việt, một xử lý tiếng Anh, một dịch qua lại giữa hai ngôn ngữ"
+          "text": "Xóa mọi thông tin sau mỗi tool call"
         },
         {
           "key": "D",
-          "text": "Một agent trả lời khách, một giám sát chất lượng, một tổng hợp báo cáo cuối ngày"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Slide mô tả ba vai chuyên biệt trong cùng luồng xử lý một yêu cầu khách hàng: đọc sentiment để hiểu trạng thái cảm xúc, truy lịch sử đơn để có dữ kiện, và soạn trả lời từ hai đầu vào đó. Đây là ví dụ chia vai theo loại chuyên môn chứ không theo khối lượng công việc.",
-      "source": "exam-100.json",
+      "explanation": "Lưu trạng thái luồng điều phối giữa các node agent. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-048",
       "type": "mcq",
-      "prompt": "Trường status_url trong contract A2A phục vụ mục đích gì?",
+      "prompt": "Nếu cần ra quyết định về Trace, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Lưu địa chỉ để agent bên kia gọi ngược lại khi cần hỏi thêm thông tin về yêu cầu"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Ghi lại lịch sử trạng thái của yêu cầu để phục vụ mục đích kiểm toán về sau này"
+          "text": "Theo dõi route, trạng thái và tool call để xác định lỗi hệ thống"
         },
         {
           "key": "C",
-          "text": "Cho biết agent bên kia hiện đang online hay offline trước khi quyết định gửi yêu cầu"
+          "text": "Chỉ hiển thị thời gian bắt đầu"
         },
         {
           "key": "D",
-          "text": "Cho biết báo tiến độ ở đâu, vì việc chạy lâu nên không trả lời gọn trong một lần gọi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "status_url ánh xạ trực tiếp tới đặc điểm 'nó làm lâu' — một việc chạy 20 phút thì mô hình request-response đồng bộ không còn phù hợp. Thay vì giữ kết nối chờ, bên giao việc theo dõi tiến độ qua một địa chỉ riêng, đúng mô hình bất đồng bộ.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Theo dõi route, trạng thái và tool call để xác định lỗi hệ thống. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-049",
       "type": "mcq",
-      "prompt": "Slide nói lợi ích của MCP là 'lợi cả hai chiều'. Hai chiều đó là gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Multi-agent?",
       "options": [
         {
           "key": "A",
-          "text": "Bên có service công bố một lần theo chuẩn và tiếp cận mọi agent; bên làm agent học một chuẩn và dùng được mọi service theo chuẩn"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Bên có service giảm được chi phí hạ tầng; bên làm agent giảm được chi phí gọi model mỗi lần, trong khi client vẫn khám phá được tool lúc chạy"
+          "text": "Phân chia vai trò khi một agent không đủ khả năng hoặc khó kiểm soát"
         },
         {
           "key": "C",
-          "text": "Bên có service nhận được phản hồi để cải thiện; bên làm agent nhận được tài liệu hướng dẫn đầy đủ, nên mỗi cặp agent phải tự thỏa thuận riêng"
+          "text": "Tạo nhiều agent cho mọi tác vụ đơn giản"
         },
         {
           "key": "D",
-          "text": "Bên có service kiểm soát được ai truy cập; bên làm agent kiểm soát được dữ liệu nào bị gửi đi, dù server đã công bố năng lực theo đúng chuẩn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "A",
-      "explanation": "Slide kết luận: 'Trách nhiệm về đúng người biết rõ service nhất.' Đây là lập luận về phân bổ trách nhiệm chứ không chỉ về kỹ thuật — người hiểu service rõ nhất chính là người sở hữu nó, nên họ nên là người mô tả năng lực của nó.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Phân chia vai trò khi một agent không đủ khả năng hoặc khó kiểm soát. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-050",
       "type": "mcq",
-      "prompt": "Theo checkpoint của Section 1, một agent đang có 8 tool và thêm tool thứ 9 làm prompt dài thêm 40 dòng — đây là tín hiệu gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Supervisor-worker?",
       "options": [
         {
           "key": "A",
-          "text": "Tín hiệu bình thường của quá trình phát triển, chỉ cần kiểm thử kỹ trước khi đưa vào production"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Tín hiệu cần nâng cấp lên model có context window lớn hơn để chứa được toàn bộ phần luật mới"
+          "text": "Supervisor phân công, kiểm tra và tổng hợp kết quả của worker"
         },
         {
           "key": "C",
-          "text": "Tín hiệu quá tải của cả giới hạn 1 và 2 — đây là lúc cân nhắc chuyển nhóm việc đó thành worker riêng"
+          "text": "Mọi worker tự đổi quyền của nhau"
         },
         {
           "key": "D",
-          "text": "Tín hiệu cần viết lại toàn bộ system prompt theo hướng ngắn gọn và súc tích hơn trước đây"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "Đáp án trong checkpoint: mỗi câu hỏi kể cả đơn giản nhất đều phải cân thêm 40 dòng luật (giới hạn 1 — context bottleneck), và nhóm luật mới có thể va với luật cũ (giới hạn 2 — specialization trade-off). Hai giới hạn cùng lúc là dấu hiệu rõ để tách nhóm việc đó ra thành một worker độc lập.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Supervisor phân công, kiểm tra và tổng hợp kết quả của worker. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-051",
       "type": "mcq",
-      "prompt": "Bốn thứ phải THÊM vào phiếu giao việc khi giao qua ranh giới A2A là gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Pipeline pattern?",
       "options": [
         {
           "key": "A",
-          "text": "from, deadline, status_url, on_reject"
+          "text": "Chuyển đầu ra qua các bước chuyên môn theo thứ tự rõ ràng"
         },
         {
           "key": "B",
-          "text": "task, context, constraints, expected_output"
+          "text": "Cho mọi agent tranh luận vô thời hạn"
         },
         {
           "key": "C",
-          "text": "agent_id, timestamp, latency_ms, status"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "skills, auth, endpoint, version"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "A",
-      "explanation": "Slide giải thích từng trường: from cho biết ai gửi để bên kia biết có nên nhận không; deadline là hạn chót, quá hạn thì bạn thôi chờ; status_url là nơi báo tiến độ vì việc chạy lâu; on_reject quy định từ chối thì trả về gì và bạn làm gì tiếp. Bốn trường này ánh xạ đúng ba đặc điểm 'tự quyết, làm lâu, có quyền từ chối'.",
-      "source": "exam-100.json",
+      "explanation": "Chuyển đầu ra qua các bước chuyên môn theo thứ tự rõ ràng. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-052",
       "type": "mcq",
-      "prompt": "Ví dụ minh họa tính 'độc lập từng lần gọi' (stateless) của worker là gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng MCP?",
       "options": [
         {
           "key": "A",
-          "text": "Worker lưu lại kết quả của lần chạy trước để dùng làm tham chiếu cho lần chạy tiếp theo"
+          "text": "Giao thức chỉ để chat giữa hai người dùng"
         },
         {
           "key": "B",
-          "text": "Worker chạy trên tiến trình riêng biệt nên không bị ảnh hưởng khi worker khác gặp sự cố"
+          "text": "Chuẩn kết nối model với tools, resources và prompts bên ngoài"
         },
         {
           "key": "C",
-          "text": "Supervisor gửi 'chính sách nghỉ phép 2025' thay vì để worker tự đọc lại hội thoại đoán 'cái đó' là cái gì"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Worker tự đọc lại toàn bộ lịch sử hội thoại để hiểu ngữ cảnh trước khi bắt đầu xử lý"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Stateless nghĩa là worker làm được việc CHỈ VỚI đầu vào của lần gọi này. Ví dụ trong slide cho thấy trách nhiệm giải quyết tham chiếu mơ hồ thuộc về supervisor: nó phải truyền xuống nội dung cụ thể thay vì để worker tự suy diễn từ lịch sử — đây cũng là lý do phiếu giao việc có trường context.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Chuẩn kết nối model với tools, resources và prompts bên ngoài. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-053",
       "type": "mcq",
-      "prompt": "Bốn framework multi-agent phổ biến và cách mô tả hệ thống của chúng là gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng A2A?",
       "options": [
         {
           "key": "A",
-          "text": "Cả bốn đều dùng chung mô hình graph, chỉ khác nhau ở ngôn ngữ lập trình được hỗ trợ, nên ranh giới vai trò giữa các agent bị mờ đi"
+          "text": "Chuẩn giao tiếp giữa các agent độc lập với năng lực được công bố"
         },
         {
           "key": "B",
-          "text": "CrewAI dùng graph, AutoGen dùng vai trò, LangGraph dùng hội thoại, OpenAI Agents SDK dùng chuyền việc"
+          "text": "Cơ chế thay thế database"
         },
         {
           "key": "C",
-          "text": "CrewAI dùng hội thoại, AutoGen dùng graph, LangGraph dùng vai trò, OpenAI Agents SDK dùng khai báo"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "CrewAI khai báo vai và nhiệm vụ, AutoGen hội thoại nhiều lượt, LangGraph graph node-edge-state, OpenAI Agents SDK chuyền việc nhẹ"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "D",
-      "explanation": "Bảng so sánh nêu điểm mạnh từng cái: CrewAI giao việc theo vai, cả nhóm cùng chạy một 'crew'; AutoGen lập trình bằng hội thoại nhiều agent; LangGraph có state graph sẵn, gắn thẳng vào hệ LangChain; OpenAI Agents SDK ít code khai báo, có sẵn trace và định tuyến chuyền việc.",
-      "source": "exam-100.json",
+      "answer": "A",
+      "explanation": "Chuẩn giao tiếp giữa các agent độc lập với năng lực được công bố. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-054",
       "type": "mcq",
-      "prompt": "LangGraph khác gì so với việc không dùng framework?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng AgentCard?",
       "options": [
         {
           "key": "A",
-          "text": "Tối ưu số lần gọi model bằng cách gộp nhiều bước xử lý vào cùng một lần suy luận, trong khi trace vẫn ghi đủ các bước đã chạy qua"
+          "text": "Mô tả năng lực, endpoint và cách tương tác của một agent"
         },
         {
           "key": "B",
-          "text": "Tự động sinh code cho từng worker dựa trên mô tả nhiệm vụ bằng ngôn ngữ tự nhiên, dù supervisor vẫn định tuyến đúng worker cần gọi"
+          "text": "Là lịch sử chat bí mật"
         },
         {
           "key": "C",
-          "text": "Routing thành code đọc được và review được, graph vẽ ra được, state có schema, và có điểm dừng rõ cho human-in-the-loop"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Cung cấp sẵn thư viện worker mẫu cho các nghiệp vụ phổ biến để không phải viết từ đầu, nên ranh giới vai trò giữa các agent bị mờ đi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "C",
-      "explanation": "Slide đối chiếu bốn điểm với trường hợp không framework: routing chôn trong một prompt điều phối dài; không biết hệ thống đang ở bước nào; thêm một nhánh xử lý phải sửa cả prompt; debug bằng cách rải print. Ý chính là chuyển điều phối từ ẩn-trong-prompt thành tường minh trong code.",
-      "source": "exam-100.json",
+      "answer": "A",
+      "explanation": "Mô tả năng lực, endpoint và cách tương tác của một agent. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-055",
       "type": "mcq",
-      "prompt": "Câu tóm tắt phân biệt MCP và A2A trong slide là gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng LangGraph state?",
       "options": [
         {
           "key": "A",
-          "text": "MCP trả lời 'lấy năng lực ở đâu'; A2A trả lời 'giao việc cho ai'"
+          "text": "Xóa mọi thông tin sau mỗi tool call"
         },
         {
           "key": "B",
-          "text": "MCP do Anthropic phát triển, A2A là chuẩn mở do cộng đồng cùng xây dựng nên"
+          "text": "Lưu trạng thái luồng điều phối giữa các node agent"
         },
         {
           "key": "C",
-          "text": "MCP dùng cho nội bộ một tổ chức, A2A dùng khi giao tiếp với tổ chức bên ngoài"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "MCP là giao thức đồng bộ, A2A là giao thức bất đồng bộ có cơ chế báo tiến độ"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "A",
-      "explanation": "Slide đưa thêm phép thử thực dụng: 'gọi xong thì bên kia có thể làm khác ý bạn không? Tool thì không — gọi là chạy đúng thế. Agent thì có — nó hỏi lại, chạy 20 phút rồi trả từng phần, hoặc từ chối thẳng.' Đây là tiêu chí phân biệt dễ áp dụng hơn là nhớ định nghĩa.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Lưu trạng thái luồng điều phối giữa các node agent. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-056",
       "type": "mcq",
-      "prompt": "Trường error trong Day09State được thiết kế theo cấu trúc nào và vì sao?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Trace?",
       "options": [
         {
           "key": "A",
-          "text": "Một dict {code, reason} hoặc None — để hỏng có kiểm soát thay vì im lặng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Một chuỗi text mô tả lỗi để người vận hành đọc được trực tiếp trong log của hệ thống"
+          "text": "Theo dõi route, trạng thái và tool call để xác định lỗi hệ thống"
         },
         {
           "key": "C",
-          "text": "Một số nguyên biểu diễn mã lỗi theo chuẩn HTTP để dễ tích hợp với hệ thống giám sát"
+          "text": "Chỉ hiển thị thời gian bắt đầu"
         },
         {
           "key": "D",
-          "text": "Một danh sách các lỗi đã xảy ra để có thể phân tích xu hướng lỗi theo thời gian"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "A",
-      "explanation": "Code ghi `error: Optional[dict] # {code, reason} or None`. Cấu trúc hai trường tách bạch mã lỗi máy đọc được (code) và lý do người đọc được (reason). Slide checkpoint cũng nêu trường error trong phiếu giao việc có vai trò 'để hỏng có kiểm soát thay vì im lặng' — im lặng là kiểu hỏng nguy hiểm nhất vì không ai phát hiện.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Theo dõi route, trạng thái và tool call để xác định lỗi hệ thống. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-057",
       "type": "mcq",
-      "prompt": "Ví dụ 'Review nhiều góc' trong slide mô tả cấu hình nào?",
+      "prompt": "Trong vận hành thực tế, Multi-agent giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Ba agent cùng đọc một tài liệu rồi bỏ phiếu chọn phương án được nhiều lượt ủng hộ nhất"
+          "text": "Tạo nhiều agent cho mọi tác vụ đơn giản"
         },
         {
           "key": "B",
-          "text": "VC hoài nghi, PM kỳ cựu và chuyên gia đạo đức cùng mổ một kế hoạch launch"
+          "text": "Phân chia vai trò khi một agent không đủ khả năng hoặc khó kiểm soát"
         },
         {
           "key": "C",
-          "text": "Một agent tìm rộng rồi chia thành nhiều nhánh đào sâu song song và quay lại bổ sung nguồn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Một classifier quét nhanh bất thường, một model lớn bình luận vĩ mô, một agent lấy giá live"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Đây là ví dụ điển hình của debate pattern: ba agent đóng ba vai có góc nhìn khác nhau cùng đánh giá một kế hoạch. Phương án C mô tả deep research, phương án D mô tả phân tích tài chính — cả hai đều là ví dụ khác trong cùng slide nhưng thuộc pattern khác.",
-      "source": "exam-100.json",
+      "explanation": "Phân chia vai trò khi một agent không đủ khả năng hoặc khó kiểm soát. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-058",
       "type": "mcq",
-      "prompt": "Debate pattern nên dùng khi nào?",
+      "prompt": "Trong vận hành thực tế, Supervisor-worker giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Khi số lượng worker đã quá nhiều cho một supervisor nên cần bổ sung thêm một tầng điều phối"
+          "text": "Supervisor phân công, kiểm tra và tổng hợp kết quả của worker"
         },
         {
           "key": "B",
-          "text": "Khi sai một lần thì đắt, và cái đáng sợ là điểm mù chứ không phải khối lượng việc"
+          "text": "Mọi worker tự đổi quyền của nhau"
         },
         {
           "key": "C",
-          "text": "Khi quy trình đã cố định từng bước và cần đảm bảo mọi yêu cầu đều đi qua đúng thứ tự đó"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Khi khối lượng công việc quá lớn cho một agent nên cần chia nhỏ ra cho nhiều worker cùng làm"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Điều kiện áp dụng của debate xoay quanh RỦI RO chứ không phải khối lượng. Ví dụ trong slide gồm ba vai bảo mật, chi phí, trải nghiệm cùng đánh giá rồi có bước hòa giải. Hai bẫy đi kèm: giá nhân lên (ba góc nhìn là ba lần token cho cùng một việc) và chỗ khó nằm ở bước cuối khi ba bên mâu thuẫn.",
-      "source": "exam-100.json",
+      "answer": "A",
+      "explanation": "Supervisor phân công, kiểm tra và tổng hợp kết quả của worker. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-059",
       "type": "mcq",
-      "prompt": "Ba nấc leo thang khi hai agent bất đồng là gì?",
+      "prompt": "Trong vận hành thực tế, Pipeline pattern giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Lấy kết quả của agent trả lời trước, lấy kết quả có điểm tin cậy cao hơn, rồi gộp cả hai lại, nên mỗi cặp agent phải tự thỏa thuận riêng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Gọi thêm agent thứ ba để bỏ phiếu, tăng số vòng tranh luận, rồi chọn theo đa số phiếu, nên mỗi cặp agent phải tự thỏa thuận riêng"
+          "text": "Chuyển đầu ra qua các bước chuyên môn theo thứ tự rõ ràng"
         },
         {
           "key": "C",
-          "text": "Judge agent làm trọng tài đọc bằng chứng hai bên, Hierarchy cho một vai được ưu tiên cứng, rồi con người là last resort"
+          "text": "Cho mọi agent tranh luận vô thời hạn"
         },
         {
           "key": "D",
-          "text": "Thử lại, chuyển sang agent dự phòng, rồi trả về thông báo lỗi cho người dùng cuối, dù server đã công bố năng lực theo đúng chuẩn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "Ví dụ xung đột trong slide: agent A nói được hoàn tiền, agent B nói khách vi phạm chính sách bảo mật nên không. Judge cân bằng chứng; nếu vẫn kẹt thì Hierarchy cho Compliance thắng (một vai được ưu tiên cứng theo luật); còn tranh cãi về ngoại lệ thì đẩy con người.",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Chuyển đầu ra qua các bước chuyên môn theo thứ tự rõ ràng. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },
     {
       "id": "D09-060",
       "type": "mcq",
-      "prompt": "State tối thiểu của hệ multi-agent cần những trường nào?",
+      "prompt": "Trong vận hành thực tế, MCP giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "input, output, error, retry_count, timeout và danh sách tool được phép gọi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "user_id, session_id, timestamp, model_name, temperature và tổng số token đã sử dụng"
+          "text": "Chuẩn kết nối model với tools, resources và prompts bên ngoài"
         },
         {
           "key": "C",
-          "text": "task, plan, worker_results, status, final_answer và trace"
+          "text": "Giao thức chỉ để chat giữa hai người dùng"
         },
         {
           "key": "D",
-          "text": "prompt, context, constraints, expected_output, deadline và status_url"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
-      "answer": "C",
-      "explanation": "Sơ đồ trong slide liệt kê đúng sáu trường này. Lưu ý phương án D chính là phiếu giao việc mở rộng cho A2A chứ không phải state. Slide cảnh báo về trace: 'Thiếu trace thì chạy xong không ai biết đường nào dẫn tới kết quả — lỗi sinh ra ở worker tra tài liệu nhưng chỉ lộ ra ở bước viết trả lời, mà bạn không lần ngược được.'",
-      "source": "exam-100.json",
+      "answer": "B",
+      "explanation": "Chuẩn kết nối model với tools, resources và prompts bên ngoài. Nội dung được biên soạn từ tài liệu Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html của Ngày 9.",
+      "source": "onthi/Day9_Multi_Agent_MCP_A2A_LangGraph_Beginner_Notes.html",
       "module": "C",
       "points": 1
     },

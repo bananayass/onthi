@@ -7,1562 +7,1562 @@
     {
       "id": "D04-001",
       "type": "mcq",
-      "prompt": "Chủ đề chính của bài giảng AICB-P1 Ngày 4 là gì?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về RTCF?",
       "options": [
         {
           "key": "A",
-          "text": "Xác định bài toán cho AI, dù kiến thức nền của model vẫn giữ nguyên"
+          "text": "Làm rõ Role, Task, Context và Format trong prompt"
         },
         {
           "key": "B",
-          "text": "Prompt Engineering & Tool Calling — làm sao nói để AI hiểu đúng ý"
+          "text": "Chỉ viết một câu lệnh càng dài càng tốt"
         },
         {
           "key": "C",
-          "text": "Kiến trúc Transformer, trong khi tham số của model không hề thay đổi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Deploy agent lên production, kể cả khi context window được mở rộng thêm"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Ngày 4 tập trung vào hai interface: prompt (giữa human intent và model behavior) và tool calling (giữa model và thế giới bên ngoài).",
-      "source": "exam-94.json"
+      "answer": "A",
+      "explanation": "Làm rõ Role, Task, Context và Format trong prompt. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-002",
       "type": "mcq",
-      "prompt": "Theo bài giảng, prompt đóng vai trò gì?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Few-shot?",
       "options": [
         {
           "key": "A",
-          "text": "Là cách tăng tốc độ suy luận của model, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Thay thế hoàn toàn việc nêu yêu cầu"
         },
         {
           "key": "B",
-          "text": "Là interface giữa human intent (ý định người dùng) và model behavior (hành vi model)"
+          "text": "Cung cấp ví dụ đầu vào–đầu ra để định hướng định dạng hoặc cách suy luận"
         },
         {
           "key": "C",
-          "text": "Là cách giảm chi phí token, dù phần hướng dẫn hệ thống đã được viết rõ ràng"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Là tài liệu kỹ thuật cho developer, nên model dễ hiểu sai phạm vi nhiệm vụ được giao"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Mục tiêu buổi học: hiểu prompt là interface giữa ý định con người và hành vi model; tool calling là interface giữa model và thế giới bên ngoài.",
-      "source": "exam-94.json"
+      "explanation": "Cung cấp ví dụ đầu vào–đầu ra để định hướng định dạng hoặc cách suy luận. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-003",
       "type": "mcq",
-      "prompt": "Nguyên tắc vàng của prompt engineering theo bài giảng là gì?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về System prompt?",
       "options": [
         {
           "key": "A",
-          "text": "Longer is better — prompt càng dài càng chi tiết, nên model dễ hiểu sai phạm vi nhiệm vụ được giao"
+          "text": "Là nơi để người dùng ghi mọi dữ liệu bí mật"
         },
         {
           "key": "B",
-          "text": "Specificity beats cleverness — prompt ngắn nhưng rõ nghĩa thường tốt hơn prompt dài lan man"
+          "text": "Đặt quy tắc, vai trò và ràng buộc ổn định cho toàn phiên"
         },
         {
           "key": "C",
-          "text": "Always use role-playing, nên model dễ hiểu sai phạm vi nhiệm vụ được giao"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Luôn dùng few-shot examples, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Nguyên tắc vàng: Specificity beats cleverness. Prompt ngắn mà rõ task/context/constraint/format tốt hơn prompt dài mà mơ hồ.",
-      "source": "exam-94.json"
+      "explanation": "Đặt quy tắc, vai trò và ràng buộc ổn định cho toàn phiên. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-004",
       "type": "mcq",
-      "prompt": "Bốn thành phần của một prompt tốt (RTCF) là gì?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Context engineering?",
       "options": [
         {
           "key": "A",
-          "text": "Request, Type, Content, Feedback"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Role, Task, Context, Format"
+          "text": "Chọn lọc, tổ chức và làm mới đúng ngữ cảnh cần cho nhiệm vụ"
         },
         {
           "key": "C",
-          "text": "Reason, Think, Check, Finalize"
+          "text": "Nhồi mọi tài liệu vào prompt"
         },
         {
           "key": "D",
-          "text": "Read, Transform, Compute, Format"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "RTCF = Role (vai trò), Task (nhiệm vụ), Context (bối cảnh), Format (định dạng đầu ra). Thứ tự ưu tiên khi viết: bắt đầu bằng Task và Format vì đây là hai thành phần quyết định nhất, chỉ thêm Role và Context khi chúng thực sự cải thiện chất lượng hoặc tính nhất quán.",
-      "source": "exam-94.json"
+      "explanation": "Chọn lọc, tổ chức và làm mới đúng ngữ cảnh cần cho nhiệm vụ. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-005",
       "type": "mcq",
-      "prompt": "Theo bài giảng, nên bắt đầu viết prompt với hai thành phần nào trước?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Prompt injection?",
       "options": [
         {
           "key": "A",
-          "text": "Role + Context"
+          "text": "Là lỗi chính tả bình thường của người dùng"
         },
         {
           "key": "B",
-          "text": "Task + Format"
+          "text": "Là chỉ dẫn không tin cậy cố gắng đổi mục tiêu hoặc vượt quyền hệ thống"
         },
         {
           "key": "C",
-          "text": "Role + Task"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Context + Format"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Bài giảng khuyên: bắt đầu với Task + Format. Chỉ thêm Role hoặc Context khi chúng thực sự cải thiện chất lượng hoặc tính nhất quán.",
-      "source": "exam-94.json"
+      "explanation": "Là chỉ dẫn không tin cậy cố gắng đổi mục tiêu hoặc vượt quyền hệ thống. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-006",
       "type": "mcq",
-      "prompt": "Trong bảng RTCF Deep Dive, vì sao thành phần Role quan trọng?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Tool schema?",
       "options": [
         {
           "key": "A",
-          "text": "Làm câu trả lời dài hơn, trong khi định dạng đầu ra vẫn được giữ ổn định, trong khi định dạng đầu ra vẫn được giữ ổn định"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Ảnh hưởng code style và library choices — ví dụ 'Senior Python dev, FastAPI expert' khác hẳn 'Developer'"
+          "text": "Xác định tham số, kiểu dữ liệu và ràng buộc khi gọi tool"
         },
         {
           "key": "C",
-          "text": "Giảm chi phí token, dù phần hướng dẫn hệ thống đã được viết rõ ràng, dù phần hướng dẫn hệ thống đã được viết rõ ràng"
+          "text": "Cho phép tool nhận bất kỳ chuỗi nào"
         },
         {
           "key": "D",
-          "text": "Tăng tốc độ phản hồi, nên model dễ hiểu sai phạm vi nhiệm vụ được giao, trong khi định dạng đầu ra vẫn được giữ ổn định"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Role cụ thể ('Senior Python dev, FastAPI expert') định hình style code và lựa chọn thư viện, khác hẳn Role chung chung 'Developer'.",
-      "source": "exam-94.json"
+      "explanation": "Xác định tham số, kiểu dữ liệu và ràng buộc khi gọi tool. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-007",
       "type": "mcq",
-      "prompt": "Thiếu thành phần Context trong prompt gây hậu quả gì?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Output validation?",
       "options": [
         {
           "key": "A",
-          "text": "Output quá ngắn"
+          "text": "Tin đầu ra vì model trả lời tự tin"
         },
         {
           "key": "B",
-          "text": "Model đoán sai stack/bối cảnh"
+          "text": "Kiểm tra format và dữ liệu trước khi dùng đầu ra của model"
         },
         {
           "key": "C",
-          "text": "Model từ chối trả lời"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Chi phí tăng gấp đôi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Ví dụ trong bảng: không nêu 'Codebase: FastAPI, Python 3.12, PostgreSQL' thì model sẽ đoán sai công nghệ đang dùng.",
-      "source": "exam-94.json"
+      "explanation": "Kiểm tra format và dữ liệu trước khi dùng đầu ra của model. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-008",
       "type": "mcq",
-      "prompt": "Thiếu thành phần Format trong prompt gây hậu quả gì?",
+      "prompt": "Phát biểu nào mô tả đúng nhất về Prompt iteration?",
       "options": [
         {
           "key": "A",
-          "text": "Model trả lời sai nội dung"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Model thêm giải thích không cần thiết"
+          "text": "Cải thiện prompt dựa trên tập eval và failure case cụ thể"
         },
         {
           "key": "C",
-          "text": "Model không hiểu câu hỏi"
+          "text": "Chỉnh prompt theo cảm giác sau một ví dụ"
         },
         {
           "key": "D",
-          "text": "Model gọi sai tool"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Không nêu 'Return only the function, no explanation' thì model tự thêm phần giải thích dư thừa — khó dùng trong pipeline tự động.",
-      "source": "exam-94.json"
+      "explanation": "Cải thiện prompt dựa trên tập eval và failure case cụ thể. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-009",
       "type": "mcq",
-      "prompt": "Trong ví dụ iteration prompt v1→v2→v3, phiên bản v2 cải thiện được gì nhưng vẫn thiếu gì?",
+      "prompt": "Trong một dự án AI, cách áp dụng RTCF nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Rõ audience nhưng thiếu format, trong khi tham số của model không hề thay đổi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Rõ format (3 bullets, mỗi bullet dưới 20 từ) nhưng thiếu audience và focus"
+          "text": "Làm rõ Role, Task, Context và Format trong prompt"
         },
         {
           "key": "C",
-          "text": "Rõ focus nhưng thiếu độ dài, trong khi tham số của model không hề thay đổi"
+          "text": "Chỉ viết một câu lệnh càng dài càng tốt"
         },
         {
           "key": "D",
-          "text": "Đã hoàn chỉnh, không thiếu gì, nên chất lượng đầu ra phụ thuộc vào cách đặt câu hỏi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "v2 'Tóm tắt trong 3 bullets, mỗi bullet dưới 20 từ' đã rõ format nhưng chưa nêu người đọc là ai và cần tập trung vào khía cạnh nào.",
-      "source": "exam-94.json"
+      "explanation": "Làm rõ Role, Task, Context và Format trong prompt. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-010",
       "type": "mcq",
-      "prompt": "Bản v3 hoàn chỉnh trong ví dụ iteration bổ sung thêm những gì?",
+      "prompt": "Trong một dự án AI, cách áp dụng Few-shot nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ thêm độ dài, trong khi định dạng đầu ra vẫn được giữ ổn định"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Audience (Bạn là analyst... cho CTO), focus (Q2 revenue impact) và tone (data-driven)"
+          "text": "Cung cấp ví dụ đầu vào–đầu ra để định hướng định dạng hoặc cách suy luận"
         },
         {
           "key": "C",
-          "text": "Chỉ thêm số lượng bullet, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Thay thế hoàn toàn việc nêu yêu cầu"
         },
         {
           "key": "D",
-          "text": "Thêm ví dụ mẫu, dù phần hướng dẫn hệ thống đã được viết rõ ràng"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "v3 = RTCF đầy đủ: role (analyst), audience (CTO), format (3 bullets <20 từ), focus (Q2 revenue impact), tone (data-driven).",
-      "source": "exam-94.json"
+      "explanation": "Cung cấp ví dụ đầu vào–đầu ra để định hướng định dạng hoặc cách suy luận. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-011",
       "type": "mcq",
-      "prompt": "Prompt engineering được mô tả là quá trình như thế nào?",
+      "prompt": "Trong một dự án AI, cách áp dụng System prompt nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Viết một lần là xong nếu đủ giỏi, nên chất lượng đầu ra phụ thuộc vào cách đặt câu hỏi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Iterative process: viết → test → observe → improve; không ai viết prompt hoàn hảo lần đầu"
+          "text": "Đặt quy tắc, vai trò và ràng buộc ổn định cho toàn phiên"
         },
         {
           "key": "C",
-          "text": "Chỉ cần copy template có sẵn, trong khi tham số của model không hề thay đổi"
+          "text": "Là nơi để người dùng ghi mọi dữ liệu bí mật"
         },
         {
           "key": "D",
-          "text": "Tự động hóa hoàn toàn bằng công cụ, trong khi tham số của model không hề thay đổi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Bài giảng nhấn mạnh: prompt engineering là quá trình lặp — viết, test, quan sát, cải thiện. Không ai viết hoàn hảo ngay lần đầu.",
-      "source": "exam-94.json"
+      "explanation": "Đặt quy tắc, vai trò và ràng buộc ổn định cho toàn phiên. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-012",
       "type": "mcq",
-      "prompt": "Instruction prompt phù hợp với loại tác vụ nào?",
+      "prompt": "Trong một dự án AI, cách áp dụng Context engineering nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Chatbot nhiều lượt"
+          "text": "Nhồi mọi tài liệu vào prompt"
         },
         {
           "key": "B",
-          "text": "Hỏi đáp 1 lượt, transform, summarize, classify"
+          "text": "Chọn lọc, tổ chức và làm mới đúng ngữ cảnh cần cho nhiệm vụ"
         },
         {
           "key": "C",
-          "text": "Đặt policy cho agent production"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Debug giảng nhiều bước"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Instruction prompt ra lệnh trực tiếp cho một tác vụ — phù hợp hỏi đáp 1 lượt, biến đổi, tóm tắt, phân loại.",
-      "source": "exam-94.json"
+      "explanation": "Chọn lọc, tổ chức và làm mới đúng ngữ cảnh cần cho nhiệm vụ. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-013",
       "type": "mcq",
-      "prompt": "System prompt được dùng khi nào?",
+      "prompt": "Trong một dự án AI, cách áp dụng Prompt injection nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Hỏi đáp 1 lượt đơn giản"
+          "text": "Là lỗi chính tả bình thường của người dùng"
         },
         {
           "key": "B",
-          "text": "Agent, assistant production, use case cần hành vi ổn định"
+          "text": "Là chỉ dẫn không tin cậy cố gắng đổi mục tiêu hoặc vượt quyền hệ thống"
         },
         {
           "key": "C",
-          "text": "Chỉ khi cần tóm tắt văn bản, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Khi muốn tiết kiệm token"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "System prompt đặt policy, boundary, output contract — dùng cho agent và assistant production nơi cần hành vi nhất quán, dự đoán được.",
-      "source": "exam-94.json"
+      "explanation": "Là chỉ dẫn không tin cậy cố gắng đổi mục tiêu hoặc vượt quyền hệ thống. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-014",
       "type": "mcq",
-      "prompt": "Vì sao negative prompting ('đừng làm X') kém hiệu quả nếu đứng một mình?",
+      "prompt": "Trong một dự án AI, cách áp dụng Tool schema nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Vì model không hiểu từ phủ định, kể cả khi thêm nhiều ví dụ mẫu vào prompt, dù phần hướng dẫn hệ thống đã được viết rõ ràng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Vì model cần biết nên làm gì, không chỉ biết đừng làm gì — hiệu quả nhất khi kèm positive alternative"
+          "text": "Xác định tham số, kiểu dữ liệu và ràng buộc khi gọi tool"
         },
         {
           "key": "C",
-          "text": "Vì tốn nhiều token hơn, trong khi định dạng đầu ra vẫn được giữ ổn định, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Cho phép tool nhận bất kỳ chuỗi nào"
         },
         {
           "key": "D",
-          "text": "Vì làm tăng temperature, dù phần hướng dẫn hệ thống đã được viết rõ ràng, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Negative prompt hiệu quả nhất khi kèm phương án thay thế: thay vì 'Đừng dùng jargon' → 'Giải thích bằng ngôn ngữ lớp 10 hiểu được'.",
-      "source": "exam-94.json"
+      "explanation": "Xác định tham số, kiểu dữ liệu và ràng buộc khi gọi tool. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-015",
       "type": "mcq",
-      "prompt": "Cách viết tốt thay cho 'Đừng đoán' là gì?",
+      "prompt": "Trong một dự án AI, cách áp dụng Output validation nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "'Phải luôn chắc chắn 100%'"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "'Nếu không chắc, trả lời: Tôi cần thêm thông tin'"
+          "text": "Kiểm tra format và dữ liệu trước khi dùng đầu ra của model"
         },
         {
           "key": "C",
-          "text": "'Đừng bao giờ sai'"
+          "text": "Tin đầu ra vì model trả lời tự tin"
         },
         {
           "key": "D",
-          "text": "'Hãy suy nghĩ kỹ hơn'"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Negative prompt kèm positive alternative: chỉ rõ hành vi thay thế cụ thể mà model nên thực hiện khi rơi vào tình huống đó.",
-      "source": "exam-94.json"
+      "explanation": "Kiểm tra format và dữ liệu trước khi dùng đầu ra của model. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-016",
       "type": "mcq",
-      "prompt": "Quan điểm của bài giảng về độ dài prompt là gì?",
+      "prompt": "Trong một dự án AI, cách áp dụng Prompt iteration nào là phù hợp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Prompt càng dài càng tốt vì nhiều thông tin, dù độ trễ phản hồi vẫn nằm trong ngưỡng cho phép"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Prompt dài hơn không đồng nghĩa prompt tốt hơn — nếu prompt dài thêm nhưng không làm thay đổi hành vi mong muốn thì hãy cắt bớt"
+          "text": "Cải thiện prompt dựa trên tập eval và failure case cụ thể"
         },
         {
           "key": "C",
-          "text": "Prompt phải dưới 100 token, trong khi trải nghiệm người dùng gần như không đổi, trong khi trải nghiệm người dùng gần như không đổi"
+          "text": "Chỉnh prompt theo cảm giác sau một ví dụ"
         },
         {
           "key": "D",
-          "text": "Độ dài không ảnh hưởng gì, dù độ trễ phản hồi vẫn nằm trong ngưỡng cho phép, dù độ trễ phản hồi vẫn nằm trong ngưỡng cho phép"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Rule thực dụng: mỗi token thừa làm tăng chi phí, latency, và đôi khi cả nhiễu. Nếu thêm mà không đổi hành vi → cắt.",
-      "source": "exam-94.json"
+      "explanation": "Cải thiện prompt dựa trên tập eval và failure case cụ thể. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-017",
       "type": "mcq",
-      "prompt": "Prompt engineering tốt là tối ưu điều gì?",
+      "prompt": "Khi đội ngũ bỏ qua RTCF, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Độ dài prompt, kể cả khi context window được mở rộng thêm"
+          "text": "Làm rõ Role, Task, Context và Format trong prompt"
         },
         {
           "key": "B",
-          "text": "Độ rõ và khả năng kiểm soát, không phải thi xem ai viết prompt dài hơn"
+          "text": "Chỉ viết một câu lệnh càng dài càng tốt"
         },
         {
           "key": "C",
-          "text": "Số lượng ví dụ mẫu, nên chất lượng đầu ra phụ thuộc vào cách đặt câu hỏi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Số lượng vai trò được gán, nên chất lượng đầu ra phụ thuộc vào cách đặt câu hỏi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Bài giảng lưu ý: prompt engineering tốt là tối ưu độ rõ (clarity) và khả năng kiểm soát (controllability).",
-      "source": "exam-94.json"
+      "answer": "A",
+      "explanation": "Làm rõ Role, Task, Context và Format trong prompt. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-018",
       "type": "mcq",
-      "prompt": "Trong Quick Exercise viết prompt cho chatbot đăng ký môn học VinUni, cần xác định những gì?",
+      "prompt": "Khi đội ngũ bỏ qua Few-shot, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ cần Task, trong khi định dạng đầu ra vẫn được giữ ổn định, trong khi định dạng đầu ra vẫn được giữ ổn định"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Role (chatbot là ai, expertise level), Task (nhiệm vụ cụ thể), Context (hệ thống nào, giới hạn gì), Format (output trông thế nào)"
+          "text": "Cung cấp ví dụ đầu vào–đầu ra để định hướng định dạng hoặc cách suy luận"
         },
         {
           "key": "C",
-          "text": "Chỉ cần chọn model phù hợp, trong khi định dạng đầu ra vẫn được giữ ổn định, trong khi định dạng đầu ra vẫn được giữ ổn định"
+          "text": "Thay thế hoàn toàn việc nêu yêu cầu"
         },
         {
           "key": "D",
-          "text": "Chỉ cần đặt temperature, nên model dễ hiểu sai phạm vi nhiệm vụ được giao, trong khi định dạng đầu ra vẫn được giữ ổn định"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Bài tập yêu cầu áp dụng đủ 4 thành phần RTCF cho tình huống cụ thể: chatbot hỗ trợ sinh viên đăng ký môn học.",
-      "source": "exam-94.json"
+      "explanation": "Cung cấp ví dụ đầu vào–đầu ra để định hướng định dạng hoặc cách suy luận. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-019",
       "type": "mcq",
-      "prompt": "Temperature nào phù hợp cho classification và extraction?",
+      "prompt": "Khi đội ngũ bỏ qua System prompt, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "0.7-1.0"
+          "text": "Đặt quy tắc, vai trò và ràng buộc ổn định cho toàn phiên"
         },
         {
           "key": "B",
-          "text": "0 — deterministic, reproducible"
+          "text": "Là nơi để người dùng ghi mọi dữ liệu bí mật"
         },
         {
           "key": "C",
-          "text": "1.0-1.5"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "0.3-0.5"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Classification/extraction cần kết quả nhất quán và tái lập → temperature = 0 (deterministic). Ở temperature 0 model luôn chọn token có xác suất cao nhất nên cùng đầu vào cho cùng đầu ra, điều kiện bắt buộc khi output được đưa vào pipeline tự động hoặc cần kiểm thử lại.",
-      "source": "exam-94.json"
+      "answer": "A",
+      "explanation": "Đặt quy tắc, vai trò và ràng buộc ổn định cho toàn phiên. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-020",
       "type": "mcq",
-      "prompt": "Temperature khuyến nghị cho chatbot/support là bao nhiêu?",
+      "prompt": "Khi đội ngũ bỏ qua Context engineering, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "0"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "0.3-0.5 — nhất quán nhưng tự nhiên"
+          "text": "Chọn lọc, tổ chức và làm mới đúng ngữ cảnh cần cho nhiệm vụ"
         },
         {
           "key": "C",
-          "text": "0.7-1.0"
+          "text": "Nhồi mọi tài liệu vào prompt"
         },
         {
           "key": "D",
-          "text": "1.0-1.5"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Chatbot/support cần cân bằng: đủ nhất quán để tin cậy nhưng vẫn tự nhiên → 0.3-0.5. Khoảng này giữ được sự tự nhiên trong diễn đạt mà vẫn đủ ổn định để không tạo ra hai câu trả lời mâu thuẫn cho cùng một câu hỏi của hai người dùng khác nhau.",
-      "source": "exam-94.json"
+      "explanation": "Chọn lọc, tổ chức và làm mới đúng ngữ cảnh cần cho nhiệm vụ. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-021",
       "type": "mcq",
-      "prompt": "Temperature 1.0-1.5 phù hợp với tác vụ nào?",
+      "prompt": "Khi đội ngũ bỏ qua Prompt injection, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Trích xuất dữ liệu có cấu trúc"
+          "text": "Là lỗi chính tả bình thường của người dùng"
         },
         {
           "key": "B",
-          "text": "Brainstorming — khám phá, chấp nhận noise"
+          "text": "Là chỉ dẫn không tin cậy cố gắng đổi mục tiêu hoặc vượt quyền hệ thống"
         },
         {
           "key": "C",
-          "text": "Phân loại ticket"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Sinh JSON theo schema"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Brainstorming cần đa dạng tối đa nên chấp nhận temperature cao (1.0-1.5) và chấp nhận nhiễu. Lưu ý temperature cao chỉ làm phân phối xác suất phẳng hơn khi lấy mẫu, nó không bổ sung kiến thức mới cho model — sáng tạo ở đây là đa dạng cách diễn đạt chứ không phải đa dạng sự thật.",
-      "source": "exam-94.json"
+      "explanation": "Là chỉ dẫn không tin cậy cố gắng đổi mục tiêu hoặc vượt quyền hệ thống. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-022",
       "type": "mcq",
-      "prompt": "Lưu ý quan trọng về temperature theo bài giảng là gì?",
+      "prompt": "Khi đội ngũ bỏ qua Tool schema, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Temperature cao luôn cho kết quả sáng tạo hơn, nên chi phí vận hành tăng lên đáng kể theo thời gian"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Temperature không thay thế prompt tốt — nếu prompt mơ hồ, giảm temperature chỉ khiến model lặp lại cùng một output kém"
+          "text": "Xác định tham số, kiểu dữ liệu và ràng buộc khi gọi tool"
         },
         {
           "key": "C",
-          "text": "Temperature chỉ ảnh hưởng tốc độ, nên chi phí vận hành tăng lên đáng kể theo thời gian, kể cả khi hệ thống đã chạy ổn định nhiều tháng"
+          "text": "Cho phép tool nhận bất kỳ chuỗi nào"
         },
         {
           "key": "D",
-          "text": "Nên luôn để temperature = 0, nên chi phí vận hành tăng lên đáng kể theo thời gian, dù độ trễ phản hồi vẫn nằm trong ngưỡng cho phép"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Temperature không sửa được prompt tồi: prompt mơ hồ + temp thấp = lặp lại cùng một output kém một cách ổn định.",
-      "source": "exam-94.json"
+      "explanation": "Xác định tham số, kiểu dữ liệu và ràng buộc khi gọi tool. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-023",
       "type": "mcq",
-      "prompt": "top_p (nucleus sampling) hoạt động thế nào và lưu ý gì khi dùng?",
+      "prompt": "Khi đội ngũ bỏ qua Output validation, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "Giới hạn số token tối đa; nên dùng chung với temperature, dù kiến thức nền của model vẫn giữ nguyên"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Chỉ xét các token có tổng xác suất ≤ p (thường 0.9-0.95); ĐỪNG tune cả temp và top_p cùng lúc"
+          "text": "Kiểm tra format và dữ liệu trước khi dùng đầu ra của model"
         },
         {
           "key": "C",
-          "text": "Lặp lại p lần rồi lấy vote, trong khi tham số của model không hề thay đổi"
+          "text": "Tin đầu ra vì model trả lời tự tin"
         },
         {
           "key": "D",
-          "text": "Chỉ áp dụng cho model open-weight, nên chất lượng đầu ra phụ thuộc vào cách đặt câu hỏi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "top_p thường dùng 0.9-0.95. Bài giảng cảnh báo: đừng tune cả temperature và top_p cùng lúc vì khó xác định biến nào gây thay đổi.",
-      "source": "exam-94.json"
+      "explanation": "Kiểm tra format và dữ liệu trước khi dùng đầu ra của model. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-024",
       "type": "mcq",
-      "prompt": "Thứ tự thử thực dụng khi chọn kỹ thuật prompting là gì?",
+      "prompt": "Khi đội ngũ bỏ qua Prompt iteration, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
       "options": [
         {
           "key": "A",
-          "text": "CoT → few-shot → zero-shot"
+          "text": "Cải thiện prompt dựa trên tập eval và failure case cụ thể"
         },
         {
           "key": "B",
-          "text": "zero-shot → few-shot → decomposition/CoT"
+          "text": "Chỉnh prompt theo cảm giác sau một ví dụ"
         },
         {
           "key": "C",
-          "text": "few-shot → zero-shot → CoT"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Luôn bắt đầu với Tree-of-Thought"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Thứ tự thực dụng: zero-shot (nhanh, rẻ, nên thử trước) → few-shot → decomposition/CoT. Đừng nhảy vào prompt phức tạp ngay từ đầu.",
-      "source": "exam-94.json"
+      "answer": "A",
+      "explanation": "Cải thiện prompt dựa trên tập eval và failure case cụ thể. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-025",
       "type": "mcq",
-      "prompt": "Zero-shot prompting có đặc điểm gì?",
+      "prompt": "Mục tiêu chính của RTCF trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Cần 2-5 ví dụ mẫu"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Không có ví dụ mẫu — nhanh, rẻ, nên thử trước"
+          "text": "Làm rõ Role, Task, Context và Format trong prompt"
         },
         {
           "key": "C",
-          "text": "Cho model reasoning từng bước"
+          "text": "Chỉ viết một câu lệnh càng dài càng tốt"
         },
         {
           "key": "D",
-          "text": "Khám phá nhiều hướng song song"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Zero-shot không kèm ví dụ nào — nhanh và rẻ nhất, nên là lựa chọn thử đầu tiên trước khi tăng độ phức tạp.",
-      "source": "exam-94.json"
+      "explanation": "Làm rõ Role, Task, Context và Format trong prompt. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-026",
       "type": "mcq",
-      "prompt": "Few-shot prompting nên dùng bao nhiêu ví dụ?",
+      "prompt": "Mục tiêu chính của Few-shot trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "1 ví dụ"
+          "text": "Cung cấp ví dụ đầu vào–đầu ra để định hướng định dạng hoặc cách suy luận"
         },
         {
           "key": "B",
-          "text": "2-5 ví dụ"
+          "text": "Thay thế hoàn toàn việc nêu yêu cầu"
         },
         {
           "key": "C",
-          "text": "10-20 ví dụ"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Càng nhiều càng tốt"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Best practice: 2-5 examples là đủ. Trên 5 ví dụ cho diminishing returns, tốn token và chậm hơn. Nguyên tắc chọn ví dụ: đa dạng, đúng format mong muốn và cover được edge case. Ví dụ quá giống nhau khiến model overfit pattern hẹp, còn ví dụ sai thì model sẽ tái tạo lỗi rất trung thành.",
-      "source": "exam-94.json"
+      "answer": "A",
+      "explanation": "Cung cấp ví dụ đầu vào–đầu ra để định hướng định dạng hoặc cách suy luận. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-027",
       "type": "mcq",
-      "prompt": "Khi nào nên dùng few-shot prompting?",
+      "prompt": "Mục tiêu chính của System prompt trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Khi model không hiểu task, dù phần hướng dẫn hệ thống đã được viết rõ ràng"
+          "text": "Đặt quy tắc, vai trò và ràng buộc ổn định cho toàn phiên"
         },
         {
           "key": "B",
-          "text": "Khi model hiểu task nhưng ra sai format hoặc không ổn định giữa các input tương tự"
+          "text": "Là nơi để người dùng ghi mọi dữ liệu bí mật"
         },
         {
           "key": "C",
-          "text": "Khi cần giảm chi phí token, dù phần hướng dẫn hệ thống đã được viết rõ ràng"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Khi task quá đơn giản, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Few-shot dùng khi cần giữ format ổn định, hoặc giữ tiêu chuẩn đánh giá/tone/cách lập luận nhất quán giữa các input tương tự.",
-      "source": "exam-94.json"
+      "answer": "A",
+      "explanation": "Đặt quy tắc, vai trò và ràng buộc ổn định cho toàn phiên. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-028",
       "type": "mcq",
-      "prompt": "Bản chất của few-shot prompting là gì?",
+      "prompt": "Mục tiêu chính của Context engineering trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Dạy lại model mọi thứ từ đầu"
+          "text": "Nhồi mọi tài liệu vào prompt"
         },
         {
           "key": "B",
-          "text": "Chỉ ra pattern mà bạn muốn model bám theo"
+          "text": "Chọn lọc, tổ chức và làm mới đúng ngữ cảnh cần cho nhiệm vụ"
         },
         {
           "key": "C",
-          "text": "Fine-tune model trên dữ liệu mới"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Tăng kích thước context window"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Bài giảng nêu rõ: few-shot không phải để 'dạy lại' model mọi thứ; nó là cách chỉ ra pattern mà bạn muốn model tuân theo.",
-      "source": "exam-94.json"
+      "explanation": "Chọn lọc, tổ chức và làm mới đúng ngữ cảnh cần cho nhiệm vụ. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-029",
       "type": "mcq",
-      "prompt": "Anti-pattern 'ví dụ quá giống nhau' trong few-shot gây hậu quả gì?",
+      "prompt": "Mục tiêu chính của Prompt injection trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Tốn nhiều token, nên model dễ hiểu sai phạm vi nhiệm vụ được giao"
+          "text": "Là chỉ dẫn không tin cậy cố gắng đổi mục tiêu hoặc vượt quyền hệ thống"
         },
         {
           "key": "B",
-          "text": "Model overfit pattern, không generalize sang input mới"
+          "text": "Là lỗi chính tả bình thường của người dùng"
         },
         {
           "key": "C",
-          "text": "Model từ chối trả lời, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Format bị lệch, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Ví dụ quá đồng nhất khiến model học một pattern hẹp và không xử lý được input khác dạng. Cần ví dụ đa dạng, cover edge cases.",
-      "source": "exam-94.json"
+      "answer": "A",
+      "explanation": "Là chỉ dẫn không tin cậy cố gắng đổi mục tiêu hoặc vượt quyền hệ thống. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-030",
       "type": "mcq",
-      "prompt": "Anti-pattern 'ví dụ có lỗi' trong few-shot dẫn đến gì?",
+      "prompt": "Mục tiêu chính của Tool schema trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Model tự phát hiện và sửa lỗi"
+          "text": "Xác định tham số, kiểu dữ liệu và ràng buộc khi gọi tool"
         },
         {
           "key": "B",
-          "text": "Model sẽ reproduce lỗi một cách trung thành"
+          "text": "Cho phép tool nhận bất kỳ chuỗi nào"
         },
         {
           "key": "C",
-          "text": "Model bỏ qua toàn bộ ví dụ"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "API trả về lỗi validation"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Model học pattern từ ví dụ — nếu ví dụ sai, model sẽ tái tạo cái sai đó một cách nhất quán. Kiểm tra kỹ ví dụ mẫu là bắt buộc.",
-      "source": "exam-94.json"
+      "answer": "A",
+      "explanation": "Xác định tham số, kiểu dữ liệu và ràng buộc khi gọi tool. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-031",
       "type": "mcq",
-      "prompt": "Khi nào Chain-of-Thought (CoT) phù hợp?",
+      "prompt": "Mục tiêu chính của Output validation trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mọi tác vụ, luôn nên dùng, nên model dễ hiểu sai phạm vi nhiệm vụ được giao, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Bài toán cần reasoning nhiều bước; muốn model giải thích logic trung gian; cần debug xem model sai ở bước nào"
+          "text": "Kiểm tra format và dữ liệu trước khi dùng đầu ra của model"
         },
         {
           "key": "C",
-          "text": "Chỉ khi cần tiết kiệm token, trong khi định dạng đầu ra vẫn được giữ ổn định, trong khi định dạng đầu ra vẫn được giữ ổn định"
+          "text": "Tin đầu ra vì model trả lời tự tin"
         },
         {
           "key": "D",
-          "text": "Chỉ cho tác vụ formatting, trong khi định dạng đầu ra vẫn được giữ ổn định, dù phần hướng dẫn hệ thống đã được viết rõ ràng"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "CoT phù hợp cho bài toán suy luận nhiều bước, khi cần thấy logic trung gian, và khi cần debug xác định model sai ở bước nào.",
-      "source": "exam-94.json"
+      "explanation": "Kiểm tra format và dữ liệu trước khi dùng đầu ra của model. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-032",
       "type": "mcq",
-      "prompt": "Khi nào CoT là overkill?",
+      "prompt": "Mục tiêu chính của Prompt iteration trong hệ thống AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Khi bài toán cần suy luận phức tạp, trong khi định dạng đầu ra vẫn được giữ ổn định"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Khi task vốn dĩ chỉ là formatting hoặc extraction đơn giản"
+          "text": "Cải thiện prompt dựa trên tập eval và failure case cụ thể"
         },
         {
           "key": "C",
-          "text": "Khi cần giải thích logic, nên model dễ hiểu sai phạm vi nhiệm vụ được giao"
+          "text": "Chỉnh prompt theo cảm giác sau một ví dụ"
         },
         {
           "key": "D",
-          "text": "Khi cần debug model, nên model dễ hiểu sai phạm vi nhiệm vụ được giao"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "CoT là công cụ cải thiện reasoning, không phải phép màu. Với formatting/extraction đơn giản, CoT chỉ tốn token và latency.",
-      "source": "exam-94.json"
+      "explanation": "Cải thiện prompt dựa trên tập eval và failure case cụ thể. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-033",
       "type": "mcq",
-      "prompt": "Tree-of-Thought (ToT) nên được giới thiệu ở vị trí nào?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về RTCF?",
       "options": [
         {
           "key": "A",
-          "text": "Là mặc định cho mọi task, nên chất lượng đầu ra phụ thuộc vào cách đặt câu hỏi, dù kiến thức nền của model vẫn giữ nguyên"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Như extension — hữu ích cho bài toán cần explore nhiều hướng, nhưng phức tạp hơn và tốn token/latency hơn"
+          "text": "Làm rõ Role, Task, Context và Format trong prompt"
         },
         {
           "key": "C",
-          "text": "Thay thế hoàn toàn CoT, kể cả khi context window được mở rộng thêm, kể cả khi context window được mở rộng thêm"
+          "text": "Chỉ viết một câu lệnh càng dài càng tốt"
         },
         {
           "key": "D",
-          "text": "Chỉ dùng cho classification, kể cả khi context window được mở rộng thêm, dù kiến thức nền của model vẫn giữ nguyên"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "ToT hữu ích khi cần khám phá nhiều hướng, nhưng phức tạp và tốn kém hơn CoT — chỉ nên coi là extension, không phải mặc định.",
-      "source": "exam-94.json"
+      "explanation": "Làm rõ Role, Task, Context và Format trong prompt. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-034",
       "type": "mcq",
-      "prompt": "Vì sao cần Structured Output Prompting?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Few-shot?",
       "options": [
         {
           "key": "A",
-          "text": "Để câu trả lời dài hơn, trong khi định dạng đầu ra vẫn được giữ ổn định, trong khi định dạng đầu ra vẫn được giữ ổn định"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Vì LLM output mặc định là free-form text, khó parse programmatically; trong agent pipeline cần JSON/structured data"
+          "text": "Cung cấp ví dụ đầu vào–đầu ra để định hướng định dạng hoặc cách suy luận"
         },
         {
           "key": "C",
-          "text": "Để giảm chi phí API, trong khi định dạng đầu ra vẫn được giữ ổn định, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Thay thế hoàn toàn việc nêu yêu cầu"
         },
         {
           "key": "D",
-          "text": "Để tăng temperature, kể cả khi thêm nhiều ví dụ mẫu vào prompt, dù phần hướng dẫn hệ thống đã được viết rõ ràng"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Trong pipeline agent, output phải máy đọc được. Free-form text không parse được ổn định nên cần ép cấu trúc.",
-      "source": "exam-94.json"
+      "explanation": "Cung cấp ví dụ đầu vào–đầu ra để định hướng định dạng hoặc cách suy luận. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-035",
       "type": "mcq",
-      "prompt": "Các cách tiếp cận để có structured output theo bài giảng là gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về System prompt?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ có JSON mode, trong khi định dạng đầu ra vẫn được giữ ổn định, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "JSON mode (API parameter), prompt-based ('Respond ONLY with valid JSON'), XML tags, và Prefill (bắt đầu assistant msg bằng '{')"
+          "text": "Đặt quy tắc, vai trò và ràng buộc ổn định cho toàn phiên"
         },
         {
           "key": "C",
-          "text": "Chỉ dùng regex parse sau, trong khi định dạng đầu ra vẫn được giữ ổn định, nên model dễ hiểu sai phạm vi nhiệm vụ được giao"
+          "text": "Là nơi để người dùng ghi mọi dữ liệu bí mật"
         },
         {
           "key": "D",
-          "text": "Chỉ có fine-tuning, kể cả khi thêm nhiều ví dụ mẫu vào prompt, trong khi định dạng đầu ra vẫn được giữ ổn định"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "4 cách: JSON mode của OpenAI, prompt-based, XML tags (<thinking>...</thinking>), và prefill của Anthropic (mở đầu assistant message bằng dấu {).",
-      "source": "exam-94.json"
+      "explanation": "Đặt quy tắc, vai trò và ràng buộc ổn định cho toàn phiên. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-036",
       "type": "mcq",
-      "prompt": "Lưu ý quan trọng khi dùng structured output là gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Context engineering?",
       "options": [
         {
           "key": "A",
-          "text": "Không cần kiểm tra gì thêm, kể cả khi thêm nhiều ví dụ mẫu vào prompt, nên model dễ hiểu sai phạm vi nhiệm vụ được giao"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Luôn validate JSON output — model có thể trả sai format, đặc biệt với schema phức tạp hoặc temperature cao"
+          "text": "Chọn lọc, tổ chức và làm mới đúng ngữ cảnh cần cho nhiệm vụ"
         },
         {
           "key": "C",
-          "text": "Chỉ dùng được với GPT-4, dù phần hướng dẫn hệ thống đã được viết rõ ràng, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Nhồi mọi tài liệu vào prompt"
         },
         {
           "key": "D",
-          "text": "Phải luôn để temperature = 2, trong khi định dạng đầu ra vẫn được giữ ổn định, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Bài giảng cảnh báo: luôn validate. Rủi ro sai format tăng khi schema phức tạp hoặc temperature cao. Có thể tăng độ tin cậy bằng cách đưa mẫu schema cụ thể vào prompt, dùng JSON mode của API, hoặc prefill mở đầu assistant message bằng dấu ngoặc nhọn để ép model đi đúng cấu trúc.",
-      "source": "exam-94.json"
+      "explanation": "Chọn lọc, tổ chức và làm mới đúng ngữ cảnh cần cho nhiệm vụ. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-037",
       "type": "mcq",
-      "prompt": "Mẹo giúp model bám format JSON tốt hơn là gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Prompt injection?",
       "options": [
         {
           "key": "A",
-          "text": "Tăng temperature lên 1.5"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Đưa JSON schema ví dụ vào trong prompt"
+          "text": "Là chỉ dẫn không tin cậy cố gắng đổi mục tiêu hoặc vượt quyền hệ thống"
         },
         {
           "key": "C",
-          "text": "Yêu cầu model giải thích trước khi trả JSON"
+          "text": "Là lỗi chính tả bình thường của người dùng"
         },
         {
           "key": "D",
-          "text": "Dùng nhiều ví dụ few-shot nhất có thể"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Đưa mẫu schema cụ thể vào prompt (VD: {\"intent\": \"...\", \"action\": \"...\"}) giúp model bám đúng cấu trúc mong muốn.",
-      "source": "exam-94.json"
+      "explanation": "Là chỉ dẫn không tin cậy cố gắng đổi mục tiêu hoặc vượt quyền hệ thống. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-038",
       "type": "mcq",
-      "prompt": "Năm thành phần của System Prompt production-grade là gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Tool schema?",
       "options": [
         {
           "key": "A",
-          "text": "Role, Task, Context, Format, Example"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Persona, Rules, Capabilities, Constraints, Output format"
+          "text": "Xác định tham số, kiểu dữ liệu và ràng buộc khi gọi tool"
         },
         {
           "key": "C",
-          "text": "Input, Process, Output, Error, Log"
+          "text": "Cho phép tool nhận bất kỳ chuỗi nào"
         },
         {
           "key": "D",
-          "text": "Identity, Memory, Tools, Safety, Version"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Anatomy: Persona (role, expertise, style), Rules (việc nên/phải làm), Capabilities (tool và dữ liệu được phép dùng), Constraints (không làm gì, khi nào từ chối/escalate), Output format.",
-      "source": "exam-94.json"
+      "explanation": "Xác định tham số, kiểu dữ liệu và ràng buộc khi gọi tool. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-039",
       "type": "mcq",
-      "prompt": "Thành phần 'Constraints' trong system prompt quy định gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Output validation?",
       "options": [
         {
           "key": "A",
-          "text": "Tool nào được phép dùng"
+          "text": "Kiểm tra format và dữ liệu trước khi dùng đầu ra của model"
         },
         {
           "key": "B",
-          "text": "Không làm gì, khi nào từ chối, khi nào escalate"
+          "text": "Tin đầu ra vì model trả lời tự tin"
         },
         {
           "key": "C",
-          "text": "Định dạng JSON đầu ra"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Phong cách giao tiếp"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Constraints là ranh giới: hành vi bị cấm, điều kiện từ chối trả lời, và thời điểm phải chuyển cho con người.",
-      "source": "exam-94.json"
+      "answer": "A",
+      "explanation": "Kiểm tra format và dữ liệu trước khi dùng đầu ra của model. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-040",
       "type": "mcq",
-      "prompt": "Thành phần 'Capabilities' trong system prompt nêu điều gì?",
+      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Prompt iteration?",
       "options": [
         {
           "key": "A",
-          "text": "Trình độ chuyên môn của persona, dù phần hướng dẫn hệ thống đã được viết rõ ràng"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Model được phép dùng tools nào, dữ liệu nào priority"
+          "text": "Cải thiện prompt dựa trên tập eval và failure case cụ thể"
         },
         {
           "key": "C",
-          "text": "Độ dài tối đa của câu trả lời, nên model dễ hiểu sai phạm vi nhiệm vụ được giao"
+          "text": "Chỉnh prompt theo cảm giác sau một ví dụ"
         },
         {
           "key": "D",
-          "text": "Ngôn ngữ phản hồi, trong khi định dạng đầu ra vẫn được giữ ổn định"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Capabilities khai báo phạm vi năng lực: tool nào được gọi và nguồn dữ liệu nào ưu tiên khi có xung đột.",
-      "source": "exam-94.json"
+      "explanation": "Cải thiện prompt dựa trên tập eval và failure case cụ thể. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-041",
       "type": "mcq",
-      "prompt": "Trong ví dụ iteration v1→v2, system prompt v1 gặp những vấn đề gì?",
+      "prompt": "Nếu cần ra quyết định về RTCF, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Quá dài và mâu thuẫn, trong khi định dạng đầu ra vẫn được giữ ổn định"
+          "text": "Chỉ viết một câu lệnh càng dài càng tốt"
         },
         {
           "key": "B",
-          "text": "Model hallucinate order status, trả lời câu ngoài scope, output format không nhất quán"
+          "text": "Làm rõ Role, Task, Context và Format trong prompt"
         },
         {
           "key": "C",
-          "text": "Không gọi được tool, nên model dễ hiểu sai phạm vi nhiệm vụ được giao"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Chi phí token quá cao, nên model dễ hiểu sai phạm vi nhiệm vụ được giao"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "v1 ('You are a support agent. Help customers with orders. Be polite.') quá mơ hồ → hallucinate trạng thái đơn, trả lời ngoài phạm vi, format không ổn định.",
-      "source": "exam-94.json"
+      "explanation": "Làm rõ Role, Task, Context và Format trong prompt. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-042",
       "type": "mcq",
-      "prompt": "System prompt v2 cải thiện bằng cách nào?",
+      "prompt": "Nếu cần ra quyết định về Few-shot, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ đơn giản làm dài hơn, kể cả khi thêm nhiều ví dụ mẫu vào prompt, trong khi định dạng đầu ra vẫn được giữ ổn định"
+          "text": "Cung cấp ví dụ đầu vào–đầu ra để định hướng định dạng hoặc cách suy luận"
         },
         {
           "key": "B",
-          "text": "Thêm clear boundaries (NEVER invent order status), refusal pattern rõ ràng, và output contract (JSON {intent, action, reply})"
+          "text": "Thay thế hoàn toàn việc nêu yêu cầu"
         },
         {
           "key": "C",
-          "text": "Thêm nhiều ví dụ few-shot, kể cả khi thêm nhiều ví dụ mẫu vào prompt, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Giảm temperature xuống 0, dù phần hướng dẫn hệ thống đã được viết rõ ràng, dù phần hướng dẫn hệ thống đã được viết rõ ràng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "v2 bổ sung: rules cụ thể, constraint cấm bịa trạng thái đơn, câu từ chối chuẩn khi ngoài scope, và hợp đồng output JSON rõ ràng.",
-      "source": "exam-94.json"
+      "answer": "A",
+      "explanation": "Cung cấp ví dụ đầu vào–đầu ra để định hướng định dạng hoặc cách suy luận. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-043",
       "type": "mcq",
-      "prompt": "Quy trình iterate system prompt theo bài giảng là gì?",
+      "prompt": "Nếu cần ra quyết định về System prompt, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Viết một lần rồi deploy"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Viết → test 10 câu → fix → test lại"
+          "text": "Đặt quy tắc, vai trò và ràng buộc ổn định cho toàn phiên"
         },
         {
           "key": "C",
-          "text": "Sao chép template rồi dùng luôn"
+          "text": "Là nơi để người dùng ghi mọi dữ liệu bí mật"
         },
         {
           "key": "D",
-          "text": "Nhờ AI viết rồi không cần kiểm tra"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "System prompt cần iterate dựa trên kết quả test: viết, chạy 10 câu test, sửa dựa trên lỗi phát hiện, rồi test lại.",
-      "source": "exam-94.json"
+      "explanation": "Đặt quy tắc, vai trò và ràng buộc ổn định cho toàn phiên. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-044",
       "type": "mcq",
-      "prompt": "Khác biệt về syntax giữa Anthropic Claude và OpenAI GPT khi đặt system prompt là gì?",
+      "prompt": "Nếu cần ra quyết định về Context engineering, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Concept hoàn toàn khác nhau, kể cả khi thêm nhiều ví dụ mẫu vào prompt, nên model dễ hiểu sai phạm vi nhiệm vụ được giao"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Concept giống nhau, chỉ khác syntax: Claude dùng tham số system= riêng; GPT đặt system trong messages array"
+          "text": "Chọn lọc, tổ chức và làm mới đúng ngữ cảnh cần cho nhiệm vụ"
         },
         {
           "key": "C",
-          "text": "Claude không hỗ trợ system prompt, kể cả khi thêm nhiều ví dụ mẫu vào prompt, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Nhồi mọi tài liệu vào prompt"
         },
         {
           "key": "D",
-          "text": "GPT không hỗ trợ tools, nên model dễ hiểu sai phạm vi nhiệm vụ được giao, trong khi định dạng đầu ra vẫn được giữ ổn định"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Claude: client.messages.create(system=\"...\", messages=[...]). GPT: system nằm trong messages array với role='system'. Concept giống nhau.",
-      "source": "exam-94.json"
+      "explanation": "Chọn lọc, tổ chức và làm mới đúng ngữ cảnh cần cho nhiệm vụ. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-045",
       "type": "mcq",
-      "prompt": "Anthropic Claude hỗ trợ đặc điểm nào giúp cấu trúc system prompt rõ hơn?",
+      "prompt": "Nếu cần ra quyết định về Prompt injection, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ hỗ trợ plain text, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Hỗ trợ XML tags như <rules>, <constraints> trong system prompt"
+          "text": "Là chỉ dẫn không tin cậy cố gắng đổi mục tiêu hoặc vượt quyền hệ thống"
         },
         {
           "key": "C",
-          "text": "Tự động sinh system prompt, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Là lỗi chính tả bình thường của người dùng"
         },
         {
           "key": "D",
-          "text": "Nén system prompt tự động, nên model dễ hiểu sai phạm vi nhiệm vụ được giao"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Claude hỗ trợ XML tags (<rules>, <constraints>) giúp cấu trúc system prompt dài rõ ràng hơn; GPT thường dùng markdown/XML sections.",
-      "source": "exam-94.json"
+      "explanation": "Là chỉ dẫn không tin cậy cố gắng đổi mục tiêu hoặc vượt quyền hệ thống. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-046",
       "type": "mcq",
-      "prompt": "Anti-pattern 'Mâu thuẫn' trong system prompt là gì?",
+      "prompt": "Nếu cần ra quyết định về Tool schema, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Prompt quá ngắn, dù phần hướng dẫn hệ thống đã được viết rõ ràng"
+          "text": "Xác định tham số, kiểu dữ liệu và ràng buộc khi gọi tool"
         },
         {
           "key": "B",
-          "text": "Vừa bảo 'ngắn gọn', vừa bắt 'giải thích chi tiết từng bước'"
+          "text": "Cho phép tool nhận bất kỳ chuỗi nào"
         },
         {
           "key": "C",
-          "text": "Không có ví dụ mẫu, trong khi định dạng đầu ra vẫn được giữ ổn định"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Dùng quá nhiều tool, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Mâu thuẫn nội tại khiến model không biết ưu tiên gì — kết quả trở nên không dự đoán được. Ví dụ điển hình là vừa yêu cầu 'ngắn gọn' vừa bắt 'giải thích chi tiết từng bước'. Model buộc phải chọn một, và lựa chọn đó thay đổi giữa các lần chạy nên hành vi mất tính ổn định.",
-      "source": "exam-94.json"
+      "answer": "A",
+      "explanation": "Xác định tham số, kiểu dữ liệu và ràng buộc khi gọi tool. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-047",
       "type": "mcq",
-      "prompt": "Anti-pattern 'Mơ hồ' trong system prompt biểu hiện thế nào?",
+      "prompt": "Nếu cần ra quyết định về Output validation, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Prompt viết bằng nhiều ngôn ngữ, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Tin đầu ra vì model trả lời tự tin"
         },
         {
           "key": "B",
-          "text": "Dùng từ như 'hãy thông minh', 'hãy chuyên nghiệp' nhưng không định nghĩa chuẩn output"
+          "text": "Kiểm tra format và dữ liệu trước khi dùng đầu ra của model"
         },
         {
           "key": "C",
-          "text": "Prompt vượt quá 2000 token, nên model dễ hiểu sai phạm vi nhiệm vụ được giao"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Không khai báo tool, dù phần hướng dẫn hệ thống đã được viết rõ ràng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Tính từ trừu tượng không tạo ra hành vi cụ thể. Phải định nghĩa chuẩn đầu ra đo được thay vì mô tả cảm tính.",
-      "source": "exam-94.json"
+      "explanation": "Kiểm tra format và dữ liệu trước khi dùng đầu ra của model. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-048",
       "type": "mcq",
-      "prompt": "Anti-pattern 'Quá dài' của system prompt là gì?",
+      "prompt": "Nếu cần ra quyết định về Prompt iteration, tiêu chí nào nên được ưu tiên?",
       "options": [
         {
           "key": "A",
-          "text": "Trên 200 token, dù phần hướng dẫn hệ thống đã được viết rõ ràng"
+          "text": "Cải thiện prompt dựa trên tập eval và failure case cụ thể"
         },
         {
           "key": "B",
-          "text": "Nhồi mọi thứ vào 1 prompt 2000+ tokens rồi hy vọng model luôn làm đúng"
+          "text": "Chỉnh prompt theo cảm giác sau một ví dụ"
         },
         {
           "key": "C",
-          "text": "Có nhiều hơn 3 rules, dù phần hướng dẫn hệ thống đã được viết rõ ràng"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Dùng cả markdown và XML, trong khi định dạng đầu ra vẫn được giữ ổn định"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Nhồi nhét mọi tình huống vào một prompt khổng lồ làm model khó ưu tiên, chậm hơn và khó bảo trì. System prompt là policy layer nên cần rõ ràng chứ không cần dài. Prompt 2000+ token còn làm giảm chỗ cho context và output, đồng thời đẩy rule quan trọng vào vùng model dễ bỏ sót.",
-      "source": "exam-94.json"
+      "answer": "A",
+      "explanation": "Cải thiện prompt dựa trên tập eval và failure case cụ thể. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-049",
       "type": "mcq",
-      "prompt": "Nguyên tắc cốt lõi về vai trò của system prompt là gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng RTCF?",
       "options": [
         {
           "key": "A",
-          "text": "System prompt là nơi chứa dữ liệu người dùng, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "System prompt là policy layer — càng rõ boundary, càng dễ predict hành vi"
+          "text": "Làm rõ Role, Task, Context và Format trong prompt"
         },
         {
           "key": "C",
-          "text": "System prompt chỉ để đặt persona, trong khi định dạng đầu ra vẫn được giữ ổn định"
+          "text": "Chỉ viết một câu lệnh càng dài càng tốt"
         },
         {
           "key": "D",
-          "text": "System prompt nên thay đổi mỗi request, trong khi định dạng đầu ra vẫn được giữ ổn định"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "System prompt đóng vai trò policy layer của hệ thống. Boundary càng rõ thì hành vi càng dự đoán được.",
-      "source": "exam-94.json"
+      "explanation": "Làm rõ Role, Task, Context và Format trong prompt. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-050",
       "type": "mcq",
-      "prompt": "Sáu mục trong System Prompt Testing Checklist là gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Few-shot?",
       "options": [
         {
           "key": "A",
-          "text": "Speed, Cost, Accuracy, Safety, Scale, UX, nên model dễ hiểu sai phạm vi nhiệm vụ được giao"
+          "text": "Cung cấp ví dụ đầu vào–đầu ra để định hướng định dạng hoặc cách suy luận"
         },
         {
           "key": "B",
-          "text": "Happy path, Edge case, Out of scope, Adversarial, Tool decision, Format consistency"
+          "text": "Thay thế hoàn toàn việc nêu yêu cầu"
         },
         {
           "key": "C",
-          "text": "Unit, Integration, E2E, Load, Stress, Security, dù phần hướng dẫn hệ thống đã được viết rõ ràng"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Input, Output, Error, Log, Metric, Alert, nên model dễ hiểu sai phạm vi nhiệm vụ được giao"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "6 mục: happy path (đúng format?), edge case (hỏi lại hay đoán bừa?), out of scope (từ chối đúng cách?), adversarial (prompt injection?), tool decision (khi nào gọi tool?), format consistency (10 câu có nhất quán?).",
-      "source": "exam-94.json"
+      "answer": "A",
+      "explanation": "Cung cấp ví dụ đầu vào–đầu ra để định hướng định dạng hoặc cách suy luận. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-051",
       "type": "mcq",
-      "prompt": "Real-world System Prompt Template gồm những section nào?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng System prompt?",
       "options": [
         {
           "key": "A",
-          "text": "## Input, ## Output, ## Error, trong khi định dạng đầu ra vẫn được giữ ổn định"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "## Identity, ## Rules, ## Tools, ## Output Format, ## Escalation"
+          "text": "Đặt quy tắc, vai trò và ràng buộc ổn định cho toàn phiên"
         },
         {
           "key": "C",
-          "text": "## Prompt, ## Model, ## Temperature, kể cả khi thêm nhiều ví dụ mẫu vào prompt"
+          "text": "Là nơi để người dùng ghi mọi dữ liệu bí mật"
         },
         {
           "key": "D",
-          "text": "## Role, ## Task, nên model dễ hiểu sai phạm vi nhiệm vụ được giao"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Template gồm: Identity (bạn là ai cho công ty nào), Rules, Tools (tool nào dùng khi nào và KHÔNG dùng khi nào), Output Format, và Escalation (khi nào chuyển cho nhân viên).",
-      "source": "exam-94.json"
+      "explanation": "Đặt quy tắc, vai trò và ràng buộc ổn định cho toàn phiên. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-052",
       "type": "mcq",
-      "prompt": "Context window được phân bổ cho những thành phần nào?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Context engineering?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ user input và output, kể cả khi context window được mở rộng thêm, kể cả khi context window được mở rộng thêm"
+          "text": "Nhồi mọi tài liệu vào prompt"
         },
         {
           "key": "B",
-          "text": "System prompt (policy), History (recent/relevant), Current input (task), Tools (schemas), Output buffer"
+          "text": "Chọn lọc, tổ chức và làm mới đúng ngữ cảnh cần cho nhiệm vụ"
         },
         {
           "key": "C",
-          "text": "Chỉ system prompt và tool, nên chất lượng đầu ra phụ thuộc vào cách đặt câu hỏi, dù kiến thức nền của model vẫn giữ nguyên"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Chỉ history hội thoại, dù kiến thức nền của model vẫn giữ nguyên, trong khi tham số của model không hề thay đổi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "5 phần: system prompt, history, current input, tool schemas, và output buffer. Cần phân bổ chủ động để không hết chỗ cho output.",
-      "source": "exam-94.json"
+      "explanation": "Chọn lọc, tổ chức và làm mới đúng ngữ cảnh cần cho nhiệm vụ. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-053",
       "type": "mcq",
-      "prompt": "Rủi ro khi không quản lý token budget chủ động là gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Prompt injection?",
       "options": [
         {
           "key": "A",
-          "text": "Model trả lời sai ngôn ngữ, dù độ trễ phản hồi vẫn nằm trong ngưỡng cho phép"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Đừng để history, tools, và examples ăn hết chỗ dành cho output"
+          "text": "Là chỉ dẫn không tin cậy cố gắng đổi mục tiêu hoặc vượt quyền hệ thống"
         },
         {
           "key": "C",
-          "text": "Tool không gọi được, nên chi phí vận hành tăng lên đáng kể theo thời gian"
+          "text": "Là lỗi chính tả bình thường của người dùng"
         },
         {
           "key": "D",
-          "text": "Temperature bị reset, nên chi phí vận hành tăng lên đáng kể theo thời gian"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Nếu history/tools/examples chiếm hết context, output buffer không đủ → câu trả lời bị cắt cụt giữa chừng.",
-      "source": "exam-94.json"
+      "explanation": "Là chỉ dẫn không tin cậy cố gắng đổi mục tiêu hoặc vượt quyền hệ thống. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-054",
       "type": "mcq",
-      "prompt": "Vấn đề 'Lost in the Middle' (Liu et al. 2023) là gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Tool schema?",
       "options": [
         {
           "key": "A",
-          "text": "Model quên system prompt, trong khi tham số của model không hề thay đổi"
+          "text": "Cho phép tool nhận bất kỳ chuỗi nào"
         },
         {
           "key": "B",
-          "text": "Thông tin nằm ở giữa context dài dễ bị 'quên' — model chú ý tốt nhất ở đầu và cuối"
+          "text": "Xác định tham số, kiểu dữ liệu và ràng buộc khi gọi tool"
         },
         {
           "key": "C",
-          "text": "Model không đọc được tool schema, kể cả khi context window được mở rộng thêm"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Context bị nén tự động, trong khi tham số của model không hề thay đổi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "Nghiên cứu Liu et al. 2023: hiệu suất truy xuất thông tin giảm mạnh khi thông tin nằm ở giữa context dài.",
-      "source": "exam-94.json"
+      "explanation": "Xác định tham số, kiểu dữ liệu và ràng buộc khi gọi tool. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-055",
       "type": "mcq",
-      "prompt": "Hệ quả thực tiễn của 'Lost in the Middle' là gì?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Output validation?",
       "options": [
         {
           "key": "A",
-          "text": "Nên dùng context window nhỏ nhất có thể, kể cả khi context window được mở rộng thêm, dù kiến thức nền của model vẫn giữ nguyên"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Đặt instructions quan trọng ở đầu hoặc cuối; break long lists bằng headers/separators; recent context đặt ngay trước user query"
+          "text": "Kiểm tra format và dữ liệu trước khi dùng đầu ra của model"
         },
         {
           "key": "C",
-          "text": "Nên lặp lại mọi thông tin 3 lần, kể cả khi context window được mở rộng thêm, trong khi tham số của model không hề thay đổi"
+          "text": "Tin đầu ra vì model trả lời tự tin"
         },
         {
           "key": "D",
-          "text": "Nên tắt hoàn toàn history, kể cả khi context window được mở rộng thêm, trong khi tham số của model không hề thay đổi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "4 hệ quả: đặt instruction quan trọng ở đầu/cuối, tránh chôn thông tin ở giữa, chia list dài bằng header/separator, và đặt context gần nhất ngay trước câu hỏi.",
-      "source": "exam-94.json"
+      "explanation": "Kiểm tra format và dữ liệu trước khi dùng đầu ra của model. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-056",
       "type": "mcq",
-      "prompt": "Memory injection nên tuân theo nguyên tắc nào?",
+      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Prompt iteration?",
       "options": [
         {
           "key": "A",
-          "text": "Dump toàn bộ transcript vào context, trong khi metadata vẫn được gắn đầy đủ cho từng chunk"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Chỉ đưa vào facts thật sự cần cho task hiện tại; ưu tiên recent hoặc relevant history"
+          "text": "Cải thiện prompt dựa trên tập eval và failure case cụ thể"
         },
         {
           "key": "C",
-          "text": "Chỉ giữ tin nhắn đầu tiên, dù toàn bộ tài liệu đã được đưa vào index"
+          "text": "Chỉnh prompt theo cảm giác sau một ví dụ"
         },
         {
           "key": "D",
-          "text": "Luôn nén toàn bộ về 1 câu, kể cả khi corpus được cập nhật thường xuyên"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Memory injection chọn lọc: chỉ đưa facts cần cho task hiện tại, ưu tiên history gần nhất hoặc liên quan nhất, không dump toàn bộ transcript.",
-      "source": "exam-94.json"
+      "explanation": "Cải thiện prompt dựa trên tập eval và failure case cụ thể. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-057",
       "type": "mcq",
-      "prompt": "Ba chiến lược Context Compression là gì?",
+      "prompt": "Trong vận hành thực tế, RTCF giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Cache, Index, Query, trong khi tham số của model không hề thay đổi, nên chất lượng đầu ra phụ thuộc vào cách đặt câu hỏi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Summarize (tóm tắt phần cũ), Drop (bỏ hẳn phần không còn liên quan), Archive (đẩy ra ngoài context, chỉ fetch lại khi cần)"
+          "text": "Làm rõ Role, Task, Context và Format trong prompt"
         },
         {
           "key": "C",
-          "text": "Encrypt, Compress, Store, dù kiến thức nền của model vẫn giữ nguyên, nên chất lượng đầu ra phụ thuộc vào cách đặt câu hỏi"
+          "text": "Chỉ viết một câu lệnh càng dài càng tốt"
         },
         {
           "key": "D",
-          "text": "Split, Merge, Rank, trong khi tham số của model không hề thay đổi, kể cả khi context window được mở rộng thêm"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "3 chiến lược nén context: Summarize, Drop, và Archive (lưu ngoài rồi truy xuất lại khi cần). Ba chiến lược này áp dụng cho phần history cũ trong hội thoại dài. Nguyên tắc chọn lọc: nếu mọi thứ đều được coi là quan trọng thì với model sẽ không còn gì thực sự nổi bật.",
-      "source": "exam-94.json"
+      "explanation": "Làm rõ Role, Task, Context và Format trong prompt. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-058",
       "type": "mcq",
-      "prompt": "Bản chất của context engineering là gì?",
+      "prompt": "Trong vận hành thực tế, Few-shot giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Nhét càng nhiều thông tin càng tốt, dù kiến thức nền của model vẫn giữ nguyên, nên chất lượng đầu ra phụ thuộc vào cách đặt câu hỏi"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         },
         {
           "key": "B",
-          "text": "Bài toán chọn lọc và ưu tiên — nếu mọi thứ đều quan trọng thì hóa ra không có gì thực sự nổi bật với model"
+          "text": "Cung cấp ví dụ đầu vào–đầu ra để định hướng định dạng hoặc cách suy luận"
         },
         {
           "key": "C",
-          "text": "Tăng kích thước context window, trong khi tham số của model không hề thay đổi, dù kiến thức nền của model vẫn giữ nguyên"
+          "text": "Thay thế hoàn toàn việc nêu yêu cầu"
         },
         {
           "key": "D",
-          "text": "Nén dữ liệu để tiết kiệm chi phí, trong khi tham số của model không hề thay đổi, nên chất lượng đầu ra phụ thuộc vào cách đặt câu hỏi"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         }
       ],
       "answer": "B",
-      "explanation": "Điều quan trọng không phải nhét bao nhiêu context, mà là chọn đúng context cần thiết. Nếu mọi thứ đều quan trọng thì không gì nổi bật.",
-      "source": "exam-94.json"
+      "explanation": "Cung cấp ví dụ đầu vào–đầu ra để định hướng định dạng hoặc cách suy luận. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-059",
       "type": "mcq",
-      "prompt": "Rủi ro khi tool schemas chiếm quá nhiều token là gì?",
+      "prompt": "Trong vận hành thực tế, System prompt giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Tool không thực thi được"
+          "text": "Đặt quy tắc, vai trò và ràng buộc ổn định cho toàn phiên"
         },
         {
           "key": "B",
-          "text": "Model chọn tool tệ nếu schema dài hoặc mơ hồ"
+          "text": "Là nơi để người dùng ghi mọi dữ liệu bí mật"
         },
         {
           "key": "C",
-          "text": "Chi phí giảm xuống"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "D",
-          "text": "Output nhanh hơn"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
-      "answer": "B",
-      "explanation": "Bảng token budget: tool schemas quá dài/mơ hồ làm model khó phân biệt và chọn sai tool. Đây là lý do tool description cần ngắn gọn nhưng đủ ba ý: chức năng, khi nào dùng, và khi nào KHÔNG dùng. Mô tả dài dòng thêm nhiễu chứ không giúp model quyết định tốt hơn.",
-      "source": "exam-94.json"
+      "answer": "A",
+      "explanation": "Đặt quy tắc, vai trò và ràng buộc ổn định cho toàn phiên. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     },
     {
       "id": "D04-060",
       "type": "mcq",
-      "prompt": "Rủi ro khi history chiếm quá nhiều context là gì?",
+      "prompt": "Trong vận hành thực tế, Context engineering giúp đội ngũ làm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Model quên system prompt hoàn toàn"
+          "text": "Mở rộng phạm vi trước khi đo kết quả"
         },
         {
           "key": "B",
-          "text": "Dễ nhiễu, dễ rơi vào lost in the middle"
+          "text": "Chọn lọc, tổ chức và làm mới đúng ngữ cảnh cần cho nhiệm vụ"
         },
         {
           "key": "C",
-          "text": "Tool schema bị xóa"
+          "text": "Nhồi mọi tài liệu vào prompt"
         },
         {
           "key": "D",
-          "text": "Temperature tự tăng"
+          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
         }
       ],
       "answer": "B",
-      "explanation": "History quá dài tạo nhiễu và đẩy thông tin quan trọng vào vùng giữa context — nơi model dễ bỏ sót. Cách xử lý là chủ động cắt bớt history không liên quan tới task hiện tại, ưu tiên giữ các lượt gần nhất, và tóm tắt phần cũ thay vì kéo theo nguyên văn toàn bộ transcript.",
-      "source": "exam-94.json"
+      "explanation": "Chọn lọc, tổ chức và làm mới đúng ngữ cảnh cần cho nhiệm vụ. Nội dung được biên soạn từ tài liệu Day4_Context_Loop_Harness_Beginner_Notes.html của Ngày 4.",
+      "source": "onthi/Day4_Context_Loop_Harness_Beginner_Notes.html"
     }
   ]
 }
