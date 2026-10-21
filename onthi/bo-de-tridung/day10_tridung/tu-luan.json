@@ -6,7 +6,8 @@
     {
       "id": "D10-TL-01",
       "type": "essay",
-      "prompt": "Giải thích ETL / ELT và nêu một ví dụ áp dụng trong sản phẩm AI.",
+      "prompt": "Agent HR trả lời sai chính sách nghỉ phép dù không có lỗi nào được báo. Trình bày cách lần ngược 5 tầng (Output → Retrieval → Corpus → Pipeline → Source) và những gì cần kiểm tra ở từng tầng.",
+      "modelAnswer": "Output: câu trả lời, mức tự tin. Retrieval: log chunk nào vào context, version, ngày. Corpus: chunk cũ/trùng/mâu thuẫn với bản mới, index-version consistency. Pipeline: lần ingest/reindex thành công cuối, job lỗi/bỏ sót, watermark bỏ sót tài liệu cập nhật trễ. Source: văn bản gốc đúng chưa. Kết luận: đừng dừng ở “model hallucinate”; thêm freshness SLI, quality gate, metadata version.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -17,7 +18,8 @@
     {
       "id": "D10-TL-02",
       "type": "essay",
-      "prompt": "So sánh ETL / ELT với data quality; nêu tiêu chí lựa chọn trong một tình huống thực tế.",
+      "prompt": "Thiết kế pipeline nạp chính sách nội bộ cho RAG theo Medallion (Bronze/Silver/Gold), nêu bước transform và các quality gate ở từng vị trí.",
+      "modelAnswer": "Bronze: raw để audit/replay. Silver: chuẩn hóa Unicode NFC, strip HTML, dedupe checksum, chốt format ngày/timezone, mask PII, kiểm null giả. Gold: tài liệu curated, version, phục vụ RAG. Gates: ingestion boundary (schema, required), post-transform (giá trị hợp lệ), pre-embed (cũ/trùng/mâu thuẫn), pre-serve (index lỗi). Lưu metadata version; RAG đọc từ Gold, không trỏ vào Bronze.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -28,7 +30,8 @@
     {
       "id": "D10-TL-03",
       "type": "essay",
-      "prompt": "Thiết kế một quy trình ngắn sử dụng data contract để giảm rủi ro cho người dùng.",
+      "prompt": "So sánh fail-closed và fail-open, chọn chiến lược cho (a) corpus chính sách tín dụng và (b) dữ liệu tồn kho real-time; giải thích lý do.",
+      "modelAnswer": "Fail-closed: check fail thì chặn cập nhật/serving, dùng dữ liệu cũ đã biết đúng — hợp (a) vì trả lời sai nguy hiểm hơn trả lời cũ. Fail-open: log và vẫn tiếp tục — có thể hợp (b) vì tồn kho cũ gây hại hơn dữ liệu mới chưa chắc chắn, nhưng phải chấp nhận rủi ro rõ, cảnh báo stale, theo dõi. Quyết định theo rủi ro, ghi trong data contract.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -39,7 +42,8 @@
     {
       "id": "D10-TL-04",
       "type": "essay",
-      "prompt": "Phân tích một failure mode liên quan đến freshness SLA, nguyên nhân và cách khắc phục.",
+      "prompt": "Viết một data contract cho dataset “orders” mà agent CSKH dùng, gồm schema, semantics, SLA/SLO và ownership, kèm cách thực thi.",
+      "modelAnswer": "Schema: order_id (string, required, unique), status (enum), updated_at (timestamp UTC, required), amount (decimal VND). Semantics: status “delivered” nghĩa là đã giao thành công… SLA/SLO: freshness ≤ 15 phút, completeness ≥ 99,5%, availability; error budget. Ownership: team nguồn sở hữu, kênh alert, severity. Thực thi: gate ở ingestion boundary, test dbt/GX, shift-left kiểm tra khi producer thay đổi, schema drift alert.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -50,7 +54,8 @@
     {
       "id": "D10-TL-05",
       "type": "essay",
-      "prompt": "Đề xuất metric đánh giá cho data drift; giải thích vì sao metric đó hữu ích.",
+      "prompt": "Thiết kế bộ metric observability cho corpus RAG (theo 5 pillars và metric riêng cho RAG) và cách đặt alert tránh alert fatigue.",
+      "modelAnswer": "Freshness SLI (tuổi ingest), Volume (row-count delta), Quality (null-rate metadata), Schema (drift), Lineage; RAG: embedding coverage, index-version consistency, retrieval staleness, contradiction rate. Alert: rule cho invariant cứng, thống kê cho metric biến động; tránh chỉ dùng “không update N giờ”; xử lý timezone/clock skew; phân severity page/ticket/dashboard, owner rõ, xem lại tỷ lệ báo giả định kỳ.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -61,7 +66,8 @@
     {
       "id": "D10-TL-06",
       "type": "essay",
-      "prompt": "Lập kế hoạch thử nghiệm nhỏ cho orchestration: giả định, dữ liệu, tiêu chí đạt và tiêu chí dừng.",
+      "prompt": "Một người dùng yêu cầu xóa toàn bộ dữ liệu cá nhân của họ khỏi knowledge base RAG. Thiết kế deletion path và cách chứng minh đã xóa.",
+      "modelAnswer": "Tìm qua lineage mọi bản phái sinh: bản nguồn, chunk, embedding, vector index, cache, backup. Xóa và rebuild/compact để tránh soft-delete (Ghost Vectors: float32 còn trên đĩa); cân nhắc epoch key rotation; ghi trạng thái từng bước, kiểm tra bằng truy vấn thử, lưu bằng chứng audit. Nêu GDPR Art. 17 yêu cầu xóa kiểm chứng được; đưa vào thiết kế từ đầu cùng retention, consent.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -72,7 +78,8 @@
     {
       "id": "D10-TL-07",
       "type": "essay",
-      "prompt": "Tình huống: kết quả liên quan đến ETL / ELT không đạt kỳ vọng. Bạn sẽ debug theo thứ tự nào?",
+      "prompt": "Đổi embedding model cho corpus 500.000 tài liệu. Lập kế hoạch re-embed, rollout và kiểm soát chi phí.",
+      "modelAnswer": "Đổi model → không gian vector mới → re-embed toàn bộ (không trộn vector hai model). Ước tính token (~400 triệu) × giá hiện hành + compute rebuild index. Backfill idempotent theo partition, UPSERT, DLQ. Build dual-index, validate recall trên eval set, chuyển traffic dần (blue-green), giữ index cũ để rollback. Lưu metadata version. Cân nhắc Drift-Adapter chỉ như hướng nghiên cứu (preprint).",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -83,7 +90,8 @@
     {
       "id": "D10-TL-08",
       "type": "essay",
-      "prompt": "Viết khuyến nghị cho stakeholder về lợi ích, giới hạn và rủi ro của data quality.",
+      "prompt": "Một job ingest bị retry và tạo chunk trùng trong vector store. Phân tích nguyên nhân và thiết kế lại để chạy lại an toàn.",
+      "modelAnswer": "Nguyên nhân: INSERT không idempotent, logic dùng datetime.now(), không xử lý theo partition. Sửa: UPSERT theo ID/checksum, đọc/ghi theo data_interval partition, retry exponential backoff, DLQ cho record fail, quy định partial failure trong DAG. At-least-once + idempotent consumer ≈ effectively-once; không khẳng định exactly-once. Test: chạy lại job và kiểm tra không tăng số chunk.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -94,7 +102,8 @@
     {
       "id": "D10-TL-09",
       "type": "essay",
-      "prompt": "Nêu các đánh đổi khi triển khai data contract trong production và cách theo dõi sau triển khai.",
+      "prompt": "Viết runbook 6 bước cho sự cố: corpus HR không được cập nhật 3 ngày, agent đang trả lời theo chính sách cũ.",
+      "modelAnswer": "Detect: alert freshness SLI vi phạm, nguồn nào. Isolate: dataset HR, agent/tool HR bị ảnh hưởng. Mitigate: gắn cảnh báo stale, fail-closed hoặc chuyển câu hỏi chính sách sang người. Fix: sửa root cause (watermark, credential, rate limit 429…), backfill. Verify: chạy lại quality gate trước khi mở lại. Post-mortem: nguyên nhân, phạm vi, thời gian phát hiện/sửa, hành động ngăn tái diễn. Alert kiểu page vì SLA cứng và agent đang bị ảnh hưởng.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -105,7 +114,8 @@
     {
       "id": "D10-TL-10",
       "type": "essay",
-      "prompt": "Tạo checklist trước khi ship một tính năng AI có dùng freshness SLA và data drift.",
+      "prompt": "Đánh giá một claim vendor: “Công cụ X giảm 90% false positive trong data observability”. Trình bày cách kiểm tra claim theo hướng dẫn Day 10.",
+      "modelAnswer": "Hỏi: nguồn gốc (paper, vendor blog, khảo sát), ngày sự kiện vs ngày công bố, có methodology, sample size, data công khai để tái lập không, con số đo chính xác điều gì, baseline có công bằng không, áp dụng được cho domain mình không. Phân biệt documentation đã triển khai với preprint/roadmap. Kết luận: thử trên dữ liệu và ngưỡng thật của mình, theo dõi tỷ lệ báo giả thực tế.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",

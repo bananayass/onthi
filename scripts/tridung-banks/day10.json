@@ -1,0 +1,526 @@
+{
+ "mcq": [
+  [
+   "Vì sao lỗi data pipeline đặc biệt nguy hiểm với agent AI?",
+   "Agent vẫn trả lời trôi chảy dù dữ liệu đã cũ hoặc sai",
+   "Agent sẽ crash ngay và báo lỗi rõ ràng cho người dùng",
+   "Pipeline lỗi luôn làm dashboard ngừng tải dữ liệu",
+   "Model tự phát hiện dữ liệu sai và từ chối trả lời",
+   "Fail silently: không exception nào, đến khi user phàn nàn mới biết."
+  ],
+  [
+   "Ingestion đã ngừng 3 ngày, vector store còn dữ liệu cũ, agent vẫn trả lời tự tin theo chính sách hết hiệu lực. Đây là kiểu lỗi gì?",
+   "Fail silently — lỗi âm thầm",
+   "Fail loudly — lỗi lộ rõ",
+   "Lỗi cú pháp trong prompt",
+   "Lỗi quá tải GPU",
+   "Fail loudly là khi pipeline ném exception hoặc gate chặn dữ liệu."
+  ],
+  [
+   "Khi debug câu trả lời sai, thứ tự lần ngược 5 tầng là gì?",
+   "Output → Retrieval → Corpus → Pipeline → Source",
+   "Source → Pipeline → Corpus → Retrieval → Output",
+   "Model → Prompt → Tool → Cache → UI",
+   "Retrieval → Output → Source → Corpus → Pipeline",
+   "Đừng dừng ở “model hallucinate”; model có thể đúng với dữ liệu sai được đưa vào."
+  ],
+  [
+   "Theo benchmark dbt Labs, khác biệt khi semantic layer fail và raw text-to-SQL fail là gì?",
+   "Semantic layer báo lỗi; text-to-SQL ra số trông đúng",
+   "Cả hai đều báo lỗi rõ ràng như nhau",
+   "Semantic layer ra số sai; text-to-SQL báo lỗi",
+   "Cả hai đều luôn ra kết quả đúng",
+   "Sự bất đối xứng lỗi âm thầm này là lý do Day 10 tồn tại."
+  ],
+  [
+   "ETL khác ELT ở điểm nào?",
+   "ETL biến đổi trước khi load; ELT load raw rồi mới biến đổi",
+   "ETL chỉ dùng cho streaming; ELT chỉ dùng cho batch",
+   "ETL không làm sạch dữ liệu; ELT luôn làm sạch trước",
+   "ETL lưu raw vĩnh viễn; ELT xóa raw ngay khi load",
+   "ELT tiện thử lại nhiều chiến lược chunking/chuẩn hóa cho RAG."
+  ],
+  [
+   "Agent cần kiểm tra tồn kho ngay sau khi đơn hàng vừa thay đổi. Kiểu xử lý nào phù hợp?",
+   "Streaming",
+   "Batch mỗi đêm",
+   "Backfill hằng tuần",
+   "Cron mỗi tháng",
+   "Streaming độ trễ thấp nhưng hạ tầng phức tạp, lỗi có thể lan ngay."
+  ],
+  [
+   "CDC (Change Data Capture) là gì?",
+   "Chỉ đồng bộ phần dữ liệu thay đổi",
+   "Quét lại toàn bộ bảng mỗi lần chạy",
+   "Nén dữ liệu trước khi lưu vào kho",
+   "Mã hóa dữ liệu khi truyền qua mạng",
+   "Log-based đọc WAL/binlog; query-based poll theo updated_at."
+  ],
+  [
+   "Nhược điểm của CDC query-based (poll theo updated_at > last_sync) là gì?",
+   "Tạo tải query, có thể sót bản ghi tạo rồi xóa",
+   "Bắt buộc phải có quyền đọc transaction log của database",
+   "Không thể chạy theo lịch định kỳ như cron",
+   "Luôn thấy được mọi thay đổi trung gian",
+   "Log-based thấy thay đổi trung gian nhưng cần quyền đọc log."
+  ],
+  [
+   "Watermark trong ingestion là gì và rủi ro đi kèm?",
+   "Mốc đã ingest tới đâu; có thể sót bản cập nhật trễ",
+   "Chữ ký số chống sao chép tài liệu; có thể bị làm giả",
+   "Ngưỡng dung lượng tối đa; vượt thì pipeline dừng",
+   "Mức ưu tiên của job; job thấp bị bỏ qua",
+   "Airflow/Dagster/Prefect không có watermark/late data native như Beam/Flink."
+  ],
+  [
+   "Backpressure xảy ra khi nào?",
+   "Consumer chậm hơn producer",
+   "Nguồn dữ liệu bị xóa khỏi hệ thống",
+   "Schema thay đổi ngoài kế hoạch",
+   "Dữ liệu bị trùng lặp nhiều lần",
+   "Cần buffer/pause/backoff để tránh tràn bộ nhớ hoặc mất record."
+  ],
+  [
+   "Nguồn dữ liệu trả HTTP 429. Pipeline nên làm gì?",
+   "Retry có backoff, không lặng lẽ bỏ request",
+   "Bỏ qua request đó và chạy tiếp",
+   "Tăng số request song song lên gấp đôi",
+   "Dừng toàn bộ pipeline vĩnh viễn",
+   "429 là rate limit; bỏ request âm thầm gây thiếu dữ liệu."
+  ],
+  [
+   "Trường phone chứa \"N/A\" thay vì null. Rủi ro với agent là gì?",
+   "Agent suy diễn từ dữ liệu không tồn tại",
+   "Agent không thể đọc được trường số",
+   "Vector store từ chối lưu bản ghi đó",
+   "Embedding model báo lỗi ngay lập tức",
+   "Cần phân biệt null thật với chuỗi giả và quy tắc required/optional."
+  ],
+  [
+   "Hai bản copy cùng một chính sách trong corpus gây hậu quả gì?",
+   "Retrieval trả chunk trùng, lãng phí context",
+   "Embedding model chạy chậm gấp đôi",
+   "Vector store tự động xóa cả hai bản",
+   "Agent không trả lời được câu hỏi nào",
+   "Dedupe bằng ID/checksum và quy tắc version."
+  ],
+  [
+   "Ngày \"05/08/2026\" gây vấn đề gì và xử lý thế nào?",
+   "Mơ hồ ngày/tháng; cần chốt format và timezone",
+   "Không có vấn đề vì mọi hệ thống đọc giống nhau",
+   "Năm 2026 quá xa nên hệ thống không hiểu",
+   "Dấu / không lưu được trong database",
+   "Sai format dẫn tới lọc, sắp xếp, hiểu thời hạn sai."
+  ],
+  [
+   "PII như CCCD trong tài liệu nên được xử lý ở bước nào?",
+   "Ở bước transform, trước embedding",
+   "Sau khi đã lưu vào vector store",
+   "Khi agent chuẩn bị trả lời người dùng",
+   "Không cần xử lý nếu đã mã hóa ổ đĩa",
+   "PII lọt vào vector store có thể bị trích xuất."
+  ],
+  [
+   "Câu “LLM proposes, code disposes” nghĩa là gì?",
+   "LLM đề xuất, code kiểm tra trước khi cho đi",
+   "LLM tự quyết định mọi bước và code chỉ thực thi",
+   "Code viết đề xuất, LLM duyệt lại kết quả cuối",
+   "LLM thay thế hoàn toàn bước kiểm tra dữ liệu",
+   "Validation bên ngoài là cổng bắt buộc cho đề xuất của LLM."
+  ],
+  [
+   "dbt data tests khác dbt unit tests thế nào?",
+   "Data test kiểm dữ liệu thật; unit test kiểm logic",
+   "Data tests kiểm logic SQL; unit tests kiểm dữ liệu production",
+   "Cả hai giống nhau, chỉ khác tên gọi",
+   "Unit tests chỉ chạy được trên production",
+   "Ví dụ data test: not_null, unique, relationships."
+  ],
+  [
+   "Data profiling nên làm khi nào?",
+   "Trước khi viết rule, để đo dữ liệu thật",
+   "Sau khi agent đã trả lời sai nhiều lần",
+   "Chỉ khi có yêu cầu từ kiểm toán",
+   "Không cần vì rule có thể đoán",
+   "Đừng đoán rule khi chưa nhìn dữ liệu."
+  ],
+  [
+   "Great Expectations (GX) giúp gì cho pipeline?",
+   "Biến kỳ vọng chất lượng thành code chạy lại được",
+   "Tự động sinh embedding cho tài liệu mới",
+   "Thay thế orchestrator như Airflow",
+   "Mã hóa dữ liệu nhạy cảm trước khi lưu",
+   "Cần pin version và đối chiếu docs vì API đời trước có thể khác."
+  ],
+  [
+   "Theo kiến trúc Medallion, agent nên đọc dữ liệu từ tầng nào?",
+   "Gold",
+   "Bronze",
+   "Silver",
+   "Raw landing zone",
+   "Bronze: raw để audit/replay; Silver: clean, dedupe; Gold: curated, phục vụ."
+  ],
+  [
+   "Vì sao không trỏ RAG ingestion thẳng vào tầng Bronze?",
+   "Bronze là raw chưa làm sạch, chưa dedupe",
+   "Bronze luôn bị khóa không cho đọc",
+   "Bronze chỉ chứa dữ liệu dạng ảnh",
+   "Bronze được xóa sau mỗi giờ",
+   "Kiểm tra chất lượng chạy ở Silver; Gold sẵn sàng phục vụ."
+  ],
+  [
+   "Timestamp “ingest thành công” và “vector store upsert/reindex thành công” khác nhau thế nào?",
+   "Hai mốc khác nhau, lệch theo lịch reindex",
+   "Luôn trùng nhau vì cùng một job",
+   "Ingest luôn sau reindex",
+   "Chỉ cần theo dõi một trong hai",
+   "“Corpus hiện hành” là một timestamp vận hành cụ thể."
+  ],
+  [
+   "Chỉ thêm/sửa vài tài liệu, embedding model và chunking giữ nguyên. Nên làm gì?",
+   "Incremental upsert",
+   "Re-embed toàn bộ corpus",
+   "Xóa index và build lại",
+   "Đổi sang embedding model mới",
+   "Đổi model hoặc chunking mới cần re-embed toàn corpus."
+  ],
+  [
+   "Rollout index mới theo kiểu blue-green cho data là gì?",
+   "Build song song, validate, chuyển traffic dần",
+   "Ghi đè index cũ ngay lập tức",
+   "Chạy hai model trên cùng index",
+   "Xóa index cũ trước rồi build mới",
+   "Hoặc chấp nhận maintenance window nếu SLA freshness cho phép."
+  ],
+  [
+   "Drift-Adapter (preprint) đề xuất gì để né chi phí re-embed?",
+   "Ánh xạ embedding query mới về không gian cũ",
+   "Trộn vector của hai model trong cùng index",
+   "Giảm số chiều vector xuống còn 2",
+   "Bỏ embedding, chỉ dùng BM25",
+   "Preprint một tác giả, chưa peer review — không trích như kết quả đã kiểm chứng."
+  ],
+  [
+   "Dimension “Timeliness” hỏi điều gì?",
+   "Dữ liệu có cập nhật đúng lúc không",
+   "Dữ liệu có đúng với thực tế không",
+   "Dữ liệu có bị trùng lặp không",
+   "Dữ liệu có đúng format không",
+   "6 dimension: Completeness, Accuracy, Consistency, Timeliness, Validity, Uniqueness."
+  ],
+  [
+   "Email khách hàng khác nhau giữa CRM và warehouse vi phạm dimension nào?",
+   "Consistency",
+   "Completeness",
+   "Uniqueness",
+   "Validity",
+   "Agent có thể trả lời khác nhau tùy chunk được retrieve."
+  ],
+  [
+   "Trạng thái đơn hàng không nằm trong enum cho phép vi phạm dimension nào?",
+   "Validity",
+   "Accuracy",
+   "Timeliness",
+   "Consistency",
+   "Validity: đúng format/quy tắc; Accuracy: đúng thực tế."
+  ],
+  [
+   "5 pillars của data observability trong slide là gì?",
+   "Freshness, Quality, Volume, Schema, Lineage",
+   "Completeness, Accuracy, Consistency, Validity, Uniqueness",
+   "Detect, Isolate, Mitigate, Fix, Verify",
+   "Bronze, Silver, Gold, Platinum, Diamond",
+   "Đây là framework vendor nêu, không phải taxonomy ISO bắt buộc."
+  ],
+  [
+   "Dữ liệu cập nhật đúng giờ nhưng toàn nội dung rỗng. Kết luận đúng là gì?",
+   "Freshness không chứng minh correctness",
+   "Dữ liệu đúng vì đã cập nhật đúng hạn",
+   "Chỉ cần tăng tần suất cập nhật",
+   "Lỗi nằm ở embedding model",
+   "Cần kết hợp quality, volume, schema."
+  ],
+  [
+   "Đặt quality gate càng sớm trong pipeline có lợi gì?",
+   "Rẻ hơn vì chưa tốn compute phía sau",
+   "Phát hiện được mọi lỗi cần ngữ cảnh",
+   "Không cần thêm gate nào ở sau",
+   "Giảm số lượng tài liệu cần lưu",
+   "Gate muộn có thể phát hiện lỗi cần thêm ngữ cảnh mới thấy."
+  ],
+  [
+   "Gate “pre-embed” kiểm tra điều gì?",
+   "Tài liệu cũ, trùng hoặc mâu thuẫn với bản mới hơn",
+   "Schema đúng và field bắt buộc không null",
+   "Giá trị còn hợp lệ sau clean, dedupe, join",
+   "Agent có đang dùng index bị đánh dấu lỗi",
+   "Các vị trí khác: ingestion boundary, post-transform, pre-serve."
+  ],
+  [
+   "Chính sách pháp lý/tài chính nên dùng chiến lược gate nào khi check fail?",
+   "Fail-closed, dùng dữ liệu cũ đã biết đúng",
+   "Fail-open: ghi log và vẫn cho dữ liệu mới đi qua",
+   "Tắt gate để tránh gián đoạn dịch vụ",
+   "Xóa toàn bộ dữ liệu cũ và mới",
+   "Fail-open hợp khi dữ liệu cũ gây hại hơn, ví dụ tồn kho real-time."
+  ],
+  [
+   "Data contract nên có tối thiểu những gì?",
+   "Schema, semantics, SLA/SLO, ownership",
+   "Logo, slogan, giá bán, khuyến mãi",
+   "Model, prompt, temperature, top-k",
+   "Mật khẩu, API key, IP, port",
+   "Contract không tự phát huy nếu không có người và gate thực thi."
+  ],
+  [
+   "“Shift-left” trong data contract nghĩa là gì?",
+   "Kiểm hợp đồng ngay từ phía producer",
+   "Dời mọi kiểm tra về cuối, khi agent trả lời",
+   "Chuyển dữ liệu từ Gold về Bronze",
+   "Giao trách nhiệm chất lượng cho người dùng cuối",
+   "Không đợi đến khi agent trả lời sai."
+  ],
+  [
+   "Metadata nào nên lưu cho mỗi chunk để audit/rollback?",
+   "Version model, hash tiền xử lý, version index",
+   "Tên người dùng đã hỏi câu hỏi gần nhất",
+   "Số lần chunk được hiển thị trên giao diện",
+   "Màu sắc của tài liệu gốc",
+   "Kèm text checksum, chunking config, document version."
+  ],
+  [
+   "Metric “Index-version consistency” đo gì?",
+   "Tỷ lệ chunk dùng embedding version hiện hành",
+   "Tuổi của chunk được truy xuất",
+   "Tỷ lệ field metadata bị trống",
+   "Số document nạp so với kỳ vọng",
+   "Các metric RAG khác: embedding coverage, retrieval staleness, contradiction rate."
+  ],
+  [
+   "Bẫy của rule “không update trong N giờ thì báo động” là gì?",
+   "Báo giả khi lặng bình thường, sót khi đổi nhịp",
+   "Luôn phát hiện chính xác mọi sự cố dữ liệu",
+   "Không bao giờ bị ảnh hưởng bởi timezone",
+   "Chỉ hoạt động với dữ liệu streaming",
+   "Clock skew/timezone cũng tạo alert giả; freshness một mình không đủ."
+  ],
+  [
+   "Phát hiện bất thường bằng rule/threshold phù hợp nhất với loại kiểm tra nào?",
+   "Invariant cứng như số chunk không thể âm",
+   "Xu hướng có tính mùa vụ theo tuần",
+   "Thay đổi phân phối khó mô tả bằng lời",
+   "Kiểu lỗi chưa ai nghĩ tới trước",
+   "Statistical/ML hợp xu hướng, seasonality nhưng cần lịch sử dài."
+  ],
+  [
+   "Điểm yếu của anomaly detection bằng thống kê/ML là gì?",
+   "Cần lịch sử dài, khó giải thích",
+   "Không phát hiện được thay đổi theo mùa",
+   "Chỉ kiểm tra được trường không null",
+   "Luôn tạo nhiều báo động giả hơn rule",
+   "Hybrid: rule cho ràng buộc cứng + thống kê cho metric biến động."
+  ],
+  [
+   "Nhận định nào đúng về ngưỡng PSI/KL divergence?",
+   "Không có ngưỡng chung; các nguồn bất đồng",
+   "Ngưỡng chuẩn quốc tế là đúng 0,1",
+   "PSI không dùng được để theo dõi drift",
+   "KL divergence luôn đối xứng hai chiều",
+   "PSI là Jeffreys divergence (tổng KL hai chiều) nên đối xứng."
+  ],
+  [
+   "Vì sao schema drift có thể nguy hiểm dù pipeline vẫn chạy?",
+   "Cột mới có thể chứa dữ liệu nhạy cảm",
+   "Pipeline sẽ tự động crash ngay lập tức",
+   "Schema drift chỉ ảnh hưởng tốc độ truy vấn",
+   "Cột mới luôn bị bỏ qua hoàn toàn",
+   "Schema drift: thêm/xóa cột hoặc đổi kiểu ngoài kế hoạch."
+  ],
+  [
+   "Alert fatigue là gì?",
+   "Báo giả nhiều khiến người trực lơ cảnh báo",
+   "Hệ thống cảnh báo bị quá tải và ngừng chạy",
+   "Người dùng nhận quá nhiều email marketing",
+   "Model mệt mỏi sau nhiều request liên tiếp",
+   "Chọn severity, ownership, ngưỡng theo tác động thực tế."
+  ],
+  [
+   "Data lineage giúp ích gì khi customers.region đổi kiểu dữ liệu?",
+   "Ước tính các downstream bị ảnh hưởng",
+   "Tự động sửa kiểu dữ liệu về như cũ",
+   "Xóa các bảng phụ thuộc để tránh lỗi",
+   "Chặn mọi truy vấn vào bảng customers",
+   "Ví dụ: join doanh thu sai, agent trả lời khu vực doanh thu cao nhất bằng số sai."
+  ],
+  [
+   "OpenLineage là gì?",
+   "Đặc tả chuẩn để ghi lại lineage",
+   "Một vector database mã nguồn mở",
+   "Thư viện kiểm tra chất lượng dữ liệu",
+   "Orchestrator thay thế Airflow",
+   "Catalog giúp khám phá metadata; governance quy định quyền, mục đích, lưu, xóa."
+  ],
+  [
+   "Xóa một row ở database nguồn có tự xóa dữ liệu khỏi hệ RAG không?",
+   "Không; phải xóa cả bản sao phái sinh",
+   "Có; vector store tự đồng bộ ngay lập tức",
+   "Có, nếu đã bật soft-delete",
+   "Không cần xóa vì embedding đã ẩn danh",
+   "Cần deletion path, ghi trạng thái, kiểm tra và bằng chứng audit."
+  ],
+  [
+   "Theo nghiên cứu Ghost Vectors, attack surface thật sự là gì?",
+   "Byte vector còn trên đĩa sau soft-delete",
+   "Cấu trúc đồ thị HNSW của index",
+   "API công khai của vector database",
+   "Prompt của người dùng cuối",
+   "Trích bằng hnswlib.get_items() hoặc reconstruct_n(), bypass API; test trên ChromaDB, FAISS, Weaviate."
+  ],
+  [
+   "Ba cam kết cụ thể của một dataset SLA là gì?",
+   "Freshness, completeness, availability",
+   "Giá bán, khuyến mãi, bảo hành",
+   "CPU, RAM, dung lượng ổ cứng",
+   "Logo, màu sắc, font chữ",
+   "SLO nên có error budget, không chỉ một threshold cố định."
+  ],
+  [
+   "Gate đã chặn lỗi trước khi tới agent. Nên chọn kiểu alert nào?",
+   "Ticket xử lý trong giờ làm việc",
+   "Page người trực ngay lập tức",
+   "Không cần ghi nhận gì cả",
+   "Gửi thông báo cho mọi người dùng",
+   "Page khi SLA cứng vi phạm và agent đang bị ảnh hưởng."
+  ],
+  [
+   "Thứ tự runbook 6 bước xử lý sự cố dữ liệu là gì?",
+   "Detect → Isolate → Mitigate → Fix → Verify → Post-mortem",
+   "Fix → Detect → Verify → Isolate → Mitigate → Post-mortem",
+   "Mitigate → Fix → Detect → Isolate → Post-mortem → Verify",
+   "Post-mortem → Detect → Fix → Verify → Isolate → Mitigate",
+   "Verify chạy lại quality gate trước khi mở lại serving."
+  ],
+  [
+   "Bước Mitigate trong runbook có thể gồm hành động nào?",
+   "Dùng bản cũ đúng, gắn cảnh báo hoặc tắt tool",
+   "Sửa ngay root cause trong source code",
+   "Viết báo cáo post-mortem chi tiết",
+   "Chạy lại toàn bộ quality gate",
+   "Fix mới là sửa root cause; Verify là chạy lại gate."
+  ],
+  [
+   "Orchestrator điều phối pipeline dưới dạng gì?",
+   "DAG",
+   "Danh sách liên kết",
+   "Cây nhị phân",
+   "Bảng băm",
+   "Xác định phụ thuộc, lịch chạy, trạng thái và retry."
+  ],
+  [
+   "Kiểu kích hoạt nào có nhược điểm “có thể chạy dù dữ liệu chưa về”?",
+   "Cron theo lịch cố định",
+   "Event-driven theo webhook",
+   "Asset-driven khi upstream cập nhật",
+   "Chạy thủ công sau khi kiểm tra",
+   "Backfill là chạy lại khoảng quá khứ sau khi sửa transform/đổi model."
+  ],
+  [
+   "Retry 3 lần với lệnh INSERT không idempotent có thể gây gì cho vector store?",
+   "Tạo chunk trùng lặp",
+   "Xóa mất các chunk cũ",
+   "Làm hỏng embedding model",
+   "Không có ảnh hưởng gì",
+   "Dùng UPSERT; at-least-once + idempotent consumer ≈ effectively-once."
+  ],
+  [
+   "Vì sao không nên dùng datetime.now() trong task cho logic cần tái lập?",
+   "Chạy lại sẽ cho kết quả khác, phá idempotency",
+   "datetime.now() không chạy trong Airflow",
+   "datetime.now() luôn trả về giờ UTC sai",
+   "datetime.now() làm chậm task gấp đôi",
+   "Đọc/ghi theo partition cụ thể như data_interval_start."
+  ],
+  [
+   "Dead-letter queue (DLQ) dùng để làm gì?",
+   "Giữ record lỗi sau khi hết retry",
+   "Xóa vĩnh viễn record lỗi để tiết kiệm chỗ",
+   "Ưu tiên chạy record quan trọng trước",
+   "Lưu bản sao lưu toàn bộ database",
+   "Record lỗi không bị vứt bỏ âm thầm."
+  ],
+  [
+   "Khoản chi phí nào hay bị đánh giá thấp khi đổi embedding model?",
+   "Re-embed corpus và rebuild index",
+   "Chi phí lưu trữ file PDF gốc",
+   "Chi phí tên miền của website",
+   "Chi phí giấy phép hệ điều hành",
+   "Rebuild HNSW cần CPU/RAM, không chỉ phí embedding API."
+  ],
+  [
+   "Benchmark dbt Labs: Claude Sonnet 4.6 raw text-to-SQL 90% vs semantic layer 98,2%. Cần đọc con số này thế nào?",
+   "Vendor tự làm, baseline yếu, có thể thiên vị",
+   "Đã được kiểm chứng độc lập, áp dụng mọi domain",
+   "Chứng minh text-to-SQL không bao giờ dùng được",
+   "Chỉ đúng với tiếng Việt",
+   "Benchmark trên schema và câu hỏi thật của domain mình."
+  ],
+  [
+   "Câu “80% thời gian data science là dọn dữ liệu” nên được xử lý thế nào?",
+   "Không coi là fact; truy nguồn có phương pháp",
+   "Trích dẫn như sự thật đã được chứng minh",
+   "Dùng làm ngưỡng chuẩn cho mọi dự án",
+   "Bỏ qua vì dọn dữ liệu không quan trọng",
+   "Kiểm tra nguồn, ngày, phương pháp, sample size, baseline."
+  ],
+  [
+   "Lab 10 yêu cầu chứng minh điều gì về việc chạy lại pipeline?",
+   "Re-run không tạo duplicate",
+   "Re-run nhanh hơn lần đầu gấp đôi",
+   "Re-run tự sửa dữ liệu bị hỏng",
+   "Re-run không cần quality gate",
+   "Pipeline: ingest → clean → validate → chunk → embed → load; cố ý làm hỏng dữ liệu để so sánh."
+  ]
+ ],
+ "essay": [
+  [
+   "Agent HR trả lời sai chính sách nghỉ phép dù không có lỗi nào được báo. Trình bày cách lần ngược 5 tầng (Output → Retrieval → Corpus → Pipeline → Source) và những gì cần kiểm tra ở từng tầng.",
+   "Output: câu trả lời, mức tự tin. Retrieval: log chunk nào vào context, version, ngày. Corpus: chunk cũ/trùng/mâu thuẫn với bản mới, index-version consistency. Pipeline: lần ingest/reindex thành công cuối, job lỗi/bỏ sót, watermark bỏ sót tài liệu cập nhật trễ. Source: văn bản gốc đúng chưa. Kết luận: đừng dừng ở “model hallucinate”; thêm freshness SLI, quality gate, metadata version."
+  ],
+  [
+   "Thiết kế pipeline nạp chính sách nội bộ cho RAG theo Medallion (Bronze/Silver/Gold), nêu bước transform và các quality gate ở từng vị trí.",
+   "Bronze: raw để audit/replay. Silver: chuẩn hóa Unicode NFC, strip HTML, dedupe checksum, chốt format ngày/timezone, mask PII, kiểm null giả. Gold: tài liệu curated, version, phục vụ RAG. Gates: ingestion boundary (schema, required), post-transform (giá trị hợp lệ), pre-embed (cũ/trùng/mâu thuẫn), pre-serve (index lỗi). Lưu metadata version; RAG đọc từ Gold, không trỏ vào Bronze."
+  ],
+  [
+   "So sánh fail-closed và fail-open, chọn chiến lược cho (a) corpus chính sách tín dụng và (b) dữ liệu tồn kho real-time; giải thích lý do.",
+   "Fail-closed: check fail thì chặn cập nhật/serving, dùng dữ liệu cũ đã biết đúng — hợp (a) vì trả lời sai nguy hiểm hơn trả lời cũ. Fail-open: log và vẫn tiếp tục — có thể hợp (b) vì tồn kho cũ gây hại hơn dữ liệu mới chưa chắc chắn, nhưng phải chấp nhận rủi ro rõ, cảnh báo stale, theo dõi. Quyết định theo rủi ro, ghi trong data contract."
+  ],
+  [
+   "Viết một data contract cho dataset “orders” mà agent CSKH dùng, gồm schema, semantics, SLA/SLO và ownership, kèm cách thực thi.",
+   "Schema: order_id (string, required, unique), status (enum), updated_at (timestamp UTC, required), amount (decimal VND). Semantics: status “delivered” nghĩa là đã giao thành công… SLA/SLO: freshness ≤ 15 phút, completeness ≥ 99,5%, availability; error budget. Ownership: team nguồn sở hữu, kênh alert, severity. Thực thi: gate ở ingestion boundary, test dbt/GX, shift-left kiểm tra khi producer thay đổi, schema drift alert."
+  ],
+  [
+   "Thiết kế bộ metric observability cho corpus RAG (theo 5 pillars và metric riêng cho RAG) và cách đặt alert tránh alert fatigue.",
+   "Freshness SLI (tuổi ingest), Volume (row-count delta), Quality (null-rate metadata), Schema (drift), Lineage; RAG: embedding coverage, index-version consistency, retrieval staleness, contradiction rate. Alert: rule cho invariant cứng, thống kê cho metric biến động; tránh chỉ dùng “không update N giờ”; xử lý timezone/clock skew; phân severity page/ticket/dashboard, owner rõ, xem lại tỷ lệ báo giả định kỳ."
+  ],
+  [
+   "Một người dùng yêu cầu xóa toàn bộ dữ liệu cá nhân của họ khỏi knowledge base RAG. Thiết kế deletion path và cách chứng minh đã xóa.",
+   "Tìm qua lineage mọi bản phái sinh: bản nguồn, chunk, embedding, vector index, cache, backup. Xóa và rebuild/compact để tránh soft-delete (Ghost Vectors: float32 còn trên đĩa); cân nhắc epoch key rotation; ghi trạng thái từng bước, kiểm tra bằng truy vấn thử, lưu bằng chứng audit. Nêu GDPR Art. 17 yêu cầu xóa kiểm chứng được; đưa vào thiết kế từ đầu cùng retention, consent."
+  ],
+  [
+   "Đổi embedding model cho corpus 500.000 tài liệu. Lập kế hoạch re-embed, rollout và kiểm soát chi phí.",
+   "Đổi model → không gian vector mới → re-embed toàn bộ (không trộn vector hai model). Ước tính token (~400 triệu) × giá hiện hành + compute rebuild index. Backfill idempotent theo partition, UPSERT, DLQ. Build dual-index, validate recall trên eval set, chuyển traffic dần (blue-green), giữ index cũ để rollback. Lưu metadata version. Cân nhắc Drift-Adapter chỉ như hướng nghiên cứu (preprint)."
+  ],
+  [
+   "Một job ingest bị retry và tạo chunk trùng trong vector store. Phân tích nguyên nhân và thiết kế lại để chạy lại an toàn.",
+   "Nguyên nhân: INSERT không idempotent, logic dùng datetime.now(), không xử lý theo partition. Sửa: UPSERT theo ID/checksum, đọc/ghi theo data_interval partition, retry exponential backoff, DLQ cho record fail, quy định partial failure trong DAG. At-least-once + idempotent consumer ≈ effectively-once; không khẳng định exactly-once. Test: chạy lại job và kiểm tra không tăng số chunk."
+  ],
+  [
+   "Viết runbook 6 bước cho sự cố: corpus HR không được cập nhật 3 ngày, agent đang trả lời theo chính sách cũ.",
+   "Detect: alert freshness SLI vi phạm, nguồn nào. Isolate: dataset HR, agent/tool HR bị ảnh hưởng. Mitigate: gắn cảnh báo stale, fail-closed hoặc chuyển câu hỏi chính sách sang người. Fix: sửa root cause (watermark, credential, rate limit 429…), backfill. Verify: chạy lại quality gate trước khi mở lại. Post-mortem: nguyên nhân, phạm vi, thời gian phát hiện/sửa, hành động ngăn tái diễn. Alert kiểu page vì SLA cứng và agent đang bị ảnh hưởng."
+  ],
+  [
+   "Đánh giá một claim vendor: “Công cụ X giảm 90% false positive trong data observability”. Trình bày cách kiểm tra claim theo hướng dẫn Day 10.",
+   "Hỏi: nguồn gốc (paper, vendor blog, khảo sát), ngày sự kiện vs ngày công bố, có methodology, sample size, data công khai để tái lập không, con số đo chính xác điều gì, baseline có công bằng không, áp dụng được cho domain mình không. Phân biệt documentation đã triển khai với preprint/roadmap. Kết luận: thử trên dữ liệu và ngưỡng thật của mình, theo dõi tỷ lệ báo giả thực tế."
+  ]
+ ]
+}

@@ -1,0 +1,526 @@
+{
+ "mcq": [
+  [
+   "Pipeline xương sống của Day 7 theo đúng thứ tự là gì?",
+   "Document → Chunk → Embed → Store → Query → Inject",
+   "Document → Embed → Chunk → Query → Store → Inject",
+   "Chunk → Document → Store → Embed → Inject → Query",
+   "Query → Document → Chunk → Inject → Embed → Store",
+   "Mỗi phần của bài chỉ đào sâu một mắt xích trong pipeline này."
+  ],
+  [
+   "Câu hỏi “Đơn hàng mới nhất của khách A đang ở đâu?” nên được xử lý bằng cách nào?",
+   "SQL/API có kiểm soát",
+   "Vector search trên toàn bộ log",
+   "Embed bảng đơn hàng rồi tìm cosine",
+   "Nhét toàn bộ CRM vào prompt",
+   "Đây là operational data thay đổi liên tục, cần kết quả chính xác và mới nhất."
+  ],
+  [
+   "Loại dữ liệu nào “retrieval fit rất cao”, lý tưởng cho vector store?",
+   "Knowledge data: FAQ, SOP, chính sách, hợp đồng",
+   "Operational data: tồn kho, trạng thái đơn hàng",
+   "Contextual data: giỏ hàng, vài lượt chat gần đây",
+   "Dữ liệu log hệ thống ghi theo từng giây",
+   "Operational → SQL/function calling; contextual → inject trực tiếp."
+  ],
+  [
+   "Giỏ hàng và profile người dùng trong phiên hiện tại nên được xử lý thế nào?",
+   "Inject ngắn gọn vào context đúng lúc",
+   "Chunk và embed vào vector store",
+   "Huấn luyện lại embedding model",
+   "Lưu thành PDF rồi OCR lại",
+   "Contextual data ít khi cần semantic search."
+  ],
+  [
+   "Vì sao không nên embed bảng giao dịch để tính tổng doanh thu quý 2?",
+   "Similarity search không cộng được số; đó là việc của SQL",
+   "Embedding model không đọc được các chữ số viết tiếng Việt",
+   "Vector store không lưu được dữ liệu có cấu trúc dạng bảng",
+   "Tổng doanh thu là dữ liệu bí mật không được phép lưu trữ",
+   "Aggregation, sort, filter chính xác là thế mạnh của SQL/analytics."
+  ],
+  [
+   "Khác biệt giữa memory và retrieval là gì?",
+   "Retrieval tìm context cho câu hỏi hiện tại; memory giữ trạng thái qua thời gian",
+   "Memory tìm tài liệu cho câu hỏi hiện tại; retrieval lưu sở thích người dùng lâu dài",
+   "Hai khái niệm hoàn toàn giống nhau, chỉ khác tên gọi trong từng framework khác nhau",
+   "Memory chỉ đơn giản là toàn bộ chat history được lưu lại nguyên văn mãi mãi",
+   "Nhầm hai khái niệm khiến agent “quên” context vừa retrieve ở lượt sau."
+  ],
+  [
+   "Vòng đời memory theo bài gồm các bước nào?",
+   "Capture → Filter → Store → Retrieve",
+   "Store → Capture → Retrieve → Filter",
+   "Filter → Embed → Rerank → Delete",
+   "Retrieve → Store → Capture → Filter",
+   "Filter: kiểm PII, chất lượng, mức liên quan trước khi lưu."
+  ],
+  [
+   "Thứ nào KHÔNG tự động là memory theo slide?",
+   "Toàn bộ chat history lưu “cho chắc”",
+   "Sở thích đã được lọc và lưu có chủ đích",
+   "Fact người dùng xác nhận, truy lại khi cần",
+   "Profile được cập nhật theo chính sách rõ ràng",
+   "Prompt dài hơn, file upload một lần không truy lại, toàn bộ chat history thường chỉ tạo nhiễu."
+  ],
+  [
+   "Với số CCCD trong tài liệu, kỹ thuật mask được khuyến nghị là gì?",
+   "Xóa hoàn toàn",
+   "Thay bằng [PERSON]",
+   "Generalize thành quận",
+   "Giữ nguyên để tìm kiếm",
+   "Tên → [PERSON]; điện thoại → regex replace; email → hash/remove; địa chỉ → generalize."
+  ],
+  [
+   "Vì sao không được coi embedding là dữ liệu đã ẩn danh?",
+   "Embedding có thể bị đảo ngược gần đúng thành văn bản gốc",
+   "Embedding luôn được lưu kèm văn bản gốc trong cùng bảng",
+   "Embedding chỉ hoạt động khi chứa tên người dùng",
+   "Embedding không thể bị xóa khỏi vector store",
+   "Morris et al. (EMNLP 2023), ALGEN (2025) khôi phục được câu gần nguyên văn."
+  ],
+  [
+   "Ví dụ “chính sách hoàn tiền” vs “quy định đổi trả sản phẩm” minh họa vấn đề gì của lexical search?",
+   "Vocabulary mismatch: không từ nào trùng nên BM25 bỏ lỡ",
+   "Silent truncation: văn bản bị cắt mất phần cuối",
+   "Lost in the middle: thông tin bị chôn giữa context",
+   "Post-filter: kết quả bị lọc sau khi tìm kiếm",
+   "Dense embedding đặt hai cụm này gần nhau vì nghĩa gần nhau."
+  ],
+  [
+   "Theo BEIR (18 dataset), nhận định nào về BM25 là đúng?",
+   "Vẫn là baseline mạnh, có thể thắng dense ngoài miền huấn luyện",
+   "Đã lỗi thời hoàn toàn kể từ khi xuất hiện các embedding model",
+   "Chỉ dùng được với văn bản tiếng Anh ngắn, không dùng cho tiếng Việt",
+   "Luôn thua mọi dense model trên tất cả dataset trong benchmark",
+   "Dense fine-tune trên MS MARCO có thể thua BM25 khi ra ngoài domain."
+  ],
+  [
+   "Vì sao BERT gốc (cross-encoder) không hợp cho similarity search trên 10.000 câu?",
+   "Phải chạy từng cặp câu, khoảng 50 triệu phép suy luận",
+   "BERT không xử lý được các câu dài hơn 10 token đầu vào",
+   "BERT chỉ hỗ trợ duy nhất một ngôn ngữ là tiếng Anh",
+   "BERT không chạy được trên các GPU thông thường hiện nay",
+   "SBERT (bi-encoder) encode mỗi câu một lần, so bằng cosine: ~5 giây thay vì ~65 giờ."
+  ],
+  [
+   "Pipeline tạo embedding cơ bản gồm ba bước nào?",
+   "Tokenize → Encoder → Pooling",
+   "Chunk → Rerank → Filter",
+   "OCR → Translate → Hash",
+   "Index → Compress → Search",
+   "Đổi cách pooling (mean, last-token, [CLS]) là đổi hành vi của model."
+  ],
+  [
+   "Cosine similarity của A = [1, 2, 3] và B = [2, 4, 6] bằng bao nhiêu?",
+   "1",
+   "0",
+   "0,5",
+   "−1",
+   "B = 2A nên cùng hướng; cosine bỏ qua độ lớn, chỉ xét hướng."
+  ],
+  [
+   "Bài nhấn mạnh điều gì về cosine similarity (Steck et al., WWW 2024)?",
+   "Là quy ước hữu ích, không phải “độ liên quan thật”",
+   "Luôn là thước đo chính xác nhất cho mọi embedding",
+   "Chỉ dùng được khi vector đã nén bằng PQ",
+   "Luôn tốt hơn dot product trong mọi trường hợp",
+   "Score cao không phải bằng chứng tuyệt đối; phải đo trên tác vụ thật."
+  ],
+  [
+   "RAG thông thường (câu hỏi ngắn tìm đoạn tài liệu dài) là kiểu tìm kiếm nào?",
+   "Asymmetric search",
+   "Symmetric search",
+   "Exact match search",
+   "Fuzzy string search",
+   "Symmetric là câu ↔ câu, ví dụ tìm câu trùng lặp."
+  ],
+  [
+   "Bỏ prefix “query:” / “passage:” mà model E5 yêu cầu sẽ gây hậu quả gì?",
+   "Không báo lỗi nhưng xếp hạng kém đi âm thầm",
+   "Thư viện ném exception ngay khi encode",
+   "Vector trả về toàn số 0",
+   "Vector store từ chối lưu dữ liệu",
+   "Failure mode #3: recall kém 5–15% mà không có lỗi; dùng prefix-ablation test."
+  ],
+  [
+   "Theo quy trình chọn embedding model trong 20 phút, bước nào làm SAU CÙNG?",
+   "Tinh chỉnh dimension và quantization",
+   "Xác định độ dài chunk và dạng query",
+   "Lập shortlist 2–3 model theo license",
+   "Đo recall@k trên bộ eval của mình",
+   "Chỉ tối ưu dimension/quantization sau khi đã đo recall@k đúng prefix."
+  ],
+  [
+   "Vì sao không nên đặt hai con số MTEB cạnh nhau để kết luận model nào tốt hơn?",
+   "Thiếu board, version, cách tính và ngày đo thì số vô nghĩa",
+   "MTEB chỉ đo tốc độ encode, hoàn toàn không đo chất lượng",
+   "MTEB chỉ chứa dữ liệu tiếng Việt nên không áp dụng chung",
+   "MTEB do duy nhất một công ty tự chấm điểm cho sản phẩm",
+   "Ví dụ Gemini: 68.32 là multilingual, English v2 thật là 73.28."
+  ],
+  [
+   "VN-MTEB (EACL 2026) phát hiện điều đáng chú ý nào?",
+   "Model dùng RoPE vượt model dùng absolute positional embedding trên tiếng Việt",
+   "Model tiếng Anh luôn chuyển giao hoàn hảo sang tác vụ tiếng Việt mà không cần đo",
+   "Mọi model đều đạt điểm gần như nhau trên toàn bộ 41 dataset được đánh giá",
+   "Văn bản tiếng Việt không cần chuẩn hóa Unicode trước khi đưa vào embedding",
+   "Trước VN-MTEB, nhóm phát triển thường chọn theo điểm tiếng Anh và hy vọng transfer tốt."
+  ],
+  [
+   "Vì sao PDF khó parse hơn nhiều người nghĩ?",
+   "PDF mô tả cách vẽ glyph tại tọa độ, không lưu thứ tự đọc hay cấu trúc",
+   "PDF luôn được mã hóa bằng mật khẩu nên phải bẻ khóa trước khi đọc",
+   "PDF chỉ chứa ảnh chụp, không bao giờ có text layer để trích xuất",
+   "PDF không hỗ trợ ký tự có dấu tiếng Việt nên luôn bị lỗi font",
+   "Hai cột, header/footer, bảng có thể bị đọc sai hoặc mất quan hệ hàng–cột."
+  ],
+  [
+   "File PDF scan (chỉ là ảnh) bắt buộc phải qua bước nào?",
+   "OCR",
+   "Fill-down",
+   "De-hyphenation",
+   "Rerank",
+   "PDF sinh từ Word thường có sẵn text layer."
+  ],
+  [
+   "Khi embed thẳng HTML thô, rủi ro lớn nhất là gì?",
+   "Vector mô tả menu, banner, footer thay vì nội dung chính",
+   "HTML không thể chuyển đổi thành văn bản thuần túy được",
+   "Mọi thẻ HTML bị dịch tự động sang tiếng Anh khi embed",
+   "Vector store không chấp nhận dữ liệu được lấy từ trang web",
+   "Trafilatura bóc boilerplate nhanh; trang convert đúng dùng ít hơn ~65% token."
+  ],
+  [
+   "Với PPTX, phần nào thường có giá trị nhất nhưng hay bị bỏ quên khi convert?",
+   "Speaker notes",
+   "Màu nền slide",
+   "Hiệu ứng chuyển trang",
+   "Tên file ảnh nhúng",
+   "Thứ tự shape cũng không phải lúc nào cũng là thứ tự đọc."
+  ],
+  [
+   "Email gây vấn đề gì cho retrieval nếu index thẳng?",
+   "Chữ ký, disclaimer, reply lồng nhau tạo near-duplicate",
+   "Email không thể chứa văn bản tiếng Việt có dấu",
+   "Email luôn bị mã hóa đầu cuối nên không đọc được",
+   "Email chỉ có tiêu đề, phần nội dung luôn bị bỏ trống",
+   "Near-duplicate làm hỏng top-k."
+  ],
+  [
+   "Excel có ô merge gây NaN rải rác. Cách xử lý được khuyên là gì?",
+   "Fill-down để khôi phục quan hệ hàng",
+   "Xóa toàn bộ các hàng có ô trống",
+   "Chuyển sheet thành ảnh rồi OCR",
+   "Embed từng ô riêng lẻ như một chunk",
+   "Header nhiều tầng cũng phải ghép thành tên cột đủ nghĩa."
+  ],
+  [
+   "Cách serialize một hàng Excel đúng cho retrieval là gì?",
+   "“Q2 2026 | Doanh thu | 4,2 tỷ VND”",
+   "Chỉ index con số “4.2”",
+   "Lưu biểu thức công thức “=SUM(B2:B9)”",
+   "Chỉ index tên sheet “Sheet1”",
+   "Mỗi hàng nên là một đơn vị tự đủ nghĩa; giá trị công thức quan trọng hơn biểu thức."
+  ],
+  [
+   "Theo nghiên cứu STC trên MAUD, chunk theo cấu trúc bảng so với RecursiveCharacterTextSplitter thế nào?",
+   "Recall@1 (BM25) tăng từ 0,366 lên 0,754 và ít chunk hơn ~40%",
+   "Recall giảm mạnh và số chunk sinh ra tăng gấp đôi so với trước",
+   "Không có khác biệt đáng kể nào giữa hai cách chunk trên MAUD",
+   "Chỉ nhanh hơn khi xử lý nhưng chất lượng retrieval như nhau",
+   "Bảng bị cắt theo ký tự là điểm hỏng im lặng số một."
+  ],
+  [
+   "Với tài liệu tiếng Việt, bước chuẩn hóa nào là bắt buộc ngay sau parse?",
+   "Chuẩn hóa Unicode NFC toàn corpus",
+   "Chuyển toàn bộ sang chữ in hoa",
+   "Xóa hết dấu thanh để dễ khớp",
+   "Dịch sang tiếng Anh trước khi embed",
+   "Cùng chữ “ế” có thể là NFC hoặc NFD, so chuỗi không khớp và tạo chunk trùng."
+  ],
+  [
+   "Vì sao provenance (file, trang, heading) phải giữ ngay từ lúc parse?",
+   "Các khâu sau không tạo lại được, mất khả năng trích nguồn",
+   "Để giảm số chiều của vector embedding khi lưu trữ",
+   "Để tăng tốc độ build index HNSW trên dữ liệu lớn",
+   "Để vượt qua giới hạn max input của embedding model",
+   "Cho phép trả lời “theo trang 14 của hợp đồng A”."
+  ],
+  [
+   "Chunk quá lớn (trên ~1.000 token) gây hậu quả gì?",
+   "Nhiều chủ đề trộn vào một vector, retrieve trúng nhưng prompt nhiễu",
+   "Mất ngữ cảnh, phải ghép quá nhiều mảnh rời rạc mới trả lời được",
+   "Không thể lưu vào bất kỳ vector store nào hiện có trên thị trường",
+   "Embedding model từ chối xử lý và báo lỗi ngay khi nhận đầu vào",
+   "Chunk quá nhỏ (<50 token) mới là mất ngữ cảnh."
+  ],
+  [
+   "Con số chunk 512 token xuất phát từ đâu?",
+   "Giới hạn positional embedding của BERT năm 2018",
+   "Quy định chuẩn bắt buộc của mọi vector database",
+   "Kết quả tối ưu đã được chứng minh cho mọi câu hỏi",
+   "Kích thước một trang PDF tiêu chuẩn khổ A4",
+   "Bhat et al. 2025: 64–128 token cho factoid, 512–1024 cho ngữ cảnh rộng."
+  ],
+  [
+   "Khi đổi embedding model, cần làm gì với chunk size?",
+   "Đo lại vì kích thước tối ưu phụ thuộc model",
+   "Giữ nguyên vì chunk size không liên quan model",
+   "Luôn tăng gấp đôi chunk size",
+   "Luôn giảm còn 50 token",
+   "Stella lợi với chunk lớn, Snowflake lợi với chunk nhỏ."
+  ],
+  [
+   "Chiến lược chunking nào “gần như luôn thắng fixed-size” và là mặc định thực dụng?",
+   "Recursive character splitting",
+   "Semantic breakpoint chunking",
+   "Cắt ngẫu nhiên theo ký tự",
+   "Mỗi tài liệu là một chunk",
+   "Tách theo \\n\\n → \\n → câu → khoảng trắng, đệ quy khi còn dài."
+  ],
+  [
+   "Theo Qu, Tu & Bao (NAACL 2025), semantic chunking có đáng chi phí không?",
+   "Không có cải thiện nhất quán đủ bù chi phí tính toán",
+   "Luôn tốt hơn fixed-size với tỷ lệ 87% so với 50%",
+   "Chỉ tốt hơn rõ rệt khi xử lý văn bản tiếng Việt",
+   "Là bước bắt buộc với mọi pipeline chạy production",
+   "Con số “87% vs 50%” không tồn tại trong nguồn nào."
+  ],
+  [
+   "Late Chunking (Jina, 2024) hoạt động thế nào?",
+   "Embed toàn văn bản bằng long-context model trước, chunk ngay trước mean pooling",
+   "Chỉ chunk lại những tài liệu được người dùng truy cập muộn nhất trong ngày",
+   "Thêm 50–100 token ngữ cảnh do LLM sinh vào đầu mỗi chunk trước khi index",
+   "Chunk sau khi đã trả lời người dùng xong để tiết kiệm thời gian phản hồi",
+   "Contextual Retrieval của Anthropic mới là prepend ngữ cảnh do LLM sinh."
+  ],
+  [
+   "Silent truncation là gì?",
+   "Text vượt max input bị cắt âm thầm, không báo lỗi",
+   "Vector bị nén mất độ chính xác khi lưu xuống đĩa",
+   "Kết quả bị loại bỏ sau khi đã tìm kiếm ANN xong",
+   "Query bị dịch sai sang một ngôn ngữ khác khi gửi",
+   "Phần bị cắt không bao giờ được retrieve; đếm token trước khi embed."
+  ],
+  [
+   "Model nào có max input chỉ 512 token dù là model 2025?",
+   "Nomic Embed Text v2 (MoE)",
+   "Qwen3-Embedding (32K)",
+   "BGE-M3 (8.192)",
+   "Cohere Embed v4 (128K)",
+   "Biết đúng giới hạn của model đang dùng để tránh silent truncation."
+  ],
+  [
+   "ANN luôn phải đánh đổi giữa ba yếu tố nào?",
+   "Recall, latency, memory",
+   "Giá, bản quyền, ngôn ngữ",
+   "Chunk, prompt, model",
+   "Token, GPU, nhân sự",
+   "Không index nào thắng cả ba cùng lúc."
+  ],
+  [
+   "Vì sao phải build index Flat trước?",
+   "Recall 100% theo định nghĩa, làm ground truth để đo ANN",
+   "Flat luôn nhanh nhất ở mọi quy mô dữ liệu hiện nay",
+   "Flat tiết kiệm bộ nhớ nhất trong tất cả các họ index",
+   "Flat là index duy nhất hỗ trợ lọc theo metadata",
+   "Không có ground truth thì “recall” là từ vô nghĩa."
+  ],
+  [
+   "Với corpus vài nghìn tài liệu, lựa chọn hợp lý là gì?",
+   "Flat trong RAM, bỏ qua vector DB",
+   "Cụm Milvus phân tán nhiều node",
+   "IVF-PQ với hàng nghìn centroid",
+   "DiskANN chạy trên SSD chuyên dụng",
+   "Dưới ~10k vector, vector DB là over-engineering."
+  ],
+  [
+   "Trong IVF, tăng nprobe thường dẫn đến gì?",
+   "Recall tăng và latency tăng",
+   "Recall giảm và latency giảm",
+   "Bộ nhớ giảm mạnh",
+   "Phải train lại centroid",
+   "Ví dụ: nprobe=1 → 30% recall @136µs; nprobe=8 → 74% @729µs."
+  ],
+  [
+   "Ý tưởng cốt lõi của PQ (Product Quantization) là gì?",
+   "Nén vector thành mã ngắn để tiết kiệm bộ nhớ",
+   "Chia corpus thành vùng để chỉ tìm vài vùng",
+   "Đi trên graph nhiều lớp từ thưa đến dày",
+   "So sánh query với toàn bộ vector",
+   "128-dim float32 (512 bytes) → 8 bytes: nén 64×, khoảng cách gần đúng."
+  ],
+  [
+   "Tham số HNSW nào là “núm vặn” lúc query, không cần rebuild index?",
+   "efSearch",
+   "M",
+   "efConstruction",
+   "nlist",
+   "M tăng kết nối và memory; efConstruction tăng thời gian build."
+  ],
+  [
+   "Giá trị khởi đầu HNSW được khuyên trong cheatsheet là gì?",
+   "M = 16, efConstruction = 200",
+   "M = 1, efConstruction = 1",
+   "M = 512, efConstruction = 10.000",
+   "M = 0, efConstruction tùy ý",
+   "Sau đó chỉ tune efSearch theo SLA."
+  ],
+  [
+   "FAISS khác một vector database đầy đủ ở điểm nào?",
+   "Là thư viện index/search, không có metadata filter, CRUD, access control",
+   "Không tìm kiếm được vector, chỉ dùng để lưu trữ văn bản thô dạng chuỗi",
+   "Chỉ chạy được trên hạ tầng cloud của Meta, không chạy được trên máy cá nhân",
+   "Không hỗ trợ bất kỳ thuật toán ANN nào ngoài tìm kiếm tuyến tính đơn giản",
+   "IndexHNSWFlat còn không hỗ trợ remove_ids()."
+  ],
+  [
+   "Dùng FAISS IndexFlatIP để mô phỏng cosine nhưng quên normalize. Hậu quả là gì?",
+   "Xếp hạng theo dot product thô, ưu tiên vector có độ lớn cao",
+   "FAISS ném lỗi vì METRIC_COSINE không tồn tại trong thư viện",
+   "Mọi score trả về đều bằng 1 nên không thể xếp hạng được",
+   "Index tự động chuyển sang dùng khoảng cách L2 thay thế",
+   "Phải normalize_L2 cả lúc add lẫn lúc query."
+  ],
+  [
+   "Bug phổ biến nhất của ChromaDB là gì?",
+   "Mở lại collection mà không truyền embedding_function, default 384-dim thế chỗ",
+   "Collection tự động bị xóa sạch sau mỗi lần khởi động lại máy chủ",
+   "Chroma hoàn toàn không hỗ trợ lọc theo metadata khi truy vấn",
+   "Chroma chỉ lưu được tối đa 100 tài liệu trong mỗi collection",
+   "Query không lỗi nhưng recall tụt; luôn truyền cùng embedding_function."
+  ],
+  [
+   "Embedding function mặc định của Chroma có đặc điểm gì?",
+   "all-MiniLM-L6-v2, 384 chiều, cắt 256 word-piece, thiên tiếng Anh",
+   "BGE-M3, 1024 chiều, hỗ trợ hơn 100 ngôn ngữ khác nhau",
+   "text-embedding-3-large, 3072 chiều, gọi qua API trả phí",
+   "Qwen3-Embedding 8B, 4096 chiều, nhận đầu vào tới 32K token",
+   "Chạy ngay không cần config nên hay bị ship nhầm lên production."
+  ],
+  [
+   "Đổi embedding model nhưng chỉ đổi ở phía query. Điều gì xảy ra?",
+   "Query và document vector khác không gian, thứ hạng lệch vô nghĩa",
+   "Hệ thống tự động re-embed toàn bộ tài liệu cũ ở chế độ nền",
+   "Recall tăng lên ngay vì model mới luôn tốt hơn model cũ",
+   "Vector store báo lỗi khác số chiều ngay ở lần truy vấn đầu",
+   "Phải re-embed, rebuild và version hóa index."
+  ],
+  [
+   "Post-filter trong filtered ANN có rủi ro gì?",
+   "Trả về ít hơn k hoặc rỗng dù có kết quả hợp lệ",
+   "Luôn quét toàn bộ corpus như brute-force",
+   "Lộ dữ liệu của tenant khác ra ngoài",
+   "Không thể chạy trên index HNSW",
+   "Pre-filter đúng tập hơn nhưng có thể suy biến về brute-force."
+  ],
+  [
+   "Với truy vấn “error code E-4471” hay “SKU VN-2291-XL”, phương pháp nào thường thắng?",
+   "BM25 / lexical",
+   "Dense embedding",
+   "Semantic chunking",
+   "Cosine trên vector 384 chiều",
+   "Dense làm nhòe token chính xác; đó là lý do giữ BM25 trong hybrid."
+  ],
+  [
+   "Vì sao RRF hợp nhất kết quả theo rank thay vì cộng score?",
+   "Score BM25 và cosine không cùng thang đo",
+   "Rank luôn chính xác hơn score",
+   "Score bị mã hóa nên không đọc được",
+   "RRF chỉ hỗ trợ một danh sách kết quả",
+   "RRF(d) = Σ 1/(k + rank), k = 60 mặc định."
+  ],
+  [
+   "Đặc điểm chi phí của reranking so với embedding là gì?",
+   "Embedding tính một lần mỗi tài liệu; rerank tốn lại mỗi query",
+   "Rerank tính một lần mỗi tài liệu; embedding tốn mỗi query",
+   "Cả hai đều chỉ tính một lần khi index",
+   "Rerank phụ thuộc kích thước toàn corpus N",
+   "Rerank O(k) trên shortlist top-50/100, không phụ thuộc N."
+  ],
+  [
+   "Tăng k mà chất lượng câu trả lời lại tệ hơn. Nguyên nhân thường là gì?",
+   "Over-retrieval làm bằng chứng đúng bị chôn giữa context",
+   "Index HNSW bị hỏng do có quá nhiều kết nối",
+   "Embedding model đã hết hạn license sử dụng",
+   "Chunk overlap đang được đặt bằng 0 token",
+   "Rerank để đẩy bằng chứng lên đầu và giảm k hợp lý."
+  ],
+  [
+   "Recall@k đo điều gì?",
+   "Trong các tài liệu liên quan, bao nhiêu nằm trong top-k",
+   "Trong top-k, bao nhiêu kết quả thật sự liên quan",
+   "Kết quả liên quan đầu tiên nằm ở vị trí nào",
+   "Thời gian trả về k kết quả đầu tiên",
+   "Precision@k mới là tỷ lệ liên quan trong top-k; MRR là vị trí đầu tiên."
+  ],
+  [
+   "Vì sao recall@5 đo bằng câu hỏi LLM tự sinh thường cao hơn thực tế?",
+   "Câu hỏi lặp lại từ ngữ của chunk gốc, user thật diễn đạt khác",
+   "LLM luôn sinh câu hỏi khó hơn nhiều so với người dùng thật",
+   "Chroma tự động cộng thêm điểm cho câu hỏi do LLM sinh ra",
+   "Recall@5 hoàn toàn không phụ thuộc vào cách đặt câu hỏi",
+   "Đây chỉ là floor check, không thay thế nhãn thật."
+  ],
+  [
+   "Corpus poisoning (PoisonedRAG) là kiểu tấn công gì?",
+   "Đưa tài liệu độc vào kho để được retrieve và lái câu trả lời",
+   "Làm quá tải vector store bằng cách gửi hàng triệu query",
+   "Đánh cắp API key được lưu trong file cấu hình của hệ thống",
+   "Xóa toàn bộ index HNSW để làm sập dịch vụ tìm kiếm",
+   "Phòng thủ rẻ: perplexity filtering vì văn bản tối ưu thường có PPL cao."
+  ],
+  [
+   "Filter theo quyền truy cập nên được đặt ở đâu trong retrieval?",
+   "Trước hoặc trong lúc chạy ANN search",
+   "Chỉ sau khi đã lấy top-k kết quả",
+   "Trong system prompt nhắc model tự lọc",
+   "Ở giao diện người dùng sau khi hiển thị",
+   "Vector DB không kế thừa permission của data store gốc."
+  ]
+ ],
+ "essay": [
+  [
+   "Một công ty bán lẻ có: (a) chính sách đổi trả dạng PDF, (b) bảng tồn kho cập nhật mỗi phút, (c) giỏ hàng của người dùng đang chat. Phân loại từng nguồn theo knowledge/operational/contextual và đề xuất cách đưa vào agent.",
+   "(a) Knowledge: parse, chuẩn hóa, chunk theo section, embed, lưu vector store kèm metadata/provenance, retrieve khi hỏi chính sách. (b) Operational: không embed; dùng SQL/function calling có kiểm soát để lấy số chính xác, mới nhất. (c) Contextual: inject ngắn vào context đúng lúc. Nêu router: câu số liệu → SQL, câu khái niệm → vector search."
+  ],
+  [
+   "Thiết kế bước parse và chuẩn hóa cho một corpus gồm PDF scan tiếng Việt, file Excel báo cáo có ô merge và trang HTML nội bộ. Nêu những gì có thể bị mất im lặng ở mỗi loại.",
+   "PDF scan: OCR ≥300 DPI, công cụ hỗ trợ tiếng Việt, giữ layout/reading order, bỏ header/footer; mất dấu, trộn cột, mất quan hệ bảng. Excel: fill-down ô merge, ghép header nhiều tầng, tách nhiều bảng, lấy giá trị thay vì công thức, serialize hàng đủ nghĩa kèm đơn vị. HTML: bóc boilerplate (trafilatura). Chung: NFC, de-hyphenation, khử trùng, giữ provenance (file, trang, heading, version, ACL)."
+  ],
+  [
+   "So sánh các chiến lược chunking (fixed-size, overlap, recursive, structure-aware, semantic) và đề xuất chiến lược cho bộ FAQ + chính sách có heading rõ ràng, kèm cách kiểm chứng.",
+   "Fixed-size: baseline rẻ. Overlap: giữ ngữ cảnh ranh giới. Recursive: mặc định thực dụng. Structure-aware: cắt theo heading/section/bảng — phù hợp FAQ/policy. Semantic: tốn chi phí, NAACL 2025 cho thấy không cải thiện nhất quán. Đề xuất structure-aware/recursive, 200–500 token làm điểm bắt đầu, overlap 10–20%, kiểm tra token count tránh silent truncation; đo recall@k trước/sau khi đổi; đo lại khi đổi embedding model."
+  ],
+  [
+   "Quy trình chọn embedding model cho trợ lý tra cứu tài liệu nội bộ tiếng Việt có nhiều mã sản phẩm (SKU). Nêu các trục quyết định và cách đánh giá.",
+   "Trục: deployment (API hay on-prem), max input, dimension/precision, ngôn ngữ & domain (tiếng Việt, xem VN-MTEB), query shape (có SKU → cần sparse/BM25 hybrid), license. Quy trình: xác định chunk length và dạng query → shortlist 2–3 model → bộ eval 50–100 câu từ corpus → đo recall@k với đúng prefix → rồi mới giảm chiều/quantize. Không so MTEB khác board/version."
+  ],
+  [
+   "Giải thích Flat, IVF, PQ và HNSW bằng ẩn dụ, nêu đánh đổi và chọn index cho ba quy mô: 5 nghìn, 5 triệu (RAM đủ) và 500 triệu vector (RAM hạn chế).",
+   "Flat: đọc mọi sách, recall 100%, chậm/tốn RAM; IVF: chia khu kệ, nprobe điều chỉnh recall/latency, cần train; PQ: nén mã ngắn, tiết kiệm RAM, khoảng cách gần đúng; HNSW: đường cao tốc nhiều lớp, recall/latency tốt, tốn RAM graph. 5k → Flat; 5M RAM đủ → HNSW (M=16, efConstruction=200, tune efSearch); 500M RAM hạn chế → IVF-PQ hoặc DiskANN. Luôn đo recall so với Flat ở k và filter thật."
+  ],
+  [
+   "Một hệ thống RAG trả HTTP 200, không log lỗi nhưng người dùng phàn nàn kết quả sai. Liệt kê ít nhất 6 failure mode âm thầm có thể gây ra và cách phát hiện/sửa từng cái.",
+   "Ví dụ: thiếu prefix query/passage (prefix-ablation); silent truncation (đếm token); đổi model không re-embed (version index); quên normalize trong FAISS IP (normalize add + query); post-filter trả < k (pre/in-algorithm filter); Chroma default embedding hoặc mở collection sai ef (truyền ef tường minh, assert dimension); over-retrieval lost-in-the-middle (rerank, giảm k); cache không version/TTL. Kết luận: “không lỗi” ≠ “đúng”, phải đo recall@k với BM25 làm sàn."
+  ],
+  [
+   "Thiết kế hybrid search cho corpus ticket hỗ trợ khách hàng có cả câu mô tả tự nhiên lẫn mã lỗi, kèm RRF và reranking. Giải thích vì sao từng thành phần cần thiết.",
+   "Dense: bắt vocabulary mismatch (“package never showed up” ↔ “shipment did not arrive”). BM25: mã lỗi E-4471, SKU, token ngoài từ vựng. RRF hợp nhất theo rank (k=60) vì score khác thang đo. Lấy top-50/100 rẻ → rerank bằng cross-encoder xuống top-5/10 → inject; rerank tốn mỗi query nhưng không phụ thuộc N. Có thể dùng BGE-M3 sinh dense+sparse cùng lúc. Đo recall/nDCG trước-sau."
+  ],
+  [
+   "Viết kế hoạch đo chất lượng retrieval cho Lab 7 khi chưa có nhãn: cách sinh eval set, metric dùng, baseline và các thiên lệch cần ghi rõ.",
+   "Sample chunk theo tỷ lệ loại tài liệu (≥100), LLM sinh 1–3 câu hỏi chỉ dựa trên chunk kèm persona, chunk nguồn là positive (citation-as-weak-label), chạy retrieval tính recall@5 và MRR, kiểm tay ~10%. Baseline: BM25 và Flat. Metric: recall@k, precision@k, nDCG, MRR. Thiên lệch: câu hỏi lặp từ ngữ chunk gốc làm recall cao hơn thực tế, thiên về trùng từ khóa — chỉ là floor check; bổ sung query log thật."
+  ],
+  [
+   "Phân tích rủi ro bảo mật và quyền riêng tư khi lưu embedding của hồ sơ bệnh nhân trong vector store, và đề xuất biện pháp.",
+   "Rủi ro: embedding inversion khôi phục gần nguyên văn; membership inference lộ sự hiện diện (bệnh hiếm X); corpus poisoning và indirect prompt injection qua kênh retrieval; vector DB không kế thừa ACL; pháp lý PDPL 91/2025, GDPR coi là pseudonymized. Biện pháp: mask PII trước khi embed, ACL filter trước/trong ANN (row-level security, namespace per tenant), lưu ACL/version trong metadata, kiểm quyền trước khi inject, kiểm soát nguồn đưa vào corpus, quản lý vector như dữ liệu nhạy cảm."
+  ],
+  [
+   "Viết mã giả (pseudocode) cho mini retrieval pipeline của Lab 7 bằng ChromaDB: chunk, embed, store, query có metadata filter, answer với context và đo recall@5; chỉ ra các điểm dễ sai.",
+   "Chunk bằng RecursiveCharacterTextSplitter (chunk_size ~400, overlap ~50, separators đoạn → dòng → câu); PersistentClient; embedding function tường minh (bge-m3) và truyền lại mỗi lần mở collection; add với id, document, metadata (source, category); query n_results=k với where filter; ghép context, prompt yêu cầu nói “không có thông tin” nếu không tìm thấy; recall@5 = số query có chunk nguồn trong top-5 / tổng. Điểm dễ sai: default embedding, silent truncation, thiếu prefix, post-filter, overfit eval tự sinh."
+  ]
+ ]
+}

@@ -1,0 +1,526 @@
+{
+ "mcq": [
+  [
+   "Giới hạn “context bottleneck” của single-agent là gì?",
+   "Mục tiêu, tool output, bằng chứng và state dồn vào một context có hạn",
+   "Agent không thể gọi bất kỳ tool nào ngoài model chính của nó",
+   "Agent chỉ trả lời được đúng một câu hỏi trong mỗi phiên chat",
+   "Agent bắt buộc phải chạy song song mọi bước để kịp thời gian",
+   "Ba giới hạn khác: specialization trade-off, parallelism hạn chế, reliability yếu."
+  ],
+  [
+   "Phân tích hợp đồng 80 trang với context 24k, sau tool output 12k, history 6k, prompt 3k thì còn bao nhiêu cho suy luận?",
+   "Khoảng 3k token",
+   "Khoảng 12k token",
+   "Khoảng 9k token",
+   "Khoảng 21k token",
+   "24 − 12 − 6 − 3 = 3k; dễ gặp lost-in-the-middle."
+  ],
+  [
+   "“Specialization trade-off” của single-agent nghĩa là gì?",
+   "Ôm nhiều vai làm prompt dài, khó giỏi vai nào",
+   "Agent chuyên một vai nên không thể học thêm kỹ năng mới",
+   "Mỗi agent chỉ được phép dùng đúng một tool duy nhất",
+   "Agent chuyên môn hóa sẽ tự động chạy song song nhanh hơn",
+   "Đây là một dấu hiệu nên cân nhắc chia vai."
+  ],
+  [
+   "Theo Anthropic (2024), khi nào mới thêm hệ agentic nhiều bước?",
+   "Khi giải pháp đơn giản hơn đã không đủ",
+   "Ngay từ đầu để hệ thống trông hiện đại",
+   "Khi đội ngũ có nhiều kỹ sư rảnh việc",
+   "Khi model mới vừa được phát hành",
+   "Nhiều agent = nhiều LLM call, nhiều token, lỗi dễ cộng dồn."
+  ],
+  [
+   "Chatbot FAQ học phí từ 30 trang tài liệu cố định nên dùng kiến trúc nào?",
+   "1 LLM call + RAG",
+   "Hierarchical nhiều tầng agent",
+   "Debate giữa ba agent phản biện",
+   "10+ subagent nghiên cứu song song",
+   "Nhiệm vụ rõ, không cần nhiều vai."
+  ],
+  [
+   "Báo cáo so sánh 6 đối thủ, mỗi đối thủ đọc 20–30 trang web, phù hợp với cách nào?",
+   "Chia nhiều subagent nghiên cứu song song",
+   "Một LLM call duy nhất không dùng tool",
+   "Pipeline tuần tự đọc từng trang một",
+   "Rule-based script không cần LLM",
+   "Các nhánh nghiên cứu độc lập nên song song hóa được."
+  ],
+  [
+   "Bài toán logic 10 bước, bước sau phụ thuộc chặt bước trước, nên chọn gì?",
+   "Luồng tuần tự / plan-then-execute",
+   "Nhiều subagent chạy song song",
+   "Debate giữa nhiều agent",
+   "Handoff liên tục giữa các agent",
+   "Ít cơ hội song song khi chưa có kết quả bước trước."
+  ],
+  [
+   "Nguyên tắc cốt lõi “song song hóa việc đọc, tuần tự hóa việc ghi” nhằm tránh điều gì?",
+   "Nhiều agent cùng ghi vào một sản phẩm chung gây xung đột",
+   "Agent đọc quá chậm khi chạy trên một máy duy nhất",
+   "Agent không đọc được tài liệu dài hơn context window",
+   "Chi phí token tăng khi agent chỉ đọc mà không ghi",
+   "Ví dụ Cognition: hai subagent làm chung game, một vẽ nền Mario, một làm chim Flappy Bird."
+  ],
+  [
+   "Khi nào plan-then-execute thắng ReAct?",
+   "Khi bài toán đã lộ hết hình dạng từ đầu",
+   "Khi môi trường chỉ lộ thông tin qua hành động",
+   "Khi không có bất kỳ tool nào để gọi",
+   "Khi cần trả lời trong dưới một giây",
+   "ReAct thắng khi thông tin chỉ lộ ra sau khi gọi tool."
+  ],
+  [
+   "Vì sao để cùng một model tự phê bình thường không cải thiện bài suy luận?",
+   "Thiếu chuẩn kiểm chứng bên ngoài như test, model khác",
+   "Model không được phép đọc lại câu trả lời của chính nó",
+   "Tự phê bình luôn tốn gấp mười lần chi phí token",
+   "Model chỉ tự phê bình được khi dùng tiếng Anh",
+   "Verifier hữu ích khi là một vai riêng có chuẩn bên ngoài."
+  ],
+  [
+   "Pattern nào giống “dây chuyền lắp ráp”, luồng ổn định, dễ test?",
+   "Pipeline",
+   "Debate",
+   "Hierarchical",
+   "Supervisor-Worker",
+   "Debate: phản biện giảm điểm mù; Hierarchical: tổng công ty → chi nhánh → phòng."
+  ],
+  [
+   "Trong 5 workflow pattern của Anthropic, Supervisor-Worker tương ứng với pattern nào?",
+   "Orchestrator-workers",
+   "Prompt chaining",
+   "Routing",
+   "Evaluator-optimizer",
+   "Bài chọn supervisor-worker vì dễ thấy vai, bắt đầu với 2–3 worker."
+  ],
+  [
+   "Với cách điều phối “script quyết”, ai giữ kế hoạch?",
+   "Đoạn code bạn viết",
+   "Agent chính qua context window",
+   "Lead cùng task list chung",
+   "Người dùng cuối",
+   "Hợp việc lặp lại, viết trước được; chi phí theo số agent, không phình context."
+  ],
+  [
+   "Cách điều phối “peers + task list chung” hợp khi nào và chi phí ra sao?",
+   "Worker cần bàn nhau; tốn vì mỗi peer một phiên",
+   "Việc lặp lại viết trước được; chi phí thấp nhất",
+   "Việc chưa rõ hình dạng; chi phí thấp nhất",
+   "Chỉ một agent chạy; không tốn chi phí",
+   "LLM quyết từng lượt có chi phí thấp nhất."
+  ],
+  [
+   "Agent CSKH gọi agent tính phí, nhận con số rồi tự trả lời khách. Đây là gì?",
+   "Agents-as-tools",
+   "Handoff",
+   "Luồng script cố định",
+   "Debate",
+   "Câu hỏi kiểm tra: lượt tới ai nói với user? Agent gọi → agents-as-tools."
+  ],
+  [
+   "Bot lễ tân chuyển hẳn cuộc trò chuyện sang agent pháp lý. Đây là gì?",
+   "Handoff",
+   "Agents-as-tools",
+   "Pipeline",
+   "Parallelization",
+   "Agent mới lái phần còn lại, mặc định thấy toàn bộ lịch sử hội thoại."
+  ],
+  [
+   "Hai worker song song cùng ghi một key mà không có reducer. LangGraph phản ứng thế nào?",
+   "Báo lỗi “Can receive only one value per step”",
+   "Tự động gộp hai giá trị thành danh sách",
+   "Giữ giá trị của worker chạy nhanh hơn",
+   "Bỏ qua cả hai giá trị mà không báo gì",
+   "Nếu ghi tuần tự vào key không reducer thì ghi đè im lặng."
+  ],
+  [
+   "Theo MAST, bao nhiêu phần trăm lỗi do không biết điều kiện dừng?",
+   "12,4%",
+   "44,2%",
+   "1,2%",
+   "80%",
+   "Trao quyền quyết “xong” cho một vai rõ ràng tăng thành công +9,4%."
+  ],
+  [
+   "Vì sao không nên ghép output các worker bằng \"\\n---\\n\".join(sections)?",
+   "Context phình theo số worker",
+   "Ký tự --- làm hỏng định dạng JSON",
+   "join() không chạy được với tiếng Việt",
+   "Supervisor không đọc được chuỗi dài",
+   "Worker nén, trả kết luận; supervisor tổng hợp bằng một lượt LLM thật."
+  ],
+  [
+   "Số subagent gợi ý cho tác vụ so sánh là bao nhiêu?",
+   "2–4 subagent",
+   "Đúng 1 agent",
+   "10+ subagent",
+   "100 subagent",
+   "Tra cứu đơn giản: 1 agent; nghiên cứu phức tạp: 10+."
+  ],
+  [
+   "Worker trả về None thì supervisor nên hiểu thế nào?",
+   "Không coi là thành công; dùng envelope có status",
+   "Mặc định là thành công vì không có exception",
+   "Bỏ qua worker đó và trả lời luôn",
+   "Gọi lại worker vô hạn đến khi có kết quả",
+   "None trông y như thành công nếu không có cấu trúc rõ."
+  ],
+  [
+   "Câu nào mô tả đúng vai Supervisor?",
+   "Phân tích, route, theo dõi, tổng hợp, xin duyệt khi cần",
+   "Tự làm retrieval, gọi tool, tổng hợp và giám sát mọi bước",
+   "Chỉ chuyên một năng lực và không biết các worker khác",
+   "Ghi trực tiếp vào mọi trường state không cần quy ước",
+   "Supervisor không cần thông minh nhất — chỉ cần route đúng."
+  ],
+  [
+   "Một worker tốt có đặc điểm nào?",
+   "Chuyên một năng lực, stateless nếu được, test độc lập",
+   "Biết toàn bộ lịch sử hệ thống để quyết định mọi thứ",
+   "Liên tục hỏi lại supervisor để chắc chắn hơn",
+   "Lỗi của nó làm dừng toàn bộ graph cho an toàn",
+   "Hỏng cục bộ không kéo sập cả hệ."
+  ],
+  [
+   "Anti-pattern “God Supervisor” là gì?",
+   "Supervisor tự làm hết, thành single-agent đổi tên",
+   "Worker hỏi ngược supervisor quá nhiều lần",
+   "State truyền qua biến toàn cục không rõ ai sửa",
+   "Worker lỗi mà supervisor không có đường dự phòng",
+   "Ba lựa chọn còn lại là Chatty Workers, Implicit State, No Fallback."
+  ],
+  [
+   "Anti-pattern “Implicit State” được sửa theo hướng nào?",
+   "Định nghĩa schema và quy ước ai được ghi trường nào",
+   "Cho mọi node được ghi tự do vào mọi trường",
+   "Dùng biến toàn cục để chia sẻ dữ liệu nhanh hơn",
+   "Bỏ state, chỉ truyền dữ liệu qua prompt",
+   "Quy tắc: mỗi trường một chỗ ghi (trừ trace)."
+  ],
+  [
+   "Trong state schema, vì sao trường trace là ngoại lệ của quy tắc “một chỗ ghi”?",
+   "Mọi node đều nối thêm log, cần reducer",
+   "Trace chỉ được supervisor ghi một lần",
+   "Trace không cần lưu trong state",
+   "Trace luôn bị ghi đè sau mỗi bước",
+   "Bỏ reducer khỏi trace thì các dòng log bị ghi đè."
+  ],
+  [
+   "MCP trả lời câu hỏi nào?",
+   "Agent lấy tool ở đâu, gọi theo giao thức nào",
+   "Agent giao nhiệm vụ cho agent nào khác",
+   "Agent lưu trạng thái hội thoại ở đâu",
+   "Agent nên dùng model lớn hay nhỏ",
+   "A2A mới trả lời “agent giao việc cho ai”."
+  ],
+  [
+   "Trong MCP, thành phần “Resources” giống loại thao tác nào?",
+   "GET — dữ liệu để đọc như file, schema, config",
+   "POST — hành động như tạo ticket, gọi webhook",
+   "Mẫu prompt dùng lại để chuẩn hóa cách gọi",
+   "Kênh truyền tải giữa client và server",
+   "Tools ~ POST (hành động); Prompts là mẫu prompt dùng lại."
+  ],
+  [
+   "Hiện MCP thuộc sự quản trị của tổ chức nào?",
+   "Agentic AI Foundation (Linux Foundation)",
+   "Riêng Anthropic, không mở cho bên khác",
+   "Google Cloud Platform",
+   "Tổ chức W3C",
+   "Đồng sáng lập Anthropic, Block, OpenAI (12/2025)."
+  ],
+  [
+   "Theo spec MCP, transport nào dùng cho server remote?",
+   "Streamable HTTP",
+   "stdio",
+   "HTTP+SSE",
+   "FTP",
+   "stdio cho local; HTTP+SSE đã deprecated."
+  ],
+  [
+   "Thay đổi lớn nhất của spec MCP 2026-07-28 là gì?",
+   "Bỏ session, mỗi request tự mang ngữ cảnh",
+   "Bắt buộc mọi server phải giữ session lâu dài",
+   "Chuyển hẳn từ JSON-RPC sang giao thức nhị phân",
+   "Bỏ hoàn toàn khái niệm tool khỏi giao thức",
+   "server/discover thay handshake; state giữ bằng explicit handle."
+  ],
+  [
+   "Vì sao MCP bỏ session lại dễ scale hơn?",
+   "Máy nào cũng xử lý được request, dễ cân tải",
+   "Server không cần xác thực người dùng nữa",
+   "Không cần lưu bất kỳ dữ liệu nào trên server",
+   "Mỗi client được giữ riêng một máy chủ",
+   "Cùng lý do ta thiết kế worker stateless."
+  ],
+  [
+   "MRTR trong MCP hoạt động thế nào khi server cần thêm thông tin?",
+   "Trả InputRequiredResult, client gửi lại câu trả lời",
+   "Server tự đoán giá trị còn thiếu rồi chạy tiếp",
+   "Server trả lỗi 500 và dừng toàn bộ phiên",
+   "Client mở lại session mới và gửi lại từ đầu",
+   "Thay cho việc server chủ động gọi elicitation/sampling/roots."
+  ],
+  [
+   "Theo slide, tool search và code execution với MCP giúp gì?",
+   "Giảm token tool định nghĩa (~−98,7%)",
+   "Tăng số tool lên gấp 75 lần",
+   "Bỏ hoàn toàn nhu cầu inputSchema",
+   "Cho phép chạy MCP không cần client",
+   "Tool search: nạp tên trước, lấy schema khi cần."
+  ],
+  [
+   "Server MCP đóng vai trò gì trong authorization theo spec mới?",
+   "OAuth 2.1 resource server, bắt buộc RFC 9728",
+   "Tự cấp mật khẩu cho mọi client kết nối",
+   "Không cần xác thực vì chạy trong mạng nội bộ",
+   "Lưu API key của người dùng trong tool description",
+   "CIMD thay Dynamic Client Registration (DCR deprecated)."
+  ],
+  [
+   "Khác biệt cốt lõi giữa MCP và A2A là gì?",
+   "MCP nối agent với tool; A2A nối agent với agent",
+   "MCP: agent → agent; A2A: agent → database",
+   "Hai chuẩn giống nhau, chỉ khác nhà phát triển",
+   "A2A thay thế hoàn toàn MCP từ năm 2026",
+   "“A2A loves MCP”: giao việc qua A2A, mỗi agent gọi tool riêng qua MCP."
+  ],
+  [
+   "A2A Agent Card v1.0 nằm ở đường dẫn nào?",
+   "/.well-known/agent-card.json",
+   "/.well-known/agent.json",
+   "/api/v1/agents/list",
+   "/mcp/tools/list",
+   "Trước v0.3 là agent.json; v1.0 ký số bằng JWS + JCS."
+  ],
+  [
+   "Message contract tối thiểu của A2A gồm ba phần nào?",
+   "task, context, expected_output",
+   "model, temperature, max_tokens",
+   "user_id, password, session",
+   "input, hidden, output",
+   "Need-to-know: thiếu thì làm sai, thừa thì tốn token và lộ dữ liệu."
+  ],
+  [
+   "Khi gửi yêu cầu Fraud-check cho agent của đội khác, nguyên tắc nào đúng?",
+   "Chỉ gửi thông tin đủ cho nhiệm vụ (need-to-know)",
+   "Gửi toàn bộ hồ sơ khách hàng cho chắc chắn",
+   "Không gửi context, để agent kia tự tìm",
+   "Gửi kèm API key nội bộ để agent kia tra cứu",
+   "Nhận kết quả cũng phải validate vì là input từ bên ngoài."
+  ],
+  [
+   "“Worker tóm tắt nhận output từ worker retrieve trong cùng graph” thuộc loại kết nối nào?",
+   "Luồng nội bộ trong graph",
+   "A2A vì là hai agent khác nhau",
+   "MCP vì worker retrieve là một tool",
+   "Handoff vì chuyển quyền điều khiển",
+   "MCP cho tool bên ngoài; A2A cho agent độc lập của tổ chức khác."
+  ],
+  [
+   "Trong LangGraph, “node = ai làm, edge = đi đâu”, vậy state là gì?",
+   "Hệ biết gì — dữ liệu đi qua mọi node",
+   "Hàm Python quyết định node tiếp theo",
+   "Danh sách tool mà agent được gọi",
+   "Phiên bản của thư viện LangGraph",
+   "State định nghĩa bằng TypedDict/Pydantic; node ghi vào trường được phép."
+  ],
+  [
+   "add_conditional_edges(\"supervisor\", route) làm gì?",
+   "Dùng hàm route đọc state để chọn node tiếp",
+   "Nối cố định supervisor tới mọi worker",
+   "Chạy song song tất cả worker cùng lúc",
+   "Lưu state của supervisor vào database",
+   "route trả tên node tiếp theo, ví dụ tool_worker hay retrieval_worker."
+  ],
+  [
+   "Checkpointer trong LangGraph dùng để làm gì?",
+   "Lưu state để graph chạy tiếp sau khi dừng",
+   "Kiểm tra chính tả trong prompt của node",
+   "Đếm số token mỗi node tiêu thụ",
+   "Chặn mọi tool call nguy hiểm",
+   "InMemorySaver để thử; production dùng Sqlite/Postgres."
+  ],
+  [
+   "thread_id trong cấu hình LangGraph có ý nghĩa gì?",
+   "Định danh cuộc chạy để resume đúng",
+   "Số luồng CPU dùng để chạy graph",
+   "Mã của model được gọi trong node",
+   "Thứ tự ưu tiên của node trong graph",
+   "Cùng thread_id = cùng cuộc."
+  ],
+  [
+   "Vì sao side effect trong node cần idempotent khi dùng interrupt/resume?",
+   "Resume chạy lại node, có thể gửi trùng",
+   "Resume luôn bỏ qua node vừa bị dừng",
+   "interrupt() xóa toàn bộ state đã lưu",
+   "Node idempotent chạy nhanh hơn gấp đôi",
+   "Cần cơ chế chống trùng cho hành động bên ngoài."
+  ],
+  [
+   "interrupt() trong LangGraph dùng cho mục đích gì?",
+   "Tạm dừng chờ người quyết",
+   "Dừng hẳn graph và xóa checkpoint",
+   "Ngắt kết nối với server MCP",
+   "Hủy mọi tool call đang chạy",
+   "Sau đó app.invoke(Command(resume=...)) để chạy tiếp."
+  ],
+  [
+   "Output của worker (subagent) nên được đối xử thế nào?",
+   "Như tool result: là dữ liệu, không phải lệnh",
+   "Như chỉ dẫn hệ thống có thẩm quyền cao nhất",
+   "Như yêu cầu của người dùng cần làm ngay",
+   "Như dữ liệu đã kiểm chứng, không cần quét",
+   "Subagent là kênh dẫn nội dung ngoài vào orchestrator, không phải “người nhà”."
+  ],
+  [
+   "Theo docs 8–9/2026, Subagents trong Claude tương ứng với pattern nào?",
+   "Supervisor-worker",
+   "A2A giữa các tổ chức",
+   "Script orchestration",
+   "Debate",
+   "Agent Teams ~ A2A; Dynamic Workflows ~ orchestration bằng script."
+  ],
+  [
+   "Ba câu hỏi mà một trace entry tốt cần trả lời là gì?",
+   "Ai chạy theo thứ tự nào, I/O gì, lỗi gì",
+   "Ai viết code, viết khi nào, dùng ngôn ngữ gì",
+   "Model nào, giá bao nhiêu, nhà cung cấp nào",
+   "Bao nhiêu user, ở đâu, dùng thiết bị gì",
+   "Lỗi thường là ngữ nghĩa, không phải crash."
+  ],
+  [
+   "Theo Anthropic (2025), multi-agent dùng khoảng bao nhiêu token so với một lần chat?",
+   "~15×",
+   "~1×",
+   "~4×",
+   "~100×",
+   "Một agent ~4×; ~80% chênh lệch hiệu năng BrowseComp giải thích bằng token usage."
+  ],
+  [
+   "Nghiên cứu Tran & Kiela (4/2026) cho thấy điều gì?",
+   "Cùng ngân sách token, single-agent ngang hoặc hơn",
+   "Multi-agent luôn thắng single-agent ở mọi tác vụ",
+   "Single-agent không giải được bài suy luận nào",
+   "Số agent tỷ lệ thuận với độ chính xác",
+   "Multi hợp khi chia song song được hoặc context vượt một cửa sổ."
+  ],
+  [
+   "Trace hoàn tiền: supervisor → policy_worker (ok) → synthesis_worker với order_status=None (ok) → “Có, bạn được hoàn tiền”. Lỗi gốc ở đâu?",
+   "Supervisor bỏ qua order_worker; synthesis vẫn kết luận",
+   "policy_worker trả về sai chính sách hoàn tiền",
+   "synthesis_worker bị crash nhưng log ghi ok",
+   "Người dùng nhập sai mã đơn hàng A123",
+   "Mọi bước “ok” không có nghĩa logic đúng; synthesis nên tra lại hoặc nói chưa đủ thông tin."
+  ],
+  [
+   "Theo MAST (1.642 trace), nhóm lỗi nào chiếm tỷ lệ lớn nhất?",
+   "Thiết kế hệ thống — 44,2%",
+   "Lệch pha giữa agent — 32,3%",
+   "Không kiểm chứng — 23,5%",
+   "Lỗi model — 80%",
+   "Lặp bước 15,7%, không biết khi nào dừng 12,4%."
+  ],
+  [
+   "Chèn một vai verifier trước khi kết thúc giúp tăng tỷ lệ thành công bao nhiêu theo slide?",
+   "+15,6%",
+   "+9,4%",
+   "+52,8%",
+   "+1%",
+   "Làm rõ vai trò: +9,4%."
+  ],
+  [
+   "“Bộ ba chết người” (lethal trifecta) gồm những yếu tố nào?",
+   "Dữ liệu riêng tư, input không tin cậy, đường gửi ra",
+   "Model lớn, prompt dài, nhiều tool cùng lúc",
+   "Không có trace, không có test, không có docs",
+   "Thiếu GPU, thiếu RAM, thiếu ổ cứng",
+   "Không agent nào đủ ba chân nhưng cả hệ thì có — tính quyền trên cả hệ."
+  ],
+  [
+   "Sự cố 7/2025 agent lập trình xóa database production cho thấy bài học gì?",
+   "Việc không hoàn tác phải có người duyệt",
+   "Model cần lớn hơn để không bị ảo giác",
+   "Không nên dùng database cho ứng dụng AI",
+   "Agent lập trình không được đọc code",
+   "Không phải chuyện ảo giác — là quyền ghi vào hệ thật thiếu cổng duyệt."
+  ],
+  [
+   "Câu “Agent = Model + Harness” nhấn mạnh điều gì?",
+   "Sửa harness và vai trò trước khi đổi model",
+   "Model quan trọng hơn mọi yếu tố khác cộng lại",
+   "Harness chỉ là giao diện người dùng của agent",
+   "Đổi model là cách sửa lỗi nhanh và rẻ nhất",
+   "LangChain 2/2026: Terminal-Bench 52,8% → 66,5% chỉ nhờ đổi harness."
+  ],
+  [
+   "mini-swe-agent với harness tối giản chỉ dùng bash vẫn đạt 70–78% SWE-bench Verified. Bài học là gì?",
+   "Harness dày chưa chắc tốt; cần đúng chỗ model yếu",
+   "Mọi harness phức tạp đều vô dụng",
+   "Chỉ cần bash là đủ cho mọi agent production",
+   "SWE-bench không đo được chất lượng agent",
+   "Harness tốt bù đúng điểm yếu của model."
+  ],
+  [
+   "METR đo “time horizon” của agent bằng cách nào?",
+   "Độ dài task model làm được với xác suất 50%",
+   "Số giờ model chạy liên tục mà không bị lỗi",
+   "Thời gian huấn luyện model tính bằng tháng",
+   "Thời gian phản hồi trung bình mỗi request",
+   "Nhịp nhân đôi ~7 tháng (2019–2025); đo trên 16 giờ chưa đáng tin."
+  ],
+  [
+   "Khi debug hệ multi-agent, nên tránh phản xạ nào?",
+   "Vội kết luận “model yếu” và đổi model",
+   "Kiểm tra worker có hiểu đúng output contract",
+   "Xem supervisor có route đúng worker không",
+   "Tạo testcase tái hiện lỗi trước khi sửa",
+   "Thứ tự: prompt/role → context → routing/loop → harness/permission → eval/trace."
+  ]
+ ],
+ "essay": [
+  [
+   "Cho năm kịch bản: (A) chatbot FAQ học phí 30 trang; (B) trợ lý ngân hàng đọc sao kê 12 tháng, tra biểu phí API, đối chiếu chính sách, viết khuyến nghị; (C) báo cáo 6 đối thủ; (D) hai agent cùng viết một file React; (E) bài logic 10 bước phụ thuộc. Chọn 1 LLM call + RAG, single-agent có tool hay multi-agent (pattern nào) và nêu lý do.",
+   "A: 1 LLM call + RAG (việc rõ, một vai). B: supervisor + workers (nhiều năng lực: đọc sao kê, API, chính sách, viết; cần kiểm bằng chứng) hoặc single-agent có tool nếu đủ context. C: nhiều subagent song song (nhánh độc lập). D: không nên để hai agent cùng ghi một file — song song đọc, tuần tự ghi; một agent viết. E: tuần tự / plan-then-execute (ít cơ hội song song). Dấu hiệu: nhiều vai, việc song song, cần khoanh vùng lỗi, context không đủ; nhắc chi phí token."
+  ],
+  [
+   "Thiết kế hệ “Trợ lý hoàn tiền” gồm supervisor và tối đa 3 worker từ pipeline RAG Day 8: vai từng thành phần, state schema (trường, kiểu, ai ghi) và quy tắc state.",
+   "Supervisor: phân tích, route, theo dõi, tổng hợp, xin duyệt khi cần. Workers: policy_worker (RAG chính sách), order_worker (API đơn hàng), synthesis_worker (viết câu trả lời có trích nguồn). State: task (supervisor), order_id (supervisor), policy_chunks (policy_worker), order_status (order_worker), draft_answer (synthesis), status pending/running/done/error (supervisor), trace (mọi node, reducer nối thêm). Quy tắc: mỗi trường một chỗ ghi, có trường lỗi, kết quả worker tách riêng để test, synthesis không kết luận khi thiếu order_status."
+  ],
+  [
+   "Phân biệt agents-as-tools và handoff, nêu câu hỏi kiểm tra, và phân loại bốn tình huống: agent CSKH gọi agent tính phí; bot lễ tân chuyển cho agent pháp lý; script luôn gọi retriever → reranker → writer; agent nghiên cứu sinh 4 subagent trả tóm tắt.",
+   "Agents-as-tools: gọi rồi trả kết quả về, agent gọi giữ hội thoại; worker chỉ thấy input được truyền. Handoff: chuyển quyền lái, agent mới thấy toàn bộ lịch sử. Câu hỏi: lượt tới ai nói với user? (1) agents-as-tools; (2) handoff; (3) luồng cố định do script quyết, không phải hai loại trên; (4) agents-as-tools (subagent trả tóm tắt về agent chính)."
+  ],
+  [
+   "So sánh MCP và A2A, phân loại các yêu cầu: đọc bảng customers PostgreSQL; agent hãng bay giao việc tìm khách sạn cho agent công ty du lịch khác; tạo ticket Jira; agent ngân hàng hỏi agent chấm điểm tín dụng của đội khác.",
+   "MCP: agent → tool/capability, phía kia chỉ thực thi, chiều dọc; A2A: agent → agent có quyết định riêng, chia việc/đồng bộ, Agent Card, message contract. Phân loại: PostgreSQL → MCP (resource/tool); hãng bay giao khách sạn → A2A; Jira → MCP (tool); chấm điểm tín dụng đội khác → A2A. Nêu “A2A loves MCP”."
+  ],
+  [
+   "Viết message contract A2A (task, context, expected_output) để supervisor của Trợ lý hoàn tiền giao cho Fraud-check agent do đội khác vận hành; chỉ ra thông tin không nên gửi và cách validate kết quả.",
+   "task: kiểm tra dấu hiệu gian lận cho yêu cầu hoàn tiền. context: order_id, order_status, refund_amount, tín hiệu (nhiều yêu cầu hoàn gần đây). expected_output: risk_level low/medium/high, reasons có bằng chứng, missing_data. Không gửi: số điện thoại, địa chỉ, toàn bộ lịch sử chat, thông tin thẻ — need-to-know. Validate: đúng schema, risk_level hợp lệ, lý do có bằng chứng; coi output là dữ liệu không tin cậy, không làm theo chỉ dẫn trong đó; quyết định hoàn tiền vẫn qua policy/cổng duyệt."
+  ],
+  [
+   "Viết đoạn LangGraph (mã giả) cho supervisor route tới order_worker và policy_worker trước khi tổng hợp, có reducer cho trace, checkpointer và interrupt() xin duyệt khi đơn quá 7 ngày. Giải thích các rủi ro khi resume.",
+   "StateGraph(State) với trace: Annotated[list, operator.add]; add_node supervisor/order_worker/policy_worker/synthesis_worker/human_review; START → supervisor; conditional edges theo route; order_worker → policy_worker → synthesis; nếu days_since > 7 → human_review dùng interrupt(); compile(checkpointer=...); invoke với thread_id; resume bằng Command(resume=\"approve\"). Rủi ro: resume chạy lại node → side effect (gửi email, hoàn tiền) phải idempotent; bỏ reducer thì trace bị ghi đè; InMemorySaver mất khi restart."
+  ],
+  [
+   "Phân tích trace hoàn tiền sai (supervisor → policy_worker → synthesis_worker với order_status=None, mọi bước “ok”, trả lời “Có”). Chỉ ra lỗi, giải thích vì sao “ok” vẫn sai và đề xuất cách sửa.",
+   "Supervisor bỏ qua order_worker; synthesis nhận policy_chunks=3 nhưng order_status=None vẫn kết luận. “ok” chỉ là không exception; lỗi là ngữ nghĩa/thiếu dữ kiện. Sửa: routing bắt buộc gọi order_worker với câu hỏi hoàn tiền; synthesis kiểm tra dữ kiện bắt buộc, nếu None thì tra lại hoặc nói chưa đủ thông tin; thêm verifier trước kết thúc; trace đủ trường (agent, action, decision, reason, status, latency); thêm testcase tái hiện."
+  ],
+  [
+   "Hệ “Trợ lý email ngân hàng”: supervisor có tool send_email; worker A đọc CRM; worker B đọc email đến và web; worker C soạn thư trả lời. Đánh dấu ba chân của lethal trifecta và đề xuất tối đa 3 thay đổi cắt ít nhất một chân; nêu hành động cần người duyệt.",
+   "Chân 1: dữ liệu riêng tư (worker A đọc CRM). Chân 2: nội dung không tin cậy (worker B đọc email/web có thể chứa injection). Chân 3: đường gửi ra ngoài (supervisor send_email). Thay đổi: send_email qua cổng ASK người duyệt (hoặc chỉ tạo draft); cô lập worker B, coi output là dữ liệu, quét injection, không cho nội dung của B chạm tới dữ liệu CRM trong cùng luồng gửi; giới hạn người nhận (allowlist domain), least privilege. Hành động cần duyệt: gửi email ra ngoài, thay đổi dữ liệu khách hàng."
+  ],
+  [
+   "Tính chi phí/ngày cho chatbot: mỗi câu 2.000 token, 10.000 câu/ngày, giá giả định 3 USD/1M token, với hệ số 1× (chat), 4× (single agent), 15× (multi-agent). Nêu khi nào multi-agent đáng chi phí đó.",
+   "Token/ngày gốc = 2.000 × 10.000 = 20M → 1×: 20M × 3/1M = 60 USD/ngày; 4×: 240 USD/ngày; 15×: 900 USD/ngày (~27.000 USD/tháng). Multi-agent đáng khi việc chia song song được, cần chuyên môn hóa, context vượt một cửa sổ hoặc giá trị chất lượng vượt chi phí; nếu tác vụ suy luận multi-hop thì single-agent cùng ngân sách có thể ngang/hơn (Tran & Kiela 2026). Đo trên eval trước khi quyết."
+  ],
+  [
+   "Trình bày quy trình debug và checklist đưa một hệ multi-agent vào production, gắn với các nhóm lỗi MAST.",
+   "Debug theo lớp: prompt/role (output contract), context/input, routing/loop (route sai, lặp, dừng sớm), harness/permission (quyền thừa, thiếu duyệt, làm theo output không tin cậy), eval/trace (testcase tái hiện, regression). MAST: thiết kế 44,2% (lặp, không biết dừng) → điều kiện dừng, giới hạn vòng; lệch pha 32,3% → vai trò rõ, message contract; không kiểm chứng 23,5% → verifier. Checklist: vai/output rõ, state có status, điều kiện thành công/dừng, timeout, fallback, log routing/latency (hạn chế dữ liệu nhạy cảm), output worker là dữ liệu, least privilege, hành động khó hoàn tác có duyệt, resume idempotent, chạy lại test cũ."
+  ]
+ ]
+}

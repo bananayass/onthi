@@ -14,1680 +14,1680 @@
     {
       "id": "D10-001",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về ETL / ELT?",
+      "prompt": "Vì sao lỗi data pipeline đặc biệt nguy hiểm với agent AI?",
       "options": [
         {
           "key": "A",
-          "text": "Đồng nghĩa với việc chỉ copy file"
+          "text": "Agent vẫn trả lời trôi chảy dù dữ liệu đã cũ hoặc sai"
         },
         {
           "key": "B",
-          "text": "Tổ chức ingest, biến đổi và lưu dữ liệu theo kiến trúc phù hợp"
+          "text": "Agent sẽ crash ngay và báo lỗi rõ ràng cho người dùng"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Pipeline lỗi luôn làm dashboard ngừng tải dữ liệu"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Model tự phát hiện dữ liệu sai và từ chối trả lời"
         }
       ],
-      "answer": "B",
-      "explanation": "Tổ chức ingest, biến đổi và lưu dữ liệu theo kiến trúc phù hợp. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Fail silently: không exception nào, đến khi user phàn nàn mới biết.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-002",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Data quality?",
+      "prompt": "Ingestion đã ngừng 3 ngày, vector store còn dữ liệu cũ, agent vẫn trả lời tự tin theo chính sách hết hiệu lực. Đây là kiểu lỗi gì?",
       "options": [
         {
           "key": "A",
-          "text": "Kiểm tra dữ liệu đủ, hợp lệ, nhất quán, không trùng và kịp thời"
+          "text": "Fail loudly — lỗi lộ rõ"
         },
         {
           "key": "B",
-          "text": "Chỉ kiểm tra file có tồn tại"
+          "text": "Lỗi cú pháp trong prompt"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Lỗi quá tải GPU"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Fail silently — lỗi âm thầm"
         }
       ],
-      "answer": "A",
-      "explanation": "Kiểm tra dữ liệu đủ, hợp lệ, nhất quán, không trùng và kịp thời. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Fail loudly là khi pipeline ném exception hoặc gate chặn dữ liệu.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-003",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Data contract?",
+      "prompt": "Khi debug câu trả lời sai, thứ tự lần ngược 5 tầng là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Thống nhất schema, ownership và kỳ vọng giữa producer với consumer"
+          "text": "Model → Prompt → Tool → Cache → UI"
         },
         {
           "key": "B",
-          "text": "Lời hứa miệng không cần kiểm thử"
+          "text": "Retrieval → Output → Source → Corpus → Pipeline"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Output → Retrieval → Corpus → Pipeline → Source"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Source → Pipeline → Corpus → Retrieval → Output"
         }
       ],
-      "answer": "A",
-      "explanation": "Thống nhất schema, ownership và kỳ vọng giữa producer với consumer. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Đừng dừng ở “model hallucinate”; model có thể đúng với dữ liệu sai được đưa vào.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-004",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Freshness SLA?",
+      "prompt": "Theo benchmark dbt Labs, khác biệt khi semantic layer fail và raw text-to-SQL fail là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Cả hai đều luôn ra kết quả đúng"
         },
         {
           "key": "B",
-          "text": "Đặt ngưỡng dữ liệu được cập nhật kịp thời cho use case"
+          "text": "Semantic layer báo lỗi; text-to-SQL ra số trông đúng"
         },
         {
           "key": "C",
-          "text": "Đo dung lượng file lớn hay nhỏ"
+          "text": "Cả hai đều báo lỗi rõ ràng như nhau"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Semantic layer ra số sai; text-to-SQL báo lỗi"
         }
       ],
       "answer": "B",
-      "explanation": "Đặt ngưỡng dữ liệu được cập nhật kịp thời cho use case. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "explanation": "Sự bất đối xứng lỗi âm thầm này là lý do Day 10 tồn tại.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-005",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Schema drift?",
+      "prompt": "ETL khác ELT ở điểm nào?",
       "options": [
         {
           "key": "A",
-          "text": "Phát hiện cấu trúc dữ liệu thay đổi so với kỳ vọng"
+          "text": "ETL biến đổi trước khi load; ELT load raw rồi mới biến đổi"
         },
         {
           "key": "B",
-          "text": "Là việc vector thay đổi độ dài"
+          "text": "ETL chỉ dùng cho streaming; ELT chỉ dùng cho batch"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "ETL không làm sạch dữ liệu; ELT luôn làm sạch trước"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "ETL lưu raw vĩnh viễn; ELT xóa raw ngay khi load"
         }
       ],
       "answer": "A",
-      "explanation": "Phát hiện cấu trúc dữ liệu thay đổi so với kỳ vọng. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "explanation": "ELT tiện thử lại nhiều chiến lược chunking/chuẩn hóa cho RAG.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-006",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Data drift?",
+      "prompt": "Agent cần kiểm tra tồn kho ngay sau khi đơn hàng vừa thay đổi. Kiểu xử lý nào phù hợp?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Batch mỗi đêm"
         },
         {
           "key": "B",
-          "text": "Phân phối hoặc đặc điểm dữ liệu thay đổi theo thời gian"
+          "text": "Backfill hằng tuần"
         },
         {
           "key": "C",
-          "text": "Là lỗi UI đổi màu"
+          "text": "Cron mỗi tháng"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Streaming"
         }
       ],
-      "answer": "B",
-      "explanation": "Phân phối hoặc đặc điểm dữ liệu thay đổi theo thời gian. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Streaming độ trễ thấp nhưng hạ tầng phức tạp, lỗi có thể lan ngay.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-007",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Idempotency?",
+      "prompt": "CDC (Change Data Capture) là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Nén dữ liệu trước khi lưu vào kho"
         },
         {
           "key": "B",
-          "text": "Chạy lại job không làm nhân bản hoặc làm sai kết quả"
+          "text": "Mã hóa dữ liệu khi truyền qua mạng"
         },
         {
           "key": "C",
-          "text": "Không cho phép retry job"
+          "text": "Chỉ đồng bộ phần dữ liệu thay đổi"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Quét lại toàn bộ bảng mỗi lần chạy"
         }
       ],
-      "answer": "B",
-      "explanation": "Chạy lại job không làm nhân bản hoặc làm sai kết quả. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Log-based đọc WAL/binlog; query-based poll theo updated_at.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-008",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Quarantine?",
+      "prompt": "Nhược điểm của CDC query-based (poll theo updated_at > last_sync) là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Luôn thấy được mọi thay đổi trung gian"
         },
         {
           "key": "B",
-          "text": "Cô lập dữ liệu đáng ngờ để điều tra thay vì đưa ngay vào phục vụ"
+          "text": "Tạo tải query, có thể sót bản ghi tạo rồi xóa"
         },
         {
           "key": "C",
-          "text": "Xóa dữ liệu không cần kiểm tra"
+          "text": "Bắt buộc phải có quyền đọc transaction log của database"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Không thể chạy theo lịch định kỳ như cron"
         }
       ],
       "answer": "B",
-      "explanation": "Cô lập dữ liệu đáng ngờ để điều tra thay vì đưa ngay vào phục vụ. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "explanation": "Log-based thấy thay đổi trung gian nhưng cần quyền đọc log.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-009",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng ETL / ELT nào là phù hợp nhất?",
+      "prompt": "Watermark trong ingestion là gì và rủi ro đi kèm?",
       "options": [
         {
           "key": "A",
-          "text": "Đồng nghĩa với việc chỉ copy file"
+          "text": "Mốc đã ingest tới đâu; có thể sót bản cập nhật trễ"
         },
         {
           "key": "B",
-          "text": "Tổ chức ingest, biến đổi và lưu dữ liệu theo kiến trúc phù hợp"
+          "text": "Chữ ký số chống sao chép tài liệu; có thể bị làm giả"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Ngưỡng dung lượng tối đa; vượt thì pipeline dừng"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Mức ưu tiên của job; job thấp bị bỏ qua"
         }
       ],
-      "answer": "B",
-      "explanation": "Tổ chức ingest, biến đổi và lưu dữ liệu theo kiến trúc phù hợp. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Airflow/Dagster/Prefect không có watermark/late data native như Beam/Flink.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-010",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Data quality nào là phù hợp nhất?",
+      "prompt": "Backpressure xảy ra khi nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Schema thay đổi ngoài kế hoạch"
         },
         {
           "key": "B",
-          "text": "Kiểm tra dữ liệu đủ, hợp lệ, nhất quán, không trùng và kịp thời"
+          "text": "Dữ liệu bị trùng lặp nhiều lần"
         },
         {
           "key": "C",
-          "text": "Chỉ kiểm tra file có tồn tại"
+          "text": "Consumer chậm hơn producer"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Nguồn dữ liệu bị xóa khỏi hệ thống"
         }
       ],
-      "answer": "B",
-      "explanation": "Kiểm tra dữ liệu đủ, hợp lệ, nhất quán, không trùng và kịp thời. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Cần buffer/pause/backoff để tránh tràn bộ nhớ hoặc mất record.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-011",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Data contract nào là phù hợp nhất?",
+      "prompt": "Nguồn dữ liệu trả HTTP 429. Pipeline nên làm gì?",
       "options": [
         {
           "key": "A",
-          "text": "Lời hứa miệng không cần kiểm thử"
+          "text": "Bỏ qua request đó và chạy tiếp"
         },
         {
           "key": "B",
-          "text": "Thống nhất schema, ownership và kỳ vọng giữa producer với consumer"
+          "text": "Tăng số request song song lên gấp đôi"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Dừng toàn bộ pipeline vĩnh viễn"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Retry có backoff, không lặng lẽ bỏ request"
         }
       ],
-      "answer": "B",
-      "explanation": "Thống nhất schema, ownership và kỳ vọng giữa producer với consumer. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "429 là rate limit; bỏ request âm thầm gây thiếu dữ liệu.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-012",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Freshness SLA nào là phù hợp nhất?",
+      "prompt": "Trường phone chứa \"N/A\" thay vì null. Rủi ro với agent là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Agent suy diễn từ dữ liệu không tồn tại"
         },
         {
           "key": "B",
-          "text": "Đặt ngưỡng dữ liệu được cập nhật kịp thời cho use case"
+          "text": "Agent không thể đọc được trường số"
         },
         {
           "key": "C",
-          "text": "Đo dung lượng file lớn hay nhỏ"
+          "text": "Vector store từ chối lưu bản ghi đó"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Embedding model báo lỗi ngay lập tức"
         }
       ],
-      "answer": "B",
-      "explanation": "Đặt ngưỡng dữ liệu được cập nhật kịp thời cho use case. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Cần phân biệt null thật với chuỗi giả và quy tắc required/optional.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-013",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Schema drift nào là phù hợp nhất?",
+      "prompt": "Hai bản copy cùng một chính sách trong corpus gây hậu quả gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Agent không trả lời được câu hỏi nào"
         },
         {
           "key": "B",
-          "text": "Phát hiện cấu trúc dữ liệu thay đổi so với kỳ vọng"
+          "text": "Retrieval trả chunk trùng, lãng phí context"
         },
         {
           "key": "C",
-          "text": "Là việc vector thay đổi độ dài"
+          "text": "Embedding model chạy chậm gấp đôi"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Vector store tự động xóa cả hai bản"
         }
       ],
       "answer": "B",
-      "explanation": "Phát hiện cấu trúc dữ liệu thay đổi so với kỳ vọng. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "explanation": "Dedupe bằng ID/checksum và quy tắc version.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-014",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Data drift nào là phù hợp nhất?",
+      "prompt": "Ngày \"05/08/2026\" gây vấn đề gì và xử lý thế nào?",
       "options": [
         {
           "key": "A",
-          "text": "Phân phối hoặc đặc điểm dữ liệu thay đổi theo thời gian"
+          "text": "Năm 2026 quá xa nên hệ thống không hiểu"
         },
         {
           "key": "B",
-          "text": "Là lỗi UI đổi màu"
+          "text": "Dấu / không lưu được trong database"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Mơ hồ ngày/tháng; cần chốt format và timezone"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Không có vấn đề vì mọi hệ thống đọc giống nhau"
         }
       ],
-      "answer": "A",
-      "explanation": "Phân phối hoặc đặc điểm dữ liệu thay đổi theo thời gian. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Sai format dẫn tới lọc, sắp xếp, hiểu thời hạn sai.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-015",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Idempotency nào là phù hợp nhất?",
+      "prompt": "PII như CCCD trong tài liệu nên được xử lý ở bước nào?",
       "options": [
         {
           "key": "A",
-          "text": "Không cho phép retry job"
+          "text": "Sau khi đã lưu vào vector store"
         },
         {
           "key": "B",
-          "text": "Chạy lại job không làm nhân bản hoặc làm sai kết quả"
+          "text": "Khi agent chuẩn bị trả lời người dùng"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Không cần xử lý nếu đã mã hóa ổ đĩa"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Ở bước transform, trước embedding"
         }
       ],
-      "answer": "B",
-      "explanation": "Chạy lại job không làm nhân bản hoặc làm sai kết quả. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "PII lọt vào vector store có thể bị trích xuất.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-016",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Quarantine nào là phù hợp nhất?",
+      "prompt": "Câu “LLM proposes, code disposes” nghĩa là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "LLM đề xuất, code kiểm tra trước khi cho đi"
         },
         {
           "key": "B",
-          "text": "Cô lập dữ liệu đáng ngờ để điều tra thay vì đưa ngay vào phục vụ"
+          "text": "LLM tự quyết định mọi bước và code chỉ thực thi"
         },
         {
           "key": "C",
-          "text": "Xóa dữ liệu không cần kiểm tra"
+          "text": "Code viết đề xuất, LLM duyệt lại kết quả cuối"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "LLM thay thế hoàn toàn bước kiểm tra dữ liệu"
         }
       ],
-      "answer": "B",
-      "explanation": "Cô lập dữ liệu đáng ngờ để điều tra thay vì đưa ngay vào phục vụ. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Validation bên ngoài là cổng bắt buộc cho đề xuất của LLM.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-017",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua ETL / ELT, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "dbt data tests khác dbt unit tests thế nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Unit tests chỉ chạy được trên production"
         },
         {
           "key": "B",
-          "text": "Tổ chức ingest, biến đổi và lưu dữ liệu theo kiến trúc phù hợp"
+          "text": "Data test kiểm dữ liệu thật; unit test kiểm logic"
         },
         {
           "key": "C",
-          "text": "Đồng nghĩa với việc chỉ copy file"
+          "text": "Data tests kiểm logic SQL; unit tests kiểm dữ liệu production"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Cả hai giống nhau, chỉ khác tên gọi"
         }
       ],
       "answer": "B",
-      "explanation": "Tổ chức ingest, biến đổi và lưu dữ liệu theo kiến trúc phù hợp. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "explanation": "Ví dụ data test: not_null, unique, relationships.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-018",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Data quality, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Data profiling nên làm khi nào?",
       "options": [
         {
           "key": "A",
-          "text": "Kiểm tra dữ liệu đủ, hợp lệ, nhất quán, không trùng và kịp thời"
+          "text": "Chỉ khi có yêu cầu từ kiểm toán"
         },
         {
           "key": "B",
-          "text": "Chỉ kiểm tra file có tồn tại"
+          "text": "Không cần vì rule có thể đoán"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Trước khi viết rule, để đo dữ liệu thật"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Sau khi agent đã trả lời sai nhiều lần"
         }
       ],
-      "answer": "A",
-      "explanation": "Kiểm tra dữ liệu đủ, hợp lệ, nhất quán, không trùng và kịp thời. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Đừng đoán rule khi chưa nhìn dữ liệu.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-019",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Data contract, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Great Expectations (GX) giúp gì cho pipeline?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Tự động sinh embedding cho tài liệu mới"
         },
         {
           "key": "B",
-          "text": "Thống nhất schema, ownership và kỳ vọng giữa producer với consumer"
+          "text": "Thay thế orchestrator như Airflow"
         },
         {
           "key": "C",
-          "text": "Lời hứa miệng không cần kiểm thử"
+          "text": "Mã hóa dữ liệu nhạy cảm trước khi lưu"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Biến kỳ vọng chất lượng thành code chạy lại được"
         }
       ],
-      "answer": "B",
-      "explanation": "Thống nhất schema, ownership và kỳ vọng giữa producer với consumer. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Cần pin version và đối chiếu docs vì API đời trước có thể khác.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-020",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Freshness SLA, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Theo kiến trúc Medallion, agent nên đọc dữ liệu từ tầng nào?",
       "options": [
         {
           "key": "A",
-          "text": "Đặt ngưỡng dữ liệu được cập nhật kịp thời cho use case"
+          "text": "Bronze"
         },
         {
           "key": "B",
-          "text": "Đo dung lượng file lớn hay nhỏ"
+          "text": "Silver"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Raw landing zone"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Gold"
         }
       ],
-      "answer": "A",
-      "explanation": "Đặt ngưỡng dữ liệu được cập nhật kịp thời cho use case. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Bronze: raw để audit/replay; Silver: clean, dedupe; Gold: curated, phục vụ.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-021",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Schema drift, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Vì sao không trỏ RAG ingestion thẳng vào tầng Bronze?",
       "options": [
         {
           "key": "A",
-          "text": "Phát hiện cấu trúc dữ liệu thay đổi so với kỳ vọng"
+          "text": "Bronze chỉ chứa dữ liệu dạng ảnh"
         },
         {
           "key": "B",
-          "text": "Là việc vector thay đổi độ dài"
+          "text": "Bronze được xóa sau mỗi giờ"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Bronze là raw chưa làm sạch, chưa dedupe"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Bronze luôn bị khóa không cho đọc"
         }
       ],
-      "answer": "A",
-      "explanation": "Phát hiện cấu trúc dữ liệu thay đổi so với kỳ vọng. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Kiểm tra chất lượng chạy ở Silver; Gold sẵn sàng phục vụ.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-022",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Data drift, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Timestamp “ingest thành công” và “vector store upsert/reindex thành công” khác nhau thế nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ cần theo dõi một trong hai"
         },
         {
           "key": "B",
-          "text": "Phân phối hoặc đặc điểm dữ liệu thay đổi theo thời gian"
+          "text": "Hai mốc khác nhau, lệch theo lịch reindex"
         },
         {
           "key": "C",
-          "text": "Là lỗi UI đổi màu"
+          "text": "Luôn trùng nhau vì cùng một job"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Ingest luôn sau reindex"
         }
       ],
       "answer": "B",
-      "explanation": "Phân phối hoặc đặc điểm dữ liệu thay đổi theo thời gian. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "explanation": "“Corpus hiện hành” là một timestamp vận hành cụ thể.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-023",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Idempotency, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Chỉ thêm/sửa vài tài liệu, embedding model và chunking giữ nguyên. Nên làm gì?",
       "options": [
         {
           "key": "A",
-          "text": "Chạy lại job không làm nhân bản hoặc làm sai kết quả"
+          "text": "Incremental upsert"
         },
         {
           "key": "B",
-          "text": "Không cho phép retry job"
+          "text": "Re-embed toàn bộ corpus"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Xóa index và build lại"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Đổi sang embedding model mới"
         }
       ],
       "answer": "A",
-      "explanation": "Chạy lại job không làm nhân bản hoặc làm sai kết quả. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "explanation": "Đổi model hoặc chunking mới cần re-embed toàn corpus.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-024",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Quarantine, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Rollout index mới theo kiểu blue-green cho data là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Ghi đè index cũ ngay lập tức"
         },
         {
           "key": "B",
-          "text": "Cô lập dữ liệu đáng ngờ để điều tra thay vì đưa ngay vào phục vụ"
+          "text": "Chạy hai model trên cùng index"
         },
         {
           "key": "C",
-          "text": "Xóa dữ liệu không cần kiểm tra"
+          "text": "Xóa index cũ trước rồi build mới"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Build song song, validate, chuyển traffic dần"
         }
       ],
-      "answer": "B",
-      "explanation": "Cô lập dữ liệu đáng ngờ để điều tra thay vì đưa ngay vào phục vụ. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Hoặc chấp nhận maintenance window nếu SLA freshness cho phép.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-025",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của ETL / ELT trong hệ thống AI là gì?",
+      "prompt": "Drift-Adapter (preprint) đề xuất gì để né chi phí re-embed?",
       "options": [
         {
           "key": "A",
-          "text": "Đồng nghĩa với việc chỉ copy file"
+          "text": "Giảm số chiều vector xuống còn 2"
         },
         {
           "key": "B",
-          "text": "Tổ chức ingest, biến đổi và lưu dữ liệu theo kiến trúc phù hợp"
+          "text": "Bỏ embedding, chỉ dùng BM25"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Ánh xạ embedding query mới về không gian cũ"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Trộn vector của hai model trong cùng index"
         }
       ],
-      "answer": "B",
-      "explanation": "Tổ chức ingest, biến đổi và lưu dữ liệu theo kiến trúc phù hợp. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Preprint một tác giả, chưa peer review — không trích như kết quả đã kiểm chứng.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-026",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Data quality trong hệ thống AI là gì?",
+      "prompt": "Dimension “Timeliness” hỏi điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ kiểm tra file có tồn tại"
+          "text": "Dữ liệu có đúng format không"
         },
         {
           "key": "B",
-          "text": "Kiểm tra dữ liệu đủ, hợp lệ, nhất quán, không trùng và kịp thời"
+          "text": "Dữ liệu có cập nhật đúng lúc không"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Dữ liệu có đúng với thực tế không"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Dữ liệu có bị trùng lặp không"
         }
       ],
       "answer": "B",
-      "explanation": "Kiểm tra dữ liệu đủ, hợp lệ, nhất quán, không trùng và kịp thời. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "explanation": "6 dimension: Completeness, Accuracy, Consistency, Timeliness, Validity, Uniqueness.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-027",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Data contract trong hệ thống AI là gì?",
+      "prompt": "Email khách hàng khác nhau giữa CRM và warehouse vi phạm dimension nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Consistency"
         },
         {
           "key": "B",
-          "text": "Thống nhất schema, ownership và kỳ vọng giữa producer với consumer"
+          "text": "Completeness"
         },
         {
           "key": "C",
-          "text": "Lời hứa miệng không cần kiểm thử"
+          "text": "Uniqueness"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Validity"
         }
       ],
-      "answer": "B",
-      "explanation": "Thống nhất schema, ownership và kỳ vọng giữa producer với consumer. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Agent có thể trả lời khác nhau tùy chunk được retrieve.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-028",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Freshness SLA trong hệ thống AI là gì?",
+      "prompt": "Trạng thái đơn hàng không nằm trong enum cho phép vi phạm dimension nào?",
       "options": [
         {
           "key": "A",
-          "text": "Đặt ngưỡng dữ liệu được cập nhật kịp thời cho use case"
+          "text": "Accuracy"
         },
         {
           "key": "B",
-          "text": "Đo dung lượng file lớn hay nhỏ"
+          "text": "Timeliness"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Consistency"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Validity"
         }
       ],
-      "answer": "A",
-      "explanation": "Đặt ngưỡng dữ liệu được cập nhật kịp thời cho use case. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Validity: đúng format/quy tắc; Accuracy: đúng thực tế.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-029",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Schema drift trong hệ thống AI là gì?",
+      "prompt": "5 pillars của data observability trong slide là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Detect, Isolate, Mitigate, Fix, Verify"
         },
         {
           "key": "B",
-          "text": "Phát hiện cấu trúc dữ liệu thay đổi so với kỳ vọng"
+          "text": "Bronze, Silver, Gold, Platinum, Diamond"
         },
         {
           "key": "C",
-          "text": "Là việc vector thay đổi độ dài"
+          "text": "Freshness, Quality, Volume, Schema, Lineage"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Completeness, Accuracy, Consistency, Validity, Uniqueness"
         }
       ],
-      "answer": "B",
-      "explanation": "Phát hiện cấu trúc dữ liệu thay đổi so với kỳ vọng. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Đây là framework vendor nêu, không phải taxonomy ISO bắt buộc.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-030",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Data drift trong hệ thống AI là gì?",
+      "prompt": "Dữ liệu cập nhật đúng giờ nhưng toàn nội dung rỗng. Kết luận đúng là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Freshness không chứng minh correctness"
         },
         {
           "key": "B",
-          "text": "Phân phối hoặc đặc điểm dữ liệu thay đổi theo thời gian"
+          "text": "Dữ liệu đúng vì đã cập nhật đúng hạn"
         },
         {
           "key": "C",
-          "text": "Là lỗi UI đổi màu"
+          "text": "Chỉ cần tăng tần suất cập nhật"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Lỗi nằm ở embedding model"
         }
       ],
-      "answer": "B",
-      "explanation": "Phân phối hoặc đặc điểm dữ liệu thay đổi theo thời gian. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Cần kết hợp quality, volume, schema.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-031",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Idempotency trong hệ thống AI là gì?",
+      "prompt": "Đặt quality gate càng sớm trong pipeline có lợi gì?",
       "options": [
         {
           "key": "A",
-          "text": "Không cho phép retry job"
+          "text": "Giảm số lượng tài liệu cần lưu"
         },
         {
           "key": "B",
-          "text": "Chạy lại job không làm nhân bản hoặc làm sai kết quả"
+          "text": "Rẻ hơn vì chưa tốn compute phía sau"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Phát hiện được mọi lỗi cần ngữ cảnh"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Không cần thêm gate nào ở sau"
         }
       ],
       "answer": "B",
-      "explanation": "Chạy lại job không làm nhân bản hoặc làm sai kết quả. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "explanation": "Gate muộn có thể phát hiện lỗi cần thêm ngữ cảnh mới thấy.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-032",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Quarantine trong hệ thống AI là gì?",
+      "prompt": "Gate “pre-embed” kiểm tra điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Xóa dữ liệu không cần kiểm tra"
+          "text": "Giá trị còn hợp lệ sau clean, dedupe, join"
         },
         {
           "key": "B",
-          "text": "Cô lập dữ liệu đáng ngờ để điều tra thay vì đưa ngay vào phục vụ"
+          "text": "Agent có đang dùng index bị đánh dấu lỗi"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Tài liệu cũ, trùng hoặc mâu thuẫn với bản mới hơn"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Schema đúng và field bắt buộc không null"
         }
       ],
-      "answer": "B",
-      "explanation": "Cô lập dữ liệu đáng ngờ để điều tra thay vì đưa ngay vào phục vụ. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Các vị trí khác: ingestion boundary, post-transform, pre-serve.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-033",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về ETL / ELT?",
+      "prompt": "Chính sách pháp lý/tài chính nên dùng chiến lược gate nào khi check fail?",
       "options": [
         {
           "key": "A",
-          "text": "Đồng nghĩa với việc chỉ copy file"
+          "text": "Fail-open: ghi log và vẫn cho dữ liệu mới đi qua"
         },
         {
           "key": "B",
-          "text": "Tổ chức ingest, biến đổi và lưu dữ liệu theo kiến trúc phù hợp"
+          "text": "Tắt gate để tránh gián đoạn dịch vụ"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Xóa toàn bộ dữ liệu cũ và mới"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Fail-closed, dùng dữ liệu cũ đã biết đúng"
         }
       ],
-      "answer": "B",
-      "explanation": "Tổ chức ingest, biến đổi và lưu dữ liệu theo kiến trúc phù hợp. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Fail-open hợp khi dữ liệu cũ gây hại hơn, ví dụ tồn kho real-time.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-034",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Data quality?",
+      "prompt": "Data contract nên có tối thiểu những gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Schema, semantics, SLA/SLO, ownership"
         },
         {
           "key": "B",
-          "text": "Kiểm tra dữ liệu đủ, hợp lệ, nhất quán, không trùng và kịp thời"
+          "text": "Logo, slogan, giá bán, khuyến mãi"
         },
         {
           "key": "C",
-          "text": "Chỉ kiểm tra file có tồn tại"
+          "text": "Model, prompt, temperature, top-k"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Mật khẩu, API key, IP, port"
         }
       ],
-      "answer": "B",
-      "explanation": "Kiểm tra dữ liệu đủ, hợp lệ, nhất quán, không trùng và kịp thời. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Contract không tự phát huy nếu không có người và gate thực thi.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-035",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Data contract?",
+      "prompt": "“Shift-left” trong data contract nghĩa là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Thống nhất schema, ownership và kỳ vọng giữa producer với consumer"
+          "text": "Giao trách nhiệm chất lượng cho người dùng cuối"
         },
         {
           "key": "B",
-          "text": "Lời hứa miệng không cần kiểm thử"
+          "text": "Kiểm hợp đồng ngay từ phía producer"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Dời mọi kiểm tra về cuối, khi agent trả lời"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chuyển dữ liệu từ Gold về Bronze"
         }
       ],
-      "answer": "A",
-      "explanation": "Thống nhất schema, ownership và kỳ vọng giữa producer với consumer. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "B",
+      "explanation": "Không đợi đến khi agent trả lời sai.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-036",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Freshness SLA?",
+      "prompt": "Metadata nào nên lưu cho mỗi chunk để audit/rollback?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Số lần chunk được hiển thị trên giao diện"
         },
         {
           "key": "B",
-          "text": "Đặt ngưỡng dữ liệu được cập nhật kịp thời cho use case"
+          "text": "Màu sắc của tài liệu gốc"
         },
         {
           "key": "C",
-          "text": "Đo dung lượng file lớn hay nhỏ"
+          "text": "Version model, hash tiền xử lý, version index"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Tên người dùng đã hỏi câu hỏi gần nhất"
         }
       ],
-      "answer": "B",
-      "explanation": "Đặt ngưỡng dữ liệu được cập nhật kịp thời cho use case. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Kèm text checksum, chunking config, document version.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-037",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Schema drift?",
+      "prompt": "Metric “Index-version consistency” đo gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Tuổi của chunk được truy xuất"
         },
         {
           "key": "B",
-          "text": "Phát hiện cấu trúc dữ liệu thay đổi so với kỳ vọng"
+          "text": "Tỷ lệ field metadata bị trống"
         },
         {
           "key": "C",
-          "text": "Là việc vector thay đổi độ dài"
+          "text": "Số document nạp so với kỳ vọng"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Tỷ lệ chunk dùng embedding version hiện hành"
         }
       ],
-      "answer": "B",
-      "explanation": "Phát hiện cấu trúc dữ liệu thay đổi so với kỳ vọng. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Các metric RAG khác: embedding coverage, retrieval staleness, contradiction rate.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-038",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Data drift?",
+      "prompt": "Bẫy của rule “không update trong N giờ thì báo động” là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Phân phối hoặc đặc điểm dữ liệu thay đổi theo thời gian"
+          "text": "Báo giả khi lặng bình thường, sót khi đổi nhịp"
         },
         {
           "key": "B",
-          "text": "Là lỗi UI đổi màu"
+          "text": "Luôn phát hiện chính xác mọi sự cố dữ liệu"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Không bao giờ bị ảnh hưởng bởi timezone"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chỉ hoạt động với dữ liệu streaming"
         }
       ],
       "answer": "A",
-      "explanation": "Phân phối hoặc đặc điểm dữ liệu thay đổi theo thời gian. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "explanation": "Clock skew/timezone cũng tạo alert giả; freshness một mình không đủ.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-039",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Idempotency?",
+      "prompt": "Phát hiện bất thường bằng rule/threshold phù hợp nhất với loại kiểm tra nào?",
       "options": [
         {
           "key": "A",
-          "text": "Chạy lại job không làm nhân bản hoặc làm sai kết quả"
+          "text": "Kiểu lỗi chưa ai nghĩ tới trước"
         },
         {
           "key": "B",
-          "text": "Không cho phép retry job"
+          "text": "Invariant cứng như số chunk không thể âm"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Xu hướng có tính mùa vụ theo tuần"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Thay đổi phân phối khó mô tả bằng lời"
         }
       ],
-      "answer": "A",
-      "explanation": "Chạy lại job không làm nhân bản hoặc làm sai kết quả. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "B",
+      "explanation": "Statistical/ML hợp xu hướng, seasonality nhưng cần lịch sử dài.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-040",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Quarantine?",
+      "prompt": "Điểm yếu của anomaly detection bằng thống kê/ML là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Xóa dữ liệu không cần kiểm tra"
+          "text": "Luôn tạo nhiều báo động giả hơn rule"
         },
         {
           "key": "B",
-          "text": "Cô lập dữ liệu đáng ngờ để điều tra thay vì đưa ngay vào phục vụ"
+          "text": "Cần lịch sử dài, khó giải thích"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Không phát hiện được thay đổi theo mùa"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chỉ kiểm tra được trường không null"
         }
       ],
       "answer": "B",
-      "explanation": "Cô lập dữ liệu đáng ngờ để điều tra thay vì đưa ngay vào phục vụ. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "explanation": "Hybrid: rule cho ràng buộc cứng + thống kê cho metric biến động.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-041",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về ETL / ELT, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Nhận định nào đúng về ngưỡng PSI/KL divergence?",
       "options": [
         {
           "key": "A",
-          "text": "Đồng nghĩa với việc chỉ copy file"
+          "text": "Không có ngưỡng chung; các nguồn bất đồng"
         },
         {
           "key": "B",
-          "text": "Tổ chức ingest, biến đổi và lưu dữ liệu theo kiến trúc phù hợp"
+          "text": "Ngưỡng chuẩn quốc tế là đúng 0,1"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "PSI không dùng được để theo dõi drift"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "KL divergence luôn đối xứng hai chiều"
         }
       ],
-      "answer": "B",
-      "explanation": "Tổ chức ingest, biến đổi và lưu dữ liệu theo kiến trúc phù hợp. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "PSI là Jeffreys divergence (tổng KL hai chiều) nên đối xứng.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-042",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Data quality, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Vì sao schema drift có thể nguy hiểm dù pipeline vẫn chạy?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Pipeline sẽ tự động crash ngay lập tức"
         },
         {
           "key": "B",
-          "text": "Kiểm tra dữ liệu đủ, hợp lệ, nhất quán, không trùng và kịp thời"
+          "text": "Schema drift chỉ ảnh hưởng tốc độ truy vấn"
         },
         {
           "key": "C",
-          "text": "Chỉ kiểm tra file có tồn tại"
+          "text": "Cột mới luôn bị bỏ qua hoàn toàn"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Cột mới có thể chứa dữ liệu nhạy cảm"
         }
       ],
-      "answer": "B",
-      "explanation": "Kiểm tra dữ liệu đủ, hợp lệ, nhất quán, không trùng và kịp thời. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Schema drift: thêm/xóa cột hoặc đổi kiểu ngoài kế hoạch.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-043",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Data contract, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Alert fatigue là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Lời hứa miệng không cần kiểm thử"
+          "text": "Người dùng nhận quá nhiều email marketing"
         },
         {
           "key": "B",
-          "text": "Thống nhất schema, ownership và kỳ vọng giữa producer với consumer"
+          "text": "Model mệt mỏi sau nhiều request liên tiếp"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Báo giả nhiều khiến người trực lơ cảnh báo"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Hệ thống cảnh báo bị quá tải và ngừng chạy"
         }
       ],
-      "answer": "B",
-      "explanation": "Thống nhất schema, ownership và kỳ vọng giữa producer với consumer. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Chọn severity, ownership, ngưỡng theo tác động thực tế.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-044",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Freshness SLA, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Data lineage giúp ích gì khi customers.region đổi kiểu dữ liệu?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chặn mọi truy vấn vào bảng customers"
         },
         {
           "key": "B",
-          "text": "Đặt ngưỡng dữ liệu được cập nhật kịp thời cho use case"
+          "text": "Ước tính các downstream bị ảnh hưởng"
         },
         {
           "key": "C",
-          "text": "Đo dung lượng file lớn hay nhỏ"
+          "text": "Tự động sửa kiểu dữ liệu về như cũ"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Xóa các bảng phụ thuộc để tránh lỗi"
         }
       ],
       "answer": "B",
-      "explanation": "Đặt ngưỡng dữ liệu được cập nhật kịp thời cho use case. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "explanation": "Ví dụ: join doanh thu sai, agent trả lời khu vực doanh thu cao nhất bằng số sai.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-045",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Schema drift, tiêu chí nào nên được ưu tiên?",
+      "prompt": "OpenLineage là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Đặc tả chuẩn để ghi lại lineage"
         },
         {
           "key": "B",
-          "text": "Phát hiện cấu trúc dữ liệu thay đổi so với kỳ vọng"
+          "text": "Một vector database mã nguồn mở"
         },
         {
           "key": "C",
-          "text": "Là việc vector thay đổi độ dài"
+          "text": "Thư viện kiểm tra chất lượng dữ liệu"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Orchestrator thay thế Airflow"
         }
       ],
-      "answer": "B",
-      "explanation": "Phát hiện cấu trúc dữ liệu thay đổi so với kỳ vọng. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Catalog giúp khám phá metadata; governance quy định quyền, mục đích, lưu, xóa.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-046",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Data drift, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Xóa một row ở database nguồn có tự xóa dữ liệu khỏi hệ RAG không?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Có; vector store tự đồng bộ ngay lập tức"
         },
         {
           "key": "B",
-          "text": "Phân phối hoặc đặc điểm dữ liệu thay đổi theo thời gian"
+          "text": "Có, nếu đã bật soft-delete"
         },
         {
           "key": "C",
-          "text": "Là lỗi UI đổi màu"
+          "text": "Không cần xóa vì embedding đã ẩn danh"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Không; phải xóa cả bản sao phái sinh"
         }
       ],
-      "answer": "B",
-      "explanation": "Phân phối hoặc đặc điểm dữ liệu thay đổi theo thời gian. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Cần deletion path, ghi trạng thái, kiểm tra và bằng chứng audit.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-047",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Idempotency, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Theo nghiên cứu Ghost Vectors, attack surface thật sự là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Không cho phép retry job"
+          "text": "API công khai của vector database"
         },
         {
           "key": "B",
-          "text": "Chạy lại job không làm nhân bản hoặc làm sai kết quả"
+          "text": "Prompt của người dùng cuối"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Byte vector còn trên đĩa sau soft-delete"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Cấu trúc đồ thị HNSW của index"
         }
       ],
-      "answer": "B",
-      "explanation": "Chạy lại job không làm nhân bản hoặc làm sai kết quả. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Trích bằng hnswlib.get_items() hoặc reconstruct_n(), bypass API; test trên ChromaDB, FAISS, Weaviate.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-048",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Quarantine, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Ba cam kết cụ thể của một dataset SLA là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Logo, màu sắc, font chữ"
         },
         {
           "key": "B",
-          "text": "Cô lập dữ liệu đáng ngờ để điều tra thay vì đưa ngay vào phục vụ"
+          "text": "Freshness, completeness, availability"
         },
         {
           "key": "C",
-          "text": "Xóa dữ liệu không cần kiểm tra"
+          "text": "Giá bán, khuyến mãi, bảo hành"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "CPU, RAM, dung lượng ổ cứng"
         }
       ],
       "answer": "B",
-      "explanation": "Cô lập dữ liệu đáng ngờ để điều tra thay vì đưa ngay vào phục vụ. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "explanation": "SLO nên có error budget, không chỉ một threshold cố định.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-049",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng ETL / ELT?",
+      "prompt": "Gate đã chặn lỗi trước khi tới agent. Nên chọn kiểu alert nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Ticket xử lý trong giờ làm việc"
         },
         {
           "key": "B",
-          "text": "Tổ chức ingest, biến đổi và lưu dữ liệu theo kiến trúc phù hợp"
+          "text": "Page người trực ngay lập tức"
         },
         {
           "key": "C",
-          "text": "Đồng nghĩa với việc chỉ copy file"
+          "text": "Không cần ghi nhận gì cả"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Gửi thông báo cho mọi người dùng"
         }
       ],
-      "answer": "B",
-      "explanation": "Tổ chức ingest, biến đổi và lưu dữ liệu theo kiến trúc phù hợp. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Page khi SLA cứng vi phạm và agent đang bị ảnh hưởng.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-050",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Data quality?",
+      "prompt": "Thứ tự runbook 6 bước xử lý sự cố dữ liệu là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Mitigate → Fix → Detect → Isolate → Post-mortem → Verify"
         },
         {
           "key": "B",
-          "text": "Kiểm tra dữ liệu đủ, hợp lệ, nhất quán, không trùng và kịp thời"
+          "text": "Post-mortem → Detect → Fix → Verify → Isolate → Mitigate"
         },
         {
           "key": "C",
-          "text": "Chỉ kiểm tra file có tồn tại"
+          "text": "Detect → Isolate → Mitigate → Fix → Verify → Post-mortem"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Fix → Detect → Verify → Isolate → Mitigate → Post-mortem"
         }
       ],
-      "answer": "B",
-      "explanation": "Kiểm tra dữ liệu đủ, hợp lệ, nhất quán, không trùng và kịp thời. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Verify chạy lại quality gate trước khi mở lại serving.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-051",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Data contract?",
+      "prompt": "Bước Mitigate trong runbook có thể gồm hành động nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Sửa ngay root cause trong source code"
         },
         {
           "key": "B",
-          "text": "Thống nhất schema, ownership và kỳ vọng giữa producer với consumer"
+          "text": "Viết báo cáo post-mortem chi tiết"
         },
         {
           "key": "C",
-          "text": "Lời hứa miệng không cần kiểm thử"
+          "text": "Chạy lại toàn bộ quality gate"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Dùng bản cũ đúng, gắn cảnh báo hoặc tắt tool"
         }
       ],
-      "answer": "B",
-      "explanation": "Thống nhất schema, ownership và kỳ vọng giữa producer với consumer. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Fix mới là sửa root cause; Verify là chạy lại gate.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-052",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Freshness SLA?",
+      "prompt": "Orchestrator điều phối pipeline dưới dạng gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "DAG"
         },
         {
           "key": "B",
-          "text": "Đặt ngưỡng dữ liệu được cập nhật kịp thời cho use case"
+          "text": "Danh sách liên kết"
         },
         {
           "key": "C",
-          "text": "Đo dung lượng file lớn hay nhỏ"
+          "text": "Cây nhị phân"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Bảng băm"
         }
       ],
-      "answer": "B",
-      "explanation": "Đặt ngưỡng dữ liệu được cập nhật kịp thời cho use case. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Xác định phụ thuộc, lịch chạy, trạng thái và retry.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-053",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Schema drift?",
+      "prompt": "Kiểu kích hoạt nào có nhược điểm “có thể chạy dù dữ liệu chưa về”?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chạy thủ công sau khi kiểm tra"
         },
         {
           "key": "B",
-          "text": "Phát hiện cấu trúc dữ liệu thay đổi so với kỳ vọng"
+          "text": "Cron theo lịch cố định"
         },
         {
           "key": "C",
-          "text": "Là việc vector thay đổi độ dài"
+          "text": "Event-driven theo webhook"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Asset-driven khi upstream cập nhật"
         }
       ],
       "answer": "B",
-      "explanation": "Phát hiện cấu trúc dữ liệu thay đổi so với kỳ vọng. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "explanation": "Backfill là chạy lại khoảng quá khứ sau khi sửa transform/đổi model.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-054",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Data drift?",
+      "prompt": "Retry 3 lần với lệnh INSERT không idempotent có thể gây gì cho vector store?",
       "options": [
         {
           "key": "A",
-          "text": "Phân phối hoặc đặc điểm dữ liệu thay đổi theo thời gian"
+          "text": "Làm hỏng embedding model"
         },
         {
           "key": "B",
-          "text": "Là lỗi UI đổi màu"
+          "text": "Không có ảnh hưởng gì"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Tạo chunk trùng lặp"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Xóa mất các chunk cũ"
         }
       ],
-      "answer": "A",
-      "explanation": "Phân phối hoặc đặc điểm dữ liệu thay đổi theo thời gian. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Dùng UPSERT; at-least-once + idempotent consumer ≈ effectively-once.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-055",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Idempotency?",
+      "prompt": "Vì sao không nên dùng datetime.now() trong task cho logic cần tái lập?",
       "options": [
         {
           "key": "A",
-          "text": "Chạy lại job không làm nhân bản hoặc làm sai kết quả"
+          "text": "datetime.now() không chạy trong Airflow"
         },
         {
           "key": "B",
-          "text": "Không cho phép retry job"
+          "text": "datetime.now() luôn trả về giờ UTC sai"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "datetime.now() làm chậm task gấp đôi"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chạy lại sẽ cho kết quả khác, phá idempotency"
         }
       ],
-      "answer": "A",
-      "explanation": "Chạy lại job không làm nhân bản hoặc làm sai kết quả. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Đọc/ghi theo partition cụ thể như data_interval_start.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-056",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Quarantine?",
+      "prompt": "Dead-letter queue (DLQ) dùng để làm gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Giữ record lỗi sau khi hết retry"
         },
         {
           "key": "B",
-          "text": "Cô lập dữ liệu đáng ngờ để điều tra thay vì đưa ngay vào phục vụ"
+          "text": "Xóa vĩnh viễn record lỗi để tiết kiệm chỗ"
         },
         {
           "key": "C",
-          "text": "Xóa dữ liệu không cần kiểm tra"
+          "text": "Ưu tiên chạy record quan trọng trước"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Lưu bản sao lưu toàn bộ database"
         }
       ],
-      "answer": "B",
-      "explanation": "Cô lập dữ liệu đáng ngờ để điều tra thay vì đưa ngay vào phục vụ. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Record lỗi không bị vứt bỏ âm thầm.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-057",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, ETL / ELT giúp đội ngũ làm điều gì?",
+      "prompt": "Khoản chi phí nào hay bị đánh giá thấp khi đổi embedding model?",
       "options": [
         {
           "key": "A",
-          "text": "Tổ chức ingest, biến đổi và lưu dữ liệu theo kiến trúc phù hợp"
+          "text": "Chi phí giấy phép hệ điều hành"
         },
         {
           "key": "B",
-          "text": "Đồng nghĩa với việc chỉ copy file"
+          "text": "Re-embed corpus và rebuild index"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chi phí lưu trữ file PDF gốc"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chi phí tên miền của website"
         }
       ],
-      "answer": "A",
-      "explanation": "Tổ chức ingest, biến đổi và lưu dữ liệu theo kiến trúc phù hợp. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "B",
+      "explanation": "Rebuild HNSW cần CPU/RAM, không chỉ phí embedding API.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-058",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Data quality giúp đội ngũ làm điều gì?",
+      "prompt": "Benchmark dbt Labs: Claude Sonnet 4.6 raw text-to-SQL 90% vs semantic layer 98,2%. Cần đọc con số này thế nào?",
       "options": [
         {
           "key": "A",
-          "text": "Kiểm tra dữ liệu đủ, hợp lệ, nhất quán, không trùng và kịp thời"
+          "text": "Chứng minh text-to-SQL không bao giờ dùng được"
         },
         {
           "key": "B",
-          "text": "Chỉ kiểm tra file có tồn tại"
+          "text": "Chỉ đúng với tiếng Việt"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Vendor tự làm, baseline yếu, có thể thiên vị"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Đã được kiểm chứng độc lập, áp dụng mọi domain"
         }
       ],
-      "answer": "A",
-      "explanation": "Kiểm tra dữ liệu đủ, hợp lệ, nhất quán, không trùng và kịp thời. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Benchmark trên schema và câu hỏi thật của domain mình.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-059",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Data contract giúp đội ngũ làm điều gì?",
+      "prompt": "Câu “80% thời gian data science là dọn dữ liệu” nên được xử lý thế nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Trích dẫn như sự thật đã được chứng minh"
         },
         {
           "key": "B",
-          "text": "Thống nhất schema, ownership và kỳ vọng giữa producer với consumer"
+          "text": "Dùng làm ngưỡng chuẩn cho mọi dự án"
         },
         {
           "key": "C",
-          "text": "Lời hứa miệng không cần kiểm thử"
+          "text": "Bỏ qua vì dọn dữ liệu không quan trọng"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Không coi là fact; truy nguồn có phương pháp"
         }
       ],
-      "answer": "B",
-      "explanation": "Thống nhất schema, ownership và kỳ vọng giữa producer với consumer. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Kiểm tra nguồn, ngày, phương pháp, sample size, baseline.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D10-060",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Freshness SLA giúp đội ngũ làm điều gì?",
+      "prompt": "Lab 10 yêu cầu chứng minh điều gì về việc chạy lại pipeline?",
       "options": [
         {
           "key": "A",
-          "text": "Đặt ngưỡng dữ liệu được cập nhật kịp thời cho use case"
+          "text": "Re-run nhanh hơn lần đầu gấp đôi"
         },
         {
           "key": "B",
-          "text": "Đo dung lượng file lớn hay nhỏ"
+          "text": "Re-run tự sửa dữ liệu bị hỏng"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Re-run không cần quality gate"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Re-run không tạo duplicate"
         }
       ],
-      "answer": "A",
-      "explanation": "Đặt ngưỡng dữ liệu được cập nhật kịp thời cho use case. Nội dung được biên soạn từ tài liệu Day10_Data_Pipeline_Observability_Beginner_Notes.html của Ngày 10.",
-      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Pipeline: ingest → clean → validate → chunk → embed → load; cố ý làm hỏng dữ liệu để so sánh.",
+      "source": "onthi/Day10_Data_Pipeline_Observability_Beginner_Notes.html + onthi/day10.pdf",
       "module": "C",
       "points": 1
     },
@@ -1696,8 +1696,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Giải thích ETL / ELT và nêu một ví dụ áp dụng trong sản phẩm AI.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm ETL / ELT, data quality, data contract, freshness SLA, data drift, orchestration, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Agent HR trả lời sai chính sách nghỉ phép dù không có lỗi nào được báo. Trình bày cách lần ngược 5 tầng (Output → Retrieval → Corpus → Pipeline → Source) và những gì cần kiểm tra ở từng tầng.",
+      "modelAnswer": "Output: câu trả lời, mức tự tin. Retrieval: log chunk nào vào context, version, ngày. Corpus: chunk cũ/trùng/mâu thuẫn với bản mới, index-version consistency. Pipeline: lần ingest/reindex thành công cuối, job lỗi/bỏ sót, watermark bỏ sót tài liệu cập nhật trễ. Source: văn bản gốc đúng chưa. Kết luận: đừng dừng ở “model hallucinate”; thêm freshness SLI, quality gate, metadata version.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1710,8 +1710,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "So sánh ETL / ELT với data quality; nêu tiêu chí lựa chọn trong một tình huống thực tế.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm ETL / ELT, data quality, data contract, freshness SLA, data drift, orchestration, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Thiết kế pipeline nạp chính sách nội bộ cho RAG theo Medallion (Bronze/Silver/Gold), nêu bước transform và các quality gate ở từng vị trí.",
+      "modelAnswer": "Bronze: raw để audit/replay. Silver: chuẩn hóa Unicode NFC, strip HTML, dedupe checksum, chốt format ngày/timezone, mask PII, kiểm null giả. Gold: tài liệu curated, version, phục vụ RAG. Gates: ingestion boundary (schema, required), post-transform (giá trị hợp lệ), pre-embed (cũ/trùng/mâu thuẫn), pre-serve (index lỗi). Lưu metadata version; RAG đọc từ Gold, không trỏ vào Bronze.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1724,8 +1724,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Thiết kế một quy trình ngắn sử dụng data contract để giảm rủi ro cho người dùng.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm ETL / ELT, data quality, data contract, freshness SLA, data drift, orchestration, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "So sánh fail-closed và fail-open, chọn chiến lược cho (a) corpus chính sách tín dụng và (b) dữ liệu tồn kho real-time; giải thích lý do.",
+      "modelAnswer": "Fail-closed: check fail thì chặn cập nhật/serving, dùng dữ liệu cũ đã biết đúng — hợp (a) vì trả lời sai nguy hiểm hơn trả lời cũ. Fail-open: log và vẫn tiếp tục — có thể hợp (b) vì tồn kho cũ gây hại hơn dữ liệu mới chưa chắc chắn, nhưng phải chấp nhận rủi ro rõ, cảnh báo stale, theo dõi. Quyết định theo rủi ro, ghi trong data contract.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1738,8 +1738,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Phân tích một failure mode liên quan đến freshness SLA, nguyên nhân và cách khắc phục.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm ETL / ELT, data quality, data contract, freshness SLA, data drift, orchestration, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Viết một data contract cho dataset “orders” mà agent CSKH dùng, gồm schema, semantics, SLA/SLO và ownership, kèm cách thực thi.",
+      "modelAnswer": "Schema: order_id (string, required, unique), status (enum), updated_at (timestamp UTC, required), amount (decimal VND). Semantics: status “delivered” nghĩa là đã giao thành công… SLA/SLO: freshness ≤ 15 phút, completeness ≥ 99,5%, availability; error budget. Ownership: team nguồn sở hữu, kênh alert, severity. Thực thi: gate ở ingestion boundary, test dbt/GX, shift-left kiểm tra khi producer thay đổi, schema drift alert.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1752,8 +1752,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Đề xuất metric đánh giá cho data drift; giải thích vì sao metric đó hữu ích.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm ETL / ELT, data quality, data contract, freshness SLA, data drift, orchestration, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Thiết kế bộ metric observability cho corpus RAG (theo 5 pillars và metric riêng cho RAG) và cách đặt alert tránh alert fatigue.",
+      "modelAnswer": "Freshness SLI (tuổi ingest), Volume (row-count delta), Quality (null-rate metadata), Schema (drift), Lineage; RAG: embedding coverage, index-version consistency, retrieval staleness, contradiction rate. Alert: rule cho invariant cứng, thống kê cho metric biến động; tránh chỉ dùng “không update N giờ”; xử lý timezone/clock skew; phân severity page/ticket/dashboard, owner rõ, xem lại tỷ lệ báo giả định kỳ.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1766,8 +1766,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Lập kế hoạch thử nghiệm nhỏ cho orchestration: giả định, dữ liệu, tiêu chí đạt và tiêu chí dừng.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm ETL / ELT, data quality, data contract, freshness SLA, data drift, orchestration, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Một người dùng yêu cầu xóa toàn bộ dữ liệu cá nhân của họ khỏi knowledge base RAG. Thiết kế deletion path và cách chứng minh đã xóa.",
+      "modelAnswer": "Tìm qua lineage mọi bản phái sinh: bản nguồn, chunk, embedding, vector index, cache, backup. Xóa và rebuild/compact để tránh soft-delete (Ghost Vectors: float32 còn trên đĩa); cân nhắc epoch key rotation; ghi trạng thái từng bước, kiểm tra bằng truy vấn thử, lưu bằng chứng audit. Nêu GDPR Art. 17 yêu cầu xóa kiểm chứng được; đưa vào thiết kế từ đầu cùng retention, consent.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1780,8 +1780,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Tình huống: kết quả liên quan đến ETL / ELT không đạt kỳ vọng. Bạn sẽ debug theo thứ tự nào?",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm ETL / ELT, data quality, data contract, freshness SLA, data drift, orchestration, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Đổi embedding model cho corpus 500.000 tài liệu. Lập kế hoạch re-embed, rollout và kiểm soát chi phí.",
+      "modelAnswer": "Đổi model → không gian vector mới → re-embed toàn bộ (không trộn vector hai model). Ước tính token (~400 triệu) × giá hiện hành + compute rebuild index. Backfill idempotent theo partition, UPSERT, DLQ. Build dual-index, validate recall trên eval set, chuyển traffic dần (blue-green), giữ index cũ để rollback. Lưu metadata version. Cân nhắc Drift-Adapter chỉ như hướng nghiên cứu (preprint).",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1794,8 +1794,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Viết khuyến nghị cho stakeholder về lợi ích, giới hạn và rủi ro của data quality.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm ETL / ELT, data quality, data contract, freshness SLA, data drift, orchestration, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Một job ingest bị retry và tạo chunk trùng trong vector store. Phân tích nguyên nhân và thiết kế lại để chạy lại an toàn.",
+      "modelAnswer": "Nguyên nhân: INSERT không idempotent, logic dùng datetime.now(), không xử lý theo partition. Sửa: UPSERT theo ID/checksum, đọc/ghi theo data_interval partition, retry exponential backoff, DLQ cho record fail, quy định partial failure trong DAG. At-least-once + idempotent consumer ≈ effectively-once; không khẳng định exactly-once. Test: chạy lại job và kiểm tra không tăng số chunk.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1808,8 +1808,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Nêu các đánh đổi khi triển khai data contract trong production và cách theo dõi sau triển khai.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm ETL / ELT, data quality, data contract, freshness SLA, data drift, orchestration, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Viết runbook 6 bước cho sự cố: corpus HR không được cập nhật 3 ngày, agent đang trả lời theo chính sách cũ.",
+      "modelAnswer": "Detect: alert freshness SLI vi phạm, nguồn nào. Isolate: dataset HR, agent/tool HR bị ảnh hưởng. Mitigate: gắn cảnh báo stale, fail-closed hoặc chuyển câu hỏi chính sách sang người. Fix: sửa root cause (watermark, credential, rate limit 429…), backfill. Verify: chạy lại quality gate trước khi mở lại. Post-mortem: nguyên nhân, phạm vi, thời gian phát hiện/sửa, hành động ngăn tái diễn. Alert kiểu page vì SLA cứng và agent đang bị ảnh hưởng.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1822,8 +1822,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Tạo checklist trước khi ship một tính năng AI có dùng freshness SLA và data drift.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm ETL / ELT, data quality, data contract, freshness SLA, data drift, orchestration, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Đánh giá một claim vendor: “Công cụ X giảm 90% false positive trong data observability”. Trình bày cách kiểm tra claim theo hướng dẫn Day 10.",
+      "modelAnswer": "Hỏi: nguồn gốc (paper, vendor blog, khảo sát), ngày sự kiện vs ngày công bố, có methodology, sample size, data công khai để tái lập không, con số đo chính xác điều gì, baseline có công bằng không, áp dụng được cho domain mình không. Phân biệt documentation đã triển khai với preprint/roadmap. Kết luận: thử trên dữ liệu và ngưỡng thật của mình, theo dõi tỷ lệ báo giả thực tế.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",

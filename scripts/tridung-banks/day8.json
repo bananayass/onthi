@@ -1,0 +1,526 @@
+{
+ "mcq": [
+  [
+   "RAG gồm ba pipeline phối hợp nào?",
+   "Indexing → Retrieval → Generation",
+   "Training → Fine-tuning → Deployment",
+   "Parsing → Hashing → Encryption",
+   "Routing → Voting → Aggregation",
+   "RAG không chỉ là “thêm context vào prompt”, mà là phối hợp ba khối kiến trúc."
+  ],
+  [
+   "Pipeline nào trong RAG thường chạy ngầm/offline trước khi người dùng hỏi?",
+   "Indexing",
+   "Retrieval",
+   "Generation",
+   "Reranking",
+   "Retrieval và Generation chạy real-time khi user hỏi."
+  ],
+  [
+   "Theo slide, vì sao LLM có thể “bịa” thông tin một cách tự tin?",
+   "Là cỗ máy dự đoán từ tiếp theo, ưu tiên trôi chảy hơn chính xác",
+   "Luôn được huấn luyện trên dữ liệu nội bộ mới nhất của công ty",
+   "Được thiết kế để từ chối mọi câu hỏi không có trong dữ liệu",
+   "Chỉ sinh câu trả lời khi có ít nhất một tài liệu nguồn",
+   "Kết hợp với knowledge cutoff, thiếu dữ kiện thì model vẫn tạo câu nghe hợp lý."
+  ],
+  [
+   "So với fine-tuning, RAG có lợi thế gì về phân quyền truy cập?",
+   "Lọc được tài liệu theo người dùng, phòng ban, quyền",
+   "Mọi kiến thức nằm trong trọng số nên tự bảo mật",
+   "Không cần quản lý quyền vì model tự nhận diện",
+   "Phân quyền được thực hiện khi huấn luyện lại model",
+   "Fine-tuning gộp kiến thức vào trọng số nên khó tách quyền theo tài liệu."
+  ],
+  [
+   "Fine-tuning phù hợp nhất cho mục đích nào theo bài?",
+   "Điều chỉnh tone, format, cách nói của model",
+   "Nhồi các sự kiện mới thay đổi hằng ngày",
+   "Cập nhật chính sách nội bộ theo thời gian thực",
+   "Trích dẫn nguồn tài liệu cho mỗi câu trả lời",
+   "Fine-tuning để nhồi facts vừa đắt vừa dễ catastrophic forgetting."
+  ],
+  [
+   "Lý do “Freshness” khiến doanh nghiệp chọn RAG là gì?",
+   "Đổi chính sách chỉ cần cập nhật index, không train lại",
+   "Model tự động tải tin tức mới từ Internet mỗi giờ",
+   "Vector DB tự viết lại tài liệu cũ cho phù hợp",
+   "Câu trả lời luôn được cache vĩnh viễn để nhanh hơn",
+   "Hai lý do khác: auditability (citation) và access control (RBAC)."
+  ],
+  [
+   "Câu “Your LLM is only as smart as your retrieval system” nhấn mạnh điều gì?",
+   "Retrieval mang về nhiễu thì prompt hay cũng vô dụng",
+   "Model càng lớn thì retrieval càng không quan trọng",
+   "Retrieval chỉ cần thiết với model nhỏ dưới 8B",
+   "Prompt engineering quan trọng hơn mọi yếu tố khác",
+   "Data-centric AI: lợi thế cạnh tranh nằm ở pipeline dữ liệu."
+  ],
+  [
+   "Ở bước Retrieval, câu hỏi của user phải được mã hóa bằng model nào?",
+   "Đúng embedding model đã dùng ở bước Indexing",
+   "Model sinh câu trả lời lớn nhất có sẵn",
+   "Bất kỳ embedding model nào có số chiều cao hơn",
+   "Model rerank cross-encoder của hệ thống",
+   "Khác model thì query và document không cùng không gian vector."
+  ],
+  [
+   "Theo slide “Nút cổ chai”, khi RAG trả lời sai, kỹ sư thường mắc sai lầm gì?",
+   "Vội sửa prompt hoặc đổi model lớn hơn",
+   "Kiểm tra context đã retrieve trước tiên",
+   "Đo Context Recall trên golden dataset",
+   "Xem lại cách chunk và metadata",
+   "Slide minh họa phần lớn lỗi nằm ở retrieval; cần kiểm tra context trước."
+  ],
+  [
+   "Vì sao bảng biểu là “cơn ác mộng” với cách cắt text thông thường?",
+   "Bảng bị xẻ đôi, nửa dưới mất liên kết với header",
+   "Bảng luôn có quá nhiều màu sắc khó nhận diện",
+   "Bảng không thể chuyển sang dạng Markdown",
+   "Bảng chỉ chứa số nên embedding bỏ qua",
+   "Giải pháp: parser chuyên dụng (LlamaParse, Unstructured) ra HTML/Markdown."
+  ],
+  [
+   "Multimodal parsing bằng Vision LLM có nhược điểm gì?",
+   "Tốn chi phí API và chậm với kho hàng triệu trang",
+   "Không đọc được biểu đồ hay bố cục phức tạp",
+   "Chỉ hỗ trợ tài liệu tiếng Anh dạng text thuần",
+   "Không lưu được diễn giải hình ảnh vào index",
+   "Ưu điểm: hiểu cấu trúc phức tạp, đọc được biểu đồ."
+  ],
+  [
+   "Redaction trong bước làm sạch dữ liệu nghĩa là gì?",
+   "Che/xóa PII như CCCD, số thẻ trước khi lưu",
+   "Gộp khoảng trắng thừa và sửa lỗi font tiếng Việt",
+   "Xóa các ký tự điều khiển làm rối model",
+   "Ghép các đoạn văn ngắn thành một đoạn dài",
+   "Ví dụ: “KH [REDACTED], SDT: [REDACTED]”."
+  ],
+  [
+   "Ưu và nhược điểm của Batch processing khi ingestion là gì?",
+   "Dễ làm nhưng dữ liệu có thể cũ giữa hai lần chạy",
+   "Luôn mới nhất nhưng cần webhook phức tạp",
+   "Không bao giờ trùng lặp nhưng rất tốn GPU",
+   "Rất nhanh nhưng không hỗ trợ metadata",
+   "Event-driven (delta sync) giữ dữ liệu mới hơn nhưng cần xử lý sự kiện tin cậy."
+  ],
+  [
+   "Trong event-driven ingestion, bước “Hash check” dùng để làm gì?",
+   "Nhận ra nội dung mới hay đã tồn tại, tránh lưu trùng",
+   "Mã hóa tài liệu để không ai đọc được",
+   "Rút gọn tài liệu thành một chuỗi ngắn để embed",
+   "Kiểm tra quyền truy cập của người sửa file",
+   "Đảm bảo idempotency: chạy lại không tạo bản sao ngoài ý muốn."
+  ],
+  [
+   "Vì sao không nên nhúng cả một chương sách vào một vector?",
+   "Ý chính bị pha loãng, khó khớp câu hỏi cụ thể",
+   "Vector DB giới hạn mỗi vector đúng 100 từ",
+   "Embedding model không đọc được đoạn có heading",
+   "Chương sách luôn chứa PII cần che trước",
+   "Vector search tìm “mật độ” ý nghĩa; chunk giúp tìm đúng đoạn."
+  ],
+  [
+   "“Tử huyệt” của fixed-size chunking là gì?",
+   "Dễ cắt ngang câu, làm đứt nghĩa",
+   "Không dự đoán được dung lượng database",
+   "Rất khó lập trình và chạy chậm",
+   "Không dùng được với văn bản tiếng Việt",
+   "Ưu điểm: dễ code, nhanh, dự đoán được dung lượng."
+  ],
+  [
+   "Recursive chunking (mặc định LangChain) ưu tiên cắt theo thứ tự nào?",
+   "\\n\\n → \\n → dấu chấm → từ/ký tự",
+   "Ký tự → từ → câu → đoạn văn",
+   "Dấu chấm → đoạn văn → ký tự → xuống dòng",
+   "Ngẫu nhiên tại bất kỳ vị trí nào",
+   "Tôn trọng ranh giới ngôn ngữ thay vì cắt mù quáng."
+  ],
+  [
+   "Với mã nguồn, structure-aware chunking dùng công cụ gì để không cắt đứt một hàm?",
+   "AST (Abstract Syntax Tree)",
+   "OCR nhận dạng ký tự",
+   "Cosine similarity giữa các dòng",
+   "Regex cắt theo 500 ký tự",
+   "Markdown/HTML thì tách theo thẻ H1, H2."
+  ],
+  [
+   "Small-to-Big (Parent–Child) retrieval hoạt động thế nào?",
+   "Tìm bằng chunk nhỏ, gửi đoạn cha vào prompt",
+   "Tìm bằng đoạn cha lớn, rồi cắt nhỏ trước khi gửi",
+   "Chỉ lưu chunk lớn, bỏ hoàn toàn chunk nhỏ",
+   "Gửi toàn bộ tài liệu khi tìm trúng một câu",
+   "Giải quyết mâu thuẫn: chunk nhỏ chính xác, chunk to giàu ngữ cảnh."
+  ],
+  [
+   "Cách “Row to Text” khi chunk bảng là gì?",
+   "Biến mỗi dòng thành một câu đủ nghĩa có tên cột",
+   "Lưu toàn bộ bảng thành một ảnh chụp màn hình",
+   "Chỉ lưu tiêu đề cột, bỏ toàn bộ giá trị",
+   "Ghép tất cả ô thành một dãy số liền nhau",
+   "Cách 2: dùng LLM tóm tắt bảng rồi embed đoạn tóm tắt."
+  ],
+  [
+   "Vì sao vector search có thể trả nhầm ERR-810 khi hỏi ERR-809?",
+   "Embedding xếp hai mã gần nhau",
+   "BM25 đã loại ERR-809 khỏi chỉ mục",
+   "Metadata filter chặn mất tài liệu đúng",
+   "Chunk overlap làm hai mã bị gộp làm một",
+   "Vector rất tệ với exact match: mã hợp đồng, ID lỗi, số series."
+  ],
+  [
+   "Theo slide, một chunk tốt cần mang “giấy tờ tùy thân” nào?",
+   "Metadata: nguồn, loại, ngày tạo, phòng ban",
+   "Chỉ cần raw text, không cần thông tin gì thêm",
+   "Mật khẩu của người tạo tài liệu",
+   "Điểm cosine của lần tìm kiếm trước",
+   "Metadata cho phép cắt giảm không gian tìm kiếm trước khi chạy vector."
+  ],
+  [
+   "Post-filtering có rủi ro gì so với pre-filtering?",
+   "Có thể rớt tài liệu nằm ngoài top đã lấy",
+   "Luôn chậm hơn vì phải quét toàn bộ database",
+   "Không thể dùng cùng metadata ngày tháng",
+   "Làm lộ tài liệu của phòng ban khác ra ngoài",
+   "Ví dụ lấy top 100 rồi lọc năm 2026, tài liệu ở hạng 101 bị bỏ lỡ."
+  ],
+  [
+   "Query Expansion giúp gì cho câu hỏi “nghỉ đẻ”?",
+   "Thêm từ đồng nghĩa như “nghỉ thai sản” để tăng recall",
+   "Chia thành hai câu hỏi nhỏ chạy song song",
+   "Lùi lại hỏi nguyên tắc chung trước",
+   "Sinh một câu trả lời giả để lấy vector",
+   "Expansion sửa chính tả, thêm đồng nghĩa và thuật ngữ chuyên ngành."
+  ],
+  [
+   "Câu “So sánh chính sách hoàn tiền của Shopee và Tiki” nên dùng kỹ thuật nào?",
+   "Query Decomposition",
+   "Query Expansion",
+   "Step-back prompting",
+   "HyDE",
+   "Tách thành hai truy vấn, tìm song song rồi gộp context (multi-hop)."
+  ],
+  [
+   "Step-back prompting xử lý câu “Lỗi 404 khi gọi API thanh toán Momo của user 8910” thế nào?",
+   "Hỏi trước về kiến trúc tích hợp cổng Momo",
+   "Tìm chính xác chuỗi “8910” bằng BM25",
+   "Dịch câu hỏi sang tiếng Anh rồi tìm",
+   "Chia thành hai câu hỏi về Momo và 404",
+   "Lùi lại lấy ngữ cảnh quy tắc chung khi câu hỏi quá cụ thể."
+  ],
+  [
+   "Vì sao HyDE lại tìm tốt hơn dùng thẳng vector câu hỏi?",
+   "Câu trả lời giả có dạng giống tài liệu thật",
+   "Câu trả lời giả luôn đúng sự thật nên đáng tin hơn",
+   "HyDE không cần gọi LLM nên rẻ hơn rất nhiều",
+   "HyDE dùng BM25 nên khớp được mã chính xác",
+   "HyDE “kéo” query vector về cụm chứa document vectors."
+  ],
+  [
+   "Đánh đổi chính khi bật Query Transformation là gì?",
+   "Tăng recall nhưng thêm latency và chi phí token",
+   "Giảm latency nhưng làm recall giảm mạnh",
+   "Giảm chi phí nhưng mất khả năng trích dẫn",
+   "Tăng bảo mật nhưng không dùng được hybrid",
+   "Checklist: chỉ bật khi query mơ hồ nhiều, dùng model rẻ, kết hợp semantic cache."
+  ],
+  [
+   "Sparse vector trong BM25 có đặc điểm gì?",
+   "Rất dài (bằng từ điển) nhưng hầu hết là số 0",
+   "Ngắn, cố định 384 chiều, toàn số thực",
+   "Chỉ có đúng một chiều khác 0 duy nhất",
+   "Được sinh bởi mạng Transformer nhiều lớp",
+   "BM25 đánh trọng số cao cho từ hiếm, phớt lờ từ phổ biến."
+  ],
+  [
+   "Tử huyệt của sparse search (BM25) là gì?",
+   "Nhạy với lỗi chính tả, không hiểu từ đồng nghĩa",
+   "Không tìm được mã lỗi và ID chính xác",
+   "Cần GPU mạnh để tạo vector cho mỗi tài liệu",
+   "Không chạy được trên Elasticsearch",
+   "“Tôi muốn đòi lại tiền” vs “Chính sách hoàn tiền” → BM25 có thể 0 kết quả."
+  ],
+  [
+   "“Nghịch lý Enterprise RAG” trong slide nói gì?",
+   "Với hợp đồng, log, luật, BM25 thường quan trọng hơn vector",
+   "Doanh nghiệp không nên dùng RAG cho tài liệu nội bộ",
+   "Vector search luôn thắng BM25 trong doanh nghiệp",
+   "Doanh nghiệp chỉ cần fine-tuning là đủ",
+   "Tutorial chỉ dạy vector search vì “nghe có vẻ AI”."
+  ],
+  [
+   "Bài toán “Cam và Táo” trong hybrid search là gì?",
+   "Score cosine và BM25 khác thang, không cộng thẳng",
+   "Dense và sparse trả về số lượng tài liệu khác nhau",
+   "Hai index dùng hai ngôn ngữ lập trình khác nhau",
+   "BM25 chỉ chạy được trên CPU, dense chạy trên GPU",
+   "Giải pháp: RRF gộp theo thứ hạng, k mặc định 60."
+  ],
+  [
+   "Alpha được gợi ý cho hệ thống tra cứu code, log, luật pháp là bao nhiêu?",
+   "Khoảng 0.2–0.4, ưu tiên khớp chính xác",
+   "Khoảng 0.7–0.9, ưu tiên ngữ nghĩa",
+   "Đúng bằng 1.0, thuần vector",
+   "Đúng bằng 0.5 cho mọi domain",
+   "Chatbot FAQ: α = 0.7–0.9 để hiểu ý định mơ hồ."
+  ],
+  [
+   "Chi phí tài nguyên khi chạy hybrid search là gì?",
+   "Hai index nên tốn gấp đôi lưu trữ, thêm tải CPU",
+   "Không tốn thêm tài nguyên so với dense thuần",
+   "Chỉ tốn thêm chi phí API của nhà cung cấp LLM",
+   "Giảm lưu trữ vì BM25 nén thay vector",
+   "Bài coi đây là đánh đổi xứng đáng cho chất lượng enterprise."
+  ],
+  [
+   "Top-k nào được slide gọi là “sweet spot”?",
+   "Top-3 đến top-5",
+   "Top-1",
+   "Top-50 trở lên",
+   "Top-100",
+   "k thấp thiếu chứng cứ; k cao nhiễu, lãng phí token."
+  ],
+  [
+   "Kiến trúc “retrieve-and-rerank” hai giai đoạn hoạt động thế nào?",
+   "Kéo nhanh top 50–100, reranker chấm lại, lấy top 3–5",
+   "Rerank toàn bộ database trước, rồi mới tìm kiếm",
+   "Chỉ dùng reranker, bỏ hoàn toàn bước retrieve",
+   "Tìm top-1 rồi mở rộng ra top-100",
+   "Retriever “thô và rộng”, tài liệu đúng có thể chìm ở top 8–10."
+  ],
+  [
+   "Cross-encoder khác bi-encoder thế nào?",
+   "Ghép query và document, đưa qua model cùng lúc",
+   "Mã hóa query và document riêng rồi so khoảng cách",
+   "Chỉ đếm từ khóa trùng nhau giữa hai đoạn",
+   "Dùng cây quyết định thay cho mạng nơ-ron",
+   "Nhờ attention, cross-encoder hiểu tương tác từng từ; chính xác nhưng chậm."
+  ],
+  [
+   "Vì sao không bao giờ dùng reranker để quét toàn bộ database?",
+   "Cross-encoder quá chậm và tốn compute",
+   "Reranker không hiểu tiếng Việt",
+   "Reranker chỉ nhận đúng 3 tài liệu",
+   "Reranker xóa tài liệu sau khi chấm",
+   "Chỉ dùng cho danh sách nhỏ đã lọt qua vòng 1."
+  ],
+  [
+   "Ba chunk “Hoàn tiền mất 7 ngày”, “Tiền về sau 7 ngày”, “Xử lý hoàn tiền 7 ngày” cùng vào prompt. Vấn đề và cách xử lý là gì?",
+   "Redundancy; dùng MMR để tăng đa dạng",
+   "Lost in the middle; đổi thứ tự tài liệu",
+   "Conflicting context; ưu tiên bản mới nhất",
+   "Silent truncation; giảm chunk size",
+   "MMR tối đa relevance nhưng phạt trùng lặp với các chunk đã chọn."
+  ],
+  [
+   "Câu hỏi mở “Tóm tắt các rủi ro của dự án A từ mọi báo cáo” nên ưu tiên kỹ thuật nào?",
+   "MMR (đa dạng góc nhìn)",
+   "Cross-encoder (chính xác tuyệt đối)",
+   "BM25 thuần (khớp từ khóa)",
+   "Top-1 retrieval",
+   "Cross-encoder hợp câu hỏi cần chính xác tuyệt đối như fact-check, legal."
+  ],
+  [
+   "Pattern context injection nào được coi là chuẩn production?",
+   "Bọc từng tài liệu bằng thẻ XML có id, source",
+   "Ghép mọi chunk thành một khối bằng .join()",
+   "Đặt context sau phần Answer của prompt",
+   "Bỏ metadata để tiết kiệm token",
+   "Pre-pending thô làm model không phân biệt ranh giới tài liệu."
+  ],
+  [
+   "Phân bổ token budget tham khảo trong slide là gì?",
+   "20% rules, 60% context, 20% query + output",
+   "60% system rules, 20% context, 20% output",
+   "5% system rules, 90% context, 5% output",
+   "33% chia đều cho ba phần",
+   "Đây là heuristic để bắt đầu, không phải công thức cứng."
+  ],
+  [
+   "Thủ thuật Document Reordering chống “Lost in the Middle” xếp top 5 vào prompt theo thứ tự nào?",
+   "[1, 3, 5, 4, 2]",
+   "[1, 2, 3, 4, 5]",
+   "[5, 4, 3, 2, 1]",
+   "[3, 1, 2, 5, 4]",
+   "Tốt nhất ở đầu, tốt thứ hai ở cuối, điểm thấp giấu vào giữa."
+  ],
+  [
+   "Grounding trong RAG nghĩa là gì?",
+   "Chỉ dùng context được cấp, không dùng kiến thức ngoài",
+   "Cho model tự do bổ sung kiến thức Internet khi cần",
+   "Lưu câu trả lời vào database để dùng lại",
+   "Giảm số tài liệu đưa vào xuống còn một",
+   "Nếu đổi context sai, model cũng phải trả lời theo context đó."
+  ],
+  [
+   "Bốn phần của một system prompt RAG chuẩn là gì?",
+   "Role, Task, Context, Strict Constraints",
+   "Persona, Tool, Memory, Loop",
+   "Question, Answer, Score, Feedback",
+   "Model, Index, Rerank, Cache",
+   "Strict constraints: cấm bịa, bắt buộc trích dẫn, từ chối khi thiếu bằng chứng."
+  ],
+  [
+   "Graceful degradation tốt khác “Tôi không biết” cụt lủn thế nào?",
+   "Báo chưa tìm thấy và gợi ý từ khóa khác hoặc kênh hỗ trợ",
+   "Đoán câu trả lời gần đúng nhất để làm hài lòng user",
+   "Trả về danh sách tất cả tài liệu có trong kho",
+   "Hỏi lại người dùng đúng câu hỏi ban đầu",
+   "Không đoán mò, nhưng vẫn đưa bước tiếp theo hữu ích."
+  ],
+  [
+   "Tài liệu A (2024) nói 12 ngày phép, tài liệu B (2026) nói 14 ngày. Prompt nên hướng dẫn gì?",
+   "Ưu tiên bản mới nhất hoặc nêu rõ mâu thuẫn",
+   "Cộng hai con số lại thành 26 ngày",
+   "Chọn ngẫu nhiên một trong hai tài liệu",
+   "Lấy trung bình 13 ngày cho an toàn",
+   "Đây là lỗi generation “conflicting context”."
+  ],
+  [
+   "Tài liệu ghi “miễn phí ship cho đơn trên 500k ở Hà Nội”, model trả lời HCM cũng được miễn phí. Đây là lỗi gì?",
+   "Over-extrapolation (suy diễn quá đà)",
+   "Conflicting context (mâu thuẫn tài liệu)",
+   "Ignored constraints (bỏ qua quy tắc)",
+   "Low context recall (thiếu tài liệu)",
+   "Khắc phục bằng strict grounding: không suy luận điều kiện không được nêu."
+  ],
+  [
+   "Model nhỏ hay quên trích dẫn khi context dài. Cách khắc phục được gợi ý là gì?",
+   "Đặt rule quan trọng ở cuối prompt, temperature = 0",
+   "Đặt rule ở đầu prompt, tăng temperature lên 1",
+   "Bỏ yêu cầu trích dẫn để model trả lời nhanh",
+   "Tăng top-k lên 50 để model có nhiều nguồn hơn",
+   "Lỗi “ignored constraints” thường gặp ở model ~8B hoặc context quá dài."
+  ],
+  [
+   "Bước debug đầu tiên khi RAG trả lời sai là gì?",
+   "In formatted_context xem có chứa đáp án không",
+   "Đổi sang model lớn và đắt hơn ngay",
+   "Viết lại toàn bộ system prompt dài hơn",
+   "Tăng top-k lên gấp đôi",
+   "Có đáp án → sửa generation; không có → sửa indexing/retrieval."
+  ],
+  [
+   "Vì sao inline citation nên là hyperlink?",
+   "Để user mở đoạn gốc đối chiếu nhanh",
+   "Để tăng điểm SEO cho trang trả lời",
+   "Để model nhớ nguồn cho lần trả lời sau",
+   "Để giảm số token của câu trả lời",
+   "UX quyết định độ tin cậy; source blocks liệt kê tài liệu ở cuối."
+  ],
+  [
+   "Context Recall trong RAGAS đo điều gì?",
+   "Retriever có mang về đủ bằng chứng cần thiết không",
+   "Câu trả lời có bám sát context hay bịa thêm",
+   "Câu trả lời có đúng trọng tâm câu hỏi không",
+   "Thời gian trả về kết quả tìm kiếm",
+   "Cần A, B, C mà chỉ có A, B → recall thấp."
+  ],
+  [
+   "Context nói “Sản phẩm A màu đỏ”, LLM trả lời “A màu đỏ và bảo hành 1 năm”. Metric nào bị trừ điểm?",
+   "Faithfulness",
+   "Context Recall",
+   "Answer Relevance",
+   "Precision@k",
+   "Khắc phục: tinh chỉnh prompt, ép citation, temperature về 0."
+  ],
+  [
+   "Hỏi thời gian bảo hành nhưng AI kể màu sắc và ưu điểm chung. Metric nào thấp?",
+   "Answer Relevance",
+   "Faithfulness",
+   "Context Recall",
+   "MRR",
+   "Câu trả lời có thể đúng sự thật nhưng không đúng trọng tâm."
+  ],
+  [
+   "Scorecard cho thấy Recall thấp nhưng Faithfulness cao. Chẩn đoán đúng là gì?",
+   "Không tìm thấy nên trả lời “không biết”; sửa retrieval",
+   "Model bịa thông tin dù tìm đúng tài liệu; sửa prompt",
+   "Hệ thống đã sẵn sàng production",
+   "Cả retrieval lẫn generation đều hỏng nặng",
+   "Recall cao + Faithfulness thấp mới là lỗi generation."
+  ],
+  [
+   "Golden dataset để chạy RAGAS cần các cột bắt buộc nào?",
+   "Question, Ground Truth, Contexts",
+   "Model, Temperature, Top-k",
+   "User ID, Session, Timestamp",
+   "Prompt, Latency, Cost",
+   "Nên có 50–100 mẫu, gồm câu đánh đố, mơ hồ, không có trong tài liệu."
+  ],
+  [
+   "Nguyên tắc sống còn khi A/B test pipeline RAG là gì?",
+   "Chỉ thay đổi một biến số mỗi lần",
+   "Đổi càng nhiều thứ càng tốt để tiết kiệm thời gian",
+   "Chỉ test bằng 3–5 câu cho nhanh",
+   "Đổi bộ test mỗi lần chạy để khách quan",
+   "Đổi nhiều thứ cùng lúc thì không biết yếu tố nào có tác dụng."
+  ],
+  [
+   "Case study chuyển từ dense sang hybrid search cho kết quả gì trên scorecard?",
+   "Context Recall tăng từ 60% lên 90%",
+   "Faithfulness giảm từ 90% xuống 60%",
+   "Latency giảm từ 4 giây xuống 1 giây",
+   "Answer Relevance không thay đổi",
+   "Nhờ bắt được các mã lỗi chính xác; kéo theo faithfulness tăng."
+  ],
+  [
+   "Reranker tăng Answer Relevance 5% nhưng latency từ 1s lên 4s và chi phí server gấp đôi. Bài học là gì?",
+   "Cân nhắc chất lượng với độ trễ và chi phí",
+   "Luôn bật reranker vì chất lượng là trên hết",
+   "Không bao giờ dùng reranker trong production",
+   "Chỉ cần đo latency, bỏ qua chất lượng",
+   "Chọn kỹ thuật dựa trên ROI thực tế, không chỉ vì mới."
+  ],
+  [
+   "Khác biệt giữa RAG một lượt và agent dùng retrieval như tool là gì?",
+   "Agent tự quyết khi nào tìm và lặp lại",
+   "RAG một lượt luôn chính xác hơn agent",
+   "Agent không thể truy cập tài liệu nội bộ",
+   "RAG một lượt bắt buộc dùng SQL",
+   "Retriever có thể đóng gói thành tool search_internal_docs(query)."
+  ]
+ ],
+ "essay": [
+  [
+   "So sánh fine-tuning và RAG theo chi phí cập nhật, rủi ro hallucination và kiểm soát truy cập; đề xuất cách tiếp cận cho trợ lý tra cứu chính sách nhân sự thay đổi mỗi quý.",
+   "Fine-tuning: cập nhật cần retrain, đắt; kiến thức tĩnh trong trọng số dễ hallucinate, catastrophic forgetting; khó phân quyền. RAG: cập nhật index, grounded với citation, phân quyền theo tài liệu (RBAC), auditability. Chính sách đổi mỗi quý → RAG với event-driven ingestion, metadata version/ngày, xử lý conflicting context; fine-tuning chỉ dùng nếu cần đổi tone/format."
+  ],
+  [
+   "Thiết kế indexing pipeline cho kho tài liệu gồm PDF scan hợp đồng, bảng giá trong PDF và trang Confluence thường xuyên được sửa.",
+   "Parse: OCR/Vision cho PDF scan (cân nhắc chi phí), parser chuyên dụng giữ bảng dạng Markdown/HTML hoặc row-to-text; bỏ header/footer, sửa layout nhiều cột. Cleaning: chuẩn hóa unicode, khoảng trắng, redaction PII. Chunking: structure-aware/recursive, overlap 10–15%, small-to-big. Metadata: source, doc_type, date, department, access. Ingestion: event-driven webhook từ Confluence + hash check (idempotency), batch định kỳ cho kho ít thay đổi."
+  ],
+  [
+   "Một user hỏi “sao app cứ văng khi mở cài đặt, mã lỗi ERR-X09”. Thiết kế retrieval gồm query transformation, hybrid search và reranking; giải thích lựa chọn α.",
+   "Query transformation: expansion/sửa chính tả bằng LLM rẻ, cân nhắc latency. Hybrid: dense bắt “app văng” ↔ “application terminates unexpectedly”; BM25 bắt ERR-X09. Gộp bằng RRF (k=60) hoặc weighted α; domain log kỹ thuật → α khoảng 0.3–0.4 nghiêng keyword, nhưng cần đo. Lấy top 50 → cross-encoder rerank → top 3–5; MMR nếu trùng lặp. Đo Context Recall trước/sau."
+  ],
+  [
+   "Viết một system prompt RAG đầy đủ 4 phần (Role, Task, Context, Strict Constraints) cho trợ lý pháp chế nội bộ, xử lý được trích dẫn, thiếu dữ liệu và mâu thuẫn tài liệu.",
+   "Role: trợ lý pháp chế nội bộ. Task: trả lời câu hỏi người dùng. Context: tài liệu bọc XML <doc id source date>. Constraints: chỉ dùng context; mỗi khẳng định trích [doc_id]; nếu không có câu trả lời thì nói rõ dữ liệu không đủ và gợi ý bước tiếp; nếu mâu thuẫn ưu tiên bản mới nhất hoặc nêu cả hai; không suy diễn điều kiện không được nêu; đặt rule quan trọng gần cuối, temperature thấp; có thể yêu cầu <thought_process> cho câu so sánh."
+  ],
+  [
+   "Giải thích hiện tượng “Lost in the Middle” và đề xuất ít nhất ba cách giảm thiểu khi đưa context vào prompt.",
+   "LLM dùng tốt thông tin ở đầu/cuối, bỏ quên phần giữa khi prompt dài. Giảm thiểu: không nhồi quá nhiều (top 3–5, token budget 20/60/20), rerank để chọn bằng chứng tốt, document reordering [1,3,5,4,2], MMR loại trùng lặp, bọc tài liệu có cấu trúc, small-to-big để context đủ nhưng gọn."
+  ],
+  [
+   "Một chatbot RAG trả lời sai. Trình bày quy trình debug từ formatted_context, phân biệt lỗi indexing/retrieval với lỗi generation và nêu cách sửa cho từng nhóm.",
+   "In formatted_context. Không chứa đáp án → indexing/retrieval: parse lỗi, chunk sai, thiếu metadata/độ mới, query mơ hồ (transformation), dense bỏ lỡ mã (hybrid), filter sai (pre-filter), top-k. Có đáp án mà vẫn sai → generation: conflicting context, over-extrapolation, ignored constraints → sửa prompt, đặt rule cuối, temperature 0, CoT, đổi model. Đo lại bằng cùng bộ test, đổi một biến mỗi lần."
+  ],
+  [
+   "Xây dựng kế hoạch đánh giá RAG bằng RAGAS: golden dataset, ba metric, cách đọc scorecard và quy trình A/B test.",
+   "Golden dataset 50–100 mẫu (Lab ≥10): Question, Ground Truth, Contexts; gồm câu thường, mơ hồ, đánh đố, không có trong tài liệu. Metric: Context Recall (retriever đủ bằng chứng), Faithfulness (không bịa), Answer Relevance (đúng trọng tâm); LLM-as-a-Judge model mạnh. Đọc: recall thấp → sửa retrieval; recall cao + faithfulness thấp → sửa generation; faithfulness ổn, relevance thấp → xem query/task. A/B: baseline → đổi một biến → chạy lại cùng bộ → giữ nếu cải thiện với chi phí/latency chấp nhận."
+  ],
+  [
+   "Thiết kế output UX cho một trợ lý RAG nội bộ giúp người dùng tin và kiểm chứng câu trả lời.",
+   "Câu trả lời scannable: tiêu đề, bullet, ý chính. Inline citation [1][2] là hyperlink mở đoạn gốc. Source block cuối câu trả lời: tên tài liệu, phiên bản, nút mở gốc. Confidence/warning tag khi điểm rerank thấp, không biến score thành lời hứa đúng. Streaming và working state (“Đang tìm…”, “Đang đọc 5 tài liệu…”). Graceful degradation với gợi ý bước tiếp; kênh feedback."
+  ],
+  [
+   "Một đội muốn thêm cross-encoder reranker: Answer Relevance +5%, latency 1s → 4s, chi phí +$500/tháng. Phân tích có nên triển khai không và đề xuất phương án.",
+   "Cân nhắc giá trị 5% chất lượng với use case: tra cứu pháp lý/y tế có thể đáng; chatbot FAQ nhanh có thể không. Phương án: chỉ rerank khi retrieval confidence thấp hoặc với loại câu khó; giảm số ứng viên rerank; dùng reranker nhẹ/tự host; cache; streaming để giảm cảm nhận chờ. Đo bằng A/B một biến trên golden dataset, theo dõi latency p95, chi phí, satisfaction rồi quyết định."
+  ],
+  [
+   "Mô tả cách chuyển một RAG pipeline một lượt thành retrieval tool cho agent, và khi nào nên làm việc đó.",
+   "RAG một lượt: hỏi → tìm một lần → trả lời, hợp câu trả lời được bằng một lần retrieve. Đóng gói pipeline (query transformation → hybrid k=50 → rerank → top 5) thành tool search_internal_docs(query) có description, schema, error mode. Agent tự quyết khi nào gọi, gọi nhiều lần, kết hợp SQL/web, kiểm tra kết quả và lặp; hướng đa agent: RAG Agent, SQL Agent, Supervisor. Nên làm khi câu hỏi nhiều bước, cần nhiều nguồn; cần guardrail, trace và eval."
+  ]
+ ]
+}

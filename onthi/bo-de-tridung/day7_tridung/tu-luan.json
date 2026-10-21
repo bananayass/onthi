@@ -6,7 +6,8 @@
     {
       "id": "D07-TL-01",
       "type": "essay",
-      "prompt": "Giải thích chunking và nêu một ví dụ áp dụng trong sản phẩm AI.",
+      "prompt": "Một công ty bán lẻ có: (a) chính sách đổi trả dạng PDF, (b) bảng tồn kho cập nhật mỗi phút, (c) giỏ hàng của người dùng đang chat. Phân loại từng nguồn theo knowledge/operational/contextual và đề xuất cách đưa vào agent.",
+      "modelAnswer": "(a) Knowledge: parse, chuẩn hóa, chunk theo section, embed, lưu vector store kèm metadata/provenance, retrieve khi hỏi chính sách. (b) Operational: không embed; dùng SQL/function calling có kiểm soát để lấy số chính xác, mới nhất. (c) Contextual: inject ngắn vào context đúng lúc. Nêu router: câu số liệu → SQL, câu khái niệm → vector search.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -17,7 +18,8 @@
     {
       "id": "D07-TL-02",
       "type": "essay",
-      "prompt": "So sánh chunking với embedding; nêu tiêu chí lựa chọn trong một tình huống thực tế.",
+      "prompt": "Thiết kế bước parse và chuẩn hóa cho một corpus gồm PDF scan tiếng Việt, file Excel báo cáo có ô merge và trang HTML nội bộ. Nêu những gì có thể bị mất im lặng ở mỗi loại.",
+      "modelAnswer": "PDF scan: OCR ≥300 DPI, công cụ hỗ trợ tiếng Việt, giữ layout/reading order, bỏ header/footer; mất dấu, trộn cột, mất quan hệ bảng. Excel: fill-down ô merge, ghép header nhiều tầng, tách nhiều bảng, lấy giá trị thay vì công thức, serialize hàng đủ nghĩa kèm đơn vị. HTML: bóc boilerplate (trafilatura). Chung: NFC, de-hyphenation, khử trùng, giữ provenance (file, trang, heading, version, ACL).",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -28,7 +30,8 @@
     {
       "id": "D07-TL-03",
       "type": "essay",
-      "prompt": "Thiết kế một quy trình ngắn sử dụng cosine similarity để giảm rủi ro cho người dùng.",
+      "prompt": "So sánh các chiến lược chunking (fixed-size, overlap, recursive, structure-aware, semantic) và đề xuất chiến lược cho bộ FAQ + chính sách có heading rõ ràng, kèm cách kiểm chứng.",
+      "modelAnswer": "Fixed-size: baseline rẻ. Overlap: giữ ngữ cảnh ranh giới. Recursive: mặc định thực dụng. Structure-aware: cắt theo heading/section/bảng — phù hợp FAQ/policy. Semantic: tốn chi phí, NAACL 2025 cho thấy không cải thiện nhất quán. Đề xuất structure-aware/recursive, 200–500 token làm điểm bắt đầu, overlap 10–20%, kiểm tra token count tránh silent truncation; đo recall@k trước/sau khi đổi; đo lại khi đổi embedding model.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -39,7 +42,8 @@
     {
       "id": "D07-TL-04",
       "type": "essay",
-      "prompt": "Phân tích một failure mode liên quan đến vector store, nguyên nhân và cách khắc phục.",
+      "prompt": "Quy trình chọn embedding model cho trợ lý tra cứu tài liệu nội bộ tiếng Việt có nhiều mã sản phẩm (SKU). Nêu các trục quyết định và cách đánh giá.",
+      "modelAnswer": "Trục: deployment (API hay on-prem), max input, dimension/precision, ngôn ngữ & domain (tiếng Việt, xem VN-MTEB), query shape (có SKU → cần sparse/BM25 hybrid), license. Quy trình: xác định chunk length và dạng query → shortlist 2–3 model → bộ eval 50–100 câu từ corpus → đo recall@k với đúng prefix → rồi mới giảm chiều/quantize. Không so MTEB khác board/version.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -50,7 +54,8 @@
     {
       "id": "D07-TL-05",
       "type": "essay",
-      "prompt": "Đề xuất metric đánh giá cho metadata filter; giải thích vì sao metric đó hữu ích.",
+      "prompt": "Giải thích Flat, IVF, PQ và HNSW bằng ẩn dụ, nêu đánh đổi và chọn index cho ba quy mô: 5 nghìn, 5 triệu (RAM đủ) và 500 triệu vector (RAM hạn chế).",
+      "modelAnswer": "Flat: đọc mọi sách, recall 100%, chậm/tốn RAM; IVF: chia khu kệ, nprobe điều chỉnh recall/latency, cần train; PQ: nén mã ngắn, tiết kiệm RAM, khoảng cách gần đúng; HNSW: đường cao tốc nhiều lớp, recall/latency tốt, tốn RAM graph. 5k → Flat; 5M RAM đủ → HNSW (M=16, efConstruction=200, tune efSearch); 500M RAM hạn chế → IVF-PQ hoặc DiskANN. Luôn đo recall so với Flat ở k và filter thật.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -61,7 +66,8 @@
     {
       "id": "D07-TL-06",
       "type": "essay",
-      "prompt": "Lập kế hoạch thử nghiệm nhỏ cho ingestion pipeline: giả định, dữ liệu, tiêu chí đạt và tiêu chí dừng.",
+      "prompt": "Một hệ thống RAG trả HTTP 200, không log lỗi nhưng người dùng phàn nàn kết quả sai. Liệt kê ít nhất 6 failure mode âm thầm có thể gây ra và cách phát hiện/sửa từng cái.",
+      "modelAnswer": "Ví dụ: thiếu prefix query/passage (prefix-ablation); silent truncation (đếm token); đổi model không re-embed (version index); quên normalize trong FAISS IP (normalize add + query); post-filter trả < k (pre/in-algorithm filter); Chroma default embedding hoặc mở collection sai ef (truyền ef tường minh, assert dimension); over-retrieval lost-in-the-middle (rerank, giảm k); cache không version/TTL. Kết luận: “không lỗi” ≠ “đúng”, phải đo recall@k với BM25 làm sàn.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -72,7 +78,8 @@
     {
       "id": "D07-TL-07",
       "type": "essay",
-      "prompt": "Tình huống: kết quả liên quan đến chunking không đạt kỳ vọng. Bạn sẽ debug theo thứ tự nào?",
+      "prompt": "Thiết kế hybrid search cho corpus ticket hỗ trợ khách hàng có cả câu mô tả tự nhiên lẫn mã lỗi, kèm RRF và reranking. Giải thích vì sao từng thành phần cần thiết.",
+      "modelAnswer": "Dense: bắt vocabulary mismatch (“package never showed up” ↔ “shipment did not arrive”). BM25: mã lỗi E-4471, SKU, token ngoài từ vựng. RRF hợp nhất theo rank (k=60) vì score khác thang đo. Lấy top-50/100 rẻ → rerank bằng cross-encoder xuống top-5/10 → inject; rerank tốn mỗi query nhưng không phụ thuộc N. Có thể dùng BGE-M3 sinh dense+sparse cùng lúc. Đo recall/nDCG trước-sau.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -83,7 +90,8 @@
     {
       "id": "D07-TL-08",
       "type": "essay",
-      "prompt": "Viết khuyến nghị cho stakeholder về lợi ích, giới hạn và rủi ro của embedding.",
+      "prompt": "Viết kế hoạch đo chất lượng retrieval cho Lab 7 khi chưa có nhãn: cách sinh eval set, metric dùng, baseline và các thiên lệch cần ghi rõ.",
+      "modelAnswer": "Sample chunk theo tỷ lệ loại tài liệu (≥100), LLM sinh 1–3 câu hỏi chỉ dựa trên chunk kèm persona, chunk nguồn là positive (citation-as-weak-label), chạy retrieval tính recall@5 và MRR, kiểm tay ~10%. Baseline: BM25 và Flat. Metric: recall@k, precision@k, nDCG, MRR. Thiên lệch: câu hỏi lặp từ ngữ chunk gốc làm recall cao hơn thực tế, thiên về trùng từ khóa — chỉ là floor check; bổ sung query log thật.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -94,7 +102,8 @@
     {
       "id": "D07-TL-09",
       "type": "essay",
-      "prompt": "Nêu các đánh đổi khi triển khai cosine similarity trong production và cách theo dõi sau triển khai.",
+      "prompt": "Phân tích rủi ro bảo mật và quyền riêng tư khi lưu embedding của hồ sơ bệnh nhân trong vector store, và đề xuất biện pháp.",
+      "modelAnswer": "Rủi ro: embedding inversion khôi phục gần nguyên văn; membership inference lộ sự hiện diện (bệnh hiếm X); corpus poisoning và indirect prompt injection qua kênh retrieval; vector DB không kế thừa ACL; pháp lý PDPL 91/2025, GDPR coi là pseudonymized. Biện pháp: mask PII trước khi embed, ACL filter trước/trong ANN (row-level security, namespace per tenant), lưu ACL/version trong metadata, kiểm quyền trước khi inject, kiểm soát nguồn đưa vào corpus, quản lý vector như dữ liệu nhạy cảm.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -105,7 +114,8 @@
     {
       "id": "D07-TL-10",
       "type": "essay",
-      "prompt": "Tạo checklist trước khi ship một tính năng AI có dùng vector store và metadata filter.",
+      "prompt": "Viết mã giả (pseudocode) cho mini retrieval pipeline của Lab 7 bằng ChromaDB: chunk, embed, store, query có metadata filter, answer với context và đo recall@5; chỉ ra các điểm dễ sai.",
+      "modelAnswer": "Chunk bằng RecursiveCharacterTextSplitter (chunk_size ~400, overlap ~50, separators đoạn → dòng → câu); PersistentClient; embedding function tường minh (bge-m3) và truyền lại mỗi lần mở collection; add với id, document, metadata (source, category); query n_results=k với where filter; ghép context, prompt yêu cầu nói “không có thông tin” nếu không tìm thấy; recall@5 = số query có chunk nguồn trong top-5 / tổng. Điểm dễ sai: default embedding, silent truncation, thiếu prefix, post-filter, overfit eval tự sinh.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",

@@ -6,7 +6,8 @@
     {
       "id": "D08-TL-01",
       "type": "essay",
-      "prompt": "Giải thích hybrid retrieval và nêu một ví dụ áp dụng trong sản phẩm AI.",
+      "prompt": "So sánh fine-tuning và RAG theo chi phí cập nhật, rủi ro hallucination và kiểm soát truy cập; đề xuất cách tiếp cận cho trợ lý tra cứu chính sách nhân sự thay đổi mỗi quý.",
+      "modelAnswer": "Fine-tuning: cập nhật cần retrain, đắt; kiến thức tĩnh trong trọng số dễ hallucinate, catastrophic forgetting; khó phân quyền. RAG: cập nhật index, grounded với citation, phân quyền theo tài liệu (RBAC), auditability. Chính sách đổi mỗi quý → RAG với event-driven ingestion, metadata version/ngày, xử lý conflicting context; fine-tuning chỉ dùng nếu cần đổi tone/format.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -17,7 +18,8 @@
     {
       "id": "D08-TL-02",
       "type": "essay",
-      "prompt": "So sánh hybrid retrieval với RRF; nêu tiêu chí lựa chọn trong một tình huống thực tế.",
+      "prompt": "Thiết kế indexing pipeline cho kho tài liệu gồm PDF scan hợp đồng, bảng giá trong PDF và trang Confluence thường xuyên được sửa.",
+      "modelAnswer": "Parse: OCR/Vision cho PDF scan (cân nhắc chi phí), parser chuyên dụng giữ bảng dạng Markdown/HTML hoặc row-to-text; bỏ header/footer, sửa layout nhiều cột. Cleaning: chuẩn hóa unicode, khoảng trắng, redaction PII. Chunking: structure-aware/recursive, overlap 10–15%, small-to-big. Metadata: source, doc_type, date, department, access. Ingestion: event-driven webhook từ Confluence + hash check (idempotency), batch định kỳ cho kho ít thay đổi.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -28,7 +30,8 @@
     {
       "id": "D08-TL-03",
       "type": "essay",
-      "prompt": "Thiết kế một quy trình ngắn sử dụng reranking để giảm rủi ro cho người dùng.",
+      "prompt": "Một user hỏi “sao app cứ văng khi mở cài đặt, mã lỗi ERR-X09”. Thiết kế retrieval gồm query transformation, hybrid search và reranking; giải thích lựa chọn α.",
+      "modelAnswer": "Query transformation: expansion/sửa chính tả bằng LLM rẻ, cân nhắc latency. Hybrid: dense bắt “app văng” ↔ “application terminates unexpectedly”; BM25 bắt ERR-X09. Gộp bằng RRF (k=60) hoặc weighted α; domain log kỹ thuật → α khoảng 0.3–0.4 nghiêng keyword, nhưng cần đo. Lấy top 50 → cross-encoder rerank → top 3–5; MMR nếu trùng lặp. Đo Context Recall trước/sau.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -39,7 +42,8 @@
     {
       "id": "D08-TL-04",
       "type": "essay",
-      "prompt": "Phân tích một failure mode liên quan đến MMR, nguyên nhân và cách khắc phục.",
+      "prompt": "Viết một system prompt RAG đầy đủ 4 phần (Role, Task, Context, Strict Constraints) cho trợ lý pháp chế nội bộ, xử lý được trích dẫn, thiếu dữ liệu và mâu thuẫn tài liệu.",
+      "modelAnswer": "Role: trợ lý pháp chế nội bộ. Task: trả lời câu hỏi người dùng. Context: tài liệu bọc XML <doc id source date>. Constraints: chỉ dùng context; mỗi khẳng định trích [doc_id]; nếu không có câu trả lời thì nói rõ dữ liệu không đủ và gợi ý bước tiếp; nếu mâu thuẫn ưu tiên bản mới nhất hoặc nêu cả hai; không suy diễn điều kiện không được nêu; đặt rule quan trọng gần cuối, temperature thấp; có thể yêu cầu <thought_process> cho câu so sánh.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -50,7 +54,8 @@
     {
       "id": "D08-TL-05",
       "type": "essay",
-      "prompt": "Đề xuất metric đánh giá cho grounding; giải thích vì sao metric đó hữu ích.",
+      "prompt": "Giải thích hiện tượng “Lost in the Middle” và đề xuất ít nhất ba cách giảm thiểu khi đưa context vào prompt.",
+      "modelAnswer": "LLM dùng tốt thông tin ở đầu/cuối, bỏ quên phần giữa khi prompt dài. Giảm thiểu: không nhồi quá nhiều (top 3–5, token budget 20/60/20), rerank để chọn bằng chứng tốt, document reordering [1,3,5,4,2], MMR loại trùng lặp, bọc tài liệu có cấu trúc, small-to-big để context đủ nhưng gọn.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -61,7 +66,8 @@
     {
       "id": "D08-TL-06",
       "type": "essay",
-      "prompt": "Lập kế hoạch thử nghiệm nhỏ cho RAGAS: giả định, dữ liệu, tiêu chí đạt và tiêu chí dừng.",
+      "prompt": "Một chatbot RAG trả lời sai. Trình bày quy trình debug từ formatted_context, phân biệt lỗi indexing/retrieval với lỗi generation và nêu cách sửa cho từng nhóm.",
+      "modelAnswer": "In formatted_context. Không chứa đáp án → indexing/retrieval: parse lỗi, chunk sai, thiếu metadata/độ mới, query mơ hồ (transformation), dense bỏ lỡ mã (hybrid), filter sai (pre-filter), top-k. Có đáp án mà vẫn sai → generation: conflicting context, over-extrapolation, ignored constraints → sửa prompt, đặt rule cuối, temperature 0, CoT, đổi model. Đo lại bằng cùng bộ test, đổi một biến mỗi lần.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -72,7 +78,8 @@
     {
       "id": "D08-TL-07",
       "type": "essay",
-      "prompt": "Tình huống: kết quả liên quan đến hybrid retrieval không đạt kỳ vọng. Bạn sẽ debug theo thứ tự nào?",
+      "prompt": "Xây dựng kế hoạch đánh giá RAG bằng RAGAS: golden dataset, ba metric, cách đọc scorecard và quy trình A/B test.",
+      "modelAnswer": "Golden dataset 50–100 mẫu (Lab ≥10): Question, Ground Truth, Contexts; gồm câu thường, mơ hồ, đánh đố, không có trong tài liệu. Metric: Context Recall (retriever đủ bằng chứng), Faithfulness (không bịa), Answer Relevance (đúng trọng tâm); LLM-as-a-Judge model mạnh. Đọc: recall thấp → sửa retrieval; recall cao + faithfulness thấp → sửa generation; faithfulness ổn, relevance thấp → xem query/task. A/B: baseline → đổi một biến → chạy lại cùng bộ → giữ nếu cải thiện với chi phí/latency chấp nhận.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -83,7 +90,8 @@
     {
       "id": "D08-TL-08",
       "type": "essay",
-      "prompt": "Viết khuyến nghị cho stakeholder về lợi ích, giới hạn và rủi ro của RRF.",
+      "prompt": "Thiết kế output UX cho một trợ lý RAG nội bộ giúp người dùng tin và kiểm chứng câu trả lời.",
+      "modelAnswer": "Câu trả lời scannable: tiêu đề, bullet, ý chính. Inline citation [1][2] là hyperlink mở đoạn gốc. Source block cuối câu trả lời: tên tài liệu, phiên bản, nút mở gốc. Confidence/warning tag khi điểm rerank thấp, không biến score thành lời hứa đúng. Streaming và working state (“Đang tìm…”, “Đang đọc 5 tài liệu…”). Graceful degradation với gợi ý bước tiếp; kênh feedback.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -94,7 +102,8 @@
     {
       "id": "D08-TL-09",
       "type": "essay",
-      "prompt": "Nêu các đánh đổi khi triển khai reranking trong production và cách theo dõi sau triển khai.",
+      "prompt": "Một đội muốn thêm cross-encoder reranker: Answer Relevance +5%, latency 1s → 4s, chi phí +$500/tháng. Phân tích có nên triển khai không và đề xuất phương án.",
+      "modelAnswer": "Cân nhắc giá trị 5% chất lượng với use case: tra cứu pháp lý/y tế có thể đáng; chatbot FAQ nhanh có thể không. Phương án: chỉ rerank khi retrieval confidence thấp hoặc với loại câu khó; giảm số ứng viên rerank; dùng reranker nhẹ/tự host; cache; streaming để giảm cảm nhận chờ. Đo bằng A/B một biến trên golden dataset, theo dõi latency p95, chi phí, satisfaction rồi quyết định.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -105,7 +114,8 @@
     {
       "id": "D08-TL-10",
       "type": "essay",
-      "prompt": "Tạo checklist trước khi ship một tính năng AI có dùng MMR và grounding.",
+      "prompt": "Mô tả cách chuyển một RAG pipeline một lượt thành retrieval tool cho agent, và khi nào nên làm việc đó.",
+      "modelAnswer": "RAG một lượt: hỏi → tìm một lần → trả lời, hợp câu trả lời được bằng một lần retrieve. Đóng gói pipeline (query transformation → hybrid k=50 → rerank → top 5) thành tool search_internal_docs(query) có description, schema, error mode. Agent tự quyết khi nào gọi, gọi nhiều lần, kết hợp SQL/web, kiểm tra kết quả và lặp; hướng đa agent: RAG Agent, SQL Agent, Supervisor. Nên làm khi câu hỏi nhiều bước, cần nhiều nguồn; cần guardrail, trace và eval.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",

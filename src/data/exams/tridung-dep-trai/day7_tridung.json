@@ -14,1680 +14,1680 @@
     {
       "id": "D07-001",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về RAG versus fine-tuning?",
+      "prompt": "Pipeline xương sống của Day 7 theo đúng thứ tự là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Fine-tuning luôn thay thế mọi nhu cầu truy xuất"
+          "text": "Document → Chunk → Embed → Store → Query → Inject"
         },
         {
           "key": "B",
-          "text": "RAG phù hợp khi cần kiến thức thay đổi và truy xuất nguồn; fine-tuning phù hợp để đổi hành vi ổn định"
+          "text": "Document → Embed → Chunk → Query → Store → Inject"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chunk → Document → Store → Embed → Inject → Query"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Query → Document → Chunk → Inject → Embed → Store"
         }
       ],
-      "answer": "B",
-      "explanation": "RAG phù hợp khi cần kiến thức thay đổi và truy xuất nguồn; fine-tuning phù hợp để đổi hành vi ổn định. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Mỗi phần của bài chỉ đào sâu một mắt xích trong pipeline này.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-002",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Chunking?",
+      "prompt": "Câu hỏi “Đơn hàng mới nhất của khách A đang ở đâu?” nên được xử lý bằng cách nào?",
       "options": [
         {
           "key": "A",
-          "text": "Chia tài liệu thành đơn vị đủ nghĩa và phù hợp retrieval"
+          "text": "Vector search trên toàn bộ log"
         },
         {
           "key": "B",
-          "text": "Cắt văn bản đúng số ký tự bất kể ngữ nghĩa"
+          "text": "Embed bảng đơn hàng rồi tìm cosine"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Nhét toàn bộ CRM vào prompt"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "SQL/API có kiểm soát"
         }
       ],
-      "answer": "A",
-      "explanation": "Chia tài liệu thành đơn vị đủ nghĩa và phù hợp retrieval. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Đây là operational data thay đổi liên tục, cần kết quả chính xác và mới nhất.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-003",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Chunk overlap?",
+      "prompt": "Loại dữ liệu nào “retrieval fit rất cao”, lý tưởng cho vector store?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Contextual data: giỏ hàng, vài lượt chat gần đây"
         },
         {
           "key": "B",
-          "text": "Giảm mất ngữ cảnh ở ranh giới giữa các chunk"
+          "text": "Dữ liệu log hệ thống ghi theo từng giây"
         },
         {
           "key": "C",
-          "text": "Làm mô hình không cần embedding"
+          "text": "Knowledge data: FAQ, SOP, chính sách, hợp đồng"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Operational data: tồn kho, trạng thái đơn hàng"
         }
       ],
-      "answer": "B",
-      "explanation": "Giảm mất ngữ cảnh ở ranh giới giữa các chunk. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Operational → SQL/function calling; contextual → inject trực tiếp.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-004",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Embedding?",
+      "prompt": "Giỏ hàng và profile người dùng trong phiên hiện tại nên được xử lý thế nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Lưu thành PDF rồi OCR lại"
         },
         {
           "key": "B",
-          "text": "Biểu diễn nội dung bằng vector để so sánh ngữ nghĩa"
+          "text": "Inject ngắn gọn vào context đúng lúc"
         },
         {
           "key": "C",
-          "text": "Lưu văn bản dưới dạng ảnh"
+          "text": "Chunk và embed vào vector store"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Huấn luyện lại embedding model"
         }
       ],
       "answer": "B",
-      "explanation": "Biểu diễn nội dung bằng vector để so sánh ngữ nghĩa. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "explanation": "Contextual data ít khi cần semantic search.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-005",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Cosine similarity?",
+      "prompt": "Vì sao không nên embed bảng giao dịch để tính tổng doanh thu quý 2?",
       "options": [
         {
           "key": "A",
-          "text": "Đo số ký tự trong tài liệu"
+          "text": "Similarity search không cộng được số; đó là việc của SQL"
         },
         {
           "key": "B",
-          "text": "Đo mức gần nhau về hướng của các vector"
+          "text": "Embedding model không đọc được các chữ số viết tiếng Việt"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Vector store không lưu được dữ liệu có cấu trúc dạng bảng"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Tổng doanh thu là dữ liệu bí mật không được phép lưu trữ"
         }
       ],
-      "answer": "B",
-      "explanation": "Đo mức gần nhau về hướng của các vector. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Aggregation, sort, filter chính xác là thế mạnh của SQL/analytics.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-006",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Vector store?",
+      "prompt": "Khác biệt giữa memory và retrieval là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Memory tìm tài liệu cho câu hỏi hiện tại; retrieval lưu sở thích người dùng lâu dài"
         },
         {
           "key": "B",
-          "text": "Lưu, lập chỉ mục và truy vấn embedding hiệu quả"
+          "text": "Hai khái niệm hoàn toàn giống nhau, chỉ khác tên gọi trong từng framework khác nhau"
         },
         {
           "key": "C",
-          "text": "Thay thế hệ quản trị người dùng"
+          "text": "Memory chỉ đơn giản là toàn bộ chat history được lưu lại nguyên văn mãi mãi"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Retrieval tìm context cho câu hỏi hiện tại; memory giữ trạng thái qua thời gian"
         }
       ],
-      "answer": "B",
-      "explanation": "Lưu, lập chỉ mục và truy vấn embedding hiệu quả. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Nhầm hai khái niệm khiến agent “quên” context vừa retrieve ở lượt sau.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-007",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Metadata filter?",
+      "prompt": "Vòng đời memory theo bài gồm các bước nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ mọi điều kiện bảo mật trước retrieval"
+          "text": "Filter → Embed → Rerank → Delete"
         },
         {
           "key": "B",
-          "text": "Thu hẹp kết quả theo thuộc tính như quyền truy cập hoặc thời gian"
+          "text": "Retrieve → Store → Capture → Filter"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Capture → Filter → Store → Retrieve"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Store → Capture → Retrieve → Filter"
         }
       ],
-      "answer": "B",
-      "explanation": "Thu hẹp kết quả theo thuộc tính như quyền truy cập hoặc thời gian. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Filter: kiểm PII, chất lượng, mức liên quan trước khi lưu.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-008",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Ingestion pipeline?",
+      "prompt": "Thứ nào KHÔNG tự động là memory theo slide?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Profile được cập nhật theo chính sách rõ ràng"
         },
         {
           "key": "B",
-          "text": "Đọc, làm sạch, chunk, embed và index dữ liệu có kiểm soát"
+          "text": "Toàn bộ chat history lưu “cho chắc”"
         },
         {
           "key": "C",
-          "text": "Đưa tài liệu thẳng vào prompt mỗi lần hỏi"
+          "text": "Sở thích đã được lọc và lưu có chủ đích"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Fact người dùng xác nhận, truy lại khi cần"
         }
       ],
       "answer": "B",
-      "explanation": "Đọc, làm sạch, chunk, embed và index dữ liệu có kiểm soát. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "explanation": "Prompt dài hơn, file upload một lần không truy lại, toàn bộ chat history thường chỉ tạo nhiễu.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-009",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng RAG versus fine-tuning nào là phù hợp nhất?",
+      "prompt": "Với số CCCD trong tài liệu, kỹ thuật mask được khuyến nghị là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Xóa hoàn toàn"
         },
         {
           "key": "B",
-          "text": "RAG phù hợp khi cần kiến thức thay đổi và truy xuất nguồn; fine-tuning phù hợp để đổi hành vi ổn định"
+          "text": "Thay bằng [PERSON]"
         },
         {
           "key": "C",
-          "text": "Fine-tuning luôn thay thế mọi nhu cầu truy xuất"
+          "text": "Generalize thành quận"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Giữ nguyên để tìm kiếm"
         }
       ],
-      "answer": "B",
-      "explanation": "RAG phù hợp khi cần kiến thức thay đổi và truy xuất nguồn; fine-tuning phù hợp để đổi hành vi ổn định. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Tên → [PERSON]; điện thoại → regex replace; email → hash/remove; địa chỉ → generalize.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-010",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Chunking nào là phù hợp nhất?",
+      "prompt": "Vì sao không được coi embedding là dữ liệu đã ẩn danh?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Embedding chỉ hoạt động khi chứa tên người dùng"
         },
         {
           "key": "B",
-          "text": "Chia tài liệu thành đơn vị đủ nghĩa và phù hợp retrieval"
+          "text": "Embedding không thể bị xóa khỏi vector store"
         },
         {
           "key": "C",
-          "text": "Cắt văn bản đúng số ký tự bất kể ngữ nghĩa"
+          "text": "Embedding có thể bị đảo ngược gần đúng thành văn bản gốc"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Embedding luôn được lưu kèm văn bản gốc trong cùng bảng"
         }
       ],
-      "answer": "B",
-      "explanation": "Chia tài liệu thành đơn vị đủ nghĩa và phù hợp retrieval. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Morris et al. (EMNLP 2023), ALGEN (2025) khôi phục được câu gần nguyên văn.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-011",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Chunk overlap nào là phù hợp nhất?",
+      "prompt": "Ví dụ “chính sách hoàn tiền” vs “quy định đổi trả sản phẩm” minh họa vấn đề gì của lexical search?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Silent truncation: văn bản bị cắt mất phần cuối"
         },
         {
           "key": "B",
-          "text": "Giảm mất ngữ cảnh ở ranh giới giữa các chunk"
+          "text": "Lost in the middle: thông tin bị chôn giữa context"
         },
         {
           "key": "C",
-          "text": "Làm mô hình không cần embedding"
+          "text": "Post-filter: kết quả bị lọc sau khi tìm kiếm"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Vocabulary mismatch: không từ nào trùng nên BM25 bỏ lỡ"
         }
       ],
-      "answer": "B",
-      "explanation": "Giảm mất ngữ cảnh ở ranh giới giữa các chunk. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Dense embedding đặt hai cụm này gần nhau vì nghĩa gần nhau.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-012",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Embedding nào là phù hợp nhất?",
+      "prompt": "Theo BEIR (18 dataset), nhận định nào về BM25 là đúng?",
       "options": [
         {
           "key": "A",
-          "text": "Lưu văn bản dưới dạng ảnh"
+          "text": "Vẫn là baseline mạnh, có thể thắng dense ngoài miền huấn luyện"
         },
         {
           "key": "B",
-          "text": "Biểu diễn nội dung bằng vector để so sánh ngữ nghĩa"
+          "text": "Đã lỗi thời hoàn toàn kể từ khi xuất hiện các embedding model"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ dùng được với văn bản tiếng Anh ngắn, không dùng cho tiếng Việt"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Luôn thua mọi dense model trên tất cả dataset trong benchmark"
         }
       ],
-      "answer": "B",
-      "explanation": "Biểu diễn nội dung bằng vector để so sánh ngữ nghĩa. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Dense fine-tune trên MS MARCO có thể thua BM25 khi ra ngoài domain.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-013",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Cosine similarity nào là phù hợp nhất?",
+      "prompt": "Vì sao BERT gốc (cross-encoder) không hợp cho similarity search trên 10.000 câu?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "BERT không chạy được trên các GPU thông thường hiện nay"
         },
         {
           "key": "B",
-          "text": "Đo mức gần nhau về hướng của các vector"
+          "text": "Phải chạy từng cặp câu, khoảng 50 triệu phép suy luận"
         },
         {
           "key": "C",
-          "text": "Đo số ký tự trong tài liệu"
+          "text": "BERT không xử lý được các câu dài hơn 10 token đầu vào"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "BERT chỉ hỗ trợ duy nhất một ngôn ngữ là tiếng Anh"
         }
       ],
       "answer": "B",
-      "explanation": "Đo mức gần nhau về hướng của các vector. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "explanation": "SBERT (bi-encoder) encode mỗi câu một lần, so bằng cosine: ~5 giây thay vì ~65 giờ.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-014",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Vector store nào là phù hợp nhất?",
+      "prompt": "Pipeline tạo embedding cơ bản gồm ba bước nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "OCR → Translate → Hash"
         },
         {
           "key": "B",
-          "text": "Lưu, lập chỉ mục và truy vấn embedding hiệu quả"
+          "text": "Index → Compress → Search"
         },
         {
           "key": "C",
-          "text": "Thay thế hệ quản trị người dùng"
+          "text": "Tokenize → Encoder → Pooling"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chunk → Rerank → Filter"
         }
       ],
-      "answer": "B",
-      "explanation": "Lưu, lập chỉ mục và truy vấn embedding hiệu quả. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Đổi cách pooling (mean, last-token, [CLS]) là đổi hành vi của model.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-015",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Metadata filter nào là phù hợp nhất?",
+      "prompt": "Cosine similarity của A = [1, 2, 3] và B = [2, 4, 6] bằng bao nhiêu?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "0"
         },
         {
           "key": "B",
-          "text": "Thu hẹp kết quả theo thuộc tính như quyền truy cập hoặc thời gian"
+          "text": "0,5"
         },
         {
           "key": "C",
-          "text": "Bỏ mọi điều kiện bảo mật trước retrieval"
+          "text": "−1"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "1"
         }
       ],
-      "answer": "B",
-      "explanation": "Thu hẹp kết quả theo thuộc tính như quyền truy cập hoặc thời gian. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "B = 2A nên cùng hướng; cosine bỏ qua độ lớn, chỉ xét hướng.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-016",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Ingestion pipeline nào là phù hợp nhất?",
+      "prompt": "Bài nhấn mạnh điều gì về cosine similarity (Steck et al., WWW 2024)?",
       "options": [
         {
           "key": "A",
-          "text": "Đọc, làm sạch, chunk, embed và index dữ liệu có kiểm soát"
+          "text": "Là quy ước hữu ích, không phải “độ liên quan thật”"
         },
         {
           "key": "B",
-          "text": "Đưa tài liệu thẳng vào prompt mỗi lần hỏi"
+          "text": "Luôn là thước đo chính xác nhất cho mọi embedding"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ dùng được khi vector đã nén bằng PQ"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Luôn tốt hơn dot product trong mọi trường hợp"
         }
       ],
       "answer": "A",
-      "explanation": "Đọc, làm sạch, chunk, embed và index dữ liệu có kiểm soát. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "explanation": "Score cao không phải bằng chứng tuyệt đối; phải đo trên tác vụ thật.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-017",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua RAG versus fine-tuning, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "RAG thông thường (câu hỏi ngắn tìm đoạn tài liệu dài) là kiểu tìm kiếm nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Fuzzy string search"
         },
         {
           "key": "B",
-          "text": "RAG phù hợp khi cần kiến thức thay đổi và truy xuất nguồn; fine-tuning phù hợp để đổi hành vi ổn định"
+          "text": "Asymmetric search"
         },
         {
           "key": "C",
-          "text": "Fine-tuning luôn thay thế mọi nhu cầu truy xuất"
+          "text": "Symmetric search"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Exact match search"
         }
       ],
       "answer": "B",
-      "explanation": "RAG phù hợp khi cần kiến thức thay đổi và truy xuất nguồn; fine-tuning phù hợp để đổi hành vi ổn định. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "explanation": "Symmetric là câu ↔ câu, ví dụ tìm câu trùng lặp.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-018",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Chunking, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Bỏ prefix “query:” / “passage:” mà model E5 yêu cầu sẽ gây hậu quả gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Vector trả về toàn số 0"
         },
         {
           "key": "B",
-          "text": "Chia tài liệu thành đơn vị đủ nghĩa và phù hợp retrieval"
+          "text": "Vector store từ chối lưu dữ liệu"
         },
         {
           "key": "C",
-          "text": "Cắt văn bản đúng số ký tự bất kể ngữ nghĩa"
+          "text": "Không báo lỗi nhưng xếp hạng kém đi âm thầm"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Thư viện ném exception ngay khi encode"
         }
       ],
-      "answer": "B",
-      "explanation": "Chia tài liệu thành đơn vị đủ nghĩa và phù hợp retrieval. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Failure mode #3: recall kém 5–15% mà không có lỗi; dùng prefix-ablation test.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-019",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Chunk overlap, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Theo quy trình chọn embedding model trong 20 phút, bước nào làm SAU CÙNG?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Xác định độ dài chunk và dạng query"
         },
         {
           "key": "B",
-          "text": "Giảm mất ngữ cảnh ở ranh giới giữa các chunk"
+          "text": "Lập shortlist 2–3 model theo license"
         },
         {
           "key": "C",
-          "text": "Làm mô hình không cần embedding"
+          "text": "Đo recall@k trên bộ eval của mình"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Tinh chỉnh dimension và quantization"
         }
       ],
-      "answer": "B",
-      "explanation": "Giảm mất ngữ cảnh ở ranh giới giữa các chunk. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Chỉ tối ưu dimension/quantization sau khi đã đo recall@k đúng prefix.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-020",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Embedding, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Vì sao không nên đặt hai con số MTEB cạnh nhau để kết luận model nào tốt hơn?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "MTEB chỉ đo tốc độ encode, hoàn toàn không đo chất lượng"
         },
         {
           "key": "B",
-          "text": "Biểu diễn nội dung bằng vector để so sánh ngữ nghĩa"
+          "text": "MTEB chỉ chứa dữ liệu tiếng Việt nên không áp dụng chung"
         },
         {
           "key": "C",
-          "text": "Lưu văn bản dưới dạng ảnh"
+          "text": "MTEB do duy nhất một công ty tự chấm điểm cho sản phẩm"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Thiếu board, version, cách tính và ngày đo thì số vô nghĩa"
         }
       ],
-      "answer": "B",
-      "explanation": "Biểu diễn nội dung bằng vector để so sánh ngữ nghĩa. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Ví dụ Gemini: 68.32 là multilingual, English v2 thật là 73.28.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-021",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Cosine similarity, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "VN-MTEB (EACL 2026) phát hiện điều đáng chú ý nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Mọi model đều đạt điểm gần như nhau trên toàn bộ 41 dataset được đánh giá"
         },
         {
           "key": "B",
-          "text": "Đo mức gần nhau về hướng của các vector"
+          "text": "Văn bản tiếng Việt không cần chuẩn hóa Unicode trước khi đưa vào embedding"
         },
         {
           "key": "C",
-          "text": "Đo số ký tự trong tài liệu"
+          "text": "Model dùng RoPE vượt model dùng absolute positional embedding trên tiếng Việt"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Model tiếng Anh luôn chuyển giao hoàn hảo sang tác vụ tiếng Việt mà không cần đo"
         }
       ],
-      "answer": "B",
-      "explanation": "Đo mức gần nhau về hướng của các vector. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Trước VN-MTEB, nhóm phát triển thường chọn theo điểm tiếng Anh và hy vọng transfer tốt.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-022",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Vector store, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Vì sao PDF khó parse hơn nhiều người nghĩ?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "PDF không hỗ trợ ký tự có dấu tiếng Việt nên luôn bị lỗi font"
         },
         {
           "key": "B",
-          "text": "Lưu, lập chỉ mục và truy vấn embedding hiệu quả"
+          "text": "PDF mô tả cách vẽ glyph tại tọa độ, không lưu thứ tự đọc hay cấu trúc"
         },
         {
           "key": "C",
-          "text": "Thay thế hệ quản trị người dùng"
+          "text": "PDF luôn được mã hóa bằng mật khẩu nên phải bẻ khóa trước khi đọc"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "PDF chỉ chứa ảnh chụp, không bao giờ có text layer để trích xuất"
         }
       ],
       "answer": "B",
-      "explanation": "Lưu, lập chỉ mục và truy vấn embedding hiệu quả. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "explanation": "Hai cột, header/footer, bảng có thể bị đọc sai hoặc mất quan hệ hàng–cột.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-023",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Metadata filter, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "File PDF scan (chỉ là ảnh) bắt buộc phải qua bước nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ mọi điều kiện bảo mật trước retrieval"
+          "text": "OCR"
         },
         {
           "key": "B",
-          "text": "Thu hẹp kết quả theo thuộc tính như quyền truy cập hoặc thời gian"
+          "text": "Fill-down"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "De-hyphenation"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Rerank"
         }
       ],
-      "answer": "B",
-      "explanation": "Thu hẹp kết quả theo thuộc tính như quyền truy cập hoặc thời gian. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "PDF sinh từ Word thường có sẵn text layer.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-024",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Ingestion pipeline, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Khi embed thẳng HTML thô, rủi ro lớn nhất là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Đưa tài liệu thẳng vào prompt mỗi lần hỏi"
+          "text": "HTML không thể chuyển đổi thành văn bản thuần túy được"
         },
         {
           "key": "B",
-          "text": "Đọc, làm sạch, chunk, embed và index dữ liệu có kiểm soát"
+          "text": "Mọi thẻ HTML bị dịch tự động sang tiếng Anh khi embed"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Vector store không chấp nhận dữ liệu được lấy từ trang web"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Vector mô tả menu, banner, footer thay vì nội dung chính"
         }
       ],
-      "answer": "B",
-      "explanation": "Đọc, làm sạch, chunk, embed và index dữ liệu có kiểm soát. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Trafilatura bóc boilerplate nhanh; trang convert đúng dùng ít hơn ~65% token.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-025",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của RAG versus fine-tuning trong hệ thống AI là gì?",
+      "prompt": "Với PPTX, phần nào thường có giá trị nhất nhưng hay bị bỏ quên khi convert?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Hiệu ứng chuyển trang"
         },
         {
           "key": "B",
-          "text": "RAG phù hợp khi cần kiến thức thay đổi và truy xuất nguồn; fine-tuning phù hợp để đổi hành vi ổn định"
+          "text": "Tên file ảnh nhúng"
         },
         {
           "key": "C",
-          "text": "Fine-tuning luôn thay thế mọi nhu cầu truy xuất"
+          "text": "Speaker notes"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Màu nền slide"
         }
       ],
-      "answer": "B",
-      "explanation": "RAG phù hợp khi cần kiến thức thay đổi và truy xuất nguồn; fine-tuning phù hợp để đổi hành vi ổn định. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Thứ tự shape cũng không phải lúc nào cũng là thứ tự đọc.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-026",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Chunking trong hệ thống AI là gì?",
+      "prompt": "Email gây vấn đề gì cho retrieval nếu index thẳng?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Email chỉ có tiêu đề, phần nội dung luôn bị bỏ trống"
         },
         {
           "key": "B",
-          "text": "Chia tài liệu thành đơn vị đủ nghĩa và phù hợp retrieval"
+          "text": "Chữ ký, disclaimer, reply lồng nhau tạo near-duplicate"
         },
         {
           "key": "C",
-          "text": "Cắt văn bản đúng số ký tự bất kể ngữ nghĩa"
+          "text": "Email không thể chứa văn bản tiếng Việt có dấu"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Email luôn bị mã hóa đầu cuối nên không đọc được"
         }
       ],
       "answer": "B",
-      "explanation": "Chia tài liệu thành đơn vị đủ nghĩa và phù hợp retrieval. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "explanation": "Near-duplicate làm hỏng top-k.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-027",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Chunk overlap trong hệ thống AI là gì?",
+      "prompt": "Excel có ô merge gây NaN rải rác. Cách xử lý được khuyên là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Fill-down để khôi phục quan hệ hàng"
         },
         {
           "key": "B",
-          "text": "Giảm mất ngữ cảnh ở ranh giới giữa các chunk"
+          "text": "Xóa toàn bộ các hàng có ô trống"
         },
         {
           "key": "C",
-          "text": "Làm mô hình không cần embedding"
+          "text": "Chuyển sheet thành ảnh rồi OCR"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Embed từng ô riêng lẻ như một chunk"
         }
       ],
-      "answer": "B",
-      "explanation": "Giảm mất ngữ cảnh ở ranh giới giữa các chunk. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Header nhiều tầng cũng phải ghép thành tên cột đủ nghĩa.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-028",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Embedding trong hệ thống AI là gì?",
+      "prompt": "Cách serialize một hàng Excel đúng cho retrieval là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Biểu diễn nội dung bằng vector để so sánh ngữ nghĩa"
+          "text": "Chỉ index con số “4.2”"
         },
         {
           "key": "B",
-          "text": "Lưu văn bản dưới dạng ảnh"
+          "text": "Lưu biểu thức công thức “=SUM(B2:B9)”"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ index tên sheet “Sheet1”"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "“Q2 2026 | Doanh thu | 4,2 tỷ VND”"
         }
       ],
-      "answer": "A",
-      "explanation": "Biểu diễn nội dung bằng vector để so sánh ngữ nghĩa. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Mỗi hàng nên là một đơn vị tự đủ nghĩa; giá trị công thức quan trọng hơn biểu thức.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-029",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Cosine similarity trong hệ thống AI là gì?",
+      "prompt": "Theo nghiên cứu STC trên MAUD, chunk theo cấu trúc bảng so với RecursiveCharacterTextSplitter thế nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Không có khác biệt đáng kể nào giữa hai cách chunk trên MAUD"
         },
         {
           "key": "B",
-          "text": "Đo mức gần nhau về hướng của các vector"
+          "text": "Chỉ nhanh hơn khi xử lý nhưng chất lượng retrieval như nhau"
         },
         {
           "key": "C",
-          "text": "Đo số ký tự trong tài liệu"
+          "text": "Recall@1 (BM25) tăng từ 0,366 lên 0,754 và ít chunk hơn ~40%"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Recall giảm mạnh và số chunk sinh ra tăng gấp đôi so với trước"
         }
       ],
-      "answer": "B",
-      "explanation": "Đo mức gần nhau về hướng của các vector. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Bảng bị cắt theo ký tự là điểm hỏng im lặng số một.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-030",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Vector store trong hệ thống AI là gì?",
+      "prompt": "Với tài liệu tiếng Việt, bước chuẩn hóa nào là bắt buộc ngay sau parse?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chuẩn hóa Unicode NFC toàn corpus"
         },
         {
           "key": "B",
-          "text": "Lưu, lập chỉ mục và truy vấn embedding hiệu quả"
+          "text": "Chuyển toàn bộ sang chữ in hoa"
         },
         {
           "key": "C",
-          "text": "Thay thế hệ quản trị người dùng"
+          "text": "Xóa hết dấu thanh để dễ khớp"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Dịch sang tiếng Anh trước khi embed"
         }
       ],
-      "answer": "B",
-      "explanation": "Lưu, lập chỉ mục và truy vấn embedding hiệu quả. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Cùng chữ “ế” có thể là NFC hoặc NFD, so chuỗi không khớp và tạo chunk trùng.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-031",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Metadata filter trong hệ thống AI là gì?",
+      "prompt": "Vì sao provenance (file, trang, heading) phải giữ ngay từ lúc parse?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Để vượt qua giới hạn max input của embedding model"
         },
         {
           "key": "B",
-          "text": "Thu hẹp kết quả theo thuộc tính như quyền truy cập hoặc thời gian"
+          "text": "Các khâu sau không tạo lại được, mất khả năng trích nguồn"
         },
         {
           "key": "C",
-          "text": "Bỏ mọi điều kiện bảo mật trước retrieval"
+          "text": "Để giảm số chiều của vector embedding khi lưu trữ"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Để tăng tốc độ build index HNSW trên dữ liệu lớn"
         }
       ],
       "answer": "B",
-      "explanation": "Thu hẹp kết quả theo thuộc tính như quyền truy cập hoặc thời gian. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "explanation": "Cho phép trả lời “theo trang 14 của hợp đồng A”.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-032",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Ingestion pipeline trong hệ thống AI là gì?",
+      "prompt": "Chunk quá lớn (trên ~1.000 token) gây hậu quả gì?",
       "options": [
         {
           "key": "A",
-          "text": "Đưa tài liệu thẳng vào prompt mỗi lần hỏi"
+          "text": "Không thể lưu vào bất kỳ vector store nào hiện có trên thị trường"
         },
         {
           "key": "B",
-          "text": "Đọc, làm sạch, chunk, embed và index dữ liệu có kiểm soát"
+          "text": "Embedding model từ chối xử lý và báo lỗi ngay khi nhận đầu vào"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Nhiều chủ đề trộn vào một vector, retrieve trúng nhưng prompt nhiễu"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Mất ngữ cảnh, phải ghép quá nhiều mảnh rời rạc mới trả lời được"
         }
       ],
-      "answer": "B",
-      "explanation": "Đọc, làm sạch, chunk, embed và index dữ liệu có kiểm soát. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Chunk quá nhỏ (<50 token) mới là mất ngữ cảnh.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-033",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về RAG versus fine-tuning?",
+      "prompt": "Con số chunk 512 token xuất phát từ đâu?",
       "options": [
         {
           "key": "A",
-          "text": "Fine-tuning luôn thay thế mọi nhu cầu truy xuất"
+          "text": "Quy định chuẩn bắt buộc của mọi vector database"
         },
         {
           "key": "B",
-          "text": "RAG phù hợp khi cần kiến thức thay đổi và truy xuất nguồn; fine-tuning phù hợp để đổi hành vi ổn định"
+          "text": "Kết quả tối ưu đã được chứng minh cho mọi câu hỏi"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Kích thước một trang PDF tiêu chuẩn khổ A4"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Giới hạn positional embedding của BERT năm 2018"
         }
       ],
-      "answer": "B",
-      "explanation": "RAG phù hợp khi cần kiến thức thay đổi và truy xuất nguồn; fine-tuning phù hợp để đổi hành vi ổn định. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Bhat et al. 2025: 64–128 token cho factoid, 512–1024 cho ngữ cảnh rộng.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-034",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Chunking?",
+      "prompt": "Khi đổi embedding model, cần làm gì với chunk size?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Đo lại vì kích thước tối ưu phụ thuộc model"
         },
         {
           "key": "B",
-          "text": "Chia tài liệu thành đơn vị đủ nghĩa và phù hợp retrieval"
+          "text": "Giữ nguyên vì chunk size không liên quan model"
         },
         {
           "key": "C",
-          "text": "Cắt văn bản đúng số ký tự bất kể ngữ nghĩa"
+          "text": "Luôn tăng gấp đôi chunk size"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Luôn giảm còn 50 token"
         }
       ],
-      "answer": "B",
-      "explanation": "Chia tài liệu thành đơn vị đủ nghĩa và phù hợp retrieval. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Stella lợi với chunk lớn, Snowflake lợi với chunk nhỏ.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-035",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Chunk overlap?",
+      "prompt": "Chiến lược chunking nào “gần như luôn thắng fixed-size” và là mặc định thực dụng?",
       "options": [
         {
           "key": "A",
-          "text": "Giảm mất ngữ cảnh ở ranh giới giữa các chunk"
+          "text": "Mỗi tài liệu là một chunk"
         },
         {
           "key": "B",
-          "text": "Làm mô hình không cần embedding"
+          "text": "Recursive character splitting"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Semantic breakpoint chunking"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Cắt ngẫu nhiên theo ký tự"
         }
       ],
-      "answer": "A",
-      "explanation": "Giảm mất ngữ cảnh ở ranh giới giữa các chunk. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "B",
+      "explanation": "Tách theo \\n\\n → \\n → câu → khoảng trắng, đệ quy khi còn dài.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-036",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Embedding?",
+      "prompt": "Theo Qu, Tu & Bao (NAACL 2025), semantic chunking có đáng chi phí không?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ tốt hơn rõ rệt khi xử lý văn bản tiếng Việt"
         },
         {
           "key": "B",
-          "text": "Biểu diễn nội dung bằng vector để so sánh ngữ nghĩa"
+          "text": "Là bước bắt buộc với mọi pipeline chạy production"
         },
         {
           "key": "C",
-          "text": "Lưu văn bản dưới dạng ảnh"
+          "text": "Không có cải thiện nhất quán đủ bù chi phí tính toán"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Luôn tốt hơn fixed-size với tỷ lệ 87% so với 50%"
         }
       ],
-      "answer": "B",
-      "explanation": "Biểu diễn nội dung bằng vector để so sánh ngữ nghĩa. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Con số “87% vs 50%” không tồn tại trong nguồn nào.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-037",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Cosine similarity?",
+      "prompt": "Late Chunking (Jina, 2024) hoạt động thế nào?",
       "options": [
         {
           "key": "A",
-          "text": "Đo mức gần nhau về hướng của các vector"
+          "text": "Chỉ chunk lại những tài liệu được người dùng truy cập muộn nhất trong ngày"
         },
         {
           "key": "B",
-          "text": "Đo số ký tự trong tài liệu"
+          "text": "Thêm 50–100 token ngữ cảnh do LLM sinh vào đầu mỗi chunk trước khi index"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chunk sau khi đã trả lời người dùng xong để tiết kiệm thời gian phản hồi"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Embed toàn văn bản bằng long-context model trước, chunk ngay trước mean pooling"
         }
       ],
-      "answer": "A",
-      "explanation": "Đo mức gần nhau về hướng của các vector. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Contextual Retrieval của Anthropic mới là prepend ngữ cảnh do LLM sinh.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-038",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Vector store?",
+      "prompt": "Silent truncation là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Thay thế hệ quản trị người dùng"
+          "text": "Text vượt max input bị cắt âm thầm, không báo lỗi"
         },
         {
           "key": "B",
-          "text": "Lưu, lập chỉ mục và truy vấn embedding hiệu quả"
+          "text": "Vector bị nén mất độ chính xác khi lưu xuống đĩa"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Kết quả bị loại bỏ sau khi đã tìm kiếm ANN xong"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Query bị dịch sai sang một ngôn ngữ khác khi gửi"
         }
       ],
-      "answer": "B",
-      "explanation": "Lưu, lập chỉ mục và truy vấn embedding hiệu quả. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Phần bị cắt không bao giờ được retrieve; đếm token trước khi embed.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-039",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Metadata filter?",
+      "prompt": "Model nào có max input chỉ 512 token dù là model 2025?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Cohere Embed v4 (128K)"
         },
         {
           "key": "B",
-          "text": "Thu hẹp kết quả theo thuộc tính như quyền truy cập hoặc thời gian"
+          "text": "Nomic Embed Text v2 (MoE)"
         },
         {
           "key": "C",
-          "text": "Bỏ mọi điều kiện bảo mật trước retrieval"
+          "text": "Qwen3-Embedding (32K)"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "BGE-M3 (8.192)"
         }
       ],
       "answer": "B",
-      "explanation": "Thu hẹp kết quả theo thuộc tính như quyền truy cập hoặc thời gian. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "explanation": "Biết đúng giới hạn của model đang dùng để tránh silent truncation.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-040",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Ingestion pipeline?",
+      "prompt": "ANN luôn phải đánh đổi giữa ba yếu tố nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Token, GPU, nhân sự"
         },
         {
           "key": "B",
-          "text": "Đọc, làm sạch, chunk, embed và index dữ liệu có kiểm soát"
+          "text": "Recall, latency, memory"
         },
         {
           "key": "C",
-          "text": "Đưa tài liệu thẳng vào prompt mỗi lần hỏi"
+          "text": "Giá, bản quyền, ngôn ngữ"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chunk, prompt, model"
         }
       ],
       "answer": "B",
-      "explanation": "Đọc, làm sạch, chunk, embed và index dữ liệu có kiểm soát. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "explanation": "Không index nào thắng cả ba cùng lúc.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-041",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về RAG versus fine-tuning, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Vì sao phải build index Flat trước?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Recall 100% theo định nghĩa, làm ground truth để đo ANN"
         },
         {
           "key": "B",
-          "text": "RAG phù hợp khi cần kiến thức thay đổi và truy xuất nguồn; fine-tuning phù hợp để đổi hành vi ổn định"
+          "text": "Flat luôn nhanh nhất ở mọi quy mô dữ liệu hiện nay"
         },
         {
           "key": "C",
-          "text": "Fine-tuning luôn thay thế mọi nhu cầu truy xuất"
+          "text": "Flat tiết kiệm bộ nhớ nhất trong tất cả các họ index"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Flat là index duy nhất hỗ trợ lọc theo metadata"
         }
       ],
-      "answer": "B",
-      "explanation": "RAG phù hợp khi cần kiến thức thay đổi và truy xuất nguồn; fine-tuning phù hợp để đổi hành vi ổn định. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Không có ground truth thì “recall” là từ vô nghĩa.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-042",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Chunking, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Với corpus vài nghìn tài liệu, lựa chọn hợp lý là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Cụm Milvus phân tán nhiều node"
         },
         {
           "key": "B",
-          "text": "Chia tài liệu thành đơn vị đủ nghĩa và phù hợp retrieval"
+          "text": "IVF-PQ với hàng nghìn centroid"
         },
         {
           "key": "C",
-          "text": "Cắt văn bản đúng số ký tự bất kể ngữ nghĩa"
+          "text": "DiskANN chạy trên SSD chuyên dụng"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Flat trong RAM, bỏ qua vector DB"
         }
       ],
-      "answer": "B",
-      "explanation": "Chia tài liệu thành đơn vị đủ nghĩa và phù hợp retrieval. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Dưới ~10k vector, vector DB là over-engineering.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-043",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Chunk overlap, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Trong IVF, tăng nprobe thường dẫn đến gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Bộ nhớ giảm mạnh"
         },
         {
           "key": "B",
-          "text": "Giảm mất ngữ cảnh ở ranh giới giữa các chunk"
+          "text": "Phải train lại centroid"
         },
         {
           "key": "C",
-          "text": "Làm mô hình không cần embedding"
+          "text": "Recall tăng và latency tăng"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Recall giảm và latency giảm"
         }
       ],
-      "answer": "B",
-      "explanation": "Giảm mất ngữ cảnh ở ranh giới giữa các chunk. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Ví dụ: nprobe=1 → 30% recall @136µs; nprobe=8 → 74% @729µs.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-044",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Embedding, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Ý tưởng cốt lõi của PQ (Product Quantization) là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "So sánh query với toàn bộ vector"
         },
         {
           "key": "B",
-          "text": "Biểu diễn nội dung bằng vector để so sánh ngữ nghĩa"
+          "text": "Nén vector thành mã ngắn để tiết kiệm bộ nhớ"
         },
         {
           "key": "C",
-          "text": "Lưu văn bản dưới dạng ảnh"
+          "text": "Chia corpus thành vùng để chỉ tìm vài vùng"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Đi trên graph nhiều lớp từ thưa đến dày"
         }
       ],
       "answer": "B",
-      "explanation": "Biểu diễn nội dung bằng vector để so sánh ngữ nghĩa. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "explanation": "128-dim float32 (512 bytes) → 8 bytes: nén 64×, khoảng cách gần đúng.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-045",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Cosine similarity, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Tham số HNSW nào là “núm vặn” lúc query, không cần rebuild index?",
       "options": [
         {
           "key": "A",
-          "text": "Đo mức gần nhau về hướng của các vector"
+          "text": "efSearch"
         },
         {
           "key": "B",
-          "text": "Đo số ký tự trong tài liệu"
+          "text": "M"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "efConstruction"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "nlist"
         }
       ],
       "answer": "A",
-      "explanation": "Đo mức gần nhau về hướng của các vector. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "explanation": "M tăng kết nối và memory; efConstruction tăng thời gian build.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-046",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Vector store, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Giá trị khởi đầu HNSW được khuyên trong cheatsheet là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "M = 1, efConstruction = 1"
         },
         {
           "key": "B",
-          "text": "Lưu, lập chỉ mục và truy vấn embedding hiệu quả"
+          "text": "M = 512, efConstruction = 10.000"
         },
         {
           "key": "C",
-          "text": "Thay thế hệ quản trị người dùng"
+          "text": "M = 0, efConstruction tùy ý"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "M = 16, efConstruction = 200"
         }
       ],
-      "answer": "B",
-      "explanation": "Lưu, lập chỉ mục và truy vấn embedding hiệu quả. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Sau đó chỉ tune efSearch theo SLA.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-047",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Metadata filter, tiêu chí nào nên được ưu tiên?",
+      "prompt": "FAISS khác một vector database đầy đủ ở điểm nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ chạy được trên hạ tầng cloud của Meta, không chạy được trên máy cá nhân"
         },
         {
           "key": "B",
-          "text": "Thu hẹp kết quả theo thuộc tính như quyền truy cập hoặc thời gian"
+          "text": "Không hỗ trợ bất kỳ thuật toán ANN nào ngoài tìm kiếm tuyến tính đơn giản"
         },
         {
           "key": "C",
-          "text": "Bỏ mọi điều kiện bảo mật trước retrieval"
+          "text": "Là thư viện index/search, không có metadata filter, CRUD, access control"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Không tìm kiếm được vector, chỉ dùng để lưu trữ văn bản thô dạng chuỗi"
         }
       ],
-      "answer": "B",
-      "explanation": "Thu hẹp kết quả theo thuộc tính như quyền truy cập hoặc thời gian. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "IndexHNSWFlat còn không hỗ trợ remove_ids().",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-048",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Ingestion pipeline, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Dùng FAISS IndexFlatIP để mô phỏng cosine nhưng quên normalize. Hậu quả là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Đọc, làm sạch, chunk, embed và index dữ liệu có kiểm soát"
+          "text": "Index tự động chuyển sang dùng khoảng cách L2 thay thế"
         },
         {
           "key": "B",
-          "text": "Đưa tài liệu thẳng vào prompt mỗi lần hỏi"
+          "text": "Xếp hạng theo dot product thô, ưu tiên vector có độ lớn cao"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "FAISS ném lỗi vì METRIC_COSINE không tồn tại trong thư viện"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Mọi score trả về đều bằng 1 nên không thể xếp hạng được"
         }
       ],
-      "answer": "A",
-      "explanation": "Đọc, làm sạch, chunk, embed và index dữ liệu có kiểm soát. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "B",
+      "explanation": "Phải normalize_L2 cả lúc add lẫn lúc query.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-049",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng RAG versus fine-tuning?",
+      "prompt": "Bug phổ biến nhất của ChromaDB là gì?",
       "options": [
         {
           "key": "A",
-          "text": "RAG phù hợp khi cần kiến thức thay đổi và truy xuất nguồn; fine-tuning phù hợp để đổi hành vi ổn định"
+          "text": "Mở lại collection mà không truyền embedding_function, default 384-dim thế chỗ"
         },
         {
           "key": "B",
-          "text": "Fine-tuning luôn thay thế mọi nhu cầu truy xuất"
+          "text": "Collection tự động bị xóa sạch sau mỗi lần khởi động lại máy chủ"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chroma hoàn toàn không hỗ trợ lọc theo metadata khi truy vấn"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chroma chỉ lưu được tối đa 100 tài liệu trong mỗi collection"
         }
       ],
       "answer": "A",
-      "explanation": "RAG phù hợp khi cần kiến thức thay đổi và truy xuất nguồn; fine-tuning phù hợp để đổi hành vi ổn định. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "explanation": "Query không lỗi nhưng recall tụt; luôn truyền cùng embedding_function.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-050",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Chunking?",
+      "prompt": "Embedding function mặc định của Chroma có đặc điểm gì?",
       "options": [
         {
           "key": "A",
-          "text": "Cắt văn bản đúng số ký tự bất kể ngữ nghĩa"
+          "text": "text-embedding-3-large, 3072 chiều, gọi qua API trả phí"
         },
         {
           "key": "B",
-          "text": "Chia tài liệu thành đơn vị đủ nghĩa và phù hợp retrieval"
+          "text": "Qwen3-Embedding 8B, 4096 chiều, nhận đầu vào tới 32K token"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "all-MiniLM-L6-v2, 384 chiều, cắt 256 word-piece, thiên tiếng Anh"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "BGE-M3, 1024 chiều, hỗ trợ hơn 100 ngôn ngữ khác nhau"
         }
       ],
-      "answer": "B",
-      "explanation": "Chia tài liệu thành đơn vị đủ nghĩa và phù hợp retrieval. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Chạy ngay không cần config nên hay bị ship nhầm lên production.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-051",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Chunk overlap?",
+      "prompt": "Đổi embedding model nhưng chỉ đổi ở phía query. Điều gì xảy ra?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Hệ thống tự động re-embed toàn bộ tài liệu cũ ở chế độ nền"
         },
         {
           "key": "B",
-          "text": "Giảm mất ngữ cảnh ở ranh giới giữa các chunk"
+          "text": "Recall tăng lên ngay vì model mới luôn tốt hơn model cũ"
         },
         {
           "key": "C",
-          "text": "Làm mô hình không cần embedding"
+          "text": "Vector store báo lỗi khác số chiều ngay ở lần truy vấn đầu"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Query và document vector khác không gian, thứ hạng lệch vô nghĩa"
         }
       ],
-      "answer": "B",
-      "explanation": "Giảm mất ngữ cảnh ở ranh giới giữa các chunk. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Phải re-embed, rebuild và version hóa index.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-052",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Embedding?",
+      "prompt": "Post-filter trong filtered ANN có rủi ro gì?",
       "options": [
         {
           "key": "A",
-          "text": "Lưu văn bản dưới dạng ảnh"
+          "text": "Trả về ít hơn k hoặc rỗng dù có kết quả hợp lệ"
         },
         {
           "key": "B",
-          "text": "Biểu diễn nội dung bằng vector để so sánh ngữ nghĩa"
+          "text": "Luôn quét toàn bộ corpus như brute-force"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Lộ dữ liệu của tenant khác ra ngoài"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Không thể chạy trên index HNSW"
         }
       ],
-      "answer": "B",
-      "explanation": "Biểu diễn nội dung bằng vector để so sánh ngữ nghĩa. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Pre-filter đúng tập hơn nhưng có thể suy biến về brute-force.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-053",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Cosine similarity?",
+      "prompt": "Với truy vấn “error code E-4471” hay “SKU VN-2291-XL”, phương pháp nào thường thắng?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Cosine trên vector 384 chiều"
         },
         {
           "key": "B",
-          "text": "Đo mức gần nhau về hướng của các vector"
+          "text": "BM25 / lexical"
         },
         {
           "key": "C",
-          "text": "Đo số ký tự trong tài liệu"
+          "text": "Dense embedding"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Semantic chunking"
         }
       ],
       "answer": "B",
-      "explanation": "Đo mức gần nhau về hướng của các vector. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "explanation": "Dense làm nhòe token chính xác; đó là lý do giữ BM25 trong hybrid.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-054",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Vector store?",
+      "prompt": "Vì sao RRF hợp nhất kết quả theo rank thay vì cộng score?",
       "options": [
         {
           "key": "A",
-          "text": "Lưu, lập chỉ mục và truy vấn embedding hiệu quả"
+          "text": "Score bị mã hóa nên không đọc được"
         },
         {
           "key": "B",
-          "text": "Thay thế hệ quản trị người dùng"
+          "text": "RRF chỉ hỗ trợ một danh sách kết quả"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Score BM25 và cosine không cùng thang đo"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Rank luôn chính xác hơn score"
         }
       ],
-      "answer": "A",
-      "explanation": "Lưu, lập chỉ mục và truy vấn embedding hiệu quả. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "RRF(d) = Σ 1/(k + rank), k = 60 mặc định.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-055",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Metadata filter?",
+      "prompt": "Đặc điểm chi phí của reranking so với embedding là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ mọi điều kiện bảo mật trước retrieval"
+          "text": "Rerank tính một lần mỗi tài liệu; embedding tốn mỗi query"
         },
         {
           "key": "B",
-          "text": "Thu hẹp kết quả theo thuộc tính như quyền truy cập hoặc thời gian"
+          "text": "Cả hai đều chỉ tính một lần khi index"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Rerank phụ thuộc kích thước toàn corpus N"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Embedding tính một lần mỗi tài liệu; rerank tốn lại mỗi query"
         }
       ],
-      "answer": "B",
-      "explanation": "Thu hẹp kết quả theo thuộc tính như quyền truy cập hoặc thời gian. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Rerank O(k) trên shortlist top-50/100, không phụ thuộc N.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-056",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Ingestion pipeline?",
+      "prompt": "Tăng k mà chất lượng câu trả lời lại tệ hơn. Nguyên nhân thường là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Đọc, làm sạch, chunk, embed và index dữ liệu có kiểm soát"
+          "text": "Over-retrieval làm bằng chứng đúng bị chôn giữa context"
         },
         {
           "key": "B",
-          "text": "Đưa tài liệu thẳng vào prompt mỗi lần hỏi"
+          "text": "Index HNSW bị hỏng do có quá nhiều kết nối"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Embedding model đã hết hạn license sử dụng"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chunk overlap đang được đặt bằng 0 token"
         }
       ],
       "answer": "A",
-      "explanation": "Đọc, làm sạch, chunk, embed và index dữ liệu có kiểm soát. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "explanation": "Rerank để đẩy bằng chứng lên đầu và giảm k hợp lý.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-057",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, RAG versus fine-tuning giúp đội ngũ làm điều gì?",
+      "prompt": "Recall@k đo điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Thời gian trả về k kết quả đầu tiên"
         },
         {
           "key": "B",
-          "text": "RAG phù hợp khi cần kiến thức thay đổi và truy xuất nguồn; fine-tuning phù hợp để đổi hành vi ổn định"
+          "text": "Trong các tài liệu liên quan, bao nhiêu nằm trong top-k"
         },
         {
           "key": "C",
-          "text": "Fine-tuning luôn thay thế mọi nhu cầu truy xuất"
+          "text": "Trong top-k, bao nhiêu kết quả thật sự liên quan"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Kết quả liên quan đầu tiên nằm ở vị trí nào"
         }
       ],
       "answer": "B",
-      "explanation": "RAG phù hợp khi cần kiến thức thay đổi và truy xuất nguồn; fine-tuning phù hợp để đổi hành vi ổn định. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "explanation": "Precision@k mới là tỷ lệ liên quan trong top-k; MRR là vị trí đầu tiên.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-058",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Chunking giúp đội ngũ làm điều gì?",
+      "prompt": "Vì sao recall@5 đo bằng câu hỏi LLM tự sinh thường cao hơn thực tế?",
       "options": [
         {
           "key": "A",
-          "text": "Cắt văn bản đúng số ký tự bất kể ngữ nghĩa"
+          "text": "Chroma tự động cộng thêm điểm cho câu hỏi do LLM sinh ra"
         },
         {
           "key": "B",
-          "text": "Chia tài liệu thành đơn vị đủ nghĩa và phù hợp retrieval"
+          "text": "Recall@5 hoàn toàn không phụ thuộc vào cách đặt câu hỏi"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Câu hỏi lặp lại từ ngữ của chunk gốc, user thật diễn đạt khác"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "LLM luôn sinh câu hỏi khó hơn nhiều so với người dùng thật"
         }
       ],
-      "answer": "B",
-      "explanation": "Chia tài liệu thành đơn vị đủ nghĩa và phù hợp retrieval. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Đây chỉ là floor check, không thay thế nhãn thật.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-059",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Chunk overlap giúp đội ngũ làm điều gì?",
+      "prompt": "Corpus poisoning (PoisonedRAG) là kiểu tấn công gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Làm quá tải vector store bằng cách gửi hàng triệu query"
         },
         {
           "key": "B",
-          "text": "Giảm mất ngữ cảnh ở ranh giới giữa các chunk"
+          "text": "Đánh cắp API key được lưu trong file cấu hình của hệ thống"
         },
         {
           "key": "C",
-          "text": "Làm mô hình không cần embedding"
+          "text": "Xóa toàn bộ index HNSW để làm sập dịch vụ tìm kiếm"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Đưa tài liệu độc vào kho để được retrieve và lái câu trả lời"
         }
       ],
-      "answer": "B",
-      "explanation": "Giảm mất ngữ cảnh ở ranh giới giữa các chunk. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Phòng thủ rẻ: perplexity filtering vì văn bản tối ưu thường có PPL cao.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D07-060",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Embedding giúp đội ngũ làm điều gì?",
+      "prompt": "Filter theo quyền truy cập nên được đặt ở đâu trong retrieval?",
       "options": [
         {
           "key": "A",
-          "text": "Lưu văn bản dưới dạng ảnh"
+          "text": "Chỉ sau khi đã lấy top-k kết quả"
         },
         {
           "key": "B",
-          "text": "Biểu diễn nội dung bằng vector để so sánh ngữ nghĩa"
+          "text": "Trong system prompt nhắc model tự lọc"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Ở giao diện người dùng sau khi hiển thị"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Trước hoặc trong lúc chạy ANN search"
         }
       ],
-      "answer": "B",
-      "explanation": "Biểu diễn nội dung bằng vector để so sánh ngữ nghĩa. Nội dung được biên soạn từ tài liệu Day7_Data_Foundations_Beginner_Notes.html của Ngày 7.",
-      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Vector DB không kế thừa permission của data store gốc.",
+      "source": "onthi/Day7_Data_Foundations_Beginner_Notes.html + onthi/day7.pdf",
       "module": "C",
       "points": 1
     },
@@ -1696,8 +1696,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Giải thích chunking và nêu một ví dụ áp dụng trong sản phẩm AI.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm chunking, embedding, cosine similarity, vector store, metadata filter, ingestion pipeline, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Một công ty bán lẻ có: (a) chính sách đổi trả dạng PDF, (b) bảng tồn kho cập nhật mỗi phút, (c) giỏ hàng của người dùng đang chat. Phân loại từng nguồn theo knowledge/operational/contextual và đề xuất cách đưa vào agent.",
+      "modelAnswer": "(a) Knowledge: parse, chuẩn hóa, chunk theo section, embed, lưu vector store kèm metadata/provenance, retrieve khi hỏi chính sách. (b) Operational: không embed; dùng SQL/function calling có kiểm soát để lấy số chính xác, mới nhất. (c) Contextual: inject ngắn vào context đúng lúc. Nêu router: câu số liệu → SQL, câu khái niệm → vector search.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1710,8 +1710,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "So sánh chunking với embedding; nêu tiêu chí lựa chọn trong một tình huống thực tế.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm chunking, embedding, cosine similarity, vector store, metadata filter, ingestion pipeline, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Thiết kế bước parse và chuẩn hóa cho một corpus gồm PDF scan tiếng Việt, file Excel báo cáo có ô merge và trang HTML nội bộ. Nêu những gì có thể bị mất im lặng ở mỗi loại.",
+      "modelAnswer": "PDF scan: OCR ≥300 DPI, công cụ hỗ trợ tiếng Việt, giữ layout/reading order, bỏ header/footer; mất dấu, trộn cột, mất quan hệ bảng. Excel: fill-down ô merge, ghép header nhiều tầng, tách nhiều bảng, lấy giá trị thay vì công thức, serialize hàng đủ nghĩa kèm đơn vị. HTML: bóc boilerplate (trafilatura). Chung: NFC, de-hyphenation, khử trùng, giữ provenance (file, trang, heading, version, ACL).",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1724,8 +1724,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Thiết kế một quy trình ngắn sử dụng cosine similarity để giảm rủi ro cho người dùng.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm chunking, embedding, cosine similarity, vector store, metadata filter, ingestion pipeline, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "So sánh các chiến lược chunking (fixed-size, overlap, recursive, structure-aware, semantic) và đề xuất chiến lược cho bộ FAQ + chính sách có heading rõ ràng, kèm cách kiểm chứng.",
+      "modelAnswer": "Fixed-size: baseline rẻ. Overlap: giữ ngữ cảnh ranh giới. Recursive: mặc định thực dụng. Structure-aware: cắt theo heading/section/bảng — phù hợp FAQ/policy. Semantic: tốn chi phí, NAACL 2025 cho thấy không cải thiện nhất quán. Đề xuất structure-aware/recursive, 200–500 token làm điểm bắt đầu, overlap 10–20%, kiểm tra token count tránh silent truncation; đo recall@k trước/sau khi đổi; đo lại khi đổi embedding model.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1738,8 +1738,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Phân tích một failure mode liên quan đến vector store, nguyên nhân và cách khắc phục.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm chunking, embedding, cosine similarity, vector store, metadata filter, ingestion pipeline, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Quy trình chọn embedding model cho trợ lý tra cứu tài liệu nội bộ tiếng Việt có nhiều mã sản phẩm (SKU). Nêu các trục quyết định và cách đánh giá.",
+      "modelAnswer": "Trục: deployment (API hay on-prem), max input, dimension/precision, ngôn ngữ & domain (tiếng Việt, xem VN-MTEB), query shape (có SKU → cần sparse/BM25 hybrid), license. Quy trình: xác định chunk length và dạng query → shortlist 2–3 model → bộ eval 50–100 câu từ corpus → đo recall@k với đúng prefix → rồi mới giảm chiều/quantize. Không so MTEB khác board/version.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1752,8 +1752,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Đề xuất metric đánh giá cho metadata filter; giải thích vì sao metric đó hữu ích.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm chunking, embedding, cosine similarity, vector store, metadata filter, ingestion pipeline, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Giải thích Flat, IVF, PQ và HNSW bằng ẩn dụ, nêu đánh đổi và chọn index cho ba quy mô: 5 nghìn, 5 triệu (RAM đủ) và 500 triệu vector (RAM hạn chế).",
+      "modelAnswer": "Flat: đọc mọi sách, recall 100%, chậm/tốn RAM; IVF: chia khu kệ, nprobe điều chỉnh recall/latency, cần train; PQ: nén mã ngắn, tiết kiệm RAM, khoảng cách gần đúng; HNSW: đường cao tốc nhiều lớp, recall/latency tốt, tốn RAM graph. 5k → Flat; 5M RAM đủ → HNSW (M=16, efConstruction=200, tune efSearch); 500M RAM hạn chế → IVF-PQ hoặc DiskANN. Luôn đo recall so với Flat ở k và filter thật.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1766,8 +1766,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Lập kế hoạch thử nghiệm nhỏ cho ingestion pipeline: giả định, dữ liệu, tiêu chí đạt và tiêu chí dừng.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm chunking, embedding, cosine similarity, vector store, metadata filter, ingestion pipeline, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Một hệ thống RAG trả HTTP 200, không log lỗi nhưng người dùng phàn nàn kết quả sai. Liệt kê ít nhất 6 failure mode âm thầm có thể gây ra và cách phát hiện/sửa từng cái.",
+      "modelAnswer": "Ví dụ: thiếu prefix query/passage (prefix-ablation); silent truncation (đếm token); đổi model không re-embed (version index); quên normalize trong FAISS IP (normalize add + query); post-filter trả < k (pre/in-algorithm filter); Chroma default embedding hoặc mở collection sai ef (truyền ef tường minh, assert dimension); over-retrieval lost-in-the-middle (rerank, giảm k); cache không version/TTL. Kết luận: “không lỗi” ≠ “đúng”, phải đo recall@k với BM25 làm sàn.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1780,8 +1780,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Tình huống: kết quả liên quan đến chunking không đạt kỳ vọng. Bạn sẽ debug theo thứ tự nào?",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm chunking, embedding, cosine similarity, vector store, metadata filter, ingestion pipeline, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Thiết kế hybrid search cho corpus ticket hỗ trợ khách hàng có cả câu mô tả tự nhiên lẫn mã lỗi, kèm RRF và reranking. Giải thích vì sao từng thành phần cần thiết.",
+      "modelAnswer": "Dense: bắt vocabulary mismatch (“package never showed up” ↔ “shipment did not arrive”). BM25: mã lỗi E-4471, SKU, token ngoài từ vựng. RRF hợp nhất theo rank (k=60) vì score khác thang đo. Lấy top-50/100 rẻ → rerank bằng cross-encoder xuống top-5/10 → inject; rerank tốn mỗi query nhưng không phụ thuộc N. Có thể dùng BGE-M3 sinh dense+sparse cùng lúc. Đo recall/nDCG trước-sau.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1794,8 +1794,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Viết khuyến nghị cho stakeholder về lợi ích, giới hạn và rủi ro của embedding.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm chunking, embedding, cosine similarity, vector store, metadata filter, ingestion pipeline, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Viết kế hoạch đo chất lượng retrieval cho Lab 7 khi chưa có nhãn: cách sinh eval set, metric dùng, baseline và các thiên lệch cần ghi rõ.",
+      "modelAnswer": "Sample chunk theo tỷ lệ loại tài liệu (≥100), LLM sinh 1–3 câu hỏi chỉ dựa trên chunk kèm persona, chunk nguồn là positive (citation-as-weak-label), chạy retrieval tính recall@5 và MRR, kiểm tay ~10%. Baseline: BM25 và Flat. Metric: recall@k, precision@k, nDCG, MRR. Thiên lệch: câu hỏi lặp từ ngữ chunk gốc làm recall cao hơn thực tế, thiên về trùng từ khóa — chỉ là floor check; bổ sung query log thật.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1808,8 +1808,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Nêu các đánh đổi khi triển khai cosine similarity trong production và cách theo dõi sau triển khai.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm chunking, embedding, cosine similarity, vector store, metadata filter, ingestion pipeline, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Phân tích rủi ro bảo mật và quyền riêng tư khi lưu embedding của hồ sơ bệnh nhân trong vector store, và đề xuất biện pháp.",
+      "modelAnswer": "Rủi ro: embedding inversion khôi phục gần nguyên văn; membership inference lộ sự hiện diện (bệnh hiếm X); corpus poisoning và indirect prompt injection qua kênh retrieval; vector DB không kế thừa ACL; pháp lý PDPL 91/2025, GDPR coi là pseudonymized. Biện pháp: mask PII trước khi embed, ACL filter trước/trong ANN (row-level security, namespace per tenant), lưu ACL/version trong metadata, kiểm quyền trước khi inject, kiểm soát nguồn đưa vào corpus, quản lý vector như dữ liệu nhạy cảm.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1822,8 +1822,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Tạo checklist trước khi ship một tính năng AI có dùng vector store và metadata filter.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm chunking, embedding, cosine similarity, vector store, metadata filter, ingestion pipeline, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Viết mã giả (pseudocode) cho mini retrieval pipeline của Lab 7 bằng ChromaDB: chunk, embed, store, query có metadata filter, answer với context và đo recall@5; chỉ ra các điểm dễ sai.",
+      "modelAnswer": "Chunk bằng RecursiveCharacterTextSplitter (chunk_size ~400, overlap ~50, separators đoạn → dòng → câu); PersistentClient; embedding function tường minh (bge-m3) và truyền lại mỗi lần mở collection; add với id, document, metadata (source, category); query n_results=k với where filter; ghép context, prompt yêu cầu nói “không có thông tin” nếu không tìm thấy; recall@5 = số query có chunk nguồn trong top-5 / tổng. Điểm dễ sai: default embedding, silent truncation, thiếu prefix, post-filter, overfit eval tự sinh.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",

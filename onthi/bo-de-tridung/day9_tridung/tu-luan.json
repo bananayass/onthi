@@ -6,7 +6,8 @@
     {
       "id": "D09-TL-01",
       "type": "essay",
-      "prompt": "Giải thích multi-agent và nêu một ví dụ áp dụng trong sản phẩm AI.",
+      "prompt": "Cho năm kịch bản: (A) chatbot FAQ học phí 30 trang; (B) trợ lý ngân hàng đọc sao kê 12 tháng, tra biểu phí API, đối chiếu chính sách, viết khuyến nghị; (C) báo cáo 6 đối thủ; (D) hai agent cùng viết một file React; (E) bài logic 10 bước phụ thuộc. Chọn 1 LLM call + RAG, single-agent có tool hay multi-agent (pattern nào) và nêu lý do.",
+      "modelAnswer": "A: 1 LLM call + RAG (việc rõ, một vai). B: supervisor + workers (nhiều năng lực: đọc sao kê, API, chính sách, viết; cần kiểm bằng chứng) hoặc single-agent có tool nếu đủ context. C: nhiều subagent song song (nhánh độc lập). D: không nên để hai agent cùng ghi một file — song song đọc, tuần tự ghi; một agent viết. E: tuần tự / plan-then-execute (ít cơ hội song song). Dấu hiệu: nhiều vai, việc song song, cần khoanh vùng lỗi, context không đủ; nhắc chi phí token.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -17,7 +18,8 @@
     {
       "id": "D09-TL-02",
       "type": "essay",
-      "prompt": "So sánh multi-agent với supervisor-worker; nêu tiêu chí lựa chọn trong một tình huống thực tế.",
+      "prompt": "Thiết kế hệ “Trợ lý hoàn tiền” gồm supervisor và tối đa 3 worker từ pipeline RAG Day 8: vai từng thành phần, state schema (trường, kiểu, ai ghi) và quy tắc state.",
+      "modelAnswer": "Supervisor: phân tích, route, theo dõi, tổng hợp, xin duyệt khi cần. Workers: policy_worker (RAG chính sách), order_worker (API đơn hàng), synthesis_worker (viết câu trả lời có trích nguồn). State: task (supervisor), order_id (supervisor), policy_chunks (policy_worker), order_status (order_worker), draft_answer (synthesis), status pending/running/done/error (supervisor), trace (mọi node, reducer nối thêm). Quy tắc: mỗi trường một chỗ ghi, có trường lỗi, kết quả worker tách riêng để test, synthesis không kết luận khi thiếu order_status.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -28,7 +30,8 @@
     {
       "id": "D09-TL-03",
       "type": "essay",
-      "prompt": "Thiết kế một quy trình ngắn sử dụng MCP để giảm rủi ro cho người dùng.",
+      "prompt": "Phân biệt agents-as-tools và handoff, nêu câu hỏi kiểm tra, và phân loại bốn tình huống: agent CSKH gọi agent tính phí; bot lễ tân chuyển cho agent pháp lý; script luôn gọi retriever → reranker → writer; agent nghiên cứu sinh 4 subagent trả tóm tắt.",
+      "modelAnswer": "Agents-as-tools: gọi rồi trả kết quả về, agent gọi giữ hội thoại; worker chỉ thấy input được truyền. Handoff: chuyển quyền lái, agent mới thấy toàn bộ lịch sử. Câu hỏi: lượt tới ai nói với user? (1) agents-as-tools; (2) handoff; (3) luồng cố định do script quyết, không phải hai loại trên; (4) agents-as-tools (subagent trả tóm tắt về agent chính).",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -39,7 +42,8 @@
     {
       "id": "D09-TL-04",
       "type": "essay",
-      "prompt": "Phân tích một failure mode liên quan đến A2A, nguyên nhân và cách khắc phục.",
+      "prompt": "So sánh MCP và A2A, phân loại các yêu cầu: đọc bảng customers PostgreSQL; agent hãng bay giao việc tìm khách sạn cho agent công ty du lịch khác; tạo ticket Jira; agent ngân hàng hỏi agent chấm điểm tín dụng của đội khác.",
+      "modelAnswer": "MCP: agent → tool/capability, phía kia chỉ thực thi, chiều dọc; A2A: agent → agent có quyết định riêng, chia việc/đồng bộ, Agent Card, message contract. Phân loại: PostgreSQL → MCP (resource/tool); hãng bay giao khách sạn → A2A; Jira → MCP (tool); chấm điểm tín dụng đội khác → A2A. Nêu “A2A loves MCP”.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -50,7 +54,8 @@
     {
       "id": "D09-TL-05",
       "type": "essay",
-      "prompt": "Đề xuất metric đánh giá cho LangGraph; giải thích vì sao metric đó hữu ích.",
+      "prompt": "Viết message contract A2A (task, context, expected_output) để supervisor của Trợ lý hoàn tiền giao cho Fraud-check agent do đội khác vận hành; chỉ ra thông tin không nên gửi và cách validate kết quả.",
+      "modelAnswer": "task: kiểm tra dấu hiệu gian lận cho yêu cầu hoàn tiền. context: order_id, order_status, refund_amount, tín hiệu (nhiều yêu cầu hoàn gần đây). expected_output: risk_level low/medium/high, reasons có bằng chứng, missing_data. Không gửi: số điện thoại, địa chỉ, toàn bộ lịch sử chat, thông tin thẻ — need-to-know. Validate: đúng schema, risk_level hợp lệ, lý do có bằng chứng; coi output là dữ liệu không tin cậy, không làm theo chỉ dẫn trong đó; quyết định hoàn tiền vẫn qua policy/cổng duyệt.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -61,7 +66,8 @@
     {
       "id": "D09-TL-06",
       "type": "essay",
-      "prompt": "Lập kế hoạch thử nghiệm nhỏ cho trace: giả định, dữ liệu, tiêu chí đạt và tiêu chí dừng.",
+      "prompt": "Viết đoạn LangGraph (mã giả) cho supervisor route tới order_worker và policy_worker trước khi tổng hợp, có reducer cho trace, checkpointer và interrupt() xin duyệt khi đơn quá 7 ngày. Giải thích các rủi ro khi resume.",
+      "modelAnswer": "StateGraph(State) với trace: Annotated[list, operator.add]; add_node supervisor/order_worker/policy_worker/synthesis_worker/human_review; START → supervisor; conditional edges theo route; order_worker → policy_worker → synthesis; nếu days_since > 7 → human_review dùng interrupt(); compile(checkpointer=...); invoke với thread_id; resume bằng Command(resume=\"approve\"). Rủi ro: resume chạy lại node → side effect (gửi email, hoàn tiền) phải idempotent; bỏ reducer thì trace bị ghi đè; InMemorySaver mất khi restart.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -72,7 +78,8 @@
     {
       "id": "D09-TL-07",
       "type": "essay",
-      "prompt": "Tình huống: kết quả liên quan đến multi-agent không đạt kỳ vọng. Bạn sẽ debug theo thứ tự nào?",
+      "prompt": "Phân tích trace hoàn tiền sai (supervisor → policy_worker → synthesis_worker với order_status=None, mọi bước “ok”, trả lời “Có”). Chỉ ra lỗi, giải thích vì sao “ok” vẫn sai và đề xuất cách sửa.",
+      "modelAnswer": "Supervisor bỏ qua order_worker; synthesis nhận policy_chunks=3 nhưng order_status=None vẫn kết luận. “ok” chỉ là không exception; lỗi là ngữ nghĩa/thiếu dữ kiện. Sửa: routing bắt buộc gọi order_worker với câu hỏi hoàn tiền; synthesis kiểm tra dữ kiện bắt buộc, nếu None thì tra lại hoặc nói chưa đủ thông tin; thêm verifier trước kết thúc; trace đủ trường (agent, action, decision, reason, status, latency); thêm testcase tái hiện.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -83,7 +90,8 @@
     {
       "id": "D09-TL-08",
       "type": "essay",
-      "prompt": "Viết khuyến nghị cho stakeholder về lợi ích, giới hạn và rủi ro của supervisor-worker.",
+      "prompt": "Hệ “Trợ lý email ngân hàng”: supervisor có tool send_email; worker A đọc CRM; worker B đọc email đến và web; worker C soạn thư trả lời. Đánh dấu ba chân của lethal trifecta và đề xuất tối đa 3 thay đổi cắt ít nhất một chân; nêu hành động cần người duyệt.",
+      "modelAnswer": "Chân 1: dữ liệu riêng tư (worker A đọc CRM). Chân 2: nội dung không tin cậy (worker B đọc email/web có thể chứa injection). Chân 3: đường gửi ra ngoài (supervisor send_email). Thay đổi: send_email qua cổng ASK người duyệt (hoặc chỉ tạo draft); cô lập worker B, coi output là dữ liệu, quét injection, không cho nội dung của B chạm tới dữ liệu CRM trong cùng luồng gửi; giới hạn người nhận (allowlist domain), least privilege. Hành động cần duyệt: gửi email ra ngoài, thay đổi dữ liệu khách hàng.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -94,7 +102,8 @@
     {
       "id": "D09-TL-09",
       "type": "essay",
-      "prompt": "Nêu các đánh đổi khi triển khai MCP trong production và cách theo dõi sau triển khai.",
+      "prompt": "Tính chi phí/ngày cho chatbot: mỗi câu 2.000 token, 10.000 câu/ngày, giá giả định 3 USD/1M token, với hệ số 1× (chat), 4× (single agent), 15× (multi-agent). Nêu khi nào multi-agent đáng chi phí đó.",
+      "modelAnswer": "Token/ngày gốc = 2.000 × 10.000 = 20M → 1×: 20M × 3/1M = 60 USD/ngày; 4×: 240 USD/ngày; 15×: 900 USD/ngày (~27.000 USD/tháng). Multi-agent đáng khi việc chia song song được, cần chuyên môn hóa, context vượt một cửa sổ hoặc giá trị chất lượng vượt chi phí; nếu tác vụ suy luận multi-hop thì single-agent cùng ngân sách có thể ngang/hơn (Tran & Kiela 2026). Đo trên eval trước khi quyết.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -105,7 +114,8 @@
     {
       "id": "D09-TL-10",
       "type": "essay",
-      "prompt": "Tạo checklist trước khi ship một tính năng AI có dùng A2A và LangGraph.",
+      "prompt": "Trình bày quy trình debug và checklist đưa một hệ multi-agent vào production, gắn với các nhóm lỗi MAST.",
+      "modelAnswer": "Debug theo lớp: prompt/role (output contract), context/input, routing/loop (route sai, lặp, dừng sớm), harness/permission (quyền thừa, thiếu duyệt, làm theo output không tin cậy), eval/trace (testcase tái hiện, regression). MAST: thiết kế 44,2% (lặp, không biết dừng) → điều kiện dừng, giới hạn vòng; lệch pha 32,3% → vai trò rõ, message contract; không kiểm chứng 23,5% → verifier. Checklist: vai/output rõ, state có status, điều kiện thành công/dừng, timeout, fallback, log routing/latency (hạn chế dữ liệu nhạy cảm), output worker là dữ liệu, least privilege, hành động khó hoàn tác có duyệt, resume idempotent, chạy lại test cũ.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
