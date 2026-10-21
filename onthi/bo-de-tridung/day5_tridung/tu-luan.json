@@ -6,7 +6,8 @@
     {
       "id": "D05-TL-01",
       "type": "essay",
-      "prompt": "Giải thích MVP và nêu một ví dụ áp dụng trong sản phẩm AI.",
+      "prompt": "Phân tích Jobs-to-be-Done (functional, emotional, social) cho nhân viên chăm sóc khách hàng dùng AI support agent, rồi chọn North Star metric kèm cảnh báo “đừng chỉ đo…”, có baseline.",
+      "modelAnswer": "Functional: trả lời ticket nhanh, đúng chính sách. Emotional: tự tin, ít sợ sai. Social: trông chuyên nghiệp, phản hồi nhanh trong mắt khách. North Star: first-response resolution rate; cảnh báo: đừng chỉ đo số câu trả lời. Có baseline (ví dụ hiện 45%) và mục tiêu; nêu thêm 4 câu: ai dùng, đau ở đâu, đo bằng gì, fail gây hại gì.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -17,7 +18,8 @@
     {
       "id": "D05-TL-02",
       "type": "essay",
-      "prompt": "So sánh MVP với Wizard of Oz; nêu tiêu chí lựa chọn trong một tình huống thực tế.",
+      "prompt": "Viết lại requirement mơ hồ “Chatbot phải trả lời nhanh và đúng” thành acceptance criteria đo được theo mẫu When X → Y → trong Z → fallback, kèm một bản Given-When-Then và ngưỡng trên bộ test.",
+      "modelAnswer": "Ví dụ: Khi nhân viên hỏi về chính sách nghỉ phép, agent trả lời bằng tiếng Việt, trích dẫn điều khoản nguồn, trong dưới 6 giây ở p95; nếu không tìm thấy nguồn thì nói rõ giới hạn và chuyển HR. Gherkin: Given nhân viên đã đăng nhập, When hỏi chính sách X, Then trả lời có trích dẫn trong ngưỡng thời gian; nếu không có nguồn thì báo và chuyển hướng. Ngưỡng: đạt ≥ 90% trên bộ 20 case đại diện gồm câu mơ hồ, thiếu dữ liệu, tiếng lóng, tool timeout.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -28,7 +30,8 @@
     {
       "id": "D05-TL-03",
       "type": "essay",
-      "prompt": "Thiết kế một quy trình ngắn sử dụng PRD cho AI feature để giảm rủi ro cho người dùng.",
+      "prompt": "Viết PRD skeleton đủ 8 phần cho một AI ticket routing agent, mỗi phần nối với một quyết định, metric hoặc risk.",
+      "modelAnswer": "Problem: ticket bị chuyển sai nhóm, xử lý chậm. Target user: operations lead, nhân viên phân loại. Success metrics: đúng nhóm ngay lần đầu (baseline → target), thời gian phản hồi. Technical architecture ở mức scope: classifier/LLM + rule + queue. Feature: gợi ý queue, giải thích lý do. Non-functional: latency, uptime, cost, privacy. AC: ngưỡng đúng nhóm trên bộ test, fallback khi confidence thấp. Risks: phân loại sai ticket khẩn, bias theo ngôn ngữ, adoption thấp — có mitigation, owner.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -39,7 +42,8 @@
     {
       "id": "D05-TL-04",
       "type": "essay",
-      "prompt": "Phân tích một failure mode liên quan đến nondeterminism, nguyên nhân và cách khắc phục.",
+      "prompt": "Xây dựng metrics hierarchy 3 tầng (Business KPI, Product metric, AI metric) cho một AI sales assistant và giải thích mối liên hệ giữa các tầng.",
+      "modelAnswer": "Business KPI: doanh thu từ lead, chi phí bán hàng giảm. Product metric: tỷ lệ lead đủ điều kiện, tỷ lệ sales dùng gợi ý, repeat usage. AI metric: độ chính xác chấm điểm lead, latency, tỷ lệ tóm tắt đúng. Liên hệ: AI metric tốt mới nâng product metric, product metric tạo business KPI; tránh đo số lead được chấm điểm thay cho chất lượng.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -50,7 +54,8 @@
     {
       "id": "D05-TL-05",
       "type": "essay",
-      "prompt": "Đề xuất metric đánh giá cho trust calibration; giải thích vì sao metric đó hữu ích.",
+      "prompt": "Viết 3 user stories chuẩn INVEST cho Internal Policy Assistant, mỗi story có ít nhất một happy path, một edge case và một error state kèm fallback.",
+      "modelAnswer": "Ví dụ: As an HR staff member, I want AI to answer policy questions with source citation, so that I respond consistently and reduce lookup time. As a line manager, I want AI to summarize leave policy for my team case… As an HR lead, I want low-confidence questions escalated… Mỗi story: happy path (trả lời đúng nguồn < 6s), edge (câu mơ hồ, tiếng lóng, chính sách mới), error (không có nguồn, timeout, confidence thấp → báo rõ, chuyển HR). Tự chấm I-N-V-E-S-T.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -61,7 +66,8 @@
     {
       "id": "D05-TL-06",
       "type": "essay",
-      "prompt": "Lập kế hoạch thử nghiệm nhỏ cho evaluation: giả định, dữ liệu, tiêu chí đạt và tiêu chí dừng.",
+      "prompt": "Lập risk matrix cho 5 rủi ro (hallucination, bias, privacy, cost, adoption) của một trợ lý tra cứu chính sách: chấm Likelihood × Impact, mitigation, owner, liên kết AC/monitoring, rồi đưa ra quyết định go / conditional go / no-go.",
+      "modelAnswer": "Ví dụ: hallucination L3×I5=15 → citation bắt buộc, verifier, owner AI lead, monitor citation rate; bias L2×I3=6 → test set đa dạng; privacy L3×I5=15 → masking, access control, owner security; cost L3×I3=9 → budget cap, cache; adoption L3×I4=12 → pilot, training. Quyết định: conditional go (pilot HR nội bộ, HITL) nếu privacy chưa xử lý xong; go khi rủi ro cao đều có mitigation, AC đo được, owner rõ.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -72,7 +78,8 @@
     {
       "id": "D05-TL-07",
       "type": "essay",
-      "prompt": "Tình huống: kết quả liên quan đến MVP không đạt kỳ vọng. Bạn sẽ debug theo thứ tự nào?",
+      "prompt": "Soạn kịch bản phỏng vấn discovery cho người dùng của một AI hỗ trợ viết email bán hàng, gồm 4 câu hỏi đặc thù AI và cách bổ sung 4 chiều persona dành cho AI.",
+      "modelAnswer": "4 câu: muốn AI tự làm đến đâu và bước nào giữ quyền kiểm soát; tin AI dựa trên gì (tốc độ, nguồn, confidence, kết quả); khi AI sai muốn sửa tay, thử lại hay chuyển người; kỳ vọng AI là trợ lý, copilot hay thay thế. Hỏi “why” ít nhất 2 lần, không gợi ý solution. Persona thêm: AI literacy, mức sẵn sàng tin automation, ngưỡng chấp nhận sai, mức muốn explainability. Rút ra 3 requirement nháp.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -83,7 +90,8 @@
     {
       "id": "D05-TL-08",
       "type": "essay",
-      "prompt": "Viết khuyến nghị cho stakeholder về lợi ích, giới hạn và rủi ro của Wizard of Oz.",
+      "prompt": "Một công ty muốn dùng AI sàng lọc CV ứng viên. Phân tích các vấn đề Bias, Privacy, Transparency theo ngôn ngữ PM/BA và chuyển thành requirement cụ thể; nêu vì sao use case này cần cẩn trọng hơn.",
+      "modelAnswer": "Bias: AI có xếp hạng khác nhau theo giới, tuổi, vùng miền? → test set đa dạng, đo chênh lệch theo nhóm, human review ca nhạy cảm, AI không tự loại ứng viên. Privacy: CV chứa PII → data minimization, masking, retention policy, kiểm soát truy cập. Transparency: ứng viên/HR biết có AI tham gia, lý do gợi ý, có kênh khiếu nại/escalation. Tuyển dụng là lĩnh vực nhạy cảm theo AI Act → risk management, documentation, logging, human oversight.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -94,7 +102,8 @@
     {
       "id": "D05-TL-09",
       "type": "essay",
-      "prompt": "Nêu các đánh đổi khi triển khai PRD cho AI feature trong production và cách theo dõi sau triển khai.",
+      "prompt": "Thiết kế feedback loop sau khi ra mắt một AI support agent: những tín hiệu explicit, behavioral, outcome nào cần thu, chúng giúp quyết định gì?",
+      "modelAnswer": "Explicit: thumbs up/down, rating → chất lượng cảm nhận. Behavioral: copy câu trả lời, rephrase câu hỏi, override, abandon → phát hiện trust, friction. Outcome: resolved, escalated, reopen ticket → nối chất lượng AI với giá trị kinh doanh. Dùng để: cập nhật bộ test, hiệu chỉnh ngưỡng, ưu tiên sửa lỗi, quyết định mở rộng/thu hẹp tự động hóa; xác định trước khi launch để hệ thống học và cải thiện được.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -105,7 +114,8 @@
     {
       "id": "D05-TL-10",
       "type": "essay",
-      "prompt": "Tạo checklist trước khi ship một tính năng AI có dùng nondeterminism và trust calibration.",
+      "prompt": "Cho PRD: “Chúng tôi dùng GPT-x để làm chatbot thông minh. Tính năng: chat, tóm tắt, gợi ý. Mục tiêu: độ chính xác càng cao càng tốt.” Chỉ ra các anti-pattern và viết lại các phần còn thiếu.",
+      "modelAnswer": "Anti-pattern: chọn solution/model quá sớm; chỉ liệt kê tính năng, thiếu problem và target user; metric “càng cao càng tốt” không baseline/threshold; thiếu non-functional (latency, cost, privacy, escalation); không có risk section; không có AC. Viết lại: problem cụ thể, target user, success metrics 3 tầng có baseline + threshold, non-functional, AC có ngưỡng trên bộ test, risks có L×I, mitigation, owner; mỗi mục nối tới quyết định/metric/risk.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",

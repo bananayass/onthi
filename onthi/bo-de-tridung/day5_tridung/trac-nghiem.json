@@ -7,1562 +7,1562 @@
     {
       "id": "D05-001",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Leap of Faith assumption?",
+      "prompt": "Kiểu thất bại “Build the wrong thing” xảy ra khi nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Không lường trước edge case khi triển khai"
         },
         {
           "key": "B",
-          "text": "Là giả định quan trọng nhưng chưa được chứng minh, cần kiểm thử sớm"
+          "text": "Chọn model có độ trễ cao hơn dự kiến"
         },
         {
           "key": "C",
-          "text": "Là tính năng đã chắc chắn có người dùng"
+          "text": "Hiểu sai job-to-be-done hoặc chọn sai persona"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Requirement mơ hồ, thiếu acceptance criteria"
         }
       ],
-      "answer": "B",
-      "explanation": "Là giả định quan trọng nhưng chưa được chứng minh, cần kiểm thử sớm. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "C",
+      "explanation": "Build the thing wrong mới là requirement mơ hồ, thiếu AC, bỏ sót rủi ro.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-002",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Prototype fidelity?",
+      "prompt": "Team làm AI viết báo cáo tự động, nhưng người dùng thật ra chỉ cần tìm đúng một con số trong báo cáo. Đây là kiểu thất bại nào?",
       "options": [
         {
           "key": "A",
-          "text": "Luôn làm giao diện hoàn chỉnh trước"
+          "text": "Thiếu non-functional requirement"
         },
         {
           "key": "B",
-          "text": "Bắt đầu mức rẻ nhất đủ để trả lời giả định cần kiểm tra"
+          "text": "Build the wrong thing"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Build the thing wrong"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Over-engineering hạ tầng"
         }
       ],
       "answer": "B",
-      "explanation": "Bắt đầu mức rẻ nhất đủ để trả lời giả định cần kiểm tra. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "Team giải sai nhu cầu thật của người dùng.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-003",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về MVP?",
+      "prompt": "Yêu cầu “AI phải thông minh và nhanh” nhưng không nói nhanh là bao lâu thuộc kiểu thất bại nào?",
       "options": [
         {
           "key": "A",
-          "text": "Là phiên bản tối thiểu người dùng có thể dùng để kiểm tra workflow"
+          "text": "Build the thing wrong"
         },
         {
           "key": "B",
-          "text": "Là bản có nhiều tính năng nhất"
+          "text": "Build the wrong thing"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chọn sai North Star"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chọn sai persona"
         }
       ],
       "answer": "A",
-      "explanation": "Là phiên bản tối thiểu người dùng có thể dùng để kiểm tra workflow. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "Hiểu đúng mục tiêu nhưng requirement không đủ rõ để kiểm thử.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-004",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Wizard of Oz?",
+      "prompt": "Khác biệt về đầu ra giữa sản phẩm AI và phần mềm thông thường là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Đầu ra AI luôn ổn định hơn phần mềm thường"
         },
         {
           "key": "B",
-          "text": "Dùng con người phía sau để kiểm tra trải nghiệm trước khi tự động hóa"
+          "text": "Đầu ra AI không cần kiểm thử như phần mềm"
         },
         {
           "key": "C",
-          "text": "Che giấu rủi ro cho người dùng production"
+          "text": "Đầu ra AI chỉ khác về giao diện hiển thị"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Đầu ra AI mang tính xác suất, có biến thiên"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng con người phía sau để kiểm tra trải nghiệm trước khi tự động hóa. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "D",
+      "explanation": "Vì vậy AI cần quality bands, fallback và trust design.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-005",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về PRD for AI?",
+      "prompt": "“Definition of done” của sản phẩm AI cần thêm gì so với phần mềm thường?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ cần demo chạy được trên máy dev"
         },
         {
           "key": "B",
-          "text": "Nêu rõ job-to-be-done, dữ liệu, metric, fallback và giới hạn AI"
+          "text": "Chỉ cần stakeholder ký duyệt"
         },
         {
           "key": "C",
-          "text": "Chỉ mô tả giao diện"
+          "text": "Ngưỡng chất lượng, SLA và fallback"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chỉ cần pass/fail của unit test"
         }
       ],
-      "answer": "B",
-      "explanation": "Nêu rõ job-to-be-done, dữ liệu, metric, fallback và giới hạn AI. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "C",
+      "explanation": "Phần mềm thường có pass/fail khá rõ; AI cần threshold, SLA, phương án dự phòng.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-006",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Nondeterminism?",
+      "prompt": "Vòng cải tiến (iteration loop) của sản phẩm AI khác phần mềm thường thế nào?",
       "options": [
         {
           "key": "A",
-          "text": "AI luôn cho cùng một đáp án"
+          "text": "Chỉ cải tiến khi có khiếu nại từ người dùng"
         },
         {
           "key": "B",
-          "text": "Đầu ra AI có thể thay đổi nên cần eval và xử lý lỗi dự kiến"
+          "text": "Build → test → observe → calibrate → re-ship"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Build rồi ship một lần duy nhất là hoàn tất"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Ship trước rồi mới viết requirement sau"
         }
       ],
       "answer": "B",
-      "explanation": "Đầu ra AI có thể thay đổi nên cần eval và xử lý lỗi dự kiến. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "Sản phẩm AI cần quan sát và hiệu chỉnh liên tục sau khi phát hành.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-007",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Trust calibration?",
+      "prompt": "Trong JTBD, “emotional job” của nhân viên hỗ trợ dùng AI có thể là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Thiết kế để người dùng tin đúng mức vào năng lực và giới hạn AI"
+          "text": "Cảm thấy tự tin hơn, ít sợ trả lời sai"
         },
         {
           "key": "B",
-          "text": "Làm AI trông chắc chắn trong mọi trường hợp"
+          "text": "Trả lời ticket nhanh hơn mỗi ngày"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Trông chuyên nghiệp trong mắt khách"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Giảm số ticket tồn đọng cuối tuần"
         }
       ],
       "answer": "A",
-      "explanation": "Thiết kế để người dùng tin đúng mức vào năng lực và giới hạn AI. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "Functional: hoàn thành việc; emotional: cảm thấy thế nào; social: được nhìn nhận ra sao.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-008",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Evaluation flow?",
+      "prompt": "“Muốn trông chuyên nghiệp và phản hồi nhanh trong mắt khách” thuộc góc JTBD nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Functional job"
         },
         {
           "key": "B",
-          "text": "Đi từ kiểm tra nhanh sang offline eval rồi theo dõi khi triển khai"
+          "text": "Emotional job"
         },
         {
           "key": "C",
-          "text": "Chỉ đánh giá sau khi có khiếu nại"
+          "text": "Technical job"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Social job"
         }
       ],
-      "answer": "B",
-      "explanation": "Đi từ kiểm tra nhanh sang offline eval rồi theo dõi khi triển khai. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "D",
+      "explanation": "Social job là cách người dùng muốn được người khác nhìn nhận.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-009",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Leap of Faith assumption nào là phù hợp nhất?",
+      "prompt": "Nếu chỉ phân tích functional job, rủi ro là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Agent không gọi được các tool bên ngoài hệ thống"
         },
         {
           "key": "B",
-          "text": "Là giả định quan trọng nhưng chưa được chứng minh, cần kiểm thử sớm"
+          "text": "Agent tốn nhiều token hơn mức thật sự cần thiết"
         },
         {
           "key": "C",
-          "text": "Là tính năng đã chắc chắn có người dùng"
+          "text": "Agent đúng chức năng nhưng không được dùng lại"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Agent sẽ chạy chậm hơn trên môi trường production"
         }
       ],
-      "answer": "B",
-      "explanation": "Là giả định quan trọng nhưng chưa được chứng minh, cần kiểm thử sớm. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "C",
+      "explanation": "Bỏ qua emotional/social job dễ làm sản phẩm thiếu động lực sử dụng lâu dài.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-010",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Prototype fidelity nào là phù hợp nhất?",
+      "prompt": "North Star gợi ý cho AI support agent là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bắt đầu mức rẻ nhất đủ để trả lời giả định cần kiểm tra"
+          "text": "First-response resolution rate"
         },
         {
           "key": "B",
-          "text": "Luôn làm giao diện hoàn chỉnh trước"
+          "text": "Số câu trả lời gửi đi mỗi ngày"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Độ dài trung bình câu trả lời"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Số token tiêu thụ mỗi tháng"
         }
       ],
       "answer": "A",
-      "explanation": "Bắt đầu mức rẻ nhất đủ để trả lời giả định cần kiểm tra. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "Cảnh báo: đừng chỉ đo số lượng câu trả lời.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-011",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng MVP nào là phù hợp nhất?",
+      "prompt": "Với ticket routing, North Star và cảnh báo đi kèm là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "CSAT cuối tháng; đừng đo tỷ lệ chuyển nhóm sai"
         },
         {
           "key": "B",
-          "text": "Là phiên bản tối thiểu người dùng có thể dùng để kiểm tra workflow"
+          "text": "Đúng nhóm ngay lần đầu; đừng chỉ đo tốc độ phân loại"
         },
         {
           "key": "C",
-          "text": "Là bản có nhiều tính năng nhất"
+          "text": "Tốc độ phân loại; đừng đo độ chính xác của nhóm"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Số ticket xử lý; đừng đo thời gian phản hồi lại"
         }
       ],
       "answer": "B",
-      "explanation": "Là phiên bản tối thiểu người dùng có thể dùng để kiểm tra workflow. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "Phân loại nhanh mà sai nhóm thì không tạo giá trị.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-012",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Wizard of Oz nào là phù hợp nhất?",
+      "prompt": "North Star gợi ý cho AI sales assistant là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Số email gửi đi mỗi tuần"
         },
         {
           "key": "B",
-          "text": "Dùng con người phía sau để kiểm tra trải nghiệm trước khi tự động hóa"
+          "text": "Thời gian phản hồi lead"
         },
         {
           "key": "C",
-          "text": "Che giấu rủi ro cho người dùng production"
+          "text": "Tỷ lệ lead đủ điều kiện"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Số lead được chấm điểm"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng con người phía sau để kiểm tra trải nghiệm trước khi tự động hóa. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "C",
+      "explanation": "Cảnh báo: đừng chỉ đo số lead được chấm điểm.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-013",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng PRD for AI nào là phù hợp nhất?",
+      "prompt": "Theo slide, một use case tốt phải trả lời được bốn câu nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Model nào, giá bao nhiêu, ai code, khi nào xong"
         },
         {
           "key": "B",
-          "text": "Nêu rõ job-to-be-done, dữ liệu, metric, fallback và giới hạn AI"
+          "text": "Bao nhiêu user, bao nhiêu tiền, bao nhiêu tính năng"
         },
         {
           "key": "C",
-          "text": "Chỉ mô tả giao diện"
+          "text": "Dùng cloud nào, framework nào, database nào"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Ai dùng, đau ở đâu, đo bằng gì, fail gây hại gì"
         }
       ],
-      "answer": "B",
-      "explanation": "Nêu rõ job-to-be-done, dữ liệu, metric, fallback và giới hạn AI. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "D",
+      "explanation": "Define success before scope.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-014",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Nondeterminism nào là phù hợp nhất?",
+      "prompt": "Điều gì phải có trước khi đặt mục tiêu cải thiện cho metric?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Baseline — mức hiện tại để so sánh"
         },
         {
           "key": "B",
-          "text": "Đầu ra AI có thể thay đổi nên cần eval và xử lý lỗi dự kiến"
+          "text": "Model đã được chọn và fine-tune"
         },
         {
           "key": "C",
-          "text": "AI luôn cho cùng một đáp án"
+          "text": "Giao diện đã được thiết kế xong"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Ngân sách marketing đã duyệt"
         }
       ],
-      "answer": "B",
-      "explanation": "Đầu ra AI có thể thay đổi nên cần eval và xử lý lỗi dự kiến. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "A",
+      "explanation": "Thực hành 1 yêu cầu metric đo được và có baseline.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-015",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Trust calibration nào là phù hợp nhất?",
+      "prompt": "Trụ cột “Riêng tư” trong 5 trụ cột Responsible AI nghĩa là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Phù hợp nhiều nhóm người dùng"
         },
         {
           "key": "B",
-          "text": "Thiết kế để người dùng tin đúng mức vào năng lực và giới hạn AI"
+          "text": "Chỉ dùng dữ liệu thật sự cần thiết"
         },
         {
           "key": "C",
-          "text": "Làm AI trông chắc chắn trong mọi trường hợp"
+          "text": "Không thiên lệch bất hợp lý"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Đủ ổn định để user tin dùng"
         }
       ],
       "answer": "B",
-      "explanation": "Thiết kế để người dùng tin đúng mức vào năng lực và giới hạn AI. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "5 trụ cột: công bằng, độ tin cậy, riêng tư, hòa nhập, minh bạch.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-016",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Evaluation flow nào là phù hợp nhất?",
+      "prompt": "Theo slide, các nguyên tắc Responsible AI cần được chuyển thành gì?",
       "options": [
         {
           "key": "A",
-          "text": "Đi từ kiểm tra nhanh sang offline eval rồi theo dõi khi triển khai"
+          "text": "Một trang câu hỏi thường gặp cho người dùng"
         },
         {
           "key": "B",
-          "text": "Chỉ đánh giá sau khi có khiếu nại"
+          "text": "Điều khoản trong hợp đồng lao động nội bộ"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Product decisions, requirements và risk items"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Khẩu hiệu truyền thông trên website sản phẩm"
         }
       ],
-      "answer": "A",
-      "explanation": "Đi từ kiểm tra nhanh sang offline eval rồi theo dõi khi triển khai. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "C",
+      "explanation": "Responsible AI phải đi vào requirement và kiểm soát rủi ro.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-017",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Leap of Faith assumption, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Vấn đề Bias nên chuyển thành requirement nào?",
       "options": [
         {
           "key": "A",
-          "text": "Là giả định quan trọng nhưng chưa được chứng minh, cần kiểm thử sớm"
+          "text": "Data minimization, masking, retention policy"
         },
         {
           "key": "B",
-          "text": "Là tính năng đã chắc chắn có người dùng"
+          "text": "Disclosure, citation, escalation path"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Latency SLA, uptime, cost budget"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Test set đa dạng, human review cho ca nhạy cảm"
         }
       ],
-      "answer": "A",
-      "explanation": "Là giả định quan trọng nhưng chưa được chứng minh, cần kiểm thử sớm. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "D",
+      "explanation": "Privacy → minimization/masking/retention; Transparency → disclosure/citation/escalation.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-018",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Prototype fidelity, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Vấn đề Privacy nên đi vào requirement nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bắt đầu mức rẻ nhất đủ để trả lời giả định cần kiểm tra"
+          "text": "Thu thập tối thiểu, che dữ liệu, chính sách lưu trữ"
         },
         {
           "key": "B",
-          "text": "Luôn làm giao diện hoàn chỉnh trước"
+          "text": "Bộ test đa dạng và người duyệt các ca nhạy cảm"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Thông báo đây là AI và trích dẫn nguồn đầy đủ"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Thời gian phản hồi dưới 5 giây ở phân vị p95"
         }
       ],
       "answer": "A",
-      "explanation": "Bắt đầu mức rẻ nhất đủ để trả lời giả định cần kiểm tra. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "Câu hỏi discovery: có PII hoặc dữ liệu nhạy cảm không?",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-019",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua MVP, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Câu hỏi discovery cho Transparency là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chi phí vận hành mỗi tháng là bao nhiêu"
         },
         {
           "key": "B",
-          "text": "Là phiên bản tối thiểu người dùng có thể dùng để kiểm tra workflow"
+          "text": "User có biết đây là AI và khi nào nên override không"
         },
         {
           "key": "C",
-          "text": "Là bản có nhiều tính năng nhất"
+          "text": "AI có đối xử khác nhau giữa các nhóm user không"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Có PII hoặc dữ liệu nhạy cảm trong hệ thống không"
         }
       ],
       "answer": "B",
-      "explanation": "Là phiên bản tối thiểu người dùng có thể dùng để kiểm tra workflow. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "Requirement tương ứng: disclosure, citation, escalation path.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-020",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Wizard of Oz, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Theo góc nhìn product về AI Act EU 2024, lĩnh vực nào cần mức cẩn trọng cao hơn?",
       "options": [
         {
           "key": "A",
-          "text": "Dùng con người phía sau để kiểm tra trải nghiệm trước khi tự động hóa"
+          "text": "Chỉnh sửa ảnh cá nhân, filter"
         },
         {
           "key": "B",
-          "text": "Che giấu rủi ro cho người dùng production"
+          "text": "Tuyển dụng, tín dụng, y tế, giáo dục"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Trò chơi điện tử và giải trí"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Gợi ý bài hát và phim ảnh"
         }
       ],
-      "answer": "A",
-      "explanation": "Dùng con người phía sau để kiểm tra trải nghiệm trước khi tự động hóa. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "B",
+      "explanation": "Các use case này bị yêu cầu risk management, documentation, human oversight chặt hơn.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-021",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua PRD for AI, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Responsible AI mang lại lợi ích gì ngoài khía cạnh đạo đức?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ mô tả giao diện"
+          "text": "Giảm rủi ro vận hành và pháp lý"
         },
         {
           "key": "B",
-          "text": "Nêu rõ job-to-be-done, dữ liệu, metric, fallback và giới hạn AI"
+          "text": "Tăng tốc độ suy luận của model"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Giảm số lượng tính năng cần build"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Loại bỏ nhu cầu viết test case"
         }
       ],
-      "answer": "B",
-      "explanation": "Nêu rõ job-to-be-done, dữ liệu, metric, fallback và giới hạn AI. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "A",
+      "explanation": "Với PM/BA: requirement, logging, disclosure, exception handling phải nghĩ từ đầu.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-022",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Nondeterminism, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Câu hỏi user research “User muốn AI tự làm đến mức nào?” khám phá điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Đầu ra AI có thể thay đổi nên cần eval và xử lý lỗi dự kiến"
+          "text": "Cơ sở để người dùng tin vào câu trả lời của AI"
         },
         {
           "key": "B",
-          "text": "AI luôn cho cùng một đáp án"
+          "text": "Fallback mà người dùng muốn khi AI trả lời sai"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Ngân sách mà người dùng sẵn sàng chi trả hằng tháng"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Mức tự chủ và bước người dùng muốn giữ quyền kiểm soát"
         }
       ],
-      "answer": "A",
-      "explanation": "Đầu ra AI có thể thay đổi nên cần eval và xử lý lỗi dự kiến. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "D",
+      "explanation": "4 câu: mức tự chủ, cơ sở để tin, fallback khi sai, kỳ vọng vai trò.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-023",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Trust calibration, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Nhiều AI product thất bại vì giả định sai nào về người dùng?",
       "options": [
         {
           "key": "A",
-          "text": "Làm AI trông chắc chắn trong mọi trường hợp"
+          "text": "Tưởng user chỉ dùng sản phẩm trên điện thoại di động"
         },
         {
           "key": "B",
-          "text": "Thiết kế để người dùng tin đúng mức vào năng lực và giới hạn AI"
+          "text": "Tưởng user không cần trích dẫn nguồn trong câu trả lời"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Tưởng user muốn tự động hoàn toàn, trong khi họ cần hỗ trợ quyết định"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Tưởng user muốn giao diện tối giản thay vì nhiều tùy chọn"
         }
       ],
-      "answer": "B",
-      "explanation": "Thiết kế để người dùng tin đúng mức vào năng lực và giới hạn AI. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "C",
+      "explanation": "Hỏi rõ AI là trợ lý, copilot hay người thay thế.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-024",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Evaluation flow, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Persona cho sản phẩm AI cần thêm chiều nào so với persona thường?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Bối cảnh sử dụng"
         },
         {
           "key": "B",
-          "text": "Đi từ kiểm tra nhanh sang offline eval rồi theo dõi khi triển khai"
+          "text": "AI literacy level"
         },
         {
           "key": "C",
-          "text": "Chỉ đánh giá sau khi có khiếu nại"
+          "text": "Vai trò công việc"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Pain points"
         }
       ],
       "answer": "B",
-      "explanation": "Đi từ kiểm tra nhanh sang offline eval rồi theo dõi khi triển khai. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "Ngoài ra: mức sẵn sàng tin automation, ngưỡng chấp nhận sai, mức muốn explainability.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-025",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Leap of Faith assumption trong hệ thống AI là gì?",
+      "prompt": "Chiều persona “ngưỡng chấp nhận sai” giúp đội sản phẩm quyết định điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Là giả định quan trọng nhưng chưa được chứng minh, cần kiểm thử sớm"
+          "text": "Mức lỗi nào không chấp nhận được với nhóm người dùng đó"
         },
         {
           "key": "B",
-          "text": "Là tính năng đã chắc chắn có người dùng"
+          "text": "Số lượng tính năng cần đưa vào bản MVP đầu tiên"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Màu sắc giao diện phù hợp với nhóm tuổi người dùng"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Giá bán gói thuê bao hàng tháng cho từng phân khúc"
         }
       ],
       "answer": "A",
-      "explanation": "Là giả định quan trọng nhưng chưa được chứng minh, cần kiểm thử sớm. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "Ngưỡng này ảnh hưởng threshold chất lượng và thiết kế fallback.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-026",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Prototype fidelity trong hệ thống AI là gì?",
+      "prompt": "Người dùng copy, hỏi lại theo cách khác, ghi đè hoặc bỏ cuộc thuộc loại tín hiệu nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bắt đầu mức rẻ nhất đủ để trả lời giả định cần kiểm tra"
+          "text": "Explicit feedback"
         },
         {
           "key": "B",
-          "text": "Luôn làm giao diện hoàn chỉnh trước"
+          "text": "Outcome signal"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Business KPI"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Behavioral signal"
         }
       ],
-      "answer": "A",
-      "explanation": "Bắt đầu mức rẻ nhất đủ để trả lời giả định cần kiểm tra. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "D",
+      "explanation": "Behavioral signal giúp phát hiện trust, friction và điểm nghẽn.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-027",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của MVP trong hệ thống AI là gì?",
+      "prompt": "Tín hiệu resolved, booked, escalated dùng để làm gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Phát hiện điểm ma sát trong giao diện"
         },
         {
           "key": "B",
-          "text": "Là phiên bản tối thiểu người dùng có thể dùng để kiểm tra workflow"
+          "text": "Tính chi phí token mỗi phiên"
         },
         {
           "key": "C",
-          "text": "Là bản có nhiều tính năng nhất"
+          "text": "Nối chất lượng AI với giá trị kinh doanh"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Đo cảm nhận chủ quan của người dùng"
         }
       ],
-      "answer": "B",
-      "explanation": "Là phiên bản tối thiểu người dùng có thể dùng để kiểm tra workflow. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "C",
+      "explanation": "Đây là outcome signal; thumbs up/down là explicit feedback.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-028",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Wizard of Oz trong hệ thống AI là gì?",
+      "prompt": "Trong Discovery Interview (Thực hành 2), tiêu chí đạt yêu cầu gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Phỏng vấn tối thiểu 20 người dùng"
         },
         {
           "key": "B",
-          "text": "Dùng con người phía sau để kiểm tra trải nghiệm trước khi tự động hóa"
+          "text": "Hỏi “why” ít nhất 2 lần để tìm nhu cầu nền"
         },
         {
           "key": "C",
-          "text": "Che giấu rủi ro cho người dùng production"
+          "text": "Gợi ý sẵn model để user dễ hình dung"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Ghi chép đúng từng tính năng user yêu cầu"
         }
       ],
       "answer": "B",
-      "explanation": "Dùng con người phía sau để kiểm tra trải nghiệm trước khi tự động hóa. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "Phân biệt điều user nói với điều họ thật sự cần; không gợi ý sẵn solution.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-029",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của PRD for AI trong hệ thống AI là gì?",
+      "prompt": "Requirement nào đã được viết ở dạng đo được?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ mô tả giao diện"
+          "text": "Trả lời dưới 5 giây ở p95, trích dẫn nguồn nội bộ, escalate khi confidence thấp"
         },
         {
           "key": "B",
-          "text": "Nêu rõ job-to-be-done, dữ liệu, metric, fallback và giới hạn AI"
+          "text": "Agent phải trả lời nhanh, chính xác và thông minh trong mọi tình huống"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Agent phải mang lại trải nghiệm tốt nhất cho người dùng nội bộ"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Agent phải hiện đại, thân thiện và đáng tin cậy như chuyên gia"
         }
       ],
-      "answer": "B",
-      "explanation": "Nêu rõ job-to-be-done, dữ liệu, metric, fallback và giới hạn AI. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "A",
+      "explanation": "Nếu engineer không biết cách test, requirement đó chưa đủ rõ.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-030",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Nondeterminism trong hệ thống AI là gì?",
+      "prompt": "“p95 = 5 giây” có nghĩa là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Đầu ra AI có thể thay đổi nên cần eval và xử lý lỗi dự kiến"
+          "text": "95% câu trả lời là đúng trong 5 giây đầu tiên"
         },
         {
           "key": "B",
-          "text": "AI luôn cho cùng một đáp án"
+          "text": "Lượt phản hồi chậm nhất mất tối đa 5 giây"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Khoảng 95% lượt phản hồi hoàn tất trong ≤ 5 giây"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Trung bình mọi lượt phản hồi đều là đúng 5 giây"
         }
       ],
-      "answer": "A",
-      "explanation": "Đầu ra AI có thể thay đổi nên cần eval và xử lý lỗi dự kiến. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "C",
+      "explanation": "p95 giúp nhìn các lượt chậm thay vì chỉ nhìn trung bình.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-031",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Trust calibration trong hệ thống AI là gì?",
+      "prompt": "“Hallucination threshold, explainability, fallback” thuộc nhóm requirement nào?",
       "options": [
         {
           "key": "A",
-          "text": "Làm AI trông chắc chắn trong mọi trường hợp"
+          "text": "Functional"
         },
         {
           "key": "B",
-          "text": "Thiết kế để người dùng tin đúng mức vào năng lực và giới hạn AI"
+          "text": "Non-functional"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Business KPI"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "AI-specific"
         }
       ],
-      "answer": "B",
-      "explanation": "Thiết kế để người dùng tin đúng mức vào năng lực và giới hạn AI. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "D",
+      "explanation": "Functional: AI làm việc gì; non-functional: latency, uptime, cost; AI-specific: rủi ro đặc thù AI.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-032",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Evaluation flow trong hệ thống AI là gì?",
+      "prompt": "“Latency SLA, uptime, cost budget” thuộc nhóm requirement nào?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ đánh giá sau khi có khiếu nại"
+          "text": "Non-functional"
         },
         {
           "key": "B",
-          "text": "Đi từ kiểm tra nhanh sang offline eval rồi theo dõi khi triển khai"
+          "text": "Functional"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "AI-specific"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Ethical"
         }
       ],
-      "answer": "B",
-      "explanation": "Đi từ kiểm tra nhanh sang offline eval rồi theo dõi khi triển khai. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "A",
+      "explanation": "Non-functional bảo vệ trải nghiệm và khả năng vận hành.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-033",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Leap of Faith assumption?",
+      "prompt": "Acceptance criterion tốt cho AI cần đủ bốn yếu tố nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Owner, deadline, budget và mức độ ưu tiên"
         },
         {
           "key": "B",
-          "text": "Là giả định quan trọng nhưng chưa được chứng minh, cần kiểm thử sớm"
+          "text": "Trigger, hành vi mong đợi, ngưỡng đo, xử lý thất bại"
         },
         {
           "key": "C",
-          "text": "Là tính năng đã chắc chắn có người dùng"
+          "text": "Persona, mục tiêu, giá trị kinh doanh, ngân sách"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Model, prompt, tool và framework sử dụng"
         }
       ],
       "answer": "B",
-      "explanation": "Là giả định quan trọng nhưng chưa được chứng minh, cần kiểm thử sớm. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "Mẫu: When X → agent làm Y → trong Z giây → nếu lỗi thì fallback.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-034",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Prototype fidelity?",
+      "prompt": "Trong mẫu Gherkin, phần “Given” mô tả gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bắt đầu mức rẻ nhất đủ để trả lời giả định cần kiểm tra"
+          "text": "Kết quả hệ thống phải trả về cuối"
         },
         {
           "key": "B",
-          "text": "Luôn làm giao diện hoàn chỉnh trước"
+          "text": "Ngưỡng đo được của chất lượng đầu ra"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Bối cảnh cho trước trước khi hành động xảy ra"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Hành động mà người dùng thực hiện"
         }
       ],
-      "answer": "A",
-      "explanation": "Bắt đầu mức rẻ nhất đủ để trả lời giả định cần kiểm tra. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "C",
+      "explanation": "Given (bối cảnh) – When (hành động) – Then (kết quả mong đợi).",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-035",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về MVP?",
+      "prompt": "Câu “AI PRD thiếu acceptance threshold” được slide kết luận thế nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Vẫn dùng được nếu có demo"
         },
         {
           "key": "B",
-          "text": "Là phiên bản tối thiểu người dùng có thể dùng để kiểm tra workflow"
+          "text": "Chỉ cần bổ sung sau khi ra mắt"
         },
         {
           "key": "C",
-          "text": "Là bản có nhiều tính năng nhất"
+          "text": "Phù hợp cho giai đoạn MVP"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chưa phải là AI PRD"
         }
       ],
-      "answer": "B",
-      "explanation": "Là phiên bản tối thiểu người dùng có thể dùng để kiểm tra workflow. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "D",
+      "explanation": "Cần ngưỡng như đạt ≥ __% trên bộ 20 case đại diện.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-036",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Wizard of Oz?",
+      "prompt": "Bộ test cho AC của AI cần có phân phối như thế nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Gồm case lộn xộn, biên và mơ hồ, không chỉ happy path"
         },
         {
           "key": "B",
-          "text": "Dùng con người phía sau để kiểm tra trải nghiệm trước khi tự động hóa"
+          "text": "Chỉ gồm các câu hỏi phổ biến nhất của người dùng"
         },
         {
           "key": "C",
-          "text": "Che giấu rủi ro cho người dùng production"
+          "text": "Chỉ gồm các case mà model đã trả lời đúng trước đó"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ gồm các câu hỏi do chính team tự nghĩ ra"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng con người phía sau để kiểm tra trải nghiệm trước khi tự động hóa. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "A",
+      "explanation": "Thêm câu thiếu dữ liệu, tiếng lóng, không có nguồn, tool timeout.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-037",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về PRD for AI?",
+      "prompt": "Theo slide, vai trò của PRD là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Nêu rõ job-to-be-done, dữ liệu, metric, fallback và giới hạn AI"
+          "text": "Hồ sơ pháp lý nộp cho cơ quan quản lý"
         },
         {
           "key": "B",
-          "text": "Chỉ mô tả giao diện"
+          "text": "Contract giữa PM, BA, Engineer và Stakeholder"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Tài liệu kỹ thuật chỉ dành cho engineer"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Bản trình bày để gọi vốn nhà đầu tư"
         }
       ],
-      "answer": "A",
-      "explanation": "Nêu rõ job-to-be-done, dữ liệu, metric, fallback và giới hạn AI. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "B",
+      "explanation": "PRD tốt làm rõ quyết định và giúp team biết thế nào là done.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-038",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Nondeterminism?",
+      "prompt": "Mục nào KHÔNG thuộc 8 phần của PRD AI theo slide?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Non-functional Requirements"
         },
         {
           "key": "B",
-          "text": "Đầu ra AI có thể thay đổi nên cần eval và xử lý lỗi dự kiến"
+          "text": "Acceptance Criteria"
         },
         {
           "key": "C",
-          "text": "AI luôn cho cùng một đáp án"
+          "text": "Kế hoạch tuyển dụng nhân sự"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Technical Architecture"
         }
       ],
-      "answer": "B",
-      "explanation": "Đầu ra AI có thể thay đổi nên cần eval và xử lý lỗi dự kiến. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "C",
+      "explanation": "8 phần: Problem, Target User, Success Metrics, Architecture, Feature Req, Non-functional, AC, Risks.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-039",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Trust calibration?",
+      "prompt": "Trong metrics hierarchy, “task completion, repeat usage, escalation rate” thuộc tầng nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Business KPI"
         },
         {
           "key": "B",
-          "text": "Thiết kế để người dùng tin đúng mức vào năng lực và giới hạn AI"
+          "text": "AI metric"
         },
         {
           "key": "C",
-          "text": "Làm AI trông chắc chắn trong mọi trường hợp"
+          "text": "Risk metric"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Product metric"
         }
       ],
-      "answer": "B",
-      "explanation": "Thiết kế để người dùng tin đúng mức vào năng lực và giới hạn AI. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "D",
+      "explanation": "Business KPI: cost saved, revenue, CSAT; AI metric: accuracy, latency, citation rate.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-040",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Evaluation flow?",
+      "prompt": "Câu hỏi mà tầng AI metric phải trả lời là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Sản phẩm này tạo giá trị kinh doanh gì"
         },
         {
           "key": "B",
-          "text": "Đi từ kiểm tra nhanh sang offline eval rồi theo dõi khi triển khai"
+          "text": "User có thực sự dùng và hoàn thành việc không"
         },
         {
           "key": "C",
-          "text": "Chỉ đánh giá sau khi có khiếu nại"
+          "text": "Đối thủ có tính năng tương tự không"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Hệ AI có đủ tốt để nâng product metric không"
         }
       ],
-      "answer": "B",
-      "explanation": "Đi từ kiểm tra nhanh sang offline eval rồi theo dõi khi triển khai. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "D",
+      "explanation": "Ba tầng giữ team đồng hướng từ chất lượng AI đến giá trị kinh doanh.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-041",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Leap of Faith assumption, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Anti-pattern nào thường gặp khi viết metric trong PRD AI?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Metric chia theo ba tầng business, product và AI rõ ràng"
         },
         {
           "key": "B",
-          "text": "Là giả định quan trọng nhưng chưa được chứng minh, cần kiểm thử sớm"
+          "text": "Metric gắn trực tiếp với acceptance criteria đo được"
         },
         {
           "key": "C",
-          "text": "Là tính năng đã chắc chắn có người dùng"
+          "text": "Metric kiểu “càng cao càng tốt”, thiếu baseline/threshold"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Metric có baseline và ngưỡng cụ thể theo từng use case"
         }
       ],
-      "answer": "B",
-      "explanation": "Là giả định quan trọng nhưng chưa được chứng minh, cần kiểm thử sớm. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "C",
+      "explanation": "Anti-pattern khác: thiếu non-functional, không có risk, viết solution quá sớm.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-042",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Prototype fidelity, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Quy tắc tự kiểm tra một PRD tốt là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "PRD phải được viết hoàn toàn bằng tiếng Anh"
         },
         {
           "key": "B",
-          "text": "Bắt đầu mức rẻ nhất đủ để trả lời giả định cần kiểm tra"
+          "text": "Mỗi mục nối được với một quyết định, metric hoặc risk"
         },
         {
           "key": "C",
-          "text": "Luôn làm giao diện hoàn chỉnh trước"
+          "text": "PRD phải dài tối thiểu 20 trang để đủ chi tiết"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "PRD phải mô tả chi tiết từng hàm trong code"
         }
       ],
       "answer": "B",
-      "explanation": "Bắt đầu mức rẻ nhất đủ để trả lời giả định cần kiểm tra. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "PRD tốt giảm mơ hồ, không phải dài cho đủ trang.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-043",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về MVP, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Trong PRD mẫu Internal Policy Assistant, bộ success metrics là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Là phiên bản tối thiểu người dùng có thể dùng để kiểm tra workflow"
+          "text": "Time-to-answer −50%, citation > 95%, escalation < 15%"
         },
         {
           "key": "B",
-          "text": "Là bản có nhiều tính năng nhất"
+          "text": "Time-to-answer −10%, citation > 50%, escalation < 50%"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Accuracy 100%, latency 0 giây, cost 0 đồng"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "CSAT 5 sao, NPS 100, churn 0%"
         }
       ],
       "answer": "A",
-      "explanation": "Là phiên bản tối thiểu người dùng có thể dùng để kiểm tra workflow. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "Đây là mục tiêu minh họa, không phải chuẩn cho mọi sản phẩm.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-044",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Wizard of Oz, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Template user story chuẩn trong slide là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Che giấu rủi ro cho người dùng production"
+          "text": "Given [context], When [action], Then [expected result]"
         },
         {
           "key": "B",
-          "text": "Dùng con người phía sau để kiểm tra trải nghiệm trước khi tự động hóa"
+          "text": "If [metric] crosses [threshold], we will [take action]"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "When X happens, the agent does Y within Z seconds"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "As [persona], I want [AI capability], so that [business value]"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng con người phía sau để kiểm tra trải nghiệm trước khi tự động hóa. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "D",
+      "explanation": "Given-When-Then dùng cho AC, không phải user story.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-045",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về PRD for AI, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Yêu cầu nào về persona trong user story là đúng?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Persona nên là toàn bộ công ty thay vì một nhóm"
         },
         {
           "key": "B",
-          "text": "Nêu rõ job-to-be-done, dữ liệu, metric, fallback và giới hạn AI"
+          "text": "Persona không cần thiết nếu đã có acceptance criteria"
         },
         {
           "key": "C",
-          "text": "Chỉ mô tả giao diện"
+          "text": "Persona phải là người dùng thật, không phải “hệ thống”"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Persona có thể là tên của model AI đang được dùng"
         }
       ],
-      "answer": "B",
-      "explanation": "Nêu rõ job-to-be-done, dữ liệu, metric, fallback và giới hạn AI. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "C",
+      "explanation": "AI capability mô tả hành vi, không phải tên model; business value nối sang KPI.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-046",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Nondeterminism, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Chữ “N” trong INVEST là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Novel — phải là tính năng mới"
         },
         {
           "key": "B",
-          "text": "Đầu ra AI có thể thay đổi nên cần eval và xử lý lỗi dự kiến"
+          "text": "Negotiable — còn thảo luận được cách làm"
         },
         {
           "key": "C",
-          "text": "AI luôn cho cùng một đáp án"
+          "text": "Necessary — bắt buộc phải có"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Numeric — luôn có số liệu cụ thể"
         }
       ],
       "answer": "B",
-      "explanation": "Đầu ra AI có thể thay đổi nên cần eval và xử lý lỗi dự kiến. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "INVEST: Independent, Negotiable, Valuable, Estimable, Small, Testable.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-047",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Trust calibration, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Chữ “E” trong INVEST yêu cầu story phải thế nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Estimable — team ước lượng được công sức"
         },
         {
           "key": "B",
-          "text": "Thiết kế để người dùng tin đúng mức vào năng lực và giới hạn AI"
+          "text": "Essential — cực kỳ quan trọng"
         },
         {
           "key": "C",
-          "text": "Làm AI trông chắc chắn trong mọi trường hợp"
+          "text": "Explainable — AI giải thích được"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Efficient — chạy nhanh trên server"
         }
       ],
-      "answer": "B",
-      "explanation": "Thiết kế để người dùng tin đúng mức vào năng lực và giới hạn AI. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "A",
+      "explanation": "Story “đạt” khi qua đủ 6 tiêu chí INVEST.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-048",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Evaluation flow, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Vì sao user story cần liệt kê edge case như câu hỏi mơ hồ, thiếu dữ liệu, tiếng lóng?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Để story trông dài và chuyên nghiệp hơn"
         },
         {
           "key": "B",
-          "text": "Đi từ kiểm tra nhanh sang offline eval rồi theo dõi khi triển khai"
+          "text": "Để giảm số acceptance criteria cần viết"
         },
         {
           "key": "C",
-          "text": "Chỉ đánh giá sau khi có khiếu nại"
+          "text": "Để model học thêm tiếng lóng mới"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Để tránh ảo tưởng coverage chỉ với happy path"
         }
       ],
-      "answer": "B",
-      "explanation": "Đi từ kiểm tra nhanh sang offline eval rồi theo dõi khi triển khai. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "D",
+      "explanation": "Happy path định nghĩa kết quả; edge case tránh ảo tưởng coverage.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-049",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Leap of Faith assumption?",
+      "prompt": "Error state như không có nguồn, tool timeout, confidence thấp buộc team thiết kế gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Tăng số model chạy song song"
         },
         {
           "key": "B",
-          "text": "Là giả định quan trọng nhưng chưa được chứng minh, cần kiểm thử sớm"
+          "text": "Rút ngắn system prompt"
         },
         {
           "key": "C",
-          "text": "Là tính năng đã chắc chắn có người dùng"
+          "text": "Fallback và escalation"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Thêm tính năng gợi ý sản phẩm"
         }
       ],
-      "answer": "B",
-      "explanation": "Là giả định quan trọng nhưng chưa được chứng minh, cần kiểm thử sớm. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "C",
+      "explanation": "Error state là lý do bắt buộc phải có phương án dự phòng.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-050",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Prototype fidelity?",
+      "prompt": "Theo Thực hành 5, mỗi user story cần tối thiểu những gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "≥ 3 AC Given-When-Then, ≥ 2 edge case, ≥ 1 error state"
         },
         {
           "key": "B",
-          "text": "Bắt đầu mức rẻ nhất đủ để trả lời giả định cần kiểm tra"
+          "text": "≥ 1 AC bất kỳ, không cần edge case hay error state"
         },
         {
           "key": "C",
-          "text": "Luôn làm giao diện hoàn chỉnh trước"
+          "text": "≥ 10 AC chi tiết và một prototype chạy được"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chỉ cần câu As/I want/So that là đủ điều kiện"
         }
       ],
-      "answer": "B",
-      "explanation": "Bắt đầu mức rẻ nhất đủ để trả lời giả định cần kiểm tra. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "A",
+      "explanation": "Kèm tự chấm bảng INVEST 6 tiêu chí.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-051",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng MVP?",
+      "prompt": "Ví dụ “stale source, PII leak, bad labeling” thuộc nhóm rủi ro nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Ethical"
         },
         {
           "key": "B",
-          "text": "Là phiên bản tối thiểu người dùng có thể dùng để kiểm tra workflow"
+          "text": "Data"
         },
         {
           "key": "C",
-          "text": "Là bản có nhiều tính năng nhất"
+          "text": "Technical"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Business"
         }
       ],
       "answer": "B",
-      "explanation": "Là phiên bản tối thiểu người dùng có thể dùng để kiểm tra workflow. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "Mitigation gợi ý: masking, access control, data QA.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-052",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Wizard of Oz?",
+      "prompt": "Rủi ro Business như adoption thấp, ROI chưa rõ được giảm thiểu bằng gì?",
       "options": [
         {
           "key": "A",
-          "text": "Che giấu rủi ro cho người dùng production"
+          "text": "Eval định kỳ, timeout và monitoring"
         },
         {
           "key": "B",
-          "text": "Dùng con người phía sau để kiểm tra trải nghiệm trước khi tự động hóa"
+          "text": "Documentation và quy trình approval"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Pilot, success metrics, kiểm chứng JTBD"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Masking dữ liệu và kiểm soát truy cập"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng con người phía sau để kiểm tra trải nghiệm trước khi tự động hóa. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "C",
+      "explanation": "Technical → eval/fallback; Data → masking; Regulatory → documentation.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-053",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng PRD for AI?",
+      "prompt": "Rủi ro Ethical như kết quả thiếu công bằng, quyết định không minh bạch nên giảm thiểu thế nào?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ mô tả giao diện"
+          "text": "Tăng max_tokens và giảm temperature của model"
         },
         {
           "key": "B",
-          "text": "Nêu rõ job-to-be-done, dữ liệu, metric, fallback và giới hạn AI"
+          "text": "Chạy pilot nhỏ để đo ROI chính xác hơn"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Cache kết quả để giảm độ trễ phản hồi"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Human review, disclosure, kiểm tra mẫu (audit sample)"
         }
       ],
-      "answer": "B",
-      "explanation": "Nêu rõ job-to-be-done, dữ liệu, metric, fallback và giới hạn AI. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "D",
+      "explanation": "Regulatory: thiếu logging → documentation, approval flow, policy review.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-054",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Nondeterminism?",
+      "prompt": "Một rủi ro có Likelihood = 4, Impact = 5 (thang 1–5). Điểm rủi ro là bao nhiêu?",
       "options": [
         {
           "key": "A",
-          "text": "Đầu ra AI có thể thay đổi nên cần eval và xử lý lỗi dự kiến"
+          "text": "20"
         },
         {
           "key": "B",
-          "text": "AI luôn cho cùng một đáp án"
+          "text": "9"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "1"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "45"
         }
       ],
       "answer": "A",
-      "explanation": "Đầu ra AI có thể thay đổi nên cần eval và xử lý lỗi dự kiến. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "Điểm rủi ro = Likelihood × Impact.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-055",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Trust calibration?",
+      "prompt": "Trong risk matrix minh họa, “Minor wording inconsistency” nằm ở ô nào?",
       "options": [
         {
           "key": "A",
-          "text": "Làm AI trông chắc chắn trong mọi trường hợp"
+          "text": "Reduce — cần giảm ngay lập tức"
         },
         {
           "key": "B",
-          "text": "Thiết kế để người dùng tin đúng mức vào năng lực và giới hạn AI"
+          "text": "Monitor — khả năng và tác động thấp"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Escalate — quyết định Go/No-Go"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Mitigate — khả năng cao, tác động cao"
         }
       ],
       "answer": "B",
-      "explanation": "Thiết kế để người dùng tin đúng mức vào năng lực và giới hạn AI. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "Privacy leak và hallucination trên tư vấn nhạy cảm mới ở vùng tác động cao.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-056",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Evaluation flow?",
+      "prompt": "Mỗi rủi ro trong risk register cần những gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chỉ cần điểm Likelihood của rủi ro đó là đủ"
         },
         {
           "key": "B",
-          "text": "Đi từ kiểm tra nhanh sang offline eval rồi theo dõi khi triển khai"
+          "text": "Chỉ cần ý kiến đánh giá của trưởng nhóm dự án"
         },
         {
           "key": "C",
-          "text": "Chỉ đánh giá sau khi có khiếu nại"
+          "text": "Điểm L, điểm I, mitigation, owner cụ thể và liên kết AC/monitoring"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ cần tên rủi ro và một dòng mô tả ngắn gọn"
         }
       ],
-      "answer": "B",
-      "explanation": "Đi từ kiểm tra nhanh sang offline eval rồi theo dõi khi triển khai. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "C",
+      "explanation": "Thiếu mitigation và owner thì rủi ro chỉ là danh sách trên giấy.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-057",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Leap of Faith assumption giúp đội ngũ làm điều gì?",
+      "prompt": "Khi nào chọn Conditional go?",
       "options": [
         {
           "key": "A",
-          "text": "Là giả định quan trọng nhưng chưa được chứng minh, cần kiểm thử sớm"
+          "text": "Mọi rủi ro cao đã có mitigation và owner rõ ràng"
         },
         {
           "key": "B",
-          "text": "Là tính năng đã chắc chắn có người dùng"
+          "text": "Rủi ro privacy lớn vẫn chưa được xử lý triệt để"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chưa chứng minh được giá trị thật cho người dùng"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Pilot giới hạn, scope hẹp, guardrails chặt, có HITL"
         }
       ],
-      "answer": "A",
-      "explanation": "Là giả định quan trọng nhưng chưa được chứng minh, cần kiểm thử sớm. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "answer": "D",
+      "explanation": "Go: rủi ro cao có mitigation, AC đo được, owner rõ.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-058",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Prototype fidelity giúp đội ngũ làm điều gì?",
+      "prompt": "Tình huống nào dẫn đến quyết định No-go?",
       "options": [
         {
           "key": "A",
-          "text": "Bắt đầu mức rẻ nhất đủ để trả lời giả định cần kiểm tra"
+          "text": "Rủi ro privacy/compliance lớn chưa xử lý, chưa có fallback"
         },
         {
           "key": "B",
-          "text": "Luôn làm giao diện hoàn chỉnh trước"
+          "text": "Có pilot giới hạn với người giám sát và guardrails chặt"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Acceptance criteria đo được và owner đã được xác định"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Rủi ro thấp đã được theo dõi định kỳ qua monitoring"
         }
       ],
       "answer": "A",
-      "explanation": "Bắt đầu mức rẻ nhất đủ để trả lời giả định cần kiểm tra. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "Rủi ro không mitigation và impact cao → no-go hoặc conditional.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-059",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, MVP giúp đội ngũ làm điều gì?",
+      "prompt": "Năm rủi ro tối thiểu trong Risk Matrix của Lab 5 là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "UI, UX, SEO, marketing, sales"
         },
         {
           "key": "B",
-          "text": "Là phiên bản tối thiểu người dùng có thể dùng để kiểm tra workflow"
+          "text": "Hallucination, bias, privacy, cost, adoption"
         },
         {
           "key": "C",
-          "text": "Là bản có nhiều tính năng nhất"
+          "text": "Latency, uptime, security, backup, DNS"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Scope, schedule, budget, quality, team"
         }
       ],
       "answer": "B",
-      "explanation": "Là phiên bản tối thiểu người dùng có thể dùng để kiểm tra workflow. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "Mỗi rủi ro có L × I, mitigation và owner.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     },
     {
       "id": "D05-060",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Wizard of Oz giúp đội ngũ làm điều gì?",
+      "prompt": "Lab 5 được chấm theo tiêu chí nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Model càng lớn càng được điểm cao"
         },
         {
           "key": "B",
-          "text": "Dùng con người phía sau để kiểm tra trải nghiệm trước khi tự động hóa"
+          "text": "Mức độ rõ, đo được, hành động được"
         },
         {
           "key": "C",
-          "text": "Che giấu rủi ro cho người dùng production"
+          "text": "Văn phong hay và trình bày đẹp"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Số trang PRD càng nhiều càng tốt"
         }
       ],
       "answer": "B",
-      "explanation": "Dùng con người phía sau để kiểm tra trải nghiệm trước khi tự động hóa. Nội dung được biên soạn từ tài liệu Day5_AI_Product_Thinking_Beginner_Notes.html của Ngày 5.",
-      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html"
+      "explanation": "Deliverable: PRD 3–5 trang, risk matrix, 3 user stories, decision note.",
+      "source": "onthi/Day5_AI_Product_Thinking_Beginner_Notes.html + onthi/day5.pdf"
     }
   ]
 }

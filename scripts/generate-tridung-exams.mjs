@@ -88,6 +88,11 @@ function essays(day, bank) {
 fs.mkdirSync(outputRoot, { recursive: true });
 fs.mkdirSync(appOutputRoot, { recursive: true });
 for (let day = 2; day <= 14; day += 1) {
+  // Ngày chưa soạn ngân hàng thì giữ nguyên đề đang có.
+  if (!fs.existsSync(path.join(bankDir, `day${day}.json`))) {
+    console.warn(`Bỏ qua Ngày ${day}: chưa có scripts/tridung-banks/day${day}.json`);
+    continue;
+  }
   const dir = path.join(outputRoot, `day${day}_tridung`);
   fs.mkdirSync(dir, { recursive: true });
   const bank = loadBank(day);

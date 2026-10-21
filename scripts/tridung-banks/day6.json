@@ -1,0 +1,526 @@
+{
+ "mcq": [
+  [
+   "Theo Day 6, quản lý dự án AI hiệu quả là sự kết hợp của gì?",
+   "Agile và phương pháp khoa học",
+   "Waterfall và timeline cứng",
+   "Scrum và hợp đồng cố định",
+   "Kanban và KPI doanh số",
+   "Nêu giả định → thử → đo → học → điều chỉnh → mới đầu tư tiếp."
+  ],
+  [
+   "Vì sao dự án AI có nhiều “unknowns” hơn phần mềm thông thường?",
+   "Chất lượng phụ thuộc dữ liệu, prompt, tool và hành vi user",
+   "AI luôn cần nhiều lập trình viên hơn phần mềm thường",
+   "AI không thể chạy được trên hạ tầng cloud phổ biến",
+   "Khách hàng AI thường thay đổi ngân sách mỗi tuần",
+   "Nhiều giả định chỉ kiểm chứng được sau prototype hoặc vài vòng eval."
+  ],
+  [
+   "Theo slide, requirement cho AI thường cần thêm gì ngoài implementation?",
+   "Calibration qua các vòng thử và đánh giá",
+   "Bản quyền phần mềm từ nhà cung cấp",
+   "Một hợp đồng bảo trì dài hạn",
+   "Thiết kế giao diện nhiều màu sắc",
+   "Đối xử AI project như backlog thường sẽ đánh giá sai effort, risk và Definition of Done."
+  ],
+  [
+   "Thứ tự đúng của AI Sprint Model là gì?",
+   "Research/Spike → Hypothesis → Build → Eval → Iterate",
+   "Build → Ship → Eval → Research → Hypothesis",
+   "Hypothesis → Ship → Build → Iterate → Eval",
+   "Eval → Build → Research → Iterate → Hypothesis",
+   "Iterate quay lại tinh chỉnh scope, prompt, data."
+  ],
+  [
+   "Mỗi AI sprint cần trả lời ba câu hỏi nào?",
+   "Học được gì, giả định nào bị bác bỏ, đầu tư tiếp hay dừng",
+   "Code bao nhiêu dòng, phát sinh bao nhiêu bug, ai làm chậm",
+   "Model nào mới ra, giá token bao nhiêu, tool nào đang hot",
+   "Họp bao nhiêu lần, ai vắng mặt, ai thường xuyên đi muộn",
+   "Sprint AI là vòng học có kiểm chứng, không chỉ là tiến độ."
+  ],
+  [
+   "“Spike” trong AI sprint là gì?",
+   "Khoảng thời gian ngắn để tìm hiểu một điều chưa rõ",
+   "Đợt tăng đột biến chi phí API vào cuối tháng",
+   "Buổi demo sản phẩm hoàn chỉnh cho nhà đầu tư",
+   "Giai đoạn ship tính năng mới ra môi trường production",
+   "Spike giúp giảm bất định kỹ thuật/giải pháp trước khi đặt giả thuyết."
+  ],
+  [
+   "Khi ước lượng task prompt/behavior tuning, sai lầm thường gặp và cách sửa là gì?",
+   "Coi là task nhỏ cố định; cần thêm buffer cho iteration và eval",
+   "Coi là task rất lớn; cần cắt bỏ hoàn toàn khỏi kế hoạch sprint",
+   "Coi là việc của data team; cần chuyển giao toàn bộ cho họ làm",
+   "Coi là việc của QA; cần để QA tự ước lượng và tự chịu trách nhiệm",
+   "Prompt hiếm khi đúng sau một lần sửa."
+  ],
+  [
+   "Ước lượng tool integration thường thiếu phần nào?",
+   "Error handling và retries",
+   "Thiết kế logo sản phẩm",
+   "Viết tài liệu marketing",
+   "Đào tạo người dùng cuối",
+   "Đừng chỉ tính thời gian viết code kết nối."
+  ],
+  [
+   "Với data/retrieval work, ước lượng cần tính thêm gì ngoài setup ban đầu?",
+   "Làm sạch dữ liệu, độ bao phủ và edge cases",
+   "Mua thêm license cho công cụ thiết kế",
+   "Họp với phòng pháp chế mỗi tuần",
+   "Viết lại toàn bộ system prompt",
+   "Dữ liệu bẩn và thiếu bao phủ làm retrieval kém."
+  ],
+  [
+   "Phần việc nào trong dự án AI hay bị “bỏ quên hoàn toàn” khi ước lượng?",
+   "UX / trust calibration với người dùng thật",
+   "Viết code gọi API của model ngôn ngữ",
+   "Cài đặt môi trường phát triển cho cả team",
+   "Tạo repository và cấu hình CI/CD ban đầu",
+   "Cần dành sprint time để test xem user có tin và dùng đúng cách không."
+  ],
+  [
+   "Definition of Done cho AI feature gồm những gì?",
+   "Quality threshold, latency, fallback, monitoring signal",
+   "Code chạy được trên máy của developer phụ trách",
+   "Đã merge thành công vào nhánh chính của repo",
+   "Đã có tài liệu hướng dẫn sử dụng cho người dùng",
+   "“Code chạy được” ≠ Done với AI."
+  ],
+  [
+   "Một support agent chỉ được coi là Done khi nào?",
+   "Citation coverage đủ, có escalation path, test set đạt ngưỡng",
+   "Trả lời đúng được một câu hỏi demo trước ban giám đốc",
+   "Giao diện chat đã hoàn thiện đẹp mắt và có dark mode",
+   "Đã chạy ổn định trên môi trường staging trong một ngày",
+   "Ví dụ trong slide về DoD cho AI."
+  ],
+  [
+   "Ba loại “nợ” mà backlog AI cần theo dõi là gì?",
+   "Feature debt, data debt, technical debt",
+   "Tax debt, loan debt, credit debt",
+   "Design debt, marketing debt, sales debt",
+   "Legal debt, HR debt, office debt",
+   "Data debt là nợ chất lượng/dữ liệu đặc thù của AI."
+  ],
+  [
+   "MVE (Minimum Viable Experiment) trả lời câu hỏi gì?",
+   "User có thật sự muốn thứ này không",
+   "Workflow có vận hành được trong thực tế không",
+   "Có đáng đầu tư thêm hay không",
+   "Hệ thống có chịu được tải lớn không",
+   "MVE test giả định giá trị nhanh nhất."
+  ],
+  [
+   "MVP trả lời câu hỏi gì?",
+   "Workflow có vận hành được trong thực tế không",
+   "User có thật sự muốn giá trị này không",
+   "Có đáng xin thêm ngân sách hay không",
+   "Model nào cho độ chính xác cao nhất",
+   "MVP là phiên bản nhỏ nhất nhưng dùng được thật."
+  ],
+  [
+   "PoC được thiết kế để trả lời câu hỏi nào?",
+   "Có đáng đầu tư thêm không",
+   "User có muốn thứ này không",
+   "Workflow có chạy hằng ngày không",
+   "Giao diện có dễ dùng không",
+   "PoC giảm bất định cho stakeholder/sponsor."
+  ],
+  [
+   "Nếu mục tiêu là học nhanh với ít công sức, nên chọn gì? Nếu cần xin phê duyệt tiếp, nên chọn gì?",
+   "Học nhanh → MVE; xin phê duyệt → PoC",
+   "Học nhanh → PoC; xin phê duyệt → MVE",
+   "Học nhanh → MVP; xin phê duyệt → MVE",
+   "Cả hai đều chọn MVP đầy đủ",
+   "Đừng dùng ba thuật ngữ lẫn lộn."
+  ],
+  [
+   "Wizard of Oz Testing là gì?",
+   "Trải nghiệm trông như AI nhưng phía sau một phần do người làm",
+   "Thử nghiệm A/B giữa hai model AI khác nhau cùng lúc",
+   "Kiểm thử bảo mật bằng cách giả làm hacker tấn công hệ thống",
+   "Demo sản phẩm hoàn chỉnh để gọi vốn từ nhà đầu tư",
+   "Mục tiêu là kiểm tra giá trị và workflow trước khi đầu tư lớn."
+  ],
+  [
+   "Khi nào nên dùng Wizard of Oz Testing?",
+   "Chưa chắc user value có thật và chưa cần đầu tư model lớn",
+   "Đã chứng minh giá trị và sẵn sàng mở rộng toàn quốc",
+   "Cần đo độ trễ của API khi hệ thống chịu tải rất cao",
+   "Cần kiểm tra các lỗ hổng bảo mật của toàn bộ hệ thống",
+   "Cũng dùng để test workflow hoặc adoption risk sớm."
+  ],
+  [
+   "Ví dụ nào đúng với Wizard of Oz cho AI sales assistant?",
+   "BA tự làm qualification lead thủ công phía sau giao diện",
+   "Dùng model lớn nhất để chấm điểm mọi lead tự động",
+   "Gửi email hàng loạt cho toàn bộ khách hàng tiềm năng",
+   "Mua danh sách lead từ bên thứ ba để tăng số lượng",
+   "Ví dụ khác: “AI support agent” nhưng backend là human draft response."
+  ],
+  [
+   "Slide nhấn mạnh điều gì về bản chất của Wizard of Oz?",
+   "Đây là cách kiểm chứng value/workflow, không phải lừa người dùng",
+   "Đây là cách tiết kiệm chi phí AI vĩnh viễn cho doanh nghiệp",
+   "Đây là cách thay thế hoàn toàn đội vận hành bằng giao diện",
+   "Đây là cách che giấu lỗi của model khỏi người dùng cuối",
+   "Kiểm chứng sớm trước khi đầu tư sâu vào hệ thống."
+  ],
+  [
+   "Một time-box experiment cần đủ bốn yếu tố nào?",
+   "Giả định, thời hạn, budget ceiling, tiêu chí dừng",
+   "Model, prompt, dataset và số GPU cần dùng",
+   "Logo, slogan, website và fanpage của sản phẩm",
+   "Owner, deadline, KPI và mức thưởng cho team",
+   "Thiếu tiêu chí dừng thì thử nghiệm dễ tiêu tiền vô hạn."
+  ],
+  [
+   "Thử internal policy assistant 2 tuần với 20 câu hỏi lặp lại nhưng time-to-answer không giảm đáng kể. Nên làm gì?",
+   "Dừng hoặc xem lại giả định",
+   "Kéo dài thêm 6 tháng để chờ cải thiện",
+   "Tăng gấp đôi ngân sách ngay",
+   "Mở rộng cho toàn công ty",
+   "Đầu tư nhỏ học nhanh tốt hơn đầu tư lớn rồi mới biết không có giá trị."
+  ],
+  [
+   "Assistants API phù hợp và giới hạn ở đâu theo slide?",
+   "Hợp PoC nhanh với tool calls cơ bản; chưa thay kiến trúc production",
+   "Hợp bài toán enterprise phức tạp; không dùng được cho PoC",
+   "Hợp vẽ flow agent trực quan; không gọi được bất kỳ tool nào",
+   "Hợp product discovery với user; không dùng để demo được",
+   "Dify: demo workflow, RAG, UI; LangFlow: giải thích flow agent trực quan."
+  ],
+  [
+   "Dify được slide mô tả phù hợp cho việc gì?",
+   "Demo workflow, RAG và app UI nhanh",
+   "Thay thế toàn bộ kiến trúc production",
+   "Product discovery đầy đủ với user",
+   "Tính ROI tự động cho dự án",
+   "Giới hạn: không giải hết bài toán enterprise phức tạp."
+  ],
+  [
+   "LangFlow có giới hạn gì theo slide?",
+   "Không thay cho product discovery đầy đủ",
+   "Không hiển thị được flow của agent",
+   "Không chạy được trên máy cá nhân",
+   "Không hỗ trợ bất kỳ model nào",
+   "LangFlow hợp để giải thích flow agent theo cách trực quan."
+  ],
+  [
+   "Nhận định nào đúng về low-code/no-code trong dự án AI?",
+   "Giúp demo, kiểm chứng workflow nhanh nhưng không thay PRD, risk register",
+   "Thay thế hoàn toàn việc viết PRD và lập risk register cho dự án",
+   "Chỉ nên dùng sau khi sản phẩm đã chạy ổn định trên production",
+   "Không nên dùng cho bất kỳ PoC nào vì thiếu khả năng tùy biến",
+   "Không thay product discovery hay production planning."
+  ],
+  [
+   "Khi nào PM/BA nên cân nhắc dùng low-code?",
+   "Cần demo cho stakeholder trong thời gian ngắn",
+   "Cần tối ưu hiệu năng hệ thống ở quy mô lớn",
+   "Cần thay đổi kiến trúc database lõi",
+   "Cần viết driver phần cứng chuyên dụng",
+   "Ngoài ra: test workflow fit, minh họa user journey và điểm gãy trải nghiệm."
+  ],
+  [
+   "Ô đầu tiên cần chốt trong PoC Canvas là gì?",
+   "Key hypothesis",
+   "Timebox",
+   "Next decision",
+   "Budget",
+   "5 ô: key hypothesis, scope, success criteria, timebox, next decision."
+  ],
+  [
+   "Scope của PoC theo PoC Canvas nên như thế nào?",
+   "Một workflow hẹp, một nhóm user hẹp, một bộ dữ liệu hẹp",
+   "Toàn bộ workflow của mọi phòng ban trong công ty",
+   "Mọi nhóm user để thu được dữ liệu đa dạng nhất",
+   "Toàn bộ dữ liệu lịch sử công ty từ trước đến nay",
+   "Phạm vi nhỏ giúp kiểm soát và đo được."
+  ],
+  [
+   "Success criteria trong PoC Canvas cần có đặc điểm gì?",
+   "Metric đo được, chốt trước với stakeholder",
+   "Được quyết định sau khi xem kết quả demo",
+   "Do riêng đội kỹ thuật tự đặt ra",
+   "Chỉ cần mô tả định tính bằng lời",
+   "Chốt trước để tránh “dời cột gôn” sau khi có kết quả."
+  ],
+  [
+   "Timebox điển hình của PoC theo slide là bao lâu?",
+   "2–4 tuần, có điểm review rõ",
+   "1–2 ngày, không cần review",
+   "6–12 tháng, review cuối kỳ",
+   "Không giới hạn đến khi thành công",
+   "Kết thúc timebox là lúc ra next decision."
+  ],
+  [
+   "Ô “Next decision” trong PoC Canvas chứa nội dung gì?",
+   "Nếu đạt hoặc không đạt thì làm gì tiếp",
+   "Tên người sẽ trình bày kết quả",
+   "Danh sách tính năng phiên bản sau",
+   "Ngân sách marketing của quý tới",
+   "Ví dụ: tiếp tục pilot, điều chỉnh phạm vi hoặc dừng."
+  ],
+  [
+   "Điều nào PoC KHÔNG nên làm?",
+   "Hứa production readiness",
+   "Giảm bất định chính",
+   "Đo giá trị ban đầu",
+   "Kiểm chứng workflow hẹp",
+   "PoC cũng không nên ôm toàn bộ scope tương lai."
+  ],
+  [
+   "Vì sao dùng demo đẹp để che metric yếu là sai mục tiêu PoC?",
+   "PoC phải giảm bất định, không tạo cảm giác “trông thông minh”",
+   "Demo đẹp luôn tốn nhiều chi phí hơn việc đo metric cẩn thận",
+   "Stakeholder thường không bao giờ xem demo trong buổi review",
+   "Metric yếu sẽ tự cải thiện sau khi sản phẩm được ra mắt",
+   "PoC tốt giúp team biết một điều quan trọng chưa chắc chắn."
+  ],
+  [
+   "Trong cost anatomy, chi phí human review, monitoring, maintenance thuộc nhóm nào?",
+   "Operate",
+   "Build",
+   "Run",
+   "Business impact",
+   "Build: dev effort, setup, integration; Run: API, compute, storage."
+  ],
+  [
+   "Chi phí API, compute, storage thuộc nhóm nào trong cost anatomy?",
+   "Run",
+   "Build",
+   "Operate",
+   "Business impact",
+   "Giá trị tương ứng của Run: throughput cao hơn, bớt việc tay."
+  ],
+  [
+   "Value side của Business impact gồm những gì?",
+   "Time saved, revenue, cost avoidance",
+   "Dev effort, setup, integration",
+   "API, compute, storage",
+   "Review, monitoring, maintenance",
+   "“ROI starts with anatomy, not optimism.”"
+  ],
+  [
+   "Câu “ROI starts with anatomy, not optimism” khuyên điều gì?",
+   "Bóc tách đủ chi phí và giá trị trước khi kỳ vọng",
+   "Luôn dùng kịch bản lạc quan nhất để dễ xin vốn",
+   "Chỉ cần tính chi phí build ban đầu là đủ cho ROI",
+   "ROI không cần số liệu cụ thể, chỉ cần tầm nhìn",
+   "Không chỉ tiền build mà còn API, người duyệt, giám sát, bảo trì."
+  ],
+  [
+   "Kịch bản Conservative trong ROI model có đặc điểm gì?",
+   "Adoption chậm, cost cao hơn, value thấp hơn",
+   "Baseline hợp lý dựa trên pilot và benchmark",
+   "Adoption tốt, workflow fit cao, ít friction",
+   "Không có chi phí vận hành sau ra mắt",
+   "Realistic dựa trên pilot; Optimistic adoption tốt."
+  ],
+  [
+   "Kịch bản Realistic dựa trên cơ sở nào?",
+   "Baseline hợp lý, kết quả pilot và benchmark nội bộ",
+   "Mong muốn cá nhân của nhà tài trợ dự án ở thời điểm đầu",
+   "Số liệu marketing do nhà cung cấp model công bố",
+   "Trường hợp xấu nhất có thể xảy ra với mọi giả định",
+   "Ba kịch bản cho stakeholder thấy phạm vi kết quả."
+  ],
+  [
+   "Vì sao ROI cần ba kịch bản thay vì một con số?",
+   "Vì adoption, chi phí và giá trị thực tế có thể lệch kỳ vọng",
+   "Vì CFO thường yêu cầu đúng ba trang slide cho phần tài chính",
+   "Vì phần mềm bảng tính mặc định có sẵn ba cột để điền số",
+   "Vì ba là con số được cho là may mắn khi đi trình bày",
+   "Stakeholder cần thấy một khoảng kết quả, không chỉ một con số đẹp."
+  ],
+  [
+   "Break-even (điểm hòa vốn) của dự án AI là gì?",
+   "Thời điểm giá trị tích lũy bù được chi phí tích lũy",
+   "Ngày team bắt đầu viết dòng code đầu tiên",
+   "Lúc chi phí vận hành hằng tháng giảm về bằng 0",
+   "Ngày ra mắt phiên bản đầu tiên cho người dùng",
+   "Cần biết hòa vốn tháng nào, kịch bản nào, giả định nào đẩy mốc ra xa."
+  ],
+  [
+   "Dự án tốn 120 triệu chi phí build; mỗi tháng tiết kiệm 30 triệu nhưng tốn 10 triệu API và người duyệt. Hòa vốn vào khoảng tháng thứ mấy?",
+   "Tháng thứ 6",
+   "Tháng thứ 4",
+   "Tháng thứ 12",
+   "Tháng thứ 3",
+   "Lợi ích ròng 20 triệu/tháng → 120 / 20 = 6 tháng."
+  ],
+  [
+   "Chi phí build 100 triệu, lợi ích ròng 25 triệu/tháng. Nếu adoption chỉ đạt một nửa (lợi ích ròng còn 12,5 triệu/tháng), mốc hòa vốn thay đổi thế nào?",
+   "Lùi từ tháng 4 sang tháng 8",
+   "Giữ nguyên ở tháng 4",
+   "Sớm hơn, còn tháng 2",
+   "Lùi từ tháng 4 sang tháng 5",
+   "Adoption rate là giả định nhạy cảm có thể đẩy break-even ra xa."
+  ],
+  [
+   "Sau 12 tháng, tổng giá trị tích lũy là 180 triệu, tổng chi phí là 120 triệu. ROI là bao nhiêu?",
+   "50%",
+   "150%",
+   "60%",
+   "33%",
+   "ROI = (giá trị − chi phí) / chi phí = 60 / 120 = 50%."
+  ],
+  [
+   "Theo slide, nói ROI với CFO/sponsor nên theo cấu trúc nào?",
+   "Baseline → giả định thay đổi → giá trị 3–6–12 tháng → điều kiện",
+   "Tầm nhìn → sứ mệnh → khẩu hiệu → lời cảm ơn và hỏi đáp",
+   "Công nghệ → model → số GPU → giới thiệu đội ngũ kỹ sư",
+   "Đối thủ → thị trường → xu hướng → mức độ hype của AI",
+   "Tránh nói chung chung “AI sẽ giúp hiệu quả hơn”."
+  ],
+  [
+   "Nhóm giả định nhạy cảm nhất cần công khai khi trình bày ROI là gì?",
+   "Adoption rate, review cost, API cost, error handling cost",
+   "Màu logo, font chữ, ảnh bìa và slogan của sản phẩm",
+   "Số cuộc họp, số email, số tin nhắn và số slide",
+   "Tên model, framework, nhà cung cấp cloud và IDE",
+   "Các giả định này quyết định khoảng kết quả và mốc hòa vốn."
+  ],
+  [
+   "Technical deck nên nhấn mạnh nội dung nào?",
+   "Scope, flow, Definition of Done",
+   "ROI, kịch bản tài chính, decision ask",
+   "Logo, slogan, chiến dịch quảng cáo",
+   "Lương thưởng và cơ cấu tổ chức",
+   "Technical team quan tâm architecture, eval, risks, dependencies."
+  ],
+  [
+   "Executive/sponsor quan tâm chính đến điều gì?",
+   "ROI, timeline, adoption, risk exposure",
+   "Chi tiết từng hàm trong code",
+   "Thứ tự các bước trong pipeline",
+   "Thông số GPU và dung lượng RAM",
+   "Nên nhấn mạnh business value, scenario, decision ask."
+  ],
+  [
+   "Vì sao cần “expectation setting: đây là AI, không phải magic”?",
+   "Stakeholder hiểu sai capability sẽ áp scope không thực tế",
+   "Để giảm ngân sách dự án xuống mức thấp nhất có thể",
+   "Để không cần đến human review ở bất kỳ bước nào",
+   "Để tránh phải trình bày ROI và kịch bản tài chính",
+   "Nói rõ AI làm tốt gì, chưa tốt gì, cần human review ở đâu."
+  ],
+  [
+   "Slide cuối cùng của pitch deck 5–7 slides nên là gì?",
+   "Decision ask: go / pilot / no-go",
+   "Lời cảm ơn và thông tin liên hệ",
+   "Lịch sử thành lập công ty",
+   "Danh sách công nghệ đã dùng",
+   "Kết thúc bằng một đề nghị rõ ràng dựa trên bằng chứng."
+  ],
+  [
+   "Trong thứ tự pitch deck, slide nào đứng ngay sau “Proposed AI solution”?",
+   "Metrics và expected value",
+   "Risks + mitigation",
+   "ROI / 3-scenario view",
+   "Decision ask",
+   "Thứ tự: Problem → Target user/workflow → Solution → Metrics → ROI → Risks → Decision ask."
+  ],
+  [
+   "Trong buổi rehearsal pitch 5 phút của Lab 6, vai trò được phân thế nào?",
+   "Một người trình bày, một người đóng vai sponsor hỏi lại",
+   "Cả nhóm cùng đọc nội dung slide đồng thanh một lượt",
+   "Giảng viên đứng ra trình bày thay cho toàn bộ nhóm",
+   "Không ai đặt câu hỏi, chỉ trình bày một chiều là đủ",
+   "Giúp luyện trả lời câu hỏi của người ra quyết định."
+  ],
+  [
+   "ROI sheet trong assessment cuối buổi phải có những gì?",
+   "Cost side, value side, break-even, 3 scenarios",
+   "Chỉ cần tổng lợi ích dự kiến sau 12 tháng",
+   "Chỉ cần chi phí build ban đầu của dự án",
+   "Chỉ cần một con số ROI cuối cùng thật đẹp",
+   "ROI chỉ có lợi ích là thiếu sót phổ biến."
+  ],
+  [
+   "Lab 6 được chấm theo tiêu chí nào?",
+   "Rõ quyết định, rõ giả định, rõ điều kiện tiếp tục đầu tư",
+   "Slide đẹp, nhiều hiệu ứng chuyển cảnh bắt mắt",
+   "Số trang PRD càng nhiều thì điểm càng cao hơn",
+   "Prototype có giao diện giống hệt sản phẩm thật",
+   "Deliverable: PRD final, ROI 3–6–12 tháng, deck 5–7 slides, pitch 5 phút."
+  ],
+  [
+   "Quyết định “Pilot / Conditional go” phù hợp khi nào?",
+   "Còn điều chưa chắc, cần thử an toàn và đo thêm",
+   "Đã đủ bằng chứng và điều kiện để triển khai rộng",
+   "Bằng chứng chưa đủ và rủi ro chưa giải quyết",
+   "Dự án đã hòa vốn trong kịch bản lạc quan",
+   "Go: đủ bằng chứng; No-go: bằng chứng chưa đủ, rủi ro chưa xử lý."
+  ],
+  [
+   "Team đã build 3 tuần thì stakeholder muốn đổi requirement. Cách xử lý phù hợp tinh thần Day 6 là gì?",
+   "Coi là giả định mới, kiểm chứng trong sprint ngắn rồi quyết định",
+   "Từ chối mọi thay đổi vì timeline dự án đã được chốt từ đầu",
+   "Bỏ toàn bộ việc đã làm trong 3 tuần và bắt đầu lại từ đầu",
+   "Chấp nhận mọi thay đổi ngay lập tức mà không cần đo lường",
+   "Agile + hypothesis-driven delivery thay cho plan cứng."
+  ],
+  [
+   "Theo key takeaways, yếu tố nào quyết định dự án có được tiếp tục đầu tư, bên cạnh chất lượng prototype?",
+   "Stakeholder communication",
+   "Số lượng tính năng",
+   "Kích thước model",
+   "Độ dài system prompt",
+   "Prototype đẹp chưa đủ; cần chứng minh giá trị và làm rõ giả định."
+  ],
+  [
+   "Mô hình ROI trong deliverable Day 6 cần thể hiện các mốc thời gian nào?",
+   "3–6–12 tháng",
+   "1–2–3 ngày",
+   "5–10–20 năm",
+   "Chỉ mốc ra mắt",
+   "Kết hợp với ba kịch bản conservative/realistic/optimistic."
+  ]
+ ],
+ "essay": [
+  [
+   "Lập kế hoạch 2 AI sprint cho trợ lý tra cứu chính sách nội bộ theo mô hình Research/Spike → Hypothesis → Build → Eval → Iterate, nêu giả thuyết, cách đo và điều kiện dừng/tiếp tục mỗi sprint.",
+   "Sprint 1: spike về dữ liệu chính sách; giả thuyết “AI giảm time-to-answer ≥30% trên 20 câu lặp lại”; build bản RAG nhỏ; eval thời gian + tỷ lệ trích dẫn đúng; học được gì, giả định nào bị bác bỏ. Sprint 2: giả thuyết về trust/adoption với nhóm HR nhỏ; đo tỷ lệ dùng lại, escalation; điều chỉnh scope/prompt/data. Điều kiện dừng: không đạt ngưỡng sau timebox; tiếp tục: đạt ngưỡng và rủi ro kiểm soát được."
+  ],
+  [
+   "Chọn MVE, MVP hay PoC cho từng tình huống và giải thích: (a) chưa biết nhân viên có cần trợ lý tóm tắt cuộc họp không; (b) cần sponsor phê duyệt ngân sách mở rộng sau thử nghiệm; (c) đã có nhu cầu rõ, cần phiên bản dùng thật cho một phòng ban.",
+   "(a) MVE: kiểm tra giá trị nhanh nhất, có thể dùng Wizard of Oz. (b) PoC: giảm bất định cho sponsor, có success criteria chốt trước, timebox, next decision. (c) MVP: phiên bản nhỏ nhất dùng được để kiểm tra workflow thực tế. Nêu không dùng lẫn lộn ba thuật ngữ và mục tiêu chính của mỗi loại."
+  ],
+  [
+   "Thiết kế một thử nghiệm Wizard of Oz cho “AI sales assistant” sàng lọc lead: ai làm gì phía sau, đo gì, kéo dài bao lâu, và những lưu ý đạo đức/minh bạch.",
+   "Giao diện trông như AI; BA tự qualification lead phía sau theo checklist. Đo: tỷ lệ sales dùng gợi ý, thời gian xử lý lead, tỷ lệ lead đủ điều kiện, phản hồi người dùng. Time-box 2 tuần, ngân sách giới hạn, tiêu chí dừng. Lưu ý: mục tiêu kiểm chứng value/workflow, không lừa người dùng; thông báo phù hợp với người tham gia thử nghiệm, bảo vệ dữ liệu khách hàng; dùng kết quả để quyết định đầu tư model."
+  ],
+  [
+   "Điền PoC Canvas đủ 5 ô cho một AI ticket routing agent tại bộ phận chăm sóc khách hàng.",
+   "Key hypothesis: AI gợi ý đúng queue giúp giảm tỷ lệ chuyển sai nhóm. Scope: một kênh (email), một nhóm vận hành, một bộ dữ liệu ticket 3 tháng. Success criteria (chốt trước với stakeholder): tỷ lệ đúng nhóm ngay lần đầu tăng từ baseline lên ngưỡng X, thời gian phân loại giảm Y. Timebox: 3 tuần, review cuối tuần 3. Next decision: đạt → pilot mở rộng; không đạt → điều chỉnh scope/dữ liệu hoặc dừng. Nêu PoC không hứa production readiness, không che metric yếu."
+  ],
+  [
+   "Một dự án có chi phí build 150 triệu. Lợi ích ròng hằng tháng (sau API và human review) theo ba kịch bản: conservative 10 triệu, realistic 25 triệu, optimistic 40 triệu. Tính mốc hòa vốn mỗi kịch bản, giá trị ròng tại tháng 12 và nêu cách trình bày cho CFO.",
+   "Break-even: conservative 15 tháng, realistic 6 tháng, optimistic ~3,75 tháng (≈ tháng 4). Giá trị ròng tháng 12: conservative 120 − 150 = −30 triệu; realistic 300 − 150 = +150 triệu; optimistic 480 − 150 = +330 triệu. Trình bày: baseline hôm nay → giả định thay đổi → giá trị 3–6–12 tháng → điều kiện để đạt; công khai giả định nhạy cảm (adoption, review cost, API cost, error handling); đưa decision ask."
+  ],
+  [
+   "Viết Definition of Done cho một AI support agent và ước lượng công việc của dự án có tính đến bất định (prompt tuning, tool integration, data, UX/trust).",
+   "DoD: citation coverage ≥ ngưỡng, latency p95 trong giới hạn, fallback/escalation path rõ, test set đạt ngưỡng, có monitoring signal sau ra mắt. Ước lượng: prompt tuning có buffer cho nhiều vòng eval; tool integration tính error handling và retry; data/retrieval tính cleaning, coverage, edge cases; UX/trust dành sprint test với user thật. Theo dõi feature debt, data debt, technical debt."
+  ],
+  [
+   "So sánh nội dung một technical deck và một executive deck cho cùng dự án trợ lý AI nội bộ; liệt kê các slide chính của mỗi deck.",
+   "Technical: kiến trúc, kết quả eval, rủi ro kỹ thuật, dependencies, scope, flow, Definition of Done, kế hoạch sprint. Executive: problem/pain, giá trị kinh doanh, ROI 3 kịch bản, timeline 3–6–12 tháng, adoption, risk exposure + mitigation, decision ask. Nêu nguyên tắc: cùng sản phẩm nhưng hai audience cần hai cách trình bày; tránh thuật ngữ kỹ thuật với sponsor."
+  ],
+  [
+   "Soạn dàn ý pitch deck 7 slides cho đề xuất AI hỗ trợ tóm tắt hồ sơ bệnh án cho bác sĩ, theo đúng thứ tự trong slide, và kết thúc bằng một decision ask cụ thể.",
+   "1 Problem/pain: bác sĩ mất nhiều thời gian đọc hồ sơ. 2 Target user & current workflow. 3 Proposed AI solution (tóm tắt có trích dẫn, bác sĩ duyệt). 4 Metrics & expected value (thời gian đọc, tỷ lệ sai sót). 5 ROI 3 kịch bản. 6 Risks + mitigation (hallucination, privacy, HITL). 7 Decision ask: phê duyệt pilot có điều kiện tại một khoa trong 4 tuần với tiêu chí đo trước. Nêu expectation setting: AI không phải magic."
+  ],
+  [
+   "Sau 3 tuần build, stakeholder muốn đổi yêu cầu từ “tra cứu chính sách” sang “tự động trả lời email khách hàng”. Hãy đề xuất cách xử lý theo tinh thần Agile + phương pháp khoa học.",
+   "Không từ chối cứng, không chấp nhận mù quáng: làm rõ pain/giá trị của yêu cầu mới; biến thành giả thuyết; đánh giá tác động đến scope, rủi ro (gửi email ra ngoài rủi ro cao hơn), chi phí, timeline; dùng MVE/time-box ngắn để kiểm chứng; cập nhật PRD, ROI, risk register; trình bày lựa chọn và trade-off cho stakeholder; ra quyết định go/pilot/no-go dựa trên bằng chứng; giữ lại những gì đã học từ 3 tuần trước."
+  ],
+  [
+   "Đánh giá việc dùng Dify (low-code) để làm PoC trợ lý RAG nội bộ: lợi ích, giới hạn, và những gì vẫn phải làm để đi từ PoC lên production.",
+   "Lợi ích: demo nhanh workflow, RAG, UI; kiểm chứng workflow fit trước khi engineer build sâu; minh họa user journey. Giới hạn: không giải hết bài toán enterprise phức tạp, không thay product discovery, PRD, risk register, production planning. Để lên production: kiến trúc phù hợp, quản trị dữ liệu, phân quyền, eval, monitoring, fallback, chi phí vận hành, bảo mật; cập nhật ROI và decision ask."
+  ]
+ ]
+}

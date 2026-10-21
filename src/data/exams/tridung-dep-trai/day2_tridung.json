@@ -14,1680 +14,1680 @@
     {
       "id": "D02-001",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Problem Statement?",
+      "prompt": "Thứ tự đúng của bốn giai đoạn trong mô hình Double Diamond là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Discover → Develop → Define → Deliver"
         },
         {
           "key": "B",
-          "text": "Nêu rõ người dùng, nỗi đau, bối cảnh và kết quả cần thay đổi"
+          "text": "Discover → Define → Develop → Deliver"
         },
         {
           "key": "C",
-          "text": "Bắt đầu bằng việc chọn model lớn nhất"
+          "text": "Define → Discover → Deliver → Develop"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Develop → Discover → Define → Deliver"
         }
       ],
       "answer": "B",
-      "explanation": "Nêu rõ người dùng, nỗi đau, bối cảnh và kết quả cần thay đổi. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "explanation": "Diamond 1 (Discover, Define) tìm đúng vấn đề; Diamond 2 (Develop, Deliver) tìm đúng giải pháp.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-002",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Double Diamond?",
+      "prompt": "Ở giai đoạn Discover của Diamond 1, đội ngũ nên làm gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Đề xuất nhiều giải pháp và làm prototype cho từng giải pháp"
         },
         {
           "key": "B",
-          "text": "Mở rộng để khám phá rồi thu hẹp để xác định vấn đề và giải pháp"
+          "text": "Chọn giải pháp tốt nhất, kiểm thử rồi triển khai cho người dùng"
         },
         {
           "key": "C",
-          "text": "Chọn ngay giải pháp đầu tiên mà không cần nghiên cứu"
+          "text": "Mở rộng góc nhìn bằng quan sát, phỏng vấn, khảo sát và dữ liệu"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Thu hẹp ngay về một bài toán gốc bằng bỏ phiếu Dot Voting"
         }
       ],
-      "answer": "B",
-      "explanation": "Mở rộng để khám phá rồi thu hẹp để xác định vấn đề và giải pháp. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "C",
+      "explanation": "Discover là pha phân kỳ: mở rộng để thấu hiểu vấn đề trước khi hội tụ ở Define.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-003",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về PAIR?",
+      "prompt": "Nhóm kỹ thuật nào thuộc pha hội tụ Define của Diamond 1?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Diary Study, User Interview, Survey, Stakeholder Mapping"
         },
         {
           "key": "B",
-          "text": "Dùng dữ liệu và nghiên cứu để kiểm tra tính phù hợp của cơ hội AI"
+          "text": "Prompt Chaining, Routing, Parallelization, Orchestrator"
         },
         {
           "key": "C",
-          "text": "Chỉ đánh giá tốc độ viết code"
+          "text": "Observation, Prototype, Test và Iteration theo vòng HCD"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Affinity Mapping, 5 Whys, Impact-Effort, How Might We"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng dữ liệu và nghiên cứu để kiểm tra tính phù hợp của cơ hội AI. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "D",
+      "explanation": "Define chọn lọc dữ liệu để tìm nguyên nhân gốc; Diary Study/Interview thuộc Discover.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-004",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Rule–Workflow–Agent?",
+      "prompt": "Câu nói “Do not solve the problem I am asked to solve” của Don Norman nhắc điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Chọn mức tự động hóa theo độ ổn định và mức cần suy luận của công việc"
+          "text": "Tìm vấn đề thật phía sau yêu cầu trước khi bắt tay giải"
         },
         {
           "key": "B",
-          "text": "Luôn dùng agent cho mọi tác vụ đơn giản"
+          "text": "Chỉ nhận những yêu cầu đã có giải pháp được phê duyệt"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Ưu tiên giải pháp AI thay vì giải pháp quy trình thủ công"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Giải đúng và nhanh nhất yêu cầu mà stakeholder đưa ra"
         }
       ],
       "answer": "A",
-      "explanation": "Chọn mức tự động hóa theo độ ổn định và mức cần suy luận của công việc. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "explanation": "Yêu cầu ban đầu thường là triệu chứng; giải pháp xuất sắc cho sai vấn đề có thể tệ hơn không có giải pháp.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-005",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Reward function?",
+      "prompt": "Theo bốn lăng kính tìm bài toán, nhận định nào về tác vụ lặp lại (Repetitive) là đúng?",
       "options": [
         {
           "key": "A",
-          "text": "Thay thế hoàn toàn phản hồi người dùng"
+          "text": "Tác vụ lặp lại chỉ nên tự động hóa bằng model lớn nhất"
         },
         {
           "key": "B",
-          "text": "Biến mục tiêu mong muốn thành tín hiệu có thể đánh giá"
+          "text": "Lặp lại chưa chắc cần AI; quy tắc rõ thì Rule có thể tối ưu hơn"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Mọi tác vụ lặp lại đều nên giao cho Agent tự lập kế hoạch"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Tác vụ lặp lại không đáng tự động hóa vì giá trị quá thấp"
         }
       ],
       "answer": "B",
-      "explanation": "Biến mục tiêu mong muốn thành tín hiệu có thể đánh giá. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "explanation": "Lặp lại là tín hiệu để chuẩn hóa; logic tất định thì rule rẻ và dễ kiểm soát hơn.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-006",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Data readiness?",
+      "prompt": "Lăng kính “AI Advantage” đặt câu hỏi gì về tác vụ?",
       "options": [
         {
           "key": "A",
-          "text": "Kiểm tra dữ liệu có sẵn, hợp pháp, đủ chất lượng và đại diện"
+          "text": "Thời gian đang hao phí ở bước tìm kiếm, chờ đợi hay định dạng"
         },
         {
           "key": "B",
-          "text": "Giả định có dữ liệu rồi mới xác minh sau"
+          "text": "Ai đang gặp khó khăn, phàn nàn hoặc bị tắc nghẽn liên tục"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Có cần hiểu ngôn ngữ, ngữ cảnh hoặc tổng hợp nhiều nguồn không"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Tác vụ có diễn ra thường xuyên mỗi ngày hoặc mỗi tuần không"
         }
       ],
-      "answer": "A",
-      "explanation": "Kiểm tra dữ liệu có sẵn, hợp pháp, đủ chất lượng và đại diện. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "C",
+      "explanation": "Ba lựa chọn còn lại lần lượt là lăng kính Repetitive, Time-consuming và User Pain Points.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-007",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Success metric?",
+      "prompt": "Đội ngũ xây chatbot trước rồi mới tìm hiểu quy trình vận hành. Đây là anti-pattern nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "No baseline"
         },
         {
           "key": "B",
-          "text": "Phải gắn với kết quả người dùng hoặc kinh doanh cụ thể"
+          "text": "No boundary"
         },
         {
           "key": "C",
-          "text": "Chỉ đo số lượng slide đã trình bày"
+          "text": "No evaluation"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Solution-first"
         }
       ],
-      "answer": "B",
-      "explanation": "Phải gắn với kết quả người dùng hoặc kinh doanh cụ thể. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "D",
+      "explanation": "Solution-first là chọn công nghệ trước khi làm rõ pain point và workflow hiện tại.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-008",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Go / Not Yet / No-Go?",
+      "prompt": "Dự án không đo hiện trạng tốn bao nhiêu thời gian/chi phí trước khi làm AI. Hậu quả trực tiếp là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Mất căn cứ để đánh giá hiệu quả cải tiến sau khi triển khai"
         },
         {
           "key": "B",
-          "text": "Ra quyết định dựa trên bằng chứng về giá trị, khả thi và rủi ro"
+          "text": "Không thể xác định AI được tự quyết đến đâu trong quy trình"
         },
         {
           "key": "C",
-          "text": "Luôn chọn Go để không chậm tiến độ"
+          "text": "Không có test case và edge case để nghiệm thu hệ thống"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Không biết nên chọn Buy, Boost hay Build cho dự án"
         }
       ],
-      "answer": "B",
-      "explanation": "Ra quyết định dựa trên bằng chứng về giá trị, khả thi và rủi ro. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "A",
+      "explanation": "Đây là anti-pattern No baseline; các lựa chọn khác ứng với No boundary, No evaluation.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-009",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Problem Statement nào là phù hợp nhất?",
+      "prompt": "Anti-pattern “No boundary” mô tả tình trạng nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Xây chatbot hoặc agent trước khi hiểu quy trình vận hành"
         },
         {
           "key": "B",
-          "text": "Nêu rõ người dùng, nỗi đau, bối cảnh và kết quả cần thay đổi"
+          "text": "Không rõ AI được tự quyết đến đâu và khi nào cần người duyệt"
         },
         {
           "key": "C",
-          "text": "Bắt đầu bằng việc chọn model lớn nhất"
+          "text": "Không lượng hóa tổn thất hiện tại về thời gian và chi phí"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Không thiết lập kịch bản kiểm thử và phương án đối chứng"
         }
       ],
       "answer": "B",
-      "explanation": "Nêu rõ người dùng, nỗi đau, bối cảnh và kết quả cần thay đổi. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "explanation": "Boundary xác định AI không được làm gì và khâu nào bắt buộc HITL.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-010",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Double Diamond nào là phù hợp nhất?",
+      "prompt": "Theo PAIR, câu hỏi “Can we use AI to ___?” nên được thay bằng cặp câu hỏi nào?",
       "options": [
         {
           "key": "A",
-          "text": "Chọn ngay giải pháp đầu tiên mà không cần nghiên cứu"
+          "text": "“Which model is best?” và “How fast can we ship it?”"
         },
         {
           "key": "B",
-          "text": "Mở rộng để khám phá rồi thu hẹp để xác định vấn đề và giải pháp"
+          "text": "“Who will pay for it?” và “What is the deadline?”"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "“Can AI replace staff?” và “How much cost can we cut?”"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "“How might we solve ___?” và “Can AI solve this in a unique way?”"
         }
       ],
-      "answer": "B",
-      "explanation": "Mở rộng để khám phá rồi thu hẹp để xác định vấn đề và giải pháp. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "D",
+      "explanation": "Hỏi về bài toán trước, về AI sau — AI chỉ là một trong nhiều phương án khả dĩ.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-011",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng PAIR nào là phù hợp nhất?",
+      "prompt": "Trường “Problem” trong Quick Problem Card cần tuân thủ điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Liệt kê đầy đủ các tính năng mà người dùng muốn"
         },
         {
           "key": "B",
-          "text": "Dùng dữ liệu và nghiên cứu để kiểm tra tính phù hợp của cơ hội AI"
+          "text": "Ghi hướng giải pháp No AI, Rule, Workflow hoặc Agent"
         },
         {
           "key": "C",
-          "text": "Chỉ đánh giá tốc độ viết code"
+          "text": "Mô tả vấn đề cụ thể, không chứa tên giải pháp"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Ghi rõ model và framework dự định sử dụng"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng dữ liệu và nghiên cứu để kiểm tra tính phù hợp của cơ hội AI. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "C",
+      "explanation": "Problem là vấn đề; hướng giải pháp nằm ở trường Direction riêng.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-012",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Rule–Workflow–Agent nào là phù hợp nhất?",
+      "prompt": "Trong case Weekly Report, bước nào được xác định là nút thắt?",
       "options": [
         {
           "key": "A",
-          "text": "Chọn mức tự động hóa theo độ ổn định và mức cần suy luận của công việc"
+          "text": "Review, format và gửi email cho EM và CEO"
         },
         {
           "key": "B",
-          "text": "Luôn dùng agent cho mọi tác vụ đơn giản"
+          "text": "Viết narrative từ dữ liệu thô, mất khoảng 25 phút"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Export dữ liệu từ Jira sang bảng tính trung gian"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Đọc lại Slack recap của cả tuần để lấy bối cảnh"
         }
       ],
-      "answer": "A",
-      "explanation": "Chọn mức tự động hóa theo độ ổn định và mức cần suy luận của công việc. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "B",
+      "explanation": "Bottleneck là khâu chậm/dễ sai nhất: viết narrative ~25 phút trong flow ~90 phút/tuần/PM.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-013",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Reward function nào là phù hợp nhất?",
+      "prompt": "Vì sao success metric của case Weekly Report thêm điều kiện “không làm tăng số câu CEO/EM phải hỏi lại”?",
       "options": [
         {
           "key": "A",
-          "text": "Thay thế hoàn toàn phản hồi người dùng"
+          "text": "Để rút ngắn thời gian mà không đánh đổi chất lượng báo cáo"
         },
         {
           "key": "B",
-          "text": "Biến mục tiêu mong muốn thành tín hiệu có thể đánh giá"
+          "text": "Để CEO không còn phải đọc weekly report mỗi tuần"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Để chứng minh AI có thể thay hoàn toàn vai trò của PM"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Để tăng số câu hỏi thảo luận trong buổi leadership sync"
         }
       ],
-      "answer": "B",
-      "explanation": "Biến mục tiêu mong muốn thành tín hiệu có thể đánh giá. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "A",
+      "explanation": "Metric tốc độ cần chỉ số chất lượng đối trọng để tránh tối ưu lệch.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-014",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Data readiness nào là phù hợp nhất?",
+      "prompt": "Trong bộ ba Baseline → Target → Measurement, Measurement trả lời câu hỏi nào?",
       "options": [
         {
           "key": "A",
-          "text": "Kiểm tra dữ liệu có sẵn, hợp pháp, đủ chất lượng và đại diện"
+          "text": "Mức hao phí hiện tại là bao nhiêu, bằng con số cụ thể"
         },
         {
           "key": "B",
-          "text": "Giả định có dữ liệu rồi mới xác minh sau"
+          "text": "Kỳ vọng cải thiện đến ngưỡng nào trong khoảng thời gian nào"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Ai là người có quyền phê duyệt ngân sách của dự án"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Dùng chỉ số nào và thu thập dữ liệu ra sao để biết đã đạt"
         }
       ],
-      "answer": "A",
-      "explanation": "Kiểm tra dữ liệu có sẵn, hợp pháp, đủ chất lượng và đại diện. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "D",
+      "explanation": "Baseline = where we are, Target = where to go, Measurement = how we know.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-015",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Success metric nào là phù hợp nhất?",
+      "prompt": "Phát biểu nào là một chỉ số thành công đạt chuẩn?",
       "options": [
         {
           "key": "A",
-          "text": "Phải gắn với kết quả người dùng hoặc kinh doanh cụ thể"
+          "text": "Giúp khách hàng hài lòng hơn khi trò chuyện với trợ lý AI"
         },
         {
           "key": "B",
-          "text": "Chỉ đo số lượng slide đã trình bày"
+          "text": "Ứng dụng AI hiện đại nhất vào toàn bộ quy trình chăm sóc"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Giảm lỗi phân loại từ 20% xuống dưới 5%, đo trên 500 ticket gắn nhãn"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Nâng cao hiệu suất làm việc của đội hỗ trợ khách hàng trong năm"
         }
       ],
-      "answer": "A",
-      "explanation": "Phải gắn với kết quả người dùng hoặc kinh doanh cụ thể. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "C",
+      "explanation": "Metric tốt có hiện trạng, ngưỡng mục tiêu và cách đo.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-016",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Go / Not Yet / No-Go nào là phù hợp nhất?",
+      "prompt": "Chỉ số nào là Input Metric (đòn bẩy) chứ không phải Output Metric?",
       "options": [
         {
           "key": "A",
-          "text": "Ra quyết định dựa trên bằng chứng về giá trị, khả thi và rủi ro"
+          "text": "Giá trị thực tế người dùng nhận được"
         },
         {
           "key": "B",
-          "text": "Luôn chọn Go để không chậm tiến độ"
+          "text": "Tỷ lệ câu hỏi được phân loại chính xác"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Thời lượng hoàn tất toàn bộ quy trình"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Tỷ lệ sai sót của đầu ra cuối cùng"
         }
       ],
-      "answer": "A",
-      "explanation": "Ra quyết định dựa trên bằng chứng về giá trị, khả thi và rủi ro. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "B",
+      "explanation": "Input metric là đòn bẩy đội tác động được; output metric là kết quả cuối muốn tối ưu.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-017",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Problem Statement, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Ba case Cursor, Artifact, NotebookLM cùng minh họa nguyên tắc nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bắt đầu bằng việc chọn model lớn nhất"
+          "text": "Khởi nguồn từ bài toán, không bắt đầu từ AI"
         },
         {
           "key": "B",
-          "text": "Nêu rõ người dùng, nỗi đau, bối cảnh và kết quả cần thay đổi"
+          "text": "Model lớn hơn luôn quyết định thành công sản phẩm"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Thị trường ngách là lựa chọn an toàn cho sản phẩm AI"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Nên mở rộng sang càng nhiều lĩnh vực càng tốt"
         }
       ],
-      "answer": "B",
-      "explanation": "Nêu rõ người dùng, nỗi đau, bối cảnh và kết quả cần thay đổi. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "A",
+      "explanation": "Lộ trình: Bài toán → Quy trình vận hành → Chỉ số đo lường → Giải pháp AI.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-018",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Double Diamond, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Theo PAIR, ba bước quyết định có nên dùng AI diễn ra theo thứ tự nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng để khám phá rồi thu hẹp để xác định vấn đề và giải pháp"
+          "text": "Automate/Augment → Nhu cầu × thế mạnh AI → Reward function"
         },
         {
           "key": "B",
-          "text": "Chọn ngay giải pháp đầu tiên mà không cần nghiên cứu"
+          "text": "Reward function → Nhu cầu × thế mạnh AI → Automate/Augment"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Nhu cầu × thế mạnh AI → Reward function → Automate/Augment"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Nhu cầu × thế mạnh AI → Automate/Augment → Reward function"
         }
       ],
-      "answer": "A",
-      "explanation": "Mở rộng để khám phá rồi thu hẹp để xác định vấn đề và giải pháp. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "D",
+      "explanation": "Ba bước PAIR lần lượt trả lời: có cần AI, cấp độ nào, đã đủ rõ để đo chưa.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-019",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua PAIR, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Trường hợp nào thuộc nhóm PAIR cho rằng AI có thể có lợi thế?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Nút Home luôn nằm cố định ở một vị trí quen thuộc"
         },
         {
           "key": "B",
-          "text": "Dùng dữ liệu và nghiên cứu để kiểm tra tính phù hợp của cơ hội AI"
+          "text": "Mọi quyết định phải truy vết được từng bước"
         },
         {
           "key": "C",
-          "text": "Chỉ đánh giá tốc độ viết code"
+          "text": "Phát hiện sự kiện hiếm hoặc biến đổi như gian lận"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Hiển thị bảng giá cố định, rất ít khi thay đổi"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng dữ liệu và nghiên cứu để kiểm tra tính phù hợp của cơ hội AI. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "C",
+      "explanation": "PAIR liệt kê 8 trường hợp “AI probably better”, gồm phát hiện cái hiếm & biến đổi.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-020",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Rule–Workflow–Agent, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Trường hợp nào PAIR xếp vào nhóm AI có thể KHÔNG tốt hơn?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Cần hiểu câu hỏi viết tự do bằng lời nói hằng ngày"
         },
         {
           "key": "B",
-          "text": "Chọn mức tự động hóa theo độ ổn định và mức cần suy luận của công việc"
+          "text": "Cần gợi ý nội dung khác nhau cho mỗi người dùng"
         },
         {
           "key": "C",
-          "text": "Luôn dùng agent cho mọi tác vụ đơn giản"
+          "text": "Chi phí một lần sai lớn hơn lợi ích nhiều lần đúng"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Cần cá nhân hóa trải nghiệm theo từng người dùng"
         }
       ],
-      "answer": "B",
-      "explanation": "Chọn mức tự động hóa theo độ ổn định và mức cần suy luận của công việc. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "C",
+      "explanation": "Lỗi quá tốn kém là một trong 6 trường hợp “AI probably NOT better”.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-021",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Reward function, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Khi rule/heuristic giải quyết triệt để bài toán, lựa chọn nào là hợp lý?",
       "options": [
         {
           "key": "A",
-          "text": "Biến mục tiêu mong muốn thành tín hiệu có thể đánh giá"
+          "text": "Dùng AI để sản phẩm có hình ảnh hiện đại hơn"
         },
         {
           "key": "B",
-          "text": "Thay thế hoàn toàn phản hồi người dùng"
+          "text": "Dùng Agent để dự phòng cho nhu cầu tương lai"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Kết hợp cả Rule, Workflow và Agent cho chắc"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Dùng rule vì dễ build, giải thích, debug và rẻ hơn"
         }
       ],
-      "answer": "A",
-      "explanation": "Biến mục tiêu mong muốn thành tín hiệu có thể đánh giá. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "D",
+      "explanation": "Rule không thua kém AI; nếu giải quyết được thì đó là lựa chọn tối ưu.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-022",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Data readiness, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Trong khung Buy — Boost — Build của MIT CISR, Boost nghĩa là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Dùng model có sẵn, bổ sung dữ liệu nội bộ bằng RAG/fine-tune"
         },
         {
           "key": "B",
-          "text": "Kiểm tra dữ liệu có sẵn, hợp pháp, đủ chất lượng và đại diện"
+          "text": "Mua giải pháp đóng gói sẵn do vendor duy trì và cập nhật"
         },
         {
           "key": "C",
-          "text": "Giả định có dữ liệu rồi mới xác minh sau"
+          "text": "Tự xây mô hình tùy biến hoàn toàn với đội AI nội bộ"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Tăng ngân sách hạ tầng để chạy model nhanh hơn"
         }
       ],
-      "answer": "B",
-      "explanation": "Kiểm tra dữ liệu có sẵn, hợp pháp, đủ chất lượng và đại diện. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "A",
+      "explanation": "Boost cần quản trị dữ liệu tốt; thực tế đa số đội đang ở mức Boost.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-023",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Success metric, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Trong công thức AI System = Model + Context + Planning + Tools, Context đóng vai trò gì?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ đo số lượng slide đã trình bày"
+          "text": "Đọc hiểu, soạn thảo, tổng hợp và phân loại văn bản"
         },
         {
           "key": "B",
-          "text": "Phải gắn với kết quả người dùng hoặc kinh doanh cụ thể"
+          "text": "Cung cấp tài liệu, dữ liệu nghiệp vụ, lịch sử cho AI"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Phân rã tác vụ phức tạp và điều chỉnh các bước"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Kết nối API, CRM, database và dịch vụ bên ngoài"
         }
       ],
       "answer": "B",
-      "explanation": "Phải gắn với kết quả người dùng hoặc kinh doanh cụ thể. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "explanation": "Context là tri thức chuyên biệt; Planning điều phối; Tools kết nối; Model xử lý.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-024",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Go / Not Yet / No-Go, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Điều kiện nào gợi ý nên chọn Automate (AI làm thay)?",
       "options": [
         {
           "key": "A",
-          "text": "Luôn chọn Go để không chậm tiến độ"
+          "text": "Kết quả gắn với trách nhiệm pháp lý hoặc sức khỏe cá nhân"
         },
         {
           "key": "B",
-          "text": "Ra quyết định dựa trên bằng chứng về giá trị, khả thi và rủi ro"
+          "text": "Sở thích của người dùng khó diễn đạt thành lời cụ thể"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Việc tẻ nhạt hoặc nguy hiểm, có “đáp án đúng” được đồng thuận"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Người dùng thích tự làm và thấy việc đó có ý nghĩa cá nhân"
         }
       ],
-      "answer": "B",
-      "explanation": "Ra quyết định dựa trên bằng chứng về giá trị, khả thi và rủi ro. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "C",
+      "explanation": "Ba lựa chọn còn lại là điều kiện nghiêng về Augment.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-025",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Problem Statement trong hệ thống AI là gì?",
+      "prompt": "PAIR lưu ý gì về các tác vụ đã được automate?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Không còn cần con người giám sát sau khi ra mắt"
         },
         {
           "key": "B",
-          "text": "Nêu rõ người dùng, nỗi đau, bối cảnh và kết quả cần thay đổi"
+          "text": "Nên tắt logging để giảm độ trễ cho người dùng"
         },
         {
           "key": "C",
-          "text": "Bắt đầu bằng việc chọn model lớn nhất"
+          "text": "Không nên cho người dùng hoàn tác để tránh lỗi"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Vẫn gần như luôn cần oversight: preview, edit, undo"
         }
       ],
-      "answer": "B",
-      "explanation": "Nêu rõ người dùng, nỗi đau, bối cảnh và kết quả cần thay đổi. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "D",
+      "explanation": "Automate không có nghĩa là bỏ con người; cần xem trước, sửa và hoàn tác.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-026",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Double Diamond trong hệ thống AI là gì?",
+      "prompt": "Trong lộ trình tăng tự động hóa theo pha cho case trợ giảng, Pha 2 là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng để khám phá rồi thu hẹp để xác định vấn đề và giải pháp"
+          "text": "AI soạn nháp, trợ giảng hiệu chỉnh trước khi gửi"
         },
         {
           "key": "B",
-          "text": "Chọn ngay giải pháp đầu tiên mà không cần nghiên cứu"
+          "text": "AI chỉ gợi ý, trợ giảng tự viết lại toàn bộ"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "AI tự gửi cho nhóm câu đã chứng minh an toàn"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "AI tự chấm điểm bài và gửi kết quả cho học viên"
         }
       ],
       "answer": "A",
-      "explanation": "Mở rộng để khám phá rồi thu hẹp để xác định vấn đề và giải pháp. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "explanation": "Pha 1 gợi ý → Pha 2 soạn nháp có duyệt → Pha 3 tự động có giám sát.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-027",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của PAIR trong hệ thống AI là gì?",
+      "prompt": "Khác biệt cốt lõi giữa Rule/Workflow/Agent và Automate/Augment là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ đánh giá tốc độ viết code"
+          "text": "Một bên dùng cho sản phẩm, một bên dùng cho nghiên cứu"
         },
         {
           "key": "B",
-          "text": "Dùng dữ liệu và nghiên cứu để kiểm tra tính phù hợp của cơ hội AI"
+          "text": "Một bên là cấp độ kỹ thuật, một bên là vai trò con người"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Hai cặp khái niệm đồng nghĩa, chỉ khác tên gọi"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Automate luôn là Agent, còn Augment luôn là Rule"
         }
       ],
       "answer": "B",
-      "explanation": "Dùng dữ liệu và nghiên cứu để kiểm tra tính phù hợp của cơ hội AI. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "explanation": "Rule/Workflow/Agent là trục kỹ thuật; Automate/Augment là trục phân vai người–AI.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-028",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Rule–Workflow–Agent trong hệ thống AI là gì?",
+      "prompt": "Ví dụ nào phù hợp nhất với cấp độ Rule/Script?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Phân loại ticket hỗ trợ viết tự do"
         },
         {
           "key": "B",
-          "text": "Chọn mức tự động hóa theo độ ổn định và mức cần suy luận của công việc"
+          "text": "Coding agent sửa lỗi trên nhiều file"
         },
         {
           "key": "C",
-          "text": "Luôn dùng agent cho mọi tác vụ đơn giản"
+          "text": "Tính thuế theo biểu thuế quy định sẵn"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Tóm tắt email dài của khách hàng"
         }
       ],
-      "answer": "B",
-      "explanation": "Chọn mức tự động hóa theo độ ổn định và mức cần suy luận của công việc. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "C",
+      "explanation": "Rule hợp với input ổn định, logic if/else, cần đúng 100% và tuân thủ chặt.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-029",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Reward function trong hệ thống AI là gì?",
+      "prompt": "Câu hỏi quyết định để phân biệt Workflow với Agent là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Hệ thống có gọi LLM ở bất kỳ bước nào hay không"
         },
         {
           "key": "B",
-          "text": "Biến mục tiêu mong muốn thành tín hiệu có thể đánh giá"
+          "text": "Có bao nhiêu người dùng truy cập cùng một lúc"
         },
         {
           "key": "C",
-          "text": "Thay thế hoàn toàn phản hồi người dùng"
+          "text": "Model có đủ lớn để suy luận nhiều bước hay không"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Lộ trình xử lý có viết trước bằng code được không"
         }
       ],
-      "answer": "B",
-      "explanation": "Biến mục tiêu mong muốn thành tín hiệu có thể đánh giá. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "D",
+      "explanation": "Workflow: code điều phối lộ trình định trước; Agent: model tự điều phối lộ trình và tools.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-030",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Data readiness trong hệ thống AI là gì?",
+      "prompt": "Lưu ý thiết kế quan trọng khi làm Workflow có AI là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Gộp mọi bước vào một prompt duy nhất cho đơn giản"
         },
         {
           "key": "B",
-          "text": "Kiểm tra dữ liệu có sẵn, hợp pháp, đủ chất lượng và đại diện"
+          "text": "Định nghĩa rõ đầu vào, đầu ra từng bước; tránh chatbot tự do"
         },
         {
           "key": "C",
-          "text": "Giả định có dữ liệu rồi mới xác minh sau"
+          "text": "Để model tự quyết định số bước cần chạy trong mỗi request"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Bỏ bước con người duyệt để giảm độ trễ của quy trình"
         }
       ],
       "answer": "B",
-      "explanation": "Kiểm tra dữ liệu có sẵn, hợp pháp, đủ chất lượng và đại diện. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "explanation": "Workflow linh hoạt nhưng có kiểm soát nhờ I/O rõ ở từng bước.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-031",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Success metric trong hệ thống AI là gì?",
+      "prompt": "Đánh đổi chính khi chọn Agent là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chi phí, độ trễ cao, khó kiểm thử, lỗi có thể cộng dồn"
         },
         {
           "key": "B",
-          "text": "Phải gắn với kết quả người dùng hoặc kinh doanh cụ thể"
+          "text": "Không gọi được công cụ hay API bên ngoài hệ thống"
         },
         {
           "key": "C",
-          "text": "Chỉ đo số lượng slide đã trình bày"
+          "text": "Không xử lý được câu hỏi bằng ngôn ngữ tự nhiên"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Phải viết toàn bộ logic dưới dạng if/else cố định"
         }
       ],
-      "answer": "B",
-      "explanation": "Phải gắn với kết quả người dùng hoặc kinh doanh cụ thể. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "A",
+      "explanation": "Agent linh hoạt nhưng đi kèm vận hành đắt và dạng lỗi phức tạp.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-032",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Go / Not Yet / No-Go trong hệ thống AI là gì?",
+      "prompt": "Một đội đã đạt mục tiêu bằng Rule. Họ có nên nâng lên Workflow rồi Agent không?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Có, phải nâng tuần tự Rule → Workflow → Agent"
         },
         {
           "key": "B",
-          "text": "Ra quyết định dựa trên bằng chứng về giá trị, khả thi và rủi ro"
+          "text": "Có, vì Agent luôn mang lại hiệu quả cao hơn Rule"
         },
         {
           "key": "C",
-          "text": "Luôn chọn Go để không chậm tiến độ"
+          "text": "Chỉ nâng khi đối thủ cạnh tranh đã dùng Agent"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Không bắt buộc; dừng ở cấp tối giản đáp ứng mục tiêu"
         }
       ],
-      "answer": "B",
-      "explanation": "Ra quyết định dựa trên bằng chứng về giá trị, khả thi và rủi ro. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "D",
+      "explanation": "Ưu tiên giải pháp đơn giản nhất mang lại cải tiến đo lường được.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-033",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Problem Statement?",
+      "prompt": "Trong thang 5 câu hỏi chọn cấp độ, nếu tần suất và tác động của vấn đề thấp thì nên làm gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chọn Workflow vì đó là cấp độ trung gian an toàn"
         },
         {
           "key": "B",
-          "text": "Nêu rõ người dùng, nỗi đau, bối cảnh và kết quả cần thay đổi"
+          "text": "Chọn Go ngay để không bỏ lỡ cơ hội thị trường"
         },
         {
           "key": "C",
-          "text": "Bắt đầu bằng việc chọn model lớn nhất"
+          "text": "Xử lý thủ công hoặc hiệu chỉnh quy trình nghiệp vụ trước"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Xây Agent để sẵn sàng khi tần suất tăng lên"
         }
       ],
-      "answer": "B",
-      "explanation": "Nêu rõ người dùng, nỗi đau, bối cảnh và kết quả cần thay đổi. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "C",
+      "explanation": "Vấn đề nhỏ không đáng chi phí AI; cải tiến quy trình là đủ.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-034",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Double Diamond?",
+      "prompt": "Pattern Prompt Chaining đánh đổi điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chấp nhận sai số cao để có tốc độ phản hồi tối đa"
         },
         {
           "key": "B",
-          "text": "Mở rộng để khám phá rồi thu hẹp để xác định vấn đề và giải pháp"
+          "text": "Chấp nhận độ trễ cộng dồn để chính xác hơn nhờ gate"
         },
         {
           "key": "C",
-          "text": "Chọn ngay giải pháp đầu tiên mà không cần nghiên cứu"
+          "text": "Chấp nhận chi phí nhân lên theo số nhánh để lấy vote"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chấp nhận khó kiểm thử để xử lý subtask chưa biết"
         }
       ],
       "answer": "B",
-      "explanation": "Mở rộng để khám phá rồi thu hẹp để xác định vấn đề và giải pháp. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "explanation": "Chuỗi bước tuần tự có gate giữa các bước nên chính xác hơn nhưng chậm hơn.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-035",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về PAIR?",
+      "prompt": "Ý nghĩa ra quyết định của pattern Routing là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ đánh giá tốc độ viết code"
+          "text": "Câu dễ đi model rẻ, câu khó đi model mạnh"
         },
         {
           "key": "B",
-          "text": "Dùng dữ liệu và nghiên cứu để kiểm tra tính phù hợp của cơ hội AI"
+          "text": "Chạy nhiều lần song song rồi lấy kết quả vote"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Một LLM tạo, một LLM đánh giá và lặp lại"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "LLM tự lập kế hoạch và gọi tools liên tục"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng dữ liệu và nghiên cứu để kiểm tra tính phù hợp của cơ hội AI. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "A",
+      "explanation": "Routing tối ưu chi phí bằng nhánh chuyên biệt nhưng phụ thuộc phân loại đúng từ đầu.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-036",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Rule–Workflow–Agent?",
+      "prompt": "Parallelization (chạy song song rồi vote/tổng hợp) phù hợp khi nào?",
       "options": [
         {
           "key": "A",
-          "text": "Chọn mức tự động hóa theo độ ổn định và mức cần suy luận của công việc"
+          "text": "Muốn chi phí thấp nhất bằng một lần gọi model duy nhất"
         },
         {
           "key": "B",
-          "text": "Luôn dùng agent cho mọi tác vụ đơn giản"
+          "text": "Không thể liệt kê trước các subtasks của bài toán"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Cần tiêu chí chấm rõ để lặp đến khi đạt yêu cầu"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Muốn giảm rủi ro một đầu ra sai, chấp nhận chi phí nhân lên"
         }
       ],
-      "answer": "A",
-      "explanation": "Chọn mức tự động hóa theo độ ổn định và mức cần suy luận của công việc. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "D",
+      "explanation": "Ví dụ guardrail chạy song song với response; tin cậy hơn nhưng tốn hơn.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-037",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Reward function?",
+      "prompt": "Pattern nào phù hợp khi một LLM phải phân việc động vì không biết trước subtasks, ví dụ sửa nhiều file?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Routing"
         },
         {
           "key": "B",
-          "text": "Biến mục tiêu mong muốn thành tín hiệu có thể đánh giá"
+          "text": "Evaluator-Optimizer"
         },
         {
           "key": "C",
-          "text": "Thay thế hoàn toàn phản hồi người dùng"
+          "text": "Orchestrator-Workers"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Prompt Chaining"
         }
       ],
-      "answer": "B",
-      "explanation": "Biến mục tiêu mong muốn thành tín hiệu có thể đánh giá. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "C",
+      "explanation": "Orchestrator phân việc cho workers rồi synthesizer tổng hợp; khó kiểm thử, hành vi khó đoán.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-038",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Data readiness?",
+      "prompt": "Điều kiện tiên quyết để pattern Evaluator-Optimizer hoạt động tốt là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Có orchestrator phân việc động cho workers"
         },
         {
           "key": "B",
-          "text": "Kiểm tra dữ liệu có sẵn, hợp pháp, đủ chất lượng và đại diện"
+          "text": "Có tiêu chí chấm rõ ràng — chính là reward function"
         },
         {
           "key": "C",
-          "text": "Giả định có dữ liệu rồi mới xác minh sau"
+          "text": "Có router phân loại đầu vào thật chính xác"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Có nhiều nhánh chạy song song để lấy vote"
         }
       ],
       "answer": "B",
-      "explanation": "Kiểm tra dữ liệu có sẵn, hợp pháp, đủ chất lượng và đại diện. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "explanation": "Evaluator cần chuẩn để chấp nhận/từ chối và phản hồi cho Generator.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-039",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Success metric?",
+      "prompt": "Theo Anthropic, pattern Agent bắt buộc phải đi kèm gì?",
       "options": [
         {
           "key": "A",
-          "text": "Phải gắn với kết quả người dùng hoặc kinh doanh cụ thể"
+          "text": "Guardrails và điều kiện dừng (stopping conditions)"
         },
         {
           "key": "B",
-          "text": "Chỉ đo số lượng slide đã trình bày"
+          "text": "Giao diện chat có avatar và hiệu ứng gõ chữ"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Một model duy nhất, không bao giờ thay đổi"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Bộ dữ liệu huấn luyện riêng cho từng tác vụ"
         }
       ],
       "answer": "A",
-      "explanation": "Phải gắn với kết quả người dùng hoặc kinh doanh cụ thể. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "explanation": "Agent là vòng lặp tự chủ; cần chốt chặn và điều kiện dừng.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-040",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Go / Not Yet / No-Go?",
+      "prompt": "Vì sao reward function cần được thiết kế liên chức năng (UX × Product × Engineering)?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Vì nó quyết định đúng/sai và định hình trải nghiệm người dùng"
         },
         {
           "key": "B",
-          "text": "Ra quyết định dựa trên bằng chứng về giá trị, khả thi và rủi ro"
+          "text": "Vì chỉ có kỹ sư mới đọc hiểu được công thức precision"
         },
         {
           "key": "C",
-          "text": "Luôn chọn Go để không chậm tiến độ"
+          "text": "Vì cần đủ ba phòng ban để bỏ phiếu theo đa số"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Vì quy định bắt buộc mọi tài liệu có ba chữ ký"
         }
       ],
-      "answer": "B",
-      "explanation": "Ra quyết định dựa trên bằng chứng về giá trị, khả thi và rủi ro. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "A",
+      "explanation": "Định nghĩa đúng/sai ảnh hưởng trực tiếp tới UX, không chỉ là chuyện kỹ thuật.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-041",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Problem Statement, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Case AI gợi ý câu trả lời: AI gợi ý SAI và gửi thẳng cho học viên khiến họ đi sai hướng. Đây là kết quả nào?",
       "options": [
         {
           "key": "A",
-          "text": "Nêu rõ người dùng, nỗi đau, bối cảnh và kết quả cần thay đổi"
+          "text": "True Negative — bỏ qua đúng"
         },
         {
           "key": "B",
-          "text": "Bắt đầu bằng việc chọn model lớn nhất"
+          "text": "False Positive — báo động giả"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "False Negative — bỏ sót"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "True Positive — phát hiện đúng"
         }
       ],
-      "answer": "A",
-      "explanation": "Nêu rõ người dùng, nỗi đau, bối cảnh và kết quả cần thay đổi. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "B",
+      "explanation": "AI “báo có/can thiệp” nhưng nội dung sai → FP.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-042",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Double Diamond, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Học viên đang thực sự bị kẹt nhưng AI không gợi ý gì, học viên vẫn chờ lâu. Đây là kết quả nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "True Negative"
         },
         {
           "key": "B",
-          "text": "Mở rộng để khám phá rồi thu hẹp để xác định vấn đề và giải pháp"
+          "text": "True Positive"
         },
         {
           "key": "C",
-          "text": "Chọn ngay giải pháp đầu tiên mà không cần nghiên cứu"
+          "text": "False Negative"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "False Positive"
         }
       ],
-      "answer": "B",
-      "explanation": "Mở rộng để khám phá rồi thu hẹp để xác định vấn đề và giải pháp. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "C",
+      "explanation": "Thực tế cần can thiệp nhưng AI không phát hiện → FN (bỏ sót).",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-043",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về PAIR, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Một hệ thống có TP = 40 và FP = 10. Precision bằng bao nhiêu?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "40%"
         },
         {
           "key": "B",
-          "text": "Dùng dữ liệu và nghiên cứu để kiểm tra tính phù hợp của cơ hội AI"
+          "text": "25%"
         },
         {
           "key": "C",
-          "text": "Chỉ đánh giá tốc độ viết code"
+          "text": "50%"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "80%"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng dữ liệu và nghiên cứu để kiểm tra tính phù hợp của cơ hội AI. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "D",
+      "explanation": "Precision = TP/(TP+FP) = 40/50 = 0,8.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-044",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Rule–Workflow–Agent, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Có 50 học viên thực sự cần giúp, AI phát hiện đúng 30 người (TP = 30, FN = 20). Recall bằng bao nhiêu?",
       "options": [
         {
           "key": "A",
-          "text": "Chọn mức tự động hóa theo độ ổn định và mức cần suy luận của công việc"
+          "text": "60%"
         },
         {
           "key": "B",
-          "text": "Luôn dùng agent cho mọi tác vụ đơn giản"
+          "text": "30%"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "40%"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "75%"
         }
       ],
       "answer": "A",
-      "explanation": "Chọn mức tự động hóa theo độ ổn định và mức cần suy luận của công việc. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "explanation": "Recall = TP/(TP+FN) = 30/50 = 0,6.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-045",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Reward function, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Khi vặn hệ thống về Precision rất cao, hệ quả thường thấy là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Thay thế hoàn toàn phản hồi người dùng"
+          "text": "Không còn bất kỳ trường hợp sai nào"
         },
         {
           "key": "B",
-          "text": "Biến mục tiêu mong muốn thành tín hiệu có thể đánh giá"
+          "text": "Nhiều False Negative — bỏ sót người cần giúp"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Nhiều False Positive — TA phải lọc lại nhiều"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Recall cũng tăng theo cùng một tỷ lệ"
         }
       ],
       "answer": "B",
-      "explanation": "Biến mục tiêu mong muốn thành tín hiệu có thể đánh giá. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "explanation": "Precision ↔ Recall ngược chiều: ít gợi ý nhưng chắc đúng thì bỏ sót nhiều hơn.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-046",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Data readiness, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Mẫu tiêu chí thành công “hành động được” của PAIR có cấu trúc nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Đo mọi chỉ số có thể rồi quyết định hành động sau"
         },
         {
           "key": "B",
-          "text": "Kiểm tra dữ liệu có sẵn, hợp pháp, đủ chất lượng và đại diện"
+          "text": "Ta sẽ cố gắng làm tính năng AI tốt nhất có thể"
         },
         {
           "key": "C",
-          "text": "Giả định có dữ liệu rồi mới xác minh sau"
+          "text": "Nếu [chỉ số] của [tính năng] qua [ngưỡng], ta sẽ [hành động]"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Tính năng AI phải đạt độ chính xác 100% trước khi ra mắt"
         }
       ],
-      "answer": "B",
-      "explanation": "Kiểm tra dữ liệu có sẵn, hợp pháp, đủ chất lượng và đại diện. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "C",
+      "explanation": "Metric tốt = chỉ số cụ thể + ngưỡng có nghĩa + hành động phản ứng.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-047",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Success metric, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Theo ví dụ của slide, nếu tỷ lệ câu trả lời AI bị TA sửa vượt 30% trong 2 tuần thì nên làm gì?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ đo số lượng slide đã trình bày"
+          "text": "Nâng lên Pha 3 để AI có thêm dữ liệu học nhanh hơn"
         },
         {
           "key": "B",
-          "text": "Phải gắn với kết quả người dùng hoặc kinh doanh cụ thể"
+          "text": "Dừng dự án và chuyển ngay sang quyết định No-Go"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Đổi sang model lớn hơn, giữ nguyên quy trình"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Hạ về Pha 1: chỉ gợi ý, không gửi thẳng cho học viên"
         }
       ],
-      "answer": "B",
-      "explanation": "Phải gắn với kết quả người dùng hoặc kinh doanh cụ thể. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "D",
+      "explanation": "Tiêu chí thành công gắn với hành động lùi mức tự động hóa khi chất lượng xấu đi.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-048",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Go / Not Yet / No-Go, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Trong 4 thành phần chuẩn bị từ Demo sang Production, nhóm Controls gồm gì?",
       "options": [
         {
           "key": "A",
-          "text": "Luôn chọn Go để không chậm tiến độ"
+          "text": "Logging, fallback, rollback và người chịu trách nhiệm"
         },
         {
           "key": "B",
-          "text": "Ra quyết định dựa trên bằng chứng về giá trị, khả thi và rủi ro"
+          "text": "Bộ dữ liệu kiểm thử, edge cases và tiêu chí nghiệm thu"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "So sánh với rule, nhân sự hoặc quy trình hiện tại"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Người giám sát lỗi và cập nhật tri thức nền"
         }
       ],
-      "answer": "B",
-      "explanation": "Ra quyết định dựa trên bằng chứng về giá trị, khả thi và rủi ro. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "A",
+      "explanation": "Baseline – Evaluation – Controls – Operations; Controls là cơ chế kiểm soát khi hệ thống sai.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-049",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Problem Statement?",
+      "prompt": "Nếu từ Problem Statement không suy ra được test cases, eval metric và boundary, kết luận nào đúng?",
       "options": [
         {
           "key": "A",
-          "text": "Bắt đầu bằng việc chọn model lớn nhất"
+          "text": "Problem Statement đã đủ, chỉ thiếu dữ liệu"
         },
         {
           "key": "B",
-          "text": "Nêu rõ người dùng, nỗi đau, bối cảnh và kết quả cần thay đổi"
+          "text": "Problem Statement chưa đủ chặt, cần làm rõ lại"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Có thể bỏ qua bước evaluation cho lần đầu"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Nên chuyển sang Agent để tự sinh test cases"
         }
       ],
       "answer": "B",
-      "explanation": "Nêu rõ người dùng, nỗi đau, bối cảnh và kết quả cần thay đổi. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "explanation": "PS tốt phải là đầu vào trực tiếp cho Eval Plan.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-050",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Double Diamond?",
+      "prompt": "Hệ thống gợi ý ôn bài đúng logic nhưng gửi vào giữa kỳ nghỉ. Theo PAIR đây là loại lỗi nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Fail state — không trả lời được"
         },
         {
           "key": "B",
-          "text": "Mở rộng để khám phá rồi thu hẹp để xác định vấn đề và giải pháp"
+          "text": "Background error — lỗi ngầm khó thấy"
         },
         {
           "key": "C",
-          "text": "Chọn ngay giải pháp đầu tiên mà không cần nghiên cứu"
+          "text": "Lỗi phân cấp giữa nhiều hệ thống AI"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Context error — sai giả định về bối cảnh"
         }
       ],
-      "answer": "B",
-      "explanation": "Mở rộng để khám phá rồi thu hẹp để xác định vấn đề và giải pháp. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "D",
+      "explanation": "Context error: hệ thống chạy “đúng” nhưng sai hoàn cảnh người dùng.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-051",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng PAIR?",
+      "prompt": "Loại lỗi “unknown unknowns” mà cả người dùng lẫn hệ thống đều không nhận ra đòi hỏi cách xử lý nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Tăng nhiệt độ sampling để đa dạng đầu ra"
         },
         {
           "key": "B",
-          "text": "Dùng dữ liệu và nghiên cứu để kiểm tra tính phù hợp của cơ hội AI"
+          "text": "Ẩn thông báo lỗi để tránh gây hoang mang"
         },
         {
           "key": "C",
-          "text": "Chỉ đánh giá tốc độ viết code"
+          "text": "QA chủ động, không chờ người dùng báo lỗi"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chờ người dùng gửi phản hồi rồi mới sửa"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng dữ liệu và nghiên cứu để kiểm tra tính phù hợp của cơ hội AI. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "C",
+      "explanation": "Background errors không tự lộ ra nên phải chủ động kiểm tra.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-052",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Rule–Workflow–Agent?",
+      "prompt": "Pattern HITL “Minh bạch thông tin” được thực hiện bằng cách nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Giới hạn phạm vi AI được phép tự quyết định"
         },
         {
           "key": "B",
-          "text": "Chọn mức tự động hóa theo độ ổn định và mức cần suy luận của công việc"
+          "text": "Đưa trích dẫn nguồn hoặc bằng chứng cho câu trả lời"
         },
         {
           "key": "C",
-          "text": "Luôn dùng agent cho mọi tác vụ đơn giản"
+          "text": "Yêu cầu người dùng bổ sung ngữ cảnh còn thiếu"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Để con người duyệt trước các tác vụ rủi ro cao"
         }
       ],
       "answer": "B",
-      "explanation": "Chọn mức tự động hóa theo độ ổn định và mức cần suy luận của công việc. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "explanation": "Bốn pattern HITL: làm rõ ý định, minh bạch thông tin, phê duyệt thủ công, thiết lập ranh giới.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-053",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Reward function?",
+      "prompt": "Khi automation thất bại, PAIR khuyên thiết kế UX thế nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Trả quyền kiểm soát cho người dùng kèm đủ thông tin"
         },
         {
           "key": "B",
-          "text": "Biến mục tiêu mong muốn thành tín hiệu có thể đánh giá"
+          "text": "Ẩn lỗi và để hệ thống tự thử lại không giới hạn"
         },
         {
           "key": "C",
-          "text": "Thay thế hoàn toàn phản hồi người dùng"
+          "text": "Tạm khóa tài khoản người dùng để bảo đảm an toàn"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Hiển thị câu trả lời mặc định, không cần giải thích"
         }
       ],
-      "answer": "B",
-      "explanation": "Biến mục tiêu mong muốn thành tín hiệu có thể đánh giá. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "A",
+      "explanation": "Paths forward from failure: mở kênh feedback, trả quyền kiểm soát, thiết kế thất bại an toàn.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-054",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Data readiness?",
+      "prompt": "Problem Statement hoàn chỉnh có 9 trường. Trường nào thuộc nhóm 3 yếu tố quyết định AI?",
       "options": [
         {
           "key": "A",
-          "text": "Giả định có dữ liệu rồi mới xác minh sau"
+          "text": "Bottleneck — khâu chậm, sai hoặc lặp"
         },
         {
           "key": "B",
-          "text": "Kiểm tra dữ liệu có sẵn, hợp pháp, đủ chất lượng và đại diện"
+          "text": "Impact — tổn thất thời gian, chi phí"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Actor — đối tượng chịu ảnh hưởng"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Mức giải pháp (Rule / Workflow / Agent)"
         }
       ],
-      "answer": "B",
-      "explanation": "Kiểm tra dữ liệu có sẵn, hợp pháp, đủ chất lượng và đại diện. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "D",
+      "explanation": "3 yếu tố quyết định AI: điểm AI can thiệp, mức giải pháp, rủi ro & HITL.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-055",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Success metric?",
+      "prompt": "Vì sao case Lab Coach (1.000 học viên) chọn Workflow thay vì Agent?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ đo số lượng slide đã trình bày"
+          "text": "Workflow luôn rẻ nhất trong mọi loại bài toán AI"
         },
         {
           "key": "B",
-          "text": "Phải gắn với kết quả người dùng hoặc kinh doanh cụ thể"
+          "text": "Rule không thể triển khai được trên kênh Discord"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Quy trình định được theo bước, chưa có bằng chứng cần Agent"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Agent không hỗ trợ xử lý câu hỏi viết bằng tiếng Việt"
         }
       ],
-      "answer": "B",
-      "explanation": "Phải gắn với kết quả người dùng hoặc kinh doanh cụ thể. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "C",
+      "explanation": "AI chỉ cần hỗ trợ tại bước cần hiểu ngôn ngữ; Workflow dễ kiểm soát và cho người duyệt đầu ra rủi ro.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-056",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Go / Not Yet / No-Go?",
+      "prompt": "Sau 5 câu hỏi readiness gate, phần lớn câu trả lời vẫn chưa rõ ràng. Quyết định nên là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Ra quyết định dựa trên bằng chứng về giá trị, khả thi và rủi ro"
+          "text": "Go có điều kiện"
         },
         {
           "key": "B",
-          "text": "Luôn chọn Go để không chậm tiến độ"
+          "text": "Not Yet"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Go"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "No-Go"
         }
       ],
-      "answer": "A",
-      "explanation": "Ra quyết định dựa trên bằng chứng về giá trị, khả thi và rủi ro. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "B",
+      "explanation": "Gate cuối: phần lớn chưa rõ → tạm hoãn để bổ sung dữ liệu, metric, boundary.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-057",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Problem Statement giúp đội ngũ làm điều gì?",
+      "prompt": "Tình huống nào dẫn đến quyết định No-Go?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Giải pháp không dùng AI tối ưu hơn"
         },
         {
           "key": "B",
-          "text": "Nêu rõ người dùng, nỗi đau, bối cảnh và kết quả cần thay đổi"
+          "text": "Có triển vọng nhưng thiếu dữ liệu thực tế"
         },
         {
           "key": "C",
-          "text": "Bắt đầu bằng việc chọn model lớn nhất"
+          "text": "Cần chuẩn hóa quy trình trước khi làm"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chưa xác định được ranh giới của AI"
         }
       ],
-      "answer": "B",
-      "explanation": "Nêu rõ người dùng, nỗi đau, bối cảnh và kết quả cần thay đổi. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "A",
+      "explanation": "No-Go khi AI không mang giá trị vượt trội; thiếu dữ liệu/quy trình/boundary là Not Yet.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-058",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Double Diamond giúp đội ngũ làm điều gì?",
+      "prompt": "Một hệ gợi ý đúng 60%. Theo PAIR, đó là thành công hay thất bại?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Luôn là thất bại vì chưa đạt ngưỡng 90% chuẩn ngành"
         },
         {
           "key": "B",
-          "text": "Mở rộng để khám phá rồi thu hẹp để xác định vấn đề và giải pháp"
+          "text": "Luôn là thành công vì đã đúng hơn một nửa số lần"
         },
         {
           "key": "C",
-          "text": "Chọn ngay giải pháp đầu tiên mà không cần nghiên cứu"
+          "text": "Không đánh giá được nếu chưa có bộ benchmark công khai"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Tùy kỳ vọng đã hứa và mô hình tâm trí của người dùng"
         }
       ],
-      "answer": "B",
-      "explanation": "Mở rộng để khám phá rồi thu hẹp để xác định vấn đề và giải pháp. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "D",
+      "explanation": "Lỗi được định nghĩa bởi kỳ vọng; cùng hệ thống có thể thành công hay thất bại.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-059",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, PAIR giúp đội ngũ làm điều gì?",
+      "prompt": "AI gợi ý “hoạt động vui chơi” cho chuyến đi dự đám tang. Đây là nguồn lỗi nào?",
       "options": [
         {
           "key": "A",
-          "text": "Dùng dữ liệu và nghiên cứu để kiểm tra tính phù hợp của cơ hội AI"
+          "text": "Lỗi đầu vào bất ngờ ngoài thiết kế"
         },
         {
           "key": "B",
-          "text": "Chỉ đánh giá tốc độ viết code"
+          "text": "Lỗi dữ liệu do gán nhãn huấn luyện sai"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Lỗi liên quan — kết quả không phù hợp"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Lỗi phân cấp giữa nhiều hệ thống AI"
         }
       ],
-      "answer": "A",
-      "explanation": "Dùng dữ liệu và nghiên cứu để kiểm tra tính phù hợp của cơ hội AI. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "C",
+      "explanation": "Bốn nguồn lỗi: dữ liệu & dự đoán, đầu vào, liên quan, phân cấp hệ thống.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D02-060",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Rule–Workflow–Agent giúp đội ngũ làm điều gì?",
+      "prompt": "Ở mảng chăm sóc khách hàng, ví dụ nào thuộc cấp độ Agent?",
       "options": [
         {
           "key": "A",
-          "text": "Luôn dùng agent cho mọi tác vụ đơn giản"
+          "text": "Soạn nháp câu trả lời kèm trích dẫn nguồn"
         },
         {
           "key": "B",
-          "text": "Chọn mức tự động hóa theo độ ổn định và mức cần suy luận của công việc"
+          "text": "Gửi auto-reply theo template có sẵn"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Xử lý đa bước, truy vấn CRM và tạo yêu cầu hoàn tiền"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Định tuyến phiếu hỗ trợ theo từ khóa cố định"
         }
       ],
-      "answer": "B",
-      "explanation": "Chọn mức tự động hóa theo độ ổn định và mức cần suy luận của công việc. Nội dung được biên soạn từ tài liệu day2_on_thi.html của Ngày 2.",
-      "source": "onthi/day2_on_thi.html",
+      "answer": "C",
+      "explanation": "Định tuyến từ khóa là Rule, soạn nháp có trích dẫn là Workflow.",
+      "source": "onthi/day2_on_thi.html + onthi/day2.pdf",
       "module": "C",
       "points": 1
     },
@@ -1696,8 +1696,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Giải thích Problem Statement và nêu một ví dụ áp dụng trong sản phẩm AI.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Problem Statement, Double Diamond, PAIR, Rule–Workflow–Agent, reward function, Go / Not Yet / No-Go, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Phòng nhân sự nhận hàng trăm câu hỏi lặp lại mỗi tuần về chính sách nghỉ phép. Hãy viết Problem Statement đủ 9 trường (6 yếu tố bài toán + 3 yếu tố quyết định AI) cho tình huống này.",
+      "modelAnswer": "Actor: nhân viên HR trả lời chính sách. Workflow: nhân viên hỏi qua chat/email → HR tra quy định → trả lời → lưu hồ sơ. Bottleneck: câu hỏi lặp lại, tra cứu thủ công. Impact: số giờ HR/tuần, thời gian chờ trả lời. Success metric: baseline → target có số liệu (ví dụ thời gian phản hồi 1 ngày → dưới 1 giờ, tỷ lệ trả lời sai không tăng). Boundary: AI không phê duyệt đơn nghỉ, không trả lời trường hợp đặc biệt. Điểm AI can thiệp: khi nhận câu hỏi. Mức giải pháp: Workflow tra cứu có trích dẫn quy định. Rủi ro & HITL: trích sai quy định → HR duyệt câu hỏi ngoài phạm vi hoặc độ tin cậy thấp.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1710,8 +1710,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "So sánh Problem Statement với Double Diamond; nêu tiêu chí lựa chọn trong một tình huống thực tế.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Problem Statement, Double Diamond, PAIR, Rule–Workflow–Agent, reward function, Go / Not Yet / No-Go, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Cho ba yêu cầu: (1) nhắc học viên khi nộp thiếu file, (2) tóm tắt phản hồi của giảng viên cho từng nhóm, (3) theo dõi nhiều kênh để phát hiện nhóm bị kẹt lâu và đề xuất hỗ trợ. Hãy chọn Rule, Workflow hoặc Agent cho từng yêu cầu và giải thích.",
+      "modelAnswer": "(1) Rule: logic if/else rõ, kết quả cố định. (2) Workflow: bước xử lý định trước nhưng cần LLM tóm tắt ngôn ngữ, có I/O rõ và người kiểm tra. (3) Agent: nhiều nguồn, tình huống thay đổi, cần tự lập kế hoạch; phải có HITL (TA duyệt trước khi gửi), guardrails và điều kiện dừng. Nêu nguyên tắc chọn cấp đơn giản nhất đủ hiệu quả và không bắt buộc nâng tuần tự.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1724,8 +1724,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Thiết kế một quy trình ngắn sử dụng PAIR để giảm rủi ro cho người dùng.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Problem Statement, Double Diamond, PAIR, Rule–Workflow–Agent, reward function, Go / Not Yet / No-Go, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Một ngân hàng muốn dùng AI phát hiện giao dịch gian lận. Hãy phân tích chi phí của FP và FN, chọn ưu tiên Precision hay Recall ở từng giai đoạn và đề xuất cơ chế HITL.",
+      "modelAnswer": "FP: chặn nhầm giao dịch hợp lệ → khách khó chịu, tốn chi phí xác minh. FN: bỏ sót gian lận → thiệt hại tài chính, uy tín. Chi phí không đối xứng; thường ưu tiên Recall ở tầng sàng lọc rồi để người/tầng sau kiểm tra nhằm giữ Precision cho hành động khóa tài khoản. Nêu Precision = TP/(TP+FP), Recall = TP/(TP+FN), thử điểm cân bằng với dữ liệu thật và đặt ngưỡng chuyển cho chuyên viên duyệt.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1738,8 +1738,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Phân tích một failure mode liên quan đến Rule–Workflow–Agent, nguyên nhân và cách khắc phục.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Problem Statement, Double Diamond, PAIR, Rule–Workflow–Agent, reward function, Go / Not Yet / No-Go, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Viết ba tiêu chí thành công theo template PAIR (“Nếu [chỉ số] của [tính năng] vượt/giảm qua [ngưỡng], chúng ta sẽ [hành động]”) cho một chatbot FAQ chăm sóc khách hàng, và giải thích vì sao mỗi tiêu chí hữu ích.",
+      "modelAnswer": "Ví dụ: tỷ lệ chuyển người thật > 40% trong 2 tuần → rà soát bộ tri thức; tỷ lệ câu trả lời bị đánh giá sai > 5% → hạ về chế độ gợi ý cho nhân viên; CSAT giảm dưới baseline → tạm dừng mở rộng. Mỗi tiêu chí có chỉ số cụ thể, ngưỡng có nghĩa, hành động phản ứng; kiểm tra metric có ý nghĩa với mọi nhóm người dùng, nhóm nào bị ảnh hưởng tiêu cực và lên lịch review định kỳ.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1752,8 +1752,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Đề xuất metric đánh giá cho reward function; giải thích vì sao metric đó hữu ích.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Problem Statement, Double Diamond, PAIR, Rule–Workflow–Agent, reward function, Go / Not Yet / No-Go, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Một giám đốc nói: “Tôi muốn xây dựng chatbot AI cho khách hàng.” Hãy phân tích vì sao đây chưa phải bài toán và liệt kê các câu hỏi bạn sẽ hỏi stakeholder trước khi đề xuất giải pháp.",
+      "modelAnswer": "“AI chatbot” là giải pháp, chưa phải vấn đề; các đối tượng (FAQ, tư vấn mua hàng, hỗ trợ nội bộ…) có workflow, metric, rủi ro khác nhau. Câu hỏi: pain point và tần suất; workflow hiện tại, công cụ, bàn giao; thiệt hại thời gian/chi phí/SLA/conversion; hậu quả khi AI sai và khâu cần HITL; ai phê duyệt và metric/risk nào quyết định đầu tư; có giải pháp phi AI đơn giản hơn không. Nếu stakeholder không trả lời được workflow và chi phí lỗi thì mọi đề xuất AI chỉ là phỏng đoán. Reframe sang “How might we…”.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1766,8 +1766,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Lập kế hoạch thử nghiệm nhỏ cho Go / Not Yet / No-Go: giả định, dữ liệu, tiêu chí đạt và tiêu chí dừng.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Problem Statement, Double Diamond, PAIR, Rule–Workflow–Agent, reward function, Go / Not Yet / No-Go, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Thiết kế lộ trình tăng dần mức tự động hóa (theo pha) cho AI trả lời email khách hàng. Nêu điều kiện chuyển pha và điều kiện lùi pha.",
+      "modelAnswer": "Pha 1: AI gợi ý, nhân viên tự viết. Pha 2: AI soạn nháp, nhân viên duyệt/sửa. Pha 3: AI tự gửi cho nhóm email đã chứng minh an toàn, có giám sát. Điều kiện chuyển: dữ liệu đánh giá cho thấy tỷ lệ sửa thấp, rủi ro thấp. Điều kiện lùi: tỷ lệ sửa/khiếu nại vượt ngưỡng trong khoảng thời gian định trước. Nhấn mạnh mức tự động hóa tỷ lệ nghịch với rủi ro và vẫn cần preview/edit/undo.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1780,8 +1780,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Tình huống: kết quả liên quan đến Problem Statement không đạt kỳ vọng. Bạn sẽ debug theo thứ tự nào?",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Problem Statement, Double Diamond, PAIR, Rule–Workflow–Agent, reward function, Go / Not Yet / No-Go, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Một doanh nghiệp bán lẻ cần trợ lý tra cứu chính sách nội bộ. Hãy so sánh Buy, Boost và Build, rồi đề xuất hướng phù hợp kèm lập luận.",
+      "modelAnswer": "Buy: nhanh, ít tùy biến, phụ thuộc vendor. Boost: model có sẵn + RAG/fine-tune dữ liệu nội bộ, cần data governance. Build: kiểm soát cao, đắt, cần đội AI mạnh. Trợ lý chính sách là productivity layer, không phải lõi cạnh tranh → Boost bằng RAG có trích dẫn là phù hợp; nêu yêu cầu quản trị tài liệu, phân quyền, cập nhật tri thức và đo chất lượng.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1794,8 +1794,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Viết khuyến nghị cho stakeholder về lợi ích, giới hạn và rủi ro của Double Diamond.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Problem Statement, Double Diamond, PAIR, Rule–Workflow–Agent, reward function, Go / Not Yet / No-Go, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Với một ứng dụng gợi ý lịch học, hãy cho ví dụ cụ thể về context error, fail state và background error, rồi đề xuất cách thiết kế UX/HITL cho từng loại.",
+      "modelAnswer": "Context error: gợi ý ôn bài vào kỳ nghỉ → làm rõ ý định, cho người dùng chỉnh bối cảnh. Fail state: không có gợi ý phù hợp → báo rõ, đưa đường chuyển tiếp. Background error: lịch lệch múi giờ không ai nhận ra → QA chủ động, logging. Bổ sung kênh feedback kể cả với output đúng, trả quyền kiểm soát, thiết kế thất bại an toàn.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1808,8 +1808,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Nêu các đánh đổi khi triển khai PAIR trong production và cách theo dõi sau triển khai.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Problem Statement, Double Diamond, PAIR, Rule–Workflow–Agent, reward function, Go / Not Yet / No-Go, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Một đội đề xuất AI phân loại hồ sơ vay nhưng chưa có dữ liệu gán nhãn và chưa có baseline. Áp dụng 5 câu hỏi readiness gate để đưa ra quyết định Go / Not Yet / No-Go và kế hoạch tiếp theo.",
+      "modelAnswer": "Đi lần lượt: cần ngôn ngữ/suy luận? (có thể); dữ liệu đủ ngữ cảnh? (chưa); có metric định lượng? (chưa có baseline); hậu quả sai kiểm soát được? (rủi ro tài chính cao, cần HITL); có cách đơn giản hơn? (rule cho tiêu chí cứng). Kết luận Not Yet: bổ sung dữ liệu gán nhãn, đo baseline, xác định boundary và HITL, thử rule trước. Not Yet là quyết định chín chắn, không phải thất bại.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1822,8 +1822,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Tạo checklist trước khi ship một tính năng AI có dùng Rule–Workflow–Agent và reward function.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Problem Statement, Double Diamond, PAIR, Rule–Workflow–Agent, reward function, Go / Not Yet / No-Go, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Một hệ thống AI gợi ý hỗ trợ có kết quả trên 200 trường hợp: TP = 60, FP = 30, FN = 20, TN = 90. Tính Precision, Recall và đề xuất nên điều chỉnh ngưỡng theo hướng nào cho bối cảnh trợ giảng quá tải.",
+      "modelAnswer": "Precision = 60/(60+30) ≈ 66,7%; Recall = 60/(60+20) = 75%. Khi TA quá tải, FP buộc TA lọc lại thủ công và có thể làm học viên đi sai hướng → nâng ngưỡng để tăng Precision, chấp nhận Recall giảm nhẹ, đồng thời giữ kênh chuyển tiếp để hạn chế FN. Kiểm chứng điểm cân bằng với người dùng thật và theo dõi tỷ lệ TA phải sửa.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",

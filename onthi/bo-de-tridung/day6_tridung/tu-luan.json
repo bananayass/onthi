@@ -6,7 +6,8 @@
     {
       "id": "D06-TL-01",
       "type": "essay",
-      "prompt": "Giải thích AI sprint và nêu một ví dụ áp dụng trong sản phẩm AI.",
+      "prompt": "Lập kế hoạch 2 AI sprint cho trợ lý tra cứu chính sách nội bộ theo mô hình Research/Spike → Hypothesis → Build → Eval → Iterate, nêu giả thuyết, cách đo và điều kiện dừng/tiếp tục mỗi sprint.",
+      "modelAnswer": "Sprint 1: spike về dữ liệu chính sách; giả thuyết “AI giảm time-to-answer ≥30% trên 20 câu lặp lại”; build bản RAG nhỏ; eval thời gian + tỷ lệ trích dẫn đúng; học được gì, giả định nào bị bác bỏ. Sprint 2: giả thuyết về trust/adoption với nhóm HR nhỏ; đo tỷ lệ dùng lại, escalation; điều chỉnh scope/prompt/data. Điều kiện dừng: không đạt ngưỡng sau timebox; tiếp tục: đạt ngưỡng và rủi ro kiểm soát được.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -17,7 +18,8 @@
     {
       "id": "D06-TL-02",
       "type": "essay",
-      "prompt": "So sánh AI sprint với Definition of Done; nêu tiêu chí lựa chọn trong một tình huống thực tế.",
+      "prompt": "Chọn MVE, MVP hay PoC cho từng tình huống và giải thích: (a) chưa biết nhân viên có cần trợ lý tóm tắt cuộc họp không; (b) cần sponsor phê duyệt ngân sách mở rộng sau thử nghiệm; (c) đã có nhu cầu rõ, cần phiên bản dùng thật cho một phòng ban.",
+      "modelAnswer": "(a) MVE: kiểm tra giá trị nhanh nhất, có thể dùng Wizard of Oz. (b) PoC: giảm bất định cho sponsor, có success criteria chốt trước, timebox, next decision. (c) MVP: phiên bản nhỏ nhất dùng được để kiểm tra workflow thực tế. Nêu không dùng lẫn lộn ba thuật ngữ và mục tiêu chính của mỗi loại.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -28,7 +30,8 @@
     {
       "id": "D06-TL-03",
       "type": "essay",
-      "prompt": "Thiết kế một quy trình ngắn sử dụng MVE / MVP / PoC để giảm rủi ro cho người dùng.",
+      "prompt": "Thiết kế một thử nghiệm Wizard of Oz cho “AI sales assistant” sàng lọc lead: ai làm gì phía sau, đo gì, kéo dài bao lâu, và những lưu ý đạo đức/minh bạch.",
+      "modelAnswer": "Giao diện trông như AI; BA tự qualification lead phía sau theo checklist. Đo: tỷ lệ sales dùng gợi ý, thời gian xử lý lead, tỷ lệ lead đủ điều kiện, phản hồi người dùng. Time-box 2 tuần, ngân sách giới hạn, tiêu chí dừng. Lưu ý: mục tiêu kiểm chứng value/workflow, không lừa người dùng; thông báo phù hợp với người tham gia thử nghiệm, bảo vệ dữ liệu khách hàng; dùng kết quả để quyết định đầu tư model.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -39,7 +42,8 @@
     {
       "id": "D06-TL-04",
       "type": "essay",
-      "prompt": "Phân tích một failure mode liên quan đến Wizard of Oz, nguyên nhân và cách khắc phục.",
+      "prompt": "Điền PoC Canvas đủ 5 ô cho một AI ticket routing agent tại bộ phận chăm sóc khách hàng.",
+      "modelAnswer": "Key hypothesis: AI gợi ý đúng queue giúp giảm tỷ lệ chuyển sai nhóm. Scope: một kênh (email), một nhóm vận hành, một bộ dữ liệu ticket 3 tháng. Success criteria (chốt trước với stakeholder): tỷ lệ đúng nhóm ngay lần đầu tăng từ baseline lên ngưỡng X, thời gian phân loại giảm Y. Timebox: 3 tuần, review cuối tuần 3. Next decision: đạt → pilot mở rộng; không đạt → điều chỉnh scope/dữ liệu hoặc dừng. Nêu PoC không hứa production readiness, không che metric yếu.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -50,7 +54,8 @@
     {
       "id": "D06-TL-05",
       "type": "essay",
-      "prompt": "Đề xuất metric đánh giá cho PoC Canvas; giải thích vì sao metric đó hữu ích.",
+      "prompt": "Một dự án có chi phí build 150 triệu. Lợi ích ròng hằng tháng (sau API và human review) theo ba kịch bản: conservative 10 triệu, realistic 25 triệu, optimistic 40 triệu. Tính mốc hòa vốn mỗi kịch bản, giá trị ròng tại tháng 12 và nêu cách trình bày cho CFO.",
+      "modelAnswer": "Break-even: conservative 15 tháng, realistic 6 tháng, optimistic ~3,75 tháng (≈ tháng 4). Giá trị ròng tháng 12: conservative 120 − 150 = −30 triệu; realistic 300 − 150 = +150 triệu; optimistic 480 − 150 = +330 triệu. Trình bày: baseline hôm nay → giả định thay đổi → giá trị 3–6–12 tháng → điều kiện để đạt; công khai giả định nhạy cảm (adoption, review cost, API cost, error handling); đưa decision ask.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -61,7 +66,8 @@
     {
       "id": "D06-TL-06",
       "type": "essay",
-      "prompt": "Lập kế hoạch thử nghiệm nhỏ cho ROI và break-even: giả định, dữ liệu, tiêu chí đạt và tiêu chí dừng.",
+      "prompt": "Viết Definition of Done cho một AI support agent và ước lượng công việc của dự án có tính đến bất định (prompt tuning, tool integration, data, UX/trust).",
+      "modelAnswer": "DoD: citation coverage ≥ ngưỡng, latency p95 trong giới hạn, fallback/escalation path rõ, test set đạt ngưỡng, có monitoring signal sau ra mắt. Ước lượng: prompt tuning có buffer cho nhiều vòng eval; tool integration tính error handling và retry; data/retrieval tính cleaning, coverage, edge cases; UX/trust dành sprint test với user thật. Theo dõi feature debt, data debt, technical debt.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -72,7 +78,8 @@
     {
       "id": "D06-TL-07",
       "type": "essay",
-      "prompt": "Tình huống: kết quả liên quan đến AI sprint không đạt kỳ vọng. Bạn sẽ debug theo thứ tự nào?",
+      "prompt": "So sánh nội dung một technical deck và một executive deck cho cùng dự án trợ lý AI nội bộ; liệt kê các slide chính của mỗi deck.",
+      "modelAnswer": "Technical: kiến trúc, kết quả eval, rủi ro kỹ thuật, dependencies, scope, flow, Definition of Done, kế hoạch sprint. Executive: problem/pain, giá trị kinh doanh, ROI 3 kịch bản, timeline 3–6–12 tháng, adoption, risk exposure + mitigation, decision ask. Nêu nguyên tắc: cùng sản phẩm nhưng hai audience cần hai cách trình bày; tránh thuật ngữ kỹ thuật với sponsor.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -83,7 +90,8 @@
     {
       "id": "D06-TL-08",
       "type": "essay",
-      "prompt": "Viết khuyến nghị cho stakeholder về lợi ích, giới hạn và rủi ro của Definition of Done.",
+      "prompt": "Soạn dàn ý pitch deck 7 slides cho đề xuất AI hỗ trợ tóm tắt hồ sơ bệnh án cho bác sĩ, theo đúng thứ tự trong slide, và kết thúc bằng một decision ask cụ thể.",
+      "modelAnswer": "1 Problem/pain: bác sĩ mất nhiều thời gian đọc hồ sơ. 2 Target user & current workflow. 3 Proposed AI solution (tóm tắt có trích dẫn, bác sĩ duyệt). 4 Metrics & expected value (thời gian đọc, tỷ lệ sai sót). 5 ROI 3 kịch bản. 6 Risks + mitigation (hallucination, privacy, HITL). 7 Decision ask: phê duyệt pilot có điều kiện tại một khoa trong 4 tuần với tiêu chí đo trước. Nêu expectation setting: AI không phải magic.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -94,7 +102,8 @@
     {
       "id": "D06-TL-09",
       "type": "essay",
-      "prompt": "Nêu các đánh đổi khi triển khai MVE / MVP / PoC trong production và cách theo dõi sau triển khai.",
+      "prompt": "Sau 3 tuần build, stakeholder muốn đổi yêu cầu từ “tra cứu chính sách” sang “tự động trả lời email khách hàng”. Hãy đề xuất cách xử lý theo tinh thần Agile + phương pháp khoa học.",
+      "modelAnswer": "Không từ chối cứng, không chấp nhận mù quáng: làm rõ pain/giá trị của yêu cầu mới; biến thành giả thuyết; đánh giá tác động đến scope, rủi ro (gửi email ra ngoài rủi ro cao hơn), chi phí, timeline; dùng MVE/time-box ngắn để kiểm chứng; cập nhật PRD, ROI, risk register; trình bày lựa chọn và trade-off cho stakeholder; ra quyết định go/pilot/no-go dựa trên bằng chứng; giữ lại những gì đã học từ 3 tuần trước.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -105,7 +114,8 @@
     {
       "id": "D06-TL-10",
       "type": "essay",
-      "prompt": "Tạo checklist trước khi ship một tính năng AI có dùng Wizard of Oz và PoC Canvas.",
+      "prompt": "Đánh giá việc dùng Dify (low-code) để làm PoC trợ lý RAG nội bộ: lợi ích, giới hạn, và những gì vẫn phải làm để đi từ PoC lên production.",
+      "modelAnswer": "Lợi ích: demo nhanh workflow, RAG, UI; kiểm chứng workflow fit trước khi engineer build sâu; minh họa user journey. Giới hạn: không giải hết bài toán enterprise phức tạp, không thay product discovery, PRD, risk register, production planning. Để lên production: kiến trúc phù hợp, quản trị dữ liệu, phân quyền, eval, monitoring, fallback, chi phí vận hành, bảo mật; cập nhật ROI và decision ask.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",

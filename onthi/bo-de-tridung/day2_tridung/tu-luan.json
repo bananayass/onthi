@@ -6,7 +6,8 @@
     {
       "id": "D02-TL-01",
       "type": "essay",
-      "prompt": "Giải thích Problem Statement và nêu một ví dụ áp dụng trong sản phẩm AI.",
+      "prompt": "Phòng nhân sự nhận hàng trăm câu hỏi lặp lại mỗi tuần về chính sách nghỉ phép. Hãy viết Problem Statement đủ 9 trường (6 yếu tố bài toán + 3 yếu tố quyết định AI) cho tình huống này.",
+      "modelAnswer": "Actor: nhân viên HR trả lời chính sách. Workflow: nhân viên hỏi qua chat/email → HR tra quy định → trả lời → lưu hồ sơ. Bottleneck: câu hỏi lặp lại, tra cứu thủ công. Impact: số giờ HR/tuần, thời gian chờ trả lời. Success metric: baseline → target có số liệu (ví dụ thời gian phản hồi 1 ngày → dưới 1 giờ, tỷ lệ trả lời sai không tăng). Boundary: AI không phê duyệt đơn nghỉ, không trả lời trường hợp đặc biệt. Điểm AI can thiệp: khi nhận câu hỏi. Mức giải pháp: Workflow tra cứu có trích dẫn quy định. Rủi ro & HITL: trích sai quy định → HR duyệt câu hỏi ngoài phạm vi hoặc độ tin cậy thấp.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -17,7 +18,8 @@
     {
       "id": "D02-TL-02",
       "type": "essay",
-      "prompt": "So sánh Problem Statement với Double Diamond; nêu tiêu chí lựa chọn trong một tình huống thực tế.",
+      "prompt": "Cho ba yêu cầu: (1) nhắc học viên khi nộp thiếu file, (2) tóm tắt phản hồi của giảng viên cho từng nhóm, (3) theo dõi nhiều kênh để phát hiện nhóm bị kẹt lâu và đề xuất hỗ trợ. Hãy chọn Rule, Workflow hoặc Agent cho từng yêu cầu và giải thích.",
+      "modelAnswer": "(1) Rule: logic if/else rõ, kết quả cố định. (2) Workflow: bước xử lý định trước nhưng cần LLM tóm tắt ngôn ngữ, có I/O rõ và người kiểm tra. (3) Agent: nhiều nguồn, tình huống thay đổi, cần tự lập kế hoạch; phải có HITL (TA duyệt trước khi gửi), guardrails và điều kiện dừng. Nêu nguyên tắc chọn cấp đơn giản nhất đủ hiệu quả và không bắt buộc nâng tuần tự.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -28,7 +30,8 @@
     {
       "id": "D02-TL-03",
       "type": "essay",
-      "prompt": "Thiết kế một quy trình ngắn sử dụng PAIR để giảm rủi ro cho người dùng.",
+      "prompt": "Một ngân hàng muốn dùng AI phát hiện giao dịch gian lận. Hãy phân tích chi phí của FP và FN, chọn ưu tiên Precision hay Recall ở từng giai đoạn và đề xuất cơ chế HITL.",
+      "modelAnswer": "FP: chặn nhầm giao dịch hợp lệ → khách khó chịu, tốn chi phí xác minh. FN: bỏ sót gian lận → thiệt hại tài chính, uy tín. Chi phí không đối xứng; thường ưu tiên Recall ở tầng sàng lọc rồi để người/tầng sau kiểm tra nhằm giữ Precision cho hành động khóa tài khoản. Nêu Precision = TP/(TP+FP), Recall = TP/(TP+FN), thử điểm cân bằng với dữ liệu thật và đặt ngưỡng chuyển cho chuyên viên duyệt.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -39,7 +42,8 @@
     {
       "id": "D02-TL-04",
       "type": "essay",
-      "prompt": "Phân tích một failure mode liên quan đến Rule–Workflow–Agent, nguyên nhân và cách khắc phục.",
+      "prompt": "Viết ba tiêu chí thành công theo template PAIR (“Nếu [chỉ số] của [tính năng] vượt/giảm qua [ngưỡng], chúng ta sẽ [hành động]”) cho một chatbot FAQ chăm sóc khách hàng, và giải thích vì sao mỗi tiêu chí hữu ích.",
+      "modelAnswer": "Ví dụ: tỷ lệ chuyển người thật > 40% trong 2 tuần → rà soát bộ tri thức; tỷ lệ câu trả lời bị đánh giá sai > 5% → hạ về chế độ gợi ý cho nhân viên; CSAT giảm dưới baseline → tạm dừng mở rộng. Mỗi tiêu chí có chỉ số cụ thể, ngưỡng có nghĩa, hành động phản ứng; kiểm tra metric có ý nghĩa với mọi nhóm người dùng, nhóm nào bị ảnh hưởng tiêu cực và lên lịch review định kỳ.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -50,7 +54,8 @@
     {
       "id": "D02-TL-05",
       "type": "essay",
-      "prompt": "Đề xuất metric đánh giá cho reward function; giải thích vì sao metric đó hữu ích.",
+      "prompt": "Một giám đốc nói: “Tôi muốn xây dựng chatbot AI cho khách hàng.” Hãy phân tích vì sao đây chưa phải bài toán và liệt kê các câu hỏi bạn sẽ hỏi stakeholder trước khi đề xuất giải pháp.",
+      "modelAnswer": "“AI chatbot” là giải pháp, chưa phải vấn đề; các đối tượng (FAQ, tư vấn mua hàng, hỗ trợ nội bộ…) có workflow, metric, rủi ro khác nhau. Câu hỏi: pain point và tần suất; workflow hiện tại, công cụ, bàn giao; thiệt hại thời gian/chi phí/SLA/conversion; hậu quả khi AI sai và khâu cần HITL; ai phê duyệt và metric/risk nào quyết định đầu tư; có giải pháp phi AI đơn giản hơn không. Nếu stakeholder không trả lời được workflow và chi phí lỗi thì mọi đề xuất AI chỉ là phỏng đoán. Reframe sang “How might we…”.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -61,7 +66,8 @@
     {
       "id": "D02-TL-06",
       "type": "essay",
-      "prompt": "Lập kế hoạch thử nghiệm nhỏ cho Go / Not Yet / No-Go: giả định, dữ liệu, tiêu chí đạt và tiêu chí dừng.",
+      "prompt": "Thiết kế lộ trình tăng dần mức tự động hóa (theo pha) cho AI trả lời email khách hàng. Nêu điều kiện chuyển pha và điều kiện lùi pha.",
+      "modelAnswer": "Pha 1: AI gợi ý, nhân viên tự viết. Pha 2: AI soạn nháp, nhân viên duyệt/sửa. Pha 3: AI tự gửi cho nhóm email đã chứng minh an toàn, có giám sát. Điều kiện chuyển: dữ liệu đánh giá cho thấy tỷ lệ sửa thấp, rủi ro thấp. Điều kiện lùi: tỷ lệ sửa/khiếu nại vượt ngưỡng trong khoảng thời gian định trước. Nhấn mạnh mức tự động hóa tỷ lệ nghịch với rủi ro và vẫn cần preview/edit/undo.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -72,7 +78,8 @@
     {
       "id": "D02-TL-07",
       "type": "essay",
-      "prompt": "Tình huống: kết quả liên quan đến Problem Statement không đạt kỳ vọng. Bạn sẽ debug theo thứ tự nào?",
+      "prompt": "Một doanh nghiệp bán lẻ cần trợ lý tra cứu chính sách nội bộ. Hãy so sánh Buy, Boost và Build, rồi đề xuất hướng phù hợp kèm lập luận.",
+      "modelAnswer": "Buy: nhanh, ít tùy biến, phụ thuộc vendor. Boost: model có sẵn + RAG/fine-tune dữ liệu nội bộ, cần data governance. Build: kiểm soát cao, đắt, cần đội AI mạnh. Trợ lý chính sách là productivity layer, không phải lõi cạnh tranh → Boost bằng RAG có trích dẫn là phù hợp; nêu yêu cầu quản trị tài liệu, phân quyền, cập nhật tri thức và đo chất lượng.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -83,7 +90,8 @@
     {
       "id": "D02-TL-08",
       "type": "essay",
-      "prompt": "Viết khuyến nghị cho stakeholder về lợi ích, giới hạn và rủi ro của Double Diamond.",
+      "prompt": "Với một ứng dụng gợi ý lịch học, hãy cho ví dụ cụ thể về context error, fail state và background error, rồi đề xuất cách thiết kế UX/HITL cho từng loại.",
+      "modelAnswer": "Context error: gợi ý ôn bài vào kỳ nghỉ → làm rõ ý định, cho người dùng chỉnh bối cảnh. Fail state: không có gợi ý phù hợp → báo rõ, đưa đường chuyển tiếp. Background error: lịch lệch múi giờ không ai nhận ra → QA chủ động, logging. Bổ sung kênh feedback kể cả với output đúng, trả quyền kiểm soát, thiết kế thất bại an toàn.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -94,7 +102,8 @@
     {
       "id": "D02-TL-09",
       "type": "essay",
-      "prompt": "Nêu các đánh đổi khi triển khai PAIR trong production và cách theo dõi sau triển khai.",
+      "prompt": "Một đội đề xuất AI phân loại hồ sơ vay nhưng chưa có dữ liệu gán nhãn và chưa có baseline. Áp dụng 5 câu hỏi readiness gate để đưa ra quyết định Go / Not Yet / No-Go và kế hoạch tiếp theo.",
+      "modelAnswer": "Đi lần lượt: cần ngôn ngữ/suy luận? (có thể); dữ liệu đủ ngữ cảnh? (chưa); có metric định lượng? (chưa có baseline); hậu quả sai kiểm soát được? (rủi ro tài chính cao, cần HITL); có cách đơn giản hơn? (rule cho tiêu chí cứng). Kết luận Not Yet: bổ sung dữ liệu gán nhãn, đo baseline, xác định boundary và HITL, thử rule trước. Not Yet là quyết định chín chắn, không phải thất bại.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -105,7 +114,8 @@
     {
       "id": "D02-TL-10",
       "type": "essay",
-      "prompt": "Tạo checklist trước khi ship một tính năng AI có dùng Rule–Workflow–Agent và reward function.",
+      "prompt": "Một hệ thống AI gợi ý hỗ trợ có kết quả trên 200 trường hợp: TP = 60, FP = 30, FN = 20, TN = 90. Tính Precision, Recall và đề xuất nên điều chỉnh ngưỡng theo hướng nào cho bối cảnh trợ giảng quá tải.",
+      "modelAnswer": "Precision = 60/(60+30) ≈ 66,7%; Recall = 60/(60+20) = 75%. Khi TA quá tải, FP buộc TA lọc lại thủ công và có thể làm học viên đi sai hướng → nâng ngưỡng để tăng Precision, chấp nhận Recall giảm nhẹ, đồng thời giữ kênh chuyển tiếp để hạn chế FN. Kiểm chứng điểm cân bằng với người dùng thật và theo dõi tỷ lệ TA phải sửa.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
