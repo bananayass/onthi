@@ -6,7 +6,8 @@
     {
       "id": "D11-TL-01",
       "type": "essay",
-      "prompt": "Giải thích AI safety và nêu một ví dụ áp dụng trong sản phẩm AI.",
+      "prompt": "Một trợ lý HR RAG đọc trang chính sách có hidden text bảo gửi danh sách nhân viên ra ngoài. Thiết kế phòng thủ qua input, LLM, output và quyền tool; nêu cách kiểm thử.",
+      "modelAnswer": "Nhận diện indirect prompt injection vì lệnh nằm trong retrieved content. Input: validation, injection detection, topic filter. LLM: đánh dấu content là dữ liệu không tin cậy, giữ instruction hierarchy. Kiến trúc: không cấp cùng lúc dữ liệu riêng, content không tin cậy và kênh gửi ra ngoài; giới hạn tool. Output: kiểm PII, grounding, format và chuyển người khi rủi ro. Red team ca này trước/sau, lưu kết quả và regression test.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -17,7 +18,8 @@
     {
       "id": "D11-TL-02",
       "type": "essay",
-      "prompt": "So sánh AI safety với prompt injection; nêu tiêu chí lựa chọn trong một tình huống thực tế.",
+      "prompt": "Agent hỗ trợ khách hàng có thể tạo bản nháp, gửi email và hoàn tiền. Chọn mô hình HITL cho từng hành động, giải thích theo tác động và khả năng hoàn tác.",
+      "modelAnswer": "Bản nháp có thể tự động hoặc on-the-loop nếu dễ hoàn tác và có log. Gửi email cần in-the-loop vì khó thu hồi. Hoàn tiền giá trị lớn/high-stakes cần con người quyết định cuối, có thể kiểm tra hai người nếu không hoàn tác. Routing ưu tiên loại hành động, giá trị, tín hiệu grounding/tool lỗi; confidence chỉ phụ sau calibration. Thiết kế draft hoặc staged action để giảm rủi ro.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -28,7 +30,8 @@
     {
       "id": "D11-TL-03",
       "type": "essay",
-      "prompt": "Thiết kế một quy trình ngắn sử dụng guardrails để giảm rủi ro cho người dùng.",
+      "prompt": "Một luồng duyệt thanh toán có thể chờ ba ngày, server sẽ deploy lại và người duyệt có thể bấm hai lần. Thiết kế HITL bền vững từ đề xuất đến thực thi.",
+      "modelAnswer": "Checkpoint state vào storage bền, đưa yêu cầu vào approval queue có deadline. Màn duyệt nêu hành động, lý do, evidence, rủi ro, duyệt/từ chối/sửa. Timeout fail-closed hoặc escalate. Resume đúng thread/state; dùng idempotency key chống chạy trùng. Side effect chỉ sau duyệt. Audit trace ID, người duyệt, UTC, quyết định và bản sửa trước/sau.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -39,7 +42,8 @@
     {
       "id": "D11-TL-04",
       "type": "essay",
-      "prompt": "Phân tích một failure mode liên quan đến HITL, nguyên nhân và cách khắc phục.",
+      "prompt": "Agent hỗ trợ đặt lịch họp: đọc lịch, đề xuất giờ và có thể ghi lịch. Thiết kế màn hình Trust UX theo bốn trụ cột của slide và nêu cách kiểm chứng badge độ tin cậy.",
+      "modelAnswer": "Show sources/traces: cho xem lịch hoặc dữ liệu đã dùng và hành động đã làm, kèm action preview trước khi ghi. Calibrated confidence: badge High/Medium/Low phải đối chiếu với tỷ lệ đúng trên dữ liệu thực, không dùng số tự khai. Undo/Redo: có đường hoàn tác phù hợp sau khi ghi lịch. Granular control: tách quyền đọc lịch và ghi lịch; user chọn từng quyền.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -50,7 +54,8 @@
     {
       "id": "D11-TL-05",
       "type": "essay",
-      "prompt": "Đề xuất metric đánh giá cho red teaming; giải thích vì sao metric đó hữu ích.",
+      "prompt": "Một red team mini tìm thấy roleplay, Base64 và lệnh độc trong tài liệu RAG. Lập báo cáo ngắn theo yêu cầu Lab 11, nêu bằng chứng cần lưu.",
+      "modelAnswer": "Chuẩn bị 5 adversarial prompts bao gồm direct/indirect injection, roleplay, encoding và data extraction. Chạy trước guardrails, ghi output và hành động tool. Bật input/output rails, chạy lại, phân loại blocked/leaked/partial/pass. Nêu root cause, fix theo lớp tương ứng, residual risk. Đưa các ca vào regression suite CI/CD; không tuyên bố an toàn tuyệt đối.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -61,7 +66,8 @@
     {
       "id": "D11-TL-06",
       "type": "essay",
-      "prompt": "Lập kế hoạch thử nghiệm nhỏ cho trust UX: giả định, dữ liệu, tiêu chí đạt và tiêu chí dừng.",
+      "prompt": "Người duyệt phải xử lý 500 cảnh báo mỗi ngày và thường bấm Approve không đọc. Phân tích rủi ro giám sát và đề xuất cách đo cải thiện.",
+      "modelAnswer": "Nêu automation bias, alert fatigue và nghịch lý tự động hóa; có nguy cơ Moral Crumple Zone. Giảm false positive và chỉ hỏi cho hành động thật sự cần; đưa evidence, rủi ro, khả năng hoàn tác vào màn duyệt. Đo tỷ lệ approve/reject, thời gian review, tỷ lệ hành động đúng trên cảnh báo và tỷ lệ bắt lỗi trên ca sai cài sẵn. Không coi thêm người duyệt là sửa gốc.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -72,7 +78,8 @@
     {
       "id": "D11-TL-07",
       "type": "essay",
-      "prompt": "Tình huống: kết quả liên quan đến AI safety không đạt kỳ vọng. Bạn sẽ debug theo thứ tự nào?",
+      "prompt": "Agent sàng lọc CV cho HR đạt mọi test prompt injection nhưng ứng viên nữ ít được mời phỏng vấn hơn. Lập kế hoạch Responsible AI cho ca này.",
+      "modelAnswer": "Xác định ứng viên là đối tượng bị tác động dù không gõ prompt. Đây có thể là allocative harm; đo demographic parity gap và equal opportunity gap nếu có ground truth. Test chất lượng theo lát cắt và counterfactual cặp hồ sơ chỉ đổi thuộc tính liên quan. Rà nguồn dữ liệu, quy trình human review, quyền xem xét lại, tài liệu system card và phạm vi pháp lý. Tránh kết luận nhân quả chỉ từ một tỷ lệ.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -83,7 +90,8 @@
     {
       "id": "D11-TL-08",
       "type": "essay",
-      "prompt": "Viết khuyến nghị cho stakeholder về lợi ích, giới hạn và rủi ro của prompt injection.",
+      "prompt": "Một chatbot mô tả nghề nghiệp theo định kiến vùng miền nhưng không đưa ra quyết định phân bổ. Phân biệt tác hại này với allocative harm và thiết kế test.",
+      "modelAnswer": "Đây là representational harm vì củng cố định kiến dù không phân bổ nguồn lực; allocative harm là phân chia cơ hội như vay vốn hoặc tuyển dụng. Tạo cặp prompt giống nhau chỉ đổi vùng miền; so mức độ tôn trọng, lựa chọn nghề và chất lượng. Kiểm thêm nhiều lát cắt, sửa nội dung/prompt hoặc dữ liệu rồi chạy lại; ghi giới hạn trong system card.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -94,7 +102,8 @@
     {
       "id": "D11-TL-09",
       "type": "essay",
-      "prompt": "Nêu các đánh đổi khi triển khai guardrails trong production và cách theo dõi sau triển khai.",
+      "prompt": "Một startup Việt dùng model API nước ngoài để tóm tắt CV cho khách tại Đức. Lập checklist pháp lý và tài liệu dựa trên slide, không kết luận thay tư vấn luật.",
+      "modelAnswer": "Rà Luật BVDLCN 91/2025/QH15 nếu xử lý dữ liệu cá nhân người Việt: consent, quyền chủ thể, đánh giá tác động và quy trình vi phạm theo phạm vi áp dụng. Rà Luật AI 134/2025/QH15 cho hệ thống cung cấp tại Việt Nam, minh bạch và quyền human review trong quyết định quan trọng. Rà EU AI Act vì đầu ra dùng ở EU và use case tuyển dụng có thể high-risk. Đối chiếu văn bản/mốc hiện hành trước triển khai. System card ghi model/version, guardrails, điểm duyệt, test và giới hạn.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -105,7 +114,8 @@
     {
       "id": "D11-TL-10",
       "type": "essay",
-      "prompt": "Tạo checklist trước khi ship một tính năng AI có dùng HITL và red teaming.",
+      "prompt": "Đội 5 người chuẩn bị ship agent có RAG và tool gửi email. Nêu bộ bằng chứng tối thiểu để chứng minh đã kiểm soát rủi ro Day 11.",
+      "modelAnswer": "Có input validation/injection/topic filter và output content/grounding/format checks. Red team ít nhất 5 prompt, kết quả trước/sau, fix và residual risk. HITL flowchart ba decision points, checkpoint/queue/timeout fail-closed/idempotency/audit. Đo hiệu quả oversight và kiểm fairness/các nhóm tác hại, map đối tượng bị tác động. System card đúng bản chạy, rà luật áp dụng; incident plan có người nhận alert, kill switch, đánh giá ảnh hưởng và regression test.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",

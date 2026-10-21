@@ -14,1680 +14,1680 @@
     {
       "id": "D12-001",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Container?",
+      "prompt": "Vì sao agent chạy tốt ở localhost vẫn có thể lỗi khi đưa lên production?",
       "options": [
         {
           "key": "A",
-          "text": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường"
+          "text": "Production tự sửa dependency thiếu ở môi trường local"
         },
         {
           "key": "B",
-          "text": "Là một virtual machine đầy đủ hệ điều hành"
+          "text": "Localhost dùng HTTPS nên khác hoàn toàn cloud HTTP"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Production khác về config, mạng, tải và xử lý lỗi"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Production chỉ cần mở port, các điều kiện khác giữ nguyên"
         }
       ],
-      "answer": "A",
-      "explanation": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Slide 5: dev và production khác dependencies, config, networking, users, failure.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-002",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Docker image?",
+      "prompt": "Theo 12-factor, API key của agent nên được cấp thế nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Đưa key qua biến VITE_* để frontend gọi trực tiếp"
         },
         {
           "key": "B",
-          "text": "Là mẫu bất biến dùng để tạo container"
+          "text": "Qua biến môi trường hoặc secret manager lúc chạy"
         },
         {
           "key": "C",
-          "text": "Là log runtime thay đổi liên tục"
+          "text": "Ghi key vào Dockerfile và chỉ đổi khi build lại image"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Commit key trong .env nhưng không công khai repository"
         }
       ],
       "answer": "B",
-      "explanation": "Là mẫu bất biến dùng để tạo container. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "explanation": "Slide 7: config trong env; không hardcode API key.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-003",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Secrets management?",
+      "prompt": "Một agent cần nhớ hội thoại qua nhiều instance. Cách giữ stateless process là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Ghi API key trực tiếp trong frontend"
+          "text": "Lưu state ngoài process theo khóa phiên ổn định"
         },
         {
           "key": "B",
-          "text": "Lưu credential ngoài source code và cấp theo quyền tối thiểu"
+          "text": "Dùng sticky session làm nơi lưu state duy nhất"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Lưu state trong RAM rồi nhân bản image định kỳ"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Gắn memory vào container và tắt autoscaling"
         }
       ],
-      "answer": "B",
-      "explanation": "Lưu credential ngoài source code và cấp theo quyền tối thiểu. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Slide 7 và 21: externalize state thay vì lưu trên instance.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-004",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Async request?",
+      "prompt": "Điểm nào khiến bill của agent khác app CRUD thông thường?",
       "options": [
         {
           "key": "A",
-          "text": "Giữ kết nối đồng bộ vô hạn"
+          "text": "Hóa đơn chỉ phụ thuộc số instance đang chạy"
         },
         {
           "key": "B",
-          "text": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP"
+          "text": "Mọi lượt gọi model có số token đầu vào cố định"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Retry sẽ không tăng cost nếu user không thấy output"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Nhiều lần gọi model và gửi lại history"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Slide 6 và 9: nhiều model call cùng history làm chi phí token khó đoán.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-005",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Authentication?",
+      "prompt": "Vì sao CI/CD của agent cần eval gate ngoài unit test?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ ẩn URL endpoint"
+          "text": "Unit test cú pháp đủ đo chất lượng câu trả lời"
         },
         {
           "key": "B",
-          "text": "Xác thực danh tính trước khi cho dùng agent hoặc tool"
+          "text": "Eval gate chỉ cần khi app tự host model GPU"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Output không xác định; cần chấm chất lượng"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Build image thành công đã chứng minh đáp án đúng"
         }
       ],
-      "answer": "B",
-      "explanation": "Xác thực danh tính trước khi cho dùng agent hoặc tool. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Slide 9 và 63: build pass không chứng minh chất lượng agent.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-006",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về CI/CD?",
+      "prompt": "Model gọi qua API là dependency đặc biệt ở điểm nào?",
       "options": [
         {
           "key": "A",
-          "text": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường"
+          "text": "Model API có cùng vòng đời với image của app"
         },
         {
           "key": "B",
-          "text": "Deploy thủ công không cần test"
+          "text": "Provider có thể đổi model, rate limit, khai tử"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Pin thư viện client sẽ khóa model ở provider"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Provider luôn cấp quota theo số instance của app"
         }
       ],
-      "answer": "A",
-      "explanation": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "B",
+      "explanation": "Slide 11: model nằm trên server bên ngoài, có rate limit và deprecation.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-007",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Rollback?",
+      "prompt": "Khi chọn model cho production, hành động nào giúp tránh đổi phiên bản ngoài ý muốn?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Pin model ID và tắt cơ chế tự nâng cấp"
         },
         {
           "key": "B",
-          "text": "Quay về phiên bản ổn định khi phát hiện lỗi production"
+          "text": "Chỉ pin phiên bản SDK gọi API của provider"
         },
         {
           "key": "C",
-          "text": "Xóa toàn bộ log để làm lại"
+          "text": "Luôn dùng alias latest để tự nhận model mới"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Đặt temperature bằng 0 để khóa model version"
         }
       ],
-      "answer": "B",
-      "explanation": "Quay về phiên bản ổn định khi phát hiện lỗi production. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Slide 11 và 77: model ID là artifact cần quản lý.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-008",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Cost guard?",
+      "prompt": "Dockerfile và Docker image khác nhau thế nào?",
       "options": [
         {
           "key": "A",
-          "text": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model"
+          "text": "Dockerfile là image đã build; image là instance chạy"
         },
         {
           "key": "B",
-          "text": "Chờ hóa đơn cuối tháng rồi mới xem"
+          "text": "Dockerfile là runtime; image là phiên hội thoại"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Dockerfile là registry; image là lệnh build source"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Dockerfile chỉ dẫn build; image là gói dùng để chạy"
         }
       ],
-      "answer": "A",
-      "explanation": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Slide 12–13: Dockerfile định nghĩa build, image là artifact được chạy.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-009",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Container nào là phù hợp nhất?",
+      "prompt": "Lợi ích chính của multi-stage Dockerfile trong bài lab là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Để mỗi stage là một agent service chạy độc lập"
         },
         {
           "key": "B",
-          "text": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường"
+          "text": "Để không cần lock dependency khi tạo image"
         },
         {
           "key": "C",
-          "text": "Là một virtual machine đầy đủ hệ điều hành"
+          "text": "Tách bước build dependency khỏi runtime gọn hơn"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Để builder và runtime cùng chứa toàn bộ toolchain"
         }
       ],
-      "answer": "B",
-      "explanation": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Slide 13: builder tạo dependencies, runtime nhận phần cần chạy.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-010",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Docker image nào là phù hợp nhất?",
+      "prompt": "Vì sao slide chọn python:3.12-slim thay vì Alpine cho nhiều app ML?",
       "options": [
         {
           "key": "A",
-          "text": "Là mẫu bất biến dùng để tạo container"
+          "text": "Slim có wheel glibc; Alpine dễ phải build source"
         },
         {
           "key": "B",
-          "text": "Là log runtime thay đổi liên tục"
+          "text": "Alpine luôn tương thích mọi wheel Python như slim"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Slim không chứa libc nên package ML build nhanh hơn"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Alpine có GPU mặc định còn slim cần driver ngoài"
         }
       ],
       "answer": "A",
-      "explanation": "Là mẫu bất biến dùng để tạo container. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "explanation": "Slide 14: musl của Alpine có thể thiếu wheel phù hợp, nhất là một số kiến trúc.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-011",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Secrets management nào là phù hợp nhất?",
+      "prompt": "Đánh đổi nổi bật của base image distroless là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Distroless chỉ chạy được khi có Kubernetes"
         },
         {
           "key": "B",
-          "text": "Lưu credential ngoài source code và cấp theo quyền tối thiểu"
+          "text": "Giảm attack surface nhưng khó debug vì thiếu shell"
         },
         {
           "key": "C",
-          "text": "Ghi API key trực tiếp trong frontend"
+          "text": "Distroless giữ shell để debug nhưng tăng CVE"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Distroless loại bỏ luôn nhu cầu scan CVE"
         }
       ],
       "answer": "B",
-      "explanation": "Lưu credential ngoài source code và cấp theo quyền tối thiểu. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "explanation": "Slide 14: distroless gọn, ít thành phần, nhưng không có shell.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-012",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Async request nào là phù hợp nhất?",
+      "prompt": "Chạy container dưới user non-root nhằm giảm rủi ro nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Thay thế hoàn toàn sandbox và network isolation"
         },
         {
           "key": "B",
-          "text": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP"
+          "text": "Bảo đảm API key không thể bị đọc từ log"
         },
         {
           "key": "C",
-          "text": "Giữ kết nối đồng bộ vô hạn"
+          "text": "Giảm quyền của tiến trình khi container bị xâm nhập"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Ngăn được mọi lỗ hổng trong dependency Python"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Slide 15: USER app giới hạn quyền so với root.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-013",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Authentication nào là phù hợp nhất?",
+      "prompt": "SBOM của Docker image giúp trả lời câu hỏi nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Image đã pass eval agent ở version nào?"
         },
         {
           "key": "B",
-          "text": "Xác thực danh tính trước khi cho dùng agent hoặc tool"
+          "text": "Container xử lý được bao nhiêu request đồng thời?"
         },
         {
           "key": "C",
-          "text": "Chỉ ẩn URL endpoint"
+          "text": "Base image đã được deploy ở region nào?"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Image chứa những thành phần và package nào?"
         }
       ],
-      "answer": "B",
-      "explanation": "Xác thực danh tính trước khi cho dùng agent hoặc tool. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Slide 15: SBOM liệt kê thành phần/package trong image.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-014",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng CI/CD nào là phù hợp nhất?",
+      "prompt": "Vì sao cần scan CVE của image lặp lại sau lần deploy đầu?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Lỗ hổng mới có thể được công bố về sau"
         },
         {
           "key": "B",
-          "text": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường"
+          "text": "Scan đầu chỉ kiểm Python; scan sau mới kiểm OS"
         },
         {
           "key": "C",
-          "text": "Deploy thủ công không cần test"
+          "text": "Image tự cài package mới khi gặp request khó"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "CVE chỉ hiện sau khi container đã chạy một tuần"
         }
       ],
-      "answer": "B",
-      "explanation": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Slide 15: scan là việc lặp lại, không phải một lần.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-015",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Rollback nào là phù hợp nhất?",
+      "prompt": "Trong Docker Compose, agent nên gọi Qdrant cùng stack qua địa chỉ nào?",
       "options": [
         {
           "key": "A",
-          "text": "Xóa toàn bộ log để làm lại"
+          "text": "Tên image qdrant:latest vì nó đã được build"
         },
         {
           "key": "B",
-          "text": "Quay về phiên bản ổn định khi phát hiện lỗi production"
+          "text": "Tên service như qdrant:6333"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "localhost:6333 vì hai service chung Compose"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "127.0.0.1:6333 vì agent là client nội bộ"
         }
       ],
       "answer": "B",
-      "explanation": "Quay về phiên bản ổn định khi phát hiện lỗi production. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "explanation": "Slide 16: service liên lạc qua DNS tên service trong Compose.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-016",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Cost guard nào là phù hợp nhất?",
+      "prompt": "Tại sao .dockerignore cần loại .env khỏi build context?",
       "options": [
         {
           "key": "A",
-          "text": "Chờ hóa đơn cuối tháng rồi mới xem"
+          "text": "Để Docker không đọc được lock file khi build"
         },
         {
           "key": "B",
-          "text": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model"
+          "text": "Để secret tự được mã hóa trong image cuối"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Để secret không vô tình bị đóng vào image"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Để .env không được nạp làm biến runtime"
         }
       ],
-      "answer": "B",
-      "explanation": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Slide 13 và lab: không copy .env hoặc API key vào image.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-017",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Container, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Agent trả 504 khi reasoning loop còn chạy. Nguyên nhân hạ tầng thường gặp là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường"
+          "text": "Model từ chối tool call nên gateway trả 504"
         },
         {
           "key": "B",
-          "text": "Là một virtual machine đầy đủ hệ điều hành"
+          "text": "Image hết hạn nên proxy ngắt mọi kết nối"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Health check fail sẽ luôn trả mã 504 cho client"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Gateway cắt request trước khi agent hoàn tất"
         }
       ],
-      "answer": "A",
-      "explanation": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Slide 18: thời gian xử lý có thể vượt timeout của gateway/proxy.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-018",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Docker image, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "SSE phù hợp nhất với luồng phản hồi nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Server gửi token một chiều dần về client qua HTTP"
         },
         {
           "key": "B",
-          "text": "Là mẫu bất biến dùng để tạo container"
+          "text": "Client gửi lệnh hai chiều liên tục trên WebSocket"
         },
         {
           "key": "C",
-          "text": "Là log runtime thay đổi liên tục"
+          "text": "API trả job_id rồi client poll để nhận kết quả"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Server trả một JSON duy nhất khi đã xử lý xong"
         }
       ],
-      "answer": "B",
-      "explanation": "Là mẫu bất biến dùng để tạo container. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Slide 19: SSE truyền event một chiều server sang client.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-019",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Secrets management, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "SSE đã bật nhưng browser nhận cả câu trả lời cùng lúc. Nên kiểm tra gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "SSE bắt buộc đợi event done mới hiện token"
         },
         {
           "key": "B",
-          "text": "Lưu credential ngoài source code và cấp theo quyền tối thiểu"
+          "text": "Proxy buffering có đang gom các event lại không"
         },
         {
           "key": "C",
-          "text": "Ghi API key trực tiếp trong frontend"
+          "text": "Readiness probe đang restart container giữa stream"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Model ID đã đổi nên mọi token bị cache trong browser"
         }
       ],
       "answer": "B",
-      "explanation": "Lưu credential ngoài source code và cấp theo quyền tối thiểu. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "explanation": "Slide 19: tắt proxy buffering hoặc dùng X-Accel-Buffering: no.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-020",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Async request, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Stream SSE bị proxy ngắt lúc agent im lặng lâu. Cách giảm idle timeout là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Tắt proxy buffering là đủ cho mọi idle timeout"
         },
         {
           "key": "B",
-          "text": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP"
+          "text": "Gửi heartbeat định kỳ trên luồng SSE"
         },
         {
           "key": "C",
-          "text": "Giữ kết nối đồng bộ vô hạn"
+          "text": "Đổi readiness thành liveness để restart nhanh"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chỉ tăng số worker, không giữ luồng hoạt động"
         }
       ],
       "answer": "B",
-      "explanation": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "explanation": "Slide 19: heartbeat giữ stream không bị cắt khi im lặng.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-021",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Authentication, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Một tác vụ nghiên cứu kéo dài hàng phút, không cần kết quả tức thì. Mẫu API nào hợp?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Trả job_id rồi poll hoặc nhận webhook"
         },
         {
           "key": "B",
-          "text": "Xác thực danh tính trước khi cho dùng agent hoặc tool"
+          "text": "Giữ kết nối đồng bộ cho tới khi gateway cho phép"
         },
         {
           "key": "C",
-          "text": "Chỉ ẩn URL endpoint"
+          "text": "Gửi nhiều request ngắn để khởi chạy lại agent"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Trả 202 nhưng không lưu job hoặc trạng thái"
         }
       ],
-      "answer": "B",
-      "explanation": "Xác thực danh tính trước khi cho dùng agent hoặc tool. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Slide 20: async job tách submit khỏi xử lý dài.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-022",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua CI/CD, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Sticky session có đủ để bảo toàn hội thoại khi instance chết không?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Có, sticky session lưu state bền khi instance chết"
         },
         {
           "key": "B",
-          "text": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường"
+          "text": "Có, load balancer luôn chuyển RAM sang instance mới"
         },
         {
           "key": "C",
-          "text": "Deploy thủ công không cần test"
+          "text": "Không, vì mọi hội thoại phải lưu trong browser"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Không; cần state dùng chung ngoài process"
         }
       ],
-      "answer": "B",
-      "explanation": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Slide 21: sticky session chỉ best-effort; externalize state mới bền.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-023",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Rollback, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Điều gì xảy ra nếu gọi hàm blocking trong async def xử lý agent?",
       "options": [
         {
           "key": "A",
-          "text": "Quay về phiên bản ổn định khi phát hiện lỗi production"
+          "text": "Chỉ riêng request gọi blocking bị chậm, không ai khác"
         },
         {
           "key": "B",
-          "text": "Xóa toàn bộ log để làm lại"
+          "text": "Async def tự tăng số worker khi event loop nghẽn"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Event loop có thể nghẽn, làm chậm request khác"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Blocking call tự động chuyển sang thread khác"
         }
       ],
-      "answer": "A",
-      "explanation": "Quay về phiên bản ổn định khi phát hiện lỗi production. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Slide 22: blocking call trong async def làm nghẽn event loop.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-024",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Cost guard, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Cold start của agent tăng mạnh do load model lúc boot. Cách xử lý trên slide là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Giữ image full thay slim để model nạp tức thì"
         },
         {
           "key": "B",
-          "text": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model"
+          "text": "Giữ instance ấm hoặc lazy-load"
         },
         {
           "key": "C",
-          "text": "Chờ hóa đơn cuối tháng rồi mới xem"
+          "text": "Load toàn bộ dependency ở mỗi request để tránh boot"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Tắt readiness cho tới khi user đầu tiên truy cập"
         }
       ],
       "answer": "B",
-      "explanation": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "explanation": "Slide 22: min instances hoặc lazy-load giảm cold path.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-025",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Container trong hệ thống AI là gì?",
+      "prompt": "Với agent server-side thông thường, loop và API key đặt ở đâu?",
       "options": [
         {
           "key": "A",
-          "text": "Là một virtual machine đầy đủ hệ điều hành"
+          "text": "Ở backend do đội triển khai vận hành"
         },
         {
           "key": "B",
-          "text": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường"
+          "text": "Ở frontend browser để giảm độ trễ đến provider"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Ở MCP registry để các client cùng tìm thấy"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Ở secret file đóng trong image khi build"
         }
       ],
-      "answer": "B",
-      "explanation": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Slide 23: backend giữ loop, tools và key; đội triển khai trả chi phí token.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-026",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Docker image trong hệ thống AI là gì?",
+      "prompt": "Vì sao UI gọi model frontier từ browser vẫn cần BFF proxy?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Browser luôn mã hóa được key trong JS bundle"
         },
         {
           "key": "B",
-          "text": "Là mẫu bất biến dùng để tạo container"
+          "text": "CORS đã đủ để giới hạn token provider cho user"
         },
         {
           "key": "C",
-          "text": "Là log runtime thay đổi liên tục"
+          "text": "Model frontier cần WebGPU trên mọi browser"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "BFF giữ API key và áp rate limit phía server"
         }
       ],
-      "answer": "B",
-      "explanation": "Là mẫu bất biến dùng để tạo container. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Slide 24: key trong VITE_/NEXT_PUBLIC_ sẽ lộ trong bundle.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-027",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Secrets management trong hệ thống AI là gì?",
+      "prompt": "Trong mô hình local-first BYOK, ai thường giữ và trả tiền cho model key?",
       "options": [
         {
           "key": "A",
-          "text": "Lưu credential ngoài source code và cấp theo quyền tối thiểu"
+          "text": "Cloud runtime cấp key ẩn cho user mà không tính phí"
         },
         {
           "key": "B",
-          "text": "Ghi API key trực tiếp trong frontend"
+          "text": "Frontend nhúng key chung cho mọi máy đang dùng"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Người dùng chạy agent trên máy của họ"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Đội triển khai giữ key chung và trả toàn bộ token"
         }
       ],
-      "answer": "A",
-      "explanation": "Lưu credential ngoài source code và cấp theo quyền tối thiểu. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Slide 23: BYOK đặt loop và key trên máy user; user trả tiền.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-028",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Async request trong hệ thống AI là gì?",
+      "prompt": "Đánh đổi của model in-browser hoặc on-device là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Miễn phí token nhưng không phụ thuộc phần cứng"
         },
         {
           "key": "B",
-          "text": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP"
+          "text": "Riêng tư/offline hơn nhưng lệ thuộc phần cứng"
         },
         {
           "key": "C",
-          "text": "Giữ kết nối đồng bộ vô hạn"
+          "text": "Riêng tư hơn nhưng phải gửi mọi prompt lên cloud"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Offline được nhưng luôn mạnh như model frontier"
         }
       ],
       "answer": "B",
-      "explanation": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "explanation": "Slide 23–25: keyless và riêng tư hơn, năng lực phụ thuộc thiết bị.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-029",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Authentication trong hệ thống AI là gì?",
+      "prompt": "Kiến trúc hybrid trong slide định tuyến yêu cầu thế nào?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ ẩn URL endpoint"
+          "text": "Việc thường dùng model nhỏ local; việc khó lên cloud"
         },
         {
           "key": "B",
-          "text": "Xác thực danh tính trước khi cho dùng agent hoặc tool"
+          "text": "Việc khó chạy model nhỏ, việc dễ gọi cloud"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Mọi request gửi cả local lẫn cloud rồi lấy output dài"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Cloud chỉ giữ checkpoint, local luôn gọi model lớn"
         }
       ],
-      "answer": "B",
-      "explanation": "Xác thực danh tính trước khi cho dùng agent hoặc tool. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Slide 25: model nhỏ xử lý việc thường, escalate lên cloud khi khó.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-030",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của CI/CD trong hệ thống AI là gì?",
+      "prompt": "Lab Day 12 khuyên bắt đầu tier cloud nào để học containerize và deploy?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Tier 2 vì auto-scale là yêu cầu đầu của lab"
         },
         {
           "key": "B",
-          "text": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường"
+          "text": "Tier 3 vì Kubernetes giảm mọi thao tác deploy"
         },
         {
           "key": "C",
-          "text": "Deploy thủ công không cần test"
+          "text": "Tier 1 như Railway hoặc Render"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Tier 0 để không cần nhìn Dockerfile hoặc logs"
         }
       ],
-      "answer": "B",
-      "explanation": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Slide 36 và 81: Tier 1 giúp hiểu cơ chế deploy cơ bản.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-031",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Rollback trong hệ thống AI là gì?",
+      "prompt": "Framework agent khác managed runtime ở đâu?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Framework cấp session; runtime chỉ format prompt"
         },
         {
           "key": "B",
-          "text": "Quay về phiên bản ổn định khi phát hiện lỗi production"
+          "text": "Framework là nơi chạy; runtime chỉ là SDK local"
         },
         {
           "key": "C",
-          "text": "Xóa toàn bộ log để làm lại"
+          "text": "Framework và runtime luôn phải cùng một vendor"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Framework định hình code; runtime lo vận hành"
         }
       ],
-      "answer": "B",
-      "explanation": "Quay về phiên bản ổn định khi phát hiện lỗi production. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Slide 26–27: đổi framework là refactor code, đổi runtime là đổi deploy/vận hành.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-032",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Cost guard trong hệ thống AI là gì?",
+      "prompt": "Khi chọn cloud cho agent, chỉ so giá có thể bỏ sót yếu tố nào?",
       "options": [
         {
           "key": "A",
-          "text": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model"
+          "text": "Timeout, SSE, state và phí lúc chờ model"
         },
         {
           "key": "B",
-          "text": "Chờ hóa đơn cuối tháng rồi mới xem"
+          "text": "Giá token là đủ vì mọi cloud có timeout giống nhau"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ region quyết định agent có chạy được hay không"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Số vCPU quyết định cả streaming và state persistence"
         }
       ],
       "answer": "A",
-      "explanation": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "explanation": "Slide 29–32: workload agent phụ thuộc timeout/runtime và billing khi chờ model.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-033",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Container?",
+      "prompt": "MCP stdio thường chạy theo cách nào?",
       "options": [
         {
           "key": "A",
-          "text": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường"
+          "text": "Browser giữ process stdio qua WebSocket"
         },
         {
           "key": "B",
-          "text": "Là một virtual machine đầy đủ hệ điều hành"
+          "text": "Client spawn subprocess và trao đổi qua stdin/stdout"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Client gọi server remote qua HTTPS public"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Registry spawn server rồi trả tool về cho client"
         }
       ],
-      "answer": "A",
-      "explanation": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "B",
+      "explanation": "Slide 40: stdio phù hợp local/dev/desktop; lấy secret từ môi trường.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-034",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Docker image?",
+      "prompt": "Khi đưa MCP server lên Streamable HTTP, thay đổi vận hành chính là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ cần đăng metadata để có hosting an toàn"
         },
         {
           "key": "B",
-          "text": "Là mẫu bất biến dùng để tạo container"
+          "text": "Không cần kiểm route vì HTTP đã xác thực sẵn"
         },
         {
           "key": "C",
-          "text": "Là log runtime thay đổi liên tục"
+          "text": "Host và bảo vệ nó như API remote nhiều client"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Remote transport tự thay thế auth của server"
         }
       ],
-      "answer": "B",
-      "explanation": "Là mẫu bất biến dùng để tạo container. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Slide 40: remote MCP là service độc lập, cần auth và bảo vệ API.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-035",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Secrets management?",
+      "prompt": "Registry, Gateway, Runtime trong kiến trúc MCP lần lượt làm gì?",
       "options": [
         {
           "key": "A",
-          "text": "Lưu credential ngoài source code và cấp theo quyền tối thiểu"
+          "text": "Registry chạy tool, Gateway lưu image, Runtime tìm metadata"
         },
         {
           "key": "B",
-          "text": "Ghi API key trực tiếp trong frontend"
+          "text": "Registry cấp secret, Gateway chạy model, Runtime chấm eval"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Registry proxy request, Gateway giữ session, Runtime build image"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Tìm metadata, gom và kiểm soát, thực thi server"
         }
       ],
-      "answer": "A",
-      "explanation": "Lưu credential ngoài source code và cấp theo quyền tối thiểu. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Slide 44: Registry để tìm, Gateway để gom/kiểm soát, Runtime để chạy.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-036",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Async request?",
+      "prompt": "Vì sao MCP server không được chuyển nguyên token cấp cho dịch vụ khác?",
       "options": [
         {
           "key": "A",
-          "text": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP"
+          "text": "Token passthrough phá audit và rate limit"
         },
         {
           "key": "B",
-          "text": "Giữ kết nối đồng bộ vô hạn"
+          "text": "Token passthrough chỉ làm request thêm latency"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Token của user tự chứng minh quyền ở mọi service"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Token passthrough chỉ ảnh hưởng session trong browser"
         }
       ],
       "answer": "A",
-      "explanation": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "explanation": "Slide 42: token phải được cấp riêng cho MCP server; không passthrough.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-037",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Authentication?",
+      "prompt": "Trong confused deputy, vì sao xác thực user thôi chưa đủ?",
       "options": [
         {
           "key": "A",
-          "text": "Xác thực danh tính trước khi cho dùng agent hoặc tool"
+          "text": "Client đăng ký trong registry là đã được user duyệt"
         },
         {
           "key": "B",
-          "text": "Chỉ ẩn URL endpoint"
+          "text": "Client cũng cần quyền làm thay user"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "User login rồi thì mọi client đều được ủy quyền"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chỉ cần kiểm JWT hết hạn trước khi gọi tool"
         }
       ],
-      "answer": "A",
-      "explanation": "Xác thực danh tính trước khi cho dùng agent hoặc tool. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "B",
+      "explanation": "Slide 42: xác thực user khác với ủy quyền cho client.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-038",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về CI/CD?",
+      "prompt": "MCP bảo vệ /mcp nhưng bỏ quên /mcp_message. Lỗi là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường"
+          "text": "Chỉ /mcp mới có tool; route khác không thể gọi"
         },
         {
           "key": "B",
-          "text": "Deploy thủ công không cần test"
+          "text": "Health check sẽ bắt được route thiếu auth trước deploy"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Route phụ vẫn lộ tool do không được xác thực"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Route phụ tự dùng auth của route chính trong proxy"
         }
       ],
-      "answer": "A",
-      "explanation": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Slide 43: xác thực mọi route, không chỉ endpoint chính.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-039",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Rollback?",
+      "prompt": "Thứ tự xử lý request nào giảm abuse và chi phí token?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Auth → agent → validate/budget → rate limit"
         },
         {
           "key": "B",
-          "text": "Quay về phiên bản ổn định khi phát hiện lỗi production"
+          "text": "Rate limit → agent → auth → validate/budget"
         },
         {
           "key": "C",
-          "text": "Xóa toàn bộ log để làm lại"
+          "text": "Validate/budget → agent → auth → rate limit"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Auth → rate limit → validate/budget → agent"
         }
       ],
-      "answer": "B",
-      "explanation": "Quay về phiên bản ổn định khi phát hiện lỗi production. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Slide 45: reject sớm trước khi agent gọi model.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-040",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Cost guard?",
+      "prompt": "API key, JWT và OAuth 2.1 nên phân biệt theo nhu cầu nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Internal/MVP, storage dài hạn và GPU quota"
         },
         {
           "key": "B",
-          "text": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model"
+          "text": "User-facing, health check và container build"
         },
         {
           "key": "C",
-          "text": "Chờ hóa đơn cuối tháng rồi mới xem"
+          "text": "Delegated auth, image scan và session cache"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Internal/MVP, app user và ủy quyền"
         }
       ],
-      "answer": "B",
-      "explanation": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Slide 46: ba mẫu auth phục vụ các loại client/quyền khác nhau.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-041",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Container, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Token bucket rate limit mô hình hóa hai đại lượng nào?",
       "options": [
         {
           "key": "A",
-          "text": "Là một virtual machine đầy đủ hệ điều hành"
+          "text": "Độ trễ request và dung lượng Docker image"
         },
         {
           "key": "B",
-          "text": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường"
+          "text": "CPU usage và số container đang deploy"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Tốc độ trung bình và burst ngắn hạn"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Tổng số model và số prompt trong cache"
         }
       ],
-      "answer": "B",
-      "explanation": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Slide 47: token bucket giới hạn rate và burst.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-042",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Docker image, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Cost guard trước model ước tính chi phí từ những gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Số user × thời gian health check mỗi phút"
         },
         {
           "key": "B",
-          "text": "Là mẫu bất biến dùng để tạo container"
+          "text": "Input/output token và giá mỗi loại"
         },
         {
           "key": "C",
-          "text": "Là log runtime thay đổi liên tục"
+          "text": "Số request × giá thuê instance theo giờ"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Kích thước image × đơn giá storage vùng cloud"
         }
       ],
       "answer": "B",
-      "explanation": "Là mẫu bất biến dùng để tạo container. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "explanation": "Slide 80: est = input_tokens/1e6 × input_price + max_output_tokens/1e6 × output_price.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-043",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Secrets management, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Spend alert của provider khác admission control thế nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Alert báo sau; admission chặn trước call"
         },
         {
           "key": "B",
-          "text": "Lưu credential ngoài source code và cấp theo quyền tối thiểu"
+          "text": "Alert chặn trước còn admission chỉ báo sau"
         },
         {
           "key": "C",
-          "text": "Ghi API key trực tiếp trong frontend"
+          "text": "Cả hai cùng chặn trước khi gọi provider"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Alert và admission đều chỉ áp cho Docker build"
         }
       ],
-      "answer": "B",
-      "explanation": "Lưu credential ngoài source code và cấp theo quyền tối thiểu. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Slide 47 và 50: cảnh báo chi tiêu không thay hard cap phía trước model.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-044",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Async request, tiêu chí nào nên được ưu tiên?",
+      "prompt": "LLM gateway/router có thể làm gì khi provider chính bị rate limit?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Tự nâng quota provider đang lỗi bằng cách scale CPU"
         },
         {
           "key": "B",
-          "text": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP"
+          "text": "Bỏ xác thực để request thử nhiều model nhanh hơn"
         },
         {
           "key": "C",
-          "text": "Giữ kết nối đồng bộ vô hạn"
+          "text": "Retry vô hạn một provider đến khi hết rate limit"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chuyển sang model/provider dự phòng theo chính sách"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Slide 54: router hỗ trợ failover, load balance, retry/backoff.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-045",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Authentication, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Prompt cache và semantic cache khác nhau ở điều kiện khớp nào?",
       "options": [
         {
           "key": "A",
-          "text": "Xác thực danh tính trước khi cho dùng agent hoặc tool"
+          "text": "Prefix theo user ID; semantic theo version image"
         },
         {
           "key": "B",
-          "text": "Chỉ ẩn URL endpoint"
+          "text": "Prefix theo provider; semantic theo thời gian chạy"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Prefix giống nhau so với ý nghĩa câu hỏi tương tự"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Prefix theo nghĩa; semantic theo byte trùng hệt"
         }
       ],
-      "answer": "A",
-      "explanation": "Xác thực danh tính trước khi cho dùng agent hoặc tool. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Slide 55: prompt cache dùng prefix; semantic cache dùng tương đồng ngữ nghĩa.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-046",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về CI/CD, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Agent đợi LLM nhiều nhưng CPU thấp. Nên xét metric scale nào?",
       "options": [
         {
           "key": "A",
-          "text": "Deploy thủ công không cần test"
+          "text": "Số dòng log vì nhiều log nghĩa là nhiều user"
         },
         {
           "key": "B",
-          "text": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường"
+          "text": "Concurrency hoặc queue depth của request"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "CPU usage vì agent chờ model vẫn bận CPU"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Dung lượng image vì lớn hơn nghĩa là tải hơn"
         }
       ],
       "answer": "B",
-      "explanation": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "explanation": "Slide 51: I/O-bound có thể đầy request dù CPU thấp.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-047",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Rollback, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Readiness fail khác liveness fail ở hành động hạ tầng nào?",
       "options": [
         {
           "key": "A",
-          "text": "Xóa toàn bộ log để làm lại"
+          "text": "Readiness gỡ traffic; liveness có thể restart"
         },
         {
           "key": "B",
-          "text": "Quay về phiên bản ổn định khi phát hiện lỗi production"
+          "text": "Readiness restart; liveness chỉ gỡ traffic"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Cả hai probe luôn restart ngay khi fail"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Readiness đổi model; liveness xóa session"
         }
       ],
-      "answer": "B",
-      "explanation": "Quay về phiên bản ổn định khi phát hiện lỗi production. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Slide 52: nhầm hai probe có thể tạo restart loop.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-048",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Cost guard, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Startup probe hữu ích khi self-host model vì sao?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Đợi public URL mở port, không cần đợi weight"
         },
         {
           "key": "B",
-          "text": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model"
+          "text": "Tự đổi sang model API ngoài khi GPU chưa lên"
         },
         {
           "key": "C",
-          "text": "Chờ hóa đơn cuối tháng rồi mới xem"
+          "text": "Giữ readiness luôn pass trong quá trình load"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chờ load weight trước khi probe khác"
         }
       ],
-      "answer": "B",
-      "explanation": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Slide 52 và 58: model load chậm; startup probe dành cho boot dài.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-049",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Container?",
+      "prompt": "Khi nhận SIGTERM trong lúc agent turn còn chạy, service nên làm gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Nhận thêm request mới đến khi hết grace period"
         },
         {
           "key": "B",
-          "text": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường"
+          "text": "Chỉ lưu log rồi bỏ qua turn đang chạy"
         },
         {
           "key": "C",
-          "text": "Là một virtual machine đầy đủ hệ điều hành"
+          "text": "Ngừng nhận việc mới và drain turn đang xử lý"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Dừng ngay mọi turn để pod thoát thật nhanh"
         }
       ],
-      "answer": "B",
-      "explanation": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Slide 53: graceful shutdown phải cho turn dài hoàn tất.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-050",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Docker image?",
+      "prompt": "Thứ tự zero-downtime deploy cơ bản là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Health pass → chuyển traffic → drain bản cũ"
         },
         {
           "key": "B",
-          "text": "Là mẫu bất biến dùng để tạo container"
+          "text": "Dừng bản cũ trước khi build xong bản mới"
         },
         {
           "key": "C",
-          "text": "Là log runtime thay đổi liên tục"
+          "text": "Chuyển traffic rồi mới thử health của bản mới"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Xóa state cũ để buộc request dùng bản mới"
         }
       ],
-      "answer": "B",
-      "explanation": "Là mẫu bất biến dùng để tạo container. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Slide 53: chỉ chuyển traffic sau khi bản mới khỏe.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-051",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Secrets management?",
+      "prompt": "Vì sao eval gate nên so cả baseline, không chỉ ngưỡng tuyệt đối?",
       "options": [
         {
           "key": "A",
-          "text": "Ghi API key trực tiếp trong frontend"
+          "text": "Baseline thay hoàn toàn ngưỡng chất lượng tối thiểu"
         },
         {
           "key": "B",
-          "text": "Lưu credential ngoài source code và cấp theo quyền tối thiểu"
+          "text": "Bản mới có thể tụt điểm dù vẫn trên ngưỡng"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Baseline chỉ đo kích thước image sau build"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chỉ ngưỡng tuyệt đối đã phát hiện mọi regression"
         }
       ],
       "answer": "B",
-      "explanation": "Lưu credential ngoài source code và cấp theo quyền tối thiểu. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "explanation": "Slide 64: regression vẫn lọt nếu chỉ nhìn ngưỡng tuyệt đối.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-052",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Async request?",
+      "prompt": "Shadow deployment khác canary ở output bản mới thế nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Shadow và canary đều bỏ mọi output mới"
         },
         {
           "key": "B",
-          "text": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP"
+          "text": "Canary luôn gửi output mới tới 100% user"
         },
         {
           "key": "C",
-          "text": "Giữ kết nối đồng bộ vô hạn"
+          "text": "Shadow bỏ output; canary trả cho một phần user"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Shadow gửi output thật; canary chỉ ghi log"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Slide 65: shadow mirror traffic; canary dùng traffic thật có output.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-053",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Authentication?",
+      "prompt": "Khi shadow test agent có tool trừ tiền, điều kiện an toàn là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Xác thực danh tính trước khi cho dùng agent hoặc tool"
+          "text": "Chỉ cần ẩn output, tool vẫn có thể chạy thật"
         },
         {
           "key": "B",
-          "text": "Chỉ ẩn URL endpoint"
+          "text": "Chỉ cần gắn nhãn shadow lên request model"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ cần giới hạn traffic shadow, tool vẫn tự an toàn"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chặn side effect của tool ở phiên bản shadow"
         }
       ],
-      "answer": "A",
-      "explanation": "Xác thực danh tính trước khi cho dùng agent hoặc tool. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Slide 65: bỏ output vẫn có thể gây side effect thật.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-054",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng CI/CD?",
+      "prompt": "Nếu prompt được lưu riêng khỏi code, ba artifact nào cần theo dõi khi rollback agent dùng hosted model?",
       "options": [
         {
           "key": "A",
-          "text": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường"
+          "text": "Container image, prompt version và model ID"
         },
         {
           "key": "B",
-          "text": "Deploy thủ công không cần test"
+          "text": "Container image, Dockerfile và image tag"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Prompt version, session ID và route SSE"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Model ID, domain HTTPS và health endpoint"
         }
       ],
       "answer": "A",
-      "explanation": "Tự động kiểm tra và triển khai có kiểm soát qua các môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "explanation": "Slide 66: ba artifact có thể rollback riêng khi prompt được tách khỏi image; prompt hardcode trong code thì phải deploy image.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-055",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Rollback?",
+      "prompt": "Timeout sau tool call trừ tiền có chứng minh giao dịch thất bại không?",
       "options": [
         {
           "key": "A",
-          "text": "Xóa toàn bộ log để làm lại"
+          "text": "Không, vì tool thanh toán không có side effect"
         },
         {
           "key": "B",
-          "text": "Quay về phiên bản ổn định khi phát hiện lỗi production"
+          "text": "Không; tác vụ có thể xong nhưng phản hồi về chậm"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Có, timeout luôn rollback lệnh trừ tiền"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Có, proxy hủy tác vụ ở hệ thống thanh toán"
         }
       ],
       "answer": "B",
-      "explanation": "Quay về phiên bản ổn định khi phát hiện lỗi production. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "explanation": "Slide 69: timeout không phân biệt thất bại với thành công trả lời chậm.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-056",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Cost guard?",
+      "prompt": "Idempotency key phải có tính chất nào khi retry cùng một hành động?",
       "options": [
         {
           "key": "A",
-          "text": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model"
+          "text": "Dựa vào output LLM lần sau để sinh key mới"
         },
         {
           "key": "B",
-          "text": "Chờ hóa đơn cuối tháng rồi mới xem"
+          "text": "Không cần gửi tới backend vì client tự dedup"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Ổn định để backend nhận ra và không thực hiện trùng"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Đổi ở mỗi retry để server xem như request mới"
         }
       ],
-      "answer": "A",
-      "explanation": "Đặt quota, ngân sách và cảnh báo để kiểm soát chi phí model. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "C",
+      "explanation": "Slide 70: cùng key nên trả lại kết quả lần đầu, không tạo side effect mới.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-057",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Container giúp đội ngũ làm điều gì?",
+      "prompt": "Agent crash sau vài bước của workflow. Durable execution giúp tránh lặp lại việc đã xong bằng cách nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chỉ lưu state cuối, rồi chạy lại toàn bộ model và tool"
         },
         {
           "key": "B",
-          "text": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường"
+          "text": "Tự rollback mọi side effect ở hệ thống ngoài"
         },
         {
           "key": "C",
-          "text": "Là một virtual machine đầy đủ hệ điều hành"
+          "text": "Giữ process sống mãi để không bao giờ cần resume"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Ghi output từng bước để resume từ điểm đã hoàn thành"
         }
       ],
-      "answer": "B",
-      "explanation": "Đóng gói ứng dụng cùng dependency để chạy nhất quán giữa môi trường. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "D",
+      "explanation": "Phần production nâng cao: lưu state/đầu ra từng bước để resume sau crash; tool ngoài vẫn cần idempotency.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-058",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Docker image giúp đội ngũ làm điều gì?",
+      "prompt": "Trong saga, bước gửi vé không thể thu hồi nên đặt ở đâu?",
       "options": [
         {
           "key": "A",
-          "text": "Là log runtime thay đổi liên tục"
+          "text": "Sau bước có thể bù trừ và qua cổng duyệt phù hợp"
         },
         {
           "key": "B",
-          "text": "Là mẫu bất biến dùng để tạo container"
+          "text": "Đặt đầu chuỗi để user biết vé đã được gửi"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Retry gửi vé đến khi có email xác nhận"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Đặt trước thanh toán để giảm latency"
         }
       ],
-      "answer": "B",
-      "explanation": "Là mẫu bất biến dùng để tạo container. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "answer": "A",
+      "explanation": "Slide 72: hành động không hoàn tác là pivot, nên đặt cuối và gate.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-059",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Secrets management giúp đội ngũ làm điều gì?",
+      "prompt": "Egress allowlist giảm rủi ro nào cho agent có tool truy cập mạng?",
       "options": [
         {
           "key": "A",
-          "text": "Ghi API key trực tiếp trong frontend"
+          "text": "Chỉ cho agent đọc file, không kiểm network"
         },
         {
           "key": "B",
-          "text": "Lưu credential ngoài source code và cấp theo quyền tối thiểu"
+          "text": "Dữ liệu riêng bị gửi ra domain lạ"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Giảm số token output bằng cách chặn URL dài"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Giới hạn CPU của model self-host theo domain"
         }
       ],
       "answer": "B",
-      "explanation": "Lưu credential ngoài source code và cấp theo quyền tối thiểu. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "explanation": "Slide 73: egress là kênh rò rỉ dữ liệu qua tool/network.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
     {
       "id": "D12-060",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Async request giúp đội ngũ làm điều gì?",
+      "prompt": "Vì sao mỗi agent nên có identity riêng và quyền hẹp?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Agent đã có prompt an toàn nên không cần scope"
         },
         {
           "key": "B",
-          "text": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP"
+          "text": "Giảm bán kính sự cố và truy vết hành động rõ hơn"
         },
         {
           "key": "C",
-          "text": "Giữ kết nối đồng bộ vô hạn"
+          "text": "Một god-key chung dễ audit hơn nhiều identity"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Token dài hạn chung giúp giảm lỗi permission"
         }
       ],
       "answer": "B",
-      "explanation": "Dùng job queue hoặc streaming khi tác vụ dài vượt timeout HTTP. Nội dung được biên soạn từ tài liệu Day12_Deployment_Agent_Cloud_Beginner_Notes.html của Ngày 12.",
-      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html",
+      "explanation": "Slide 75: least privilege, token ngắn hạn, tránh god-key chung.",
+      "source": "onthi/Day12_Deployment_Agent_Cloud_Beginner_Notes.html + onthi/day12.pdf",
       "module": "C",
       "points": 1
     },
@@ -1696,8 +1696,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Giải thích Docker và nêu một ví dụ áp dụng trong sản phẩm AI.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Docker, container, cloud deployment, authentication, CI/CD, cost guard, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Một agent đang chạy ở localhost cần demo công khai cho 100 người. Lập checklist triển khai từ image tới public URL, nêu cách xác nhận từng mục.",
+      "modelAnswer": "Chấm: Dockerfile multi-stage với uv/slim, non-root, .dockerignore loại secret, scan CVE; chạy local; health endpoint và SSE; cấu hình env/secret; deploy Railway/Render; HTTPS URL, auth/rate limit/cost guard; gọi thử endpoint và xem log.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1710,8 +1710,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "So sánh Docker với container; nêu tiêu chí lựa chọn trong một tình huống thực tế.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Docker, container, cloud deployment, authentication, CI/CD, cost guard, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Agent trả token từng phần ở local nhưng production chỉ hiện sau một phút rồi 504. Chẩn đoán đường request và đề xuất hai cách xử lý tác vụ dài.",
+      "modelAnswer": "Chấm: đo thời gian agent so timeout gateway/proxy; kiểm proxy buffering và tắt phù hợp; SSE một chiều, heartbeat lúc im lặng; nếu cần replay lưu token theo streamId; với tác vụ dài chuyển job queue, trả job_id, poll/webhook.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1724,8 +1724,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Thiết kế một quy trình ngắn sử dụng cloud deployment để giảm rủi ro cho người dùng.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Docker, container, cloud deployment, authentication, CI/CD, cost guard, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Sau khi scale từ một lên ba instance, agent quên lịch sử khi request rơi vào instance khác. Thiết kế lại state và health/scaling để khắc phục.",
+      "modelAnswer": "Chấm: externalize conversation/tool history vào Redis/Postgres/checkpointer với thread_id ổn định; không dựa sticky session; scale theo concurrency/queue depth; phân biệt liveness/readiness/startup; kiểm thử request A rồi B vẫn tiếp tục được.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1738,8 +1738,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Phân tích một failure mode liên quan đến authentication, nguyên nhân và cách khắc phục.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Docker, container, cloud deployment, authentication, CI/CD, cost guard, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Một nhóm muốn chọn giữa Tier 0 managed runtime và tự deploy Tier 1–3 cho agent có dữ liệu nhạy cảm. Nêu tiêu chí và quyết định có điều kiện.",
+      "modelAnswer": "Chấm: so timeout, SSE, session persistence, security/identity, residency/compliance, network, cost khi chờ model, năng lực vận hành và lock-in; Tier 0 giảm việc infra; tự deploy cho kiểm soát riêng; phân biệt framework và runtime; xác minh giới hạn hiện hành trước khi chốt.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1752,8 +1752,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Đề xuất metric đánh giá cho CI/CD; giải thích vì sao metric đó hữu ích.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Docker, container, cloud deployment, authentication, CI/CD, cost guard, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Bạn phải host MCP server cho nhiều client. Thiết kế đường đi Registry → Gateway → Runtime và các kiểm tra bảo mật tối thiểu.",
+      "modelAnswer": "Chấm: Streamable HTTP remote, host như API; registry chỉ metadata/discovery; gateway gom và kiểm soát; runtime chạy isolated/non-root; OAuth 2.1 theo slide, phân quyền từng client/user; không token passthrough; auth mọi route; egress allowlist; kiểm thử route phụ.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1766,8 +1766,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Lập kế hoạch thử nghiệm nhỏ cho cost guard: giả định, dữ liệu, tiêu chí đạt và tiêu chí dừng.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Docker, container, cloud deployment, authentication, CI/CD, cost guard, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Một agent bị retry vô hạn làm hóa đơn tăng, nhưng provider đã gửi spend alert. Thiết kế cost guard trước model và phép thử chứng minh nó chặn thật.",
+      "modelAnswer": "Chấm: auth → rate limit → validate; ước lượng input_tokens × input_price + max_output_tokens × output_price trên đơn vị triệu; so per-request và tenant budget trước mỗi LLM call; hard reject, tag user/workload/model, đếm usage thật; test request vượt budget không gọi model; alert không thay guard.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1780,8 +1780,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Tình huống: kết quả liên quan đến Docker không đạt kỳ vọng. Bạn sẽ debug theo thứ tự nào?",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Docker, container, cloud deployment, authentication, CI/CD, cost guard, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Agent bản mới build pass nhưng giảm chất lượng. Thiết kế pipeline CI/CD và lộ trình rollout có thể quay lại nhanh.",
+      "modelAnswer": "Chấm: build image, scan CVE, chạy eval suite có ngưỡng và so baseline; fail thì chặn deploy; shadow mẫu traffic với tool side effect bị chặn và theo dõi token; canary nhỏ, tăng dần theo metric; rollback riêng image, prompt version, model ID.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1794,8 +1794,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Viết khuyến nghị cho stakeholder về lợi ích, giới hạn và rủi ro của container.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Docker, container, cloud deployment, authentication, CI/CD, cost guard, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Agent đặt vé bị timeout sau khi gọi tool thanh toán; nó sắp retry. Thiết kế cách tránh trừ tiền hai lần và xử lý chuỗi giữ chỗ → thanh toán → gửi vé.",
+      "modelAnswer": "Chấm: timeout không chứng minh thất bại; gắn idempotency key ổn định theo ý định/order, backend lưu kết quả và dedup; kiểm trạng thái trước retry; journal/replay bước đã hoàn thành; saga bù trừ giữ chỗ/thanh toán khi lỗi; đặt gửi vé không hoàn tác cuối và gate.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1808,8 +1808,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Nêu các đánh đổi khi triển khai cloud deployment trong production và cách theo dõi sau triển khai.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Docker, container, cloud deployment, authentication, CI/CD, cost guard, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Một đội muốn tự host model vì dữ liệu không được rời vùng cho phép. Phân tích thêm những phần phải vận hành và cách kiểm chứng quyết định.",
+      "modelAnswer": "Chấm: nêu residency/compliance là lý do; so hosted API/managed self-host/tự dựng; GPU-hour cả lúc idle, weights/revision/quantization/engine, cold start, readiness sau load, scaling queue depth, rollback; benchmark tải thực, cost và latency; cân nhắc continuous batching/KV cache.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1822,8 +1822,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Tạo checklist trước khi ship một tính năng AI có dùng authentication và CI/CD.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm Docker, container, cloud deployment, authentication, CI/CD, cost guard, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Một agent đọc tài liệu không tin cậy, có quyền gọi tool HTTP và ghi dữ liệu. Thiết kế ranh giới hạ tầng nếu tool bị prompt injection điều khiển.",
+      "modelAnswer": "Chấm: xác định private data + untrusted content + external channel; cô lập FS/network, egress allowlist, kiểm cả kênh provider tin cậy; per-agent identity và least privilege, token ngắn hạn/audience-bound; gate hành động write; fail-closed với cấu hình rỗng; kiểm thử đường rò rỉ.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",

@@ -6,7 +6,8 @@
     {
       "id": "D12-TL-01",
       "type": "essay",
-      "prompt": "Giải thích Docker và nêu một ví dụ áp dụng trong sản phẩm AI.",
+      "prompt": "Một agent đang chạy ở localhost cần demo công khai cho 100 người. Lập checklist triển khai từ image tới public URL, nêu cách xác nhận từng mục.",
+      "modelAnswer": "Chấm: Dockerfile multi-stage với uv/slim, non-root, .dockerignore loại secret, scan CVE; chạy local; health endpoint và SSE; cấu hình env/secret; deploy Railway/Render; HTTPS URL, auth/rate limit/cost guard; gọi thử endpoint và xem log.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -17,7 +18,8 @@
     {
       "id": "D12-TL-02",
       "type": "essay",
-      "prompt": "So sánh Docker với container; nêu tiêu chí lựa chọn trong một tình huống thực tế.",
+      "prompt": "Agent trả token từng phần ở local nhưng production chỉ hiện sau một phút rồi 504. Chẩn đoán đường request và đề xuất hai cách xử lý tác vụ dài.",
+      "modelAnswer": "Chấm: đo thời gian agent so timeout gateway/proxy; kiểm proxy buffering và tắt phù hợp; SSE một chiều, heartbeat lúc im lặng; nếu cần replay lưu token theo streamId; với tác vụ dài chuyển job queue, trả job_id, poll/webhook.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -28,7 +30,8 @@
     {
       "id": "D12-TL-03",
       "type": "essay",
-      "prompt": "Thiết kế một quy trình ngắn sử dụng cloud deployment để giảm rủi ro cho người dùng.",
+      "prompt": "Sau khi scale từ một lên ba instance, agent quên lịch sử khi request rơi vào instance khác. Thiết kế lại state và health/scaling để khắc phục.",
+      "modelAnswer": "Chấm: externalize conversation/tool history vào Redis/Postgres/checkpointer với thread_id ổn định; không dựa sticky session; scale theo concurrency/queue depth; phân biệt liveness/readiness/startup; kiểm thử request A rồi B vẫn tiếp tục được.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -39,7 +42,8 @@
     {
       "id": "D12-TL-04",
       "type": "essay",
-      "prompt": "Phân tích một failure mode liên quan đến authentication, nguyên nhân và cách khắc phục.",
+      "prompt": "Một nhóm muốn chọn giữa Tier 0 managed runtime và tự deploy Tier 1–3 cho agent có dữ liệu nhạy cảm. Nêu tiêu chí và quyết định có điều kiện.",
+      "modelAnswer": "Chấm: so timeout, SSE, session persistence, security/identity, residency/compliance, network, cost khi chờ model, năng lực vận hành và lock-in; Tier 0 giảm việc infra; tự deploy cho kiểm soát riêng; phân biệt framework và runtime; xác minh giới hạn hiện hành trước khi chốt.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -50,7 +54,8 @@
     {
       "id": "D12-TL-05",
       "type": "essay",
-      "prompt": "Đề xuất metric đánh giá cho CI/CD; giải thích vì sao metric đó hữu ích.",
+      "prompt": "Bạn phải host MCP server cho nhiều client. Thiết kế đường đi Registry → Gateway → Runtime và các kiểm tra bảo mật tối thiểu.",
+      "modelAnswer": "Chấm: Streamable HTTP remote, host như API; registry chỉ metadata/discovery; gateway gom và kiểm soát; runtime chạy isolated/non-root; OAuth 2.1 theo slide, phân quyền từng client/user; không token passthrough; auth mọi route; egress allowlist; kiểm thử route phụ.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -61,7 +66,8 @@
     {
       "id": "D12-TL-06",
       "type": "essay",
-      "prompt": "Lập kế hoạch thử nghiệm nhỏ cho cost guard: giả định, dữ liệu, tiêu chí đạt và tiêu chí dừng.",
+      "prompt": "Một agent bị retry vô hạn làm hóa đơn tăng, nhưng provider đã gửi spend alert. Thiết kế cost guard trước model và phép thử chứng minh nó chặn thật.",
+      "modelAnswer": "Chấm: auth → rate limit → validate; ước lượng input_tokens × input_price + max_output_tokens × output_price trên đơn vị triệu; so per-request và tenant budget trước mỗi LLM call; hard reject, tag user/workload/model, đếm usage thật; test request vượt budget không gọi model; alert không thay guard.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -72,7 +78,8 @@
     {
       "id": "D12-TL-07",
       "type": "essay",
-      "prompt": "Tình huống: kết quả liên quan đến Docker không đạt kỳ vọng. Bạn sẽ debug theo thứ tự nào?",
+      "prompt": "Agent bản mới build pass nhưng giảm chất lượng. Thiết kế pipeline CI/CD và lộ trình rollout có thể quay lại nhanh.",
+      "modelAnswer": "Chấm: build image, scan CVE, chạy eval suite có ngưỡng và so baseline; fail thì chặn deploy; shadow mẫu traffic với tool side effect bị chặn và theo dõi token; canary nhỏ, tăng dần theo metric; rollback riêng image, prompt version, model ID.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -83,7 +90,8 @@
     {
       "id": "D12-TL-08",
       "type": "essay",
-      "prompt": "Viết khuyến nghị cho stakeholder về lợi ích, giới hạn và rủi ro của container.",
+      "prompt": "Agent đặt vé bị timeout sau khi gọi tool thanh toán; nó sắp retry. Thiết kế cách tránh trừ tiền hai lần và xử lý chuỗi giữ chỗ → thanh toán → gửi vé.",
+      "modelAnswer": "Chấm: timeout không chứng minh thất bại; gắn idempotency key ổn định theo ý định/order, backend lưu kết quả và dedup; kiểm trạng thái trước retry; journal/replay bước đã hoàn thành; saga bù trừ giữ chỗ/thanh toán khi lỗi; đặt gửi vé không hoàn tác cuối và gate.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -94,7 +102,8 @@
     {
       "id": "D12-TL-09",
       "type": "essay",
-      "prompt": "Nêu các đánh đổi khi triển khai cloud deployment trong production và cách theo dõi sau triển khai.",
+      "prompt": "Một đội muốn tự host model vì dữ liệu không được rời vùng cho phép. Phân tích thêm những phần phải vận hành và cách kiểm chứng quyết định.",
+      "modelAnswer": "Chấm: nêu residency/compliance là lý do; so hosted API/managed self-host/tự dựng; GPU-hour cả lúc idle, weights/revision/quantization/engine, cold start, readiness sau load, scaling queue depth, rollback; benchmark tải thực, cost và latency; cân nhắc continuous batching/KV cache.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -105,7 +114,8 @@
     {
       "id": "D12-TL-10",
       "type": "essay",
-      "prompt": "Tạo checklist trước khi ship một tính năng AI có dùng authentication và CI/CD.",
+      "prompt": "Một agent đọc tài liệu không tin cậy, có quyền gọi tool HTTP và ghi dữ liệu. Thiết kế ranh giới hạ tầng nếu tool bị prompt injection điều khiển.",
+      "modelAnswer": "Chấm: xác định private data + untrusted content + external channel; cô lập FS/network, egress allowlist, kiểm cả kênh provider tin cậy; per-agent identity và least privilege, token ngắn hạn/audience-bound; gate hành động write; fail-closed với cấu hình rỗng; kiểm thử đường rò rỉ.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",

@@ -6,7 +6,8 @@
     {
       "id": "D14-TL-01",
       "type": "essay",
-      "prompt": "Giải thích evaluation dataset và nêu một ví dụ áp dụng trong sản phẩm AI.",
+      "prompt": "Nhóm muốn chứng minh prompt hoàn tiền mới tốt hơn bản cũ. Hãy thiết kế vòng lặp evaluation có giả thuyết, đối chứng, metric và quyết định phát hành.",
+      "modelAnswer": "Nêu giả thuyết kiểm chứng được; chốt correctness/completeness/task completion và ngưỡng trước; chạy cùng benchmark hai bản; xem trace các ca sai và độ biến thiên; chỉ phát hành khi qua regression gate.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -17,7 +18,8 @@
     {
       "id": "D14-TL-02",
       "type": "essay",
-      "prompt": "So sánh evaluation dataset với benchmark; nêu tiêu chí lựa chọn trong một tình huống thực tế.",
+      "prompt": "Một agent y tế sắp đổi embedding. Hãy lập kế hoạch dùng offline, online và human evaluation trước và sau deploy.",
+      "modelAnswer": "Trước deploy chạy offline RAG regression và ca từng lỗi; sau deploy lấy mẫu traffic theo dõi chất lượng, latency, lỗi; chuyên gia duyệt ca high-stakes và hiệu chuẩn evaluator; ghi hạn chế sampling và xử lý bất đồng.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -28,7 +30,8 @@
     {
       "id": "D14-TL-03",
       "type": "essay",
-      "prompt": "Thiết kế một quy trình ngắn sử dụng LLM-as-a-Judge để giảm rủi ro cho người dùng.",
+      "prompt": "Bộ lọc nguy hiểm có TP=30, FP=10, FN=20, TN=940. Tính precision, recall, accuracy và giải thích vì sao accuracy dễ gây hiểu lầm.",
+      "modelAnswer": "Precision=30/40=75%; recall=30/50=60%; accuracy=(30+940)/1000=97%; lớp nguy hiểm ít nên 97% vẫn che 20 ca bỏ lọt; ưu tiên xem recall và rủi ro FN.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -39,7 +42,8 @@
     {
       "id": "D14-TL-04",
       "type": "essay",
-      "prompt": "Phân tích một failure mode liên quan đến RAGAS, nguyên nhân và cách khắc phục.",
+      "prompt": "Hãy thiết kế golden dataset ban đầu cho agent hỗ trợ khách hàng, gồm nguồn ca, độ phủ, metadata, kiểm nhãn và adversarial cases.",
+      "modelAnswer": "Lấy ca thường gặp, edge cases, logs đã ẩn danh và ca expert-written; LLM chỉ sinh ứng viên có human filter; lưu reference/rubric, evidence, độ khó, use case, nguồn, phiên bản; đo agreement, adjudicate; có tối thiểu 10% adversarial theo gợi ý slide và thêm lỗi thực tế vào bộ test.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -50,7 +54,8 @@
     {
       "id": "D14-TL-05",
       "type": "essay",
-      "prompt": "Đề xuất metric đánh giá cho calibration; giải thích vì sao metric đó hữu ích.",
+      "prompt": "Hai model trả lời câu hỏi chính sách mở. Hãy đề xuất cách chấm LLM-as-Judge và giảm bias trước khi dùng điểm để chọn model.",
+      "modelAnswer": "Dùng reference/evidence và rubric có mức điểm, ví dụ, output cố định; ẩn danh và đảo thứ tự pairwise; pin judge model/prompt, temperature phù hợp; tách correctness khỏi văn phong; so judge với chuyên gia trên mẫu và kiểm bias position/verbosity/self-preference.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -61,7 +66,8 @@
     {
       "id": "D14-TL-06",
       "type": "essay",
-      "prompt": "Lập kế hoạch thử nghiệm nhỏ cho failure analysis: giả định, dữ liệu, tiêu chí đạt và tiêu chí dừng.",
+      "prompt": "RAGAS báo faithfulness cao nhưng agent tư vấn theo policy hết hạn. Hãy phân tích metric nào vẫn có ích và cần kiểm gì thêm.",
+      "modelAnswer": "Faithfulness chỉ đo claim bám context, không xác thực nguồn ngoài đời; kiểm timestamp và nguồn chính thức, context recall/precision, answer relevance; mở case sai, bổ sung benchmark/regression và human review khi tác động cao.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -72,7 +78,8 @@
     {
       "id": "D14-TL-07",
       "type": "essay",
-      "prompt": "Tình huống: kết quả liên quan đến evaluation dataset không đạt kỳ vọng. Bạn sẽ debug theo thứ tự nào?",
+      "prompt": "Nhóm tuyên bố model mới tăng 2% điểm trung bình, nhưng mỗi run ra kết quả khác. Hãy lập kế hoạch xác nhận lợi ích trước release.",
+      "modelAnswer": "Chốt metric và ngưỡng trước; cho hai bản cùng case, lặp run, ghi model/seed/cấu hình; báo cỡ mẫu, mean/variance, khoảng bất định, paired differences và practical significance; xem các ca thua, mở rộng test nếu chưa đủ tin cậy.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -83,7 +90,8 @@
     {
       "id": "D14-TL-08",
       "type": "essay",
-      "prompt": "Viết khuyến nghị cho stakeholder về lợi ích, giới hạn và rủi ro của benchmark.",
+      "prompt": "Agent đặt hàng trả lời đúng nhưng đã gọi tool không được phép và đôi khi sửa test để đạt điểm. Thiết kế agentic/safety suite.",
+      "modelAnswer": "Chấm step correctness, tool args/quyền, efficiency và goal completion; kiểm pass@k lẫn pass^k; có holdout, sandbox, kiểm side effects và reward hacking; thử prompt injection, PII, unsafe output; ghi expected safe behavior và PASS/FAIL.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -94,7 +102,8 @@
     {
       "id": "D14-TL-09",
       "type": "essay",
-      "prompt": "Nêu các đánh đổi khi triển khai LLM-as-a-Judge trong production và cách theo dõi sau triển khai.",
+      "prompt": "Production có cụm lỗi trả sai chính sách hoàn tiền. Hãy đi từ triệu chứng đến root cause và nêu failure log cần ghi.",
+      "modelAnswer": "Phân loại lỗi, mở trace/retrieved chunks/citation/tool calls, hỏi 5 Whys và kiểm nguồn/timestamp; sửa đúng corpus, retrieval hoặc generation; log case ID, model/prompt/dataset version, input/output/expected, metric, latency/cost, hypothesis/fix; thêm regression case và retest.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -105,7 +114,8 @@
     {
       "id": "D14-TL-10",
       "type": "essay",
-      "prompt": "Tạo checklist trước khi ship một tính năng AI có dùng RAGAS và calibration.",
+      "prompt": "Chuẩn bị phát hành agent sau khi đổi model. Hãy viết release gate có số liệu, safety và khả năng rollback.",
+      "modelAnswer": "Chốt ngưỡng trước; chạy golden/regression và adversarial suite, không bù lỗi nghiêm trọng bằng điểm trung bình; kiểm resolution, escalation, P50/P95, cost; xem failure clusters và human/red-team high-stakes; lưu model/prompt/rubric/dataset/trace để so và rollback; block nếu trượt gate.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",

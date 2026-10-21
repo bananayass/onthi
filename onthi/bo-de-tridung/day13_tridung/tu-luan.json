@@ -6,7 +6,8 @@
     {
       "id": "D13-TL-01",
       "type": "essay",
-      "prompt": "Giải thích monitoring và nêu một ví dụ áp dụng trong sản phẩm AI.",
+      "prompt": "Một feature chỉ chậm với một model và một nhóm user, trong khi dashboard tổng vẫn xanh. Lập kế hoạch điều tra end-to-end và chọn dữ liệu cần nối giữa các service.",
+      "modelAnswer": "Nêu observability cho câu hỏi mới; lọc metric theo feature/model ở mức cardinality hợp lý; dùng trace tìm span chậm; dùng correlation_id ghép log; xem P95/P99, TTFT/TPOT; đo MTTD/MTTR và ghi nguyên nhân.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -17,7 +18,8 @@
     {
       "id": "D13-TL-02",
       "type": "essay",
-      "prompt": "So sánh monitoring với logging; nêu tiêu chí lựa chọn trong một tình huống thực tế.",
+      "prompt": "Dịch vụ có SLO uptime 99,9% trong tháng 30 ngày. Tính downtime cho phép, giải thích quyết định phát hành khi đã dùng hết 80% budget.",
+      "modelAnswer": "Budget là 0,1% × 30 ngày = 43 phút 12 giây; đã dùng khoảng 34 phút 34 giây, còn khoảng 8 phút 38 giây. Ưu tiên ổn định/sửa lỗi, trì hoãn thay đổi rủi ro; phân biệt SLI đo được, SLO nội bộ và SLA với khách.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -28,7 +30,8 @@
     {
       "id": "D13-TL-03",
       "type": "essay",
-      "prompt": "Thiết kế một quy trình ngắn sử dụng tracing để giảm rủi ro cho người dùng.",
+      "prompt": "Chat streaming bắt đầu hiện chữ sau 3 giây, sau đó sinh rất nhanh; average latency vẫn ổn. Thiết kế phép đo để xác nhận trải nghiệm và ngưỡng cảnh báo.",
+      "modelAnswer": "Đo TTFT, TPOT và tokens/sec theo model/feature; xem P50/P95/P99 thay vì chỉ average; nêu tail latency và tác động nhiều lượt chat; đặt SLO/alert theo TTFT hoặc P95 đã hiệu chỉnh từ baseline.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -39,7 +42,8 @@
     {
       "id": "D13-TL-04",
       "type": "essay",
-      "prompt": "Phân tích một failure mode liên quan đến metrics, nguyên nhân và cách khắc phục.",
+      "prompt": "Agent RAG trả lời trôi chảy nhưng sai số liệu tài chính. Thiết kế kiểm tra chất lượng nhiều tầng và vòng phản hồi sau deploy.",
+      "modelAnswer": "L1 kiểm format/PII; L2 judge relevance, faithfulness/groundedness theo context; xác minh số với DB/API đáng tin; self-consistency trên mẫu nhỏ nếu cần; L3 thumbs/CSAT/regenerate; L4 task success; theo dõi xu hướng hallucination.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -50,7 +54,8 @@
     {
       "id": "D13-TL-05",
       "type": "essay",
-      "prompt": "Đề xuất metric đánh giá cho alerting; giải thích vì sao metric đó hữu ích.",
+      "prompt": "Hóa đơn LLM tăng sau khi thêm tính năng tóm tắt. Đề xuất cách quy trách nhiệm chi phí và hai thay đổi giảm bill mà vẫn giữ quality.",
+      "modelAnswer": "Ghi token input/output, cache read/write và cost theo user_id đã bảo vệ, feature, model; phân tích cost/request và cost/feature; thử prompt caching nội dung tĩnh và routing tóm tắt dễ sang model nhỏ; đo quality trước/sau, chỉ dùng batch cho việc không realtime.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -61,7 +66,8 @@
     {
       "id": "D13-TL-06",
       "type": "essay",
-      "prompt": "Lập kế hoạch thử nghiệm nhỏ cho cost observability: giả định, dữ liệu, tiêu chí đạt và tiêu chí dừng.",
+      "prompt": "Bạn thiết kế log cho agent xử lý thông tin khách hàng. Viết schema tối thiểu, quy tắc sanitize và chính sách lưu app log so với audit log.",
+      "modelAnswer": "Tier 1 timestamp ISO 8601, level, correlation_id, service, event; Tier 2 user_id hash, session_id, feature, model, env; Tier 3 latency/tokens/cost/error_type; sanitize trước ghi, không lưu PII/secret/full prompt; app log có thể sampling, audit log đầy đủ, hạn chế quyền, append-only.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -72,7 +78,8 @@
     {
       "id": "D13-TL-07",
       "type": "essay",
-      "prompt": "Tình huống: kết quả liên quan đến monitoring không đạt kỳ vọng. Bạn sẽ debug theo thứ tự nào?",
+      "prompt": "Waterfall trace của một request cho thấy nhiều retry tool call và các span chờ LLM dài trong lúc CPU idle. Phân tích hai nút thắt và sửa chúng.",
+      "modelAnswer": "Phân biệt waiting do LLM/network với retry storm; xét parallelize/cache/timeout cho bước độc lập; retry exponential backoff có jitter, circuit breaker và giới hạn retry; giữ trace context qua service; xác nhận thay đổi bằng latency P95/P99 và error rate.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -83,7 +90,8 @@
     {
       "id": "D13-TL-08",
       "type": "essay",
-      "prompt": "Viết khuyến nghị cho stakeholder về lợi ích, giới hạn và rủi ro của logging.",
+      "prompt": "Một alert P95 latency page on-call liên tục nhưng nhiều lần tự hết. Thiết kế lại rule và nội dung thông báo để bớt alert fatigue.",
+      "modelAnswer": "Dùng SLO symptom và multi-window/multi-burn-rate, cả hai cửa sổ vượt mới fire; phân severity, deduplicate, auto-resolve, route đúng owner; thông báo có impact, current/baseline/threshold, dashboard lọc sẵn, trace và runbook; review rule định kỳ.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -94,7 +102,8 @@
     {
       "id": "D13-TL-09",
       "type": "essay",
-      "prompt": "Nêu các đánh đổi khi triển khai tracing trong production và cách theo dõi sau triển khai.",
+      "prompt": "Thiết kế dashboard vận hành cho lãnh đạo, kỹ sư và người debug. Nêu nội dung từng tầng và ba lỗi trình bày cần tránh.",
+      "modelAnswer": "Overview: health/uptime/alert chính; Detail: latency P50/P95/P99, traffic, errors, cost/hour, tokens, hallucination; Drill-down: trace cụ thể và log search. Tránh quá nhiều panel, thiếu baseline/SLO line, thiếu đơn vị hoặc time range quá dài; dùng refresh phù hợp.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -105,7 +114,8 @@
     {
       "id": "D13-TL-10",
       "type": "essay",
-      "prompt": "Tạo checklist trước khi ship một tính năng AI có dùng metrics và alerting.",
+      "prompt": "Lab 13 yêu cầu bàn giao monitoring blueprint trong 90 phút. Lập checklist kiểm chứng cụ thể trước khi chấp nhận hệ thống.",
+      "modelAnswer": "Instrumentation: JSON log, correlation propagation, PII sanitize, observe ba function và tags; Dashboard/Alerts: SLO P95/error/cost, ít nhất sáu panel, ba rule có runbook; Validation: 10–20 request đa dạng, tối thiểu 10 trace có cost/latency/quality, gây một lỗi có kiểm soát và xác nhận alert; blueprint một trang gồm SLO, kiến trúc, playbook, cost/scaling.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",

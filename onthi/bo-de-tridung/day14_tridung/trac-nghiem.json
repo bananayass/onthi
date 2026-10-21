@@ -7,1561 +7,1561 @@
     {
       "id": "D14-001",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Evaluation objective?",
+      "prompt": "Agent hoàn tiền nói rất hay nhưng áp dụng sai điều kiện 7 ngày. Kết luận đánh giá nào phù hợp?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Trượt correctness và task completion"
         },
         {
           "key": "B",
-          "text": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric"
+          "text": "Đạt correctness nhờ văn phong rõ ràng"
         },
         {
           "key": "C",
-          "text": "Chọn metric dễ đẹp nhất rồi mới tìm mục tiêu"
+          "text": "Đạt task completion vì đã trả lời"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ cần đo thêm tốc độ phản hồi"
         }
       ],
-      "answer": "B",
-      "explanation": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "A",
+      "explanation": "Mục Evaluation Fundamentals: lời đáp trôi chảy không chứng minh đúng chính sách hay hoàn thành việc.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-002",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Benchmark?",
+      "prompt": "Vì sao một nhãn đúng/sai đơn lẻ thường không đủ để chấm câu trả lời LLM?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Mọi đầu ra LLM đều có một chuỗi cố định"
         },
         {
           "key": "B",
-          "text": "Tập case và cách chấm chuẩn để so sánh nhất quán"
+          "text": "Ngôn ngữ tự nhiên luôn có nhãn số sẵn"
         },
         {
           "key": "C",
-          "text": "Một demo gồm vài ví dụ thành công"
+          "text": "Chỉ độ dài câu trả lời quyết định chất lượng"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Có nhiều cách diễn đạt hợp lý cho cùng yêu cầu"
         }
       ],
-      "answer": "B",
-      "explanation": "Tập case và cách chấm chuẩn để so sánh nhất quán. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "D",
+      "explanation": "Mục Evaluation Fundamentals: output mở cần xét nhiều chiều chất lượng.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-003",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Evaluation dataset?",
+      "prompt": "Cùng prompt nhưng hai lần gọi model cho đáp án khác nhau. Khi so phiên bản nên làm gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Đổi câu hỏi sau mỗi run cho đa dạng"
         },
         {
           "key": "B",
-          "text": "Phải đại diện các use case, edge case và rủi ro quan trọng"
+          "text": "Giả định mọi lần gọi phải cho cùng output"
         },
         {
           "key": "C",
-          "text": "Chỉ gồm các ví dụ model trả lời đúng"
+          "text": "Ghi cấu hình và đo biến thiên qua nhiều run"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chỉ giữ run có điểm cao nhất để báo cáo"
         }
       ],
-      "answer": "B",
-      "explanation": "Phải đại diện các use case, edge case và rủi ro quan trọng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "C",
+      "explanation": "Mục Evaluation Fundamentals: sampling và model có thể làm kết quả thay đổi.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-004",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về LLM-as-a-Judge?",
+      "prompt": "Nhóm tin prompt mới tốt hơn prompt cũ. Bước đầu của vòng lặp evaluation là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chỉ hỏi người viết prompt tự chấm"
         },
         {
           "key": "B",
-          "text": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy"
+          "text": "Nêu giả thuyết và tiêu chí đo trước"
         },
         {
           "key": "C",
-          "text": "Chấp nhận điểm chấm không cần rubric"
+          "text": "Xem vài demo đẹp rồi tuyên bố thắng"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Đổi luôn model và corpus cùng lúc"
         }
       ],
       "answer": "B",
-      "explanation": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "explanation": "Mục Evaluation Fundamentals: đặt giả thuyết rồi so trên benchmark có đối chứng.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-005",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về RAGAS?",
+      "prompt": "Vừa đổi embedding model trước deploy. Kiểu đánh giá ưu tiên là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG"
+          "text": "Offline regression trên golden dataset"
         },
         {
           "key": "B",
-          "text": "Thay thế hoàn toàn đánh giá con người"
+          "text": "Online monitoring sau khi đã phát hành"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Human review duy nhất trên một ca"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chỉ đo thời gian khởi động server"
         }
       ],
       "answer": "A",
-      "explanation": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "explanation": "Mục Ba loại Evaluation: thay đổi embedding cần chạy benchmark RAG trước deploy.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-006",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Slice evaluation?",
+      "prompt": "Offline benchmark đạt cao nhưng người dùng thật vẫn phàn nàn. Hạn chế nào giải thích việc này?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Offline luôn đọc trực tiếp traffic mới"
         },
         {
           "key": "B",
-          "text": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ"
+          "text": "Human review làm benchmark mất hiệu lực"
         },
         {
           "key": "C",
-          "text": "Gộp tất cả điểm thành một số duy nhất"
+          "text": "Online metric chỉ áp dụng cho model cũ"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Tập cố định chưa phủ hết traffic thực tế"
         }
       ],
-      "answer": "B",
-      "explanation": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "D",
+      "explanation": "Mục Ba loại Evaluation: offline không phản ánh toàn bộ traffic production.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-007",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Calibration?",
+      "prompt": "Sau deploy, nhóm lấy mẫu câu hỏi thật để theo dõi chất lượng. Đây là loại nào?",
       "options": [
         {
           "key": "A",
-          "text": "Làm model luôn trả lời chắc chắn"
+          "text": "Human evaluation cho toàn bộ dữ liệu"
         },
         {
           "key": "B",
-          "text": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng"
+          "text": "Chỉ là kiểm tra cú pháp mã nguồn"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Online evaluation trên traffic production"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Offline evaluation trên bộ case cố định"
         }
       ],
-      "answer": "B",
-      "explanation": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "C",
+      "explanation": "Mục Ba loại Evaluation: online theo dõi chất lượng sau deploy.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-008",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Failure analysis?",
+      "prompt": "Ca tư vấn tác động lớn có ý kiến chuyên gia bất đồng. Bổ sung nào hợp lý?",
       "options": [
         {
           "key": "A",
-          "text": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân"
+          "text": "Cho model tự xác nhận mình đã đúng"
         },
         {
           "key": "B",
-          "text": "Chỉ đọc các câu trả lời hay nhất"
+          "text": "Human review và làm rõ hướng dẫn chấm"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ tăng số token ở câu trả lời"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Bỏ mọi ca khó khỏi golden dataset"
         }
       ],
-      "answer": "A",
-      "explanation": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "B",
+      "explanation": "Mục Ba loại Evaluation: ca high-stakes cần chuyên gia; người chấm có thể bất đồng.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-009",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Evaluation objective nào là phù hợp nhất?",
+      "prompt": "Agent bịa một nguồn dẫn dù các ý còn lại đúng. Chiều chất lượng nào lỗi trực tiếp?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Correctness của thông tin và citation"
         },
         {
           "key": "B",
-          "text": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric"
+          "text": "Coherence của trật tự các câu"
         },
         {
           "key": "C",
-          "text": "Chọn metric dễ đẹp nhất rồi mới tìm mục tiêu"
+          "text": "Relevance với câu hỏi người dùng"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Completeness của số mục bắt buộc"
         }
       ],
-      "answer": "B",
-      "explanation": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "A",
+      "explanation": "Mục Metrics: correctness kiểm tra sự thật và citation bịa.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-010",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Benchmark nào là phù hợp nhất?",
+      "prompt": "Agent nêu đúng chính sách hoàn tiền nhưng bỏ sót bước xác minh hóa đơn. Chiều nào giảm?",
       "options": [
         {
           "key": "A",
-          "text": "Một demo gồm vài ví dụ thành công"
+          "text": "Coherence vì câu văn khó đọc"
         },
         {
           "key": "B",
-          "text": "Tập case và cách chấm chuẩn để so sánh nhất quán"
+          "text": "Relevance vì đổi sang chủ đề khác"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Completeness vì thiếu bước bắt buộc"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Correctness vì mọi dữ kiện đều sai"
         }
       ],
-      "answer": "B",
-      "explanation": "Tập case và cách chấm chuẩn để so sánh nhất quán. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "C",
+      "explanation": "Mục Metrics: completeness đo điều kiện hoặc bước bắt buộc bị bỏ sót.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-011",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Evaluation dataset nào là phù hợp nhất?",
+      "prompt": "Người dùng hỏi phí giao hàng; agent chỉ giải thích lịch sử công ty. Chiều nào lỗi?",
       "options": [
         {
           "key": "A",
-          "text": "Phải đại diện các use case, edge case và rủi ro quan trọng"
+          "text": "Correctness vì công ty không tồn tại"
         },
         {
           "key": "B",
-          "text": "Chỉ gồm các ví dụ model trả lời đúng"
+          "text": "Completeness vì thiếu lời chào"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Coherence vì có nhiều đoạn văn"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Relevance vì không đáp câu hỏi"
         }
       ],
-      "answer": "A",
-      "explanation": "Phải đại diện các use case, edge case và rủi ro quan trọng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "D",
+      "explanation": "Mục Metrics: relevance xét output có trả đúng nhu cầu hỏi.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-012",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng LLM-as-a-Judge nào là phù hợp nhất?",
+      "prompt": "Câu trả lời đủ dữ kiện nhưng các bước tự mâu thuẫn và khó theo dõi. Chiều nào giảm?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Coherence của lập luận và trình bày"
         },
         {
           "key": "B",
-          "text": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy"
+          "text": "Context Recall của bước truy xuất"
         },
         {
           "key": "C",
-          "text": "Chấp nhận điểm chấm không cần rubric"
+          "text": "Precision của bộ lọc độc hại"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Latency của lần gọi tới model"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "A",
+      "explanation": "Mục Metrics: coherence xét logic, nhất quán, dễ hiểu.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-013",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng RAGAS nào là phù hợp nhất?",
+      "prompt": "Nhóm muốn thấy tốc độ ở phần đuôi chậm của trải nghiệm người dùng. Metric nào hợp lý?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Điểm coherence của đáp án mẫu"
         },
         {
           "key": "B",
-          "text": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG"
+          "text": "P95 latency của request thực tế"
         },
         {
           "key": "C",
-          "text": "Thay thế hoàn toàn đánh giá con người"
+          "text": "Số ký tự trong tên mô hình"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Tỷ lệ chunk có nhiều dấu câu"
         }
       ],
       "answer": "B",
-      "explanation": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "explanation": "Mục Metrics: business metrics có P50/P95 latency.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-014",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Slice evaluation nào là phù hợp nhất?",
+      "prompt": "Agent xử lý nhiều lượt nhưng tốn kém. Đơn vị chi phí nào gắn với kết quả kinh doanh?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Cost per file trong corpus"
         },
         {
           "key": "B",
-          "text": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ"
+          "text": "Cost per lần mở dashboard"
         },
         {
           "key": "C",
-          "text": "Gộp tất cả điểm thành một số duy nhất"
+          "text": "Cost per resolved query"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Cost per ký tự của prompt"
         }
       ],
-      "answer": "B",
-      "explanation": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "C",
+      "explanation": "Mục Metrics: business metric nêu cost per resolved query.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-015",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Calibration nào là phù hợp nhất?",
+      "prompt": "Retriever thiếu đúng đoạn quy định cần để trả lời. Metric RAG nào thấp?",
       "options": [
         {
           "key": "A",
-          "text": "Làm model luôn trả lời chắc chắn"
+          "text": "Context Precision của đoạn đã lấy"
         },
         {
           "key": "B",
-          "text": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng"
+          "text": "Coherence của câu trả lời cuối"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "P95 latency của truy vấn người dùng"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Context Recall của evidence cần thiết"
         }
       ],
-      "answer": "B",
-      "explanation": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "D",
+      "explanation": "Mục Metrics/RAGAS: Context Recall hỏi evidence cần thiết có được lấy đủ không.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-016",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Failure analysis nào là phù hợp nhất?",
+      "prompt": "Retriever lấy đúng đoạn cần nhưng kèm rất nhiều chunk lạc đề. Metric nào giảm?",
       "options": [
         {
           "key": "A",
-          "text": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân"
+          "text": "Context Precision của tập chunk"
         },
         {
           "key": "B",
-          "text": "Chỉ đọc các câu trả lời hay nhất"
+          "text": "Context Recall của đoạn cần thiết"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Faithfulness của mọi claim"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Recall của bộ lọc harmful"
         }
       ],
       "answer": "A",
-      "explanation": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "explanation": "Mục Metrics/RAGAS: Context Precision thấp gợi ý nhiều chunk nhiễu.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-017",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Evaluation objective, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Một claim trong câu trả lời không có trong context được retrieve. Metric nào bắt lỗi?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "P50 latency của lần truy xuất"
         },
         {
           "key": "B",
-          "text": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric"
+          "text": "Faithfulness của claim với context"
         },
         {
           "key": "C",
-          "text": "Chọn metric dễ đẹp nhất rồi mới tìm mục tiêu"
+          "text": "Answer Relevance với câu hỏi"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Context Recall của bộ tài liệu"
         }
       ],
       "answer": "B",
-      "explanation": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "explanation": "Mục Metrics/RAGAS: Faithfulness xem claim có evidence hỗ trợ hay không.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-018",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Benchmark, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Agent trung thành với tài liệu cũ đã hết hiệu lực. Điều gì vẫn có thể xảy ra?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Coherence bắt buộc phải thấp"
         },
         {
           "key": "B",
-          "text": "Tập case và cách chấm chuẩn để so sánh nhất quán"
+          "text": "Precision của bộ lọc luôn cao"
         },
         {
           "key": "C",
-          "text": "Một demo gồm vài ví dụ thành công"
+          "text": "Faithfulness cao, sự thật vẫn sai"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Context Recall luôn bằng không"
         }
       ],
-      "answer": "B",
-      "explanation": "Tập case và cách chấm chuẩn để so sánh nhất quán. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "C",
+      "explanation": "Mục Metrics: faithfulness không chứng minh context đúng sự thật.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-019",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Evaluation dataset, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Agent dựa đúng nguồn nhưng trả lời một câu hỏi khác. Metric RAG nào cần xem?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ gồm các ví dụ model trả lời đúng"
+          "text": "Faithfulness của từng claim trong nguồn"
         },
         {
           "key": "B",
-          "text": "Phải đại diện các use case, edge case và rủi ro quan trọng"
+          "text": "Context Precision của mọi chunk"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Recall của bộ lọc an toàn"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Answer Relevance với câu hỏi gốc"
         }
       ],
-      "answer": "B",
-      "explanation": "Phải đại diện các use case, edge case và rủi ro quan trọng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "D",
+      "explanation": "Mục Metrics/RAGAS: Answer Relevance xét output có giải quyết đúng câu hỏi.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-020",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua LLM-as-a-Judge, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Bộ lọc báo nguy hiểm cho prompt thực sự nguy hiểm. Ô confusion matrix này là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy"
+          "text": "False positive (FP)"
         },
         {
           "key": "B",
-          "text": "Chấp nhận điểm chấm không cần rubric"
+          "text": "False negative (FN)"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "True negative (TN)"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "True positive (TP)"
         }
       ],
-      "answer": "A",
-      "explanation": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "D",
+      "explanation": "Mục Metrics: dự đoán positive và thực tế positive là TP.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-021",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua RAGAS, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Bộ lọc chặn nhầm prompt vô hại. Ô confusion matrix này là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "False negative (FN)"
         },
         {
           "key": "B",
-          "text": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG"
+          "text": "True negative (TN)"
         },
         {
           "key": "C",
-          "text": "Thay thế hoàn toàn đánh giá con người"
+          "text": "False positive (FP)"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "True positive (TP)"
         }
       ],
-      "answer": "B",
-      "explanation": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "C",
+      "explanation": "Mục Metrics: dự đoán positive nhưng thực tế negative là FP.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-022",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Slice evaluation, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Bộ lọc bỏ lọt prompt nguy hiểm. Ô confusion matrix này là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ"
+          "text": "True negative (TN)"
         },
         {
           "key": "B",
-          "text": "Gộp tất cả điểm thành một số duy nhất"
+          "text": "False negative (FN)"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "True positive (TP)"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "False positive (FP)"
         }
       ],
-      "answer": "A",
-      "explanation": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "B",
+      "explanation": "Mục Metrics: dự đoán negative nhưng thực tế positive là FN.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-023",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Calibration, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Bộ lọc có TP=8 và FP=2. Precision bằng bao nhiêu?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "80%"
         },
         {
           "key": "B",
-          "text": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng"
+          "text": "20%"
         },
         {
           "key": "C",
-          "text": "Làm model luôn trả lời chắc chắn"
+          "text": "40%"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "100%"
         }
       ],
-      "answer": "B",
-      "explanation": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "A",
+      "explanation": "Mục Metrics: precision = TP/(TP+FP) = 8/10.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-024",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Failure analysis, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Bộ lọc có TP=8 và FN=8. Recall bằng bao nhiêu?",
       "options": [
         {
           "key": "A",
-          "text": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân"
+          "text": "25%"
         },
         {
           "key": "B",
-          "text": "Chỉ đọc các câu trả lời hay nhất"
+          "text": "75%"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "100%"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "50%"
         }
       ],
-      "answer": "A",
-      "explanation": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "D",
+      "explanation": "Mục Metrics: recall = TP/(TP+FN) = 8/16.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-025",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Evaluation objective trong hệ thống AI là gì?",
+      "prompt": "Bộ lọc đo accuracy 99% trên traffic hầu hết an toàn. Vì sao chưa thể yên tâm?",
       "options": [
         {
           "key": "A",
-          "text": "Chọn metric dễ đẹp nhất rồi mới tìm mục tiêu"
+          "text": "Mọi prompt nguy hiểm đều được chặn đúng"
         },
         {
           "key": "B",
-          "text": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric"
+          "text": "Tỷ lệ mẫu an toàn không ảnh hưởng kết quả"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Lớp nguy hiểm hiếm có thể bị bỏ sót"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Accuracy luôn bằng recall của lớp nguy hiểm"
         }
       ],
-      "answer": "B",
-      "explanation": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "C",
+      "explanation": "Mục Metrics: dữ liệu lệch lớp có thể che lỗi dù accuracy cao.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-026",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Benchmark trong hệ thống AI là gì?",
+      "prompt": "Bộ ca benchmark cần gì để dùng làm golden dataset?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ cần nhiều câu hỏi cùng một chủ đề"
         },
         {
           "key": "B",
-          "text": "Tập case và cách chấm chuẩn để so sánh nhất quán"
+          "text": "Đáp án tham chiếu hoặc rubric rõ ràng"
         },
         {
           "key": "C",
-          "text": "Một demo gồm vài ví dụ thành công"
+          "text": "Chỉ cần tên model và số token chạy"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chỉ cần log thô chưa được gắn nhãn"
         }
       ],
       "answer": "B",
-      "explanation": "Tập case và cách chấm chuẩn để so sánh nhất quán. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "explanation": "Mục Benchmark Design: golden dataset cần ca chất lượng cao và chuẩn chấm rõ.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-027",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Evaluation dataset trong hệ thống AI là gì?",
+      "prompt": "Golden dataset cho chatbot chính sách chỉ có câu hỏi dễ. Bổ sung nào tăng độ phủ?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Ca mơ hồ, ngoài phạm vi và adversarial"
         },
         {
           "key": "B",
-          "text": "Phải đại diện các use case, edge case và rủi ro quan trọng"
+          "text": "Chỉ nhân bản câu hỏi dễ thành nhiều bản"
         },
         {
           "key": "C",
-          "text": "Chỉ gồm các ví dụ model trả lời đúng"
+          "text": "Chỉ đổi thứ tự đáp án của các ca cũ"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Bỏ mọi ca đa ngôn ngữ hoặc context dài"
         }
       ],
-      "answer": "B",
-      "explanation": "Phải đại diện các use case, edge case và rủi ro quan trọng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "A",
+      "explanation": "Mục Benchmark Design: cần ca thường gặp lẫn edge case.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-028",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của LLM-as-a-Judge trong hệ thống AI là gì?",
+      "prompt": "Muốn truy lại nguyên nhân điểm số thay đổi sau cập nhật dữ liệu. Metadata nào cần lưu?",
       "options": [
         {
           "key": "A",
-          "text": "Chấp nhận điểm chấm không cần rubric"
+          "text": "Chỉ màu sắc giao diện của dashboard"
         },
         {
           "key": "B",
-          "text": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy"
+          "text": "Chỉ thứ tự hiển thị câu hỏi trên web"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ số ký tự của mỗi đáp án mẫu"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Phiên bản dữ liệu, nguồn và nhóm use case"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "D",
+      "explanation": "Mục Benchmark Design: metadata gồm độ khó, use case, phiên bản dữ liệu và nguồn.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-029",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của RAGAS trong hệ thống AI là gì?",
+      "prompt": "Tài liệu nêu quy mô khởi đầu nào hợp lý hơn cho production benchmark?",
       "options": [
         {
           "key": "A",
-          "text": "Thay thế hoàn toàn đánh giá con người"
+          "text": "Đúng 20 ca bất kể use case"
         },
         {
           "key": "B",
-          "text": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG"
+          "text": "Mọi log thô không cần nhãn"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Khoảng 50–100 ca có chọn lọc"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Đúng 2 ca do chuyên gia viết"
         }
       ],
-      "answer": "B",
-      "explanation": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "C",
+      "explanation": "Mục Benchmark Design: 50–100 ca là điểm bắt đầu, không phải ngưỡng phổ quát.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-030",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Slice evaluation trong hệ thống AI là gì?",
+      "prompt": "Dùng production logs để tạo ca chuẩn. Rủi ro cần xử lý trước là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "PII trong log và chất lượng nhãn"
         },
         {
           "key": "B",
-          "text": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ"
+          "text": "Thiếu màu sắc trong output mẫu"
         },
         {
           "key": "C",
-          "text": "Gộp tất cả điểm thành một số duy nhất"
+          "text": "Tên file log không cùng độ dài"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Độ rộng màn hình của người chấm"
         }
       ],
-      "answer": "B",
-      "explanation": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "A",
+      "explanation": "Mục Benchmark Design: log thực phản ánh nhu cầu nhưng cần ẩn danh và kiểm nhãn.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-031",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Calibration trong hệ thống AI là gì?",
+      "prompt": "LLM sinh ứng viên cho golden dataset. Ai nên duyệt nhãn cuối?",
       "options": [
         {
           "key": "A",
-          "text": "Làm model luôn trả lời chắc chắn"
+          "text": "Bỏ nhãn và dùng mọi ứng viên thô"
         },
         {
           "key": "B",
-          "text": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng"
+          "text": "Người kiểm tra theo rubric và evidence"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chính LLM sinh dữ liệu tự xác nhận"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Model đang được benchmark tự sửa nhãn"
         }
       ],
       "answer": "B",
-      "explanation": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "explanation": "Mục Benchmark Design: LLM + human filter; không để model tự sinh và tự duyệt hết.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-032",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Failure analysis trong hệ thống AI là gì?",
+      "prompt": "Cohen's Kappa điều chỉnh tỷ lệ đồng ý quan sát theo đại lượng nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Số token của câu trả lời tham chiếu"
         },
         {
           "key": "B",
-          "text": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân"
+          "text": "Chi phí chạy hai model trong một ngày"
         },
         {
           "key": "C",
-          "text": "Chỉ đọc các câu trả lời hay nhất"
+          "text": "Mức đồng ý có thể xảy ra do ngẫu nhiên"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Độ trễ trung bình giữa hai lần chấm"
         }
       ],
-      "answer": "B",
-      "explanation": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "C",
+      "explanation": "Mục Benchmark Design: κ=(Pₒ−Pₑ)/(1−Pₑ), Pₑ là chance agreement.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-033",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Evaluation objective?",
+      "prompt": "Hai người chấm thường xuyên bất đồng ở ca khó. Việc nào nên làm trước?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Tuyên bố mọi nhãn đã là golden"
         },
         {
           "key": "B",
-          "text": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric"
+          "text": "Xóa toàn bộ ca hai người bất đồng"
         },
         {
           "key": "C",
-          "text": "Chọn metric dễ đẹp nhất rồi mới tìm mục tiêu"
+          "text": "Lấy điểm cao hơn làm chuẩn mặc định"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Sửa rubric và phân xử ca bất đồng"
         }
       ],
-      "answer": "B",
-      "explanation": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "D",
+      "explanation": "Mục Benchmark Design: bất đồng nhiều có thể báo rubric mơ hồ.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-034",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Benchmark?",
+      "prompt": "Bộ benchmark có 20 ca; theo gợi ý ít nhất 10% adversarial, cần tối thiểu mấy ca?",
       "options": [
         {
           "key": "A",
-          "text": "Một demo gồm vài ví dụ thành công"
+          "text": "2 ca adversarial"
         },
         {
           "key": "B",
-          "text": "Tập case và cách chấm chuẩn để so sánh nhất quán"
+          "text": "1 ca adversarial"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "5 ca adversarial"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "10 ca adversarial"
         }
       ],
-      "answer": "B",
-      "explanation": "Tập case và cách chấm chuẩn để so sánh nhất quán. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "A",
+      "explanation": "Mục Benchmark Design: 10% của 20 là 2; đây là gợi ý từ slide.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-035",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Evaluation dataset?",
+      "prompt": "LLM-as-Judge nhận những gì để chấm một câu trả lời có reference?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ thời gian khởi động máy chủ"
         },
         {
           "key": "B",
-          "text": "Phải đại diện các use case, edge case và rủi ro quan trọng"
+          "text": "Câu hỏi, output, reference và rubric"
         },
         {
           "key": "C",
-          "text": "Chỉ gồm các ví dụ model trả lời đúng"
+          "text": "Chỉ tên model và số token đã dùng"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chỉ giao diện và màu nút gửi"
         }
       ],
       "answer": "B",
-      "explanation": "Phải đại diện các use case, edge case và rủi ro quan trọng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "explanation": "Mục LLM-as-Judge: judge chấm output theo reference/rubric, trả verdict hoặc score.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-036",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về LLM-as-a-Judge?",
+      "prompt": "Factual QA ngắn có đáp án chính xác. Nên ưu tiên cách chấm nào?",
       "options": [
         {
           "key": "A",
-          "text": "Chấp nhận điểm chấm không cần rubric"
+          "text": "Chỉ chấm độ dài output"
         },
         {
           "key": "B",
-          "text": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy"
+          "text": "Chỉ chấm thủ công toàn bộ"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Exact match, F1 hoặc assertion"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Judge lớn cho mọi câu dễ"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "C",
+      "explanation": "Mục LLM-as-Judge: đáp án rõ dùng metric xác định trước.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-037",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về RAGAS?",
+      "prompt": "Judge luôn thích câu A khi A đứng đầu. Cách giảm bias nào đúng?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Luôn đặt A đầu cho nhất quán"
         },
         {
           "key": "B",
-          "text": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG"
+          "text": "Cho judge biết model A đắt hơn"
         },
         {
           "key": "C",
-          "text": "Thay thế hoàn toàn đánh giá con người"
+          "text": "Bỏ hoàn toàn các ca so sánh"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Ẩn danh và đảo vị trí A/B khi chấm"
         }
       ],
-      "answer": "B",
-      "explanation": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "D",
+      "explanation": "Mục LLM-as-Judge: position bias giảm bằng randomize thứ tự.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-038",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Slice evaluation?",
+      "prompt": "Judge cho câu dài điểm cao dù sai thêm dữ kiện. Đây là bias nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Verbosity bias"
         },
         {
           "key": "B",
-          "text": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ"
+          "text": "Position bias"
         },
         {
           "key": "C",
-          "text": "Gộp tất cả điểm thành một số duy nhất"
+          "text": "Recency bias"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Format bias"
         }
       ],
-      "answer": "B",
-      "explanation": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "A",
+      "explanation": "Mục LLM-as-Judge: verbosity bias nhầm câu dài với câu tốt.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-039",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Calibration?",
+      "prompt": "Judge thích câu giống văn phong của chính model judge. Đây là bias nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Position bias"
         },
         {
           "key": "B",
-          "text": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng"
+          "text": "Self-preference bias"
         },
         {
           "key": "C",
-          "text": "Làm model luôn trả lời chắc chắn"
+          "text": "Sycophancy bias"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Authority bias"
         }
       ],
       "answer": "B",
-      "explanation": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "explanation": "Mục LLM-as-Judge: self-preference ưu ái output giống phong cách của judge.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-040",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Failure analysis?",
+      "prompt": "Prompt nói sẵn 'đáp án A là đúng' khiến judge chiều theo dù evidence khác. Bias nào?",
       "options": [
         {
           "key": "A",
-          "text": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân"
+          "text": "Recency bias"
         },
         {
           "key": "B",
-          "text": "Chỉ đọc các câu trả lời hay nhất"
+          "text": "Sycophancy bias"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Verbosity bias"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Format bias"
         }
       ],
-      "answer": "A",
-      "explanation": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "B",
+      "explanation": "Mục LLM-as-Judge: sycophancy chiều theo ý kiến trong prompt.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-041",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Evaluation objective, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Judge chấm cao vì câu trả lời gắn nhãn 'bác sĩ trưởng khoa' dù thiếu bằng chứng. Bias nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Authority bias"
         },
         {
           "key": "B",
-          "text": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric"
+          "text": "Position bias"
         },
         {
           "key": "C",
-          "text": "Chọn metric dễ đẹp nhất rồi mới tìm mục tiêu"
+          "text": "Format bias"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Recency bias"
         }
       ],
-      "answer": "B",
-      "explanation": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "A",
+      "explanation": "Mục LLM-as-Judge: authority bias bị cách trình bày có vẻ uy tín chi phối.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-042",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Benchmark, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Để so điểm judge qua các tuần, điều gì nên được cố định?",
       "options": [
         {
           "key": "A",
-          "text": "Một demo gồm vài ví dụ thành công"
+          "text": "Chỉ thứ tự chữ cái của câu hỏi"
         },
         {
           "key": "B",
-          "text": "Tập case và cách chấm chuẩn để so sánh nhất quán"
+          "text": "Chỉ kích thước cửa sổ trình duyệt"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ số dòng trong file log cũ"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Phiên bản judge, prompt và rubric chấm"
         }
       ],
-      "answer": "B",
-      "explanation": "Tập case và cách chấm chuẩn để so sánh nhất quán. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "D",
+      "explanation": "Mục LLM-as-Judge: pin model snapshot và prompt chấm để so công bằng.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-043",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Evaluation dataset, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Judge không có reference, nhưng được yêu cầu xác minh chính sách cụ thể. Hạn chế chính là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Luôn chấm coherence kém hơn con người"
         },
         {
           "key": "B",
-          "text": "Phải đại diện các use case, edge case và rủi ro quan trọng"
+          "text": "Bắt buộc phải trả duy nhất một nhãn số"
         },
         {
           "key": "C",
-          "text": "Chỉ gồm các ví dụ model trả lời đúng"
+          "text": "Khó xác minh sự thật khi thiếu evidence"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Không thể nhận đầu vào văn bản tiếng Việt"
         }
       ],
-      "answer": "B",
-      "explanation": "Phải đại diện các use case, edge case và rủi ro quan trọng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "C",
+      "explanation": "Mục LLM-as-Judge: reference-free yếu khi cần xác minh sự thật.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-044",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về LLM-as-a-Judge, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Score RAGAS tăng sau sửa retriever. Điều nào chưa được chứng minh?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Retriever đã đổi cách lấy context"
         },
         {
           "key": "B",
-          "text": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy"
+          "text": "Mọi câu trả lời đều đúng ngoài đời"
         },
         {
           "key": "C",
-          "text": "Chấp nhận điểm chấm không cần rubric"
+          "text": "Metric RAG đã có thể đo theo pipeline"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Các test case đã được chạy lại"
         }
       ],
       "answer": "B",
-      "explanation": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "explanation": "Mục RAGAS: score phụ thuộc benchmark, context và evaluator; không là chứng nhận sự thật.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-045",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về RAGAS, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Vì sao RAGAS tách metric retrieval khỏi metric câu trả lời?",
       "options": [
         {
           "key": "A",
-          "text": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG"
+          "text": "Để khoanh vùng lỗi lấy nguồn hay tạo đáp án"
         },
         {
           "key": "B",
-          "text": "Thay thế hoàn toàn đánh giá con người"
+          "text": "Để chứng minh mọi nguồn đều còn hiệu lực"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Để thay thế hoàn toàn human review"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Để làm output cố định giữa các run"
         }
       ],
       "answer": "A",
-      "explanation": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "explanation": "Mục RAGAS: metric từng phần giúp chẩn đoán pipeline thay vì chỉ nhìn câu cuối.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-046",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Slice evaluation, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Phiên bản A đúng 15/20, B đúng 14/20. Kết luận nào đúng?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "A chắc chắn hơn B ở mọi traffic"
         },
         {
           "key": "B",
-          "text": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ"
+          "text": "B chắc chắn tốt hơn nếu chạy online"
         },
         {
           "key": "C",
-          "text": "Gộp tất cả điểm thành một số duy nhất"
+          "text": "Hai model có năng lực bằng nhau tuyệt đối"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chênh một ca chưa đủ kết luận A tốt hơn"
         }
       ],
-      "answer": "B",
-      "explanation": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "D",
+      "explanation": "Mục Statistical Rigor: tập nhỏ và chênh một ca cần phân tích thêm.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-047",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Calibration, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Vì sao cho A và B làm cùng tập test thay vì hai tập khác nhau?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Loại bỏ nhu cầu kiểm tra từng lỗi"
         },
         {
           "key": "B",
-          "text": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng"
+          "text": "Cho phép bỏ qua phiên bản dataset"
         },
         {
           "key": "C",
-          "text": "Làm model luôn trả lời chắc chắn"
+          "text": "Paired comparison giảm lệch mẫu"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Làm output của LLM hoàn toàn cố định"
         }
       ],
-      "answer": "B",
-      "explanation": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "C",
+      "explanation": "Mục Statistical Rigor: so chênh lệch trên cùng case công bằng hơn.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-048",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Failure analysis, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Báo cáo chỉ ghi 'score 0,75'. Thông tin nào cần thêm để diễn giải độ tin cậy?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chỉ kích thước của PDF nguồn"
         },
         {
           "key": "B",
-          "text": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân"
+          "text": "Cỡ mẫu, số run và khoảng bất định"
         },
         {
           "key": "C",
-          "text": "Chỉ đọc các câu trả lời hay nhất"
+          "text": "Chỉ màu biểu đồ và tên người viết"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ số chữ trong phần giới thiệu"
         }
       ],
       "answer": "B",
-      "explanation": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "explanation": "Mục Statistical Rigor: báo score cùng cỡ mẫu, số run, uncertainty và kiểu lỗi.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-049",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Evaluation objective?",
+      "prompt": "Điểm mới tăng có ý nghĩa thống kê nhưng chi phí tăng gấp nhiều lần. Câu hỏi nào còn thiếu?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Mức cải thiện có giá trị thực tế không"
         },
         {
           "key": "B",
-          "text": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric"
+          "text": "Có thể bỏ metric chi phí được không"
         },
         {
           "key": "C",
-          "text": "Chọn metric dễ đẹp nhất rồi mới tìm mục tiêu"
+          "text": "Có nên chỉ báo run cao nhất không"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Có nên đổi tập test cho bản mới không"
         }
       ],
-      "answer": "B",
-      "explanation": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "A",
+      "explanation": "Mục Statistical Rigor: practical significance xét giá trị kinh doanh, không chỉ p-value.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-050",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Benchmark?",
+      "prompt": "Agent trả lời đúng nhưng đã gọi tool vượt quyền. Cần chấm thêm điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Tập case và cách chấm chuẩn để so sánh nhất quán"
+          "text": "Chỉ số lượng ký tự của prompt"
         },
         {
           "key": "B",
-          "text": "Một demo gồm vài ví dụ thành công"
+          "text": "Chỉ điểm benchmark tổng hợp"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Trajectory và quyền của từng bước"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chỉ văn phong của câu cuối"
         }
       ],
-      "answer": "A",
-      "explanation": "Tập case và cách chấm chuẩn để so sánh nhất quán. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "C",
+      "explanation": "Mục Agentic Evaluation: đáp án cuối đúng không bảo đảm đường đi an toàn.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-051",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Evaluation dataset?",
+      "prompt": "Agent gọi năm tool dù hai tool đã đủ. Chiều đánh giá trajectory nào bị ảnh hưởng?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ gồm các ví dụ model trả lời đúng"
+          "text": "Correctness của nguồn dữ liệu"
         },
         {
           "key": "B",
-          "text": "Phải đại diện các use case, edge case và rủi ro quan trọng"
+          "text": "Recall của bộ lọc nguy hiểm"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Format của câu trả lời mẫu"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Efficiency của bước và tool call"
         }
       ],
-      "answer": "B",
-      "explanation": "Phải đại diện các use case, edge case và rủi ro quan trọng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "D",
+      "explanation": "Mục Agentic Evaluation: efficiency xét bước và tool call có cần thiết.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-052",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng LLM-as-a-Judge?",
+      "prompt": "Agent thành công ít nhất một lần trong k lần thử. Metric nào mô tả điều này?",
       "options": [
         {
           "key": "A",
-          "text": "Chấp nhận điểm chấm không cần rubric"
+          "text": "pass@k"
         },
         {
           "key": "B",
-          "text": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy"
+          "text": "pass^k"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "P95 latency"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Cohen's Kappa"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "A",
+      "explanation": "Mục Agentic Evaluation: pass@k đo năng lực có ít nhất một lần thành công.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-053",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng RAGAS?",
+      "prompt": "Giao dịch không được sai ở bất kỳ lần chạy nào. Metric nào nhấn mạnh ổn định qua k lần?",
       "options": [
         {
           "key": "A",
-          "text": "Thay thế hoàn toàn đánh giá con người"
+          "text": "Answer Relevance"
         },
         {
           "key": "B",
-          "text": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG"
+          "text": "pass^k"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "pass@k"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Context Recall"
         }
       ],
       "answer": "B",
-      "explanation": "Đánh giá các khía cạnh như faithfulness, relevance và context của RAG. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "explanation": "Mục Agentic Evaluation: pass^k yêu cầu tất cả k lần thành công.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-054",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Slice evaluation?",
+      "prompt": "Agent sửa unit test để được điểm pass thay vì sửa code. Đây là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Paired comparison giữa model"
         },
         {
           "key": "B",
-          "text": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ"
+          "text": "Reference-based evaluation"
         },
         {
           "key": "C",
-          "text": "Gộp tất cả điểm thành một số duy nhất"
+          "text": "Reward hacking theo metric chấm"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Human calibration cho judge"
         }
       ],
-      "answer": "B",
-      "explanation": "Phân tích metric theo nhóm tình huống để không che lỗi cục bộ. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "C",
+      "explanation": "Mục Agentic Evaluation: reward hacking lách thước đo thay vì giải quyết mục tiêu.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-055",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Calibration?",
+      "prompt": "Đổi riêng giới tính trong cùng một hồ sơ để so kết quả agent. Đây là kiểu kiểm tra nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Offline latency smoke test"
         },
         {
           "key": "B",
-          "text": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng"
+          "text": "Context Precision benchmark"
         },
         {
           "key": "C",
-          "text": "Làm model luôn trả lời chắc chắn"
+          "text": "Repeated run cùng seed"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Counterfactual fairness test"
         }
       ],
-      "answer": "B",
-      "explanation": "Độ tự tin của hệ thống cần phù hợp với xác suất nó đúng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "D",
+      "explanation": "Mục Agentic Evaluation: fairness eval dùng biến thể counterfactual.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-056",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Failure analysis?",
+      "prompt": "Sau lỗi trả sai chính sách, bước đầu để tìm root cause là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Mở trace, nguồn và chunk đã retrieve"
         },
         {
           "key": "B",
-          "text": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân"
+          "text": "Tăng temperature mà chưa xem evidence"
         },
         {
           "key": "C",
-          "text": "Chỉ đọc các câu trả lời hay nhất"
+          "text": "Đổi model ngay và xóa log cũ"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chỉ sửa câu trả lời demo cho đẹp"
         }
       ],
-      "answer": "B",
-      "explanation": "Phân loại và ưu tiên lỗi để sửa đúng tầng nguyên nhân. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "A",
+      "explanation": "Mục Failure Analysis: trace và nguồn giúp phân biệt corpus cũ, retrieval và generation.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-057",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Evaluation objective giúp đội ngũ làm điều gì?",
+      "prompt": "Nhiều lỗi production cùng do corpus hết hạn. Cách sửa bền hơn là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Bỏ các lỗi khỏi dashboard theo dõi"
         },
         {
           "key": "B",
-          "text": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric"
+          "text": "Sửa nguồn gốc rồi thêm regression case"
         },
         {
           "key": "C",
-          "text": "Chọn metric dễ đẹp nhất rồi mới tìm mục tiêu"
+          "text": "Vá riêng từng câu trả lời của user"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Giữ corpus và nâng điểm bằng tay"
         }
       ],
       "answer": "B",
-      "explanation": "Xác định rõ hành vi hoặc kết quả cần chứng minh trước khi chọn metric. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "explanation": "Mục Failure Analysis: gom lỗi theo root cause, sửa đúng tầng và thêm test.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-058",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Benchmark giúp đội ngũ làm điều gì?",
+      "prompt": "Failure log thiếu model ID và phiên bản prompt. Việc gì trở nên khó hơn?",
       "options": [
         {
           "key": "A",
-          "text": "Một demo gồm vài ví dụ thành công"
+          "text": "Đo kích thước tệp PDF đã dùng"
         },
         {
           "key": "B",
-          "text": "Tập case và cách chấm chuẩn để so sánh nhất quán"
+          "text": "Chọn màu cho dashboard theo dõi"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Tái hiện lỗi và so kết quả sau sửa"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Đếm tổng số câu trong benchmark"
         }
       ],
-      "answer": "B",
-      "explanation": "Tập case và cách chấm chuẩn để so sánh nhất quán. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "C",
+      "explanation": "Mục Failure Analysis: failure log cần model ID, prompt/dataset version để truy vết.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-059",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Evaluation dataset giúp đội ngũ làm điều gì?",
+      "prompt": "Điểm trung bình tăng nhưng safety suite có ca PII leak mới. Release gate nên xử lý sao?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Ship vì điểm trung bình đã tăng"
         },
         {
           "key": "B",
-          "text": "Phải đại diện các use case, edge case và rủi ro quan trọng"
+          "text": "Xóa ca PII khỏi benchmark"
         },
         {
           "key": "C",
-          "text": "Chỉ gồm các ví dụ model trả lời đúng"
+          "text": "Chỉ sửa tên metric trên báo cáo"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Block vì lỗi safety nghiêm trọng"
         }
       ],
-      "answer": "B",
-      "explanation": "Phải đại diện các use case, edge case và rủi ro quan trọng. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "D",
+      "explanation": "Mục Safety & Release Gate: lỗi nghiêm trọng không được bù bởi điểm trung bình.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     },
     {
       "id": "D14-060",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, LLM-as-a-Judge giúp đội ngũ làm điều gì?",
+      "prompt": "Trước release, khi nào cần chốt ngưỡng pass của benchmark?",
       "options": [
         {
           "key": "A",
-          "text": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy"
+          "text": "Sau khi chọn run điểm cao nhất"
         },
         {
           "key": "B",
-          "text": "Chấp nhận điểm chấm không cần rubric"
+          "text": "Chỉ sau khi người dùng phàn nàn"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Không cần chốt nếu đã có demo"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Trước khi xem kết quả chạy test"
         }
       ],
-      "answer": "A",
-      "explanation": "Dùng model chấm theo rubric rõ ràng và cần kiểm chứng độ tin cậy. Nội dung được biên soạn từ tài liệu Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html của Ngày 14.",
+      "answer": "D",
+      "explanation": "Mục Safety & Release Gate: định nghĩa điều kiện pass trước; trượt regression/safety thì không ship.",
       "source": "onthi/Day14_AI_Evaluation_Benchmarking_Beginner_Notes.html"
     }
   ]

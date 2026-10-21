@@ -1,0 +1,526 @@
+{
+  "mcq": [
+    [
+      "Agent chậm riêng với feature X và model Z; trước đó chưa có metric cho tổ hợp này. Cần năng lực nào để điều tra?",
+      "Observability để khám phá câu hỏi chưa định sẵn",
+      "Monitoring để chỉ kiểm tra ngưỡng CPU đã định",
+      "Audit log để thay toàn bộ metric vận hành",
+      "Profiling để chỉ đo mức dùng RAM của host",
+      "Slide phân biệt monitoring theo câu hỏi biết trước và observability để khám phá unknown unknowns."
+    ],
+    [
+      "Sự cố bắt đầu lúc 09:00, hệ thống báo lúc 09:07. Khoảng 7 phút là chỉ số nào?",
+      "MTTD, thời gian từ lúc sự cố bắt đầu đến lúc phát hiện",
+      "MTTR, thời gian từ lúc báo động đến lúc khôi phục",
+      "TTFT, thời gian từ yêu cầu đến token đầu tiên",
+      "TPOT, thời gian trung bình cho mỗi token đầu ra",
+      "MTTD đo độ trễ phát hiện sự cố."
+    ],
+    [
+      "Alert đến lúc 09:07, dịch vụ khôi phục lúc 09:24. Khoảng 17 phút là chỉ số nào?",
+      "MTTR, thời gian từ lúc phát hiện đến lúc khôi phục",
+      "MTTD, thời gian từ lúc bắt đầu đến lúc phát hiện",
+      "P95, thời gian đáp ứng của 95% request",
+      "SLA, thời gian phản hồi cam kết với khách",
+      "MTTR đo thời gian khôi phục sau khi đã phát hiện."
+    ],
+    [
+      "Muốn biết P99 latency và error rate đang tăng hay giảm theo thời gian, nên mở dữ liệu nào trước?",
+      "Metrics tổng hợp theo khoảng thời gian",
+      "Một log lỗi của request bất kỳ",
+      "Một span riêng trong trace bất kỳ",
+      "Profile CPU của một worker bất kỳ",
+      "Metrics trả lời bao nhiêu và bao lâu, thích hợp phát hiện xu hướng."
+    ],
+    [
+      "Trace đã chỉ ra tool call thất bại; muốn xem thông báo exception cụ thể, nên tìm gì?",
+      "Log sự kiện của tool call cùng request",
+      "Metric tổng request theo mỗi giờ",
+      "Profile mức dùng CPU của server",
+      "SLO uptime của cả tháng hiện tại",
+      "Logs ghi chi tiết sự kiện; trace giúp khoanh vùng bước lỗi."
+    ],
+    [
+      "Một request đi qua gateway, agent, RAG và provider. Dữ liệu nào cho thấy thứ tự và thời lượng từng bước?",
+      "Distributed trace của request đó",
+      "Biểu đồ traffic tổng của dịch vụ",
+      "Audit log thay đổi quyền truy cập",
+      "Bảng giá token theo từng model",
+      "Trace mô tả toàn bộ hành trình request qua các span."
+    ],
+    [
+      "Trường hợp nào khiến profile CPU/memory hữu ích hơn việc chỉ nhìn trace?",
+      "Nghi ngờ code nội bộ đốt CPU trong một bước",
+      "Nghi ngờ provider LLM trả lời qua mạng chậm",
+      "Muốn biết tổng chi phí token theo feature",
+      "Muốn tra exception của một tool call cụ thể",
+      "Profiles cho biết code tiêu thụ CPU/memory ở đâu; AI agent thường chờ API ngoài."
+    ],
+    [
+      "Vì sao không nên thêm request_id làm label của metric?",
+      "Mỗi giá trị tạo thêm series, làm cardinality bùng nổ",
+      "Giá trị này khiến log JSON mất correlation ID",
+      "Metric có request_id sẽ luôn sai đơn vị đo",
+      "Request_id chỉ tồn tại ở hệ thống không dùng trace",
+      "ID nhiều giá trị nên nằm trong log hoặc trace, không phải metric label."
+    ],
+    [
+      "P95 latency thực đo là 2,3 giây. Con số này thuộc loại nào?",
+      "SLI, chỉ số dịch vụ đang được đo",
+      "SLO, mục tiêu nội bộ phải đạt",
+      "SLA, cam kết pháp lý với khách",
+      "Error budget, phần lỗi còn được phép",
+      "SLI là chỉ số đo thực tế; P95 latency 2,3 giây là ví dụ trong slide."
+    ],
+    [
+      "Team đặt mục tiêu nội bộ P95 latency không quá 3 giây. Đây là gì?",
+      "SLO cho chỉ số latency",
+      "SLI đo latency hiện tại",
+      "SLA hoàn tiền cho khách hàng",
+      "Audit log ghi thay đổi ngưỡng",
+      "SLO là mục tiêu nội bộ cho một SLI."
+    ],
+    [
+      "Hợp đồng hứa hoàn tiền nếu uptime dưới 99%. Điều khoản đó là gì?",
+      "SLA, cam kết dịch vụ với khách hàng",
+      "SLI, giá trị uptime vừa đo được",
+      "SLO, mục tiêu nội bộ của đội vận hành",
+      "Trace, hành trình của một request lỗi",
+      "SLA là cam kết với khách và có thể gắn bồi thường."
+    ],
+    [
+      "SLO uptime 99,5% trong tháng 30 ngày cho phép downtime xấp xỉ bao lâu?",
+      "3 giờ 36 phút",
+      "43 phút 12 giây",
+      "7 giờ 12 phút",
+      "4 phút 19 giây",
+      "0,5% của 30 ngày bằng 3 giờ 36 phút, theo bảng error budget của slide."
+    ],
+    [
+      "Error budget gần cạn; quyết định phát hành nào phù hợp?",
+      "Ưu tiên ổn định và sửa lỗi trước thay đổi rủi ro",
+      "Tăng tốc phát hành thay đổi rủi ro để thử nghiệm",
+      "Bỏ SLO vì budget không còn giá trị theo dõi",
+      "Chỉ đổi dashboard mà giữ nguyên lịch phát hành",
+      "Slide khuyên giảm rủi ro khi error budget cạn."
+    ],
+    [
+      "Queue chờ tool tăng liên tục dù CPU chưa đầy. Golden Signal nào phản ánh gần nghẽn?",
+      "Saturation, mức đầy của tài nguyên hoặc hàng đợi",
+      "Traffic, lượng request đi vào mỗi giây",
+      "Latency, thời gian hoàn thành một request",
+      "Errors, tỷ lệ request kết thúc thất bại",
+      "Saturation bao gồm mức đầy hàng đợi, không chỉ mức dùng CPU."
+    ],
+    [
+      "Nhóm muốn nhìn hệ thống theo từng request: số lượt, lỗi và thời lượng. Bộ chỉ số nào phù hợp?",
+      "RED: Rate, Errors, Duration",
+      "USE: Utilization, Saturation, Errors",
+      "SLI: Service, Latency, Impact",
+      "APM: Audit, Prompt, Model",
+      "RED là góc nhìn request theo slide."
+    ],
+    [
+      "Nhóm muốn nhìn tài nguyên: mức sử dụng, nghẽn và lỗi. Bộ chỉ số nào phù hợp?",
+      "USE: Utilization, Saturation, Errors",
+      "RED: Rate, Errors, Duration",
+      "SLA: Service, Latency, Availability",
+      "RAG: Retrieval, Answer, Grounding",
+      "USE là góc nhìn tài nguyên theo slide."
+    ],
+    [
+      "Agent có uptime tốt và ít lỗi HTTP nhưng câu trả lời sai, hóa đơn tăng. Còn thiếu nhóm metric nào?",
+      "Cost và quality của AI",
+      "CPU và RAM của host",
+      "QPS và số connection",
+      "Uptime và HTTP error",
+      "Slide bổ sung cost và quality cho AI bên cạnh 4 Golden Signals."
+    ],
+    [
+      "Ứng dụng streaming mất 3 giây mới hiện chữ đầu tiên dù tổng thời gian không đổi. Metric nào nên xem?",
+      "TTFT, thời gian đến token đầu tiên",
+      "TPOT, thời gian mỗi token đầu ra",
+      "P99, ngưỡng của 99% request",
+      "Context fill, phần trăm cửa sổ dùng",
+      "TTFT ảnh hưởng rõ tới cảm giác chờ trong giao diện streaming."
+    ],
+    [
+      "Token đầu đến nhanh nhưng phần còn lại hiện rất chậm. Metric nào giúp kiểm tra tốc độ sinh tiếp?",
+      "TPOT, thời gian mỗi output token",
+      "TTFT, thời gian chờ token đầu tiên",
+      "MTTD, thời gian phát hiện sự cố",
+      "SLA, cam kết dịch vụ với khách",
+      "TPOT phản ánh thời gian tạo mỗi token sau đó."
+    ],
+    [
+      "Trước khi lịch sử chat bị cắt do vượt giới hạn model, nên theo dõi đại lượng nào?",
+      "Context fill %, tỷ lệ cửa sổ ngữ cảnh đã dùng",
+      "Error budget %, tỷ lệ downtime còn lại",
+      "Cache hit %, tỷ lệ query lặp được dùng lại",
+      "CPU idle %, tỷ lệ thời gian chờ provider",
+      "Context fill % báo mức sử dụng cửa sổ ngữ cảnh."
+    ],
+    [
+      "P95 latency bằng 4 giây có nghĩa gì?",
+      "95% request mất không quá 4 giây",
+      "95% request mất ít nhất 4 giây",
+      "Chỉ 5% request mất không quá 4 giây",
+      "Thời gian trung bình của request là 4 giây",
+      "P95 là ngưỡng mà 95% request nhanh hơn hoặc bằng."
+    ],
+    [
+      "P99 là 5 giây. Giả sử mỗi lượt có 1% xác suất vượt 5 giây và 10 lượt độc lập. Xác suất gặp ít nhất một lượt chậm xấp xỉ bao nhiêu?",
+      "9,6%, tính bằng 1 − 0,99^10",
+      "1%, vì P99 luôn tính cho cả phiên",
+      "50%, vì mười lượt chia đều hai phía",
+      "99%, vì P99 là tỷ lệ gặp lượt chậm",
+      "Ví dụ trong slide: 1 − 0,99^10 ≈ 9,6%; average có thể che tail latency."
+    ],
+    [
+      "Bộ kiểm tra format, độ dài, toxicity và PII leak thuộc tầng chất lượng nào?",
+      "L1, automated heuristic nhanh và rẻ",
+      "L2, LLM-as-Judge đánh giá nội dung",
+      "L3, tín hiệu đánh giá của người dùng",
+      "L4, kết quả kinh doanh và tác vụ",
+      "L1 phát hiện sớm các dấu hiệu dễ đo, nhưng không đủ để kết luận chất lượng thực."
+    ],
+    [
+      "Muốn chấm relevance và faithfulness của câu trả lời bằng model đánh giá, nên dùng tầng nào?",
+      "L2, LLM-as-Judge",
+      "L1, kiểm tra format đơn giản",
+      "L3, phản hồi thumbs up/down",
+      "L4, tỷ lệ giữ chân người dùng",
+      "Slide xếp LLM-as-Judge ở L2 của kim tự tháp chất lượng."
+    ],
+    [
+      "Tỷ lệ thumbs down và follow-up tăng sau bản deploy. Đây là tín hiệu ở tầng nào?",
+      "L3, user signals",
+      "L1, automated heuristic",
+      "L2, LLM-as-Judge",
+      "L4, outcome kinh doanh",
+      "L3 gồm thumbs up/down, CSAT và hành vi follow-up."
+    ],
+    [
+      "Task success được đo sau nhiều ngày; theo kim tự tháp chất lượng, nó thuộc tầng nào?",
+      "L4, outcome gần ground truth nhưng đến chậm",
+      "L1, heuristic nhanh dựa trên format",
+      "L2, LLM-as-Judge chạy trực tiếp",
+      "L3, phản hồi tức thời của người dùng",
+      "L4 gồm task success, revenue và retention."
+    ],
+    [
+      "Agent RAG nêu một claim có vẻ đúng. Kiểm tra groundedness cần xác minh điều gì?",
+      "Claim có bằng chứng trong context truy xuất hay không",
+      "Claim có số token thấp hơn câu trả lời khác không",
+      "Claim có khiến P95 latency vượt SLO hay không",
+      "Claim có được người dùng đọc hết trên UI hay không",
+      "Groundedness đối chiếu claim với ngữ cảnh nguồn để phát hiện hallucination."
+    ],
+    [
+      "Đội lấy nhiều câu trả lời cho cùng câu hỏi rồi tìm mâu thuẫn. Phương pháp nào đang dùng?",
+      "Self-consistency, nên dùng có chọn mẫu vì tốn chi phí",
+      "Entity verification, luôn chỉ dùng một câu trả lời",
+      "Prompt caching, tái dùng toàn bộ output cũ",
+      "Context propagation, truyền ID xuyên service",
+      "Slide nêu self-consistency là cách phát hiện hallucination, có chi phí thêm."
+    ],
+    [
+      "Agent trả lời sai số dư tài khoản. Cách xác minh phù hợp nhất là gì?",
+      "Đối chiếu số với DB hoặc API đáng tin",
+      "Chỉ đếm token của câu trả lời",
+      "Chỉ đo thời gian gọi provider",
+      "Đổi sang model nhỏ để trả lời lại",
+      "Entity verification kiểm tra tên, số và ngày với nguồn đáng tin."
+    ],
+    [
+      "Người dùng bấm regenerate nhiều hơn dù không bấm thumbs down. Điều này gợi ý gì?",
+      "Theo dõi như tín hiệu chất lượng ngầm",
+      "Bỏ qua vì không phải lỗi HTTP",
+      "Chỉ tăng ngưỡng alert CPU để bớt nhiễu",
+      "Ghi full prompt vào log để thay feedback",
+      "Case Replit trong slide cho thấy regenerate rate tăng có thể báo vấn đề chất lượng."
+    ],
+    [
+      "Tổng hóa đơn LLM tăng; muốn biết feature nào gây tăng, nên làm gì?",
+      "Gắn cost theo feature và model",
+      "Chỉ đo tổng chi phí theo tháng",
+      "Chỉ đếm số container đang chạy",
+      "Chỉ xem tỷ lệ lỗi của provider",
+      "Cost engineering cần gắn chi phí đúng nơi phát sinh; slide nêu tags user_id, feature, model."
+    ],
+    [
+      "System prompt dài lặp lại trong nhiều request. Cách giảm chi phí nào phù hợp?",
+      "Prompt caching cho phần nội dung tĩnh",
+      "Batch API cho mọi câu trả lời realtime",
+      "Entity verification cho token đầu ra",
+      "Audit log cho toàn bộ system prompt",
+      "Prompt caching tái sử dụng system prompt hoặc tài liệu tĩnh."
+    ],
+    [
+      "Một phần lớn request đơn giản không cần model mạnh. Cách tối ưu nào phù hợp?",
+      "Model routing: việc dễ dùng model nhỏ",
+      "Semantic cache: luôn trả output gần nhất",
+      "Batch API: gom cả request realtime",
+      "Prompt logging: lưu prompt nguyên văn",
+      "Routing/cascade chỉ chuyển việc khó sang model lớn."
+    ],
+    [
+      "Hai query khác chữ nhưng cùng ý; use case cho phép dùng lại đáp án. Cách nào phù hợp?",
+      "Semantic cache theo độ giống nghĩa",
+      "Prompt caching theo system prompt tĩnh",
+      "Audit log theo thay đổi quyền truy cập",
+      "Circuit breaker theo lỗi provider",
+      "Semantic cache tái dùng kết quả khi query đủ giống và use case cho phép."
+    ],
+    [
+      "Công việc tổng hợp dữ liệu không cần phản hồi ngay. Tùy chọn chi phí nào trong slide đáng cân nhắc?",
+      "Batch API nếu giá nhà cung cấp phù hợp",
+      "Streaming token để giảm mọi chi phí",
+      "DEBUG logging toàn phần trong production",
+      "Model lớn cho mọi tác vụ để giảm retry",
+      "Slide đề xuất Batch API cho việc không cần realtime; mức giảm giá tùy nhà cung cấp."
+    ],
+    [
+      "LLM provider trả 5xx tạm thời. Cách xử lý được slide đề xuất là gì?",
+      "Retry với exponential backoff, có fallback model",
+      "Lặp request ngay liên tục không giới hạn",
+      "Ghi full prompt rồi ngừng mọi request",
+      "Bỏ lỗi provider khỏi error rate dashboard",
+      "Taxonomy lỗi gợi ý backoff và fallback cho LLM API 5xx."
+    ],
+    [
+      "Provider phản hồi rất chậm, gây LLM timeout. Cặp biện pháp nào phù hợp?",
+      "Circuit breaker; client timeout ngắn hơn server",
+      "Tắt timeout ở client và server để chờ mãi",
+      "Chỉ tăng sampling INFO khi provider chậm",
+      "Chỉ đổi nhãn model trong pricing database",
+      "Slide nêu circuit breaker và client timeout ngắn hơn timeout server."
+    ],
+    [
+      "API ngoài dùng bởi tool call bị lỗi. Hành vi nào giữ agent hữu dụng mà tránh retry quá mức?",
+      "Retry có kiểm soát và graceful degradation",
+      "Retry vô hạn trên mọi request của người dùng",
+      "Ẩn lỗi bằng cách bịa kết quả tool call",
+      "Tắt hoàn toàn log và trace của tool",
+      "Taxonomy lỗi đề xuất retry có kiểm soát và graceful degradation."
+    ],
+    [
+      "LLM sinh JSON sai schema cho một tool. Cách xử lý nào được slide nêu?",
+      "Phản hồi lỗi schema để model sửa hoặc re-prompt",
+      "Gửi JSON sai thẳng tới API ngoài như thường",
+      "Đổi error_type thành success để tránh alert",
+      "Chỉ tăng context window mà không báo lỗi",
+      "Tool schema invalid cần trả feedback lỗi để sửa/re-prompt."
+    ],
+    [
+      "Lịch sử chat vượt cửa sổ ngữ cảnh của model. Biện pháp nào phù hợp?",
+      "Truncate hoặc summarize history",
+      "Tăng retry không giới hạn",
+      "Đổi log level thành CRITICAL",
+      "Tắt quality metrics cho request",
+      "Context overflow được xử lý bằng cắt bớt hoặc tóm tắt lịch sử."
+    ],
+    [
+      "Error rate tăng từ nhiều nguồn. Trường log nào giúp phân biệt lỗi provider, tool và guardrail?",
+      "error_type có taxonomy nhất quán",
+      "request_id làm metric label",
+      "full_prompt lưu nguyên văn",
+      "cpu_idle của một máy duy nhất",
+      "error_type giúp định tuyến điều tra khi alert fire."
+    ],
+    [
+      "Chính sách mới làm quan hệ giữa câu hỏi và câu trả lời đúng thay đổi. Đây là loại drift nào?",
+      "Concept drift, quan hệ input–output đổi",
+      "Data drift, chỉ phân bố input đổi",
+      "Model drift, provider đổi hành vi model",
+      "Clock drift, timestamp máy chủ lệch",
+      "Slide lấy chính sách hoặc luật mới làm ví dụ concept drift."
+    ],
+    [
+      "Phân bố câu hỏi đầu vào đổi mạnh; slide nêu nhóm công cụ nào để theo dõi drift?",
+      "PSI, KL-divergence, embedding drift",
+      "TTFT, TPOT hoặc tokens mỗi giây",
+      "MTTD, MTTR hoặc error budget",
+      "RED, USE hoặc trace waterfall",
+      "Slide giới thiệu PSI, KL-divergence và embedding drift để theo dõi thay đổi."
+    ],
+    [
+      "Vì sao structured JSON log hữu ích hơn câu văn tự do khi vận hành?",
+      "Có schema để lọc, truy vấn và tổng hợp trường",
+      "Tự động thay mọi trace và metric hệ thống",
+      "Đảm bảo không bao giờ chứa dữ liệu nhạy cảm",
+      "Luôn có dung lượng nhỏ hơn log văn bản",
+      "Structured logging lưu dữ liệu theo trường nhất quán."
+    ],
+    [
+      "Bộ trường nào nằm ở Tier 1 Required của log schema theo slide?",
+      "timestamp, level, correlation_id, service, event",
+      "user_id, session_id, feature, model, env",
+      "latency_ms, tokens_in, tokens_out, cost_usd",
+      "prompt, response, access token, số CCCD",
+      "Tier 1 chứa định danh và loại sự kiện tối thiểu."
+    ],
+    [
+      "Các service cùng xử lý một request nhưng log nằm nhiều nơi. Cần truyền gì xuyên gateway và agent?",
+      "correlation_id xuyên các service",
+      "user_id dùng làm metric label",
+      "API key của provider",
+      "full output của model",
+      "Correlation ID ghép log của cùng request qua nhiều service."
+    ],
+    [
+      "Provider lỗi tạm, hệ thống chuyển sang fallback và vẫn trả lời. Mức log nào hợp lý?",
+      "WARN vì có suy giảm nhưng đã phục hồi",
+      "DEBUG vì chỉ là dữ liệu rất chi tiết",
+      "INFO vì mọi bước đều bình thường",
+      "CRITICAL vì toàn hệ thống ngừng chạy",
+      "Slide định nghĩa WARN cho suy giảm đã phục hồi hoặc đang fallback."
+    ],
+    [
+      "Dữ liệu nào phải tránh ghi thô vào app log?",
+      "PII, API key và full prompt nhạy cảm",
+      "Latency, tokens, cost và error type",
+      "Correlation ID và topic đã sanitize",
+      "Tên event, service và mức log",
+      "Slide cấm log PII, secret và prompt/output nhạy cảm dạng thô."
+    ],
+    [
+      "Thứ tự nào đúng khi xử lý PII trong pipeline logging?",
+      "Sanitize trước khi ghi log hoặc render JSON",
+      "Ghi log thô rồi đợi audit định kỳ xử lý",
+      "Xuất trace công khai rồi mới xóa email",
+      "Chỉ sanitize các log sau khi có alert",
+      "Slide nhấn mạnh sanitize trước khi ghi; regex cần kiểm thử vì có thể bỏ sót."
+    ],
+    [
+      "Muốn giảm chi phí logging mà vẫn giữ sự cố hiếm. Chính sách sampling nào hợp lý?",
+      "Giữ WARN/ERROR và ca chậm/đắt; lấy mẫu còn lại",
+      "Chỉ giữ INFO/DEBUG, bỏ ERROR/WARN để tiết kiệm",
+      "Lấy mẫu mọi loại log cùng một tỷ lệ rất thấp",
+      "Tắt log cho request có latency hoặc cost cao",
+      "Slide đề xuất ưu tiên ERROR/WARN và giữ request latency/cost bất thường."
+    ],
+    [
+      "Hệ thống cần hồ sơ phục vụ điều tra tuân thủ. Thuộc tính nào phù hợp với audit log?",
+      "Đầy đủ, hạn chế truy cập và append-only",
+      "Sampling mạnh, ai cũng xem và sửa được",
+      "Chỉ giữ khi request vượt P95 latency",
+      "Dùng làm metric label cho mọi user_id",
+      "Audit log khác app log: cần đầy đủ, kiểm soát quyền và append-only."
+    ],
+    [
+      "Trong distributed tracing, quan hệ giữa trace và span là gì?",
+      "Trace là hành trình; span là một công việc bên trong",
+      "Span là hành trình; trace là một log lỗi bên trong",
+      "Trace là metric; span là một giá trị của metric",
+      "Span là dashboard; trace là một panel bên trong",
+      "Một trace gồm các span có thời gian, attributes, status và events."
+    ],
+    [
+      "Trace bị đứt giữa agent và RAG service dù mỗi service đều tạo span. Cần kiểm tra gì?",
+      "Truyền trace context qua HTTP hoặc queue",
+      "Giá token của model trong pricing database",
+      "Độ dài system prompt trong prompt cache",
+      "Mức sử dụng CPU của dashboard server",
+      "Trace context phải đi theo request qua ranh giới service."
+    ],
+    [
+      "Vai trò của OpenTelemetry Collector là gì?",
+      "Nhận, xử lý và export telemetry tới backend",
+      "Thay model để chấm faithfulness của output",
+      "Tạo SLA thương mại cho mọi dịch vụ",
+      "Tự động xóa PII trong mọi ứng dụng",
+      "Slide tách API instrument, SDK theo ngôn ngữ và Collector xử lý/export."
+    ],
+    [
+      "Muốn ghi provider, model và token usage theo quy ước OpenTelemetry cho AI, nên dùng gì?",
+      "Attributes trong namespace gen_ai.*",
+      "Metric label là email người dùng",
+      "Log DEBUG chứa toàn bộ access token",
+      "Span name bằng toàn bộ prompt người dùng",
+      "Slide gợi ý namespace gen_ai.* để tăng khả năng tương thích."
+    ],
+    [
+      "Waterfall có nhiều call DB nhỏ lặp lại cho từng item. Mẫu bottleneck và cách sửa nào đúng?",
+      "N+1 queries; batch hoặc pre-fetch",
+      "Waiting; chỉ tăng CPU cho worker",
+      "Retry storm; bỏ toàn bộ timeout",
+      "Sequential dependency; thêm nhiều call nối tiếp",
+      "Slide chỉ ra N+1 queries và cách giảm bằng batch/pre-fetch."
+    ],
+    [
+      "Team dùng LangChain và cần tracing tích hợp chặt cùng playground, datasets. Công cụ nào khớp slide?",
+      "LangSmith",
+      "Helicone",
+      "Datadog",
+      "New Relic",
+      "Bảng công cụ trong slide gắn LangSmith với hệ LangChain."
+    ],
+    [
+      "Khi đặt alert cho người trực, điều kiện nào phản ánh tác động lên người dùng trực tiếp nhất?",
+      "P95 vượt SLO hoặc error rate tăng",
+      "CPU tăng nhẹ dù request vẫn bình thường",
+      "Một worker có tên process mới",
+      "Số file log trên máy vừa thay đổi",
+      "Slide ưu tiên symptom-based alert; cause-based signal hỗ trợ debug."
+    ],
+    [
+      "Multi-window alert dùng 5 phút và 1 giờ. Theo slide, khi nào page critical nên fire?",
+      "Cả hai cửa sổ cùng vượt ngưỡng burn rate",
+      "Chỉ một điểm dữ liệu bất kỳ vượt ngưỡng",
+      "Chỉ cửa sổ 5 phút vượt, bỏ cửa sổ dài",
+      "Chỉ khi CPU vượt 80% trong một giây",
+      "Multi-window, multi-burn-rate giảm nhiễu khi đòi cả cửa sổ ngắn và dài vượt ngưỡng."
+    ],
+    [
+      "Engineering dashboard cần tối thiểu 6 panels theo slide. Bộ nào đúng?",
+      "Latency, traffic, errors, cost, tokens, hallucination",
+      "Latency, traffic, errors, CPU, RAM, uptime",
+      "Latency, traffic, errors, cost, tokens, memory",
+      "Latency, traffic, errors, cost, uptime, traces",
+      "Slide liệt kê sáu panel tối thiểu; saturation thuộc 4 Golden Signals và cần theo dõi thêm."
+    ]
+  ],
+  "essay": [
+    [
+      "Một feature chỉ chậm với một model và một nhóm user, trong khi dashboard tổng vẫn xanh. Lập kế hoạch điều tra end-to-end và chọn dữ liệu cần nối giữa các service.",
+      "Nêu observability cho câu hỏi mới; lọc metric theo feature/model ở mức cardinality hợp lý; dùng trace tìm span chậm; dùng correlation_id ghép log; xem P95/P99, TTFT/TPOT; đo MTTD/MTTR và ghi nguyên nhân."
+    ],
+    [
+      "Dịch vụ có SLO uptime 99,9% trong tháng 30 ngày. Tính downtime cho phép, giải thích quyết định phát hành khi đã dùng hết 80% budget.",
+      "Budget là 0,1% × 30 ngày = 43 phút 12 giây; đã dùng khoảng 34 phút 34 giây, còn khoảng 8 phút 38 giây. Ưu tiên ổn định/sửa lỗi, trì hoãn thay đổi rủi ro; phân biệt SLI đo được, SLO nội bộ và SLA với khách."
+    ],
+    [
+      "Chat streaming bắt đầu hiện chữ sau 3 giây, sau đó sinh rất nhanh; average latency vẫn ổn. Thiết kế phép đo để xác nhận trải nghiệm và ngưỡng cảnh báo.",
+      "Đo TTFT, TPOT và tokens/sec theo model/feature; xem P50/P95/P99 thay vì chỉ average; nêu tail latency và tác động nhiều lượt chat; đặt SLO/alert theo TTFT hoặc P95 đã hiệu chỉnh từ baseline."
+    ],
+    [
+      "Agent RAG trả lời trôi chảy nhưng sai số liệu tài chính. Thiết kế kiểm tra chất lượng nhiều tầng và vòng phản hồi sau deploy.",
+      "L1 kiểm format/PII; L2 judge relevance, faithfulness/groundedness theo context; xác minh số với DB/API đáng tin; self-consistency trên mẫu nhỏ nếu cần; L3 thumbs/CSAT/regenerate; L4 task success; theo dõi xu hướng hallucination."
+    ],
+    [
+      "Hóa đơn LLM tăng sau khi thêm tính năng tóm tắt. Đề xuất cách quy trách nhiệm chi phí và hai thay đổi giảm bill mà vẫn giữ quality.",
+      "Ghi token input/output, cache read/write và cost theo user_id đã bảo vệ, feature, model; phân tích cost/request và cost/feature; thử prompt caching nội dung tĩnh và routing tóm tắt dễ sang model nhỏ; đo quality trước/sau, chỉ dùng batch cho việc không realtime."
+    ],
+    [
+      "Bạn thiết kế log cho agent xử lý thông tin khách hàng. Viết schema tối thiểu, quy tắc sanitize và chính sách lưu app log so với audit log.",
+      "Tier 1 timestamp ISO 8601, level, correlation_id, service, event; Tier 2 user_id hash, session_id, feature, model, env; Tier 3 latency/tokens/cost/error_type; sanitize trước ghi, không lưu PII/secret/full prompt; app log có thể sampling, audit log đầy đủ, hạn chế quyền, append-only."
+    ],
+    [
+      "Waterfall trace của một request cho thấy nhiều retry tool call và các span chờ LLM dài trong lúc CPU idle. Phân tích hai nút thắt và sửa chúng.",
+      "Phân biệt waiting do LLM/network với retry storm; xét parallelize/cache/timeout cho bước độc lập; retry exponential backoff có jitter, circuit breaker và giới hạn retry; giữ trace context qua service; xác nhận thay đổi bằng latency P95/P99 và error rate."
+    ],
+    [
+      "Một alert P95 latency page on-call liên tục nhưng nhiều lần tự hết. Thiết kế lại rule và nội dung thông báo để bớt alert fatigue.",
+      "Dùng SLO symptom và multi-window/multi-burn-rate, cả hai cửa sổ vượt mới fire; phân severity, deduplicate, auto-resolve, route đúng owner; thông báo có impact, current/baseline/threshold, dashboard lọc sẵn, trace và runbook; review rule định kỳ."
+    ],
+    [
+      "Thiết kế dashboard vận hành cho lãnh đạo, kỹ sư và người debug. Nêu nội dung từng tầng và ba lỗi trình bày cần tránh.",
+      "Overview: health/uptime/alert chính; Detail: latency P50/P95/P99, traffic, errors, cost/hour, tokens, hallucination; Drill-down: trace cụ thể và log search. Tránh quá nhiều panel, thiếu baseline/SLO line, thiếu đơn vị hoặc time range quá dài; dùng refresh phù hợp."
+    ],
+    [
+      "Lab 13 yêu cầu bàn giao monitoring blueprint trong 90 phút. Lập checklist kiểm chứng cụ thể trước khi chấp nhận hệ thống.",
+      "Instrumentation: JSON log, correlation propagation, PII sanitize, observe ba function và tags; Dashboard/Alerts: SLO P95/error/cost, ít nhất sáu panel, ba rule có runbook; Validation: 10–20 request đa dạng, tối thiểu 10 trace có cost/latency/quality, gây một lỗi có kiểm soát và xác nhận alert; blueprint một trang gồm SLO, kiến trúc, playbook, cost/scaling."
+    ]
+  ]
+}

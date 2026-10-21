@@ -70,7 +70,7 @@ function mcqs(day, bank) {
       options: arranged.map((text, i) => ({ key: 'ABCD'[i], text })),
       answer: 'ABCD'[arranged.indexOf(correct)],
       explanation,
-      source: `onthi/${sourceFiles[day]} + onthi/day${day}.pdf`
+      source: `onthi/${sourceFiles[day]}${day === 13 || day === 14 ? '' : ` + onthi/day${day}.pdf`}`
     };
   });
 }
@@ -109,7 +109,7 @@ for (let day = 2; day <= 14; day += 1) {
   fs.writeFileSync(path.join(dir, 'tu-luan.json'), `${JSON.stringify({ id: `day${day}_tridung_tu_luan`, title: `Tự luận Ngày ${day}`, questionCount: 10, questions: essayQuestions }, null, 2)}\n`, 'utf8');
 
   const appExam = {
-    id: `day${day}-tridung`,
+    id: day === 6 ? 'day6-tridung-bank' : `day${day}-tridung`,
     title: `Trí Dũng đẹp trai · Ngày ${day}`,
     description: `Bộ đề Ngày ${day}: 60 câu trắc nghiệm và 10 câu tự luận, biên soạn từ tài liệu ôn thi cùng ngày.`,
     course: 'tridung',

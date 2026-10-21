@@ -1,11 +1,11 @@
-# Handoff: soạn ngân hàng câu hỏi "Trí Dũng đẹp trai" Ngày 11–14
+# Ngân hàng câu hỏi "Trí Dũng đẹp trai" Ngày 2–14
 
 ## Bối cảnh
 
 Đề cũ sinh từ 8 fact/ngày × 8 mẫu câu → một ý bị hỏi 8 lần. Đã thay bằng ngân hàng câu hỏi soạn tay theo PDF + HTML từng ngày.
 
-- Xong: Ngày 2–10 (`scripts/tridung-banks/day2.json` … `day10.json`).
-- Còn lại: **Ngày 11, 12, 13, 14**. Chưa có bank thì script giữ nguyên đề cũ của ngày đó.
+- Xong: Ngày 2–14 (`scripts/tridung-banks/day2.json` … `day14.json`). Mỗi ngày có 60 trắc nghiệm và 10 tự luận.
+- Ngày 13: PDF yêu cầu mật khẩu; bank được đối chiếu với HTML cùng ngày. Ngày 14: PDF scan, bank bám HTML cùng ngày.
 
 ## Nguồn cho mỗi ngày
 
@@ -90,6 +90,7 @@ Không sửa tay các file đầu ra; chỉ sửa bank rồi chạy lại script
 
 ## Lưu ý khác
 
-- `src/data/exams/day6_TriDung.json` (course `aicb`, 12 câu) có cùng `id: "day6-tridung"` với đề sinh ra cho Ngày 6. Chưa xử lý; kiểm tra xem app có bị trùng id không.
-- `npm run validate` chỉ kiểm file ở thư mục gốc `src/data/exams/`, không kiểm thư mục `tridung-dep-trai/`.
+- Đề AICB `src/data/exams/day6_TriDung.json` giữ `id: "day6-tridung"`; đề Trí Dũng Ngày 6 sinh ra dùng `id: "day6-tridung-bank"` để không trùng ID và không đổi khóa tiến độ của đề cũ.
+- `npm run validate` chỉ kiểm file ở thư mục gốc `src/data/exams/`, không kiểm thư mục `tridung-dep-trai/`. Lệnh hiện báo lỗi trên nhiều đề gốc cũ với số câu/module/type không theo schema 60 câu mặc định; lỗi này không do bank Ngày 11–14.
+- `npm run build` chạy được với `postcss.config.mjs` cục bộ, tránh đọc nhầm PostCSS config của thư mục cha.
 - Commit theo conventional commit, ví dụ `feat(exams): rewrite tridung day 11 question bank`.

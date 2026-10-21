@@ -14,27 +14,27 @@
     {
       "id": "D13-001",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Monitoring?",
+      "prompt": "Agent chậm riêng với feature X và model Z; trước đó chưa có metric cho tổ hợp này. Cần năng lực nào để điều tra?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ lưu văn bản hội thoại thô"
+          "text": "Monitoring để chỉ kiểm tra ngưỡng CPU đã định"
         },
         {
           "key": "B",
-          "text": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không"
+          "text": "Audit log để thay toàn bộ metric vận hành"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Profiling để chỉ đo mức dùng RAM của host"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Observability để khám phá câu hỏi chưa định sẵn"
         }
       ],
-      "answer": "B",
-      "explanation": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "D",
+      "explanation": "Slide phân biệt monitoring theo câu hỏi biết trước và observability để khám phá unknown unknowns.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -42,27 +42,27 @@
     {
       "id": "D13-002",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Logging?",
+      "prompt": "Sự cố bắt đầu lúc 09:00, hệ thống báo lúc 09:07. Khoảng 7 phút là chỉ số nào?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ vẽ biểu đồ tổng quan"
+          "text": "MTTD, thời gian từ lúc sự cố bắt đầu đến lúc phát hiện"
         },
         {
           "key": "B",
-          "text": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit"
+          "text": "MTTR, thời gian từ lúc báo động đến lúc khôi phục"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "TTFT, thời gian từ yêu cầu đến token đầu tiên"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "TPOT, thời gian trung bình cho mỗi token đầu ra"
         }
       ],
-      "answer": "B",
-      "explanation": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "A",
+      "explanation": "MTTD đo độ trễ phát hiện sự cố.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -70,27 +70,27 @@
     {
       "id": "D13-003",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Tracing?",
+      "prompt": "Alert đến lúc 09:07, dịch vụ khôi phục lúc 09:24. Khoảng 17 phút là chỉ số nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "SLA, thời gian phản hồi cam kết với khách"
         },
         {
           "key": "B",
-          "text": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool"
+          "text": "MTTR, thời gian từ lúc phát hiện đến lúc khôi phục"
         },
         {
           "key": "C",
-          "text": "Xóa request ID để bảo mật"
+          "text": "MTTD, thời gian từ lúc bắt đầu đến lúc phát hiện"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "P95, thời gian đáp ứng của 95% request"
         }
       ],
       "answer": "B",
-      "explanation": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "explanation": "MTTR đo thời gian khôi phục sau khi đã phát hiện.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -98,27 +98,27 @@
     {
       "id": "D13-004",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Latency percentile?",
+      "prompt": "Muốn biết P99 latency và error rate đang tăng hay giảm theo thời gian, nên mở dữ liệu nào trước?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ dùng trung bình để bỏ qua outlier"
+          "text": "Một span riêng trong trace bất kỳ"
         },
         {
           "key": "B",
-          "text": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối"
+          "text": "Profile CPU của một worker bất kỳ"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Metrics tổng hợp theo khoảng thời gian"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Một log lỗi của request bất kỳ"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "C",
+      "explanation": "Metrics trả lời bao nhiêu và bao lâu, thích hợp phát hiện xu hướng.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -126,27 +126,27 @@
     {
       "id": "D13-005",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Quality metric?",
+      "prompt": "Trace đã chỉ ra tool call thất bại; muốn xem thông báo exception cụ thể, nên tìm gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Metric tổng request theo mỗi giờ"
         },
         {
           "key": "B",
-          "text": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime"
+          "text": "Profile mức dùng CPU của server"
         },
         {
           "key": "C",
-          "text": "Chỉ đếm số request"
+          "text": "SLO uptime của cả tháng hiện tại"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Log sự kiện của tool call cùng request"
         }
       ],
-      "answer": "B",
-      "explanation": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "D",
+      "explanation": "Logs ghi chi tiết sự kiện; trace giúp khoanh vùng bước lỗi.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -154,27 +154,27 @@
     {
       "id": "D13-006",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Alert rule?",
+      "prompt": "Một request đi qua gateway, agent, RAG và provider. Dữ liệu nào cho thấy thứ tự và thời lượng từng bước?",
       "options": [
         {
           "key": "A",
-          "text": "Báo động cho mọi dao động nhỏ"
+          "text": "Distributed trace của request đó"
         },
         {
           "key": "B",
-          "text": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích"
+          "text": "Biểu đồ traffic tổng của dịch vụ"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Audit log thay đổi quyền truy cập"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Bảng giá token theo từng model"
         }
       ],
-      "answer": "B",
-      "explanation": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "A",
+      "explanation": "Trace mô tả toàn bộ hành trình request qua các span.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -182,27 +182,27 @@
     {
       "id": "D13-007",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Cardinality?",
+      "prompt": "Trường hợp nào khiến profile CPU/memory hữu ích hơn việc chỉ nhìn trace?",
       "options": [
         {
           "key": "A",
-          "text": "Tăng vô hạn label theo user ID"
+          "text": "Muốn tra exception của một tool call cụ thể"
         },
         {
           "key": "B",
-          "text": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải"
+          "text": "Nghi ngờ code nội bộ đốt CPU trong một bước"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Nghi ngờ provider LLM trả lời qua mạng chậm"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Muốn biết tổng chi phí token theo feature"
         }
       ],
       "answer": "B",
-      "explanation": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "explanation": "Profiles cho biết code tiêu thụ CPU/memory ở đâu; AI agent thường chờ API ngoài.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -210,27 +210,27 @@
     {
       "id": "D13-008",
       "type": "mcq",
-      "prompt": "Phát biểu nào mô tả đúng nhất về Runbook?",
+      "prompt": "Vì sao không nên thêm request_id làm label của metric?",
       "options": [
         {
           "key": "A",
-          "text": "Nêu bước triage, ownership và xử lý khi alert kích hoạt"
+          "text": "Metric có request_id sẽ luôn sai đơn vị đo"
         },
         {
           "key": "B",
-          "text": "Chỉ liệt kê tên dashboard"
+          "text": "Request_id chỉ tồn tại ở hệ thống không dùng trace"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Mỗi giá trị tạo thêm series, làm cardinality bùng nổ"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Giá trị này khiến log JSON mất correlation ID"
         }
       ],
-      "answer": "A",
-      "explanation": "Nêu bước triage, ownership và xử lý khi alert kích hoạt. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "C",
+      "explanation": "ID nhiều giá trị nên nằm trong log hoặc trace, không phải metric label.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -238,27 +238,27 @@
     {
       "id": "D13-009",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Monitoring nào là phù hợp nhất?",
+      "prompt": "P95 latency thực đo là 2,3 giây. Con số này thuộc loại nào?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "SLO, mục tiêu nội bộ phải đạt"
         },
         {
           "key": "B",
-          "text": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không"
+          "text": "SLA, cam kết pháp lý với khách"
         },
         {
           "key": "C",
-          "text": "Chỉ lưu văn bản hội thoại thô"
+          "text": "Error budget, phần lỗi còn được phép"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "SLI, chỉ số dịch vụ đang được đo"
         }
       ],
-      "answer": "B",
-      "explanation": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "D",
+      "explanation": "SLI là chỉ số đo thực tế; P95 latency 2,3 giây là ví dụ trong slide.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -266,27 +266,27 @@
     {
       "id": "D13-010",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Logging nào là phù hợp nhất?",
+      "prompt": "Team đặt mục tiêu nội bộ P95 latency không quá 3 giây. Đây là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Audit log ghi thay đổi ngưỡng"
         },
         {
           "key": "B",
-          "text": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit"
+          "text": "SLO cho chỉ số latency"
         },
         {
           "key": "C",
-          "text": "Chỉ vẽ biểu đồ tổng quan"
+          "text": "SLI đo latency hiện tại"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "SLA hoàn tiền cho khách hàng"
         }
       ],
       "answer": "B",
-      "explanation": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "explanation": "SLO là mục tiêu nội bộ cho một SLI.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -294,27 +294,27 @@
     {
       "id": "D13-011",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Tracing nào là phù hợp nhất?",
+      "prompt": "Hợp đồng hứa hoàn tiền nếu uptime dưới 99%. Điều khoản đó là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Xóa request ID để bảo mật"
+          "text": "SLA, cam kết dịch vụ với khách hàng"
         },
         {
           "key": "B",
-          "text": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool"
+          "text": "SLI, giá trị uptime vừa đo được"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "SLO, mục tiêu nội bộ của đội vận hành"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Trace, hành trình của một request lỗi"
         }
       ],
-      "answer": "B",
-      "explanation": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "A",
+      "explanation": "SLA là cam kết với khách và có thể gắn bồi thường.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -322,27 +322,27 @@
     {
       "id": "D13-012",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Latency percentile nào là phù hợp nhất?",
+      "prompt": "SLO uptime 99,5% trong tháng 30 ngày cho phép downtime xấp xỉ bao lâu?",
       "options": [
         {
           "key": "A",
-          "text": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối"
+          "text": "43 phút 12 giây"
         },
         {
           "key": "B",
-          "text": "Chỉ dùng trung bình để bỏ qua outlier"
+          "text": "7 giờ 12 phút"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "4 phút 19 giây"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "3 giờ 36 phút"
         }
       ],
-      "answer": "A",
-      "explanation": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "D",
+      "explanation": "0,5% của 30 ngày bằng 3 giờ 36 phút, theo bảng error budget của slide.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -350,27 +350,27 @@
     {
       "id": "D13-013",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Quality metric nào là phù hợp nhất?",
+      "prompt": "Error budget gần cạn; quyết định phát hành nào phù hợp?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ đếm số request"
+          "text": "Bỏ SLO vì budget không còn giá trị theo dõi"
         },
         {
           "key": "B",
-          "text": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime"
+          "text": "Chỉ đổi dashboard mà giữ nguyên lịch phát hành"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Ưu tiên ổn định và sửa lỗi trước thay đổi rủi ro"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Tăng tốc phát hành thay đổi rủi ro để thử nghiệm"
         }
       ],
-      "answer": "B",
-      "explanation": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "C",
+      "explanation": "Slide khuyên giảm rủi ro khi error budget cạn.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -378,27 +378,27 @@
     {
       "id": "D13-014",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Alert rule nào là phù hợp nhất?",
+      "prompt": "Queue chờ tool tăng liên tục dù CPU chưa đầy. Golden Signal nào phản ánh gần nghẽn?",
       "options": [
         {
           "key": "A",
-          "text": "Báo động cho mọi dao động nhỏ"
+          "text": "Errors, tỷ lệ request kết thúc thất bại"
         },
         {
           "key": "B",
-          "text": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích"
+          "text": "Saturation, mức đầy của tài nguyên hoặc hàng đợi"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Traffic, lượng request đi vào mỗi giây"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Latency, thời gian hoàn thành một request"
         }
       ],
       "answer": "B",
-      "explanation": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "explanation": "Saturation bao gồm mức đầy hàng đợi, không chỉ mức dùng CPU.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -406,27 +406,27 @@
     {
       "id": "D13-015",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Cardinality nào là phù hợp nhất?",
+      "prompt": "Nhóm muốn nhìn hệ thống theo từng request: số lượt, lỗi và thời lượng. Bộ chỉ số nào phù hợp?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "RED: Rate, Errors, Duration"
         },
         {
           "key": "B",
-          "text": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải"
+          "text": "USE: Utilization, Saturation, Errors"
         },
         {
           "key": "C",
-          "text": "Tăng vô hạn label theo user ID"
+          "text": "SLI: Service, Latency, Impact"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "APM: Audit, Prompt, Model"
         }
       ],
-      "answer": "B",
-      "explanation": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "A",
+      "explanation": "RED là góc nhìn request theo slide.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -434,27 +434,27 @@
     {
       "id": "D13-016",
       "type": "mcq",
-      "prompt": "Trong một dự án AI, cách áp dụng Runbook nào là phù hợp nhất?",
+      "prompt": "Nhóm muốn nhìn tài nguyên: mức sử dụng, nghẽn và lỗi. Bộ chỉ số nào phù hợp?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "RED: Rate, Errors, Duration"
         },
         {
           "key": "B",
-          "text": "Nêu bước triage, ownership và xử lý khi alert kích hoạt"
+          "text": "SLA: Service, Latency, Availability"
         },
         {
           "key": "C",
-          "text": "Chỉ liệt kê tên dashboard"
+          "text": "RAG: Retrieval, Answer, Grounding"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "USE: Utilization, Saturation, Errors"
         }
       ],
-      "answer": "B",
-      "explanation": "Nêu bước triage, ownership và xử lý khi alert kích hoạt. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "D",
+      "explanation": "USE là góc nhìn tài nguyên theo slide.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -462,27 +462,27 @@
     {
       "id": "D13-017",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Monitoring, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Agent có uptime tốt và ít lỗi HTTP nhưng câu trả lời sai, hóa đơn tăng. Còn thiếu nhóm metric nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "QPS và số connection"
         },
         {
           "key": "B",
-          "text": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không"
+          "text": "Uptime và HTTP error"
         },
         {
           "key": "C",
-          "text": "Chỉ lưu văn bản hội thoại thô"
+          "text": "Cost và quality của AI"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "CPU và RAM của host"
         }
       ],
-      "answer": "B",
-      "explanation": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "C",
+      "explanation": "Slide bổ sung cost và quality cho AI bên cạnh 4 Golden Signals.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -490,27 +490,27 @@
     {
       "id": "D13-018",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Logging, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Ứng dụng streaming mất 3 giây mới hiện chữ đầu tiên dù tổng thời gian không đổi. Metric nào nên xem?",
       "options": [
         {
           "key": "A",
-          "text": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit"
+          "text": "Context fill, phần trăm cửa sổ dùng"
         },
         {
           "key": "B",
-          "text": "Chỉ vẽ biểu đồ tổng quan"
+          "text": "TTFT, thời gian đến token đầu tiên"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "TPOT, thời gian mỗi token đầu ra"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "P99, ngưỡng của 99% request"
         }
       ],
-      "answer": "A",
-      "explanation": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "B",
+      "explanation": "TTFT ảnh hưởng rõ tới cảm giác chờ trong giao diện streaming.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -518,27 +518,27 @@
     {
       "id": "D13-019",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Tracing, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Token đầu đến nhanh nhưng phần còn lại hiện rất chậm. Metric nào giúp kiểm tra tốc độ sinh tiếp?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "TPOT, thời gian mỗi output token"
         },
         {
           "key": "B",
-          "text": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool"
+          "text": "TTFT, thời gian chờ token đầu tiên"
         },
         {
           "key": "C",
-          "text": "Xóa request ID để bảo mật"
+          "text": "MTTD, thời gian phát hiện sự cố"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "SLA, cam kết dịch vụ với khách"
         }
       ],
-      "answer": "B",
-      "explanation": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "A",
+      "explanation": "TPOT phản ánh thời gian tạo mỗi token sau đó.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -546,27 +546,27 @@
     {
       "id": "D13-020",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Latency percentile, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Trước khi lịch sử chat bị cắt do vượt giới hạn model, nên theo dõi đại lượng nào?",
       "options": [
         {
           "key": "A",
-          "text": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối"
+          "text": "Context fill %, tỷ lệ cửa sổ ngữ cảnh đã dùng"
         },
         {
           "key": "B",
-          "text": "Chỉ dùng trung bình để bỏ qua outlier"
+          "text": "Error budget %, tỷ lệ downtime còn lại"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Cache hit %, tỷ lệ query lặp được dùng lại"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "CPU idle %, tỷ lệ thời gian chờ provider"
         }
       ],
       "answer": "A",
-      "explanation": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "explanation": "Context fill % báo mức sử dụng cửa sổ ngữ cảnh.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -574,27 +574,27 @@
     {
       "id": "D13-021",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Quality metric, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "P95 latency bằng 4 giây có nghĩa gì?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ đếm số request"
+          "text": "Thời gian trung bình của request là 4 giây"
         },
         {
           "key": "B",
-          "text": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime"
+          "text": "95% request mất không quá 4 giây"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "95% request mất ít nhất 4 giây"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chỉ 5% request mất không quá 4 giây"
         }
       ],
       "answer": "B",
-      "explanation": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "explanation": "P95 là ngưỡng mà 95% request nhanh hơn hoặc bằng.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -602,27 +602,27 @@
     {
       "id": "D13-022",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Alert rule, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "P99 là 5 giây. Giả sử mỗi lượt có 1% xác suất vượt 5 giây và 10 lượt độc lập. Xác suất gặp ít nhất một lượt chậm xấp xỉ bao nhiêu?",
       "options": [
         {
           "key": "A",
-          "text": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích"
+          "text": "50%, vì mười lượt chia đều hai phía"
         },
         {
           "key": "B",
-          "text": "Báo động cho mọi dao động nhỏ"
+          "text": "99%, vì P99 là tỷ lệ gặp lượt chậm"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "9,6%, tính bằng 1 − 0,99^10"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "1%, vì P99 luôn tính cho cả phiên"
         }
       ],
-      "answer": "A",
-      "explanation": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "C",
+      "explanation": "Ví dụ trong slide: 1 − 0,99^10 ≈ 9,6%; average có thể che tail latency.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -630,27 +630,27 @@
     {
       "id": "D13-023",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Cardinality, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Bộ kiểm tra format, độ dài, toxicity và PII leak thuộc tầng chất lượng nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "L2, LLM-as-Judge đánh giá nội dung"
         },
         {
           "key": "B",
-          "text": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải"
+          "text": "L3, tín hiệu đánh giá của người dùng"
         },
         {
           "key": "C",
-          "text": "Tăng vô hạn label theo user ID"
+          "text": "L4, kết quả kinh doanh và tác vụ"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "L1, automated heuristic nhanh và rẻ"
         }
       ],
-      "answer": "B",
-      "explanation": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "D",
+      "explanation": "L1 phát hiện sớm các dấu hiệu dễ đo, nhưng không đủ để kết luận chất lượng thực.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -658,27 +658,27 @@
     {
       "id": "D13-024",
       "type": "mcq",
-      "prompt": "Khi đội ngũ bỏ qua Runbook, rủi ro nào cần được phòng tránh? Chọn nguyên tắc đúng.",
+      "prompt": "Muốn chấm relevance và faithfulness của câu trả lời bằng model đánh giá, nên dùng tầng nào?",
       "options": [
         {
           "key": "A",
-          "text": "Nêu bước triage, ownership và xử lý khi alert kích hoạt"
+          "text": "L2, LLM-as-Judge"
         },
         {
           "key": "B",
-          "text": "Chỉ liệt kê tên dashboard"
+          "text": "L1, kiểm tra format đơn giản"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "L3, phản hồi thumbs up/down"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "L4, tỷ lệ giữ chân người dùng"
         }
       ],
       "answer": "A",
-      "explanation": "Nêu bước triage, ownership và xử lý khi alert kích hoạt. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "explanation": "Slide xếp LLM-as-Judge ở L2 của kim tự tháp chất lượng.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -686,27 +686,27 @@
     {
       "id": "D13-025",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Monitoring trong hệ thống AI là gì?",
+      "prompt": "Tỷ lệ thumbs down và follow-up tăng sau bản deploy. Đây là tín hiệu ở tầng nào?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "L4, outcome kinh doanh"
         },
         {
           "key": "B",
-          "text": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không"
+          "text": "L3, user signals"
         },
         {
           "key": "C",
-          "text": "Chỉ lưu văn bản hội thoại thô"
+          "text": "L1, automated heuristic"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "L2, LLM-as-Judge"
         }
       ],
       "answer": "B",
-      "explanation": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "explanation": "L3 gồm thumbs up/down, CSAT và hành vi follow-up.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -714,27 +714,27 @@
     {
       "id": "D13-026",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Logging trong hệ thống AI là gì?",
+      "prompt": "Task success được đo sau nhiều ngày; theo kim tự tháp chất lượng, nó thuộc tầng nào?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ vẽ biểu đồ tổng quan"
+          "text": "L2, LLM-as-Judge chạy trực tiếp"
         },
         {
           "key": "B",
-          "text": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit"
+          "text": "L3, phản hồi tức thời của người dùng"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "L4, outcome gần ground truth nhưng đến chậm"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "L1, heuristic nhanh dựa trên format"
         }
       ],
-      "answer": "B",
-      "explanation": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "C",
+      "explanation": "L4 gồm task success, revenue và retention.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -742,27 +742,27 @@
     {
       "id": "D13-027",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Tracing trong hệ thống AI là gì?",
+      "prompt": "Agent RAG nêu một claim có vẻ đúng. Kiểm tra groundedness cần xác minh điều gì?",
       "options": [
         {
           "key": "A",
-          "text": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool"
+          "text": "Claim có số token thấp hơn câu trả lời khác không"
         },
         {
           "key": "B",
-          "text": "Xóa request ID để bảo mật"
+          "text": "Claim có khiến P95 latency vượt SLO hay không"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Claim có được người dùng đọc hết trên UI hay không"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Claim có bằng chứng trong context truy xuất hay không"
         }
       ],
-      "answer": "A",
-      "explanation": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "D",
+      "explanation": "Groundedness đối chiếu claim với ngữ cảnh nguồn để phát hiện hallucination.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -770,27 +770,27 @@
     {
       "id": "D13-028",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Latency percentile trong hệ thống AI là gì?",
+      "prompt": "Đội lấy nhiều câu trả lời cho cùng câu hỏi rồi tìm mâu thuẫn. Phương pháp nào đang dùng?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ dùng trung bình để bỏ qua outlier"
+          "text": "Self-consistency, nên dùng có chọn mẫu vì tốn chi phí"
         },
         {
           "key": "B",
-          "text": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối"
+          "text": "Entity verification, luôn chỉ dùng một câu trả lời"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Prompt caching, tái dùng toàn bộ output cũ"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Context propagation, truyền ID xuyên service"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "A",
+      "explanation": "Slide nêu self-consistency là cách phát hiện hallucination, có chi phí thêm.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -798,27 +798,27 @@
     {
       "id": "D13-029",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Quality metric trong hệ thống AI là gì?",
+      "prompt": "Agent trả lời sai số dư tài khoản. Cách xác minh phù hợp nhất là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Đổi sang model nhỏ để trả lời lại"
         },
         {
           "key": "B",
-          "text": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime"
+          "text": "Đối chiếu số với DB hoặc API đáng tin"
         },
         {
           "key": "C",
-          "text": "Chỉ đếm số request"
+          "text": "Chỉ đếm token của câu trả lời"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ đo thời gian gọi provider"
         }
       ],
       "answer": "B",
-      "explanation": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "explanation": "Entity verification kiểm tra tên, số và ngày với nguồn đáng tin.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -826,27 +826,27 @@
     {
       "id": "D13-030",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Alert rule trong hệ thống AI là gì?",
+      "prompt": "Người dùng bấm regenerate nhiều hơn dù không bấm thumbs down. Điều này gợi ý gì?",
       "options": [
         {
           "key": "A",
-          "text": "Báo động cho mọi dao động nhỏ"
+          "text": "Bỏ qua vì không phải lỗi HTTP"
         },
         {
           "key": "B",
-          "text": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích"
+          "text": "Chỉ tăng ngưỡng alert CPU để bớt nhiễu"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Ghi full prompt vào log để thay feedback"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Theo dõi như tín hiệu chất lượng ngầm"
         }
       ],
-      "answer": "B",
-      "explanation": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "D",
+      "explanation": "Case Replit trong slide cho thấy regenerate rate tăng có thể báo vấn đề chất lượng.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -854,27 +854,27 @@
     {
       "id": "D13-031",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Cardinality trong hệ thống AI là gì?",
+      "prompt": "Tổng hóa đơn LLM tăng; muốn biết feature nào gây tăng, nên làm gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chỉ đếm số container đang chạy"
         },
         {
           "key": "B",
-          "text": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải"
+          "text": "Chỉ xem tỷ lệ lỗi của provider"
         },
         {
           "key": "C",
-          "text": "Tăng vô hạn label theo user ID"
+          "text": "Gắn cost theo feature và model"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ đo tổng chi phí theo tháng"
         }
       ],
-      "answer": "B",
-      "explanation": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "C",
+      "explanation": "Cost engineering cần gắn chi phí đúng nơi phát sinh; slide nêu tags user_id, feature, model.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -882,27 +882,27 @@
     {
       "id": "D13-032",
       "type": "mcq",
-      "prompt": "Mục tiêu chính của Runbook trong hệ thống AI là gì?",
+      "prompt": "System prompt dài lặp lại trong nhiều request. Cách giảm chi phí nào phù hợp?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ liệt kê tên dashboard"
+          "text": "Audit log cho toàn bộ system prompt"
         },
         {
           "key": "B",
-          "text": "Nêu bước triage, ownership và xử lý khi alert kích hoạt"
+          "text": "Prompt caching cho phần nội dung tĩnh"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Batch API cho mọi câu trả lời realtime"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Entity verification cho token đầu ra"
         }
       ],
       "answer": "B",
-      "explanation": "Nêu bước triage, ownership và xử lý khi alert kích hoạt. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "explanation": "Prompt caching tái sử dụng system prompt hoặc tài liệu tĩnh.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -910,27 +910,27 @@
     {
       "id": "D13-033",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Monitoring?",
+      "prompt": "Một phần lớn request đơn giản không cần model mạnh. Cách tối ưu nào phù hợp?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ lưu văn bản hội thoại thô"
+          "text": "Model routing: việc dễ dùng model nhỏ"
         },
         {
           "key": "B",
-          "text": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không"
+          "text": "Semantic cache: luôn trả output gần nhất"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Batch API: gom cả request realtime"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Prompt logging: lưu prompt nguyên văn"
         }
       ],
-      "answer": "B",
-      "explanation": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "A",
+      "explanation": "Routing/cascade chỉ chuyển việc khó sang model lớn.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -938,27 +938,27 @@
     {
       "id": "D13-034",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Logging?",
+      "prompt": "Hai query khác chữ nhưng cùng ý; use case cho phép dùng lại đáp án. Cách nào phù hợp?",
       "options": [
         {
           "key": "A",
-          "text": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit"
+          "text": "Prompt caching theo system prompt tĩnh"
         },
         {
           "key": "B",
-          "text": "Chỉ vẽ biểu đồ tổng quan"
+          "text": "Audit log theo thay đổi quyền truy cập"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Circuit breaker theo lỗi provider"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Semantic cache theo độ giống nghĩa"
         }
       ],
-      "answer": "A",
-      "explanation": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "D",
+      "explanation": "Semantic cache tái dùng kết quả khi query đủ giống và use case cho phép.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -966,27 +966,27 @@
     {
       "id": "D13-035",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Tracing?",
+      "prompt": "Công việc tổng hợp dữ liệu không cần phản hồi ngay. Tùy chọn chi phí nào trong slide đáng cân nhắc?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "DEBUG logging toàn phần trong production"
         },
         {
           "key": "B",
-          "text": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool"
+          "text": "Model lớn cho mọi tác vụ để giảm retry"
         },
         {
           "key": "C",
-          "text": "Xóa request ID để bảo mật"
+          "text": "Batch API nếu giá nhà cung cấp phù hợp"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Streaming token để giảm mọi chi phí"
         }
       ],
-      "answer": "B",
-      "explanation": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "C",
+      "explanation": "Slide đề xuất Batch API cho việc không cần realtime; mức giảm giá tùy nhà cung cấp.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -994,27 +994,27 @@
     {
       "id": "D13-036",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Latency percentile?",
+      "prompt": "LLM provider trả 5xx tạm thời. Cách xử lý được slide đề xuất là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Bỏ lỗi provider khỏi error rate dashboard"
         },
         {
           "key": "B",
-          "text": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối"
+          "text": "Retry với exponential backoff, có fallback model"
         },
         {
           "key": "C",
-          "text": "Chỉ dùng trung bình để bỏ qua outlier"
+          "text": "Lặp request ngay liên tục không giới hạn"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Ghi full prompt rồi ngừng mọi request"
         }
       ],
       "answer": "B",
-      "explanation": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "explanation": "Taxonomy lỗi gợi ý backoff và fallback cho LLM API 5xx.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1022,27 +1022,27 @@
     {
       "id": "D13-037",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Quality metric?",
+      "prompt": "Provider phản hồi rất chậm, gây LLM timeout. Cặp biện pháp nào phù hợp?",
       "options": [
         {
           "key": "A",
-          "text": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime"
+          "text": "Circuit breaker; client timeout ngắn hơn server"
         },
         {
           "key": "B",
-          "text": "Chỉ đếm số request"
+          "text": "Tắt timeout ở client và server để chờ mãi"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ tăng sampling INFO khi provider chậm"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chỉ đổi nhãn model trong pricing database"
         }
       ],
       "answer": "A",
-      "explanation": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "explanation": "Slide nêu circuit breaker và client timeout ngắn hơn timeout server.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1050,27 +1050,27 @@
     {
       "id": "D13-038",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Alert rule?",
+      "prompt": "API ngoài dùng bởi tool call bị lỗi. Hành vi nào giữ agent hữu dụng mà tránh retry quá mức?",
       "options": [
         {
           "key": "A",
-          "text": "Báo động cho mọi dao động nhỏ"
+          "text": "Retry vô hạn trên mọi request của người dùng"
         },
         {
           "key": "B",
-          "text": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích"
+          "text": "Ẩn lỗi bằng cách bịa kết quả tool call"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Tắt hoàn toàn log và trace của tool"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Retry có kiểm soát và graceful degradation"
         }
       ],
-      "answer": "B",
-      "explanation": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "D",
+      "explanation": "Taxonomy lỗi đề xuất retry có kiểm soát và graceful degradation.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1078,27 +1078,27 @@
     {
       "id": "D13-039",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Cardinality?",
+      "prompt": "LLM sinh JSON sai schema cho một tool. Cách xử lý nào được slide nêu?",
       "options": [
         {
           "key": "A",
-          "text": "Tăng vô hạn label theo user ID"
+          "text": "Đổi error_type thành success để tránh alert"
         },
         {
           "key": "B",
-          "text": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải"
+          "text": "Chỉ tăng context window mà không báo lỗi"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Phản hồi lỗi schema để model sửa hoặc re-prompt"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Gửi JSON sai thẳng tới API ngoài như thường"
         }
       ],
-      "answer": "B",
-      "explanation": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "C",
+      "explanation": "Tool schema invalid cần trả feedback lỗi để sửa/re-prompt.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1106,27 +1106,27 @@
     {
       "id": "D13-040",
       "type": "mcq",
-      "prompt": "Tình huống nào thể hiện cách hiểu đúng về Runbook?",
+      "prompt": "Lịch sử chat vượt cửa sổ ngữ cảnh của model. Biện pháp nào phù hợp?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Đổi log level thành CRITICAL"
         },
         {
           "key": "B",
-          "text": "Nêu bước triage, ownership và xử lý khi alert kích hoạt"
+          "text": "Tắt quality metrics cho request"
         },
         {
           "key": "C",
-          "text": "Chỉ liệt kê tên dashboard"
+          "text": "Truncate hoặc summarize history"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Tăng retry không giới hạn"
         }
       ],
-      "answer": "B",
-      "explanation": "Nêu bước triage, ownership và xử lý khi alert kích hoạt. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "C",
+      "explanation": "Context overflow được xử lý bằng cắt bớt hoặc tóm tắt lịch sử.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1134,27 +1134,27 @@
     {
       "id": "D13-041",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Monitoring, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Error rate tăng từ nhiều nguồn. Trường log nào giúp phân biệt lỗi provider, tool và guardrail?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ lưu văn bản hội thoại thô"
+          "text": "request_id làm metric label"
         },
         {
           "key": "B",
-          "text": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không"
+          "text": "full_prompt lưu nguyên văn"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "cpu_idle của một máy duy nhất"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "error_type có taxonomy nhất quán"
         }
       ],
-      "answer": "B",
-      "explanation": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "D",
+      "explanation": "error_type giúp định tuyến điều tra khi alert fire.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1162,27 +1162,27 @@
     {
       "id": "D13-042",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Logging, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Chính sách mới làm quan hệ giữa câu hỏi và câu trả lời đúng thay đổi. Đây là loại drift nào?",
       "options": [
         {
           "key": "A",
-          "text": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit"
+          "text": "Concept drift, quan hệ input–output đổi"
         },
         {
           "key": "B",
-          "text": "Chỉ vẽ biểu đồ tổng quan"
+          "text": "Data drift, chỉ phân bố input đổi"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Model drift, provider đổi hành vi model"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Clock drift, timestamp máy chủ lệch"
         }
       ],
       "answer": "A",
-      "explanation": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "explanation": "Slide lấy chính sách hoặc luật mới làm ví dụ concept drift.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1190,27 +1190,27 @@
     {
       "id": "D13-043",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Tracing, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Phân bố câu hỏi đầu vào đổi mạnh; slide nêu nhóm công cụ nào để theo dõi drift?",
       "options": [
         {
           "key": "A",
-          "text": "Xóa request ID để bảo mật"
+          "text": "RED, USE hoặc trace waterfall"
         },
         {
           "key": "B",
-          "text": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool"
+          "text": "PSI, KL-divergence, embedding drift"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "TTFT, TPOT hoặc tokens mỗi giây"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "MTTD, MTTR hoặc error budget"
         }
       ],
       "answer": "B",
-      "explanation": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "explanation": "Slide giới thiệu PSI, KL-divergence và embedding drift để theo dõi thay đổi.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1218,27 +1218,27 @@
     {
       "id": "D13-044",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Latency percentile, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Vì sao structured JSON log hữu ích hơn câu văn tự do khi vận hành?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ dùng trung bình để bỏ qua outlier"
+          "text": "Đảm bảo không bao giờ chứa dữ liệu nhạy cảm"
         },
         {
           "key": "B",
-          "text": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối"
+          "text": "Luôn có dung lượng nhỏ hơn log văn bản"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Có schema để lọc, truy vấn và tổng hợp trường"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Tự động thay mọi trace và metric hệ thống"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "C",
+      "explanation": "Structured logging lưu dữ liệu theo trường nhất quán.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1246,27 +1246,27 @@
     {
       "id": "D13-045",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Quality metric, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Bộ trường nào nằm ở Tier 1 Required của log schema theo slide?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "user_id, session_id, feature, model, env"
         },
         {
           "key": "B",
-          "text": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime"
+          "text": "latency_ms, tokens_in, tokens_out, cost_usd"
         },
         {
           "key": "C",
-          "text": "Chỉ đếm số request"
+          "text": "prompt, response, access token, số CCCD"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "timestamp, level, correlation_id, service, event"
         }
       ],
-      "answer": "B",
-      "explanation": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "D",
+      "explanation": "Tier 1 chứa định danh và loại sự kiện tối thiểu.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1274,27 +1274,27 @@
     {
       "id": "D13-046",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Alert rule, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Các service cùng xử lý một request nhưng log nằm nhiều nơi. Cần truyền gì xuyên gateway và agent?",
       "options": [
         {
           "key": "A",
-          "text": "Báo động cho mọi dao động nhỏ"
+          "text": "correlation_id xuyên các service"
         },
         {
           "key": "B",
-          "text": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích"
+          "text": "user_id dùng làm metric label"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "API key của provider"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "full output của model"
         }
       ],
-      "answer": "B",
-      "explanation": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "A",
+      "explanation": "Correlation ID ghép log của cùng request qua nhiều service.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1302,27 +1302,27 @@
     {
       "id": "D13-047",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Cardinality, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Provider lỗi tạm, hệ thống chuyển sang fallback và vẫn trả lời. Mức log nào hợp lý?",
       "options": [
         {
           "key": "A",
-          "text": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải"
+          "text": "CRITICAL vì toàn hệ thống ngừng chạy"
         },
         {
           "key": "B",
-          "text": "Tăng vô hạn label theo user ID"
+          "text": "WARN vì có suy giảm nhưng đã phục hồi"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "DEBUG vì chỉ là dữ liệu rất chi tiết"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "INFO vì mọi bước đều bình thường"
         }
       ],
-      "answer": "A",
-      "explanation": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "B",
+      "explanation": "Slide định nghĩa WARN cho suy giảm đã phục hồi hoặc đang fallback.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1330,27 +1330,27 @@
     {
       "id": "D13-048",
       "type": "mcq",
-      "prompt": "Nếu cần ra quyết định về Runbook, tiêu chí nào nên được ưu tiên?",
+      "prompt": "Dữ liệu nào phải tránh ghi thô vào app log?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Correlation ID và topic đã sanitize"
         },
         {
           "key": "B",
-          "text": "Nêu bước triage, ownership và xử lý khi alert kích hoạt"
+          "text": "Tên event, service và mức log"
         },
         {
           "key": "C",
-          "text": "Chỉ liệt kê tên dashboard"
+          "text": "PII, API key và full prompt nhạy cảm"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Latency, tokens, cost và error type"
         }
       ],
-      "answer": "B",
-      "explanation": "Nêu bước triage, ownership và xử lý khi alert kích hoạt. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "C",
+      "explanation": "Slide cấm log PII, secret và prompt/output nhạy cảm dạng thô.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1358,27 +1358,27 @@
     {
       "id": "D13-049",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Monitoring?",
+      "prompt": "Thứ tự nào đúng khi xử lý PII trong pipeline logging?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ lưu văn bản hội thoại thô"
+          "text": "Ghi log thô rồi đợi audit định kỳ xử lý"
         },
         {
           "key": "B",
-          "text": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không"
+          "text": "Xuất trace công khai rồi mới xóa email"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ sanitize các log sau khi có alert"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Sanitize trước khi ghi log hoặc render JSON"
         }
       ],
-      "answer": "B",
-      "explanation": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "D",
+      "explanation": "Slide nhấn mạnh sanitize trước khi ghi; regex cần kiểm thử vì có thể bỏ sót.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1386,27 +1386,27 @@
     {
       "id": "D13-050",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Logging?",
+      "prompt": "Muốn giảm chi phí logging mà vẫn giữ sự cố hiếm. Chính sách sampling nào hợp lý?",
       "options": [
         {
           "key": "A",
-          "text": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit"
+          "text": "Tắt log cho request có latency hoặc cost cao"
         },
         {
           "key": "B",
-          "text": "Chỉ vẽ biểu đồ tổng quan"
+          "text": "Giữ WARN/ERROR và ca chậm/đắt; lấy mẫu còn lại"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ giữ INFO/DEBUG, bỏ ERROR/WARN để tiết kiệm"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Lấy mẫu mọi loại log cùng một tỷ lệ rất thấp"
         }
       ],
-      "answer": "A",
-      "explanation": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "B",
+      "explanation": "Slide đề xuất ưu tiên ERROR/WARN và giữ request latency/cost bất thường.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1414,27 +1414,27 @@
     {
       "id": "D13-051",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Tracing?",
+      "prompt": "Hệ thống cần hồ sơ phục vụ điều tra tuân thủ. Thuộc tính nào phù hợp với audit log?",
       "options": [
         {
           "key": "A",
-          "text": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool"
+          "text": "Đầy đủ, hạn chế truy cập và append-only"
         },
         {
           "key": "B",
-          "text": "Xóa request ID để bảo mật"
+          "text": "Sampling mạnh, ai cũng xem và sửa được"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Chỉ giữ khi request vượt P95 latency"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Dùng làm metric label cho mọi user_id"
         }
       ],
       "answer": "A",
-      "explanation": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "explanation": "Audit log khác app log: cần đầy đủ, kiểm soát quyền và append-only.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1442,27 +1442,27 @@
     {
       "id": "D13-052",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Latency percentile?",
+      "prompt": "Trong distributed tracing, quan hệ giữa trace và span là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Span là hành trình; trace là một log lỗi bên trong"
         },
         {
           "key": "B",
-          "text": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối"
+          "text": "Trace là metric; span là một giá trị của metric"
         },
         {
           "key": "C",
-          "text": "Chỉ dùng trung bình để bỏ qua outlier"
+          "text": "Span là dashboard; trace là một panel bên trong"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Trace là hành trình; span là một công việc bên trong"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "D",
+      "explanation": "Một trace gồm các span có thời gian, attributes, status và events.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1470,27 +1470,27 @@
     {
       "id": "D13-053",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Quality metric?",
+      "prompt": "Trace bị đứt giữa agent và RAG service dù mỗi service đều tạo span. Cần kiểm tra gì?",
       "options": [
         {
           "key": "A",
-          "text": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime"
+          "text": "Độ dài system prompt trong prompt cache"
         },
         {
           "key": "B",
-          "text": "Chỉ đếm số request"
+          "text": "Mức sử dụng CPU của dashboard server"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Truyền trace context qua HTTP hoặc queue"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Giá token của model trong pricing database"
         }
       ],
-      "answer": "A",
-      "explanation": "Đo tính đúng, groundedness hoặc mức hài lòng chứ không chỉ uptime. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "C",
+      "explanation": "Trace context phải đi theo request qua ranh giới service.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1498,27 +1498,27 @@
     {
       "id": "D13-054",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Alert rule?",
+      "prompt": "Vai trò của OpenTelemetry Collector là gì?",
       "options": [
         {
           "key": "A",
-          "text": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích"
+          "text": "Tự động xóa PII trong mọi ứng dụng"
         },
         {
           "key": "B",
-          "text": "Báo động cho mọi dao động nhỏ"
+          "text": "Nhận, xử lý và export telemetry tới backend"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Thay model để chấm faithfulness của output"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Tạo SLA thương mại cho mọi dịch vụ"
         }
       ],
-      "answer": "A",
-      "explanation": "Kết hợp ngưỡng, thời gian kéo dài và mức độ ảnh hưởng để cảnh báo hữu ích. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "B",
+      "explanation": "Slide tách API instrument, SDK theo ngôn ngữ và Collector xử lý/export.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1526,27 +1526,27 @@
     {
       "id": "D13-055",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Cardinality?",
+      "prompt": "Muốn ghi provider, model và token usage theo quy ước OpenTelemetry cho AI, nên dùng gì?",
       "options": [
         {
           "key": "A",
-          "text": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải"
+          "text": "Attributes trong namespace gen_ai.*"
         },
         {
           "key": "B",
-          "text": "Tăng vô hạn label theo user ID"
+          "text": "Metric label là email người dùng"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Log DEBUG chứa toàn bộ access token"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Span name bằng toàn bộ prompt người dùng"
         }
       ],
       "answer": "A",
-      "explanation": "Kiểm soát số lượng giá trị label để hệ quan sát không quá tải. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "explanation": "Slide gợi ý namespace gen_ai.* để tăng khả năng tương thích.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1554,27 +1554,27 @@
     {
       "id": "D13-056",
       "type": "mcq",
-      "prompt": "Lựa chọn nào KHÔNG phải là cách làm đúng khi vận dụng Runbook?",
+      "prompt": "Waterfall có nhiều call DB nhỏ lặp lại cho từng item. Mẫu bottleneck và cách sửa nào đúng?",
       "options": [
         {
           "key": "A",
-          "text": "Nêu bước triage, ownership và xử lý khi alert kích hoạt"
+          "text": "Waiting; chỉ tăng CPU cho worker"
         },
         {
           "key": "B",
-          "text": "Chỉ liệt kê tên dashboard"
+          "text": "Retry storm; bỏ toàn bộ timeout"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Sequential dependency; thêm nhiều call nối tiếp"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "N+1 queries; batch hoặc pre-fetch"
         }
       ],
-      "answer": "A",
-      "explanation": "Nêu bước triage, ownership và xử lý khi alert kích hoạt. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "D",
+      "explanation": "Slide chỉ ra N+1 queries và cách giảm bằng batch/pre-fetch.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1582,27 +1582,27 @@
     {
       "id": "D13-057",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Monitoring giúp đội ngũ làm điều gì?",
+      "prompt": "Team dùng LangChain và cần tracing tích hợp chặt cùng playground, datasets. Công cụ nào khớp slide?",
       "options": [
         {
           "key": "A",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Datadog"
         },
         {
           "key": "B",
-          "text": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không"
+          "text": "New Relic"
         },
         {
           "key": "C",
-          "text": "Chỉ lưu văn bản hội thoại thô"
+          "text": "LangSmith"
         },
         {
           "key": "D",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Helicone"
         }
       ],
-      "answer": "B",
-      "explanation": "Theo dõi metric để biết hệ thống có đang đạt mục tiêu vận hành hay không. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "C",
+      "explanation": "Bảng công cụ trong slide gắn LangSmith với hệ LangChain.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1610,27 +1610,27 @@
     {
       "id": "D13-058",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Logging giúp đội ngũ làm điều gì?",
+      "prompt": "Khi đặt alert cho người trực, điều kiện nào phản ánh tác động lên người dùng trực tiếp nhất?",
       "options": [
         {
           "key": "A",
-          "text": "Chỉ vẽ biểu đồ tổng quan"
+          "text": "Số file log trên máy vừa thay đổi"
         },
         {
           "key": "B",
-          "text": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit"
+          "text": "P95 vượt SLO hoặc error rate tăng"
         },
         {
           "key": "C",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "CPU tăng nhẹ dù request vẫn bình thường"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Một worker có tên process mới"
         }
       ],
       "answer": "B",
-      "explanation": "Ghi sự kiện có cấu trúc phục vụ điều tra và audit. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "explanation": "Slide ưu tiên symptom-based alert; cause-based signal hỗ trợ debug.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1638,27 +1638,27 @@
     {
       "id": "D13-059",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Tracing giúp đội ngũ làm điều gì?",
+      "prompt": "Multi-window alert dùng 5 phút và 1 giờ. Theo slide, khi nào page critical nên fire?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Cả hai cửa sổ cùng vượt ngưỡng burn rate"
         },
         {
           "key": "B",
-          "text": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool"
+          "text": "Chỉ một điểm dữ liệu bất kỳ vượt ngưỡng"
         },
         {
           "key": "C",
-          "text": "Xóa request ID để bảo mật"
+          "text": "Chỉ cửa sổ 5 phút vượt, bỏ cửa sổ dài"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Chỉ khi CPU vượt 80% trong một giây"
         }
       ],
-      "answer": "B",
-      "explanation": "Liên kết các bước của một request qua nhiều dịch vụ hoặc tool. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "A",
+      "explanation": "Multi-window, multi-burn-rate giảm nhiễu khi đòi cả cửa sổ ngắn và dài vượt ngưỡng.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1666,27 +1666,27 @@
     {
       "id": "D13-060",
       "type": "mcq",
-      "prompt": "Trong vận hành thực tế, Latency percentile giúp đội ngũ làm điều gì?",
+      "prompt": "Engineering dashboard cần tối thiểu 6 panels theo slide. Bộ nào đúng?",
       "options": [
         {
           "key": "A",
-          "text": "Mở rộng phạm vi trước khi đo kết quả"
+          "text": "Latency, traffic, errors, cost, tokens, hallucination"
         },
         {
           "key": "B",
-          "text": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối"
+          "text": "Latency, traffic, errors, CPU, RAM, uptime"
         },
         {
           "key": "C",
-          "text": "Chỉ dùng trung bình để bỏ qua outlier"
+          "text": "Latency, traffic, errors, cost, tokens, memory"
         },
         {
           "key": "D",
-          "text": "Bỏ qua rủi ro và không cần tiêu chí đánh giá"
+          "text": "Latency, traffic, errors, cost, uptime, traces"
         }
       ],
-      "answer": "B",
-      "explanation": "Dùng p95/p99 để nhìn trải nghiệm chậm ở đuôi phân phối. Nội dung được biên soạn từ tài liệu Day13_Monitoring_Logging_Observability_Beginner_Notes.html của Ngày 13.",
+      "answer": "A",
+      "explanation": "Slide liệt kê sáu panel tối thiểu; saturation thuộc 4 Golden Signals và cần theo dõi thêm.",
       "source": "onthi/Day13_Monitoring_Logging_Observability_Beginner_Notes.html",
       "module": "C",
       "points": 1
@@ -1696,8 +1696,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Giải thích monitoring và nêu một ví dụ áp dụng trong sản phẩm AI.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm monitoring, logging, tracing, metrics, alerting, cost observability, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Một feature chỉ chậm với một model và một nhóm user, trong khi dashboard tổng vẫn xanh. Lập kế hoạch điều tra end-to-end và chọn dữ liệu cần nối giữa các service.",
+      "modelAnswer": "Nêu observability cho câu hỏi mới; lọc metric theo feature/model ở mức cardinality hợp lý; dùng trace tìm span chậm; dùng correlation_id ghép log; xem P95/P99, TTFT/TPOT; đo MTTD/MTTR và ghi nguyên nhân.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1710,8 +1710,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "So sánh monitoring với logging; nêu tiêu chí lựa chọn trong một tình huống thực tế.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm monitoring, logging, tracing, metrics, alerting, cost observability, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Dịch vụ có SLO uptime 99,9% trong tháng 30 ngày. Tính downtime cho phép, giải thích quyết định phát hành khi đã dùng hết 80% budget.",
+      "modelAnswer": "Budget là 0,1% × 30 ngày = 43 phút 12 giây; đã dùng khoảng 34 phút 34 giây, còn khoảng 8 phút 38 giây. Ưu tiên ổn định/sửa lỗi, trì hoãn thay đổi rủi ro; phân biệt SLI đo được, SLO nội bộ và SLA với khách.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1724,8 +1724,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Thiết kế một quy trình ngắn sử dụng tracing để giảm rủi ro cho người dùng.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm monitoring, logging, tracing, metrics, alerting, cost observability, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Chat streaming bắt đầu hiện chữ sau 3 giây, sau đó sinh rất nhanh; average latency vẫn ổn. Thiết kế phép đo để xác nhận trải nghiệm và ngưỡng cảnh báo.",
+      "modelAnswer": "Đo TTFT, TPOT và tokens/sec theo model/feature; xem P50/P95/P99 thay vì chỉ average; nêu tail latency và tác động nhiều lượt chat; đặt SLO/alert theo TTFT hoặc P95 đã hiệu chỉnh từ baseline.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1738,8 +1738,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Phân tích một failure mode liên quan đến metrics, nguyên nhân và cách khắc phục.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm monitoring, logging, tracing, metrics, alerting, cost observability, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Agent RAG trả lời trôi chảy nhưng sai số liệu tài chính. Thiết kế kiểm tra chất lượng nhiều tầng và vòng phản hồi sau deploy.",
+      "modelAnswer": "L1 kiểm format/PII; L2 judge relevance, faithfulness/groundedness theo context; xác minh số với DB/API đáng tin; self-consistency trên mẫu nhỏ nếu cần; L3 thumbs/CSAT/regenerate; L4 task success; theo dõi xu hướng hallucination.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1752,8 +1752,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Đề xuất metric đánh giá cho alerting; giải thích vì sao metric đó hữu ích.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm monitoring, logging, tracing, metrics, alerting, cost observability, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Hóa đơn LLM tăng sau khi thêm tính năng tóm tắt. Đề xuất cách quy trách nhiệm chi phí và hai thay đổi giảm bill mà vẫn giữ quality.",
+      "modelAnswer": "Ghi token input/output, cache read/write và cost theo user_id đã bảo vệ, feature, model; phân tích cost/request và cost/feature; thử prompt caching nội dung tĩnh và routing tóm tắt dễ sang model nhỏ; đo quality trước/sau, chỉ dùng batch cho việc không realtime.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1766,8 +1766,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Lập kế hoạch thử nghiệm nhỏ cho cost observability: giả định, dữ liệu, tiêu chí đạt và tiêu chí dừng.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm monitoring, logging, tracing, metrics, alerting, cost observability, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Bạn thiết kế log cho agent xử lý thông tin khách hàng. Viết schema tối thiểu, quy tắc sanitize và chính sách lưu app log so với audit log.",
+      "modelAnswer": "Tier 1 timestamp ISO 8601, level, correlation_id, service, event; Tier 2 user_id hash, session_id, feature, model, env; Tier 3 latency/tokens/cost/error_type; sanitize trước ghi, không lưu PII/secret/full prompt; app log có thể sampling, audit log đầy đủ, hạn chế quyền, append-only.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1780,8 +1780,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Tình huống: kết quả liên quan đến monitoring không đạt kỳ vọng. Bạn sẽ debug theo thứ tự nào?",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm monitoring, logging, tracing, metrics, alerting, cost observability, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Waterfall trace của một request cho thấy nhiều retry tool call và các span chờ LLM dài trong lúc CPU idle. Phân tích hai nút thắt và sửa chúng.",
+      "modelAnswer": "Phân biệt waiting do LLM/network với retry storm; xét parallelize/cache/timeout cho bước độc lập; retry exponential backoff có jitter, circuit breaker và giới hạn retry; giữ trace context qua service; xác nhận thay đổi bằng latency P95/P99 và error rate.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1794,8 +1794,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Viết khuyến nghị cho stakeholder về lợi ích, giới hạn và rủi ro của logging.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm monitoring, logging, tracing, metrics, alerting, cost observability, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Một alert P95 latency page on-call liên tục nhưng nhiều lần tự hết. Thiết kế lại rule và nội dung thông báo để bớt alert fatigue.",
+      "modelAnswer": "Dùng SLO symptom và multi-window/multi-burn-rate, cả hai cửa sổ vượt mới fire; phân severity, deduplicate, auto-resolve, route đúng owner; thông báo có impact, current/baseline/threshold, dashboard lọc sẵn, trace và runbook; review rule định kỳ.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1808,8 +1808,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Nêu các đánh đổi khi triển khai tracing trong production và cách theo dõi sau triển khai.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm monitoring, logging, tracing, metrics, alerting, cost observability, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Thiết kế dashboard vận hành cho lãnh đạo, kỹ sư và người debug. Nêu nội dung từng tầng và ba lỗi trình bày cần tránh.",
+      "modelAnswer": "Overview: health/uptime/alert chính; Detail: latency P50/P95/P99, traffic, errors, cost/hour, tokens, hallucination; Drill-down: trace cụ thể và log search. Tránh quá nhiều panel, thiếu baseline/SLO line, thiếu đơn vị hoặc time range quá dài; dùng refresh phù hợp.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",
@@ -1822,8 +1822,8 @@
       "module": "D",
       "type": "essay",
       "points": 4,
-      "prompt": "Tạo checklist trước khi ship một tính năng AI có dùng metrics và alerting.",
-      "modelAnswer": "Bài trả lời cần vận dụng đúng các khái niệm monitoring, logging, tracing, metrics, alerting, cost observability, đưa ra ví dụ phù hợp, phân tích rủi ro/đánh đổi và đề xuất bước kiểm chứng cụ thể.",
+      "prompt": "Lab 13 yêu cầu bàn giao monitoring blueprint trong 90 phút. Lập checklist kiểm chứng cụ thể trước khi chấp nhận hệ thống.",
+      "modelAnswer": "Instrumentation: JSON log, correlation propagation, PII sanitize, observe ba function và tags; Dashboard/Alerts: SLO P95/error/cost, ít nhất sáu panel, ba rule có runbook; Validation: 10–20 request đa dạng, tối thiểu 10 trace có cost/latency/quality, gây một lỗi có kiểm soát và xác nhận alert; blueprint một trang gồm SLO, kiến trúc, playbook, cost/scaling.",
       "rubric": [
         "Đúng khái niệm trọng tâm",
         "Có lập luận hoặc ví dụ cụ thể",

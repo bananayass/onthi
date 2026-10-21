@@ -1,0 +1,526 @@
+{
+  "mcq": [
+    [
+      "Vì sao agent chạy tốt ở localhost vẫn có thể lỗi khi đưa lên production?",
+      "Production khác về config, mạng, tải và xử lý lỗi",
+      "Production chỉ cần mở port, các điều kiện khác giữ nguyên",
+      "Production tự sửa dependency thiếu ở môi trường local",
+      "Localhost dùng HTTPS nên khác hoàn toàn cloud HTTP",
+      "Slide 5: dev và production khác dependencies, config, networking, users, failure."
+    ],
+    [
+      "Theo 12-factor, API key của agent nên được cấp thế nào?",
+      "Qua biến môi trường hoặc secret manager lúc chạy",
+      "Ghi key vào Dockerfile và chỉ đổi khi build lại image",
+      "Commit key trong .env nhưng không công khai repository",
+      "Đưa key qua biến VITE_* để frontend gọi trực tiếp",
+      "Slide 7: config trong env; không hardcode API key."
+    ],
+    [
+      "Một agent cần nhớ hội thoại qua nhiều instance. Cách giữ stateless process là gì?",
+      "Lưu state ngoài process theo khóa phiên ổn định",
+      "Dùng sticky session làm nơi lưu state duy nhất",
+      "Lưu state trong RAM rồi nhân bản image định kỳ",
+      "Gắn memory vào container và tắt autoscaling",
+      "Slide 7 và 21: externalize state thay vì lưu trên instance."
+    ],
+    [
+      "Điểm nào khiến bill của agent khác app CRUD thông thường?",
+      "Nhiều lần gọi model và gửi lại history",
+      "Hóa đơn chỉ phụ thuộc số instance đang chạy",
+      "Mọi lượt gọi model có số token đầu vào cố định",
+      "Retry sẽ không tăng cost nếu user không thấy output",
+      "Slide 6 và 9: nhiều model call cùng history làm chi phí token khó đoán."
+    ],
+    [
+      "Vì sao CI/CD của agent cần eval gate ngoài unit test?",
+      "Output không xác định; cần chấm chất lượng",
+      "Build image thành công đã chứng minh đáp án đúng",
+      "Unit test cú pháp đủ đo chất lượng câu trả lời",
+      "Eval gate chỉ cần khi app tự host model GPU",
+      "Slide 9 và 63: build pass không chứng minh chất lượng agent."
+    ],
+    [
+      "Model gọi qua API là dependency đặc biệt ở điểm nào?",
+      "Provider có thể đổi model, rate limit, khai tử",
+      "Pin thư viện client sẽ khóa model ở provider",
+      "Provider luôn cấp quota theo số instance của app",
+      "Model API có cùng vòng đời với image của app",
+      "Slide 11: model nằm trên server bên ngoài, có rate limit và deprecation."
+    ],
+    [
+      "Khi chọn model cho production, hành động nào giúp tránh đổi phiên bản ngoài ý muốn?",
+      "Pin model ID và tắt cơ chế tự nâng cấp",
+      "Chỉ pin phiên bản SDK gọi API của provider",
+      "Luôn dùng alias latest để tự nhận model mới",
+      "Đặt temperature bằng 0 để khóa model version",
+      "Slide 11 và 77: model ID là artifact cần quản lý."
+    ],
+    [
+      "Dockerfile và Docker image khác nhau thế nào?",
+      "Dockerfile chỉ dẫn build; image là gói dùng để chạy",
+      "Dockerfile là image đã build; image là instance chạy",
+      "Dockerfile là runtime; image là phiên hội thoại",
+      "Dockerfile là registry; image là lệnh build source",
+      "Slide 12–13: Dockerfile định nghĩa build, image là artifact được chạy."
+    ],
+    [
+      "Lợi ích chính của multi-stage Dockerfile trong bài lab là gì?",
+      "Tách bước build dependency khỏi runtime gọn hơn",
+      "Để builder và runtime cùng chứa toàn bộ toolchain",
+      "Để mỗi stage là một agent service chạy độc lập",
+      "Để không cần lock dependency khi tạo image",
+      "Slide 13: builder tạo dependencies, runtime nhận phần cần chạy."
+    ],
+    [
+      "Vì sao slide chọn python:3.12-slim thay vì Alpine cho nhiều app ML?",
+      "Slim có wheel glibc; Alpine dễ phải build source",
+      "Alpine luôn tương thích mọi wheel Python như slim",
+      "Slim không chứa libc nên package ML build nhanh hơn",
+      "Alpine có GPU mặc định còn slim cần driver ngoài",
+      "Slide 14: musl của Alpine có thể thiếu wheel phù hợp, nhất là một số kiến trúc."
+    ],
+    [
+      "Đánh đổi nổi bật của base image distroless là gì?",
+      "Giảm attack surface nhưng khó debug vì thiếu shell",
+      "Distroless giữ shell để debug nhưng tăng CVE",
+      "Distroless loại bỏ luôn nhu cầu scan CVE",
+      "Distroless chỉ chạy được khi có Kubernetes",
+      "Slide 14: distroless gọn, ít thành phần, nhưng không có shell."
+    ],
+    [
+      "Chạy container dưới user non-root nhằm giảm rủi ro nào?",
+      "Giảm quyền của tiến trình khi container bị xâm nhập",
+      "Ngăn được mọi lỗ hổng trong dependency Python",
+      "Thay thế hoàn toàn sandbox và network isolation",
+      "Bảo đảm API key không thể bị đọc từ log",
+      "Slide 15: USER app giới hạn quyền so với root."
+    ],
+    [
+      "SBOM của Docker image giúp trả lời câu hỏi nào?",
+      "Image chứa những thành phần và package nào?",
+      "Image đã pass eval agent ở version nào?",
+      "Container xử lý được bao nhiêu request đồng thời?",
+      "Base image đã được deploy ở region nào?",
+      "Slide 15: SBOM liệt kê thành phần/package trong image."
+    ],
+    [
+      "Vì sao cần scan CVE của image lặp lại sau lần deploy đầu?",
+      "Lỗ hổng mới có thể được công bố về sau",
+      "Scan đầu chỉ kiểm Python; scan sau mới kiểm OS",
+      "Image tự cài package mới khi gặp request khó",
+      "CVE chỉ hiện sau khi container đã chạy một tuần",
+      "Slide 15: scan là việc lặp lại, không phải một lần."
+    ],
+    [
+      "Trong Docker Compose, agent nên gọi Qdrant cùng stack qua địa chỉ nào?",
+      "Tên service như qdrant:6333",
+      "localhost:6333 vì hai service chung Compose",
+      "127.0.0.1:6333 vì agent là client nội bộ",
+      "Tên image qdrant:latest vì nó đã được build",
+      "Slide 16: service liên lạc qua DNS tên service trong Compose."
+    ],
+    [
+      "Tại sao .dockerignore cần loại .env khỏi build context?",
+      "Để secret không vô tình bị đóng vào image",
+      "Để .env không được nạp làm biến runtime",
+      "Để Docker không đọc được lock file khi build",
+      "Để secret tự được mã hóa trong image cuối",
+      "Slide 13 và lab: không copy .env hoặc API key vào image."
+    ],
+    [
+      "Agent trả 504 khi reasoning loop còn chạy. Nguyên nhân hạ tầng thường gặp là gì?",
+      "Gateway cắt request trước khi agent hoàn tất",
+      "Model từ chối tool call nên gateway trả 504",
+      "Image hết hạn nên proxy ngắt mọi kết nối",
+      "Health check fail sẽ luôn trả mã 504 cho client",
+      "Slide 18: thời gian xử lý có thể vượt timeout của gateway/proxy."
+    ],
+    [
+      "SSE phù hợp nhất với luồng phản hồi nào?",
+      "Server gửi token một chiều dần về client qua HTTP",
+      "Client gửi lệnh hai chiều liên tục trên WebSocket",
+      "API trả job_id rồi client poll để nhận kết quả",
+      "Server trả một JSON duy nhất khi đã xử lý xong",
+      "Slide 19: SSE truyền event một chiều server sang client."
+    ],
+    [
+      "SSE đã bật nhưng browser nhận cả câu trả lời cùng lúc. Nên kiểm tra gì?",
+      "Proxy buffering có đang gom các event lại không",
+      "Readiness probe đang restart container giữa stream",
+      "Model ID đã đổi nên mọi token bị cache trong browser",
+      "SSE bắt buộc đợi event done mới hiện token",
+      "Slide 19: tắt proxy buffering hoặc dùng X-Accel-Buffering: no."
+    ],
+    [
+      "Stream SSE bị proxy ngắt lúc agent im lặng lâu. Cách giảm idle timeout là gì?",
+      "Gửi heartbeat định kỳ trên luồng SSE",
+      "Đổi readiness thành liveness để restart nhanh",
+      "Chỉ tăng số worker, không giữ luồng hoạt động",
+      "Tắt proxy buffering là đủ cho mọi idle timeout",
+      "Slide 19: heartbeat giữ stream không bị cắt khi im lặng."
+    ],
+    [
+      "Một tác vụ nghiên cứu kéo dài hàng phút, không cần kết quả tức thì. Mẫu API nào hợp?",
+      "Trả job_id rồi poll hoặc nhận webhook",
+      "Giữ kết nối đồng bộ cho tới khi gateway cho phép",
+      "Gửi nhiều request ngắn để khởi chạy lại agent",
+      "Trả 202 nhưng không lưu job hoặc trạng thái",
+      "Slide 20: async job tách submit khỏi xử lý dài."
+    ],
+    [
+      "Sticky session có đủ để bảo toàn hội thoại khi instance chết không?",
+      "Không; cần state dùng chung ngoài process",
+      "Có, sticky session lưu state bền khi instance chết",
+      "Có, load balancer luôn chuyển RAM sang instance mới",
+      "Không, vì mọi hội thoại phải lưu trong browser",
+      "Slide 21: sticky session chỉ best-effort; externalize state mới bền."
+    ],
+    [
+      "Điều gì xảy ra nếu gọi hàm blocking trong async def xử lý agent?",
+      "Event loop có thể nghẽn, làm chậm request khác",
+      "Blocking call tự động chuyển sang thread khác",
+      "Chỉ riêng request gọi blocking bị chậm, không ai khác",
+      "Async def tự tăng số worker khi event loop nghẽn",
+      "Slide 22: blocking call trong async def làm nghẽn event loop."
+    ],
+    [
+      "Cold start của agent tăng mạnh do load model lúc boot. Cách xử lý trên slide là gì?",
+      "Giữ instance ấm hoặc lazy-load",
+      "Load toàn bộ dependency ở mỗi request để tránh boot",
+      "Tắt readiness cho tới khi user đầu tiên truy cập",
+      "Giữ image full thay slim để model nạp tức thì",
+      "Slide 22: min instances hoặc lazy-load giảm cold path."
+    ],
+    [
+      "Với agent server-side thông thường, loop và API key đặt ở đâu?",
+      "Ở backend do đội triển khai vận hành",
+      "Ở frontend browser để giảm độ trễ đến provider",
+      "Ở MCP registry để các client cùng tìm thấy",
+      "Ở secret file đóng trong image khi build",
+      "Slide 23: backend giữ loop, tools và key; đội triển khai trả chi phí token."
+    ],
+    [
+      "Vì sao UI gọi model frontier từ browser vẫn cần BFF proxy?",
+      "BFF giữ API key và áp rate limit phía server",
+      "Browser luôn mã hóa được key trong JS bundle",
+      "CORS đã đủ để giới hạn token provider cho user",
+      "Model frontier cần WebGPU trên mọi browser",
+      "Slide 24: key trong VITE_/NEXT_PUBLIC_ sẽ lộ trong bundle."
+    ],
+    [
+      "Trong mô hình local-first BYOK, ai thường giữ và trả tiền cho model key?",
+      "Người dùng chạy agent trên máy của họ",
+      "Đội triển khai giữ key chung và trả toàn bộ token",
+      "Cloud runtime cấp key ẩn cho user mà không tính phí",
+      "Frontend nhúng key chung cho mọi máy đang dùng",
+      "Slide 23: BYOK đặt loop và key trên máy user; user trả tiền."
+    ],
+    [
+      "Đánh đổi của model in-browser hoặc on-device là gì?",
+      "Riêng tư/offline hơn nhưng lệ thuộc phần cứng",
+      "Riêng tư hơn nhưng phải gửi mọi prompt lên cloud",
+      "Offline được nhưng luôn mạnh như model frontier",
+      "Miễn phí token nhưng không phụ thuộc phần cứng",
+      "Slide 23–25: keyless và riêng tư hơn, năng lực phụ thuộc thiết bị."
+    ],
+    [
+      "Kiến trúc hybrid trong slide định tuyến yêu cầu thế nào?",
+      "Việc thường dùng model nhỏ local; việc khó lên cloud",
+      "Việc khó chạy model nhỏ, việc dễ gọi cloud",
+      "Mọi request gửi cả local lẫn cloud rồi lấy output dài",
+      "Cloud chỉ giữ checkpoint, local luôn gọi model lớn",
+      "Slide 25: model nhỏ xử lý việc thường, escalate lên cloud khi khó."
+    ],
+    [
+      "Lab Day 12 khuyên bắt đầu tier cloud nào để học containerize và deploy?",
+      "Tier 1 như Railway hoặc Render",
+      "Tier 0 để không cần nhìn Dockerfile hoặc logs",
+      "Tier 2 vì auto-scale là yêu cầu đầu của lab",
+      "Tier 3 vì Kubernetes giảm mọi thao tác deploy",
+      "Slide 36 và 81: Tier 1 giúp hiểu cơ chế deploy cơ bản."
+    ],
+    [
+      "Framework agent khác managed runtime ở đâu?",
+      "Framework định hình code; runtime lo vận hành",
+      "Framework cấp session; runtime chỉ format prompt",
+      "Framework là nơi chạy; runtime chỉ là SDK local",
+      "Framework và runtime luôn phải cùng một vendor",
+      "Slide 26–27: đổi framework là refactor code, đổi runtime là đổi deploy/vận hành."
+    ],
+    [
+      "Khi chọn cloud cho agent, chỉ so giá có thể bỏ sót yếu tố nào?",
+      "Timeout, SSE, state và phí lúc chờ model",
+      "Giá token là đủ vì mọi cloud có timeout giống nhau",
+      "Chỉ region quyết định agent có chạy được hay không",
+      "Số vCPU quyết định cả streaming và state persistence",
+      "Slide 29–32: workload agent phụ thuộc timeout/runtime và billing khi chờ model."
+    ],
+    [
+      "MCP stdio thường chạy theo cách nào?",
+      "Client spawn subprocess và trao đổi qua stdin/stdout",
+      "Client gọi server remote qua HTTPS public",
+      "Registry spawn server rồi trả tool về cho client",
+      "Browser giữ process stdio qua WebSocket",
+      "Slide 40: stdio phù hợp local/dev/desktop; lấy secret từ môi trường."
+    ],
+    [
+      "Khi đưa MCP server lên Streamable HTTP, thay đổi vận hành chính là gì?",
+      "Host và bảo vệ nó như API remote nhiều client",
+      "Remote transport tự thay thế auth của server",
+      "Chỉ cần đăng metadata để có hosting an toàn",
+      "Không cần kiểm route vì HTTP đã xác thực sẵn",
+      "Slide 40: remote MCP là service độc lập, cần auth và bảo vệ API."
+    ],
+    [
+      "Registry, Gateway, Runtime trong kiến trúc MCP lần lượt làm gì?",
+      "Tìm metadata, gom và kiểm soát, thực thi server",
+      "Registry chạy tool, Gateway lưu image, Runtime tìm metadata",
+      "Registry cấp secret, Gateway chạy model, Runtime chấm eval",
+      "Registry proxy request, Gateway giữ session, Runtime build image",
+      "Slide 44: Registry để tìm, Gateway để gom/kiểm soát, Runtime để chạy."
+    ],
+    [
+      "Vì sao MCP server không được chuyển nguyên token cấp cho dịch vụ khác?",
+      "Token passthrough phá audit và rate limit",
+      "Token passthrough chỉ làm request thêm latency",
+      "Token của user tự chứng minh quyền ở mọi service",
+      "Token passthrough chỉ ảnh hưởng session trong browser",
+      "Slide 42: token phải được cấp riêng cho MCP server; không passthrough."
+    ],
+    [
+      "Trong confused deputy, vì sao xác thực user thôi chưa đủ?",
+      "Client cũng cần quyền làm thay user",
+      "User login rồi thì mọi client đều được ủy quyền",
+      "Chỉ cần kiểm JWT hết hạn trước khi gọi tool",
+      "Client đăng ký trong registry là đã được user duyệt",
+      "Slide 42: xác thực user khác với ủy quyền cho client."
+    ],
+    [
+      "MCP bảo vệ /mcp nhưng bỏ quên /mcp_message. Lỗi là gì?",
+      "Route phụ vẫn lộ tool do không được xác thực",
+      "Route phụ tự dùng auth của route chính trong proxy",
+      "Chỉ /mcp mới có tool; route khác không thể gọi",
+      "Health check sẽ bắt được route thiếu auth trước deploy",
+      "Slide 43: xác thực mọi route, không chỉ endpoint chính."
+    ],
+    [
+      "Thứ tự xử lý request nào giảm abuse và chi phí token?",
+      "Auth → rate limit → validate/budget → agent",
+      "Auth → agent → validate/budget → rate limit",
+      "Rate limit → agent → auth → validate/budget",
+      "Validate/budget → agent → auth → rate limit",
+      "Slide 45: reject sớm trước khi agent gọi model."
+    ],
+    [
+      "API key, JWT và OAuth 2.1 nên phân biệt theo nhu cầu nào?",
+      "Internal/MVP, app user và ủy quyền",
+      "Internal/MVP, storage dài hạn và GPU quota",
+      "User-facing, health check và container build",
+      "Delegated auth, image scan và session cache",
+      "Slide 46: ba mẫu auth phục vụ các loại client/quyền khác nhau."
+    ],
+    [
+      "Token bucket rate limit mô hình hóa hai đại lượng nào?",
+      "Tốc độ trung bình và burst ngắn hạn",
+      "Tổng số model và số prompt trong cache",
+      "Độ trễ request và dung lượng Docker image",
+      "CPU usage và số container đang deploy",
+      "Slide 47: token bucket giới hạn rate và burst."
+    ],
+    [
+      "Cost guard trước model ước tính chi phí từ những gì?",
+      "Input/output token và giá mỗi loại",
+      "Số request × giá thuê instance theo giờ",
+      "Kích thước image × đơn giá storage vùng cloud",
+      "Số user × thời gian health check mỗi phút",
+      "Slide 80: est = input_tokens/1e6 × input_price + max_output_tokens/1e6 × output_price."
+    ],
+    [
+      "Spend alert của provider khác admission control thế nào?",
+      "Alert báo sau; admission chặn trước call",
+      "Alert chặn trước còn admission chỉ báo sau",
+      "Cả hai cùng chặn trước khi gọi provider",
+      "Alert và admission đều chỉ áp cho Docker build",
+      "Slide 47 và 50: cảnh báo chi tiêu không thay hard cap phía trước model."
+    ],
+    [
+      "LLM gateway/router có thể làm gì khi provider chính bị rate limit?",
+      "Chuyển sang model/provider dự phòng theo chính sách",
+      "Tự nâng quota provider đang lỗi bằng cách scale CPU",
+      "Bỏ xác thực để request thử nhiều model nhanh hơn",
+      "Retry vô hạn một provider đến khi hết rate limit",
+      "Slide 54: router hỗ trợ failover, load balance, retry/backoff."
+    ],
+    [
+      "Prompt cache và semantic cache khác nhau ở điều kiện khớp nào?",
+      "Prefix giống nhau so với ý nghĩa câu hỏi tương tự",
+      "Prefix theo nghĩa; semantic theo byte trùng hệt",
+      "Prefix theo user ID; semantic theo version image",
+      "Prefix theo provider; semantic theo thời gian chạy",
+      "Slide 55: prompt cache dùng prefix; semantic cache dùng tương đồng ngữ nghĩa."
+    ],
+    [
+      "Agent đợi LLM nhiều nhưng CPU thấp. Nên xét metric scale nào?",
+      "Concurrency hoặc queue depth của request",
+      "CPU usage vì agent chờ model vẫn bận CPU",
+      "Dung lượng image vì lớn hơn nghĩa là tải hơn",
+      "Số dòng log vì nhiều log nghĩa là nhiều user",
+      "Slide 51: I/O-bound có thể đầy request dù CPU thấp."
+    ],
+    [
+      "Readiness fail khác liveness fail ở hành động hạ tầng nào?",
+      "Readiness gỡ traffic; liveness có thể restart",
+      "Readiness restart; liveness chỉ gỡ traffic",
+      "Cả hai probe luôn restart ngay khi fail",
+      "Readiness đổi model; liveness xóa session",
+      "Slide 52: nhầm hai probe có thể tạo restart loop."
+    ],
+    [
+      "Startup probe hữu ích khi self-host model vì sao?",
+      "Chờ load weight trước khi probe khác",
+      "Đợi public URL mở port, không cần đợi weight",
+      "Tự đổi sang model API ngoài khi GPU chưa lên",
+      "Giữ readiness luôn pass trong quá trình load",
+      "Slide 52 và 58: model load chậm; startup probe dành cho boot dài."
+    ],
+    [
+      "Khi nhận SIGTERM trong lúc agent turn còn chạy, service nên làm gì?",
+      "Ngừng nhận việc mới và drain turn đang xử lý",
+      "Dừng ngay mọi turn để pod thoát thật nhanh",
+      "Nhận thêm request mới đến khi hết grace period",
+      "Chỉ lưu log rồi bỏ qua turn đang chạy",
+      "Slide 53: graceful shutdown phải cho turn dài hoàn tất."
+    ],
+    [
+      "Thứ tự zero-downtime deploy cơ bản là gì?",
+      "Health pass → chuyển traffic → drain bản cũ",
+      "Dừng bản cũ trước khi build xong bản mới",
+      "Chuyển traffic rồi mới thử health của bản mới",
+      "Xóa state cũ để buộc request dùng bản mới",
+      "Slide 53: chỉ chuyển traffic sau khi bản mới khỏe."
+    ],
+    [
+      "Vì sao eval gate nên so cả baseline, không chỉ ngưỡng tuyệt đối?",
+      "Bản mới có thể tụt điểm dù vẫn trên ngưỡng",
+      "Baseline chỉ đo kích thước image sau build",
+      "Chỉ ngưỡng tuyệt đối đã phát hiện mọi regression",
+      "Baseline thay hoàn toàn ngưỡng chất lượng tối thiểu",
+      "Slide 64: regression vẫn lọt nếu chỉ nhìn ngưỡng tuyệt đối."
+    ],
+    [
+      "Shadow deployment khác canary ở output bản mới thế nào?",
+      "Shadow bỏ output; canary trả cho một phần user",
+      "Shadow gửi output thật; canary chỉ ghi log",
+      "Shadow và canary đều bỏ mọi output mới",
+      "Canary luôn gửi output mới tới 100% user",
+      "Slide 65: shadow mirror traffic; canary dùng traffic thật có output."
+    ],
+    [
+      "Khi shadow test agent có tool trừ tiền, điều kiện an toàn là gì?",
+      "Chặn side effect của tool ở phiên bản shadow",
+      "Chỉ cần ẩn output, tool vẫn có thể chạy thật",
+      "Chỉ cần gắn nhãn shadow lên request model",
+      "Chỉ cần giới hạn traffic shadow, tool vẫn tự an toàn",
+      "Slide 65: bỏ output vẫn có thể gây side effect thật."
+    ],
+    [
+      "Nếu prompt được lưu riêng khỏi code, ba artifact nào cần theo dõi khi rollback agent dùng hosted model?",
+      "Container image, prompt version và model ID",
+      "Container image, Dockerfile và image tag",
+      "Prompt version, session ID và route SSE",
+      "Model ID, domain HTTPS và health endpoint",
+      "Slide 66: ba artifact có thể rollback riêng khi prompt được tách khỏi image; prompt hardcode trong code thì phải deploy image."
+    ],
+    [
+      "Timeout sau tool call trừ tiền có chứng minh giao dịch thất bại không?",
+      "Không; tác vụ có thể xong nhưng phản hồi về chậm",
+      "Có, timeout luôn rollback lệnh trừ tiền",
+      "Có, proxy hủy tác vụ ở hệ thống thanh toán",
+      "Không, vì tool thanh toán không có side effect",
+      "Slide 69: timeout không phân biệt thất bại với thành công trả lời chậm."
+    ],
+    [
+      "Idempotency key phải có tính chất nào khi retry cùng một hành động?",
+      "Ổn định để backend nhận ra và không thực hiện trùng",
+      "Đổi ở mỗi retry để server xem như request mới",
+      "Dựa vào output LLM lần sau để sinh key mới",
+      "Không cần gửi tới backend vì client tự dedup",
+      "Slide 70: cùng key nên trả lại kết quả lần đầu, không tạo side effect mới."
+    ],
+    [
+      "Agent crash sau vài bước của workflow. Durable execution giúp tránh lặp lại việc đã xong bằng cách nào?",
+      "Ghi output từng bước để resume từ điểm đã hoàn thành",
+      "Chỉ lưu state cuối, rồi chạy lại toàn bộ model và tool",
+      "Tự rollback mọi side effect ở hệ thống ngoài",
+      "Giữ process sống mãi để không bao giờ cần resume",
+      "Phần production nâng cao: lưu state/đầu ra từng bước để resume sau crash; tool ngoài vẫn cần idempotency."
+    ],
+    [
+      "Trong saga, bước gửi vé không thể thu hồi nên đặt ở đâu?",
+      "Sau bước có thể bù trừ và qua cổng duyệt phù hợp",
+      "Đặt đầu chuỗi để user biết vé đã được gửi",
+      "Retry gửi vé đến khi có email xác nhận",
+      "Đặt trước thanh toán để giảm latency",
+      "Slide 72: hành động không hoàn tác là pivot, nên đặt cuối và gate."
+    ],
+    [
+      "Egress allowlist giảm rủi ro nào cho agent có tool truy cập mạng?",
+      "Dữ liệu riêng bị gửi ra domain lạ",
+      "Giảm số token output bằng cách chặn URL dài",
+      "Giới hạn CPU của model self-host theo domain",
+      "Chỉ cho agent đọc file, không kiểm network",
+      "Slide 73: egress là kênh rò rỉ dữ liệu qua tool/network."
+    ],
+    [
+      "Vì sao mỗi agent nên có identity riêng và quyền hẹp?",
+      "Giảm bán kính sự cố và truy vết hành động rõ hơn",
+      "Một god-key chung dễ audit hơn nhiều identity",
+      "Token dài hạn chung giúp giảm lỗi permission",
+      "Agent đã có prompt an toàn nên không cần scope",
+      "Slide 75: least privilege, token ngắn hạn, tránh god-key chung."
+    ]
+  ],
+  "essay": [
+    [
+      "Một agent đang chạy ở localhost cần demo công khai cho 100 người. Lập checklist triển khai từ image tới public URL, nêu cách xác nhận từng mục.",
+      "Chấm: Dockerfile multi-stage với uv/slim, non-root, .dockerignore loại secret, scan CVE; chạy local; health endpoint và SSE; cấu hình env/secret; deploy Railway/Render; HTTPS URL, auth/rate limit/cost guard; gọi thử endpoint và xem log."
+    ],
+    [
+      "Agent trả token từng phần ở local nhưng production chỉ hiện sau một phút rồi 504. Chẩn đoán đường request và đề xuất hai cách xử lý tác vụ dài.",
+      "Chấm: đo thời gian agent so timeout gateway/proxy; kiểm proxy buffering và tắt phù hợp; SSE một chiều, heartbeat lúc im lặng; nếu cần replay lưu token theo streamId; với tác vụ dài chuyển job queue, trả job_id, poll/webhook."
+    ],
+    [
+      "Sau khi scale từ một lên ba instance, agent quên lịch sử khi request rơi vào instance khác. Thiết kế lại state và health/scaling để khắc phục.",
+      "Chấm: externalize conversation/tool history vào Redis/Postgres/checkpointer với thread_id ổn định; không dựa sticky session; scale theo concurrency/queue depth; phân biệt liveness/readiness/startup; kiểm thử request A rồi B vẫn tiếp tục được."
+    ],
+    [
+      "Một nhóm muốn chọn giữa Tier 0 managed runtime và tự deploy Tier 1–3 cho agent có dữ liệu nhạy cảm. Nêu tiêu chí và quyết định có điều kiện.",
+      "Chấm: so timeout, SSE, session persistence, security/identity, residency/compliance, network, cost khi chờ model, năng lực vận hành và lock-in; Tier 0 giảm việc infra; tự deploy cho kiểm soát riêng; phân biệt framework và runtime; xác minh giới hạn hiện hành trước khi chốt."
+    ],
+    [
+      "Bạn phải host MCP server cho nhiều client. Thiết kế đường đi Registry → Gateway → Runtime và các kiểm tra bảo mật tối thiểu.",
+      "Chấm: Streamable HTTP remote, host như API; registry chỉ metadata/discovery; gateway gom và kiểm soát; runtime chạy isolated/non-root; OAuth 2.1 theo slide, phân quyền từng client/user; không token passthrough; auth mọi route; egress allowlist; kiểm thử route phụ."
+    ],
+    [
+      "Một agent bị retry vô hạn làm hóa đơn tăng, nhưng provider đã gửi spend alert. Thiết kế cost guard trước model và phép thử chứng minh nó chặn thật.",
+      "Chấm: auth → rate limit → validate; ước lượng input_tokens × input_price + max_output_tokens × output_price trên đơn vị triệu; so per-request và tenant budget trước mỗi LLM call; hard reject, tag user/workload/model, đếm usage thật; test request vượt budget không gọi model; alert không thay guard."
+    ],
+    [
+      "Agent bản mới build pass nhưng giảm chất lượng. Thiết kế pipeline CI/CD và lộ trình rollout có thể quay lại nhanh.",
+      "Chấm: build image, scan CVE, chạy eval suite có ngưỡng và so baseline; fail thì chặn deploy; shadow mẫu traffic với tool side effect bị chặn và theo dõi token; canary nhỏ, tăng dần theo metric; rollback riêng image, prompt version, model ID."
+    ],
+    [
+      "Agent đặt vé bị timeout sau khi gọi tool thanh toán; nó sắp retry. Thiết kế cách tránh trừ tiền hai lần và xử lý chuỗi giữ chỗ → thanh toán → gửi vé.",
+      "Chấm: timeout không chứng minh thất bại; gắn idempotency key ổn định theo ý định/order, backend lưu kết quả và dedup; kiểm trạng thái trước retry; journal/replay bước đã hoàn thành; saga bù trừ giữ chỗ/thanh toán khi lỗi; đặt gửi vé không hoàn tác cuối và gate."
+    ],
+    [
+      "Một đội muốn tự host model vì dữ liệu không được rời vùng cho phép. Phân tích thêm những phần phải vận hành và cách kiểm chứng quyết định.",
+      "Chấm: nêu residency/compliance là lý do; so hosted API/managed self-host/tự dựng; GPU-hour cả lúc idle, weights/revision/quantization/engine, cold start, readiness sau load, scaling queue depth, rollback; benchmark tải thực, cost và latency; cân nhắc continuous batching/KV cache."
+    ],
+    [
+      "Một agent đọc tài liệu không tin cậy, có quyền gọi tool HTTP và ghi dữ liệu. Thiết kế ranh giới hạ tầng nếu tool bị prompt injection điều khiển.",
+      "Chấm: xác định private data + untrusted content + external channel; cô lập FS/network, egress allowlist, kiểm cả kênh provider tin cậy; per-agent identity và least privilege, token ngắn hạn/audience-bound; gate hành động write; fail-closed với cấu hình rỗng; kiểm thử đường rò rỉ."
+    ]
+  ]
+}
