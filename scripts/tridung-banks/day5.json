@@ -1,0 +1,526 @@
+{
+ "mcq": [
+  [
+   "Kiểu thất bại “Build the wrong thing” xảy ra khi nào?",
+   "Hiểu sai job-to-be-done hoặc chọn sai persona",
+   "Requirement mơ hồ, thiếu acceptance criteria",
+   "Không lường trước edge case khi triển khai",
+   "Chọn model có độ trễ cao hơn dự kiến",
+   "Build the thing wrong mới là requirement mơ hồ, thiếu AC, bỏ sót rủi ro."
+  ],
+  [
+   "Team làm AI viết báo cáo tự động, nhưng người dùng thật ra chỉ cần tìm đúng một con số trong báo cáo. Đây là kiểu thất bại nào?",
+   "Build the wrong thing",
+   "Build the thing wrong",
+   "Over-engineering hạ tầng",
+   "Thiếu non-functional requirement",
+   "Team giải sai nhu cầu thật của người dùng."
+  ],
+  [
+   "Yêu cầu “AI phải thông minh và nhanh” nhưng không nói nhanh là bao lâu thuộc kiểu thất bại nào?",
+   "Build the thing wrong",
+   "Build the wrong thing",
+   "Chọn sai North Star",
+   "Chọn sai persona",
+   "Hiểu đúng mục tiêu nhưng requirement không đủ rõ để kiểm thử."
+  ],
+  [
+   "Khác biệt về đầu ra giữa sản phẩm AI và phần mềm thông thường là gì?",
+   "Đầu ra AI mang tính xác suất, có biến thiên",
+   "Đầu ra AI luôn ổn định hơn phần mềm thường",
+   "Đầu ra AI không cần kiểm thử như phần mềm",
+   "Đầu ra AI chỉ khác về giao diện hiển thị",
+   "Vì vậy AI cần quality bands, fallback và trust design."
+  ],
+  [
+   "“Definition of done” của sản phẩm AI cần thêm gì so với phần mềm thường?",
+   "Ngưỡng chất lượng, SLA và fallback",
+   "Chỉ cần pass/fail của unit test",
+   "Chỉ cần demo chạy được trên máy dev",
+   "Chỉ cần stakeholder ký duyệt",
+   "Phần mềm thường có pass/fail khá rõ; AI cần threshold, SLA, phương án dự phòng."
+  ],
+  [
+   "Vòng cải tiến (iteration loop) của sản phẩm AI khác phần mềm thường thế nào?",
+   "Build → test → observe → calibrate → re-ship",
+   "Build rồi ship một lần duy nhất là hoàn tất",
+   "Ship trước rồi mới viết requirement sau",
+   "Chỉ cải tiến khi có khiếu nại từ người dùng",
+   "Sản phẩm AI cần quan sát và hiệu chỉnh liên tục sau khi phát hành."
+  ],
+  [
+   "Trong JTBD, “emotional job” của nhân viên hỗ trợ dùng AI có thể là gì?",
+   "Cảm thấy tự tin hơn, ít sợ trả lời sai",
+   "Trả lời ticket nhanh hơn mỗi ngày",
+   "Trông chuyên nghiệp trong mắt khách",
+   "Giảm số ticket tồn đọng cuối tuần",
+   "Functional: hoàn thành việc; emotional: cảm thấy thế nào; social: được nhìn nhận ra sao."
+  ],
+  [
+   "“Muốn trông chuyên nghiệp và phản hồi nhanh trong mắt khách” thuộc góc JTBD nào?",
+   "Social job",
+   "Functional job",
+   "Emotional job",
+   "Technical job",
+   "Social job là cách người dùng muốn được người khác nhìn nhận."
+  ],
+  [
+   "Nếu chỉ phân tích functional job, rủi ro là gì?",
+   "Agent đúng chức năng nhưng không được dùng lại",
+   "Agent sẽ chạy chậm hơn trên môi trường production",
+   "Agent không gọi được các tool bên ngoài hệ thống",
+   "Agent tốn nhiều token hơn mức thật sự cần thiết",
+   "Bỏ qua emotional/social job dễ làm sản phẩm thiếu động lực sử dụng lâu dài."
+  ],
+  [
+   "North Star gợi ý cho AI support agent là gì?",
+   "First-response resolution rate",
+   "Số câu trả lời gửi đi mỗi ngày",
+   "Độ dài trung bình câu trả lời",
+   "Số token tiêu thụ mỗi tháng",
+   "Cảnh báo: đừng chỉ đo số lượng câu trả lời."
+  ],
+  [
+   "Với ticket routing, North Star và cảnh báo đi kèm là gì?",
+   "Đúng nhóm ngay lần đầu; đừng chỉ đo tốc độ phân loại",
+   "Tốc độ phân loại; đừng đo độ chính xác của nhóm",
+   "Số ticket xử lý; đừng đo thời gian phản hồi lại",
+   "CSAT cuối tháng; đừng đo tỷ lệ chuyển nhóm sai",
+   "Phân loại nhanh mà sai nhóm thì không tạo giá trị."
+  ],
+  [
+   "North Star gợi ý cho AI sales assistant là gì?",
+   "Tỷ lệ lead đủ điều kiện",
+   "Số lead được chấm điểm",
+   "Số email gửi đi mỗi tuần",
+   "Thời gian phản hồi lead",
+   "Cảnh báo: đừng chỉ đo số lead được chấm điểm."
+  ],
+  [
+   "Theo slide, một use case tốt phải trả lời được bốn câu nào?",
+   "Ai dùng, đau ở đâu, đo bằng gì, fail gây hại gì",
+   "Model nào, giá bao nhiêu, ai code, khi nào xong",
+   "Bao nhiêu user, bao nhiêu tiền, bao nhiêu tính năng",
+   "Dùng cloud nào, framework nào, database nào",
+   "Define success before scope."
+  ],
+  [
+   "Điều gì phải có trước khi đặt mục tiêu cải thiện cho metric?",
+   "Baseline — mức hiện tại để so sánh",
+   "Model đã được chọn và fine-tune",
+   "Giao diện đã được thiết kế xong",
+   "Ngân sách marketing đã duyệt",
+   "Thực hành 1 yêu cầu metric đo được và có baseline."
+  ],
+  [
+   "Trụ cột “Riêng tư” trong 5 trụ cột Responsible AI nghĩa là gì?",
+   "Chỉ dùng dữ liệu thật sự cần thiết",
+   "Không thiên lệch bất hợp lý",
+   "Đủ ổn định để user tin dùng",
+   "Phù hợp nhiều nhóm người dùng",
+   "5 trụ cột: công bằng, độ tin cậy, riêng tư, hòa nhập, minh bạch."
+  ],
+  [
+   "Theo slide, các nguyên tắc Responsible AI cần được chuyển thành gì?",
+   "Product decisions, requirements và risk items",
+   "Khẩu hiệu truyền thông trên website sản phẩm",
+   "Một trang câu hỏi thường gặp cho người dùng",
+   "Điều khoản trong hợp đồng lao động nội bộ",
+   "Responsible AI phải đi vào requirement và kiểm soát rủi ro."
+  ],
+  [
+   "Vấn đề Bias nên chuyển thành requirement nào?",
+   "Test set đa dạng, human review cho ca nhạy cảm",
+   "Data minimization, masking, retention policy",
+   "Disclosure, citation, escalation path",
+   "Latency SLA, uptime, cost budget",
+   "Privacy → minimization/masking/retention; Transparency → disclosure/citation/escalation."
+  ],
+  [
+   "Vấn đề Privacy nên đi vào requirement nào?",
+   "Thu thập tối thiểu, che dữ liệu, chính sách lưu trữ",
+   "Bộ test đa dạng và người duyệt các ca nhạy cảm",
+   "Thông báo đây là AI và trích dẫn nguồn đầy đủ",
+   "Thời gian phản hồi dưới 5 giây ở phân vị p95",
+   "Câu hỏi discovery: có PII hoặc dữ liệu nhạy cảm không?"
+  ],
+  [
+   "Câu hỏi discovery cho Transparency là gì?",
+   "User có biết đây là AI và khi nào nên override không",
+   "AI có đối xử khác nhau giữa các nhóm user không",
+   "Có PII hoặc dữ liệu nhạy cảm trong hệ thống không",
+   "Chi phí vận hành mỗi tháng là bao nhiêu",
+   "Requirement tương ứng: disclosure, citation, escalation path."
+  ],
+  [
+   "Theo góc nhìn product về AI Act EU 2024, lĩnh vực nào cần mức cẩn trọng cao hơn?",
+   "Tuyển dụng, tín dụng, y tế, giáo dục",
+   "Trò chơi điện tử và giải trí",
+   "Gợi ý bài hát và phim ảnh",
+   "Chỉnh sửa ảnh cá nhân, filter",
+   "Các use case này bị yêu cầu risk management, documentation, human oversight chặt hơn."
+  ],
+  [
+   "Responsible AI mang lại lợi ích gì ngoài khía cạnh đạo đức?",
+   "Giảm rủi ro vận hành và pháp lý",
+   "Tăng tốc độ suy luận của model",
+   "Giảm số lượng tính năng cần build",
+   "Loại bỏ nhu cầu viết test case",
+   "Với PM/BA: requirement, logging, disclosure, exception handling phải nghĩ từ đầu."
+  ],
+  [
+   "Câu hỏi user research “User muốn AI tự làm đến mức nào?” khám phá điều gì?",
+   "Mức tự chủ và bước người dùng muốn giữ quyền kiểm soát",
+   "Cơ sở để người dùng tin vào câu trả lời của AI",
+   "Fallback mà người dùng muốn khi AI trả lời sai",
+   "Ngân sách mà người dùng sẵn sàng chi trả hằng tháng",
+   "4 câu: mức tự chủ, cơ sở để tin, fallback khi sai, kỳ vọng vai trò."
+  ],
+  [
+   "Nhiều AI product thất bại vì giả định sai nào về người dùng?",
+   "Tưởng user muốn tự động hoàn toàn, trong khi họ cần hỗ trợ quyết định",
+   "Tưởng user muốn giao diện tối giản thay vì nhiều tùy chọn",
+   "Tưởng user chỉ dùng sản phẩm trên điện thoại di động",
+   "Tưởng user không cần trích dẫn nguồn trong câu trả lời",
+   "Hỏi rõ AI là trợ lý, copilot hay người thay thế."
+  ],
+  [
+   "Persona cho sản phẩm AI cần thêm chiều nào so với persona thường?",
+   "AI literacy level",
+   "Vai trò công việc",
+   "Pain points",
+   "Bối cảnh sử dụng",
+   "Ngoài ra: mức sẵn sàng tin automation, ngưỡng chấp nhận sai, mức muốn explainability."
+  ],
+  [
+   "Chiều persona “ngưỡng chấp nhận sai” giúp đội sản phẩm quyết định điều gì?",
+   "Mức lỗi nào không chấp nhận được với nhóm người dùng đó",
+   "Số lượng tính năng cần đưa vào bản MVP đầu tiên",
+   "Màu sắc giao diện phù hợp với nhóm tuổi người dùng",
+   "Giá bán gói thuê bao hàng tháng cho từng phân khúc",
+   "Ngưỡng này ảnh hưởng threshold chất lượng và thiết kế fallback."
+  ],
+  [
+   "Người dùng copy, hỏi lại theo cách khác, ghi đè hoặc bỏ cuộc thuộc loại tín hiệu nào?",
+   "Behavioral signal",
+   "Explicit feedback",
+   "Outcome signal",
+   "Business KPI",
+   "Behavioral signal giúp phát hiện trust, friction và điểm nghẽn."
+  ],
+  [
+   "Tín hiệu resolved, booked, escalated dùng để làm gì?",
+   "Nối chất lượng AI với giá trị kinh doanh",
+   "Đo cảm nhận chủ quan của người dùng",
+   "Phát hiện điểm ma sát trong giao diện",
+   "Tính chi phí token mỗi phiên",
+   "Đây là outcome signal; thumbs up/down là explicit feedback."
+  ],
+  [
+   "Trong Discovery Interview (Thực hành 2), tiêu chí đạt yêu cầu gì?",
+   "Hỏi “why” ít nhất 2 lần để tìm nhu cầu nền",
+   "Gợi ý sẵn model để user dễ hình dung",
+   "Ghi chép đúng từng tính năng user yêu cầu",
+   "Phỏng vấn tối thiểu 20 người dùng",
+   "Phân biệt điều user nói với điều họ thật sự cần; không gợi ý sẵn solution."
+  ],
+  [
+   "Requirement nào đã được viết ở dạng đo được?",
+   "Trả lời dưới 5 giây ở p95, trích dẫn nguồn nội bộ, escalate khi confidence thấp",
+   "Agent phải trả lời nhanh, chính xác và thông minh trong mọi tình huống",
+   "Agent phải mang lại trải nghiệm tốt nhất cho người dùng nội bộ",
+   "Agent phải hiện đại, thân thiện và đáng tin cậy như chuyên gia",
+   "Nếu engineer không biết cách test, requirement đó chưa đủ rõ."
+  ],
+  [
+   "“p95 = 5 giây” có nghĩa là gì?",
+   "Khoảng 95% lượt phản hồi hoàn tất trong ≤ 5 giây",
+   "Trung bình mọi lượt phản hồi đều là đúng 5 giây",
+   "95% câu trả lời là đúng trong 5 giây đầu tiên",
+   "Lượt phản hồi chậm nhất mất tối đa 5 giây",
+   "p95 giúp nhìn các lượt chậm thay vì chỉ nhìn trung bình."
+  ],
+  [
+   "“Hallucination threshold, explainability, fallback” thuộc nhóm requirement nào?",
+   "AI-specific",
+   "Functional",
+   "Non-functional",
+   "Business KPI",
+   "Functional: AI làm việc gì; non-functional: latency, uptime, cost; AI-specific: rủi ro đặc thù AI."
+  ],
+  [
+   "“Latency SLA, uptime, cost budget” thuộc nhóm requirement nào?",
+   "Non-functional",
+   "Functional",
+   "AI-specific",
+   "Ethical",
+   "Non-functional bảo vệ trải nghiệm và khả năng vận hành."
+  ],
+  [
+   "Acceptance criterion tốt cho AI cần đủ bốn yếu tố nào?",
+   "Trigger, hành vi mong đợi, ngưỡng đo, xử lý thất bại",
+   "Persona, mục tiêu, giá trị kinh doanh, ngân sách",
+   "Model, prompt, tool và framework sử dụng",
+   "Owner, deadline, budget và mức độ ưu tiên",
+   "Mẫu: When X → agent làm Y → trong Z giây → nếu lỗi thì fallback."
+  ],
+  [
+   "Trong mẫu Gherkin, phần “Given” mô tả gì?",
+   "Bối cảnh cho trước trước khi hành động xảy ra",
+   "Hành động mà người dùng thực hiện",
+   "Kết quả hệ thống phải trả về cuối",
+   "Ngưỡng đo được của chất lượng đầu ra",
+   "Given (bối cảnh) – When (hành động) – Then (kết quả mong đợi)."
+  ],
+  [
+   "Câu “AI PRD thiếu acceptance threshold” được slide kết luận thế nào?",
+   "Chưa phải là AI PRD",
+   "Vẫn dùng được nếu có demo",
+   "Chỉ cần bổ sung sau khi ra mắt",
+   "Phù hợp cho giai đoạn MVP",
+   "Cần ngưỡng như đạt ≥ __% trên bộ 20 case đại diện."
+  ],
+  [
+   "Bộ test cho AC của AI cần có phân phối như thế nào?",
+   "Gồm case lộn xộn, biên và mơ hồ, không chỉ happy path",
+   "Chỉ gồm các câu hỏi phổ biến nhất của người dùng",
+   "Chỉ gồm các case mà model đã trả lời đúng trước đó",
+   "Chỉ gồm các câu hỏi do chính team tự nghĩ ra",
+   "Thêm câu thiếu dữ liệu, tiếng lóng, không có nguồn, tool timeout."
+  ],
+  [
+   "Theo slide, vai trò của PRD là gì?",
+   "Contract giữa PM, BA, Engineer và Stakeholder",
+   "Tài liệu kỹ thuật chỉ dành cho engineer",
+   "Bản trình bày để gọi vốn nhà đầu tư",
+   "Hồ sơ pháp lý nộp cho cơ quan quản lý",
+   "PRD tốt làm rõ quyết định và giúp team biết thế nào là done."
+  ],
+  [
+   "Mục nào KHÔNG thuộc 8 phần của PRD AI theo slide?",
+   "Kế hoạch tuyển dụng nhân sự",
+   "Technical Architecture",
+   "Non-functional Requirements",
+   "Acceptance Criteria",
+   "8 phần: Problem, Target User, Success Metrics, Architecture, Feature Req, Non-functional, AC, Risks."
+  ],
+  [
+   "Trong metrics hierarchy, “task completion, repeat usage, escalation rate” thuộc tầng nào?",
+   "Product metric",
+   "Business KPI",
+   "AI metric",
+   "Risk metric",
+   "Business KPI: cost saved, revenue, CSAT; AI metric: accuracy, latency, citation rate."
+  ],
+  [
+   "Câu hỏi mà tầng AI metric phải trả lời là gì?",
+   "Hệ AI có đủ tốt để nâng product metric không",
+   "Sản phẩm này tạo giá trị kinh doanh gì",
+   "User có thực sự dùng và hoàn thành việc không",
+   "Đối thủ có tính năng tương tự không",
+   "Ba tầng giữ team đồng hướng từ chất lượng AI đến giá trị kinh doanh."
+  ],
+  [
+   "Anti-pattern nào thường gặp khi viết metric trong PRD AI?",
+   "Metric kiểu “càng cao càng tốt”, thiếu baseline/threshold",
+   "Metric có baseline và ngưỡng cụ thể theo từng use case",
+   "Metric chia theo ba tầng business, product và AI rõ ràng",
+   "Metric gắn trực tiếp với acceptance criteria đo được",
+   "Anti-pattern khác: thiếu non-functional, không có risk, viết solution quá sớm."
+  ],
+  [
+   "Quy tắc tự kiểm tra một PRD tốt là gì?",
+   "Mỗi mục nối được với một quyết định, metric hoặc risk",
+   "PRD phải dài tối thiểu 20 trang để đủ chi tiết",
+   "PRD phải mô tả chi tiết từng hàm trong code",
+   "PRD phải được viết hoàn toàn bằng tiếng Anh",
+   "PRD tốt giảm mơ hồ, không phải dài cho đủ trang."
+  ],
+  [
+   "Trong PRD mẫu Internal Policy Assistant, bộ success metrics là gì?",
+   "Time-to-answer −50%, citation > 95%, escalation < 15%",
+   "Time-to-answer −10%, citation > 50%, escalation < 50%",
+   "Accuracy 100%, latency 0 giây, cost 0 đồng",
+   "CSAT 5 sao, NPS 100, churn 0%",
+   "Đây là mục tiêu minh họa, không phải chuẩn cho mọi sản phẩm."
+  ],
+  [
+   "Template user story chuẩn trong slide là gì?",
+   "As [persona], I want [AI capability], so that [business value]",
+   "Given [context], When [action], Then [expected result]",
+   "If [metric] crosses [threshold], we will [take action]",
+   "When X happens, the agent does Y within Z seconds",
+   "Given-When-Then dùng cho AC, không phải user story."
+  ],
+  [
+   "Yêu cầu nào về persona trong user story là đúng?",
+   "Persona phải là người dùng thật, không phải “hệ thống”",
+   "Persona có thể là tên của model AI đang được dùng",
+   "Persona nên là toàn bộ công ty thay vì một nhóm",
+   "Persona không cần thiết nếu đã có acceptance criteria",
+   "AI capability mô tả hành vi, không phải tên model; business value nối sang KPI."
+  ],
+  [
+   "Chữ “N” trong INVEST là gì?",
+   "Negotiable — còn thảo luận được cách làm",
+   "Necessary — bắt buộc phải có",
+   "Numeric — luôn có số liệu cụ thể",
+   "Novel — phải là tính năng mới",
+   "INVEST: Independent, Negotiable, Valuable, Estimable, Small, Testable."
+  ],
+  [
+   "Chữ “E” trong INVEST yêu cầu story phải thế nào?",
+   "Estimable — team ước lượng được công sức",
+   "Essential — cực kỳ quan trọng",
+   "Explainable — AI giải thích được",
+   "Efficient — chạy nhanh trên server",
+   "Story “đạt” khi qua đủ 6 tiêu chí INVEST."
+  ],
+  [
+   "Vì sao user story cần liệt kê edge case như câu hỏi mơ hồ, thiếu dữ liệu, tiếng lóng?",
+   "Để tránh ảo tưởng coverage chỉ với happy path",
+   "Để story trông dài và chuyên nghiệp hơn",
+   "Để giảm số acceptance criteria cần viết",
+   "Để model học thêm tiếng lóng mới",
+   "Happy path định nghĩa kết quả; edge case tránh ảo tưởng coverage."
+  ],
+  [
+   "Error state như không có nguồn, tool timeout, confidence thấp buộc team thiết kế gì?",
+   "Fallback và escalation",
+   "Thêm tính năng gợi ý sản phẩm",
+   "Tăng số model chạy song song",
+   "Rút ngắn system prompt",
+   "Error state là lý do bắt buộc phải có phương án dự phòng."
+  ],
+  [
+   "Theo Thực hành 5, mỗi user story cần tối thiểu những gì?",
+   "≥ 3 AC Given-When-Then, ≥ 2 edge case, ≥ 1 error state",
+   "≥ 1 AC bất kỳ, không cần edge case hay error state",
+   "≥ 10 AC chi tiết và một prototype chạy được",
+   "Chỉ cần câu As/I want/So that là đủ điều kiện",
+   "Kèm tự chấm bảng INVEST 6 tiêu chí."
+  ],
+  [
+   "Ví dụ “stale source, PII leak, bad labeling” thuộc nhóm rủi ro nào?",
+   "Data",
+   "Technical",
+   "Business",
+   "Ethical",
+   "Mitigation gợi ý: masking, access control, data QA."
+  ],
+  [
+   "Rủi ro Business như adoption thấp, ROI chưa rõ được giảm thiểu bằng gì?",
+   "Pilot, success metrics, kiểm chứng JTBD",
+   "Masking dữ liệu và kiểm soát truy cập",
+   "Eval định kỳ, timeout và monitoring",
+   "Documentation và quy trình approval",
+   "Technical → eval/fallback; Data → masking; Regulatory → documentation."
+  ],
+  [
+   "Rủi ro Ethical như kết quả thiếu công bằng, quyết định không minh bạch nên giảm thiểu thế nào?",
+   "Human review, disclosure, kiểm tra mẫu (audit sample)",
+   "Tăng max_tokens và giảm temperature của model",
+   "Chạy pilot nhỏ để đo ROI chính xác hơn",
+   "Cache kết quả để giảm độ trễ phản hồi",
+   "Regulatory: thiếu logging → documentation, approval flow, policy review."
+  ],
+  [
+   "Một rủi ro có Likelihood = 4, Impact = 5 (thang 1–5). Điểm rủi ro là bao nhiêu?",
+   "20",
+   "9",
+   "1",
+   "45",
+   "Điểm rủi ro = Likelihood × Impact."
+  ],
+  [
+   "Trong risk matrix minh họa, “Minor wording inconsistency” nằm ở ô nào?",
+   "Monitor — khả năng và tác động thấp",
+   "Escalate — quyết định Go/No-Go",
+   "Mitigate — khả năng cao, tác động cao",
+   "Reduce — cần giảm ngay lập tức",
+   "Privacy leak và hallucination trên tư vấn nhạy cảm mới ở vùng tác động cao."
+  ],
+  [
+   "Mỗi rủi ro trong risk register cần những gì?",
+   "Điểm L, điểm I, mitigation, owner cụ thể và liên kết AC/monitoring",
+   "Chỉ cần tên rủi ro và một dòng mô tả ngắn gọn",
+   "Chỉ cần điểm Likelihood của rủi ro đó là đủ",
+   "Chỉ cần ý kiến đánh giá của trưởng nhóm dự án",
+   "Thiếu mitigation và owner thì rủi ro chỉ là danh sách trên giấy."
+  ],
+  [
+   "Khi nào chọn Conditional go?",
+   "Pilot giới hạn, scope hẹp, guardrails chặt, có HITL",
+   "Mọi rủi ro cao đã có mitigation và owner rõ ràng",
+   "Rủi ro privacy lớn vẫn chưa được xử lý triệt để",
+   "Chưa chứng minh được giá trị thật cho người dùng",
+   "Go: rủi ro cao có mitigation, AC đo được, owner rõ."
+  ],
+  [
+   "Tình huống nào dẫn đến quyết định No-go?",
+   "Rủi ro privacy/compliance lớn chưa xử lý, chưa có fallback",
+   "Có pilot giới hạn với người giám sát và guardrails chặt",
+   "Acceptance criteria đo được và owner đã được xác định",
+   "Rủi ro thấp đã được theo dõi định kỳ qua monitoring",
+   "Rủi ro không mitigation và impact cao → no-go hoặc conditional."
+  ],
+  [
+   "Năm rủi ro tối thiểu trong Risk Matrix của Lab 5 là gì?",
+   "Hallucination, bias, privacy, cost, adoption",
+   "Latency, uptime, security, backup, DNS",
+   "Scope, schedule, budget, quality, team",
+   "UI, UX, SEO, marketing, sales",
+   "Mỗi rủi ro có L × I, mitigation và owner."
+  ],
+  [
+   "Lab 5 được chấm theo tiêu chí nào?",
+   "Mức độ rõ, đo được, hành động được",
+   "Văn phong hay và trình bày đẹp",
+   "Số trang PRD càng nhiều càng tốt",
+   "Model càng lớn càng được điểm cao",
+   "Deliverable: PRD 3–5 trang, risk matrix, 3 user stories, decision note."
+  ]
+ ],
+ "essay": [
+  [
+   "Phân tích Jobs-to-be-Done (functional, emotional, social) cho nhân viên chăm sóc khách hàng dùng AI support agent, rồi chọn North Star metric kèm cảnh báo “đừng chỉ đo…”, có baseline.",
+   "Functional: trả lời ticket nhanh, đúng chính sách. Emotional: tự tin, ít sợ sai. Social: trông chuyên nghiệp, phản hồi nhanh trong mắt khách. North Star: first-response resolution rate; cảnh báo: đừng chỉ đo số câu trả lời. Có baseline (ví dụ hiện 45%) và mục tiêu; nêu thêm 4 câu: ai dùng, đau ở đâu, đo bằng gì, fail gây hại gì."
+  ],
+  [
+   "Viết lại requirement mơ hồ “Chatbot phải trả lời nhanh và đúng” thành acceptance criteria đo được theo mẫu When X → Y → trong Z → fallback, kèm một bản Given-When-Then và ngưỡng trên bộ test.",
+   "Ví dụ: Khi nhân viên hỏi về chính sách nghỉ phép, agent trả lời bằng tiếng Việt, trích dẫn điều khoản nguồn, trong dưới 6 giây ở p95; nếu không tìm thấy nguồn thì nói rõ giới hạn và chuyển HR. Gherkin: Given nhân viên đã đăng nhập, When hỏi chính sách X, Then trả lời có trích dẫn trong ngưỡng thời gian; nếu không có nguồn thì báo và chuyển hướng. Ngưỡng: đạt ≥ 90% trên bộ 20 case đại diện gồm câu mơ hồ, thiếu dữ liệu, tiếng lóng, tool timeout."
+  ],
+  [
+   "Viết PRD skeleton đủ 8 phần cho một AI ticket routing agent, mỗi phần nối với một quyết định, metric hoặc risk.",
+   "Problem: ticket bị chuyển sai nhóm, xử lý chậm. Target user: operations lead, nhân viên phân loại. Success metrics: đúng nhóm ngay lần đầu (baseline → target), thời gian phản hồi. Technical architecture ở mức scope: classifier/LLM + rule + queue. Feature: gợi ý queue, giải thích lý do. Non-functional: latency, uptime, cost, privacy. AC: ngưỡng đúng nhóm trên bộ test, fallback khi confidence thấp. Risks: phân loại sai ticket khẩn, bias theo ngôn ngữ, adoption thấp — có mitigation, owner."
+  ],
+  [
+   "Xây dựng metrics hierarchy 3 tầng (Business KPI, Product metric, AI metric) cho một AI sales assistant và giải thích mối liên hệ giữa các tầng.",
+   "Business KPI: doanh thu từ lead, chi phí bán hàng giảm. Product metric: tỷ lệ lead đủ điều kiện, tỷ lệ sales dùng gợi ý, repeat usage. AI metric: độ chính xác chấm điểm lead, latency, tỷ lệ tóm tắt đúng. Liên hệ: AI metric tốt mới nâng product metric, product metric tạo business KPI; tránh đo số lead được chấm điểm thay cho chất lượng."
+  ],
+  [
+   "Viết 3 user stories chuẩn INVEST cho Internal Policy Assistant, mỗi story có ít nhất một happy path, một edge case và một error state kèm fallback.",
+   "Ví dụ: As an HR staff member, I want AI to answer policy questions with source citation, so that I respond consistently and reduce lookup time. As a line manager, I want AI to summarize leave policy for my team case… As an HR lead, I want low-confidence questions escalated… Mỗi story: happy path (trả lời đúng nguồn < 6s), edge (câu mơ hồ, tiếng lóng, chính sách mới), error (không có nguồn, timeout, confidence thấp → báo rõ, chuyển HR). Tự chấm I-N-V-E-S-T."
+  ],
+  [
+   "Lập risk matrix cho 5 rủi ro (hallucination, bias, privacy, cost, adoption) của một trợ lý tra cứu chính sách: chấm Likelihood × Impact, mitigation, owner, liên kết AC/monitoring, rồi đưa ra quyết định go / conditional go / no-go.",
+   "Ví dụ: hallucination L3×I5=15 → citation bắt buộc, verifier, owner AI lead, monitor citation rate; bias L2×I3=6 → test set đa dạng; privacy L3×I5=15 → masking, access control, owner security; cost L3×I3=9 → budget cap, cache; adoption L3×I4=12 → pilot, training. Quyết định: conditional go (pilot HR nội bộ, HITL) nếu privacy chưa xử lý xong; go khi rủi ro cao đều có mitigation, AC đo được, owner rõ."
+  ],
+  [
+   "Soạn kịch bản phỏng vấn discovery cho người dùng của một AI hỗ trợ viết email bán hàng, gồm 4 câu hỏi đặc thù AI và cách bổ sung 4 chiều persona dành cho AI.",
+   "4 câu: muốn AI tự làm đến đâu và bước nào giữ quyền kiểm soát; tin AI dựa trên gì (tốc độ, nguồn, confidence, kết quả); khi AI sai muốn sửa tay, thử lại hay chuyển người; kỳ vọng AI là trợ lý, copilot hay thay thế. Hỏi “why” ít nhất 2 lần, không gợi ý solution. Persona thêm: AI literacy, mức sẵn sàng tin automation, ngưỡng chấp nhận sai, mức muốn explainability. Rút ra 3 requirement nháp."
+  ],
+  [
+   "Một công ty muốn dùng AI sàng lọc CV ứng viên. Phân tích các vấn đề Bias, Privacy, Transparency theo ngôn ngữ PM/BA và chuyển thành requirement cụ thể; nêu vì sao use case này cần cẩn trọng hơn.",
+   "Bias: AI có xếp hạng khác nhau theo giới, tuổi, vùng miền? → test set đa dạng, đo chênh lệch theo nhóm, human review ca nhạy cảm, AI không tự loại ứng viên. Privacy: CV chứa PII → data minimization, masking, retention policy, kiểm soát truy cập. Transparency: ứng viên/HR biết có AI tham gia, lý do gợi ý, có kênh khiếu nại/escalation. Tuyển dụng là lĩnh vực nhạy cảm theo AI Act → risk management, documentation, logging, human oversight."
+  ],
+  [
+   "Thiết kế feedback loop sau khi ra mắt một AI support agent: những tín hiệu explicit, behavioral, outcome nào cần thu, chúng giúp quyết định gì?",
+   "Explicit: thumbs up/down, rating → chất lượng cảm nhận. Behavioral: copy câu trả lời, rephrase câu hỏi, override, abandon → phát hiện trust, friction. Outcome: resolved, escalated, reopen ticket → nối chất lượng AI với giá trị kinh doanh. Dùng để: cập nhật bộ test, hiệu chỉnh ngưỡng, ưu tiên sửa lỗi, quyết định mở rộng/thu hẹp tự động hóa; xác định trước khi launch để hệ thống học và cải thiện được."
+  ],
+  [
+   "Cho PRD: “Chúng tôi dùng GPT-x để làm chatbot thông minh. Tính năng: chat, tóm tắt, gợi ý. Mục tiêu: độ chính xác càng cao càng tốt.” Chỉ ra các anti-pattern và viết lại các phần còn thiếu.",
+   "Anti-pattern: chọn solution/model quá sớm; chỉ liệt kê tính năng, thiếu problem và target user; metric “càng cao càng tốt” không baseline/threshold; thiếu non-functional (latency, cost, privacy, escalation); không có risk section; không có AC. Viết lại: problem cụ thể, target user, success metrics 3 tầng có baseline + threshold, non-functional, AC có ngưỡng trên bộ test, risks có L×I, mitigation, owner; mỗi mục nối tới quyết định/metric/risk."
+  ]
+ ]
+}

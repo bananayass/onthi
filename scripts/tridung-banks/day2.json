@@ -1,0 +1,526 @@
+{
+ "mcq": [
+  [
+   "Thứ tự đúng của bốn giai đoạn trong mô hình Double Diamond là gì?",
+   "Discover → Define → Develop → Deliver",
+   "Define → Discover → Deliver → Develop",
+   "Develop → Discover → Define → Deliver",
+   "Discover → Develop → Define → Deliver",
+   "Diamond 1 (Discover, Define) tìm đúng vấn đề; Diamond 2 (Develop, Deliver) tìm đúng giải pháp."
+  ],
+  [
+   "Ở giai đoạn Discover của Diamond 1, đội ngũ nên làm gì?",
+   "Mở rộng góc nhìn bằng quan sát, phỏng vấn, khảo sát và dữ liệu",
+   "Thu hẹp ngay về một bài toán gốc bằng bỏ phiếu Dot Voting",
+   "Đề xuất nhiều giải pháp và làm prototype cho từng giải pháp",
+   "Chọn giải pháp tốt nhất, kiểm thử rồi triển khai cho người dùng",
+   "Discover là pha phân kỳ: mở rộng để thấu hiểu vấn đề trước khi hội tụ ở Define."
+  ],
+  [
+   "Nhóm kỹ thuật nào thuộc pha hội tụ Define của Diamond 1?",
+   "Affinity Mapping, 5 Whys, Impact-Effort, How Might We",
+   "Diary Study, User Interview, Survey, Stakeholder Mapping",
+   "Prompt Chaining, Routing, Parallelization, Orchestrator",
+   "Observation, Prototype, Test và Iteration theo vòng HCD",
+   "Define chọn lọc dữ liệu để tìm nguyên nhân gốc; Diary Study/Interview thuộc Discover."
+  ],
+  [
+   "Câu nói “Do not solve the problem I am asked to solve” của Don Norman nhắc điều gì?",
+   "Tìm vấn đề thật phía sau yêu cầu trước khi bắt tay giải",
+   "Chỉ nhận những yêu cầu đã có giải pháp được phê duyệt",
+   "Ưu tiên giải pháp AI thay vì giải pháp quy trình thủ công",
+   "Giải đúng và nhanh nhất yêu cầu mà stakeholder đưa ra",
+   "Yêu cầu ban đầu thường là triệu chứng; giải pháp xuất sắc cho sai vấn đề có thể tệ hơn không có giải pháp."
+  ],
+  [
+   "Theo bốn lăng kính tìm bài toán, nhận định nào về tác vụ lặp lại (Repetitive) là đúng?",
+   "Lặp lại chưa chắc cần AI; quy tắc rõ thì Rule có thể tối ưu hơn",
+   "Mọi tác vụ lặp lại đều nên giao cho Agent tự lập kế hoạch",
+   "Tác vụ lặp lại không đáng tự động hóa vì giá trị quá thấp",
+   "Tác vụ lặp lại chỉ nên tự động hóa bằng model lớn nhất",
+   "Lặp lại là tín hiệu để chuẩn hóa; logic tất định thì rule rẻ và dễ kiểm soát hơn."
+  ],
+  [
+   "Lăng kính “AI Advantage” đặt câu hỏi gì về tác vụ?",
+   "Có cần hiểu ngôn ngữ, ngữ cảnh hoặc tổng hợp nhiều nguồn không",
+   "Tác vụ có diễn ra thường xuyên mỗi ngày hoặc mỗi tuần không",
+   "Thời gian đang hao phí ở bước tìm kiếm, chờ đợi hay định dạng",
+   "Ai đang gặp khó khăn, phàn nàn hoặc bị tắc nghẽn liên tục",
+   "Ba lựa chọn còn lại lần lượt là lăng kính Repetitive, Time-consuming và User Pain Points."
+  ],
+  [
+   "Đội ngũ xây chatbot trước rồi mới tìm hiểu quy trình vận hành. Đây là anti-pattern nào?",
+   "Solution-first",
+   "No baseline",
+   "No boundary",
+   "No evaluation",
+   "Solution-first là chọn công nghệ trước khi làm rõ pain point và workflow hiện tại."
+  ],
+  [
+   "Dự án không đo hiện trạng tốn bao nhiêu thời gian/chi phí trước khi làm AI. Hậu quả trực tiếp là gì?",
+   "Mất căn cứ để đánh giá hiệu quả cải tiến sau khi triển khai",
+   "Không thể xác định AI được tự quyết đến đâu trong quy trình",
+   "Không có test case và edge case để nghiệm thu hệ thống",
+   "Không biết nên chọn Buy, Boost hay Build cho dự án",
+   "Đây là anti-pattern No baseline; các lựa chọn khác ứng với No boundary, No evaluation."
+  ],
+  [
+   "Anti-pattern “No boundary” mô tả tình trạng nào?",
+   "Không rõ AI được tự quyết đến đâu và khi nào cần người duyệt",
+   "Không lượng hóa tổn thất hiện tại về thời gian và chi phí",
+   "Không thiết lập kịch bản kiểm thử và phương án đối chứng",
+   "Xây chatbot hoặc agent trước khi hiểu quy trình vận hành",
+   "Boundary xác định AI không được làm gì và khâu nào bắt buộc HITL."
+  ],
+  [
+   "Theo PAIR, câu hỏi “Can we use AI to ___?” nên được thay bằng cặp câu hỏi nào?",
+   "“How might we solve ___?” và “Can AI solve this in a unique way?”",
+   "“Which model is best?” và “How fast can we ship it?”",
+   "“Who will pay for it?” và “What is the deadline?”",
+   "“Can AI replace staff?” và “How much cost can we cut?”",
+   "Hỏi về bài toán trước, về AI sau — AI chỉ là một trong nhiều phương án khả dĩ."
+  ],
+  [
+   "Trường “Problem” trong Quick Problem Card cần tuân thủ điều gì?",
+   "Mô tả vấn đề cụ thể, không chứa tên giải pháp",
+   "Ghi rõ model và framework dự định sử dụng",
+   "Liệt kê đầy đủ các tính năng mà người dùng muốn",
+   "Ghi hướng giải pháp No AI, Rule, Workflow hoặc Agent",
+   "Problem là vấn đề; hướng giải pháp nằm ở trường Direction riêng."
+  ],
+  [
+   "Trong case Weekly Report, bước nào được xác định là nút thắt?",
+   "Viết narrative từ dữ liệu thô, mất khoảng 25 phút",
+   "Export dữ liệu từ Jira sang bảng tính trung gian",
+   "Đọc lại Slack recap của cả tuần để lấy bối cảnh",
+   "Review, format và gửi email cho EM và CEO",
+   "Bottleneck là khâu chậm/dễ sai nhất: viết narrative ~25 phút trong flow ~90 phút/tuần/PM."
+  ],
+  [
+   "Vì sao success metric của case Weekly Report thêm điều kiện “không làm tăng số câu CEO/EM phải hỏi lại”?",
+   "Để rút ngắn thời gian mà không đánh đổi chất lượng báo cáo",
+   "Để CEO không còn phải đọc weekly report mỗi tuần",
+   "Để chứng minh AI có thể thay hoàn toàn vai trò của PM",
+   "Để tăng số câu hỏi thảo luận trong buổi leadership sync",
+   "Metric tốc độ cần chỉ số chất lượng đối trọng để tránh tối ưu lệch."
+  ],
+  [
+   "Trong bộ ba Baseline → Target → Measurement, Measurement trả lời câu hỏi nào?",
+   "Dùng chỉ số nào và thu thập dữ liệu ra sao để biết đã đạt",
+   "Mức hao phí hiện tại là bao nhiêu, bằng con số cụ thể",
+   "Kỳ vọng cải thiện đến ngưỡng nào trong khoảng thời gian nào",
+   "Ai là người có quyền phê duyệt ngân sách của dự án",
+   "Baseline = where we are, Target = where to go, Measurement = how we know."
+  ],
+  [
+   "Phát biểu nào là một chỉ số thành công đạt chuẩn?",
+   "Giảm lỗi phân loại từ 20% xuống dưới 5%, đo trên 500 ticket gắn nhãn",
+   "Nâng cao hiệu suất làm việc của đội hỗ trợ khách hàng trong năm",
+   "Giúp khách hàng hài lòng hơn khi trò chuyện với trợ lý AI",
+   "Ứng dụng AI hiện đại nhất vào toàn bộ quy trình chăm sóc",
+   "Metric tốt có hiện trạng, ngưỡng mục tiêu và cách đo."
+  ],
+  [
+   "Chỉ số nào là Input Metric (đòn bẩy) chứ không phải Output Metric?",
+   "Tỷ lệ câu hỏi được phân loại chính xác",
+   "Thời lượng hoàn tất toàn bộ quy trình",
+   "Tỷ lệ sai sót của đầu ra cuối cùng",
+   "Giá trị thực tế người dùng nhận được",
+   "Input metric là đòn bẩy đội tác động được; output metric là kết quả cuối muốn tối ưu."
+  ],
+  [
+   "Ba case Cursor, Artifact, NotebookLM cùng minh họa nguyên tắc nào?",
+   "Khởi nguồn từ bài toán, không bắt đầu từ AI",
+   "Model lớn hơn luôn quyết định thành công sản phẩm",
+   "Thị trường ngách là lựa chọn an toàn cho sản phẩm AI",
+   "Nên mở rộng sang càng nhiều lĩnh vực càng tốt",
+   "Lộ trình: Bài toán → Quy trình vận hành → Chỉ số đo lường → Giải pháp AI."
+  ],
+  [
+   "Theo PAIR, ba bước quyết định có nên dùng AI diễn ra theo thứ tự nào?",
+   "Nhu cầu × thế mạnh AI → Automate/Augment → Reward function",
+   "Automate/Augment → Nhu cầu × thế mạnh AI → Reward function",
+   "Reward function → Nhu cầu × thế mạnh AI → Automate/Augment",
+   "Nhu cầu × thế mạnh AI → Reward function → Automate/Augment",
+   "Ba bước PAIR lần lượt trả lời: có cần AI, cấp độ nào, đã đủ rõ để đo chưa."
+  ],
+  [
+   "Trường hợp nào thuộc nhóm PAIR cho rằng AI có thể có lợi thế?",
+   "Phát hiện sự kiện hiếm hoặc biến đổi như gian lận",
+   "Hiển thị bảng giá cố định, rất ít khi thay đổi",
+   "Nút Home luôn nằm cố định ở một vị trí quen thuộc",
+   "Mọi quyết định phải truy vết được từng bước",
+   "PAIR liệt kê 8 trường hợp “AI probably better”, gồm phát hiện cái hiếm & biến đổi."
+  ],
+  [
+   "Trường hợp nào PAIR xếp vào nhóm AI có thể KHÔNG tốt hơn?",
+   "Chi phí một lần sai lớn hơn lợi ích nhiều lần đúng",
+   "Cần cá nhân hóa trải nghiệm theo từng người dùng",
+   "Cần hiểu câu hỏi viết tự do bằng lời nói hằng ngày",
+   "Cần gợi ý nội dung khác nhau cho mỗi người dùng",
+   "Lỗi quá tốn kém là một trong 6 trường hợp “AI probably NOT better”."
+  ],
+  [
+   "Khi rule/heuristic giải quyết triệt để bài toán, lựa chọn nào là hợp lý?",
+   "Dùng rule vì dễ build, giải thích, debug và rẻ hơn",
+   "Dùng AI để sản phẩm có hình ảnh hiện đại hơn",
+   "Dùng Agent để dự phòng cho nhu cầu tương lai",
+   "Kết hợp cả Rule, Workflow và Agent cho chắc",
+   "Rule không thua kém AI; nếu giải quyết được thì đó là lựa chọn tối ưu."
+  ],
+  [
+   "Trong khung Buy — Boost — Build của MIT CISR, Boost nghĩa là gì?",
+   "Dùng model có sẵn, bổ sung dữ liệu nội bộ bằng RAG/fine-tune",
+   "Mua giải pháp đóng gói sẵn do vendor duy trì và cập nhật",
+   "Tự xây mô hình tùy biến hoàn toàn với đội AI nội bộ",
+   "Tăng ngân sách hạ tầng để chạy model nhanh hơn",
+   "Boost cần quản trị dữ liệu tốt; thực tế đa số đội đang ở mức Boost."
+  ],
+  [
+   "Trong công thức AI System = Model + Context + Planning + Tools, Context đóng vai trò gì?",
+   "Cung cấp tài liệu, dữ liệu nghiệp vụ, lịch sử cho AI",
+   "Phân rã tác vụ phức tạp và điều chỉnh các bước",
+   "Kết nối API, CRM, database và dịch vụ bên ngoài",
+   "Đọc hiểu, soạn thảo, tổng hợp và phân loại văn bản",
+   "Context là tri thức chuyên biệt; Planning điều phối; Tools kết nối; Model xử lý."
+  ],
+  [
+   "Điều kiện nào gợi ý nên chọn Automate (AI làm thay)?",
+   "Việc tẻ nhạt hoặc nguy hiểm, có “đáp án đúng” được đồng thuận",
+   "Người dùng thích tự làm và thấy việc đó có ý nghĩa cá nhân",
+   "Kết quả gắn với trách nhiệm pháp lý hoặc sức khỏe cá nhân",
+   "Sở thích của người dùng khó diễn đạt thành lời cụ thể",
+   "Ba lựa chọn còn lại là điều kiện nghiêng về Augment."
+  ],
+  [
+   "PAIR lưu ý gì về các tác vụ đã được automate?",
+   "Vẫn gần như luôn cần oversight: preview, edit, undo",
+   "Không còn cần con người giám sát sau khi ra mắt",
+   "Nên tắt logging để giảm độ trễ cho người dùng",
+   "Không nên cho người dùng hoàn tác để tránh lỗi",
+   "Automate không có nghĩa là bỏ con người; cần xem trước, sửa và hoàn tác."
+  ],
+  [
+   "Trong lộ trình tăng tự động hóa theo pha cho case trợ giảng, Pha 2 là gì?",
+   "AI soạn nháp, trợ giảng hiệu chỉnh trước khi gửi",
+   "AI chỉ gợi ý, trợ giảng tự viết lại toàn bộ",
+   "AI tự gửi cho nhóm câu đã chứng minh an toàn",
+   "AI tự chấm điểm bài và gửi kết quả cho học viên",
+   "Pha 1 gợi ý → Pha 2 soạn nháp có duyệt → Pha 3 tự động có giám sát."
+  ],
+  [
+   "Khác biệt cốt lõi giữa Rule/Workflow/Agent và Automate/Augment là gì?",
+   "Một bên là cấp độ kỹ thuật, một bên là vai trò con người",
+   "Hai cặp khái niệm đồng nghĩa, chỉ khác tên gọi",
+   "Automate luôn là Agent, còn Augment luôn là Rule",
+   "Một bên dùng cho sản phẩm, một bên dùng cho nghiên cứu",
+   "Rule/Workflow/Agent là trục kỹ thuật; Automate/Augment là trục phân vai người–AI."
+  ],
+  [
+   "Ví dụ nào phù hợp nhất với cấp độ Rule/Script?",
+   "Tính thuế theo biểu thuế quy định sẵn",
+   "Tóm tắt email dài của khách hàng",
+   "Phân loại ticket hỗ trợ viết tự do",
+   "Coding agent sửa lỗi trên nhiều file",
+   "Rule hợp với input ổn định, logic if/else, cần đúng 100% và tuân thủ chặt."
+  ],
+  [
+   "Câu hỏi quyết định để phân biệt Workflow với Agent là gì?",
+   "Lộ trình xử lý có viết trước bằng code được không",
+   "Hệ thống có gọi LLM ở bất kỳ bước nào hay không",
+   "Có bao nhiêu người dùng truy cập cùng một lúc",
+   "Model có đủ lớn để suy luận nhiều bước hay không",
+   "Workflow: code điều phối lộ trình định trước; Agent: model tự điều phối lộ trình và tools."
+  ],
+  [
+   "Lưu ý thiết kế quan trọng khi làm Workflow có AI là gì?",
+   "Định nghĩa rõ đầu vào, đầu ra từng bước; tránh chatbot tự do",
+   "Để model tự quyết định số bước cần chạy trong mỗi request",
+   "Bỏ bước con người duyệt để giảm độ trễ của quy trình",
+   "Gộp mọi bước vào một prompt duy nhất cho đơn giản",
+   "Workflow linh hoạt nhưng có kiểm soát nhờ I/O rõ ở từng bước."
+  ],
+  [
+   "Đánh đổi chính khi chọn Agent là gì?",
+   "Chi phí, độ trễ cao, khó kiểm thử, lỗi có thể cộng dồn",
+   "Không gọi được công cụ hay API bên ngoài hệ thống",
+   "Không xử lý được câu hỏi bằng ngôn ngữ tự nhiên",
+   "Phải viết toàn bộ logic dưới dạng if/else cố định",
+   "Agent linh hoạt nhưng đi kèm vận hành đắt và dạng lỗi phức tạp."
+  ],
+  [
+   "Một đội đã đạt mục tiêu bằng Rule. Họ có nên nâng lên Workflow rồi Agent không?",
+   "Không bắt buộc; dừng ở cấp tối giản đáp ứng mục tiêu",
+   "Có, phải nâng tuần tự Rule → Workflow → Agent",
+   "Có, vì Agent luôn mang lại hiệu quả cao hơn Rule",
+   "Chỉ nâng khi đối thủ cạnh tranh đã dùng Agent",
+   "Ưu tiên giải pháp đơn giản nhất mang lại cải tiến đo lường được."
+  ],
+  [
+   "Trong thang 5 câu hỏi chọn cấp độ, nếu tần suất và tác động của vấn đề thấp thì nên làm gì?",
+   "Xử lý thủ công hoặc hiệu chỉnh quy trình nghiệp vụ trước",
+   "Xây Agent để sẵn sàng khi tần suất tăng lên",
+   "Chọn Workflow vì đó là cấp độ trung gian an toàn",
+   "Chọn Go ngay để không bỏ lỡ cơ hội thị trường",
+   "Vấn đề nhỏ không đáng chi phí AI; cải tiến quy trình là đủ."
+  ],
+  [
+   "Pattern Prompt Chaining đánh đổi điều gì?",
+   "Chấp nhận độ trễ cộng dồn để chính xác hơn nhờ gate",
+   "Chấp nhận chi phí nhân lên theo số nhánh để lấy vote",
+   "Chấp nhận khó kiểm thử để xử lý subtask chưa biết",
+   "Chấp nhận sai số cao để có tốc độ phản hồi tối đa",
+   "Chuỗi bước tuần tự có gate giữa các bước nên chính xác hơn nhưng chậm hơn."
+  ],
+  [
+   "Ý nghĩa ra quyết định của pattern Routing là gì?",
+   "Câu dễ đi model rẻ, câu khó đi model mạnh",
+   "Chạy nhiều lần song song rồi lấy kết quả vote",
+   "Một LLM tạo, một LLM đánh giá và lặp lại",
+   "LLM tự lập kế hoạch và gọi tools liên tục",
+   "Routing tối ưu chi phí bằng nhánh chuyên biệt nhưng phụ thuộc phân loại đúng từ đầu."
+  ],
+  [
+   "Parallelization (chạy song song rồi vote/tổng hợp) phù hợp khi nào?",
+   "Muốn giảm rủi ro một đầu ra sai, chấp nhận chi phí nhân lên",
+   "Muốn chi phí thấp nhất bằng một lần gọi model duy nhất",
+   "Không thể liệt kê trước các subtasks của bài toán",
+   "Cần tiêu chí chấm rõ để lặp đến khi đạt yêu cầu",
+   "Ví dụ guardrail chạy song song với response; tin cậy hơn nhưng tốn hơn."
+  ],
+  [
+   "Pattern nào phù hợp khi một LLM phải phân việc động vì không biết trước subtasks, ví dụ sửa nhiều file?",
+   "Orchestrator-Workers",
+   "Prompt Chaining",
+   "Routing",
+   "Evaluator-Optimizer",
+   "Orchestrator phân việc cho workers rồi synthesizer tổng hợp; khó kiểm thử, hành vi khó đoán."
+  ],
+  [
+   "Điều kiện tiên quyết để pattern Evaluator-Optimizer hoạt động tốt là gì?",
+   "Có tiêu chí chấm rõ ràng — chính là reward function",
+   "Có router phân loại đầu vào thật chính xác",
+   "Có nhiều nhánh chạy song song để lấy vote",
+   "Có orchestrator phân việc động cho workers",
+   "Evaluator cần chuẩn để chấp nhận/từ chối và phản hồi cho Generator."
+  ],
+  [
+   "Theo Anthropic, pattern Agent bắt buộc phải đi kèm gì?",
+   "Guardrails và điều kiện dừng (stopping conditions)",
+   "Giao diện chat có avatar và hiệu ứng gõ chữ",
+   "Một model duy nhất, không bao giờ thay đổi",
+   "Bộ dữ liệu huấn luyện riêng cho từng tác vụ",
+   "Agent là vòng lặp tự chủ; cần chốt chặn và điều kiện dừng."
+  ],
+  [
+   "Vì sao reward function cần được thiết kế liên chức năng (UX × Product × Engineering)?",
+   "Vì nó quyết định đúng/sai và định hình trải nghiệm người dùng",
+   "Vì chỉ có kỹ sư mới đọc hiểu được công thức precision",
+   "Vì cần đủ ba phòng ban để bỏ phiếu theo đa số",
+   "Vì quy định bắt buộc mọi tài liệu có ba chữ ký",
+   "Định nghĩa đúng/sai ảnh hưởng trực tiếp tới UX, không chỉ là chuyện kỹ thuật."
+  ],
+  [
+   "Case AI gợi ý câu trả lời: AI gợi ý SAI và gửi thẳng cho học viên khiến họ đi sai hướng. Đây là kết quả nào?",
+   "False Positive — báo động giả",
+   "False Negative — bỏ sót",
+   "True Positive — phát hiện đúng",
+   "True Negative — bỏ qua đúng",
+   "AI “báo có/can thiệp” nhưng nội dung sai → FP."
+  ],
+  [
+   "Học viên đang thực sự bị kẹt nhưng AI không gợi ý gì, học viên vẫn chờ lâu. Đây là kết quả nào?",
+   "False Negative",
+   "False Positive",
+   "True Negative",
+   "True Positive",
+   "Thực tế cần can thiệp nhưng AI không phát hiện → FN (bỏ sót)."
+  ],
+  [
+   "Một hệ thống có TP = 40 và FP = 10. Precision bằng bao nhiêu?",
+   "80%",
+   "40%",
+   "25%",
+   "50%",
+   "Precision = TP/(TP+FP) = 40/50 = 0,8."
+  ],
+  [
+   "Có 50 học viên thực sự cần giúp, AI phát hiện đúng 30 người (TP = 30, FN = 20). Recall bằng bao nhiêu?",
+   "60%",
+   "30%",
+   "40%",
+   "75%",
+   "Recall = TP/(TP+FN) = 30/50 = 0,6."
+  ],
+  [
+   "Khi vặn hệ thống về Precision rất cao, hệ quả thường thấy là gì?",
+   "Nhiều False Negative — bỏ sót người cần giúp",
+   "Nhiều False Positive — TA phải lọc lại nhiều",
+   "Recall cũng tăng theo cùng một tỷ lệ",
+   "Không còn bất kỳ trường hợp sai nào",
+   "Precision ↔ Recall ngược chiều: ít gợi ý nhưng chắc đúng thì bỏ sót nhiều hơn."
+  ],
+  [
+   "Mẫu tiêu chí thành công “hành động được” của PAIR có cấu trúc nào?",
+   "Nếu [chỉ số] của [tính năng] qua [ngưỡng], ta sẽ [hành động]",
+   "Tính năng AI phải đạt độ chính xác 100% trước khi ra mắt",
+   "Đo mọi chỉ số có thể rồi quyết định hành động sau",
+   "Ta sẽ cố gắng làm tính năng AI tốt nhất có thể",
+   "Metric tốt = chỉ số cụ thể + ngưỡng có nghĩa + hành động phản ứng."
+  ],
+  [
+   "Theo ví dụ của slide, nếu tỷ lệ câu trả lời AI bị TA sửa vượt 30% trong 2 tuần thì nên làm gì?",
+   "Hạ về Pha 1: chỉ gợi ý, không gửi thẳng cho học viên",
+   "Nâng lên Pha 3 để AI có thêm dữ liệu học nhanh hơn",
+   "Dừng dự án và chuyển ngay sang quyết định No-Go",
+   "Đổi sang model lớn hơn, giữ nguyên quy trình",
+   "Tiêu chí thành công gắn với hành động lùi mức tự động hóa khi chất lượng xấu đi."
+  ],
+  [
+   "Trong 4 thành phần chuẩn bị từ Demo sang Production, nhóm Controls gồm gì?",
+   "Logging, fallback, rollback và người chịu trách nhiệm",
+   "Bộ dữ liệu kiểm thử, edge cases và tiêu chí nghiệm thu",
+   "So sánh với rule, nhân sự hoặc quy trình hiện tại",
+   "Người giám sát lỗi và cập nhật tri thức nền",
+   "Baseline – Evaluation – Controls – Operations; Controls là cơ chế kiểm soát khi hệ thống sai."
+  ],
+  [
+   "Nếu từ Problem Statement không suy ra được test cases, eval metric và boundary, kết luận nào đúng?",
+   "Problem Statement chưa đủ chặt, cần làm rõ lại",
+   "Có thể bỏ qua bước evaluation cho lần đầu",
+   "Nên chuyển sang Agent để tự sinh test cases",
+   "Problem Statement đã đủ, chỉ thiếu dữ liệu",
+   "PS tốt phải là đầu vào trực tiếp cho Eval Plan."
+  ],
+  [
+   "Hệ thống gợi ý ôn bài đúng logic nhưng gửi vào giữa kỳ nghỉ. Theo PAIR đây là loại lỗi nào?",
+   "Context error — sai giả định về bối cảnh",
+   "Fail state — không trả lời được",
+   "Background error — lỗi ngầm khó thấy",
+   "Lỗi phân cấp giữa nhiều hệ thống AI",
+   "Context error: hệ thống chạy “đúng” nhưng sai hoàn cảnh người dùng."
+  ],
+  [
+   "Loại lỗi “unknown unknowns” mà cả người dùng lẫn hệ thống đều không nhận ra đòi hỏi cách xử lý nào?",
+   "QA chủ động, không chờ người dùng báo lỗi",
+   "Chờ người dùng gửi phản hồi rồi mới sửa",
+   "Tăng nhiệt độ sampling để đa dạng đầu ra",
+   "Ẩn thông báo lỗi để tránh gây hoang mang",
+   "Background errors không tự lộ ra nên phải chủ động kiểm tra."
+  ],
+  [
+   "Pattern HITL “Minh bạch thông tin” được thực hiện bằng cách nào?",
+   "Đưa trích dẫn nguồn hoặc bằng chứng cho câu trả lời",
+   "Yêu cầu người dùng bổ sung ngữ cảnh còn thiếu",
+   "Để con người duyệt trước các tác vụ rủi ro cao",
+   "Giới hạn phạm vi AI được phép tự quyết định",
+   "Bốn pattern HITL: làm rõ ý định, minh bạch thông tin, phê duyệt thủ công, thiết lập ranh giới."
+  ],
+  [
+   "Khi automation thất bại, PAIR khuyên thiết kế UX thế nào?",
+   "Trả quyền kiểm soát cho người dùng kèm đủ thông tin",
+   "Ẩn lỗi và để hệ thống tự thử lại không giới hạn",
+   "Tạm khóa tài khoản người dùng để bảo đảm an toàn",
+   "Hiển thị câu trả lời mặc định, không cần giải thích",
+   "Paths forward from failure: mở kênh feedback, trả quyền kiểm soát, thiết kế thất bại an toàn."
+  ],
+  [
+   "Problem Statement hoàn chỉnh có 9 trường. Trường nào thuộc nhóm 3 yếu tố quyết định AI?",
+   "Mức giải pháp (Rule / Workflow / Agent)",
+   "Bottleneck — khâu chậm, sai hoặc lặp",
+   "Impact — tổn thất thời gian, chi phí",
+   "Actor — đối tượng chịu ảnh hưởng",
+   "3 yếu tố quyết định AI: điểm AI can thiệp, mức giải pháp, rủi ro & HITL."
+  ],
+  [
+   "Vì sao case Lab Coach (1.000 học viên) chọn Workflow thay vì Agent?",
+   "Quy trình định được theo bước, chưa có bằng chứng cần Agent",
+   "Agent không hỗ trợ xử lý câu hỏi viết bằng tiếng Việt",
+   "Workflow luôn rẻ nhất trong mọi loại bài toán AI",
+   "Rule không thể triển khai được trên kênh Discord",
+   "AI chỉ cần hỗ trợ tại bước cần hiểu ngôn ngữ; Workflow dễ kiểm soát và cho người duyệt đầu ra rủi ro."
+  ],
+  [
+   "Sau 5 câu hỏi readiness gate, phần lớn câu trả lời vẫn chưa rõ ràng. Quyết định nên là gì?",
+   "Not Yet",
+   "Go",
+   "No-Go",
+   "Go có điều kiện",
+   "Gate cuối: phần lớn chưa rõ → tạm hoãn để bổ sung dữ liệu, metric, boundary."
+  ],
+  [
+   "Tình huống nào dẫn đến quyết định No-Go?",
+   "Giải pháp không dùng AI tối ưu hơn",
+   "Có triển vọng nhưng thiếu dữ liệu thực tế",
+   "Cần chuẩn hóa quy trình trước khi làm",
+   "Chưa xác định được ranh giới của AI",
+   "No-Go khi AI không mang giá trị vượt trội; thiếu dữ liệu/quy trình/boundary là Not Yet."
+  ],
+  [
+   "Một hệ gợi ý đúng 60%. Theo PAIR, đó là thành công hay thất bại?",
+   "Tùy kỳ vọng đã hứa và mô hình tâm trí của người dùng",
+   "Luôn là thất bại vì chưa đạt ngưỡng 90% chuẩn ngành",
+   "Luôn là thành công vì đã đúng hơn một nửa số lần",
+   "Không đánh giá được nếu chưa có bộ benchmark công khai",
+   "Lỗi được định nghĩa bởi kỳ vọng; cùng hệ thống có thể thành công hay thất bại."
+  ],
+  [
+   "AI gợi ý “hoạt động vui chơi” cho chuyến đi dự đám tang. Đây là nguồn lỗi nào?",
+   "Lỗi liên quan — kết quả không phù hợp",
+   "Lỗi phân cấp giữa nhiều hệ thống AI",
+   "Lỗi đầu vào bất ngờ ngoài thiết kế",
+   "Lỗi dữ liệu do gán nhãn huấn luyện sai",
+   "Bốn nguồn lỗi: dữ liệu & dự đoán, đầu vào, liên quan, phân cấp hệ thống."
+  ],
+  [
+   "Ở mảng chăm sóc khách hàng, ví dụ nào thuộc cấp độ Agent?",
+   "Xử lý đa bước, truy vấn CRM và tạo yêu cầu hoàn tiền",
+   "Định tuyến phiếu hỗ trợ theo từ khóa cố định",
+   "Soạn nháp câu trả lời kèm trích dẫn nguồn",
+   "Gửi auto-reply theo template có sẵn",
+   "Định tuyến từ khóa là Rule, soạn nháp có trích dẫn là Workflow."
+  ]
+ ],
+ "essay": [
+  [
+   "Phòng nhân sự nhận hàng trăm câu hỏi lặp lại mỗi tuần về chính sách nghỉ phép. Hãy viết Problem Statement đủ 9 trường (6 yếu tố bài toán + 3 yếu tố quyết định AI) cho tình huống này.",
+   "Actor: nhân viên HR trả lời chính sách. Workflow: nhân viên hỏi qua chat/email → HR tra quy định → trả lời → lưu hồ sơ. Bottleneck: câu hỏi lặp lại, tra cứu thủ công. Impact: số giờ HR/tuần, thời gian chờ trả lời. Success metric: baseline → target có số liệu (ví dụ thời gian phản hồi 1 ngày → dưới 1 giờ, tỷ lệ trả lời sai không tăng). Boundary: AI không phê duyệt đơn nghỉ, không trả lời trường hợp đặc biệt. Điểm AI can thiệp: khi nhận câu hỏi. Mức giải pháp: Workflow tra cứu có trích dẫn quy định. Rủi ro & HITL: trích sai quy định → HR duyệt câu hỏi ngoài phạm vi hoặc độ tin cậy thấp."
+  ],
+  [
+   "Cho ba yêu cầu: (1) nhắc học viên khi nộp thiếu file, (2) tóm tắt phản hồi của giảng viên cho từng nhóm, (3) theo dõi nhiều kênh để phát hiện nhóm bị kẹt lâu và đề xuất hỗ trợ. Hãy chọn Rule, Workflow hoặc Agent cho từng yêu cầu và giải thích.",
+   "(1) Rule: logic if/else rõ, kết quả cố định. (2) Workflow: bước xử lý định trước nhưng cần LLM tóm tắt ngôn ngữ, có I/O rõ và người kiểm tra. (3) Agent: nhiều nguồn, tình huống thay đổi, cần tự lập kế hoạch; phải có HITL (TA duyệt trước khi gửi), guardrails và điều kiện dừng. Nêu nguyên tắc chọn cấp đơn giản nhất đủ hiệu quả và không bắt buộc nâng tuần tự."
+  ],
+  [
+   "Một ngân hàng muốn dùng AI phát hiện giao dịch gian lận. Hãy phân tích chi phí của FP và FN, chọn ưu tiên Precision hay Recall ở từng giai đoạn và đề xuất cơ chế HITL.",
+   "FP: chặn nhầm giao dịch hợp lệ → khách khó chịu, tốn chi phí xác minh. FN: bỏ sót gian lận → thiệt hại tài chính, uy tín. Chi phí không đối xứng; thường ưu tiên Recall ở tầng sàng lọc rồi để người/tầng sau kiểm tra nhằm giữ Precision cho hành động khóa tài khoản. Nêu Precision = TP/(TP+FP), Recall = TP/(TP+FN), thử điểm cân bằng với dữ liệu thật và đặt ngưỡng chuyển cho chuyên viên duyệt."
+  ],
+  [
+   "Viết ba tiêu chí thành công theo template PAIR (“Nếu [chỉ số] của [tính năng] vượt/giảm qua [ngưỡng], chúng ta sẽ [hành động]”) cho một chatbot FAQ chăm sóc khách hàng, và giải thích vì sao mỗi tiêu chí hữu ích.",
+   "Ví dụ: tỷ lệ chuyển người thật > 40% trong 2 tuần → rà soát bộ tri thức; tỷ lệ câu trả lời bị đánh giá sai > 5% → hạ về chế độ gợi ý cho nhân viên; CSAT giảm dưới baseline → tạm dừng mở rộng. Mỗi tiêu chí có chỉ số cụ thể, ngưỡng có nghĩa, hành động phản ứng; kiểm tra metric có ý nghĩa với mọi nhóm người dùng, nhóm nào bị ảnh hưởng tiêu cực và lên lịch review định kỳ."
+  ],
+  [
+   "Một giám đốc nói: “Tôi muốn xây dựng chatbot AI cho khách hàng.” Hãy phân tích vì sao đây chưa phải bài toán và liệt kê các câu hỏi bạn sẽ hỏi stakeholder trước khi đề xuất giải pháp.",
+   "“AI chatbot” là giải pháp, chưa phải vấn đề; các đối tượng (FAQ, tư vấn mua hàng, hỗ trợ nội bộ…) có workflow, metric, rủi ro khác nhau. Câu hỏi: pain point và tần suất; workflow hiện tại, công cụ, bàn giao; thiệt hại thời gian/chi phí/SLA/conversion; hậu quả khi AI sai và khâu cần HITL; ai phê duyệt và metric/risk nào quyết định đầu tư; có giải pháp phi AI đơn giản hơn không. Nếu stakeholder không trả lời được workflow và chi phí lỗi thì mọi đề xuất AI chỉ là phỏng đoán. Reframe sang “How might we…”."
+  ],
+  [
+   "Thiết kế lộ trình tăng dần mức tự động hóa (theo pha) cho AI trả lời email khách hàng. Nêu điều kiện chuyển pha và điều kiện lùi pha.",
+   "Pha 1: AI gợi ý, nhân viên tự viết. Pha 2: AI soạn nháp, nhân viên duyệt/sửa. Pha 3: AI tự gửi cho nhóm email đã chứng minh an toàn, có giám sát. Điều kiện chuyển: dữ liệu đánh giá cho thấy tỷ lệ sửa thấp, rủi ro thấp. Điều kiện lùi: tỷ lệ sửa/khiếu nại vượt ngưỡng trong khoảng thời gian định trước. Nhấn mạnh mức tự động hóa tỷ lệ nghịch với rủi ro và vẫn cần preview/edit/undo."
+  ],
+  [
+   "Một doanh nghiệp bán lẻ cần trợ lý tra cứu chính sách nội bộ. Hãy so sánh Buy, Boost và Build, rồi đề xuất hướng phù hợp kèm lập luận.",
+   "Buy: nhanh, ít tùy biến, phụ thuộc vendor. Boost: model có sẵn + RAG/fine-tune dữ liệu nội bộ, cần data governance. Build: kiểm soát cao, đắt, cần đội AI mạnh. Trợ lý chính sách là productivity layer, không phải lõi cạnh tranh → Boost bằng RAG có trích dẫn là phù hợp; nêu yêu cầu quản trị tài liệu, phân quyền, cập nhật tri thức và đo chất lượng."
+  ],
+  [
+   "Với một ứng dụng gợi ý lịch học, hãy cho ví dụ cụ thể về context error, fail state và background error, rồi đề xuất cách thiết kế UX/HITL cho từng loại.",
+   "Context error: gợi ý ôn bài vào kỳ nghỉ → làm rõ ý định, cho người dùng chỉnh bối cảnh. Fail state: không có gợi ý phù hợp → báo rõ, đưa đường chuyển tiếp. Background error: lịch lệch múi giờ không ai nhận ra → QA chủ động, logging. Bổ sung kênh feedback kể cả với output đúng, trả quyền kiểm soát, thiết kế thất bại an toàn."
+  ],
+  [
+   "Một đội đề xuất AI phân loại hồ sơ vay nhưng chưa có dữ liệu gán nhãn và chưa có baseline. Áp dụng 5 câu hỏi readiness gate để đưa ra quyết định Go / Not Yet / No-Go và kế hoạch tiếp theo.",
+   "Đi lần lượt: cần ngôn ngữ/suy luận? (có thể); dữ liệu đủ ngữ cảnh? (chưa); có metric định lượng? (chưa có baseline); hậu quả sai kiểm soát được? (rủi ro tài chính cao, cần HITL); có cách đơn giản hơn? (rule cho tiêu chí cứng). Kết luận Not Yet: bổ sung dữ liệu gán nhãn, đo baseline, xác định boundary và HITL, thử rule trước. Not Yet là quyết định chín chắn, không phải thất bại."
+  ],
+  [
+   "Một hệ thống AI gợi ý hỗ trợ có kết quả trên 200 trường hợp: TP = 60, FP = 30, FN = 20, TN = 90. Tính Precision, Recall và đề xuất nên điều chỉnh ngưỡng theo hướng nào cho bối cảnh trợ giảng quá tải.",
+   "Precision = 60/(60+30) ≈ 66,7%; Recall = 60/(60+20) = 75%. Khi TA quá tải, FP buộc TA lọc lại thủ công và có thể làm học viên đi sai hướng → nâng ngưỡng để tăng Precision, chấp nhận Recall giảm nhẹ, đồng thời giữ kênh chuyển tiếp để hạn chế FN. Kiểm chứng điểm cân bằng với người dùng thật và theo dõi tỷ lệ TA phải sửa."
+  ]
+ ]
+}
