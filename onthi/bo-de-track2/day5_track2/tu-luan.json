@@ -1,0 +1,127 @@
+{
+  "id": "day5_track2_tu_luan",
+  "title": "Tự luận Track 2 Ngày 5",
+  "questionCount": 10,
+  "questions": [
+    {
+      "id": "T2D05-TL-01",
+      "type": "essay",
+      "prompt": "Một team báo cáo hệ thống chat Llama-3-70B trên H100 đạt throughput 1,800 tok/s. Đo thêm: TTFT ≈ 450 ms, TPOT ≈ 25 ms, SLO là TTFT < 1s và TPOT < 50ms ở P95. (a) Tính E2E latency cho response 201 token. (b) Giải thích vì sao chỉ báo cáo throughput là misleading và nên báo cáo metric nào. (c) Nêu cách benchmark trước khi go-live.",
+      "modelAnswer": "(a) E2E = TTFT + TPOT × (N − 1) = 450 + 25 × 200 = 5,450 ms ≈ 5.45 s. (b) Throughput đo ở saturation, không có SLO constraint; nhiều request có thể vượt TTFT/TPOT SLO. Goodput = req/s (hoặc tok/s) thỏa TTFT+TPOT SLO; ví dụ slide goodput ≈ 1,200 tok/s < 1,800. Luôn report goodput cho production, SLO ở P95/P99. (c) Load test bằng locust/k6 (ví dụ 100 concurrent users), đo P50/P95/P99, theo dõi queue depth (chỉ báo saturation), TTFT/TPOT histogram; không đoán latency, đo thực tế.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D05-TL-02",
+      "type": "essay",
+      "prompt": "Công ty có 3 nhu cầu: (1) serve Llama-3-8B production trên cụm H100, (2) cùng model chạy offline trên laptop CPU-only của nhân viên, (3) fine-tune model trên 1 GPU duy nhất. Đề xuất định dạng quantization cho từng nhu cầu, ước tính VRAM/RAM và nêu rủi ro chất lượng.",
+      "modelAnswer": "(1) H100 (Hopper): FP8 — ~7.9 GB, <1% drop, 2× memory vs FP16, native Hopper; nếu VRAM chật dùng AWQ 4-bit (~4.5 GB, ~1pt MMLU, accuracy > GPTQ cùng bits). Nếu sau này lên Blackwell: NVFP4 default. (2) CPU-only/laptop: GGUF Q4_K_M (~4.8 GB, mixed Q4/Q6 per tensor), chạy qua llama.cpp/Ollama; chỉ dùng Q2_K khi cực kỳ constrained (last resort, quality drop rõ). (3) Fine-tune 1 GPU: NF4 + QLoRA (~4.0 GB, double quant constants). Rủi ro: model <7B mất quality nhanh hơn; luôn benchmark perplexity/MMLU sau quantize; so sánh với baseline FP16 (15.8 GB).",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D05-TL-03",
+      "type": "essay",
+      "prompt": "Bạn vận hành một agent platform: mọi request dùng chung system prompt dài 6K token + tool definitions, sau đó là hội thoại multi-turn. TTFT cao và hóa đơn API lớn. Thiết kế giải pháp dựa trên prefix caching (engine, cấu hình, thiết kế prompt, giám sát).",
+      "modelAnswer": "Chọn engine có prefix caching: vLLM v1 (APC ON by default) hoặc SGLang RadixAttention (radix-tree, cache hit = skip prefill shared prefix). Thiết kế prompt: system prompt/tool definitions cố định ở đầu, tránh chèn nội dung thay đổi (timestamp, id) phía trước. Kỳ vọng −70% TTFT trên repeated system prompts. Mở rộng: HiCache tier GPU VRAM → Host RAM → external storage cho long-context/multi-turn; LMCache/Mooncake cho cross-instance sharing. Multi-instance: cache-aware router gửi request đến instance có prefix phù hợp. Pricing: provider giảm giá cached input (Anthropic −90%, DeepSeek 10×, OpenAI ≈50%), cache miss tính full price. Monitor cache-hit rate trên dashboard (Prometheus/Grafana).",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D05-TL-04",
+      "type": "essay",
+      "prompt": "Cần serve DeepSeek-V3 671B (MoE) full precision trên cluster 2 nodes × 4 GPU, intra-node có NVLink, inter-node InfiniBand. Đề xuất chiến lược parallelism (TP/PP/EP/DP), các flag/lệnh chính, và giải thích vì sao không dùng TP qua nodes.",
+      "modelAnswer": "Rule of thumb: TP ≤ GPUs/node → TP 4 trong node (NVLink 900 GB/s, all-reduce không bottleneck); PP = số nodes → PP 2 qua IB (P2P activation chịu được latency); EP cho MoE experts (mỗi GPU giữ subset experts, A2A routing on-demand). Ví dụ slide: --tp 4 --pp 2 --ep 8. Setup Ray: ray start --head / ray start --address=… mỗi node; NCCL collective, NCCL_IB_HCA=mlx5 cho IB NIC. Không TP qua nodes vì all-reduce mỗi layer quá chậm qua IB, trừ NVLink fabric (NVL72/GB200). Tối ưu thêm: Two-Batch Overlap (--enable-two-batch-overlap) để overlap A2A với GEMM, EPLB cân bằng load expert, DPA + MLA để tăng batch, chú ý constraint ep_size = tp_size ở nhiều backend; PP có tradeoff bubble latency.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D05-TL-05",
+      "type": "essay",
+      "prompt": "Một service LLM có traffic rất biến động: ban đêm gần như 0, giờ cao điểm 100 RPS bùng nổ. Thiết kế chính sách auto-scaling và routing trên Kubernetes, nêu ngưỡng cụ thể và trade-off chi phí/latency.",
+      "modelAnswer": "Dùng KEDA (+ Knative) event-driven autoscaling. Scale out khi GPU util > 80% hoặc queue depth > 10 requests; scale in khi GPU util < 30%. Scale-to-zero khi no traffic để tiết kiệm chi phí đáng kể, nhưng trade-off cold start latency → giữ warm pool N idle instances cho spikes giờ cao điểm. Load balancer dùng least-busy routing (+30% vs round-robin); request batching 50 ms window (+40% throughput). Spot instances cho batch inference; right-size GPU. Giám sát goodput/TTFT để chọn ngưỡng, load test trước bằng locust/k6.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D05-TL-06",
+      "type": "essay",
+      "prompt": "Team đang cân nhắc chuyển từ vLLM monolithic sang disaggregated prefill/decode cho hai sản phẩm: (A) RAG trên tài liệu dài 50K token; (B) chatbot câu ngắn, prompt mỗi người khác nhau. Phân tích có nên chuyển cho từng sản phẩm, nêu cơ chế, chi phí và lựa chọn engine.",
+      "modelAnswer": "Cơ chế: tách prefill pool và decode pool, KV transfer qua NVLink/IB; tránh prefill contend với decode như monolithic (vLLM v0). Chi phí: KV transfer overhead ~10 GB/s, tốn bandwidth. (A) Long-context RAG là prefill-heavy → nên chuyển; kỳ vọng TTFT giảm mạnh (Mooncake TTFT ↓75%). (B) Short unique prompts → không đáng, overhead KV transfer lớn hơn lợi ích; giữ monolithic với continuous batching/chunked prefill. Engine: NVIDIA Dynamo (disaggregated default, NIM-ready), llm-d (K8s-native, KV-aware routing, 2.2K tok/s/H200), Mooncake; nền tảng lý thuyết DistServe/Splitwise.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D05-TL-07",
+      "type": "essay",
+      "prompt": "Một công ty muốn phục vụ 4 domain (SQL, y tế, code, finance), mỗi domain có LoRA adapter riêng trên cùng base model 8B. Hiện đang chạy 4 deployment độc lập. Đề xuất kiến trúc mới, lợi ích định lượng, overhead và công cụ.",
+      "modelAnswer": "Multi-LoRA serving: 1 base model + N domain adapters trên 1 GPU instance, chọn adapter per request. Công cụ: vLLM --enable-lora (N adapters / 1 endpoint), S-LoRA (paged LoRA weights, swap per request), Punica kernels (merged vào PyTorch Jan 2024), SGLang Chunked SGMV (20–80% latency ↓) + LoRA overlap loading (35% TTFT ↓), SageMaker LMI-Dist managed. Lợi ích: 12× throughput vs N separate servers, tiết kiệm VRAM và serving cost. Overhead: +2 ms/token cho adapter application. Cần kiểm tra latency SLO sau khi gộp.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D05-TL-08",
+      "type": "essay",
+      "prompt": "Server SGLang production liên tục crash OOM vào giờ cao điểm; dashboard cho thấy queue depth vượt 2,000. Trình bày quy trình tuning + debug theo slide và các flag cần điều chỉnh.",
+      "modelAnswer": "Memory: --mem-fraction-static (SGLang) / --gpu-memory-utilization (vLLM) chừa 5–8 GB baseline. Prefill OOM: giảm --chunked-prefill-size xuống 2048–4096 (default 8192). Decode OOM: --max-running-requests / --max-num-seqs để cap burst. Scheduling: bắt đầu --schedule-conservativeness 1.0 (0.3 aggressive, 1.3 conservative). Queue depth target 100–2,000; >2K là saturation → cần scale out. Observability: --enable-metrics → Prometheus :30000/metrics; metric num_running_reqs, num_queue_reqs, TTFT/TPOT histogram, cache-hit rate → Grafana. Debug flow: Grafana anomaly → --log-requests trace → crash dump (rolling 5 phút) → replay_request_dump.py reproduce → fix + redeploy.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D05-TL-09",
+      "type": "essay",
+      "prompt": "Thiết kế các biện pháp đảm bảo SLA cho một LLM API với mục tiêu P50 < 200 ms, P95 < 500 ms, P99 < 1000 ms, uptime 99.9%. Nêu kiến trúc chịu lỗi, hành vi khi quá tải, và tối ưu chi phí.",
+      "modelAnswer": "Uptime 99.9% ≈ 8.7h downtime/năm. Chịu lỗi: multi-AZ deployment + health checks; timeout 10–60s cho LLM generation. Quá tải: circuit breaker fallback; graceful degradation — trả cached/shorter response, route sang smaller model. Chi phí: theo dõi cost per 1M tokens, spot instances cho batch inference, scale-to-zero (KEDA) khi no traffic, right-size GPU (không dùng A100 cho 7B). Đo: dashboard P50/P95/P99 + tokens/s per GPU, benchmark k6/locust trước production, không đoán latency.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D05-TL-10",
+      "type": "essay",
+      "prompt": "Bạn cần làm Lab 20 trên laptop 8 GB RAM, không GPU, và tích hợp vào Milestone 1. Trình bày các bước triển khai inference local, các hướng tuning llama.cpp, và cách endpoint này khớp với platform N16–N19.",
+      "modelAnswer": "Lab chạy được trên Windows/macOS/Linux, low-spec OK. Bước: 00-setup hardware detection + install; 01-quickstart llama-cpp-python baseline đo P50/P95/P99; 02-server OpenAI-compat llama-server + Prometheus + locust load test; 03-milestone-integration nối endpoint với N16–N19. Model: GGUF Q4_K_M (recommended) cho Llama-3-8B/Qwen-3-8B/Phi-3-mini. Tuning bonus: build flags (AVX2/AVX-512, NEON), thread sweep, ctx-len sweep, GPU offload (Metal/CUDA/Vulkan) nếu có, quant tradeoff Q2_K → Q8_0; MLX tùy chọn trên Apple Silicon. Kết quả ghi benchmarks/results.md. Milestone 1: cloud IaC + K8s, data pipeline, lakehouse Delta + Medallion, vector store API, feature store online/offline, model serving optimized endpoint, benchmark report latency + cost, live demo end-to-end.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    }
+  ]
+}

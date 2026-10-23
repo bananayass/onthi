@@ -1,0 +1,526 @@
+{
+ "mcq": [
+  [
+   "Trên bản đồ công nghệ data engineering 2026, Debezium, Airbyte, Fivetran và Kafka Connect thuộc tầng nào?",
+   "Ingestion",
+   "Vận chuyển",
+   "Điều phối",
+   "Biến đổi",
+   "Bản đồ xếp bốn công cụ này vào tầng Ingestion; Kafka/Redpanda/Pulsar mới là tầng Vận chuyển."
+  ],
+  [
+   "dbt tests, Great Expectations, Soda và Pandera được xếp vào tầng nào trên bản đồ công nghệ?",
+   "Chất lượng",
+   "Biến đổi",
+   "Tính toán",
+   "Phục vụ AI",
+   "Bản đồ 2026: tầng Chất lượng gồm dbt tests · Great Expectations · Soda · Pandera."
+  ],
+  [
+   "Trong bài toán xuyên suốt (nền tảng AI hỗ trợ khách hàng), ba nguồn dữ liệu vào Bronze là gì?",
+   "Postgres tickets, S3 transcripts, Kafka events",
+   "Postgres tickets, MySQL orders, Kinesis logs",
+   "S3 tickets, Postgres transcripts, Kafka orders",
+   "Kafka tickets, S3 events, Postgres feedback",
+   "Tickets qua CDC Debezium, transcripts JSON đổ hằng giờ lên S3, events click + feedback qua Kafka."
+  ],
+  [
+   "Vì sao bài toán xuyên suốt cần tới ba bảng Gold thay vì một?",
+   "Ba consumer AI hiểu chữ “sạch” theo ba kiểu khác nhau",
+   "Mỗi nguồn dữ liệu bắt buộc phải có một bảng Gold riêng",
+   "Để chia tải đọc đều ra cho ba cụm máy tính khác nhau",
+   "Vì một bảng Gold chỉ được phép chứa tối đa một schema",
+   "RAG index, classifier và routing agent có định nghĩa “sạch” mâu thuẫn nhau, nên Gold không bao giờ là một bảng."
+  ],
+  [
+   "Tầng Bronze cam kết điều gì với người đọc?",
+   "Dữ liệu y hệt lúc rời nguồn, chỉ INSERT",
+   "Dữ liệu đã khử trùng lặp và đúng kiểu",
+   "Mỗi hàng tương ứng đúng một thực thể",
+   "Dữ liệu đã được che PII trước khi lưu",
+   "Bronze: chỉ INSERT, không UPDATE, không DELETE; không cam kết sạch — và đó là chủ ý."
+  ],
+  [
+   "Một ticket trong nguồn có priority là 'HIGH ' (thừa dấu cách). Ở Bronze phải làm gì?",
+   "Lưu nguyên giá trị như nguồn gửi",
+   "Trim dấu cách rồi mới ghi vào bảng",
+   "Bỏ bản ghi vì giá trị không hợp lệ",
+   "Đổi về chữ thường cho đồng nhất",
+   "Bronze “nguyên bản”: thừa dấu cách, gửi trùng 3 lần, trường lạ — đều lưu nguyên."
+  ],
+  [
+   "Cột _kafka_offset trong bảng bronze_tickets có mục đích chính là gì?",
+   "Để replay lại dữ liệu khi cần",
+   "Để làm khoá chính cho tầng Silver",
+   "Để partition bảng theo thời gian",
+   "Để đếm số lần retry của Airflow",
+   "Slide chú thích: _kafka_offset BIGINT -- de replay; Bronze mang dấu vết đường đi của dữ liệu."
+  ],
+  [
+   "Logic Silver viết sai, 2 tháng sau mới phát hiện, nhưng Bronze đã bị “làm sạch”. Vì sao không cứu được?",
+   "Postgres chỉ còn trạng thái hôm nay",
+   "Silver đã tự xoá sau đúng 30 ngày",
+   "Kafka không cho phép đọc lại offset",
+   "dbt không hỗ trợ chạy lại bảng cũ",
+   "Nếu Bronze còn nguyên: xoá Silver, chạy lại 20 phút. Bronze đã sửa → nguồn không có lịch sử 2 tháng."
+  ],
+  [
+   "Bronze có 3 hàng cho ticket T-91 (1 create, 2 update). Analyst đếm số ticket tháng này trên Bronze sẽ gặp gì?",
+   "Ra 3, trong khi thực tế chỉ có 1",
+   "Ra 1, đúng với thực tế của nguồn",
+   "Ra 2, vì bỏ qua thao tác create",
+   "Ra 0, vì Bronze không có khoá",
+   "Bronze mỗi hàng = một lần thay đổi; Silver mỗi hàng = một ticket. Thiếu Silver thì mọi người dùng tầng sau đếm sai."
+  ],
+  [
+   "Một “Silver” chỉ là SELECT * FROM bronze WHERE user_id IS NOT NULL nên được đánh giá thế nào?",
+   "Layer thừa, xoá đi cho nhanh và rẻ",
+   "Silver chuẩn, vì đã lọc giá trị NULL",
+   "Nên giữ, vì nó chính là bảng Gold",
+   "Nên đổi sang materialization view",
+   "Nó không cam kết thêm điều gì so với Bronze; xoá đi pipeline nhanh hơn và rẻ hơn."
+  ],
+  [
+   "Bảng Silver không có khoá, chỉ INSERT. Airflow retry lúc 3 giờ sáng thì hậu quả là gì?",
+   "Dữ liệu nhân đôi mà không báo lỗi",
+   "Task fail ngay vì trùng khoá chính",
+   "Airflow tự rollback lần chạy trước",
+   "Bảng bị khoá cho tới khi có người xử lý",
+   "Có khoá → MERGE, chạy 1 hay 10 lần vẫn 1 hàng; không khoá → retry nhân đôi, lần nữa nhân ba, không gì báo lỗi."
+  ],
+  [
+   "Upstream đổi priority từ số sang chuỗi, Silver không ép kiểu. Slide cảnh báo điều gì xảy ra?",
+   "Pipeline chạy êm, vài tuần sau số liệu lạ",
+   "Pipeline fail ngay ở bước đọc từ Bronze",
+   "Debezium dừng replication slot tự động",
+   "dbt tự chuyển cột về kiểu số ban đầu",
+   "“Đúng kiểu”: không ép kiểu thì pipeline chạy êm, 3 tuần sau mới có người thấy dashboard ra số lạ."
+  ],
+  [
+   "Vì sao PII phải được xử lý xong ở Silver?",
+   "Qua Silver dữ liệu toả ra, không gom lại được",
+   "Gold không có quyền đọc các cột chứa PII",
+   "Bronze tự động mã hoá PII khi ingest vào",
+   "Feature store chỉ nhận dữ liệu dạng số",
+   "Silver là ranh giới cuối: sau đó dữ liệu toả ra Gold, feature store, vector DB, CSV export."
+  ],
+  [
+   "Với gold_doc_chunks (consumer: RAG index), cam kết sống còn là gì?",
+   "Chunk ổn định và ghim version model embedding",
+   "Snapshot bất biến, có version cho mỗi tháng",
+   "Point-in-time đúng, không rò rỉ tương lai",
+   "Một hàng là một user nhân với một ngày",
+   "Đổi model mà không ghim → index trộn hai hệ toạ độ vector, kết quả nhiễu."
+  ],
+  [
+   "gold_training_set cho classifier cần cam kết gì để trả lời được “model đã học từ tập nào”?",
+   "Snapshot bất biến, có version",
+   "Chunk ổn định, ghim embedding",
+   "Point-in-time join theo ngày",
+   "Cập nhật liên tục theo stream",
+   "Thiếu snapshot có version thì tháng sau model tụt điểm không truy được tập huấn luyện."
+  ],
+  [
+   "gold_feature_daily dùng feature 12-08 nhưng lỡ dính nhãn sinh ra ngày 15-08. Hậu quả?",
+   "Đẹp lúc test, sập lúc production",
+   "Fail ngay ở bước build của dbt",
+   "Kafka từ chối message tới muộn",
+   "Index RAG trộn hai hệ toạ độ",
+   "gold_feature_daily cam kết point-in-time đúng, không rò rỉ tương lai."
+  ],
+  [
+   "Debezium đọc thay đổi từ Postgres và MySQL bằng cơ chế nào?",
+   "Logical replication trên WAL; binlog",
+   "Trigger trên từng bảng; general log",
+   "Query theo updated_at; slow query log",
+   "Snapshot định kỳ; redo log của InnoDB",
+   "Debezium giả làm một replica nên gần như không thêm tải truy vấn."
+  ],
+  [
+   "Nhóm có nhiều nguồn SaaS lặt vặt và ngân sách hẹp nên chọn công cụ ingestion nào?",
+   "Airbyte",
+   "Fivetran",
+   "Debezium",
+   "Temporal",
+   "Airbyte: mã nguồn mở, rất nhiều connector; trả giá là connector chất lượng không đều."
+  ],
+  [
+   "Điểm trả giá chính của Fivetran theo slide là gì?",
+   "Giá theo số dòng, khó dự đoán",
+   "Connector chất lượng không đều",
+   "Phải tự trông replication slot",
+   "Phải hiểu và vận hành Connect cluster",
+   "Fivetran là SaaS quản lý trọn gói: hết việc vận hành nhưng giá theo số dòng."
+  ],
+  [
+   "Avro được dùng ở chặng nào trong pipeline?",
+   "Trên đường truyền — message Kafka",
+   "Khi lưu — mọi bảng trong lake",
+   "Trong RAM — trao đổi giữa engine",
+   "Chỉ ở rìa hệ thống, ngắn hạn",
+   "Avro theo hàng, có schema, ghi nhanh, tiến hoá schema là tính năng gốc."
+  ],
+  [
+   "Vì sao Parquet là định dạng lưu trữ cho mọi bảng trong lake?",
+   "Theo cột, chỉ đọc cột cần, pushdown được",
+   "Theo hàng, ghi nhanh, tiến hoá schema tốt",
+   "Văn bản thuần, người đọc được, dễ parse",
+   "Nằm trong RAM, không cần serialize lại",
+   "Parquet theo cột, nén mạnh, đẩy được điều kiện lọc xuống file."
+  ],
+  [
+   "Đọc Parquet bằng DuckDB rồi đưa sang Polars không tốn lần chuyển đổi nào là nhờ đâu?",
+   "Cả hai cùng dùng Arrow trong bộ nhớ",
+   "Cả hai cùng đọc Avro từ Kafka topic",
+   "Polars tự gọi DuckDB qua JDBC driver",
+   "DuckDB ghi tạm ra JSON nén gzip",
+   "Arrow theo cột trong bộ nhớ; trước Arrow mỗi lần đổi công cụ là một lần serialize lại."
+  ],
+  [
+   "Vì sao không nên lưu Bronze bằng JSON nén gzip “cho tiện”?",
+   "Lọc một cột phải giải nén, parse toàn bộ",
+   "JSON gzip không lưu được trường lạ",
+   "Gzip làm mất thứ tự các thay đổi CDC",
+   "Kafka Connect không ghi được JSON",
+   "Sáu tháng sau một truy vấn lọc một cột phải giải nén và parse toàn bộ lịch sử — hoá đơn sẽ nhắc bạn."
+  ],
+  [
+   "Trong dbt, ba tầng model staging → intermediate → marts lần lượt làm gì?",
+   "1:1 nguồn; join và nghiệp vụ; bảng Gold",
+   "Join nguồn; làm sạch nhẹ; bảng Bronze",
+   "Bảng Gold; join nguồn; làm sạch 1:1",
+   "Làm sạch; bảng Gold; join và nghiệp vụ",
+   "staging 1:1 với nguồn, làm sạch nhẹ; intermediate join + logic nghiệp vụ; marts là bảng Gold cuối."
+  ],
+  [
+   "Vì sao dbt biết thứ tự chạy các model mà bạn không cần khai báo?",
+   "ref() tự sinh đồ thị phụ thuộc",
+   "is_incremental() sắp xếp thứ tự",
+   "unique_key định nghĩa phụ thuộc",
+   "contract khai báo thứ tự chạy",
+   "{{ ref() }} giữa các model tạo ra DAG phụ thuộc."
+  ],
+  [
+   "Bật contract: { enforced: true } trên silver_tickets mang lại điều gì?",
+   "Sai kiểu dữ liệu thì fail ngay lúc build",
+   "Tự động ép kiểu cột về varchar khi chạy",
+   "Tự sinh test unique cho mọi cột khoá",
+   "Tự backfill phần bị ảnh hưởng khi sửa",
+   "Contract kiểm lúc build — không phải lúc tình cờ phát hiện dashboard sai."
+  ],
+  [
+   "Khác biệt giữa incremental_strategy = 'merge' và 'delete+insert'?",
+   "merge là upsert; delete+insert ghi đè cả phân vùng",
+   "merge ghi đè cả bảng; delete+insert là upsert",
+   "merge chỉ thêm hàng mới; delete+insert xoá bảng",
+   "merge cần partition; delete+insert cần unique_key",
+   "Slide: merge = upsert; delete+insert = ghi đè cả phân vùng."
+  ],
+  [
+   "SQLMesh khác dbt ở cách hiểu SQL như thế nào?",
+   "Parse thành cây, lineage tới từng cột",
+   "Xử lý SQL như văn bản cộng với Jinja",
+   "Dịch SQL sang Python rồi mới chạy",
+   "Chỉ đọc comment trong file SQL",
+   "dbt xử lý SQL như văn bản + Jinja; SQLMesh phân tích cú pháp → lineage cột, tự phân loại breaking."
+  ],
+  [
+   "Môi trường dev của SQLMesh rẻ hơn dbt vì sao?",
+   "Virtual environment chỉ tạo view",
+   "Build lại toàn bộ schema riêng",
+   "Dùng DuckDB thay cho warehouse",
+   "Bỏ qua test khi chạy ở dev",
+   "SQLMesh virtual environment tạo view, gần như không tốn tính toán; dbt thường build lại schema riêng."
+  ],
+  [
+   "Theo slide, điểm chung quan trọng nhất giữa dbt và SQLMesh là gì?",
+   "Coi transform là code có version, test, review",
+   "Cùng phân tích SQL thành cây tới từng cột",
+   "Cùng tạo virtual environment bằng view",
+   "Cùng có hệ sinh thái và cộng đồng rất lớn",
+   "Điểm chung quan trọng hơn khác biệt: thay vì tập script SQL trong thư mục dùng chung."
+  ],
+  [
+   "Vì sao transform phải idempotent?",
+   "Mọi hệ thống đều là at-least-once",
+   "Mọi hệ thống đều là exactly-once",
+   "Để dbt có thể chạy song song",
+   "Để giảm dung lượng lưu trữ",
+   "Airflow retry, người bấm Clear Task, backfill chồng lịch, consumer restart — chạy N lần phải cùng trạng thái."
+  ],
+  [
+   "Kỹ thuật idempotent “overwrite partition” (DELETE ngày X rồi INSERT lại) hợp khi nào?",
+   "Có cột thời gian rõ ràng",
+   "Bản ghi bị sửa về sau qua CDC",
+   "Nguồn không có khoá ổn định",
+   "Không sửa được tầng ghi",
+   "Overwrite partition rẻ nhất, đơn giản nhất, hợp khi có cột thời gian rõ ràng."
+  ],
+  [
+   "Nguồn không có khoá ổn định, dùng md5(payload) làm khoá. Cái giá là gì?",
+   "Hash đổi khi format thay đổi",
+   "Trả giá mỗi lần đọc dữ liệu",
+   "Cần một khoá nghiệp vụ tin cậy",
+   "Phải xoá phân vùng mỗi ngày",
+   "Content hash: hợp khi nguồn không có khoá ổn định; trả giá: hash đổi khi format đổi."
+  ],
+  [
+   "Không sửa được tầng ghi, bạn chọn dedup on read bằng row_number(). Nhược điểm?",
+   "Trả giá mỗi lần đọc",
+   "Hash đổi khi format đổi",
+   "Cần cột thời gian rõ",
+   "Mất bản ghi bị xoá",
+   "Dedup on read giữ bản mới nhất bằng row_number() nhưng tốn chi phí ở mỗi lần đọc."
+  ],
+  [
+   "Theo slide, cặp kỹ thuật idempotent mặc định phủ gần hết trường hợp thực tế là gì?",
+   "Overwrite partition cho bảng ngày, MERGE cho bảng thực thể",
+   "MERGE cho bảng ngày, content hash cho bảng thực thể",
+   "Dedup on read cho bảng ngày, overwrite cho bảng thực thể",
+   "Content hash cho bảng ngày, dedup on read cho thực thể",
+   "Mặc định: overwrite partition cho bảng theo ngày · MERGE cho bảng thực thể."
+  ],
+  [
+   "Người dùng bấm “không hài lòng” sau 3 ngày làm nhãn ticket 08-12 đổi. Với snapshot training cũ nên làm gì?",
+   "Giữ nguyên, tạo version mới",
+   "Sửa trực tiếp nhãn trong đó",
+   "Xoá snapshot, build lại từ Silver",
+   "Bỏ ticket đó khỏi mọi snapshot",
+   "Đừng sửa snapshot training cũ — tạo version mới."
+  ],
+  [
+   "SCD Type 2 giữ lịch sử ticket bằng các cột nào?",
+   "valid_from · valid_to · is_current",
+   "_op · _ingested_at · _batch_id",
+   "event_date · updated_at · label",
+   "_source · _payload · _kafka_offset",
+   "Mỗi lần đổi sinh một hàng mới với valid_from, valid_to, is_current; join theo point-in-time."
+  ],
+  [
+   "Bảng overwrite chỉ giữ priority hiện tại; training set gán nhãn theo trạng thái hôm nay. Lỗi này gọi là gì?",
+   "Training-serving skew",
+   "Data skew khi shuffle",
+   "Small-file problem",
+   "Schema drift ở upstream",
+   "Model học thông tin mà lúc dự đoán thật nó không có — slide gọi là training-serving skew."
+  ],
+  [
+   "Cần kiểm payload API và message Kafka từng bản ghi ngay tại biên hệ thống. Chọn công cụ nào?",
+   "Pydantic",
+   "dbt tests",
+   "Soda",
+   "Pandera",
+   "Pydantic kiểm từng bản ghi lúc chạy, bắt sai kiểu ngay tại biên hệ thống."
+  ],
+  [
+   "Quy tắc đặt chốt kiểm dữ liệu theo đúng thứ tự là gì?",
+   "Sau extract → sau transform → trước training",
+   "Trước training → sau extract → sau transform",
+   "Sau transform → trước training → sau extract",
+   "Chỉ một chốt duy nhất ngay trước training",
+   "Bắt lỗi nguồn → bắt lỗi logic → chốt cuối. Hỏng sớm thì rẻ."
+  ],
+  [
+   "Tổ chức lớn cần bộ kỳ vọng dùng chung nhiều team và tài liệu tự sinh nên chọn gì?",
+   "Great Expectations / Soda",
+   "Pydantic trên từng bản ghi",
+   "Pandera trong tiến trình Python",
+   "dbt tests chạy trong warehouse",
+   "Great Expectations/Soda là khung riêng, có báo cáo, hợp tổ chức lớn."
+  ],
+  [
+   "DuckDB mạnh nhất ở đâu và trả giá gì?",
+   "Phân tích tới vài trăm GB; không mở rộng ngang",
+   "TB đến PB, join bảng lớn; khởi động chậm",
+   "Truy vấn liên kho; không chạy transform lịch",
+   "Embedding trên GPU; non cho SQL analytics",
+   "DuckDB: trong tiến trình, một máy, vector hoá, đọc thẳng Parquet trên S3."
+  ],
+  [
+   "Việc nặng là embed 10 triệu chunk cho RAG trên GPU. Engine nào phù hợp?",
+   "Ray Data",
+   "Trino",
+   "DuckDB",
+   "Spark SQL",
+   "Ray Data: phân tán, thuần Python, batch inference/embedding trên GPU."
+  ],
+  [
+   "Cần đối chiếu nhanh lake trên S3 với Postgres sản xuất mà không di chuyển data. Chọn engine nào?",
+   "Trino",
+   "Polars",
+   "Ray Data",
+   "DuckDB",
+   "Trino: MPP, truy vấn liên kho S3 + Postgres + Kafka; không phải nơi chạy transform theo lịch."
+  ],
+  [
+   "Theo cây quyết định, mỗi lần chạy 10–500 GB (không vừa RAM, chưa tới 1 TB) nên dùng gì?",
+   "DuckDB tràn đĩa trên máy RAM lớn",
+   "Spark trên cụm dùng chung nhiều team",
+   "Polars trên laptop của từng kỹ sư",
+   "Trino trên ba kho dữ liệu khác nhau",
+   "Vừa RAM <10 GB → DuckDB/Polars; 10–500 GB → DuckDB out-of-core; >1 TB/join lớn → Spark."
+  ],
+  [
+   "Cụm Spark 10 node xử lý 8 GB thường chậm hơn DuckDB một máy. Vì sao?",
+   "Thời gian trôi vào lập lịch và shuffle",
+   "Spark không đọc được Parquet trên S3",
+   "DuckDB tự chia dữ liệu ra nhiều node",
+   "JVM không hỗ trợ vector hoá cột",
+   "Cái bẫy “distributed by default”: bắt đầu từ một máy, chỉ lên cụm khi đã đo và thấy chật."
+  ],
+  [
+   "Khoá idempotent đúng cho gold_doc_chunks để tránh embed lại toàn bộ là gì?",
+   "hash(text) + embedding_model_version",
+   "chunk_id + _ingested_at của Bronze",
+   "hash(text) + _batch_id của lần chạy",
+   "doc_id + thời điểm chạy embedding",
+   "Đổi model thì re-embed toàn bộ có chủ đích, không trộn hai version trong một index."
+  ],
+  [
+   "Polars được mô tả thế nào trong bảng năm engine?",
+   "DataFrame Rust, lazy; hệ sinh thái còn trẻ",
+   "MPP liên kho; không chạy transform lịch",
+   "Phân tán JVM; vận hành cụm, khởi động chậm",
+   "Thuần Python trên GPU; non cho SQL",
+   "Polars thay thế pandas; ETL bằng Python nhanh hơn nhiều lần."
+  ],
+  [
+   "Kafka topic được ví là “Bronze có hạn sử dụng”. Replay trong Kafka nghĩa là gì?",
+   "Đọc lại từ offset cũ",
+   "Xoá topic rồi tạo lại",
+   "Tăng số partition",
+   "Đổi consumer group",
+   "Topic bất biến, chỉ ghi thêm; offset là vị trí đọc riêng của từng consumer group."
+  ],
+  [
+   "Kafka retention 24 giờ nhưng lookback của pipeline là 3 ngày. Hệ quả?",
+   "Không backfill được",
+   "Kafka tự gia hạn",
+   "Consumer bị trùng",
+   "Mất thứ tự offset",
+   "Retention quyết định bạn replay được bao xa — phát hiện đúng lúc cần nhất."
+  ],
+  [
+   "Broker nào viết bằng C++, một binary, tương thích Kafka API, hợp khi muốn độ trễ thấp?",
+   "Redpanda",
+   "Pulsar",
+   "WarpStream",
+   "Kinesis",
+   "Redpanda: ít việc vận hành; trả giá là cộng đồng nhỏ hơn."
+  ],
+  [
+   "WarpStream dùng object storage làm log, không đĩa cục bộ. Chọn khi nào?",
+   "Chi phí quan trọng hơn độ trễ",
+   "Cần độ trễ dưới một mili giây",
+   "Một cụm phục vụ nhiều tenant",
+   "Đã ở AWS, muốn bật là chạy",
+   "WarpStream có độ trễ hàng trăm ms, đổi lại chi phí thấp."
+  ],
+  [
+   "Theo slide, thứ thật sự khoá bạn lại khi dùng streaming là gì?",
+   "Schema, partition key và consumer đã viết",
+   "Lựa chọn broker Kafka hay Redpanda",
+   "Ngôn ngữ viết broker: JVM hay C++",
+   "Nhà cung cấp cloud chạy cụm broker",
+   "Năm broker nói gần như cùng một API; hãy cẩn thận với schema, partition key, consumer."
+  ],
+  [
+   "Flink khác Spark Structured Streaming ở mô hình và độ trễ như thế nào?",
+   "Từng sự kiện, mili giây; micro-batch, giây",
+   "Micro-batch, giây; từng sự kiện, mili giây",
+   "Từng sự kiện, giây; micro-batch, mili giây",
+   "Cả hai micro-batch, cùng độ trễ mili giây",
+   "Flink event-at-a-time; Spark Structured Streaming gom lô nhỏ, không đạt được mili giây."
+  ],
+  [
+   "Kafka Streams hợp với trường hợp nào?",
+   "Chỉ biến đổi Kafka → Kafka",
+   "Event-time và state là trung tâm",
+   "Một API cho cả batch lẫn stream",
+   "Truy vấn xuyên S3 và Postgres",
+   "Kafka Streams là thư viện nhúng trong app Java, state RocksDB cục bộ, không phải cụm riêng."
+  ],
+  [
+   "Đâu KHÔNG phải chi phí thật của streaming được liệt kê trong slide?",
+   "Mất bản ghi bị DELETE ở nguồn",
+   "Phải quản lý state store",
+   "Backpressure khi consumer chậm",
+   "Phải trực hệ thống 24/7",
+   "Chi phí: state store, checkpoint/khôi phục, backpressure, trực 24/7, debug khó. Mất DELETE là nhược điểm của polling."
+  ],
+  [
+   "Khác biệt lớn nhất giữa Airflow và Dagster là gì?",
+   "Đơn vị tư duy: task so với asset",
+   "Ngôn ngữ: Python so với Java",
+   "Airflow có UI, Dagster thì không",
+   "Dagster không hỗ trợ lập lịch",
+   "Airflow hỏi “chạy những bước nào”, Dagster hỏi “những bảng nào phải tồn tại và còn tươi”."
+  ],
+  [
+   "Workflow agent AI nhiều bước, kéo dài nhiều ngày, cần retry nằm trong runtime. Chọn gì?",
+   "Temporal",
+   "Airflow",
+   "Dagster",
+   "Prefect",
+   "Temporal: durable execution; không phải scheduler cho data nhưng ngày càng được chọn cho agent."
+  ],
+  [
+   "Vì sao backfill phải dùng đúng code path với job daily?",
+   "Script riêng thì ra kết quả riêng",
+   "Để Airflow tính đúng start_date",
+   "Để tránh làm đầy replication slot",
+   "Vì Kafka chỉ cho một consumer group",
+   "Backfill dùng script khác = kết quả khác với daily."
+  ],
+  [
+   "Airflow bản 3 bổ sung những gì theo slide?",
+   "Lịch theo sự kiện và versioning DAG",
+   "Lineage cột và virtual environment",
+   "Durable execution và retry trong runtime",
+   "Khai báo asset và observability sẵn có",
+   "Airflow: hệ sinh thái provider lớn nhất; bản 3 thêm lịch theo sự kiện và versioning DAG."
+  ]
+ ],
+ "essay": [
+  [
+   "Bạn dựng pipeline cho nền tảng AI hỗ trợ khách hàng (Postgres tickets, S3 transcripts, Kafka events) phục vụ RAG index, classifier và routing agent. Thiết kế ba tầng Medallion: nêu cam kết của từng tầng, các cột metadata cần có ở Bronze, và vì sao Gold phải tách thành ba bảng.",
+   "- Bronze: nguyên bản, chỉ INSERT, không UPDATE/DELETE, không cam kết sạch (chủ ý); cột _payload, _source, _op (c/u/d), _ingested_at, _batch_id, _kafka_offset để replay.\n- Lý do giữ nguyên: sửa logic Silver sai (chạy lại ~20 phút), retrain trên dữ liệu đúng thời điểm, audit.\n- Silver: 1 hàng = 1 thực thể, có khoá (MERGE), đúng kiểu, hết trùng, PII đã xử lý (ranh giới cuối).\n- Gold: gold_doc_chunks (chunk ổn định + ghim version embedding), gold_training_set (snapshot bất biến có version), gold_feature_daily (user × ngày, point-in-time, không rò rỉ tương lai).\n- Ba consumer có ba định nghĩa “sạch” mâu thuẫn → không bao giờ là một bảng."
+  ],
+  [
+   "Team hiện lấy dữ liệu tickets từ Postgres bằng job polling WHERE updated_at > ? mỗi 5 phút. Phân tích các vấn đề của cách này và đề xuất chuyển sang CDC log-based: cơ chế hoạt động, lợi ích, và rủi ro vận hành cần giám sát.",
+   "- Polling: mất bản ghi bị DELETE, mất trạng thái trung gian giữa hai lần poll, thêm tải truy vấn lên DB sản xuất.\n- CDC: Debezium đọc WAL qua logical replication (MySQL: binlog), giả làm replica, đẩy vào Kafka topic; bắt cả INSERT/UPDATE/DELETE đúng thứ tự, gần như không thêm tải truy vấn.\n- Chạy trên Kafka Connect; phù hợp khi cần mọi thay đổi kể cả xoá và cần thứ tự.\n- Rủi ro: phải bật replication slot; slot không được đọc làm đầy đĩa DB gốc → giám sát lag/dung lượng; tự vận hành.\n- Định dạng: Avro trên đường truyền (có Schema Registry), Parquet khi lưu Bronze."
+  ],
+  [
+   "Bạn viết model dbt incremental gold cho ticket. Dữ liệu có thể về muộn (app offline, producer retry, batch upstream chậm, user sửa bản ghi cũ). Hãy viết cấu hình model, giải thích từng dòng quan trọng, và nêu cách chọn độ dài lookback window cùng rủi ro khi --full-refresh.",
+   "- config: materialized='incremental', unique_key='ticket_id', incremental_strategy='merge'.\n- unique_key thiếu → nhân đôi mỗi lần chạy lại; merge = upsert (delete+insert ghi đè cả phân vùng); is_incremental() thiếu → quét toàn bộ lịch sử.\n- Điều kiện: where event_date >= max(event_date) from {{ this }} - interval N day.\n- Lookback = P99 của (_ingested_at - event_time), đo từ Bronze, không đoán (ví dụ slide 3 ngày).\n- --full-refresh chỉ an toàn khi Bronze còn đủ lịch sử; nếu Bronze đã xoá theo TTL sẽ dựng bảng thiếu data mà không báo."
+  ],
+  [
+   "Một job Spark aggregate ticket theo customer_id: 200 task xong trong 30 giây nhưng 1 task chạy 40 phút. Chẩn đoán nguyên nhân, cách phát hiện, và đề xuất cách sửa; nêu thêm cách tránh shuffle khi join với bảng nhỏ.",
+   "- Nguyên nhân: data skew — một khách hàng doanh nghiệp chiếm ~40% ticket dồn vào một task; thủ phạm phổ biến thứ hai: user_id IS NULL.\n- Phát hiện: nhìn phân bố thời gian task, không nhìn trung bình.\n- Sửa: salting — gộp theo (customer_id, số ngẫu nhiên 0–15) rồi gộp lần hai; xử lý riêng NULL.\n- Shuffle (JOIN, GROUP BY, DISTINCT, ORDER BY) = ghi đĩa → qua mạng → đọc lại, đắt; scan cục bộ rẻ.\n- Bảng nhỏ <100 MB → broadcast join, join thành cục bộ."
+  ],
+  [
+   "Pipeline đọc bảng sự kiện trên S3 chậm dần theo tháng dù không ai đổi code. Kiểm tra thấy 50.000 file × 2 MB, bảng đang partition theo user_id. Phân tích nguyên nhân và đề xuất chiến lược file và phân vùng mới, kèm cách đo hiệu quả.",
+   "- Small-file problem: mỗi file là một lần liệt kê, mở, đọc footer → engine dành phần lớn thời gian lập kế hoạch thay vì đọc data.\n- Partition theo user_id: cardinality cao → sinh rất nhiều file nhỏ.\n- Sửa: nhắm file 128 MB – 1 GB; compaction định kỳ; giảm số task ghi ở cuối pipeline.\n- Partition theo cột hay lọc, gần như luôn là event_date; vài trăm đến vài nghìn phân vùng, không phải vài triệu.\n- Predicate pushdown: lọc đúng cột phân vùng thì bỏ qua cả thư mục.\n- Đo bằng EXPLAIN ANALYZE, đọc rows scanned trước thời gian (ví dụ 412 triệu → 1,34 triệu hàng)."
+  ],
+  [
+   "Routing agent dùng feature “số sự kiện mỗi phút” từ stream click. Một khách hàng dùng app trên tàu điện (offline) 2 giờ, khi có mạng toàn bộ sự kiện tới cùng lúc và agent tưởng khách gặp sự cố nghiêm trọng. Giải thích lỗi và thiết kế lại cách tính cửa sổ.",
+   "- Lỗi: cửa sổ tính theo processing time → 2 giờ hoạt động dồn vào một phút, feature vọt giả tạo.\n- Sửa: cửa sổ theo event time.\n- Watermark: “đã thấy hết sự kiện trước T”, sau mốc này đóng cửa sổ.\n- Allowed lateness: biên độ tha thứ sau watermark; sự kiện muộn hơn thì bỏ hoặc đẩy sang nhánh phụ, không lặng lẽ vứt.\n- Công cụ: Flink hợp khi event-time và state là trung tâm (từng sự kiện, ms, checkpoint bài bản).\n- Streaming là bài toán thời gian sự kiện, không phải “batch nhanh hơn”."
+  ],
+  [
+   "Bạn quản lý hai topic: (A) topic log click có một producer và hàng chục consumer phân tích; (B) topic nuôi feature online cho model đang chạy production. Chọn chế độ Schema Registry cho từng topic, giải thích thay đổi được phép và bên nâng cấp trước.",
+   "- BACKWARD: cho xoá field, thêm field có giá trị mặc định; consumer nâng cấp trước; hợp nhiều consumer, ít producer → topic A.\n- FORWARD: thêm field, xoá field có default; producer nâng cấp trước; hợp producer nâng cấp thường xuyên.\n- FULL: chỉ thay đổi an toàn cả hai chiều; bên nào nâng cấp trước cũng được; topic quan trọng nhiều bên phụ thuộc → topic B.\n- Lý do B: đổi schema event = đổi feature = model nhận input khác mà không ai deploy lại; chấp nhận đổi chậm hơn.\n- Schema Registry là data contract do máy chủ ép lúc producer ghi, không phải phát hiện muộn lúc pipeline chạy."
+  ],
+  [
+   "Lúc 5 giờ chiều, một kỹ sư deploy DAG training mới với start_date 30 ngày trước, để catchup mặc định; cụm GPU lập tức nhận 30 job. Phân tích sự cố, đề xuất các quy tắc chạy lại/backfill an toàn và cách kiểm chứng pipeline idempotent.",
+   "- Nguyên nhân: catchup mặc định True → Airflow xếp mọi lịch đã lỡ (30 lần) cùng lúc.\n- Quy tắc: catchup=False; max_active_runs=1 để backfill không chồng daily; backfill dùng đúng code path với daily; ghi có phân vùng để backfill 08-12 không đụng 08-13.\n- Idempotent vì hệ thống at-least-once (retry, Clear Task, backfill chồng, consumer restart): overwrite partition cho bảng ngày, MERGE cho bảng thực thể.\n- Kiểm chứng: chạy lại một ngày cũ ba lần liên tiếp, ghi checksum bảng Gold sau mỗi lần; ba số phải giống hệt (tiêu chí Lab 17)."
+  ],
+  [
+   "Phân bổ engine cho bốn workload và giải thích lựa chọn: (1) transform Silver/Gold 8 GB mỗi lần chạy; (2) báo cáo 200 GB trên một máy; (3) join nhiều bảng lớn trên 1 TB dùng chung nhiều team; (4) embed 10 triệu chunk cho RAG. Nêu cái bẫy “distributed by default”.",
+   "- (1) DuckDB/Polars: vừa RAM một máy (<10 GB), một tiến trình, không cụm.\n- (2) DuckDB tràn đĩa, máy RAM lớn, out-of-core (10–500 GB).\n- (3) Spark: phân tán JVM, TB–PB, join nhiều bảng lớn; trả giá vận hành cụm, khởi động chậm.\n- (4) Ray Data: thuần Python, batch inference/embedding trên GPU.\n- Ngoài trục: Trino khi câu hỏi trải nhiều kho.\n- Bẫy: Spark 10 node xử lý 8 GB thường chậm hơn DuckDB một máy vì thời gian vào lập lịch và shuffle; bắt đầu từ một máy, chỉ lên cụm khi đã đo."
+  ],
+  [
+   "Product owner muốn “real-time” cho bốn nhu cầu: cập nhật RAG index từ tài liệu nội bộ, retrain classifier phân loại ticket, feature định tuyến agent (số ticket 7 ngày), chặn giao dịch gian lận. Với mỗi nhu cầu xác định độ trễ thật sự cần và giải pháp rẻ nhất, rồi nêu chi phí thật của streaming.",
+   "- RAG index: độ trễ giờ → batch mỗi giờ.\n- Retrain classifier: ngày → batch chạy đêm.\n- Feature định tuyến 7 ngày: phút → micro-batch 5 phút.\n- Chặn gian lận: mili giây → streaming thật.\n- Chi phí streaming: state store phải quản lý, checkpoint và khôi phục, backpressure khi consumer chậm, trực 24/7, debug khó hơn vì không có “chạy lại cho tôi xem”.\n- Micro-batch 5 phút giải quyết phần lớn nhu cầu “real-time” với một phần nhỏ chi phí; chọn streaming vì yêu cầu độ trễ, không vì nghe hiện đại."
+  ]
+ ]
+}

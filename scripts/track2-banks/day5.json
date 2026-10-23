@@ -1,0 +1,526 @@
+{
+  "mcq": [
+    [
+      "TTFT (Time To First Token) phụ thuộc chủ yếu vào hai thành phần nào?",
+      "Prefill compute và thời gian chờ trong queue",
+      "Decode compute và kích thước output cuối cùng",
+      "Băng thông mạng và kích thước response JSON",
+      "Số output token và tốc độ token streaming",
+      "Slide Latency Taxonomy: TTFT tính từ request đến token đầu tiên, phụ thuộc prefill compute + queue wait."
+    ],
+    [
+      "Trong latency taxonomy, TPOT còn được gọi là gì?",
+      "ITL – khoảng cách giữa các output token",
+      "TTFT – thời gian ra token đầu tiên",
+      "E2E – tổng latency của toàn request",
+      "QPS – số request xử lý mỗi giây",
+      "Slide: TPOT (Time Per Output Token) = ITL, khoảng cách đều giữa mỗi output token."
+    ],
+    [
+      "Metric nào được slide gọi là “metric production quan trọng nhất”?",
+      "Goodput: req/s thỏa mãn SLO TTFT + TPOT",
+      "Throughput: tokens/s ở mức saturation",
+      "Peak FLOPS GPU đạt được khi benchmark",
+      "Average latency P50 của toàn hệ thống",
+      "Goodput đếm request đạt SLO; throughput @saturation không có SLO constraint nên dễ misleading."
+    ],
+    [
+      "Dashboard cho thấy Queue Depth tăng liên tục. Đây là chỉ báo của hiện tượng gì?",
+      "Hệ thống đang tiến tới saturation",
+      "KV cache đã được tái sử dụng tốt",
+      "Model đang bị quantize quá mức",
+      "Token streaming đã bị tắt ở client",
+      "Queue Depth là số request đang chờ prefill — chỉ báo saturation."
+    ],
+    [
+      "Trong ví dụ H100 · Llama-3-70B · batch 32, throughput 1,800 tok/s nhưng goodput @SLO(TTFT<1s, TPOT<50ms) xấp xỉ bao nhiêu?",
+      "≈ 1,200 tok/s",
+      "≈ 1,800 tok/s",
+      "≈ 2,400 tok/s",
+      "≈ 450 tok/s",
+      "Slide nêu Goodput ≈ 1,200 tok/s, thấp hơn throughput vì chỉ tính phần đạt SLO."
+    ],
+    [
+      "Ở kỷ nguyên pre-LLM, vì sao KV cache gây lãng phí 60–80% VRAM?",
+      "KV cache cần contiguous block cố định",
+      "KV cache bị copy sang CPU mỗi step",
+      "KV cache luôn lưu ở định dạng FP32",
+      "KV cache bị nhân bản cho mỗi GPU",
+      "Slide Pre-LLM Era: memory fragmentation do KV cache cần contiguous block cố định — 60–80% VRAM waste."
+    ],
+    [
+      "Static batching ở các hệ thống serving cũ thêm khoảng bao nhiêu latency?",
+      "200–500 ms do phải chờ đủ batch",
+      "10–20 ms do phải chờ đủ batch",
+      "1–2 giây do phải chờ đủ batch",
+      "50 ms do cửa sổ batching cố định",
+      "Slide: static batching chờ đủ batch, thêm 200–500 ms latency."
+    ],
+    [
+      "Server nào thuộc thời pre-LLM nổi bật với multi-framework và dynamic batching per model?",
+      "Triton Inference Server (NVIDIA 2019)",
+      "TF Serving (Google 2017) với SavedModel",
+      "TorchServe (Facebook 2020) với MAR",
+      "BentoML (2020) với Python packaging",
+      "Slide Pre-LLM Era: Triton — multi-framework, dynamic batching per model."
+    ],
+    [
+      "Điểm bước ngoặt tháng 6/2023 mở ra “LLM serving era” là gì?",
+      "vLLM PagedAttention + continuous batching",
+      "TensorRT compile sang .trt engine FP8",
+      "ONNX Runtime hỗ trợ kernel cho NPU",
+      "FlashAttention-1 với tiling vào SRAM",
+      "The Shift (Jun 2023): vLLM PagedAttention + continuous batching, 24× throughput vs naive HF Transformers."
+    ],
+    [
+      "Llama-3-8B ở FP16 chiếm khoảng bao nhiêu VRAM theo slide?",
+      "15.8 GB",
+      "31.6 GB",
+      "7.9 GB",
+      "4.5 GB",
+      "Bảng VRAM Usage: FP32 31.6 · FP16 15.8 · FP8 7.9 · AWQ 4-bit 4.5 GB."
+    ],
+    [
+      "Đặc điểm của FP8 so với FP16 theo slide là gì?",
+      "Giảm 2× memory, drop <1%, native trên Hopper+",
+      "Giảm 4× memory, drop ~1pt MMLU, chạy mọi GPU",
+      "Giảm 2× memory, drop ~5%, chỉ chạy trên Ampere",
+      "Giảm 3.5× memory, không loss, chỉ có ở Blackwell",
+      "Slide Quantization: FP8 <1% drop, 2× memory vs FP16 (Hopper+ native)."
+    ],
+    [
+      "NVFP4 trên Blackwell tiết kiệm memory thế nào so với FP16 và FP8?",
+      "3.5× vs FP16, 1.8× vs FP8, loss <1%",
+      "2× vs FP16, 1.2× vs FP8, loss khoảng 3%",
+      "4× vs FP16, 2× vs FP8, loss khoảng 1pt",
+      "8× vs FP16, 4× vs FP8, loss đáng kể",
+      "Slide: NVFP4 (Blackwell) 3.5× vs FP16, 1.8× vs FP8, <1% loss; là default cho production Blackwell."
+    ],
+    [
+      "Muốn chất lượng tối đa, không chấp nhận mất accuracy do quantize, nên chọn định dạng nào?",
+      "BF16 / FP16",
+      "GGUF Q4_K_M",
+      "AWQ 4-bit",
+      "NF4 (bitsandbytes)",
+      "Slide chọn quantization: Max quality → BF16 / FP16."
+    ],
+    [
+      "GPTQ quantize model bằng cách nào?",
+      "Inverse Hessian layer-by-layer với 128 calib samples",
+      "Tìm salient weights rồi scale trước INT4 rounding",
+      "Dùng 4-bit NormalFloat cho weights phân phối chuẩn",
+      "Trộn Q4/Q6 theo từng tensor attention và FFN",
+      "Slide: GPTQ dùng inverse Hessian layer-by-layer (128 calib. samples), chậm quantize, nhanh inference."
+    ],
+    [
+      "Vì sao AWQ thường cho accuracy cao hơn GPTQ ở cùng số bit?",
+      "Bảo vệ salient weights có activation magnitude cao",
+      "Lưu toàn bộ weights ở FP8 thay vì ở INT4",
+      "Bỏ qua bước calibration nên không bị overfit",
+      "Chỉ quantize FFN và giữ attention ở FP16",
+      "Slide: AWQ tìm salient weights (high activation magnitude), scale trước INT4 rounding → Acc > GPTQ cùng bits."
+    ],
+    [
+      "Cần fine-tune một model trên chỉ 1 GPU. Slide khuyến nghị kết hợp nào?",
+      "NF4 + QLoRA",
+      "FP8 + full fine-tune",
+      "GGUF Q2_K + LoRA",
+      "GPTQ + DeepSpeed",
+      "Slide Quantization for Memory: Fine-tune trên 1 GPU → NF4 + QLoRA."
+    ],
+    [
+      "Trong GGUF, ký hiệu Q4_K_M nghĩa là gì?",
+      "Mixed Q4/Q6 per tensor, k-quant, size medium",
+      "4-bit đồng nhất cho mọi tensor, size max",
+      "Q4 cho weights, KV cache giữ ở Q8_0 cố định",
+      "4-bit chỉ cho FFN, attention giữ ở FP16",
+      "Slide: Q4_K_M = mixed Q4/Q6 per tensor (attn vs FFN); k = better quant, m = medium size."
+    ],
+    [
+      "Khi nào slide coi GGUF Q2_K là lựa chọn phù hợp?",
+      "Môi trường cực kỳ constrained — last resort",
+      "GPU cloud Hopper cần best quality/perf",
+      "CPU-only inference thông thường, mặc định",
+      "Fine-tune model trên một GPU duy nhất",
+      "Slide: Cực kỳ constrained → GGUF Q2_K — last resort; quality drop noticeable."
+    ],
+    [
+      "Sau khi quantize một model 3B xuống 4-bit, bước nào slide nhấn mạnh cần làm?",
+      "Benchmark perplexity vì model <7B mất quality nhanh",
+      "Bỏ qua kiểm tra vì 4-bit chỉ mất khoảng 1pt MMLU",
+      "Tăng batch size gấp đôi để bù phần accuracy mất",
+      "Chuyển sang Q2_K để model nhỏ hơn và ổn định hơn",
+      "Slide: <7B models mất quality nhanh hơn 13B+. Benchmark perplexity sau khi quantize."
+    ],
+    [
+      "Theo bảng format, Llama 70B ở GPTQ 4-bit cần khoảng bao nhiêu VRAM?",
+      "35 GB",
+      "70 GB",
+      "43 GB",
+      "140 GB",
+      "Bảng: 70B VRAM — FP16 140 · FP8 70 · AWQ 40 · GPTQ 35 · Q4_K_M 43 · Q2_K 24 · NF4 36 GB."
+    ],
+    [
+      "“Double quant” của NF4 (bitsandbytes) làm gì?",
+      "Quantize tiếp các constants từ FP32 xuống FP8",
+      "Quantize weights hai lần để giảm xuống 2-bit",
+      "Lưu hai bản weights để chọn bản tốt hơn",
+      "Quantize cả KV cache lẫn activations xuống INT4",
+      "Slide: NF4 — Double quant: constants FP32→FP8."
+    ],
+    [
+      "PagedAttention quản lý KV cache theo cách nào?",
+      "Như virtual memory pages, non-contiguous qua page table",
+      "Như một block contiguous cấp phát trước tối đa",
+      "Như file trên disk, đọc lại khi decode từng token",
+      "Như bảng hash theo token id, không có page table",
+      "Slide KV Cache & PagedAttention: KV cache như virtual memory pages, dynamic allocation, no waste."
+    ],
+    [
+      "Multi-head Latent Attention (MLA) của DeepSeek-V3 giảm KV memory bằng cách nào?",
+      "Compress Q/K/V xuống latent vector nhỏ trước attention",
+      "Dùng chung một K/V head cho tất cả query heads",
+      "Chia K/V heads thành 4 nhóm dùng chung giữa các head",
+      "Bỏ KV cache, tính lại K/V ở mỗi bước decode",
+      "Slide: MLA compress Q/K/V xuống latent vector; DeepSeek-V3 10× ít KV memory vs MHA."
+    ],
+    [
+      "Theo slide attention architecture, GQA (dùng ở LLaMA-2/3) giảm KV cache bao nhiêu so với MHA?",
+      "Khoảng 4× ít hơn",
+      "Khoảng 8× ít hơn",
+      "Khoảng 10× ít hơn",
+      "Không giảm, bằng 1×",
+      "Slide: MHA KV 1× · GQA 4× less · MQA 8× less · MLA 10× less."
+    ],
+    [
+      "Kỹ thuật nào mở rộng context bằng RoPE interpolation mà không cần retrain?",
+      "YaRN",
+      "StreamingLLM",
+      "Jamba",
+      "FlashMLA",
+      "Slide long-context: YaRN — RoPE interpolation, không cần retrain."
+    ],
+    [
+      "StreamingLLM hỗ trợ context gần như vô hạn nhờ cơ chế gì?",
+      "Attention sinks",
+      "SSM/Transformer hybrid",
+      "RoPE interpolation",
+      "Latent KV compression",
+      "Slide: StreamingLLM — attention sinks, ∞ context; Jamba mới là SSM/Transformer hybrid."
+    ],
+    [
+      "Trong speculative decoding, draft model và target model phối hợp thế nào?",
+      "Draft sinh 4–8 tokens, target verify song song trong 1 forward pass",
+      "Target sinh 4–8 tokens, draft verify tuần tự từng token một",
+      "Draft và target cùng sinh song song rồi chọn câu trả lời dài hơn",
+      "Draft thay hoàn toàn target khi acceptance rate vượt quá 50%",
+      "Slide Speculative Decoding: draft sinh 4–8 tokens, target verify song song trên cùng 1 forward pass."
+    ],
+    [
+      "EAGLE-3 (NeurIPS ’25) đạt speedup khoảng bao nhiêu?",
+      "3.0–6.5×, +20–40% so EAGLE-2",
+      "1.1–1.5×, ngang bằng EAGLE-2",
+      "1.8×, acceptance rate trên 80%",
+      "24×, so với HF Transformers",
+      "Slide: EAGLE-3 3.0–6.5×, +20–40% so EAGLE-2; ~1.8× là DeepSeek MTP."
+    ],
+    [
+      "Khi không có draft model riêng, kỹ thuật speculative nào vẫn dùng được nhờ self-drafting?",
+      "Lookahead Decoding",
+      "EAGLE-3 với draft head",
+      "DeepSeek MTP head",
+      "Two-Batch Overlap",
+      "Slide: Lookahead Decoding — self-drafting khi không có draft model."
+    ],
+    [
+      "Continuous batching khác static batching ở điểm nào?",
+      "Request vào/ra mỗi step, không padding",
+      "Chờ đủ batch rồi mới chạy một lần",
+      "Chỉ batch các request có cùng độ dài",
+      "Gộp request theo cửa sổ cố định 500 ms",
+      "Slide: continuous batching — requests vào/ra mỗi step, no padding → 5× latency giảm."
+    ],
+    [
+      "“In-flight batching” của TensorRT-LLM tương đương thuật ngữ nào trong vLLM?",
+      "Continuous batching",
+      "Chunked prefill",
+      "Static batching",
+      "Prefix caching",
+      "Slide: vLLM (continuous batching), TensorRT-LLM (in-flight batching) — thuật ngữ tương đương."
+    ],
+    [
+      "Standard attention tốn bao nhiêu HBM round trips, và FlashAttention xử lý thế nào?",
+      "3 round trips; FA tile Q/K/V vào SRAM, ghi output 1 lần",
+      "1 round trip; FA chia attention sang nhiều GPU khác nhau",
+      "2 round trips; FA lưu toàn bộ ma trận N² vào CPU RAM",
+      "3 round trips; FA bỏ softmax để giảm số lần đọc HBM",
+      "Slide FlashAttention: standard 3 HBM round trips; FA tile vào SRAM, online softmax, memory O(N) thay vì O(N²)."
+    ],
+    [
+      "Phiên bản FlashAttention nào nhắm tới Blackwell với FP4 KV cache?",
+      "FlashAttention-4 (2025)",
+      "FlashAttention-3 (2024)",
+      "FlashAttention-2 (2023)",
+      "FlashAttention-1 (2022)",
+      "Slide: FA3 — Hopper TMA async + FP8; FA4 — Blackwell FP4 KV, B200 native."
+    ],
+    [
+      "FlexAttention (torch.nn.attention.flex_attention) cho phép tạo pattern attention mới mà không cần CUDA custom bằng cách nào?",
+      "BlockMask API, compile qua torch.compile thành Triton kernel",
+      "Viết kernel bằng CUDA C++ rồi load qua ctypes vào PyTorch",
+      "Dùng ONNX export rồi build .trt engine bằng TensorRT riêng",
+      "Gọi FlashMLA kernel với page size 64 cho mọi model",
+      "Slide: flex_attention BlockMask API, express causal/sliding window/…, compile qua torch.compile → Triton kernel."
+    ],
+    [
+      "mode=“max-autotune” của torch.compile có trade-off gì?",
+      "Compile chậm nhưng run nhanh nhờ tìm kernel tối ưu",
+      "Compile nhanh nhưng mỗi shape mới đều phải recompile",
+      "Loại Python overhead nhưng không fuse được kernel",
+      "Chạy eager hoàn toàn, chỉ dùng khi debug model",
+      "Slide Model Compilation: max-autotune tìm optimal kernel config (compile chậm, run nhanh); reduce-overhead loại Python overhead."
+    ],
+    [
+      "Vì sao LLM decode phase lý tưởng cho CUDA Graphs?",
+      "Cùng ops lặp lại N_tokens lần, replay bỏ Python overhead",
+      "Shape thay đổi mỗi bước nên cần ghi lại graph liên tục",
+      "Decode chạy trên CPU nên CUDA graph giảm tải cho GPU",
+      "Decode không dùng KV cache nên graph rất đơn giản",
+      "Slide: LLM decode = cùng ops lặp N_tokens lần → CUDA graph lý tưởng; vLLM v1 decode dùng replay, prefill chạy eager."
+    ],
+    [
+      "TensorRT compilation (ONNX → layer fusion → kernel selection → calibration → .trt) mang lại gì?",
+      "3–5× vs vanilla PyTorch, compile 5–30 phút/model",
+      "1.1–1.5× vs vanilla PyTorch, compile vài giây",
+      "24× vs vanilla PyTorch, không cần calibration",
+      "10–20% vs vanilla PyTorch, compile 2–3 giờ/model",
+      "Slide: TensorRT 3–5× vs vanilla PyTorch, compile time 5–30 min/model."
+    ],
+    [
+      "Workload chatbot multi-turn, nhiều prefix chung. Engine nào slide ghi “Best for: Multi-turn / chat”?",
+      "SGLang với RadixAttention",
+      "TensorRT-LLM với FP8/FP4",
+      "Ollama với lệnh ollama run",
+      "LMDeploy với TurboMind",
+      "Bảng Serving Stack 2026: SGLang — RadixAttention, structured gen, MLA backend — Multi-turn / chat."
+    ],
+    [
+      "Engine nào được mô tả là K8s-native với KV-aware routing, phù hợp production at scale?",
+      "llm-d",
+      "vLLM",
+      "llama.cpp",
+      "LMDeploy",
+      "Bảng Serving Stack: llm-d — K8s-native, KV-aware routing, Production at scale."
+    ],
+    [
+      "Quan hệ giữa Ollama và llama.cpp theo slide là gì?",
+      "Ollama wrap llama.cpp, chạy bằng 1 lệnh",
+      "llama.cpp wrap Ollama để thêm GPU offload",
+      "Ollama là fork của vLLM cho máy local",
+      "Hai engine độc lập, khác định dạng model",
+      "Bảng: Ollama — 1 lệnh ollama run (wraps llama.cpp), Local dev/testing."
+    ],
+    [
+      "vLLM v1 khác v0 ở điểm nào về prefix caching?",
+      "APC bật mặc định, không cần flag",
+      "Phải thêm --enable-prefix-caching",
+      "Bỏ hẳn prefix caching khỏi engine",
+      "Chỉ cache prefix trên CPU RAM",
+      "Slide vLLM v0 → v1: v0 prefix caching opt-in; v1 APC ON by default, prefix-aware scheduler, 1.7× v0 throughput."
+    ],
+    [
+      "Block size mặc định của PagedAttention trong vLLM là bao nhiêu?",
+      "16 tokens/page",
+      "64 tokens/page",
+      "128 tokens/page",
+      "8192 tokens/page",
+      "Slide vLLM deep dive: Block size 16 tokens/page (default), FCFS scheduler + preemption."
+    ],
+    [
+      "Chunked prefill (default trong vLLM v1) hoạt động thế nào?",
+      "Chia prefill thành chunks, interleave với decode",
+      "Chia decode thành chunks, chạy sau toàn bộ prefill",
+      "Gửi prefill sang GPU khác qua NVLink rồi decode",
+      "Bỏ prefill nếu prefix đã nằm trong cache GPU",
+      "Slide: Chunked prefill default — chia prefill thành chunks, interleave với decode."
+    ],
+    [
+      "Để tối đa cache-hit rate của prefix caching, nên thiết kế prompt thế nào?",
+      "Đặt system prompt/context cố định ở đầu",
+      "Đặt câu hỏi user ở đầu, context ở cuối",
+      "Chèn timestamp ngẫu nhiên vào đầu prompt",
+      "Xáo thứ tự tài liệu RAG ở mỗi request",
+      "Takeaway slide Prefix Caching: thiết kế prompt với system prompt/context cố định ở đầu; cache miss vẫn tính full price."
+    ],
+    [
+      "Theo slide pricing, DeepSeek tính giá cache-hit thế nào so với cache-miss?",
+      "Rẻ hơn 10× ($0.014 vs $0.14/M tok)",
+      "Rẻ hơn 25× ($0.006 vs $0.14/M tok)",
+      "Rẻ hơn 50% ($0.07 vs $0.14/M tok)",
+      "Rẻ hơn 90% ($0.014 vs $0.14/K tok)",
+      "Slide: DeepSeek cache-hit 10× rẻ hơn ($0.014 vs $0.14/M tok); Google 25×, OpenAI ≈50%, Anthropic −90%."
+    ],
+    [
+      "Thứ tự tier lưu KV cache của HiCache là gì?",
+      "GPU VRAM → Host RAM → External storage",
+      "Host RAM → GPU VRAM → External storage",
+      "External storage → GPU VRAM → Host RAM",
+      "GPU SRAM → GPU VRAM → Host RAM",
+      "Slide: Tier 1 GPU VRAM (hot) → Tier 2 Host RAM (spillover) → Tier 3 External storage (HF3FS, Mooncake, disk)."
+    ],
+    [
+      "Chạy SGLang trên A100, attention backend nào được chọn theo slide?",
+      "flashinfer",
+      "fa3",
+      "fa4",
+      "flashmla",
+      "Slide Attention Backend: H100/H200 → fa3 · B200 → trtllm_mha/fa4 · A100/A40 → flashinfer · ROCm/CPU → triton."
+    ],
+    [
+      "Với reasoning model, grammar constraint (XGrammar) được áp dụng ở đâu?",
+      "Sau phần <think>...</think>",
+      "Trước khi model bắt đầu <think>",
+      "Chỉ bên trong khối <think>",
+      "Trên cả prompt lẫn phần reasoning",
+      "Slide Structured Generation: constraint áp dụng sau <think>…</think>; workflow free reasoning → grammar-constrained output."
+    ],
+    [
+      "Flag --reasoning-parser (ví dụ deepseek-r1) làm gì với output?",
+      "Tách <think> thành reasoning_content riêng với content",
+      "Xóa phần <think> và chỉ trả về content cho client",
+      "Ép toàn bộ output theo JSON Schema đã khai báo",
+      "Parse tool call và stream arguments incrementally",
+      "Slide: Reasoning Parser trích <think> → reasoning_content + content tách biệt; tool call là việc của --tool-call-parser."
+    ],
+    [
+      "SGLang gặp OOM ở giai đoạn prefill. Slide khuyên chỉnh flag nào?",
+      "Giảm --chunked-prefill-size xuống 2048–4096",
+      "Tăng --chunked-prefill-size lên 16384 trở lên",
+      "Tăng --schedule-conservativeness lên 0.3",
+      "Tắt --enable-metrics để giải phóng memory",
+      "Slide Production Tuning: --chunked-prefill-size giảm 2048–4096 khi prefill OOM (default 8192)."
+    ],
+    [
+      "Giá trị --schedule-conservativeness nào là aggressive theo slide?",
+      "0.3",
+      "1.0",
+      "1.3",
+      "2.0",
+      "Slide: 0.3 aggressive · 1.0 default · 1.3 conservative."
+    ],
+    [
+      "Disaggregated prefill/decode KHÔNG đáng triển khai cho workload nào?",
+      "Short unique prompts",
+      "Long-context RAG",
+      "Prefill-heavy chat",
+      "Long document Q&A",
+      "Slide: KV transfer overhead ~10 GB/s; lợi ích rõ khi prefill-heavy, không đáng cho short unique prompts."
+    ],
+    [
+      "Two-Batch Overlap (TBO) trong Expert Parallelism tăng throughput nhờ đâu?",
+      "Xen kẽ A2A communication và GEMM trên 2 micro-batches",
+      "Nhân bản expert weights lên mọi GPU để tránh routing",
+      "Chạy 2 bản model độc lập rồi chọn output nhanh hơn",
+      "Gộp 2 request thành 1 để giảm số lần A2A gửi đi",
+      "Slide EP: TBO xen kẽ A2A communication và GEMM computation trên 2 micro-batches → loại bỏ GPU idle → 2× throughput."
+    ],
+    [
+      "DP Attention (DPA) khác DP thường ở điểm nào?",
+      "Chỉ replicate attention, MoE/FC chia qua EP",
+      "Replicate toàn bộ model và KV cache mỗi GPU",
+      "Chia layers thành stages chạy qua nhiều node",
+      "Chia weights mỗi layer, all-reduce mỗi layer",
+      "Slide DP/DPA: DP replicate toàn bộ model + KV → memory duplication; DPA chỉ replicate attention, không duplicate KV cache."
+    ],
+    [
+      "Rule of thumb chọn parallelism cho cluster nhiều node là gì?",
+      "TP ≤ GPUs/node; PP = số nodes; EP cho MoE",
+      "TP = số nodes; PP ≤ GPUs/node; EP cho dense",
+      "TP qua mọi node; PP chỉ dùng cho model nhỏ",
+      "DP cho MoE; EP cho dense; TP = tổng số GPU",
+      "Slide Parallelism Guide: TP within node (NVLink 900 GB/s), PP across nodes; không TP qua nodes trừ NVLink fabric."
+    ],
+    [
+      "Tradeoff chính của Pipeline Parallelism (PP) theo bảng parallelism là gì?",
+      "Bubble latency, cần micro-batch",
+      "All-reduce sync ở mỗi layer",
+      "Expert routing overhead",
+      "Không chia sẻ được KV cache",
+      "Bảng: PP split layers, best for multi-node/128K+ context, tradeoff bubble latency, micro-batch."
+    ],
+    [
+      "Theo kiến trúc auto-scaling của slide, điều kiện nào kích hoạt scale in?",
+      "GPU util < 30%",
+      "GPU util > 80%",
+      "Queue depth > 10",
+      "Queue depth > 2,000",
+      "Slide Auto-scaling: GPU util >80% hoặc queue depth >10 → scale out; GPU util <30% → scale in."
+    ],
+    [
+      "Bật scale-to-zero giúp tiết kiệm chi phí, nhưng phải chấp nhận trade-off gì?",
+      "Cold start latency khi traffic quay lại",
+      "Mất KV cache của toàn bộ user vĩnh viễn",
+      "Không thể dùng KEDA để autoscale nữa",
+      "Phải chuyển model sang GGUF Q2_K",
+      "Slide: Warm pool N idle instances cho spikes; trade-off: cost vs cold start latency."
+    ],
+    [
+      "Trong các GGUF level, level nào được mô tả là near-lossless?",
+      "Q6_K",
+      "Q4_K_M",
+      "Q2_K",
+      "Q8_0",
+      "Slide Edge Deployment: Q2_K extreme · Q4_K_M recommended · Q6_K near-lossless · Q8_0 max quality."
+    ],
+    [
+      "Chip nào có 230 MB SRAM và nhắm tới sub-100 ms TTFT?",
+      "Groq LPU",
+      "NVIDIA H200",
+      "AWS Trainium2",
+      "AMD MI300X",
+      "Bảng Hardware Landscape 2026: Groq LPU — Sub-100 ms TTFT, 230 MB SRAM, ultra-low latency."
+    ]
+  ],
+  "essay": [
+    [
+      "Một team báo cáo hệ thống chat Llama-3-70B trên H100 đạt throughput 1,800 tok/s. Đo thêm: TTFT ≈ 450 ms, TPOT ≈ 25 ms, SLO là TTFT < 1s và TPOT < 50ms ở P95. (a) Tính E2E latency cho response 201 token. (b) Giải thích vì sao chỉ báo cáo throughput là misleading và nên báo cáo metric nào. (c) Nêu cách benchmark trước khi go-live.",
+      "(a) E2E = TTFT + TPOT × (N − 1) = 450 + 25 × 200 = 5,450 ms ≈ 5.45 s. (b) Throughput đo ở saturation, không có SLO constraint; nhiều request có thể vượt TTFT/TPOT SLO. Goodput = req/s (hoặc tok/s) thỏa TTFT+TPOT SLO; ví dụ slide goodput ≈ 1,200 tok/s < 1,800. Luôn report goodput cho production, SLO ở P95/P99. (c) Load test bằng locust/k6 (ví dụ 100 concurrent users), đo P50/P95/P99, theo dõi queue depth (chỉ báo saturation), TTFT/TPOT histogram; không đoán latency, đo thực tế."
+    ],
+    [
+      "Công ty có 3 nhu cầu: (1) serve Llama-3-8B production trên cụm H100, (2) cùng model chạy offline trên laptop CPU-only của nhân viên, (3) fine-tune model trên 1 GPU duy nhất. Đề xuất định dạng quantization cho từng nhu cầu, ước tính VRAM/RAM và nêu rủi ro chất lượng.",
+      "(1) H100 (Hopper): FP8 — ~7.9 GB, <1% drop, 2× memory vs FP16, native Hopper; nếu VRAM chật dùng AWQ 4-bit (~4.5 GB, ~1pt MMLU, accuracy > GPTQ cùng bits). Nếu sau này lên Blackwell: NVFP4 default. (2) CPU-only/laptop: GGUF Q4_K_M (~4.8 GB, mixed Q4/Q6 per tensor), chạy qua llama.cpp/Ollama; chỉ dùng Q2_K khi cực kỳ constrained (last resort, quality drop rõ). (3) Fine-tune 1 GPU: NF4 + QLoRA (~4.0 GB, double quant constants). Rủi ro: model <7B mất quality nhanh hơn; luôn benchmark perplexity/MMLU sau quantize; so sánh với baseline FP16 (15.8 GB)."
+    ],
+    [
+      "Bạn vận hành một agent platform: mọi request dùng chung system prompt dài 6K token + tool definitions, sau đó là hội thoại multi-turn. TTFT cao và hóa đơn API lớn. Thiết kế giải pháp dựa trên prefix caching (engine, cấu hình, thiết kế prompt, giám sát).",
+      "Chọn engine có prefix caching: vLLM v1 (APC ON by default) hoặc SGLang RadixAttention (radix-tree, cache hit = skip prefill shared prefix). Thiết kế prompt: system prompt/tool definitions cố định ở đầu, tránh chèn nội dung thay đổi (timestamp, id) phía trước. Kỳ vọng −70% TTFT trên repeated system prompts. Mở rộng: HiCache tier GPU VRAM → Host RAM → external storage cho long-context/multi-turn; LMCache/Mooncake cho cross-instance sharing. Multi-instance: cache-aware router gửi request đến instance có prefix phù hợp. Pricing: provider giảm giá cached input (Anthropic −90%, DeepSeek 10×, OpenAI ≈50%), cache miss tính full price. Monitor cache-hit rate trên dashboard (Prometheus/Grafana)."
+    ],
+    [
+      "Cần serve DeepSeek-V3 671B (MoE) full precision trên cluster 2 nodes × 4 GPU, intra-node có NVLink, inter-node InfiniBand. Đề xuất chiến lược parallelism (TP/PP/EP/DP), các flag/lệnh chính, và giải thích vì sao không dùng TP qua nodes.",
+      "Rule of thumb: TP ≤ GPUs/node → TP 4 trong node (NVLink 900 GB/s, all-reduce không bottleneck); PP = số nodes → PP 2 qua IB (P2P activation chịu được latency); EP cho MoE experts (mỗi GPU giữ subset experts, A2A routing on-demand). Ví dụ slide: --tp 4 --pp 2 --ep 8. Setup Ray: ray start --head / ray start --address=… mỗi node; NCCL collective, NCCL_IB_HCA=mlx5 cho IB NIC. Không TP qua nodes vì all-reduce mỗi layer quá chậm qua IB, trừ NVLink fabric (NVL72/GB200). Tối ưu thêm: Two-Batch Overlap (--enable-two-batch-overlap) để overlap A2A với GEMM, EPLB cân bằng load expert, DPA + MLA để tăng batch, chú ý constraint ep_size = tp_size ở nhiều backend; PP có tradeoff bubble latency."
+    ],
+    [
+      "Một service LLM có traffic rất biến động: ban đêm gần như 0, giờ cao điểm 100 RPS bùng nổ. Thiết kế chính sách auto-scaling và routing trên Kubernetes, nêu ngưỡng cụ thể và trade-off chi phí/latency.",
+      "Dùng KEDA (+ Knative) event-driven autoscaling. Scale out khi GPU util > 80% hoặc queue depth > 10 requests; scale in khi GPU util < 30%. Scale-to-zero khi no traffic để tiết kiệm chi phí đáng kể, nhưng trade-off cold start latency → giữ warm pool N idle instances cho spikes giờ cao điểm. Load balancer dùng least-busy routing (+30% vs round-robin); request batching 50 ms window (+40% throughput). Spot instances cho batch inference; right-size GPU. Giám sát goodput/TTFT để chọn ngưỡng, load test trước bằng locust/k6."
+    ],
+    [
+      "Team đang cân nhắc chuyển từ vLLM monolithic sang disaggregated prefill/decode cho hai sản phẩm: (A) RAG trên tài liệu dài 50K token; (B) chatbot câu ngắn, prompt mỗi người khác nhau. Phân tích có nên chuyển cho từng sản phẩm, nêu cơ chế, chi phí và lựa chọn engine.",
+      "Cơ chế: tách prefill pool và decode pool, KV transfer qua NVLink/IB; tránh prefill contend với decode như monolithic (vLLM v0). Chi phí: KV transfer overhead ~10 GB/s, tốn bandwidth. (A) Long-context RAG là prefill-heavy → nên chuyển; kỳ vọng TTFT giảm mạnh (Mooncake TTFT ↓75%). (B) Short unique prompts → không đáng, overhead KV transfer lớn hơn lợi ích; giữ monolithic với continuous batching/chunked prefill. Engine: NVIDIA Dynamo (disaggregated default, NIM-ready), llm-d (K8s-native, KV-aware routing, 2.2K tok/s/H200), Mooncake; nền tảng lý thuyết DistServe/Splitwise."
+    ],
+    [
+      "Một công ty muốn phục vụ 4 domain (SQL, y tế, code, finance), mỗi domain có LoRA adapter riêng trên cùng base model 8B. Hiện đang chạy 4 deployment độc lập. Đề xuất kiến trúc mới, lợi ích định lượng, overhead và công cụ.",
+      "Multi-LoRA serving: 1 base model + N domain adapters trên 1 GPU instance, chọn adapter per request. Công cụ: vLLM --enable-lora (N adapters / 1 endpoint), S-LoRA (paged LoRA weights, swap per request), Punica kernels (merged vào PyTorch Jan 2024), SGLang Chunked SGMV (20–80% latency ↓) + LoRA overlap loading (35% TTFT ↓), SageMaker LMI-Dist managed. Lợi ích: 12× throughput vs N separate servers, tiết kiệm VRAM và serving cost. Overhead: +2 ms/token cho adapter application. Cần kiểm tra latency SLO sau khi gộp."
+    ],
+    [
+      "Server SGLang production liên tục crash OOM vào giờ cao điểm; dashboard cho thấy queue depth vượt 2,000. Trình bày quy trình tuning + debug theo slide và các flag cần điều chỉnh.",
+      "Memory: --mem-fraction-static (SGLang) / --gpu-memory-utilization (vLLM) chừa 5–8 GB baseline. Prefill OOM: giảm --chunked-prefill-size xuống 2048–4096 (default 8192). Decode OOM: --max-running-requests / --max-num-seqs để cap burst. Scheduling: bắt đầu --schedule-conservativeness 1.0 (0.3 aggressive, 1.3 conservative). Queue depth target 100–2,000; >2K là saturation → cần scale out. Observability: --enable-metrics → Prometheus :30000/metrics; metric num_running_reqs, num_queue_reqs, TTFT/TPOT histogram, cache-hit rate → Grafana. Debug flow: Grafana anomaly → --log-requests trace → crash dump (rolling 5 phút) → replay_request_dump.py reproduce → fix + redeploy."
+    ],
+    [
+      "Thiết kế các biện pháp đảm bảo SLA cho một LLM API với mục tiêu P50 < 200 ms, P95 < 500 ms, P99 < 1000 ms, uptime 99.9%. Nêu kiến trúc chịu lỗi, hành vi khi quá tải, và tối ưu chi phí.",
+      "Uptime 99.9% ≈ 8.7h downtime/năm. Chịu lỗi: multi-AZ deployment + health checks; timeout 10–60s cho LLM generation. Quá tải: circuit breaker fallback; graceful degradation — trả cached/shorter response, route sang smaller model. Chi phí: theo dõi cost per 1M tokens, spot instances cho batch inference, scale-to-zero (KEDA) khi no traffic, right-size GPU (không dùng A100 cho 7B). Đo: dashboard P50/P95/P99 + tokens/s per GPU, benchmark k6/locust trước production, không đoán latency."
+    ],
+    [
+      "Bạn cần làm Lab 20 trên laptop 8 GB RAM, không GPU, và tích hợp vào Milestone 1. Trình bày các bước triển khai inference local, các hướng tuning llama.cpp, và cách endpoint này khớp với platform N16–N19.",
+      "Lab chạy được trên Windows/macOS/Linux, low-spec OK. Bước: 00-setup hardware detection + install; 01-quickstart llama-cpp-python baseline đo P50/P95/P99; 02-server OpenAI-compat llama-server + Prometheus + locust load test; 03-milestone-integration nối endpoint với N16–N19. Model: GGUF Q4_K_M (recommended) cho Llama-3-8B/Qwen-3-8B/Phi-3-mini. Tuning bonus: build flags (AVX2/AVX-512, NEON), thread sweep, ctx-len sweep, GPU offload (Metal/CUDA/Vulkan) nếu có, quant tradeoff Q2_K → Q8_0; MLX tùy chọn trên Apple Silicon. Kết quả ghi benchmarks/results.md. Milestone 1: cloud IaC + K8s, data pipeline, lakehouse Delta + Medallion, vector store API, feature store online/offline, model serving optimized endpoint, benchmark report latency + cost, live demo end-to-end."
+    ]
+  ]
+}

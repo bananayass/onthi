@@ -1,0 +1,1568 @@
+{
+  "id": "day5_track2",
+  "title": "Bộ đề ôn tập Track 2 Ngày 5",
+  "sourceFolder": "onthi",
+  "questionCount": 60,
+  "questions": [
+    {
+      "id": "T2D05-001",
+      "type": "mcq",
+      "prompt": "TTFT (Time To First Token) phụ thuộc chủ yếu vào hai thành phần nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Prefill compute và thời gian chờ trong queue"
+        },
+        {
+          "key": "B",
+          "text": "Decode compute và kích thước output cuối cùng"
+        },
+        {
+          "key": "C",
+          "text": "Băng thông mạng và kích thước response JSON"
+        },
+        {
+          "key": "D",
+          "text": "Số output token và tốc độ token streaming"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide Latency Taxonomy: TTFT tính từ request đến token đầu tiên, phụ thuộc prefill compute + queue wait.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-002",
+      "type": "mcq",
+      "prompt": "Trong latency taxonomy, TPOT còn được gọi là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "TTFT – thời gian ra token đầu tiên"
+        },
+        {
+          "key": "B",
+          "text": "E2E – tổng latency của toàn request"
+        },
+        {
+          "key": "C",
+          "text": "QPS – số request xử lý mỗi giây"
+        },
+        {
+          "key": "D",
+          "text": "ITL – khoảng cách giữa các output token"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide: TPOT (Time Per Output Token) = ITL, khoảng cách đều giữa mỗi output token.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-003",
+      "type": "mcq",
+      "prompt": "Metric nào được slide gọi là “metric production quan trọng nhất”?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Peak FLOPS GPU đạt được khi benchmark"
+        },
+        {
+          "key": "B",
+          "text": "Average latency P50 của toàn hệ thống"
+        },
+        {
+          "key": "C",
+          "text": "Goodput: req/s thỏa mãn SLO TTFT + TPOT"
+        },
+        {
+          "key": "D",
+          "text": "Throughput: tokens/s ở mức saturation"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Goodput đếm request đạt SLO; throughput @saturation không có SLO constraint nên dễ misleading.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-004",
+      "type": "mcq",
+      "prompt": "Dashboard cho thấy Queue Depth tăng liên tục. Đây là chỉ báo của hiện tượng gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Token streaming đã bị tắt ở client"
+        },
+        {
+          "key": "B",
+          "text": "Hệ thống đang tiến tới saturation"
+        },
+        {
+          "key": "C",
+          "text": "KV cache đã được tái sử dụng tốt"
+        },
+        {
+          "key": "D",
+          "text": "Model đang bị quantize quá mức"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Queue Depth là số request đang chờ prefill — chỉ báo saturation.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-005",
+      "type": "mcq",
+      "prompt": "Trong ví dụ H100 · Llama-3-70B · batch 32, throughput 1,800 tok/s nhưng goodput @SLO(TTFT<1s, TPOT<50ms) xấp xỉ bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "≈ 1,200 tok/s"
+        },
+        {
+          "key": "B",
+          "text": "≈ 1,800 tok/s"
+        },
+        {
+          "key": "C",
+          "text": "≈ 2,400 tok/s"
+        },
+        {
+          "key": "D",
+          "text": "≈ 450 tok/s"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide nêu Goodput ≈ 1,200 tok/s, thấp hơn throughput vì chỉ tính phần đạt SLO.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-006",
+      "type": "mcq",
+      "prompt": "Ở kỷ nguyên pre-LLM, vì sao KV cache gây lãng phí 60–80% VRAM?",
+      "options": [
+        {
+          "key": "A",
+          "text": "KV cache bị copy sang CPU mỗi step"
+        },
+        {
+          "key": "B",
+          "text": "KV cache luôn lưu ở định dạng FP32"
+        },
+        {
+          "key": "C",
+          "text": "KV cache bị nhân bản cho mỗi GPU"
+        },
+        {
+          "key": "D",
+          "text": "KV cache cần contiguous block cố định"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide Pre-LLM Era: memory fragmentation do KV cache cần contiguous block cố định — 60–80% VRAM waste.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-007",
+      "type": "mcq",
+      "prompt": "Static batching ở các hệ thống serving cũ thêm khoảng bao nhiêu latency?",
+      "options": [
+        {
+          "key": "A",
+          "text": "1–2 giây do phải chờ đủ batch"
+        },
+        {
+          "key": "B",
+          "text": "50 ms do cửa sổ batching cố định"
+        },
+        {
+          "key": "C",
+          "text": "200–500 ms do phải chờ đủ batch"
+        },
+        {
+          "key": "D",
+          "text": "10–20 ms do phải chờ đủ batch"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide: static batching chờ đủ batch, thêm 200–500 ms latency.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-008",
+      "type": "mcq",
+      "prompt": "Server nào thuộc thời pre-LLM nổi bật với multi-framework và dynamic batching per model?",
+      "options": [
+        {
+          "key": "A",
+          "text": "BentoML (2020) với Python packaging"
+        },
+        {
+          "key": "B",
+          "text": "Triton Inference Server (NVIDIA 2019)"
+        },
+        {
+          "key": "C",
+          "text": "TF Serving (Google 2017) với SavedModel"
+        },
+        {
+          "key": "D",
+          "text": "TorchServe (Facebook 2020) với MAR"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide Pre-LLM Era: Triton — multi-framework, dynamic batching per model.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-009",
+      "type": "mcq",
+      "prompt": "Điểm bước ngoặt tháng 6/2023 mở ra “LLM serving era” là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "vLLM PagedAttention + continuous batching"
+        },
+        {
+          "key": "B",
+          "text": "TensorRT compile sang .trt engine FP8"
+        },
+        {
+          "key": "C",
+          "text": "ONNX Runtime hỗ trợ kernel cho NPU"
+        },
+        {
+          "key": "D",
+          "text": "FlashAttention-1 với tiling vào SRAM"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The Shift (Jun 2023): vLLM PagedAttention + continuous batching, 24× throughput vs naive HF Transformers.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-010",
+      "type": "mcq",
+      "prompt": "Llama-3-8B ở FP16 chiếm khoảng bao nhiêu VRAM theo slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "7.9 GB"
+        },
+        {
+          "key": "B",
+          "text": "4.5 GB"
+        },
+        {
+          "key": "C",
+          "text": "15.8 GB"
+        },
+        {
+          "key": "D",
+          "text": "31.6 GB"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Bảng VRAM Usage: FP32 31.6 · FP16 15.8 · FP8 7.9 · AWQ 4-bit 4.5 GB.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-011",
+      "type": "mcq",
+      "prompt": "Đặc điểm của FP8 so với FP16 theo slide là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Giảm 4× memory, drop ~1pt MMLU, chạy mọi GPU"
+        },
+        {
+          "key": "B",
+          "text": "Giảm 2× memory, drop ~5%, chỉ chạy trên Ampere"
+        },
+        {
+          "key": "C",
+          "text": "Giảm 3.5× memory, không loss, chỉ có ở Blackwell"
+        },
+        {
+          "key": "D",
+          "text": "Giảm 2× memory, drop <1%, native trên Hopper+"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide Quantization: FP8 <1% drop, 2× memory vs FP16 (Hopper+ native).",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-012",
+      "type": "mcq",
+      "prompt": "NVFP4 trên Blackwell tiết kiệm memory thế nào so với FP16 và FP8?",
+      "options": [
+        {
+          "key": "A",
+          "text": "3.5× vs FP16, 1.8× vs FP8, loss <1%"
+        },
+        {
+          "key": "B",
+          "text": "2× vs FP16, 1.2× vs FP8, loss khoảng 3%"
+        },
+        {
+          "key": "C",
+          "text": "4× vs FP16, 2× vs FP8, loss khoảng 1pt"
+        },
+        {
+          "key": "D",
+          "text": "8× vs FP16, 4× vs FP8, loss đáng kể"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide: NVFP4 (Blackwell) 3.5× vs FP16, 1.8× vs FP8, <1% loss; là default cho production Blackwell.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-013",
+      "type": "mcq",
+      "prompt": "Muốn chất lượng tối đa, không chấp nhận mất accuracy do quantize, nên chọn định dạng nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "NF4 (bitsandbytes)"
+        },
+        {
+          "key": "B",
+          "text": "BF16 / FP16"
+        },
+        {
+          "key": "C",
+          "text": "GGUF Q4_K_M"
+        },
+        {
+          "key": "D",
+          "text": "AWQ 4-bit"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide chọn quantization: Max quality → BF16 / FP16.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-014",
+      "type": "mcq",
+      "prompt": "GPTQ quantize model bằng cách nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dùng 4-bit NormalFloat cho weights phân phối chuẩn"
+        },
+        {
+          "key": "B",
+          "text": "Trộn Q4/Q6 theo từng tensor attention và FFN"
+        },
+        {
+          "key": "C",
+          "text": "Inverse Hessian layer-by-layer với 128 calib samples"
+        },
+        {
+          "key": "D",
+          "text": "Tìm salient weights rồi scale trước INT4 rounding"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide: GPTQ dùng inverse Hessian layer-by-layer (128 calib. samples), chậm quantize, nhanh inference.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-015",
+      "type": "mcq",
+      "prompt": "Vì sao AWQ thường cho accuracy cao hơn GPTQ ở cùng số bit?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Lưu toàn bộ weights ở FP8 thay vì ở INT4"
+        },
+        {
+          "key": "B",
+          "text": "Bỏ qua bước calibration nên không bị overfit"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ quantize FFN và giữ attention ở FP16"
+        },
+        {
+          "key": "D",
+          "text": "Bảo vệ salient weights có activation magnitude cao"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide: AWQ tìm salient weights (high activation magnitude), scale trước INT4 rounding → Acc > GPTQ cùng bits.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-016",
+      "type": "mcq",
+      "prompt": "Cần fine-tune một model trên chỉ 1 GPU. Slide khuyến nghị kết hợp nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "NF4 + QLoRA"
+        },
+        {
+          "key": "B",
+          "text": "FP8 + full fine-tune"
+        },
+        {
+          "key": "C",
+          "text": "GGUF Q2_K + LoRA"
+        },
+        {
+          "key": "D",
+          "text": "GPTQ + DeepSpeed"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide Quantization for Memory: Fine-tune trên 1 GPU → NF4 + QLoRA.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-017",
+      "type": "mcq",
+      "prompt": "Trong GGUF, ký hiệu Q4_K_M nghĩa là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "4-bit chỉ cho FFN, attention giữ ở FP16"
+        },
+        {
+          "key": "B",
+          "text": "Mixed Q4/Q6 per tensor, k-quant, size medium"
+        },
+        {
+          "key": "C",
+          "text": "4-bit đồng nhất cho mọi tensor, size max"
+        },
+        {
+          "key": "D",
+          "text": "Q4 cho weights, KV cache giữ ở Q8_0 cố định"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide: Q4_K_M = mixed Q4/Q6 per tensor (attn vs FFN); k = better quant, m = medium size.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-018",
+      "type": "mcq",
+      "prompt": "Khi nào slide coi GGUF Q2_K là lựa chọn phù hợp?",
+      "options": [
+        {
+          "key": "A",
+          "text": "CPU-only inference thông thường, mặc định"
+        },
+        {
+          "key": "B",
+          "text": "Fine-tune model trên một GPU duy nhất"
+        },
+        {
+          "key": "C",
+          "text": "Môi trường cực kỳ constrained — last resort"
+        },
+        {
+          "key": "D",
+          "text": "GPU cloud Hopper cần best quality/perf"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide: Cực kỳ constrained → GGUF Q2_K — last resort; quality drop noticeable.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-019",
+      "type": "mcq",
+      "prompt": "Sau khi quantize một model 3B xuống 4-bit, bước nào slide nhấn mạnh cần làm?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bỏ qua kiểm tra vì 4-bit chỉ mất khoảng 1pt MMLU"
+        },
+        {
+          "key": "B",
+          "text": "Tăng batch size gấp đôi để bù phần accuracy mất"
+        },
+        {
+          "key": "C",
+          "text": "Chuyển sang Q2_K để model nhỏ hơn và ổn định hơn"
+        },
+        {
+          "key": "D",
+          "text": "Benchmark perplexity vì model <7B mất quality nhanh"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide: <7B models mất quality nhanh hơn 13B+. Benchmark perplexity sau khi quantize.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-020",
+      "type": "mcq",
+      "prompt": "Theo bảng format, Llama 70B ở GPTQ 4-bit cần khoảng bao nhiêu VRAM?",
+      "options": [
+        {
+          "key": "A",
+          "text": "70 GB"
+        },
+        {
+          "key": "B",
+          "text": "43 GB"
+        },
+        {
+          "key": "C",
+          "text": "140 GB"
+        },
+        {
+          "key": "D",
+          "text": "35 GB"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Bảng: 70B VRAM — FP16 140 · FP8 70 · AWQ 40 · GPTQ 35 · Q4_K_M 43 · Q2_K 24 · NF4 36 GB.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-021",
+      "type": "mcq",
+      "prompt": "“Double quant” của NF4 (bitsandbytes) làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Lưu hai bản weights để chọn bản tốt hơn"
+        },
+        {
+          "key": "B",
+          "text": "Quantize cả KV cache lẫn activations xuống INT4"
+        },
+        {
+          "key": "C",
+          "text": "Quantize tiếp các constants từ FP32 xuống FP8"
+        },
+        {
+          "key": "D",
+          "text": "Quantize weights hai lần để giảm xuống 2-bit"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide: NF4 — Double quant: constants FP32→FP8.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-022",
+      "type": "mcq",
+      "prompt": "PagedAttention quản lý KV cache theo cách nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Như bảng hash theo token id, không có page table"
+        },
+        {
+          "key": "B",
+          "text": "Như virtual memory pages, non-contiguous qua page table"
+        },
+        {
+          "key": "C",
+          "text": "Như một block contiguous cấp phát trước tối đa"
+        },
+        {
+          "key": "D",
+          "text": "Như file trên disk, đọc lại khi decode từng token"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide KV Cache & PagedAttention: KV cache như virtual memory pages, dynamic allocation, no waste.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-023",
+      "type": "mcq",
+      "prompt": "Multi-head Latent Attention (MLA) của DeepSeek-V3 giảm KV memory bằng cách nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Compress Q/K/V xuống latent vector nhỏ trước attention"
+        },
+        {
+          "key": "B",
+          "text": "Dùng chung một K/V head cho tất cả query heads"
+        },
+        {
+          "key": "C",
+          "text": "Chia K/V heads thành 4 nhóm dùng chung giữa các head"
+        },
+        {
+          "key": "D",
+          "text": "Bỏ KV cache, tính lại K/V ở mỗi bước decode"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide: MLA compress Q/K/V xuống latent vector; DeepSeek-V3 10× ít KV memory vs MHA.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-024",
+      "type": "mcq",
+      "prompt": "Theo slide attention architecture, GQA (dùng ở LLaMA-2/3) giảm KV cache bao nhiêu so với MHA?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Khoảng 8× ít hơn"
+        },
+        {
+          "key": "B",
+          "text": "Khoảng 10× ít hơn"
+        },
+        {
+          "key": "C",
+          "text": "Không giảm, bằng 1×"
+        },
+        {
+          "key": "D",
+          "text": "Khoảng 4× ít hơn"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide: MHA KV 1× · GQA 4× less · MQA 8× less · MLA 10× less.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-025",
+      "type": "mcq",
+      "prompt": "Kỹ thuật nào mở rộng context bằng RoPE interpolation mà không cần retrain?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Jamba"
+        },
+        {
+          "key": "B",
+          "text": "FlashMLA"
+        },
+        {
+          "key": "C",
+          "text": "YaRN"
+        },
+        {
+          "key": "D",
+          "text": "StreamingLLM"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide long-context: YaRN — RoPE interpolation, không cần retrain.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-026",
+      "type": "mcq",
+      "prompt": "StreamingLLM hỗ trợ context gần như vô hạn nhờ cơ chế gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Latent KV compression"
+        },
+        {
+          "key": "B",
+          "text": "Attention sinks"
+        },
+        {
+          "key": "C",
+          "text": "SSM/Transformer hybrid"
+        },
+        {
+          "key": "D",
+          "text": "RoPE interpolation"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide: StreamingLLM — attention sinks, ∞ context; Jamba mới là SSM/Transformer hybrid.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-027",
+      "type": "mcq",
+      "prompt": "Trong speculative decoding, draft model và target model phối hợp thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Draft sinh 4–8 tokens, target verify song song trong 1 forward pass"
+        },
+        {
+          "key": "B",
+          "text": "Target sinh 4–8 tokens, draft verify tuần tự từng token một"
+        },
+        {
+          "key": "C",
+          "text": "Draft và target cùng sinh song song rồi chọn câu trả lời dài hơn"
+        },
+        {
+          "key": "D",
+          "text": "Draft thay hoàn toàn target khi acceptance rate vượt quá 50%"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide Speculative Decoding: draft sinh 4–8 tokens, target verify song song trên cùng 1 forward pass.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-028",
+      "type": "mcq",
+      "prompt": "EAGLE-3 (NeurIPS ’25) đạt speedup khoảng bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "1.1–1.5×, ngang bằng EAGLE-2"
+        },
+        {
+          "key": "B",
+          "text": "1.8×, acceptance rate trên 80%"
+        },
+        {
+          "key": "C",
+          "text": "24×, so với HF Transformers"
+        },
+        {
+          "key": "D",
+          "text": "3.0–6.5×, +20–40% so EAGLE-2"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide: EAGLE-3 3.0–6.5×, +20–40% so EAGLE-2; ~1.8× là DeepSeek MTP.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-029",
+      "type": "mcq",
+      "prompt": "Khi không có draft model riêng, kỹ thuật speculative nào vẫn dùng được nhờ self-drafting?",
+      "options": [
+        {
+          "key": "A",
+          "text": "DeepSeek MTP head"
+        },
+        {
+          "key": "B",
+          "text": "Two-Batch Overlap"
+        },
+        {
+          "key": "C",
+          "text": "Lookahead Decoding"
+        },
+        {
+          "key": "D",
+          "text": "EAGLE-3 với draft head"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide: Lookahead Decoding — self-drafting khi không có draft model.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-030",
+      "type": "mcq",
+      "prompt": "Continuous batching khác static batching ở điểm nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Request vào/ra mỗi step, không padding"
+        },
+        {
+          "key": "B",
+          "text": "Chờ đủ batch rồi mới chạy một lần"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ batch các request có cùng độ dài"
+        },
+        {
+          "key": "D",
+          "text": "Gộp request theo cửa sổ cố định 500 ms"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide: continuous batching — requests vào/ra mỗi step, no padding → 5× latency giảm.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-031",
+      "type": "mcq",
+      "prompt": "“In-flight batching” của TensorRT-LLM tương đương thuật ngữ nào trong vLLM?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Prefix caching"
+        },
+        {
+          "key": "B",
+          "text": "Continuous batching"
+        },
+        {
+          "key": "C",
+          "text": "Chunked prefill"
+        },
+        {
+          "key": "D",
+          "text": "Static batching"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide: vLLM (continuous batching), TensorRT-LLM (in-flight batching) — thuật ngữ tương đương.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-032",
+      "type": "mcq",
+      "prompt": "Standard attention tốn bao nhiêu HBM round trips, và FlashAttention xử lý thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "2 round trips; FA lưu toàn bộ ma trận N² vào CPU RAM"
+        },
+        {
+          "key": "B",
+          "text": "3 round trips; FA bỏ softmax để giảm số lần đọc HBM"
+        },
+        {
+          "key": "C",
+          "text": "3 round trips; FA tile Q/K/V vào SRAM, ghi output 1 lần"
+        },
+        {
+          "key": "D",
+          "text": "1 round trip; FA chia attention sang nhiều GPU khác nhau"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide FlashAttention: standard 3 HBM round trips; FA tile vào SRAM, online softmax, memory O(N) thay vì O(N²).",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-033",
+      "type": "mcq",
+      "prompt": "Phiên bản FlashAttention nào nhắm tới Blackwell với FP4 KV cache?",
+      "options": [
+        {
+          "key": "A",
+          "text": "FlashAttention-3 (2024)"
+        },
+        {
+          "key": "B",
+          "text": "FlashAttention-2 (2023)"
+        },
+        {
+          "key": "C",
+          "text": "FlashAttention-1 (2022)"
+        },
+        {
+          "key": "D",
+          "text": "FlashAttention-4 (2025)"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide: FA3 — Hopper TMA async + FP8; FA4 — Blackwell FP4 KV, B200 native.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-034",
+      "type": "mcq",
+      "prompt": "FlexAttention (torch.nn.attention.flex_attention) cho phép tạo pattern attention mới mà không cần CUDA custom bằng cách nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "BlockMask API, compile qua torch.compile thành Triton kernel"
+        },
+        {
+          "key": "B",
+          "text": "Viết kernel bằng CUDA C++ rồi load qua ctypes vào PyTorch"
+        },
+        {
+          "key": "C",
+          "text": "Dùng ONNX export rồi build .trt engine bằng TensorRT riêng"
+        },
+        {
+          "key": "D",
+          "text": "Gọi FlashMLA kernel với page size 64 cho mọi model"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide: flex_attention BlockMask API, express causal/sliding window/…, compile qua torch.compile → Triton kernel.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-035",
+      "type": "mcq",
+      "prompt": "mode=“max-autotune” của torch.compile có trade-off gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chạy eager hoàn toàn, chỉ dùng khi debug model"
+        },
+        {
+          "key": "B",
+          "text": "Compile chậm nhưng run nhanh nhờ tìm kernel tối ưu"
+        },
+        {
+          "key": "C",
+          "text": "Compile nhanh nhưng mỗi shape mới đều phải recompile"
+        },
+        {
+          "key": "D",
+          "text": "Loại Python overhead nhưng không fuse được kernel"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide Model Compilation: max-autotune tìm optimal kernel config (compile chậm, run nhanh); reduce-overhead loại Python overhead.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-036",
+      "type": "mcq",
+      "prompt": "Vì sao LLM decode phase lý tưởng cho CUDA Graphs?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Decode chạy trên CPU nên CUDA graph giảm tải cho GPU"
+        },
+        {
+          "key": "B",
+          "text": "Decode không dùng KV cache nên graph rất đơn giản"
+        },
+        {
+          "key": "C",
+          "text": "Cùng ops lặp lại N_tokens lần, replay bỏ Python overhead"
+        },
+        {
+          "key": "D",
+          "text": "Shape thay đổi mỗi bước nên cần ghi lại graph liên tục"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide: LLM decode = cùng ops lặp N_tokens lần → CUDA graph lý tưởng; vLLM v1 decode dùng replay, prefill chạy eager.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-037",
+      "type": "mcq",
+      "prompt": "TensorRT compilation (ONNX → layer fusion → kernel selection → calibration → .trt) mang lại gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "1.1–1.5× vs vanilla PyTorch, compile vài giây"
+        },
+        {
+          "key": "B",
+          "text": "24× vs vanilla PyTorch, không cần calibration"
+        },
+        {
+          "key": "C",
+          "text": "10–20% vs vanilla PyTorch, compile 2–3 giờ/model"
+        },
+        {
+          "key": "D",
+          "text": "3–5× vs vanilla PyTorch, compile 5–30 phút/model"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide: TensorRT 3–5× vs vanilla PyTorch, compile time 5–30 min/model.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-038",
+      "type": "mcq",
+      "prompt": "Workload chatbot multi-turn, nhiều prefix chung. Engine nào slide ghi “Best for: Multi-turn / chat”?",
+      "options": [
+        {
+          "key": "A",
+          "text": "SGLang với RadixAttention"
+        },
+        {
+          "key": "B",
+          "text": "TensorRT-LLM với FP8/FP4"
+        },
+        {
+          "key": "C",
+          "text": "Ollama với lệnh ollama run"
+        },
+        {
+          "key": "D",
+          "text": "LMDeploy với TurboMind"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Bảng Serving Stack 2026: SGLang — RadixAttention, structured gen, MLA backend — Multi-turn / chat.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-039",
+      "type": "mcq",
+      "prompt": "Engine nào được mô tả là K8s-native với KV-aware routing, phù hợp production at scale?",
+      "options": [
+        {
+          "key": "A",
+          "text": "LMDeploy"
+        },
+        {
+          "key": "B",
+          "text": "llm-d"
+        },
+        {
+          "key": "C",
+          "text": "vLLM"
+        },
+        {
+          "key": "D",
+          "text": "llama.cpp"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bảng Serving Stack: llm-d — K8s-native, KV-aware routing, Production at scale.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-040",
+      "type": "mcq",
+      "prompt": "Quan hệ giữa Ollama và llama.cpp theo slide là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Hai engine độc lập, khác định dạng model"
+        },
+        {
+          "key": "B",
+          "text": "Ollama wrap llama.cpp, chạy bằng 1 lệnh"
+        },
+        {
+          "key": "C",
+          "text": "llama.cpp wrap Ollama để thêm GPU offload"
+        },
+        {
+          "key": "D",
+          "text": "Ollama là fork của vLLM cho máy local"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bảng: Ollama — 1 lệnh ollama run (wraps llama.cpp), Local dev/testing.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-041",
+      "type": "mcq",
+      "prompt": "vLLM v1 khác v0 ở điểm nào về prefix caching?",
+      "options": [
+        {
+          "key": "A",
+          "text": "APC bật mặc định, không cần flag"
+        },
+        {
+          "key": "B",
+          "text": "Phải thêm --enable-prefix-caching"
+        },
+        {
+          "key": "C",
+          "text": "Bỏ hẳn prefix caching khỏi engine"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ cache prefix trên CPU RAM"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide vLLM v0 → v1: v0 prefix caching opt-in; v1 APC ON by default, prefix-aware scheduler, 1.7× v0 throughput.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-042",
+      "type": "mcq",
+      "prompt": "Block size mặc định của PagedAttention trong vLLM là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "64 tokens/page"
+        },
+        {
+          "key": "B",
+          "text": "128 tokens/page"
+        },
+        {
+          "key": "C",
+          "text": "8192 tokens/page"
+        },
+        {
+          "key": "D",
+          "text": "16 tokens/page"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide vLLM deep dive: Block size 16 tokens/page (default), FCFS scheduler + preemption.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-043",
+      "type": "mcq",
+      "prompt": "Chunked prefill (default trong vLLM v1) hoạt động thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Gửi prefill sang GPU khác qua NVLink rồi decode"
+        },
+        {
+          "key": "B",
+          "text": "Bỏ prefill nếu prefix đã nằm trong cache GPU"
+        },
+        {
+          "key": "C",
+          "text": "Chia prefill thành chunks, interleave với decode"
+        },
+        {
+          "key": "D",
+          "text": "Chia decode thành chunks, chạy sau toàn bộ prefill"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide: Chunked prefill default — chia prefill thành chunks, interleave với decode.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-044",
+      "type": "mcq",
+      "prompt": "Để tối đa cache-hit rate của prefix caching, nên thiết kế prompt thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Xáo thứ tự tài liệu RAG ở mỗi request"
+        },
+        {
+          "key": "B",
+          "text": "Đặt system prompt/context cố định ở đầu"
+        },
+        {
+          "key": "C",
+          "text": "Đặt câu hỏi user ở đầu, context ở cuối"
+        },
+        {
+          "key": "D",
+          "text": "Chèn timestamp ngẫu nhiên vào đầu prompt"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Takeaway slide Prefix Caching: thiết kế prompt với system prompt/context cố định ở đầu; cache miss vẫn tính full price.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-045",
+      "type": "mcq",
+      "prompt": "Theo slide pricing, DeepSeek tính giá cache-hit thế nào so với cache-miss?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Rẻ hơn 10× ($0.014 vs $0.14/M tok)"
+        },
+        {
+          "key": "B",
+          "text": "Rẻ hơn 25× ($0.006 vs $0.14/M tok)"
+        },
+        {
+          "key": "C",
+          "text": "Rẻ hơn 50% ($0.07 vs $0.14/M tok)"
+        },
+        {
+          "key": "D",
+          "text": "Rẻ hơn 90% ($0.014 vs $0.14/K tok)"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide: DeepSeek cache-hit 10× rẻ hơn ($0.014 vs $0.14/M tok); Google 25×, OpenAI ≈50%, Anthropic −90%.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-046",
+      "type": "mcq",
+      "prompt": "Thứ tự tier lưu KV cache của HiCache là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Host RAM → GPU VRAM → External storage"
+        },
+        {
+          "key": "B",
+          "text": "External storage → GPU VRAM → Host RAM"
+        },
+        {
+          "key": "C",
+          "text": "GPU SRAM → GPU VRAM → Host RAM"
+        },
+        {
+          "key": "D",
+          "text": "GPU VRAM → Host RAM → External storage"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide: Tier 1 GPU VRAM (hot) → Tier 2 Host RAM (spillover) → Tier 3 External storage (HF3FS, Mooncake, disk).",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-047",
+      "type": "mcq",
+      "prompt": "Chạy SGLang trên A100, attention backend nào được chọn theo slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "fa4"
+        },
+        {
+          "key": "B",
+          "text": "flashmla"
+        },
+        {
+          "key": "C",
+          "text": "flashinfer"
+        },
+        {
+          "key": "D",
+          "text": "fa3"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide Attention Backend: H100/H200 → fa3 · B200 → trtllm_mha/fa4 · A100/A40 → flashinfer · ROCm/CPU → triton.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-048",
+      "type": "mcq",
+      "prompt": "Với reasoning model, grammar constraint (XGrammar) được áp dụng ở đâu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Trên cả prompt lẫn phần reasoning"
+        },
+        {
+          "key": "B",
+          "text": "Sau phần <think>...</think>"
+        },
+        {
+          "key": "C",
+          "text": "Trước khi model bắt đầu <think>"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ bên trong khối <think>"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide Structured Generation: constraint áp dụng sau <think>…</think>; workflow free reasoning → grammar-constrained output.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-049",
+      "type": "mcq",
+      "prompt": "Flag --reasoning-parser (ví dụ deepseek-r1) làm gì với output?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tách <think> thành reasoning_content riêng với content"
+        },
+        {
+          "key": "B",
+          "text": "Xóa phần <think> và chỉ trả về content cho client"
+        },
+        {
+          "key": "C",
+          "text": "Ép toàn bộ output theo JSON Schema đã khai báo"
+        },
+        {
+          "key": "D",
+          "text": "Parse tool call và stream arguments incrementally"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide: Reasoning Parser trích <think> → reasoning_content + content tách biệt; tool call là việc của --tool-call-parser.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-050",
+      "type": "mcq",
+      "prompt": "SGLang gặp OOM ở giai đoạn prefill. Slide khuyên chỉnh flag nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tăng --schedule-conservativeness lên 0.3"
+        },
+        {
+          "key": "B",
+          "text": "Tắt --enable-metrics để giải phóng memory"
+        },
+        {
+          "key": "C",
+          "text": "Giảm --chunked-prefill-size xuống 2048–4096"
+        },
+        {
+          "key": "D",
+          "text": "Tăng --chunked-prefill-size lên 16384 trở lên"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide Production Tuning: --chunked-prefill-size giảm 2048–4096 khi prefill OOM (default 8192).",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-051",
+      "type": "mcq",
+      "prompt": "Giá trị --schedule-conservativeness nào là aggressive theo slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "1.0"
+        },
+        {
+          "key": "B",
+          "text": "1.3"
+        },
+        {
+          "key": "C",
+          "text": "2.0"
+        },
+        {
+          "key": "D",
+          "text": "0.3"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide: 0.3 aggressive · 1.0 default · 1.3 conservative.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-052",
+      "type": "mcq",
+      "prompt": "Disaggregated prefill/decode KHÔNG đáng triển khai cho workload nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Short unique prompts"
+        },
+        {
+          "key": "B",
+          "text": "Long-context RAG"
+        },
+        {
+          "key": "C",
+          "text": "Prefill-heavy chat"
+        },
+        {
+          "key": "D",
+          "text": "Long document Q&A"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide: KV transfer overhead ~10 GB/s; lợi ích rõ khi prefill-heavy, không đáng cho short unique prompts.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-053",
+      "type": "mcq",
+      "prompt": "Two-Batch Overlap (TBO) trong Expert Parallelism tăng throughput nhờ đâu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Gộp 2 request thành 1 để giảm số lần A2A gửi đi"
+        },
+        {
+          "key": "B",
+          "text": "Xen kẽ A2A communication và GEMM trên 2 micro-batches"
+        },
+        {
+          "key": "C",
+          "text": "Nhân bản expert weights lên mọi GPU để tránh routing"
+        },
+        {
+          "key": "D",
+          "text": "Chạy 2 bản model độc lập rồi chọn output nhanh hơn"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide EP: TBO xen kẽ A2A communication và GEMM computation trên 2 micro-batches → loại bỏ GPU idle → 2× throughput.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-054",
+      "type": "mcq",
+      "prompt": "DP Attention (DPA) khác DP thường ở điểm nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chia layers thành stages chạy qua nhiều node"
+        },
+        {
+          "key": "B",
+          "text": "Chia weights mỗi layer, all-reduce mỗi layer"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ replicate attention, MoE/FC chia qua EP"
+        },
+        {
+          "key": "D",
+          "text": "Replicate toàn bộ model và KV cache mỗi GPU"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide DP/DPA: DP replicate toàn bộ model + KV → memory duplication; DPA chỉ replicate attention, không duplicate KV cache.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-055",
+      "type": "mcq",
+      "prompt": "Rule of thumb chọn parallelism cho cluster nhiều node là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "TP = số nodes; PP ≤ GPUs/node; EP cho dense"
+        },
+        {
+          "key": "B",
+          "text": "TP qua mọi node; PP chỉ dùng cho model nhỏ"
+        },
+        {
+          "key": "C",
+          "text": "DP cho MoE; EP cho dense; TP = tổng số GPU"
+        },
+        {
+          "key": "D",
+          "text": "TP ≤ GPUs/node; PP = số nodes; EP cho MoE"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide Parallelism Guide: TP within node (NVLink 900 GB/s), PP across nodes; không TP qua nodes trừ NVLink fabric.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-056",
+      "type": "mcq",
+      "prompt": "Tradeoff chính của Pipeline Parallelism (PP) theo bảng parallelism là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bubble latency, cần micro-batch"
+        },
+        {
+          "key": "B",
+          "text": "All-reduce sync ở mỗi layer"
+        },
+        {
+          "key": "C",
+          "text": "Expert routing overhead"
+        },
+        {
+          "key": "D",
+          "text": "Không chia sẻ được KV cache"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Bảng: PP split layers, best for multi-node/128K+ context, tradeoff bubble latency, micro-batch.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-057",
+      "type": "mcq",
+      "prompt": "Theo kiến trúc auto-scaling của slide, điều kiện nào kích hoạt scale in?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Queue depth > 2,000"
+        },
+        {
+          "key": "B",
+          "text": "GPU util < 30%"
+        },
+        {
+          "key": "C",
+          "text": "GPU util > 80%"
+        },
+        {
+          "key": "D",
+          "text": "Queue depth > 10"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide Auto-scaling: GPU util >80% hoặc queue depth >10 → scale out; GPU util <30% → scale in.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-058",
+      "type": "mcq",
+      "prompt": "Bật scale-to-zero giúp tiết kiệm chi phí, nhưng phải chấp nhận trade-off gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không thể dùng KEDA để autoscale nữa"
+        },
+        {
+          "key": "B",
+          "text": "Phải chuyển model sang GGUF Q2_K"
+        },
+        {
+          "key": "C",
+          "text": "Cold start latency khi traffic quay lại"
+        },
+        {
+          "key": "D",
+          "text": "Mất KV cache của toàn bộ user vĩnh viễn"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide: Warm pool N idle instances cho spikes; trade-off: cost vs cold start latency.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-059",
+      "type": "mcq",
+      "prompt": "Trong các GGUF level, level nào được mô tả là near-lossless?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Q4_K_M"
+        },
+        {
+          "key": "B",
+          "text": "Q2_K"
+        },
+        {
+          "key": "C",
+          "text": "Q8_0"
+        },
+        {
+          "key": "D",
+          "text": "Q6_K"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide Edge Deployment: Q2_K extreme · Q4_K_M recommended · Q6_K near-lossless · Q8_0 max quality.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    },
+    {
+      "id": "T2D05-060",
+      "type": "mcq",
+      "prompt": "Chip nào có 230 MB SRAM và nhắm tới sub-100 ms TTFT?",
+      "options": [
+        {
+          "key": "A",
+          "text": "NVIDIA H200"
+        },
+        {
+          "key": "B",
+          "text": "AWS Trainium2"
+        },
+        {
+          "key": "C",
+          "text": "AMD MI300X"
+        },
+        {
+          "key": "D",
+          "text": "Groq LPU"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Bảng Hardware Landscape 2026: Groq LPU — Sub-100 ms TTFT, 230 MB SRAM, ultra-low latency.",
+      "source": "onthi/Slide_Day_5_Model Serving & In_02.pdf"
+    }
+  ]
+}

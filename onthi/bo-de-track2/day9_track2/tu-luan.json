@@ -1,0 +1,127 @@
+{
+  "id": "day9_track2_tu_luan",
+  "title": "Tự luận Track 2 Ngày 9",
+  "questionCount": 10,
+  "questions": [
+    {
+      "id": "T2D09-TL-01",
+      "type": "essay",
+      "prompt": "Một startup AI có 4 nhóm người dùng: admin, ML engineer, data analyst, intern. Hiện mọi ML engineer đều có admin access “cho nhanh”. Hãy thiết kế lại phân quyền theo least privilege và nêu các cơ chế IAM/ABAC hỗ trợ.",
+      "modelAnswer": "Ý chấm: (1) Nêu rủi ro hiện tại: một lần xoá nhầm = disaster. (2) Bảng quyền: Admin read/write all; ML Engineer read training data, write model artifacts, cấm delete production data; Analyst read aggregated metrics, write reports, cấm raw PII; Intern chỉ sandbox, cấm production. (3) Tạo role per function, permission boundary làm trần quyền, condition keys theo VPC/IP/MFA. (4) ABAC theo team tag (user.team == data.owner_team) để scale. (5) Unity Catalog/Apache Ranger cho column/row-level security, dynamic masking PII. (6) Audit bằng CloudTrail + IAM Access Analyzer.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D09-TL-02",
+      "type": "essay",
+      "prompt": "Team cần mã hóa training data chứa PII trên S3 và RDS. Hãy mô tả luồng envelope encryption bằng AWS KMS và lịch rotate key, kèm các lỗi cần tránh.",
+      "modelAnswer": "Ý chấm: (1) generate_data_key với KeySpec AES_256 → Plaintext DEK + CiphertextBlob. (2) Encrypt data bằng plaintext DEK; lưu encrypted_dek + encrypted_data; xoá plaintext DEK, không bao giờ lưu. (3) KEK trong KMS mã hóa DEK. (4) Rotate: KEK hàng năm (KMS auto), DEK hàng tháng, service credentials hàng tuần. (5) S3 SSE AES256/KMS, EBS encrypted by default, RDS TDE, column-level encryption cho name/email/CCCD. (6) Không để plaintext key trong code/env vars; dùng KMS/Vault; log mọi key usage. (7) In transit: TLS 1.3, certificate pinning nội bộ.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D09-TL-03",
+      "type": "essay",
+      "prompt": "Công ty có log chăm sóc khách hàng tiếng Việt chứa họ tên, CCCD, SĐT, địa chỉ, email. Hãy thiết kế PII detection & anonymization pipeline bằng Presidio trước khi đưa vào training, đạt mục tiêu của lab.",
+      "modelAnswer": "Ý chấm: (1) AnalyzerEngine với language=\"vi\", entities PERSON/PHONE_NUMBER/EMAIL_ADDRESS. (2) Custom recognizers: CCCD 12 số bằng regex, SĐT +84 bằng phone recognizer, địa chỉ bằng custom NER, số tài khoản ngân hàng. (3) AnonymizerEngine chọn kỹ thuật: masking, replacement bằng Faker, hashing cho analytics, generalization (tuổi → khoảng). (4) Đặt pipeline trước ingestion vào training. (5) Đo detection rate >95% trên Vietnamese test data, so sánh before/after. (6) Theo dõi PII exposure metric trên dashboard.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D09-TL-04",
+      "type": "essay",
+      "prompt": "Bộ phận product muốn dữ liệu khách hàng cho A/B testing nội bộ, còn bộ phận research muốn công bố dataset cho cộng đồng. Hãy chọn kỹ thuật phù hợp cho từng nhu cầu và giải thích.",
+      "modelAnswer": "Ý chấm: (1) A/B testing nội bộ: de-identification/pseudonymization, thay PII bằng pseudonym nhất quán, reversible qua lookup table. (2) Phải bảo vệ lookup table (RBAC, encryption). (3) Research công khai: anonymization irreversible, không re-identify được. (4) Áp k-anonymity: mỗi record giống ít nhất k-1 records khác; generalization giúp đạt điều kiện. (5) Có thể dùng synthetic data (Faker + custom templates). (6) Phân loại: dataset gốc là Restricted, không export.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D09-TL-05",
+      "type": "essay",
+      "prompt": "Một fintech Việt Nam phục vụ cả khách hàng EU và đang chào bán cho enterprise clients. Hãy lập compliance checklist ánh xạ yêu cầu NĐ13, GDPR, ISO 27001/SOC 2 sang technical controls.",
+      "modelAnswer": "Ý chấm: (1) NĐ13: data localization trên server VN; explicit consent; breach notification trong 72h; bổ nhiệm DPO. (2) GDPR: right to erasure → delete cascade trong Lakehouse (cả feature store, training snapshot). (3) ISO 27001: InfoSec management framework, annual audit. (4) SOC 2: security, availability, processing integrity. (5) Technical controls: RBAC, encryption at rest/in transit, audit log, lineage làm audit trail. (6) Nêu compliance là competitive advantage: enterprise yêu cầu trước khi ký hợp đồng.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D09-TL-06",
+      "type": "essay",
+      "prompt": "Công ty muốn tự động hoá việc kiểm tra compliance thay vì checklist thủ công. Hãy đề xuất cách dùng OPA và thiết kế compliance dashboard.",
+      "modelAnswer": "Ý chấm: (1) Policy as code bằng Rego (declarative) trong CI/CD. (2) Ví dụ rule: ML engineers cannot access production labels. (3) Enforce tại API gateway, Kubernetes admission, data access. (4) Dashboard: access logs (who/what/when), PII exposure (% data scanned), encryption coverage (% encrypted at rest), policy violations (count, severity, trend), breach response time (< 72h). (5) Gắn với yêu cầu NĐ13 để chứng minh tuân thủ.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D09-TL-07",
+      "type": "essay",
+      "prompt": "Hãy thiết kế security testing cho một AI serving repo Python theo Security Testing Pyramid, phân rõ phần nào chạy trong CI và phần nào định kỳ.",
+      "modelAnswer": "Ý chấm: (1) Automated in CI: dependency scanning (pip-audit, Snyk) cảnh báo CVE serving deps; SAST bằng Bandit; secret scanning bằng git-secrets hook + truffleHog chặn push credential. (2) Prompt injection testing bằng Garak (70+ attack categories). (3) Manual/periodic: pentest hàng quý. (4) Container: trivy image scan CVE trước deploy. (5) Xuất security audit report làm deliverable.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D09-TL-08",
+      "type": "essay",
+      "prompt": "Chatbot RAG của ngân hàng bị phát hiện trả lời theo chỉ dẫn ẩn trong một tài liệu được retrieve và đôi lúc lặp lại số điện thoại khách hàng. Hãy phân tích các threat và đề xuất phòng thủ.",
+      "modelAnswer": "Ý chấm: (1) Indirect prompt injection: malicious content trong retrieved documents (khác direct “Ignore instructions…”). (2) PII leakage: model memorize & reproduce PII. (3) Phòng thủ: input sanitization + output validation; red-teaming tự động bằng Garak. (4) Anonymize PII trước ingestion/indexing. (5) Defense in depth: input guardrails + model hardening + output validation + monitoring, không layer nào đủ một mình. (6) Nhắc thêm các threat khác cần theo dõi: data poisoning, model extraction, membership inference.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D09-TL-09",
+      "type": "essay",
+      "prompt": "Một ML pipeline đang dùng access key tĩnh của một kỹ sư, có quyền đọc toàn bộ data lake, key nằm trong env vars. Hãy phân tích rủi ro và đề xuất cấu hình service account an toàn.",
+      "modelAnswer": "Ý chấm: (1) Rủi ro: long-lived key, plaintext trong env vars, quyền quá rộng, gắn với cá nhân. (2) Mỗi pipeline một service account riêng, scope tối thiểu. (3) Bỏ long-lived keys, dùng OIDC federation. (4) Credentials rotate tự động hàng tuần qua Vault/KMS. (5) Secrets trong Vault/AWS Secrets Manager. (6) Monitor, alert khi access bất thường; audit qua CloudTrail.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D09-TL-10",
+      "type": "essay",
+      "prompt": "Model churn bị khách hàng khiếu nại dự đoán sai, đội không biết model được train từ dữ liệu nào và các team hiểu “Churn” khác nhau. Hãy đề xuất framework data governance để khắc phục.",
+      "modelAnswer": "Ý chấm: (1) Data Catalog (Apache Atlas/DataHub) để discover & document. (2) Classification Public/Internal/Confidential/Restricted, drive policies. (3) Lineage source → ETL → feature store → training → prediction bằng OpenLineage/Marquez/Atlas, làm audit trail. (4) Business Glossary thống nhất “Customer”, “Churn”, “Transaction”. (5) Nâng maturity từ Reactive → Proactive → Predictive. (6) Governance built-in từ đầu; retrofit cost 10x so với design-in.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    }
+  ]
+}

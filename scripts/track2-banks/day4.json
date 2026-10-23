@@ -1,0 +1,526 @@
+{
+ "mcq": [
+  [
+   "Cosine similarity giữa hai vector có miền giá trị nào và đo yếu tố gì?",
+   "[−1, 1], chỉ đo góc giữa hai vector",
+   "[0, 1], đo cả góc lẫn độ dài vector",
+   "[0, ∞), đo khoảng cách hình học thực",
+   "[−∞, ∞], đo tổng tích từng chiều",
+   "Slide Similarity Metrics: cosine range [−1, 1], angle only; với text embedding thực tế thường > 0."
+  ],
+  [
+   "Theo bảng Embedding Models 2026, text-embedding-3-small có số chiều và giá bao nhiêu?",
+   "1536d, $0.02/M token",
+   "3072d, $0.13/M token",
+   "1024d, self-host miễn phí",
+   "768d, $0.05/M token",
+   "3-small là baseline rẻ: 1536d, $0.02/M; 3-large mới là 3072d, $0.13/M."
+  ],
+  [
+   "Truncate text-embedding-3-large từ 3072d xuống 256d bằng Matryoshka (MRL) giúp index nhỏ đi bao nhiêu lần?",
+   "12 lần",
+   "6 lần",
+   "32 lần",
+   "4 lần",
+   "3072/256 = 12×; so với ada-002 1536d chỉ là 6×. Nên áp dụng khi scale >10M vectors."
+  ],
+  [
+   "Khi so điểm benchmark embedding, lưu ý “vệ sinh benchmark” nào là đúng theo slide?",
+   "Điểm MTEB v2 không so được với v1",
+   "MMTEB và MTEB v2 là cùng một bảng",
+   "Điểm v1 cao hơn luôn tốt hơn v2",
+   "Chỉ cần xem MTEB, không cần golden set",
+   "MTEB v2 (Eng) và MMTEB (đa ngữ) là hai bảng khác nhau; v2 không so được với v1; luôn re-rank trên golden set của bạn."
+  ],
+  [
+   "Trên VN-MTEB, bge-m3 (64.90) đứng trên cả bản fine-tune tiếng Việt của chính nó. Bài học rút ra là gì?",
+   "Generalist đa ngữ có thể thắng trên benchmark rộng",
+   "Fine-tune tiếng Việt luôn làm model kém đi",
+   "Model ít params hơn luôn cho điểm cao hơn",
+   "Benchmark rộng thay được đo trên domain hẹp",
+   "Bài học 1 của slide VN-MTEB; bài học 2: fine-tune vẫn có thể thắng trên domain hẹp nên phải đo trên dữ liệu của bạn."
+  ],
+  [
+   "Theo slide VN-MTEB, vì sao một số model vượt trội hơn model khác?",
+   "Dùng RoPE thay vì absolute positional embedding",
+   "Được phát hành muộn hơn nên tự động tốt hơn",
+   "Có số chiều vector lớn hơn 3072 chiều",
+   "Được train riêng trên văn hoá Việt Nam",
+   "Model dùng RoPE vượt model dùng absolute positional embedding — lý do kỹ thuật, không phải “mới hơn”."
+  ],
+  [
+   "Hạn chế quan trọng của VN-MTEB là gì?",
+   "Dịch từ MTEB tiếng Anh nên chưa đo văn hoá/domain Việt",
+   "Chỉ có 6 datasets nên không đủ ý nghĩa thống kê",
+   "Chỉ đánh giá model đóng, không có model open-source",
+   "Chỉ đo latency, không đo chất lượng retrieval",
+   "VN-MTEB: 41 datasets, 6 tasks, 18 models, dịch từ MTEB ⇒ đo năng lực ngôn ngữ, chưa đo văn hoá/domain."
+  ],
+  [
+   "Dùng sai similarity metric so với pretraining objective của model gây hậu quả gì?",
+   "Recall giảm khoảng 10–20%",
+   "Latency tăng khoảng 10–20 lần",
+   "Index phải rebuild mỗi giờ một lần",
+   "Không ảnh hưởng gì nếu đã normalize",
+   "Slide: match metric với pretraining objective; sai metric degrade recall 10–20%."
+  ],
+  [
+   "Với vector unit-norm, khoảng cách Euclidean liên hệ với cosine theo công thức nào?",
+   "d² = 2(1 − cos)",
+   "d = 1 − cos",
+   "d² = 1 + cos",
+   "d = 2 · cos",
+   "Slide Euclidean (L2): Unit-norm ⇒ d² = 2(1 − cos), nên xếp hạng theo L2 và cosine tương đương."
+  ],
+  [
+   "Trong nhóm multi-modal embedding 2026, model nào là backbone của ColPali?",
+   "SigLIP (Google)",
+   "ImageBind (Meta)",
+   "CLIP (OpenAI)",
+   "jina-clip-v2",
+   "SigLIP là backbone của ColPali; ImageBind hỗ trợ 6 modalities; jina-clip-v2 multilingual có tiếng Việt."
+  ],
+  [
+   "Theo bảng so sánh Vector DB (VectorDBBench 2025), pgvector phù hợp nhất khi nào?",
+   "Team đã chạy sẵn Postgres",
+   "Cần multi-modal native",
+   "Cần filter bằng GraphQL",
+   "Cần managed hoàn toàn",
+   "pgvector là extension, filter bằng SQL WHERE, P99 ~15 ms; best for “Have Postgres”."
+  ],
+  [
+   "Phát biểu nào đúng về FAISS (Meta, 2017)?",
+   "Là thư viện index, không phải database",
+   "Là managed service chạy trên cloud Meta",
+   "Là vector DB có REST API và replication",
+   "Chỉ hỗ trợ HNSW, không có IVF hay PQ",
+   "FAISS: library C++/Python, no server; hỗ trợ IVF, HNSW, PQ, OPQ, IVF-PQ; 2026 vẫn là thư viện index bên trong Milvus."
+  ],
+  [
+   "Deep metric learning thời pre-LLM (triplet loss FaceNet, ArcFace) là tiền thân của gì?",
+   "Contrastive pre-training hiện đại như CLIP",
+   "Thuật toán BM25 dùng cho keyword search",
+   "Kỹ thuật chunking theo cấu trúc AST",
+   "Point-in-time join trong feature store",
+   "Train embedding để cosine/Euclidean tách class — tiền thân của contrastive pre-training (CLIP, SigLIP)."
+  ],
+  [
+   "HNSW với 10M vector 768d fp32 cần khoảng bao nhiêu RAM cho riêng vector (chưa tính graph)?",
+   "Khoảng 31 GB",
+   "Khoảng 3 GB",
+   "Khoảng 310 GB",
+   "Khoảng 7,7 GB",
+   "768 × 4 B ≈ 3 KB/vec; 10M × 3 KB ≈ 31 GB + graph ⇒ HNSW là RAM-bound."
+  ],
+  [
+   "Trường hợp nào slide nêu HNSW KHÔNG phải lựa chọn tốt?",
+   "Corpus update nhiều, re-build chậm",
+   "Corpus ≤10M vector cần latency thấp",
+   "Cần recall 95%+ ở khoảng 10 ms",
+   "Chạy trên Qdrant hoặc Weaviate",
+   "Khi HNSW không phải lựa chọn: RAM-bound, update-heavy corpus (re-build chậm), static billion-scale → DiskANN."
+  ],
+  [
+   "IVF (FAISS) phù hợp nhất với kịch bản nào?",
+   "Batch-mode, corpus tĩnh, hạ tầng CPU-only",
+   "Hot vectors cần latency dưới 10 ms",
+   "Hơn 1 tỷ vector trên SSD một node",
+   "Corpus thay đổi liên tục từng giây",
+   "IVF: cluster-based, RAM thấp hơn, latency ~30–50 ms, cần retrain khi drift lớn; params nlist=1024, nprobe=64."
+  ],
+  [
+   "RaBitQ (SIGMOD 2024) nén vector bằng cách nào?",
+   "Xoay ngẫu nhiên rồi 1 bit/chiều, có cận sai số",
+   "Cắt bớt chiều cuối theo kiểu Matryoshka",
+   "Gom cụm rồi lưu ID centroid cho mỗi vector",
+   "Chuyển fp32 sang int8 theo min-max từng chiều",
+   "RaBitQ dùng trong VectorChord, Milvus; BBQ của Elasticsearch phát triển từ đó; pgvectorscale dùng SBQ."
+  ],
+  [
+   "Reciprocal Rank Fusion tính điểm thế nào và vì sao tiện?",
+   "∑ 1/(k + rank); chỉ dùng hạng, không cần normalize",
+   "∑ score × rank; cần normalize BM25 về [0, 1]",
+   "max(score); chỉ giữ điểm cao nhất của mỗi hệ",
+   "α·cos + (1−α)·BM25; cần tune α trên golden set",
+   "RRF score(d) = ∑ 1/(k + rank_r(d)), k = 60 (Qdrant mặc định k = 2); rank-only nên không cần chuẩn hoá raw scores."
+  ],
+  [
+   "Lab 19 đo hybrid so với semantic thế nào?",
+   "P@10 78,6% vs 73,2%; P99 8,9 vs 6,3 ms",
+   "P@10 73,2% vs 78,6%; P99 6,3 vs 8,9 ms",
+   "P@10 78,6% vs 73,2%; P99 6,3 vs 8,9 ms",
+   "P@10 bằng nhau; P99 hybrid nhanh gấp đôi",
+   "Hybrid tốt hơn về chất lượng nhưng chậm hơn (CPU, 1K doc) — đo trên golden set của bạn."
+  ],
+  [
+   "Late interaction (ColBERT) chấm điểm query–document thế nào?",
+   "MaxSim: mỗi token query lấy cos lớn nhất rồi cộng lại",
+   "Nén cả chunk thành một vector rồi tính một cos",
+   "Đếm số token trùng giữa query và document",
+   "Lấy trung bình vector token rồi tính dot product",
+   "score = ∑_{t∈q} max_{d∈D} cos(t, d) — giữ vector từng token/patch, bắt chi tiết single-vector bỏ sót."
+  ],
+  [
+   "ColPali encode mỗi trang PDF thành bao nhiêu vector?",
+   "1024 patch (32 × 32), mỗi patch 128d",
+   "1 vector 3072d cho toàn trang",
+   "512 patch (16 × 32), mỗi patch 768d",
+   "256 patch (16 × 16), mỗi patch 1024d",
+   "1M trang × 1024 × 128d × 4B ≈ 524 GB ⇒ cần vector DB hỗ trợ multi-vector + MaxSim."
+  ],
+  [
+   "Theo Production Tuning, chunk size và overlap khuyến nghị cho RAG là bao nhiêu?",
+   "200–500 tokens, overlap 10–20%",
+   "1K–2K tokens, overlap 50%",
+   "50–100 tokens, không overlap",
+   "4K tokens, overlap 1–2%",
+   "Chunk 200–500 tokens cho RAG, 1K+ cho long-context; overlap 10–20% (~50–100 tokens)."
+  ],
+  [
+   "Chiến lược chunking Hierarchical hoạt động thế nào?",
+   "Retrieve child (đoạn), trả về parent (trang)",
+   "Retrieve parent (trang), trả về mọi child",
+   "Cắt cố định 512 tokens rồi gộp theo tầng",
+   "Ngắt tại topic shift dựa trên similarity",
+   "Hierarchical: parent (page) + child (paragraph); semantic mới là ngắt tại topic shift."
+  ],
+  [
+   "Top-K khuyến nghị theo slide RAG Production Best Practices là gì?",
+   "5–10 cho RAG, 20–50 trước reranker",
+   "50–100 cho RAG, 5–10 trước reranker",
+   "1–2 cho RAG, 200 trước reranker",
+   "Luôn 100 để tối đa recall",
+   "Top-K 5–10 cho RAG, 20–50 trước reranker; ef_search 200 default."
+  ],
+  [
+   "MMR với λ=0.5 được dùng trong retrieval để làm gì?",
+   "Tăng đa dạng, giảm chunks trùng nhau",
+   "Tăng recall bằng cách mở rộng query",
+   "Giảm latency bằng cách cắt bớt chiều",
+   "Chuẩn hoá điểm BM25 về khoảng [0, 1]",
+   "Slide: MMR diversity λ=0.5 giảm chunks trùng."
+  ],
+  [
+   "HyDE và multi-query expansion thuộc nhóm kỹ thuật nào?",
+   "Query rewriting",
+   "Index quantization",
+   "Embedding versioning",
+   "Metadata filtering",
+   "Production Gotchas: query rewriting gồm HyDE, multi-query expansion."
+  ],
+  [
+   "Khác biệt giữa stage 1 và stage 2 trong 2-stage retrieval là gì?",
+   "Stage 1 bi-encoder embed riêng; stage 2 cross-encoder chấm từng cặp",
+   "Stage 1 cross-encoder chấm từng cặp; stage 2 bi-encoder embed riêng",
+   "Stage 1 dùng BM25 thuần; stage 2 dùng LLM sinh lại toàn bộ câu hỏi",
+   "Stage 1 lọc metadata; stage 2 chạy ANN trên toàn bộ corpus gốc",
+   "Stage 1: ANN top-100, latency <20 ms; stage 2: cross-encoder query + doc cùng lúc, chọn top-10."
+  ],
+  [
+   "Reranker managed API (Cohere Rerank v4, zerank) có latency khoảng bao nhiêu?",
+   "Khoảng 600 ms",
+   "Khoảng 5 ms",
+   "Khoảng 50 ms",
+   "Khoảng 6 s",
+   "Self-host + GPU ~50–200 ms; managed ~600 ms, không cần GPU — rerank cộng thẳng vào P99."
+  ],
+  [
+   "Theo Context Rot (Chroma Research, 07/2025), model cửa sổ 1M token thường suy giảm rõ ở đâu?",
+   "Quanh 300–400K token",
+   "Ngay từ 10K token",
+   "Chỉ khi vượt 1M token",
+   "Quanh 900K–1M token",
+   "18 model frontier; chất lượng giảm khi input dài; multi-hop gãy sớm hơn nhiều."
+  ],
+  [
+   "Mặc định 2026 khi kết hợp RAG với model long-context là gì?",
+   "Retrieve 50K–200K token liên quan rồi để model suy luận",
+   "Nhồi toàn bộ corpus vào cửa sổ 1M token mỗi request",
+   "Chỉ retrieve top-1 chunk để tiết kiệm token tối đa",
+   "Bỏ retrieval vì cửa sổ lớn đã đảm bảo chất lượng",
+   "Lai, không phải chọn một: cửa sổ lớn là sức chứa, không phải đảm bảo; retrieval trả tiền index một lần."
+  ],
+  [
+   "MS GraphRAG có đặc điểm gì so với các tool GraphRAG khác?",
+   "Community summaries, chất lượng cao, index đắt nhất",
+   "Hoãn extraction sang query-time, index rẻ nhất",
+   "Index nhẹ, chỉ lưu entity không lưu quan hệ",
+   "In-memory, traversal dưới 1 ms, query Cypher",
+   "Lazy hoãn extraction; LightRAG index nhẹ; Memgraph in-memory sub-ms."
+  ],
+  [
+   "Vì sao agentic retrieval không nên là mặc định cho mọi query?",
+   "Thêm LLM call nên tăng latency và token",
+   "Không truy xuất được từ nhiều nguồn",
+   "Chỉ chạy được trên knowledge graph",
+   "Không tách được câu hỏi nhiều phần",
+   "Classic RAG một lượt đủ cho tra cứu đơn giản; agentic tốn thêm LLM call."
+  ],
+  [
+   "Weaviate (1.37+, Preview) cho agent truy cập vector DB thế nào?",
+   "MCP server nhúng sẵn tại /v1/mcp",
+   "SDK riêng chạy qua cổng gRPC khác",
+   "Plugin LangChain bắt buộc cài thêm",
+   "Webhook đẩy kết quả sang agent",
+   "MCP server cùng cổng REST API — vector DB thành công cụ agent gọi được."
+  ],
+  [
+   "Kiến trúc agent memory Letta (ex-MemGPT) tổ chức bộ nhớ thế nào?",
+   "3 tầng: core / recall / archival",
+   "Knowledge graph theo thời gian",
+   "Vector-first, trích sự kiện từ chat",
+   "Một bảng KV duy nhất theo user_id",
+   "Mem0: vector-first; Zep: temporal KG (Graphiti); Letta: 3 tầng core/recall/archival."
+  ],
+  [
+   "Trong định nghĩa retrieval tool cho agent, trường description đóng vai trò gì?",
+   "Là prompt truy xuất: agent dựa vào nó để quyết định gọi",
+   "Chỉ là ghi chú cho developer, agent không đọc tới",
+   "Là schema bắt buộc để validate tham số đầu vào",
+   "Là câu query mặc định gửi tới vector DB mỗi lần",
+   "“this description IS the retrieval prompt” — mơ hồ ⇒ gọi sai lúc."
+  ],
+  [
+   "Vì sao tham số filter của search tool nên là enum thay vì string tự do?",
+   "Để agent không bịa giá trị filter",
+   "Để giảm số chiều của embedding",
+   "Để vector DB tự tạo index mới",
+   "Để bỏ được tham số top_k",
+   "Bốn điều quyết định chất lượng: description, filter enum, trả citation + score, top_k có trần."
+  ],
+  [
+   "Agent trả lời chung chung dù tài liệu đúng nằm trong top-K. Cách sửa theo bảng debug là gì?",
+   "Giảm top_k, thêm reranker",
+   "Tăng top_k lên gấp đôi",
+   "Đổi sang model lớn hơn",
+   "Tắt hybrid, chỉ dùng BM25",
+   "Nguyên nhân: top_k quá lớn → context loãng (context rot)."
+  ],
+  [
+   "Hệ thống chạy đúng lúc demo nhưng sai trên production. Nguyên nhân và cách sửa?",
+   "Query thật khác golden set; log query thật, refresh hàng tuần",
+   "Thiếu GPU khi production; chuyển sang reranker managed API",
+   "Vector DB bị đầy; tăng RAM và rebuild lại toàn bộ index",
+   "Model quá nhỏ; đổi sang embedding 3072d cho mọi request",
+   "Bảng Debug Agent + Retrieval: refresh golden set từ query thật hàng tuần."
+  ],
+  [
+   "Agent làm theo “lệnh” nằm trong tài liệu được retrieve. Cách sửa là gì?",
+   "Tách data khỏi instruction; text retrieve không điều khiển tool",
+   "Tăng threshold similarity để loại tài liệu chứa câu mệnh lệnh",
+   "Giảm top_k về 1 để chỉ đọc đúng một tài liệu đáng tin nhất",
+   "Bật semantic cache để agent không gọi lại tài liệu đó lần nữa",
+   "Nguyên nhân: prompt injection qua retrieved doc."
+  ],
+  [
+   "Với on-demand feature view, write_to_online_store=True có nghĩa gì?",
+   "Tính lúc ghi; mặc định False là tính lúc đọc",
+   "Tính lúc đọc; mặc định False là tính lúc ghi",
+   "Bỏ qua request source khi materialize",
+   "Chỉ dùng cho training, không dùng serving",
+   "Slide On-Demand Feature: write_to_online_store=True ⇒ tính lúc ghi; mặc định False ⇒ lúc đọc."
+  ],
+  [
+   "Thí nghiệm Lab 19 với TabICL và HistGradientBoosting cho thấy điều gì?",
+   "Đổi model +0,02 AUC, thêm feature +0,14",
+   "Đổi model +0,14 AUC, thêm feature +0,02",
+   "Đổi model và thêm feature đều +0,08",
+   "TabICL thắng mà không cần aggregate",
+   "Nhãn phụ thuộc hành vi gần đây của user; model không học được thứ bạn không đưa vào."
+  ],
+  [
+   "Rào cản nào khi đưa TabPFN-2.5 vào production theo slide?",
+   "Thiết kế cho ≤50K dòng, weights cấm thương mại",
+   "Chỉ chạy trên CPU, không hỗ trợ GPU inference",
+   "Cần retrain lại cho từng bộ dữ liệu mới",
+   "Latency dưới 2 ms nhưng AUC thấp hơn XGBoost",
+   "Latency 151–1.275 ms trên GPU; ≤50K dòng; giấy phép cấm thương mại; TabICL weights BSD-3."
+  ],
+  [
+   "Vì sao Uber xây Michelangelo và khái niệm feature store ra đời?",
+   "100+ model reuse features, cần tránh skew và tính trùng",
+   "Cần lưu embedding cho RAG ngay từ năm 2017",
+   "Muốn bán feature store như sản phẩm SaaS",
+   "Thay thế data warehouse bằng key-value store",
+   "Why feature stores emerged: centralize để tránh skew + duplicate compute."
+  ],
+  [
+   "Online store khác offline store ở điểm nào?",
+   "Online lưu giá trị hiện tại, offline lưu full history",
+   "Online lưu full history, offline lưu giá trị hiện tại",
+   "Online dùng cho training, offline dùng cho serving",
+   "Online chạy batch TB, offline lookup dưới 10 ms",
+   "Online: Redis/DynamoDB, KV lookup <10 ms P99, current value only; offline: Parquet/BigQuery, full history."
+  ],
+  [
+   "Bài toán nào slide nói KHÔNG cần streaming feature pipeline?",
+   "Churn prediction",
+   "Fraud detection",
+   "Dynamic pricing",
+   "Real-time recsys",
+   "Không cần streaming: churn prediction (daily batch OK), credit scoring."
+  ],
+  [
+   "Recommendation system trong 3 use cases feature store có latency mục tiêu bao nhiêu?",
+   "<50 ms",
+   "<2 ms",
+   "<10 ms",
+   "<1 s",
+   "Fraud <10 ms, recsys <50 ms (homepage personalization), dynamic pricing <100 ms."
+  ],
+  [
+   "Trong Feast, khai báo Field với vector_index=True cho phép làm gì?",
+   "Tra cứu bằng độ tương đồng thay vì bằng khoá",
+   "Tự động sinh embedding từ cột văn bản",
+   "Nén vector sang binary trước khi lưu",
+   "Bỏ qua TTL cho riêng cột vector đó",
+   "retrieve_online_documents_v2(query=..., top_k=3) — RAG corpus thành một feature view (Alpha)."
+  ],
+  [
+   "Embedding cache bằng Redis TTL 24h đạt hit rate bao nhiêu theo slide Production Optimization?",
+   "60–80%",
+   "10–20%",
+   "95–99%",
+   "30–40%",
+   "Hit rate 60–80% giảm embedding cost; batch 1000 texts/request: throughput 50×."
+  ],
+  [
+   "Quy trình cập nhật index đúng theo Index Lifecycle Management là gì?",
+   "Build V2 offline, validate, blue-green switch rồi retire V1",
+   "Xoá V1, ingest lại vào chính index cũ rồi mới serve",
+   "Ghi đè vector mới lên V1 trong giờ thấp điểm",
+   "Serve song song V1 và V2 vĩnh viễn để so sánh",
+   "Rollback ngay nếu quality giảm."
+  ],
+  [
+   "MRR trong retrieval evaluation đo gì?",
+   "Vị trí của kết quả đúng đầu tiên",
+   "Tỷ lệ relevant docs trong top-k",
+   "Xếp hạng có trọng số theo nhãn",
+   "Độ trễ P99 của truy vấn search",
+   "Recall@k là tỷ lệ relevant trong top-k; nDCG@k là xếp hạng có weight."
+  ],
+  [
+   "Trong LLM-as-Judge cho RAG, Groundedness kiểm tra điều gì?",
+   "Câu trả lời có dựa trên context không",
+   "Chunk retrieve có liên quan query không",
+   "Câu trả lời có trả lời đúng query không",
+   "Query có nằm trong golden set không",
+   "Context Relevance, Answer Relevance, Groundedness ⇒ RAGAS: faithfulness, answer relevancy, context precision."
+  ],
+  [
+   "Luật AI Việt Nam 134/2025/QH15 có hiệu lực từ ngày nào?",
+   "01/03/2026",
+   "01/01/2026",
+   "01/09/2027",
+   "17/02/2027",
+   "Luật AI tham chiếu EU AI Act; chuyển tiếp đến 01/03/2027 (y tế, giáo dục, tài chính: 01/09/2027)."
+  ],
+  [
+   "Trong 5 khoản chi của hệ retrieval, khoản nào thường lớn nhất và đòn bẩy hiệu quả nhất là gì?",
+   "LLM generation; semantic cache",
+   "Embedding; Matryoshka",
+   "Lưu index; quantization",
+   "Reranker; giảm Top-K",
+   "Semantic cache cắt cả khoản 4 (reranker) và 5 (LLM generation)."
+  ],
+  [
+   "Vì sao re-index được gọi là “khoản không ai lập ngân sách”?",
+   "Trả lại toàn bộ embedding và tạm gấp đôi lưu index",
+   "Chỉ tốn thêm phí reranker trong vài ngày đầu",
+   "Vector DB tính phí phạt khi xoá index cũ",
+   "Phải mua thêm GPU mới cho mỗi lần re-index",
+   "Đổi embedding model = trả lại khoản 1 + blue-green tạm thời gấp đôi khoản 2 ⇒ chi phí định kỳ."
+  ],
+  [
+   "Slide Enterprise Case Studies khuyên nhìn các con số ROI (vd. GlassDollar 40% cost ↓) thế nào?",
+   "Do vendor tự công bố, nên tự đo",
+   "Là chuẩn ngành, dùng làm SLA",
+   "Đã kiểm toán độc lập, tin được",
+   "Chỉ đúng với hệ dưới 1M vector",
+   "“con số đáng tin nhất là con số bạn tự đo.”"
+  ],
+  [
+   "So với ML Era, index tooling của LLM Era thay đổi thế nào?",
+   "Managed multi-tenant như Pinecone, Zilliz Cloud",
+   "FAISS / Annoy nhúng trong process ứng dụng",
+   "Chỉ còn dùng kd-tree trên CPU đơn lẻ",
+   "Chuyển hết sang SQL LIKE trên Postgres",
+   "ML Era: FAISS/Annoy/NMSLIB embedded trong app; LLM Era: managed multi-tenant."
+  ],
+  [
+   "Vì sao CodeWiki nên chunk code theo AST thay vì theo số ký tự?",
+   "Cắt theo ký tự làm đôi hàm, mất import và signature",
+   "AST tạo ra ít chunk hơn nên tiết kiệm chi phí embed",
+   "Embedding model chỉ đọc được code đã format AST",
+   "Cắt theo ký tự không hỗ trợ các file tiếng Việt",
+   "tree-sitter cắt tại hàm/class/method; cAST: +4,3 Recall@5 RepoEval, +2,67 Pass@1 SWE-bench."
+  ],
+  [
+   "Phát biểu nào đúng về llms.txt?",
+   "Đề xuất cộng đồng, chưa là chuẩn IETF/W3C",
+   "Chuẩn W3C bắt buộc cho mọi trang tài liệu",
+   "File HTML liệt kê toàn bộ nội dung site",
+   "Thay thế robots.txt để chặn crawler AI",
+   "llms.txt: file markdown sitemap cho LLM, mặc định trên Mintlify, Fern, GitBook, Vercel, Supabase."
+  ],
+  [
+   "Vì sao trong Lab 19 semantic search yếu ở câu paraphrase tiếng Việt?",
+   "Dùng bge-small-en, model tiếng Anh 384d",
+   "Dùng BM25 thuần không có vector index",
+   "Qdrant in-memory không hỗ trợ tiếng Việt",
+   "Golden set chỉ có 5 câu nên nhiễu lớn",
+   "Demo: index 1.000 tài liệu với bge-small-en (384d, CPU), đổi model bằng EMBEDDING_BACKEND."
+  ],
+  [
+   "Feature Store thắng cùng lúc ở 3 dimensions nào?",
+   "Feature reuse, train/serve consistency, low-latency lookup",
+   "Vector search, semantic cache, agent memory",
+   "Model training, hyperparameter tuning, deployment",
+   "Data lake, ETL scheduling, BI dashboard",
+   "Key takeaway 3: không tool nào khác giải quyết cả 3."
+  ]
+ ],
+ "essay": [
+  [
+   "Bạn có ba workload: (a) chatbot nội bộ 5M vector, cần P99 thấp; (b) catalog 300M vector, vẫn cần tương tác; (c) kho lưu trữ 2 tỷ vector, vài truy vấn/ngày. Chọn tầng lưu trữ và loại index cho từng workload, giải thích đánh đổi chi phí – latency.",
+   "(a) In-memory HNSW trên RAM: 5–20 ms, chi phí cao nhất, hợp ≤10M hot, latency-critical; params ef=200, m=16. (b) On-disk DiskANN trên SSD: ~30 ms @ 99% recall, 10–50× rẻ hơn HNSW ở scale lớn, hợp 100M+ (pgvectorscale, Milvus). (c) Object storage (S3 Vectors/turbopuffer/LanceDB): ~100 ms, query thưa <1 s, rẻ nhất; S3 Vectors 2 tỷ vector/index, chi phí giảm tới 90%. Lý do rẻ: giá lưu trữ ~$0,02/GB vs RAM ~$2+/GB. Đánh đổi: latency cao hơn, QPS thấp hơn. Tầng lưu trữ là quyết định chi phí lớn nhất của hạ tầng retrieval."
+  ],
+  [
+   "Tính dung lượng vector cho 50M vector 1024d ở fp32, int8 và binary. Đề xuất cấu hình quantization giữ recall cao và quy trình triển khai an toàn.",
+   "fp32: 50M × 1024 × 4 B ≈ 204,8 GB; int8 (1 B/dim, ÷4) ≈ 51,2 GB, recall ~99%; binary (1 bit/dim, ÷32) ≈ 6,4 GB, recall 95–98% có rescore. Đề xuất: lưu binary + asymmetric/oversample + rescore bằng vector gốc ⇒ recall gần scalar. Bật quantization trước khi ingest; re-quantize = re-index ⇒ dùng blue-green. Có thể kết hợp Matryoshka nếu model hỗ trợ. Kiểm recall trên golden set trước khi switch."
+  ],
+  [
+   "Thiết kế hybrid search cho corpus văn bản luật tiếng Việt nhiều thuật ngữ hiếm. Nêu lựa chọn sparse/dense, cách fusion, xử lý tách từ và cách chứng minh cấu hình tốt.",
+   "Sparse: BM25 (không dùng SPLADE-v3 tiếng Anh — thua BM25 trên 10/10 bộ tiếng Việt; learned sparse phải đúng ngôn ngữ). BM25 thắng 3-large ở 4/10 bộ (luật, tin tức, review) vì thuật ngữ hiếm. Dense: model tiếng Việt/đa ngữ (bge-m3, Vietnamese_Embedding). Fusion: α-fusion tuyến tính (α 0,6–0,8 cho dense) thường > RRF nhưng phải tune trên golden set; RRF k=60 là baseline không cần normalize. Âm tiết ≠ từ: “học sinh” bị tách; thử pyvi/underthesea và tự đo. Chứng minh: golden set có nhãn, so keyword vs semantic vs hybrid bằng nDCG@10/P@10 và P99."
+  ],
+  [
+   "Một SaaS đa tenant muốn thêm semantic cache trước LLM. Thiết kế cache (tham số, khoá, invalidation) và phân tích các kiểu gãy cần phòng.",
+   "Cosine > threshold ⇒ trả câu trả lời đã lưu; threshold phải đo (AWS dùng 0,75), quá thấp ⇒ trả nhầm câu trả lời câu khác. Namespace/filter theo tenant trong chính query cache — thiếu ⇒ user A nhận dữ liệu user B (lỗ hổng bảo mật). TTL bắt buộc (vd. 3600 s); xoá cache khi tài liệu nguồn đổi. 4 kiểu gãy: query phụ thuộc ngữ cảnh, query nhạy thời gian, đổi embedding model ⇒ xoá sạch cache (khác không gian), cache câu bịa rồi phục vụ mãi. Cache sai nguy hiểm hơn không cache; đầu độc semantic cache là rủi ro OWASP 2026."
+  ],
+  [
+   "Thiết kế feature store cho hệ fraud detection thẻ thanh toán: nhóm feature, pipeline cập nhật, online store và cách tính feature amount/avg_7d.",
+   "Yêu cầu <10 ms/transaction. Feature: velocity (txn/min, cửa sổ 5 phút/1 giờ), device fingerprint, amount-vs-7d-avg, recency. Pipeline: Postgres OLTP → CDC (Debezium) → Kafka → Flink/Spark Streaming (tumbling/sliding window) → Redis online + S3/Delta offline; hoặc Feast Push API. Online store in-memory (Redis/Aerospike) phải chặn được giá trị quá TTL (SQLite thì không). amount chỉ có lúc request ⇒ on-demand feature view ghép RequestSource với user_spend_stats, cùng công thức cho train và serve. Đặt tên user_txn_count_7d…; dùng timestamp_field cho PIT join."
+  ],
+  [
+   "Model churn đạt AUC tốt khi train nhưng production kém hơn ~25%. Liệt kê các nguyên nhân có thể liên quan feature và cách điều tra, sửa.",
+   "(1) Data leakage do dùng LATEST value thay vì PIT join ⇒ prod thấp hơn training 20–30%; sửa: get_historical_features(entity_df) lấy feature as-of timestamp từng event, có timestamp_field. (2) Training-serving skew: train dùng df.mean() toàn lịch sử, serve dùng running_mean(last_N); train parse UTC, serve local timezone ⇒ “giờ trong ngày” lệch 7h. (3) Target encoding không fit trong fold. Sửa: một định nghĩa feature duy nhất trong feature store cho cả train và inference, registry chung; so phân phối feature train vs serve."
+  ],
+  [
+   "Ban M&A hỏi: “Ai ở PayPal từng cộng tác với người được Mahle thuê?”. Giải thích vì sao vector RAG thất bại và đề xuất kiến trúc cùng phân tích chi phí index.",
+   "Vector RAG trả chunks về PayPal hoặc Mahle riêng lẻ, không cross-document multi-hop. GraphRAG: NER → entity linking (dedupe, canonical ID) → relation extraction (Alice, worked_on, Project X) → community detection (Leiden) → KG trên Neo4j/Memgraph; traverse 3-hop trong µs. Kiến trúc layered: vector RAG cho grounding → thêm KG cho domain nhiều thực thể → hybrid: vector retrieve → KG expand → LLM. Chi phí: full extraction 5–20×; LazyGraphRAG hoãn extraction sang query-time ⇒ index ≈ vector RAG (0,1% full GraphRAG). Chọn theo hình dạng câu hỏi (relationship), không theo ngân sách index."
+  ],
+  [
+   "Một feature view có ttl=1h, freshness SLO = 1 giờ. Tuổi feature của 5 request: 20 phút, 50 phút, 3 giờ, 30 phút, 26 giờ. Tính tỷ lệ vi phạm, giải thích vì sao ttl không bảo vệ và thiết kế guard.",
+   "Vi phạm: 3 giờ và 26 giờ ⇒ 2/5 = 40%. age = now − event_ts, lấy event_ts qua to_dict(include_event_timestamps=True) (cột <feature>__ts). ttl online chỉ được Redis/ScyllaDB thực thi; SQLite (Lab 19) vẫn trả giá trị 50 giờ tuổi. Job streaming chết ⇒ feature đóng băng, model vẫn trả lời tự tin (silent failure). Guard: age > SLO ⇒ dùng giá trị mặc định hoặc model dự phòng và đếm metric; alert theo tỷ lệ vi phạm. Đo tuổi lúc serve, không tin cấu hình."
+  ],
+  [
+   "Xây golden set đánh giá retrieval cho hệ hỏi đáp nội bộ. Nêu quy trình, cách gán nhãn, và tính nDCG@5 cho kết quả có nhãn [0, 3, 2, 0, 1]; giải thích κ khi judge khớp người 75%, ngẫu nhiên 50%.",
+   "Quy trình: query thật từ log + query sinh từ tài liệu; pooling top-k của nhiều hệ; nhãn 0–3 thay vì đúng/sai; chỉ dùng LLM-judge sau khi đo đồng thuận với người (TREC 2024: người chấm khắt khe hơn). Khoảng 200 query, regression-test mỗi lần đổi embedding/chunking. DCG = 3/log2 3 + 2/log2 4 + 1/log2 6 = 1,893 + 1,000 + 0,387 = 3,280; IDCG [3,2,1,0,0] = 3 + 1,262 + 0,500 = 4,762 ⇒ nDCG@5 ≈ 0,689 (nhị phân cho 0,712, che mất tài liệu tốt nhất ở hạng 2). κ = (0,75 − 0,50)/(1 − 0,50) = 0,50 — “khá”, không phải 75% đúng. Lưu ý query sinh cùng template với corpus làm hybrid thắng sẵn."
+  ],
+  [
+   "Công ty Việt Nam lưu hồ sơ khách hàng dạng embedding trong vector store dùng chung cho nhiều khách doanh nghiệp. Phân tích rủi ro bảo mật/tuân thủ và thiết kế đường xoá dữ liệu.",
+   "OWASP LLM09:2026: embedding inversion (embedding không phải safe-harbor), rò chéo tenant ⇒ enforce tenant scoping trong index query, không post-filter; ưu tiên namespace/collection per tenant; poisoning & jamming; membership inference; đầu độc semantic cache. PDPL Luật 91/2025/QH15 (hiệu lực 01/01/2026), NĐ 356/2025: quyền chủ thể, DPO bắt buộc, đánh giá tác động, báo vi phạm 72 h (24 h nếu bị tấn công), chế tài hình sự, áp dụng cả tổ chức nước ngoài. Quyền được xoá: lan tới vector index + online store + semantic cache; thiết kế đường xoá trước khi ingest."
+  ]
+ ]
+}

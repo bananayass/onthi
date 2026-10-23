@@ -1,0 +1,1568 @@
+{
+  "id": "day11_track2",
+  "title": "Bộ đề ôn tập Track 2 Ngày 11",
+  "sourceFolder": "onthi",
+  "questionCount": 60,
+  "questions": [
+    {
+      "id": "T2D11-001",
+      "type": "mcq",
+      "prompt": "Có 10 ứng dụng AI và 40 tool/nguồn dữ liệu. Với một giao thức chung như MCP, cần khoảng bao nhiêu bộ tích hợp?",
+      "options": [
+        {
+          "key": "A",
+          "text": "400 bộ (N×M)"
+        },
+        {
+          "key": "B",
+          "text": "40 bộ (bằng số tool)"
+        },
+        {
+          "key": "C",
+          "text": "4.000 bộ (N×M×10)"
+        },
+        {
+          "key": "D",
+          "text": "50 bộ (N+M)"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Giao thức đổi phép nhân N×M = 400 thành phép cộng N+M = 50; auth, version, trace thì không tự biến mất.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-002",
+      "type": "mcq",
+      "prompt": "Theo bài “A2A joins AAIF”, MCP và A2A sở hữu hai trục nào của sơ đồ agent?",
+      "options": [
+        {
+          "key": "A",
+          "text": "MCP trục dọc agent ↔ tool; A2A trục ngang agent ↔ agent"
+        },
+        {
+          "key": "B",
+          "text": "MCP trục ngang agent ↔ agent; A2A trục dọc agent ↔ tool"
+        },
+        {
+          "key": "C",
+          "text": "MCP trục người ↔ agent; A2A trục agent ↔ thanh toán"
+        },
+        {
+          "key": "D",
+          "text": "Cả hai cùng trục agent ↔ tool, khác nhau ở transport"
+        }
+      ],
+      "answer": "A",
+      "explanation": "MCP = vertical (tool, dữ liệu, resource); A2A = horizontal (giao task, theo dõi vòng đời). AG-UI/MCP Apps là người ↔ agent; AP2/ACP/UCP là agent ↔ tiền.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-003",
+      "type": "mcq",
+      "prompt": "Một đồng nghiệp nói “ta dùng ACP”. Phản ứng đúng theo bài là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Hiểu là extension thanh toán chính thức của spec MCP"
+        },
+        {
+          "key": "B",
+          "text": "Hỏi lại “ACP nào?” vì có hai giao thức khác nhau"
+        },
+        {
+          "key": "C",
+          "text": "Hiểu là giao thức agent ↔ agent của IBM, đang phát triển"
+        },
+        {
+          "key": "D",
+          "text": "Hiểu là tên cũ của A2A trước khi vào Linux Foundation"
+        }
+      ],
+      "answer": "B",
+      "explanation": "ACP của IBM (agent ↔ agent) đã nhập vào A2A 8/2025; ACP của OpenAI–Stripe (9/2025) là giao thức mua hàng.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-004",
+      "type": "mcq",
+      "prompt": "MCP và A2A cùng nằm ở AAIF. Phát biểu nào đúng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "A2A trở thành một extension chính thức của MCP"
+        },
+        {
+          "key": "B",
+          "text": "AAIF quy định một SDK duy nhất cho cả hai giao thức"
+        },
+        {
+          "key": "C",
+          "text": "Chung quản trị trung lập, mỗi dự án giữ spec riêng"
+        },
+        {
+          "key": "D",
+          "text": "Hai giao thức đã hợp nhất thành một spec chung"
+        }
+      ],
+      "answer": "C",
+      "explanation": "AAIF là quỹ trung lập của Linux Foundation; chung mái nhà ≠ chung giao thức.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-005",
+      "type": "mcq",
+      "prompt": "Chuyện gì đã xảy ra với Envoy AI Gateway tính đến 10/2026?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bị khai tử, người dùng phải migrate sang agentgateway"
+        },
+        {
+          "key": "B",
+          "text": "Được nhập vào Istio thành tính năng waypoint mặc định"
+        },
+        {
+          "key": "C",
+          "text": "Chuyển thành dự án managed, bỏ bản mã nguồn mở"
+        },
+        {
+          "key": "D",
+          "text": "Đổi tên thành Agent Router, vào AAIF, vẫn phát hành"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Agent Router vào AAIF 9/9/2026, không cần migrate, giữ cam kết tương thích 1.x; agentgateway là một dự án khác.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-006",
+      "type": "mcq",
+      "prompt": "Tutor cần agent chấm bài của đội khác chấm 200 bài, mất khoảng 2 giờ. Nên dùng cơ chế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Giao một task A2A và theo dõi trạng thái"
+        },
+        {
+          "key": "B",
+          "text": "Gọi agent chấm bài như một MCP tool đồng bộ"
+        },
+        {
+          "key": "C",
+          "text": "Mở một luồng AG-UI sang agent chấm bài"
+        },
+        {
+          "key": "D",
+          "text": "Viết REST endpoint riêng cho cặp agent này"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Giao việc dài hạn giữa agent khác đội là đúng cạnh agent ↔ agent của A2A, có vòng đời task để theo dõi.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-007",
+      "type": "mcq",
+      "prompt": "Spec MCP 2026-07-28 thay session và header Mcp-Session-Id bằng gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Token phiên ngắn hạn cấp qua handshake initialize"
+        },
+        {
+          "key": "B",
+          "text": "Mỗi request tự mang _meta: version, capability"
+        },
+        {
+          "key": "C",
+          "text": "Một session store Redis dùng chung giữa replica"
+        },
+        {
+          "key": "D",
+          "text": "Cookie sticky do load balancer cấp cho client"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bốn thứ bị gỡ: session, initialize, server gửi request ngược client, resume SSE. Request nào cũng có thể rơi vào instance nào sau LB round-robin.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-008",
+      "type": "mcq",
+      "prompt": "Tool cần người dùng xác nhận trước khi xoá khoá học. Trong MCP phi trạng thái, luồng đúng là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Server lưu câu hỏi vào session rồi chờ client resume SSE"
+        },
+        {
+          "key": "B",
+          "text": "Client mở task mới, server trả handle để tasks/get sau"
+        },
+        {
+          "key": "C",
+          "text": "Server trả input_required; client gửi lại request kèm inputResponses"
+        },
+        {
+          "key": "D",
+          "text": "Server giữ kết nối mở và gửi request ngược về client để hỏi"
+        }
+      ],
+      "answer": "C",
+      "explanation": "MRTR (SEP-2322): client gửi lại cùng request tới replica bất kỳ; không replica nào phải nhớ hội thoại; tool phải idempotent.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-009",
+      "type": "mcq",
+      "prompt": "Một result MCP 2026-07-28 không có trường resultType. Client hiểu thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Coi là “input_required”"
+        },
+        {
+          "key": "B",
+          "text": "Coi là “task” đang chạy"
+        },
+        {
+          "key": "C",
+          "text": "Coi là lỗi giao thức -32020"
+        },
+        {
+          "key": "D",
+          "text": "Coi là “complete”"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Changelog 2026-07-28: result thiếu resultType được coi là “complete”.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-010",
+      "type": "mcq",
+      "prompt": "Gateway nhận header Mcp-Name: read_docs nhưng body gọi delete_repo. Xử lý đúng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cho qua nhưng giảm rate limit của client đó"
+        },
+        {
+          "key": "B",
+          "text": "Từ chối với -32020 và ghi log bảo mật"
+        },
+        {
+          "key": "C",
+          "text": "Cho qua theo header vì header đọc nhanh hơn"
+        },
+        {
+          "key": "D",
+          "text": "Sửa header cho khớp body rồi chuyển tiếp"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Header để định tuyến, body là sự thật; header có thể bị giả nên lệch thì trả lỗi -32020.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-011",
+      "type": "mcq",
+      "prompt": "Theo changelog 2026-07-28, header Mcp-Method xuất hiện ở đâu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bắt buộc trên mọi POST"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ trên tools/call"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ khi client yêu cầu"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ trên resources/read"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Mcp-Method bắt buộc trên mọi POST; Mcp-Name đi kèm tools/call, resources/read, prompts/get. Proxy route, đếm quota, chặn theo tool ngay ở L7.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-012",
+      "type": "mcq",
+      "prompt": "Phân biệt MRTR và Tasks trong MCP 2026, phát biểu nào đúng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tasks thuộc core; MRTR là extension cho việc chạy lâu"
+        },
+        {
+          "key": "B",
+          "text": "Cả hai đều thuộc core và dùng chung resultType “task”"
+        },
+        {
+          "key": "C",
+          "text": "MRTR trả handle; Tasks buộc client gửi lại request gốc"
+        },
+        {
+          "key": "D",
+          "text": "MRTR thuộc core; Tasks là extension cho việc chạy lâu"
+        }
+      ],
+      "answer": "D",
+      "explanation": "MRTR khi thiếu input người dùng (gửi lại request gốc); Tasks trả resultType “task” + handle, dùng tasks/get/update/cancel, đã tách thành io.modelcontextprotocol/tasks (SEP-2663).",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-013",
+      "type": "mcq",
+      "prompt": "Viết MCP server phi trạng thái theo Python SDK v2 để chạy 2 replica sau LB thường. Cấu hình nào đúng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "mcp.run(transport=“stdio”, host=“0.0.0.0”, stateless_http=False)"
+        },
+        {
+          "key": "B",
+          "text": "mcp.run(transport=“streamable-http”, host=“127.0.0.1”, sticky=True)"
+        },
+        {
+          "key": "C",
+          "text": "mcp.run(transport=“streamable-http”, host=“0.0.0.0”, stateless_http=True)"
+        },
+        {
+          "key": "D",
+          "text": "MCPServer(“glossary”, transport=“sse”, host=“127.0.0.1”) rồi gọi run()"
+        }
+      ],
+      "answer": "C",
+      "explanation": "SDK v2 chuyển tuỳ chọn transport từ constructor sang run(); bind 0.0.0.0 (không phải 127.0.0.1), stateless_http=True, không cần sticky.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-014",
+      "type": "mcq",
+      "prompt": "Trong kiến trúc tham chiếu, thành phần nào thuộc control plane?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tutor agent, A2A agent, Router"
+        },
+        {
+          "key": "B",
+          "text": "Registry, Policy, Identity"
+        },
+        {
+          "key": "C",
+          "text": "Gateway, Router, MCP server"
+        },
+        {
+          "key": "D",
+          "text": "Sandbox, Telemetry, Secrets"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Control plane quyết định (ai được tồn tại, ai được làm gì, ai là ai); data plane thực thi; lớp nền là sandbox, durable state, telemetry, secrets.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-015",
+      "type": "mcq",
+      "prompt": "“Durable state” trong lớp nền của agent platform giữ gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Task và checkpoint"
+        },
+        {
+          "key": "B",
+          "text": "Credential upstream"
+        },
+        {
+          "key": "C",
+          "text": "Trace và chi phí"
+        },
+        {
+          "key": "D",
+          "text": "Nơi code tuỳ ý chạy"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Lớp nền: Sandbox (nơi code chạy), Durable state (task, checkpoint), Telemetry (trace, chi phí), Secrets (credential upstream).",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-016",
+      "type": "mcq",
+      "prompt": "Tutor agent có sẵn URL của grades MCP trong config nên có thể gọi thẳng, bỏ qua gateway. Cách sửa gốc mà slide nhấn mạnh?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Thêm cảnh báo vào system prompt tutor"
+        },
+        {
+          "key": "B",
+          "text": "Ẩn URL server khỏi file config của agent"
+        },
+        {
+          "key": "C",
+          "text": "Bật log chi tiết hơn ở phía grades MCP"
+        },
+        {
+          "key": "D",
+          "text": "Agent không giữ credential của server"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Gateway chỉ là điểm cưỡng chế nếu không ai đi vòng; chặn ở mạng (mTLS/NetworkPolicy) và ở credential: agent không có thứ gì để gọi trực tiếp.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-017",
+      "type": "mcq",
+      "prompt": "“Tutor không được đọc điểm của học viên khác.” Cưỡng chế ở đâu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Trong registry, ẩn tool grades khỏi tutor agent"
+        },
+        {
+          "key": "B",
+          "text": "Trong trace, bật cảnh báo khi phát hiện vi phạm"
+        },
+        {
+          "key": "C",
+          "text": "Policy ở gateway theo principal, kiểm lại ở server"
+        },
+        {
+          "key": "D",
+          "text": "Trong system prompt của tutor, nhắc rõ quy định"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Cưỡng chế theo principal, ở hai lớp, không ở prompt; trace chỉ phát hiện sau khi lộ.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-018",
+      "type": "mcq",
+      "prompt": "Trong bảng lựa chọn tự host / managed, ví dụ nào là sandbox managed?",
+      "options": [
+        {
+          "key": "A",
+          "text": "SPIRE, OPA, Cedar"
+        },
+        {
+          "key": "B",
+          "text": "E2B, Modal, Daytona"
+        },
+        {
+          "key": "C",
+          "text": "Firecracker, gVisor, Kata"
+        },
+        {
+          "key": "D",
+          "text": "Temporal, DBOS, OTel"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Sandbox mã nguồn mở: Firecracker · gVisor · Kata; managed: E2B · Modal · Daytona.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-019",
+      "type": "mcq",
+      "prompt": "Sau khi A2A v0.3 đổi agent.json thành agent-card.json, client cũ gặp hiện tượng gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Nhận 404 và kết luận “không có agent”"
+        },
+        {
+          "key": "B",
+          "text": "Nhận card cũ vì server tự chuyển hướng"
+        },
+        {
+          "key": "C",
+          "text": "Báo lỗi chữ ký JWS không hợp lệ ngay"
+        },
+        {
+          "key": "D",
+          "text": "Nhận lỗi 401 vì thiếu scheme bảo mật"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Hỏng im lặng: discovery hỏng trông giống vắng mặt, nên health check phải đọc được card tại /.well-known/agent-card.json.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-020",
+      "type": "mcq",
+      "prompt": "MCP Registry chính thức cung cấp điều gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Namespace xác thực qua DNS/GitHub"
+        },
+        {
+          "key": "B",
+          "text": "Quét bảo mật code của từng server"
+        },
+        {
+          "key": "C",
+          "text": "Cam kết uptime và độ bền cho server"
+        },
+        {
+          "key": "D",
+          "text": "Bằng chứng server chạy đúng mô tả"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Registry xác thực cái tên (server.json, namespace, API đọc, hash package), không xác thực lòng tin: không quét code, không host server nội bộ, không cam kết uptime.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-021",
+      "type": "mcq",
+      "prompt": "Agent Card A2A v1.0.1 hỗ trợ bao nhiêu security scheme, và chữ ký JWS có bắt buộc không?",
+      "options": [
+        {
+          "key": "A",
+          "text": "2 scheme; không hỗ trợ chữ ký JWS"
+        },
+        {
+          "key": "B",
+          "text": "5 scheme; chữ ký JWS là tuỳ chọn"
+        },
+        {
+          "key": "C",
+          "text": "3 scheme; chữ ký JWS là bắt buộc"
+        },
+        {
+          "key": "D",
+          "text": "5 scheme; chữ ký JWS là bắt buộc"
+        }
+      ],
+      "answer": "B",
+      "explanation": "APIKey, HTTPAuth, OAuth2, OpenIdConnect, MutualTls; signatures là tuỳ chọn. Card vừa là menu vừa là cổng.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-022",
+      "type": "mcq",
+      "prompt": "Enum TaskState của A2A trên dây có bao nhiêu hằng số và bao nhiêu trạng thái thật?",
+      "options": [
+        {
+          "key": "A",
+          "text": "9 hằng số, 9 trạng thái thật"
+        },
+        {
+          "key": "B",
+          "text": "10 hằng số, 8 trạng thái thật"
+        },
+        {
+          "key": "C",
+          "text": "9 hằng số, 8 trạng thái thật"
+        },
+        {
+          "key": "D",
+          "text": "8 hằng số, 8 trạng thái thật"
+        }
+      ],
+      "answer": "C",
+      "explanation": "TASK_STATE_UNSPECIFIED (= 0) không phải trạng thái thật; hai trạng thái chờ là INPUT_REQUIRED và AUTH_REQUIRED.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-023",
+      "type": "mcq",
+      "prompt": "Theo SEP-2596, một tính năng MCP bị đánh dấu Deprecated thì sao?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bị gỡ ngay ở bản spec kế tiếp sau 6 tháng"
+        },
+        {
+          "key": "B",
+          "text": "Ngừng chạy ngay, client phải nâng cấp gấp"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ chạy trong SDK cũ, spec hiện tại đã xoá"
+        },
+        {
+          "key": "D",
+          "text": "Vẫn chạy, thông báo tối thiểu 12 tháng mới xét gỡ"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Active → Deprecated (vẫn chạy, đừng build mới) → Removed; ở 2026-07-28 deprecated Roots, Sampling, Logging, DCR.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-024",
+      "type": "mcq",
+      "prompt": "Extension MCP nào đang ở mức Experimental theo bảng độ trưởng thành?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Server Card"
+        },
+        {
+          "key": "B",
+          "text": "Tasks"
+        },
+        {
+          "key": "C",
+          "text": "MCP Apps"
+        },
+        {
+          "key": "D",
+          "text": "Skills"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Final: Tasks, Skills, MCP Apps, Enterprise-Managed Authorization; Experimental: Server Card; Draft SEP: DPoP (SEP-1932), Workload Identity Federation (SEP-1933).",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-025",
+      "type": "mcq",
+      "prompt": "Vì sao proxy hiểu MCP trở nên rẻ từ năm 2026?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mọi server bắt buộc chạy sau một load balancer"
+        },
+        {
+          "key": "B",
+          "text": "Không còn session; tên method có sẵn trên header"
+        },
+        {
+          "key": "C",
+          "text": "Body JSON được nén nhỏ hơn nên parse rất nhanh"
+        },
+        {
+          "key": "D",
+          "text": "Service mesh đã tự đọc được tool trong body"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Proxy L7 thường chỉ thấy POST /mcp; nay đọc Mcp-Method/Mcp-Name, đối chiếu body, đặt quota/policy theo tool và principal.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-026",
+      "type": "mcq",
+      "prompt": "Trong tám việc gateway làm trên mỗi lời gọi, bước đầu tiên là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Áp policy người, agent, tool"
+        },
+        {
+          "key": "B",
+          "text": "Định tuyến virtual server"
+        },
+        {
+          "key": "C",
+          "text": "Xác thực đúng audience"
+        },
+        {
+          "key": "D",
+          "text": "Đối chiếu header với body"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Thứ tự: xác thực → đối chiếu header = body → policy → allowlist → định tuyến → quota → credential (không passthrough) → span. Thứ tự khâu là bảo mật.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-027",
+      "type": "mcq",
+      "prompt": "Khi nhà cung cấp nói sản phẩm “hỗ trợ MCP”, nên hỏi theo bốn cột nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Latency, throughput, uptime, giá theo giờ"
+        },
+        {
+          "key": "B",
+          "text": "SDK, ngôn ngữ, license, số sao GitHub"
+        },
+        {
+          "key": "C",
+          "text": "mTLS, retry, traffic split, rate limit"
+        },
+        {
+          "key": "D",
+          "text": "Gộp server, REST → MCP, JWT/policy, quota"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Bảng so sánh agentgateway, AgentCore Gateway, APIM, Kong, Cloudflare theo bốn cột; “chưa rõ” không có nghĩa là không có.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-028",
+      "type": "mcq",
+      "prompt": "Gateway API Inference Extension v1.6.2 làm việc gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chọn pod model, không chọn tool"
+        },
+        {
+          "key": "B",
+          "text": "Data plane agent → LLM, tool, agent"
+        },
+        {
+          "key": "C",
+          "text": "Gateway API trên nền Envoy proxy"
+        },
+        {
+          "key": "D",
+          "text": "Tên mới của Envoy AI Gateway"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Bốn dự án Kubernetes, bốn việc: agentgateway (data plane agent), Agent Router (tên mới Envoy AI Gateway), kgateway (Gateway API trên Envoy), Inference Extension (chọn pod model).",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-029",
+      "type": "mcq",
+      "prompt": "Đội bảo mật audit bằng Istio. Họ có thấy policy theo tool của agentgateway không?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không; agentgateway không có policy"
+        },
+        {
+          "key": "B",
+          "text": "Không; đó là ranh giới policy thứ hai"
+        },
+        {
+          "key": "C",
+          "text": "Có; Istio quản lý cấu hình agentgateway"
+        },
+        {
+          "key": "D",
+          "text": "Có; ztunnel L4 ghi lại tên từng tool"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Cấu hình riêng của agentgateway Istio không quản lý; ở Istio 1.31 tích hợp còn thử nghiệm, tắt mặc định (PILOT_ENABLE_AGENTGATEWAY).",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-030",
+      "type": "mcq",
+      "prompt": "Gateway được phép trả kết quả cache nào cho người dùng khác?",
+      "options": [
+        {
+          "key": "A",
+          "text": "resources/read bảng điểm có cacheScope “private”"
+        },
+        {
+          "key": "B",
+          "text": "Kết quả tools/call enroll_course vừa chạy xong"
+        },
+        {
+          "key": "C",
+          "text": "Câu trả lời LLM cho một câu hỏi giống hệt trước"
+        },
+        {
+          "key": "D",
+          "text": "tools/list có cacheScope “public”, còn trong ttlMs"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Chỉ cache dùng chung kết quả public; tác dụng phụ không bao giờ cache; ttlMs là gợi ý độ tươi, không bảo đảm còn đúng (SEP-2549).",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-031",
+      "type": "mcq",
+      "prompt": "Fleet 40 MCP server × 15 tool. Tool routing nên cho model thấy khoảng bao nhiêu tool mỗi lượt?",
+      "options": [
+        {
+          "key": "A",
+          "text": "15 tool của một server"
+        },
+        {
+          "key": "B",
+          "text": "40 tool, mỗi server một"
+        },
+        {
+          "key": "C",
+          "text": "~7 tool liên quan"
+        },
+        {
+          "key": "D",
+          "text": "Toàn bộ 600 tool"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Tool routing lọc 40 × 15 xuống ~7 tool liên quan; model routing và agent routing là hai quyết định khác.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-032",
+      "type": "mcq",
+      "prompt": "Kỹ thuật định tuyến “thử rẻ, leo thang khi kém tự tin” là gì và tốn bao nhiêu lời gọi?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Classifier; vài ms"
+        },
+        {
+          "key": "B",
+          "text": "Cascade; 1–2 lời gọi"
+        },
+        {
+          "key": "C",
+          "text": "Semantic; 1 embedding"
+        },
+        {
+          "key": "D",
+          "text": "LLM-as-router; 1 lời gọi"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Năm kỹ thuật theo giá: luật/từ khoá ≈ 0, semantic 1 embedding, classifier vài ms, cascade 1–2 lời gọi, LLM-as-router 1 lời gọi đầy đủ; luôn có fallback.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-033",
+      "type": "mcq",
+      "prompt": "Trên ToolBench (3.251 tool), với câu khó có tool đúng xếp hạng 6–20, top-5 cố định đạt bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "0%"
+        },
+        {
+          "key": "B",
+          "text": "16,7%"
+        },
+        {
+          "key": "C",
+          "text": "90,3%"
+        },
+        {
+          "key": "D",
+          "text": "90,8%"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Top-5 cố định 0%, tìm sâu hơn khi cần 16,7%: list ngắn gần như không mất độ phủ nhưng top-k cố định bỏ sót câu khó.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-034",
+      "type": "mcq",
+      "prompt": "40 MCP server × 15 tool × 300 token/định nghĩa, cửa sổ 200k. Còn lại bao nhiêu token để làm việc?",
+      "options": [
+        {
+          "key": "A",
+          "text": "60k token"
+        },
+        {
+          "key": "B",
+          "text": "180k token"
+        },
+        {
+          "key": "C",
+          "text": "120k token"
+        },
+        {
+          "key": "D",
+          "text": "20k token"
+        }
+      ],
+      "answer": "D",
+      "explanation": "40 × 15 × 300 = 180k token định nghĩa tool = 90% cửa sổ, còn 20k. Bật tool search để nạp ~7 tool khi cần.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-035",
+      "type": "mcq",
+      "prompt": "Bẫy khi dùng tool search kèm defer_loading là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Model không bao giờ thấy tool nào cả"
+        },
+        {
+          "key": "B",
+          "text": "Phải thêm một sandbox chạy code riêng"
+        },
+        {
+          "key": "C",
+          "text": "Defer tất cả tool thì gặp lỗi 400"
+        },
+        {
+          "key": "D",
+          "text": "Token tăng thay vì giảm 85% như báo"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Tool search + defer_loading: token −85% (ví dụ nhà cung cấp); cái giá là bẫy defer tất cả → lỗi 400.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-036",
+      "type": "mcq",
+      "prompt": "Code Mode (gọi tool bằng code) cắt thuế context thế nào và đổi lại cái giá gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Token −85% với defer_loading; dễ lỗi 400"
+        },
+        {
+          "key": "B",
+          "text": "1,17 triệu → ~1.000 token; cần sandbox chặt"
+        },
+        {
+          "key": "C",
+          "text": "13,6% → 43,1% chọn đúng; thêm bước truy hồi"
+        },
+        {
+          "key": "D",
+          "text": "Token −98% trên APIBank; cần thêm registry"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Code Mode dời bài toán từ ngữ cảnh sang sandbox: ít lượt model ↔ tool, nhưng code tuỳ ý mở bề mặt tấn công mới (16 lớp, 5 pha).",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-037",
+      "type": "mcq",
+      "prompt": "11 Agent Card có 4 agent khớp skill “grading”. Thứ tự agent routing đúng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Lọc theo quyền, xếp hạng, rồi fallback"
+        },
+        {
+          "key": "B",
+          "text": "Xếp hạng chất lượng, rồi lọc theo quyền"
+        },
+        {
+          "key": "C",
+          "text": "Chọn agent rẻ nhất, lỗi thì thử ngẫu nhiên"
+        },
+        {
+          "key": "D",
+          "text": "Gửi cả 4 agent song song, lấy kết quả nhanh"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Lọc principal/tenant/dữ liệu (còn 2) → xếp hạng chất lượng, độ trễ, chi phí, tải → fallback agent 2 → người. Agent Card không quy định cách chấm ứng viên.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-038",
+      "type": "mcq",
+      "prompt": "Ba lớp danh tính: “tiến trình nào?” được trả lời bằng chuẩn nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "DPoP (RFC 9449) gắn token vào khoá"
+        },
+        {
+          "key": "B",
+          "text": "OAuth scope và policy trên từng lời gọi"
+        },
+        {
+          "key": "C",
+          "text": "RFC 8693 token exchange theo từng hop"
+        },
+        {
+          "key": "D",
+          "text": "SPIFFE/SPIRE với SVID ngắn hạn"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Tiến trình nào: SPIFFE/SPIRE; ai giữ khoá: DPoP; được làm gì: OAuth + policy. Đừng để một chuẩn trả lời cả ba.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-039",
+      "type": "mcq",
+      "prompt": "MCP client gọi tool chưa có token và nhận 401 kèm metadata URL. Bước tiếp theo?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đăng ký client động qua DCR rồi gọi lại"
+        },
+        {
+          "key": "B",
+          "text": "Xin token trực tiếp từ chính MCP server"
+        },
+        {
+          "key": "C",
+          "text": "GET Protected Resource Metadata (RFC 9728)"
+        },
+        {
+          "key": "D",
+          "text": "Gửi lại request với Mcp-Session-Id mới"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Luồng: 401 + metadata URL → PRM (RFC 9728) → xin token với client_id = URL metadata (CIMD), resource = server (RFC 8707).",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-040",
+      "type": "mcq",
+      "prompt": "MCP server nhận token có audience là một server khác. Làm gì và vì sao?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chuyển tiếp token sang server đích"
+        },
+        {
+          "key": "B",
+          "text": "Đổi audience rồi xử lý bình thường"
+        },
+        {
+          "key": "C",
+          "text": "Từ chối, để chống token passthrough"
+        },
+        {
+          "key": "D",
+          "text": "Chấp nhận nếu chữ ký token hợp lệ"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Access token có audience = chính MCP server; server kiểm audience và từ chối audience khác.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-041",
+      "type": "mcq",
+      "prompt": "Phân biệt rug pull với shadowing trong tấn công tool?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Rug pull điều khiển tool khác; shadowing đổi mô tả sau duyệt"
+        },
+        {
+          "key": "B",
+          "text": "Rug pull giấu lệnh trong kết quả; shadowing đổi tên package"
+        },
+        {
+          "key": "C",
+          "text": "Cả hai đều là chỉ thị ẩn trong kết quả trả về của tool"
+        },
+        {
+          "key": "D",
+          "text": "Rug pull đổi mô tả sau duyệt; shadowing điều khiển tool khác"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Tool poisoning: chỉ thị ẩn trong mô tả/kết quả; rug pull: đổi mô tả sau khi duyệt (pin hash, drift thì chặn); shadowing: mô tả độc điều khiển tool đáng tin khác (quét chéo, cách ly).",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-042",
+      "type": "mcq",
+      "prompt": "MCPTox cho thấy tỉ lệ từ chối cao nhất của các model được thử là bao nhiêu, và bài học là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "<3%; phải phòng thủ ở hạ tầng, nhiều lớp"
+        },
+        {
+          "key": "B",
+          "text": "72,8%; model tự từ chối đủ, không cần gateway"
+        },
+        {
+          "key": "C",
+          "text": "93,6%; chỉ cần tối ưu metadata là an toàn"
+        },
+        {
+          "key": "D",
+          "text": "5,5%; chỉ cần quét mã nguồn lúc đăng ký"
+        }
+      ],
+      "answer": "A",
+      "explanation": "MCPTox: <3% từ chối cao nhất (Claude 3.7 Sonnet), 72,8% tấn công thành công trên o1-mini. Model hầu như không tự từ chối.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-043",
+      "type": "mcq",
+      "prompt": "Pin hash schema tool có điểm mù nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chặn nhầm mọi server có chữ ký JWS"
+        },
+        {
+          "key": "B",
+          "text": "Server remote giữ schema, đổi hành vi"
+        },
+        {
+          "key": "C",
+          "text": "Không phát hiện được mô tả tool bị đổi"
+        },
+        {
+          "key": "D",
+          "text": "Không phát hiện được schema bị sửa đổi"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Pin hash bắt được mô tả/schema thay đổi, nhưng sót server remote giữ nguyên schema mà đổi hành vi.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-044",
+      "type": "mcq",
+      "prompt": "Trong thiết kế kiểu CaMeL, LLM cách ly có vai trò gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Gán nhãn capability, quyết định đích đến"
+        },
+        {
+          "key": "B",
+          "text": "Sinh luồng điều khiển rồi gọi mọi tool"
+        },
+        {
+          "key": "C",
+          "text": "Đọc dữ liệu lạ, không được gọi tool"
+        },
+        {
+          "key": "D",
+          "text": "Lập kế hoạch, chỉ thấy câu hỏi tin cậy"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Tách luồng điều khiển khỏi dữ liệu không tin cậy: LLM lập kế hoạch chỉ thấy câu hỏi, LLM cách ly đọc dữ liệu lạ, giá trị mang nhãn capability. Giới hạn: không tự cộng dồn khi nhiều agent.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-045",
+      "type": "mcq",
+      "prompt": "Đơn vị capacity đúng cho vòng lặp agent là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Số request mỗi giây và độ trễ trung bình mỗi request"
+        },
+        {
+          "key": "B",
+          "text": "Phần trăm CPU và RAM trung bình của mỗi pod"
+        },
+        {
+          "key": "C",
+          "text": "Số tool được đăng ký trong registry của platform"
+        },
+        {
+          "key": "D",
+          "text": "Phiên đồng thời, độ sâu hàng đợi, tồn kho sandbox"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Vòng lặp agent sống phút đến giờ, model quyết số lời gọi, chi phí đuôi dài, có thể không kết thúc (MCPMark: 16,2 lượt, 17,4 lời gọi tool mỗi task).",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-046",
+      "type": "mcq",
+      "prompt": "Xây agent bằng Tool Runner của SDK: ai cấp harness, ai cấp deployment?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Harness: SDK; deployment: bạn"
+        },
+        {
+          "key": "B",
+          "text": "Harness: bạn; deployment: bạn"
+        },
+        {
+          "key": "C",
+          "text": "Harness: SDK; deployment: nhà cung cấp"
+        },
+        {
+          "key": "D",
+          "text": "Harness: nhà cung cấp; deployment: bạn"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Hai trục độc lập: vòng lặp tự viết (bạn/bạn), Tool Runner và Agent SDK (SDK/bạn), Managed Agents (nhà cung cấp/nhà cung cấp).",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-047",
+      "type": "mcq",
+      "prompt": "So sánh max_tokens và task budget, phát biểu nào đúng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "max_tokens tư vấn cho cả vòng lặp, không cắt"
+        },
+        {
+          "key": "B",
+          "text": "Task budget model thấy bộ đếm, tự kết thúc gọn"
+        },
+        {
+          "key": "C",
+          "text": "max_tokens model thấy bộ đếm, tự kết thúc gọn"
+        },
+        {
+          "key": "D",
+          "text": "Task budget cưỡng chế theo đô-la cho cả phiên"
+        }
+      ],
+      "answer": "B",
+      "explanation": "max_tokens cưỡng chế mỗi response, model không biết nên bị cắt ngang; task budget tư vấn cả vòng lặp (tối thiểu 20.000 token); session budget cưỡng chế theo đô-la.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-048",
+      "type": "mcq",
+      "prompt": "LangGraph checkpointer thuộc bậc nào trong thang ba bậc của trạng thái?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ngoại vi hoá: bản ghi trong store dùng chung"
+        },
+        {
+          "key": "B",
+          "text": "Handle tường minh: MCP Tasks và A2A task"
+        },
+        {
+          "key": "C",
+          "text": "Checkpoint framework: state đồ thị theo thread_id"
+        },
+        {
+          "key": "D",
+          "text": "Durable execution: lịch sử sự kiện từng bước"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Ngoại vi hoá (Redis, Postgres) → checkpoint framework (LangGraph) → durable execution (Temporal, Restate, DBOS, Inngest).",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-049",
+      "type": "mcq",
+      "prompt": "Khôi phục agent từ checkpoint mà quên chuỗi uỷ quyền thì rủi ro gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mất file sandbox"
+        },
+        {
+          "key": "B",
+          "text": "Trùng tác dụng phụ"
+        },
+        {
+          "key": "C",
+          "text": "Trượt prompt cache"
+        },
+        {
+          "key": "D",
+          "text": "Leo thang quyền"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Checkpoint đủ bốn thứ (agent, task, filesystem, artifact) kèm principal, chuỗi uỷ quyền, hash schema, version policy, tác dụng phụ cuối đã xong.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-050",
+      "type": "mcq",
+      "prompt": "Lỗi an toàn im lặng của compaction là gì, và sửa ở đâu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tóm tắt xoá tool call; tắt compaction hoàn toàn"
+        },
+        {
+          "key": "B",
+          "text": "Tóm tắt bỏ luật an toàn; ghim luật ngoài vùng nén"
+        },
+        {
+          "key": "C",
+          "text": "Tóm tắt lộ dữ liệu riêng; mã hoá toàn bộ lịch sử"
+        },
+        {
+          "key": "D",
+          "text": "Tóm tắt làm tràn cửa sổ; giảm ngưỡng xuống 50K"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bộ tóm tắt bỏ luật an toàn đầu phiên vì trông như phần mở đầu cũ; lỗi code là chỉ lấy content[0].text làm mất compaction state.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-051",
+      "type": "mcq",
+      "prompt": "Quy ước OTel GenAI cho MCP (trạng thái Development) lệch spec 2026-07-28 ở điểm nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vẫn còn mcp.session.id và span cho initialize"
+        },
+        {
+          "key": "B",
+          "text": "Thiếu thuộc tính mcp.method.name cho mỗi span"
+        },
+        {
+          "key": "C",
+          "text": "Không có thuộc tính gen_ai.tool.name cho tool"
+        },
+        {
+          "key": "D",
+          "text": "Không hỗ trợ traceparent trong params._meta"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Dùng chuẩn Development sau một lớp adapter mỏng; thay session ID bằng task ID, conversation ID.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-052",
+      "type": "mcq",
+      "prompt": "Về cardinality, ID từng lượt chạy agent nên đặt ở đâu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Làm nhãn metric cho mọi chỉ số"
+        },
+        {
+          "key": "B",
+          "text": "Trong tên metric, mỗi lượt một metric"
+        },
+        {
+          "key": "C",
+          "text": "Trong log, xoá khỏi trace cho nhẹ"
+        },
+        {
+          "key": "D",
+          "text": "Trong trace, không làm nhãn metric"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Metric theo tên agent ổn định; ID từng lượt để trong trace.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-053",
+      "type": "mcq",
+      "prompt": "Chỉ số “chi phí theo agent” cần lưu ý gì theo OTel GenAI hiện tại?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chỉ cần đếm token, chi phí tool và sandbox không đáng kể"
+        },
+        {
+          "key": "B",
+          "text": "Gán chi phí cho gateway vì mọi lời gọi đều đi qua nó"
+        },
+        {
+          "key": "C",
+          "text": "Chưa có thuộc tính chi phí chuẩn; tự thêm kèm version bảng giá"
+        },
+        {
+          "key": "D",
+          "text": "Đã có thuộc tính chi phí chuẩn, chỉ cần bật exporter mặc định"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Chi phí theo agent gồm token, tool, sandbox theo bảng giá có version; OTel GenAI metrics mới có token usage (Development).",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-054",
+      "type": "mcq",
+      "prompt": "LiveMCPBench báo 79,0%, Toolathlon báo 38,6%. Vì sao không đặt chung một bảng xếp hạng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Hai benchmark đo cùng một tập task giống nhau"
+        },
+        {
+          "key": "B",
+          "text": "Cách chấm khác nhau, LiveMCPBench dùng LLM chấm"
+        },
+        {
+          "key": "C",
+          "text": "LiveMCPBench chỉ thử trên một model rất nhỏ"
+        },
+        {
+          "key": "D",
+          "text": "Toolathlon chỉ có 11 server và 231 task CRUD"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Benchmark MCP 39–82% tuỳ cách chấm; thanh khác màu dùng LLM chấm hoặc tính điểm từng phần; luôn đọc kèm đơn vị.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-055",
+      "type": "mcq",
+      "prompt": "Hệ nghiên cứu đa agent của Anthropic dùng khoảng bao nhiêu token so với một lượt chat?",
+      "options": [
+        {
+          "key": "A",
+          "text": "≈15×"
+        },
+        {
+          "key": "B",
+          "text": "≈4×"
+        },
+        {
+          "key": "C",
+          "text": "≈24×"
+        },
+        {
+          "key": "D",
+          "text": "≈98×"
+        }
+      ],
+      "answer": "A",
+      "explanation": "≈15× với đa agent, single agent ≈4× (số tự báo, 13/6/2025); thêm agent không miễn phí, phải so ở cùng ngân sách token.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-056",
+      "type": "mcq",
+      "prompt": "MAST (arXiv:2503.13657) phân loại được bao nhiêu kiểu hỏng của hệ đa agent, từ bao nhiêu trace?",
+      "options": [
+        {
+          "key": "A",
+          "text": "7 kiểu, từ 1.642 trace"
+        },
+        {
+          "key": "B",
+          "text": "14 kiểu, từ 1.348 trace"
+        },
+        {
+          "key": "C",
+          "text": "16 kiểu, từ 1.899 trace"
+        },
+        {
+          "key": "D",
+          "text": "14 kiểu, từ 1.642 trace"
+        }
+      ],
+      "answer": "D",
+      "explanation": "MAST: 14 kiểu hỏng, 1.642 trace, 7 framework.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-057",
+      "type": "mcq",
+      "prompt": "Đánh giá time horizon của METR cho cùng một model cho thấy điều gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Model đạt time horizon vững chắc trên 16 giờ"
+        },
+        {
+          "key": "B",
+          "text": "Khoảng tin cậy 95% hẹp, từ 11 đến 13 giờ"
+        },
+        {
+          "key": "C",
+          "text": "Cách chấm gian lận đổi kết quả khoảng 24 lần"
+        },
+        {
+          "key": "D",
+          "text": "Kết quả ổn định trong khoảng ±10% mọi cách chấm"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Gian lận tính thất bại 11,3 giờ, bỏ gian lận 71 giờ, tính thành công >270 giờ; CI 95% của số giữa là 13–11.400 giờ; không con số nào là phép đo vững.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-058",
+      "type": "mcq",
+      "prompt": "Lab nền tảng Day26-MCP-Tools-Integration: bước 03 Production gồm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Function calling, một tool, cần Gemini key"
+        },
+        {
+          "key": "B",
+          "text": "Bearer token (401/403), registry, v1 + v2"
+        },
+        {
+          "key": "C",
+          "text": "Server + client cơ bản, không cần API key"
+        },
+        {
+          "key": "D",
+          "text": "ADK + MCP remote ở cổng :8085/mcp"
+        }
+      ],
+      "answer": "B",
+      "explanation": "01 Function calling (Gemini key), 02 MCP cơ bản (không key), 03 Production, 04 Agent thật với ADK + FastMCP (Gemini + WeatherAPI).",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-059",
+      "type": "mcq",
+      "prompt": "Trong Colosseum, vai PROSECUTE làm gì và luật chơi ra sao?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đọc trace đối thủ, cáo buộc invariant vỡ; sai thì mất máu"
+        },
+        {
+          "key": "B",
+          "text": "Soạn câu hỏi kèm mutation manifest bắn vào agent đối thủ"
+        },
+        {
+          "key": "C",
+          "text": "Trả lời có trích dẫn khi MCP/A2A đang nói dối agent mình"
+        },
+        {
+          "key": "D",
+          "text": "Đọc log client của mình, tự sửa lỗi; không bị trừ máu"
+        }
+      ],
+      "answer": "A",
+      "explanation": "ATTACK soạn câu hỏi + mutation manifest; DEFEND trả lời có trích dẫn; PROSECUTE nộp cáo buộc invariant nào vỡ, ở sự kiện nào. Không cáo buộc thì không có sát thương.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    },
+    {
+      "id": "T2D11-060",
+      "type": "mcq",
+      "prompt": "Lệnh khởi đầu Colosseum theo slide là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "make install · make doctor · make spar BOT=rookie"
+        },
+        {
+          "key": "B",
+          "text": "make setup · make test · make attack BOT=rookie"
+        },
+        {
+          "key": "C",
+          "text": "make install · make build · make arena BOT=boss"
+        },
+        {
+          "key": "D",
+          "text": "make doctor · make defend · make spar BOT=pro"
+        }
+      ],
+      "answer": "A",
+      "explanation": "BẮT ĐẦU: make install · make doctor · make spar BOT=rookie.",
+      "source": "onthi/Slide_Day_11_MCPA2A_Infra_AgenticRouting.pdf"
+    }
+  ]
+}

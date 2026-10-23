@@ -1,0 +1,526 @@
+{
+  "mcq": [
+    [
+      "Theo slide, chọn nhà cung cấp đám mây cho AI dựa trên bốn yếu tố nào?",
+      "Loại khối lượng, ngân sách, tuân thủ, độ trễ",
+      "Thương hiệu, số vùng, ngôn ngữ SDK, giấy phép",
+      "Giá GPU, số SM, băng thông HBM, công suất TDP",
+      "Ngân sách, số GPU, loại chip, tốc độ mạng LAN",
+      "Slide bản đồ nhà cung cấp: loại khối lượng × ngân sách × tuân thủ × độ trễ (latency)."
+    ],
+    [
+      "Giá niêm yết GPU ở ba đám mây lớn so với đám mây GPU chuyên biệt thế nào?",
+      "Cao hơn khoảng 1,5 đến 3 lần",
+      "Thấp hơn khoảng 1,5 đến 3 lần",
+      "Tương đương, chênh dưới 10%",
+      "Cao hơn khoảng 5 đến 8 lần",
+      "Đám mây lớn đắt hơn 1,5–3 lần, đổi lại có dịch vụ quản lý, vùng khả dụng, SLA và tuân thủ."
+    ],
+    [
+      "Theo cây quyết định, đội huấn luyện nhiều bằng JAX/PyTorch và quan tâm TPU nên chọn đám mây nào?",
+      "Google Cloud",
+      "AWS",
+      "Azure",
+      "Viettel / FPT / VNG",
+      "Nhánh “PyTorch/JAX nặng, quan tâm TPU?” → Google Cloud (Vertex AI, GKE, TPU Ironwood)."
+    ],
+    [
+      "Không rơi vào nhánh nào của cây quyết định, chỉ cần GPU giá thấp và đội có kỹ năng hạ tầng. Nên xét gì?",
+      "Đám mây GPU chuyên biệt như CoreWeave, Lambda",
+      "Đám mây trong nước như Viettel IDC, FPT",
+      "Azure vì có mô hình OpenAI tích hợp sẵn",
+      "Tự mua DGX đặt tại chỗ ngay từ đầu",
+      "Slide cây quyết định: ngoài các nhánh, cần GPU rẻ và tự vận hành được thì xét CoreWeave, Lambda, RunPod."
+    ],
+    [
+      "Nhận định “đám mây trong nước chỉ có T4/V100” hiện nay thế nào?",
+      "Đã lỗi thời; FPT, Viettel đã có H100/H200",
+      "Vẫn đúng; chỉ FPT mới có thêm A100",
+      "Vẫn đúng với mọi nhà cung cấp trừ CMC",
+      "Đã lỗi thời; nhưng chỉ có L4 và A10G",
+      "FPT AI Factory có HGX H100/H200, B300; Viettel có H200 và DGX B200; VNG có HGX H100."
+    ],
+    [
+      "Hạn chế còn lại của đám mây trong nước so với đám mây lớn là gì?",
+      "Ít vùng khả dụng và ít dịch vụ quản lý",
+      "Chưa có GPU thế hệ Hopper nào",
+      "Không đáp ứng luật dữ liệu Việt Nam",
+      "Không hỗ trợ InfiniBand giữa các nút",
+      "Slide đám mây trong nước: hạn chế còn lại là ít vùng khả dụng và ít dịch vụ quản lý hơn."
+    ],
+    [
+      "Luật Bảo vệ dữ liệu cá nhân 91/2025 có hiệu lực từ ngày nào?",
+      "01/01/2026",
+      "01/07/2025",
+      "01/03/2026",
+      "01/01/2025",
+      "Luật Dữ liệu 60/2024 hiệu lực 01/07/2025; Luật BVDLCN 91/2025 hiệu lực 01/01/2026; Luật AI 134/2025 từ 01/03/2026."
+    ],
+    [
+      "Mô hình AI-aaS (OpenAI API, Bedrock) có đặc điểm nào?",
+      "Nhanh nhất, không cần hạ tầng, tính phí theo token",
+      "Kiểm soát GPU, cần nhóm vận hành riêng để quản lý",
+      "Tự mở rộng, nhà cung cấp quản lý huấn luyện, phục vụ",
+      "Kiểm soát tối đa, phải tự lo điện, làm mát và mạng",
+      "Bốn mô hình: AI-aaS nhanh nhất, PaaS ít vận hành, IaaS kiểm soát GPU, vật lý kiểm soát tối đa."
+    ],
+    [
+      "Hệ thống AI thường kết hợp các mô hình triển khai theo thứ tự nào?",
+      "Tạo mẫu AI-aaS → phục vụ PaaS → huấn luyện nặng IaaS",
+      "Tạo mẫu IaaS → phục vụ AI-aaS → huấn luyện nặng PaaS",
+      "Tạo mẫu PaaS → phục vụ IaaS → huấn luyện nặng AI-aaS",
+      "Tạo mẫu AI-aaS → phục vụ IaaS → huấn luyện nặng PaaS",
+      "Slide bốn mô hình triển khai: tạo mẫu bằng AI-aaS, phục vụ bằng PaaS, huấn luyện nặng bằng IaaS."
+    ],
+    [
+      "Trong mô hình trách nhiệm chia sẻ, việc nào thuộc nhóm vận hành (người dùng)?",
+      "Chống prompt injection, cấp quyền tối thiểu",
+      "Chống tấn công DDoS ở mạng lõi của vùng",
+      "Bảo trì phần cứng vật lý và lớp ảo hoá",
+      "Đảm bảo độ sẵn sàng của vùng khả dụng",
+      "Nhà cung cấp lo hạ tầng vật lý, ảo hoá, mạng lõi/DDoS; người dùng lo bảo mật mô hình, mã hoá, least privilege, prompt injection, tuân thủ."
+    ],
+    [
+      "Theo slide, sự cố bảo mật đám mây phổ biến nhất nằm ở đâu?",
+      "Phía người dùng, như bucket để công khai",
+      "Phía nhà cung cấp, như lỗi lớp ảo hoá",
+      "Phần cứng GPU hỏng trong trung tâm dữ liệu",
+      "Tấn công DDoS vào mạng lõi của vùng",
+      "Sự cố phổ biến: bucket công khai, khoá truy cập lộ trong mã nguồn, quyền *:* cho mọi vai trò."
+    ],
+    [
+      "Trong landing zone, gộp mọi thứ vào một tài khoản gây hậu quả gì?",
+      "Không tách được ngân sách, quyền và log về sau",
+      "Không chạy được máy GPU trong tài khoản đó",
+      "SCP tự chặn mọi vùng ngoài us-east-1",
+      "Terraform không quản lý được tệp state nữa",
+      "Slide landing zone: sai sót thiết kế ban đầu rất tốn kém; một tài khoản khiến không thể tách ngân sách, quyền, nhật ký."
+    ],
+    [
+      "GPU H100 bật bao nhiêu SM (streaming multiprocessor)?",
+      "132",
+      "144",
+      "128",
+      "108",
+      "Chip GH100 đầy đủ có 144 SM trong 8 GPC; H100 bật 132 SM."
+    ],
+    [
+      "Mỗi SM của H100 gồm những gì?",
+      "128 lõi FP32 + 4 lõi tensor",
+      "64 lõi FP32 + 8 lõi tensor",
+      "32 lõi FP32 + 1 lõi tensor",
+      "256 lõi FP32 + 4 lõi tensor",
+      "Mỗi SM có 4 phân vùng, mỗi phân vùng 32 lõi FP32 + 1 lõi tensor → 128 FP32 + 4 tensor, 256 KB thanh ghi."
+    ],
+    [
+      "H100 có 132 SM. Tổng số lõi tensor của GPU là bao nhiêu?",
+      "528",
+      "576",
+      "132",
+      "1 056",
+      "132 SM × 4 lõi tensor = 528 (và 132 × 128 = 16 896 lõi FP32)."
+    ],
+    [
+      "Khác biệt chính giữa lõi tensor và lõi CUDA là gì?",
+      "Lõi tensor làm cả khối nhân–cộng ma trận mỗi lệnh",
+      "Lõi tensor tính một phép d = a × b + c mỗi lần",
+      "Lõi CUDA quyết định gần hết thông lượng suy luận",
+      "Lõi tensor chỉ chạy được định dạng FP32 chuẩn",
+      "Lõi tensor làm MMA trên khối ma trận, đầu vào độ chính xác thấp; thông lượng suy luận LLM gần như đến từ lõi tensor."
+    ],
+    [
+      "Với VRAM (HBM), dung lượng và băng thông lần lượt quyết định điều gì?",
+      "Mô hình chạy được không, và chạy nhanh đến đâu",
+      "Mô hình chạy nhanh đến đâu, và chạy được không",
+      "Số SM được bật, và số lõi tensor hoạt động",
+      "Số yêu cầu đồng thời, và kích thước L2 cache",
+      "Slide phân cấp bộ nhớ: dung lượng quyết định chạy được không, băng thông quyết định tốc độ."
+    ],
+    [
+      "Llama-3-70B (70,55 tỉ tham số) ở FP8 cần khoảng bao nhiêu bộ nhớ cho trọng số?",
+      "70,6 GB",
+      "141 GB",
+      "35,3 GB",
+      "80 GB",
+      "Trọng số = số tham số × byte: 70,55 tỉ × 1 byte ≈ 70,6 GB (FP16 141 GB, FP4 35,3 GB)."
+    ],
+    [
+      "Llama-3-70B: 80 lớp, 8 đầu KV, kích thước đầu 128, FP16. KV cache mỗi token là bao nhiêu?",
+      "320 KiB",
+      "160 KiB",
+      "640 KiB",
+      "2,7 MiB",
+      "2 × 80 × 8 × 128 × 2 byte = 327 680 byte = 320 KiB mỗi token."
+    ],
+    [
+      "Vì sao Llama-3-70B FP16 không vừa một H200?",
+      "Riêng trọng số 141,1 GB đã vượt 141 GB VRAM",
+      "KV cache 8K token vượt quá 2,7 GB cho phép",
+      "H200 không hỗ trợ định dạng số FP16",
+      "Băng thông 4,8 TB/s không đủ cho FP16",
+      "Slide tính bộ nhớ: FP16 141,1 GB > 141 GB của H200, chưa tính KV và bộ nhớ trung gian."
+    ],
+    [
+      "Rack GB200 NVL72 dùng khoảng 125 kW. Hệ quả về hạ tầng là gì?",
+      "Phải làm mát bằng chất lỏng",
+      "Làm mát bằng khí như rack thường",
+      "Chỉ cần thêm máy phát điện dự phòng",
+      "Ngang một máy DGX H100 10,2 kW",
+      "Rack doanh nghiệp 10–30 kW; GB200 NVL72 gấp 4–12 lần nên phải làm mát bằng chất lỏng."
+    ],
+    [
+      "Về số FLOPS trong bảng thông số GPU, slide lưu ý điều gì?",
+      "Số quảng cáo thường là sparse, gấp đôi dense",
+      "Số quảng cáo thường là dense, gấp đôi sparse",
+      "Sparse và dense luôn bằng nhau ở FP8",
+      "Số quảng cáo là FP32, gấp tư số FP8",
+      "Mọi số trong bảng là dense; số NVIDIA quảng cáo thường là sparse (gấp đôi)."
+    ],
+    [
+      "Thông số bộ nhớ của H200 theo bảng là gì?",
+      "141 GB HBM3e, băng thông 4,8 TB/s",
+      "80 GB HBM3, băng thông 3,35 TB/s",
+      "192 GB HBM3e, băng thông 8 TB/s",
+      "288 GB HBM4, băng thông 22 TB/s",
+      "H200: 141 GB HBM3e, 4,8 TB/s, FP8 dense 1,98 PF, 700 W."
+    ],
+    [
+      "Giá AWS theo yêu cầu cho một GPU H100 mỗi giờ theo slide là bao nhiêu?",
+      "6,88 USD",
+      "3,43 USD",
+      "7,91 USD",
+      "12,29 USD",
+      "AWS: L40S 1,86; A100 3,43; H100 6,88; H200 7,91; B200 14,24. Azure H100 là 12,29 USD."
+    ],
+    [
+      "Vì sao tinh chỉnh toàn phần tốn khoảng 16 byte mỗi tham số?",
+      "Trọng số 2 + gradient 2 + trạng thái Adam 12",
+      "Trọng số 4 + gradient 4 + trạng thái Adam 8",
+      "Trọng số 2 + KV cache 2 + trạng thái Adam 12",
+      "Trọng số 2 + gradient 2 + activation 12",
+      "Adam 12 byte gồm bản sao FP32, momentum, phương sai (ZeRO, 2020); chưa tính activation."
+    ],
+    [
+      "Suy luận mô hình cần 80–180 GB VRAM. Cây quyết định gợi ý GPU nào?",
+      "H200, B200 hoặc 2 H100",
+      "L4, A10G hoặc L40S",
+      "Một L40S 48 GB, time-slicing",
+      "Nút 8 GPU hoặc rack NVL72",
+      "≤24 GB: L4/A10G/L40S; 24–80: L40S/H100; 80–180: H200, B200, 2 H100; >180: nút 8 GPU, NVL72."
+    ],
+    [
+      "Tinh chỉnh bằng LoRA/QLoRA thường cần phần cứng thế nào?",
+      "Một GPU 24–80 GB là đủ",
+      "Nhiều GPU kèm FSDP/ZeRO",
+      "Cụm H100 nối InfiniBand",
+      "Một rack GB200 NVL72",
+      "Cây quyết định: LoRA, QLoRA dùng 1 GPU 24–80 GB; toàn phần ≥7 tỉ mới cần nhiều GPU, FSDP/ZeRO."
+    ],
+    [
+      "Máy spot trên AWS bị thu hồi với thời gian báo trước bao lâu?",
+      "2 phút",
+      "30 giây",
+      "10 phút",
+      "1 giờ",
+      "Slide bốn lựa chọn mua: spot bị ngắt với thông báo ngắn (AWS: 2 phút), nên dùng cho huấn luyện có điểm lưu."
+    ],
+    [
+      "Một dịch vụ phục vụ ổn định dự kiến chạy 18 tháng. Nên chọn hình thức mua nào?",
+      "Cân nhắc gói cam kết 1–3 năm",
+      "Spot vì rẻ hơn khoảng 60–70%",
+      "Theo yêu cầu, huỷ lúc nào cũng được",
+      "Đặt chỗ GPU theo lịch cố định",
+      "Quy tắc: dưới 6 tháng dùng spot/theo yêu cầu; trên 12 tháng cân nhắc cam kết (1 năm 30–40%, 3 năm 50–60%)."
+    ],
+    [
+      "Trong ví dụ giảm hoá đơn 50.000 → 12.000 USD, bước nào giảm nhiều nhất (−20 nghìn)?",
+      "Right-sizing đúng cấu hình",
+      "Spot cho huấn luyện và lô",
+      "Tắt GPU ngoài giờ làm việc",
+      "Gói đặt trước cho phục vụ",
+      "Biểu đồ: đúng cấu hình −20, spot −10, tắt ngoài giờ −6, đặt trước −2 → còn 12."
+    ],
+    [
+      "Ở bước vận hành, lệnh Terraform nào dùng để phát hiện lệch (drift)?",
+      "terraform plan -refresh-only",
+      "terraform init -upgrade",
+      "terraform apply -auto-approve",
+      "terraform validate -json",
+      "Vòng đời: init → plan -out=tfplan → apply tfplan → vận hành với plan -refresh-only."
+    ],
+    [
+      "Trạng thái (state) của Terraform là gì?",
+      "Ánh xạ khối trong mã với tài nguyên thật",
+      "Danh sách provider tải về khi init",
+      "Bản sao mã .tf đã được định dạng",
+      "Nhật ký các lệnh apply đã từng chạy",
+      "State ánh xạ aws_instance.gpu trong mã với máy i-0abc… thật trên AWS."
+    ],
+    [
+      "Từ Terraform 1.11, cách khoá state trên backend S3 được khuyến nghị là gì?",
+      "use_lockfile = true, tạo tệp .tflock trong bucket",
+      "Bảng DynamoDB riêng, ghi khoá mỗi lần apply",
+      "encrypt = true, tự khoá state khi đang apply",
+      "Bật versioning để chặn hai người apply cùng lúc",
+      "use_lockfile tạo .tflock trong bucket; khoá bằng DynamoDB bị đánh dấu lỗi thời từ 1.11; versioning để khôi phục."
+    ],
+    [
+      "Lần apply đầu trên tài khoản AWS mới báo VcpuLimitExceeded khi tạo máy GPU. Nguyên nhân?",
+      "Hạn mức vCPU họ G, VT, P mới tạo bằng 0",
+      "Tài khoản mới chỉ được một máy GPU spot",
+      "Provider aws chưa hỗ trợ loại máy GPU",
+      "Thiếu use_lockfile nên apply bị chặn",
+      "Tài khoản mới có hạn mức vCPU = 0 cho họ G, VT, P; xin tăng cần AWS duyệt, không để apply phụ thuộc bước này."
+    ],
+    [
+      "Trong aws_eks_node_group GPU, taint nvidia.com/gpu với NO_SCHEDULE nhằm mục đích gì?",
+      "Giữ pod CPU khỏi nút GPU đắt tiền",
+      "Giữ pod GPU khỏi nút CPU giá rẻ",
+      "Buộc mọi pod GPU chạy trên spot",
+      "Ngăn nhóm nút thu nhỏ về 0 nút",
+      "Slide nhóm nút GPU: taint giữ pod CPU khỏi nút đắt; min_size = 0 thu về 0; max_size = 4 là trần chi phí."
+    ],
+    [
+      "Trong Karpenter NodePool, limits nvidia.com/gpu: 8 có ý nghĩa gì?",
+      "Trần số GPU của pool, tức trần chi phí",
+      "Số GPU tối thiểu luôn được giữ ấm",
+      "Số GPU trên mỗi nút Karpenter tạo ra",
+      "Số pod GPU tối đa trên một nút",
+      "Karpenter tạo nút rẻ nhất thoả pod chờ; limits là trần số GPU của pool."
+    ],
+    [
+      "Infracost không hiện chênh lệch chi phí trong trường hợp nào?",
+      "Máy chỉ khai báo qua aws_launch_template",
+      "Máy khai báo trực tiếp qua aws_instance",
+      "Máy nằm trong nhóm Auto Scaling",
+      "Máy thuộc một nhóm nút EKS",
+      "aws_launch_template không có giá riêng; chi phí chỉ hiện khi khai báo qua aws_instance, ASG hoặc nhóm nút."
+    ],
+    [
+      "Pipeline CI/CD cho Terraform nên lấy quyền trên AWS bằng cách nào?",
+      "Dùng OIDC để nhận quyền tạm thời",
+      "Lưu access key tĩnh trong kho mã",
+      "Dùng tài khoản root kèm MFA cố định",
+      "Cấp quyền *:* cho vai trò CI chung",
+      "Slide CI/CD: dùng OIDC để CI nhận quyền tạm thời, không lưu khoá tĩnh trong kho mã."
+    ],
+    [
+      "Công cụ IaC nào dùng HCL, giấy phép MPL 2.0, cùng hệ provider với Terraform và có mã hoá state?",
+      "OpenTofu",
+      "Pulumi",
+      "Crossplane",
+      "AWS CDK",
+      "OpenTofu 1.13 (Linux Foundation, MPL 2.0) có mã hoá state và for_each cho provider."
+    ],
+    [
+      "Một dự án IaC mới định dùng CDKTF. Theo bảng so sánh công cụ, nên xử lý thế nào?",
+      "Không dùng, CDKTF đã ngừng và lưu trữ 12/2025",
+      "Dùng được, CDKTF là bản kế nhiệm của AWS CDK",
+      "Dùng được, CDKTF chỉ hỗ trợ riêng cho AWS",
+      "Không dùng, CDKTF chuyển sang giấy phép BSL",
+      "Bảng công cụ: CDKTF đã ngừng và lưu trữ 12/2025, không dùng cho dự án mới; mục “CDK” trong tài liệu cũ là AWS CDK."
+    ],
+    [
+      "Trong Dockerfile multi-stage, vì sao đặt COPY mã ứng dụng sau bước cài thư viện?",
+      "Sửa mã không làm cài lại thư viện",
+      "Để image runtime có trình biên dịch",
+      "Để .dockerignore loại bỏ tập dữ liệu",
+      "Để gộp toàn bộ image thành một lớp",
+      "Thứ tự lớp: thư viện trước, mã sau để tận dụng cache; image devel chỉ dùng để dựng."
+    ],
+    [
+      "Thành phần nào của NVIDIA GPU Operator xuất chỉ số GPU cho Prometheus?",
+      "DCGM Exporter",
+      "Device Plugin",
+      "GPU Feature Discovery",
+      "MIG Manager",
+      "Device Plugin khai báo nvidia.com/gpu; GFD gắn nhãn loại GPU; MIG Manager chia lát; DCGM Exporter xuất chỉ số."
+    ],
+    [
+      "Cần chạy nhiều mô hình nhỏ của các người dùng khác nhau trên một H100, yêu cầu cách ly ổn định. Chọn gì?",
+      "MIG",
+      "Time-slicing",
+      "MPS",
+      "Cấp nguyên GPU cho mỗi pod",
+      "MIG cắt GPU tối đa 7 lát phần cứng, mỗi lát có bộ nhớ và SM riêng; hỗ trợ A100, H100, H200, B200."
+    ],
+    [
+      "Pod mới mất khoảng 4 phút mới nhận yêu cầu. Slide rút ra hệ quả thiết kế nào?",
+      "Không scale-to-zero dịch vụ cần độ trễ thấp",
+      "Đặt ngưỡng tự mở rộng càng muộn càng tốt",
+      "Bỏ warm pool đi để tiết kiệm chi phí",
+      "Gộp trọng số vào image cho khởi động nhanh",
+      "Tự mở rộng mất vài phút: đặt ngưỡng sớm, giữ dư công suất, không scale-to-zero cho dịch vụ nhạy độ trễ."
+    ],
+    [
+      "Trong ví dụ thời gian pod sẵn sàng, đoạn nào chiếm lâu nhất?",
+      "Khởi tạo nút GPU (≈90 s)",
+      "Tải image về nút (≈60 s)",
+      "Nạp trọng số mô hình (≈50 s)",
+      "Biên dịch kernel (≈20 s)",
+      "Ví dụ: lập lịch ≈20 s, nút ≈90 s, image ≈60 s, trọng số ≈50 s, biên dịch ≈20 s; rút nút bằng warm pool."
+    ],
+    [
+      "Trên đường đi của yêu cầu suy luận, lớp nào đảm nhận mTLS giữa mọi cặp dịch vụ?",
+      "Lưới dịch vụ (service mesh)",
+      "API Gateway",
+      "Bộ cân bằng tải / Ingress (ALB)",
+      "Vector DB",
+      "API Gateway lo giới hạn tần suất, hàng đợi, SSE; service mesh lo mTLS giữa các dịch vụ."
+    ],
+    [
+      "NVLink 4 có 900 GB/s. Đổi sang đơn vị mạng (Gb/s) là bao nhiêu?",
+      "7 200 Gb/s",
+      "900 Gb/s",
+      "3 200 Gb/s",
+      "1 800 Gb/s",
+      "NVLink tính GB/s, mạng tính Gb/s: 900 × 8 = 7 200 Gb/s."
+    ],
+    [
+      "Chia mô hình theo tensor (tensor parallel) nên đặt ở đâu?",
+      "Trong một máy nối bằng NVLink",
+      "Giữa các máy qua InfiniBand",
+      "Giữa các máy qua Ethernet RDMA",
+      "Giữa nhiều máy p5 qua EFA",
+      "Băng thông NVLink gấp hàng chục lần mạng giữa máy, nên tensor parallel chỉ nên nằm trong một máy NVLink."
+    ],
+    [
+      "Điểm lưu (checkpoint) cũ và tập dữ liệu ít dùng nên nằm ở tầng lưu trữ nào?",
+      "Mát: S3 Infrequent Access",
+      "Ấm: S3 Standard",
+      "Nóng: Redis, bộ nhớ GPU",
+      "Lạnh: Glacier Deep Archive",
+      "Nóng: KV cache; ấm: trọng số đang phục vụ; mát: checkpoint cũ (0,0125 USD/GB/tháng); lạnh: dữ liệu tuân thủ."
+    ],
+    [
+      "Nạp 140 GB trọng số qua mạng 10 Gb/s mất bao lâu (lý thuyết)?",
+      "112 giây",
+      "14 giây",
+      "45 giây",
+      "1 120 giây",
+      "140 GB × 8 = 1 120 Gb; chia 10 Gb/s = 112 giây (25 Gb/s: 45 s; NVMe 7 GB/s: 20 s)."
+    ],
+    [
+      "Nguyên tắc thiết kế agent ở môi trường vận hành để mở rộng ngang là gì?",
+      "Stateless, đẩy trạng thái sang Redis/Postgres",
+      "Giữ trạng thái trong RAM pod cho nhanh hơn",
+      "Lưu trạng thái trong KV cache của GPU",
+      "Ghi trạng thái phiên vào log OpenTelemetry",
+      "Slide tám lớp: agent không lưu trạng thái; trạng thái chuyển sang Redis hoặc Postgres."
+    ],
+    [
+      "Trong tám lớp hạ tầng agent, lớp “Bí mật” dùng công cụ nào?",
+      "Vault, Secrets Manager",
+      "OpenTelemetry, Jaeger",
+      "Redis Streams, Kafka",
+      "PostgreSQL, pgvector",
+      "Lớp 8 Bí mật: Vault, Secrets Manager; lớp 7 Quan sát: OpenTelemetry, Jaeger; lớp 3 Hàng đợi: Redis Streams, Kafka."
+    ],
+    [
+      "Giai đoạn decode bị giới hạn bởi gì và quyết định chỉ số nào?",
+      "Băng thông bộ nhớ, quyết định ITL",
+      "Tính toán, quyết định chỉ số TTFT",
+      "Tính toán, quyết định chỉ số ITL",
+      "Băng thông mạng, quyết định TTFT",
+      "Prefill giới hạn tính toán → TTFT; decode đọc lại trọng số + KV mỗi token, giới hạn băng thông → ITL."
+    ],
+    [
+      "Ý tưởng cốt lõi của PagedAttention là gì?",
+      "Cắt KV cache thành khối, cấp qua bảng khối",
+      "Nén KV cache xuống FP4 khi bộ nhớ đầy",
+      "Lưu prompt thành cây tiền tố radix tree",
+      "Đẩy KV cache sang L2 cache dùng chung",
+      "Giống bộ nhớ ảo hệ điều hành, gần như hết phân mảnh; thông lượng gấp 2–4 lần FasterTransformer, Orca."
+    ],
+    [
+      "Khi đầy bộ nhớ, RadixAttention của SGLang loại bỏ gì?",
+      "Nút lá ít dùng gần đây nhất",
+      "Nút gốc chứa system prompt",
+      "Nhánh dài nhất trong cây",
+      "Yêu cầu đến sớm nhất hàng đợi",
+      "Slide RadixAttention: yêu cầu mới tìm tiền tố dài nhất; khi đầy, nút lá ít dùng gần đây nhất bị loại."
+    ],
+    [
+      "Agent nhiều lượt, các yêu cầu lặp lại cùng chỉ dẫn hệ thống. Engine nào hợp nhất?",
+      "SGLang",
+      "Ollama",
+      "TGI",
+      "LMDeploy",
+      "SGLang mạnh khi nhiều yêu cầu chung tiền tố; Ollama cho máy cá nhân; TGI đang bảo trì; LMDeploy cho mô hình lượng tử hoá."
+    ],
+    [
+      "99% yêu cầu dưới 4K token. Nên đặt --max-model-len của vLLM thế nào?",
+      "Theo độ dài thực tế của yêu cầu",
+      "Luôn đặt 128K cho chắc chắn",
+      "Bằng số GPU tensor parallel",
+      "Bằng 0,92 như giá trị mặc định",
+      "Slide khởi chạy vLLM: đặt theo độ dài thực tế; không đặt 128K khi 99% yêu cầu dưới 4K."
+    ],
+    [
+      "Khi nào nên giảm --gpu-memory-utilization (mặc định 0,92) của vLLM?",
+      "Khi hai tiến trình dùng chung một GPU",
+      "Khi cần thêm chỗ cho KV cache",
+      "Khi chạy tensor parallel trên 2 GPU",
+      "Khi --max-model-len vượt quá 8192",
+      "Tham số là tỉ lệ bộ nhớ một tiến trình dùng; tăng để có thêm KV, giảm khi chung GPU."
+    ],
+    [
+      "Thị phần đám mây của AWS quý 2/2026 theo Synergy là bao nhiêu?",
+      "28%",
+      "20%",
+      "15%",
+      "37%",
+      "AWS 28%, Microsoft 20%, Google 15%, khác 37%; doanh thu hạ tầng 143,4 tỉ USD, tăng 43%."
+    ],
+    [
+      "Xu hướng “nút thắt mới” của hạ tầng AI theo slide là gì?",
+      "Điện, đất, làm mát khan hiếm hơn chip",
+      "Băng thông HBM khan hiếm hơn điện",
+      "Giấy phép phần mềm IaC ngày càng đắt",
+      "Số lõi CUDA không theo kịp mô hình",
+      "Xu hướng 4: điện là nút thắt mới; dự án tính bằng gigawatt."
+    ]
+  ],
+  "essay": [
+    [
+      "Một startup y tế ở Việt Nam xử lý hồ sơ bệnh nhân, cần chatbot dùng mô hình mở 70B. Hãy dùng bốn yếu tố chọn nhà cung cấp và cây quyết định trong bài để đề xuất nhà cung cấp, nêu khung pháp lý liên quan và hạn chế cần lường trước.",
+      "Ý chấm: (1) Bốn yếu tố: loại khối lượng × ngân sách × tuân thủ × độ trễ. (2) Dữ liệu cá nhân nhạy cảm, phải ở trong nước → nhánh Viettel / FPT / VNG. (3) Nêu đám mây trong nước đã có H100/H200 (FPT AI Factory, Viettel H200 Hoà Lạc 2, VNG HGX H100), thông tin “chỉ có T4/V100” đã lỗi thời. (4) Pháp lý: Luật Dữ liệu 60/2024 (01/07/2025), Luật BVDLCN 91/2025 (01/01/2026, Nghị định 356/2025 thay 13/2023), Luật AI 134/2025 (01/03/2026). (5) Hạn chế: ít vùng khả dụng, ít dịch vụ quản lý → tự vận hành serving, cần kế hoạch dự phòng. (6) Có thể dùng đám mây lớn/chuyên biệt cho phần không chứa dữ liệu cá nhân."
+    ],
+    [
+      "Cần phục vụ Llama-3-70B (80 lớp, 8 đầu KV, kích thước đầu 128) cho 8 yêu cầu đồng thời, mỗi yêu cầu 8K token, KV ở FP16. Hãy tính bộ nhớ trọng số ở FP16 và FP8, bộ nhớ KV, rồi đánh giá phương án 1 H100, 2 H100 (FP16) và 1 H200 (FP8).",
+      "Ý chấm: (1) Công thức: trọng số = tham số × byte; KV/token = 2 × lớp × đầu KV × kích thước đầu × byte; điều kiện: trọng số + KV + bộ nhớ trung gian ≤ VRAM. (2) FP16 ≈ 141 GB, FP8 ≈ 70,6 GB. (3) KV = 2×80×8×128×2 = 320 KiB/token; 8K token ≈ 2,7 GB; 8 yêu cầu ≈ 21–22 GB. (4) 1 H100 80 GB: FP16 không vừa; FP8 70,6 + 21,5 > 80 → không đủ. (5) 2 H100 FP16: dư ~19 GB < KV cần → thiếu hoặc phải giảm lô/độ dài. (6) 1 H200 FP8: 141 GB, dư ~70 GB → chứa KV thoải mái; phương án hợp lý. (7) Nhắc decode giới hạn bởi băng thông HBM."
+    ],
+    [
+      "Hoá đơn GPU của một công ty là 50.000 USD/tháng, gồm huấn luyện định kỳ, xử lý lô ban đêm và một API phục vụ ổn định 24/7. Hãy đề xuất kế hoạch giảm chi phí theo bài, gắn mỗi bước với hình thức mua phù hợp và rủi ro đi kèm.",
+      "Ý chấm: (1) Right-sizing: đổi GPU quá lớn sang L40S/A10G cho mô hình nhỏ (bước giảm lớn nhất trong ví dụ, −20 nghìn). (2) Spot cho huấn luyện và lô: rẻ 60–70%, bị thu hồi (AWS báo 2 phút) → bắt buộc checkpoint. (3) Tắt GPU ngoài giờ: giảm về 0 bản sao đêm/cuối tuần cho tải không nhạy độ trễ. (4) Cam kết 1–3 năm (30–40% / 50–60%) cho phần phục vụ ổn định; rủi ro trả tiền khi không dùng; quy tắc >12 tháng. (5) Đặt chỗ GPU cho đợt huấn luyện lớn có lịch. (6) Kết quả minh hoạ 50k → 12k; nêu đây là ví dụ, cần đo thực tế. (7) Kiểm soát bằng Terraform: trần số GPU, ngân sách, thẻ."
+    ],
+    [
+      "Nhóm bạn bắt đầu dựng nền tảng GPU trên AWS bằng Terraform. Hãy thiết kế cách tổ chức mã, cấu hình backend state và các biện pháp kiểm soát chi phí ngay trong mã, kèm các bẫy cần tránh ở lần apply đầu.",
+      "Ý chấm: (1) Tách tệp theo nhóm: network.tf (VPC, subnet riêng cho nút GPU, NAT), eks.tf, storage.tf (bucket trọng số versioning + vòng đời, VPC endpoint S3), helm.tf (GPU Operator), iam.tf (quyền tối thiểu), cost.tf (ngân sách cảnh báo dự báo + thực tế). (2) Backend S3: encrypt = true, use_lockfile = true (.tflock), không dùng DynamoDB lock (lỗi thời từ 1.11), bật versioning, không commit state vì có thể chứa bí mật. (3) Nhóm nút GPU: AMI AL2023_x86_64_NVIDIA + cài device plugin qua GPU Operator, taint nvidia.com/gpu, min_size 0, max_size làm trần; hoặc Karpenter limits nvidia.com/gpu. (4) Bẫy hạn mức vCPU họ G/VT/P = 0 ở tài khoản mới: xin trước, không để apply phụ thuộc. (5) Luôn plan và đọc kế hoạch trước apply vì NAT, EKS tốn phí."
+    ],
+    [
+      "Thiết kế pipeline CI/CD cho kho Terraform của nền tảng GPU sao cho mọi thay đổi được kiểm tra bảo mật, chi phí và chính sách trước khi áp dụng. Nêu các bước, công cụ, ví dụ chính sách GPU và cách cấp quyền cho CI.",
+      "Ý chấm: (1) Pull request: fmt, validate, tflint. (2) Quét bảo mật Trivy/Checkov. (3) terraform plan, bình luận kế hoạch vào PR. (4) Infracost báo chênh lệch giá/tháng; lưu ý aws_launch_template không có giá riêng, cần aws_instance/ASG/nhóm nút để thấy chi phí. (5) Chính sách OPA/Sentinel: cấm loại máy ngoài danh sách cho phép, cấm thiếu thẻ CostCenter, trần max_size nhóm nút GPU. (6) Duyệt, hợp nhất, apply từ đúng kế hoạch đã duyệt. (7) Kiểm tra lệch hằng đêm (plan -refresh-only). (8) CI dùng OIDC nhận quyền tạm thời, không lưu khoá tĩnh."
+    ],
+    [
+      "Dịch vụ suy luận trên Kubernetes cần khoảng 4 phút để một pod mới nhận yêu cầu đầu tiên, khiến người dùng chờ lâu khi tải tăng đột ngột. Hãy phân tích các đoạn thời gian và đề xuất cách rút ngắn từng đoạn, kể cả cách viết Dockerfile.",
+      "Ý chấm: (1) Các đoạn: lập lịch ≈20 s, khởi tạo nút GPU ≈90 s, tải image ≈60 s, nạp trọng số ≈50 s, biên dịch ≈20 s. (2) Nút: warm pool giữ sẵn nút ấm. (3) Image: Dockerfile multi-stage (devel để build wheel, runtime để chạy), thư viện trước mã, .dockerignore loại dữ liệu/checkpoint; lưu đệm image trên nút. (4) Trọng số: NVMe cục bộ, hệ tệp song song FSx for Lustre, init container nạp trước; ví dụ 140 GB qua 10 Gb/s mất 112 s, NVMe 7 GB/s ~20 s. (5) Thiết kế: đặt ngưỡng tự mở rộng sớm (HPA/KEDA theo hàng đợi), giữ dư công suất, không scale-to-zero cho dịch vụ cần độ trễ thấp."
+    ],
+    [
+      "Một phòng lab có một máy H100 và ba nhu cầu: (a) sinh viên thử nghiệm notebook nhẹ, (b) một người dùng chạy nhiều tiến trình nhỏ, (c) ba nhóm khác nhau mỗi nhóm phục vụ một mô hình nhỏ cần ổn định. Hãy chọn cách chia sẻ GPU cho từng nhu cầu và giải thích rủi ro.",
+      "Ý chấm: (1) Mặc định Kubernetes cấp nguyên GPU cho một pod; chia sẻ là lựa chọn có chủ ý. (2) (a) Time-slicing: luân phiên thời gian, hầu hết GPU hỗ trợ, không cách ly bộ nhớ → một pod OOM ảnh hưởng pod khác; chấp nhận cho thử nghiệm. (3) (b) MPS: nhiều tiến trình dùng chung SM, giới hạn bộ nhớ mềm, hợp cùng một người dùng. (4) (c) MIG: cắt tối đa 7 lát phần cứng, mỗi lát bộ nhớ và SM riêng, hỗ trợ A100/H100/H200/B200 → cách ly cho người dùng khác nhau. (5) Triển khai qua GPU Operator (MIG Manager, Device Plugin), theo dõi bằng DCGM Exporter + Prometheus."
+    ],
+    [
+      "Bạn cần chọn engine và cấu hình phục vụ cho hai dịch vụ: (1) API chat chung cho nhiều ứng dụng, (2) agent nhiều lượt với system prompt dài lặp lại. Hãy giải thích hai giai đoạn prefill/decode, chọn engine cho từng dịch vụ, nêu tham số khởi chạy quan trọng và chỉ số cần đo.",
+      "Ý chấm: (1) Prefill xử lý cả prompt song song, giới hạn tính toán, quyết định TTFT; decode sinh từng token, đọc lại trọng số + KV, giới hạn băng thông, quyết định ITL. (2) Dịch vụ (1): vLLM — PagedAttention (khối KV qua bảng khối, gần hết phân mảnh, 2–4× thông lượng), gom lô liên tục, API tương thích OpenAI; mặc định cho hầu hết dịch vụ. (3) Dịch vụ (2): SGLang — RadixAttention lưu cây tiền tố, bỏ qua prefill phần chung, loại nút lá ít dùng khi đầy. (4) Tham số: --max-model-len theo độ dài thực tế, --gpu-memory-utilization (0,92; giảm khi chung GPU), --tensor-parallel-size/--tp trong một máy NVLink; dùng vllm serve thay api_server cũ. (5) Đo TTFT, ITL, thông lượng. (6) Tránh TGI (bảo trì)."
+    ],
+    [
+      "Thiết kế hạ tầng cho một agent hỗ trợ khách hàng chạy ở môi trường vận hành theo mô hình tám lớp trong bài. Với mỗi lớp, nêu công cụ đề xuất và vai trò; giải thích cách agent mở rộng ngang.",
+      "Ý chấm: (1) Tính toán: GPU cho suy luận, CPU cho điều phối, Lambda cho công cụ. (2) Điều phối: LangGraph/CrewAI trên pod CPU. (3) Hàng đợi: Redis Streams, Kafka, RabbitMQ. (4) Bộ nhớ đệm: L1 trong tiến trình, L2 Redis, L3 bộ nhớ đệm embedding. (5) Lưu trữ: PostgreSQL + pgvector, Redis, S3. (6) Mạng: API Gateway, gRPC nội bộ, HTTP + SSE (truyền tải MCP); service mesh mTLS. (7) Quan sát: OpenTelemetry, Jaeger, Prometheus, Grafana. (8) Bí mật: Vault, Secrets Manager, cờ tính năng. (9) Agent stateless, trạng thái đưa ra Redis/Postgres để mở rộng ngang."
+    ],
+    [
+      "Một công ty để khoá truy cập AWS trong repo công khai, một bucket chứa dữ liệu huấn luyện bị đặt public và mọi vai trò đều có quyền *:* trong một tài khoản duy nhất. Hãy phân tích lỗi theo mô hình trách nhiệm chia sẻ và đề xuất thiết kế landing zone cùng rào chắn để ngăn tái diễn.",
+      "Ý chấm: (1) Các lỗi đều thuộc phía người dùng (sự cố phổ biến nhất), không phải nhà cung cấp; nhà cung cấp chỉ lo hạ tầng vật lý, ảo hoá, mạng lõi/DDoS, bảo trì. (2) Trách nhiệm người dùng: mã hoá dữ liệu, least privilege, chống prompt injection, tuân thủ GDPR/luật Việt Nam. (3) Landing zone: Organization + SCP; tài khoản bảo mật (log archive, audit), hạ tầng dùng chung (mạng trung tâm Transit Gateway, registry, CI), khối lượng AI (dev, staging, prod GPU), sandbox ngân sách thấp. (4) Rào chắn SCP: chặn vùng ngoài danh sách, bắt buộc mã hoá, cấm bucket công khai, giới hạn loại máy GPU đắt. (5) Một tài khoản duy nhất không tách được ngân sách, quyền, log → tách sớm. (6) CI dùng OIDC thay khoá tĩnh; xoay khoá đã lộ."
+    ]
+  ]
+}

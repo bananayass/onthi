@@ -1,0 +1,127 @@
+{
+  "id": "day2_track2_tu_luan",
+  "title": "Tự luận Track 2 Ngày 2",
+  "questionCount": 10,
+  "questions": [
+    {
+      "id": "T2D02-TL-01",
+      "type": "essay",
+      "prompt": "Bạn dựng pipeline cho nền tảng AI hỗ trợ khách hàng (Postgres tickets, S3 transcripts, Kafka events) phục vụ RAG index, classifier và routing agent. Thiết kế ba tầng Medallion: nêu cam kết của từng tầng, các cột metadata cần có ở Bronze, và vì sao Gold phải tách thành ba bảng.",
+      "modelAnswer": "- Bronze: nguyên bản, chỉ INSERT, không UPDATE/DELETE, không cam kết sạch (chủ ý); cột _payload, _source, _op (c/u/d), _ingested_at, _batch_id, _kafka_offset để replay.\n- Lý do giữ nguyên: sửa logic Silver sai (chạy lại ~20 phút), retrain trên dữ liệu đúng thời điểm, audit.\n- Silver: 1 hàng = 1 thực thể, có khoá (MERGE), đúng kiểu, hết trùng, PII đã xử lý (ranh giới cuối).\n- Gold: gold_doc_chunks (chunk ổn định + ghim version embedding), gold_training_set (snapshot bất biến có version), gold_feature_daily (user × ngày, point-in-time, không rò rỉ tương lai).\n- Ba consumer có ba định nghĩa “sạch” mâu thuẫn → không bao giờ là một bảng.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D02-TL-02",
+      "type": "essay",
+      "prompt": "Team hiện lấy dữ liệu tickets từ Postgres bằng job polling WHERE updated_at > ? mỗi 5 phút. Phân tích các vấn đề của cách này và đề xuất chuyển sang CDC log-based: cơ chế hoạt động, lợi ích, và rủi ro vận hành cần giám sát.",
+      "modelAnswer": "- Polling: mất bản ghi bị DELETE, mất trạng thái trung gian giữa hai lần poll, thêm tải truy vấn lên DB sản xuất.\n- CDC: Debezium đọc WAL qua logical replication (MySQL: binlog), giả làm replica, đẩy vào Kafka topic; bắt cả INSERT/UPDATE/DELETE đúng thứ tự, gần như không thêm tải truy vấn.\n- Chạy trên Kafka Connect; phù hợp khi cần mọi thay đổi kể cả xoá và cần thứ tự.\n- Rủi ro: phải bật replication slot; slot không được đọc làm đầy đĩa DB gốc → giám sát lag/dung lượng; tự vận hành.\n- Định dạng: Avro trên đường truyền (có Schema Registry), Parquet khi lưu Bronze.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D02-TL-03",
+      "type": "essay",
+      "prompt": "Bạn viết model dbt incremental gold cho ticket. Dữ liệu có thể về muộn (app offline, producer retry, batch upstream chậm, user sửa bản ghi cũ). Hãy viết cấu hình model, giải thích từng dòng quan trọng, và nêu cách chọn độ dài lookback window cùng rủi ro khi --full-refresh.",
+      "modelAnswer": "- config: materialized='incremental', unique_key='ticket_id', incremental_strategy='merge'.\n- unique_key thiếu → nhân đôi mỗi lần chạy lại; merge = upsert (delete+insert ghi đè cả phân vùng); is_incremental() thiếu → quét toàn bộ lịch sử.\n- Điều kiện: where event_date >= max(event_date) from {{ this }} - interval N day.\n- Lookback = P99 của (_ingested_at - event_time), đo từ Bronze, không đoán (ví dụ slide 3 ngày).\n- --full-refresh chỉ an toàn khi Bronze còn đủ lịch sử; nếu Bronze đã xoá theo TTL sẽ dựng bảng thiếu data mà không báo.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D02-TL-04",
+      "type": "essay",
+      "prompt": "Một job Spark aggregate ticket theo customer_id: 200 task xong trong 30 giây nhưng 1 task chạy 40 phút. Chẩn đoán nguyên nhân, cách phát hiện, và đề xuất cách sửa; nêu thêm cách tránh shuffle khi join với bảng nhỏ.",
+      "modelAnswer": "- Nguyên nhân: data skew — một khách hàng doanh nghiệp chiếm ~40% ticket dồn vào một task; thủ phạm phổ biến thứ hai: user_id IS NULL.\n- Phát hiện: nhìn phân bố thời gian task, không nhìn trung bình.\n- Sửa: salting — gộp theo (customer_id, số ngẫu nhiên 0–15) rồi gộp lần hai; xử lý riêng NULL.\n- Shuffle (JOIN, GROUP BY, DISTINCT, ORDER BY) = ghi đĩa → qua mạng → đọc lại, đắt; scan cục bộ rẻ.\n- Bảng nhỏ <100 MB → broadcast join, join thành cục bộ.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D02-TL-05",
+      "type": "essay",
+      "prompt": "Pipeline đọc bảng sự kiện trên S3 chậm dần theo tháng dù không ai đổi code. Kiểm tra thấy 50.000 file × 2 MB, bảng đang partition theo user_id. Phân tích nguyên nhân và đề xuất chiến lược file và phân vùng mới, kèm cách đo hiệu quả.",
+      "modelAnswer": "- Small-file problem: mỗi file là một lần liệt kê, mở, đọc footer → engine dành phần lớn thời gian lập kế hoạch thay vì đọc data.\n- Partition theo user_id: cardinality cao → sinh rất nhiều file nhỏ.\n- Sửa: nhắm file 128 MB – 1 GB; compaction định kỳ; giảm số task ghi ở cuối pipeline.\n- Partition theo cột hay lọc, gần như luôn là event_date; vài trăm đến vài nghìn phân vùng, không phải vài triệu.\n- Predicate pushdown: lọc đúng cột phân vùng thì bỏ qua cả thư mục.\n- Đo bằng EXPLAIN ANALYZE, đọc rows scanned trước thời gian (ví dụ 412 triệu → 1,34 triệu hàng).",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D02-TL-06",
+      "type": "essay",
+      "prompt": "Routing agent dùng feature “số sự kiện mỗi phút” từ stream click. Một khách hàng dùng app trên tàu điện (offline) 2 giờ, khi có mạng toàn bộ sự kiện tới cùng lúc và agent tưởng khách gặp sự cố nghiêm trọng. Giải thích lỗi và thiết kế lại cách tính cửa sổ.",
+      "modelAnswer": "- Lỗi: cửa sổ tính theo processing time → 2 giờ hoạt động dồn vào một phút, feature vọt giả tạo.\n- Sửa: cửa sổ theo event time.\n- Watermark: “đã thấy hết sự kiện trước T”, sau mốc này đóng cửa sổ.\n- Allowed lateness: biên độ tha thứ sau watermark; sự kiện muộn hơn thì bỏ hoặc đẩy sang nhánh phụ, không lặng lẽ vứt.\n- Công cụ: Flink hợp khi event-time và state là trung tâm (từng sự kiện, ms, checkpoint bài bản).\n- Streaming là bài toán thời gian sự kiện, không phải “batch nhanh hơn”.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D02-TL-07",
+      "type": "essay",
+      "prompt": "Bạn quản lý hai topic: (A) topic log click có một producer và hàng chục consumer phân tích; (B) topic nuôi feature online cho model đang chạy production. Chọn chế độ Schema Registry cho từng topic, giải thích thay đổi được phép và bên nâng cấp trước.",
+      "modelAnswer": "- BACKWARD: cho xoá field, thêm field có giá trị mặc định; consumer nâng cấp trước; hợp nhiều consumer, ít producer → topic A.\n- FORWARD: thêm field, xoá field có default; producer nâng cấp trước; hợp producer nâng cấp thường xuyên.\n- FULL: chỉ thay đổi an toàn cả hai chiều; bên nào nâng cấp trước cũng được; topic quan trọng nhiều bên phụ thuộc → topic B.\n- Lý do B: đổi schema event = đổi feature = model nhận input khác mà không ai deploy lại; chấp nhận đổi chậm hơn.\n- Schema Registry là data contract do máy chủ ép lúc producer ghi, không phải phát hiện muộn lúc pipeline chạy.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D02-TL-08",
+      "type": "essay",
+      "prompt": "Lúc 5 giờ chiều, một kỹ sư deploy DAG training mới với start_date 30 ngày trước, để catchup mặc định; cụm GPU lập tức nhận 30 job. Phân tích sự cố, đề xuất các quy tắc chạy lại/backfill an toàn và cách kiểm chứng pipeline idempotent.",
+      "modelAnswer": "- Nguyên nhân: catchup mặc định True → Airflow xếp mọi lịch đã lỡ (30 lần) cùng lúc.\n- Quy tắc: catchup=False; max_active_runs=1 để backfill không chồng daily; backfill dùng đúng code path với daily; ghi có phân vùng để backfill 08-12 không đụng 08-13.\n- Idempotent vì hệ thống at-least-once (retry, Clear Task, backfill chồng, consumer restart): overwrite partition cho bảng ngày, MERGE cho bảng thực thể.\n- Kiểm chứng: chạy lại một ngày cũ ba lần liên tiếp, ghi checksum bảng Gold sau mỗi lần; ba số phải giống hệt (tiêu chí Lab 17).",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D02-TL-09",
+      "type": "essay",
+      "prompt": "Phân bổ engine cho bốn workload và giải thích lựa chọn: (1) transform Silver/Gold 8 GB mỗi lần chạy; (2) báo cáo 200 GB trên một máy; (3) join nhiều bảng lớn trên 1 TB dùng chung nhiều team; (4) embed 10 triệu chunk cho RAG. Nêu cái bẫy “distributed by default”.",
+      "modelAnswer": "- (1) DuckDB/Polars: vừa RAM một máy (<10 GB), một tiến trình, không cụm.\n- (2) DuckDB tràn đĩa, máy RAM lớn, out-of-core (10–500 GB).\n- (3) Spark: phân tán JVM, TB–PB, join nhiều bảng lớn; trả giá vận hành cụm, khởi động chậm.\n- (4) Ray Data: thuần Python, batch inference/embedding trên GPU.\n- Ngoài trục: Trino khi câu hỏi trải nhiều kho.\n- Bẫy: Spark 10 node xử lý 8 GB thường chậm hơn DuckDB một máy vì thời gian vào lập lịch và shuffle; bắt đầu từ một máy, chỉ lên cụm khi đã đo.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D02-TL-10",
+      "type": "essay",
+      "prompt": "Product owner muốn “real-time” cho bốn nhu cầu: cập nhật RAG index từ tài liệu nội bộ, retrain classifier phân loại ticket, feature định tuyến agent (số ticket 7 ngày), chặn giao dịch gian lận. Với mỗi nhu cầu xác định độ trễ thật sự cần và giải pháp rẻ nhất, rồi nêu chi phí thật của streaming.",
+      "modelAnswer": "- RAG index: độ trễ giờ → batch mỗi giờ.\n- Retrain classifier: ngày → batch chạy đêm.\n- Feature định tuyến 7 ngày: phút → micro-batch 5 phút.\n- Chặn gian lận: mili giây → streaming thật.\n- Chi phí streaming: state store phải quản lý, checkpoint và khôi phục, backpressure khi consumer chậm, trực 24/7, debug khó hơn vì không có “chạy lại cho tôi xem”.\n- Micro-batch 5 phút giải quyết phần lớn nhu cầu “real-time” với một phần nhỏ chi phí; chọn streaming vì yêu cầu độ trễ, không vì nghe hiện đại.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    }
+  ]
+}

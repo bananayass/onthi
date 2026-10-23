@@ -1,0 +1,526 @@
+{
+ "mcq": [
+  [
+   "So với ứng dụng web thông thường, thời gian khởi động lại của hệ thống AI khác ở điểm nào?",
+   "Mất vài phút do GPU cold start: tìm công suất, kéo ảnh, nạp trọng số",
+   "Chỉ vài giây vì chỉ cần khởi động lại tiến trình trên máy CPU",
+   "Mất vài giờ vì phải huấn luyện lại mô hình trước khi phục vụ",
+   "Không đáng kể vì trọng số luôn được giữ sẵn trong VRAM mọi vùng",
+   "Bảng so sánh: web khởi động lại vài giây; hệ AI có GPU cold start (tìm công suất, kéo ảnh, nạp trọng số) tổng cộng vài phút."
+  ],
+  [
+   "Sự cố mất điện hoặc mạng nội bộ ở một vùng khả dụng (AZ) được xử lý bằng biện pháp nào?",
+   "Phân bổ tải trên nhiều AZ",
+   "Tự thay nút bằng auto-repair",
+   "Tăng giới hạn bộ nhớ của pod",
+   "Thêm bản sao trong cùng AZ",
+   "Phạm vi sự cố: pod → nhiều bản sao; máy GPU → auto-repair; AZ → phân bổ nhiều AZ; vùng → vùng dự phòng, GPU ấm; nhà cung cấp → đa tài khoản, đa nhà cung cấp."
+  ],
+  [
+   "Theo các báo cáo sự cố 2021–2025 trên slide, phần lớn sự cố lớn bắt nguồn từ đâu?",
+   "Mặt phẳng điều khiển hoặc cấu hình lan truyền toàn cầu",
+   "Phần cứng máy chủ hỏng đồng loạt trong trung tâm dữ liệu",
+   "Tấn công DDoS từ bên ngoài vào điểm cuối phục vụ mô hình",
+   "Lỗi GPU và driver trên các cụm suy luận cỡ lớn",
+   "Slide kết luận: hầu hết sự cố lớn không do phần cứng hỏng mà do control plane hoặc cấu hình lan truyền toàn cầu."
+  ],
+  [
+   "Sự cố AWS us-east-1 10/2025 (lỗi DNS của DynamoDB, 14 giờ 32 phút) để lại bài học gì cho DR?",
+   "Failover không được phụ thuộc vào khởi tạo máy mới; cấp sẵn công suất",
+   "Nên dồn mọi workload vào us-east-1 vì vùng này có nhiều GPU nhất",
+   "Chỉ cần thêm bản sao EC2 trong cùng vùng là đủ chống sự cố này",
+   "Nên bỏ DNS nội bộ và gọi thẳng địa chỉ IP của DynamoDB từ app",
+   "EC2 đang chạy vẫn ổn nhưng khởi tạo máy mới và xác thực thất bại; kế hoạch cần tạo GPU mới lúc sự cố sẽ không chạy."
+  ],
+  [
+   "Sự cố OpenAI 12/2024: dịch vụ giám sát làm quá tải điều khiển Kubernetes, việc sửa lại cần chính mặt phẳng đang hỏng. Bài học rút ra là gì?",
+   "Có đường vào khẩn cấp (break-glass) nằm ngoài mặt phẳng đang hỏng",
+   "Tắt hẳn giám sát trên cụm production để giảm tải cho Kubernetes",
+   "Chuyển toàn bộ cụm Kubernetes sang một AZ khác trong cùng vùng",
+   "Tăng TTL của bản ghi DNS lên vài giờ để giảm số lần truy vấn",
+   "Bảng năm sự cố: OpenAI 12/2024 (4 giờ 22 phút) → cần đường break-glass ngoài mặt phẳng đang hỏng."
+  ],
+  [
+   "Sự cố Google Cloud 6/2025 (chính sách có trường rỗng sao chép toàn cầu làm sập Service Control) cho thấy điều gì?",
+   "Nhiều vùng không cứu được cấu hình nhân bản toàn cầu; retry cần jitter",
+   "Chạy nhiều vùng luôn đủ để chống mọi loại lỗi cấu hình của nhà cung cấp",
+   "Máy khách nên thử lại ngay, liên tục để rút ngắn thời gian phục hồi",
+   "Chỉ cần thêm GPU ấm ở vùng dự phòng là tránh được sự cố tương tự",
+   "Client retry ồ ạt kéo dài phục hồi; cấu hình nhân bản toàn cầu làm hỏng mọi vùng cùng lúc."
+  ],
+  [
+   "Sự cố Cloudflare 11/2025: tệp cấu hình tự sinh vượt giới hạn làm proxy lỗi và bảng điều khiển cũng ngừng. Bài học nào đúng?",
+   "Coi cấu hình tự sinh là đầu vào không tin cậy; tách kênh quản trị",
+   "Tăng giới hạn kích thước tệp cấu hình lên mức không giới hạn",
+   "Đặt bảng điều khiển chung hạ tầng với proxy để dễ quản lý hơn",
+   "Ngừng tự sinh cấu hình và chuyển sang chỉnh tay toàn bộ proxy",
+   "Bài học: cấu hình tự sinh là đầu vào không tin cậy; kênh quản trị không nằm chung phạm vi ảnh hưởng."
+  ],
+  [
+   "Phát biểu nào đúng về RPO và RTO trên trục thời gian?",
+   "RPO đo ngược về bản sao lưu cuối; RTO đo tiến đến khi phục vụ lại",
+   "RPO đo tiến đến khi phục vụ lại; RTO đo ngược về bản sao lưu cuối",
+   "Cả RPO và RTO đều tính từ lúc phát hiện sự cố đến lúc cắt DNS",
+   "RPO và RTO là một cặp số dùng chung cho toàn bộ hệ thống AI",
+   "RPO = lượng dữ liệu có thể mất (tính theo thời gian), RTO = thời gian gián đoạn. Mỗi thành phần cần một cặp số riêng."
+  ],
+  [
+   "Bước nào KHÔNG nằm trong sáu giai đoạn cấu thành RTO trên slide?",
+   "Huấn luyện lại mô hình",
+   "Nạp lại trọng số mô hình",
+   "Cắt DNS sang vùng dự phòng",
+   "Khôi phục công suất GPU",
+   "Sáu giai đoạn: phát hiện, quyết định, khôi phục GPU, nạp mô hình, cắt DNS, xác minh."
+  ],
+  [
+   "Mức sẵn sàng 99,99% cho phép thời gian ngừng tối đa khoảng bao nhiêu mỗi năm?",
+   "52,6 phút",
+   "5,26 phút",
+   "4,38 giờ",
+   "8,76 giờ",
+   "99% = 87,6 giờ; 99,9% = 8,76 giờ; 99,95% = 4,38 giờ; 99,99% = 52,6 phút; 99,999% = 5,26 phút."
+  ],
+  [
+   "Ba thành phần nối tiếp, mỗi thành phần sẵn sàng 99,9%. Tính sẵn sàng tổng hợp xấp xỉ bao nhiêu?",
+   "≈ 99,7%, khoảng 26 giờ ngừng mỗi năm",
+   "≈ 99,9%, khoảng 8,76 giờ ngừng mỗi năm",
+   "≈ 99,99%, khoảng 52,6 phút ngừng mỗi năm",
+   "≈ 99,0%, khoảng 87,6 giờ ngừng mỗi năm",
+   "0,999³ ≈ 0,997 ≈ 99,7%, tương đương khoảng 26 giờ ngừng mỗi năm."
+  ],
+  [
+   "Chiến lược đèn mồi (pilot light) có đặc điểm nào?",
+   "Dữ liệu sao chép sẵn, tính toán tắt cho đến khi cần",
+   "Bản thu nhỏ chạy sẵn, mở rộng lên khi chuyển đổi",
+   "Hai vùng cùng phục vụ lưu lượng theo active-active",
+   "Chỉ có dữ liệu sao lưu ở vùng khác, khởi tạo lại hết",
+   "Pilot light: RPO hàng phút, RTO chục phút; dữ liệu sao chép sẵn, compute tắt (AWS REL13-BP02)."
+  ],
+  [
+   "Theo AWS REL13-BP02, dự phòng ấm (warm standby) đạt RPO và RTO cỡ nào?",
+   "RPO hàng giây, RTO hàng phút",
+   "RPO hàng phút, RTO chục phút",
+   "RPO hàng giờ, RTO đến 24 giờ",
+   "RPO gần 0, RTO có thể bằng 0",
+   "Warm standby: bản thu nhỏ chạy sẵn, mở rộng khi chuyển đổi; RPO hàng giây, RTO hàng phút."
+  ],
+  [
+   "Với suy luận LLM, chiến lược sao lưu và khôi phục (backup & restore) có RTO khoảng bao nhiêu?",
+   "Đến 24 giờ",
+   "Hàng chục phút",
+   "Vài phút",
+   "Gần bằng 0",
+   "Backup & restore: khởi tạo mọi thứ khi sự cố, RTO đến 24 giờ, chi phí GPU 1,0x."
+  ],
+  [
+   "Đánh đổi chính của mô hình active-active so với active-passive là gì?",
+   "RTO gần 0 nhưng chi phí gấp đôi và phải xử lý xung đột trạng thái",
+   "RTO vài phút do phải cắt DNS và khởi động GPU ở vùng đang chờ",
+   "Rẻ hơn và đơn giản hơn vì chỉ có một vùng nhận toàn bộ lưu lượng",
+   "Không cần đồng bộ dữ liệu vì mỗi vùng giữ trạng thái riêng biệt",
+   "Active-passive rẻ, đơn giản, chuyển mất vài phút; active-active (50/50, đồng bộ hai chiều) RTO gần 0 nhưng chi phí gấp đôi."
+  ],
+  [
+   "Cấu hình định tuyến DNS nào khớp khuyến nghị trên slide?",
+   "Health check 10–30 giây, 3 lỗi liên tiếp là không khoẻ, TTL 60 giây",
+   "Health check mỗi 5 phút, 1 lỗi là đánh dấu không khoẻ, TTL 24 giờ",
+   "Health check mỗi giờ, 10 lỗi liên tiếp mới không khoẻ, TTL 1 giờ",
+   "Health check 10–30 giây, 1 lỗi là đánh dấu không khoẻ, TTL 12 giờ",
+   "Kiểm tra mỗi 10–30 giây; 3 lần lỗi liên tiếp thì đánh dấu không khoẻ; TTL thấp (60 giây) để cắt nhanh; định tuyến theo độ trễ."
+  ],
+  [
+   "Vì sao chuyển đổi bằng DNS thuần không tức thì dù TTL đã đặt thấp?",
+   "Cache DNS ở máy khách và ISP không luôn tôn trọng TTL",
+   "Bản ghi DNS chỉ được cập nhật một lần mỗi ngày",
+   "Health check chỉ chạy được từ bên trong vùng chính",
+   "DNS phải chờ GPU vùng dự phòng nạp xong trọng số",
+   "DNS cộng thêm khoảng 30–90 giây vào RTO; kết hợp global load balancer dùng Anycast để cắt nhanh hơn."
+  ],
+  [
+   "Ổn định tĩnh (static stability) trong thiết kế DR nghĩa là gì?",
+   "Loại bỏ phụ thuộc vào control plane khỏi đường khôi phục",
+   "Giữ cấu hình hạ tầng cố định, không bao giờ thay đổi nó",
+   "Chỉ dùng API của control plane để tạo máy mới khi sự cố",
+   "Tắt tự động co giãn để số nút trong vùng luôn ổn định",
+   "Data plane thường sẵn sàng cao hơn; AWS khuyến nghị chỉ dùng thao tác data plane trong đường chuyển đổi."
+  ],
+  [
+   "Suy luận liên vùng (cross-region inference) của Bedrock, Foundry, Vertex AI nên được dùng cho mục đích gì?",
+   "Tăng throughput và giảm lỗi 429, không thay cho DR",
+   "Thay thế hoàn toàn cổng LLM và nhà cung cấp dự phòng",
+   "Bảo đảm tự chuyển Provisioned Throughput sang vùng khác",
+   "Cam kết RTO bằng 0 cho mọi điểm cuối theo từng vùng",
+   "Bedrock không hỗ trợ Provisioned Throughput, điểm gọi neo ở vùng nguồn; dự phòng thật vẫn ở tầng ứng dụng."
+  ],
+  [
+   "Có hạn mức PTU trên Azure có bảo đảm còn công suất khi cần chuyển đổi không?",
+   "Không, công suất thay đổi theo nhu cầu của mọi khách hàng",
+   "Có, hạn mức PTU luôn đi kèm công suất được giữ riêng",
+   "Có, miễn là đặt hạn mức ở ít nhất hai vùng khác nhau",
+   "Không, vì Azure hoàn toàn không cho đặt hạn mức PTU",
+   "Hạn mức (quota) không phải công suất (capacity): Azure ghi nhận có hạn mức PTU không bảo đảm còn công suất."
+  ],
+  [
+   "Vì sao EC2 Capacity Blocks hợp với huấn luyện hơn là chờ dự phòng DR?",
+   "Đặt trước tối đa 8 tuần, tối đa 64 instance mỗi khối, không huỷ được",
+   "Chỉ cấp được GPU đời cũ và không hỗ trợ đặt ở vùng dự phòng nào",
+   "Chỉ dùng được với SageMaker, không dùng được với EKS hay EC2 thường",
+   "Chỉ cấp phát được khi tài khoản đã có sẵn hạn mức GPU lớn hơn 0",
+   "Capacity Blocks: tối đa 8 tuần, 64 instance/khối, không huỷ → hợp huấn luyện; DR nên dùng ODCR hoặc nút GPU ấm đúng loại instance."
+  ],
+  [
+   "Trong Terraform sao chép trọng số liên vùng, vì sao đặt delete_marker_replication ở trạng thái Disabled?",
+   "Để xoá nhầm ở bucket nguồn không lan sang bucket DR",
+   "Để giảm chi phí truyền dữ liệu giữa hai vùng AWS",
+   "Để S3 tự xoá checkpoint cũ ở vùng DR sau 15 phút",
+   "Để bật versioning tự động cho bucket ở vùng DR",
+   "Tắt sao chép dấu xoá: xoá nhầm ở nguồn không lan sang DR. Versioning phải bật riêng ở cả hai bucket."
+  ],
+  [
+   "S3 Replication Time Control cam kết gì, và giới hạn sử dụng ra sao?",
+   "99,9% đối tượng trong 15 phút; không dùng cho RPO dưới 1 phút",
+   "100% đối tượng trong 1 phút; dùng được cho RPO gần bằng 0",
+   "99,9% đối tượng trong 1 giờ; chỉ áp dụng cho bucket dưới 1 TB",
+   "99,99% đối tượng trong 5 phút; dùng cho mọi RPO dưới 1 phút",
+   "S3 RTC (khối replication_time, metrics) cam kết 99,9% đối tượng trong 15 phút; không dùng cho RPO dưới 1 phút."
+  ],
+  [
+   "Mô hình 70B lưu ở fp16 chiếm khoảng bao nhiêu dung lượng cần sao chép liên vùng?",
+   "Khoảng 140 GB",
+   "Khoảng 70 GB",
+   "Khoảng 35 GB",
+   "Khoảng 280 GB",
+   "70B tham số × 2 byte (fp16) ≈ 140 GB; chi phí gồm truyền dữ liệu và lưu trữ nhân đôi."
+  ],
+  [
+   "Trong kiến trúc tham chiếu hai vùng, những gì phải nằm ngoài cả hai vùng?",
+   "Giám sát độc lập và nhà cung cấp LLM thứ hai",
+   "Bản sao đọc Aurora Global và S3 của vùng DR",
+   "GPU ấm 1–2 nút và bản chụp của kho vector",
+   "Cổng LLM chính và kho vector của vùng chính",
+   "Ba lớp sao chép riêng: DNS, GPU, trạng thái (S3, Aurora, kho vector); giám sát và nhà cung cấp LLM thứ hai nằm ngoài hai vùng."
+  ],
+  [
+   "Bộ nhớ đệm KV (KV cache) trong VRAM được xử lý thế nào khi DR?",
+   "Không khôi phục; bản sao mới tính lại từ lời nhắc",
+   "Snapshot VRAM mỗi phút rồi sao chép sang vùng DR",
+   "Ghi vào Postgres có PITR để khôi phục đến từng giây",
+   "Sao chép liên vùng bằng S3 Replication Time Control",
+   "Bảng kiểm kê trạng thái: KV cache đổi mỗi yêu cầu, không khôi phục mà tính lại."
+  ],
+  [
+   "Với ảnh container 9,72 GB, nạp lười bằng SOCI rút thời gian kéo ảnh từ bao nhiêu xuống bao nhiêu?",
+   "Từ 419 giây xuống 21 giây",
+   "Từ 188 giây xuống 50 giây",
+   "Từ 148,8 giây xuống 6,3 giây",
+   "Từ 37,6 giây xuống 0,26 giây",
+   "SOCI: 419 s → 21 s (trọng số vẫn phải nạp sau). 188 → 50 s là Fast Model Loader cho trọng số 70B."
+  ],
+  [
+   "Dù đã tối ưu kéo ảnh và nạp trọng số, đo đầu cuối khi mở rộng một bản sao 70B trên SageMaker vẫn mất bao lâu?",
+   "306–407 giây, chưa tính thời gian tìm GPU",
+   "21–50 giây, đã gồm cả thời gian tìm GPU",
+   "60–90 giây, đã gồm cả thời gian cắt DNS",
+   "15–30 phút, gồm cả thời gian huấn luyện lại",
+   "Đo đầu cuối khoảng 306–407 giây (5–7 phút), chưa tính tìm GPU; các phép đo riêng lẻ không cộng trực tiếp."
+  ],
+  [
+   "Giới hạn DR quan trọng của Pinecone theo slide là gì?",
+   "Chỉ khôi phục cùng project và cloud; chưa sao chép liên vùng",
+   "Chỉ khôi phục khi tên và số nút nguồn, đích giống hệt nhau",
+   "Cần phiên bản 2.6.6 trở lên và chỉ có một bản sao CDC",
+   "Sau khi dừng sao chép liên cụm thì không bật lại được",
+   "Pinecone: backup chỉ mục serverless, khôi phục tạo chỉ mục mới. Các nhiễu là giới hạn của Weaviate, Milvus, OpenSearch."
+  ],
+  [
+   "Muốn dựng cụm dự phòng Milvus bằng CDC trễ vài giây, cần điều kiện gì?",
+   "Milvus 2.6.6 trở lên; một bản sao CDC",
+   "Milvus 2.0 trở lên; không giới hạn bản sao",
+   "Bật Aurora Global với ít nhất 10 vùng phụ",
+   "Cùng tên và cùng số nút ở nguồn và đích",
+   "Bảng DR kho vector: Milvus cụm dự phòng bằng CDC, cần 2.6.6+, một bản sao CDC."
+  ],
+  [
+   "pgvector trên Aurora Global cung cấp sao chép thế nào và cần lưu ý gì khi chuyển đổi?",
+   "Mức lưu trữ, thường trễ dưới 1 giây; cần cùng phiên bản engine",
+   "Mức ứng dụng, trễ vài giờ; phải dựng lại chỉ mục ở vùng phụ",
+   "Snapshot theo nút, trễ vài phút; chỉ khôi phục vào cụm mới",
+   "Sao chép liên cụm thụ động; dừng rồi thì không bật lại được",
+   "pgvector/Aurora Global: sao chép mức lưu trữ, trễ thường dưới 1 giây, đến 10 vùng phụ; chuyển đổi cần cùng phiên bản engine."
+  ],
+  [
+   "Khi sao lưu kho vector, thông tin nào cần ghi vào manifest để chỉ mục còn dùng được khi khôi phục?",
+   "Mã, phiên bản, số chiều và cách chuẩn hoá của embedding model",
+   "Tên bucket, vùng và storage class của bản sao lưu trên S3",
+   "Số GPU, loại instance và driver của nút đã dựng chỉ mục",
+   "Danh sách người dùng đã truy vấn chỉ mục trong tuần qua",
+   "Quên embedding model thì chỉ mục không tương thích; khôi phục chỉ mục và dịch vụ biểu diễn như một đơn vị."
+  ],
+  [
+   "Lỗi phổ biến nhất khi khôi phục sổ đăng ký mô hình (MLflow Model Registry) là gì?",
+   "Sổ đăng ký trỏ đến đường dẫn artefact không tồn tại",
+   "Postgres không bật được PITR ở vùng DR khi khôi phục",
+   "Trọng số được sao chép nhưng sai storage class trên S3",
+   "Tên mô hình trong sổ đăng ký bị đổi thành chữ in hoa",
+   "Siêu dữ liệu sổ đăng ký (Postgres) và artefact (S3) phải sao lưu đồng bộ, khớp nhau."
+  ],
+  [
+   "PITR của RDS/Aurora hoạt động thế nào?",
+   "Về bất kỳ giây nào trong tối đa 35 ngày, tạo instance mới",
+   "Về bất kỳ giây nào trong tối đa 7 ngày, ghi đè instance cũ",
+   "Chỉ về snapshot hằng ngày gần nhất, ghi đè instance đang chạy",
+   "Về bất kỳ giây nào, mặc định khôi phục sang một vùng khác",
+   "PITR: sao lưu liên tục + nhật ký giao dịch, tối đa 35 ngày; khôi phục tạo instance mới, trong cùng vùng."
+  ],
+  [
+   "Một migration hỏng làm sai siêu dữ liệu. Vì sao bản sao đồng bộ liên vùng không cứu được?",
+   "Lỗi logic cũng lan sang bản sao; cần bản sao lưu theo thời điểm",
+   "Bản sao đồng bộ chỉ chứa dữ liệu cũ hơn 24 giờ so với bản chính",
+   "Bản sao liên vùng không cho đọc nên không kiểm tra được dữ liệu",
+   "Migration chỉ chạy ở vùng phụ nên bản chính không bị ảnh hưởng",
+   "Khi PITR chưa đủ: lỗi logic lan sang bản sao đồng bộ, nên cần bản sao lưu theo thời điểm riêng, không chỉ bản sao."
+  ],
+  [
+   "Theo báo cáo Llama 3 405B, tần suất gián đoạn ngoài kế hoạch khi huấn luyện là bao nhiêu?",
+   "419 lần trong 54 ngày, khoảng 3 giờ một lần, ~78% do phần cứng",
+   "54 lần trong 419 ngày, khoảng 8 ngày một lần, ~30% do phần cứng",
+   "419 lần trong 54 ngày, khoảng 3 giờ một lần, ~78% do phần mềm",
+   "78 lần trong 54 ngày, khoảng 17 giờ một lần, ~90% do mạng",
+   "Llama 3 Herd of Models mục 3.3.4; GPU lỗi chiếm 30,1%; thời gian huấn luyện hiệu dụng vẫn trên 90%."
+  ],
+  [
+   "Lưu điểm bất đồng bộ của PyTorch giảm thời gian chặn huấn luyện mô hình 7B thế nào?",
+   "Từ 148,8 giây xuống 6,3 giây",
+   "Từ 419 giây xuống 21 giây",
+   "Từ 188 giây xuống 50 giây",
+   "Từ 30,1 giây xuống 7,6 giây",
+   "PyTorch Blog 11/2024: async checkpoint giảm thời gian chặn 148,8 s → 6,3 s cho mô hình 7B."
+  ],
+  [
+   "RPO của một job huấn luyện được xác định chủ yếu bởi gì?",
+   "Chu kỳ lưu điểm cộng độ trễ ghi bền",
+   "Thời gian kéo ảnh container lên nút",
+   "TTL của bản ghi DNS điểm cuối API",
+   "Số GPU tham gia huấn luyện song song",
+   "RPO huấn luyện ≈ chu kỳ lưu + độ trễ ghi bền; điểm lưu chỉ trong RAM mất cùng nút."
+  ],
+  [
+   "API trả 429 do vượt trần chi tiêu (không có Retry-After). Cách xử lý đúng là gì?",
+   "Không thử lại",
+   "Thử lại ngay vài lần liên tiếp",
+   "Thử lại sau 5 giây, không giới hạn",
+   "Chờ 60 giây rồi gửi lại y hệt",
+   "429 thường chờ theo Retry-After; riêng lỗi vượt trần chi tiêu không có Retry-After và không nên thử lại."
+  ],
+  [
+   "Mã 529 từ nhà cung cấp mô hình nghĩa là gì và nên xử lý ra sao?",
+   "Nhà cung cấp quá tải; thử lại ngắn rồi chuyển sang dự phòng",
+   "Vượt rate limit của tổ chức; chờ đúng theo tiêu đề Retry-After",
+   "Yêu cầu sai định dạng; sửa nội dung rồi gửi lại ngay lập tức",
+   "Lỗi xác thực khoá API; xoay khoá mới rồi gửi lại yêu cầu đó",
+   "529 = nhà cung cấp quá tải (mọi người dùng): thử lại ngắn, sau đó fallback."
+  ],
+  [
+   "Yêu cầu nhận HTTP 200 nhưng luồng SSE báo lỗi giữa chừng. Ứng dụng nên làm gì?",
+   "Xử lý lỗi trong bộ phân tích luồng, không dựa vào mã trạng thái",
+   "Coi là thành công vì mã 200 đã xác nhận phản hồi hoàn toàn đúng",
+   "Chờ theo Retry-After rồi gửi lại toàn bộ yêu cầu như ban đầu",
+   "Mở cầu dao ngắt mạch ngay để chặn mọi yêu cầu trong 24 giờ tới",
+   "Lỗi giữa chừng khi đang sinh phải xử lý trong stream parser; bỏ qua lỗi SSE vì mã đã là 200 là điều cần tránh."
+  ],
+  [
+   "Suy giảm âm thầm (HTTP 200 nhưng chất lượng thấp) được phát hiện bằng cách nào?",
+   "Bộ đánh giá (eval) và yêu cầu canary",
+   "Theo dõi tỉ lệ mã lỗi 5xx của API",
+   "Health check nông gọi endpoint /healthz",
+   "Đọc tiêu đề Retry-After trong phản hồi",
+   "Bảng phân loại lỗi: 200 chất lượng thấp chỉ phát hiện bằng eval và yêu cầu canary."
+  ],
+  [
+   "Trường hợp nào KHÔNG nên thử lại?",
+   "Lỗi 401 do khoá API không hợp lệ",
+   "Lỗi 504 do quá thời gian chờ",
+   "Lỗi 500 do lỗi nội bộ nhà cung cấp",
+   "Lỗi 429 có kèm tiêu đề Retry-After",
+   "Tránh thử lại lỗi 4xx về nội dung yêu cầu (400, 401, 403). 500/504 thử lại có lùi dần; 429 chờ theo Retry-After."
+  ],
+  [
+   "Cầu dao ngắt mạch ở trạng thái Nửa mở (Half-Open) làm gì?",
+   "Cho thử vài yêu cầu; thành công thì đóng, thất bại thì mở lại",
+   "Chặn mọi yêu cầu và luôn trả phương án dự phòng cho người dùng",
+   "Cho mọi yêu cầu đi bình thường và chỉ ghi log các lỗi phát sinh",
+   "Chuyển hẳn sang nhà cung cấp thứ hai cho đến khi khởi động lại",
+   "Closed: đi bình thường; vượt ngưỡng lỗi → Open: chặn, trả dự phòng; hết thời gian chờ → Half-Open: cho thử vài yêu cầu."
+  ],
+  [
+   "Mặc định LiteLLM tạm loại một triển khai khỏi định tuyến thế nào?",
+   "Sau 3 lần lỗi, loại trong 5 giây",
+   "Sau 1 lần lỗi, loại trong 30 giây",
+   "Sau 5 lần lỗi, loại trong 60 giây",
+   "Sau 3 lần lỗi, loại vĩnh viễn",
+   "Mặc định allowed_fails = 3, cooldown_time = 5 s; ví dụ cấu hình trên slide nâng cooldown lên 30."
+  ],
+  [
+   "Trong cấu hình LiteLLM, tiêu đề phản hồi x-litellm-model-id dùng để làm gì?",
+   "Biết triển khai nào đã phục vụ, để đo tỉ lệ dùng dự phòng",
+   "Cho ứng dụng tự chọn mô hình dự phòng ở mỗi yêu cầu gửi đi",
+   "Xác thực khoá API của nhà cung cấp chính khi gọi chat-primary",
+   "Ghim mã mô hình có ngày để tránh bị nhà cung cấp ngừng hỗ trợ",
+   "Ứng dụng luôn gọi chat-primary; việc chuyển sang chat-backup do cổng quyết định; tiêu đề cho biết ai đã phục vụ."
+  ],
+  [
+   "Trước khi bật chuyển đổi sang mô hình dự phòng của nhà cung cấp khác, cần làm gì?",
+   "Chạy bộ eval của ứng dụng trên mô hình dự phòng",
+   "Sao chép prompt cache từ nhà cung cấp chính sang",
+   "Tắt structured output để hai mô hình trả giống nhau",
+   "Giữ nguyên tham số vì mọi nhà cung cấp đều nhận",
+   "Prompt, tool schema, structured output khác nhau giữa nhà cung cấp; tham số có thể bị 400; prompt cache không dùng chung."
+  ],
+  [
+   "Chính sách ngừng hỗ trợ mô hình GA của Azure (Foundry) là gì?",
+   "Ngừng sau 18 tháng, không gia hạn; yêu cầu trả 410 Gone",
+   "Báo trước tối thiểu 60 ngày; yêu cầu tự chuyển mô hình mới",
+   "Báo trước tối thiểu 6 tháng; mô hình tắt theo lịch công bố",
+   "Ngừng sau 36 tháng, có gia hạn; yêu cầu trả 404 Not Found",
+   "Anthropic: tối thiểu 60 ngày; OpenAI: tối thiểu 6 tháng với GA; Azure: GA ngừng sau 18 tháng, trả 410 Gone."
+  ],
+  [
+   "SLA của Amazon Bedrock hoàn bao nhiêu tín dụng khi tính sẵn sàng dưới 99,0% (nhưng từ 95,0% trở lên)?",
+   "25%",
+   "10%",
+   "50%",
+   "100%",
+   "10% khi dưới 99,9%, 25% khi dưới 99,0%, 100% khi dưới 95,0%; chỉ tính lỗi 500 theo vùng; không cam kết TTFT hay chất lượng."
+  ],
+  [
+   "Vì sao lần chuyển đổi dự phòng đầu tiên nên bán tự động?",
+   "Để tránh dao động (flapping) qua lại giữa hai vùng",
+   "Để tiết kiệm chi phí GPU ấm trong vùng dự phòng",
+   "Vì DNS không hỗ trợ cắt lưu lượng tự động hoàn toàn",
+   "Vì health check chỉ chạy được từ một vị trí duy nhất",
+   "Cảnh báo + một lần xác nhận; bộ kiểm tra chạy từ 3 vị trí, mỗi 15 giây."
+  ],
+  [
+   "Kiểm tra tình trạng sâu (deep) cho hệ thống AI nên gồm gì?",
+   "Synthetic request 1 token đo TTFT, truy vấn vector cố định, đọc XID/ECC từ DCGM",
+   "Gọi /healthz và nhận HTTP 200 để xác nhận tiến trình phục vụ vẫn còn sống",
+   "Chạy lại toàn bộ bộ eval trên mọi yêu cầu thật của người dùng mỗi 15 giây",
+   "Ping địa chỉ IP của nút GPU và kiểm tra dung lượng đĩa còn trống trên nút",
+   "Kiểm tra nông chỉ biết tiến trình sống; kiểm tra sâu tốn GPU nên chạy thưa hơn, từ nhiều vị trí."
+  ],
+  [
+   "Trong sơ đồ chống dao động, điều kiện xác nhận lỗi trước khi chuyển vùng là gì?",
+   "3 lần lỗi, từ 2 trên 3 vị trí kiểm tra",
+   "1 lần lỗi, từ bất kỳ vị trí kiểm tra nào",
+   "3 lần lỗi, chỉ từ vị trí trong vùng chính",
+   "1–2 lần lỗi, từ một vị trí kiểm tra bất kỳ",
+   "Nghi ngờ: 1–2 lần lỗi; xác nhận lỗi: 3 lần, 2 trên 3 vị trí; người trực xác nhận một lần bấm."
+  ],
+  [
+   "Chế độ ngủ (sleep mode) của vLLM giúp gì cho vùng dự phòng và giới hạn là gì?",
+   "Đánh thức mô hình nhỏ trong 0,26 giây thay vì 37,6 giây; chỉ trong cùng tiến trình",
+   "Đánh thức mô hình 70B trong 21 giây thay vì 419 giây; dùng được giữa các nút",
+   "Nạp trọng số từ S3 trong 50 giây thay vì 188 giây; chỉ cho mô hình dưới 7B",
+   "Giữ KV cache khi chuyển vùng trong 6,3 giây; cần có Run:ai Model Streamer",
+   "Slide làm ấm GPU: vLLM sleep mode 0,26 s thay vì 37,6 s, chỉ có tác dụng trong cùng tiến trình."
+  ],
+  [
+   "Lỗi thiết kế DR nào khiến bảng theo dõi ngừng cùng lúc và không ai biết hệ thống đang hỏng?",
+   "Đặt giám sát cùng vùng với tải",
+   "Dùng cùng tài khoản và cùng khoá",
+   "Không có cầu dao ngắt mạch",
+   "Sổ tay xử lý chưa từng chạy thử",
+   "Sáu lỗi thường gặp: giám sát cùng vùng với tải → bảng theo dõi ngừng cùng lúc."
+  ],
+  [
+   "Hai vùng DR dùng chung một tài khoản và một khoá. Rủi ro chính là gì?",
+   "Sự cố IAM hoặc thanh toán làm cả hai vùng ngừng cùng lúc",
+   "Hai vùng chuyển qua lại liên tục khi health check dao động",
+   "Chi phí truyền dữ liệu giữa hai vùng tăng gấp đôi mỗi tháng",
+   "Bản sao kho vector ở vùng phụ trễ hơn bản chính vài giờ",
+   "Sáu lỗi thường gặp: cùng tài khoản, cùng khoá → sự cố IAM hoặc thanh toán hạ cả hai vùng."
+  ],
+  [
+   "Theo bảng chi phí GPU (1x là chi phí vùng chính), dự phòng ấm 1–2 nút tốn khoảng bao nhiêu?",
+   "1,2x đến 1,5x",
+   "1,0x đến 1,1x",
+   "1,6x đến 1,8x",
+   "2,0x đến 2,5x",
+   "Backup & restore 1,0x; pilot light 1,1x; warm standby 1,2x–1,5x; hot 2,0x."
+  ],
+  [
+   "Kịch bản diễn tập nào được xếp mức rủi ro Cao?",
+   "Thu hồi thông tin xác thực vùng chính",
+   "Xoá một pod phục vụ GPU trên Kubernetes",
+   "Tăng độ trễ gọi kho vector lên vài giây",
+   "Nhà cung cấp LLM trả 429 hoặc lỗi 5xx",
+   "Cao: chặn mạng vùng chính, thu hồi credential; Trung bình: 429/5xx, khôi phục snapshot vector; Thấp: xoá pod, tăng độ trễ kho vector."
+  ],
+  [
+   "Khi dùng kịch bản liên vùng của AWS FIS, cần lưu ý gì về an toàn?",
+   "Kịch bản không có điều kiện dừng sẵn, phải tự thêm",
+   "Kịch bản tự dừng khi RTO vượt mục tiêu đã khai báo",
+   "Kịch bản chỉ chạy được trên môi trường production",
+   "Kịch bản tự gửi thông báo trước cho nhóm người trực",
+   "Nguyên tắc an toàn: có kill switch; AWS FIS kịch bản liên vùng không có điều kiện dừng sẵn, phải tự thêm."
+  ],
+  [
+   "Theo mô hình trưởng thành DR, mục tiêu thực tế cho hầu hết nhóm là mức nào?",
+   "Mức 2 đến 3",
+   "Mức 0 đến 1",
+   "Mức 4",
+   "Mức 1 đến 2",
+   "Mức 2: chuyển đổi tự động một phần; mức 3: diễn tập hàng quý. Mức 4 chỉ đáng khi SLA yêu cầu 99,99% trở lên."
+  ],
+  [
+   "Trong script đo RTO bằng thăm dò liên tục, vì sao gửi yêu cầu max_tokens = 1?",
+   "Rẻ nhưng vẫn đi qua toàn bộ đường phục vụ",
+   "Để vượt qua rate limit của nhà cung cấp",
+   "Để chỉ kiểm tra DNS mà không gọi mô hình",
+   "Vì cổng LLM từ chối yêu cầu dài hơn 1 token",
+   "Script đo RTO nhìn từ người dùng (gồm DNS), dừng khi vùng dự phòng trả lời lần đầu."
+  ]
+ ],
+ "essay": [
+  [
+   "Nhóm bạn vận hành chatbot hỗ trợ khách hàng dùng RAG. Hãy lập bảng RTO/RPO cho 5 thành phần: dịch vụ suy luận (cổng LLM, API), kho vector, feature store, kho siêu dữ liệu/lịch sử hội thoại và nhà cung cấp LLM bên ngoài; giải thích lý do cho từng cặp số.",
+   "Ý chấm: (1) Cổng LLM/API suy luận: RTO 5–15 phút, RPO không áp dụng vì không lưu trạng thái; người dùng thấy trực tiếp, SLA chặt. (2) Kho vector: RTO 15 phút, RPO 5 phút; cần vector mới, bản sao có thể trễ nhẹ. (3) Feature store: RTO 30 phút, RPO 15 phút; đặc trưng theo lô chấp nhận độ trễ lớn hơn. (4) Siêu dữ liệu, lịch sử hội thoại: RTO 15 phút, RPO vài giây đến 1 phút; mất lịch sử làm hỏng trải nghiệm và kiểm toán. (5) Nhà cung cấp LLM: RTO dưới 1 phút nhờ cổng fallback, RPO không áp dụng; phụ thuộc hạn mức dự phòng và chất lượng mô hình thay thế. (6) Nêu nguyên tắc: không có một RTO cho mọi thành phần; RTO/RPO càng thấp chi phí càng cao; số là minh hoạ, điều chỉnh theo SLA thực tế."
+  ],
+  [
+   "Công ty cần SLA 99,9% cho dịch vụ suy luận chạy trên 10 nút GPU, RTO mục tiêu 3 phút. Lãnh đạo hỏi có nên chạy active-active không. Dùng cây quyết định và bảng chi phí trên slide để đề xuất chiến lược, nêu chi phí tương đối và đánh đổi.",
+   "Ý chấm: (1) Cây quyết định: RTO dưới 5 phút → dự phòng ấm hoặc chủ động; nếu chấp nhận 15–30 phút thì nguội/đèn mồi; không chấp nhận thì tính lại ngân sách hoặc hạ SLA. (2) Chi phí GPU (1x = vùng chính): backup & restore 1,0x, pilot light 1,1x, warm 1,2x–1,5x (ví dụ 2 nút ấm ≈ 1,2x), hot 2,0x; nguội + công suất đặt trước cũng ≈ 2,0x vì công suất đặt trước tính tiền như đang chạy. (3) Chưa tính lưu trữ và egress. (4) SLA 99,9% không cần thiết kế cho 99,99%; chủ động chỉ đáng chi phí gấp đôi khi RTO thật sự cần gần 0. (5) Lưu ý warm vẫn có phát hiện, xác nhận, cắt DNS 4–5 phút: muốn đạt 3 phút phải rút ngắn các bước này hoặc chạy đồng thời hai vùng; đề xuất kết luận có lý do và đo bằng diễn tập."
+  ],
+  [
+   "Trong buổi diễn tập, RTO đo được khi vùng chính ngừng là 14,5 phút trong khi mục tiêu là 5 phút. Hãy phân tích các giai đoạn tạo nên RTO này và đề xuất biện pháp rút ngắn từng giai đoạn.",
+   "Ý chấm: (1) Sáu giai đoạn: phát hiện, quyết định, khôi phục GPU, nạp mô hình, cắt DNS, xác minh; ví dụ nguội 1+2+4+5+1,5+1 = 14,5 phút, phần lớn là chờ GPU và nạp mô hình. (2) GPU: giữ 1–2 nút GPU ấm (Karpenter), công suất đặt trước/ODCR đúng loại instance, xin hạn mức trước; không tạo GPU mới lúc sự cố (control plane có thể hỏng). (3) Nạp mô hình: SOCI lazy loading (419 s → 21 s), Fast Model Loader (188 s → 50 s), trọng số nạp sẵn vào cache cục bộ, Run:ai Model Streamer, vLLM sleep mode. (4) Nút ấm rút RTO còn khoảng 7 phút; phát hiện, xác nhận và cắt DNS vẫn chiếm 4–5 phút: rút ngắn chu kỳ health check, TTL 60 giây, global LB Anycast, xác nhận một lần bấm. (5) Nếu vẫn không đạt: chạy đồng thời hai vùng (active-active) hoặc điều chỉnh mục tiêu; đo lại bằng diễn tập."
+  ],
+  [
+   "Nhà cung cấp LLM chính của trợ lý nội bộ ngừng hoạt động nhiều giờ. Hãy thiết kế bậc thang suy giảm có kiểm soát (graceful degradation) cho ứng dụng, nêu mỗi bậc người dùng nhận được gì và rủi ro cần kiểm soát.",
+   "Ý chấm: (1) Thứ tự bậc: mô hình chính → nhà cung cấp thứ hai → mô hình nhỏ hơn (có thể tự lưu trữ) → câu trả lời đã lưu → hàng đợi, trả lời sau → thông báo tĩnh. (2) Chất lượng và chi phí giảm dần, khả năng sống sót tăng dần; mỗi bậc là quyết định có chủ đích về nội dung trả về và cách thông báo. (3) Bậc cuối luôn tồn tại kể cả khi mọi nhà cung cấp ngừng. (4) Rủi ro: mô hình dự phòng khác về prompt, tool schema, structured output, tham số có thể lỗi 400 → chạy eval trước; prompt cache lạnh; semantic cache chỉ còn nếu được sao chép; hạn mức ở nhà cung cấp dự phòng phải cấp trước. (5) Triển khai qua cổng LLM (fallback, circuit breaker), đo tỉ lệ dùng dự phòng."
+  ],
+  [
+   "Viết sổ tay xử lý sự cố (runbook) một trang cho tình huống vùng chính ngừng hoạt động, có mốc thời gian, và nêu những việc sau sự cố.",
+   "Ý chấm: (1) T+0 xác nhận sự cố từ nhiều vị trí và trang trạng thái nhà cung cấp cloud. (2) T+2 mở kênh sự cố, ghi giờ bắt đầu để tính RTO. (3) T+3 mở rộng nhóm GPU vùng dự phòng từ mức ấm lên đủ công suất. (4) T+6 kiểm tra trọng số mô hình và độ trễ sao chép kho vector ở vùng dự phòng. (5) T+8 cắt 10% rồi 100% lưu lượng. (6) T+12 xác minh tín hiệu vàng (độ trễ, tỉ lệ lỗi, TTFT). (7) Sau sự cố: đo RTO thực tế so với mục tiêu, viết postmortem. (8) Ghi chú: mốc phút là ví dụ, điều chỉnh theo RTO cam kết; sổ tay phải được diễn tập, không chỉ nằm trên giấy; đường thực hiện không phụ thuộc control plane của vùng hỏng."
+  ],
+  [
+   "Lên kế hoạch một buổi game day cho kịch bản chặn mạng đến vùng chính của hệ thống suy luận LLM. Nêu các bước, vai trò, điều kiện an toàn và cách đo kết quả.",
+   "Ý chấm: (1) Lên kế hoạch: chọn kịch bản và phạm vi, đặt giả thuyết RTO, chốt điều kiện dừng khẩn cấp. (2) Thông báo nhóm trực và các bên liên quan; phân vai chỉ huy, thực thi, ghi giờ. (3) Kích hoạt sự cố giả ở môi trường thử trước, bắt đầu đồng hồ RTO, làm theo sổ tay, không đoán. (4) Đo và rút kinh nghiệm: so RTO đo được với giả thuyết, ghi khoảng chênh từng bước, cập nhật sổ tay trong 1 tuần. (5) An toàn: kill switch; AWS FIS liên vùng không có điều kiện dừng sẵn nên tự thêm; bắt đầu phạm vi nhỏ; đây là kịch bản rủi ro Cao. (6) Đo bằng script thăm dò yêu cầu 1 token, dừng khi vùng dự phòng trả lời lần đầu (RTO nhìn từ người dùng, gồm DNS)."
+  ],
+  [
+   "Sau khi đã chuyển sang vùng dự phòng được 6 giờ, vùng chính hồi phục. Thiết kế quy trình chuyển ngược (failback) và giải thích vì sao nó khó hơn chuyển đổi.",
+   "Ý chấm: (1) Khó hơn vì vùng dự phòng đã nhận dữ liệu mới (kho vector, siêu dữ liệu, lịch sử hội thoại); sao chép phải đảo chiều trước khi cắt lưu lượng, nếu không mất dữ liệu; vùng chính vừa hồi phục thường chưa ổn định. (2) Bước 1: đồng bộ ngược dữ liệu, kiểm tra nhất quán. (3) Bước 2: làm ấm GPU và chạy kiểm tra tình trạng sâu ở vùng chính. (4) Bước 3: chuyển 5%, 25%, 100% lưu lượng, theo dõi tín hiệu vàng mỗi bước. (5) Bước 4: giữ vùng dự phòng ấm thêm một khoảng quan sát. (6) Thực hiện giờ thấp điểm, có kế hoạch và người phụ trách, không tự động; chờ cooldown tránh dao động."
+  ],
+  [
+   "Một tài khoản admin bị chiếm quyền và kẻ tấn công mã hoá các bucket trọng số mô hình. Hãy thiết kế chiến lược sao lưu để khôi phục được trong tình huống này và giải thích vì sao sao chép liên vùng thôi là chưa đủ.",
+   "Ý chấm: (1) Sao chép chỉ giữ bản hiện tại: bản bị mã hoá hoặc xoá nhầm cũng được sao chép; cùng tài khoản, cùng khoá thì sai sót lan sang DR. (2) Cần bản có phiên bản (versioning), bất biến và tách tài khoản. (3) S3 Object Lock chế độ compliance: không ai, kể cả root, ghi đè hay xoá trong thời hạn giữ. (4) AWS Backup logically air-gapped vault: luôn khoá compliance, giữ tối thiểu 7 ngày, chia sẻ qua RAM để tài khoản khác khôi phục. (5) Sao lưu liên tài khoản chống tài khoản bị chiếm và mối đe doạ nội bộ. (6) Kiểm tra checksum sau sao chép, định kỳ khôi phục thử; bản sao lưu chưa khôi phục thử thì chưa được xem là có."
+  ],
+  [
+   "Agent đặt lịch hẹn chạy vòng lặp nhiều bước (gọi LLM, tra cứu, ghi cơ sở dữ liệu, gửi email). Tiến trình bị kill giữa chừng khi vùng gặp sự cố. Phân tích những gì bị mất và thiết kế cơ chế để agent tiếp tục an toàn.",
+   "Ý chấm: (1) Bị mất nếu chỉ giữ trong bộ nhớ: luồng sinh và ngữ cảnh hội thoại, vị trí trong vòng lặp agent, kết quả công cụ chưa ghi, prompt cache ở nhà cung cấp cũ. (2) Thực thi bền vững: ghi kết quả từng bước vào kho bền vững, sau sự cố tiếp tục từ bước cuối đã ghi. (3) Công cụ: Temporal (lịch sử sự kiện), LangGraph (checkpoint vào Postgres), Cloudflare Workflows (từ bước thành công cuối). (4) Activity chạy ít nhất một lần, có thể chạy lại một phần → công cụ có tác dụng phụ (gửi email, ghi DB) cần idempotency key; không retry thao tác chưa idempotent. (5) Kho checkpoint phải được sao chép sang vùng khác."
+  ],
+  [
+   "Sau sự cố vùng làm chatbot ngừng 40 phút (RTO mục tiêu 15 phút), bạn được giao viết báo cáo sau sự cố không quy lỗi (blameless postmortem). Nêu cấu trúc báo cáo và các mục riêng cần có cho hệ thống AI.",
+   "Ý chấm: (1) Dòng thời gian: bắt đầu, phát hiện, cảnh báo, cắt lưu lượng, khôi phục. (2) RTO/RPO đo được so với mục tiêu (40 vs 15 phút), chỉ ra bước nào gây khoảng chênh. (3) Nguyên nhân gốc bằng 5 câu hỏi vì sao, không quy cho cá nhân. (4) Hành động khắc phục có người phụ trách và hạn chót. (5) Mục riêng cho AI: số yêu cầu bị từ chối/hết thời gian chờ tính theo token; chất lượng đầu ra khi chạy mô hình dự phòng; chi phí phát sinh (GPU mở rộng, egress); khoảng chênh trong sổ tay đã sửa chưa. (6) Liên hệ sáu lỗi thường gặp (sổ tay chưa chạy, giám sát cùng vùng, phụ thuộc control plane...) nếu là nguyên nhân."
+  ]
+ ]
+}

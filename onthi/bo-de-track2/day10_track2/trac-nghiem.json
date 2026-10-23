@@ -1,0 +1,1568 @@
+{
+  "id": "day10_track2",
+  "title": "Bộ đề ôn tập Track 2 Ngày 10",
+  "sourceFolder": "onthi",
+  "questionCount": 60,
+  "questions": [
+    {
+      "id": "T2D10-001",
+      "type": "mcq",
+      "prompt": "Trong breakdown chi phí GPU cloud 2026, Compute (GPU hours) chiếm khoảng bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Khoảng 30%"
+        },
+        {
+          "key": "B",
+          "text": "Khoảng 75%"
+        },
+        {
+          "key": "C",
+          "text": "Khoảng 50%"
+        },
+        {
+          "key": "D",
+          "text": "Khoảng 15%"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Breakdown: Compute 50%, Power 15%, Storage 12%, Net 8%, Other 15%.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-002",
+      "type": "mcq",
+      "prompt": "Line-item nào được slide gọi là tăng nhanh nhất trong chi phí GPU?",
+      "options": [
+        {
+          "key": "A",
+          "text": "License phần mềm"
+        },
+        {
+          "key": "B",
+          "text": "Power (điện năng)"
+        },
+        {
+          "key": "C",
+          "text": "Storage (lưu trữ)"
+        },
+        {
+          "key": "D",
+          "text": "Network egress"
+        }
+      ],
+      "answer": "B",
+      "explanation": "H100 node ∼1,400 W/GPU all-in; power ∼10–20% TCO nhưng ∼30–40% opex.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-003",
+      "type": "mcq",
+      "prompt": "Hidden cost nào được slide nêu với mức $0.09/GB?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Egress trên AWS"
+        },
+        {
+          "key": "B",
+          "text": "NAT gateway"
+        },
+        {
+          "key": "C",
+          "text": "Secrets Manager"
+        },
+        {
+          "key": "D",
+          "text": "Inter-AZ traffic"
+        }
+      ],
+      "answer": "A",
+      "explanation": "NAT gateway $0.045/GB, Secrets Manager $0.40/secret/tháng; egress AWS $0.09/GB.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-004",
+      "type": "mcq",
+      "prompt": "Theo rule of thumb của slide, GPU utilization dưới ngưỡng nào thì cần right-size ngay?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dưới 50%"
+        },
+        {
+          "key": "B",
+          "text": "Dưới 60%"
+        },
+        {
+          "key": "C",
+          "text": "Dưới 10%"
+        },
+        {
+          "key": "D",
+          "text": "Dưới 30%"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Rule of thumb: GPU utilization <30% (hay MFU thấp) = cần right-size ngay.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-005",
+      "type": "mcq",
+      "prompt": "Chạy inference model 8B trên H100 thuộc dạng lãng phí nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "GPU idle qua đêm sau khi training"
+        },
+        {
+          "key": "B",
+          "text": "Dev environment chạy 24/7 cả tuần"
+        },
+        {
+          "key": "C",
+          "text": "Over-provisioned, A10G/L4 là đủ"
+        },
+        {
+          "key": "D",
+          "text": "Unused reserved capacity mua 1 năm"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide liệt kê 5 dạng lãng phí; H100 cho inference 8B là over-provisioned.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-006",
+      "type": "mcq",
+      "prompt": "Theo slide, hầu hết AI team đang ở giai đoạn nào của vòng đời FinOps?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Run — đã đạt mức trưởng thành cao"
+        },
+        {
+          "key": "B",
+          "text": "Inform — cần audit trước khi optimize"
+        },
+        {
+          "key": "C",
+          "text": "Optimize — đang tối ưu purchasing"
+        },
+        {
+          "key": "D",
+          "text": "Operate — đã có chargeback ổn định"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Vòng đời Inform → Optimize → Operate; hầu hết AI teams mới ở Inform.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-007",
+      "type": "mcq",
+      "prompt": "Giá thuê H100 từ đỉnh ∼$8/hr (2023) xuống ∼$2/hr neocloud (cuối 2025) giảm khoảng bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "64–75%"
+        },
+        {
+          "key": "B",
+          "text": "20–30%"
+        },
+        {
+          "key": "C",
+          "text": "85–95%"
+        },
+        {
+          "key": "D",
+          "text": "40–50%"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Đỉnh ∼$8/GPU-hr → ∼$2/hr neocloud: giảm 64–75%.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-008",
+      "type": "mcq",
+      "prompt": "Hợp đồng 1 năm H100 bật lại +40% ($1.70→$2.35/hr) đầu 2026 dẫn tới khuyến nghị gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Luôn chờ thêm vì giá GPU chỉ đi xuống"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ dùng on-demand vì reserved luôn lỗ"
+        },
+        {
+          "key": "C",
+          "text": "Chuyển toàn bộ sang spot để né hợp đồng"
+        },
+        {
+          "key": "D",
+          "text": "Khóa reserved sớm, đừng cược chờ rẻ hơn"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Thị trường đang siết lại → khóa reserved sớm, tránh bẫy “năm nào cũng rẻ hơn”.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-009",
+      "type": "mcq",
+      "prompt": "Với H100 SXM ∼$50k trọn đời 5 năm, cho thuê dưới mức giá nào thì lỗ?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dưới $2.35/hr"
+        },
+        {
+          "key": "B",
+          "text": "Dưới $7.44/hr"
+        },
+        {
+          "key": "C",
+          "text": "Dưới $1.65/hr"
+        },
+        {
+          "key": "D",
+          "text": "Dưới $2.85/hr"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Cho thuê <$1.65/hr → lỗ; >$2.85/hr → thắng cả thị trường chứng khoán.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-010",
+      "type": "mcq",
+      "prompt": "Vì sao slide yêu cầu re-baseline mọi TCO về giá 2026?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Số A100/A10G 2023 thổi phồng chi phí 3–4×"
+        },
+        {
+          "key": "B",
+          "text": "Giá 2026 luôn cao gấp đôi so với 2023"
+        },
+        {
+          "key": "C",
+          "text": "Giá 2023 chưa tính chi phí storage"
+        },
+        {
+          "key": "D",
+          "text": "Chip 2026 không còn tính tiền theo giờ"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Re-baseline mọi TCO về giá 2026 (số A100/A10G 2023 thổi phồng chi phí 3–4×).",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-011",
+      "type": "mcq",
+      "prompt": "Cùng chip H100 nhưng giá $1.49–$6.98/GPU-hr tùy cloud cho thấy điều gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Nên lập ngân sách theo $/GPU-hr niêm yết"
+        },
+        {
+          "key": "B",
+          "text": "Chênh 4–5× → cơ hội provider arbitrage"
+        },
+        {
+          "key": "C",
+          "text": "Cloud rẻ đang dùng bản H100 cấu hình yếu"
+        },
+        {
+          "key": "D",
+          "text": "Giá cao hơn luôn kèm throughput cao hơn"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bảng $/GPU-hr là vanity metric: cùng chip đa cloud chênh 4–5×.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-012",
+      "type": "mcq",
+      "prompt": "GB300 NVL72 so với Hopper minh họa nguyên tắc nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đắt hơn mỗi giờ và đắt hơn ∼35× mỗi token"
+        },
+        {
+          "key": "B",
+          "text": "Giá mỗi giờ ngang nhau, throughput thấp hơn"
+        },
+        {
+          "key": "C",
+          "text": "Đắt hơn mỗi giờ nhưng rẻ hơn ∼35× mỗi token"
+        },
+        {
+          "key": "D",
+          "text": "Rẻ hơn mỗi giờ và rẻ hơn ∼35× mỗi token"
+        }
+      ],
+      "answer": "C",
+      "explanation": "$/hr cao không nghĩa đắt hơn/token — GB300 đắt/giờ nhưng rẻ nhất/token; 50× throughput/MW.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-013",
+      "type": "mcq",
+      "prompt": "B300 so với B200 (Llama-70B FP4): giá/giờ cao hơn 23%. $/1M-token thay đổi thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đắt hơn 23% mỗi token"
+        },
+        {
+          "key": "B",
+          "text": "Đắt hơn 26% mỗi token"
+        },
+        {
+          "key": "C",
+          "text": "Ngang nhau mỗi token"
+        },
+        {
+          "key": "D",
+          "text": "Rẻ hơn 26% mỗi token"
+        }
+      ],
+      "answer": "D",
+      "explanation": "$0.055 vs $0.074/1M-token (−26%): chip mới = rẻ hơn/token.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-014",
+      "type": "mcq",
+      "prompt": "Lợi thế chính của AMD MI300X/MI355X trong thực đơn silicon 2026 là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "$/GB-VRAM thấp, chạy 70B trên một GPU"
+        },
+        {
+          "key": "B",
+          "text": "Spot arbitrage đa cloud dễ nhất thị trường"
+        },
+        {
+          "key": "C",
+          "text": "Rẻ nhất mỗi token ở biên giới frontier"
+        },
+        {
+          "key": "D",
+          "text": "Giá-perf cao nhất cho training trên AWS"
+        }
+      ],
+      "answer": "A",
+      "explanation": "MI355X 288GB; MI300X −55% $/GB-VRAM vs H100; AMD còn là đòn bẩy đàm phán.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-015",
+      "type": "mcq",
+      "prompt": "Đánh đổi khi chọn AWS Trainium hoặc Google TPU là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Giá ngang NVIDIA nhưng spot ổn định hơn"
+        },
+        {
+          "key": "B",
+          "text": "Rẻ 30–60%/đơn vị nhưng captive một cloud"
+        },
+        {
+          "key": "C",
+          "text": "Portable đa cloud nhưng đắt hơn 30–60%"
+        },
+        {
+          "key": "D",
+          "text": "Lock-in thấp nhưng chỉ dùng được inference"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Trainium/TPU = rẻ 30–60%/đơn vị nhưng captive một cloud (lock-in cao).",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-016",
+      "type": "mcq",
+      "prompt": "Trước khi cam kết custom silicon, slide khuyên làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "So sánh giá $/GPU-hr niêm yết giữa các vendor"
+        },
+        {
+          "key": "B",
+          "text": "Chọn chip có peak TFLOPS cao nhất danh mục"
+        },
+        {
+          "key": "C",
+          "text": "Đòi benchmark $/1M-token trên workload của mình"
+        },
+        {
+          "key": "D",
+          "text": "Tin số tok/$ vendor công bố vì đã dùng FP4"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Vendor tok/$ claims dùng FP4 + model chọn lọc nên cần benchmark trên workload thật.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-017",
+      "type": "mcq",
+      "prompt": "Hyperscaler ∼$7.44/GPU-hr và neocloud ∼$2.5/hr: neocloud rẻ hơn khoảng bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "∼2×, tức ∼50% rẻ hơn"
+        },
+        {
+          "key": "B",
+          "text": "∼5×, tức ∼80% rẻ hơn"
+        },
+        {
+          "key": "C",
+          "text": "∼1.5×, tức ∼33% rẻ hơn"
+        },
+        {
+          "key": "D",
+          "text": "∼3×, tức ∼67% rẻ hơn"
+        }
+      ],
+      "answer": "D",
+      "explanation": "7.44/2.5 ≈ 3× → ∼67% rẻ hơn.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-018",
+      "type": "mcq",
+      "prompt": "Điểm đáng lưu ý về giá B200 trên neocloud Q1 2026 là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tăng +24%, volatility 11.4% — thị trường mỏng"
+        },
+        {
+          "key": "B",
+          "text": "Giảm −24%, volatility 0.5% — thị trường dư"
+        },
+        {
+          "key": "C",
+          "text": "Ổn định, volatility ngang H100 hyperscaler"
+        },
+        {
+          "key": "D",
+          "text": "Rẻ hơn H100 vì nguồn cung Blackwell dư thừa"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Frontier đảo ngược: B200 ∼$5.09/GPU-hr, +24% Q1 2026, volatility 11.4% vs 0.5% H100 hyperscaler.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-019",
+      "type": "mcq",
+      "prompt": "Quy tắc “neocloud rẻ hơn 40–70%” thời A100 được cập nhật thế nào cho 2026?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không còn chênh lệch giá đáng kể nào"
+        },
+        {
+          "key": "B",
+          "text": "∼3× mainstream, 3–6× với silicon mới"
+        },
+        {
+          "key": "C",
+          "text": "Vẫn giữ 40–70% cho mọi thế hệ chip"
+        },
+        {
+          "key": "D",
+          "text": "∼1.5× mainstream, 2× với silicon mới"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Cập nhật quy tắc: nay ∼3× mainstream, 3–6× silicon mới; một chính sách mua không hợp mọi thế hệ.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-020",
+      "type": "mcq",
+      "prompt": "Workload utilization thấp, không cần kiểm soát hạ tầng. Lựa chọn stack neocloud phù hợp?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đặt Capacity Block dài 182 ngày"
+        },
+        {
+          "key": "B",
+          "text": "Mua per-token API, không mua GPU"
+        },
+        {
+          "key": "C",
+          "text": "Thuê bare-metal reserved 1 năm"
+        },
+        {
+          "key": "D",
+          "text": "Mua H100 PCIe đặt tại on-prem"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Chọn theo duty cycle: spiky → scale-to-zero; ổn định → reserved; util thấp → mua token.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-021",
+      "type": "mcq",
+      "prompt": "Theo slide, vì sao neocloud có thể bán GPU rẻ?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Năng lượng rẻ + nợ GPU-backed: arbitrage chi phí vốn"
+        },
+        {
+          "key": "B",
+          "text": "Dùng GPU đời cũ đã khấu hao hết từ năm 2023"
+        },
+        {
+          "key": "C",
+          "text": "Không tính phí egress và storage cho khách hàng"
+        },
+        {
+          "key": "D",
+          "text": "Được NVIDIA trợ giá trực tiếp cho mỗi GPU bán"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Ví dụ CoreWeave $8.5B @ ∼5.9%: năng lượng rẻ + nợ GPU-backed.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-022",
+      "type": "mcq",
+      "prompt": "Mua H100 PCIe ∼$25k–30k: break-even all-in (điện, làm mát, khấu hao, ops) mất bao lâu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "∼6–8 tháng ở ∼50% utilization"
+        },
+        {
+          "key": "B",
+          "text": "∼3–4 năm ở ∼30% utilization"
+        },
+        {
+          "key": "C",
+          "text": "∼2–3 tháng ở ∼100% utilization"
+        },
+        {
+          "key": "D",
+          "text": "∼16–18+ tháng ở ∼100% utilization"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Break-even thô ∼8,300 GPU-hr; all-in ∼16–18+ tháng ở ∼100% utilization.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-023",
+      "type": "mcq",
+      "prompt": "AWS cắt on-demand GPU −45% (6/2025) rồi tăng Capacity Blocks +15% (1/2026). Bài học là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Capacity Block luôn rẻ hơn on-demand"
+        },
+        {
+          "key": "B",
+          "text": "On-demand luôn đắt hơn mọi tầng cam kết"
+        },
+        {
+          "key": "C",
+          "text": "Giá là tín hiệu cung-cầu thời gian thực"
+        },
+        {
+          "key": "D",
+          "text": "Giá GPU chắc chắn chỉ giảm theo thời gian"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Hai cú cách nhau ∼7 tháng — giá không phải xu hướng một chiều.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-024",
+      "type": "mcq",
+      "prompt": "Reserved có discount 45%. Cần utilization tối thiểu khoảng bao nhiêu để có lời?",
+      "options": [
+        {
+          "key": "A",
+          "text": "∼30% (∼7.2h/ngày)"
+        },
+        {
+          "key": "B",
+          "text": "∼55% (∼13.2h/ngày)"
+        },
+        {
+          "key": "C",
+          "text": "∼45% (∼10.8h/ngày)"
+        },
+        {
+          "key": "D",
+          "text": "∼70% (∼16.8h/ngày)"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Break-even utilization ≈ 1 − discount% = 1 − 0.45 = 55%.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-025",
+      "type": "mcq",
+      "prompt": "DWS Flex-start trên GCP có đặc điểm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "−53%, cam kết ≤7 ngày, cho batch/training ngắn"
+        },
+        {
+          "key": "B",
+          "text": "−80%, có thể bị thu hồi chỉ với notice 30 giây"
+        },
+        {
+          "key": "C",
+          "text": "∼45–55%, cam kết 1–3 năm cho workload ổn định"
+        },
+        {
+          "key": "D",
+          "text": "0% discount, trả theo giây cho tải spiky"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Thang cam kết: DWS Flex-start (GCP) −53%, ≤7 ngày, batch/training ngắn.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-026",
+      "type": "mcq",
+      "prompt": "Thời gian notice khi bị thu hồi spot trên AWS và GCP lần lượt là?",
+      "options": [
+        {
+          "key": "A",
+          "text": "∼30 giây và ∼2 phút"
+        },
+        {
+          "key": "B",
+          "text": "∼5 phút và ∼1 phút"
+        },
+        {
+          "key": "C",
+          "text": "∼1 giờ và ∼10 phút"
+        },
+        {
+          "key": "D",
+          "text": "∼2 phút và ∼30 giây"
+        }
+      ],
+      "answer": "D",
+      "explanation": "AWS Spot −40–70%, notice ∼2 phút; GCP tới −80%, notice ∼30 giây.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-027",
+      "type": "mcq",
+      "prompt": "Tỷ lệ interruption spot theo chip cho thấy điều gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mọi chip đều có tỷ lệ gián đoạn ngang nhau"
+        },
+        {
+          "key": "B",
+          "text": "A100 <5% nên chip cũ thì spot an toàn hơn"
+        },
+        {
+          "key": "C",
+          "text": "H100 <5% nên chip mới thì spot an toàn hơn"
+        },
+        {
+          "key": "D",
+          "text": "H100 >20% nên chip mới thì spot rủi ro hơn"
+        }
+      ],
+      "answer": "C",
+      "explanation": "H100 <5%, A100 15–20%, V100/RTX PRO 6000 >20%.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-028",
+      "type": "mcq",
+      "prompt": "Managed Spot (multi-cloud) giúp giảm chi phí ở mức nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "∼1.2× vì phải trả thêm phí điều phối"
+        },
+        {
+          "key": "B",
+          "text": "∼3× (GPU train) đến 6.5× (CPU batch)"
+        },
+        {
+          "key": "C",
+          "text": "∼6.5× (GPU train) đến 3× (CPU batch)"
+        },
+        {
+          "key": "D",
+          "text": "∼10× cho mọi loại workload như nhau"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Managed Spot auto-recover preemption + route GPU rẻ nhất; SkyServe serve ∼50% rẻ hơn.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-029",
+      "type": "mcq",
+      "prompt": "Bẫy FinOps khi tính commitment discount cho GPU là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Áp % CUD toàn-cloud cho GPU thay vì model theo SKU"
+        },
+        {
+          "key": "B",
+          "text": "Model discount theo SKU thực trước khi cam kết"
+        },
+        {
+          "key": "C",
+          "text": "Kết hợp spot và reserved cho cùng một cụm GPU"
+        },
+        {
+          "key": "D",
+          "text": "Theo dõi utilization thực trước khi gia hạn"
+        }
+      ],
+      "answer": "A",
+      "explanation": "AWS H100 3yr chỉ ∼45% (headline 72% là thời CPU); GCP loại accelerator khỏi flexible CUD.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-030",
+      "type": "mcq",
+      "prompt": "Chính sách mua cho Blackwell (khan hiếm) khác H100/A100 thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cả hai đều nên chờ giá giảm trước khi cam kết"
+        },
+        {
+          "key": "B",
+          "text": "Cả hai đều nên khóa reserved 3 năm ngay bây giờ"
+        },
+        {
+          "key": "C",
+          "text": "Blackwell commit sớm; H100/A100 giữ spot/on-demand"
+        },
+        {
+          "key": "D",
+          "text": "Blackwell dùng spot; H100/A100 khóa reserved 3 năm"
+        }
+      ],
+      "answer": "C",
+      "explanation": "B200/GB200 bán hết tới giữa 2026, backlog ∼3.6 triệu chip: khan → commit; dư → spot.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-031",
+      "type": "mcq",
+      "prompt": "nvidia-smi “GPU-Util” thực chất đo gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "% FLOPS đạt được so với peak"
+        },
+        {
+          "key": "B",
+          "text": "% băng thông HBM đang sử dụng"
+        },
+        {
+          "key": "C",
+          "text": "% số SM đang hoạt động đồng thời"
+        },
+        {
+          "key": "D",
+          "text": "% thời gian có ≥1 kernel đang chạy"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Không đo dung lượng tính toán — 1 thread trên 1 SM đã báo 100%.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-032",
+      "type": "mcq",
+      "prompt": "Training báo 100% GPU-Util nhưng MFU thực ∼20–30%. Hệ quả chi phí là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Trả full GPU-hour cho dưới 1/2 FLOPS thực dùng"
+        },
+        {
+          "key": "B",
+          "text": "Chi phí tối ưu vì GPU luôn ở trạng thái bận"
+        },
+        {
+          "key": "C",
+          "text": "Cần mua thêm GPU vì cụm đang quá tải"
+        },
+        {
+          "key": "D",
+          "text": "Chi phí chỉ phụ thuộc vào HBM bandwidth"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Đừng capacity-plan/mua thêm GPU dựa trên GPU-Util — đó là đồng hồ “đang bận”.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-033",
+      "type": "mcq",
+      "prompt": "Chọn thước đo hiệu quả đúng cho training và decode?",
+      "options": [
+        {
+          "key": "A",
+          "text": "MFU cho cả hai vì đều compute-bound"
+        },
+        {
+          "key": "B",
+          "text": "MFU cho training, MBU cho decode"
+        },
+        {
+          "key": "C",
+          "text": "MBU cho training, MFU cho decode"
+        },
+        {
+          "key": "D",
+          "text": "GPU-Util cho training, MFU cho decode"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Training compute-bound → MFU; decode memory-bound → MBU.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-034",
+      "type": "mcq",
+      "prompt": "70B dùng config mặc định có MFU <30%. Cách sửa slide nêu là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tăng số GPU lên gấp đôi để chia tải"
+        },
+        {
+          "key": "B",
+          "text": "Giảm batch size xuống 1 để ổn định"
+        },
+        {
+          "key": "C",
+          "text": "TP 8→1 + selective checkpointing"
+        },
+        {
+          "key": "D",
+          "text": "TP 1→8 + full activation checkpointing"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Sửa TP 8→1 + selective checkpointing = ∼2× MFU = ∼2× rẻ hơn.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-035",
+      "type": "mcq",
+      "prompt": "Vì sao decode batch-1 trên H100 là memory-bound?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đạt ∼295 FLOP/byte, vượt xa ridge 1–2"
+        },
+        {
+          "key": "B",
+          "text": "Do Tensor Core không hỗ trợ BF16"
+        },
+        {
+          "key": "C",
+          "text": "Do PCIe giới hạn ở mức 8 TB/s"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ 1–2 FLOP/byte, thấp xa ridge ∼295"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Ridge H100 ∼295 FLOP/byte (BF16); decode batch-1 chỉ 1–2 FLOP/byte.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-036",
+      "type": "mcq",
+      "prompt": "Khi mua GPU cho decode, nên trả tiền cho chỉ số nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "$/TB-bandwidth (HBM)"
+        },
+        {
+          "key": "B",
+          "text": "$/TFLOP peak compute"
+        },
+        {
+          "key": "C",
+          "text": "$/GPU-hr niêm yết"
+        },
+        {
+          "key": "D",
+          "text": "$/GB dung lượng SSD"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Decode scale theo HBM BW: H100 3.35 → H200 4.8 → B200 8 TB/s; H200 ∼1.9× inference vs H100.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-037",
+      "type": "mcq",
+      "prompt": "Hệ thống nhận 10 req/s nhưng chỉ 3 req đạt SLO (TTFT + TPOT). Goodput là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "13 req/s"
+        },
+        {
+          "key": "B",
+          "text": "3 req/s"
+        },
+        {
+          "key": "C",
+          "text": "10 req/s"
+        },
+        {
+          "key": "D",
+          "text": "7 req/s"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Goodput = req/s đạt SLO; 7 req đã trả tiền nhưng vô dụng.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-038",
+      "type": "mcq",
+      "prompt": "GPU chạy ở 10% tải thì cost/token thay đổi thế nào so với đầy tải?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không thay đổi"
+        },
+        {
+          "key": "B",
+          "text": "Thấp đi ∼10×"
+        },
+        {
+          "key": "C",
+          "text": "Cao gấp ∼10×"
+        },
+        {
+          "key": "D",
+          "text": "Cao gấp ∼2×"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Đòn bẩy lớn nhất là utilization: GPU ở 10% tải → 10× cost/token.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-039",
+      "type": "mcq",
+      "prompt": "Theo slide, tiền thuê GPU thô chiếm bao nhiêu TCO self-host?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Khoảng 50–60%"
+        },
+        {
+          "key": "B",
+          "text": "Khoảng 80–90%"
+        },
+        {
+          "key": "C",
+          "text": "Gần như 100%"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ 25–35%"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Thuê GPU thô chỉ là 25–35% TCO self-host.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-040",
+      "type": "mcq",
+      "prompt": "Để đo hiệu quả thật thay cho GPU-Util, nên lấy metric gì từ DCGM?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Nhiệt độ GPU, tốc độ quạt, điện áp"
+        },
+        {
+          "key": "B",
+          "text": "Số process, PID, dung lượng VRAM"
+        },
+        {
+          "key": "C",
+          "text": "Clock speed, PCIe link, driver version"
+        },
+        {
+          "key": "D",
+          "text": "SM activity, Tensor Core %, HBM BW"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Lấy từ DCGM: SM activity, Tensor Core %, HBM BW — không phải GPU-Util.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-041",
+      "type": "mcq",
+      "prompt": "Inference single model có GPU-Util 20–40% (target >60%). Action phù hợp?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Larger batch + gradient accumulation"
+        },
+        {
+          "key": "B",
+          "text": "Mua thêm GPU H100 để giảm latency"
+        },
+        {
+          "key": "C",
+          "text": "Multi-model serving, MIG, fractioning"
+        },
+        {
+          "key": "D",
+          "text": "Optimise data loading pipeline"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Bảng right-sizing: inference single model → multi-model serving, MIG, fractioning.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-042",
+      "type": "mcq",
+      "prompt": "Pre-training có GPU-Util thấp hơn target >90%. Action slide đề xuất?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chuyển sang serverless GPU"
+        },
+        {
+          "key": "B",
+          "text": "Optimise data loading"
+        },
+        {
+          "key": "C",
+          "text": "Tune continuous batching"
+        },
+        {
+          "key": "D",
+          "text": "Multi-model serving với MIG"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Pre-training 80–95%, target >90% → optimise data loading.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-043",
+      "type": "mcq",
+      "prompt": "Serverless GPU scale-to-zero hòa vốn với reserved ở duty cycle khoảng bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "∼30% duty cycle"
+        },
+        {
+          "key": "B",
+          "text": "∼60% duty cycle"
+        },
+        {
+          "key": "C",
+          "text": "∼90% duty cycle"
+        },
+        {
+          "key": "D",
+          "text": "∼5% duty cycle"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Break-even ∼30%: spiky → serverless; ổn định cao → reserved (serverless premium ∼1.3–3× bare-metal).",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-044",
+      "type": "mcq",
+      "prompt": "“Cold start = paid dead time” trên serverless GPU nghĩa là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Thời gian chờ queue được miễn phí hoàn toàn"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ tính tiền khi token đầu tiên được sinh"
+        },
+        {
+          "key": "C",
+          "text": "Keep-warm không tiêu thụ điện nên miễn phí"
+        },
+        {
+          "key": "D",
+          "text": "20–60s init + model-load tính full rate"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Model Parking Tax: keep-warm +26–66 W/GPU (>98% idle power).",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-045",
+      "type": "mcq",
+      "prompt": "Khác biệt giữa MIG và time-slicing/MPS khi chia GPU?",
+      "options": [
+        {
+          "key": "A",
+          "text": "MPS phân vùng phần cứng, memory riêng biệt"
+        },
+        {
+          "key": "B",
+          "text": "Cả hai cho isolation và mật độ như nhau"
+        },
+        {
+          "key": "C",
+          "text": "MIG phân vùng phần cứng, isolation cao hơn"
+        },
+        {
+          "key": "D",
+          "text": "MIG chia theo thời gian, isolation thấp hơn"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Đánh đổi cost density ↔ isolation: time-slicing/MPS mật độ cao, isolation thấp.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-046",
+      "type": "mcq",
+      "prompt": "Run:ai cấp 0.5 GPU cho một workload đạt được bao nhiêu throughput?",
+      "options": [
+        {
+          "key": "A",
+          "text": "∼35% throughput"
+        },
+        {
+          "key": "B",
+          "text": "∼77% throughput"
+        },
+        {
+          "key": "C",
+          "text": "∼50% throughput"
+        },
+        {
+          "key": "D",
+          "text": "∼95% throughput"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Run:ai: 0.5 GPU = 77% throughput, 86% user capacity; co-location → tới 3× users.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-047",
+      "type": "mcq",
+      "prompt": "Trong K8s cost-autoscaling stack, công cụ nào chống GPU hoarding bằng gang scheduling và quota theo team?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Kueue"
+        },
+        {
+          "key": "B",
+          "text": "KEDA"
+        },
+        {
+          "key": "C",
+          "text": "Karpenter"
+        },
+        {
+          "key": "D",
+          "text": "DCGM Exporter"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Kueue: gang scheduling + quota theo team + cohort borrowing; KEDA scale-to-zero; Karpenter bin-packing.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-048",
+      "type": "mcq",
+      "prompt": "LLMflation: giá token cùng năng lực giảm ∼10×/năm nhưng không đều. Hệ quả cho dự báo?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dùng chung tốc độ 10×/năm cho mọi model"
+        },
+        {
+          "key": "B",
+          "text": "Giả định giá frontier giữ nguyên mãi"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ dự báo theo $/GPU-hr của chip"
+        },
+        {
+          "key": "D",
+          "text": "Tách dự báo theo tầng năng lực"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Epoch AI: biên độ 9×–900×/năm, trung vị ∼50× → tách dự báo theo tầng.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-049",
+      "type": "mcq",
+      "prompt": "Con số $5.576M của DeepSeek nên được hiểu thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Là chi phí inference một năm của R1 API"
+        },
+        {
+          "key": "B",
+          "text": "Là giá mua ∼2,048 GPU H800 cho cụm"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ là GPU pre-training, chưa gồm CapEx/R&D"
+        },
+        {
+          "key": "D",
+          "text": "Là toàn bộ TCO gồm CapEx, R&D và nhân sự"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Thực tế ∼$1.6B CapEx + $944M opex → chênh ∼100×; luôn đòi full TCO.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-050",
+      "type": "mcq",
+      "prompt": "Kiến trúc nào của DeepSeek giúp giảm −93.3% KV-cache?",
+      "options": [
+        {
+          "key": "A",
+          "text": "MLA (Multi-head Latent Attention)"
+        },
+        {
+          "key": "B",
+          "text": "MoE chỉ kích hoạt 37B/671B params"
+        },
+        {
+          "key": "C",
+          "text": "FP8 cho toàn bộ quá trình training"
+        },
+        {
+          "key": "D",
+          "text": "Speculative decoding với EAGLE-3"
+        }
+      ],
+      "answer": "A",
+      "explanation": "MLA −93.3% KV-cache; MoE kích hoạt 37B/671B params/token; FP8 rẻ $/token.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-051",
+      "type": "mcq",
+      "prompt": "Model reasoning sinh ∼10k token suy luận cho câu trả lời 500 token. Số token output bị tính tăng bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "∼×50"
+        },
+        {
+          "key": "B",
+          "text": "∼×21"
+        },
+        {
+          "key": "C",
+          "text": "∼×2"
+        },
+        {
+          "key": "D",
+          "text": "∼×10"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Thinking-token ẩn tính giá output: (10,000 + 500)/500 = ×21.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-052",
+      "type": "mcq",
+      "prompt": "Batch API −50% kết hợp prompt caching read −90% cho mức giảm khoảng bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "≈70% off"
+        },
+        {
+          "key": "B",
+          "text": "≈90% off"
+        },
+        {
+          "key": "C",
+          "text": "≈95% off"
+        },
+        {
+          "key": "D",
+          "text": "≈140% off"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Multiplier nhân được: 0.5 × 0.1 = 0.05 → ≈95% off (Anthropic xác nhận).",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-053",
+      "type": "mcq",
+      "prompt": "Model cascading theo slide hoạt động thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Model lớn xử lý 80%, 8B xử lý phần còn lại"
+        },
+        {
+          "key": "B",
+          "text": "Mọi request chạy song song trên hai model"
+        },
+        {
+          "key": "C",
+          "text": "Cache 80% request, 20% còn lại gọi 8B"
+        },
+        {
+          "key": "D",
+          "text": "8B xử lý 80%, escalate 20% lên model lớn"
+        }
+      ],
+      "answer": "D",
+      "explanation": "FrugalGPT tới 98%, RouteLLM 85%+ tiết kiệm.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-054",
+      "type": "mcq",
+      "prompt": "FOCUS trong FinOps là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chuẩn mở normalize billing đa cloud về một schema"
+        },
+        {
+          "key": "B",
+          "text": "Công cụ của AWS để mua Capacity Block tự động"
+        },
+        {
+          "key": "C",
+          "text": "Thước đo hiệu quả GPU thay cho GPU-Util"
+        },
+        {
+          "key": "D",
+          "text": "Framework kiểm soát quota GPU trên Kubernetes"
+        }
+      ],
+      "answer": "A",
+      "explanation": "FOCUS = FinOps Open Cost & Usage Spec; native export từ >12 nhà cung cấp.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-055",
+      "type": "mcq",
+      "prompt": "Tính đến 6/2026, phần AI token consumption đầy đủ (model identity, input/output tokens) trong FOCUS ở trạng thái nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bị loại khỏi lộ trình FOCUS vĩnh viễn"
+        },
+        {
+          "key": "B",
+          "text": "Scoped cho FOCUS 1.5, chưa ratified"
+        },
+        {
+          "key": "C",
+          "text": "Đã có sẵn trong FOCUS 1.2 từ 5/2025"
+        },
+        {
+          "key": "D",
+          "text": "Đã ratified trong FOCUS 1.4 với 47 cột"
+        }
+      ],
+      "answer": "B",
+      "explanation": "1.2 thêm virtual-currency/token; 1.3 Contract Commitment + Split Cost Allocation; 1.4 47 cột; AI-token đầy đủ đợi 1.5.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-056",
+      "type": "mcq",
+      "prompt": "Tổng chi $5,000 cho 100k inference. Cost/Inference là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "$0.005"
+        },
+        {
+          "key": "B",
+          "text": "$5.00"
+        },
+        {
+          "key": "C",
+          "text": "$0.05"
+        },
+        {
+          "key": "D",
+          "text": "$0.50"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Cost/Inference = Total $ / #inferences = 5,000 / 100,000 = $0.05.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-057",
+      "type": "mcq",
+      "prompt": "Điểm mới của Kubecost 3.0 (GA 9/2025) theo slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bỏ hỗ trợ DCGM, chỉ đọc billing cloud"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ chạy được trên EKS, không K8s khác"
+        },
+        {
+          "key": "C",
+          "text": "Tính phí license cho mọi cụm dưới $1M"
+        },
+        {
+          "key": "D",
+          "text": "Dùng ClickHouse, bỏ phụ thuộc Prometheus"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Kubecost 3.0: ClickHouse, bỏ Prometheus dep, GPU-aware (DCGM), free <$1M.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-058",
+      "type": "mcq",
+      "prompt": "SCI (ISO/IEC 21031:2024) được dùng để làm gì trong GPU FinOps?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đo carbon/inference, đối ứng $/1M-token"
+        },
+        {
+          "key": "B",
+          "text": "Đo PUE của data center theo từng giờ"
+        },
+        {
+          "key": "C",
+          "text": "Chuẩn hóa billing đa cloud về một schema"
+        },
+        {
+          "key": "D",
+          "text": "Đo tỷ lệ interruption spot theo chip"
+        }
+      ],
+      "answer": "A",
+      "explanation": "SCI là đối ứng carbon của $/1M-token cho dashboard & ESG.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-059",
+      "type": "mcq",
+      "prompt": "Model reasoning tốn năng lượng mỗi truy vấn gấp bao nhiêu so với model nhỏ?",
+      "options": [
+        {
+          "key": "A",
+          "text": "∼500–900×"
+        },
+        {
+          "key": "B",
+          "text": "∼74–86×"
+        },
+        {
+          "key": "C",
+          "text": "∼2–3×"
+        },
+        {
+          "key": "D",
+          "text": "∼10–20×"
+        }
+      ],
+      "answer": "B",
+      "explanation": "o3 ∼39.2 Wh, DeepSeek-R1 ∼33.6 Wh vs GPT-4.1 nano ∼0.45 Wh.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    },
+    {
+      "id": "T2D10-060",
+      "type": "mcq",
+      "prompt": "Trên A10G, AWQ 4-bit so với FP16 (1200→1800 tok/s, $0.83→$0.55/M tok) tiết kiệm khoảng bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "∼15%"
+        },
+        {
+          "key": "B",
+          "text": "∼34%"
+        },
+        {
+          "key": "C",
+          "text": "∼50%"
+        },
+        {
+          "key": "D",
+          "text": "∼66%"
+        }
+      ],
+      "answer": "B",
+      "explanation": "(0.83 − 0.55)/0.83 ≈ 34%; stack batching+caching+cascading+quant → 70–85% vs naive.",
+      "source": "onthi/Slide_Day_10_GPU FinOps&CostOptimize.pdf"
+    }
+  ]
+}

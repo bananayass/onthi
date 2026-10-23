@@ -1,0 +1,127 @@
+{
+  "id": "day7_track2_tu_luan",
+  "title": "Tự luận Track 2 Ngày 7",
+  "questionCount": 10,
+  "questions": [
+    {
+      "id": "T2D07-TL-01",
+      "type": "essay",
+      "prompt": "Tình huống mở đầu bài: một nhóm sửa một dòng system prompt để trả lời chi tiết hơn, sau đó độ trễ và chi phí cùng tăng nhưng không truy được nguyên nhân. Hãy thiết kế những gì hệ thống cần ghi lại và quy trình để lần sau truy ngược được, khôi phục nhanh.",
+      "modelAnswer": "Ý chấm: (1) Phiên bản hoá prompt như mã: mỗi thay đổi là bản ghi bất biến có commit message, người thực hiện; phiên bản phủ cả tổ hợp (mẫu prompt, mã mô hình có ngày, temperature/max tokens, schema, tool/few-shot). (2) Ghi vết mọi lời gọi LLM bằng OpenTelemetry/LangSmith: token vào/ra (gen_ai.usage.*), độ trễ, chi phí, gắn prompt_version và mã mô hình vào mọi vết. (3) Dashboard p50/p95, chi phí/ngày, token/ngày, lỗi theo loại, đánh dấu thời điểm đổi phiên bản. (4) Khôi phục bằng chuyển nhãn production về bản ghi cũ, không phát hành lại ứng dụng. (5) Cổng CI + canary 5% với điều kiện dừng (tỉ lệ lỗi, điểm online, chi phí mỗi yêu cầu). (6) Giải thích cơ chế: 200→600 token đầu ra, sinh tuần tự nên độ trễ ~3×, chi phí ~+200%.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D07-TL-02",
+      "type": "essay",
+      "prompt": "Thiết kế quy trình phát hành một thay đổi prompt từ pull request đến 100% lưu lượng cho chatbot hỗ trợ khách hàng, bao gồm cổng chất lượng, triển khai dần và khôi phục.",
+      "modelAnswer": "Ý chấm: (1) Prompt lưu dạng tệp YAML trong Git hoặc kho prompt; mọi thay đổi qua pull request, diff rà soát; webhook đồng bộ kho prompt sang Git/CI. (2) CI chạy bộ đánh giá: kiểm tra xác định trước (JSON, lược đồ, độ dài), LLM-as-judge/RAGAS sau; so với mốc nền có tolerance (ví dụ 0,02), không đạt thì chặn. (3) Đạt thì đẩy với nhãn staging. (4) Canary 5% rồi 100%; điều kiện dừng đặt trước: tỉ lệ lỗi, điểm đánh giá trực tuyến, chi phí mỗi yêu cầu. (5) Giám sát bằng vết gắn prompt_version, dashboard. (6) Khôi phục: chuyển nhãn về bản ghi trước. (7) Production ghim nhãn hoặc mã băm, không kéo bản mới nhất; ghim mã mô hình có ngày.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D07-TL-03",
+      "type": "essay",
+      "prompt": "Nhóm chạy A/B hai prompt trên 50 câu hỏi của lab: v1 đạt 70%, v2 đạt 75%. Trưởng nhóm muốn kết luận v2 tốt hơn. Phân tích kết luận này và đề xuất cách thiết kế thử nghiệm đủ tin cậy.",
+      "modelAnswer": "Ý chấm: (1) Chênh lệch 5 điểm từ mốc 70% cần khoảng 1.250 mẫu mỗi phiên bản (α=0,05, lực 80%, hai tỉ lệ độc lập: n = (zα/2+zβ)²[p1q1+p2q2]/(p1−p2)²); 50 mẫu chỉ đủ phát hiện chênh cỡ 20 điểm (59 mẫu) → chưa đủ kết luận. (2) Dùng thiết kế ghép cặp (cùng câu hỏi cho hai prompt, McNemar) giảm còn khoảng 312–940 mẫu. (3) Định tuyến hash(user_id) để mỗi người gặp một phiên bản; gắn prompt_version vào mọi vết. (4) So nhiều chiều: faithfulness, độ trễ, chi phí, độ dài. (5) Chấm trên cùng cấu hình judge; báo cáo cỡ mẫu và giới hạn kết luận; 100 truy vấn chỉ là mức khởi động.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D07-TL-04",
+      "type": "essay",
+      "prompt": "Một hệ thống RAG nội bộ trả lời sai nhiều câu. Hãy dùng các chỉ số RAGAS để khoanh vùng lỗi ở bước truy xuất hay bước sinh, nêu cách tính và chỉ số nào cần đáp án chuẩn.",
+      "modelAnswer": "Ý chấm: (1) context_recall: số khẳng định của đáp án chuẩn được ngữ cảnh hỗ trợ / tổng → thấp nghĩa là retriever thiếu dữ kiện (cần reference). (2) context_precision: trung bình Precision@k có trọng số → đoạn liên quan có xếp hạng cao không (cần reference). (3) Faithfulness: khẳng định được ngữ cảnh hỗ trợ / tổng khẳng định → thấp khi ngữ cảnh tốt nghĩa là mô hình sinh ảo giác (không cần reference). (4) Response relevancy: cosine giữa câu hỏi và câu hỏi sinh ngược (mặc định 3) → lạc đề (không cần reference). (5) Noise sensitivity: lỗi do đoạn nhiễu, càng thấp càng tốt (cần reference). (6) Thêm kiểm tra xác định cho lỗi định dạng. (7) Ngưỡng 0,8 chỉ là quy ước; so chênh lệch trên cùng cấu hình chấm; ghim phiên bản ragas/langchain-community.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D07-TL-05",
+      "type": "essay",
+      "prompt": "Thiết kế hệ thống LLM-as-judge cho bài toán so sánh hai câu trả lời, nêu các thiên lệch đã đo được và cách giảm, cùng quy trình hiệu chỉnh với người.",
+      "modelAnswer": "Ý chấm: (1) Pipeline: đầu vào + ngữ cảnh → đầu ra → judge với rubric → điểm kèm lý do; ưu điểm chạy hàng nghìn mẫu, reference-free nếu rubric rõ; GPT-4 đồng thuận 85% vs 81% người-người nhưng chỉ đo trên MT-bench. (2) Thiên lệch vị trí (GPT-4 nhất quán 65%): chấm hai thứ tự, thắng cả hai mới tính. (3) Độ dài: rubric nêu độ dài không cộng điểm. (4) Tự ưu ái: judge khác họ. (5) Toán/lập luận: cho đáp án tham chiếu (sai 70%→15%). (6) Cặp khó (JudgeBench): hiệu chỉnh với người, không tuyên bố đủ tin cậy. (7) Vòng kết hợp: judge hằng ngày, người hằng tuần 100–200 mẫu, hằng tháng đo Cohen κ, κ thấp (ngưỡng nhóm tự đặt, ví dụ <0,7) thì sửa rubric hoặc đổi judge.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D07-TL-06",
+      "type": "essay",
+      "prompt": "Công ty triển khai agent đọc email khách hàng, truy cập CRM chứa dữ liệu cá nhân và có công cụ gửi email ra ngoài. Phân tích rủi ro chèn lệnh và đề xuất kiến trúc phòng thủ.",
+      "modelAnswer": "Ý chấm: (1) Nhận diện lethal trifecta: dữ liệu riêng tư (CRM) + nội dung không tin cậy (email) + kênh gửi ra ngoài → rủi ro rò rỉ; chèn lệnh gián tiếp qua email (như EchoLeak, zero-click). (2) OWASP LLM01: chưa có biện pháp tuyệt đối; RAG, fine-tuning không giải quyết triệt để. (3) Loại bỏ ít nhất một vòng bằng thiết kế: không cho gửi ra ngoài sau khi đọc nội dung không tin cậy, hoặc cần người phê duyệt hành động có tác dụng phụ; quyền tối thiểu; tách luồng điều khiển khỏi dữ liệu (CaMeL). (4) Lớp lọc xác suất: Prompt Guard 2, AlignmentCheck giảm ASR 17,6%→1,75% nhưng không về 0 và giảm tiện ích. (5) Rào chắn đầu vào/đầu ra (PII, schema), execution rails cho tool call. (6) Quan sát: vết, nhật ký sự cố, cảnh báo theo tỉ lệ chặn.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D07-TL-07",
+      "type": "essay",
+      "prompt": "Chatbot ngân hàng cần rào chắn bằng Guardrails AI cho bốn tình huống: (a) đầu ra chứa số thẻ, (b) đầu ra không phải JSON hợp lệ, (c) nội dung độc hại, (d) giai đoạn mới bật validator mới, muốn đo trước. Chọn on_fail cho từng tình huống và giải thích, kèm lưu ý API 0.11.",
+      "modelAnswer": "Ý chấm: (a) fix: thay đầu ra bằng giá trị đã sửa (che PII/khoá), kết quả hợp lệ. (b) reask hoặc fix_reask: gọi lại mô hình kèm thông báo lỗi; fix_reask sửa xác định trước rồi mới hỏi lại; hoặc exception nếu luồng phải dừng. (c) refrain: không trả đầu ra (None) cho nội dung không an toàn. (d) noop: giữ nguyên đầu ra, ghi thất bại vào nhật ký. Nêu thêm filter (bỏ trường hỏng), exception (ném ValidationError). API 0.11: Guard().use(ValidJson(on_fail=...)) nhận instance validator, on_fail đặt ở validator, không có use_many; validator Hub cài bằng pip; tài liệu còn cú pháp cũ nên thử lại. Ghi nhật ký sự cố cho mỗi lần thất bại.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D07-TL-08",
+      "type": "essay",
+      "prompt": "Thiết kế nhật ký sự cố và chính sách cảnh báo cho lớp rào chắn của một ứng dụng LLM đang vận hành, giải thích vì sao không nên chỉ dùng ngưỡng cố định.",
+      "modelAnswer": "Ý chấm: (1) Trường nhật ký: mã yêu cầu và vết; phiên bản prompt và mã mô hình; tên và phiên bản rào chắn; giai đoạn (đầu vào, đầu ra, công cụ); kết luận, điểm số, hành động on_fail; mã nhóm OWASP; đoạn trích đã che hoặc mã băm (không lưu dữ liệu gốc); độ trễ rào chắn; kết quả rà soát của người. (2) Ngưỡng minh hoạ: độc hại >0,5% báo Slack; ảo giác >5% gọi trực; rò rỉ PII chặn ngay; reask >3 lần/giờ xem lại prompt; rào chắn thất bại >2% kiểm tra cấu hình — không có nguồn công bố, phải hiệu chỉnh theo mốc nền. (3) Cách có cơ sở: định nghĩa SLI (tỉ lệ phản hồi qua rào chắn), SLO 99,9%, burn rate: 14,4× trong 1 giờ (cửa sổ 5 phút) gọi trực; 6× trong 6 giờ; 1× trong 3 ngày mở phiếu. (4) PII detection: regex+checksum cho dữ liệu có cấu trúc, NER cho tên/địa chỉ, Presidio không bảo đảm phát hiện hết.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D07-TL-09",
+      "type": "essay",
+      "prompt": "Một công ty 40 kỹ sư cùng đội nội dung không biết lập trình đang cân nhắc quản lý prompt bằng kho prompt (LangSmith/Langfuse) hay tệp YAML trong Git. Phân tích lựa chọn và đề xuất cách kết hợp.",
+      "modelAnswer": "Ý chấm: (1) Kho prompt: có giao diện rà soát, playground, người không lập trình sửa được, nhãn production/latest, liên kết generation với phiên bản; nhưng là phụ thuộc lúc chạy → cần cache phía client (Langfuse có). (2) Git + YAML: diff, pull request, CI chặt, monorepo; tệp chứa name, version, model có ngày, temperature, variables, template; ứng dụng nạp từ tệp thay vì viết cứng. (3) Kết hợp: webhook kho prompt khi có bản ghi mới → máy chủ trung gian ghi tệp vào GitHub → có cả UI và lịch sử Git/CI. (4) Production ghim nhãn hoặc mã băm; commit message theo feat/fix/refactor; biến có tên để kiểm tra đầu vào. (5) Giữ định dạng mở để đổi nhà cung cấp khi thị trường hợp nhất (Langfuse về ClickHouse, Helicone bảo trì...).",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D07-TL-10",
+      "type": "essay",
+      "prompt": "Chất lượng chatbot giảm rõ rệt trong tuần qua dù không ai sửa prompt. Hãy phân tích các nguyên nhân có thể dựa trên khái niệm 'phiên bản là một tổ hợp' và sự cố công khai trong bài, và đề xuất cách phát hiện, phòng ngừa.",
+      "modelAnswer": "Ý chấm: (1) Phiên bản = mẫu prompt + biến, mã mô hình có ngày, tham số lấy mẫu, lược đồ đầu ra, công cụ và few-shot; đổi một thành phần là đổi hành vi. (2) Nguyên nhân: tên mô hình không kèm ngày trỏ sang bản mới; nhà cung cấp cập nhật mô hình (GPT-4o xu nịnh 04/2025: tín hiệu thưởng mới, offline eval và A/B vẫn tốt); thay đổi công cụ/ví dụ mẫu/dữ liệu truy xuất. (3) Phòng ngừa: ghim mã mô hình có ngày (gpt-4o-mini-2024-07-18), mã phiên bản phủ cả tổ hợp. (4) Phát hiện: đánh giá online lấy mẫu (ví dụ 10%), dashboard theo phiên bản, gán nhãn vết lỗi đưa vào dataset, regression test khi đổi mô hình; người đánh giá chuyên môn vì đánh giá chỉ bắt điều nó đo. (5) Khôi phục bằng chuyển nhãn về tổ hợp cũ.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    }
+  ]
+}

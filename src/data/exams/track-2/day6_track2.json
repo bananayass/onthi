@@ -1,0 +1,1835 @@
+{
+  "id": "track2-day6",
+  "title": "Track 2 · Ngày 6",
+  "description": "Bộ đề Track 2 Ngày 6: 60 câu trắc nghiệm và 10 câu tự luận, biên soạn từ slide cùng ngày.",
+  "course": "track2",
+  "kind": "daily",
+  "day": 6,
+  "label": "Ngày 6",
+  "durationMinutes": 90,
+  "totalPoints": 100,
+  "passingScore": 70,
+  "disclaimer": "Bộ đề ôn tập Track 2, tham khảo từ slide cùng ngày; không phải đề thi chính thức.",
+  "questions": [
+    {
+      "id": "T2D06-001",
+      "type": "mcq",
+      "prompt": "Theo hình vẽ lại từ Sculley và cộng sự (NIPS 2015), phần mã ML trong một hệ thống ML thực tế như thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chiếm phần lớn hệ thống, hạ tầng chỉ là phụ trợ"
+        },
+        {
+          "key": "B",
+          "text": "Ngang bằng phần cấu hình và phần giám sát cộng lại"
+        },
+        {
+          "key": "C",
+          "text": "Là phần duy nhất cần kiểm thử và triển khai tự động"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ là một ô nhỏ, hạ tầng bao quanh lớn hơn nhiều"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide “Mã ML chỉ là một phần nhỏ”: cấu hình, thu thập dữ liệu, serving, monitoring… lớn hơn nhiều và ô nào cũng cần kiểm thử, triển khai tự động.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-002",
+      "type": "mcq",
+      "prompt": "Bốn trục thay đổi của một hệ thống AI theo bài gồm những trục nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mã, dữ liệu, mô hình, prompt và cấu hình"
+        },
+        {
+          "key": "B",
+          "text": "Mã, phần cứng, mạng, hệ điều hành máy chủ"
+        },
+        {
+          "key": "C",
+          "text": "Mã, giao diện, cơ sở dữ liệu, tài liệu API"
+        },
+        {
+          "key": "D",
+          "text": "Dữ liệu, GPU, chi phí cloud, đội vận hành"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Mỗi trục có công cụ riêng: Git, DVC, MLflow/kho mô hình, phiên bản hoá + bộ đánh giá. CI/CD cho AI phải kích hoạt khi bất kỳ trục nào đổi.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-003",
+      "type": "mcq",
+      "prompt": "Vì sao kiểm thử hệ thống AI cần ngưỡng và lặp lại nhiều lần thay vì so khớp đúng một đầu ra?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vì kiểm thử đơn vị không chạy được trên mã Python"
+        },
+        {
+          "key": "B",
+          "text": "Kết quả không xác định: cùng đầu vào có thể khác đầu ra"
+        },
+        {
+          "key": "C",
+          "text": "Vì GitHub Actions giới hạn mỗi job chỉ chạy một lần"
+        },
+        {
+          "key": "D",
+          "text": "Vì mô hình AI không có đầu ra để so khớp trực tiếp"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bảng “CI/CD cho AI khác phần mềm thông thường”: phần mềm truyền thống xác định, hệ thống AI không xác định.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-004",
+      "type": "mcq",
+      "prompt": "Ngoài tỉ lệ lỗi tăng, điều kiện hoàn tác của hệ thống AI thêm những tín hiệu nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dung lượng image tăng, số pod giảm, CPU nhàn rỗi"
+        },
+        {
+          "key": "B",
+          "text": "Thời gian build tăng, số dependency, số nhánh Git"
+        },
+        {
+          "key": "C",
+          "text": "Độ chính xác giảm, thiên lệch, chi phí token tăng"
+        },
+        {
+          "key": "D",
+          "text": "Số commit tăng, số PR mở, số người duyệt giảm"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Bảng so sánh phần mềm truyền thống và AI, dòng “Điều kiện hoàn tác”.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-005",
+      "type": "mcq",
+      "prompt": "Ngoài việc mã thay đổi, chuỗi xử lý của hệ thống AI còn được kích hoạt bởi yếu tố nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chỉ khi có người bấm nút chạy thủ công trên UI"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ khi phiên bản Python của runner được nâng cấp"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ khi giảng viên tạo tag phát hành trên Git"
+        },
+        {
+          "key": "D",
+          "text": "Dữ liệu, prompt thay đổi; theo lịch; dữ liệu trôi"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Bảng so sánh, dòng “Kích hoạt chuỗi xử lý”: mã, dữ liệu, lời nhắc thay đổi; lịch; drift.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-006",
+      "type": "mcq",
+      "prompt": "Theo Google Cloud, mức trưởng thành MLOps nào có huấn luyện liên tục (CT) và kiểm tra dữ liệu, mô hình tự động?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mức 1 · Tự động hoá chuỗi"
+        },
+        {
+          "key": "B",
+          "text": "Mức 0 · Thủ công"
+        },
+        {
+          "key": "C",
+          "text": "Mức 2 · CI/CD tự động"
+        },
+        {
+          "key": "D",
+          "text": "Mức 3 · Tự trị hoàn toàn"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Mức 0 mọi bước làm tay; Mức 1 tự động hoá chuỗi huấn luyện (CT); Mức 2 CI/CD xây dựng, kiểm thử, triển khai chính chuỗi huấn luyện.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-007",
+      "type": "mcq",
+      "prompt": "Trong kiến trúc tham chiếu, công cụ nào đồng bộ phiên bản mới và chạy canary sau khi cổng đánh giá đạt?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dependabot"
+        },
+        {
+          "key": "B",
+          "text": "Argo CD"
+        },
+        {
+          "key": "C",
+          "text": "DVC"
+        },
+        {
+          "key": "D",
+          "text": "MLflow Tracking"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Kiến trúc tham chiếu: GitHub Actions kiểm thử, dvc pull từ S3, MLflow ghi mô hình, cổng so challenger với champion, đạt thì Argo CD đồng bộ và chạy canary.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-008",
+      "type": "mcq",
+      "prompt": "Sự cố GPT-4o tháng 04/2025 (mô hình quá chiều lòng người dùng) rút ra bài học gì cho CI/CD?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bộ đánh giá trước phát hành đạt là đủ để đảm bảo an toàn"
+        },
+        {
+          "key": "B",
+          "text": "Nên bỏ bộ đánh giá và chỉ dựa vào phản hồi người dùng"
+        },
+        {
+          "key": "C",
+          "text": "Cổng chỉ chặn điều nó đo; cần thêm chỉ số cho kiểu lỗi mới"
+        },
+        {
+          "key": "D",
+          "text": "Không bao giờ cập nhật mô hình vào cuối tuần làm việc"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide “Ba sự cố thật”: bộ đánh giá đạt nhưng không có metric đo hiện tượng chiều lòng.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-009",
+      "type": "mcq",
+      "prompt": "Sự cố Anthropic 08–09/2025 (lỗi routing ảnh hưởng tối đa 16% request Sonnet 4) dẫn tới bài học nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chỉ cần đánh giá kỹ một lần trước phát hành là đủ cho mọi bản sau"
+        },
+        {
+          "key": "B",
+          "text": "Lỗi hạ tầng không bao giờ ảnh hưởng tới chất lượng đầu ra mô hình"
+        },
+        {
+          "key": "C",
+          "text": "Nên tắt routing và chỉ dùng một máy chủ duy nhất cho mọi request"
+        },
+        {
+          "key": "D",
+          "text": "Chạy đánh giá liên tục trên hệ thống thật, không chỉ trước phát hành"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Bộ đánh giá không phản ánh suy giảm mà người dùng báo, nên cần eval liên tục trên production.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-010",
+      "type": "mcq",
+      "prompt": "Trong MLflow 3, nhóm chức năng AI Gateway đóng vai trò gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Quản lý phiên bản dữ liệu lớn bằng tệp con trỏ trong Git"
+        },
+        {
+          "key": "B",
+          "text": "Một điểm truy cập cho nhiều nhà cung cấp LLM, có chia lưu lượng"
+        },
+        {
+          "key": "C",
+          "text": "Ghi tham số, chỉ số và artifact của mỗi lần chạy thí nghiệm"
+        },
+        {
+          "key": "D",
+          "text": "Đăng ký phiên bản mô hình và gán bí danh thay cho stage cũ"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bốn nhóm: Tracking, Model Registry, GenAI, AI Gateway. Ba nhiễu là Tracking, Registry và DVC.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-011",
+      "type": "mcq",
+      "prompt": "Thực thể LoggedModel mới trong MLflow 3 mang ý nghĩa gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mô hình thành đối tượng độc lập, liên kết run, trace, prompt, kết quả đánh giá"
+        },
+        {
+          "key": "B",
+          "text": "Mô hình chỉ còn là một tệp artifact gắn cứng vào một lần chạy duy nhất"
+        },
+        {
+          "key": "C",
+          "text": "Thay thế hoàn toàn Model Registry nên không còn cần đăng ký mô hình"
+        },
+        {
+          "key": "D",
+          "text": "Một định dạng tệp mới thay pickle để chặn mã độc khi tải mô hình"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide “MLflow 3: bốn nhóm chức năng”, ô LoggedModel.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-012",
+      "type": "mcq",
+      "prompt": "Trong MLflow Tracking, đặc điểm của Params là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Giá trị ghi theo từng bước để vẽ đường cong loss và accuracy"
+        },
+        {
+          "key": "B",
+          "text": "Biểu đồ và tệp cấu hình lưu kèm lần chạy để truy ngược sau"
+        },
+        {
+          "key": "C",
+          "text": "Lược đồ đầu vào và đầu ra, cần thiết khi phục vụ mô hình"
+        },
+        {
+          "key": "D",
+          "text": "Siêu tham số và phiên bản dữ liệu, bất biến trong một lần chạy"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Params bất biến; Metrics ghi theo step; Artifacts là tệp; Signature là lược đồ I/O.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-013",
+      "type": "mcq",
+      "prompt": "Vì sao nên truyền signature=infer_signature(...) khi log_model?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Để MLflow tự chọn siêu tham số tốt nhất cho mô hình"
+        },
+        {
+          "key": "B",
+          "text": "Để nén trọng số mô hình nhỏ hơn khi lưu lên S3"
+        },
+        {
+          "key": "C",
+          "text": "Lược đồ đầu vào/đầu ra cần khi phục vụ mô hình"
+        },
+        {
+          "key": "D",
+          "text": "Để ký số mô hình bằng Sigstore trước khi đăng ký"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Signature là schema I/O; ký số là việc của model-signing, không phải signature của MLflow.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-014",
+      "type": "mcq",
+      "prompt": "mlflow.openai.autolog() mang lại lợi ích gì cho ứng dụng LLM?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tự sinh bộ ca kiểm thử vàng từ tài liệu sản phẩm của nhóm"
+        },
+        {
+          "key": "B",
+          "text": "Tự ghi trace (prompt, token, độ trễ) mà không sửa mã ứng dụng"
+        },
+        {
+          "key": "C",
+          "text": "Tự động huấn luyện lại mô hình OpenAI mỗi khi có dữ liệu mới"
+        },
+        {
+          "key": "D",
+          "text": "Tự chuyển mọi request sang mô hình rẻ nhất để giảm chi phí"
+        }
+      ],
+      "answer": "B",
+      "explanation": "autolog() có từ bản 2.14 (06/2024), hỗ trợ OpenAI, LangChain, LlamaIndex, Anthropic; là điểm vào của truy vết GenAI trong MLflow 3.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-015",
+      "type": "mcq",
+      "prompt": "Từ phiên bản MLflow nào, giai đoạn (stage) như models:/name/Production bị đánh dấu deprecated?",
+      "options": [
+        {
+          "key": "A",
+          "text": "2.9 (12/2023)"
+        },
+        {
+          "key": "B",
+          "text": "2.14 (06/2024)"
+        },
+        {
+          "key": "C",
+          "text": "3.1 (06/2025)"
+        },
+        {
+          "key": "D",
+          "text": "3.16 (09/2026)"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide “Từ giai đoạn sang bí danh”: deprecated từ 2.9.0, vẫn còn trong 3.16.1. Cách mới: models:/name@champion.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-016",
+      "type": "mcq",
+      "prompt": "Vì sao bí danh (alias) giúp champion và challenger cùng tồn tại để chạy A/B?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bí danh tự sao chép mô hình sang một cụm Kubernetes riêng biệt"
+        },
+        {
+          "key": "B",
+          "text": "Bí danh khoá mô hình, không cho đăng ký thêm phiên bản mới nào"
+        },
+        {
+          "key": "C",
+          "text": "Bí danh bắt buộc mỗi mô hình chỉ có đúng một phiên bản đang chạy"
+        },
+        {
+          "key": "D",
+          "text": "Mỗi phiên bản có thể mang nhiều bí danh, bí danh trỏ phiên bản bất kỳ"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide Model Registry: một phiên bản có thể mang nhiều bí danh; champion và challenger cùng tồn tại.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-017",
+      "type": "mcq",
+      "prompt": "Theo bài, nên tách môi trường dev, staging, prod trong MLflow Model Registry thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dùng ba nhánh Git khác nhau, mỗi nhánh chứa một bản sao tệp mô hình"
+        },
+        {
+          "key": "B",
+          "text": "Dùng một bí danh duy nhất rồi đổi tên bí danh theo từng môi trường"
+        },
+        {
+          "key": "C",
+          "text": "Mỗi môi trường là một mô hình đăng ký riêng, chuyển bằng copy_model_version"
+        },
+        {
+          "key": "D",
+          "text": "Dùng ba stage Staging, Production, Archived trên cùng một mô hình đăng ký"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide “Từ giai đoạn sang bí danh”: môi trường tách thành mô hình đăng ký riêng, chuyển bằng copy_model_version.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-018",
+      "type": "mcq",
+      "prompt": "Theo bài, mã serving nên nạp mô hình như thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Theo run_id mới nhất lấy từ giao diện MLflow Tracking"
+        },
+        {
+          "key": "B",
+          "text": "Theo bí danh, ví dụ models:/sentiment_classifier@champion"
+        },
+        {
+          "key": "C",
+          "text": "Theo số phiên bản cố định, ví dụ models:/sentiment_classifier/4"
+        },
+        {
+          "key": "D",
+          "text": "Theo đường dẫn tệp .pkl trên máy của người huấn luyện"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Comment trong code: “serving code loads by alias, never by number”.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-019",
+      "type": "mcq",
+      "prompt": "Nên ghi thẻ (tag) nào lên phiên bản mô hình để truy ngược khi có sự cố?",
+      "options": [
+        {
+          "key": "A",
+          "text": "data_version, git_commit, eval_accuracy"
+        },
+        {
+          "key": "B",
+          "text": "owner_email, slack_channel, office_room"
+        },
+        {
+          "key": "C",
+          "text": "gpu_model, cpu_count, docker_size_mb"
+        },
+        {
+          "key": "D",
+          "text": "run_color, ui_theme, notebook_name"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide “Kho mô hình: API và thực hành tốt”. Quy ước tên {tác_vụ}_{kiến_trúc}, ví dụ fraud_lgbm.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-020",
+      "type": "mcq",
+      "prompt": "Trước khi chuyển challenger thành champion, thực hành tốt yêu cầu điều gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ít nhất một người duyệt"
+        },
+        {
+          "key": "B",
+          "text": "Ít nhất ba lần huấn luyện lại"
+        },
+        {
+          "key": "C",
+          "text": "Xoá toàn bộ phiên bản cũ"
+        },
+        {
+          "key": "D",
+          "text": "Đổi tên mô hình đăng ký"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide “Kho mô hình: API và thực hành tốt”, ô Phê duyệt.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-021",
+      "type": "mcq",
+      "prompt": "Trong mlflow.genai.evaluate, cách viết một bộ chấm điểm tự định nghĩa (như is_concise) là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đăng ký nó như một bí danh trong kho mô hình"
+        },
+        {
+          "key": "B",
+          "text": "Viết hàm Python và gắn decorator @scorer"
+        },
+        {
+          "key": "C",
+          "text": "Viết tệp YAML và đặt trong thư mục .dvc"
+        },
+        {
+          "key": "D",
+          "text": "Khai báo một job mới trong GitHub Actions"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bộ chấm điểm tự viết là hàm Python gắn @scorer; ví dụ is_concise trả về len(outputs.split()) <= 60.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-022",
+      "type": "mcq",
+      "prompt": "Bộ chấm điểm dựng sẵn nào của MLflow phù hợp nhất để kiểm agent gọi công cụ đúng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "RelevanceToQuery"
+        },
+        {
+          "key": "B",
+          "text": "Safety"
+        },
+        {
+          "key": "C",
+          "text": "ToolCallCorrectness"
+        },
+        {
+          "key": "D",
+          "text": "RetrievalGroundedness"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Danh sách dựng sẵn: Correctness, Safety, Guidelines, RelevanceToQuery, RetrievalGroundedness, ToolCallCorrectness. Mô hình chấm mặc định là gpt-4o-mini.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-023",
+      "type": "mcq",
+      "prompt": "Với Prompt Registry của MLflow, đổi bí danh prompts:/name@production có tác dụng gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Xoá vĩnh viễn mọi phiên bản lời nhắc trước đó"
+        },
+        {
+          "key": "B",
+          "text": "Sửa trực tiếp nội dung của phiên bản bất biến"
+        },
+        {
+          "key": "C",
+          "text": "Tự huấn luyện lại mô hình theo lời nhắc mới"
+        },
+        {
+          "key": "D",
+          "text": "Đổi lời nhắc đang chạy, vẫn giữ lịch sử phiên bản"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Kho lời nhắc có phiên bản bất biến và bí danh; đổi bí danh là đổi lời nhắc đang chạy, có lịch sử.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-024",
+      "type": "mcq",
+      "prompt": "Tài liệu MLflow phân biệt “đo lường” và “chặn” trong kiểm thử agent. “Chặn” nghĩa là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Kiểm một hành vi cụ thể có bị hỏng không"
+        },
+        {
+          "key": "B",
+          "text": "Tính điểm trung bình trên cả tập dữ liệu"
+        },
+        {
+          "key": "C",
+          "text": "Chặn người dùng gửi câu hỏi quá dài"
+        },
+        {
+          "key": "D",
+          "text": "Chặn agent truy cập internet khi chạy"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Đo lường = điểm trung bình; chặn = mỗi hành vi quan trọng là một hàm test, CI thất bại khi result.passed sai.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-025",
+      "type": "mcq",
+      "prompt": "Hôm qua độ chính xác 92%, hôm nay 88%, nhóm không biết do mã hay do dữ liệu. Đây là vấn đề DVC giải quyết nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Runner CI thiếu GPU nên chạy huấn luyện chậm hơn hôm qua"
+        },
+        {
+          "key": "B",
+          "text": "Không tái tạo được kết quả vì dữ liệu không có phiên bản"
+        },
+        {
+          "key": "C",
+          "text": "Git không lưu được mã nguồn Python có dung lượng lớn"
+        },
+        {
+          "key": "D",
+          "text": "Mô hình bị tấn công chèn lệnh qua bộ dữ liệu huấn luyện"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide “Vấn đề: dữ liệu không có kiểm soát phiên bản”, ô Không tái tạo được kết quả.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-026",
+      "type": "mcq",
+      "prompt": "Tệp con trỏ .dvc chứa gì và vì sao quan trọng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mật khẩu kho S3; giúp CI đăng nhập mà không cần dùng tới OIDC"
+        },
+        {
+          "key": "B",
+          "text": "Danh sách siêu tham số; giúp MLflow tự so sánh các lần chạy"
+        },
+        {
+          "key": "C",
+          "text": "Mã băm của dữ liệu; Git theo dõi nên chuyển nhánh là chuyển đúng dữ liệu"
+        },
+        {
+          "key": "D",
+          "text": "Toàn bộ dữ liệu đã nén; Git lưu trực tiếp nên không cần kho từ xa nữa"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide “DVC hoạt động thế nào”: tệp con trỏ nhỏ lưu mã băm; git checkout + dvc checkout lấy đúng phiên bản.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-027",
+      "type": "mcq",
+      "prompt": "Thực hành tốt cho thông tin xác thực kho từ xa DVC trên CI là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ghi access key vào dvc.yaml để mọi job dùng chung"
+        },
+        {
+          "key": "B",
+          "text": "Commit khoá truy cập vào .dvc/config cho tiện chia sẻ"
+        },
+        {
+          "key": "C",
+          "text": "Gửi khoá S3 cho từng thành viên qua tin nhắn Slack"
+        },
+        {
+          "key": "D",
+          "text": "CI dùng vai trò IAM qua OIDC, không dùng khoá cố định"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Ngoài ra lưu xác thực cục bộ bằng dvc remote modify --local, và chính sách vòng đời chuyển dữ liệu nguội sang lưu trữ rẻ.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-028",
+      "type": "mcq",
+      "prompt": "Theo slide, từ 11/2025 DVC có thay đổi gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Thuộc lakeFS, vẫn giấy phép Apache-2.0"
+        },
+        {
+          "key": "B",
+          "text": "Thuộc OpenAI, đổi sang giấy phép MIT"
+        },
+        {
+          "key": "C",
+          "text": "Ngừng phát triển, chuyển sang MLflow"
+        },
+        {
+          "key": "D",
+          "text": "Thuộc GitHub, chỉ chạy trong Actions"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide DVC: “Từ 11/2025, DVC thuộc lakeFS, vẫn giấy phép Apache-2.0” (nguồn DVC FAQ 18/11/2025).",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-029",
+      "type": "mcq",
+      "prompt": "Chỉ tham số lr trong params.yaml đổi. Chạy dvc repro với chuỗi prepare → train → evaluate sẽ làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không chạy gì vì dữ liệu không đổi"
+        },
+        {
+          "key": "B",
+          "text": "Bỏ qua prepare, chạy lại train và evaluate"
+        },
+        {
+          "key": "C",
+          "text": "Chạy lại cả ba giai đoạn từ prepare"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ chạy lại prepare rồi dừng lại"
+        }
+      ],
+      "answer": "B",
+      "explanation": "dvc repro chỉ chạy lại các giai đoạn có đầu vào thay đổi; train phụ thuộc params lr, evaluate phụ thuộc model.pkl.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-030",
+      "type": "mcq",
+      "prompt": "Lệnh dvc exp run --queue -S lr=0.001,0.01,0.1 -S epochs=10,20 xếp hàng bao nhiêu thí nghiệm?",
+      "options": [
+        {
+          "key": "A",
+          "text": "5"
+        },
+        {
+          "key": "B",
+          "text": "3"
+        },
+        {
+          "key": "C",
+          "text": "9"
+        },
+        {
+          "key": "D",
+          "text": "6"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Dấu phẩy là mỗi giá trị; grid search 3 giá trị lr × 2 giá trị epochs = 6. Sau đó dvc queue start --jobs 3, dvc exp show để so sánh.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-031",
+      "type": "mcq",
+      "prompt": "Khi dùng cả DVC và MLflow, cái gì liên kết kết quả thí nghiệm với phiên bản dữ liệu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tệp metrics.json với cache: false"
+        },
+        {
+          "key": "B",
+          "text": "Nhánh Git tên trùng tên dataset"
+        },
+        {
+          "key": "C",
+          "text": "Thẻ data_version ghi trong MLflow"
+        },
+        {
+          "key": "D",
+          "text": "Bí danh champion trong kho mô hình"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide so sánh công cụ: git commit ghi mã, dvc push ghi dữ liệu, MLflow ghi kết quả và liên kết qua thẻ data_version.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-032",
+      "type": "mcq",
+      "prompt": "Bộ lọc đường dẫn (path filter) trong chuỗi CI cho dự án AI dùng để làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tự động xoá các tệp tạm sinh ra sau khi job hoàn tất"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ chạy huấn luyện khi data/, src/ hoặc params.yaml đổi"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ cho phép thành viên trong nhóm được push lên main"
+        },
+        {
+          "key": "D",
+          "text": "Chặn mọi tệp dữ liệu lớn hơn 100 MB khỏi kho mã Git"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide “Kiến trúc chuỗi CI”: sửa tài liệu không tốn GPU.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-033",
+      "type": "mcq",
+      "prompt": "Sự cố tj-actions/changed-files (03/2025, CVE-2025-30066) xảy ra thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mã độc gắn vào thẻ phiên bản cũ, đưa secret CI/CD vào nhật ký"
+        },
+        {
+          "key": "B",
+          "text": "Runner GPU bị chiếm dụng để đào tiền ảo trong nhiều tuần liền"
+        },
+        {
+          "key": "C",
+          "text": "Kho mô hình bị xoá toàn bộ do lỗi phân quyền của MLflow"
+        },
+        {
+          "key": "D",
+          "text": "Dữ liệu huấn luyện bị đầu độc qua kho từ xa S3 công khai"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Hơn 23.000 kho mã bị ảnh hưởng; repo dùng thẻ như @v45 lấy ngay mã độc mà không đổi dòng nào.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-034",
+      "type": "mcq",
+      "prompt": "Theo tài liệu GitHub, cách duy nhất để dùng một action bên thứ ba như bản phát hành bất biến là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ghim vào thẻ phiên bản lớn như @v7"
+        },
+        {
+          "key": "B",
+          "text": "Ghim vào nhánh main của action đó"
+        },
+        {
+          "key": "C",
+          "text": "Dùng thẻ @latest để luôn cập nhật"
+        },
+        {
+          "key": "D",
+          "text": "Ghim vào mã băm commit đầy đủ (SHA)"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Biện pháp sau tj-actions: ghim SHA 40 ký tự, bật chính sách bắt buộc ghim SHA, dùng Dependabot để cập nhật.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-035",
+      "type": "mcq",
+      "prompt": "Để job GitHub Actions dùng OIDC lấy quyền AWS tạm thời, cần cấu hình gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "permissions: contents: write cho toàn bộ workflow"
+        },
+        {
+          "key": "B",
+          "text": "Cài AWS CLI rồi đăng nhập bằng tài khoản root"
+        },
+        {
+          "key": "C",
+          "text": "permissions: id-token: write và role-to-assume"
+        },
+        {
+          "key": "D",
+          "text": "Lưu AWS access key dài hạn trong GitHub Secrets"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide OIDC: GitHub OIDC cấp token ký số, AWS STS đổi lấy quyền tạm thời; khoá chỉ hợp lệ trong một job.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-036",
+      "type": "mcq",
+      "prompt": "Hàm eval_gate có threshold=0.02. new_acc = 0,905, base_acc = 0,930. Kết quả là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "FAIL nhưng mô hình vẫn được gán champion"
+        },
+        {
+          "key": "B",
+          "text": "FAIL, sys.exit(1) và việc triển khai bị chặn"
+        },
+        {
+          "key": "C",
+          "text": "PASS vì delta chỉ lệch nhỏ hơn hai phần trăm"
+        },
+        {
+          "key": "D",
+          "text": "PASS vì mô hình mới vẫn trên chín mươi phần trăm"
+        }
+      ],
+      "answer": "B",
+      "explanation": "delta = −0,025 < −0,02 nên in FAIL và thoát mã 1; job lỗi → deploy blocked.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-037",
+      "type": "mcq",
+      "prompt": "Mốc đang chạy có độ chính xác 92,4%, ngưỡng chặn = nền − 2 điểm. Phiên bản nào dưới đây bị cổng chặn?",
+      "options": [
+        {
+          "key": "A",
+          "text": "v5 với 89,6%"
+        },
+        {
+          "key": "B",
+          "text": "v6 với 92,6%"
+        },
+        {
+          "key": "C",
+          "text": "v4 với 92,4%"
+        },
+        {
+          "key": "D",
+          "text": "v3 với 92,1%"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Ngưỡng = 90,4%. v5 89,6% thấp hơn nên không được đăng ký; v6 phục hồi lên 92,6% và đi tiếp.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-038",
+      "type": "mcq",
+      "prompt": "Mô hình chấm điểm (LLM-as-judge) có thiên lệch vị trí, độ dài, tự ưu ái. Bài đề xuất giảm bằng cách nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đổi mô hình chấm ngẫu nhiên sau mỗi lần chạy đánh giá"
+        },
+        {
+          "key": "B",
+          "text": "Tăng nhiệt độ để mô hình chấm sáng tạo và khách quan hơn"
+        },
+        {
+          "key": "C",
+          "text": "Cho mô hình đang được đánh giá tự chấm câu trả lời của mình"
+        },
+        {
+          "key": "D",
+          "text": "Cố định phiên bản mô hình chấm, nhiệt độ thấp, chạy lặp"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide “Cổng đánh giá cho ứng dụng LLM và agent”, nguồn Zheng và cộng sự arXiv:2306.05685.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-039",
+      "type": "mcq",
+      "prompt": "Chiến lược triển khai nào cho thử mô hình mới với lưu lượng thật mà người dùng không bị ảnh hưởng, nhưng không thấy phản ứng người dùng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Blue/green"
+        },
+        {
+          "key": "B",
+          "text": "Rolling"
+        },
+        {
+          "key": "C",
+          "text": "Shadow"
+        },
+        {
+          "key": "D",
+          "text": "Canary"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Shadow: mô hình mới nhận bản sao yêu cầu, phản hồi chỉ được ghi lại; tốn gấp đôi tính toán.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-040",
+      "type": "mcq",
+      "prompt": "Hạn chế chính của blue/green là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Người dùng bị gián đoạn khi chuyển đổi"
+        },
+        {
+          "key": "B",
+          "text": "Không chạy được kiểm thử khói trên v2"
+        },
+        {
+          "key": "C",
+          "text": "Tốn gấp đôi tài nguyên khi chạy cả hai"
+        },
+        {
+          "key": "D",
+          "text": "Hoàn tác chậm vì phải thay từng pod"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Blue/green: không gián đoạn, hoàn tác tức thì, nhưng tốn gấp đôi tài nguyên. Hoàn tác chậm là hạn chế của rolling.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-041",
+      "type": "mcq",
+      "prompt": "Chiến lược rolling (cập nhật cuốn chiếu) có đặc điểm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chuyển 5% lưu lượng rồi tăng dần theo chỉ số"
+        },
+        {
+          "key": "B",
+          "text": "Dựng môi trường song song rồi đổi bộ cân bằng tải"
+        },
+        {
+          "key": "C",
+          "text": "Gửi bản sao request và chỉ ghi lại phản hồi"
+        },
+        {
+          "key": "D",
+          "text": "Mặc định trong Kubernetes, nhưng hoàn tác chậm"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Rolling thay từng pod; đơn giản, mặc định; hai phiên bản cùng chạy.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-042",
+      "type": "mcq",
+      "prompt": "Trong AnalysisTemplate của Argo Rollouts, khi điều kiện successCondition: result[0] < 0.45 thất bại thì sao?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Huỷ lần phát hành và đặt trọng số canary về 0"
+        },
+        {
+          "key": "B",
+          "text": "Tăng ngay trọng số canary lên 100% để thử"
+        },
+        {
+          "key": "C",
+          "text": "Giữ nguyên trọng số và gửi email cho đội"
+        },
+        {
+          "key": "D",
+          "text": "Tự nâng ngưỡng p99 lên 600 ms rồi chạy lại"
+        }
+      ],
+      "answer": "A",
+      "explanation": "0.45 giây = ngưỡng p99 450 ms; failureLimit: 1. Với mô hình, thay truy vấn bằng chỉ số chất lượng.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-043",
+      "type": "mcq",
+      "prompt": "Với Istio mirror trong chiến lược shadow, phản hồi của v2 được xử lý thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Lưu vào cache để trả cho request sau"
+        },
+        {
+          "key": "B",
+          "text": "Bị loại, chỉ dùng để so sánh qua nhật ký"
+        },
+        {
+          "key": "C",
+          "text": "Trả về người dùng thay cho phản hồi v1"
+        },
+        {
+          "key": "D",
+          "text": "Gộp với phản hồi v1 rồi trả cả hai"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Istio mirror “gửi rồi bỏ qua”: so sánh đầu ra, độ trễ, lỗi giữa hai phiên bản.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-044",
+      "type": "mcq",
+      "prompt": "Theo bảng công cụ trên Kubernetes (10/2026), KServe có giới hạn gì về canary?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Canary chỉ chạy được trên GPU A100"
+        },
+        {
+          "key": "B",
+          "text": "Canary chỉ hỗ trợ mô hình pickle"
+        },
+        {
+          "key": "C",
+          "text": "Canary chỉ ở chế độ serverless"
+        },
+        {
+          "key": "D",
+          "text": "Không hỗ trợ canary ở mọi chế độ"
+        }
+      ],
+      "answer": "C",
+      "explanation": "KServe v0.21 phục vụ mô hình; Flagger v1.45 hỗ trợ canary, A/B, mirroring; Argo Rollouts v1.10 phân tích qua Prometheus.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-045",
+      "type": "mcq",
+      "prompt": "Hàm test_features_have_no_label_leakage kiểm tra điều gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mô hình không trả về nhãn rỗng"
+        },
+        {
+          "key": "B",
+          "text": "Nhãn được mã hoá thành số nguyên"
+        },
+        {
+          "key": "C",
+          "text": "Dữ liệu không có hàng bị trùng"
+        },
+        {
+          "key": "D",
+          "text": "Cột nhãn không lọt vào tập đặc trưng"
+        }
+      ],
+      "answer": "D",
+      "explanation": "assert \"label\" not in feats.columns: đặc trưng không rò rỉ nhãn (data leakage).",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-046",
+      "type": "mcq",
+      "prompt": "Kiểm thử hành vi “thêm từ “không” vào câu thì cảm xúc đảo chiều” thuộc loại nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Kiểm thử có hướng (directional)"
+        },
+        {
+          "key": "B",
+          "text": "Kiểm thử bất biến (invariance)"
+        },
+        {
+          "key": "C",
+          "text": "Kiểm thử công bằng (fairness)"
+        },
+        {
+          "key": "D",
+          "text": "Kiểm thử tải đột biến (spike)"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Bất biến: xoay ảnh 90° nhãn không đổi; có hướng: thay đổi đầu vào làm đầu ra đổi theo hướng dự đoán.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-047",
+      "type": "mcq",
+      "prompt": "Theo ví dụ kiểm thử mô hình, tiêu chí công bằng (fairness) là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Độ trễ p95 của mọi nhóm người dùng dưới 500 ms"
+        },
+        {
+          "key": "B",
+          "text": "Chênh lệch độ chính xác giữa nhóm con dưới 3 điểm"
+        },
+        {
+          "key": "C",
+          "text": "Độ chính xác trên tập vàng ≥ bản trước − 0,5 điểm"
+        },
+        {
+          "key": "D",
+          "text": "Lớp thiểu số chiếm ít nhất 10% trong mỗi lô dữ liệu"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Hồi quy: ≥ bản trước − 0,5 điểm; công bằng: chênh lệch nhóm con < 3 điểm.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-048",
+      "type": "mcq",
+      "prompt": "Kiểm thử dữ liệu nào trong bài dùng kiểm định KS so với mốc chuẩn?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Khối lượng"
+        },
+        {
+          "key": "B",
+          "text": "Đầy đủ"
+        },
+        {
+          "key": "C",
+          "text": "Phân phối"
+        },
+        {
+          "key": "D",
+          "text": "Lược đồ"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Kiểm thử dữ liệu: lược đồ, đầy đủ (tỉ lệ rỗng), phân phối (KS), khối lượng; chạy trên mỗi phiên bản dữ liệu mới và ghi vào MLflow.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-049",
+      "type": "mcq",
+      "prompt": "Với kiểm thử LLM và agent, bài khuyên thứ tự chấm điểm như thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chấm bằng LLM-as-judge trước, quy tắc sau"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ dùng LLM-as-judge, bỏ hẳn quy tắc"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ dùng người chấm, không dùng tự động"
+        },
+        {
+          "key": "D",
+          "text": "Chấm bằng quy tắc trước, LLM-as-judge sau"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide “Kiểm thử mô hình, dữ liệu và LLM”, cột LLM và agent.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-050",
+      "type": "mcq",
+      "prompt": "Khi kiểm thử tải cho LLM bằng k6, ngoài p95 nên đo thêm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Độ bao phủ mã nguồn của thư mục src/"
+        },
+        {
+          "key": "B",
+          "text": "Thời gian đến token đầu (TTFT) và độ trễ giữa token"
+        },
+        {
+          "key": "C",
+          "text": "Số tham số mô hình và dung lượng tệp trọng số"
+        },
+        {
+          "key": "D",
+          "text": "Số commit trong ngày và số PR đang mở"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Ngưỡng (thresholds) vi phạm thì k6 thoát mã khác 0 và chuỗi CI thất bại.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-051",
+      "type": "mcq",
+      "prompt": "Mức phục vụ mô hình nào dùng lệnh mlflow models build-docker và phù hợp cho tiền phát hành?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Docker"
+        },
+        {
+          "key": "B",
+          "text": "Local"
+        },
+        {
+          "key": "C",
+          "text": "Đám mây"
+        },
+        {
+          "key": "D",
+          "text": "Kubernetes"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Local: mlflow models serve cho phát triển; Đám mây: SageMaker, Azure ML, Databricks; Kubernetes: KServe, Seldon, vLLM.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-052",
+      "type": "mcq",
+      "prompt": "Vì sao hàm variant() băm user_id bằng SHA-256 thay vì chọn ngẫu nhiên mỗi request?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Để mã hoá user_id trước khi gửi đi"
+        },
+        {
+          "key": "B",
+          "text": "Để chia đều 50/50 cho hai biến thể"
+        },
+        {
+          "key": "C",
+          "text": "Để chặn người dùng truy cập biến thể B"
+        },
+        {
+          "key": "D",
+          "text": "Mỗi người luôn thấy cùng một biến thể"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Chia lưu lượng xác định: same user always sees same variant; pct_b mặc định 0,10.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-053",
+      "type": "mcq",
+      "prompt": "Khi so sánh nhiều biến thể cùng lúc, bài khuyên xử lý mức ý nghĩa thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bỏ qua kiểm định thống kê"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ giữ biến thể có p nhỏ nhất"
+        },
+        {
+          "key": "C",
+          "text": "Hiệu chỉnh, ví dụ Bonferroni"
+        },
+        {
+          "key": "D",
+          "text": "Nâng mức ý nghĩa lên 0,10"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Mức ý nghĩa p < 0,05; nhiều so sánh cùng lúc thì hiệu chỉnh (Bonferroni).",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-054",
+      "type": "mcq",
+      "prompt": "Tỉ lệ nền 5%, muốn phát hiện cải thiện tương đối 5% (α = 5% hai phía, công suất 80%). Cần khoảng bao nhiêu mẫu mỗi nhóm?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Khoảng 10.000"
+        },
+        {
+          "key": "B",
+          "text": "Khoảng 122.000"
+        },
+        {
+          "key": "C",
+          "text": "Khoảng 25.600"
+        },
+        {
+          "key": "D",
+          "text": "Khoảng 1.000"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Biểu đồ cỡ mẫu: 122.100 với nền 5%, 25.600 với nền 20%; quy tắc “tối thiểu 1.000 mẫu” không đủ.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-055",
+      "type": "mcq",
+      "prompt": "Biến thể LLM mới thắng ở tỉ lệ hoàn thành tác vụ nhưng chi phí mỗi tác vụ tăng gấp đôi. Theo bài, kết luận hợp lý là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vẫn có thể bị từ chối vì vi phạm rào chắn chi phí"
+        },
+        {
+          "key": "B",
+          "text": "Phải chọn ngay vì đã thắng ở chỉ số chính"
+        },
+        {
+          "key": "C",
+          "text": "Kết quả vô hiệu vì chi phí không phải chỉ số"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ cần tăng hạn mức chi phí của gateway"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide A/B cho LLM: biến thể thắng chỉ số chính nhưng chi phí gấp đôi vẫn có thể bị từ chối.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-056",
+      "type": "mcq",
+      "prompt": "Vì sao tải tệp mô hình pickle từ nguồn không tin cậy là nguy hiểm?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tệp pickle luôn lớn gấp đôi safetensors"
+        },
+        {
+          "key": "B",
+          "text": "pickle làm giảm độ chính xác mô hình"
+        },
+        {
+          "key": "C",
+          "text": "pickle không lưu được trọng số float16"
+        },
+        {
+          "key": "D",
+          "text": "pickle.load có thể chạy mã tuỳ ý (RCE)"
+        }
+      ],
+      "answer": "D",
+      "explanation": "safetensors chỉ đọc tensor, không thực thi mã. Hugging Face có quét pickle nhưng không tuyệt đối.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-057",
+      "type": "mcq",
+      "prompt": "Sự cố JFrog phát hiện tháng 02/2024 trên Hugging Face là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Lỗi routing khiến 16% request bị trả lời bởi sai cấu hình mô hình"
+        },
+        {
+          "key": "B",
+          "text": "Một tập dữ liệu công khai bị lộ thông tin cá nhân của người dùng"
+        },
+        {
+          "key": "C",
+          "text": "Khoảng 100 mô hình độc hại dùng __reduce__ của pickle mở reverse shell"
+        },
+        {
+          "key": "D",
+          "text": "Hơn 23.000 kho mã bị gắn mã độc qua thẻ phiên bản của một action"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Nguồn JFrog Security Research (27/02/2024). Nhiễu là sự cố tj-actions và Anthropic.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-058",
+      "type": "mcq",
+      "prompt": "Công cụ nào trong bài dùng để ký số mô hình kiểu keyless (Sigstore) trong CI?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Argo Rollouts"
+        },
+        {
+          "key": "B",
+          "text": "OpenSSF model-signing"
+        },
+        {
+          "key": "C",
+          "text": "CycloneDX ML-BOM"
+        },
+        {
+          "key": "D",
+          "text": "Great Expectations"
+        }
+      ],
+      "answer": "B",
+      "explanation": "model-signing v1.0 ra mắt 04/2025; khi triển khai verify chữ ký + identity + OIDC issuer.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-059",
+      "type": "mcq",
+      "prompt": "ML-BOM theo chuẩn CycloneDX ghi lại thông tin gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Thành phần: mô hình, tập dữ liệu, phụ thuộc"
+        },
+        {
+          "key": "B",
+          "text": "Chữ ký số và danh tính người huấn luyện"
+        },
+        {
+          "key": "C",
+          "text": "Kết quả A/B test của từng biến thể"
+        },
+        {
+          "key": "D",
+          "text": "Ngưỡng p99 của từng lần chạy canary"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Bảng lớp bảo vệ: toàn vẹn/danh tính (model-signing, Sigstore), nguồn gốc build (GitHub attestation, SLSA), thành phần (ML-BOM).",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-060",
+      "type": "mcq",
+      "prompt": "Mục rủi ro nào của OWASP được bài gắn với chuỗi cung ứng mô hình?",
+      "options": [
+        {
+          "key": "A",
+          "text": "LLM03:2025 Supply Chain"
+        },
+        {
+          "key": "B",
+          "text": "LLM01:2025 Prompt Injection"
+        },
+        {
+          "key": "C",
+          "text": "LLM05:2025 Output Handling"
+        },
+        {
+          "key": "D",
+          "text": "LLM10:2025 Unbounded Use"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide “Ký số mô hình và chứng thực nguồn gốc”, dòng Rủi ro.",
+      "source": "onthi/Slide_Day_6_CICD_AI_System.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D06-TL-01",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Một nhóm cập nhật prompt của agent vào chiều thứ Sáu. Sáng thứ Hai tỉ lệ tool call thành công giảm từ 92% xuống 71% nhưng không có alert nào. Hãy phân tích vì sao sự cố lọt qua và thiết kế các bước kiểm tra mà một thay đổi prompt phải đi qua trước và sau khi đến người dùng.",
+      "modelAnswer": "Ý cần có: (1) Prompt là một trong bốn trục thay đổi (mã, dữ liệu, mô hình, prompt/cấu hình) nên phải kích hoạt CI/CD như mã; (2) Prompt có phiên bản và bí danh trong Prompt Registry (prompts:/name@production), đổi bí danh có lịch sử, hoàn tác được; (3) Cổng đánh giá trên PR: golden dataset + scorer (ToolCallCorrectness, Guidelines) + ngưỡng + mã thoát khác 0; đánh giá cả quỹ đạo gọi công cụ; (4) Phát hành từng phần: canary/gateway chia 90/10 hoặc 5% tăng dần, điều kiện hoàn tác tự động; (5) Giám sát và đánh giá liên tục trên production, alert theo tỉ lệ tool call thành công (bài học Anthropic 2025); (6) Cổng chỉ chặn điều nó đo → bổ sung chỉ số khi biết kiểu lỗi mới (bài học GPT-4o).",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D06-TL-02",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Thiết kế luồng GitHub Actions cho một repo phân loại cảm xúc dùng DVC và MLflow, từ push/pull_request tới đăng ký mô hình. Nêu thứ tự job, các cơ chế tiết kiệm chi phí GPU và các biện pháp bảo mật workflow.",
+      "modelAnswer": "Ý cần có: (1) Thứ tự: lint + unit test + data validation chạy song song → train (needs: data-validation, dvc pull && dvc repro, log MLflow) → cổng đánh giá → đăng ký/gán challenger → deploy; (2) Fail fast khi kiểm tra dữ liệu lỗi; (3) Path filter data/**, src/**, params.yaml, dvc.yaml, *.dvc; concurrency; sửa tài liệu không tốn GPU; cache pip theo hash requirements.txt, cache DVC; (4) GPU runner T4 ~0,052 USD/phút, A100/H100 cần self-hosted; (5) Bảo mật: permissions tối thiểu (contents: read), ghim action theo SHA đầy đủ + Dependabot (bài học tj-actions CVE-2025-30066), OIDC (id-token: write, role-to-assume) thay khoá dài hạn, Environment có người duyệt cho bước production; (6) Thông báo Slack và đăng kết quả eval lên PR.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D06-TL-03",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Champion hiện có độ chính xác 92,4%, F1 0,90 và p95 latency 180 ms. Challenger đạt 91,1%, F1 0,91 và p95 205 ms. Áp dụng ngưỡng ví dụ của bài (độ chính xác −2 điểm, độ trễ +10%), hãy tính và ra quyết định cho cổng đánh giá, đồng thời nêu các thực hành tốt khi vận hành cổng này.",
+      "modelAnswer": "Ý cần có: (1) Ngưỡng accuracy = 92,4 − 2 = 90,4% → 91,1% đạt; (2) Ngưỡng độ trễ = 180 × 1,1 = 198 ms → 205 ms vượt → cổng chặn (ngưỡng riêng từng chỉ số, chỉ cần một chỉ số vi phạm là không đạt); (3) Nếu kết quả sát ngưỡng thì yêu cầu người duyệt thay vì tự động; (4) Tập kiểm tra cố định, không xáo trộn; theo dõi nhiều chỉ số (accuracy, F1, AUC, p95); (5) Ghi kết quả vào MLflow, đăng lên PR; sys.exit(1) để job lỗi và chặn deploy; (6) Cổng chỉ chặn điều nó đo, cần bổ sung chỉ số khi phát hiện kiểu lỗi mới.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D06-TL-04",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Công ty sắp thay mô hình gợi ý bằng một kiến trúc hoàn toàn mới, rủi ro cao, và cũng có một bản vá nhỏ cho mô hình hiện tại. So sánh canary, blue/green, shadow, rolling và đề xuất chiến lược cho từng thay đổi, kèm điều kiện tự động hoàn tác.",
+      "modelAnswer": "Ý cần có: (1) Canary: 5% → 25% → 50% → 100%, phát hiện sớm, cần giám sát tốt; (2) Blue/green: không gián đoạn, hoàn tác tức thì, tốn gấp đôi tài nguyên; (3) Shadow: bản sao request (Istio mirror, fire-and-forget), người dùng không bị ảnh hưởng, không thấy phản ứng người dùng, tốn gấp đôi tính toán; (4) Rolling: mặc định Kubernetes, hoàn tác chậm; (5) Đề xuất: kiến trúc mới → shadow trước để so đầu ra/độ trễ/lỗi, rồi canary; bản vá nhỏ → canary (hoặc blue/green nếu cần không gián đoạn); (6) Điều kiện hoàn tác: p99 vượt ngưỡng hoặc độ chính xác giảm quá 2 điểm → Argo Rollouts AnalysisTemplate với Prometheus, huỷ và đặt trọng số canary về 0; GitOps để hoàn tác bằng git revert.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D06-TL-05",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Nhóm sản phẩm muốn A/B test prompt mới cho trợ lý LLM, tỉ lệ nền chấp nhận câu trả lời là 20%, kỳ vọng phát hiện cải thiện tương đối 5%. Hãy thiết kế phép thử: cách chia lưu lượng, cỡ mẫu, nhóm chỉ số và quy tắc ra quyết định.",
+      "modelAnswer": "Ý cần có: (1) Chia lưu lượng tại AI Gateway (ví dụ 90/10) hoặc băm user_id để mỗi người luôn thấy cùng biến thể; đổi tỉ lệ bằng cấu hình, có thể về 0% ngay; (2) Cỡ mẫu: nền 20%, cải thiện 5% → khoảng 25.600 mẫu mỗi nhóm (α 5% hai phía, power 80%); quy tắc 1.000 mẫu không đủ; tính trước bằng power analysis; (3) Chỉ số chính: tỉ lệ hoàn thành tác vụ/chấp nhận câu trả lời; chất lượng tự động: LLM-as-judge trên mẫu lưu lượng; rào chắn vận hành: p95, tỉ lệ lỗi, TTFT; rào chắn chi phí: token mỗi request, chi phí mỗi tác vụ; (4) p < 0,05, nhiều so sánh thì Bonferroni; không dừng sớm; (5) Biến thể thắng nhưng chi phí gấp đôi vẫn có thể bị từ chối; (6) Ghi kết quả vào MLflow/hệ phân tích, không ghi trong đường xử lý request.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D06-TL-06",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Nhóm của bạn thường tải mô hình mã nguồn mở từ Hugging Face rồi fine-tune và triển khai. Hãy thiết kế các lớp bảo vệ chuỗi cung ứng mô hình trong pipeline CI/CD, từ lúc nhập mô hình đến lúc triển khai.",
+      "modelAnswer": "Ý cần có: (1) Rủi ro: tệp pickle có thể chạy mã tuỳ ý (RCE); sự cố JFrog 02/2024 ~100 mô hình độc hại dùng __reduce__ mở reverse shell; quét của Hugging Face không tuyệt đối; (2) Nhập: ưu tiên safetensors, chặn pickle từ nguồn không tin cậy, ghim theo commit hash, tải và quét trong môi trường cách ly; (3) Sau huấn luyện: ký số bằng OpenSSF model-signing/Sigstore (keyless), chứng thực nguồn gốc build (GitHub attestation, SLSA); (4) Kho mô hình + ML-BOM CycloneDX (mô hình, dữ liệu, phụ thuộc); (5) Triển khai: verify chữ ký + danh tính + OIDC issuer, mặc định từ chối nếu thiếu chữ ký/sai danh tính/không trong kho đã duyệt; (6) Liên hệ OWASP LLM03:2025 Supply Chain, NIST AI RMF 1.0 / AI 600-1; bảo mật CI: ghim SHA, OIDC.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D06-TL-07",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Ba thành viên mỗi người giữ một bản sao dataset hàng GB trong thư mục chung, MLflow ghi chỉ số nhưng không biết mô hình huấn luyện trên dữ liệu nào. Hãy đề xuất cách dùng Git + DVC + MLflow để mọi kết quả tái lập được, kèm các lệnh chính.",
+      "modelAnswer": "Ý cần có: (1) Nêu vấn đề: không tái tạo kết quả, Git không chứa nổi tệp lớn, thí nghiệm không gắn dữ liệu, lãng phí lưu trữ; (2) dvc init, dvc add → tệp con trỏ .dvc chứa mã băm, git add/commit; dvc remote add -d s3://..., dvc push; đồng đội/CI git clone && dvc pull; git checkout + dvc checkout để chuyển phiên bản; (3) Lưu theo nội dung: bản trùng chỉ lưu một lần; (4) dvc.yaml với prepare/train/evaluate (deps, params, outs, metrics), dvc repro chỉ chạy lại giai đoạn đổi, dvc metrics diff/params diff; (5) MLflow: log_params kèm data_version, metrics, artifacts, signature; thẻ data_version, git_commit liên kết ba phần; (6) Remote: S3/GCS có phiên bản, IAM qua OIDC cho CI, dvc remote modify --local cho credential.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D06-TL-08",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Bạn phụ trách một API phân loại cảm xúc tiếng Việt kèm một agent hỗ trợ khách hàng. Hãy xây dựng kim tự tháp kiểm thử cho hệ thống: mỗi tầng kiểm gì, công cụ, ví dụ ngưỡng và chạy ở thời điểm nào trong pipeline.",
+      "modelAnswer": "Ý cần có: (1) Đơn vị (pytest): tiền xử lý, tách từ, đặc trưng, ca biên rỗng/null/độ dài tối đa, tiếng Việt có dấu, không rò rỉ nhãn, mock API/DB; coverage ≥ 80%, toàn bộ < 30 giây; (2) Tích hợp: chuỗi suy luận đầu-cuối với mẫu nhỏ (100 mẫu), ví dụ /predict trả 200 và confidence trong [0,1]; (3) Mô hình/LLM: bất biến, có hướng, hồi quy (≥ bản trước − 0,5), công bằng (< 3 điểm); agent: bộ ca vàng từ nhật ký, quỹ đạo công cụ, an toàn/prompt injection, chi phí token; quy tắc trước, LLM-as-judge sau; (4) Dữ liệu: lược đồ, đầy đủ, phân phối KS, khối lượng (Great Expectations/Pandera); (5) Tải (k6/Locust): baseline 50 RPS p95 < 500 ms lỗi < 0,1%, stress, soak, spike; TTFT với LLM; (6) Tầng thấp chạy mọi commit, tầng cao ở bước phát hành hoặc theo lịch.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D06-TL-09",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Pipeline dữ liệu đổ lô mới hằng ngày vào huấn luyện. Hãy thiết kế bước kiểm tra dữ liệu trong CI: các kiểm tra cần có với ngưỡng ví dụ, công cụ, cách tích hợp vào workflow, và giải thích vì sao bước này phải đứng trước huấn luyện.",
+      "modelAnswer": "Ý cần có: (1) Kiểm tra: lược đồ (đúng cột, kiểu), tỉ lệ rỗng mỗi cột ≤ 5%, khoảng giá trị (tuổi 0–120, giá > 0), trôi phân phối so mốc chuẩn, trùng lặp < 0,1%, lớp thiểu số ≥ 10%, khối lượng ≥ 10.000 hàng/lô, độ mới ≤ 7 ngày; ngưỡng là ví dụ, đặt theo bài toán; (2) Công cụ: Great Expectations, Pandera; (3) Workflow: job data-validation (dvc pull data/, python ci/validate_data.py), train needs: [data-validation]; path filter cho data/**, *.dvc; (4) Fail fast: dữ liệu lỗi dừng ngay, không tốn GPU; (5) Ghi kết quả kiểm tra vào MLflow theo phiên bản dữ liệu; (6) Liên hệ trục dữ liệu: cùng mã, dữ liệu mới vẫn làm mô hình xấu đi; drift có thể kích hoạt huấn luyện lại.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D06-TL-10",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Hãy mô tả trình tự một lần phát hành mô hình từ git push tới production theo bài (GitHub Actions, MLflow, Argo CD/Argo Rollouts), chỉ rõ vai trò của bí danh champion/challenger, các môi trường và cách hoàn tác ở từng tầng.",
+      "modelAnswer": "Ý cần có: (1) Push → GitHub Actions chạy test, dvc pull/dvc repro; (2) Huấn luyện, ghi MLflow, đăng ký phiên bản, gán bí danh challenger (kèm tag validation_status); (3) Cổng đánh giá so challenger với champion; đạt thì đi tiếp, không đạt thì chặn; (4) Cập nhật tệp khai báo trong Git (GitOps), Argo CD đồng bộ; môi trường dev (mọi commit, smoke < 2 phút) → staging (tích hợp đầy đủ, dữ liệu thật tập con) → production (phê duyệt thủ công, canary theo dõi 30 phút); (5) Argo Rollouts canary 5%, phân tích p99 và điểm đánh giá, tăng dần; đạt thì gán champion cho phiên bản mới; (6) Hoàn tác: canary tự đặt trọng số về 0; registry gán lại champion bằng một lệnh API; cụm hoàn tác bằng git revert; serving nạp theo alias nên không cần triển khai lại; ít nhất một người duyệt trước khi chuyển challenger thành champion.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    }
+  ]
+}

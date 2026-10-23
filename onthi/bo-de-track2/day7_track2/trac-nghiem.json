@@ -1,0 +1,1568 @@
+{
+  "id": "day7_track2",
+  "title": "Bộ đề ôn tập Track 2 Ngày 7",
+  "sourceFolder": "onthi",
+  "questionCount": 60,
+  "questions": [
+    {
+      "id": "T2D07-001",
+      "type": "mcq",
+      "prompt": "Kịch bản slide: thêm yêu cầu 'trả lời chi tiết hơn' làm token đầu ra tăng từ 200 lên 600. Chi phí đầu ra tăng khoảng bao nhiêu và vì sao?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không đổi, vì chi phí tính theo giờ GPU đã thuê"
+        },
+        {
+          "key": "B",
+          "text": "Khoảng 600%, vì mỗi token sinh ra đắt gấp đôi"
+        },
+        {
+          "key": "C",
+          "text": "Khoảng 200%, vì giá đầu ra tính theo token"
+        },
+        {
+          "key": "D",
+          "text": "Khoảng 50%, vì chỉ phần prompt đầu vào dài thêm"
+        }
+      ],
+      "answer": "C",
+      "explanation": "600/200 = 3 lần, tức tăng khoảng 200%; giá đầu ra tính theo token (số liệu giả định của slide).",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-002",
+      "type": "mcq",
+      "prompt": "Theo bảng MLOps và LLMOps, mô hình chi phí của hai bên khác nhau thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "MLOps tính theo dung lượng dataset; LLMOps theo số người dùng"
+        },
+        {
+          "key": "B",
+          "text": "MLOps tính theo giờ GPU; LLMOps tính theo token mỗi tác vụ"
+        },
+        {
+          "key": "C",
+          "text": "MLOps tính theo token mỗi tác vụ; LLMOps tính theo giờ GPU"
+        },
+        {
+          "key": "D",
+          "text": "Cả hai đều tính theo số lần triển khai mô hình mỗi tháng"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide 'MLOps và LLMOps': mô hình chi phí là giờ tính toán (GPU) so với token mỗi tác vụ.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-003",
+      "type": "mcq",
+      "prompt": "Ngoài trọng số, dataset và mã nguồn, LLMOps cần phiên bản hoá thêm những gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Prompt, chỉ dẫn hệ thống, tham số và lược đồ đầu ra"
+        },
+        {
+          "key": "B",
+          "text": "Siêu tham số huấn luyện, seed và cấu hình GPU cluster"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ số AUC-ROC, F1 và ma trận nhầm lẫn mỗi lần chạy"
+        },
+        {
+          "key": "D",
+          "text": "Bảng giá token, hạn mức API và hợp đồng nhà cung cấp"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Bảng so sánh: LLMOps thêm prompt, chỉ dẫn hệ thống, tham số, lược đồ đầu ra vào phiên bản hoá.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-004",
+      "type": "mcq",
+      "prompt": "Thách thức 'chất lượng chủ quan' của LLM dẫn tới yêu cầu gì trong đánh giá?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Phải dùng accuracy và F1 vì đầu ra luôn tái lập được"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ cần đo độ trễ p95 vì chất lượng không đo được"
+        },
+        {
+          "key": "C",
+          "text": "Phải huấn luyện lại mô hình mỗi khi điểm đánh giá giảm"
+        },
+        {
+          "key": "D",
+          "text": "Thường không có ground truth, cần LLM-as-judge hoặc người chấm"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Sáu thách thức: chất lượng chủ quan, thường không có đáp án chuẩn, cần LLM-as-judge hoặc người đánh giá.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-005",
+      "type": "mcq",
+      "prompt": "Trong vòng lặp LLMOps sáu bước, bước nào khép vòng và đưa kinh nghiệm vận hành về lại đánh giá?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Soạn và phiên bản hoá prompt mới"
+        },
+        {
+          "key": "B",
+          "text": "Ghi vết và giám sát môi trường thật"
+        },
+        {
+          "key": "C",
+          "text": "Thêm mẫu lỗi vào tập đánh giá"
+        },
+        {
+          "key": "D",
+          "text": "Triển khai thử tỉ lệ nhỏ (canary)"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Vòng lặp: soạn prompt → đánh giá ngoại tuyến → canary → ghi vết → đánh giá trực tuyến → thêm mẫu lỗi vào tập đánh giá.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-006",
+      "type": "mcq",
+      "prompt": "Trên bản đồ stack LLMOps 2026, Llama Guard và Prompt Guard nằm ở lớp nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Lớp 1: Chi phí và hạ tầng"
+        },
+        {
+          "key": "B",
+          "text": "Lớp 5: Rào chắn an toàn"
+        },
+        {
+          "key": "C",
+          "text": "Lớp 4: Đánh giá mô hình"
+        },
+        {
+          "key": "D",
+          "text": "Lớp 3: Ghi vết và quan sát"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Lớp 5 gồm Guardrails AI, NeMo Guardrails, Llama Guard, Prompt Guard.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-007",
+      "type": "mcq",
+      "prompt": "Thương vụ nào khiến một công cụ chuyển sang chế độ bảo trì, theo slide thị trường hợp nhất?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Helicone về Mintlify, công bố 03/03/2026"
+        },
+        {
+          "key": "B",
+          "text": "Langfuse về ClickHouse, công bố 16/01/2026"
+        },
+        {
+          "key": "C",
+          "text": "W&B về CoreWeave, hoàn tất 05/05/2025"
+        },
+        {
+          "key": "D",
+          "text": "Promptfoo về OpenAI, công bố 09/03/2026"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Helicone về Mintlify và chuyển sang chế độ bảo trì; Langfuse nêu không đổi giấy phép, Promptfoo nêu vẫn mã nguồn mở.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-008",
+      "type": "mcq",
+      "prompt": "Hệ quả thiết kế mà slide rút ra từ làn sóng hợp nhất thị trường công cụ LLMOps là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chỉ chọn công cụ thương mại có hợp đồng hỗ trợ dài hạn"
+        },
+        {
+          "key": "B",
+          "text": "Tự viết toàn bộ công cụ ghi vết và đánh giá trong nhà"
+        },
+        {
+          "key": "C",
+          "text": "Gắn chặt ứng dụng vào SDK của một nhà cung cấp duy nhất"
+        },
+        {
+          "key": "D",
+          "text": "Giữ vết ở định dạng OpenTelemetry, prompt ở tệp văn bản"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Giữ dữ liệu ở định dạng mở để đổi nhà cung cấp mà không viết lại ứng dụng.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-009",
+      "type": "mcq",
+      "prompt": "Theo khảo sát State of Agent Engineering của LangChain, bao nhiêu % tổ chức có ghi vết chi tiết từng bước và tool call?",
+      "options": [
+        {
+          "key": "A",
+          "text": "94%"
+        },
+        {
+          "key": "B",
+          "text": "85%"
+        },
+        {
+          "key": "C",
+          "text": "62%"
+        },
+        {
+          "key": "D",
+          "text": "89%"
+        }
+      ],
+      "answer": "C",
+      "explanation": "89% có một dạng quan sát; 62% có ghi vết chi tiết; trong nhóm đã chạy production là 94% và 71,5%.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-010",
+      "type": "mcq",
+      "prompt": "Trong kiến trúc quan sát, số liệu tổng hợp như độ trễ p95 và cảnh báo được chuyển tới đâu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Prometheus và Grafana"
+        },
+        {
+          "key": "B",
+          "text": "LangSmith và tập đánh giá"
+        },
+        {
+          "key": "C",
+          "text": "Kho prompt và webhook Git"
+        },
+        {
+          "key": "D",
+          "text": "RAGAS và mô hình chấm"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Bộ thu chuyển cây vết, chi phí tới LangSmith; số liệu tổng hợp (p95, cảnh báo) tới Prometheus và Grafana.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-011",
+      "type": "mcq",
+      "prompt": "Bật ghi vết LangSmith theo tài liệu hiện hành dùng biến môi trường nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "WEAVE_AUTO_TRACE=true"
+        },
+        {
+          "key": "B",
+          "text": "LANGSMITH_TRACING=true"
+        },
+        {
+          "key": "C",
+          "text": "LANGCHAIN_HUB_ENABLE=true"
+        },
+        {
+          "key": "D",
+          "text": "OTEL_GENAI_TRACING=true"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Tài liệu dùng LANGSMITH_*; SDK vẫn nhận LANGCHAIN_TRACING_V2 như biến cũ.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-012",
+      "type": "mcq",
+      "prompt": "Trong mã mẫu LangSmith, bọc client bằng wrap_openai() có tác dụng gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mỗi prompt được đẩy lên kho với nhãn staging"
+        },
+        {
+          "key": "B",
+          "text": "Mỗi phản hồi được lọc PII trước khi trả về"
+        },
+        {
+          "key": "C",
+          "text": "Mỗi lời gọi LLM trở thành một child run trong vết"
+        },
+        {
+          "key": "D",
+          "text": "Mỗi lời gọi LLM tự động được chấm bằng RAGAS"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Chú thích trong mã: client = wrap_openai(openai.Client()) # each LLM call -> child run.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-013",
+      "type": "mcq",
+      "prompt": "Vết minh hoạ: run gốc 1,54 s, retriever 120 ms, format_prompt 5 ms, lời gọi mô hình 1,41 s. Kết luận và cách giảm?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Nghẽn ở retriever (~8%); thêm chỉ mục cho vector store"
+        },
+        {
+          "key": "B",
+          "text": "Nghẽn ở format_prompt; gộp mẫu prompt vào một bước"
+        },
+        {
+          "key": "C",
+          "text": "Nghẽn ở run gốc; tách pipeline thành nhiều dịch vụ"
+        },
+        {
+          "key": "D",
+          "text": "Nghẽn ở mô hình (~92%); rút ngắn đầu ra hoặc streaming"
+        }
+      ],
+      "answer": "D",
+      "explanation": "1,41/1,54 ≈ 92%; slide gợi ý rút ngắn đầu ra hoặc phát dòng (streaming).",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-014",
+      "type": "mcq",
+      "prompt": "Theo quy ước OpenTelemetry GenAI, một span lời gọi mô hình được đặt tên thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "{operation} {model}, ví dụ chat gpt-4o-mini"
+        },
+        {
+          "key": "B",
+          "text": "{model}.{provider}, ví dụ gpt-4o-mini.openai"
+        },
+        {
+          "key": "C",
+          "text": "{service}/{route}, ví dụ rag/answer-question"
+        },
+        {
+          "key": "D",
+          "text": "{run_type}:{name}, ví dụ chain:rag_pipeline"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Mỗi lời gọi mô hình là một span tên theo {operation} {model}.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-015",
+      "type": "mcq",
+      "prompt": "Trạng thái hiện tại của quy ước GenAI trong OpenTelemetry theo slide là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mức Stable; chỉ còn thuộc tính token, bỏ hết tên nhà cung cấp"
+        },
+        {
+          "key": "B",
+          "text": "Mức Development; gen_ai.system được thay bằng gen_ai.provider.name"
+        },
+        {
+          "key": "C",
+          "text": "Mức Stable; gen_ai.provider.name được thay bằng gen_ai.system"
+        },
+        {
+          "key": "D",
+          "text": "Đã bị loại bỏ; thay bằng định dạng vết riêng của LangSmith"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Quy ước GenAI vẫn ở mức Development, chưa ổn định; tên cũ gen_ai.system thay bằng gen_ai.provider.name.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-016",
+      "type": "mcq",
+      "prompt": "Điểm khác chính giữa đánh giá trực tuyến (online) và ngoại tuyến (offline) là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Online chỉ dùng kiểm tra xác định, không dùng mô hình"
+        },
+        {
+          "key": "B",
+          "text": "Online chạy một lần mỗi quý để so sánh các phiên bản"
+        },
+        {
+          "key": "C",
+          "text": "Online lấy mẫu lưu lượng thật, không cần đáp án chuẩn"
+        },
+        {
+          "key": "D",
+          "text": "Online chạy trước triển khai trên tập có đáp án chuẩn"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Offline: trước triển khai, có đáp án chuẩn, regression test. Online: lưu lượng thật, lấy mẫu (ví dụ 10%), không cần đáp án chuẩn.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-017",
+      "type": "mcq",
+      "prompt": "Trong luồng 'từ vết sản xuất đến kiểm thử chống suy giảm', bước cuối là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Xoá các vết đã gán nhãn để tiết kiệm lưu trữ"
+        },
+        {
+          "key": "B",
+          "text": "Tự động đẩy prompt mới lên nhãn production"
+        },
+        {
+          "key": "C",
+          "text": "Gửi toàn bộ vết lỗi cho nhà cung cấp mô hình"
+        },
+        {
+          "key": "D",
+          "text": "Chặn thay đổi nếu điểm giảm so với mốc nền"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Vết → gán nhãn → thêm vào dataset → chạy lại khi đổi prompt/mô hình → chặn nếu điểm giảm so với mốc nền.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-018",
+      "type": "mcq",
+      "prompt": "Bài học slide rút ra từ sự cố chỉnh sửa trái phép chỉ dẫn hệ thống của Grok (xAI, 14/05/2025)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Prompt cần pull request và dấu vết kiểm toán"
+        },
+        {
+          "key": "B",
+          "text": "Prompt cần mã hoá để người ngoài không đọc được"
+        },
+        {
+          "key": "C",
+          "text": "Prompt cần ghim mã mô hình có ngày phát hành"
+        },
+        {
+          "key": "D",
+          "text": "Prompt cần chạy canary 5% trước khi mở rộng"
+        }
+      ],
+      "answer": "A",
+      "explanation": "xAI cho biết quy trình rà soát bị vượt qua; bài học: yêu cầu hợp nhất (pull request) và dấu vết kiểm toán.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-019",
+      "type": "mcq",
+      "prompt": "Sự cố GPT-4o xu nịnh (25–29/04/2025) cho bài học gì về đánh giá?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đánh giá ngoại tuyến cho điểm thấp nhưng vẫn bị ép phát hành đúng hạn"
+        },
+        {
+          "key": "B",
+          "text": "Suy giảm có thể xảy ra dù prompt không đổi; đánh giá chỉ bắt điều nó đo"
+        },
+        {
+          "key": "C",
+          "text": "Thử nghiệm A/B đã phát hiện lỗi nhưng đội ngũ bỏ qua kết quả cảnh báo"
+        },
+        {
+          "key": "D",
+          "text": "Nguyên nhân là một dòng prompt bị sửa mà không qua pull request rà soát"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Tín hiệu thưởng mới từ nút thích làm yếu tín hiệu chính; offline eval và A/B đều tốt.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-020",
+      "type": "mcq",
+      "prompt": "Vì sao slide khuyên ghim mã mô hình có ngày phát hành, ví dụ gpt-4o-mini-2024-07-18?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tên không kèm ngày bị nhà cung cấp chặn ở môi trường vận hành production"
+        },
+        {
+          "key": "B",
+          "text": "Tên không kèm ngày có thể trỏ tới bản mới, hành vi đổi dù prompt giữ nguyên"
+        },
+        {
+          "key": "C",
+          "text": "Mã có ngày phát hành luôn rẻ hơn tên mô hình chung trên bảng giá token"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ mã có ngày mới gửi được thuộc tính gen_ai.usage qua OpenTelemetry"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Phiên bản là tổ hợp; tên mô hình không kèm ngày có thể trỏ tới bản mới hơn.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-021",
+      "type": "mcq",
+      "prompt": "Nguyên tắc 'bản ghi bất biến, nhãn di động' nghĩa là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mỗi lần lưu tạo bản ghi mới; nhãn là con trỏ có thể chuyển"
+        },
+        {
+          "key": "B",
+          "text": "Mỗi lần lưu ghi đè bản cũ; nhãn cố định vào một bản ghi"
+        },
+        {
+          "key": "C",
+          "text": "Bản ghi có thể sửa trong 24 giờ; sau đó nhãn bị khoá lại"
+        },
+        {
+          "key": "D",
+          "text": "Nhãn tạo bản ghi mới; bản ghi là con trỏ chỉ tới nhãn"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Mỗi lần lưu tạo một bản ghi mới, không sửa bản ghi cũ; staging/production là con trỏ di động.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-022",
+      "type": "mcq",
+      "prompt": "Công cụ nào dùng bí danh (alias) dạng @production làm con trỏ di động cho prompt?",
+      "options": [
+        {
+          "key": "A",
+          "text": "LangSmith"
+        },
+        {
+          "key": "B",
+          "text": "Langfuse"
+        },
+        {
+          "key": "C",
+          "text": "Promptfoo"
+        },
+        {
+          "key": "D",
+          "text": "MLflow 3"
+        }
+      ],
+      "answer": "D",
+      "explanation": "LangSmith dùng tag (staging, production); Langfuse dùng label (production, latest dành riêng); MLflow 3 dùng alias @production.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-023",
+      "type": "mcq",
+      "prompt": "Lệnh nào kéo prompt đúng phiên bản đang gắn nhãn production trong LangSmith SDK?",
+      "options": [
+        {
+          "key": "A",
+          "text": "hub.pull(\"support-bot\", tag=\"latest\")"
+        },
+        {
+          "key": "B",
+          "text": "c.get_prompt(\"support-bot\").latest()"
+        },
+        {
+          "key": "C",
+          "text": "c.pull_prompt(\"support-bot:production\")"
+        },
+        {
+          "key": "D",
+          "text": "c.push_prompt(\"support-bot\", commit_tags=[\"production\"])"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Kéo theo tag hoặc mã băm: pull_prompt(\"support-bot:production\") hoặc \"support-bot:12344e88\".",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-024",
+      "type": "mcq",
+      "prompt": "Trạng thái của langchain.hub theo slide là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ngừng dùng từ 2.0.0; chỉ còn hỗ trợ đọc, không cho đẩy lên"
+        },
+        {
+          "key": "B",
+          "text": "Ngừng dùng từ langchain 1.0.6, gỡ ở 2.0.0; dùng langsmith"
+        },
+        {
+          "key": "C",
+          "text": "Vẫn khuyến nghị dùng; langsmith chỉ dành cho bản trả phí"
+        },
+        {
+          "key": "D",
+          "text": "Đã gỡ từ 1.0.6; thay bằng thư viện Langfuse mã nguồn mở"
+        }
+      ],
+      "answer": "B",
+      "explanation": "langchain.hub bị đánh dấu ngừng dùng từ 1.0.6, gỡ ở 2.0.0; dùng langsmith.Client.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-025",
+      "type": "mcq",
+      "prompt": "Webhook của kho prompt LangSmith kích hoạt khi nào và dùng để làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Khi có bản ghi mới; nối với CI hoặc đồng bộ sang Git"
+        },
+        {
+          "key": "B",
+          "text": "Khi điểm RAGAS giảm; tự động khôi phục nhãn production"
+        },
+        {
+          "key": "C",
+          "text": "Khi chi phí vượt ngưỡng; gửi cảnh báo Slack cho trực ca"
+        },
+        {
+          "key": "D",
+          "text": "Khi vết bị lỗi; đẩy vết đó vào tập dữ liệu đánh giá"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Webhook kích hoạt mỗi khi có bản ghi mới; sơ đồ đồng bộ: máy chủ trung gian ghi tệp vào GitHub.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-026",
+      "type": "mcq",
+      "prompt": "Nhóm có nhiều người không lập trình cần sửa prompt qua giao diện rà soát. Slide gợi ý chọn gì và cần lưu ý gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Git monorepo; vì CI chặt chẽ giúp người không lập trình sửa dễ hơn"
+        },
+        {
+          "key": "B",
+          "text": "Kho prompt; nó không phụ thuộc mạng nên không cần bộ nhớ đệm"
+        },
+        {
+          "key": "C",
+          "text": "Tệp YAML; vì diff trên GitHub dễ đọc nhất cho người không lập trình"
+        },
+        {
+          "key": "D",
+          "text": "Kho prompt; nó là phụ thuộc lúc chạy nên cần cache phía máy khách"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Kho prompt hợp nhóm lớn, người không lập trình; là phụ thuộc lúc chạy, cần cache phía client (Langfuse đã có).",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-027",
+      "type": "mcq",
+      "prompt": "Bộ định tuyến A/B dùng hash(user_id) mod 100, nhánh < 50 sang v1. Vì sao băm theo người dùng thay vì theo yêu cầu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Băm theo người dùng giúp giảm chi phí token đầu ra"
+        },
+        {
+          "key": "B",
+          "text": "Băm theo yêu cầu làm lộ user_id vào trong vết"
+        },
+        {
+          "key": "C",
+          "text": "Mỗi người luôn gặp một phiên bản suốt hội thoại"
+        },
+        {
+          "key": "D",
+          "text": "Băm theo yêu cầu không chia được đúng tỉ lệ 50/50"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide A/B: băm theo người dùng, mỗi người luôn gặp một phiên bản trong suốt hội thoại.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-028",
+      "type": "mcq",
+      "prompt": "Cổng phát hành prompt mô tả canary thế nào và khôi phục ra sao?",
+      "options": [
+        {
+          "key": "A",
+          "text": "100% lưu lượng ngay; khôi phục bằng xoá bản ghi mới khỏi kho prompt"
+        },
+        {
+          "key": "B",
+          "text": "5% lưu lượng trước rồi 100%; khôi phục bằng đưa nhãn về bản trước"
+        },
+        {
+          "key": "C",
+          "text": "50% lưu lượng trước rồi 100%; khôi phục bằng phát hành lại ứng dụng"
+        },
+        {
+          "key": "D",
+          "text": "1% lưu lượng trong một tuần; khôi phục bằng huấn luyện lại mô hình"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Canary 5% trước khi mở rộng 100%; khôi phục chỉ cần đưa nhãn về bản ghi trước, không phát hành lại ứng dụng.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-029",
+      "type": "mcq",
+      "prompt": "Lỗi 'bộ truy xuất sai' trong RAG được bắt bằng chỉ số nào thay vì accuracy cuối?",
+      "options": [
+        {
+          "key": "A",
+          "text": "context_recall và context_precision"
+        },
+        {
+          "key": "B",
+          "text": "faithfulness và response relevancy"
+        },
+        {
+          "key": "C",
+          "text": "noise sensitivity và tỉ lệ ảo giác"
+        },
+        {
+          "key": "D",
+          "text": "kiểm tra JSON và đối chiếu lược đồ"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Accuracy cuối không cho biết lỗi ở retrieval hay ở sinh; dùng context_recall, context_precision.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-030",
+      "type": "mcq",
+      "prompt": "Trong ba tầng đánh giá, tầng nào rẻ nhất và chạy ở mọi lần?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Người đánh giá chấm mẫu nhỏ đều đặn mỗi tuần một lần"
+        },
+        {
+          "key": "B",
+          "text": "Thử nghiệm A/B trên lưu lượng thật của toàn hệ thống"
+        },
+        {
+          "key": "C",
+          "text": "Kiểm tra xác định: JSON hợp lệ, độ dài, regex, lược đồ"
+        },
+        {
+          "key": "D",
+          "text": "LLM-as-judge và RAGAS chạy hàng loạt theo từng ngày"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Tầng thấp chi phí gần 0, chạy mọi lần; judge hằng ngày; người hằng tuần, đắt nhất.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-031",
+      "type": "mcq",
+      "prompt": "Câu trả lời có 8 khẳng định, 6 khẳng định được ngữ cảnh hỗ trợ. Faithfulness bằng bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "0,60"
+        },
+        {
+          "key": "B",
+          "text": "0,80"
+        },
+        {
+          "key": "C",
+          "text": "1,33"
+        },
+        {
+          "key": "D",
+          "text": "0,75"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Faithfulness = số khẳng định được ngữ cảnh hỗ trợ / tổng khẳng định = 6/8 = 0,75.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-032",
+      "type": "mcq",
+      "prompt": "RAGAS tính response relevancy như thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Trung bình cosine giữa câu hỏi và các câu hỏi sinh ngược từ câu trả lời"
+        },
+        {
+          "key": "B",
+          "text": "Số khẳng định của câu trả lời được ngữ cảnh hỗ trợ chia tổng khẳng định"
+        },
+        {
+          "key": "C",
+          "text": "Trung bình Precision@k của các đoạn truy xuất, có trọng số độ liên quan"
+        },
+        {
+          "key": "D",
+          "text": "Tỉ lệ khẳng định sai do đoạn nhiễu chia cho tổng khẳng định câu trả lời"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Response relevancy: trung bình độ tương đồng cosine với các câu hỏi do mô hình sinh ngược (mặc định 3).",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-033",
+      "type": "mcq",
+      "prompt": "Chỉ số RAGAS nào KHÔNG cần đáp án chuẩn (reference)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Noise sensitivity"
+        },
+        {
+          "key": "B",
+          "text": "Faithfulness"
+        },
+        {
+          "key": "C",
+          "text": "context_recall"
+        },
+        {
+          "key": "D",
+          "text": "context_precision"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bảng chỉ số: Faithfulness và Response relevancy không cần đáp án chuẩn; ba chỉ số còn lại cần.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-034",
+      "type": "mcq",
+      "prompt": "Ngưỡng faithfulness 0,8 nên được hiểu thế nào theo slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Là mức tối thiểu OWASP yêu cầu để qua mục thông tin sai lệch"
+        },
+        {
+          "key": "B",
+          "text": "Là điểm cố định không phụ thuộc mô hình chấm hay prompt chấm"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ là quy ước kinh nghiệm; so chênh lệch trên cùng cấu hình chấm"
+        },
+        {
+          "key": "D",
+          "text": "Là chuẩn bắt buộc do tài liệu RAGAS công bố cho mọi hệ thống RAG"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Ngưỡng như 0,8 không có trong tài liệu; điểm phụ thuộc mô hình chấm và prompt chấm.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-035",
+      "type": "mcq",
+      "prompt": "Với RAGAS 0.4.3, phát biểu nào đúng về API?",
+      "options": [
+        {
+          "key": "A",
+          "text": "ragas.metrics đã bị gỡ hẳn, import sẽ báo lỗi ngay lập tức"
+        },
+        {
+          "key": "B",
+          "text": "langchain-community 0.4.2 là bản bắt buộc để import ragas chạy"
+        },
+        {
+          "key": "C",
+          "text": "Mã mới gọi metric.score() đồng bộ thay vì phương thức ascore"
+        },
+        {
+          "key": "D",
+          "text": "evaluate() hiện không nhận chỉ số của ragas.metrics.collections"
+        }
+      ],
+      "answer": "D",
+      "explanation": "ragas.metrics vẫn chạy kèm deprecation warning (gỡ ở v1.0); collections dùng await metric.ascore(); phải ghim langchain-community<0.4.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-036",
+      "type": "mcq",
+      "prompt": "Theo MT-bench (Zheng và cs., 2023), mức đồng thuận của GPT-4 với chuyên gia so với giữa người với người?",
+      "options": [
+        {
+          "key": "A",
+          "text": "85% so với 81%"
+        },
+        {
+          "key": "B",
+          "text": "81% so với 85%"
+        },
+        {
+          "key": "C",
+          "text": "65% so với 85%"
+        },
+        {
+          "key": "D",
+          "text": "92% so với 70%"
+        }
+      ],
+      "answer": "A",
+      "explanation": "GPT-4 đồng thuận với chuyên gia 85%, so với 81% giữa người với người (bỏ cặp hoà).",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-037",
+      "type": "mcq",
+      "prompt": "Thiên lệch vị trí của mô hình chấm được giảm bằng cách nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tăng temperature của judge để kết quả chấm đa dạng hơn"
+        },
+        {
+          "key": "B",
+          "text": "Chấm hai lần theo hai thứ tự, chỉ tính thắng khi thắng cả hai"
+        },
+        {
+          "key": "C",
+          "text": "Chọn câu trả lời ngắn hơn khi hai câu có điểm gần bằng nhau"
+        },
+        {
+          "key": "D",
+          "text": "Dùng mô hình chấm cùng họ với mô hình đang được đánh giá"
+        }
+      ],
+      "answer": "B",
+      "explanation": "GPT-4 chỉ nhất quán ở 65% cặp đảo thứ tự; cách giảm: chấm hai thứ tự, thắng cả hai mới tính.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-038",
+      "type": "mcq",
+      "prompt": "Mô hình chấm cho điểm cao đầu ra của chính nó. Slide đề xuất cách giảm nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cho judge xem đáp án tham chiếu trước khi chấm"
+        },
+        {
+          "key": "B",
+          "text": "Đổi thứ tự hai câu trả lời rồi chấm lại lần nữa"
+        },
+        {
+          "key": "C",
+          "text": "Dùng mô hình chấm khác họ với mô hình được chấm"
+        },
+        {
+          "key": "D",
+          "text": "Ghi rõ trong rubric rằng độ dài không cộng điểm"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Thiên lệch tự ưu ái: dùng mô hình chấm khác họ với mô hình được chấm.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-039",
+      "type": "mcq",
+      "prompt": "Hệ số Cohen κ giữa judge và người đạt 0,72. Theo quy ước Landis và Koch, đọc thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đồng thuận gần hoàn hảo, đủ để bỏ người đánh giá"
+        },
+        {
+          "key": "B",
+          "text": "Đồng thuận yếu, bắt buộc phải đổi mô hình chấm"
+        },
+        {
+          "key": "C",
+          "text": "Đồng thuận ngẫu nhiên, judge không có giá trị"
+        },
+        {
+          "key": "D",
+          "text": "Đồng thuận đáng kể, nhưng chỉ là quy ước tham khảo"
+        }
+      ],
+      "answer": "D",
+      "explanation": "κ 0,61–0,80 thường gọi là đồng thuận đáng kể; là quy ước, không có chứng cứ thực nghiệm, phụ thuộc tỉ lệ nhãn.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-040",
+      "type": "mcq",
+      "prompt": "Trong vòng đánh giá kết hợp, nhịp của từng hoạt động được slide đề xuất thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Judge hằng tuần, người hằng ngày 1.000 mẫu, hiệu chỉnh κ hằng quý"
+        },
+        {
+          "key": "B",
+          "text": "Judge hằng tháng, người hằng ngày 50 mẫu, hiệu chỉnh κ hằng tuần"
+        },
+        {
+          "key": "C",
+          "text": "Judge mỗi commit, người hằng năm 10 mẫu, hiệu chỉnh κ mỗi ngày"
+        },
+        {
+          "key": "D",
+          "text": "Judge hằng ngày, người hằng tuần 100–200 mẫu, hiệu chỉnh κ hằng tháng"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Vòng: LLM-as-judge hằng ngày, người hằng tuần lấy 100–200 đầu ra, hiệu chỉnh hằng tháng đo κ.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-041",
+      "type": "mcq",
+      "prompt": "Từ mốc accuracy 70%, muốn phát hiện cải thiện 10 điểm (α = 0,05, lực 80%) cần khoảng bao nhiêu mẫu mỗi phiên bản?",
+      "options": [
+        {
+          "key": "A",
+          "text": "1.247"
+        },
+        {
+          "key": "B",
+          "text": "50"
+        },
+        {
+          "key": "C",
+          "text": "290"
+        },
+        {
+          "key": "D",
+          "text": "59"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide cỡ mẫu: 5 điểm ~1.250 (1.247), 10 điểm 290, 20 điểm 59.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-042",
+      "type": "mcq",
+      "prompt": "Tập 50 mẫu của lab dùng để so hai prompt nên được hiểu thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không dùng được vì RAGAS cần tối thiểu 1.000 mẫu"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ đủ cho chênh lệch cỡ 20 điểm; để kiểm tra nhanh"
+        },
+        {
+          "key": "C",
+          "text": "Đủ để kết luận mọi chênh lệch từ 5 điểm trở lên"
+        },
+        {
+          "key": "D",
+          "text": "Đủ nếu dùng LLM-as-judge thay cho người chấm"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Tập 50 mẫu chỉ đủ cho chênh lệch cỡ 20 điểm: kiểm tra nhanh, chưa đủ kết luận.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-043",
+      "type": "mcq",
+      "prompt": "Test CI có TOLERANCE = 0.02. Mốc nền trung bình 0,85. Ứng viên nào bị chặn?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ứng viên trung bình 0,82"
+        },
+        {
+          "key": "B",
+          "text": "Ứng viên trung bình 0,84"
+        },
+        {
+          "key": "C",
+          "text": "Ứng viên trung bình 0,83"
+        },
+        {
+          "key": "D",
+          "text": "Ứng viên trung bình 0,86"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Điều kiện: mean(candidate) ≥ mean(baseline) − 0,02 = 0,83; chỉ 0,82 không đạt.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-044",
+      "type": "mcq",
+      "prompt": "Bảng Vectara Hallucination Leaderboard đo gì và slide rút ra kết luận gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Faithfulness RAGAS của GPT, Claude, Gemini; chọn mô hình lớn nhất là an toàn"
+        },
+        {
+          "key": "B",
+          "text": "Tỉ lệ ảo giác khi tóm tắt (HHEM-2.3); mô hình lớn hơn luôn ít ảo giác hơn"
+        },
+        {
+          "key": "C",
+          "text": "Độ đồng thuận judge với người; chọn judge đứng đầu bảng cho mọi hệ thống"
+        },
+        {
+          "key": "D",
+          "text": "Tỉ lệ ảo giác khi tóm tắt (HHEM-2.3); cần đo trên dữ liệu của chính hệ thống"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Chỉ số chấm bằng HHEM-2.3, không phải faithfulness RAGAS; mô hình nhỏ đứng đầu; đo trên dữ liệu của mình.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-045",
+      "type": "mcq",
+      "prompt": "Trong W&B Weave, hàm scorer có ràng buộc bắt buộc nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Phải gắn @traceable của LangSmith"
+        },
+        {
+          "key": "B",
+          "text": "Phải gọi một LLM để chấm điểm"
+        },
+        {
+          "key": "C",
+          "text": "Phải có đối số tên output"
+        },
+        {
+          "key": "D",
+          "text": "Phải trả về số thực từ 0 đến 1"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide Weave: hàm chấm điểm (scorer) bắt buộc có đối số tên output.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-046",
+      "type": "mcq",
+      "prompt": "Nhóm muốn kiểm thử LLM theo kiểu pytest với assert_test và ngưỡng. Công cụ nào khớp nhất theo bảng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "RAGAS"
+        },
+        {
+          "key": "B",
+          "text": "DeepEval"
+        },
+        {
+          "key": "C",
+          "text": "Inspect AI"
+        },
+        {
+          "key": "D",
+          "text": "OpenAI Evals"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bảng chọn công cụ: DeepEval (Apache-2.0) kiểm thử kiểu pytest với assert_test và ngưỡng.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-047",
+      "type": "mcq",
+      "prompt": "Công cụ nào được mô tả là khung của UK AI Security Institute với hơn 200 bộ đánh giá dựng sẵn?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Inspect AI"
+        },
+        {
+          "key": "B",
+          "text": "Promptfoo"
+        },
+        {
+          "key": "C",
+          "text": "W&B Weave"
+        },
+        {
+          "key": "D",
+          "text": "DeepEval"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Inspect AI (MIT): khung của UK AI Security Institute, hơn 200 bộ đánh giá dựng sẵn.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-048",
+      "type": "mcq",
+      "prompt": "Vụ Moffatt kiện Air Canada (2024) thuộc mục nào của OWASP LLM Top 10 2025?",
+      "options": [
+        {
+          "key": "A",
+          "text": "LLM01: Chèn lệnh (prompt injection)"
+        },
+        {
+          "key": "B",
+          "text": "LLM06: Quyền hạn quá mức"
+        },
+        {
+          "key": "C",
+          "text": "LLM07: Lộ chỉ dẫn hệ thống"
+        },
+        {
+          "key": "D",
+          "text": "LLM09: Thông tin sai lệch"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide: đây là lỗi thông tin sai lệch (OWASP LLM09), không phải tấn công; doanh nghiệp sở hữu đầu ra.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-049",
+      "type": "mcq",
+      "prompt": "Kiểm soát theo cấu trúc trong mô hình phòng thủ nhiều lớp gồm những gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ghim mã mô hình có ngày, gắn prompt_version vào vết, triển khai canary 5% rồi mở rộng lên 100%"
+        },
+        {
+          "key": "B",
+          "text": "Mã hoá toàn bộ vết, xoay vòng khoá API hằng tuần, chặn mọi truy cập từ ngoài mạng nội bộ công ty"
+        },
+        {
+          "key": "C",
+          "text": "Quyền tối thiểu, người phê duyệt hành động có tác dụng phụ, không kênh gửi ra sau khi đọc nội dung không tin cậy"
+        },
+        {
+          "key": "D",
+          "text": "Regex lọc PII, bộ phân loại độc hại ở đầu vào, kiểm tra lược đồ JSON ở đầu ra và cảnh báo tỉ lệ chặn"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Dải trên cùng của sơ đồ phòng thủ nhiều lớp: quyền tối thiểu · người phê duyệt · không kênh gửi ra ngoài.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-050",
+      "type": "mcq",
+      "prompt": "Trong NeMo Guardrails, loại rào chắn nào kiểm soát lời gọi công cụ?",
+      "options": [
+        {
+          "key": "A",
+          "text": "execution rails"
+        },
+        {
+          "key": "B",
+          "text": "retrieval rails"
+        },
+        {
+          "key": "C",
+          "text": "dialog rails"
+        },
+        {
+          "key": "D",
+          "text": "output rails"
+        }
+      ],
+      "answer": "A",
+      "explanation": "retrieval rails lọc đoạn truy xuất; execution rails kiểm soát lời gọi công cụ; dialog rails điều hướng hội thoại.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-051",
+      "type": "mcq",
+      "prompt": "Thay đổi API của Guardrails AI 0.11.0 theo slide là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "guard(llm_api=...) là cách duy nhất còn trong tài liệu"
+        },
+        {
+          "key": "B",
+          "text": "use() nhận đối tượng validator; on_fail đặt ở validator"
+        },
+        {
+          "key": "C",
+          "text": "use() nhận tên chuỗi validator; on_fail đặt ở Guard"
+        },
+        {
+          "key": "D",
+          "text": "use_many() thay use(); on_fail đặt trong prompt hệ thống"
+        }
+      ],
+      "answer": "B",
+      "explanation": "use() nhận instance validator, on_fail đặt ở validator; không có use_many; guard(llm_api=...) không còn trong tài liệu.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-052",
+      "type": "mcq",
+      "prompt": "Đội đang ở giai đoạn đo tỉ lệ vi phạm, chưa muốn chặn người dùng. Nên chọn on_fail nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "exception: ném ValidationError và dừng toàn bộ luồng"
+        },
+        {
+          "key": "B",
+          "text": "filter: trả đầu ra rỗng, chỉ lọc bỏ trường bị lỗi"
+        },
+        {
+          "key": "C",
+          "text": "noop: giữ nguyên đầu ra, ghi thất bại vào nhật ký"
+        },
+        {
+          "key": "D",
+          "text": "refrain: không trả đầu ra nào, trả về giá trị None"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Bảng on_fail: noop giữ nguyên đầu ra, ghi nhật ký; dùng ở giai đoạn đo, chưa chặn.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-053",
+      "type": "mcq",
+      "prompt": "Chèn lệnh gián tiếp (indirect prompt injection) khác trực tiếp ở điểm nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Lệnh độc hại do chính người dùng gõ vào ô chat để đổi hành vi"
+        },
+        {
+          "key": "B",
+          "text": "Lệnh độc hại được cài vào trọng số khi tinh chỉnh mô hình"
+        },
+        {
+          "key": "C",
+          "text": "Lệnh độc hại nằm trong chỉ dẫn hệ thống do nhà phát triển viết"
+        },
+        {
+          "key": "D",
+          "text": "Lệnh độc hại nằm trong email, web hoặc tệp mà hệ thống đọc"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Trực tiếp: người dùng viết lệnh; gián tiếp: văn bản độc hại trong email, trang web, tệp hệ thống đọc.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-054",
+      "type": "mcq",
+      "prompt": "Ba điều kiện của 'lethal trifecta' gây rò rỉ dữ liệu là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dữ liệu riêng tư, nội dung không tin cậy, kênh gửi ra ngoài"
+        },
+        {
+          "key": "B",
+          "text": "Prompt dài, mô hình lớn, không có bộ lọc ở đầu vào hệ thống"
+        },
+        {
+          "key": "C",
+          "text": "Thiếu vết, thiếu phiên bản prompt, thiếu cổng đánh giá CI"
+        },
+        {
+          "key": "D",
+          "text": "Quyền quản trị, mật khẩu yếu, máy chủ mở cổng ra Internet"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Lethal trifecta (Simon Willison, 16/06/2025): cách chắc chắn là loại bỏ ít nhất một vòng bằng thiết kế.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-055",
+      "type": "mcq",
+      "prompt": "Trên AgentDojo (Meta tự đo), kết hợp Prompt Guard 2 và AlignmentCheck đưa tỉ lệ tấn công thành công về bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Từ 7,5% xuống 2,9%"
+        },
+        {
+          "key": "B",
+          "text": "Từ 17,6% xuống 1,75%"
+        },
+        {
+          "key": "C",
+          "text": "Từ 17,6% xuống 0%"
+        },
+        {
+          "key": "D",
+          "text": "Từ 47,7% xuống 42,7%"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Không phòng thủ 17,6; Prompt Guard 2: 7,5; AlignmentCheck: 2,9; kết hợp: 1,75. Tiện ích giảm 47,7% → 42,7%.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-056",
+      "type": "mcq",
+      "prompt": "CaMeL được slide nêu như ví dụ về điều gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bộ đánh giá ảo giác HHEM-2.3 dùng cho bảng xếp hạng công khai"
+        },
+        {
+          "key": "B",
+          "text": "Khung rào chắn năm loại viết bằng ngôn ngữ Colang của NVIDIA"
+        },
+        {
+          "key": "C",
+          "text": "Tách luồng điều khiển khỏi dữ liệu không tin cậy, giải 77% nhiệm vụ"
+        },
+        {
+          "key": "D",
+          "text": "Bộ phân loại chèn lệnh 22M tham số chạy 19,3 ms trên GPU A100"
+        }
+      ],
+      "answer": "C",
+      "explanation": "CaMeL: bảo đảm có thể chứng minh, giải 77% nhiệm vụ so với 84% khi không phòng thủ.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-057",
+      "type": "mcq",
+      "prompt": "Bài học chính từ EchoLeak (CVE-2025-32711) trong Microsoft 365 Copilot là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chatbot là chủ thể pháp lý riêng khỏi doanh nghiệp"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ cần thêm chính sách CSP là chặn được rò rỉ"
+        },
+        {
+          "key": "C",
+          "text": "Lỗi chỉ xảy ra khi người dùng bấm vào liên kết lạ"
+        },
+        {
+          "key": "D",
+          "text": "Bộ phân loại không thay được thiết kế kiến trúc"
+        }
+      ],
+      "answer": "D",
+      "explanation": "EchoLeak không cần thao tác người dùng, vượt XPIA, che liên kết và CSP; bài học: bộ phân loại không thay thiết kế.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-058",
+      "type": "mcq",
+      "prompt": "Để phát hiện số căn cước 12 chữ số và số thẻ, phương pháp nào được slide đánh giá chính xác, nhanh?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Regex kèm kiểm tra tổng kiểm (checksum)"
+        },
+        {
+          "key": "B",
+          "text": "Nhận dạng thực thể (NER) theo ngôn ngữ"
+        },
+        {
+          "key": "C",
+          "text": "LLM-as-judge chấm từng câu trả lời"
+        },
+        {
+          "key": "D",
+          "text": "Llama Guard 4 với 14 nhóm S1 đến S14"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Regex và checksum hợp mã có cấu trúc; NER bắt tên, địa chỉ tự do nhưng nhiễu hơn; Presidio kết hợp cả hai.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-059",
+      "type": "mcq",
+      "prompt": "Với SLO 99,9%, SRE Workbook gợi ý gọi trực khi tốc độ đốt ngân sách lỗi ở mức nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "6 lần trong 30 ngày (cửa sổ ngắn 1 ngày)"
+        },
+        {
+          "key": "B",
+          "text": "14,4 lần trong 1 giờ (cửa sổ ngắn 5 phút)"
+        },
+        {
+          "key": "C",
+          "text": "1 lần trong 3 ngày (cửa sổ ngắn 6 giờ)"
+        },
+        {
+          "key": "D",
+          "text": "2 lần trong 1 giờ (cửa sổ ngắn 1 phút)"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Gọi trực: 14,4× trong 1 giờ (cửa sổ 5 phút); 6× trong 6 giờ; 1× trong 3 ngày thì mở phiếu.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    },
+    {
+      "id": "T2D07-060",
+      "type": "mcq",
+      "prompt": "Lỗi thường gặp trong lab: gói miễn phí LangSmith giữ vết cơ bản bao lâu và cần làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "90 ngày; không cần thao tác gì thêm"
+        },
+        {
+          "key": "B",
+          "text": "14 ngày; xuất bằng chứng trước khi hết hạn"
+        },
+        {
+          "key": "C",
+          "text": "30 ngày; tự động lưu vĩnh viễn khi nộp bài"
+        },
+        {
+          "key": "D",
+          "text": "7 ngày; phải nâng cấp gói trả phí để nộp"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Checklist lab: gói miễn phí giữ vết cơ bản 14 ngày, xuất bằng chứng trước hạn.",
+      "source": "onthi/Slide_Day_7_LLMOps và quản lý phiên bản prompt.pdf"
+    }
+  ]
+}

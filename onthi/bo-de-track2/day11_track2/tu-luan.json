@@ -1,0 +1,127 @@
+{
+  "id": "day11_track2_tu_luan",
+  "title": "Tự luận Track 2 Ngày 11",
+  "questionCount": 10,
+  "questions": [
+    {
+      "id": "T2D11-TL-01",
+      "type": "essay",
+      "prompt": "VLearn cho phép các đội tự đăng ký MCP server vào fleet 40 server. Một đêm, một server đổi mô tả tool lúc 2 giờ sáng. Thiết kế cổng kiểm duyệt từ lúc đăng ký đến lúc chạy để phát hiện và xử lý tình huống này; nêu rõ MCP Registry công khai giúp được gì và không giúp được gì.",
+      "modelAnswer": "Ý chấm: (1) Luồng: đội đăng ký server.json + image → quét mô tả tool, quyền, egress → pin digest image + hash schema tool → duyệt (người + policy) → gateway allowlist chỉ bản đã pin. (2) Lúc chạy so hash schema với hash đã pin; lệch = drift (rug pull) → chặn và đưa về vòng duyệt lại từ đầu, không tự cập nhật pin. (3) Registry chính thức xác thực tên (namespace DNS/GitHub, server.json, hash package như fileSha256) nhưng không quét bảo mật code, không có server riêng tư nội bộ, không cam kết uptime, không chứng minh server chạy đúng mô tả; đang Preview (API v0.1). (4) Điểm mù: server remote giữ schema nhưng đổi hành vi → cần thêm policy và trace lúc chạy. (5) Ghi span cho mọi quyết định chặn/cho qua.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D11-TL-02",
+      "type": "essay",
+      "prompt": "Fleet có 30k token định nghĩa tool được gửi kèm 200k lượt gọi/ngày. Giá minh hoạ: input 3 $/MTok, đọc cache 0,3 $/MTok. (a) Tính chi phí/ngày khi cache trúng ≈100% và khi trượt hoàn toàn. (b) Giải thích vì sao một server đọc tool từ dict không thứ tự có thể đẩy chi phí từ trường hợp đầu sang trường hợp sau, và đề xuất cách sửa theo spec 2026-07-28.",
+      "modelAnswer": "Ý chấm: (a) 30k × 200k = 6 tỷ token = 6.000 MTok; trúng cache: 6.000 × 0,3 = $1.800/ngày; trượt: 6.000 × 3 = $18.000/ngày, chênh $16.200/ngày (chỉ tính phần định nghĩa tool). (b) Prompt cache khớp theo tiền tố: lệch một byte đầu là trượt cả chuỗi; xáo thứ tự tool làm tiền tố đổi mỗi lần. (c) Sửa: server SHOULD trả tool theo thứ tự tất định; dùng CacheableResult ttlMs + cacheScope (SEP-2549) để gateway cache tools/list; kiểm thử ổn định thứ tự; theo dõi tỉ lệ trúng cache.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D11-TL-03",
+      "type": "essay",
+      "prompt": "Học viên A hỏi tutor về điểm lab; tutor giao cho agent grader, grader gọi grades MCP. Thiết kế chuỗi danh tính và uỷ quyền sao cho tool chỉ đọc được điểm của A và audit trả lời được “ai đã làm việc này”.",
+      "modelAnswer": "Ý chấm: (1) A đăng nhập SSO; mỗi hop đổi token bằng token exchange RFC 8693 với subject/actor: tutor có sub = A, act = tutor; grader có sub = A, act = grader ← tutor. (2) Thu hẹp quyền mỗi hop: course:read grades:read → grades:read, thời hạn ngắn (ví dụ 5 phút). (3) Token có audience = server đích; server từ chối audience khác (chống passthrough). (4) Ba lớp: SPIFFE/SPIRE cho workload, DPoP gắn khoá, OAuth + policy theo principal. (5) Policy ở gateway và kiểm lại ở server, không trong prompt. (6) Audit A → tutor → grader → tool qua trace; phân biệt nhân danh chính nó và nhân danh người dùng.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D11-TL-04",
+      "type": "essay",
+      "prompt": "Một pod vLLM của tutor đang phục vụ 50 request đồng thời: CPU 7%, GPU 95%, KV cache 90%, hàng đợi đang tăng. HPA đặt ngưỡng CPU 70%. Phân tích vì sao HPA không scale, và đề xuất cấu hình autoscale thay thế cùng các giới hạn cần biết.",
+      "modelAnswer": "Ý chấm: (1) HPA: ceil(1 × 7/70) = 1 pod → không thêm; sai vì nút cổ chai là KV cache/hàng đợi, không phải CPU. (2) Scale theo vllm:num_requests_waiting và vllm:kv_cache_usage_perc qua KEDA ScaledObject trigger Prometheus (ví dụ query sum(vllm:num_requests_waiting), threshold 5). (3) Giới hạn 1: hàng đợi báo trong cỡ 30–90 giây nhưng pod mới mất cỡ 3–10 phút (kéo image, nạp trọng số) → cần headroom. (4) Giới hạn 2: metric nằm trong pod; minReplicaCount mặc định 0 thì không bao giờ thức → giữ ≥1 hoặc dùng hàng đợi ngoài. (5) cooldownPeriod mặc định 300 giây. (6) Đơn vị capacity là phiên, hàng đợi, sandbox.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D11-TL-05",
+      "type": "essay",
+      "prompt": "Workflow cấp chứng chỉ cho học viên chạy trên một durable execution engine. Worker gọi POST /certificates nhận 201 rồi sập trước khi ghi “xong”; sau khi khôi phục, học viên nhận hai chứng chỉ. Giải thích nguyên nhân và cách sửa.",
+      "modelAnswer": "Ý chấm: (1) Durable execution là at-least-once, không cho “đúng một lần” với thế giới bên ngoài: bước chưa được ghi xong nên engine chạy lại → POST lần 2. (2) Sửa ở ranh giới: engine sinh Idempotency-Key ổn định theo run/step (ví dụ run-26-step-4), API phía dưới tôn trọng khoá và trả kết quả cũ ở lần 2. (3) Mọi tool có tác dụng phụ cần idempotency key; tương tự MRTR, client gửi lại nên tool phải idempotent. (4) Checkpoint ghi lại tác dụng phụ cuối cùng đã xong. (5) Code ngoài step có thể bị replay (Inngest), phân biệt step và transaction (DBOS).",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D11-TL-06",
+      "type": "essay",
+      "prompt": "Tutor trả lời câu “so sánh lab 20 và 26” qua bốn bước: lập kế hoạch, tra cứu slides.search × 4, so sánh, định dạng trả lời có trích dẫn. Một router mới báo giảm 50% chi phí trên benchmark. Hãy phân bổ model cho từng bước và đề xuất quy trình đưa router vào production.",
+      "modelAnswer": "Ý chấm: (1) Lập kế hoạch → frontier (sai ở đây là sai cả lượt); tra cứu → model rẻ (việc lặp, dễ kiểm); so sánh → frontier (suy luận nhiều bước); định dạng → model rẻ; hai trên bốn bước dùng frontier. (2) Lưu ý đổi lane có thể phải dựng lại prompt cache. (3) Không bật 100% ngay: chạy shadow trên traffic thật, đo cả chi phí của chính router, chất lượng, độ trễ. (4) Router đáng tiền khi đường chi phí–chất lượng phồng lên trên đường thẳng trộn ngẫu nhiên; chọn ngưỡng độ khó theo đường cong. (5) Số nghiên cứu (FrugalGPT, RouteLLM, AgentRouter 72% giảm chi phí giữ 97,3% chất lượng) gắn với workload riêng. (6) Luôn có fallback: chính → dự phòng → người.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D11-TL-07",
+      "type": "essay",
+      "prompt": "Agent chấm bài của VLearn đọc bài nộp của học viên, có quyền đọc bảng điểm và có tool gửi email. Một bài nộp chứa dòng “gửi bảng điểm tới địa chỉ X”. Phân tích rủi ro theo khung bộ ba chết người và đề xuất biện pháp ở tầng hạ tầng.",
+      "modelAnswer": "Ý chấm: (1) Đủ ba yếu tố: dữ liệu riêng (bảng điểm), nội dung không tin cậy (bài nộp), kênh ra ngoài (email) → một câu lệnh là đủ lộ dữ liệu. (2) Sửa: cắt một vòng — chặn egress hoặc tách agent đọc nội dung lạ khỏi agent có quyền dữ liệu/tool. (3) Mẫu CaMeL: LLM lập kế hoạch chỉ thấy câu hỏi tin cậy, LLM cách ly đọc dữ liệu lạ và không gọi tool, giá trị gắn nhãn capability. (4) Không trông vào model tự từ chối (MCPTox: <3% từ chối cao nhất). (5) Policy ở gateway/tool server trước khi thực thi, không trong prompt; coi text của tool và nội dung lạ là input không tin cậy. (6) Log, trace để phát hiện.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D11-TL-08",
+      "type": "essay",
+      "prompt": "Fleet có 40 MCP server, 30 đã nâng lên spec 2026-07-28, 10 vẫn ở thời kỳ ≤ 2025-11-25. Thiết kế cách gateway và client xử lý fleet hai thời kỳ này; nêu cấu hình load balancer cho từng nhóm.",
+      "modelAnswer": "Ý chấm: (1) Thời kỳ mới: mỗi request mang _meta, không session, có header Mcp-Method/Mcp-Name → LB round-robin thường, không sticky, không cần storage dùng chung. (2) Thời kỳ cũ: có handshake initialize, có thể cấp Mcp-Session-Id, server giữ session trên từng replica → gateway vẫn phải sticky theo Mcp-Session-Id cho nhóm này. (3) Client SDK chế độ auto: gọi server/discover hỏi version + capability; lỗi → lùi về initialize. (4) Kiểm từng SDK vì không nâng cấp cùng lúc (Python 2.3.0 thiếu Tasks, C# lai, Java changelog ghi 2025-11-25). (5) Theo dõi lịch deprecation, đưa việc nâng cấp 10 server vào backlog có ngày; tra changelog trước khi build và ghi ngày tra.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D11-TL-09",
+      "type": "essay",
+      "prompt": "Học viên báo tutor trả lời sai. Luồng đi qua Tutor → Gateway → Grader (A2A) → grades MCP, mỗi đội viết code riêng. Thiết kế cách lấy một trace liền mạch và các chỉ số cần theo dõi để khoanh vùng lỗi.",
+      "modelAnswer": "Ý chấm: (1) Trace context W3C: ở A2A truyền traceparent trên header HTTP; ở MCP inject traceparent, tracestate, baggage vào params._meta. (2) Gateway gắn traceparent nếu thiếu và là chỗ ép quy tắc này vì không sửa được code mọi đội. (3) Kết quả một cây span: invoke_agent → task → execute_tool → truy vấn DB; mỗi quyết định policy có span. (4) Dùng thuộc tính OTel GenAI (gen_ai.operation.name, gen_ai.agent.id, gen_ai.tool.name, mcp.method.name) sau lớp adapter; thay session ID bằng task ID/conversation ID. (5) Chỉ số đa agent: tỉ lệ chờ (INPUT_REQUIRED, AUTH_REQUIRED), định tuyến sai, p95 theo hop, chi phí theo agent. (6) ID từng lượt trong trace, không làm nhãn metric.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D11-TL-10",
+      "type": "essay",
+      "prompt": "MCPMark báo GPT-5-medium đạt pass@1 = 52,56% và pass^4 = 33,86%. (a) Tính pass^4 nếu mọi task có cùng xác suất thành công và so với số đo được. (b) Giải thích chênh lệch và rút ra hệ quả cho thiết kế retry của đội hạ tầng.",
+      "modelAnswer": "Ý chấm: (a) 0,526⁴ ≈ 7,6%, thấp xa 33,9% đo được. (b) pass^4 là trung bình của p⁴ theo từng task, không phải (trung bình p)⁴; lỗi tương quan theo task: task dễ đúng cả 4 lần, task khó sai cả 4 lần. (c) pass@1 nói “làm được”, pass^k nói “làm được mỗi lần” — hạ tầng cần độ tin cậy lặp lại. (d) Retry chỉ cứu lỗi ngẫu nhiên; lỗi hệ thống thì retry lặp lại y hệt, tốn tiền. (e) Định tuyến task khó (model mạnh hơn, tool tốt hơn) tốt hơn retry mù; retry chỉ an toàn khi tool idempotent.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "id": "day8_track2_tu_luan",
+  "title": "Tự luận Track 2 Ngày 8",
+  "questionCount": 10,
+  "questions": [
+    {
+      "id": "T2D08-TL-01",
+      "type": "essay",
+      "prompt": "Nhóm bạn vận hành chatbot hỗ trợ khách hàng dùng RAG. Hãy lập bảng RTO/RPO cho 5 thành phần: dịch vụ suy luận (cổng LLM, API), kho vector, feature store, kho siêu dữ liệu/lịch sử hội thoại và nhà cung cấp LLM bên ngoài; giải thích lý do cho từng cặp số.",
+      "modelAnswer": "Ý chấm: (1) Cổng LLM/API suy luận: RTO 5–15 phút, RPO không áp dụng vì không lưu trạng thái; người dùng thấy trực tiếp, SLA chặt. (2) Kho vector: RTO 15 phút, RPO 5 phút; cần vector mới, bản sao có thể trễ nhẹ. (3) Feature store: RTO 30 phút, RPO 15 phút; đặc trưng theo lô chấp nhận độ trễ lớn hơn. (4) Siêu dữ liệu, lịch sử hội thoại: RTO 15 phút, RPO vài giây đến 1 phút; mất lịch sử làm hỏng trải nghiệm và kiểm toán. (5) Nhà cung cấp LLM: RTO dưới 1 phút nhờ cổng fallback, RPO không áp dụng; phụ thuộc hạn mức dự phòng và chất lượng mô hình thay thế. (6) Nêu nguyên tắc: không có một RTO cho mọi thành phần; RTO/RPO càng thấp chi phí càng cao; số là minh hoạ, điều chỉnh theo SLA thực tế.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D08-TL-02",
+      "type": "essay",
+      "prompt": "Công ty cần SLA 99,9% cho dịch vụ suy luận chạy trên 10 nút GPU, RTO mục tiêu 3 phút. Lãnh đạo hỏi có nên chạy active-active không. Dùng cây quyết định và bảng chi phí trên slide để đề xuất chiến lược, nêu chi phí tương đối và đánh đổi.",
+      "modelAnswer": "Ý chấm: (1) Cây quyết định: RTO dưới 5 phút → dự phòng ấm hoặc chủ động; nếu chấp nhận 15–30 phút thì nguội/đèn mồi; không chấp nhận thì tính lại ngân sách hoặc hạ SLA. (2) Chi phí GPU (1x = vùng chính): backup & restore 1,0x, pilot light 1,1x, warm 1,2x–1,5x (ví dụ 2 nút ấm ≈ 1,2x), hot 2,0x; nguội + công suất đặt trước cũng ≈ 2,0x vì công suất đặt trước tính tiền như đang chạy. (3) Chưa tính lưu trữ và egress. (4) SLA 99,9% không cần thiết kế cho 99,99%; chủ động chỉ đáng chi phí gấp đôi khi RTO thật sự cần gần 0. (5) Lưu ý warm vẫn có phát hiện, xác nhận, cắt DNS 4–5 phút: muốn đạt 3 phút phải rút ngắn các bước này hoặc chạy đồng thời hai vùng; đề xuất kết luận có lý do và đo bằng diễn tập.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D08-TL-03",
+      "type": "essay",
+      "prompt": "Trong buổi diễn tập, RTO đo được khi vùng chính ngừng là 14,5 phút trong khi mục tiêu là 5 phút. Hãy phân tích các giai đoạn tạo nên RTO này và đề xuất biện pháp rút ngắn từng giai đoạn.",
+      "modelAnswer": "Ý chấm: (1) Sáu giai đoạn: phát hiện, quyết định, khôi phục GPU, nạp mô hình, cắt DNS, xác minh; ví dụ nguội 1+2+4+5+1,5+1 = 14,5 phút, phần lớn là chờ GPU và nạp mô hình. (2) GPU: giữ 1–2 nút GPU ấm (Karpenter), công suất đặt trước/ODCR đúng loại instance, xin hạn mức trước; không tạo GPU mới lúc sự cố (control plane có thể hỏng). (3) Nạp mô hình: SOCI lazy loading (419 s → 21 s), Fast Model Loader (188 s → 50 s), trọng số nạp sẵn vào cache cục bộ, Run:ai Model Streamer, vLLM sleep mode. (4) Nút ấm rút RTO còn khoảng 7 phút; phát hiện, xác nhận và cắt DNS vẫn chiếm 4–5 phút: rút ngắn chu kỳ health check, TTL 60 giây, global LB Anycast, xác nhận một lần bấm. (5) Nếu vẫn không đạt: chạy đồng thời hai vùng (active-active) hoặc điều chỉnh mục tiêu; đo lại bằng diễn tập.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D08-TL-04",
+      "type": "essay",
+      "prompt": "Nhà cung cấp LLM chính của trợ lý nội bộ ngừng hoạt động nhiều giờ. Hãy thiết kế bậc thang suy giảm có kiểm soát (graceful degradation) cho ứng dụng, nêu mỗi bậc người dùng nhận được gì và rủi ro cần kiểm soát.",
+      "modelAnswer": "Ý chấm: (1) Thứ tự bậc: mô hình chính → nhà cung cấp thứ hai → mô hình nhỏ hơn (có thể tự lưu trữ) → câu trả lời đã lưu → hàng đợi, trả lời sau → thông báo tĩnh. (2) Chất lượng và chi phí giảm dần, khả năng sống sót tăng dần; mỗi bậc là quyết định có chủ đích về nội dung trả về và cách thông báo. (3) Bậc cuối luôn tồn tại kể cả khi mọi nhà cung cấp ngừng. (4) Rủi ro: mô hình dự phòng khác về prompt, tool schema, structured output, tham số có thể lỗi 400 → chạy eval trước; prompt cache lạnh; semantic cache chỉ còn nếu được sao chép; hạn mức ở nhà cung cấp dự phòng phải cấp trước. (5) Triển khai qua cổng LLM (fallback, circuit breaker), đo tỉ lệ dùng dự phòng.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D08-TL-05",
+      "type": "essay",
+      "prompt": "Viết sổ tay xử lý sự cố (runbook) một trang cho tình huống vùng chính ngừng hoạt động, có mốc thời gian, và nêu những việc sau sự cố.",
+      "modelAnswer": "Ý chấm: (1) T+0 xác nhận sự cố từ nhiều vị trí và trang trạng thái nhà cung cấp cloud. (2) T+2 mở kênh sự cố, ghi giờ bắt đầu để tính RTO. (3) T+3 mở rộng nhóm GPU vùng dự phòng từ mức ấm lên đủ công suất. (4) T+6 kiểm tra trọng số mô hình và độ trễ sao chép kho vector ở vùng dự phòng. (5) T+8 cắt 10% rồi 100% lưu lượng. (6) T+12 xác minh tín hiệu vàng (độ trễ, tỉ lệ lỗi, TTFT). (7) Sau sự cố: đo RTO thực tế so với mục tiêu, viết postmortem. (8) Ghi chú: mốc phút là ví dụ, điều chỉnh theo RTO cam kết; sổ tay phải được diễn tập, không chỉ nằm trên giấy; đường thực hiện không phụ thuộc control plane của vùng hỏng.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D08-TL-06",
+      "type": "essay",
+      "prompt": "Lên kế hoạch một buổi game day cho kịch bản chặn mạng đến vùng chính của hệ thống suy luận LLM. Nêu các bước, vai trò, điều kiện an toàn và cách đo kết quả.",
+      "modelAnswer": "Ý chấm: (1) Lên kế hoạch: chọn kịch bản và phạm vi, đặt giả thuyết RTO, chốt điều kiện dừng khẩn cấp. (2) Thông báo nhóm trực và các bên liên quan; phân vai chỉ huy, thực thi, ghi giờ. (3) Kích hoạt sự cố giả ở môi trường thử trước, bắt đầu đồng hồ RTO, làm theo sổ tay, không đoán. (4) Đo và rút kinh nghiệm: so RTO đo được với giả thuyết, ghi khoảng chênh từng bước, cập nhật sổ tay trong 1 tuần. (5) An toàn: kill switch; AWS FIS liên vùng không có điều kiện dừng sẵn nên tự thêm; bắt đầu phạm vi nhỏ; đây là kịch bản rủi ro Cao. (6) Đo bằng script thăm dò yêu cầu 1 token, dừng khi vùng dự phòng trả lời lần đầu (RTO nhìn từ người dùng, gồm DNS).",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D08-TL-07",
+      "type": "essay",
+      "prompt": "Sau khi đã chuyển sang vùng dự phòng được 6 giờ, vùng chính hồi phục. Thiết kế quy trình chuyển ngược (failback) và giải thích vì sao nó khó hơn chuyển đổi.",
+      "modelAnswer": "Ý chấm: (1) Khó hơn vì vùng dự phòng đã nhận dữ liệu mới (kho vector, siêu dữ liệu, lịch sử hội thoại); sao chép phải đảo chiều trước khi cắt lưu lượng, nếu không mất dữ liệu; vùng chính vừa hồi phục thường chưa ổn định. (2) Bước 1: đồng bộ ngược dữ liệu, kiểm tra nhất quán. (3) Bước 2: làm ấm GPU và chạy kiểm tra tình trạng sâu ở vùng chính. (4) Bước 3: chuyển 5%, 25%, 100% lưu lượng, theo dõi tín hiệu vàng mỗi bước. (5) Bước 4: giữ vùng dự phòng ấm thêm một khoảng quan sát. (6) Thực hiện giờ thấp điểm, có kế hoạch và người phụ trách, không tự động; chờ cooldown tránh dao động.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D08-TL-08",
+      "type": "essay",
+      "prompt": "Một tài khoản admin bị chiếm quyền và kẻ tấn công mã hoá các bucket trọng số mô hình. Hãy thiết kế chiến lược sao lưu để khôi phục được trong tình huống này và giải thích vì sao sao chép liên vùng thôi là chưa đủ.",
+      "modelAnswer": "Ý chấm: (1) Sao chép chỉ giữ bản hiện tại: bản bị mã hoá hoặc xoá nhầm cũng được sao chép; cùng tài khoản, cùng khoá thì sai sót lan sang DR. (2) Cần bản có phiên bản (versioning), bất biến và tách tài khoản. (3) S3 Object Lock chế độ compliance: không ai, kể cả root, ghi đè hay xoá trong thời hạn giữ. (4) AWS Backup logically air-gapped vault: luôn khoá compliance, giữ tối thiểu 7 ngày, chia sẻ qua RAM để tài khoản khác khôi phục. (5) Sao lưu liên tài khoản chống tài khoản bị chiếm và mối đe doạ nội bộ. (6) Kiểm tra checksum sau sao chép, định kỳ khôi phục thử; bản sao lưu chưa khôi phục thử thì chưa được xem là có.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D08-TL-09",
+      "type": "essay",
+      "prompt": "Agent đặt lịch hẹn chạy vòng lặp nhiều bước (gọi LLM, tra cứu, ghi cơ sở dữ liệu, gửi email). Tiến trình bị kill giữa chừng khi vùng gặp sự cố. Phân tích những gì bị mất và thiết kế cơ chế để agent tiếp tục an toàn.",
+      "modelAnswer": "Ý chấm: (1) Bị mất nếu chỉ giữ trong bộ nhớ: luồng sinh và ngữ cảnh hội thoại, vị trí trong vòng lặp agent, kết quả công cụ chưa ghi, prompt cache ở nhà cung cấp cũ. (2) Thực thi bền vững: ghi kết quả từng bước vào kho bền vững, sau sự cố tiếp tục từ bước cuối đã ghi. (3) Công cụ: Temporal (lịch sử sự kiện), LangGraph (checkpoint vào Postgres), Cloudflare Workflows (từ bước thành công cuối). (4) Activity chạy ít nhất một lần, có thể chạy lại một phần → công cụ có tác dụng phụ (gửi email, ghi DB) cần idempotency key; không retry thao tác chưa idempotent. (5) Kho checkpoint phải được sao chép sang vùng khác.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D08-TL-10",
+      "type": "essay",
+      "prompt": "Sau sự cố vùng làm chatbot ngừng 40 phút (RTO mục tiêu 15 phút), bạn được giao viết báo cáo sau sự cố không quy lỗi (blameless postmortem). Nêu cấu trúc báo cáo và các mục riêng cần có cho hệ thống AI.",
+      "modelAnswer": "Ý chấm: (1) Dòng thời gian: bắt đầu, phát hiện, cảnh báo, cắt lưu lượng, khôi phục. (2) RTO/RPO đo được so với mục tiêu (40 vs 15 phút), chỉ ra bước nào gây khoảng chênh. (3) Nguyên nhân gốc bằng 5 câu hỏi vì sao, không quy cho cá nhân. (4) Hành động khắc phục có người phụ trách và hạn chót. (5) Mục riêng cho AI: số yêu cầu bị từ chối/hết thời gian chờ tính theo token; chất lượng đầu ra khi chạy mô hình dự phòng; chi phí phát sinh (GPU mở rộng, egress); khoảng chênh trong sổ tay đã sửa chưa. (6) Liên hệ sáu lỗi thường gặp (sổ tay chưa chạy, giám sát cùng vùng, phụ thuộc control plane...) nếu là nguyên nhân.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    }
+  ]
+}

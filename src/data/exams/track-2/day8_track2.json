@@ -1,0 +1,1835 @@
+{
+  "id": "track2-day8",
+  "title": "Track 2 · Ngày 8",
+  "description": "Bộ đề Track 2 Ngày 8: 60 câu trắc nghiệm và 10 câu tự luận, biên soạn từ slide cùng ngày.",
+  "course": "track2",
+  "kind": "daily",
+  "day": 8,
+  "label": "Ngày 8",
+  "durationMinutes": 90,
+  "totalPoints": 100,
+  "passingScore": 70,
+  "disclaimer": "Bộ đề ôn tập Track 2, tham khảo từ slide cùng ngày; không phải đề thi chính thức.",
+  "questions": [
+    {
+      "id": "T2D08-001",
+      "type": "mcq",
+      "prompt": "So với ứng dụng web thông thường, thời gian khởi động lại của hệ thống AI khác ở điểm nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không đáng kể vì trọng số luôn được giữ sẵn trong VRAM mọi vùng"
+        },
+        {
+          "key": "B",
+          "text": "Mất vài phút do GPU cold start: tìm công suất, kéo ảnh, nạp trọng số"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ vài giây vì chỉ cần khởi động lại tiến trình trên máy CPU"
+        },
+        {
+          "key": "D",
+          "text": "Mất vài giờ vì phải huấn luyện lại mô hình trước khi phục vụ"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bảng so sánh: web khởi động lại vài giây; hệ AI có GPU cold start (tìm công suất, kéo ảnh, nạp trọng số) tổng cộng vài phút.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-002",
+      "type": "mcq",
+      "prompt": "Sự cố mất điện hoặc mạng nội bộ ở một vùng khả dụng (AZ) được xử lý bằng biện pháp nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tăng giới hạn bộ nhớ của pod"
+        },
+        {
+          "key": "B",
+          "text": "Thêm bản sao trong cùng AZ"
+        },
+        {
+          "key": "C",
+          "text": "Phân bổ tải trên nhiều AZ"
+        },
+        {
+          "key": "D",
+          "text": "Tự thay nút bằng auto-repair"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Phạm vi sự cố: pod → nhiều bản sao; máy GPU → auto-repair; AZ → phân bổ nhiều AZ; vùng → vùng dự phòng, GPU ấm; nhà cung cấp → đa tài khoản, đa nhà cung cấp.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-003",
+      "type": "mcq",
+      "prompt": "Theo các báo cáo sự cố 2021–2025 trên slide, phần lớn sự cố lớn bắt nguồn từ đâu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Phần cứng máy chủ hỏng đồng loạt trong trung tâm dữ liệu"
+        },
+        {
+          "key": "B",
+          "text": "Tấn công DDoS từ bên ngoài vào điểm cuối phục vụ mô hình"
+        },
+        {
+          "key": "C",
+          "text": "Lỗi GPU và driver trên các cụm suy luận cỡ lớn"
+        },
+        {
+          "key": "D",
+          "text": "Mặt phẳng điều khiển hoặc cấu hình lan truyền toàn cầu"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide kết luận: hầu hết sự cố lớn không do phần cứng hỏng mà do control plane hoặc cấu hình lan truyền toàn cầu.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-004",
+      "type": "mcq",
+      "prompt": "Sự cố AWS us-east-1 10/2025 (lỗi DNS của DynamoDB, 14 giờ 32 phút) để lại bài học gì cho DR?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Failover không được phụ thuộc vào khởi tạo máy mới; cấp sẵn công suất"
+        },
+        {
+          "key": "B",
+          "text": "Nên dồn mọi workload vào us-east-1 vì vùng này có nhiều GPU nhất"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ cần thêm bản sao EC2 trong cùng vùng là đủ chống sự cố này"
+        },
+        {
+          "key": "D",
+          "text": "Nên bỏ DNS nội bộ và gọi thẳng địa chỉ IP của DynamoDB từ app"
+        }
+      ],
+      "answer": "A",
+      "explanation": "EC2 đang chạy vẫn ổn nhưng khởi tạo máy mới và xác thực thất bại; kế hoạch cần tạo GPU mới lúc sự cố sẽ không chạy.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-005",
+      "type": "mcq",
+      "prompt": "Sự cố OpenAI 12/2024: dịch vụ giám sát làm quá tải điều khiển Kubernetes, việc sửa lại cần chính mặt phẳng đang hỏng. Bài học rút ra là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tăng TTL của bản ghi DNS lên vài giờ để giảm số lần truy vấn"
+        },
+        {
+          "key": "B",
+          "text": "Có đường vào khẩn cấp (break-glass) nằm ngoài mặt phẳng đang hỏng"
+        },
+        {
+          "key": "C",
+          "text": "Tắt hẳn giám sát trên cụm production để giảm tải cho Kubernetes"
+        },
+        {
+          "key": "D",
+          "text": "Chuyển toàn bộ cụm Kubernetes sang một AZ khác trong cùng vùng"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bảng năm sự cố: OpenAI 12/2024 (4 giờ 22 phút) → cần đường break-glass ngoài mặt phẳng đang hỏng.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-006",
+      "type": "mcq",
+      "prompt": "Sự cố Google Cloud 6/2025 (chính sách có trường rỗng sao chép toàn cầu làm sập Service Control) cho thấy điều gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Máy khách nên thử lại ngay, liên tục để rút ngắn thời gian phục hồi"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ cần thêm GPU ấm ở vùng dự phòng là tránh được sự cố tương tự"
+        },
+        {
+          "key": "C",
+          "text": "Nhiều vùng không cứu được cấu hình nhân bản toàn cầu; retry cần jitter"
+        },
+        {
+          "key": "D",
+          "text": "Chạy nhiều vùng luôn đủ để chống mọi loại lỗi cấu hình của nhà cung cấp"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Client retry ồ ạt kéo dài phục hồi; cấu hình nhân bản toàn cầu làm hỏng mọi vùng cùng lúc.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-007",
+      "type": "mcq",
+      "prompt": "Sự cố Cloudflare 11/2025: tệp cấu hình tự sinh vượt giới hạn làm proxy lỗi và bảng điều khiển cũng ngừng. Bài học nào đúng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tăng giới hạn kích thước tệp cấu hình lên mức không giới hạn"
+        },
+        {
+          "key": "B",
+          "text": "Đặt bảng điều khiển chung hạ tầng với proxy để dễ quản lý hơn"
+        },
+        {
+          "key": "C",
+          "text": "Ngừng tự sinh cấu hình và chuyển sang chỉnh tay toàn bộ proxy"
+        },
+        {
+          "key": "D",
+          "text": "Coi cấu hình tự sinh là đầu vào không tin cậy; tách kênh quản trị"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Bài học: cấu hình tự sinh là đầu vào không tin cậy; kênh quản trị không nằm chung phạm vi ảnh hưởng.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-008",
+      "type": "mcq",
+      "prompt": "Phát biểu nào đúng về RPO và RTO trên trục thời gian?",
+      "options": [
+        {
+          "key": "A",
+          "text": "RPO đo ngược về bản sao lưu cuối; RTO đo tiến đến khi phục vụ lại"
+        },
+        {
+          "key": "B",
+          "text": "RPO đo tiến đến khi phục vụ lại; RTO đo ngược về bản sao lưu cuối"
+        },
+        {
+          "key": "C",
+          "text": "Cả RPO và RTO đều tính từ lúc phát hiện sự cố đến lúc cắt DNS"
+        },
+        {
+          "key": "D",
+          "text": "RPO và RTO là một cặp số dùng chung cho toàn bộ hệ thống AI"
+        }
+      ],
+      "answer": "A",
+      "explanation": "RPO = lượng dữ liệu có thể mất (tính theo thời gian), RTO = thời gian gián đoạn. Mỗi thành phần cần một cặp số riêng.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-009",
+      "type": "mcq",
+      "prompt": "Bước nào KHÔNG nằm trong sáu giai đoạn cấu thành RTO trên slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Khôi phục công suất GPU"
+        },
+        {
+          "key": "B",
+          "text": "Huấn luyện lại mô hình"
+        },
+        {
+          "key": "C",
+          "text": "Nạp lại trọng số mô hình"
+        },
+        {
+          "key": "D",
+          "text": "Cắt DNS sang vùng dự phòng"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Sáu giai đoạn: phát hiện, quyết định, khôi phục GPU, nạp mô hình, cắt DNS, xác minh.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-010",
+      "type": "mcq",
+      "prompt": "Mức sẵn sàng 99,99% cho phép thời gian ngừng tối đa khoảng bao nhiêu mỗi năm?",
+      "options": [
+        {
+          "key": "A",
+          "text": "5,26 phút"
+        },
+        {
+          "key": "B",
+          "text": "4,38 giờ"
+        },
+        {
+          "key": "C",
+          "text": "8,76 giờ"
+        },
+        {
+          "key": "D",
+          "text": "52,6 phút"
+        }
+      ],
+      "answer": "D",
+      "explanation": "99% = 87,6 giờ; 99,9% = 8,76 giờ; 99,95% = 4,38 giờ; 99,99% = 52,6 phút; 99,999% = 5,26 phút.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-011",
+      "type": "mcq",
+      "prompt": "Ba thành phần nối tiếp, mỗi thành phần sẵn sàng 99,9%. Tính sẵn sàng tổng hợp xấp xỉ bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "≈ 99,99%, khoảng 52,6 phút ngừng mỗi năm"
+        },
+        {
+          "key": "B",
+          "text": "≈ 99,0%, khoảng 87,6 giờ ngừng mỗi năm"
+        },
+        {
+          "key": "C",
+          "text": "≈ 99,7%, khoảng 26 giờ ngừng mỗi năm"
+        },
+        {
+          "key": "D",
+          "text": "≈ 99,9%, khoảng 8,76 giờ ngừng mỗi năm"
+        }
+      ],
+      "answer": "C",
+      "explanation": "0,999³ ≈ 0,997 ≈ 99,7%, tương đương khoảng 26 giờ ngừng mỗi năm.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-012",
+      "type": "mcq",
+      "prompt": "Chiến lược đèn mồi (pilot light) có đặc điểm nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chỉ có dữ liệu sao lưu ở vùng khác, khởi tạo lại hết"
+        },
+        {
+          "key": "B",
+          "text": "Dữ liệu sao chép sẵn, tính toán tắt cho đến khi cần"
+        },
+        {
+          "key": "C",
+          "text": "Bản thu nhỏ chạy sẵn, mở rộng lên khi chuyển đổi"
+        },
+        {
+          "key": "D",
+          "text": "Hai vùng cùng phục vụ lưu lượng theo active-active"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Pilot light: RPO hàng phút, RTO chục phút; dữ liệu sao chép sẵn, compute tắt (AWS REL13-BP02).",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-013",
+      "type": "mcq",
+      "prompt": "Theo AWS REL13-BP02, dự phòng ấm (warm standby) đạt RPO và RTO cỡ nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "RPO hàng giây, RTO hàng phút"
+        },
+        {
+          "key": "B",
+          "text": "RPO hàng phút, RTO chục phút"
+        },
+        {
+          "key": "C",
+          "text": "RPO hàng giờ, RTO đến 24 giờ"
+        },
+        {
+          "key": "D",
+          "text": "RPO gần 0, RTO có thể bằng 0"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Warm standby: bản thu nhỏ chạy sẵn, mở rộng khi chuyển đổi; RPO hàng giây, RTO hàng phút.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-014",
+      "type": "mcq",
+      "prompt": "Với suy luận LLM, chiến lược sao lưu và khôi phục (backup & restore) có RTO khoảng bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Hàng chục phút"
+        },
+        {
+          "key": "B",
+          "text": "Vài phút"
+        },
+        {
+          "key": "C",
+          "text": "Gần bằng 0"
+        },
+        {
+          "key": "D",
+          "text": "Đến 24 giờ"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Backup & restore: khởi tạo mọi thứ khi sự cố, RTO đến 24 giờ, chi phí GPU 1,0x.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-015",
+      "type": "mcq",
+      "prompt": "Đánh đổi chính của mô hình active-active so với active-passive là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Rẻ hơn và đơn giản hơn vì chỉ có một vùng nhận toàn bộ lưu lượng"
+        },
+        {
+          "key": "B",
+          "text": "Không cần đồng bộ dữ liệu vì mỗi vùng giữ trạng thái riêng biệt"
+        },
+        {
+          "key": "C",
+          "text": "RTO gần 0 nhưng chi phí gấp đôi và phải xử lý xung đột trạng thái"
+        },
+        {
+          "key": "D",
+          "text": "RTO vài phút do phải cắt DNS và khởi động GPU ở vùng đang chờ"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Active-passive rẻ, đơn giản, chuyển mất vài phút; active-active (50/50, đồng bộ hai chiều) RTO gần 0 nhưng chi phí gấp đôi.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-016",
+      "type": "mcq",
+      "prompt": "Cấu hình định tuyến DNS nào khớp khuyến nghị trên slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Health check 10–30 giây, 1 lỗi là đánh dấu không khoẻ, TTL 12 giờ"
+        },
+        {
+          "key": "B",
+          "text": "Health check 10–30 giây, 3 lỗi liên tiếp là không khoẻ, TTL 60 giây"
+        },
+        {
+          "key": "C",
+          "text": "Health check mỗi 5 phút, 1 lỗi là đánh dấu không khoẻ, TTL 24 giờ"
+        },
+        {
+          "key": "D",
+          "text": "Health check mỗi giờ, 10 lỗi liên tiếp mới không khoẻ, TTL 1 giờ"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Kiểm tra mỗi 10–30 giây; 3 lần lỗi liên tiếp thì đánh dấu không khoẻ; TTL thấp (60 giây) để cắt nhanh; định tuyến theo độ trễ.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-017",
+      "type": "mcq",
+      "prompt": "Vì sao chuyển đổi bằng DNS thuần không tức thì dù TTL đã đặt thấp?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cache DNS ở máy khách và ISP không luôn tôn trọng TTL"
+        },
+        {
+          "key": "B",
+          "text": "Bản ghi DNS chỉ được cập nhật một lần mỗi ngày"
+        },
+        {
+          "key": "C",
+          "text": "Health check chỉ chạy được từ bên trong vùng chính"
+        },
+        {
+          "key": "D",
+          "text": "DNS phải chờ GPU vùng dự phòng nạp xong trọng số"
+        }
+      ],
+      "answer": "A",
+      "explanation": "DNS cộng thêm khoảng 30–90 giây vào RTO; kết hợp global load balancer dùng Anycast để cắt nhanh hơn.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-018",
+      "type": "mcq",
+      "prompt": "Ổn định tĩnh (static stability) trong thiết kế DR nghĩa là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Giữ cấu hình hạ tầng cố định, không bao giờ thay đổi nó"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ dùng API của control plane để tạo máy mới khi sự cố"
+        },
+        {
+          "key": "C",
+          "text": "Tắt tự động co giãn để số nút trong vùng luôn ổn định"
+        },
+        {
+          "key": "D",
+          "text": "Loại bỏ phụ thuộc vào control plane khỏi đường khôi phục"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Data plane thường sẵn sàng cao hơn; AWS khuyến nghị chỉ dùng thao tác data plane trong đường chuyển đổi.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-019",
+      "type": "mcq",
+      "prompt": "Suy luận liên vùng (cross-region inference) của Bedrock, Foundry, Vertex AI nên được dùng cho mục đích gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bảo đảm tự chuyển Provisioned Throughput sang vùng khác"
+        },
+        {
+          "key": "B",
+          "text": "Cam kết RTO bằng 0 cho mọi điểm cuối theo từng vùng"
+        },
+        {
+          "key": "C",
+          "text": "Tăng throughput và giảm lỗi 429, không thay cho DR"
+        },
+        {
+          "key": "D",
+          "text": "Thay thế hoàn toàn cổng LLM và nhà cung cấp dự phòng"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Bedrock không hỗ trợ Provisioned Throughput, điểm gọi neo ở vùng nguồn; dự phòng thật vẫn ở tầng ứng dụng.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-020",
+      "type": "mcq",
+      "prompt": "Có hạn mức PTU trên Azure có bảo đảm còn công suất khi cần chuyển đổi không?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Có, miễn là đặt hạn mức ở ít nhất hai vùng khác nhau"
+        },
+        {
+          "key": "B",
+          "text": "Không, vì Azure hoàn toàn không cho đặt hạn mức PTU"
+        },
+        {
+          "key": "C",
+          "text": "Không, công suất thay đổi theo nhu cầu của mọi khách hàng"
+        },
+        {
+          "key": "D",
+          "text": "Có, hạn mức PTU luôn đi kèm công suất được giữ riêng"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Hạn mức (quota) không phải công suất (capacity): Azure ghi nhận có hạn mức PTU không bảo đảm còn công suất.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-021",
+      "type": "mcq",
+      "prompt": "Vì sao EC2 Capacity Blocks hợp với huấn luyện hơn là chờ dự phòng DR?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chỉ cấp được GPU đời cũ và không hỗ trợ đặt ở vùng dự phòng nào"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ dùng được với SageMaker, không dùng được với EKS hay EC2 thường"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ cấp phát được khi tài khoản đã có sẵn hạn mức GPU lớn hơn 0"
+        },
+        {
+          "key": "D",
+          "text": "Đặt trước tối đa 8 tuần, tối đa 64 instance mỗi khối, không huỷ được"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Capacity Blocks: tối đa 8 tuần, 64 instance/khối, không huỷ → hợp huấn luyện; DR nên dùng ODCR hoặc nút GPU ấm đúng loại instance.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-022",
+      "type": "mcq",
+      "prompt": "Trong Terraform sao chép trọng số liên vùng, vì sao đặt delete_marker_replication ở trạng thái Disabled?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Để xoá nhầm ở bucket nguồn không lan sang bucket DR"
+        },
+        {
+          "key": "B",
+          "text": "Để giảm chi phí truyền dữ liệu giữa hai vùng AWS"
+        },
+        {
+          "key": "C",
+          "text": "Để S3 tự xoá checkpoint cũ ở vùng DR sau 15 phút"
+        },
+        {
+          "key": "D",
+          "text": "Để bật versioning tự động cho bucket ở vùng DR"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Tắt sao chép dấu xoá: xoá nhầm ở nguồn không lan sang DR. Versioning phải bật riêng ở cả hai bucket.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-023",
+      "type": "mcq",
+      "prompt": "S3 Replication Time Control cam kết gì, và giới hạn sử dụng ra sao?",
+      "options": [
+        {
+          "key": "A",
+          "text": "99,99% đối tượng trong 5 phút; dùng cho mọi RPO dưới 1 phút"
+        },
+        {
+          "key": "B",
+          "text": "99,9% đối tượng trong 15 phút; không dùng cho RPO dưới 1 phút"
+        },
+        {
+          "key": "C",
+          "text": "100% đối tượng trong 1 phút; dùng được cho RPO gần bằng 0"
+        },
+        {
+          "key": "D",
+          "text": "99,9% đối tượng trong 1 giờ; chỉ áp dụng cho bucket dưới 1 TB"
+        }
+      ],
+      "answer": "B",
+      "explanation": "S3 RTC (khối replication_time, metrics) cam kết 99,9% đối tượng trong 15 phút; không dùng cho RPO dưới 1 phút.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-024",
+      "type": "mcq",
+      "prompt": "Mô hình 70B lưu ở fp16 chiếm khoảng bao nhiêu dung lượng cần sao chép liên vùng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Khoảng 35 GB"
+        },
+        {
+          "key": "B",
+          "text": "Khoảng 280 GB"
+        },
+        {
+          "key": "C",
+          "text": "Khoảng 140 GB"
+        },
+        {
+          "key": "D",
+          "text": "Khoảng 70 GB"
+        }
+      ],
+      "answer": "C",
+      "explanation": "70B tham số × 2 byte (fp16) ≈ 140 GB; chi phí gồm truyền dữ liệu và lưu trữ nhân đôi.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-025",
+      "type": "mcq",
+      "prompt": "Trong kiến trúc tham chiếu hai vùng, những gì phải nằm ngoài cả hai vùng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bản sao đọc Aurora Global và S3 của vùng DR"
+        },
+        {
+          "key": "B",
+          "text": "GPU ấm 1–2 nút và bản chụp của kho vector"
+        },
+        {
+          "key": "C",
+          "text": "Cổng LLM chính và kho vector của vùng chính"
+        },
+        {
+          "key": "D",
+          "text": "Giám sát độc lập và nhà cung cấp LLM thứ hai"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Ba lớp sao chép riêng: DNS, GPU, trạng thái (S3, Aurora, kho vector); giám sát và nhà cung cấp LLM thứ hai nằm ngoài hai vùng.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-026",
+      "type": "mcq",
+      "prompt": "Bộ nhớ đệm KV (KV cache) trong VRAM được xử lý thế nào khi DR?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không khôi phục; bản sao mới tính lại từ lời nhắc"
+        },
+        {
+          "key": "B",
+          "text": "Snapshot VRAM mỗi phút rồi sao chép sang vùng DR"
+        },
+        {
+          "key": "C",
+          "text": "Ghi vào Postgres có PITR để khôi phục đến từng giây"
+        },
+        {
+          "key": "D",
+          "text": "Sao chép liên vùng bằng S3 Replication Time Control"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Bảng kiểm kê trạng thái: KV cache đổi mỗi yêu cầu, không khôi phục mà tính lại.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-027",
+      "type": "mcq",
+      "prompt": "Với ảnh container 9,72 GB, nạp lười bằng SOCI rút thời gian kéo ảnh từ bao nhiêu xuống bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Từ 37,6 giây xuống 0,26 giây"
+        },
+        {
+          "key": "B",
+          "text": "Từ 419 giây xuống 21 giây"
+        },
+        {
+          "key": "C",
+          "text": "Từ 188 giây xuống 50 giây"
+        },
+        {
+          "key": "D",
+          "text": "Từ 148,8 giây xuống 6,3 giây"
+        }
+      ],
+      "answer": "B",
+      "explanation": "SOCI: 419 s → 21 s (trọng số vẫn phải nạp sau). 188 → 50 s là Fast Model Loader cho trọng số 70B.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-028",
+      "type": "mcq",
+      "prompt": "Dù đã tối ưu kéo ảnh và nạp trọng số, đo đầu cuối khi mở rộng một bản sao 70B trên SageMaker vẫn mất bao lâu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "60–90 giây, đã gồm cả thời gian cắt DNS"
+        },
+        {
+          "key": "B",
+          "text": "15–30 phút, gồm cả thời gian huấn luyện lại"
+        },
+        {
+          "key": "C",
+          "text": "306–407 giây, chưa tính thời gian tìm GPU"
+        },
+        {
+          "key": "D",
+          "text": "21–50 giây, đã gồm cả thời gian tìm GPU"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Đo đầu cuối khoảng 306–407 giây (5–7 phút), chưa tính tìm GPU; các phép đo riêng lẻ không cộng trực tiếp.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-029",
+      "type": "mcq",
+      "prompt": "Giới hạn DR quan trọng của Pinecone theo slide là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chỉ khôi phục khi tên và số nút nguồn, đích giống hệt nhau"
+        },
+        {
+          "key": "B",
+          "text": "Cần phiên bản 2.6.6 trở lên và chỉ có một bản sao CDC"
+        },
+        {
+          "key": "C",
+          "text": "Sau khi dừng sao chép liên cụm thì không bật lại được"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ khôi phục cùng project và cloud; chưa sao chép liên vùng"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Pinecone: backup chỉ mục serverless, khôi phục tạo chỉ mục mới. Các nhiễu là giới hạn của Weaviate, Milvus, OpenSearch.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-030",
+      "type": "mcq",
+      "prompt": "Muốn dựng cụm dự phòng Milvus bằng CDC trễ vài giây, cần điều kiện gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cùng tên và cùng số nút ở nguồn và đích"
+        },
+        {
+          "key": "B",
+          "text": "Milvus 2.6.6 trở lên; một bản sao CDC"
+        },
+        {
+          "key": "C",
+          "text": "Milvus 2.0 trở lên; không giới hạn bản sao"
+        },
+        {
+          "key": "D",
+          "text": "Bật Aurora Global với ít nhất 10 vùng phụ"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bảng DR kho vector: Milvus cụm dự phòng bằng CDC, cần 2.6.6+, một bản sao CDC.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-031",
+      "type": "mcq",
+      "prompt": "pgvector trên Aurora Global cung cấp sao chép thế nào và cần lưu ý gì khi chuyển đổi?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mức lưu trữ, thường trễ dưới 1 giây; cần cùng phiên bản engine"
+        },
+        {
+          "key": "B",
+          "text": "Mức ứng dụng, trễ vài giờ; phải dựng lại chỉ mục ở vùng phụ"
+        },
+        {
+          "key": "C",
+          "text": "Snapshot theo nút, trễ vài phút; chỉ khôi phục vào cụm mới"
+        },
+        {
+          "key": "D",
+          "text": "Sao chép liên cụm thụ động; dừng rồi thì không bật lại được"
+        }
+      ],
+      "answer": "A",
+      "explanation": "pgvector/Aurora Global: sao chép mức lưu trữ, trễ thường dưới 1 giây, đến 10 vùng phụ; chuyển đổi cần cùng phiên bản engine.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-032",
+      "type": "mcq",
+      "prompt": "Khi sao lưu kho vector, thông tin nào cần ghi vào manifest để chỉ mục còn dùng được khi khôi phục?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tên bucket, vùng và storage class của bản sao lưu trên S3"
+        },
+        {
+          "key": "B",
+          "text": "Số GPU, loại instance và driver của nút đã dựng chỉ mục"
+        },
+        {
+          "key": "C",
+          "text": "Danh sách người dùng đã truy vấn chỉ mục trong tuần qua"
+        },
+        {
+          "key": "D",
+          "text": "Mã, phiên bản, số chiều và cách chuẩn hoá của embedding model"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Quên embedding model thì chỉ mục không tương thích; khôi phục chỉ mục và dịch vụ biểu diễn như một đơn vị.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-033",
+      "type": "mcq",
+      "prompt": "Lỗi phổ biến nhất khi khôi phục sổ đăng ký mô hình (MLflow Model Registry) là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Trọng số được sao chép nhưng sai storage class trên S3"
+        },
+        {
+          "key": "B",
+          "text": "Tên mô hình trong sổ đăng ký bị đổi thành chữ in hoa"
+        },
+        {
+          "key": "C",
+          "text": "Sổ đăng ký trỏ đến đường dẫn artefact không tồn tại"
+        },
+        {
+          "key": "D",
+          "text": "Postgres không bật được PITR ở vùng DR khi khôi phục"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Siêu dữ liệu sổ đăng ký (Postgres) và artefact (S3) phải sao lưu đồng bộ, khớp nhau.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-034",
+      "type": "mcq",
+      "prompt": "PITR của RDS/Aurora hoạt động thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Về bất kỳ giây nào, mặc định khôi phục sang một vùng khác"
+        },
+        {
+          "key": "B",
+          "text": "Về bất kỳ giây nào trong tối đa 35 ngày, tạo instance mới"
+        },
+        {
+          "key": "C",
+          "text": "Về bất kỳ giây nào trong tối đa 7 ngày, ghi đè instance cũ"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ về snapshot hằng ngày gần nhất, ghi đè instance đang chạy"
+        }
+      ],
+      "answer": "B",
+      "explanation": "PITR: sao lưu liên tục + nhật ký giao dịch, tối đa 35 ngày; khôi phục tạo instance mới, trong cùng vùng.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-035",
+      "type": "mcq",
+      "prompt": "Một migration hỏng làm sai siêu dữ liệu. Vì sao bản sao đồng bộ liên vùng không cứu được?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Lỗi logic cũng lan sang bản sao; cần bản sao lưu theo thời điểm"
+        },
+        {
+          "key": "B",
+          "text": "Bản sao đồng bộ chỉ chứa dữ liệu cũ hơn 24 giờ so với bản chính"
+        },
+        {
+          "key": "C",
+          "text": "Bản sao liên vùng không cho đọc nên không kiểm tra được dữ liệu"
+        },
+        {
+          "key": "D",
+          "text": "Migration chỉ chạy ở vùng phụ nên bản chính không bị ảnh hưởng"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Khi PITR chưa đủ: lỗi logic lan sang bản sao đồng bộ, nên cần bản sao lưu theo thời điểm riêng, không chỉ bản sao.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-036",
+      "type": "mcq",
+      "prompt": "Theo báo cáo Llama 3 405B, tần suất gián đoạn ngoài kế hoạch khi huấn luyện là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "54 lần trong 419 ngày, khoảng 8 ngày một lần, ~30% do phần cứng"
+        },
+        {
+          "key": "B",
+          "text": "419 lần trong 54 ngày, khoảng 3 giờ một lần, ~78% do phần mềm"
+        },
+        {
+          "key": "C",
+          "text": "78 lần trong 54 ngày, khoảng 17 giờ một lần, ~90% do mạng"
+        },
+        {
+          "key": "D",
+          "text": "419 lần trong 54 ngày, khoảng 3 giờ một lần, ~78% do phần cứng"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Llama 3 Herd of Models mục 3.3.4; GPU lỗi chiếm 30,1%; thời gian huấn luyện hiệu dụng vẫn trên 90%.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-037",
+      "type": "mcq",
+      "prompt": "Lưu điểm bất đồng bộ của PyTorch giảm thời gian chặn huấn luyện mô hình 7B thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Từ 188 giây xuống 50 giây"
+        },
+        {
+          "key": "B",
+          "text": "Từ 30,1 giây xuống 7,6 giây"
+        },
+        {
+          "key": "C",
+          "text": "Từ 148,8 giây xuống 6,3 giây"
+        },
+        {
+          "key": "D",
+          "text": "Từ 419 giây xuống 21 giây"
+        }
+      ],
+      "answer": "C",
+      "explanation": "PyTorch Blog 11/2024: async checkpoint giảm thời gian chặn 148,8 s → 6,3 s cho mô hình 7B.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-038",
+      "type": "mcq",
+      "prompt": "RPO của một job huấn luyện được xác định chủ yếu bởi gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Số GPU tham gia huấn luyện song song"
+        },
+        {
+          "key": "B",
+          "text": "Chu kỳ lưu điểm cộng độ trễ ghi bền"
+        },
+        {
+          "key": "C",
+          "text": "Thời gian kéo ảnh container lên nút"
+        },
+        {
+          "key": "D",
+          "text": "TTL của bản ghi DNS điểm cuối API"
+        }
+      ],
+      "answer": "B",
+      "explanation": "RPO huấn luyện ≈ chu kỳ lưu + độ trễ ghi bền; điểm lưu chỉ trong RAM mất cùng nút.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-039",
+      "type": "mcq",
+      "prompt": "API trả 429 do vượt trần chi tiêu (không có Retry-After). Cách xử lý đúng là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không thử lại"
+        },
+        {
+          "key": "B",
+          "text": "Thử lại ngay vài lần liên tiếp"
+        },
+        {
+          "key": "C",
+          "text": "Thử lại sau 5 giây, không giới hạn"
+        },
+        {
+          "key": "D",
+          "text": "Chờ 60 giây rồi gửi lại y hệt"
+        }
+      ],
+      "answer": "A",
+      "explanation": "429 thường chờ theo Retry-After; riêng lỗi vượt trần chi tiêu không có Retry-After và không nên thử lại.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-040",
+      "type": "mcq",
+      "prompt": "Mã 529 từ nhà cung cấp mô hình nghĩa là gì và nên xử lý ra sao?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Nhà cung cấp quá tải; thử lại ngắn rồi chuyển sang dự phòng"
+        },
+        {
+          "key": "B",
+          "text": "Vượt rate limit của tổ chức; chờ đúng theo tiêu đề Retry-After"
+        },
+        {
+          "key": "C",
+          "text": "Yêu cầu sai định dạng; sửa nội dung rồi gửi lại ngay lập tức"
+        },
+        {
+          "key": "D",
+          "text": "Lỗi xác thực khoá API; xoay khoá mới rồi gửi lại yêu cầu đó"
+        }
+      ],
+      "answer": "A",
+      "explanation": "529 = nhà cung cấp quá tải (mọi người dùng): thử lại ngắn, sau đó fallback.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-041",
+      "type": "mcq",
+      "prompt": "Yêu cầu nhận HTTP 200 nhưng luồng SSE báo lỗi giữa chừng. Ứng dụng nên làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mở cầu dao ngắt mạch ngay để chặn mọi yêu cầu trong 24 giờ tới"
+        },
+        {
+          "key": "B",
+          "text": "Xử lý lỗi trong bộ phân tích luồng, không dựa vào mã trạng thái"
+        },
+        {
+          "key": "C",
+          "text": "Coi là thành công vì mã 200 đã xác nhận phản hồi hoàn toàn đúng"
+        },
+        {
+          "key": "D",
+          "text": "Chờ theo Retry-After rồi gửi lại toàn bộ yêu cầu như ban đầu"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Lỗi giữa chừng khi đang sinh phải xử lý trong stream parser; bỏ qua lỗi SSE vì mã đã là 200 là điều cần tránh.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-042",
+      "type": "mcq",
+      "prompt": "Suy giảm âm thầm (HTTP 200 nhưng chất lượng thấp) được phát hiện bằng cách nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Health check nông gọi endpoint /healthz"
+        },
+        {
+          "key": "B",
+          "text": "Đọc tiêu đề Retry-After trong phản hồi"
+        },
+        {
+          "key": "C",
+          "text": "Bộ đánh giá (eval) và yêu cầu canary"
+        },
+        {
+          "key": "D",
+          "text": "Theo dõi tỉ lệ mã lỗi 5xx của API"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Bảng phân loại lỗi: 200 chất lượng thấp chỉ phát hiện bằng eval và yêu cầu canary.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-043",
+      "type": "mcq",
+      "prompt": "Trường hợp nào KHÔNG nên thử lại?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Lỗi 504 do quá thời gian chờ"
+        },
+        {
+          "key": "B",
+          "text": "Lỗi 500 do lỗi nội bộ nhà cung cấp"
+        },
+        {
+          "key": "C",
+          "text": "Lỗi 429 có kèm tiêu đề Retry-After"
+        },
+        {
+          "key": "D",
+          "text": "Lỗi 401 do khoá API không hợp lệ"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Tránh thử lại lỗi 4xx về nội dung yêu cầu (400, 401, 403). 500/504 thử lại có lùi dần; 429 chờ theo Retry-After.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-044",
+      "type": "mcq",
+      "prompt": "Cầu dao ngắt mạch ở trạng thái Nửa mở (Half-Open) làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cho thử vài yêu cầu; thành công thì đóng, thất bại thì mở lại"
+        },
+        {
+          "key": "B",
+          "text": "Chặn mọi yêu cầu và luôn trả phương án dự phòng cho người dùng"
+        },
+        {
+          "key": "C",
+          "text": "Cho mọi yêu cầu đi bình thường và chỉ ghi log các lỗi phát sinh"
+        },
+        {
+          "key": "D",
+          "text": "Chuyển hẳn sang nhà cung cấp thứ hai cho đến khi khởi động lại"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Closed: đi bình thường; vượt ngưỡng lỗi → Open: chặn, trả dự phòng; hết thời gian chờ → Half-Open: cho thử vài yêu cầu.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-045",
+      "type": "mcq",
+      "prompt": "Mặc định LiteLLM tạm loại một triển khai khỏi định tuyến thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Sau 3 lần lỗi, loại vĩnh viễn"
+        },
+        {
+          "key": "B",
+          "text": "Sau 3 lần lỗi, loại trong 5 giây"
+        },
+        {
+          "key": "C",
+          "text": "Sau 1 lần lỗi, loại trong 30 giây"
+        },
+        {
+          "key": "D",
+          "text": "Sau 5 lần lỗi, loại trong 60 giây"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Mặc định allowed_fails = 3, cooldown_time = 5 s; ví dụ cấu hình trên slide nâng cooldown lên 30.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-046",
+      "type": "mcq",
+      "prompt": "Trong cấu hình LiteLLM, tiêu đề phản hồi x-litellm-model-id dùng để làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Xác thực khoá API của nhà cung cấp chính khi gọi chat-primary"
+        },
+        {
+          "key": "B",
+          "text": "Ghim mã mô hình có ngày để tránh bị nhà cung cấp ngừng hỗ trợ"
+        },
+        {
+          "key": "C",
+          "text": "Biết triển khai nào đã phục vụ, để đo tỉ lệ dùng dự phòng"
+        },
+        {
+          "key": "D",
+          "text": "Cho ứng dụng tự chọn mô hình dự phòng ở mỗi yêu cầu gửi đi"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Ứng dụng luôn gọi chat-primary; việc chuyển sang chat-backup do cổng quyết định; tiêu đề cho biết ai đã phục vụ.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-047",
+      "type": "mcq",
+      "prompt": "Trước khi bật chuyển đổi sang mô hình dự phòng của nhà cung cấp khác, cần làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Sao chép prompt cache từ nhà cung cấp chính sang"
+        },
+        {
+          "key": "B",
+          "text": "Tắt structured output để hai mô hình trả giống nhau"
+        },
+        {
+          "key": "C",
+          "text": "Giữ nguyên tham số vì mọi nhà cung cấp đều nhận"
+        },
+        {
+          "key": "D",
+          "text": "Chạy bộ eval của ứng dụng trên mô hình dự phòng"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Prompt, tool schema, structured output khác nhau giữa nhà cung cấp; tham số có thể bị 400; prompt cache không dùng chung.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-048",
+      "type": "mcq",
+      "prompt": "Chính sách ngừng hỗ trợ mô hình GA của Azure (Foundry) là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ngừng sau 18 tháng, không gia hạn; yêu cầu trả 410 Gone"
+        },
+        {
+          "key": "B",
+          "text": "Báo trước tối thiểu 60 ngày; yêu cầu tự chuyển mô hình mới"
+        },
+        {
+          "key": "C",
+          "text": "Báo trước tối thiểu 6 tháng; mô hình tắt theo lịch công bố"
+        },
+        {
+          "key": "D",
+          "text": "Ngừng sau 36 tháng, có gia hạn; yêu cầu trả 404 Not Found"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Anthropic: tối thiểu 60 ngày; OpenAI: tối thiểu 6 tháng với GA; Azure: GA ngừng sau 18 tháng, trả 410 Gone.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-049",
+      "type": "mcq",
+      "prompt": "SLA của Amazon Bedrock hoàn bao nhiêu tín dụng khi tính sẵn sàng dưới 99,0% (nhưng từ 95,0% trở lên)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "100%"
+        },
+        {
+          "key": "B",
+          "text": "25%"
+        },
+        {
+          "key": "C",
+          "text": "10%"
+        },
+        {
+          "key": "D",
+          "text": "50%"
+        }
+      ],
+      "answer": "B",
+      "explanation": "10% khi dưới 99,9%, 25% khi dưới 99,0%, 100% khi dưới 95,0%; chỉ tính lỗi 500 theo vùng; không cam kết TTFT hay chất lượng.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-050",
+      "type": "mcq",
+      "prompt": "Vì sao lần chuyển đổi dự phòng đầu tiên nên bán tự động?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Để tiết kiệm chi phí GPU ấm trong vùng dự phòng"
+        },
+        {
+          "key": "B",
+          "text": "Vì DNS không hỗ trợ cắt lưu lượng tự động hoàn toàn"
+        },
+        {
+          "key": "C",
+          "text": "Vì health check chỉ chạy được từ một vị trí duy nhất"
+        },
+        {
+          "key": "D",
+          "text": "Để tránh dao động (flapping) qua lại giữa hai vùng"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Cảnh báo + một lần xác nhận; bộ kiểm tra chạy từ 3 vị trí, mỗi 15 giây.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-051",
+      "type": "mcq",
+      "prompt": "Kiểm tra tình trạng sâu (deep) cho hệ thống AI nên gồm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chạy lại toàn bộ bộ eval trên mọi yêu cầu thật của người dùng mỗi 15 giây"
+        },
+        {
+          "key": "B",
+          "text": "Ping địa chỉ IP của nút GPU và kiểm tra dung lượng đĩa còn trống trên nút"
+        },
+        {
+          "key": "C",
+          "text": "Synthetic request 1 token đo TTFT, truy vấn vector cố định, đọc XID/ECC từ DCGM"
+        },
+        {
+          "key": "D",
+          "text": "Gọi /healthz và nhận HTTP 200 để xác nhận tiến trình phục vụ vẫn còn sống"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Kiểm tra nông chỉ biết tiến trình sống; kiểm tra sâu tốn GPU nên chạy thưa hơn, từ nhiều vị trí.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-052",
+      "type": "mcq",
+      "prompt": "Trong sơ đồ chống dao động, điều kiện xác nhận lỗi trước khi chuyển vùng là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "1–2 lần lỗi, từ một vị trí kiểm tra bất kỳ"
+        },
+        {
+          "key": "B",
+          "text": "3 lần lỗi, từ 2 trên 3 vị trí kiểm tra"
+        },
+        {
+          "key": "C",
+          "text": "1 lần lỗi, từ bất kỳ vị trí kiểm tra nào"
+        },
+        {
+          "key": "D",
+          "text": "3 lần lỗi, chỉ từ vị trí trong vùng chính"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Nghi ngờ: 1–2 lần lỗi; xác nhận lỗi: 3 lần, 2 trên 3 vị trí; người trực xác nhận một lần bấm.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-053",
+      "type": "mcq",
+      "prompt": "Chế độ ngủ (sleep mode) của vLLM giúp gì cho vùng dự phòng và giới hạn là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đánh thức mô hình nhỏ trong 0,26 giây thay vì 37,6 giây; chỉ trong cùng tiến trình"
+        },
+        {
+          "key": "B",
+          "text": "Đánh thức mô hình 70B trong 21 giây thay vì 419 giây; dùng được giữa các nút"
+        },
+        {
+          "key": "C",
+          "text": "Nạp trọng số từ S3 trong 50 giây thay vì 188 giây; chỉ cho mô hình dưới 7B"
+        },
+        {
+          "key": "D",
+          "text": "Giữ KV cache khi chuyển vùng trong 6,3 giây; cần có Run:ai Model Streamer"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide làm ấm GPU: vLLM sleep mode 0,26 s thay vì 37,6 s, chỉ có tác dụng trong cùng tiến trình.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-054",
+      "type": "mcq",
+      "prompt": "Lỗi thiết kế DR nào khiến bảng theo dõi ngừng cùng lúc và không ai biết hệ thống đang hỏng?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dùng cùng tài khoản và cùng khoá"
+        },
+        {
+          "key": "B",
+          "text": "Không có cầu dao ngắt mạch"
+        },
+        {
+          "key": "C",
+          "text": "Sổ tay xử lý chưa từng chạy thử"
+        },
+        {
+          "key": "D",
+          "text": "Đặt giám sát cùng vùng với tải"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Sáu lỗi thường gặp: giám sát cùng vùng với tải → bảng theo dõi ngừng cùng lúc.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-055",
+      "type": "mcq",
+      "prompt": "Hai vùng DR dùng chung một tài khoản và một khoá. Rủi ro chính là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chi phí truyền dữ liệu giữa hai vùng tăng gấp đôi mỗi tháng"
+        },
+        {
+          "key": "B",
+          "text": "Bản sao kho vector ở vùng phụ trễ hơn bản chính vài giờ"
+        },
+        {
+          "key": "C",
+          "text": "Sự cố IAM hoặc thanh toán làm cả hai vùng ngừng cùng lúc"
+        },
+        {
+          "key": "D",
+          "text": "Hai vùng chuyển qua lại liên tục khi health check dao động"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Sáu lỗi thường gặp: cùng tài khoản, cùng khoá → sự cố IAM hoặc thanh toán hạ cả hai vùng.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-056",
+      "type": "mcq",
+      "prompt": "Theo bảng chi phí GPU (1x là chi phí vùng chính), dự phòng ấm 1–2 nút tốn khoảng bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "2,0x đến 2,5x"
+        },
+        {
+          "key": "B",
+          "text": "1,2x đến 1,5x"
+        },
+        {
+          "key": "C",
+          "text": "1,0x đến 1,1x"
+        },
+        {
+          "key": "D",
+          "text": "1,6x đến 1,8x"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Backup & restore 1,0x; pilot light 1,1x; warm standby 1,2x–1,5x; hot 2,0x.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-057",
+      "type": "mcq",
+      "prompt": "Kịch bản diễn tập nào được xếp mức rủi ro Cao?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Thu hồi thông tin xác thực vùng chính"
+        },
+        {
+          "key": "B",
+          "text": "Xoá một pod phục vụ GPU trên Kubernetes"
+        },
+        {
+          "key": "C",
+          "text": "Tăng độ trễ gọi kho vector lên vài giây"
+        },
+        {
+          "key": "D",
+          "text": "Nhà cung cấp LLM trả 429 hoặc lỗi 5xx"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Cao: chặn mạng vùng chính, thu hồi credential; Trung bình: 429/5xx, khôi phục snapshot vector; Thấp: xoá pod, tăng độ trễ kho vector.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-058",
+      "type": "mcq",
+      "prompt": "Khi dùng kịch bản liên vùng của AWS FIS, cần lưu ý gì về an toàn?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Kịch bản tự dừng khi RTO vượt mục tiêu đã khai báo"
+        },
+        {
+          "key": "B",
+          "text": "Kịch bản chỉ chạy được trên môi trường production"
+        },
+        {
+          "key": "C",
+          "text": "Kịch bản tự gửi thông báo trước cho nhóm người trực"
+        },
+        {
+          "key": "D",
+          "text": "Kịch bản không có điều kiện dừng sẵn, phải tự thêm"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Nguyên tắc an toàn: có kill switch; AWS FIS kịch bản liên vùng không có điều kiện dừng sẵn, phải tự thêm.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-059",
+      "type": "mcq",
+      "prompt": "Theo mô hình trưởng thành DR, mục tiêu thực tế cho hầu hết nhóm là mức nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mức 4"
+        },
+        {
+          "key": "B",
+          "text": "Mức 1 đến 2"
+        },
+        {
+          "key": "C",
+          "text": "Mức 2 đến 3"
+        },
+        {
+          "key": "D",
+          "text": "Mức 0 đến 1"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Mức 2: chuyển đổi tự động một phần; mức 3: diễn tập hàng quý. Mức 4 chỉ đáng khi SLA yêu cầu 99,99% trở lên.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-060",
+      "type": "mcq",
+      "prompt": "Trong script đo RTO bằng thăm dò liên tục, vì sao gửi yêu cầu max_tokens = 1?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Để chỉ kiểm tra DNS mà không gọi mô hình"
+        },
+        {
+          "key": "B",
+          "text": "Vì cổng LLM từ chối yêu cầu dài hơn 1 token"
+        },
+        {
+          "key": "C",
+          "text": "Rẻ nhưng vẫn đi qua toàn bộ đường phục vụ"
+        },
+        {
+          "key": "D",
+          "text": "Để vượt qua rate limit của nhà cung cấp"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Script đo RTO nhìn từ người dùng (gồm DNS), dừng khi vùng dự phòng trả lời lần đầu.",
+      "source": "onthi/Slide_Day_8_Disaster Recovery for AI infrastructure.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D08-TL-01",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Nhóm bạn vận hành chatbot hỗ trợ khách hàng dùng RAG. Hãy lập bảng RTO/RPO cho 5 thành phần: dịch vụ suy luận (cổng LLM, API), kho vector, feature store, kho siêu dữ liệu/lịch sử hội thoại và nhà cung cấp LLM bên ngoài; giải thích lý do cho từng cặp số.",
+      "modelAnswer": "Ý chấm: (1) Cổng LLM/API suy luận: RTO 5–15 phút, RPO không áp dụng vì không lưu trạng thái; người dùng thấy trực tiếp, SLA chặt. (2) Kho vector: RTO 15 phút, RPO 5 phút; cần vector mới, bản sao có thể trễ nhẹ. (3) Feature store: RTO 30 phút, RPO 15 phút; đặc trưng theo lô chấp nhận độ trễ lớn hơn. (4) Siêu dữ liệu, lịch sử hội thoại: RTO 15 phút, RPO vài giây đến 1 phút; mất lịch sử làm hỏng trải nghiệm và kiểm toán. (5) Nhà cung cấp LLM: RTO dưới 1 phút nhờ cổng fallback, RPO không áp dụng; phụ thuộc hạn mức dự phòng và chất lượng mô hình thay thế. (6) Nêu nguyên tắc: không có một RTO cho mọi thành phần; RTO/RPO càng thấp chi phí càng cao; số là minh hoạ, điều chỉnh theo SLA thực tế.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D08-TL-02",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Công ty cần SLA 99,9% cho dịch vụ suy luận chạy trên 10 nút GPU, RTO mục tiêu 3 phút. Lãnh đạo hỏi có nên chạy active-active không. Dùng cây quyết định và bảng chi phí trên slide để đề xuất chiến lược, nêu chi phí tương đối và đánh đổi.",
+      "modelAnswer": "Ý chấm: (1) Cây quyết định: RTO dưới 5 phút → dự phòng ấm hoặc chủ động; nếu chấp nhận 15–30 phút thì nguội/đèn mồi; không chấp nhận thì tính lại ngân sách hoặc hạ SLA. (2) Chi phí GPU (1x = vùng chính): backup & restore 1,0x, pilot light 1,1x, warm 1,2x–1,5x (ví dụ 2 nút ấm ≈ 1,2x), hot 2,0x; nguội + công suất đặt trước cũng ≈ 2,0x vì công suất đặt trước tính tiền như đang chạy. (3) Chưa tính lưu trữ và egress. (4) SLA 99,9% không cần thiết kế cho 99,99%; chủ động chỉ đáng chi phí gấp đôi khi RTO thật sự cần gần 0. (5) Lưu ý warm vẫn có phát hiện, xác nhận, cắt DNS 4–5 phút: muốn đạt 3 phút phải rút ngắn các bước này hoặc chạy đồng thời hai vùng; đề xuất kết luận có lý do và đo bằng diễn tập.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D08-TL-03",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Trong buổi diễn tập, RTO đo được khi vùng chính ngừng là 14,5 phút trong khi mục tiêu là 5 phút. Hãy phân tích các giai đoạn tạo nên RTO này và đề xuất biện pháp rút ngắn từng giai đoạn.",
+      "modelAnswer": "Ý chấm: (1) Sáu giai đoạn: phát hiện, quyết định, khôi phục GPU, nạp mô hình, cắt DNS, xác minh; ví dụ nguội 1+2+4+5+1,5+1 = 14,5 phút, phần lớn là chờ GPU và nạp mô hình. (2) GPU: giữ 1–2 nút GPU ấm (Karpenter), công suất đặt trước/ODCR đúng loại instance, xin hạn mức trước; không tạo GPU mới lúc sự cố (control plane có thể hỏng). (3) Nạp mô hình: SOCI lazy loading (419 s → 21 s), Fast Model Loader (188 s → 50 s), trọng số nạp sẵn vào cache cục bộ, Run:ai Model Streamer, vLLM sleep mode. (4) Nút ấm rút RTO còn khoảng 7 phút; phát hiện, xác nhận và cắt DNS vẫn chiếm 4–5 phút: rút ngắn chu kỳ health check, TTL 60 giây, global LB Anycast, xác nhận một lần bấm. (5) Nếu vẫn không đạt: chạy đồng thời hai vùng (active-active) hoặc điều chỉnh mục tiêu; đo lại bằng diễn tập.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D08-TL-04",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Nhà cung cấp LLM chính của trợ lý nội bộ ngừng hoạt động nhiều giờ. Hãy thiết kế bậc thang suy giảm có kiểm soát (graceful degradation) cho ứng dụng, nêu mỗi bậc người dùng nhận được gì và rủi ro cần kiểm soát.",
+      "modelAnswer": "Ý chấm: (1) Thứ tự bậc: mô hình chính → nhà cung cấp thứ hai → mô hình nhỏ hơn (có thể tự lưu trữ) → câu trả lời đã lưu → hàng đợi, trả lời sau → thông báo tĩnh. (2) Chất lượng và chi phí giảm dần, khả năng sống sót tăng dần; mỗi bậc là quyết định có chủ đích về nội dung trả về và cách thông báo. (3) Bậc cuối luôn tồn tại kể cả khi mọi nhà cung cấp ngừng. (4) Rủi ro: mô hình dự phòng khác về prompt, tool schema, structured output, tham số có thể lỗi 400 → chạy eval trước; prompt cache lạnh; semantic cache chỉ còn nếu được sao chép; hạn mức ở nhà cung cấp dự phòng phải cấp trước. (5) Triển khai qua cổng LLM (fallback, circuit breaker), đo tỉ lệ dùng dự phòng.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D08-TL-05",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Viết sổ tay xử lý sự cố (runbook) một trang cho tình huống vùng chính ngừng hoạt động, có mốc thời gian, và nêu những việc sau sự cố.",
+      "modelAnswer": "Ý chấm: (1) T+0 xác nhận sự cố từ nhiều vị trí và trang trạng thái nhà cung cấp cloud. (2) T+2 mở kênh sự cố, ghi giờ bắt đầu để tính RTO. (3) T+3 mở rộng nhóm GPU vùng dự phòng từ mức ấm lên đủ công suất. (4) T+6 kiểm tra trọng số mô hình và độ trễ sao chép kho vector ở vùng dự phòng. (5) T+8 cắt 10% rồi 100% lưu lượng. (6) T+12 xác minh tín hiệu vàng (độ trễ, tỉ lệ lỗi, TTFT). (7) Sau sự cố: đo RTO thực tế so với mục tiêu, viết postmortem. (8) Ghi chú: mốc phút là ví dụ, điều chỉnh theo RTO cam kết; sổ tay phải được diễn tập, không chỉ nằm trên giấy; đường thực hiện không phụ thuộc control plane của vùng hỏng.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D08-TL-06",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Lên kế hoạch một buổi game day cho kịch bản chặn mạng đến vùng chính của hệ thống suy luận LLM. Nêu các bước, vai trò, điều kiện an toàn và cách đo kết quả.",
+      "modelAnswer": "Ý chấm: (1) Lên kế hoạch: chọn kịch bản và phạm vi, đặt giả thuyết RTO, chốt điều kiện dừng khẩn cấp. (2) Thông báo nhóm trực và các bên liên quan; phân vai chỉ huy, thực thi, ghi giờ. (3) Kích hoạt sự cố giả ở môi trường thử trước, bắt đầu đồng hồ RTO, làm theo sổ tay, không đoán. (4) Đo và rút kinh nghiệm: so RTO đo được với giả thuyết, ghi khoảng chênh từng bước, cập nhật sổ tay trong 1 tuần. (5) An toàn: kill switch; AWS FIS liên vùng không có điều kiện dừng sẵn nên tự thêm; bắt đầu phạm vi nhỏ; đây là kịch bản rủi ro Cao. (6) Đo bằng script thăm dò yêu cầu 1 token, dừng khi vùng dự phòng trả lời lần đầu (RTO nhìn từ người dùng, gồm DNS).",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D08-TL-07",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Sau khi đã chuyển sang vùng dự phòng được 6 giờ, vùng chính hồi phục. Thiết kế quy trình chuyển ngược (failback) và giải thích vì sao nó khó hơn chuyển đổi.",
+      "modelAnswer": "Ý chấm: (1) Khó hơn vì vùng dự phòng đã nhận dữ liệu mới (kho vector, siêu dữ liệu, lịch sử hội thoại); sao chép phải đảo chiều trước khi cắt lưu lượng, nếu không mất dữ liệu; vùng chính vừa hồi phục thường chưa ổn định. (2) Bước 1: đồng bộ ngược dữ liệu, kiểm tra nhất quán. (3) Bước 2: làm ấm GPU và chạy kiểm tra tình trạng sâu ở vùng chính. (4) Bước 3: chuyển 5%, 25%, 100% lưu lượng, theo dõi tín hiệu vàng mỗi bước. (5) Bước 4: giữ vùng dự phòng ấm thêm một khoảng quan sát. (6) Thực hiện giờ thấp điểm, có kế hoạch và người phụ trách, không tự động; chờ cooldown tránh dao động.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D08-TL-08",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Một tài khoản admin bị chiếm quyền và kẻ tấn công mã hoá các bucket trọng số mô hình. Hãy thiết kế chiến lược sao lưu để khôi phục được trong tình huống này và giải thích vì sao sao chép liên vùng thôi là chưa đủ.",
+      "modelAnswer": "Ý chấm: (1) Sao chép chỉ giữ bản hiện tại: bản bị mã hoá hoặc xoá nhầm cũng được sao chép; cùng tài khoản, cùng khoá thì sai sót lan sang DR. (2) Cần bản có phiên bản (versioning), bất biến và tách tài khoản. (3) S3 Object Lock chế độ compliance: không ai, kể cả root, ghi đè hay xoá trong thời hạn giữ. (4) AWS Backup logically air-gapped vault: luôn khoá compliance, giữ tối thiểu 7 ngày, chia sẻ qua RAM để tài khoản khác khôi phục. (5) Sao lưu liên tài khoản chống tài khoản bị chiếm và mối đe doạ nội bộ. (6) Kiểm tra checksum sau sao chép, định kỳ khôi phục thử; bản sao lưu chưa khôi phục thử thì chưa được xem là có.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D08-TL-09",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Agent đặt lịch hẹn chạy vòng lặp nhiều bước (gọi LLM, tra cứu, ghi cơ sở dữ liệu, gửi email). Tiến trình bị kill giữa chừng khi vùng gặp sự cố. Phân tích những gì bị mất và thiết kế cơ chế để agent tiếp tục an toàn.",
+      "modelAnswer": "Ý chấm: (1) Bị mất nếu chỉ giữ trong bộ nhớ: luồng sinh và ngữ cảnh hội thoại, vị trí trong vòng lặp agent, kết quả công cụ chưa ghi, prompt cache ở nhà cung cấp cũ. (2) Thực thi bền vững: ghi kết quả từng bước vào kho bền vững, sau sự cố tiếp tục từ bước cuối đã ghi. (3) Công cụ: Temporal (lịch sử sự kiện), LangGraph (checkpoint vào Postgres), Cloudflare Workflows (từ bước thành công cuối). (4) Activity chạy ít nhất một lần, có thể chạy lại một phần → công cụ có tác dụng phụ (gửi email, ghi DB) cần idempotency key; không retry thao tác chưa idempotent. (5) Kho checkpoint phải được sao chép sang vùng khác.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D08-TL-10",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Sau sự cố vùng làm chatbot ngừng 40 phút (RTO mục tiêu 15 phút), bạn được giao viết báo cáo sau sự cố không quy lỗi (blameless postmortem). Nêu cấu trúc báo cáo và các mục riêng cần có cho hệ thống AI.",
+      "modelAnswer": "Ý chấm: (1) Dòng thời gian: bắt đầu, phát hiện, cảnh báo, cắt lưu lượng, khôi phục. (2) RTO/RPO đo được so với mục tiêu (40 vs 15 phút), chỉ ra bước nào gây khoảng chênh. (3) Nguyên nhân gốc bằng 5 câu hỏi vì sao, không quy cho cá nhân. (4) Hành động khắc phục có người phụ trách và hạn chót. (5) Mục riêng cho AI: số yêu cầu bị từ chối/hết thời gian chờ tính theo token; chất lượng đầu ra khi chạy mô hình dự phòng; chi phí phát sinh (GPU mở rộng, egress); khoảng chênh trong sổ tay đã sửa chưa. (6) Liên hệ sáu lỗi thường gặp (sổ tay chưa chạy, giám sát cùng vùng, phụ thuộc control plane...) nếu là nguyên nhân.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    }
+  ]
+}

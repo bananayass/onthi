@@ -1,0 +1,1568 @@
+{
+  "id": "day9_track2",
+  "title": "Bộ đề ôn tập Track 2 Ngày 9",
+  "sourceFolder": "onthi",
+  "questionCount": 60,
+  "questions": [
+    {
+      "id": "T2D09-001",
+      "type": "mcq",
+      "prompt": "Theo số liệu IBM 2024 được slide dẫn, một vụ data breach trung bình tốn bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "$4.45M"
+        },
+        {
+          "key": "B",
+          "text": "$1.25M"
+        },
+        {
+          "key": "C",
+          "text": "$9.80M"
+        },
+        {
+          "key": "D",
+          "text": "$0.45M"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide mở đầu: vụ data breach trung bình tốn $4.45M (IBM 2024).",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-002",
+      "type": "mcq",
+      "prompt": "Case study Samsung trong slide dẫn tới hậu quả gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bị phạt GDPR vì lưu dữ liệu ngoài EU"
+        },
+        {
+          "key": "B",
+          "text": "Model nội bộ bị đánh cắp qua API queries"
+        },
+        {
+          "key": "C",
+          "text": "Lộ CCCD khách hàng do quên mã hóa S3"
+        },
+        {
+          "key": "D",
+          "text": "Lộ trade secrets, công ty cấm ChatGPT toàn bộ"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Nhân viên paste confidential code vào ChatGPT → leaked trade secrets → company-wide ban.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-003",
+      "type": "mcq",
+      "prompt": "Vì sao slide cho rằng rủi ro dữ liệu với AI còn cao hơn hệ thống thường?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dữ liệu AI không được phép lưu trên cloud công cộng"
+        },
+        {
+          "key": "B",
+          "text": "Mọi model AI bắt buộc phải công khai training data"
+        },
+        {
+          "key": "C",
+          "text": "Model có thể “nhớ” và leak PII từ training data"
+        },
+        {
+          "key": "D",
+          "text": "Model AI luôn chạy trên GPU nên khó mã hóa dữ liệu"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide mở đầu: với AI, model có thể ghi nhớ và làm lộ PII từ dữ liệu huấn luyện.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-004",
+      "type": "mcq",
+      "prompt": "RBAC demo trong deliverable cuối ngày gồm những role nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "root, developer, guest"
+        },
+        {
+          "key": "B",
+          "text": "admin, ml-engineer, analyst"
+        },
+        {
+          "key": "C",
+          "text": "owner, editor, viewer"
+        },
+        {
+          "key": "D",
+          "text": "admin, intern, auditor"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Deliverable: RBAC demo với 3 roles (admin, ml-engineer, analyst) có quyền truy cập dữ liệu khác nhau.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-005",
+      "type": "mcq",
+      "prompt": "Mục tiêu detection rate của PII anonymization pipeline trên Vietnamese test data là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": ">95%"
+        },
+        {
+          "key": "B",
+          "text": ">80%"
+        },
+        {
+          "key": "C",
+          "text": ">99.9%"
+        },
+        {
+          "key": "D",
+          "text": ">70%"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Deliverable và Lab 24 đều yêu cầu detection >95%.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-006",
+      "type": "mcq",
+      "prompt": "Thành phần nào của Data Governance dùng Apache Atlas / DataHub để discover & document dữ liệu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Business Glossary"
+        },
+        {
+          "key": "B",
+          "text": "Classification"
+        },
+        {
+          "key": "C",
+          "text": "Lineage"
+        },
+        {
+          "key": "D",
+          "text": "Data Catalog"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide tổng quan: Data Catalog — Apache Atlas / DataHub — Discover & document.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-007",
+      "type": "mcq",
+      "prompt": "Bốn mức Classification theo thứ tự tăng dần độ nhạy cảm là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Public → Confidential → Internal → Restricted"
+        },
+        {
+          "key": "B",
+          "text": "Restricted → Internal → Public → Confidential"
+        },
+        {
+          "key": "C",
+          "text": "Public → Internal → Confidential → Restricted"
+        },
+        {
+          "key": "D",
+          "text": "Internal → Public → Restricted → Confidential"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide liệt kê Public / Internal / Confidential / Restricted; classification drive policies.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-008",
+      "type": "mcq",
+      "prompt": "Business Glossary với các thuật ngữ như “Customer”, “Churn”, “Transaction” nhằm mục đích gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Phân quyền truy cập theo từng phòng ban"
+        },
+        {
+          "key": "B",
+          "text": "Thống nhất định nghĩa thuật ngữ giữa các team"
+        },
+        {
+          "key": "C",
+          "text": "Mã hóa các cột chứa thông tin khách hàng"
+        },
+        {
+          "key": "D",
+          "text": "Truy vết dữ liệu từ nguồn đến prediction"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Business Glossary → Consistent terms.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-009",
+      "type": "mcq",
+      "prompt": "Theo slide, hầu hết công ty Việt Nam đang ở mức Governance Maturity nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Reactive (level 1)"
+        },
+        {
+          "key": "B",
+          "text": "Proactive (level 2)"
+        },
+        {
+          "key": "C",
+          "text": "Predictive (level 3)"
+        },
+        {
+          "key": "D",
+          "text": "Optimized (level 4)"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Governance Maturity: Reactive → Proactive → Predictive — hầu hết công ty VN ở level 1.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-010",
+      "type": "mcq",
+      "prompt": "Training datasets được xếp vào mức classification nào trong bảng ví dụ AI?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Public"
+        },
+        {
+          "key": "B",
+          "text": "Restricted"
+        },
+        {
+          "key": "C",
+          "text": "Confidential"
+        },
+        {
+          "key": "D",
+          "text": "Internal"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Bảng: Public = benchmarks/docs; Internal = feature engineering code; Confidential = training datasets; Restricted = PII, medical records.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-011",
+      "type": "mcq",
+      "prompt": "Một bệnh viện lưu hồ sơ bệnh án dùng để train model. Dữ liệu này thuộc mức nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Confidential"
+        },
+        {
+          "key": "B",
+          "text": "Internal"
+        },
+        {
+          "key": "C",
+          "text": "Public"
+        },
+        {
+          "key": "D",
+          "text": "Restricted"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Restricted gồm PII, medical records.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-012",
+      "type": "mcq",
+      "prompt": "Theo slide, dữ liệu Restricted phải được áp chính sách nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Encrypted + RBAC + audit log + no export"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ cần RBAC, được export khi có duyệt"
+        },
+        {
+          "key": "C",
+          "text": "Public read, chỉ chặn quyền write/delete"
+        },
+        {
+          "key": "D",
+          "text": "Encrypted, nhưng analyst được tải về local"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Classification drives policy: Restricted data → encrypted + RBAC + audit log + no export.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-013",
+      "type": "mcq",
+      "prompt": "Lineage trong slide cần track luồng nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "feature store → source → prediction → ETL → training"
+        },
+        {
+          "key": "B",
+          "text": "source → ETL → feature store → training → prediction"
+        },
+        {
+          "key": "C",
+          "text": "prediction → training → feature store → ETL → source"
+        },
+        {
+          "key": "D",
+          "text": "source → training → ETL → prediction → feature store"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide Lineage: Track source → ETL → feature store → training → prediction.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-014",
+      "type": "mcq",
+      "prompt": "Câu hỏi thực tế nào được slide dùng để giải thích vì sao cần lineage?",
+      "options": [
+        {
+          "key": "A",
+          "text": "“Key KMS nào đang mã hóa bucket này?”"
+        },
+        {
+          "key": "B",
+          "text": "“Bao nhiêu % dữ liệu đã encrypt at rest?”"
+        },
+        {
+          "key": "C",
+          "text": "“Model prediction sai — dùng data nào train?”"
+        },
+        {
+          "key": "D",
+          "text": "“Ai được quyền xoá bảng production?”"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Why: model prediction sai — cần biết data nào đã dùng để train.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-015",
+      "type": "mcq",
+      "prompt": "Bộ công cụ nào slide liệt kê cho lineage?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Presidio, Faker, OpenLineage"
+        },
+        {
+          "key": "B",
+          "text": "Garak, Trivy, Marquez"
+        },
+        {
+          "key": "C",
+          "text": "Bandit, Snyk, Apache Atlas"
+        },
+        {
+          "key": "D",
+          "text": "Apache Atlas, OpenLineage, Marquez"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Tools lineage: Apache Atlas, OpenLineage, Marquez.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-016",
+      "type": "mcq",
+      "prompt": "Theo bảng least privilege, ML Engineer được write vào đâu và không được làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Write model artifacts; không được delete production data"
+        },
+        {
+          "key": "B",
+          "text": "Write all data; không được đọc aggregated metrics"
+        },
+        {
+          "key": "C",
+          "text": "Write reports; không được truy cập sandbox data"
+        },
+        {
+          "key": "D",
+          "text": "Write training data; không được tạo model artifacts"
+        }
+      ],
+      "answer": "A",
+      "explanation": "ML Engineer: Read training data, Write model artifacts, Cannot delete production data.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-017",
+      "type": "mcq",
+      "prompt": "Data Analyst trong bảng least privilege được read gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "All data"
+        },
+        {
+          "key": "B",
+          "text": "Aggregated metrics"
+        },
+        {
+          "key": "C",
+          "text": "Raw PII data"
+        },
+        {
+          "key": "D",
+          "text": "Training data"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Data Analyst: Read aggregated metrics, Write reports, Cannot raw PII data.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-018",
+      "type": "mcq",
+      "prompt": "Intern được cấp quyền thế nào theo slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Read aggregated metrics, không xem raw PII"
+        },
+        {
+          "key": "B",
+          "text": "Read all data nhưng không được write gì"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ sandbox data, không có production access"
+        },
+        {
+          "key": "D",
+          "text": "Read training data, write model artifacts"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Intern: Sandbox data only / Sandbox only / Cannot production access.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-019",
+      "type": "mcq",
+      "prompt": "Sai lầm phổ biến nào được slide cảnh báo khi phân quyền cho ML team?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tách role riêng cho từng chức năng trong team"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ cho intern truy cập vào sandbox data"
+        },
+        {
+          "key": "C",
+          "text": "Dùng permission boundary để giới hạn quyền"
+        },
+        {
+          "key": "D",
+          "text": "Cho mọi ML engineer admin access “cho nhanh”"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Cho tất cả ML engineers admin access “cho nhanh” → một lần xoá nhầm = disaster.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-020",
+      "type": "mcq",
+      "prompt": "Trong IAM, permission boundary có tác dụng gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cấp thêm quyền tự động khi team tag khớp nhau"
+        },
+        {
+          "key": "B",
+          "text": "Ghi log mọi API call để phục vụ việc audit"
+        },
+        {
+          "key": "C",
+          "text": "Mã hóa credential của role bằng key KMS riêng"
+        },
+        {
+          "key": "D",
+          "text": "Đặt mức trần quyền tối đa (max permissions cap)"
+        }
+      ],
+      "answer": "D",
+      "explanation": "RBAC Implementation: Permission boundary — max permissions cap.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-021",
+      "type": "mcq",
+      "prompt": "Condition keys trong IAM policy được dùng để restrict theo những yếu tố nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Column, row, data mask"
+        },
+        {
+          "key": "B",
+          "text": "Region, AZ, instance type"
+        },
+        {
+          "key": "C",
+          "text": "VPC, IP, MFA"
+        },
+        {
+          "key": "D",
+          "text": "Team tag, owner, cost center"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide: Condition keys — restrict by VPC, IP, MFA.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-022",
+      "type": "mcq",
+      "prompt": "Bộ đôi nào slide đề xuất để audit quyền IAM?",
+      "options": [
+        {
+          "key": "A",
+          "text": "OpenLineage + Bandit"
+        },
+        {
+          "key": "B",
+          "text": "CloudTrail + IAM Access Analyzer"
+        },
+        {
+          "key": "C",
+          "text": "Trivy + IAM Access Analyzer"
+        },
+        {
+          "key": "D",
+          "text": "CloudTrail + Garak"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Audit: CloudTrail + IAM Access Analyzer.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-023",
+      "type": "mcq",
+      "prompt": "Rule `if user.team == data.owner_team: allow` là ví dụ của mô hình nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "ABAC, scale tốt hơn RBAC đơn thuần"
+        },
+        {
+          "key": "B",
+          "text": "RBAC, cần tạo role cho từng dataset"
+        },
+        {
+          "key": "C",
+          "text": "Permission boundary giới hạn quyền tối đa"
+        },
+        {
+          "key": "D",
+          "text": "Condition key restrict theo VPC và IP"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Attribute-Based: user.team == data.owner_team → allow; scale better than RBAC alone; auto-grant khi team tag matches.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-024",
+      "type": "mcq",
+      "prompt": "Unity Catalog / Apache Ranger cung cấp những kiểm soát nào cho data platform?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Container image scanning và CVE alert tự động"
+        },
+        {
+          "key": "B",
+          "text": "Envelope encryption và rotate DEK hàng tháng"
+        },
+        {
+          "key": "C",
+          "text": "Prompt injection testing với 70+ attack category"
+        },
+        {
+          "key": "D",
+          "text": "Column/row-level security và dynamic data masking"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide RBAC: Unity Catalog / Apache Ranger — column-level & row-level security, dynamic data masking cho PII.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-025",
+      "type": "mcq",
+      "prompt": "Nguyên tắc nào đúng cho service account của ML pipeline?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mỗi team dùng chung một account cho mọi job"
+        },
+        {
+          "key": "B",
+          "text": "Pipeline dùng account cá nhân của engineer"
+        },
+        {
+          "key": "C",
+          "text": "Mỗi ML pipeline có một service account riêng"
+        },
+        {
+          "key": "D",
+          "text": "Mọi pipeline dùng chung một account admin"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Service Account Security: mỗi ML pipeline = service account riêng, scope tối thiểu.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-026",
+      "type": "mcq",
+      "prompt": "Thay cho long-lived keys, slide khuyên service account dùng gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Password lưu trong file config"
+        },
+        {
+          "key": "B",
+          "text": "OIDC federation"
+        },
+        {
+          "key": "C",
+          "text": "Static API keys trong env vars"
+        },
+        {
+          "key": "D",
+          "text": "SSH key dùng chung giữa các pipeline"
+        }
+      ],
+      "answer": "B",
+      "explanation": "No long-lived keys — dùng OIDC federation.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-027",
+      "type": "mcq",
+      "prompt": "Tần suất rotate credentials của service account theo slide là bao lâu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Hàng tuần (automated)"
+        },
+        {
+          "key": "B",
+          "text": "Hàng quý (thủ công)"
+        },
+        {
+          "key": "C",
+          "text": "Hàng năm (KMS auto)"
+        },
+        {
+          "key": "D",
+          "text": "Hàng tháng (thủ công)"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Service credentials: rotate weekly, tự động qua Vault / KMS.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-028",
+      "type": "mcq",
+      "prompt": "Yêu cầu encryption in transit trong slide là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "TLS 1.0 trở lên, tắt certificate check cho internal services"
+        },
+        {
+          "key": "B",
+          "text": "AES-256 cho mọi gói tin, không cần TLS giữa các service"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ dùng HTTPS cho public API, internal dùng HTTP thường"
+        },
+        {
+          "key": "D",
+          "text": "TLS 1.3 bắt buộc, certificate pinning cho internal services"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Encryption Strategy: In Transit — TLS 1.3 bắt buộc, certificate pinning cho internal services.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-029",
+      "type": "mcq",
+      "prompt": "Encryption at rest cho S3, EBS, databases dùng chuẩn nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "SHA-256 hashing cho từng file"
+        },
+        {
+          "key": "B",
+          "text": "Base64 encoding với key cố định"
+        },
+        {
+          "key": "C",
+          "text": "AES-256 với KMS managed keys"
+        },
+        {
+          "key": "D",
+          "text": "TLS 1.3 với certificate pinning"
+        }
+      ],
+      "answer": "C",
+      "explanation": "At Rest — AES-256 cho S3, EBS, databases (KMS managed keys).",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-030",
+      "type": "mcq",
+      "prompt": "Column-level encryption trong slide áp dụng cho những gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Các field PII như name, email, CCCD"
+        },
+        {
+          "key": "B",
+          "text": "Toàn bộ bucket S3 chứa model artifacts"
+        },
+        {
+          "key": "C",
+          "text": "Các gói tin giữa các internal services"
+        },
+        {
+          "key": "D",
+          "text": "File log của CI/CD pipeline hằng ngày"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Column-Level — Encrypt PII fields riêng (name, email, CCCD).",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-031",
+      "type": "mcq",
+      "prompt": "Trong envelope encryption, quan hệ giữa DEK và KEK là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "KEK chỉ dùng cho TLS, DEK dùng cho S3"
+        },
+        {
+          "key": "B",
+          "text": "DEK mã hóa data, KEK mã hóa DEK"
+        },
+        {
+          "key": "C",
+          "text": "KEK mã hóa data, DEK mã hóa KEK"
+        },
+        {
+          "key": "D",
+          "text": "DEK và KEK cùng mã hóa trực tiếp data"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Envelope Encryption — DEK encrypted by KEK; DEK dùng để encrypt data.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-032",
+      "type": "mcq",
+      "prompt": "DEK được rotate với tần suất nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Hàng năm"
+        },
+        {
+          "key": "B",
+          "text": "Hàng ngày"
+        },
+        {
+          "key": "C",
+          "text": "Hàng tháng"
+        },
+        {
+          "key": "D",
+          "text": "Hàng tuần"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Envelope Encryption: rotate DEK hàng tháng; KEK hàng năm; service credentials hàng tuần.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-033",
+      "type": "mcq",
+      "prompt": "KEK được rotate thế nào theo slide Key Management?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Monthly, ghi tay vào runbook"
+        },
+        {
+          "key": "B",
+          "text": "Weekly, qua pipeline CI/CD"
+        },
+        {
+          "key": "C",
+          "text": "Daily, bằng cron job riêng"
+        },
+        {
+          "key": "D",
+          "text": "Annually, KMS tự động rotate"
+        }
+      ],
+      "answer": "D",
+      "explanation": "KEK: rotate annually (KMS auto).",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-034",
+      "type": "mcq",
+      "prompt": "Key rule về lưu trữ key trong slide Encryption là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không để plaintext key trong code/env vars; dùng KMS hoặc Vault"
+        },
+        {
+          "key": "B",
+          "text": "Để plaintext key trong env vars là đủ an toàn cho production"
+        },
+        {
+          "key": "C",
+          "text": "Lưu key trong repo private, chỉ admin mới được phép clone"
+        },
+        {
+          "key": "D",
+          "text": "Mã hóa key bằng Base64 rồi commit vào file config chung"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Key rule: Không lưu plaintext keys trong code hoặc env vars — dùng AWS KMS / HashiCorp Vault.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-035",
+      "type": "mcq",
+      "prompt": "Trong code `kms.generate_data_key`, cần lưu những gì sau khi mã hóa?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chỉ plaintext_dek, data giữ dạng plaintext gốc"
+        },
+        {
+          "key": "B",
+          "text": "encrypted_dek + encrypted_data, xoá plaintext_dek"
+        },
+        {
+          "key": "C",
+          "text": "plaintext_dek + encrypted_data để giải mã nhanh"
+        },
+        {
+          "key": "D",
+          "text": "plaintext_dek + encrypted_dek, xoá encrypted_data"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Code: Store encrypted_dek + encrypted_data; NEVER store plaintext_dek; del plaintext_dek.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-036",
+      "type": "mcq",
+      "prompt": "Secrets của service (password, API token) nên lưu ở đâu theo slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Biến môi trường của container"
+        },
+        {
+          "key": "B",
+          "text": "Tag gắn trên bucket S3"
+        },
+        {
+          "key": "C",
+          "text": "Vault / AWS Secrets Manager"
+        },
+        {
+          "key": "D",
+          "text": "File .env commit cùng code"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide: Secrets: Vault / AWS Secrets Manager.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-037",
+      "type": "mcq",
+      "prompt": "Trong Presidio, vai trò của AnalyzerEngine và AnonymizerEngine là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Analyzer che PII, Anonymizer phát hiện PII trong text"
+        },
+        {
+          "key": "B",
+          "text": "Analyzer mã hóa AES-256, Anonymizer quản lý key KMS"
+        },
+        {
+          "key": "C",
+          "text": "Analyzer sinh fake data, Anonymizer chạy NER tiếng Việt"
+        },
+        {
+          "key": "D",
+          "text": "Analyzer phát hiện PII, Anonymizer thay thế/che PII"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Code Presidio: analyzer.analyze() trả results, anonymizer.anonymize() dùng analyzer_results để thay PII.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-038",
+      "type": "mcq",
+      "prompt": "Để Presidio nhận diện CCCD Việt Nam, slide dùng cách nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Custom regex cho 12 chữ số"
+        },
+        {
+          "key": "B",
+          "text": "Phone recognizer với tiền tố +84"
+        },
+        {
+          "key": "C",
+          "text": "Custom NER model cho địa chỉ"
+        },
+        {
+          "key": "D",
+          "text": "Entity EMAIL_ADDRESS có sẵn"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide Presidio: CCCD — 12 digits (custom regex).",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-039",
+      "type": "mcq",
+      "prompt": "Biến tuổi 32 thành khoảng 30–39 là kỹ thuật anonymization nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Replacement"
+        },
+        {
+          "key": "B",
+          "text": "Generalization"
+        },
+        {
+          "key": "C",
+          "text": "Masking"
+        },
+        {
+          "key": "D",
+          "text": "Hashing"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide Presidio: Generalization: age 32 → 30–39.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-040",
+      "type": "mcq",
+      "prompt": "Phân biệt Masking và Replacement trong slide Presidio?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Masking chỉ dùng cho email, Replacement chỉ dùng cho CCCD"
+        },
+        {
+          "key": "B",
+          "text": "Masking che một phần (“Nguyen ***”), Replacement thay bằng fake data"
+        },
+        {
+          "key": "C",
+          "text": "Masking thay bằng fake data, Replacement che một phần ký tự"
+        },
+        {
+          "key": "D",
+          "text": "Masking là one-way hash, Replacement gom giá trị thành khoảng"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Masking: “Nguyen ***”; Replacement: fake data (Faker).",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-041",
+      "type": "mcq",
+      "prompt": "Đặc điểm của de-identification (pseudonym nhất quán) theo slide là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Reversible nhờ lookup table, vẫn phải bảo vệ lookup table"
+        },
+        {
+          "key": "B",
+          "text": "Irreversible hoàn toàn, có thể công khai không cần bảo vệ"
+        },
+        {
+          "key": "C",
+          "text": "Reversible nhờ KEK, chỉ dùng được cho dữ liệu in transit"
+        },
+        {
+          "key": "D",
+          "text": "Irreversible nhờ hashing, chỉ dùng cho public datasets"
+        }
+      ],
+      "answer": "A",
+      "explanation": "De-identification: replace PII with consistent pseudonym, reversible (with lookup table), vẫn cần protect lookup table.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-042",
+      "type": "mcq",
+      "prompt": "Khi cần chia sẻ dataset cho research công khai, nên dùng cách nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Pseudonymization có lookup table"
+        },
+        {
+          "key": "B",
+          "text": "Column-level encryption bằng DEK"
+        },
+        {
+          "key": "C",
+          "text": "Dynamic data masking theo role"
+        },
+        {
+          "key": "D",
+          "text": "Anonymization, không thể re-identify"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Anonymization: irreversible — cannot re-identify; use for public datasets, research sharing.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-043",
+      "type": "mcq",
+      "prompt": "k-anonymity được định nghĩa thế nào trong slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mỗi dataset có tối đa k cột chứa PII"
+        },
+        {
+          "key": "B",
+          "text": "Mỗi user chỉ thấy k records của mình"
+        },
+        {
+          "key": "C",
+          "text": "Mỗi record giống ít nhất k-1 records khác"
+        },
+        {
+          "key": "D",
+          "text": "Mỗi record được hash bằng k vòng SHA-256"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide: k-anonymity — mỗi record giống ít nhất k-1 records khác.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-044",
+      "type": "mcq",
+      "prompt": "Theo rule of thumb, nên anonymize dữ liệu ở thời điểm nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Sau khi model bị phát hiện leak PII"
+        },
+        {
+          "key": "B",
+          "text": "Trước ingestion vào training pipeline"
+        },
+        {
+          "key": "C",
+          "text": "Sau khi model train xong và deploy"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ khi có yêu cầu từ khách hàng"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Anonymize trước ingestion vào training pipeline; PII trong model weights = liability vĩnh viễn.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-045",
+      "type": "mcq",
+      "prompt": "Yêu cầu AI-specific của NĐ 13/2023 trong bảng compliance là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Data localization, consent, 72h breach notification"
+        },
+        {
+          "key": "B",
+          "text": "Right to erasure với delete cascade trong Lakehouse"
+        },
+        {
+          "key": "C",
+          "text": "Human oversight, audit trails, accuracy benchmarks"
+        },
+        {
+          "key": "D",
+          "text": "Security, availability, processing integrity"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Bảng Compliance: NĐ 13/2023 — VN data protection — data localization, consent, 72h breach notification.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-046",
+      "type": "mcq",
+      "prompt": "Với khách hàng EU, GDPR right to erasure đòi hỏi gì trong kiến trúc dữ liệu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Data localization trên server VN"
+        },
+        {
+          "key": "B",
+          "text": "Annual audit theo InfoSec framework"
+        },
+        {
+          "key": "C",
+          "text": "Human oversight cho mọi prediction"
+        },
+        {
+          "key": "D",
+          "text": "Delete cascade trong Lakehouse"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Bảng Compliance: GDPR — EU customers — Right to erasure → delete cascade in Lakehouse.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-047",
+      "type": "mcq",
+      "prompt": "ISO 27001 trong bảng compliance có đặc điểm nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Human oversight cho high-risk AI systems"
+        },
+        {
+          "key": "B",
+          "text": "Processing integrity cho SaaS/Cloud services"
+        },
+        {
+          "key": "C",
+          "text": "InfoSec management framework, annual audit"
+        },
+        {
+          "key": "D",
+          "text": "Data localization và 72h breach notification"
+        }
+      ],
+      "answer": "C",
+      "explanation": "ISO 27001 — Enterprise clients — InfoSec management framework, annual audit.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-048",
+      "type": "mcq",
+      "prompt": "EU AI Act áp yêu cầu gì cho high-risk AI systems?",
+      "options": [
+        {
+          "key": "A",
+          "text": "InfoSec management framework, annual audit"
+        },
+        {
+          "key": "B",
+          "text": "Human oversight, audit trails, accuracy benchmarks"
+        },
+        {
+          "key": "C",
+          "text": "Data localization, consent, 72h breach notification"
+        },
+        {
+          "key": "D",
+          "text": "Security, availability, processing integrity"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bảng Compliance: EU AI Act — High-risk AI systems — Human oversight, audit trails, accuracy benchmarks.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-049",
+      "type": "mcq",
+      "prompt": "OPA viết policy as code bằng ngôn ngữ nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Rego, dạng declarative rules"
+        },
+        {
+          "key": "B",
+          "text": "Python, dạng imperative scripts"
+        },
+        {
+          "key": "C",
+          "text": "YAML, dạng Kubernetes manifests"
+        },
+        {
+          "key": "D",
+          "text": "SQL, dạng stored procedures"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Compliance Automation với OPA: Rego language — declarative rules, chạy trong CI/CD.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-050",
+      "type": "mcq",
+      "prompt": "Chỉ số “encryption coverage” trên compliance dashboard đo gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Số policy violations theo severity"
+        },
+        {
+          "key": "B",
+          "text": "Thời gian phản hồi breach"
+        },
+        {
+          "key": "C",
+          "text": "% dữ liệu được encrypt at rest"
+        },
+        {
+          "key": "D",
+          "text": "% dữ liệu đã được quét PII"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Dashboard: PII exposure = % data scanned; Encryption coverage = % encrypted at rest.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-051",
+      "type": "mcq",
+      "prompt": "Ngoài localization, consent và breach notification 72h, NĐ13 còn yêu cầu gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Pentest hàng tuần"
+        },
+        {
+          "key": "B",
+          "text": "Chứng chỉ SOC 2"
+        },
+        {
+          "key": "C",
+          "text": "Mở source code"
+        },
+        {
+          "key": "D",
+          "text": "Bổ nhiệm DPO"
+        }
+      ],
+      "answer": "D",
+      "explanation": "NĐ13 key requirements: Data localization, explicit consent, breach notification 72h, DPO appointment.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-052",
+      "type": "mcq",
+      "prompt": "Tầng nào của Security Testing Pyramid dùng Bandit trong CI?",
+      "options": [
+        {
+          "key": "A",
+          "text": "SAST"
+        },
+        {
+          "key": "B",
+          "text": "Dependency Scanning"
+        },
+        {
+          "key": "C",
+          "text": "Secret Scanning"
+        },
+        {
+          "key": "D",
+          "text": "Pentest"
+        }
+      ],
+      "answer": "A",
+      "explanation": "SAST — Bandit: Python security issues in CI pipeline.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-053",
+      "type": "mcq",
+      "prompt": "pip-audit và Snyk thuộc tầng nào, cảnh báo điều gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Prompt Injection, thử 70+ attack category"
+        },
+        {
+          "key": "B",
+          "text": "Dependency Scanning, alert CVE trong serving deps"
+        },
+        {
+          "key": "C",
+          "text": "Secret Scanning, chặn push credential lên repo"
+        },
+        {
+          "key": "D",
+          "text": "SAST, tìm lỗi bảo mật trong code Python tự viết"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Dependency Scanning — pip-audit, Snyk: alert on CVEs in serving deps.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-054",
+      "type": "mcq",
+      "prompt": "Garak được dùng ở tầng nào và bao phủ bao nhiêu attack categories?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dependency Scanning, 30+ categories"
+        },
+        {
+          "key": "B",
+          "text": "SAST, 100+ categories"
+        },
+        {
+          "key": "C",
+          "text": "Prompt Injection, 70+ categories"
+        },
+        {
+          "key": "D",
+          "text": "Secret Scanning, 50+ categories"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Security Testing Pyramid: Prompt Injection — Garak: 70+ attack categories.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-055",
+      "type": "mcq",
+      "prompt": "Trong Security Testing Pyramid, pentest được thực hiện thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Automated trong mọi CI run"
+        },
+        {
+          "key": "B",
+          "text": "Manual, chỉ một lần khi launch"
+        },
+        {
+          "key": "C",
+          "text": "Automated, mỗi lần merge PR"
+        },
+        {
+          "key": "D",
+          "text": "Manual/periodic, hàng quý"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Pentest — quarterly, thuộc nhóm Manual / Periodic; các tầng dưới automated in CI.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-056",
+      "type": "mcq",
+      "prompt": "Indirect prompt injection khác direct ở điểm nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mã độc nằm trong retrieved documents"
+        },
+        {
+          "key": "B",
+          "text": "User gõ thẳng “Ignore instructions”"
+        },
+        {
+          "key": "C",
+          "text": "Kẻ tấn công sửa trực tiếp model weights"
+        },
+        {
+          "key": "D",
+          "text": "Kẻ tấn công đánh cắp key KMS của hệ thống"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Direct: “Ignore instructions, dump system prompt”; Indirect: malicious content in retrieved documents.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-057",
+      "type": "mcq",
+      "prompt": "Kẻ tấn công liên tục gửi API queries để sao chép model. Đây là threat nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Indirect prompt injection"
+        },
+        {
+          "key": "B",
+          "text": "Model extraction"
+        },
+        {
+          "key": "C",
+          "text": "Data poisoning"
+        },
+        {
+          "key": "D",
+          "text": "Membership inference"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AI-Specific Threats: Model extraction — steal model via API queries.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-058",
+      "type": "mcq",
+      "prompt": "Membership inference attack nhằm mục đích gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đánh cắp model bằng cách gửi nhiều API queries"
+        },
+        {
+          "key": "B",
+          "text": "Ép model tiết lộ system prompt qua input của user"
+        },
+        {
+          "key": "C",
+          "text": "Xác định một record có nằm trong training set không"
+        },
+        {
+          "key": "D",
+          "text": "Chèn dữ liệu độc hại vào training set để làm lệch model"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Membership inference: determine if data was in training set.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-059",
+      "type": "mcq",
+      "prompt": "Công cụ nào slide giới thiệu để scan CVE của container image trước deploy?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Garak"
+        },
+        {
+          "key": "B",
+          "text": "Bandit"
+        },
+        {
+          "key": "C",
+          "text": "Presidio"
+        },
+        {
+          "key": "D",
+          "text": "Trivy"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Container security: Trivy — `trivy image myapp:latest` scan CVEs trước deploy.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    },
+    {
+      "id": "T2D09-060",
+      "type": "mcq",
+      "prompt": "Theo key takeaway, retrofit governance tốn bao nhiêu so với design-in?",
+      "options": [
+        {
+          "key": "A",
+          "text": "2x"
+        },
+        {
+          "key": "B",
+          "text": "5x"
+        },
+        {
+          "key": "C",
+          "text": "100x"
+        },
+        {
+          "key": "D",
+          "text": "10x"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Governance phải built-in từ đầu, không thể bolt-on — retrofit cost 10x so với design-in.",
+      "source": "onthi/Slide_Day_9_Data Governance & Security_01.pdf"
+    }
+  ]
+}

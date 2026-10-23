@@ -1,0 +1,1835 @@
+{
+  "id": "track2-day2",
+  "title": "Track 2 · Ngày 2",
+  "description": "Bộ đề Track 2 Ngày 2: 60 câu trắc nghiệm và 10 câu tự luận, biên soạn từ slide cùng ngày.",
+  "course": "track2",
+  "kind": "daily",
+  "day": 2,
+  "label": "Ngày 2",
+  "durationMinutes": 90,
+  "totalPoints": 100,
+  "passingScore": 70,
+  "disclaimer": "Bộ đề ôn tập Track 2, tham khảo từ slide cùng ngày; không phải đề thi chính thức.",
+  "questions": [
+    {
+      "id": "T2D02-001",
+      "type": "mcq",
+      "prompt": "Trên bản đồ công nghệ data engineering 2026, Debezium, Airbyte, Fivetran và Kafka Connect thuộc tầng nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vận chuyển"
+        },
+        {
+          "key": "B",
+          "text": "Điều phối"
+        },
+        {
+          "key": "C",
+          "text": "Biến đổi"
+        },
+        {
+          "key": "D",
+          "text": "Ingestion"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Bản đồ xếp bốn công cụ này vào tầng Ingestion; Kafka/Redpanda/Pulsar mới là tầng Vận chuyển.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-002",
+      "type": "mcq",
+      "prompt": "dbt tests, Great Expectations, Soda và Pandera được xếp vào tầng nào trên bản đồ công nghệ?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chất lượng"
+        },
+        {
+          "key": "B",
+          "text": "Biến đổi"
+        },
+        {
+          "key": "C",
+          "text": "Tính toán"
+        },
+        {
+          "key": "D",
+          "text": "Phục vụ AI"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Bản đồ 2026: tầng Chất lượng gồm dbt tests · Great Expectations · Soda · Pandera.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-003",
+      "type": "mcq",
+      "prompt": "Trong bài toán xuyên suốt (nền tảng AI hỗ trợ khách hàng), ba nguồn dữ liệu vào Bronze là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Kafka tickets, S3 events, Postgres feedback"
+        },
+        {
+          "key": "B",
+          "text": "Postgres tickets, S3 transcripts, Kafka events"
+        },
+        {
+          "key": "C",
+          "text": "Postgres tickets, MySQL orders, Kinesis logs"
+        },
+        {
+          "key": "D",
+          "text": "S3 tickets, Postgres transcripts, Kafka orders"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Tickets qua CDC Debezium, transcripts JSON đổ hằng giờ lên S3, events click + feedback qua Kafka.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-004",
+      "type": "mcq",
+      "prompt": "Vì sao bài toán xuyên suốt cần tới ba bảng Gold thay vì một?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Để chia tải đọc đều ra cho ba cụm máy tính khác nhau"
+        },
+        {
+          "key": "B",
+          "text": "Vì một bảng Gold chỉ được phép chứa tối đa một schema"
+        },
+        {
+          "key": "C",
+          "text": "Ba consumer AI hiểu chữ “sạch” theo ba kiểu khác nhau"
+        },
+        {
+          "key": "D",
+          "text": "Mỗi nguồn dữ liệu bắt buộc phải có một bảng Gold riêng"
+        }
+      ],
+      "answer": "C",
+      "explanation": "RAG index, classifier và routing agent có định nghĩa “sạch” mâu thuẫn nhau, nên Gold không bao giờ là một bảng.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-005",
+      "type": "mcq",
+      "prompt": "Tầng Bronze cam kết điều gì với người đọc?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dữ liệu đã khử trùng lặp và đúng kiểu"
+        },
+        {
+          "key": "B",
+          "text": "Mỗi hàng tương ứng đúng một thực thể"
+        },
+        {
+          "key": "C",
+          "text": "Dữ liệu đã được che PII trước khi lưu"
+        },
+        {
+          "key": "D",
+          "text": "Dữ liệu y hệt lúc rời nguồn, chỉ INSERT"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Bronze: chỉ INSERT, không UPDATE, không DELETE; không cam kết sạch — và đó là chủ ý.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-006",
+      "type": "mcq",
+      "prompt": "Một ticket trong nguồn có priority là 'HIGH ' (thừa dấu cách). Ở Bronze phải làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Lưu nguyên giá trị như nguồn gửi"
+        },
+        {
+          "key": "B",
+          "text": "Trim dấu cách rồi mới ghi vào bảng"
+        },
+        {
+          "key": "C",
+          "text": "Bỏ bản ghi vì giá trị không hợp lệ"
+        },
+        {
+          "key": "D",
+          "text": "Đổi về chữ thường cho đồng nhất"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Bronze “nguyên bản”: thừa dấu cách, gửi trùng 3 lần, trường lạ — đều lưu nguyên.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-007",
+      "type": "mcq",
+      "prompt": "Cột _kafka_offset trong bảng bronze_tickets có mục đích chính là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Để đếm số lần retry của Airflow"
+        },
+        {
+          "key": "B",
+          "text": "Để replay lại dữ liệu khi cần"
+        },
+        {
+          "key": "C",
+          "text": "Để làm khoá chính cho tầng Silver"
+        },
+        {
+          "key": "D",
+          "text": "Để partition bảng theo thời gian"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide chú thích: _kafka_offset BIGINT -- de replay; Bronze mang dấu vết đường đi của dữ liệu.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-008",
+      "type": "mcq",
+      "prompt": "Logic Silver viết sai, 2 tháng sau mới phát hiện, nhưng Bronze đã bị “làm sạch”. Vì sao không cứu được?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Kafka không cho phép đọc lại offset"
+        },
+        {
+          "key": "B",
+          "text": "dbt không hỗ trợ chạy lại bảng cũ"
+        },
+        {
+          "key": "C",
+          "text": "Postgres chỉ còn trạng thái hôm nay"
+        },
+        {
+          "key": "D",
+          "text": "Silver đã tự xoá sau đúng 30 ngày"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Nếu Bronze còn nguyên: xoá Silver, chạy lại 20 phút. Bronze đã sửa → nguồn không có lịch sử 2 tháng.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-009",
+      "type": "mcq",
+      "prompt": "Bronze có 3 hàng cho ticket T-91 (1 create, 2 update). Analyst đếm số ticket tháng này trên Bronze sẽ gặp gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ra 1, đúng với thực tế của nguồn"
+        },
+        {
+          "key": "B",
+          "text": "Ra 2, vì bỏ qua thao tác create"
+        },
+        {
+          "key": "C",
+          "text": "Ra 0, vì Bronze không có khoá"
+        },
+        {
+          "key": "D",
+          "text": "Ra 3, trong khi thực tế chỉ có 1"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Bronze mỗi hàng = một lần thay đổi; Silver mỗi hàng = một ticket. Thiếu Silver thì mọi người dùng tầng sau đếm sai.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-010",
+      "type": "mcq",
+      "prompt": "Một “Silver” chỉ là SELECT * FROM bronze WHERE user_id IS NOT NULL nên được đánh giá thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Nên đổi sang materialization view"
+        },
+        {
+          "key": "B",
+          "text": "Layer thừa, xoá đi cho nhanh và rẻ"
+        },
+        {
+          "key": "C",
+          "text": "Silver chuẩn, vì đã lọc giá trị NULL"
+        },
+        {
+          "key": "D",
+          "text": "Nên giữ, vì nó chính là bảng Gold"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Nó không cam kết thêm điều gì so với Bronze; xoá đi pipeline nhanh hơn và rẻ hơn.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-011",
+      "type": "mcq",
+      "prompt": "Bảng Silver không có khoá, chỉ INSERT. Airflow retry lúc 3 giờ sáng thì hậu quả là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dữ liệu nhân đôi mà không báo lỗi"
+        },
+        {
+          "key": "B",
+          "text": "Task fail ngay vì trùng khoá chính"
+        },
+        {
+          "key": "C",
+          "text": "Airflow tự rollback lần chạy trước"
+        },
+        {
+          "key": "D",
+          "text": "Bảng bị khoá cho tới khi có người xử lý"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Có khoá → MERGE, chạy 1 hay 10 lần vẫn 1 hàng; không khoá → retry nhân đôi, lần nữa nhân ba, không gì báo lỗi.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-012",
+      "type": "mcq",
+      "prompt": "Upstream đổi priority từ số sang chuỗi, Silver không ép kiểu. Slide cảnh báo điều gì xảy ra?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Pipeline fail ngay ở bước đọc từ Bronze"
+        },
+        {
+          "key": "B",
+          "text": "Debezium dừng replication slot tự động"
+        },
+        {
+          "key": "C",
+          "text": "dbt tự chuyển cột về kiểu số ban đầu"
+        },
+        {
+          "key": "D",
+          "text": "Pipeline chạy êm, vài tuần sau số liệu lạ"
+        }
+      ],
+      "answer": "D",
+      "explanation": "“Đúng kiểu”: không ép kiểu thì pipeline chạy êm, 3 tuần sau mới có người thấy dashboard ra số lạ.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-013",
+      "type": "mcq",
+      "prompt": "Vì sao PII phải được xử lý xong ở Silver?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bronze tự động mã hoá PII khi ingest vào"
+        },
+        {
+          "key": "B",
+          "text": "Feature store chỉ nhận dữ liệu dạng số"
+        },
+        {
+          "key": "C",
+          "text": "Qua Silver dữ liệu toả ra, không gom lại được"
+        },
+        {
+          "key": "D",
+          "text": "Gold không có quyền đọc các cột chứa PII"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Silver là ranh giới cuối: sau đó dữ liệu toả ra Gold, feature store, vector DB, CSV export.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-014",
+      "type": "mcq",
+      "prompt": "Với gold_doc_chunks (consumer: RAG index), cam kết sống còn là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Một hàng là một user nhân với một ngày"
+        },
+        {
+          "key": "B",
+          "text": "Chunk ổn định và ghim version model embedding"
+        },
+        {
+          "key": "C",
+          "text": "Snapshot bất biến, có version cho mỗi tháng"
+        },
+        {
+          "key": "D",
+          "text": "Point-in-time đúng, không rò rỉ tương lai"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Đổi model mà không ghim → index trộn hai hệ toạ độ vector, kết quả nhiễu.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-015",
+      "type": "mcq",
+      "prompt": "gold_training_set cho classifier cần cam kết gì để trả lời được “model đã học từ tập nào”?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Snapshot bất biến, có version"
+        },
+        {
+          "key": "B",
+          "text": "Chunk ổn định, ghim embedding"
+        },
+        {
+          "key": "C",
+          "text": "Point-in-time join theo ngày"
+        },
+        {
+          "key": "D",
+          "text": "Cập nhật liên tục theo stream"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Thiếu snapshot có version thì tháng sau model tụt điểm không truy được tập huấn luyện.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-016",
+      "type": "mcq",
+      "prompt": "gold_feature_daily dùng feature 12-08 nhưng lỡ dính nhãn sinh ra ngày 15-08. Hậu quả?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Fail ngay ở bước build của dbt"
+        },
+        {
+          "key": "B",
+          "text": "Kafka từ chối message tới muộn"
+        },
+        {
+          "key": "C",
+          "text": "Index RAG trộn hai hệ toạ độ"
+        },
+        {
+          "key": "D",
+          "text": "Đẹp lúc test, sập lúc production"
+        }
+      ],
+      "answer": "D",
+      "explanation": "gold_feature_daily cam kết point-in-time đúng, không rò rỉ tương lai.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-017",
+      "type": "mcq",
+      "prompt": "Debezium đọc thay đổi từ Postgres và MySQL bằng cơ chế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Query theo updated_at; slow query log"
+        },
+        {
+          "key": "B",
+          "text": "Snapshot định kỳ; redo log của InnoDB"
+        },
+        {
+          "key": "C",
+          "text": "Logical replication trên WAL; binlog"
+        },
+        {
+          "key": "D",
+          "text": "Trigger trên từng bảng; general log"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Debezium giả làm một replica nên gần như không thêm tải truy vấn.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-018",
+      "type": "mcq",
+      "prompt": "Nhóm có nhiều nguồn SaaS lặt vặt và ngân sách hẹp nên chọn công cụ ingestion nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Temporal"
+        },
+        {
+          "key": "B",
+          "text": "Airbyte"
+        },
+        {
+          "key": "C",
+          "text": "Fivetran"
+        },
+        {
+          "key": "D",
+          "text": "Debezium"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Airbyte: mã nguồn mở, rất nhiều connector; trả giá là connector chất lượng không đều.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-019",
+      "type": "mcq",
+      "prompt": "Điểm trả giá chính của Fivetran theo slide là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Giá theo số dòng, khó dự đoán"
+        },
+        {
+          "key": "B",
+          "text": "Connector chất lượng không đều"
+        },
+        {
+          "key": "C",
+          "text": "Phải tự trông replication slot"
+        },
+        {
+          "key": "D",
+          "text": "Phải hiểu và vận hành Connect cluster"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Fivetran là SaaS quản lý trọn gói: hết việc vận hành nhưng giá theo số dòng.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-020",
+      "type": "mcq",
+      "prompt": "Avro được dùng ở chặng nào trong pipeline?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Trên đường truyền — message Kafka"
+        },
+        {
+          "key": "B",
+          "text": "Khi lưu — mọi bảng trong lake"
+        },
+        {
+          "key": "C",
+          "text": "Trong RAM — trao đổi giữa engine"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ ở rìa hệ thống, ngắn hạn"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Avro theo hàng, có schema, ghi nhanh, tiến hoá schema là tính năng gốc.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-021",
+      "type": "mcq",
+      "prompt": "Vì sao Parquet là định dạng lưu trữ cho mọi bảng trong lake?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Nằm trong RAM, không cần serialize lại"
+        },
+        {
+          "key": "B",
+          "text": "Theo cột, chỉ đọc cột cần, pushdown được"
+        },
+        {
+          "key": "C",
+          "text": "Theo hàng, ghi nhanh, tiến hoá schema tốt"
+        },
+        {
+          "key": "D",
+          "text": "Văn bản thuần, người đọc được, dễ parse"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Parquet theo cột, nén mạnh, đẩy được điều kiện lọc xuống file.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-022",
+      "type": "mcq",
+      "prompt": "Đọc Parquet bằng DuckDB rồi đưa sang Polars không tốn lần chuyển đổi nào là nhờ đâu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Polars tự gọi DuckDB qua JDBC driver"
+        },
+        {
+          "key": "B",
+          "text": "DuckDB ghi tạm ra JSON nén gzip"
+        },
+        {
+          "key": "C",
+          "text": "Cả hai cùng dùng Arrow trong bộ nhớ"
+        },
+        {
+          "key": "D",
+          "text": "Cả hai cùng đọc Avro từ Kafka topic"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Arrow theo cột trong bộ nhớ; trước Arrow mỗi lần đổi công cụ là một lần serialize lại.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-023",
+      "type": "mcq",
+      "prompt": "Vì sao không nên lưu Bronze bằng JSON nén gzip “cho tiện”?",
+      "options": [
+        {
+          "key": "A",
+          "text": "JSON gzip không lưu được trường lạ"
+        },
+        {
+          "key": "B",
+          "text": "Gzip làm mất thứ tự các thay đổi CDC"
+        },
+        {
+          "key": "C",
+          "text": "Kafka Connect không ghi được JSON"
+        },
+        {
+          "key": "D",
+          "text": "Lọc một cột phải giải nén, parse toàn bộ"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Sáu tháng sau một truy vấn lọc một cột phải giải nén và parse toàn bộ lịch sử — hoá đơn sẽ nhắc bạn.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-024",
+      "type": "mcq",
+      "prompt": "Trong dbt, ba tầng model staging → intermediate → marts lần lượt làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "1:1 nguồn; join và nghiệp vụ; bảng Gold"
+        },
+        {
+          "key": "B",
+          "text": "Join nguồn; làm sạch nhẹ; bảng Bronze"
+        },
+        {
+          "key": "C",
+          "text": "Bảng Gold; join nguồn; làm sạch 1:1"
+        },
+        {
+          "key": "D",
+          "text": "Làm sạch; bảng Gold; join và nghiệp vụ"
+        }
+      ],
+      "answer": "A",
+      "explanation": "staging 1:1 với nguồn, làm sạch nhẹ; intermediate join + logic nghiệp vụ; marts là bảng Gold cuối.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-025",
+      "type": "mcq",
+      "prompt": "Vì sao dbt biết thứ tự chạy các model mà bạn không cần khai báo?",
+      "options": [
+        {
+          "key": "A",
+          "text": "contract khai báo thứ tự chạy"
+        },
+        {
+          "key": "B",
+          "text": "ref() tự sinh đồ thị phụ thuộc"
+        },
+        {
+          "key": "C",
+          "text": "is_incremental() sắp xếp thứ tự"
+        },
+        {
+          "key": "D",
+          "text": "unique_key định nghĩa phụ thuộc"
+        }
+      ],
+      "answer": "B",
+      "explanation": "{{ ref() }} giữa các model tạo ra DAG phụ thuộc.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-026",
+      "type": "mcq",
+      "prompt": "Bật contract: { enforced: true } trên silver_tickets mang lại điều gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tự sinh test unique cho mọi cột khoá"
+        },
+        {
+          "key": "B",
+          "text": "Tự backfill phần bị ảnh hưởng khi sửa"
+        },
+        {
+          "key": "C",
+          "text": "Sai kiểu dữ liệu thì fail ngay lúc build"
+        },
+        {
+          "key": "D",
+          "text": "Tự động ép kiểu cột về varchar khi chạy"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Contract kiểm lúc build — không phải lúc tình cờ phát hiện dashboard sai.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-027",
+      "type": "mcq",
+      "prompt": "Khác biệt giữa incremental_strategy = 'merge' và 'delete+insert'?",
+      "options": [
+        {
+          "key": "A",
+          "text": "merge ghi đè cả bảng; delete+insert là upsert"
+        },
+        {
+          "key": "B",
+          "text": "merge chỉ thêm hàng mới; delete+insert xoá bảng"
+        },
+        {
+          "key": "C",
+          "text": "merge cần partition; delete+insert cần unique_key"
+        },
+        {
+          "key": "D",
+          "text": "merge là upsert; delete+insert ghi đè cả phân vùng"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide: merge = upsert; delete+insert = ghi đè cả phân vùng.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-028",
+      "type": "mcq",
+      "prompt": "SQLMesh khác dbt ở cách hiểu SQL như thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Parse thành cây, lineage tới từng cột"
+        },
+        {
+          "key": "B",
+          "text": "Xử lý SQL như văn bản cộng với Jinja"
+        },
+        {
+          "key": "C",
+          "text": "Dịch SQL sang Python rồi mới chạy"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ đọc comment trong file SQL"
+        }
+      ],
+      "answer": "A",
+      "explanation": "dbt xử lý SQL như văn bản + Jinja; SQLMesh phân tích cú pháp → lineage cột, tự phân loại breaking.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-029",
+      "type": "mcq",
+      "prompt": "Môi trường dev của SQLMesh rẻ hơn dbt vì sao?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bỏ qua test khi chạy ở dev"
+        },
+        {
+          "key": "B",
+          "text": "Virtual environment chỉ tạo view"
+        },
+        {
+          "key": "C",
+          "text": "Build lại toàn bộ schema riêng"
+        },
+        {
+          "key": "D",
+          "text": "Dùng DuckDB thay cho warehouse"
+        }
+      ],
+      "answer": "B",
+      "explanation": "SQLMesh virtual environment tạo view, gần như không tốn tính toán; dbt thường build lại schema riêng.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-030",
+      "type": "mcq",
+      "prompt": "Theo slide, điểm chung quan trọng nhất giữa dbt và SQLMesh là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cùng phân tích SQL thành cây tới từng cột"
+        },
+        {
+          "key": "B",
+          "text": "Cùng tạo virtual environment bằng view"
+        },
+        {
+          "key": "C",
+          "text": "Cùng có hệ sinh thái và cộng đồng rất lớn"
+        },
+        {
+          "key": "D",
+          "text": "Coi transform là code có version, test, review"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Điểm chung quan trọng hơn khác biệt: thay vì tập script SQL trong thư mục dùng chung.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-031",
+      "type": "mcq",
+      "prompt": "Vì sao transform phải idempotent?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Để dbt có thể chạy song song"
+        },
+        {
+          "key": "B",
+          "text": "Để giảm dung lượng lưu trữ"
+        },
+        {
+          "key": "C",
+          "text": "Mọi hệ thống đều là at-least-once"
+        },
+        {
+          "key": "D",
+          "text": "Mọi hệ thống đều là exactly-once"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Airflow retry, người bấm Clear Task, backfill chồng lịch, consumer restart — chạy N lần phải cùng trạng thái.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-032",
+      "type": "mcq",
+      "prompt": "Kỹ thuật idempotent “overwrite partition” (DELETE ngày X rồi INSERT lại) hợp khi nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không sửa được tầng ghi"
+        },
+        {
+          "key": "B",
+          "text": "Có cột thời gian rõ ràng"
+        },
+        {
+          "key": "C",
+          "text": "Bản ghi bị sửa về sau qua CDC"
+        },
+        {
+          "key": "D",
+          "text": "Nguồn không có khoá ổn định"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Overwrite partition rẻ nhất, đơn giản nhất, hợp khi có cột thời gian rõ ràng.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-033",
+      "type": "mcq",
+      "prompt": "Nguồn không có khoá ổn định, dùng md5(payload) làm khoá. Cái giá là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Hash đổi khi format thay đổi"
+        },
+        {
+          "key": "B",
+          "text": "Trả giá mỗi lần đọc dữ liệu"
+        },
+        {
+          "key": "C",
+          "text": "Cần một khoá nghiệp vụ tin cậy"
+        },
+        {
+          "key": "D",
+          "text": "Phải xoá phân vùng mỗi ngày"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Content hash: hợp khi nguồn không có khoá ổn định; trả giá: hash đổi khi format đổi.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-034",
+      "type": "mcq",
+      "prompt": "Không sửa được tầng ghi, bạn chọn dedup on read bằng row_number(). Nhược điểm?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Hash đổi khi format đổi"
+        },
+        {
+          "key": "B",
+          "text": "Cần cột thời gian rõ"
+        },
+        {
+          "key": "C",
+          "text": "Mất bản ghi bị xoá"
+        },
+        {
+          "key": "D",
+          "text": "Trả giá mỗi lần đọc"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Dedup on read giữ bản mới nhất bằng row_number() nhưng tốn chi phí ở mỗi lần đọc.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-035",
+      "type": "mcq",
+      "prompt": "Theo slide, cặp kỹ thuật idempotent mặc định phủ gần hết trường hợp thực tế là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dedup on read cho bảng ngày, overwrite cho bảng thực thể"
+        },
+        {
+          "key": "B",
+          "text": "Content hash cho bảng ngày, dedup on read cho thực thể"
+        },
+        {
+          "key": "C",
+          "text": "Overwrite partition cho bảng ngày, MERGE cho bảng thực thể"
+        },
+        {
+          "key": "D",
+          "text": "MERGE cho bảng ngày, content hash cho bảng thực thể"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Mặc định: overwrite partition cho bảng theo ngày · MERGE cho bảng thực thể.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-036",
+      "type": "mcq",
+      "prompt": "Người dùng bấm “không hài lòng” sau 3 ngày làm nhãn ticket 08-12 đổi. Với snapshot training cũ nên làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bỏ ticket đó khỏi mọi snapshot"
+        },
+        {
+          "key": "B",
+          "text": "Giữ nguyên, tạo version mới"
+        },
+        {
+          "key": "C",
+          "text": "Sửa trực tiếp nhãn trong đó"
+        },
+        {
+          "key": "D",
+          "text": "Xoá snapshot, build lại từ Silver"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Đừng sửa snapshot training cũ — tạo version mới.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-037",
+      "type": "mcq",
+      "prompt": "SCD Type 2 giữ lịch sử ticket bằng các cột nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "valid_from · valid_to · is_current"
+        },
+        {
+          "key": "B",
+          "text": "_op · _ingested_at · _batch_id"
+        },
+        {
+          "key": "C",
+          "text": "event_date · updated_at · label"
+        },
+        {
+          "key": "D",
+          "text": "_source · _payload · _kafka_offset"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Mỗi lần đổi sinh một hàng mới với valid_from, valid_to, is_current; join theo point-in-time.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-038",
+      "type": "mcq",
+      "prompt": "Bảng overwrite chỉ giữ priority hiện tại; training set gán nhãn theo trạng thái hôm nay. Lỗi này gọi là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Data skew khi shuffle"
+        },
+        {
+          "key": "B",
+          "text": "Small-file problem"
+        },
+        {
+          "key": "C",
+          "text": "Schema drift ở upstream"
+        },
+        {
+          "key": "D",
+          "text": "Training-serving skew"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Model học thông tin mà lúc dự đoán thật nó không có — slide gọi là training-serving skew.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-039",
+      "type": "mcq",
+      "prompt": "Cần kiểm payload API và message Kafka từng bản ghi ngay tại biên hệ thống. Chọn công cụ nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Soda"
+        },
+        {
+          "key": "B",
+          "text": "Pandera"
+        },
+        {
+          "key": "C",
+          "text": "Pydantic"
+        },
+        {
+          "key": "D",
+          "text": "dbt tests"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Pydantic kiểm từng bản ghi lúc chạy, bắt sai kiểu ngay tại biên hệ thống.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-040",
+      "type": "mcq",
+      "prompt": "Quy tắc đặt chốt kiểm dữ liệu theo đúng thứ tự là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Sau transform → trước training → sau extract"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ một chốt duy nhất ngay trước training"
+        },
+        {
+          "key": "C",
+          "text": "Sau extract → sau transform → trước training"
+        },
+        {
+          "key": "D",
+          "text": "Trước training → sau extract → sau transform"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Bắt lỗi nguồn → bắt lỗi logic → chốt cuối. Hỏng sớm thì rẻ.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-041",
+      "type": "mcq",
+      "prompt": "Tổ chức lớn cần bộ kỳ vọng dùng chung nhiều team và tài liệu tự sinh nên chọn gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Pydantic trên từng bản ghi"
+        },
+        {
+          "key": "B",
+          "text": "Pandera trong tiến trình Python"
+        },
+        {
+          "key": "C",
+          "text": "dbt tests chạy trong warehouse"
+        },
+        {
+          "key": "D",
+          "text": "Great Expectations / Soda"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Great Expectations/Soda là khung riêng, có báo cáo, hợp tổ chức lớn.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-042",
+      "type": "mcq",
+      "prompt": "DuckDB mạnh nhất ở đâu và trả giá gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Phân tích tới vài trăm GB; không mở rộng ngang"
+        },
+        {
+          "key": "B",
+          "text": "TB đến PB, join bảng lớn; khởi động chậm"
+        },
+        {
+          "key": "C",
+          "text": "Truy vấn liên kho; không chạy transform lịch"
+        },
+        {
+          "key": "D",
+          "text": "Embedding trên GPU; non cho SQL analytics"
+        }
+      ],
+      "answer": "A",
+      "explanation": "DuckDB: trong tiến trình, một máy, vector hoá, đọc thẳng Parquet trên S3.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-043",
+      "type": "mcq",
+      "prompt": "Việc nặng là embed 10 triệu chunk cho RAG trên GPU. Engine nào phù hợp?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Spark SQL"
+        },
+        {
+          "key": "B",
+          "text": "Ray Data"
+        },
+        {
+          "key": "C",
+          "text": "Trino"
+        },
+        {
+          "key": "D",
+          "text": "DuckDB"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Ray Data: phân tán, thuần Python, batch inference/embedding trên GPU.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-044",
+      "type": "mcq",
+      "prompt": "Cần đối chiếu nhanh lake trên S3 với Postgres sản xuất mà không di chuyển data. Chọn engine nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ray Data"
+        },
+        {
+          "key": "B",
+          "text": "DuckDB"
+        },
+        {
+          "key": "C",
+          "text": "Trino"
+        },
+        {
+          "key": "D",
+          "text": "Polars"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Trino: MPP, truy vấn liên kho S3 + Postgres + Kafka; không phải nơi chạy transform theo lịch.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-045",
+      "type": "mcq",
+      "prompt": "Theo cây quyết định, mỗi lần chạy 10–500 GB (không vừa RAM, chưa tới 1 TB) nên dùng gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Spark trên cụm dùng chung nhiều team"
+        },
+        {
+          "key": "B",
+          "text": "Polars trên laptop của từng kỹ sư"
+        },
+        {
+          "key": "C",
+          "text": "Trino trên ba kho dữ liệu khác nhau"
+        },
+        {
+          "key": "D",
+          "text": "DuckDB tràn đĩa trên máy RAM lớn"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Vừa RAM <10 GB → DuckDB/Polars; 10–500 GB → DuckDB out-of-core; >1 TB/join lớn → Spark.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-046",
+      "type": "mcq",
+      "prompt": "Cụm Spark 10 node xử lý 8 GB thường chậm hơn DuckDB một máy. Vì sao?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Thời gian trôi vào lập lịch và shuffle"
+        },
+        {
+          "key": "B",
+          "text": "Spark không đọc được Parquet trên S3"
+        },
+        {
+          "key": "C",
+          "text": "DuckDB tự chia dữ liệu ra nhiều node"
+        },
+        {
+          "key": "D",
+          "text": "JVM không hỗ trợ vector hoá cột"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Cái bẫy “distributed by default”: bắt đầu từ một máy, chỉ lên cụm khi đã đo và thấy chật.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-047",
+      "type": "mcq",
+      "prompt": "Khoá idempotent đúng cho gold_doc_chunks để tránh embed lại toàn bộ là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "doc_id + thời điểm chạy embedding"
+        },
+        {
+          "key": "B",
+          "text": "hash(text) + embedding_model_version"
+        },
+        {
+          "key": "C",
+          "text": "chunk_id + _ingested_at của Bronze"
+        },
+        {
+          "key": "D",
+          "text": "hash(text) + _batch_id của lần chạy"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Đổi model thì re-embed toàn bộ có chủ đích, không trộn hai version trong một index.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-048",
+      "type": "mcq",
+      "prompt": "Polars được mô tả thế nào trong bảng năm engine?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Phân tán JVM; vận hành cụm, khởi động chậm"
+        },
+        {
+          "key": "B",
+          "text": "Thuần Python trên GPU; non cho SQL"
+        },
+        {
+          "key": "C",
+          "text": "DataFrame Rust, lazy; hệ sinh thái còn trẻ"
+        },
+        {
+          "key": "D",
+          "text": "MPP liên kho; không chạy transform lịch"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Polars thay thế pandas; ETL bằng Python nhanh hơn nhiều lần.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-049",
+      "type": "mcq",
+      "prompt": "Kafka topic được ví là “Bronze có hạn sử dụng”. Replay trong Kafka nghĩa là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Xoá topic rồi tạo lại"
+        },
+        {
+          "key": "B",
+          "text": "Tăng số partition"
+        },
+        {
+          "key": "C",
+          "text": "Đổi consumer group"
+        },
+        {
+          "key": "D",
+          "text": "Đọc lại từ offset cũ"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Topic bất biến, chỉ ghi thêm; offset là vị trí đọc riêng của từng consumer group.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-050",
+      "type": "mcq",
+      "prompt": "Kafka retention 24 giờ nhưng lookback của pipeline là 3 ngày. Hệ quả?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mất thứ tự offset"
+        },
+        {
+          "key": "B",
+          "text": "Không backfill được"
+        },
+        {
+          "key": "C",
+          "text": "Kafka tự gia hạn"
+        },
+        {
+          "key": "D",
+          "text": "Consumer bị trùng"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Retention quyết định bạn replay được bao xa — phát hiện đúng lúc cần nhất.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-051",
+      "type": "mcq",
+      "prompt": "Broker nào viết bằng C++, một binary, tương thích Kafka API, hợp khi muốn độ trễ thấp?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Redpanda"
+        },
+        {
+          "key": "B",
+          "text": "Pulsar"
+        },
+        {
+          "key": "C",
+          "text": "WarpStream"
+        },
+        {
+          "key": "D",
+          "text": "Kinesis"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Redpanda: ít việc vận hành; trả giá là cộng đồng nhỏ hơn.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-052",
+      "type": "mcq",
+      "prompt": "WarpStream dùng object storage làm log, không đĩa cục bộ. Chọn khi nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cần độ trễ dưới một mili giây"
+        },
+        {
+          "key": "B",
+          "text": "Một cụm phục vụ nhiều tenant"
+        },
+        {
+          "key": "C",
+          "text": "Đã ở AWS, muốn bật là chạy"
+        },
+        {
+          "key": "D",
+          "text": "Chi phí quan trọng hơn độ trễ"
+        }
+      ],
+      "answer": "D",
+      "explanation": "WarpStream có độ trễ hàng trăm ms, đổi lại chi phí thấp.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-053",
+      "type": "mcq",
+      "prompt": "Theo slide, thứ thật sự khoá bạn lại khi dùng streaming là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ngôn ngữ viết broker: JVM hay C++"
+        },
+        {
+          "key": "B",
+          "text": "Nhà cung cấp cloud chạy cụm broker"
+        },
+        {
+          "key": "C",
+          "text": "Schema, partition key và consumer đã viết"
+        },
+        {
+          "key": "D",
+          "text": "Lựa chọn broker Kafka hay Redpanda"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Năm broker nói gần như cùng một API; hãy cẩn thận với schema, partition key, consumer.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-054",
+      "type": "mcq",
+      "prompt": "Flink khác Spark Structured Streaming ở mô hình và độ trễ như thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cả hai micro-batch, cùng độ trễ mili giây"
+        },
+        {
+          "key": "B",
+          "text": "Từng sự kiện, mili giây; micro-batch, giây"
+        },
+        {
+          "key": "C",
+          "text": "Micro-batch, giây; từng sự kiện, mili giây"
+        },
+        {
+          "key": "D",
+          "text": "Từng sự kiện, giây; micro-batch, mili giây"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Flink event-at-a-time; Spark Structured Streaming gom lô nhỏ, không đạt được mili giây.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-055",
+      "type": "mcq",
+      "prompt": "Kafka Streams hợp với trường hợp nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chỉ biến đổi Kafka → Kafka"
+        },
+        {
+          "key": "B",
+          "text": "Event-time và state là trung tâm"
+        },
+        {
+          "key": "C",
+          "text": "Một API cho cả batch lẫn stream"
+        },
+        {
+          "key": "D",
+          "text": "Truy vấn xuyên S3 và Postgres"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Kafka Streams là thư viện nhúng trong app Java, state RocksDB cục bộ, không phải cụm riêng.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-056",
+      "type": "mcq",
+      "prompt": "Đâu KHÔNG phải chi phí thật của streaming được liệt kê trong slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Phải quản lý state store"
+        },
+        {
+          "key": "B",
+          "text": "Backpressure khi consumer chậm"
+        },
+        {
+          "key": "C",
+          "text": "Phải trực hệ thống 24/7"
+        },
+        {
+          "key": "D",
+          "text": "Mất bản ghi bị DELETE ở nguồn"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Chi phí: state store, checkpoint/khôi phục, backpressure, trực 24/7, debug khó. Mất DELETE là nhược điểm của polling.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-057",
+      "type": "mcq",
+      "prompt": "Khác biệt lớn nhất giữa Airflow và Dagster là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Airflow có UI, Dagster thì không"
+        },
+        {
+          "key": "B",
+          "text": "Dagster không hỗ trợ lập lịch"
+        },
+        {
+          "key": "C",
+          "text": "Đơn vị tư duy: task so với asset"
+        },
+        {
+          "key": "D",
+          "text": "Ngôn ngữ: Python so với Java"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Airflow hỏi “chạy những bước nào”, Dagster hỏi “những bảng nào phải tồn tại và còn tươi”.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-058",
+      "type": "mcq",
+      "prompt": "Workflow agent AI nhiều bước, kéo dài nhiều ngày, cần retry nằm trong runtime. Chọn gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Prefect"
+        },
+        {
+          "key": "B",
+          "text": "Temporal"
+        },
+        {
+          "key": "C",
+          "text": "Airflow"
+        },
+        {
+          "key": "D",
+          "text": "Dagster"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Temporal: durable execution; không phải scheduler cho data nhưng ngày càng được chọn cho agent.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-059",
+      "type": "mcq",
+      "prompt": "Vì sao backfill phải dùng đúng code path với job daily?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Script riêng thì ra kết quả riêng"
+        },
+        {
+          "key": "B",
+          "text": "Để Airflow tính đúng start_date"
+        },
+        {
+          "key": "C",
+          "text": "Để tránh làm đầy replication slot"
+        },
+        {
+          "key": "D",
+          "text": "Vì Kafka chỉ cho một consumer group"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Backfill dùng script khác = kết quả khác với daily.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-060",
+      "type": "mcq",
+      "prompt": "Airflow bản 3 bổ sung những gì theo slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Lịch theo sự kiện và versioning DAG"
+        },
+        {
+          "key": "B",
+          "text": "Lineage cột và virtual environment"
+        },
+        {
+          "key": "C",
+          "text": "Durable execution và retry trong runtime"
+        },
+        {
+          "key": "D",
+          "text": "Khai báo asset và observability sẵn có"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Airflow: hệ sinh thái provider lớn nhất; bản 3 thêm lịch theo sự kiện và versioning DAG.",
+      "source": "onthi/Slide_Day_2_Data Pipeline Engineering_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D02-TL-01",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Bạn dựng pipeline cho nền tảng AI hỗ trợ khách hàng (Postgres tickets, S3 transcripts, Kafka events) phục vụ RAG index, classifier và routing agent. Thiết kế ba tầng Medallion: nêu cam kết của từng tầng, các cột metadata cần có ở Bronze, và vì sao Gold phải tách thành ba bảng.",
+      "modelAnswer": "- Bronze: nguyên bản, chỉ INSERT, không UPDATE/DELETE, không cam kết sạch (chủ ý); cột _payload, _source, _op (c/u/d), _ingested_at, _batch_id, _kafka_offset để replay.\n- Lý do giữ nguyên: sửa logic Silver sai (chạy lại ~20 phút), retrain trên dữ liệu đúng thời điểm, audit.\n- Silver: 1 hàng = 1 thực thể, có khoá (MERGE), đúng kiểu, hết trùng, PII đã xử lý (ranh giới cuối).\n- Gold: gold_doc_chunks (chunk ổn định + ghim version embedding), gold_training_set (snapshot bất biến có version), gold_feature_daily (user × ngày, point-in-time, không rò rỉ tương lai).\n- Ba consumer có ba định nghĩa “sạch” mâu thuẫn → không bao giờ là một bảng.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D02-TL-02",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Team hiện lấy dữ liệu tickets từ Postgres bằng job polling WHERE updated_at > ? mỗi 5 phút. Phân tích các vấn đề của cách này và đề xuất chuyển sang CDC log-based: cơ chế hoạt động, lợi ích, và rủi ro vận hành cần giám sát.",
+      "modelAnswer": "- Polling: mất bản ghi bị DELETE, mất trạng thái trung gian giữa hai lần poll, thêm tải truy vấn lên DB sản xuất.\n- CDC: Debezium đọc WAL qua logical replication (MySQL: binlog), giả làm replica, đẩy vào Kafka topic; bắt cả INSERT/UPDATE/DELETE đúng thứ tự, gần như không thêm tải truy vấn.\n- Chạy trên Kafka Connect; phù hợp khi cần mọi thay đổi kể cả xoá và cần thứ tự.\n- Rủi ro: phải bật replication slot; slot không được đọc làm đầy đĩa DB gốc → giám sát lag/dung lượng; tự vận hành.\n- Định dạng: Avro trên đường truyền (có Schema Registry), Parquet khi lưu Bronze.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D02-TL-03",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Bạn viết model dbt incremental gold cho ticket. Dữ liệu có thể về muộn (app offline, producer retry, batch upstream chậm, user sửa bản ghi cũ). Hãy viết cấu hình model, giải thích từng dòng quan trọng, và nêu cách chọn độ dài lookback window cùng rủi ro khi --full-refresh.",
+      "modelAnswer": "- config: materialized='incremental', unique_key='ticket_id', incremental_strategy='merge'.\n- unique_key thiếu → nhân đôi mỗi lần chạy lại; merge = upsert (delete+insert ghi đè cả phân vùng); is_incremental() thiếu → quét toàn bộ lịch sử.\n- Điều kiện: where event_date >= max(event_date) from {{ this }} - interval N day.\n- Lookback = P99 của (_ingested_at - event_time), đo từ Bronze, không đoán (ví dụ slide 3 ngày).\n- --full-refresh chỉ an toàn khi Bronze còn đủ lịch sử; nếu Bronze đã xoá theo TTL sẽ dựng bảng thiếu data mà không báo.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D02-TL-04",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Một job Spark aggregate ticket theo customer_id: 200 task xong trong 30 giây nhưng 1 task chạy 40 phút. Chẩn đoán nguyên nhân, cách phát hiện, và đề xuất cách sửa; nêu thêm cách tránh shuffle khi join với bảng nhỏ.",
+      "modelAnswer": "- Nguyên nhân: data skew — một khách hàng doanh nghiệp chiếm ~40% ticket dồn vào một task; thủ phạm phổ biến thứ hai: user_id IS NULL.\n- Phát hiện: nhìn phân bố thời gian task, không nhìn trung bình.\n- Sửa: salting — gộp theo (customer_id, số ngẫu nhiên 0–15) rồi gộp lần hai; xử lý riêng NULL.\n- Shuffle (JOIN, GROUP BY, DISTINCT, ORDER BY) = ghi đĩa → qua mạng → đọc lại, đắt; scan cục bộ rẻ.\n- Bảng nhỏ <100 MB → broadcast join, join thành cục bộ.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D02-TL-05",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Pipeline đọc bảng sự kiện trên S3 chậm dần theo tháng dù không ai đổi code. Kiểm tra thấy 50.000 file × 2 MB, bảng đang partition theo user_id. Phân tích nguyên nhân và đề xuất chiến lược file và phân vùng mới, kèm cách đo hiệu quả.",
+      "modelAnswer": "- Small-file problem: mỗi file là một lần liệt kê, mở, đọc footer → engine dành phần lớn thời gian lập kế hoạch thay vì đọc data.\n- Partition theo user_id: cardinality cao → sinh rất nhiều file nhỏ.\n- Sửa: nhắm file 128 MB – 1 GB; compaction định kỳ; giảm số task ghi ở cuối pipeline.\n- Partition theo cột hay lọc, gần như luôn là event_date; vài trăm đến vài nghìn phân vùng, không phải vài triệu.\n- Predicate pushdown: lọc đúng cột phân vùng thì bỏ qua cả thư mục.\n- Đo bằng EXPLAIN ANALYZE, đọc rows scanned trước thời gian (ví dụ 412 triệu → 1,34 triệu hàng).",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D02-TL-06",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Routing agent dùng feature “số sự kiện mỗi phút” từ stream click. Một khách hàng dùng app trên tàu điện (offline) 2 giờ, khi có mạng toàn bộ sự kiện tới cùng lúc và agent tưởng khách gặp sự cố nghiêm trọng. Giải thích lỗi và thiết kế lại cách tính cửa sổ.",
+      "modelAnswer": "- Lỗi: cửa sổ tính theo processing time → 2 giờ hoạt động dồn vào một phút, feature vọt giả tạo.\n- Sửa: cửa sổ theo event time.\n- Watermark: “đã thấy hết sự kiện trước T”, sau mốc này đóng cửa sổ.\n- Allowed lateness: biên độ tha thứ sau watermark; sự kiện muộn hơn thì bỏ hoặc đẩy sang nhánh phụ, không lặng lẽ vứt.\n- Công cụ: Flink hợp khi event-time và state là trung tâm (từng sự kiện, ms, checkpoint bài bản).\n- Streaming là bài toán thời gian sự kiện, không phải “batch nhanh hơn”.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D02-TL-07",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Bạn quản lý hai topic: (A) topic log click có một producer và hàng chục consumer phân tích; (B) topic nuôi feature online cho model đang chạy production. Chọn chế độ Schema Registry cho từng topic, giải thích thay đổi được phép và bên nâng cấp trước.",
+      "modelAnswer": "- BACKWARD: cho xoá field, thêm field có giá trị mặc định; consumer nâng cấp trước; hợp nhiều consumer, ít producer → topic A.\n- FORWARD: thêm field, xoá field có default; producer nâng cấp trước; hợp producer nâng cấp thường xuyên.\n- FULL: chỉ thay đổi an toàn cả hai chiều; bên nào nâng cấp trước cũng được; topic quan trọng nhiều bên phụ thuộc → topic B.\n- Lý do B: đổi schema event = đổi feature = model nhận input khác mà không ai deploy lại; chấp nhận đổi chậm hơn.\n- Schema Registry là data contract do máy chủ ép lúc producer ghi, không phải phát hiện muộn lúc pipeline chạy.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D02-TL-08",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Lúc 5 giờ chiều, một kỹ sư deploy DAG training mới với start_date 30 ngày trước, để catchup mặc định; cụm GPU lập tức nhận 30 job. Phân tích sự cố, đề xuất các quy tắc chạy lại/backfill an toàn và cách kiểm chứng pipeline idempotent.",
+      "modelAnswer": "- Nguyên nhân: catchup mặc định True → Airflow xếp mọi lịch đã lỡ (30 lần) cùng lúc.\n- Quy tắc: catchup=False; max_active_runs=1 để backfill không chồng daily; backfill dùng đúng code path với daily; ghi có phân vùng để backfill 08-12 không đụng 08-13.\n- Idempotent vì hệ thống at-least-once (retry, Clear Task, backfill chồng, consumer restart): overwrite partition cho bảng ngày, MERGE cho bảng thực thể.\n- Kiểm chứng: chạy lại một ngày cũ ba lần liên tiếp, ghi checksum bảng Gold sau mỗi lần; ba số phải giống hệt (tiêu chí Lab 17).",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D02-TL-09",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Phân bổ engine cho bốn workload và giải thích lựa chọn: (1) transform Silver/Gold 8 GB mỗi lần chạy; (2) báo cáo 200 GB trên một máy; (3) join nhiều bảng lớn trên 1 TB dùng chung nhiều team; (4) embed 10 triệu chunk cho RAG. Nêu cái bẫy “distributed by default”.",
+      "modelAnswer": "- (1) DuckDB/Polars: vừa RAM một máy (<10 GB), một tiến trình, không cụm.\n- (2) DuckDB tràn đĩa, máy RAM lớn, out-of-core (10–500 GB).\n- (3) Spark: phân tán JVM, TB–PB, join nhiều bảng lớn; trả giá vận hành cụm, khởi động chậm.\n- (4) Ray Data: thuần Python, batch inference/embedding trên GPU.\n- Ngoài trục: Trino khi câu hỏi trải nhiều kho.\n- Bẫy: Spark 10 node xử lý 8 GB thường chậm hơn DuckDB một máy vì thời gian vào lập lịch và shuffle; bắt đầu từ một máy, chỉ lên cụm khi đã đo.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D02-TL-10",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Product owner muốn “real-time” cho bốn nhu cầu: cập nhật RAG index từ tài liệu nội bộ, retrain classifier phân loại ticket, feature định tuyến agent (số ticket 7 ngày), chặn giao dịch gian lận. Với mỗi nhu cầu xác định độ trễ thật sự cần và giải pháp rẻ nhất, rồi nêu chi phí thật của streaming.",
+      "modelAnswer": "- RAG index: độ trễ giờ → batch mỗi giờ.\n- Retrain classifier: ngày → batch chạy đêm.\n- Feature định tuyến 7 ngày: phút → micro-batch 5 phút.\n- Chặn gian lận: mili giây → streaming thật.\n- Chi phí streaming: state store phải quản lý, checkpoint và khôi phục, backpressure khi consumer chậm, trực 24/7, debug khó hơn vì không có “chạy lại cho tôi xem”.\n- Micro-batch 5 phút giải quyết phần lớn nhu cầu “real-time” với một phần nhỏ chi phí; chọn streaming vì yêu cầu độ trễ, không vì nghe hiện đại.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    }
+  ]
+}

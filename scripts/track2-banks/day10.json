@@ -1,0 +1,526 @@
+{
+ "mcq": [
+  [
+   "Trong breakdown chi phí GPU cloud 2026, Compute (GPU hours) chiếm khoảng bao nhiêu?",
+   "Khoảng 50%",
+   "Khoảng 15%",
+   "Khoảng 30%",
+   "Khoảng 75%",
+   "Breakdown: Compute 50%, Power 15%, Storage 12%, Net 8%, Other 15%."
+  ],
+  [
+   "Line-item nào được slide gọi là tăng nhanh nhất trong chi phí GPU?",
+   "Power (điện năng)",
+   "Storage (lưu trữ)",
+   "Network egress",
+   "License phần mềm",
+   "H100 node ∼1,400 W/GPU all-in; power ∼10–20% TCO nhưng ∼30–40% opex."
+  ],
+  [
+   "Hidden cost nào được slide nêu với mức $0.09/GB?",
+   "Egress trên AWS",
+   "NAT gateway",
+   "Secrets Manager",
+   "Inter-AZ traffic",
+   "NAT gateway $0.045/GB, Secrets Manager $0.40/secret/tháng; egress AWS $0.09/GB."
+  ],
+  [
+   "Theo rule of thumb của slide, GPU utilization dưới ngưỡng nào thì cần right-size ngay?",
+   "Dưới 30%",
+   "Dưới 50%",
+   "Dưới 60%",
+   "Dưới 10%",
+   "Rule of thumb: GPU utilization <30% (hay MFU thấp) = cần right-size ngay."
+  ],
+  [
+   "Chạy inference model 8B trên H100 thuộc dạng lãng phí nào?",
+   "Over-provisioned, A10G/L4 là đủ",
+   "Unused reserved capacity mua 1 năm",
+   "GPU idle qua đêm sau khi training",
+   "Dev environment chạy 24/7 cả tuần",
+   "Slide liệt kê 5 dạng lãng phí; H100 cho inference 8B là over-provisioned."
+  ],
+  [
+   "Theo slide, hầu hết AI team đang ở giai đoạn nào của vòng đời FinOps?",
+   "Inform — cần audit trước khi optimize",
+   "Optimize — đang tối ưu purchasing",
+   "Operate — đã có chargeback ổn định",
+   "Run — đã đạt mức trưởng thành cao",
+   "Vòng đời Inform → Optimize → Operate; hầu hết AI teams mới ở Inform."
+  ],
+  [
+   "Giá thuê H100 từ đỉnh ∼$8/hr (2023) xuống ∼$2/hr neocloud (cuối 2025) giảm khoảng bao nhiêu?",
+   "64–75%",
+   "20–30%",
+   "85–95%",
+   "40–50%",
+   "Đỉnh ∼$8/GPU-hr → ∼$2/hr neocloud: giảm 64–75%."
+  ],
+  [
+   "Hợp đồng 1 năm H100 bật lại +40% ($1.70→$2.35/hr) đầu 2026 dẫn tới khuyến nghị gì?",
+   "Khóa reserved sớm, đừng cược chờ rẻ hơn",
+   "Luôn chờ thêm vì giá GPU chỉ đi xuống",
+   "Chỉ dùng on-demand vì reserved luôn lỗ",
+   "Chuyển toàn bộ sang spot để né hợp đồng",
+   "Thị trường đang siết lại → khóa reserved sớm, tránh bẫy “năm nào cũng rẻ hơn”."
+  ],
+  [
+   "Với H100 SXM ∼$50k trọn đời 5 năm, cho thuê dưới mức giá nào thì lỗ?",
+   "Dưới $1.65/hr",
+   "Dưới $2.85/hr",
+   "Dưới $2.35/hr",
+   "Dưới $7.44/hr",
+   "Cho thuê <$1.65/hr → lỗ; >$2.85/hr → thắng cả thị trường chứng khoán."
+  ],
+  [
+   "Vì sao slide yêu cầu re-baseline mọi TCO về giá 2026?",
+   "Số A100/A10G 2023 thổi phồng chi phí 3–4×",
+   "Giá 2026 luôn cao gấp đôi so với 2023",
+   "Giá 2023 chưa tính chi phí storage",
+   "Chip 2026 không còn tính tiền theo giờ",
+   "Re-baseline mọi TCO về giá 2026 (số A100/A10G 2023 thổi phồng chi phí 3–4×)."
+  ],
+  [
+   "Cùng chip H100 nhưng giá $1.49–$6.98/GPU-hr tùy cloud cho thấy điều gì?",
+   "Chênh 4–5× → cơ hội provider arbitrage",
+   "Cloud rẻ đang dùng bản H100 cấu hình yếu",
+   "Giá cao hơn luôn kèm throughput cao hơn",
+   "Nên lập ngân sách theo $/GPU-hr niêm yết",
+   "Bảng $/GPU-hr là vanity metric: cùng chip đa cloud chênh 4–5×."
+  ],
+  [
+   "GB300 NVL72 so với Hopper minh họa nguyên tắc nào?",
+   "Đắt hơn mỗi giờ nhưng rẻ hơn ∼35× mỗi token",
+   "Rẻ hơn mỗi giờ và rẻ hơn ∼35× mỗi token",
+   "Đắt hơn mỗi giờ và đắt hơn ∼35× mỗi token",
+   "Giá mỗi giờ ngang nhau, throughput thấp hơn",
+   "$/hr cao không nghĩa đắt hơn/token — GB300 đắt/giờ nhưng rẻ nhất/token; 50× throughput/MW."
+  ],
+  [
+   "B300 so với B200 (Llama-70B FP4): giá/giờ cao hơn 23%. $/1M-token thay đổi thế nào?",
+   "Rẻ hơn 26% mỗi token",
+   "Đắt hơn 23% mỗi token",
+   "Đắt hơn 26% mỗi token",
+   "Ngang nhau mỗi token",
+   "$0.055 vs $0.074/1M-token (−26%): chip mới = rẻ hơn/token."
+  ],
+  [
+   "Lợi thế chính của AMD MI300X/MI355X trong thực đơn silicon 2026 là gì?",
+   "$/GB-VRAM thấp, chạy 70B trên một GPU",
+   "Spot arbitrage đa cloud dễ nhất thị trường",
+   "Rẻ nhất mỗi token ở biên giới frontier",
+   "Giá-perf cao nhất cho training trên AWS",
+   "MI355X 288GB; MI300X −55% $/GB-VRAM vs H100; AMD còn là đòn bẩy đàm phán."
+  ],
+  [
+   "Đánh đổi khi chọn AWS Trainium hoặc Google TPU là gì?",
+   "Rẻ 30–60%/đơn vị nhưng captive một cloud",
+   "Portable đa cloud nhưng đắt hơn 30–60%",
+   "Lock-in thấp nhưng chỉ dùng được inference",
+   "Giá ngang NVIDIA nhưng spot ổn định hơn",
+   "Trainium/TPU = rẻ 30–60%/đơn vị nhưng captive một cloud (lock-in cao)."
+  ],
+  [
+   "Trước khi cam kết custom silicon, slide khuyên làm gì?",
+   "Đòi benchmark $/1M-token trên workload của mình",
+   "Tin số tok/$ vendor công bố vì đã dùng FP4",
+   "So sánh giá $/GPU-hr niêm yết giữa các vendor",
+   "Chọn chip có peak TFLOPS cao nhất danh mục",
+   "Vendor tok/$ claims dùng FP4 + model chọn lọc nên cần benchmark trên workload thật."
+  ],
+  [
+   "Hyperscaler ∼$7.44/GPU-hr và neocloud ∼$2.5/hr: neocloud rẻ hơn khoảng bao nhiêu?",
+   "∼3×, tức ∼67% rẻ hơn",
+   "∼2×, tức ∼50% rẻ hơn",
+   "∼5×, tức ∼80% rẻ hơn",
+   "∼1.5×, tức ∼33% rẻ hơn",
+   "7.44/2.5 ≈ 3× → ∼67% rẻ hơn."
+  ],
+  [
+   "Điểm đáng lưu ý về giá B200 trên neocloud Q1 2026 là gì?",
+   "Tăng +24%, volatility 11.4% — thị trường mỏng",
+   "Giảm −24%, volatility 0.5% — thị trường dư",
+   "Ổn định, volatility ngang H100 hyperscaler",
+   "Rẻ hơn H100 vì nguồn cung Blackwell dư thừa",
+   "Frontier đảo ngược: B200 ∼$5.09/GPU-hr, +24% Q1 2026, volatility 11.4% vs 0.5% H100 hyperscaler."
+  ],
+  [
+   "Quy tắc “neocloud rẻ hơn 40–70%” thời A100 được cập nhật thế nào cho 2026?",
+   "∼3× mainstream, 3–6× với silicon mới",
+   "Vẫn giữ 40–70% cho mọi thế hệ chip",
+   "∼1.5× mainstream, 2× với silicon mới",
+   "Không còn chênh lệch giá đáng kể nào",
+   "Cập nhật quy tắc: nay ∼3× mainstream, 3–6× silicon mới; một chính sách mua không hợp mọi thế hệ."
+  ],
+  [
+   "Workload utilization thấp, không cần kiểm soát hạ tầng. Lựa chọn stack neocloud phù hợp?",
+   "Mua per-token API, không mua GPU",
+   "Thuê bare-metal reserved 1 năm",
+   "Mua H100 PCIe đặt tại on-prem",
+   "Đặt Capacity Block dài 182 ngày",
+   "Chọn theo duty cycle: spiky → scale-to-zero; ổn định → reserved; util thấp → mua token."
+  ],
+  [
+   "Theo slide, vì sao neocloud có thể bán GPU rẻ?",
+   "Năng lượng rẻ + nợ GPU-backed: arbitrage chi phí vốn",
+   "Dùng GPU đời cũ đã khấu hao hết từ năm 2023",
+   "Không tính phí egress và storage cho khách hàng",
+   "Được NVIDIA trợ giá trực tiếp cho mỗi GPU bán",
+   "Ví dụ CoreWeave $8.5B @ ∼5.9%: năng lượng rẻ + nợ GPU-backed."
+  ],
+  [
+   "Mua H100 PCIe ∼$25k–30k: break-even all-in (điện, làm mát, khấu hao, ops) mất bao lâu?",
+   "∼16–18+ tháng ở ∼100% utilization",
+   "∼6–8 tháng ở ∼50% utilization",
+   "∼3–4 năm ở ∼30% utilization",
+   "∼2–3 tháng ở ∼100% utilization",
+   "Break-even thô ∼8,300 GPU-hr; all-in ∼16–18+ tháng ở ∼100% utilization."
+  ],
+  [
+   "AWS cắt on-demand GPU −45% (6/2025) rồi tăng Capacity Blocks +15% (1/2026). Bài học là gì?",
+   "Giá là tín hiệu cung-cầu thời gian thực",
+   "Giá GPU chắc chắn chỉ giảm theo thời gian",
+   "Capacity Block luôn rẻ hơn on-demand",
+   "On-demand luôn đắt hơn mọi tầng cam kết",
+   "Hai cú cách nhau ∼7 tháng — giá không phải xu hướng một chiều."
+  ],
+  [
+   "Reserved có discount 45%. Cần utilization tối thiểu khoảng bao nhiêu để có lời?",
+   "∼55% (∼13.2h/ngày)",
+   "∼45% (∼10.8h/ngày)",
+   "∼70% (∼16.8h/ngày)",
+   "∼30% (∼7.2h/ngày)",
+   "Break-even utilization ≈ 1 − discount% = 1 − 0.45 = 55%."
+  ],
+  [
+   "DWS Flex-start trên GCP có đặc điểm gì?",
+   "−53%, cam kết ≤7 ngày, cho batch/training ngắn",
+   "−80%, có thể bị thu hồi chỉ với notice 30 giây",
+   "∼45–55%, cam kết 1–3 năm cho workload ổn định",
+   "0% discount, trả theo giây cho tải spiky",
+   "Thang cam kết: DWS Flex-start (GCP) −53%, ≤7 ngày, batch/training ngắn."
+  ],
+  [
+   "Thời gian notice khi bị thu hồi spot trên AWS và GCP lần lượt là?",
+   "∼2 phút và ∼30 giây",
+   "∼30 giây và ∼2 phút",
+   "∼5 phút và ∼1 phút",
+   "∼1 giờ và ∼10 phút",
+   "AWS Spot −40–70%, notice ∼2 phút; GCP tới −80%, notice ∼30 giây."
+  ],
+  [
+   "Tỷ lệ interruption spot theo chip cho thấy điều gì?",
+   "H100 <5% nên chip mới thì spot an toàn hơn",
+   "H100 >20% nên chip mới thì spot rủi ro hơn",
+   "Mọi chip đều có tỷ lệ gián đoạn ngang nhau",
+   "A100 <5% nên chip cũ thì spot an toàn hơn",
+   "H100 <5%, A100 15–20%, V100/RTX PRO 6000 >20%."
+  ],
+  [
+   "Managed Spot (multi-cloud) giúp giảm chi phí ở mức nào?",
+   "∼3× (GPU train) đến 6.5× (CPU batch)",
+   "∼6.5× (GPU train) đến 3× (CPU batch)",
+   "∼10× cho mọi loại workload như nhau",
+   "∼1.2× vì phải trả thêm phí điều phối",
+   "Managed Spot auto-recover preemption + route GPU rẻ nhất; SkyServe serve ∼50% rẻ hơn."
+  ],
+  [
+   "Bẫy FinOps khi tính commitment discount cho GPU là gì?",
+   "Áp % CUD toàn-cloud cho GPU thay vì model theo SKU",
+   "Model discount theo SKU thực trước khi cam kết",
+   "Kết hợp spot và reserved cho cùng một cụm GPU",
+   "Theo dõi utilization thực trước khi gia hạn",
+   "AWS H100 3yr chỉ ∼45% (headline 72% là thời CPU); GCP loại accelerator khỏi flexible CUD."
+  ],
+  [
+   "Chính sách mua cho Blackwell (khan hiếm) khác H100/A100 thế nào?",
+   "Blackwell commit sớm; H100/A100 giữ spot/on-demand",
+   "Blackwell dùng spot; H100/A100 khóa reserved 3 năm",
+   "Cả hai đều nên chờ giá giảm trước khi cam kết",
+   "Cả hai đều nên khóa reserved 3 năm ngay bây giờ",
+   "B200/GB200 bán hết tới giữa 2026, backlog ∼3.6 triệu chip: khan → commit; dư → spot."
+  ],
+  [
+   "nvidia-smi “GPU-Util” thực chất đo gì?",
+   "% thời gian có ≥1 kernel đang chạy",
+   "% FLOPS đạt được so với peak",
+   "% băng thông HBM đang sử dụng",
+   "% số SM đang hoạt động đồng thời",
+   "Không đo dung lượng tính toán — 1 thread trên 1 SM đã báo 100%."
+  ],
+  [
+   "Training báo 100% GPU-Util nhưng MFU thực ∼20–30%. Hệ quả chi phí là gì?",
+   "Trả full GPU-hour cho dưới 1/2 FLOPS thực dùng",
+   "Chi phí tối ưu vì GPU luôn ở trạng thái bận",
+   "Cần mua thêm GPU vì cụm đang quá tải",
+   "Chi phí chỉ phụ thuộc vào HBM bandwidth",
+   "Đừng capacity-plan/mua thêm GPU dựa trên GPU-Util — đó là đồng hồ “đang bận”."
+  ],
+  [
+   "Chọn thước đo hiệu quả đúng cho training và decode?",
+   "MFU cho training, MBU cho decode",
+   "MBU cho training, MFU cho decode",
+   "GPU-Util cho training, MFU cho decode",
+   "MFU cho cả hai vì đều compute-bound",
+   "Training compute-bound → MFU; decode memory-bound → MBU."
+  ],
+  [
+   "70B dùng config mặc định có MFU <30%. Cách sửa slide nêu là gì?",
+   "TP 8→1 + selective checkpointing",
+   "TP 1→8 + full activation checkpointing",
+   "Tăng số GPU lên gấp đôi để chia tải",
+   "Giảm batch size xuống 1 để ổn định",
+   "Sửa TP 8→1 + selective checkpointing = ∼2× MFU = ∼2× rẻ hơn."
+  ],
+  [
+   "Vì sao decode batch-1 trên H100 là memory-bound?",
+   "Chỉ 1–2 FLOP/byte, thấp xa ridge ∼295",
+   "Đạt ∼295 FLOP/byte, vượt xa ridge 1–2",
+   "Do Tensor Core không hỗ trợ BF16",
+   "Do PCIe giới hạn ở mức 8 TB/s",
+   "Ridge H100 ∼295 FLOP/byte (BF16); decode batch-1 chỉ 1–2 FLOP/byte."
+  ],
+  [
+   "Khi mua GPU cho decode, nên trả tiền cho chỉ số nào?",
+   "$/TB-bandwidth (HBM)",
+   "$/TFLOP peak compute",
+   "$/GPU-hr niêm yết",
+   "$/GB dung lượng SSD",
+   "Decode scale theo HBM BW: H100 3.35 → H200 4.8 → B200 8 TB/s; H200 ∼1.9× inference vs H100."
+  ],
+  [
+   "Hệ thống nhận 10 req/s nhưng chỉ 3 req đạt SLO (TTFT + TPOT). Goodput là bao nhiêu?",
+   "3 req/s",
+   "10 req/s",
+   "7 req/s",
+   "13 req/s",
+   "Goodput = req/s đạt SLO; 7 req đã trả tiền nhưng vô dụng."
+  ],
+  [
+   "GPU chạy ở 10% tải thì cost/token thay đổi thế nào so với đầy tải?",
+   "Cao gấp ∼10×",
+   "Cao gấp ∼2×",
+   "Không thay đổi",
+   "Thấp đi ∼10×",
+   "Đòn bẩy lớn nhất là utilization: GPU ở 10% tải → 10× cost/token."
+  ],
+  [
+   "Theo slide, tiền thuê GPU thô chiếm bao nhiêu TCO self-host?",
+   "Chỉ 25–35%",
+   "Khoảng 50–60%",
+   "Khoảng 80–90%",
+   "Gần như 100%",
+   "Thuê GPU thô chỉ là 25–35% TCO self-host."
+  ],
+  [
+   "Để đo hiệu quả thật thay cho GPU-Util, nên lấy metric gì từ DCGM?",
+   "SM activity, Tensor Core %, HBM BW",
+   "Nhiệt độ GPU, tốc độ quạt, điện áp",
+   "Số process, PID, dung lượng VRAM",
+   "Clock speed, PCIe link, driver version",
+   "Lấy từ DCGM: SM activity, Tensor Core %, HBM BW — không phải GPU-Util."
+  ],
+  [
+   "Inference single model có GPU-Util 20–40% (target >60%). Action phù hợp?",
+   "Multi-model serving, MIG, fractioning",
+   "Optimise data loading pipeline",
+   "Larger batch + gradient accumulation",
+   "Mua thêm GPU H100 để giảm latency",
+   "Bảng right-sizing: inference single model → multi-model serving, MIG, fractioning."
+  ],
+  [
+   "Pre-training có GPU-Util thấp hơn target >90%. Action slide đề xuất?",
+   "Optimise data loading",
+   "Tune continuous batching",
+   "Multi-model serving với MIG",
+   "Chuyển sang serverless GPU",
+   "Pre-training 80–95%, target >90% → optimise data loading."
+  ],
+  [
+   "Serverless GPU scale-to-zero hòa vốn với reserved ở duty cycle khoảng bao nhiêu?",
+   "∼30% duty cycle",
+   "∼60% duty cycle",
+   "∼90% duty cycle",
+   "∼5% duty cycle",
+   "Break-even ∼30%: spiky → serverless; ổn định cao → reserved (serverless premium ∼1.3–3× bare-metal)."
+  ],
+  [
+   "“Cold start = paid dead time” trên serverless GPU nghĩa là gì?",
+   "20–60s init + model-load tính full rate",
+   "Thời gian chờ queue được miễn phí hoàn toàn",
+   "Chỉ tính tiền khi token đầu tiên được sinh",
+   "Keep-warm không tiêu thụ điện nên miễn phí",
+   "Model Parking Tax: keep-warm +26–66 W/GPU (>98% idle power)."
+  ],
+  [
+   "Khác biệt giữa MIG và time-slicing/MPS khi chia GPU?",
+   "MIG phân vùng phần cứng, isolation cao hơn",
+   "MIG chia theo thời gian, isolation thấp hơn",
+   "MPS phân vùng phần cứng, memory riêng biệt",
+   "Cả hai cho isolation và mật độ như nhau",
+   "Đánh đổi cost density ↔ isolation: time-slicing/MPS mật độ cao, isolation thấp."
+  ],
+  [
+   "Run:ai cấp 0.5 GPU cho một workload đạt được bao nhiêu throughput?",
+   "∼77% throughput",
+   "∼50% throughput",
+   "∼95% throughput",
+   "∼35% throughput",
+   "Run:ai: 0.5 GPU = 77% throughput, 86% user capacity; co-location → tới 3× users."
+  ],
+  [
+   "Trong K8s cost-autoscaling stack, công cụ nào chống GPU hoarding bằng gang scheduling và quota theo team?",
+   "Kueue",
+   "KEDA",
+   "Karpenter",
+   "DCGM Exporter",
+   "Kueue: gang scheduling + quota theo team + cohort borrowing; KEDA scale-to-zero; Karpenter bin-packing."
+  ],
+  [
+   "LLMflation: giá token cùng năng lực giảm ∼10×/năm nhưng không đều. Hệ quả cho dự báo?",
+   "Tách dự báo theo tầng năng lực",
+   "Dùng chung tốc độ 10×/năm cho mọi model",
+   "Giả định giá frontier giữ nguyên mãi",
+   "Chỉ dự báo theo $/GPU-hr của chip",
+   "Epoch AI: biên độ 9×–900×/năm, trung vị ∼50× → tách dự báo theo tầng."
+  ],
+  [
+   "Con số $5.576M của DeepSeek nên được hiểu thế nào?",
+   "Chỉ là GPU pre-training, chưa gồm CapEx/R&D",
+   "Là toàn bộ TCO gồm CapEx, R&D và nhân sự",
+   "Là chi phí inference một năm của R1 API",
+   "Là giá mua ∼2,048 GPU H800 cho cụm",
+   "Thực tế ∼$1.6B CapEx + $944M opex → chênh ∼100×; luôn đòi full TCO."
+  ],
+  [
+   "Kiến trúc nào của DeepSeek giúp giảm −93.3% KV-cache?",
+   "MLA (Multi-head Latent Attention)",
+   "MoE chỉ kích hoạt 37B/671B params",
+   "FP8 cho toàn bộ quá trình training",
+   "Speculative decoding với EAGLE-3",
+   "MLA −93.3% KV-cache; MoE kích hoạt 37B/671B params/token; FP8 rẻ $/token."
+  ],
+  [
+   "Model reasoning sinh ∼10k token suy luận cho câu trả lời 500 token. Số token output bị tính tăng bao nhiêu?",
+   "∼×21",
+   "∼×2",
+   "∼×10",
+   "∼×50",
+   "Thinking-token ẩn tính giá output: (10,000 + 500)/500 = ×21."
+  ],
+  [
+   "Batch API −50% kết hợp prompt caching read −90% cho mức giảm khoảng bao nhiêu?",
+   "≈95% off",
+   "≈140% off",
+   "≈70% off",
+   "≈90% off",
+   "Multiplier nhân được: 0.5 × 0.1 = 0.05 → ≈95% off (Anthropic xác nhận)."
+  ],
+  [
+   "Model cascading theo slide hoạt động thế nào?",
+   "8B xử lý 80%, escalate 20% lên model lớn",
+   "Model lớn xử lý 80%, 8B xử lý phần còn lại",
+   "Mọi request chạy song song trên hai model",
+   "Cache 80% request, 20% còn lại gọi 8B",
+   "FrugalGPT tới 98%, RouteLLM 85%+ tiết kiệm."
+  ],
+  [
+   "FOCUS trong FinOps là gì?",
+   "Chuẩn mở normalize billing đa cloud về một schema",
+   "Công cụ của AWS để mua Capacity Block tự động",
+   "Thước đo hiệu quả GPU thay cho GPU-Util",
+   "Framework kiểm soát quota GPU trên Kubernetes",
+   "FOCUS = FinOps Open Cost & Usage Spec; native export từ >12 nhà cung cấp."
+  ],
+  [
+   "Tính đến 6/2026, phần AI token consumption đầy đủ (model identity, input/output tokens) trong FOCUS ở trạng thái nào?",
+   "Scoped cho FOCUS 1.5, chưa ratified",
+   "Đã có sẵn trong FOCUS 1.2 từ 5/2025",
+   "Đã ratified trong FOCUS 1.4 với 47 cột",
+   "Bị loại khỏi lộ trình FOCUS vĩnh viễn",
+   "1.2 thêm virtual-currency/token; 1.3 Contract Commitment + Split Cost Allocation; 1.4 47 cột; AI-token đầy đủ đợi 1.5."
+  ],
+  [
+   "Tổng chi $5,000 cho 100k inference. Cost/Inference là bao nhiêu?",
+   "$0.05",
+   "$0.50",
+   "$0.005",
+   "$5.00",
+   "Cost/Inference = Total $ / #inferences = 5,000 / 100,000 = $0.05."
+  ],
+  [
+   "Điểm mới của Kubecost 3.0 (GA 9/2025) theo slide?",
+   "Dùng ClickHouse, bỏ phụ thuộc Prometheus",
+   "Bỏ hỗ trợ DCGM, chỉ đọc billing cloud",
+   "Chỉ chạy được trên EKS, không K8s khác",
+   "Tính phí license cho mọi cụm dưới $1M",
+   "Kubecost 3.0: ClickHouse, bỏ Prometheus dep, GPU-aware (DCGM), free <$1M."
+  ],
+  [
+   "SCI (ISO/IEC 21031:2024) được dùng để làm gì trong GPU FinOps?",
+   "Đo carbon/inference, đối ứng $/1M-token",
+   "Đo PUE của data center theo từng giờ",
+   "Chuẩn hóa billing đa cloud về một schema",
+   "Đo tỷ lệ interruption spot theo chip",
+   "SCI là đối ứng carbon của $/1M-token cho dashboard & ESG."
+  ],
+  [
+   "Model reasoning tốn năng lượng mỗi truy vấn gấp bao nhiêu so với model nhỏ?",
+   "∼74–86×",
+   "∼2–3×",
+   "∼10–20×",
+   "∼500–900×",
+   "o3 ∼39.2 Wh, DeepSeek-R1 ∼33.6 Wh vs GPT-4.1 nano ∼0.45 Wh."
+  ],
+  [
+   "Trên A10G, AWQ 4-bit so với FP16 (1200→1800 tok/s, $0.83→$0.55/M tok) tiết kiệm khoảng bao nhiêu?",
+   "∼34%",
+   "∼50%",
+   "∼66%",
+   "∼15%",
+   "(0.83 − 0.55)/0.83 ≈ 34%; stack batching+caching+cascading+quant → 70–85% vs naive."
+  ]
+ ],
+ "essay": [
+  [
+   "Một team để 4×H100 idle 12h mỗi đêm trên neocloud giá $2.50/GPU-hr. Hãy tính chi phí lãng phí theo ngày và theo năm, so sánh nếu cùng node chạy trên hyperscaler ($7.44/hr), và đề xuất ít nhất 3 biện pháp loại bỏ idle.",
+   "- Neocloud: 4 × 12 × $2.50 = $120/ngày ≈ $43,800/năm.\n- Hyperscaler: 4 × 12 × $7.44 ≈ $357/ngày ≈ $130k/năm.\n- Biện pháp: tắt instance sau training (GPU idle qua đêm là lãng phí #1); KEDA scale-to-zero cho inference pods; Karpenter consolidation/bin-packing xóa node rỗng; dev env chỉ chạy giờ hành chính; serverless per-second cho tải spiky.\n- Đo: nvidia-smi dmon/DCGM → Prometheus → Grafana để phát hiện idle; báo cáo baseline vs optimized."
+  ],
+  [
+   "Bạn phải chọn giữa on-demand, spot, Capacity Block và reserved 1–3 năm (discount ∼45%) cho ba workload: (a) inference ổn định chạy ∼18h/ngày, (b) fine-tuning burst 2 tuần có deadline cố định, (c) batch eval chịu gián đoạn. Hãy phân tích bằng break-even utilization và đưa ra lựa chọn.",
+   "- Công thức: break-even utilization ≈ 1 − discount%; 45% → cần ∼55% util (∼13.2h/ngày).\n- (a) 18h/ngày = 75% > 55% → reserved/CUD hoặc neocloud reserved blocks; lưu ý reserved ở 70% util vẫn phí ∼30%.\n- (b) Capacity Block (1–182 ngày, đặt ≤8 tuần, giá cố định, burst đảm bảo) hoặc DWS Flex-start ≤7 ngày nếu GCP.\n- (c) Spot −40–70% (GCP tới −80%) + checkpoint.\n- Gắn quyết định vào util đo được; model discount theo SKU, không áp % CUD toàn-cloud; với Blackwell khan hiếm thì commit sớm."
+  ],
+  [
+   "Thiết kế quy trình chạy một job pre-training dài nhiều ngày trên spot instances để vừa rẻ vừa không mất tiến độ.",
+   "- Chọn chip có interruption thấp (H100 <5% vs A100 15–20%, V100 >20%).\n- Mixed fleet: 20% on-demand baseline + 80% spot burst; Spot Fleet đa AZ/instance type.\n- Checkpoint mỗi epoch hoặc mỗi 30 phút, lưu S3/GCS, resume ở instance bất kỳ; dùng PyTorch Lightning ModelCheckpoint/async checkpointing.\n- Xử lý notice (AWS ∼2 phút, GCP ∼30 giây).\n- Test resume flow trước khi chạy dài.\n- Cân nhắc Managed Spot đa cloud (auto-recover, route GPU rẻ nhất)."
+  ],
+  [
+   "Dashboard của team báo cụm GPU luôn 95–100% GPU-Util nên quản lý muốn mua thêm GPU. Hãy phản biện và đề xuất bộ chỉ số đo hiệu quả chi phí thật cho cả training lẫn inference.",
+   "- GPU-Util = % thời gian có ≥1 kernel chạy; 1 thread trên 1 SM đã báo 100% → không đo compute.\n- Training: MFU = achieved/peak FLOPs; tốt 35–45%, xuất sắc 50%+; 100% Util có thể chỉ MFU 20–30%.\n- Decode: MBU = achieved/peak BW, target ∼60%; decode batch-1 memory-bound (1–2 FLOP/byte vs ridge ∼295).\n- Serving: goodput = req/s đạt SLO (TTFT + TPOT).\n- Nguồn: DCGM (SM activity, Tensor Core %, HBM BW).\n- Kết luận: tối ưu (vd TP 8→1 + selective checkpointing ∼2× MFU) trước khi mua thêm; đo bằng $/1M-token hoặc $/job."
+  ],
+  [
+   "Một pipeline enrich dữ liệu chạy hàng đêm gọi LLM API với system prompt dài cố định. Hãy thiết kế cách cắt chi phí bằng discount stack và nêu các điều kiện/caveat.",
+   "- Batch API −50% vì SLA 24h, latency-tolerant (nightly).\n- Prompt caching read −90% (0.1×): đặt prefix tĩnh (system prompt, few-shot, RAG context) ổn định ở đầu prompt.\n- Stack: 0.5 × 0.1 → ≈95% off.\n- Caveat: write 1.25×/2×, cần ≥2 reads mới lời; Gemini thu phí lưu $1–4.5/1M-tok-giờ có thể lật phép tính → cache có chủ đích.\n- Theo dõi cache-hit% như KPI chi phí chính; benchmark $/1M-token trước/sau."
+  ],
+  [
+   "Đánh giá việc áp dụng disaggregated prefill/decode và các tối ưu inference (speculative decoding, chunked prefill) cho một deployment. Khi nào lời, khi nào lỗ?",
+   "- Disaggregation: prefill compute-bound, decode memory-bound → tách pool, right-size theo SKU rẻ nhất; DistServe 7.4× request, Dynamo tới 30×.\n- Thắng ở QPS cao + context dài chia sẻ; KV-transfer tăng theo context → deployment nhỏ có thể lỗ.\n- Speculative decoding: −48% $/1M token khi latency-bound nhưng +19% khi throughput bão hòa; cần acceptance rate ≥60%.\n- Chunked prefill: chunk 512 thêm tới +25% overhead, ∼2048 gần như 0.\n- Nguyên tắc: mỗi lever có vùng tải riêng; đo unit economics trước/sau, đừng giả định nhanh hơn = rẻ hơn."
+  ],
+  [
+   "Thiết kế lộ trình phân bổ chi phí cho một cụm GPU dùng chung giữa nhiều team, từ chưa có tag đến chargeback.",
+   "- Tagging: team, project, env, cost-center; enforce bằng SCP/OPA; K8s label → DCGM → Prometheus.\n- Quota: ResourceQuota per namespace, team budget (vd max 4 GPUs, 100GB storage).\n- Các bước: Visibility → Showback 4–6 tuần vá tag → Chargeback khi tag-coverage >80% → $/Outcome.\n- Mô hình phân bổ: per-namespace / per-tenant / per-token / per-experiment.\n- Gotcha: split GPU cost EKS nằm ở CUR 2.0 SCAD/Data Exports, không ở Cost Explorer UI."
+  ],
+  [
+   "Đề xuất kiến trúc cost observability cho một nền tảng vừa tự host GPU trên Kubernetes vừa gọi nhiều LLM API bên ngoài.",
+   "- Tầng $/GPU-giờ: DCGM → Prometheus → Kubecost 3.0/OpenCost; chi phí theo pod/namespace; tách Workload Idle vs Infrastructure Idle.\n- Tầng $/1M-token: LiteLLM proxy (100+ provider) + Langfuse/Helicone; $/request, $/1M-token theo API-key/team; budget cứng chặn request vượt hạn mức.\n- Hợp nhất qua FOCUS (schema chung đa nhà cung cấp; AI-token đầy đủ đợi FOCUS 1.5).\n- KPI unit economics: cost/token, cost/inference, utilization, ROI, token yield rate.\n- Lưu ý token bill chỉ 1/9 khoản chi; đo cả retrieval, eval, KV-cache infra..."
+  ],
+  [
+   "Công ty cần đặt một cụm training mới và muốn tối ưu cả chi phí điện lẫn carbon. Hãy phân tích các yếu tố và đưa ra khuyến nghị.",
+   "- Power là nút thắt: ∼10–20% TCO nhưng ∼30–40% opex; giá capacity PJM ∼11× trong 2 năm; đấu nối lưới 24–36 tháng.\n- Chọn region: điện ∼5–6¢ (E. Washington) vs ∼15¢/kWh (CA); carbon Norway ∼6 vs Poland ∼660 gCO2/kWh.\n- PUE: Google 1.09 vs industry ∼1.56.\n- Carbon-aware scheduling cho job hoãn được: cắt carbon ∼20–50%, thường trúng giờ điện rẻ.\n- Đo SCI (ISO/IEC 21031:2024) và Wh/query cạnh $/1M-token; model routing + reasoning-token budget giảm năng lượng."
+  ],
+  [
+   "Một startup cân nhắc chuyển inference từ hyperscaler sang neocloud và đổi chip. Hãy phân tích lợi ích, rủi ro và quy trình ra quyết định.",
+   "- Lợi ích: hyperscaler ∼$7.44 vs neocloud ∼$2.5/GPU-hr (∼3×); chip mới rẻ hơn/token (B300 −26%, GB300 ∼35×).\n- So sánh bằng $/1M-token, không $/GPU-hr; benchmark trên workload thật (vendor claims dùng FP4).\n- Lock-in: NVIDIA portable; AMD $/GB-VRAM; Trainium/TPU rẻ 30–60% nhưng captive.\n- Rủi ro neocloud: SLA 99.99% ∼52 phút/năm, managed services mỏng, rủi ro tài chính đối tác (nợ lớn đáo hạn 2026), frontier volatility cao.\n- FinOps phải định giá exit/migration + khả năng thanh toán của nhà cung cấp."
+  ]
+ ]
+}

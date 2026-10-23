@@ -94,3 +94,12 @@ Không sửa tay các file đầu ra; chỉ sửa bank rồi chạy lại script
 - `npm run validate` chỉ kiểm file ở thư mục gốc `src/data/exams/`, không kiểm thư mục `tridung-dep-trai/`. Lệnh hiện báo lỗi trên nhiều đề gốc cũ với số câu/module/type không theo schema 60 câu mặc định; lỗi này không do bank Ngày 11–14.
 - `npm run build` chạy được với `postcss.config.mjs` cục bộ, tránh đọc nhầm PostCSS config của thư mục cha.
 - Commit theo conventional commit, ví dụ `feat(exams): rewrite tridung day 11 question bank`.
+
+## Track 2 (Ngày 1–11)
+
+- Nguồn: `onthi/Slide_Day_N_*.pdf` (chỉ có slide, không có HTML).
+- Bank: `scripts/track2-banks/dayN.json`, cùng định dạng và quy tắc soạn như trên.
+- Cùng script `node scripts/generate-tridung-exams.mjs` sinh thêm:
+  - `onthi/bo-de-track2/dayN_track2/trac-nghiem.json`, `tu-luan.json`
+  - `src/data/exams/track-2/dayN_track2.json` (`id: "track2-dayN"`, `course: "track2"`, tab "Track 2" trên web).
+- Mã câu hỏi dạng `T2D01-001`, `T2D01-TL-01`.

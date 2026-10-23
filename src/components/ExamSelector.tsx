@@ -60,7 +60,7 @@ export function ExamSelector({ exams, selectedExamId, mode, timerEnabled, onExam
   const handleOpenExam = (examId: string) => {
     const exam = exams.find((item) => item.id === examId);
     if (!exam) return;
-    setGroup(exam.course === 'aicb' ? 'aicb' : exam.course === 'tridung' ? 'tridung' : 'other');
+    setGroup(exam.course ?? 'other');
     onExamChange(examId);
     listRef.current?.scrollTo({ top: 0 });
   };

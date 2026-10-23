@@ -17,6 +17,9 @@ const sourceFiles = {
 };
 
 const bankDir = path.join(root, 'scripts', 'tridung-banks');
+const track2BankDir = path.join(root, 'scripts', 'track2-banks');
+const track2OutputRoot = path.join(root, 'onthi', 'bo-de-track2');
+const track2AppOutputRoot = path.join(examDir, 'track-2');
 const MCQ_COUNT = 60;
 const ESSAY_COUNT = 10;
 const rubric = ['Đúng khái niệm trọng tâm', 'Có lập luận hoặc ví dụ cụ thể', 'Nêu rủi ro/đánh đổi phù hợp', 'Đề xuất hành động có thể kiểm chứng'];
@@ -31,8 +34,8 @@ function hash(text) {
 }
 
 /** Ngân hàng soạn tay từ PDF + HTML từng ngày; mỗi câu một ý, chặn trùng câu hỏi và đáp án đúng. */
-function loadBank(day) {
-  const file = path.join(bankDir, `day${day}.json`);
+function loadBank(day, dir = bankDir) {
+  const file = path.join(dir, `day${day}.json`);
   const bank = JSON.parse(fs.readFileSync(file, 'utf8'));
   const errors = [];
   if (bank.mcq.length !== MCQ_COUNT) errors.push(`cần ${MCQ_COUNT} câu trắc nghiệm, có ${bank.mcq.length}`);
@@ -57,9 +60,9 @@ function loadBank(day) {
   return bank;
 }
 
-function mcqs(day, bank) {
+function mcqs(day, bank, idPrefix = 'D', source = `onthi/${sourceFiles[day]}${day === 13 || day === 14 ? '' : ` + onthi/day${day}.pdf`}`) {
   return bank.mcq.map(([prompt, correct, wrong1, wrong2, wrong3, explanation], index) => {
-    const id = `D${String(day).padStart(2, '0')}-${String(index + 1).padStart(3, '0')}`;
+    const id = `${idPrefix}${String(day).padStart(2, '0')}-${String(index + 1).padStart(3, '0')}`;
     const choices = [correct, wrong1, wrong2, wrong3];
     const shift = hash(id) % 4;
     const arranged = choices.map((_, i) => choices[(i + shift) % 4]);
@@ -70,14 +73,14 @@ function mcqs(day, bank) {
       options: arranged.map((text, i) => ({ key: 'ABCD'[i], text })),
       answer: 'ABCD'[arranged.indexOf(correct)],
       explanation,
-      source: `onthi/${sourceFiles[day]}${day === 13 || day === 14 ? '' : ` + onthi/day${day}.pdf`}`
+      source
     };
   });
 }
 
-function essays(day, bank) {
+function essays(day, bank, idPrefix = 'D') {
   return bank.essay.map(([prompt, modelAnswer], index) => ({
-    id: `D${String(day).padStart(2, '0')}-TL-${String(index + 1).padStart(2, '0')}`,
+    id: `${idPrefix}${String(day).padStart(2, '0')}-TL-${String(index + 1).padStart(2, '0')}`,
     type: 'essay',
     prompt,
     modelAnswer,
@@ -136,3 +139,42 @@ for (let day = 2; day <= 14; day += 1) {
   fs.writeFileSync(path.join(appOutputRoot, `day${day}_tridung.json`), `${JSON.stringify(appExam, null, 2)}\n`, 'utf8');
 }
 console.log(`Created Day 2–14 exam folders in ${outputRoot}`);
+
+// Track 2: ngân hàng soạn từ onthi/Slide_Day_N_*.pdf, đầu ra cạnh bộ đề Trí Dũng.
+const slideFiles = fs.readdirSync(path.join(root, 'onthi')).filter((name) => /^Slide_Day_\d+_.*\.pdf$/.test(name))
+  .sort((a, b) => Number(/\d+/.exec(a)[0]) - Number(/\d+/.exec(b)[0]));
+fs.mkdirSync(track2OutputRoot, { recursive: true });
+fs.mkdirSync(track2AppOutputRoot, { recursive: true });
+for (const slide of slideFiles) {
+  const day = Number(/^Slide_Day_(\d+)_/.exec(slide)[1]);
+  if (!fs.existsSync(path.join(track2BankDir, `day${day}.json`))) {
+    console.warn(`Bỏ qua Track 2 Ngày ${day}: chưa có scripts/track2-banks/day${day}.json`);
+    continue;
+  }
+  const bank = loadBank(day, track2BankDir);
+  const mcqQuestions = mcqs(day, bank, 'T2D', `onthi/${slide}`);
+  const essayQuestions = essays(day, bank, 'T2D');
+  const dir = path.join(track2OutputRoot, `day${day}_track2`);
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, 'trac-nghiem.json'), `${JSON.stringify({ id: `day${day}_track2`, title: `Bộ đề ôn tập Track 2 Ngày ${day}`, sourceFolder: 'onthi', questionCount: mcqQuestions.length, questions: mcqQuestions }, null, 2)}\n`, 'utf8');
+  fs.writeFileSync(path.join(dir, 'tu-luan.json'), `${JSON.stringify({ id: `day${day}_track2_tu_luan`, title: `Tự luận Track 2 Ngày ${day}`, questionCount: essayQuestions.length, questions: essayQuestions }, null, 2)}\n`, 'utf8');
+  const appExam = {
+    id: `track2-day${day}`,
+    title: `Track 2 · Ngày ${day}`,
+    description: `Bộ đề Track 2 Ngày ${day}: 60 câu trắc nghiệm và 10 câu tự luận, biên soạn từ slide cùng ngày.`,
+    course: 'track2',
+    kind: 'daily',
+    day,
+    label: `Ngày ${day}`,
+    durationMinutes: 90,
+    totalPoints: 100,
+    passingScore: 70,
+    disclaimer: 'Bộ đề ôn tập Track 2, tham khảo từ slide cùng ngày; không phải đề thi chính thức.',
+    questions: [
+      ...mcqQuestions.map((question) => ({ ...question, module: 'C', points: 1 })),
+      ...essayQuestions.map(({ id, prompt, modelAnswer, rubric: items }) => ({ id, module: 'D', type: 'essay', points: 4, prompt, modelAnswer, rubric: items }))
+    ]
+  };
+  fs.writeFileSync(path.join(track2AppOutputRoot, `day${day}_track2.json`), `${JSON.stringify(appExam, null, 2)}\n`, 'utf8');
+}
+console.log(`Created Track 2 exam folders in ${track2OutputRoot}`);

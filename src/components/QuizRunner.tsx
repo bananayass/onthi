@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import type { AnswerState, Exam, QuizMode } from '../types/exam';
+import type { AnswerState, Exam, Question, QuizMode } from '../types/exam';
 import { saveProgress, loadProgress, clearProgress } from '../utils/storage';
 import { QuestionCard } from './QuestionCard';
 import { ResultSummary } from './ResultSummary';
@@ -53,19 +53,29 @@ export function QuizRunner({ exam, mode, timerEnabled, onHome }: Props) {
     setAnswers((prev) => ({ ...prev, [currentQuestion.id]: answer }));
   };
 
+  // Lượt làm lại chỉ gồm câu sai/chưa đạt; tổng điểm tính lại theo các câu đó để % kết quả có nghĩa.
+  const retryWrong = (wrong: Question[]) => {
+    const ids = new Set(wrong.map((question) => question.id));
+    setRandomizedExam(shuffleExam({ ...exam, title: `${exam.title} · Làm lại câu sai`, questions: wrong, totalPoints: wrong.reduce((sum, question) => sum + question.points, 0) }));
+    setAnswers((prev) => Object.fromEntries(Object.entries(prev).filter(([id]) => !ids.has(id))));
+    setCurrent(0);
+    setSecondsLeft(exam.durationMinutes * 60);
+    setSubmitted(false);
+  };
+
   if (submitted) {
-    return <ResultSummary exam={randomizedExam} answers={answers} onReview={(idx) => { setSubmitted(false); setCurrent(idx); }} onRestart={() => { clearProgress(exam.id); setRandomizedExam(shuffleExam(exam)); setAnswers({}); setCurrent(0); setSecondsLeft(exam.durationMinutes * 60); setSubmitted(false); }} onHome={onHome} />;
+    return <ResultSummary exam={randomizedExam} answers={answers} onReview={(idx) => { setSubmitted(false); setCurrent(idx); }} onRetryWrong={retryWrong} onRestart={() => { clearProgress(exam.id); setRandomizedExam(shuffleExam(exam)); setAnswers({}); setCurrent(0); setSecondsLeft(exam.durationMinutes * 60); setSubmitted(false); }} onHome={onHome} />;
   }
 
   return (
     <div className="app-frame quiz-frame">
-      <AppHeader title={exam.title} onMenu={() => setNavOpen(true)} />
+      <AppHeader title={randomizedExam.title} onMenu={() => setNavOpen(true)} />
       {navOpen && <button className="drawer-backdrop" aria-label="Đóng điều hướng" onClick={() => setNavOpen(false)} />}
       <main className="quiz-layout">
       <aside className={`quiz-sidebar card ${navOpen ? 'open' : ''}`}>
         <div className="sidebar-mobile-head"><strong>Điều hướng câu hỏi</strong><button className="icon-button" onClick={() => setNavOpen(false)} aria-label="Đóng">×</button></div>
         <button className="link" onClick={onHome}>← Đổi đề</button>
-        <h1>{exam.title}</h1>
+        <h1>{randomizedExam.title}</h1>
         <p>{mode === 'practice' ? 'Practice mode' : 'Exam mode'} · {answeredCount}/{randomizedExam.questions.length} câu đã làm</p>
         {timerEnabled && <div className="timer">{minutes}:{seconds}</div>}
         <div className="question-nav">

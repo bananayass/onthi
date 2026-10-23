@@ -1,4 +1,4 @@
-import type { AnswerState, Exam } from '../types/exam';
+import type { AnswerState, Exam, Question } from '../types/exam';
 import { summarizeExam } from '../utils/scoring';
 import { ModuleStats } from './ModuleStats';
 import { Disclaimer } from './Disclaimer';
@@ -8,11 +8,12 @@ interface Props {
   exam: Exam;
   answers: Record<string, AnswerState>;
   onReview: (questionIndex: number) => void;
+  onRetryWrong: (wrong: Question[]) => void;
   onRestart: () => void;
   onHome: () => void;
 }
 
-export function ResultSummary({ exam, answers, onReview, onRestart, onHome }: Props) {
+export function ResultSummary({ exam, answers, onReview, onRetryWrong, onRestart, onHome }: Props) {
   const summary = summarizeExam(exam, answers);
   return (
     <div className="app-frame">
@@ -44,6 +45,7 @@ export function ResultSummary({ exam, answers, onReview, onRestart, onHome }: Pr
 
       <div className="actions result-actions">
         <button className="secondary" onClick={onHome}>Về trang chọn đề</button>
+        {summary.review.length > 0 && <button className="secondary" onClick={() => onRetryWrong(summary.review)}>Làm lại {summary.review.length} câu sai</button>}
         <button className="primary" onClick={onRestart}>Làm lại bài này</button>
       </div>
       </main>

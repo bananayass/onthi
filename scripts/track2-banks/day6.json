@@ -1,0 +1,526 @@
+{
+ "mcq": [
+  [
+   "Theo hình vẽ lại từ Sculley và cộng sự (NIPS 2015), phần mã ML trong một hệ thống ML thực tế như thế nào?",
+   "Chỉ là một ô nhỏ, hạ tầng bao quanh lớn hơn nhiều",
+   "Chiếm phần lớn hệ thống, hạ tầng chỉ là phụ trợ",
+   "Ngang bằng phần cấu hình và phần giám sát cộng lại",
+   "Là phần duy nhất cần kiểm thử và triển khai tự động",
+   "Slide “Mã ML chỉ là một phần nhỏ”: cấu hình, thu thập dữ liệu, serving, monitoring… lớn hơn nhiều và ô nào cũng cần kiểm thử, triển khai tự động."
+  ],
+  [
+   "Bốn trục thay đổi của một hệ thống AI theo bài gồm những trục nào?",
+   "Mã, dữ liệu, mô hình, prompt và cấu hình",
+   "Mã, phần cứng, mạng, hệ điều hành máy chủ",
+   "Mã, giao diện, cơ sở dữ liệu, tài liệu API",
+   "Dữ liệu, GPU, chi phí cloud, đội vận hành",
+   "Mỗi trục có công cụ riêng: Git, DVC, MLflow/kho mô hình, phiên bản hoá + bộ đánh giá. CI/CD cho AI phải kích hoạt khi bất kỳ trục nào đổi."
+  ],
+  [
+   "Vì sao kiểm thử hệ thống AI cần ngưỡng và lặp lại nhiều lần thay vì so khớp đúng một đầu ra?",
+   "Kết quả không xác định: cùng đầu vào có thể khác đầu ra",
+   "Vì GitHub Actions giới hạn mỗi job chỉ chạy một lần",
+   "Vì mô hình AI không có đầu ra để so khớp trực tiếp",
+   "Vì kiểm thử đơn vị không chạy được trên mã Python",
+   "Bảng “CI/CD cho AI khác phần mềm thông thường”: phần mềm truyền thống xác định, hệ thống AI không xác định."
+  ],
+  [
+   "Ngoài tỉ lệ lỗi tăng, điều kiện hoàn tác của hệ thống AI thêm những tín hiệu nào?",
+   "Độ chính xác giảm, thiên lệch, chi phí token tăng",
+   "Số commit tăng, số PR mở, số người duyệt giảm",
+   "Dung lượng image tăng, số pod giảm, CPU nhàn rỗi",
+   "Thời gian build tăng, số dependency, số nhánh Git",
+   "Bảng so sánh phần mềm truyền thống và AI, dòng “Điều kiện hoàn tác”."
+  ],
+  [
+   "Ngoài việc mã thay đổi, chuỗi xử lý của hệ thống AI còn được kích hoạt bởi yếu tố nào?",
+   "Dữ liệu, prompt thay đổi; theo lịch; dữ liệu trôi",
+   "Chỉ khi có người bấm nút chạy thủ công trên UI",
+   "Chỉ khi phiên bản Python của runner được nâng cấp",
+   "Chỉ khi giảng viên tạo tag phát hành trên Git",
+   "Bảng so sánh, dòng “Kích hoạt chuỗi xử lý”: mã, dữ liệu, lời nhắc thay đổi; lịch; drift."
+  ],
+  [
+   "Theo Google Cloud, mức trưởng thành MLOps nào có huấn luyện liên tục (CT) và kiểm tra dữ liệu, mô hình tự động?",
+   "Mức 1 · Tự động hoá chuỗi",
+   "Mức 0 · Thủ công",
+   "Mức 2 · CI/CD tự động",
+   "Mức 3 · Tự trị hoàn toàn",
+   "Mức 0 mọi bước làm tay; Mức 1 tự động hoá chuỗi huấn luyện (CT); Mức 2 CI/CD xây dựng, kiểm thử, triển khai chính chuỗi huấn luyện."
+  ],
+  [
+   "Trong kiến trúc tham chiếu, công cụ nào đồng bộ phiên bản mới và chạy canary sau khi cổng đánh giá đạt?",
+   "Argo CD",
+   "DVC",
+   "MLflow Tracking",
+   "Dependabot",
+   "Kiến trúc tham chiếu: GitHub Actions kiểm thử, dvc pull từ S3, MLflow ghi mô hình, cổng so challenger với champion, đạt thì Argo CD đồng bộ và chạy canary."
+  ],
+  [
+   "Sự cố GPT-4o tháng 04/2025 (mô hình quá chiều lòng người dùng) rút ra bài học gì cho CI/CD?",
+   "Cổng chỉ chặn điều nó đo; cần thêm chỉ số cho kiểu lỗi mới",
+   "Không bao giờ cập nhật mô hình vào cuối tuần làm việc",
+   "Bộ đánh giá trước phát hành đạt là đủ để đảm bảo an toàn",
+   "Nên bỏ bộ đánh giá và chỉ dựa vào phản hồi người dùng",
+   "Slide “Ba sự cố thật”: bộ đánh giá đạt nhưng không có metric đo hiện tượng chiều lòng."
+  ],
+  [
+   "Sự cố Anthropic 08–09/2025 (lỗi routing ảnh hưởng tối đa 16% request Sonnet 4) dẫn tới bài học nào?",
+   "Chạy đánh giá liên tục trên hệ thống thật, không chỉ trước phát hành",
+   "Chỉ cần đánh giá kỹ một lần trước phát hành là đủ cho mọi bản sau",
+   "Lỗi hạ tầng không bao giờ ảnh hưởng tới chất lượng đầu ra mô hình",
+   "Nên tắt routing và chỉ dùng một máy chủ duy nhất cho mọi request",
+   "Bộ đánh giá không phản ánh suy giảm mà người dùng báo, nên cần eval liên tục trên production."
+  ],
+  [
+   "Trong MLflow 3, nhóm chức năng AI Gateway đóng vai trò gì?",
+   "Một điểm truy cập cho nhiều nhà cung cấp LLM, có chia lưu lượng",
+   "Ghi tham số, chỉ số và artifact của mỗi lần chạy thí nghiệm",
+   "Đăng ký phiên bản mô hình và gán bí danh thay cho stage cũ",
+   "Quản lý phiên bản dữ liệu lớn bằng tệp con trỏ trong Git",
+   "Bốn nhóm: Tracking, Model Registry, GenAI, AI Gateway. Ba nhiễu là Tracking, Registry và DVC."
+  ],
+  [
+   "Thực thể LoggedModel mới trong MLflow 3 mang ý nghĩa gì?",
+   "Mô hình thành đối tượng độc lập, liên kết run, trace, prompt, kết quả đánh giá",
+   "Mô hình chỉ còn là một tệp artifact gắn cứng vào một lần chạy duy nhất",
+   "Thay thế hoàn toàn Model Registry nên không còn cần đăng ký mô hình",
+   "Một định dạng tệp mới thay pickle để chặn mã độc khi tải mô hình",
+   "Slide “MLflow 3: bốn nhóm chức năng”, ô LoggedModel."
+  ],
+  [
+   "Trong MLflow Tracking, đặc điểm của Params là gì?",
+   "Siêu tham số và phiên bản dữ liệu, bất biến trong một lần chạy",
+   "Giá trị ghi theo từng bước để vẽ đường cong loss và accuracy",
+   "Biểu đồ và tệp cấu hình lưu kèm lần chạy để truy ngược sau",
+   "Lược đồ đầu vào và đầu ra, cần thiết khi phục vụ mô hình",
+   "Params bất biến; Metrics ghi theo step; Artifacts là tệp; Signature là lược đồ I/O."
+  ],
+  [
+   "Vì sao nên truyền signature=infer_signature(...) khi log_model?",
+   "Lược đồ đầu vào/đầu ra cần khi phục vụ mô hình",
+   "Để ký số mô hình bằng Sigstore trước khi đăng ký",
+   "Để MLflow tự chọn siêu tham số tốt nhất cho mô hình",
+   "Để nén trọng số mô hình nhỏ hơn khi lưu lên S3",
+   "Signature là schema I/O; ký số là việc của model-signing, không phải signature của MLflow."
+  ],
+  [
+   "mlflow.openai.autolog() mang lại lợi ích gì cho ứng dụng LLM?",
+   "Tự ghi trace (prompt, token, độ trễ) mà không sửa mã ứng dụng",
+   "Tự động huấn luyện lại mô hình OpenAI mỗi khi có dữ liệu mới",
+   "Tự chuyển mọi request sang mô hình rẻ nhất để giảm chi phí",
+   "Tự sinh bộ ca kiểm thử vàng từ tài liệu sản phẩm của nhóm",
+   "autolog() có từ bản 2.14 (06/2024), hỗ trợ OpenAI, LangChain, LlamaIndex, Anthropic; là điểm vào của truy vết GenAI trong MLflow 3."
+  ],
+  [
+   "Từ phiên bản MLflow nào, giai đoạn (stage) như models:/name/Production bị đánh dấu deprecated?",
+   "2.9 (12/2023)",
+   "2.14 (06/2024)",
+   "3.1 (06/2025)",
+   "3.16 (09/2026)",
+   "Slide “Từ giai đoạn sang bí danh”: deprecated từ 2.9.0, vẫn còn trong 3.16.1. Cách mới: models:/name@champion."
+  ],
+  [
+   "Vì sao bí danh (alias) giúp champion và challenger cùng tồn tại để chạy A/B?",
+   "Mỗi phiên bản có thể mang nhiều bí danh, bí danh trỏ phiên bản bất kỳ",
+   "Bí danh tự sao chép mô hình sang một cụm Kubernetes riêng biệt",
+   "Bí danh khoá mô hình, không cho đăng ký thêm phiên bản mới nào",
+   "Bí danh bắt buộc mỗi mô hình chỉ có đúng một phiên bản đang chạy",
+   "Slide Model Registry: một phiên bản có thể mang nhiều bí danh; champion và challenger cùng tồn tại."
+  ],
+  [
+   "Theo bài, nên tách môi trường dev, staging, prod trong MLflow Model Registry thế nào?",
+   "Mỗi môi trường là một mô hình đăng ký riêng, chuyển bằng copy_model_version",
+   "Dùng ba stage Staging, Production, Archived trên cùng một mô hình đăng ký",
+   "Dùng ba nhánh Git khác nhau, mỗi nhánh chứa một bản sao tệp mô hình",
+   "Dùng một bí danh duy nhất rồi đổi tên bí danh theo từng môi trường",
+   "Slide “Từ giai đoạn sang bí danh”: môi trường tách thành mô hình đăng ký riêng, chuyển bằng copy_model_version."
+  ],
+  [
+   "Theo bài, mã serving nên nạp mô hình như thế nào?",
+   "Theo bí danh, ví dụ models:/sentiment_classifier@champion",
+   "Theo số phiên bản cố định, ví dụ models:/sentiment_classifier/4",
+   "Theo đường dẫn tệp .pkl trên máy của người huấn luyện",
+   "Theo run_id mới nhất lấy từ giao diện MLflow Tracking",
+   "Comment trong code: “serving code loads by alias, never by number”."
+  ],
+  [
+   "Nên ghi thẻ (tag) nào lên phiên bản mô hình để truy ngược khi có sự cố?",
+   "data_version, git_commit, eval_accuracy",
+   "owner_email, slack_channel, office_room",
+   "gpu_model, cpu_count, docker_size_mb",
+   "run_color, ui_theme, notebook_name",
+   "Slide “Kho mô hình: API và thực hành tốt”. Quy ước tên {tác_vụ}_{kiến_trúc}, ví dụ fraud_lgbm."
+  ],
+  [
+   "Trước khi chuyển challenger thành champion, thực hành tốt yêu cầu điều gì?",
+   "Ít nhất một người duyệt",
+   "Ít nhất ba lần huấn luyện lại",
+   "Xoá toàn bộ phiên bản cũ",
+   "Đổi tên mô hình đăng ký",
+   "Slide “Kho mô hình: API và thực hành tốt”, ô Phê duyệt."
+  ],
+  [
+   "Trong mlflow.genai.evaluate, cách viết một bộ chấm điểm tự định nghĩa (như is_concise) là gì?",
+   "Viết hàm Python và gắn decorator @scorer",
+   "Viết tệp YAML và đặt trong thư mục .dvc",
+   "Khai báo một job mới trong GitHub Actions",
+   "Đăng ký nó như một bí danh trong kho mô hình",
+   "Bộ chấm điểm tự viết là hàm Python gắn @scorer; ví dụ is_concise trả về len(outputs.split()) <= 60."
+  ],
+  [
+   "Bộ chấm điểm dựng sẵn nào của MLflow phù hợp nhất để kiểm agent gọi công cụ đúng?",
+   "ToolCallCorrectness",
+   "RetrievalGroundedness",
+   "RelevanceToQuery",
+   "Safety",
+   "Danh sách dựng sẵn: Correctness, Safety, Guidelines, RelevanceToQuery, RetrievalGroundedness, ToolCallCorrectness. Mô hình chấm mặc định là gpt-4o-mini."
+  ],
+  [
+   "Với Prompt Registry của MLflow, đổi bí danh prompts:/name@production có tác dụng gì?",
+   "Đổi lời nhắc đang chạy, vẫn giữ lịch sử phiên bản",
+   "Xoá vĩnh viễn mọi phiên bản lời nhắc trước đó",
+   "Sửa trực tiếp nội dung của phiên bản bất biến",
+   "Tự huấn luyện lại mô hình theo lời nhắc mới",
+   "Kho lời nhắc có phiên bản bất biến và bí danh; đổi bí danh là đổi lời nhắc đang chạy, có lịch sử."
+  ],
+  [
+   "Tài liệu MLflow phân biệt “đo lường” và “chặn” trong kiểm thử agent. “Chặn” nghĩa là gì?",
+   "Kiểm một hành vi cụ thể có bị hỏng không",
+   "Tính điểm trung bình trên cả tập dữ liệu",
+   "Chặn người dùng gửi câu hỏi quá dài",
+   "Chặn agent truy cập internet khi chạy",
+   "Đo lường = điểm trung bình; chặn = mỗi hành vi quan trọng là một hàm test, CI thất bại khi result.passed sai."
+  ],
+  [
+   "Hôm qua độ chính xác 92%, hôm nay 88%, nhóm không biết do mã hay do dữ liệu. Đây là vấn đề DVC giải quyết nào?",
+   "Không tái tạo được kết quả vì dữ liệu không có phiên bản",
+   "Git không lưu được mã nguồn Python có dung lượng lớn",
+   "Mô hình bị tấn công chèn lệnh qua bộ dữ liệu huấn luyện",
+   "Runner CI thiếu GPU nên chạy huấn luyện chậm hơn hôm qua",
+   "Slide “Vấn đề: dữ liệu không có kiểm soát phiên bản”, ô Không tái tạo được kết quả."
+  ],
+  [
+   "Tệp con trỏ .dvc chứa gì và vì sao quan trọng?",
+   "Mã băm của dữ liệu; Git theo dõi nên chuyển nhánh là chuyển đúng dữ liệu",
+   "Toàn bộ dữ liệu đã nén; Git lưu trực tiếp nên không cần kho từ xa nữa",
+   "Mật khẩu kho S3; giúp CI đăng nhập mà không cần dùng tới OIDC",
+   "Danh sách siêu tham số; giúp MLflow tự so sánh các lần chạy",
+   "Slide “DVC hoạt động thế nào”: tệp con trỏ nhỏ lưu mã băm; git checkout + dvc checkout lấy đúng phiên bản."
+  ],
+  [
+   "Thực hành tốt cho thông tin xác thực kho từ xa DVC trên CI là gì?",
+   "CI dùng vai trò IAM qua OIDC, không dùng khoá cố định",
+   "Ghi access key vào dvc.yaml để mọi job dùng chung",
+   "Commit khoá truy cập vào .dvc/config cho tiện chia sẻ",
+   "Gửi khoá S3 cho từng thành viên qua tin nhắn Slack",
+   "Ngoài ra lưu xác thực cục bộ bằng dvc remote modify --local, và chính sách vòng đời chuyển dữ liệu nguội sang lưu trữ rẻ."
+  ],
+  [
+   "Theo slide, từ 11/2025 DVC có thay đổi gì?",
+   "Thuộc lakeFS, vẫn giấy phép Apache-2.0",
+   "Thuộc OpenAI, đổi sang giấy phép MIT",
+   "Ngừng phát triển, chuyển sang MLflow",
+   "Thuộc GitHub, chỉ chạy trong Actions",
+   "Slide DVC: “Từ 11/2025, DVC thuộc lakeFS, vẫn giấy phép Apache-2.0” (nguồn DVC FAQ 18/11/2025)."
+  ],
+  [
+   "Chỉ tham số lr trong params.yaml đổi. Chạy dvc repro với chuỗi prepare → train → evaluate sẽ làm gì?",
+   "Bỏ qua prepare, chạy lại train và evaluate",
+   "Chạy lại cả ba giai đoạn từ prepare",
+   "Chỉ chạy lại prepare rồi dừng lại",
+   "Không chạy gì vì dữ liệu không đổi",
+   "dvc repro chỉ chạy lại các giai đoạn có đầu vào thay đổi; train phụ thuộc params lr, evaluate phụ thuộc model.pkl."
+  ],
+  [
+   "Lệnh dvc exp run --queue -S lr=0.001,0.01,0.1 -S epochs=10,20 xếp hàng bao nhiêu thí nghiệm?",
+   "6",
+   "5",
+   "3",
+   "9",
+   "Dấu phẩy là mỗi giá trị; grid search 3 giá trị lr × 2 giá trị epochs = 6. Sau đó dvc queue start --jobs 3, dvc exp show để so sánh."
+  ],
+  [
+   "Khi dùng cả DVC và MLflow, cái gì liên kết kết quả thí nghiệm với phiên bản dữ liệu?",
+   "Thẻ data_version ghi trong MLflow",
+   "Bí danh champion trong kho mô hình",
+   "Tệp metrics.json với cache: false",
+   "Nhánh Git tên trùng tên dataset",
+   "Slide so sánh công cụ: git commit ghi mã, dvc push ghi dữ liệu, MLflow ghi kết quả và liên kết qua thẻ data_version."
+  ],
+  [
+   "Bộ lọc đường dẫn (path filter) trong chuỗi CI cho dự án AI dùng để làm gì?",
+   "Chỉ chạy huấn luyện khi data/, src/ hoặc params.yaml đổi",
+   "Chỉ cho phép thành viên trong nhóm được push lên main",
+   "Chặn mọi tệp dữ liệu lớn hơn 100 MB khỏi kho mã Git",
+   "Tự động xoá các tệp tạm sinh ra sau khi job hoàn tất",
+   "Slide “Kiến trúc chuỗi CI”: sửa tài liệu không tốn GPU."
+  ],
+  [
+   "Sự cố tj-actions/changed-files (03/2025, CVE-2025-30066) xảy ra thế nào?",
+   "Mã độc gắn vào thẻ phiên bản cũ, đưa secret CI/CD vào nhật ký",
+   "Runner GPU bị chiếm dụng để đào tiền ảo trong nhiều tuần liền",
+   "Kho mô hình bị xoá toàn bộ do lỗi phân quyền của MLflow",
+   "Dữ liệu huấn luyện bị đầu độc qua kho từ xa S3 công khai",
+   "Hơn 23.000 kho mã bị ảnh hưởng; repo dùng thẻ như @v45 lấy ngay mã độc mà không đổi dòng nào."
+  ],
+  [
+   "Theo tài liệu GitHub, cách duy nhất để dùng một action bên thứ ba như bản phát hành bất biến là gì?",
+   "Ghim vào mã băm commit đầy đủ (SHA)",
+   "Ghim vào thẻ phiên bản lớn như @v7",
+   "Ghim vào nhánh main của action đó",
+   "Dùng thẻ @latest để luôn cập nhật",
+   "Biện pháp sau tj-actions: ghim SHA 40 ký tự, bật chính sách bắt buộc ghim SHA, dùng Dependabot để cập nhật."
+  ],
+  [
+   "Để job GitHub Actions dùng OIDC lấy quyền AWS tạm thời, cần cấu hình gì?",
+   "permissions: id-token: write và role-to-assume",
+   "Lưu AWS access key dài hạn trong GitHub Secrets",
+   "permissions: contents: write cho toàn bộ workflow",
+   "Cài AWS CLI rồi đăng nhập bằng tài khoản root",
+   "Slide OIDC: GitHub OIDC cấp token ký số, AWS STS đổi lấy quyền tạm thời; khoá chỉ hợp lệ trong một job."
+  ],
+  [
+   "Hàm eval_gate có threshold=0.02. new_acc = 0,905, base_acc = 0,930. Kết quả là gì?",
+   "FAIL, sys.exit(1) và việc triển khai bị chặn",
+   "PASS vì delta chỉ lệch nhỏ hơn hai phần trăm",
+   "PASS vì mô hình mới vẫn trên chín mươi phần trăm",
+   "FAIL nhưng mô hình vẫn được gán champion",
+   "delta = −0,025 < −0,02 nên in FAIL và thoát mã 1; job lỗi → deploy blocked."
+  ],
+  [
+   "Mốc đang chạy có độ chính xác 92,4%, ngưỡng chặn = nền − 2 điểm. Phiên bản nào dưới đây bị cổng chặn?",
+   "v5 với 89,6%",
+   "v6 với 92,6%",
+   "v4 với 92,4%",
+   "v3 với 92,1%",
+   "Ngưỡng = 90,4%. v5 89,6% thấp hơn nên không được đăng ký; v6 phục hồi lên 92,6% và đi tiếp."
+  ],
+  [
+   "Mô hình chấm điểm (LLM-as-judge) có thiên lệch vị trí, độ dài, tự ưu ái. Bài đề xuất giảm bằng cách nào?",
+   "Cố định phiên bản mô hình chấm, nhiệt độ thấp, chạy lặp",
+   "Đổi mô hình chấm ngẫu nhiên sau mỗi lần chạy đánh giá",
+   "Tăng nhiệt độ để mô hình chấm sáng tạo và khách quan hơn",
+   "Cho mô hình đang được đánh giá tự chấm câu trả lời của mình",
+   "Slide “Cổng đánh giá cho ứng dụng LLM và agent”, nguồn Zheng và cộng sự arXiv:2306.05685."
+  ],
+  [
+   "Chiến lược triển khai nào cho thử mô hình mới với lưu lượng thật mà người dùng không bị ảnh hưởng, nhưng không thấy phản ứng người dùng?",
+   "Shadow",
+   "Canary",
+   "Blue/green",
+   "Rolling",
+   "Shadow: mô hình mới nhận bản sao yêu cầu, phản hồi chỉ được ghi lại; tốn gấp đôi tính toán."
+  ],
+  [
+   "Hạn chế chính của blue/green là gì?",
+   "Tốn gấp đôi tài nguyên khi chạy cả hai",
+   "Hoàn tác chậm vì phải thay từng pod",
+   "Người dùng bị gián đoạn khi chuyển đổi",
+   "Không chạy được kiểm thử khói trên v2",
+   "Blue/green: không gián đoạn, hoàn tác tức thì, nhưng tốn gấp đôi tài nguyên. Hoàn tác chậm là hạn chế của rolling."
+  ],
+  [
+   "Chiến lược rolling (cập nhật cuốn chiếu) có đặc điểm gì?",
+   "Mặc định trong Kubernetes, nhưng hoàn tác chậm",
+   "Chuyển 5% lưu lượng rồi tăng dần theo chỉ số",
+   "Dựng môi trường song song rồi đổi bộ cân bằng tải",
+   "Gửi bản sao request và chỉ ghi lại phản hồi",
+   "Rolling thay từng pod; đơn giản, mặc định; hai phiên bản cùng chạy."
+  ],
+  [
+   "Trong AnalysisTemplate của Argo Rollouts, khi điều kiện successCondition: result[0] < 0.45 thất bại thì sao?",
+   "Huỷ lần phát hành và đặt trọng số canary về 0",
+   "Tăng ngay trọng số canary lên 100% để thử",
+   "Giữ nguyên trọng số và gửi email cho đội",
+   "Tự nâng ngưỡng p99 lên 600 ms rồi chạy lại",
+   "0.45 giây = ngưỡng p99 450 ms; failureLimit: 1. Với mô hình, thay truy vấn bằng chỉ số chất lượng."
+  ],
+  [
+   "Với Istio mirror trong chiến lược shadow, phản hồi của v2 được xử lý thế nào?",
+   "Bị loại, chỉ dùng để so sánh qua nhật ký",
+   "Trả về người dùng thay cho phản hồi v1",
+   "Gộp với phản hồi v1 rồi trả cả hai",
+   "Lưu vào cache để trả cho request sau",
+   "Istio mirror “gửi rồi bỏ qua”: so sánh đầu ra, độ trễ, lỗi giữa hai phiên bản."
+  ],
+  [
+   "Theo bảng công cụ trên Kubernetes (10/2026), KServe có giới hạn gì về canary?",
+   "Canary chỉ ở chế độ serverless",
+   "Không hỗ trợ canary ở mọi chế độ",
+   "Canary chỉ chạy được trên GPU A100",
+   "Canary chỉ hỗ trợ mô hình pickle",
+   "KServe v0.21 phục vụ mô hình; Flagger v1.45 hỗ trợ canary, A/B, mirroring; Argo Rollouts v1.10 phân tích qua Prometheus."
+  ],
+  [
+   "Hàm test_features_have_no_label_leakage kiểm tra điều gì?",
+   "Cột nhãn không lọt vào tập đặc trưng",
+   "Mô hình không trả về nhãn rỗng",
+   "Nhãn được mã hoá thành số nguyên",
+   "Dữ liệu không có hàng bị trùng",
+   "assert \"label\" not in feats.columns: đặc trưng không rò rỉ nhãn (data leakage)."
+  ],
+  [
+   "Kiểm thử hành vi “thêm từ “không” vào câu thì cảm xúc đảo chiều” thuộc loại nào?",
+   "Kiểm thử có hướng (directional)",
+   "Kiểm thử bất biến (invariance)",
+   "Kiểm thử công bằng (fairness)",
+   "Kiểm thử tải đột biến (spike)",
+   "Bất biến: xoay ảnh 90° nhãn không đổi; có hướng: thay đổi đầu vào làm đầu ra đổi theo hướng dự đoán."
+  ],
+  [
+   "Theo ví dụ kiểm thử mô hình, tiêu chí công bằng (fairness) là gì?",
+   "Chênh lệch độ chính xác giữa nhóm con dưới 3 điểm",
+   "Độ chính xác trên tập vàng ≥ bản trước − 0,5 điểm",
+   "Lớp thiểu số chiếm ít nhất 10% trong mỗi lô dữ liệu",
+   "Độ trễ p95 của mọi nhóm người dùng dưới 500 ms",
+   "Hồi quy: ≥ bản trước − 0,5 điểm; công bằng: chênh lệch nhóm con < 3 điểm."
+  ],
+  [
+   "Kiểm thử dữ liệu nào trong bài dùng kiểm định KS so với mốc chuẩn?",
+   "Phân phối",
+   "Lược đồ",
+   "Khối lượng",
+   "Đầy đủ",
+   "Kiểm thử dữ liệu: lược đồ, đầy đủ (tỉ lệ rỗng), phân phối (KS), khối lượng; chạy trên mỗi phiên bản dữ liệu mới và ghi vào MLflow."
+  ],
+  [
+   "Với kiểm thử LLM và agent, bài khuyên thứ tự chấm điểm như thế nào?",
+   "Chấm bằng quy tắc trước, LLM-as-judge sau",
+   "Chấm bằng LLM-as-judge trước, quy tắc sau",
+   "Chỉ dùng LLM-as-judge, bỏ hẳn quy tắc",
+   "Chỉ dùng người chấm, không dùng tự động",
+   "Slide “Kiểm thử mô hình, dữ liệu và LLM”, cột LLM và agent."
+  ],
+  [
+   "Khi kiểm thử tải cho LLM bằng k6, ngoài p95 nên đo thêm gì?",
+   "Thời gian đến token đầu (TTFT) và độ trễ giữa token",
+   "Số tham số mô hình và dung lượng tệp trọng số",
+   "Số commit trong ngày và số PR đang mở",
+   "Độ bao phủ mã nguồn của thư mục src/",
+   "Ngưỡng (thresholds) vi phạm thì k6 thoát mã khác 0 và chuỗi CI thất bại."
+  ],
+  [
+   "Mức phục vụ mô hình nào dùng lệnh mlflow models build-docker và phù hợp cho tiền phát hành?",
+   "Docker",
+   "Local",
+   "Đám mây",
+   "Kubernetes",
+   "Local: mlflow models serve cho phát triển; Đám mây: SageMaker, Azure ML, Databricks; Kubernetes: KServe, Seldon, vLLM."
+  ],
+  [
+   "Vì sao hàm variant() băm user_id bằng SHA-256 thay vì chọn ngẫu nhiên mỗi request?",
+   "Mỗi người luôn thấy cùng một biến thể",
+   "Để mã hoá user_id trước khi gửi đi",
+   "Để chia đều 50/50 cho hai biến thể",
+   "Để chặn người dùng truy cập biến thể B",
+   "Chia lưu lượng xác định: same user always sees same variant; pct_b mặc định 0,10."
+  ],
+  [
+   "Khi so sánh nhiều biến thể cùng lúc, bài khuyên xử lý mức ý nghĩa thế nào?",
+   "Hiệu chỉnh, ví dụ Bonferroni",
+   "Nâng mức ý nghĩa lên 0,10",
+   "Bỏ qua kiểm định thống kê",
+   "Chỉ giữ biến thể có p nhỏ nhất",
+   "Mức ý nghĩa p < 0,05; nhiều so sánh cùng lúc thì hiệu chỉnh (Bonferroni)."
+  ],
+  [
+   "Tỉ lệ nền 5%, muốn phát hiện cải thiện tương đối 5% (α = 5% hai phía, công suất 80%). Cần khoảng bao nhiêu mẫu mỗi nhóm?",
+   "Khoảng 122.000",
+   "Khoảng 25.600",
+   "Khoảng 1.000",
+   "Khoảng 10.000",
+   "Biểu đồ cỡ mẫu: 122.100 với nền 5%, 25.600 với nền 20%; quy tắc “tối thiểu 1.000 mẫu” không đủ."
+  ],
+  [
+   "Biến thể LLM mới thắng ở tỉ lệ hoàn thành tác vụ nhưng chi phí mỗi tác vụ tăng gấp đôi. Theo bài, kết luận hợp lý là gì?",
+   "Vẫn có thể bị từ chối vì vi phạm rào chắn chi phí",
+   "Phải chọn ngay vì đã thắng ở chỉ số chính",
+   "Kết quả vô hiệu vì chi phí không phải chỉ số",
+   "Chỉ cần tăng hạn mức chi phí của gateway",
+   "Slide A/B cho LLM: biến thể thắng chỉ số chính nhưng chi phí gấp đôi vẫn có thể bị từ chối."
+  ],
+  [
+   "Vì sao tải tệp mô hình pickle từ nguồn không tin cậy là nguy hiểm?",
+   "pickle.load có thể chạy mã tuỳ ý (RCE)",
+   "Tệp pickle luôn lớn gấp đôi safetensors",
+   "pickle làm giảm độ chính xác mô hình",
+   "pickle không lưu được trọng số float16",
+   "safetensors chỉ đọc tensor, không thực thi mã. Hugging Face có quét pickle nhưng không tuyệt đối."
+  ],
+  [
+   "Sự cố JFrog phát hiện tháng 02/2024 trên Hugging Face là gì?",
+   "Khoảng 100 mô hình độc hại dùng __reduce__ của pickle mở reverse shell",
+   "Hơn 23.000 kho mã bị gắn mã độc qua thẻ phiên bản của một action",
+   "Lỗi routing khiến 16% request bị trả lời bởi sai cấu hình mô hình",
+   "Một tập dữ liệu công khai bị lộ thông tin cá nhân của người dùng",
+   "Nguồn JFrog Security Research (27/02/2024). Nhiễu là sự cố tj-actions và Anthropic."
+  ],
+  [
+   "Công cụ nào trong bài dùng để ký số mô hình kiểu keyless (Sigstore) trong CI?",
+   "OpenSSF model-signing",
+   "CycloneDX ML-BOM",
+   "Great Expectations",
+   "Argo Rollouts",
+   "model-signing v1.0 ra mắt 04/2025; khi triển khai verify chữ ký + identity + OIDC issuer."
+  ],
+  [
+   "ML-BOM theo chuẩn CycloneDX ghi lại thông tin gì?",
+   "Thành phần: mô hình, tập dữ liệu, phụ thuộc",
+   "Chữ ký số và danh tính người huấn luyện",
+   "Kết quả A/B test của từng biến thể",
+   "Ngưỡng p99 của từng lần chạy canary",
+   "Bảng lớp bảo vệ: toàn vẹn/danh tính (model-signing, Sigstore), nguồn gốc build (GitHub attestation, SLSA), thành phần (ML-BOM)."
+  ],
+  [
+   "Mục rủi ro nào của OWASP được bài gắn với chuỗi cung ứng mô hình?",
+   "LLM03:2025 Supply Chain",
+   "LLM01:2025 Prompt Injection",
+   "LLM05:2025 Output Handling",
+   "LLM10:2025 Unbounded Use",
+   "Slide “Ký số mô hình và chứng thực nguồn gốc”, dòng Rủi ro."
+  ]
+ ],
+ "essay": [
+  [
+   "Một nhóm cập nhật prompt của agent vào chiều thứ Sáu. Sáng thứ Hai tỉ lệ tool call thành công giảm từ 92% xuống 71% nhưng không có alert nào. Hãy phân tích vì sao sự cố lọt qua và thiết kế các bước kiểm tra mà một thay đổi prompt phải đi qua trước và sau khi đến người dùng.",
+   "Ý cần có: (1) Prompt là một trong bốn trục thay đổi (mã, dữ liệu, mô hình, prompt/cấu hình) nên phải kích hoạt CI/CD như mã; (2) Prompt có phiên bản và bí danh trong Prompt Registry (prompts:/name@production), đổi bí danh có lịch sử, hoàn tác được; (3) Cổng đánh giá trên PR: golden dataset + scorer (ToolCallCorrectness, Guidelines) + ngưỡng + mã thoát khác 0; đánh giá cả quỹ đạo gọi công cụ; (4) Phát hành từng phần: canary/gateway chia 90/10 hoặc 5% tăng dần, điều kiện hoàn tác tự động; (5) Giám sát và đánh giá liên tục trên production, alert theo tỉ lệ tool call thành công (bài học Anthropic 2025); (6) Cổng chỉ chặn điều nó đo → bổ sung chỉ số khi biết kiểu lỗi mới (bài học GPT-4o)."
+  ],
+  [
+   "Thiết kế luồng GitHub Actions cho một repo phân loại cảm xúc dùng DVC và MLflow, từ push/pull_request tới đăng ký mô hình. Nêu thứ tự job, các cơ chế tiết kiệm chi phí GPU và các biện pháp bảo mật workflow.",
+   "Ý cần có: (1) Thứ tự: lint + unit test + data validation chạy song song → train (needs: data-validation, dvc pull && dvc repro, log MLflow) → cổng đánh giá → đăng ký/gán challenger → deploy; (2) Fail fast khi kiểm tra dữ liệu lỗi; (3) Path filter data/**, src/**, params.yaml, dvc.yaml, *.dvc; concurrency; sửa tài liệu không tốn GPU; cache pip theo hash requirements.txt, cache DVC; (4) GPU runner T4 ~0,052 USD/phút, A100/H100 cần self-hosted; (5) Bảo mật: permissions tối thiểu (contents: read), ghim action theo SHA đầy đủ + Dependabot (bài học tj-actions CVE-2025-30066), OIDC (id-token: write, role-to-assume) thay khoá dài hạn, Environment có người duyệt cho bước production; (6) Thông báo Slack và đăng kết quả eval lên PR."
+  ],
+  [
+   "Champion hiện có độ chính xác 92,4%, F1 0,90 và p95 latency 180 ms. Challenger đạt 91,1%, F1 0,91 và p95 205 ms. Áp dụng ngưỡng ví dụ của bài (độ chính xác −2 điểm, độ trễ +10%), hãy tính và ra quyết định cho cổng đánh giá, đồng thời nêu các thực hành tốt khi vận hành cổng này.",
+   "Ý cần có: (1) Ngưỡng accuracy = 92,4 − 2 = 90,4% → 91,1% đạt; (2) Ngưỡng độ trễ = 180 × 1,1 = 198 ms → 205 ms vượt → cổng chặn (ngưỡng riêng từng chỉ số, chỉ cần một chỉ số vi phạm là không đạt); (3) Nếu kết quả sát ngưỡng thì yêu cầu người duyệt thay vì tự động; (4) Tập kiểm tra cố định, không xáo trộn; theo dõi nhiều chỉ số (accuracy, F1, AUC, p95); (5) Ghi kết quả vào MLflow, đăng lên PR; sys.exit(1) để job lỗi và chặn deploy; (6) Cổng chỉ chặn điều nó đo, cần bổ sung chỉ số khi phát hiện kiểu lỗi mới."
+  ],
+  [
+   "Công ty sắp thay mô hình gợi ý bằng một kiến trúc hoàn toàn mới, rủi ro cao, và cũng có một bản vá nhỏ cho mô hình hiện tại. So sánh canary, blue/green, shadow, rolling và đề xuất chiến lược cho từng thay đổi, kèm điều kiện tự động hoàn tác.",
+   "Ý cần có: (1) Canary: 5% → 25% → 50% → 100%, phát hiện sớm, cần giám sát tốt; (2) Blue/green: không gián đoạn, hoàn tác tức thì, tốn gấp đôi tài nguyên; (3) Shadow: bản sao request (Istio mirror, fire-and-forget), người dùng không bị ảnh hưởng, không thấy phản ứng người dùng, tốn gấp đôi tính toán; (4) Rolling: mặc định Kubernetes, hoàn tác chậm; (5) Đề xuất: kiến trúc mới → shadow trước để so đầu ra/độ trễ/lỗi, rồi canary; bản vá nhỏ → canary (hoặc blue/green nếu cần không gián đoạn); (6) Điều kiện hoàn tác: p99 vượt ngưỡng hoặc độ chính xác giảm quá 2 điểm → Argo Rollouts AnalysisTemplate với Prometheus, huỷ và đặt trọng số canary về 0; GitOps để hoàn tác bằng git revert."
+  ],
+  [
+   "Nhóm sản phẩm muốn A/B test prompt mới cho trợ lý LLM, tỉ lệ nền chấp nhận câu trả lời là 20%, kỳ vọng phát hiện cải thiện tương đối 5%. Hãy thiết kế phép thử: cách chia lưu lượng, cỡ mẫu, nhóm chỉ số và quy tắc ra quyết định.",
+   "Ý cần có: (1) Chia lưu lượng tại AI Gateway (ví dụ 90/10) hoặc băm user_id để mỗi người luôn thấy cùng biến thể; đổi tỉ lệ bằng cấu hình, có thể về 0% ngay; (2) Cỡ mẫu: nền 20%, cải thiện 5% → khoảng 25.600 mẫu mỗi nhóm (α 5% hai phía, power 80%); quy tắc 1.000 mẫu không đủ; tính trước bằng power analysis; (3) Chỉ số chính: tỉ lệ hoàn thành tác vụ/chấp nhận câu trả lời; chất lượng tự động: LLM-as-judge trên mẫu lưu lượng; rào chắn vận hành: p95, tỉ lệ lỗi, TTFT; rào chắn chi phí: token mỗi request, chi phí mỗi tác vụ; (4) p < 0,05, nhiều so sánh thì Bonferroni; không dừng sớm; (5) Biến thể thắng nhưng chi phí gấp đôi vẫn có thể bị từ chối; (6) Ghi kết quả vào MLflow/hệ phân tích, không ghi trong đường xử lý request."
+  ],
+  [
+   "Nhóm của bạn thường tải mô hình mã nguồn mở từ Hugging Face rồi fine-tune và triển khai. Hãy thiết kế các lớp bảo vệ chuỗi cung ứng mô hình trong pipeline CI/CD, từ lúc nhập mô hình đến lúc triển khai.",
+   "Ý cần có: (1) Rủi ro: tệp pickle có thể chạy mã tuỳ ý (RCE); sự cố JFrog 02/2024 ~100 mô hình độc hại dùng __reduce__ mở reverse shell; quét của Hugging Face không tuyệt đối; (2) Nhập: ưu tiên safetensors, chặn pickle từ nguồn không tin cậy, ghim theo commit hash, tải và quét trong môi trường cách ly; (3) Sau huấn luyện: ký số bằng OpenSSF model-signing/Sigstore (keyless), chứng thực nguồn gốc build (GitHub attestation, SLSA); (4) Kho mô hình + ML-BOM CycloneDX (mô hình, dữ liệu, phụ thuộc); (5) Triển khai: verify chữ ký + danh tính + OIDC issuer, mặc định từ chối nếu thiếu chữ ký/sai danh tính/không trong kho đã duyệt; (6) Liên hệ OWASP LLM03:2025 Supply Chain, NIST AI RMF 1.0 / AI 600-1; bảo mật CI: ghim SHA, OIDC."
+  ],
+  [
+   "Ba thành viên mỗi người giữ một bản sao dataset hàng GB trong thư mục chung, MLflow ghi chỉ số nhưng không biết mô hình huấn luyện trên dữ liệu nào. Hãy đề xuất cách dùng Git + DVC + MLflow để mọi kết quả tái lập được, kèm các lệnh chính.",
+   "Ý cần có: (1) Nêu vấn đề: không tái tạo kết quả, Git không chứa nổi tệp lớn, thí nghiệm không gắn dữ liệu, lãng phí lưu trữ; (2) dvc init, dvc add → tệp con trỏ .dvc chứa mã băm, git add/commit; dvc remote add -d s3://..., dvc push; đồng đội/CI git clone && dvc pull; git checkout + dvc checkout để chuyển phiên bản; (3) Lưu theo nội dung: bản trùng chỉ lưu một lần; (4) dvc.yaml với prepare/train/evaluate (deps, params, outs, metrics), dvc repro chỉ chạy lại giai đoạn đổi, dvc metrics diff/params diff; (5) MLflow: log_params kèm data_version, metrics, artifacts, signature; thẻ data_version, git_commit liên kết ba phần; (6) Remote: S3/GCS có phiên bản, IAM qua OIDC cho CI, dvc remote modify --local cho credential."
+  ],
+  [
+   "Bạn phụ trách một API phân loại cảm xúc tiếng Việt kèm một agent hỗ trợ khách hàng. Hãy xây dựng kim tự tháp kiểm thử cho hệ thống: mỗi tầng kiểm gì, công cụ, ví dụ ngưỡng và chạy ở thời điểm nào trong pipeline.",
+   "Ý cần có: (1) Đơn vị (pytest): tiền xử lý, tách từ, đặc trưng, ca biên rỗng/null/độ dài tối đa, tiếng Việt có dấu, không rò rỉ nhãn, mock API/DB; coverage ≥ 80%, toàn bộ < 30 giây; (2) Tích hợp: chuỗi suy luận đầu-cuối với mẫu nhỏ (100 mẫu), ví dụ /predict trả 200 và confidence trong [0,1]; (3) Mô hình/LLM: bất biến, có hướng, hồi quy (≥ bản trước − 0,5), công bằng (< 3 điểm); agent: bộ ca vàng từ nhật ký, quỹ đạo công cụ, an toàn/prompt injection, chi phí token; quy tắc trước, LLM-as-judge sau; (4) Dữ liệu: lược đồ, đầy đủ, phân phối KS, khối lượng (Great Expectations/Pandera); (5) Tải (k6/Locust): baseline 50 RPS p95 < 500 ms lỗi < 0,1%, stress, soak, spike; TTFT với LLM; (6) Tầng thấp chạy mọi commit, tầng cao ở bước phát hành hoặc theo lịch."
+  ],
+  [
+   "Pipeline dữ liệu đổ lô mới hằng ngày vào huấn luyện. Hãy thiết kế bước kiểm tra dữ liệu trong CI: các kiểm tra cần có với ngưỡng ví dụ, công cụ, cách tích hợp vào workflow, và giải thích vì sao bước này phải đứng trước huấn luyện.",
+   "Ý cần có: (1) Kiểm tra: lược đồ (đúng cột, kiểu), tỉ lệ rỗng mỗi cột ≤ 5%, khoảng giá trị (tuổi 0–120, giá > 0), trôi phân phối so mốc chuẩn, trùng lặp < 0,1%, lớp thiểu số ≥ 10%, khối lượng ≥ 10.000 hàng/lô, độ mới ≤ 7 ngày; ngưỡng là ví dụ, đặt theo bài toán; (2) Công cụ: Great Expectations, Pandera; (3) Workflow: job data-validation (dvc pull data/, python ci/validate_data.py), train needs: [data-validation]; path filter cho data/**, *.dvc; (4) Fail fast: dữ liệu lỗi dừng ngay, không tốn GPU; (5) Ghi kết quả kiểm tra vào MLflow theo phiên bản dữ liệu; (6) Liên hệ trục dữ liệu: cùng mã, dữ liệu mới vẫn làm mô hình xấu đi; drift có thể kích hoạt huấn luyện lại."
+  ],
+  [
+   "Hãy mô tả trình tự một lần phát hành mô hình từ git push tới production theo bài (GitHub Actions, MLflow, Argo CD/Argo Rollouts), chỉ rõ vai trò của bí danh champion/challenger, các môi trường và cách hoàn tác ở từng tầng.",
+   "Ý cần có: (1) Push → GitHub Actions chạy test, dvc pull/dvc repro; (2) Huấn luyện, ghi MLflow, đăng ký phiên bản, gán bí danh challenger (kèm tag validation_status); (3) Cổng đánh giá so challenger với champion; đạt thì đi tiếp, không đạt thì chặn; (4) Cập nhật tệp khai báo trong Git (GitOps), Argo CD đồng bộ; môi trường dev (mọi commit, smoke < 2 phút) → staging (tích hợp đầy đủ, dữ liệu thật tập con) → production (phê duyệt thủ công, canary theo dõi 30 phút); (5) Argo Rollouts canary 5%, phân tích p99 và điểm đánh giá, tăng dần; đạt thì gán champion cho phiên bản mới; (6) Hoàn tác: canary tự đặt trọng số về 0; registry gán lại champion bằng một lệnh API; cụm hoàn tác bằng git revert; serving nạp theo alias nên không cần triển khai lại; ít nhất một người duyệt trước khi chuyển challenger thành champion."
+  ]
+ ]
+}

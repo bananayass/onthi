@@ -1,0 +1,127 @@
+{
+  "id": "day6_track2_tu_luan",
+  "title": "Tự luận Track 2 Ngày 6",
+  "questionCount": 10,
+  "questions": [
+    {
+      "id": "T2D06-TL-01",
+      "type": "essay",
+      "prompt": "Một nhóm cập nhật prompt của agent vào chiều thứ Sáu. Sáng thứ Hai tỉ lệ tool call thành công giảm từ 92% xuống 71% nhưng không có alert nào. Hãy phân tích vì sao sự cố lọt qua và thiết kế các bước kiểm tra mà một thay đổi prompt phải đi qua trước và sau khi đến người dùng.",
+      "modelAnswer": "Ý cần có: (1) Prompt là một trong bốn trục thay đổi (mã, dữ liệu, mô hình, prompt/cấu hình) nên phải kích hoạt CI/CD như mã; (2) Prompt có phiên bản và bí danh trong Prompt Registry (prompts:/name@production), đổi bí danh có lịch sử, hoàn tác được; (3) Cổng đánh giá trên PR: golden dataset + scorer (ToolCallCorrectness, Guidelines) + ngưỡng + mã thoát khác 0; đánh giá cả quỹ đạo gọi công cụ; (4) Phát hành từng phần: canary/gateway chia 90/10 hoặc 5% tăng dần, điều kiện hoàn tác tự động; (5) Giám sát và đánh giá liên tục trên production, alert theo tỉ lệ tool call thành công (bài học Anthropic 2025); (6) Cổng chỉ chặn điều nó đo → bổ sung chỉ số khi biết kiểu lỗi mới (bài học GPT-4o).",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D06-TL-02",
+      "type": "essay",
+      "prompt": "Thiết kế luồng GitHub Actions cho một repo phân loại cảm xúc dùng DVC và MLflow, từ push/pull_request tới đăng ký mô hình. Nêu thứ tự job, các cơ chế tiết kiệm chi phí GPU và các biện pháp bảo mật workflow.",
+      "modelAnswer": "Ý cần có: (1) Thứ tự: lint + unit test + data validation chạy song song → train (needs: data-validation, dvc pull && dvc repro, log MLflow) → cổng đánh giá → đăng ký/gán challenger → deploy; (2) Fail fast khi kiểm tra dữ liệu lỗi; (3) Path filter data/**, src/**, params.yaml, dvc.yaml, *.dvc; concurrency; sửa tài liệu không tốn GPU; cache pip theo hash requirements.txt, cache DVC; (4) GPU runner T4 ~0,052 USD/phút, A100/H100 cần self-hosted; (5) Bảo mật: permissions tối thiểu (contents: read), ghim action theo SHA đầy đủ + Dependabot (bài học tj-actions CVE-2025-30066), OIDC (id-token: write, role-to-assume) thay khoá dài hạn, Environment có người duyệt cho bước production; (6) Thông báo Slack và đăng kết quả eval lên PR.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D06-TL-03",
+      "type": "essay",
+      "prompt": "Champion hiện có độ chính xác 92,4%, F1 0,90 và p95 latency 180 ms. Challenger đạt 91,1%, F1 0,91 và p95 205 ms. Áp dụng ngưỡng ví dụ của bài (độ chính xác −2 điểm, độ trễ +10%), hãy tính và ra quyết định cho cổng đánh giá, đồng thời nêu các thực hành tốt khi vận hành cổng này.",
+      "modelAnswer": "Ý cần có: (1) Ngưỡng accuracy = 92,4 − 2 = 90,4% → 91,1% đạt; (2) Ngưỡng độ trễ = 180 × 1,1 = 198 ms → 205 ms vượt → cổng chặn (ngưỡng riêng từng chỉ số, chỉ cần một chỉ số vi phạm là không đạt); (3) Nếu kết quả sát ngưỡng thì yêu cầu người duyệt thay vì tự động; (4) Tập kiểm tra cố định, không xáo trộn; theo dõi nhiều chỉ số (accuracy, F1, AUC, p95); (5) Ghi kết quả vào MLflow, đăng lên PR; sys.exit(1) để job lỗi và chặn deploy; (6) Cổng chỉ chặn điều nó đo, cần bổ sung chỉ số khi phát hiện kiểu lỗi mới.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D06-TL-04",
+      "type": "essay",
+      "prompt": "Công ty sắp thay mô hình gợi ý bằng một kiến trúc hoàn toàn mới, rủi ro cao, và cũng có một bản vá nhỏ cho mô hình hiện tại. So sánh canary, blue/green, shadow, rolling và đề xuất chiến lược cho từng thay đổi, kèm điều kiện tự động hoàn tác.",
+      "modelAnswer": "Ý cần có: (1) Canary: 5% → 25% → 50% → 100%, phát hiện sớm, cần giám sát tốt; (2) Blue/green: không gián đoạn, hoàn tác tức thì, tốn gấp đôi tài nguyên; (3) Shadow: bản sao request (Istio mirror, fire-and-forget), người dùng không bị ảnh hưởng, không thấy phản ứng người dùng, tốn gấp đôi tính toán; (4) Rolling: mặc định Kubernetes, hoàn tác chậm; (5) Đề xuất: kiến trúc mới → shadow trước để so đầu ra/độ trễ/lỗi, rồi canary; bản vá nhỏ → canary (hoặc blue/green nếu cần không gián đoạn); (6) Điều kiện hoàn tác: p99 vượt ngưỡng hoặc độ chính xác giảm quá 2 điểm → Argo Rollouts AnalysisTemplate với Prometheus, huỷ và đặt trọng số canary về 0; GitOps để hoàn tác bằng git revert.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D06-TL-05",
+      "type": "essay",
+      "prompt": "Nhóm sản phẩm muốn A/B test prompt mới cho trợ lý LLM, tỉ lệ nền chấp nhận câu trả lời là 20%, kỳ vọng phát hiện cải thiện tương đối 5%. Hãy thiết kế phép thử: cách chia lưu lượng, cỡ mẫu, nhóm chỉ số và quy tắc ra quyết định.",
+      "modelAnswer": "Ý cần có: (1) Chia lưu lượng tại AI Gateway (ví dụ 90/10) hoặc băm user_id để mỗi người luôn thấy cùng biến thể; đổi tỉ lệ bằng cấu hình, có thể về 0% ngay; (2) Cỡ mẫu: nền 20%, cải thiện 5% → khoảng 25.600 mẫu mỗi nhóm (α 5% hai phía, power 80%); quy tắc 1.000 mẫu không đủ; tính trước bằng power analysis; (3) Chỉ số chính: tỉ lệ hoàn thành tác vụ/chấp nhận câu trả lời; chất lượng tự động: LLM-as-judge trên mẫu lưu lượng; rào chắn vận hành: p95, tỉ lệ lỗi, TTFT; rào chắn chi phí: token mỗi request, chi phí mỗi tác vụ; (4) p < 0,05, nhiều so sánh thì Bonferroni; không dừng sớm; (5) Biến thể thắng nhưng chi phí gấp đôi vẫn có thể bị từ chối; (6) Ghi kết quả vào MLflow/hệ phân tích, không ghi trong đường xử lý request.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D06-TL-06",
+      "type": "essay",
+      "prompt": "Nhóm của bạn thường tải mô hình mã nguồn mở từ Hugging Face rồi fine-tune và triển khai. Hãy thiết kế các lớp bảo vệ chuỗi cung ứng mô hình trong pipeline CI/CD, từ lúc nhập mô hình đến lúc triển khai.",
+      "modelAnswer": "Ý cần có: (1) Rủi ro: tệp pickle có thể chạy mã tuỳ ý (RCE); sự cố JFrog 02/2024 ~100 mô hình độc hại dùng __reduce__ mở reverse shell; quét của Hugging Face không tuyệt đối; (2) Nhập: ưu tiên safetensors, chặn pickle từ nguồn không tin cậy, ghim theo commit hash, tải và quét trong môi trường cách ly; (3) Sau huấn luyện: ký số bằng OpenSSF model-signing/Sigstore (keyless), chứng thực nguồn gốc build (GitHub attestation, SLSA); (4) Kho mô hình + ML-BOM CycloneDX (mô hình, dữ liệu, phụ thuộc); (5) Triển khai: verify chữ ký + danh tính + OIDC issuer, mặc định từ chối nếu thiếu chữ ký/sai danh tính/không trong kho đã duyệt; (6) Liên hệ OWASP LLM03:2025 Supply Chain, NIST AI RMF 1.0 / AI 600-1; bảo mật CI: ghim SHA, OIDC.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D06-TL-07",
+      "type": "essay",
+      "prompt": "Ba thành viên mỗi người giữ một bản sao dataset hàng GB trong thư mục chung, MLflow ghi chỉ số nhưng không biết mô hình huấn luyện trên dữ liệu nào. Hãy đề xuất cách dùng Git + DVC + MLflow để mọi kết quả tái lập được, kèm các lệnh chính.",
+      "modelAnswer": "Ý cần có: (1) Nêu vấn đề: không tái tạo kết quả, Git không chứa nổi tệp lớn, thí nghiệm không gắn dữ liệu, lãng phí lưu trữ; (2) dvc init, dvc add → tệp con trỏ .dvc chứa mã băm, git add/commit; dvc remote add -d s3://..., dvc push; đồng đội/CI git clone && dvc pull; git checkout + dvc checkout để chuyển phiên bản; (3) Lưu theo nội dung: bản trùng chỉ lưu một lần; (4) dvc.yaml với prepare/train/evaluate (deps, params, outs, metrics), dvc repro chỉ chạy lại giai đoạn đổi, dvc metrics diff/params diff; (5) MLflow: log_params kèm data_version, metrics, artifacts, signature; thẻ data_version, git_commit liên kết ba phần; (6) Remote: S3/GCS có phiên bản, IAM qua OIDC cho CI, dvc remote modify --local cho credential.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D06-TL-08",
+      "type": "essay",
+      "prompt": "Bạn phụ trách một API phân loại cảm xúc tiếng Việt kèm một agent hỗ trợ khách hàng. Hãy xây dựng kim tự tháp kiểm thử cho hệ thống: mỗi tầng kiểm gì, công cụ, ví dụ ngưỡng và chạy ở thời điểm nào trong pipeline.",
+      "modelAnswer": "Ý cần có: (1) Đơn vị (pytest): tiền xử lý, tách từ, đặc trưng, ca biên rỗng/null/độ dài tối đa, tiếng Việt có dấu, không rò rỉ nhãn, mock API/DB; coverage ≥ 80%, toàn bộ < 30 giây; (2) Tích hợp: chuỗi suy luận đầu-cuối với mẫu nhỏ (100 mẫu), ví dụ /predict trả 200 và confidence trong [0,1]; (3) Mô hình/LLM: bất biến, có hướng, hồi quy (≥ bản trước − 0,5), công bằng (< 3 điểm); agent: bộ ca vàng từ nhật ký, quỹ đạo công cụ, an toàn/prompt injection, chi phí token; quy tắc trước, LLM-as-judge sau; (4) Dữ liệu: lược đồ, đầy đủ, phân phối KS, khối lượng (Great Expectations/Pandera); (5) Tải (k6/Locust): baseline 50 RPS p95 < 500 ms lỗi < 0,1%, stress, soak, spike; TTFT với LLM; (6) Tầng thấp chạy mọi commit, tầng cao ở bước phát hành hoặc theo lịch.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D06-TL-09",
+      "type": "essay",
+      "prompt": "Pipeline dữ liệu đổ lô mới hằng ngày vào huấn luyện. Hãy thiết kế bước kiểm tra dữ liệu trong CI: các kiểm tra cần có với ngưỡng ví dụ, công cụ, cách tích hợp vào workflow, và giải thích vì sao bước này phải đứng trước huấn luyện.",
+      "modelAnswer": "Ý cần có: (1) Kiểm tra: lược đồ (đúng cột, kiểu), tỉ lệ rỗng mỗi cột ≤ 5%, khoảng giá trị (tuổi 0–120, giá > 0), trôi phân phối so mốc chuẩn, trùng lặp < 0,1%, lớp thiểu số ≥ 10%, khối lượng ≥ 10.000 hàng/lô, độ mới ≤ 7 ngày; ngưỡng là ví dụ, đặt theo bài toán; (2) Công cụ: Great Expectations, Pandera; (3) Workflow: job data-validation (dvc pull data/, python ci/validate_data.py), train needs: [data-validation]; path filter cho data/**, *.dvc; (4) Fail fast: dữ liệu lỗi dừng ngay, không tốn GPU; (5) Ghi kết quả kiểm tra vào MLflow theo phiên bản dữ liệu; (6) Liên hệ trục dữ liệu: cùng mã, dữ liệu mới vẫn làm mô hình xấu đi; drift có thể kích hoạt huấn luyện lại.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D06-TL-10",
+      "type": "essay",
+      "prompt": "Hãy mô tả trình tự một lần phát hành mô hình từ git push tới production theo bài (GitHub Actions, MLflow, Argo CD/Argo Rollouts), chỉ rõ vai trò của bí danh champion/challenger, các môi trường và cách hoàn tác ở từng tầng.",
+      "modelAnswer": "Ý cần có: (1) Push → GitHub Actions chạy test, dvc pull/dvc repro; (2) Huấn luyện, ghi MLflow, đăng ký phiên bản, gán bí danh challenger (kèm tag validation_status); (3) Cổng đánh giá so challenger với champion; đạt thì đi tiếp, không đạt thì chặn; (4) Cập nhật tệp khai báo trong Git (GitOps), Argo CD đồng bộ; môi trường dev (mọi commit, smoke < 2 phút) → staging (tích hợp đầy đủ, dữ liệu thật tập con) → production (phê duyệt thủ công, canary theo dõi 30 phút); (5) Argo Rollouts canary 5%, phân tích p99 và điểm đánh giá, tăng dần; đạt thì gán champion cho phiên bản mới; (6) Hoàn tác: canary tự đặt trọng số về 0; registry gán lại champion bằng một lệnh API; cụm hoàn tác bằng git revert; serving nạp theo alias nên không cần triển khai lại; ít nhất một người duyệt trước khi chuyển challenger thành champion.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    }
+  ]
+}

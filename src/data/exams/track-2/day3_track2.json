@@ -1,0 +1,1835 @@
+{
+  "id": "track2-day3",
+  "title": "Track 2 · Ngày 3",
+  "description": "Bộ đề Track 2 Ngày 3: 60 câu trắc nghiệm và 10 câu tự luận, biên soạn từ slide cùng ngày.",
+  "course": "track2",
+  "kind": "daily",
+  "day": 3,
+  "label": "Ngày 3",
+  "durationMinutes": 90,
+  "totalPoints": 100,
+  "passingScore": 70,
+  "disclaimer": "Bộ đề ôn tập Track 2, tham khảo từ slide cùng ngày; không phải đề thi chính thức.",
+  "questions": [
+    {
+      "id": "T2D03-001",
+      "type": "mcq",
+      "prompt": "Theo slide, key innovation giúp Data Lakehouse vượt qua Data Lake là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Engine OLTP riêng thay thế hẳn object storage giá rẻ"
+        },
+        {
+          "key": "B",
+          "text": "Định dạng row-oriented JSON thay cho Parquet columnar"
+        },
+        {
+          "key": "C",
+          "text": "Metadata layer biến S3 object storage thành transactional store"
+        },
+        {
+          "key": "D",
+          "text": "Vector index tích hợp sẵn giúp truy vấn embedding trên S3"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide Evolution: metadata layer + open table formats + cheap object storage + query engines.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-002",
+      "type": "mcq",
+      "prompt": "Nhược điểm điển hình của Data Lake thế hệ 2010s được slide gọi là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "“Cold start”"
+        },
+        {
+          "key": "B",
+          "text": "“Data swamp”"
+        },
+        {
+          "key": "C",
+          "text": "“Schema lock-in”"
+        },
+        {
+          "key": "D",
+          "text": "“Vendor prison”"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Data Lake rẻ, flexible, nhận mọi format nhưng dễ thành data swamp.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-003",
+      "type": "mcq",
+      "prompt": "Bộ ba enabler của Lakehouse theo slide gồm những gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Open table formats + cheap object storage + query engines"
+        },
+        {
+          "key": "B",
+          "text": "Vector DB + feature store + GPU cluster chuyên dụng"
+        },
+        {
+          "key": "C",
+          "text": "OLTP DB + data warehouse độc quyền + ETL thủ công"
+        },
+        {
+          "key": "D",
+          "text": "Kafka + Debezium + Schema Registry cho mọi bảng"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Delta/Iceberg/Hudi + S3 + Spark/DuckDB/Trino.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-004",
+      "type": "mcq",
+      "prompt": "Failure mode đặc trưng của LLM Era theo bảng 3 Eras là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Schema drift và deadlock giữa các transaction"
+        },
+        {
+          "key": "B",
+          "text": "Data drift và train/serve skew khi serving"
+        },
+        {
+          "key": "C",
+          "text": "Small-file problem và thiếu OPTIMIZE định kỳ"
+        },
+        {
+          "key": "D",
+          "text": "Dedup leak, license violation, hallucination"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Traditional: schema drift/deadlock; ML: data drift/skew; LLM: dedup leak, license, hallucination.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-005",
+      "type": "mcq",
+      "prompt": "Pattern chung của 3 era về storage stack là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Era mới quay về schema-on-write cứng nhắc như OLTP"
+        },
+        {
+          "key": "B",
+          "text": "Era mới bỏ object storage để chuyển sang vector DB"
+        },
+        {
+          "key": "C",
+          "text": "Mỗi era thêm class data mới; stack mở rộng, không thay thế"
+        },
+        {
+          "key": "D",
+          "text": "Mỗi era thay thế hoàn toàn storage của era trước đó"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Semi-structured rồi multimodal + embeddings; storage stack mở rộng.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-006",
+      "type": "mcq",
+      "prompt": "Trong LLM Era, Vector DB (Qdrant/Milvus) đảm nhận vai trò chính nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Lưu raw crawls và multimodal blobs thô"
+        },
+        {
+          "key": "B",
+          "text": "Online RAG với latency sub-100 ms"
+        },
+        {
+          "key": "C",
+          "text": "Dataset-of-record cho compliance huấn luyện"
+        },
+        {
+          "key": "D",
+          "text": "Nguồn CDC chính cho pipeline analytics"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bảng Storage Tech × Era Fit: Vector DB = Online RAG (sub-100 ms).",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-007",
+      "type": "mcq",
+      "prompt": "Theo slide, LLM era “ép” lakehouse trở thành gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dataset-of-record cho compliance"
+        },
+        {
+          "key": "B",
+          "text": "Cache tạm thời cho online inference"
+        },
+        {
+          "key": "C",
+          "text": "Thay thế hoàn toàn cho vector DB"
+        },
+        {
+          "key": "D",
+          "text": "Hệ OLTP chính cho ứng dụng chat"
+        }
+      ],
+      "answer": "A",
+      "explanation": "LLM era thêm tầng (vector DB, multimodal) và ép lakehouse = dataset-of-record.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-008",
+      "type": "mcq",
+      "prompt": "Trong Delta Lake, thư mục _delta_log/ chứa gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bản sao đầy đủ của từng Parquet file sau mỗi commit"
+        },
+        {
+          "key": "B",
+          "text": "Bitmap đánh dấu các row đã bị xoá khỏi bảng"
+        },
+        {
+          "key": "C",
+          "text": "Thống kê min/max cho từng row group của bảng"
+        },
+        {
+          "key": "D",
+          "text": "Các file JSON ghi action add/remove Parquet theo version"
+        }
+      ],
+      "answer": "D",
+      "explanation": "000.json, 001.json… ghi add part-001, remove part-001…; JSON log biến object store thành transactional table.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-009",
+      "type": "mcq",
+      "prompt": "Delta Lake xử lý ghi đồng thời (concurrency) bằng cơ chế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Two-phase commit qua Kafka"
+        },
+        {
+          "key": "B",
+          "text": "Single-writer leader election"
+        },
+        {
+          "key": "C",
+          "text": "Optimistic conflict detection"
+        },
+        {
+          "key": "D",
+          "text": "Pessimistic row-level locking"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide transaction log: Concurrency = optimistic conflict detection.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-010",
+      "type": "mcq",
+      "prompt": "Theo slide, MERGE INTO so với overwrite ở quy mô production 100M+ rows nhanh hơn khoảng bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "10–50×"
+        },
+        {
+          "key": "B",
+          "text": "2–3×"
+        },
+        {
+          "key": "C",
+          "text": "100–500×"
+        },
+        {
+          "key": "D",
+          "text": "1,5×"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Workshop 100K ∼2×; prod 100M+ → 10–50× vs overwrite.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-011",
+      "type": "mcq",
+      "prompt": "Khi compact bảng Delta, target kích thước file theo slide là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "16 KB–64 KB"
+        },
+        {
+          "key": "B",
+          "text": "128 MB–1 GB"
+        },
+        {
+          "key": "C",
+          "text": "1 MB–10 MB"
+        },
+        {
+          "key": "D",
+          "text": "10 GB–50 GB"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Compact → target 128 MB–1 GB; ví dụ 10,000 × 1 MB → 10 × 1 GB.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-012",
+      "type": "mcq",
+      "prompt": "Mức cải thiện điển hình của Z-ORDER theo slide là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "20–50× typical, 1000× best case"
+        },
+        {
+          "key": "B",
+          "text": "Không cải thiện, chỉ giảm storage"
+        },
+        {
+          "key": "C",
+          "text": "3–10× typical, 100× best case"
+        },
+        {
+          "key": "D",
+          "text": "1,1–1,5× typical, 3× best case"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Slide thao tác Delta: Z-ORDER 3–10× typical; 100× best case.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-013",
+      "type": "mcq",
+      "prompt": "Lệnh VACUUM table RETAIN 168 HOURS tương ứng retention bao lâu và đánh đổi gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "7 ngày; giữ dài rẻ hơn nhưng mất rollback window"
+        },
+        {
+          "key": "B",
+          "text": "1 ngày; giữ ngắn tốn cost nhưng audit tốt hơn"
+        },
+        {
+          "key": "C",
+          "text": "30 ngày; retention không ảnh hưởng chi phí storage"
+        },
+        {
+          "key": "D",
+          "text": "7 ngày; giữ dài tốn cost nhưng audit/rollback tốt hơn"
+        }
+      ],
+      "answer": "D",
+      "explanation": "168h = 7 ngày. Dài = nhiều cost, audit tốt; ngắn = ít cost, mất rollback window.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-014",
+      "type": "mcq",
+      "prompt": "Successor của Z-ORDER được slide nhắc (incremental re-cluster) có ưu điểm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không cần rewrite toàn bộ table"
+        },
+        {
+          "key": "B",
+          "text": "Không cần chạy thêm job nào nữa"
+        },
+        {
+          "key": "C",
+          "text": "Tự động partition theo user_id"
+        },
+        {
+          "key": "D",
+          "text": "Thay thế hoàn toàn time travel"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Liquid clustering: incremental re-cluster, không rewrite toàn bộ table; GA Databricks.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-015",
+      "type": "mcq",
+      "prompt": "Vấn đề mà Deletion Vectors giải quyết là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Schema thay đổi làm vỡ pipeline downstream"
+        },
+        {
+          "key": "B",
+          "text": "DELETE 1 row phải rewrite cả file (write amplification)"
+        },
+        {
+          "key": "C",
+          "text": "Reader không đọc được các version cũ của bảng"
+        },
+        {
+          "key": "D",
+          "text": "Parquet file quá lớn khiến query chậm khi scan"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Không có DV: DELETE 1 row → rewrite cả file, write amplification 1000×.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-016",
+      "type": "mcq",
+      "prompt": "Deletion Vectors hoạt động như thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ghi tombstone vào Kafka để consumer tự lọc khi đọc"
+        },
+        {
+          "key": "B",
+          "text": "Đổi tên file Parquet cũ để reader bỏ qua toàn bộ file"
+        },
+        {
+          "key": "C",
+          "text": "Lưu bitmap rows bị xoá trong sidecar file; reader skip theo bitmap"
+        },
+        {
+          "key": "D",
+          "text": "Rewrite ngay Parquet file mới không chứa các rows bị xoá"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Không rewrite Parquet; physical removal khi OPTIMIZE.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-017",
+      "type": "mcq",
+      "prompt": "Với Deletion Vectors, lệnh GDPR DELETE FROM ... WHERE user_id=X thay đổi thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Từ phút xuống mili giây"
+        },
+        {
+          "key": "B",
+          "text": "Từ ngày xuống giờ"
+        },
+        {
+          "key": "C",
+          "text": "Không thay đổi thời gian"
+        },
+        {
+          "key": "D",
+          "text": "Từ giờ xuống phút"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide DV: GDPR DELETE từ giờ → phút; DELETE/UPDATE/MERGE 10–100× nhanh hơn.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-018",
+      "type": "mcq",
+      "prompt": "Khi bật Deletion Vectors, row bị xoá được loại bỏ vật lý khỏi file khi nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Khi chạy OPTIMIZE"
+        },
+        {
+          "key": "B",
+          "text": "Ngay khi DELETE commit"
+        },
+        {
+          "key": "C",
+          "text": "Khi reader đọc lần đầu"
+        },
+        {
+          "key": "D",
+          "text": "Khi chạy DESCRIBE HISTORY"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Compact-on-read; physical removal khi OPTIMIZE.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-019",
+      "type": "mcq",
+      "prompt": "Change Data Feed (CDF) phù hợp nhất cho use case nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ẩn cột PII khỏi analyst bằng column masking động"
+        },
+        {
+          "key": "B",
+          "text": "Downstream cần biết cái gì thay đổi thay vì full snapshot"
+        },
+        {
+          "key": "C",
+          "text": "Rollback bảng về version cũ sau khi ingest dữ liệu lỗi"
+        },
+        {
+          "key": "D",
+          "text": "Giảm số small files bằng cách gộp thành file lớn hơn"
+        }
+      ],
+      "answer": "B",
+      "explanation": "CDF: consumer đọc deltas với readChangeFeed + startingVersion.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-020",
+      "type": "mcq",
+      "prompt": "Cột _change_type trong output CDF có thể nhận các giá trị nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "append / overwrite / merge / vacuum"
+        },
+        {
+          "key": "B",
+          "text": "insert / update_pre / update_post / delete"
+        },
+        {
+          "key": "C",
+          "text": "add / remove / metadata / protocol"
+        },
+        {
+          "key": "D",
+          "text": "create / alter / drop / truncate"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide: _change_type (insert / update_pre / update_post / delete) + version + timestamp.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-021",
+      "type": "mcq",
+      "prompt": "Theo slide, canonical CDC sink pattern trong Delta là kết hợp gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Deletion Vectors + CDF + MERGE"
+        },
+        {
+          "key": "B",
+          "text": "VACUUM + Z-ORDER + overwrite"
+        },
+        {
+          "key": "C",
+          "text": "Time travel + RESTORE + DROP"
+        },
+        {
+          "key": "D",
+          "text": "Hidden partitioning + bucket()"
+        }
+      ],
+      "answer": "A",
+      "explanation": "DV + CDF + MERGE = canonical CDC sink pattern, không cần custom apply logic.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-022",
+      "type": "mcq",
+      "prompt": "Muốn đọc bảng Delta đúng trạng thái lúc “2025-01-15 00:00:00”, dùng option nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "versionAsOf"
+        },
+        {
+          "key": "B",
+          "text": "startingVersion"
+        },
+        {
+          "key": "C",
+          "text": "readChangeFeed"
+        },
+        {
+          "key": "D",
+          "text": "timestampAsOf"
+        }
+      ],
+      "answer": "D",
+      "explanation": "3 cách: versionAsOf (số version), timestampAsOf (point-in-time), restoreToVersion (rollback).",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-023",
+      "type": "mcq",
+      "prompt": "restoreToVersion(10) hoạt động thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chỉ đọc v10, không thay đổi bảng"
+        },
+        {
+          "key": "B",
+          "text": "Ghi đè log để v10 thành version cuối"
+        },
+        {
+          "key": "C",
+          "text": "Tạo version mới có cùng data với v10"
+        },
+        {
+          "key": "D",
+          "text": "Xoá vĩnh viễn mọi version sau v10"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Comment slide: restore creates new version with same data as v10.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-024",
+      "type": "mcq",
+      "prompt": "Lệnh nào cung cấp audit trail compliance-grade built-in cho bảng Delta?",
+      "options": [
+        {
+          "key": "A",
+          "text": "ANALYZE TABLE"
+        },
+        {
+          "key": "B",
+          "text": "DESCRIBE HISTORY"
+        },
+        {
+          "key": "C",
+          "text": "SHOW PARTITIONS"
+        },
+        {
+          "key": "D",
+          "text": "EXPLAIN FORMATTED"
+        }
+      ],
+      "answer": "B",
+      "explanation": "DESCRIBE HISTORY = compliance-grade audit log đi kèm built-in.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-025",
+      "type": "mcq",
+      "prompt": "Giới hạn chính của time travel trong Delta theo slide là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bị giới hạn bởi VACUUM retention (default 7 ngày)"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ giữ tối đa 10 version gần nhất của bảng"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ dùng được khi bảng có hidden partitioning"
+        },
+        {
+          "key": "D",
+          "text": "Không đọc được version cũ khi bật Deletion Vectors"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Ngoài ra: schema-incompatible old versions có thể fail.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-026",
+      "type": "mcq",
+      "prompt": "Vì sao RESTORE về version cũ không đáp ứng được GDPR DELETE?",
+      "options": [
+        {
+          "key": "A",
+          "text": "RESTORE luôn bị chặn khi bảng chứa cột PII"
+        },
+        {
+          "key": "B",
+          "text": "RESTORE chỉ chạy được trên Iceberg, không Delta"
+        },
+        {
+          "key": "C",
+          "text": "GDPR chỉ yêu cầu ẩn dữ liệu khỏi dashboard"
+        },
+        {
+          "key": "D",
+          "text": "Dữ liệu cũ vẫn còn đến khi VACUUM xoá vĩnh viễn"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Khôi phục ≠ GDPR DELETE — VACUUM mới xoá vĩnh viễn.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-027",
+      "type": "mcq",
+      "prompt": "Slide nói time travel kết hợp với thành phần nào thì thành Data Contracts?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Spot instances"
+        },
+        {
+          "key": "B",
+          "text": "Bloom filter"
+        },
+        {
+          "key": "C",
+          "text": "Schema registry"
+        },
+        {
+          "key": "D",
+          "text": "Vector index"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Lưu ý slide: Time travel + schema registry = Data Contracts.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-028",
+      "type": "mcq",
+      "prompt": "Để training có thể reproducible, slide đề xuất liên kết gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Model name ↔ ngày ingest gần nhất"
+        },
+        {
+          "key": "B",
+          "text": "MLflow run_id ↔ Delta table version"
+        },
+        {
+          "key": "C",
+          "text": "MLflow run_id ↔ tên S3 bucket"
+        },
+        {
+          "key": "D",
+          "text": "Git commit ↔ Kafka offset mới nhất"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Ví dụ MLflow run-1 data_version=1, run-2 data_version=3.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-029",
+      "type": "mcq",
+      "prompt": "Theo bảng so sánh, tính năng nào chỉ Iceberg có trong ba format?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Hidden partitioning"
+        },
+        {
+          "key": "B",
+          "text": "ACID transactions"
+        },
+        {
+          "key": "C",
+          "text": "Time travel"
+        },
+        {
+          "key": "D",
+          "text": "Deletion vectors"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Hidden Partitioning: Delta ×, Iceberg ✓, Hudi ×.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-030",
+      "type": "mcq",
+      "prompt": "Format nào được slide đánh giá row-level updates nhanh nhất nhờ MOR?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Iceberg"
+        },
+        {
+          "key": "B",
+          "text": "Lance"
+        },
+        {
+          "key": "C",
+          "text": "Hudi"
+        },
+        {
+          "key": "D",
+          "text": "Delta Lake"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Row-level Updates: Hudi MOR (fastest); Delta/Iceberg MERGE + DV.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-031",
+      "type": "mcq",
+      "prompt": "Nguồn gốc (origin) của ba format theo slide là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Delta: Netflix 2018; Iceberg: Databricks 2017; Hudi: Uber 2016"
+        },
+        {
+          "key": "B",
+          "text": "Delta: Databricks 2016; Iceberg: Uber 2018; Hudi: Apple 2017"
+        },
+        {
+          "key": "C",
+          "text": "Delta: Uber 2017; Iceberg: Netflix 2016; Hudi: Databricks 2018"
+        },
+        {
+          "key": "D",
+          "text": "Delta: Databricks 2017; Iceberg: Netflix/Apple 2018; Hudi: Uber 2016"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Bảng Delta vs Iceberg vs Hudi, dòng Ecosystem (origin).",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-032",
+      "type": "mcq",
+      "prompt": "Thứ tự cấu trúc metadata của Iceberg là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "metadata.json → manifest list → manifests → Parquet"
+        },
+        {
+          "key": "B",
+          "text": "manifests → metadata.json → manifest list → Parquet"
+        },
+        {
+          "key": "C",
+          "text": "_delta_log → checkpoint → manifests → Parquet"
+        },
+        {
+          "key": "D",
+          "text": "Parquet → manifests → manifest list → metadata.json"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide so sánh format: Iceberg metadata chain; Apache XTable convert giữa các format.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-033",
+      "type": "mcq",
+      "prompt": "Công cụ nào được slide nêu để convert metadata Delta ↔ Iceberg ↔ Hudi?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Marquez"
+        },
+        {
+          "key": "B",
+          "text": "Apache XTable"
+        },
+        {
+          "key": "C",
+          "text": "Apache Kafka"
+        },
+        {
+          "key": "D",
+          "text": "Debezium"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Apache XTable convert Delta ↔ Iceberg ↔ Hudi.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-034",
+      "type": "mcq",
+      "prompt": "Bảng Hive partition theo cột ts_day; user query WHERE ts > '2026-04-01'. Hậu quả?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Lỗi cú pháp vì thiếu cột partition"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ đọc partition mới nhất của bảng"
+        },
+        {
+          "key": "C",
+          "text": "Full scan vì không filter cột ts_day"
+        },
+        {
+          "key": "D",
+          "text": "Chạy nhanh vì ts tự động được prune"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Vấn đề: ts_day duplicate dữ liệu, user dễ quên filter → full scan.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-035",
+      "type": "mcq",
+      "prompt": "Với Iceberg PARTITIONED BY (days(ts)), user cần viết filter thế nào để được prune?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Phải filter thêm cột ts_day được sinh ra"
+        },
+        {
+          "key": "B",
+          "text": "Phải gọi hàm days(ts) trong mệnh đề WHERE"
+        },
+        {
+          "key": "C",
+          "text": "Phải chỉ định tên partition bằng hint"
+        },
+        {
+          "key": "D",
+          "text": "Filter cột tự nhiên ts, Iceberg auto-prune"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Partition là transformation; user filter natural column.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-036",
+      "type": "mcq",
+      "prompt": "Partition Evolution của Iceberg cho phép làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đổi days(ts) → hours(ts) không cần rewrite data"
+        },
+        {
+          "key": "B",
+          "text": "Tự động xoá partition cũ sau 7 ngày retention"
+        },
+        {
+          "key": "C",
+          "text": "Partition theo user_id mà không sinh small files"
+        },
+        {
+          "key": "D",
+          "text": "Gộp nhiều bảng thành một bảng không cần MERGE"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Partition Evolution: đổi transform không rewrite data.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-037",
+      "type": "mcq",
+      "prompt": "Lý do chính LinkedIn migrate Hive → Iceberg theo slide là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tích hợp sẵn Debezium cho CDC"
+        },
+        {
+          "key": "B",
+          "text": "Hidden partitioning (và query planning)"
+        },
+        {
+          "key": "C",
+          "text": "Chi phí storage S3 rẻ hơn Hive"
+        },
+        {
+          "key": "D",
+          "text": "Hỗ trợ native HNSW vector index"
+        }
+      ],
+      "answer": "B",
+      "explanation": "LinkedIn cite hidden partitioning là lý do chính migrate.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-038",
+      "type": "mcq",
+      "prompt": "Tổ chức nào nên chọn Delta Lake thay vì Iceberg theo slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ưu tiên vendor neutrality và partition evolution"
+        },
+        {
+          "key": "B",
+          "text": "Cần git-like branching data bằng Nessie catalog"
+        },
+        {
+          "key": "C",
+          "text": "Databricks-heavy, Spark-first, team quen Delta API"
+        },
+        {
+          "key": "D",
+          "text": "Cần cùng một bảng cho Spark, Trino, Flink, Snowflake"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Delta: zero friction với Databricks Runtime; các lựa chọn còn lại là lý do chọn Iceberg.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-039",
+      "type": "mcq",
+      "prompt": "Phát biểu nào đúng về adoption Iceberg 2026 theo slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Snowflake ngừng hỗ trợ Iceberg để chuyển sang Delta"
+        },
+        {
+          "key": "B",
+          "text": "Iceberg chỉ còn dùng trong hệ Hadoop on-prem cũ"
+        },
+        {
+          "key": "C",
+          "text": "Databricks từ chối hỗ trợ Iceberg v3 trong 2026"
+        },
+        {
+          "key": "D",
+          "text": "AWS Athena/EMR default; Databricks Iceberg v3 GA Apr 2026"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Adoption 2026: Netflix, Apple, LinkedIn, Adobe; Iceberg = de facto open standard.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-040",
+      "type": "mcq",
+      "prompt": "Một dev cần phân tích 5 GB Parquet trên laptop. Engine phù hợp nhất theo slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Spark cluster"
+        },
+        {
+          "key": "B",
+          "text": "Photon"
+        },
+        {
+          "key": "C",
+          "text": "Trino cluster"
+        },
+        {
+          "key": "D",
+          "text": "DuckDB"
+        }
+      ],
+      "answer": "D",
+      "explanation": "<100 GB, 1 dev: DuckDB — zero infra; đừng chạy Spark cluster cho 5 GB.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-041",
+      "type": "mcq",
+      "prompt": "Sweet spot của Trino theo bảng Query Engines là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Single-node analytics cho môi trường dev"
+        },
+        {
+          "key": "B",
+          "text": "Fast SQL chỉ chạy trên Databricks"
+        },
+        {
+          "key": "C",
+          "text": "Federated BI, ad-hoc SQL nhiều nguồn"
+        },
+        {
+          "key": "D",
+          "text": "ETL batch và ML pipeline quy mô PB"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Trino: Federated BI, GB–PB, Iceberg native, Delta qua connector.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-042",
+      "type": "mcq",
+      "prompt": "Athena hỗ trợ Delta ở mức nào theo slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không hỗ trợ cả Delta lẫn Iceberg"
+        },
+        {
+          "key": "B",
+          "text": "Delta read-only, Iceberg native"
+        },
+        {
+          "key": "C",
+          "text": "Delta native, Iceberg read-only"
+        },
+        {
+          "key": "D",
+          "text": "Cả Delta và Iceberg đều read-write"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Athena: serverless ad-hoc on S3, GB–TB, Iceberg native, Delta read-only.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-043",
+      "type": "mcq",
+      "prompt": "SELECT 5/100 columns trên Parquet đọc khoảng bao nhiêu data so với JSON?",
+      "options": [
+        {
+          "key": "A",
+          "text": "∼5% so với 100%"
+        },
+        {
+          "key": "B",
+          "text": "∼50% so với 100%"
+        },
+        {
+          "key": "C",
+          "text": "∼95% so với 100%"
+        },
+        {
+          "key": "D",
+          "text": "∼1% so với 10%"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Columnar chỉ đọc cột cần; JSON row-oriented đọc toàn bộ.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-044",
+      "type": "mcq",
+      "prompt": "Quy tắc chọn compression theo layer trong slide Parquet là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bronze = ZSTD; Gold = Snappy"
+        },
+        {
+          "key": "B",
+          "text": "Bronze = GZIP; Gold = Snappy"
+        },
+        {
+          "key": "C",
+          "text": "Mọi layer đều dùng GZIP"
+        },
+        {
+          "key": "D",
+          "text": "Bronze = Snappy; Gold = ZSTD"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Bronze fast write → Snappy; Gold slow write OK, fast read → ZSTD (3× smaller).",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-045",
+      "type": "mcq",
+      "prompt": "Muốn query nhanh theo date và user_id trên bảng lớn, slide khuyên gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Partition theo cả date và user_id"
+        },
+        {
+          "key": "B",
+          "text": "Không partition, chỉ dùng bloom filter"
+        },
+        {
+          "key": "C",
+          "text": "Partition by date + Z-ORDER by user_id"
+        },
+        {
+          "key": "D",
+          "text": "Partition by user_id + Z-ORDER by date"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Không partition theo high-card user_id; partition = directory, Z-ORDER = co-locate trong file.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-046",
+      "type": "mcq",
+      "prompt": "Over-partition gây hậu quả gì theo slide Partition Strategy?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không ghi được MERGE"
+        },
+        {
+          "key": "B",
+          "text": "Small files → query chậm"
+        },
+        {
+          "key": "C",
+          "text": "Large scans → lãng phí IO"
+        },
+        {
+          "key": "D",
+          "text": "Mất time travel của bảng"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Over-partition → small files → slow; under-partition → large scans → waste IO.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-047",
+      "type": "mcq",
+      "prompt": "Parquet footer chứa những gì giúp reader skip dữ liệu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Schema + stats min/max/null + Page Index + Bloom Filters"
+        },
+        {
+          "key": "B",
+          "text": "Toàn bộ data đã nén của row group đầu tiên"
+        },
+        {
+          "key": "C",
+          "text": "Transaction log JSON của mọi version trước đó"
+        },
+        {
+          "key": "D",
+          "text": "Bitmap deletion vector cho từng row đã xoá"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Reader đọc footer (∼KB) trước để skip row groups/pages/values.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-048",
+      "type": "mcq",
+      "prompt": "Trong chiến lược 4 levels of skip của Parquet reader, bước đầu tiên là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dùng Bloom Filter loại value chắc chắn không có"
+        },
+        {
+          "key": "B",
+          "text": "Đọc Page Index để skip từng page không cần"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ đọc các columns có trong SELECT"
+        },
+        {
+          "key": "D",
+          "text": "Đọc footer, skip Row Groups bằng min/max stats"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Thứ tự: footer/min-max → Page Index → Bloom Filter → chỉ columns trong SELECT.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-049",
+      "type": "mcq",
+      "prompt": "WHERE user_id=42 trên 1 TB Parquet có bloom filter đọc khoảng bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "∼1 TB"
+        },
+        {
+          "key": "B",
+          "text": "∼5 GB"
+        },
+        {
+          "key": "C",
+          "text": "∼50 MB"
+        },
+        {
+          "key": "D",
+          "text": "∼500 GB"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Cùng query CSV/JSON → full 1 TB; 20,000× I/O reduction.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-050",
+      "type": "mcq",
+      "prompt": "Thay đổi schema nào bị slide đánh dấu không được phép?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Type narrow double → int"
+        },
+        {
+          "key": "B",
+          "text": "Type widen int → bigint"
+        },
+        {
+          "key": "C",
+          "text": "Add column nullable"
+        },
+        {
+          "key": "D",
+          "text": "Move column position"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Type narrow → DATA LOSS; widen là compatible cast.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-051",
+      "type": "mcq",
+      "prompt": "Thứ tự an toàn khi thêm cột mới theo Schema Evolution Playbook?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Backfill → deploy reader → update writer → add column"
+        },
+        {
+          "key": "B",
+          "text": "Deploy reader → add column → backfill → update writer"
+        },
+        {
+          "key": "C",
+          "text": "Update writer → add column → backfill → deploy reader"
+        },
+        {
+          "key": "D",
+          "text": "Add column → update writer → deploy reader → backfill"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Đảo thứ tự = production outage.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-052",
+      "type": "mcq",
+      "prompt": "Rename column trên Delta cần điều kiện gì theo slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cần tắt Deletion Vectors"
+        },
+        {
+          "key": "B",
+          "text": "Không thể rename được"
+        },
+        {
+          "key": "C",
+          "text": "Cần bật column mapping"
+        },
+        {
+          "key": "D",
+          "text": "Cần rewrite toàn bộ bảng"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Iceberg RENAME qua field ID; Delta cần column mapping.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-053",
+      "type": "mcq",
+      "prompt": "Trong medallion, bước deduplicate và PII-scrub diễn ra ở chuyển tiếp nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Silver → Gold"
+        },
+        {
+          "key": "B",
+          "text": "Gold → Feature Store"
+        },
+        {
+          "key": "C",
+          "text": "Source → Bronze"
+        },
+        {
+          "key": "D",
+          "text": "Bronze → Silver"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Bronze→Silver: deduplicate, PII-scrub; Silver→Gold: aggregate, feature eng.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-054",
+      "type": "mcq",
+      "prompt": "Với LLM observability, retention theo slide của Bronze / Silver / Gold là bao lâu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "30 ngày / 1 năm / 5 năm"
+        },
+        {
+          "key": "B",
+          "text": "7 ngày / 30 ngày / 1 năm"
+        },
+        {
+          "key": "C",
+          "text": "1 năm / 5 năm / 30 ngày"
+        },
+        {
+          "key": "D",
+          "text": "5 năm / 1 năm / 30 ngày"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Bảng Medallion schema cụ thể: retention 30 ngày, 1 năm, 5 năm.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-055",
+      "type": "mcq",
+      "prompt": "Quy tắc ghi của từng layer medallion theo slide là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bronze rebuild từ Gold; Silver append; Gold MERGE"
+        },
+        {
+          "key": "B",
+          "text": "Bronze append-only; Silver MERGE; Gold rebuild từ Silver"
+        },
+        {
+          "key": "C",
+          "text": "Bronze MERGE; Silver append-only; Gold overwrite thủ công"
+        },
+        {
+          "key": "D",
+          "text": "Cả ba layer append-only, không bao giờ MERGE"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bronze immutable audit, Silver upsert, Gold idempotent rebuild-from-Silver.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-056",
+      "type": "mcq",
+      "prompt": "Trong CDC Postgres → Lakehouse, Kafka đầy dẫn tới sự cố gì và cách fix?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Schema bị đổi; tắt Schema Registry để Debezium tự suy luận"
+        },
+        {
+          "key": "B",
+          "text": "Mất time travel; giảm VACUUM retention xuống 0 hours"
+        },
+        {
+          "key": "C",
+          "text": "Postgres WAL đầy → DB outage; alert Debezium lag + Kafka retention dài"
+        },
+        {
+          "key": "D",
+          "text": "Bronze table bị xoá; bật Deletion Vectors trên sink để khôi phục"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Failure mode (1) của slide CDC.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-057",
+      "type": "mcq",
+      "prompt": "Out-of-order events trong CDC được fix bằng cách nào theo slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tăng số partition Kafka lên gấp đôi"
+        },
+        {
+          "key": "B",
+          "text": "Chạy VACUUM RETAIN 0 HOURS mỗi giờ"
+        },
+        {
+          "key": "C",
+          "text": "Ghi overwrite toàn bộ bảng mỗi batch"
+        },
+        {
+          "key": "D",
+          "text": "MERGE ... WHEN MATCHED AND src.ts > tgt.ts"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Failure mode (3): out-of-order tạo bad updates; điều kiện timestamp trong MERGE.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-058",
+      "type": "mcq",
+      "prompt": "Theo case studies, Uber dùng format và đạt kết quả nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Hudi 350 PB; freshness 24h → 1h"
+        },
+        {
+          "key": "B",
+          "text": "Iceberg 350 PB; planning 9.6 min → 42 sec"
+        },
+        {
+          "key": "C",
+          "text": "Delta 19 PB; freshness 1h → 1 phút"
+        },
+        {
+          "key": "D",
+          "text": "Lance 350 PB; random access 2000× nhanh"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Uber Hudi: 6T rows/day, 19,500 datasets, freshness 24h → 1h.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-059",
+      "type": "mcq",
+      "prompt": "Theo slide, workload multimodal (video, embeddings) nên chọn format nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Avro + JSON"
+        },
+        {
+          "key": "B",
+          "text": "Lance + Iceberg"
+        },
+        {
+          "key": "C",
+          "text": "Hudi MOR"
+        },
+        {
+          "key": "D",
+          "text": "Delta + Z-ORDER"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Append-mostly → Delta/Iceberg; mutation-heavy → Hudi; multimodal → Lance + Iceberg.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-060",
+      "type": "mcq",
+      "prompt": "Theo slide, vector DB nên được xem là gì trong kiến trúc LLM?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Thay thế Lakehouse cho mọi workload phân tích"
+        },
+        {
+          "key": "B",
+          "text": "Derived index, rebuild được, không phải system of record"
+        },
+        {
+          "key": "C",
+          "text": "System of record duy nhất cho dữ liệu huấn luyện"
+        },
+        {
+          "key": "D",
+          "text": "Nơi lưu provenance và license tag của tài liệu"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Iceberg/Delta + Lance + Vector DB bổ trợ, không thay thế nhau.",
+      "source": "onthi/Slide_Day_3_Data Lakehouse Architecture_01.pdf",
+      "module": "C",
+      "points": 1
+    },
+    {
+      "id": "T2D03-TL-01",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Team của bạn đổ raw JSON từ chatbot LLM vào S3 không schema, partition theo user_id, không chạy OPTIMIZE, VACUUM 0 HOURS cho rẻ, và dùng Spark cluster cho query 5 GB. Dựa vào Top 5 Lakehouse Anti-Patterns, nêu hậu quả và cách fix từng vấn đề.",
+      "modelAnswer": "(1) Đổ tất cả vào S3 → data swamp; enforce schema từ Bronze, dùng Delta/Iceberg từ đầu. (2) Partition high-cardinality user_id → triệu partition nhỏ; partition by date/region + Z-ORDER user_id. (3) Bỏ OPTIMIZE → small-file problem, 10K files × 1 MB → query 10× chậm; daily OPTIMIZE cron. (4) VACUUM 0 HOURS → mất time travel, concurrent readers fail; giữ tối thiểu 168h (7 ngày). (5) Spark cho 5 GB → lãng phí 10× chi phí; DuckDB/Athena cho <100 GB, chỉ scale-up khi > 1 node RAM. Nêu 80% pain production thuộc 5 anti-pattern, cần audit checklist trước deploy.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D03-TL-02",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Thiết kế medallion Bronze/Silver/Gold cho LLM observability (log request/response của inference API). Nêu schema, cardinality, partition, retention, consumer và quy tắc ghi của từng layer.",
+      "modelAnswer": "Bronze: request_id, ts, raw_json; 1 row/LLM call; partition ingest_date; retention 30 ngày; consumer replay/debug; append-only (immutable audit). Silver: request_id, ts, model, prompt_tokens, completion_tokens, latency_ms, user_id, status; dedup + parse, validated; partition date; 1 năm; feature store/RAG corpus; upsert MERGE. Gold: date, model, p50/p95 latency, total_tokens, cost_usd, error_rate; 1 row/(date, model); partition date + Z-ORDER model; 5 năm; dashboards, alerts, FinOps; rebuild-from-Silver idempotent. Schema mỗi layer = data contract giữa teams. Có thể thêm S3 Intelligent-Tiering/Glacier cho Bronze cold.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D03-TL-03",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Một fintech VN muốn đồng bộ bảng giao dịch từ Postgres OLTP sang lakehouse để phân tích mà không ảnh hưởng OLTP. Thiết kế pipeline CDC và nêu 3 failure mode phổ biến cùng cách phòng tránh.",
+      "modelAnswer": "Pipeline: Postgres WAL → Debezium (WAL reader, Avro msg) → Kafka + Schema Registry (durable buffer, decouple uptime) → Hudi/Delta Streamer → Bronze table, MERGE upsert. Freshness end-to-end 1–5 phút, không impact OLTP. Failure: (1) Kafka full → Postgres WAL fills → DB outage; alert Debezium lag + Kafka retention dài. (2) Source schema change phá pipeline; Schema Registry + mergeSchema=true ở sink. (3) Out-of-order events → bad updates; MERGE WHEN MATCHED AND src.ts > tgt.ts. Có thể dùng DV + CDF + MERGE làm CDC sink; với Decree 13 cân nhắc Iceberg trên MinIO on-prem.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D03-TL-04",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Một bảng Delta 1 TB nhận yêu cầu GDPR xoá dữ liệu của một user. Hãy giải thích vì sao DELETE thông thường chậm, Deletion Vectors cải thiện thế nào, và các bước để dữ liệu thực sự bị xoá vĩnh viễn (kể cả với time travel).",
+      "modelAnswer": "Không DV: DELETE 1 row → rewrite cả Parquet file, write amplification ~1000×. DV: lưu bitmap rows bị xoá trong sidecar, reader skip theo bitmap, không rewrite; DELETE/UPDATE/MERGE 10–100× nhanh, GDPR DELETE từ giờ → phút. Bật bằng TBLPROPERTIES delta.enableDeletionVectors=true. Physical removal khi OPTIMIZE. Time travel vẫn giữ version cũ → khôi phục ≠ GDPR DELETE; cần VACUUM sau retention (slide security: DELETE + VACUUM sau 30d grace) mới xoá vĩnh viễn. Lưu ý Decree 13 right-to-forget 72h SLA nên phải cân retention; audit log truy cập PII.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D03-TL-05",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Một job ingest đẩy dữ liệu lỗi vào bảng Delta training lúc 2h sáng, và team ML cần chứng minh model tháng trước được train trên đúng dataset nào. Trình bày cách dùng time travel và MLflow để xử lý cả hai việc, cùng giới hạn cần lưu ý.",
+      "modelAnswer": "Rollback: DESCRIBE HISTORY xác định version trước lỗi; restoreToVersion(n) tạo version mới với data như vn — vài chục giây thay vì ~2h manual fix. Có thể đọc so sánh bằng versionAsOf/timestampAsOf. Reproducibility: pin Delta version trong MLflow run (run_id ↔ table version, ví dụ data_version=3), lineage data → features → model → deploy. DESCRIBE HISTORY = audit log compliance. Giới hạn: bị chặn bởi VACUUM retention (default 7 ngày) — training set cần giữ lâu phải tăng retention hoặc tag; old version schema-incompatible có thể fail; time travel + schema registry = data contracts. Có thể dùng Nessie tag/branch để trả lời “Model X dùng data nào?”.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D03-TL-06",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Công ty bạn chạy Spark trên Databricks nhưng team BI dùng Trino và Snowflake, đồng thời cần git-like branching cho thử nghiệm ML. So sánh Delta Lake, Iceberg, Hudi và đề xuất format + catalog phù hợp, có giải thích.",
+      "modelAnswer": "So sánh: cả ba có ACID, time travel, deletion vectors (Delta 2.3+, Iceberg v3, Hudi MOR). Hidden partitioning chỉ Iceberg. Branching: Delta tag only, Iceberg + Nessie, Hudi không. Multi-engine: Iceberg default, Delta qua UniForm. Hudi mạnh mutation-heavy (MOR). Đề xuất: Iceberg (multi-engine, vendor neutral, partition evolution, Databricks Iceberg v3 GA Apr 2026) hoặc Delta + UniForm nếu muốn giữ Delta API; catalog REST: Polaris (multi-cloud, vendor-neutral) hoặc Nessie (branch/tag cho ML), Unity nếu Databricks-native. Nêu format war đã kết thúc, on-disk Parquet giống nhau, chọn theo tooling fit; XTable convert nếu cần.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D03-TL-07",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Bảng events 2 TB trên Hive partition theo ts_day thường bị full scan do user quên filter. Đề xuất thiết kế lại bằng Iceberg và chiến lược partition/layout, giải thích cơ chế giúp query nhanh.",
+      "modelAnswer": "Iceberg hidden partitioning: PARTITIONED BY (days(ts)), bỏ cột ts_day duplicate; user filter ts tự nhiên, Iceberg auto-prune. Transforms: years/months/days/hours, bucket(N,col), truncate(N,col). Partition evolution: đổi days → hours không rewrite data. Partition low-cardinality (date, region), không partition user_id; dùng Z-ORDER/clustering user_id trong file. Target file 100 MB–1 GB; OPTIMIZE định kỳ tránh small files. Parquet footer min/max, page index, bloom filter giúp skip (ví dụ user_id=42 trên 1 TB đọc ∼50 MB). Nêu đa số regression do quên partition column; LinkedIn migrate vì lý do này.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D03-TL-08",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Ước tính và so sánh chi phí lakehouse 100 TB/tháng giữa Snowflake, Iceberg + Trino trên S3 và Databricks theo slide; sau đó đề xuất 5 biện pháp FinOps và giải thích vì sao savings không tự đến.",
+      "modelAnswer": "Tổng: Snowflake $24,000; Iceberg + Trino/S3 $12,800 (−47%): storage $2,300, BI Trino EC2 $8,000, ETL Spark EMR $2,000, Polaris $500; Databricks $17,300 (−28%). Biện pháp: per-layer budget, Bronze → Glacier sau 30d (hoặc 90 ngày −60% storage); auto-OPTIMIZE nightly cron; tag clusters team/purpose/expires_at; spot cho ETL, on-demand cho BI; review top-10 query hàng tháng; DuckDB cho query nhỏ. Savings chỉ materialize nếu actively optimize: không OPTIMIZE → small-file tax, có thể đắt 10× hơn DW.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D03-TL-09",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Thiết kế stack data quality, data contract và lineage cho pipeline Bronze → Silver → Gold phục vụ dashboard cost LLM. Chỉ rõ công cụ ở từng chỗ, ví dụ check, và cách xử lý khi contract bị vỡ.",
+      "modelAnswer": "Bronze ingestion: Great Expectations validate raw (50+ expectations, ví dụ status in set ok/rate_limited/error). Silver/Gold transforms: dbt tests SQL-native (unique, not_null, relationships). Prod monitoring: Soda (SodaCL: row_count >= 1000, freshness < 1h, anomaly_score < 0.7 cho cost_usd). Data contract = schema + constraints + freshness SLA + ownership, chạy trong CI (pre-merge) và runtime (per-batch); vỡ contract → block pipeline. Lineage: OpenLineage (Spark/Airflow/dbt/Flink emit tự động) + Marquez (graph + UI), trả lời drop column ảnh hưởng ai, metric Gold sai truy ngược Bronze nào; bật từ ngày 1 (spark.openlineage.transport.type=http). Catalog-level commit để Bronze+Silver+Gold all-or-nothing.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D03-TL-10",
+      "module": "D",
+      "type": "essay",
+      "points": 4,
+      "prompt": "Một startup VN xây corpus fine-tune LLM (Wiki-VI + ZNews) chứa cả dữ liệu cá nhân người dùng. Thiết kế lakehouse cho corpus + embedding + multimodal, đồng thời đáp ứng Decree 13 và governance.",
+      "modelAnswer": "Corpus: Bronze raw → Silver quality filter + MinHash dedup (RedPajama-style; Dolma dùng Bloom filter) → Gold curated + license tags train-ready; time travel revert dedup mistakes. Embedding version = doc_v × model_v, pin qua Iceberg/Delta version + MLflow run_id. Lance cho embeddings/multimodal blobs (random access ∼2000× Parquet, HNSW, versioning); vector DB là derived index rebuild được cho online ANN sub-100 ms. Governance: RBAC/ABAC (Unity/Polaris), row-level security, column masking, tokenize PII ở Bronze, encrypt field-level (Iceberg v3), audit log mọi PII access, retention 365+ ngày regulated. Decree 13: phân basic vs sensitive, sensitive lưu tại VN → on-prem MinIO + Iceberg, cross-border cần consent + DPI, right-to-forget 72h SLA (DELETE + VACUUM).",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    }
+  ]
+}

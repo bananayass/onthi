@@ -1,0 +1,127 @@
+{
+  "id": "day4_track2_tu_luan",
+  "title": "Tự luận Track 2 Ngày 4",
+  "questionCount": 10,
+  "questions": [
+    {
+      "id": "T2D04-TL-01",
+      "type": "essay",
+      "prompt": "Bạn có ba workload: (a) chatbot nội bộ 5M vector, cần P99 thấp; (b) catalog 300M vector, vẫn cần tương tác; (c) kho lưu trữ 2 tỷ vector, vài truy vấn/ngày. Chọn tầng lưu trữ và loại index cho từng workload, giải thích đánh đổi chi phí – latency.",
+      "modelAnswer": "(a) In-memory HNSW trên RAM: 5–20 ms, chi phí cao nhất, hợp ≤10M hot, latency-critical; params ef=200, m=16. (b) On-disk DiskANN trên SSD: ~30 ms @ 99% recall, 10–50× rẻ hơn HNSW ở scale lớn, hợp 100M+ (pgvectorscale, Milvus). (c) Object storage (S3 Vectors/turbopuffer/LanceDB): ~100 ms, query thưa <1 s, rẻ nhất; S3 Vectors 2 tỷ vector/index, chi phí giảm tới 90%. Lý do rẻ: giá lưu trữ ~$0,02/GB vs RAM ~$2+/GB. Đánh đổi: latency cao hơn, QPS thấp hơn. Tầng lưu trữ là quyết định chi phí lớn nhất của hạ tầng retrieval.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D04-TL-02",
+      "type": "essay",
+      "prompt": "Tính dung lượng vector cho 50M vector 1024d ở fp32, int8 và binary. Đề xuất cấu hình quantization giữ recall cao và quy trình triển khai an toàn.",
+      "modelAnswer": "fp32: 50M × 1024 × 4 B ≈ 204,8 GB; int8 (1 B/dim, ÷4) ≈ 51,2 GB, recall ~99%; binary (1 bit/dim, ÷32) ≈ 6,4 GB, recall 95–98% có rescore. Đề xuất: lưu binary + asymmetric/oversample + rescore bằng vector gốc ⇒ recall gần scalar. Bật quantization trước khi ingest; re-quantize = re-index ⇒ dùng blue-green. Có thể kết hợp Matryoshka nếu model hỗ trợ. Kiểm recall trên golden set trước khi switch.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D04-TL-03",
+      "type": "essay",
+      "prompt": "Thiết kế hybrid search cho corpus văn bản luật tiếng Việt nhiều thuật ngữ hiếm. Nêu lựa chọn sparse/dense, cách fusion, xử lý tách từ và cách chứng minh cấu hình tốt.",
+      "modelAnswer": "Sparse: BM25 (không dùng SPLADE-v3 tiếng Anh — thua BM25 trên 10/10 bộ tiếng Việt; learned sparse phải đúng ngôn ngữ). BM25 thắng 3-large ở 4/10 bộ (luật, tin tức, review) vì thuật ngữ hiếm. Dense: model tiếng Việt/đa ngữ (bge-m3, Vietnamese_Embedding). Fusion: α-fusion tuyến tính (α 0,6–0,8 cho dense) thường > RRF nhưng phải tune trên golden set; RRF k=60 là baseline không cần normalize. Âm tiết ≠ từ: “học sinh” bị tách; thử pyvi/underthesea và tự đo. Chứng minh: golden set có nhãn, so keyword vs semantic vs hybrid bằng nDCG@10/P@10 và P99.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D04-TL-04",
+      "type": "essay",
+      "prompt": "Một SaaS đa tenant muốn thêm semantic cache trước LLM. Thiết kế cache (tham số, khoá, invalidation) và phân tích các kiểu gãy cần phòng.",
+      "modelAnswer": "Cosine > threshold ⇒ trả câu trả lời đã lưu; threshold phải đo (AWS dùng 0,75), quá thấp ⇒ trả nhầm câu trả lời câu khác. Namespace/filter theo tenant trong chính query cache — thiếu ⇒ user A nhận dữ liệu user B (lỗ hổng bảo mật). TTL bắt buộc (vd. 3600 s); xoá cache khi tài liệu nguồn đổi. 4 kiểu gãy: query phụ thuộc ngữ cảnh, query nhạy thời gian, đổi embedding model ⇒ xoá sạch cache (khác không gian), cache câu bịa rồi phục vụ mãi. Cache sai nguy hiểm hơn không cache; đầu độc semantic cache là rủi ro OWASP 2026.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D04-TL-05",
+      "type": "essay",
+      "prompt": "Thiết kế feature store cho hệ fraud detection thẻ thanh toán: nhóm feature, pipeline cập nhật, online store và cách tính feature amount/avg_7d.",
+      "modelAnswer": "Yêu cầu <10 ms/transaction. Feature: velocity (txn/min, cửa sổ 5 phút/1 giờ), device fingerprint, amount-vs-7d-avg, recency. Pipeline: Postgres OLTP → CDC (Debezium) → Kafka → Flink/Spark Streaming (tumbling/sliding window) → Redis online + S3/Delta offline; hoặc Feast Push API. Online store in-memory (Redis/Aerospike) phải chặn được giá trị quá TTL (SQLite thì không). amount chỉ có lúc request ⇒ on-demand feature view ghép RequestSource với user_spend_stats, cùng công thức cho train và serve. Đặt tên user_txn_count_7d…; dùng timestamp_field cho PIT join.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D04-TL-06",
+      "type": "essay",
+      "prompt": "Model churn đạt AUC tốt khi train nhưng production kém hơn ~25%. Liệt kê các nguyên nhân có thể liên quan feature và cách điều tra, sửa.",
+      "modelAnswer": "(1) Data leakage do dùng LATEST value thay vì PIT join ⇒ prod thấp hơn training 20–30%; sửa: get_historical_features(entity_df) lấy feature as-of timestamp từng event, có timestamp_field. (2) Training-serving skew: train dùng df.mean() toàn lịch sử, serve dùng running_mean(last_N); train parse UTC, serve local timezone ⇒ “giờ trong ngày” lệch 7h. (3) Target encoding không fit trong fold. Sửa: một định nghĩa feature duy nhất trong feature store cho cả train và inference, registry chung; so phân phối feature train vs serve.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D04-TL-07",
+      "type": "essay",
+      "prompt": "Ban M&A hỏi: “Ai ở PayPal từng cộng tác với người được Mahle thuê?”. Giải thích vì sao vector RAG thất bại và đề xuất kiến trúc cùng phân tích chi phí index.",
+      "modelAnswer": "Vector RAG trả chunks về PayPal hoặc Mahle riêng lẻ, không cross-document multi-hop. GraphRAG: NER → entity linking (dedupe, canonical ID) → relation extraction (Alice, worked_on, Project X) → community detection (Leiden) → KG trên Neo4j/Memgraph; traverse 3-hop trong µs. Kiến trúc layered: vector RAG cho grounding → thêm KG cho domain nhiều thực thể → hybrid: vector retrieve → KG expand → LLM. Chi phí: full extraction 5–20×; LazyGraphRAG hoãn extraction sang query-time ⇒ index ≈ vector RAG (0,1% full GraphRAG). Chọn theo hình dạng câu hỏi (relationship), không theo ngân sách index.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D04-TL-08",
+      "type": "essay",
+      "prompt": "Một feature view có ttl=1h, freshness SLO = 1 giờ. Tuổi feature của 5 request: 20 phút, 50 phút, 3 giờ, 30 phút, 26 giờ. Tính tỷ lệ vi phạm, giải thích vì sao ttl không bảo vệ và thiết kế guard.",
+      "modelAnswer": "Vi phạm: 3 giờ và 26 giờ ⇒ 2/5 = 40%. age = now − event_ts, lấy event_ts qua to_dict(include_event_timestamps=True) (cột <feature>__ts). ttl online chỉ được Redis/ScyllaDB thực thi; SQLite (Lab 19) vẫn trả giá trị 50 giờ tuổi. Job streaming chết ⇒ feature đóng băng, model vẫn trả lời tự tin (silent failure). Guard: age > SLO ⇒ dùng giá trị mặc định hoặc model dự phòng và đếm metric; alert theo tỷ lệ vi phạm. Đo tuổi lúc serve, không tin cấu hình.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D04-TL-09",
+      "type": "essay",
+      "prompt": "Xây golden set đánh giá retrieval cho hệ hỏi đáp nội bộ. Nêu quy trình, cách gán nhãn, và tính nDCG@5 cho kết quả có nhãn [0, 3, 2, 0, 1]; giải thích κ khi judge khớp người 75%, ngẫu nhiên 50%.",
+      "modelAnswer": "Quy trình: query thật từ log + query sinh từ tài liệu; pooling top-k của nhiều hệ; nhãn 0–3 thay vì đúng/sai; chỉ dùng LLM-judge sau khi đo đồng thuận với người (TREC 2024: người chấm khắt khe hơn). Khoảng 200 query, regression-test mỗi lần đổi embedding/chunking. DCG = 3/log2 3 + 2/log2 4 + 1/log2 6 = 1,893 + 1,000 + 0,387 = 3,280; IDCG [3,2,1,0,0] = 3 + 1,262 + 0,500 = 4,762 ⇒ nDCG@5 ≈ 0,689 (nhị phân cho 0,712, che mất tài liệu tốt nhất ở hạng 2). κ = (0,75 − 0,50)/(1 − 0,50) = 0,50 — “khá”, không phải 75% đúng. Lưu ý query sinh cùng template với corpus làm hybrid thắng sẵn.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D04-TL-10",
+      "type": "essay",
+      "prompt": "Công ty Việt Nam lưu hồ sơ khách hàng dạng embedding trong vector store dùng chung cho nhiều khách doanh nghiệp. Phân tích rủi ro bảo mật/tuân thủ và thiết kế đường xoá dữ liệu.",
+      "modelAnswer": "OWASP LLM09:2026: embedding inversion (embedding không phải safe-harbor), rò chéo tenant ⇒ enforce tenant scoping trong index query, không post-filter; ưu tiên namespace/collection per tenant; poisoning & jamming; membership inference; đầu độc semantic cache. PDPL Luật 91/2025/QH15 (hiệu lực 01/01/2026), NĐ 356/2025: quyền chủ thể, DPO bắt buộc, đánh giá tác động, báo vi phạm 72 h (24 h nếu bị tấn công), chế tài hình sự, áp dụng cả tổ chức nước ngoài. Quyền được xoá: lan tới vector index + online store + semantic cache; thiết kế đường xoá trước khi ingest.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    }
+  ]
+}

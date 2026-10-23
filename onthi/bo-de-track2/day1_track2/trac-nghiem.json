@@ -1,0 +1,1568 @@
+{
+  "id": "day1_track2",
+  "title": "Bộ đề ôn tập Track 2 Ngày 1",
+  "sourceFolder": "onthi",
+  "questionCount": 60,
+  "questions": [
+    {
+      "id": "T2D01-001",
+      "type": "mcq",
+      "prompt": "Theo slide, chọn nhà cung cấp đám mây cho AI dựa trên bốn yếu tố nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Loại khối lượng, ngân sách, tuân thủ, độ trễ"
+        },
+        {
+          "key": "B",
+          "text": "Thương hiệu, số vùng, ngôn ngữ SDK, giấy phép"
+        },
+        {
+          "key": "C",
+          "text": "Giá GPU, số SM, băng thông HBM, công suất TDP"
+        },
+        {
+          "key": "D",
+          "text": "Ngân sách, số GPU, loại chip, tốc độ mạng LAN"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide bản đồ nhà cung cấp: loại khối lượng × ngân sách × tuân thủ × độ trễ (latency).",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-002",
+      "type": "mcq",
+      "prompt": "Giá niêm yết GPU ở ba đám mây lớn so với đám mây GPU chuyên biệt thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Thấp hơn khoảng 1,5 đến 3 lần"
+        },
+        {
+          "key": "B",
+          "text": "Tương đương, chênh dưới 10%"
+        },
+        {
+          "key": "C",
+          "text": "Cao hơn khoảng 5 đến 8 lần"
+        },
+        {
+          "key": "D",
+          "text": "Cao hơn khoảng 1,5 đến 3 lần"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Đám mây lớn đắt hơn 1,5–3 lần, đổi lại có dịch vụ quản lý, vùng khả dụng, SLA và tuân thủ.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-003",
+      "type": "mcq",
+      "prompt": "Theo cây quyết định, đội huấn luyện nhiều bằng JAX/PyTorch và quan tâm TPU nên chọn đám mây nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Azure"
+        },
+        {
+          "key": "B",
+          "text": "Viettel / FPT / VNG"
+        },
+        {
+          "key": "C",
+          "text": "Google Cloud"
+        },
+        {
+          "key": "D",
+          "text": "AWS"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Nhánh “PyTorch/JAX nặng, quan tâm TPU?” → Google Cloud (Vertex AI, GKE, TPU Ironwood).",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-004",
+      "type": "mcq",
+      "prompt": "Không rơi vào nhánh nào của cây quyết định, chỉ cần GPU giá thấp và đội có kỹ năng hạ tầng. Nên xét gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tự mua DGX đặt tại chỗ ngay từ đầu"
+        },
+        {
+          "key": "B",
+          "text": "Đám mây GPU chuyên biệt như CoreWeave, Lambda"
+        },
+        {
+          "key": "C",
+          "text": "Đám mây trong nước như Viettel IDC, FPT"
+        },
+        {
+          "key": "D",
+          "text": "Azure vì có mô hình OpenAI tích hợp sẵn"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide cây quyết định: ngoài các nhánh, cần GPU rẻ và tự vận hành được thì xét CoreWeave, Lambda, RunPod.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-005",
+      "type": "mcq",
+      "prompt": "Nhận định “đám mây trong nước chỉ có T4/V100” hiện nay thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đã lỗi thời; FPT, Viettel đã có H100/H200"
+        },
+        {
+          "key": "B",
+          "text": "Vẫn đúng; chỉ FPT mới có thêm A100"
+        },
+        {
+          "key": "C",
+          "text": "Vẫn đúng với mọi nhà cung cấp trừ CMC"
+        },
+        {
+          "key": "D",
+          "text": "Đã lỗi thời; nhưng chỉ có L4 và A10G"
+        }
+      ],
+      "answer": "A",
+      "explanation": "FPT AI Factory có HGX H100/H200, B300; Viettel có H200 và DGX B200; VNG có HGX H100.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-006",
+      "type": "mcq",
+      "prompt": "Hạn chế còn lại của đám mây trong nước so với đám mây lớn là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chưa có GPU thế hệ Hopper nào"
+        },
+        {
+          "key": "B",
+          "text": "Không đáp ứng luật dữ liệu Việt Nam"
+        },
+        {
+          "key": "C",
+          "text": "Không hỗ trợ InfiniBand giữa các nút"
+        },
+        {
+          "key": "D",
+          "text": "Ít vùng khả dụng và ít dịch vụ quản lý"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide đám mây trong nước: hạn chế còn lại là ít vùng khả dụng và ít dịch vụ quản lý hơn.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-007",
+      "type": "mcq",
+      "prompt": "Luật Bảo vệ dữ liệu cá nhân 91/2025 có hiệu lực từ ngày nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "01/03/2026"
+        },
+        {
+          "key": "B",
+          "text": "01/01/2025"
+        },
+        {
+          "key": "C",
+          "text": "01/01/2026"
+        },
+        {
+          "key": "D",
+          "text": "01/07/2025"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Luật Dữ liệu 60/2024 hiệu lực 01/07/2025; Luật BVDLCN 91/2025 hiệu lực 01/01/2026; Luật AI 134/2025 từ 01/03/2026.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-008",
+      "type": "mcq",
+      "prompt": "Mô hình AI-aaS (OpenAI API, Bedrock) có đặc điểm nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Kiểm soát tối đa, phải tự lo điện, làm mát và mạng"
+        },
+        {
+          "key": "B",
+          "text": "Nhanh nhất, không cần hạ tầng, tính phí theo token"
+        },
+        {
+          "key": "C",
+          "text": "Kiểm soát GPU, cần nhóm vận hành riêng để quản lý"
+        },
+        {
+          "key": "D",
+          "text": "Tự mở rộng, nhà cung cấp quản lý huấn luyện, phục vụ"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bốn mô hình: AI-aaS nhanh nhất, PaaS ít vận hành, IaaS kiểm soát GPU, vật lý kiểm soát tối đa.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-009",
+      "type": "mcq",
+      "prompt": "Hệ thống AI thường kết hợp các mô hình triển khai theo thứ tự nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tạo mẫu AI-aaS → phục vụ PaaS → huấn luyện nặng IaaS"
+        },
+        {
+          "key": "B",
+          "text": "Tạo mẫu IaaS → phục vụ AI-aaS → huấn luyện nặng PaaS"
+        },
+        {
+          "key": "C",
+          "text": "Tạo mẫu PaaS → phục vụ IaaS → huấn luyện nặng AI-aaS"
+        },
+        {
+          "key": "D",
+          "text": "Tạo mẫu AI-aaS → phục vụ IaaS → huấn luyện nặng PaaS"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide bốn mô hình triển khai: tạo mẫu bằng AI-aaS, phục vụ bằng PaaS, huấn luyện nặng bằng IaaS.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-010",
+      "type": "mcq",
+      "prompt": "Trong mô hình trách nhiệm chia sẻ, việc nào thuộc nhóm vận hành (người dùng)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bảo trì phần cứng vật lý và lớp ảo hoá"
+        },
+        {
+          "key": "B",
+          "text": "Đảm bảo độ sẵn sàng của vùng khả dụng"
+        },
+        {
+          "key": "C",
+          "text": "Chống prompt injection, cấp quyền tối thiểu"
+        },
+        {
+          "key": "D",
+          "text": "Chống tấn công DDoS ở mạng lõi của vùng"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Nhà cung cấp lo hạ tầng vật lý, ảo hoá, mạng lõi/DDoS; người dùng lo bảo mật mô hình, mã hoá, least privilege, prompt injection, tuân thủ.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-011",
+      "type": "mcq",
+      "prompt": "Theo slide, sự cố bảo mật đám mây phổ biến nhất nằm ở đâu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Phía nhà cung cấp, như lỗi lớp ảo hoá"
+        },
+        {
+          "key": "B",
+          "text": "Phần cứng GPU hỏng trong trung tâm dữ liệu"
+        },
+        {
+          "key": "C",
+          "text": "Tấn công DDoS vào mạng lõi của vùng"
+        },
+        {
+          "key": "D",
+          "text": "Phía người dùng, như bucket để công khai"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Sự cố phổ biến: bucket công khai, khoá truy cập lộ trong mã nguồn, quyền *:* cho mọi vai trò.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-012",
+      "type": "mcq",
+      "prompt": "Trong landing zone, gộp mọi thứ vào một tài khoản gây hậu quả gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không tách được ngân sách, quyền và log về sau"
+        },
+        {
+          "key": "B",
+          "text": "Không chạy được máy GPU trong tài khoản đó"
+        },
+        {
+          "key": "C",
+          "text": "SCP tự chặn mọi vùng ngoài us-east-1"
+        },
+        {
+          "key": "D",
+          "text": "Terraform không quản lý được tệp state nữa"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide landing zone: sai sót thiết kế ban đầu rất tốn kém; một tài khoản khiến không thể tách ngân sách, quyền, nhật ký.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-013",
+      "type": "mcq",
+      "prompt": "GPU H100 bật bao nhiêu SM (streaming multiprocessor)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "108"
+        },
+        {
+          "key": "B",
+          "text": "132"
+        },
+        {
+          "key": "C",
+          "text": "144"
+        },
+        {
+          "key": "D",
+          "text": "128"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Chip GH100 đầy đủ có 144 SM trong 8 GPC; H100 bật 132 SM.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-014",
+      "type": "mcq",
+      "prompt": "Mỗi SM của H100 gồm những gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "32 lõi FP32 + 1 lõi tensor"
+        },
+        {
+          "key": "B",
+          "text": "256 lõi FP32 + 4 lõi tensor"
+        },
+        {
+          "key": "C",
+          "text": "128 lõi FP32 + 4 lõi tensor"
+        },
+        {
+          "key": "D",
+          "text": "64 lõi FP32 + 8 lõi tensor"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Mỗi SM có 4 phân vùng, mỗi phân vùng 32 lõi FP32 + 1 lõi tensor → 128 FP32 + 4 tensor, 256 KB thanh ghi.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-015",
+      "type": "mcq",
+      "prompt": "H100 có 132 SM. Tổng số lõi tensor của GPU là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "576"
+        },
+        {
+          "key": "B",
+          "text": "132"
+        },
+        {
+          "key": "C",
+          "text": "1 056"
+        },
+        {
+          "key": "D",
+          "text": "528"
+        }
+      ],
+      "answer": "D",
+      "explanation": "132 SM × 4 lõi tensor = 528 (và 132 × 128 = 16 896 lõi FP32).",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-016",
+      "type": "mcq",
+      "prompt": "Khác biệt chính giữa lõi tensor và lõi CUDA là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Lõi tensor làm cả khối nhân–cộng ma trận mỗi lệnh"
+        },
+        {
+          "key": "B",
+          "text": "Lõi tensor tính một phép d = a × b + c mỗi lần"
+        },
+        {
+          "key": "C",
+          "text": "Lõi CUDA quyết định gần hết thông lượng suy luận"
+        },
+        {
+          "key": "D",
+          "text": "Lõi tensor chỉ chạy được định dạng FP32 chuẩn"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Lõi tensor làm MMA trên khối ma trận, đầu vào độ chính xác thấp; thông lượng suy luận LLM gần như đến từ lõi tensor.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-017",
+      "type": "mcq",
+      "prompt": "Với VRAM (HBM), dung lượng và băng thông lần lượt quyết định điều gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Số yêu cầu đồng thời, và kích thước L2 cache"
+        },
+        {
+          "key": "B",
+          "text": "Mô hình chạy được không, và chạy nhanh đến đâu"
+        },
+        {
+          "key": "C",
+          "text": "Mô hình chạy nhanh đến đâu, và chạy được không"
+        },
+        {
+          "key": "D",
+          "text": "Số SM được bật, và số lõi tensor hoạt động"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide phân cấp bộ nhớ: dung lượng quyết định chạy được không, băng thông quyết định tốc độ.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-018",
+      "type": "mcq",
+      "prompt": "Llama-3-70B (70,55 tỉ tham số) ở FP8 cần khoảng bao nhiêu bộ nhớ cho trọng số?",
+      "options": [
+        {
+          "key": "A",
+          "text": "35,3 GB"
+        },
+        {
+          "key": "B",
+          "text": "80 GB"
+        },
+        {
+          "key": "C",
+          "text": "70,6 GB"
+        },
+        {
+          "key": "D",
+          "text": "141 GB"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Trọng số = số tham số × byte: 70,55 tỉ × 1 byte ≈ 70,6 GB (FP16 141 GB, FP4 35,3 GB).",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-019",
+      "type": "mcq",
+      "prompt": "Llama-3-70B: 80 lớp, 8 đầu KV, kích thước đầu 128, FP16. KV cache mỗi token là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "160 KiB"
+        },
+        {
+          "key": "B",
+          "text": "640 KiB"
+        },
+        {
+          "key": "C",
+          "text": "2,7 MiB"
+        },
+        {
+          "key": "D",
+          "text": "320 KiB"
+        }
+      ],
+      "answer": "D",
+      "explanation": "2 × 80 × 8 × 128 × 2 byte = 327 680 byte = 320 KiB mỗi token.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-020",
+      "type": "mcq",
+      "prompt": "Vì sao Llama-3-70B FP16 không vừa một H200?",
+      "options": [
+        {
+          "key": "A",
+          "text": "KV cache 8K token vượt quá 2,7 GB cho phép"
+        },
+        {
+          "key": "B",
+          "text": "H200 không hỗ trợ định dạng số FP16"
+        },
+        {
+          "key": "C",
+          "text": "Băng thông 4,8 TB/s không đủ cho FP16"
+        },
+        {
+          "key": "D",
+          "text": "Riêng trọng số 141,1 GB đã vượt 141 GB VRAM"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide tính bộ nhớ: FP16 141,1 GB > 141 GB của H200, chưa tính KV và bộ nhớ trung gian.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-021",
+      "type": "mcq",
+      "prompt": "Rack GB200 NVL72 dùng khoảng 125 kW. Hệ quả về hạ tầng là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chỉ cần thêm máy phát điện dự phòng"
+        },
+        {
+          "key": "B",
+          "text": "Ngang một máy DGX H100 10,2 kW"
+        },
+        {
+          "key": "C",
+          "text": "Phải làm mát bằng chất lỏng"
+        },
+        {
+          "key": "D",
+          "text": "Làm mát bằng khí như rack thường"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Rack doanh nghiệp 10–30 kW; GB200 NVL72 gấp 4–12 lần nên phải làm mát bằng chất lỏng.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-022",
+      "type": "mcq",
+      "prompt": "Về số FLOPS trong bảng thông số GPU, slide lưu ý điều gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Số quảng cáo là FP32, gấp tư số FP8"
+        },
+        {
+          "key": "B",
+          "text": "Số quảng cáo thường là sparse, gấp đôi dense"
+        },
+        {
+          "key": "C",
+          "text": "Số quảng cáo thường là dense, gấp đôi sparse"
+        },
+        {
+          "key": "D",
+          "text": "Sparse và dense luôn bằng nhau ở FP8"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Mọi số trong bảng là dense; số NVIDIA quảng cáo thường là sparse (gấp đôi).",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-023",
+      "type": "mcq",
+      "prompt": "Thông số bộ nhớ của H200 theo bảng là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "141 GB HBM3e, băng thông 4,8 TB/s"
+        },
+        {
+          "key": "B",
+          "text": "80 GB HBM3, băng thông 3,35 TB/s"
+        },
+        {
+          "key": "C",
+          "text": "192 GB HBM3e, băng thông 8 TB/s"
+        },
+        {
+          "key": "D",
+          "text": "288 GB HBM4, băng thông 22 TB/s"
+        }
+      ],
+      "answer": "A",
+      "explanation": "H200: 141 GB HBM3e, 4,8 TB/s, FP8 dense 1,98 PF, 700 W.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-024",
+      "type": "mcq",
+      "prompt": "Giá AWS theo yêu cầu cho một GPU H100 mỗi giờ theo slide là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "3,43 USD"
+        },
+        {
+          "key": "B",
+          "text": "7,91 USD"
+        },
+        {
+          "key": "C",
+          "text": "12,29 USD"
+        },
+        {
+          "key": "D",
+          "text": "6,88 USD"
+        }
+      ],
+      "answer": "D",
+      "explanation": "AWS: L40S 1,86; A100 3,43; H100 6,88; H200 7,91; B200 14,24. Azure H100 là 12,29 USD.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-025",
+      "type": "mcq",
+      "prompt": "Vì sao tinh chỉnh toàn phần tốn khoảng 16 byte mỗi tham số?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Trọng số 2 + KV cache 2 + trạng thái Adam 12"
+        },
+        {
+          "key": "B",
+          "text": "Trọng số 2 + gradient 2 + activation 12"
+        },
+        {
+          "key": "C",
+          "text": "Trọng số 2 + gradient 2 + trạng thái Adam 12"
+        },
+        {
+          "key": "D",
+          "text": "Trọng số 4 + gradient 4 + trạng thái Adam 8"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Adam 12 byte gồm bản sao FP32, momentum, phương sai (ZeRO, 2020); chưa tính activation.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-026",
+      "type": "mcq",
+      "prompt": "Suy luận mô hình cần 80–180 GB VRAM. Cây quyết định gợi ý GPU nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Nút 8 GPU hoặc rack NVL72"
+        },
+        {
+          "key": "B",
+          "text": "H200, B200 hoặc 2 H100"
+        },
+        {
+          "key": "C",
+          "text": "L4, A10G hoặc L40S"
+        },
+        {
+          "key": "D",
+          "text": "Một L40S 48 GB, time-slicing"
+        }
+      ],
+      "answer": "B",
+      "explanation": "≤24 GB: L4/A10G/L40S; 24–80: L40S/H100; 80–180: H200, B200, 2 H100; >180: nút 8 GPU, NVL72.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-027",
+      "type": "mcq",
+      "prompt": "Tinh chỉnh bằng LoRA/QLoRA thường cần phần cứng thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Một GPU 24–80 GB là đủ"
+        },
+        {
+          "key": "B",
+          "text": "Nhiều GPU kèm FSDP/ZeRO"
+        },
+        {
+          "key": "C",
+          "text": "Cụm H100 nối InfiniBand"
+        },
+        {
+          "key": "D",
+          "text": "Một rack GB200 NVL72"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Cây quyết định: LoRA, QLoRA dùng 1 GPU 24–80 GB; toàn phần ≥7 tỉ mới cần nhiều GPU, FSDP/ZeRO.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-028",
+      "type": "mcq",
+      "prompt": "Máy spot trên AWS bị thu hồi với thời gian báo trước bao lâu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "30 giây"
+        },
+        {
+          "key": "B",
+          "text": "10 phút"
+        },
+        {
+          "key": "C",
+          "text": "1 giờ"
+        },
+        {
+          "key": "D",
+          "text": "2 phút"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide bốn lựa chọn mua: spot bị ngắt với thông báo ngắn (AWS: 2 phút), nên dùng cho huấn luyện có điểm lưu.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-029",
+      "type": "mcq",
+      "prompt": "Một dịch vụ phục vụ ổn định dự kiến chạy 18 tháng. Nên chọn hình thức mua nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Theo yêu cầu, huỷ lúc nào cũng được"
+        },
+        {
+          "key": "B",
+          "text": "Đặt chỗ GPU theo lịch cố định"
+        },
+        {
+          "key": "C",
+          "text": "Cân nhắc gói cam kết 1–3 năm"
+        },
+        {
+          "key": "D",
+          "text": "Spot vì rẻ hơn khoảng 60–70%"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Quy tắc: dưới 6 tháng dùng spot/theo yêu cầu; trên 12 tháng cân nhắc cam kết (1 năm 30–40%, 3 năm 50–60%).",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-030",
+      "type": "mcq",
+      "prompt": "Trong ví dụ giảm hoá đơn 50.000 → 12.000 USD, bước nào giảm nhiều nhất (−20 nghìn)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Right-sizing đúng cấu hình"
+        },
+        {
+          "key": "B",
+          "text": "Spot cho huấn luyện và lô"
+        },
+        {
+          "key": "C",
+          "text": "Tắt GPU ngoài giờ làm việc"
+        },
+        {
+          "key": "D",
+          "text": "Gói đặt trước cho phục vụ"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Biểu đồ: đúng cấu hình −20, spot −10, tắt ngoài giờ −6, đặt trước −2 → còn 12.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-031",
+      "type": "mcq",
+      "prompt": "Ở bước vận hành, lệnh Terraform nào dùng để phát hiện lệch (drift)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "terraform validate -json"
+        },
+        {
+          "key": "B",
+          "text": "terraform plan -refresh-only"
+        },
+        {
+          "key": "C",
+          "text": "terraform init -upgrade"
+        },
+        {
+          "key": "D",
+          "text": "terraform apply -auto-approve"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Vòng đời: init → plan -out=tfplan → apply tfplan → vận hành với plan -refresh-only.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-032",
+      "type": "mcq",
+      "prompt": "Trạng thái (state) của Terraform là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bản sao mã .tf đã được định dạng"
+        },
+        {
+          "key": "B",
+          "text": "Nhật ký các lệnh apply đã từng chạy"
+        },
+        {
+          "key": "C",
+          "text": "Ánh xạ khối trong mã với tài nguyên thật"
+        },
+        {
+          "key": "D",
+          "text": "Danh sách provider tải về khi init"
+        }
+      ],
+      "answer": "C",
+      "explanation": "State ánh xạ aws_instance.gpu trong mã với máy i-0abc… thật trên AWS.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-033",
+      "type": "mcq",
+      "prompt": "Từ Terraform 1.11, cách khoá state trên backend S3 được khuyến nghị là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bảng DynamoDB riêng, ghi khoá mỗi lần apply"
+        },
+        {
+          "key": "B",
+          "text": "encrypt = true, tự khoá state khi đang apply"
+        },
+        {
+          "key": "C",
+          "text": "Bật versioning để chặn hai người apply cùng lúc"
+        },
+        {
+          "key": "D",
+          "text": "use_lockfile = true, tạo tệp .tflock trong bucket"
+        }
+      ],
+      "answer": "D",
+      "explanation": "use_lockfile tạo .tflock trong bucket; khoá bằng DynamoDB bị đánh dấu lỗi thời từ 1.11; versioning để khôi phục.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-034",
+      "type": "mcq",
+      "prompt": "Lần apply đầu trên tài khoản AWS mới báo VcpuLimitExceeded khi tạo máy GPU. Nguyên nhân?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Hạn mức vCPU họ G, VT, P mới tạo bằng 0"
+        },
+        {
+          "key": "B",
+          "text": "Tài khoản mới chỉ được một máy GPU spot"
+        },
+        {
+          "key": "C",
+          "text": "Provider aws chưa hỗ trợ loại máy GPU"
+        },
+        {
+          "key": "D",
+          "text": "Thiếu use_lockfile nên apply bị chặn"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Tài khoản mới có hạn mức vCPU = 0 cho họ G, VT, P; xin tăng cần AWS duyệt, không để apply phụ thuộc bước này.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-035",
+      "type": "mcq",
+      "prompt": "Trong aws_eks_node_group GPU, taint nvidia.com/gpu với NO_SCHEDULE nhằm mục đích gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ngăn nhóm nút thu nhỏ về 0 nút"
+        },
+        {
+          "key": "B",
+          "text": "Giữ pod CPU khỏi nút GPU đắt tiền"
+        },
+        {
+          "key": "C",
+          "text": "Giữ pod GPU khỏi nút CPU giá rẻ"
+        },
+        {
+          "key": "D",
+          "text": "Buộc mọi pod GPU chạy trên spot"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide nhóm nút GPU: taint giữ pod CPU khỏi nút đắt; min_size = 0 thu về 0; max_size = 4 là trần chi phí.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-036",
+      "type": "mcq",
+      "prompt": "Trong Karpenter NodePool, limits nvidia.com/gpu: 8 có ý nghĩa gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Số GPU trên mỗi nút Karpenter tạo ra"
+        },
+        {
+          "key": "B",
+          "text": "Số pod GPU tối đa trên một nút"
+        },
+        {
+          "key": "C",
+          "text": "Trần số GPU của pool, tức trần chi phí"
+        },
+        {
+          "key": "D",
+          "text": "Số GPU tối thiểu luôn được giữ ấm"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Karpenter tạo nút rẻ nhất thoả pod chờ; limits là trần số GPU của pool.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-037",
+      "type": "mcq",
+      "prompt": "Infracost không hiện chênh lệch chi phí trong trường hợp nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Máy khai báo trực tiếp qua aws_instance"
+        },
+        {
+          "key": "B",
+          "text": "Máy nằm trong nhóm Auto Scaling"
+        },
+        {
+          "key": "C",
+          "text": "Máy thuộc một nhóm nút EKS"
+        },
+        {
+          "key": "D",
+          "text": "Máy chỉ khai báo qua aws_launch_template"
+        }
+      ],
+      "answer": "D",
+      "explanation": "aws_launch_template không có giá riêng; chi phí chỉ hiện khi khai báo qua aws_instance, ASG hoặc nhóm nút.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-038",
+      "type": "mcq",
+      "prompt": "Pipeline CI/CD cho Terraform nên lấy quyền trên AWS bằng cách nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Dùng OIDC để nhận quyền tạm thời"
+        },
+        {
+          "key": "B",
+          "text": "Lưu access key tĩnh trong kho mã"
+        },
+        {
+          "key": "C",
+          "text": "Dùng tài khoản root kèm MFA cố định"
+        },
+        {
+          "key": "D",
+          "text": "Cấp quyền *:* cho vai trò CI chung"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide CI/CD: dùng OIDC để CI nhận quyền tạm thời, không lưu khoá tĩnh trong kho mã.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-039",
+      "type": "mcq",
+      "prompt": "Công cụ IaC nào dùng HCL, giấy phép MPL 2.0, cùng hệ provider với Terraform và có mã hoá state?",
+      "options": [
+        {
+          "key": "A",
+          "text": "AWS CDK"
+        },
+        {
+          "key": "B",
+          "text": "OpenTofu"
+        },
+        {
+          "key": "C",
+          "text": "Pulumi"
+        },
+        {
+          "key": "D",
+          "text": "Crossplane"
+        }
+      ],
+      "answer": "B",
+      "explanation": "OpenTofu 1.13 (Linux Foundation, MPL 2.0) có mã hoá state và for_each cho provider.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-040",
+      "type": "mcq",
+      "prompt": "Một dự án IaC mới định dùng CDKTF. Theo bảng so sánh công cụ, nên xử lý thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không dùng, CDKTF chuyển sang giấy phép BSL"
+        },
+        {
+          "key": "B",
+          "text": "Không dùng, CDKTF đã ngừng và lưu trữ 12/2025"
+        },
+        {
+          "key": "C",
+          "text": "Dùng được, CDKTF là bản kế nhiệm của AWS CDK"
+        },
+        {
+          "key": "D",
+          "text": "Dùng được, CDKTF chỉ hỗ trợ riêng cho AWS"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bảng công cụ: CDKTF đã ngừng và lưu trữ 12/2025, không dùng cho dự án mới; mục “CDK” trong tài liệu cũ là AWS CDK.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-041",
+      "type": "mcq",
+      "prompt": "Trong Dockerfile multi-stage, vì sao đặt COPY mã ứng dụng sau bước cài thư viện?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Sửa mã không làm cài lại thư viện"
+        },
+        {
+          "key": "B",
+          "text": "Để image runtime có trình biên dịch"
+        },
+        {
+          "key": "C",
+          "text": "Để .dockerignore loại bỏ tập dữ liệu"
+        },
+        {
+          "key": "D",
+          "text": "Để gộp toàn bộ image thành một lớp"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Thứ tự lớp: thư viện trước, mã sau để tận dụng cache; image devel chỉ dùng để dựng.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-042",
+      "type": "mcq",
+      "prompt": "Thành phần nào của NVIDIA GPU Operator xuất chỉ số GPU cho Prometheus?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Device Plugin"
+        },
+        {
+          "key": "B",
+          "text": "GPU Feature Discovery"
+        },
+        {
+          "key": "C",
+          "text": "MIG Manager"
+        },
+        {
+          "key": "D",
+          "text": "DCGM Exporter"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Device Plugin khai báo nvidia.com/gpu; GFD gắn nhãn loại GPU; MIG Manager chia lát; DCGM Exporter xuất chỉ số.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-043",
+      "type": "mcq",
+      "prompt": "Cần chạy nhiều mô hình nhỏ của các người dùng khác nhau trên một H100, yêu cầu cách ly ổn định. Chọn gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "MPS"
+        },
+        {
+          "key": "B",
+          "text": "Cấp nguyên GPU cho mỗi pod"
+        },
+        {
+          "key": "C",
+          "text": "MIG"
+        },
+        {
+          "key": "D",
+          "text": "Time-slicing"
+        }
+      ],
+      "answer": "C",
+      "explanation": "MIG cắt GPU tối đa 7 lát phần cứng, mỗi lát có bộ nhớ và SM riêng; hỗ trợ A100, H100, H200, B200.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-044",
+      "type": "mcq",
+      "prompt": "Pod mới mất khoảng 4 phút mới nhận yêu cầu. Slide rút ra hệ quả thiết kế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Gộp trọng số vào image cho khởi động nhanh"
+        },
+        {
+          "key": "B",
+          "text": "Không scale-to-zero dịch vụ cần độ trễ thấp"
+        },
+        {
+          "key": "C",
+          "text": "Đặt ngưỡng tự mở rộng càng muộn càng tốt"
+        },
+        {
+          "key": "D",
+          "text": "Bỏ warm pool đi để tiết kiệm chi phí"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Tự mở rộng mất vài phút: đặt ngưỡng sớm, giữ dư công suất, không scale-to-zero cho dịch vụ nhạy độ trễ.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-045",
+      "type": "mcq",
+      "prompt": "Trong ví dụ thời gian pod sẵn sàng, đoạn nào chiếm lâu nhất?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Khởi tạo nút GPU (≈90 s)"
+        },
+        {
+          "key": "B",
+          "text": "Tải image về nút (≈60 s)"
+        },
+        {
+          "key": "C",
+          "text": "Nạp trọng số mô hình (≈50 s)"
+        },
+        {
+          "key": "D",
+          "text": "Biên dịch kernel (≈20 s)"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Ví dụ: lập lịch ≈20 s, nút ≈90 s, image ≈60 s, trọng số ≈50 s, biên dịch ≈20 s; rút nút bằng warm pool.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-046",
+      "type": "mcq",
+      "prompt": "Trên đường đi của yêu cầu suy luận, lớp nào đảm nhận mTLS giữa mọi cặp dịch vụ?",
+      "options": [
+        {
+          "key": "A",
+          "text": "API Gateway"
+        },
+        {
+          "key": "B",
+          "text": "Bộ cân bằng tải / Ingress (ALB)"
+        },
+        {
+          "key": "C",
+          "text": "Vector DB"
+        },
+        {
+          "key": "D",
+          "text": "Lưới dịch vụ (service mesh)"
+        }
+      ],
+      "answer": "D",
+      "explanation": "API Gateway lo giới hạn tần suất, hàng đợi, SSE; service mesh lo mTLS giữa các dịch vụ.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-047",
+      "type": "mcq",
+      "prompt": "NVLink 4 có 900 GB/s. Đổi sang đơn vị mạng (Gb/s) là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "3 200 Gb/s"
+        },
+        {
+          "key": "B",
+          "text": "1 800 Gb/s"
+        },
+        {
+          "key": "C",
+          "text": "7 200 Gb/s"
+        },
+        {
+          "key": "D",
+          "text": "900 Gb/s"
+        }
+      ],
+      "answer": "C",
+      "explanation": "NVLink tính GB/s, mạng tính Gb/s: 900 × 8 = 7 200 Gb/s.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-048",
+      "type": "mcq",
+      "prompt": "Chia mô hình theo tensor (tensor parallel) nên đặt ở đâu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Giữa nhiều máy p5 qua EFA"
+        },
+        {
+          "key": "B",
+          "text": "Trong một máy nối bằng NVLink"
+        },
+        {
+          "key": "C",
+          "text": "Giữa các máy qua InfiniBand"
+        },
+        {
+          "key": "D",
+          "text": "Giữa các máy qua Ethernet RDMA"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Băng thông NVLink gấp hàng chục lần mạng giữa máy, nên tensor parallel chỉ nên nằm trong một máy NVLink.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-049",
+      "type": "mcq",
+      "prompt": "Điểm lưu (checkpoint) cũ và tập dữ liệu ít dùng nên nằm ở tầng lưu trữ nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Mát: S3 Infrequent Access"
+        },
+        {
+          "key": "B",
+          "text": "Ấm: S3 Standard"
+        },
+        {
+          "key": "C",
+          "text": "Nóng: Redis, bộ nhớ GPU"
+        },
+        {
+          "key": "D",
+          "text": "Lạnh: Glacier Deep Archive"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Nóng: KV cache; ấm: trọng số đang phục vụ; mát: checkpoint cũ (0,0125 USD/GB/tháng); lạnh: dữ liệu tuân thủ.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-050",
+      "type": "mcq",
+      "prompt": "Nạp 140 GB trọng số qua mạng 10 Gb/s mất bao lâu (lý thuyết)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "45 giây"
+        },
+        {
+          "key": "B",
+          "text": "1 120 giây"
+        },
+        {
+          "key": "C",
+          "text": "112 giây"
+        },
+        {
+          "key": "D",
+          "text": "14 giây"
+        }
+      ],
+      "answer": "C",
+      "explanation": "140 GB × 8 = 1 120 Gb; chia 10 Gb/s = 112 giây (25 Gb/s: 45 s; NVMe 7 GB/s: 20 s).",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-051",
+      "type": "mcq",
+      "prompt": "Nguyên tắc thiết kế agent ở môi trường vận hành để mở rộng ngang là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Giữ trạng thái trong RAM pod cho nhanh hơn"
+        },
+        {
+          "key": "B",
+          "text": "Lưu trạng thái trong KV cache của GPU"
+        },
+        {
+          "key": "C",
+          "text": "Ghi trạng thái phiên vào log OpenTelemetry"
+        },
+        {
+          "key": "D",
+          "text": "Stateless, đẩy trạng thái sang Redis/Postgres"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide tám lớp: agent không lưu trạng thái; trạng thái chuyển sang Redis hoặc Postgres.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-052",
+      "type": "mcq",
+      "prompt": "Trong tám lớp hạ tầng agent, lớp “Bí mật” dùng công cụ nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Vault, Secrets Manager"
+        },
+        {
+          "key": "B",
+          "text": "OpenTelemetry, Jaeger"
+        },
+        {
+          "key": "C",
+          "text": "Redis Streams, Kafka"
+        },
+        {
+          "key": "D",
+          "text": "PostgreSQL, pgvector"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Lớp 8 Bí mật: Vault, Secrets Manager; lớp 7 Quan sát: OpenTelemetry, Jaeger; lớp 3 Hàng đợi: Redis Streams, Kafka.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-053",
+      "type": "mcq",
+      "prompt": "Giai đoạn decode bị giới hạn bởi gì và quyết định chỉ số nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Băng thông mạng, quyết định TTFT"
+        },
+        {
+          "key": "B",
+          "text": "Băng thông bộ nhớ, quyết định ITL"
+        },
+        {
+          "key": "C",
+          "text": "Tính toán, quyết định chỉ số TTFT"
+        },
+        {
+          "key": "D",
+          "text": "Tính toán, quyết định chỉ số ITL"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Prefill giới hạn tính toán → TTFT; decode đọc lại trọng số + KV mỗi token, giới hạn băng thông → ITL.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-054",
+      "type": "mcq",
+      "prompt": "Ý tưởng cốt lõi của PagedAttention là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Lưu prompt thành cây tiền tố radix tree"
+        },
+        {
+          "key": "B",
+          "text": "Đẩy KV cache sang L2 cache dùng chung"
+        },
+        {
+          "key": "C",
+          "text": "Cắt KV cache thành khối, cấp qua bảng khối"
+        },
+        {
+          "key": "D",
+          "text": "Nén KV cache xuống FP4 khi bộ nhớ đầy"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Giống bộ nhớ ảo hệ điều hành, gần như hết phân mảnh; thông lượng gấp 2–4 lần FasterTransformer, Orca.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-055",
+      "type": "mcq",
+      "prompt": "Khi đầy bộ nhớ, RadixAttention của SGLang loại bỏ gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Nút gốc chứa system prompt"
+        },
+        {
+          "key": "B",
+          "text": "Nhánh dài nhất trong cây"
+        },
+        {
+          "key": "C",
+          "text": "Yêu cầu đến sớm nhất hàng đợi"
+        },
+        {
+          "key": "D",
+          "text": "Nút lá ít dùng gần đây nhất"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide RadixAttention: yêu cầu mới tìm tiền tố dài nhất; khi đầy, nút lá ít dùng gần đây nhất bị loại.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-056",
+      "type": "mcq",
+      "prompt": "Agent nhiều lượt, các yêu cầu lặp lại cùng chỉ dẫn hệ thống. Engine nào hợp nhất?",
+      "options": [
+        {
+          "key": "A",
+          "text": "SGLang"
+        },
+        {
+          "key": "B",
+          "text": "Ollama"
+        },
+        {
+          "key": "C",
+          "text": "TGI"
+        },
+        {
+          "key": "D",
+          "text": "LMDeploy"
+        }
+      ],
+      "answer": "A",
+      "explanation": "SGLang mạnh khi nhiều yêu cầu chung tiền tố; Ollama cho máy cá nhân; TGI đang bảo trì; LMDeploy cho mô hình lượng tử hoá.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-057",
+      "type": "mcq",
+      "prompt": "99% yêu cầu dưới 4K token. Nên đặt --max-model-len của vLLM thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bằng 0,92 như giá trị mặc định"
+        },
+        {
+          "key": "B",
+          "text": "Theo độ dài thực tế của yêu cầu"
+        },
+        {
+          "key": "C",
+          "text": "Luôn đặt 128K cho chắc chắn"
+        },
+        {
+          "key": "D",
+          "text": "Bằng số GPU tensor parallel"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide khởi chạy vLLM: đặt theo độ dài thực tế; không đặt 128K khi 99% yêu cầu dưới 4K.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-058",
+      "type": "mcq",
+      "prompt": "Khi nào nên giảm --gpu-memory-utilization (mặc định 0,92) của vLLM?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Khi chạy tensor parallel trên 2 GPU"
+        },
+        {
+          "key": "B",
+          "text": "Khi --max-model-len vượt quá 8192"
+        },
+        {
+          "key": "C",
+          "text": "Khi hai tiến trình dùng chung một GPU"
+        },
+        {
+          "key": "D",
+          "text": "Khi cần thêm chỗ cho KV cache"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Tham số là tỉ lệ bộ nhớ một tiến trình dùng; tăng để có thêm KV, giảm khi chung GPU.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-059",
+      "type": "mcq",
+      "prompt": "Thị phần đám mây của AWS quý 2/2026 theo Synergy là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "20%"
+        },
+        {
+          "key": "B",
+          "text": "15%"
+        },
+        {
+          "key": "C",
+          "text": "37%"
+        },
+        {
+          "key": "D",
+          "text": "28%"
+        }
+      ],
+      "answer": "D",
+      "explanation": "AWS 28%, Microsoft 20%, Google 15%, khác 37%; doanh thu hạ tầng 143,4 tỉ USD, tăng 43%.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    },
+    {
+      "id": "T2D01-060",
+      "type": "mcq",
+      "prompt": "Xu hướng “nút thắt mới” của hạ tầng AI theo slide là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Băng thông HBM khan hiếm hơn điện"
+        },
+        {
+          "key": "B",
+          "text": "Giấy phép phần mềm IaC ngày càng đắt"
+        },
+        {
+          "key": "C",
+          "text": "Số lõi CUDA không theo kịp mô hình"
+        },
+        {
+          "key": "D",
+          "text": "Điện, đất, làm mát khan hiếm hơn chip"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Xu hướng 4: điện là nút thắt mới; dự án tính bằng gigawatt.",
+      "source": "onthi/Slide_Day_1_Cloud_Infra_01.pdf"
+    }
+  ]
+}

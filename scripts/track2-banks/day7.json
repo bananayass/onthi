@@ -1,0 +1,526 @@
+{
+  "mcq": [
+    [
+      "Kịch bản slide: thêm yêu cầu 'trả lời chi tiết hơn' làm token đầu ra tăng từ 200 lên 600. Chi phí đầu ra tăng khoảng bao nhiêu và vì sao?",
+      "Khoảng 200%, vì giá đầu ra tính theo token",
+      "Khoảng 50%, vì chỉ phần prompt đầu vào dài thêm",
+      "Không đổi, vì chi phí tính theo giờ GPU đã thuê",
+      "Khoảng 600%, vì mỗi token sinh ra đắt gấp đôi",
+      "600/200 = 3 lần, tức tăng khoảng 200%; giá đầu ra tính theo token (số liệu giả định của slide)."
+    ],
+    [
+      "Theo bảng MLOps và LLMOps, mô hình chi phí của hai bên khác nhau thế nào?",
+      "MLOps tính theo giờ GPU; LLMOps tính theo token mỗi tác vụ",
+      "MLOps tính theo token mỗi tác vụ; LLMOps tính theo giờ GPU",
+      "Cả hai đều tính theo số lần triển khai mô hình mỗi tháng",
+      "MLOps tính theo dung lượng dataset; LLMOps theo số người dùng",
+      "Slide 'MLOps và LLMOps': mô hình chi phí là giờ tính toán (GPU) so với token mỗi tác vụ."
+    ],
+    [
+      "Ngoài trọng số, dataset và mã nguồn, LLMOps cần phiên bản hoá thêm những gì?",
+      "Prompt, chỉ dẫn hệ thống, tham số và lược đồ đầu ra",
+      "Siêu tham số huấn luyện, seed và cấu hình GPU cluster",
+      "Chỉ số AUC-ROC, F1 và ma trận nhầm lẫn mỗi lần chạy",
+      "Bảng giá token, hạn mức API và hợp đồng nhà cung cấp",
+      "Bảng so sánh: LLMOps thêm prompt, chỉ dẫn hệ thống, tham số, lược đồ đầu ra vào phiên bản hoá."
+    ],
+    [
+      "Thách thức 'chất lượng chủ quan' của LLM dẫn tới yêu cầu gì trong đánh giá?",
+      "Thường không có ground truth, cần LLM-as-judge hoặc người chấm",
+      "Phải dùng accuracy và F1 vì đầu ra luôn tái lập được",
+      "Chỉ cần đo độ trễ p95 vì chất lượng không đo được",
+      "Phải huấn luyện lại mô hình mỗi khi điểm đánh giá giảm",
+      "Sáu thách thức: chất lượng chủ quan, thường không có đáp án chuẩn, cần LLM-as-judge hoặc người đánh giá."
+    ],
+    [
+      "Trong vòng lặp LLMOps sáu bước, bước nào khép vòng và đưa kinh nghiệm vận hành về lại đánh giá?",
+      "Thêm mẫu lỗi vào tập đánh giá",
+      "Triển khai thử tỉ lệ nhỏ (canary)",
+      "Soạn và phiên bản hoá prompt mới",
+      "Ghi vết và giám sát môi trường thật",
+      "Vòng lặp: soạn prompt → đánh giá ngoại tuyến → canary → ghi vết → đánh giá trực tuyến → thêm mẫu lỗi vào tập đánh giá."
+    ],
+    [
+      "Trên bản đồ stack LLMOps 2026, Llama Guard và Prompt Guard nằm ở lớp nào?",
+      "Lớp 5: Rào chắn an toàn",
+      "Lớp 4: Đánh giá mô hình",
+      "Lớp 3: Ghi vết và quan sát",
+      "Lớp 1: Chi phí và hạ tầng",
+      "Lớp 5 gồm Guardrails AI, NeMo Guardrails, Llama Guard, Prompt Guard."
+    ],
+    [
+      "Thương vụ nào khiến một công cụ chuyển sang chế độ bảo trì, theo slide thị trường hợp nhất?",
+      "Helicone về Mintlify, công bố 03/03/2026",
+      "Langfuse về ClickHouse, công bố 16/01/2026",
+      "W&B về CoreWeave, hoàn tất 05/05/2025",
+      "Promptfoo về OpenAI, công bố 09/03/2026",
+      "Helicone về Mintlify và chuyển sang chế độ bảo trì; Langfuse nêu không đổi giấy phép, Promptfoo nêu vẫn mã nguồn mở."
+    ],
+    [
+      "Hệ quả thiết kế mà slide rút ra từ làn sóng hợp nhất thị trường công cụ LLMOps là gì?",
+      "Giữ vết ở định dạng OpenTelemetry, prompt ở tệp văn bản",
+      "Chỉ chọn công cụ thương mại có hợp đồng hỗ trợ dài hạn",
+      "Tự viết toàn bộ công cụ ghi vết và đánh giá trong nhà",
+      "Gắn chặt ứng dụng vào SDK của một nhà cung cấp duy nhất",
+      "Giữ dữ liệu ở định dạng mở để đổi nhà cung cấp mà không viết lại ứng dụng."
+    ],
+    [
+      "Theo khảo sát State of Agent Engineering của LangChain, bao nhiêu % tổ chức có ghi vết chi tiết từng bước và tool call?",
+      "62%",
+      "89%",
+      "94%",
+      "85%",
+      "89% có một dạng quan sát; 62% có ghi vết chi tiết; trong nhóm đã chạy production là 94% và 71,5%."
+    ],
+    [
+      "Trong kiến trúc quan sát, số liệu tổng hợp như độ trễ p95 và cảnh báo được chuyển tới đâu?",
+      "Prometheus và Grafana",
+      "LangSmith và tập đánh giá",
+      "Kho prompt và webhook Git",
+      "RAGAS và mô hình chấm",
+      "Bộ thu chuyển cây vết, chi phí tới LangSmith; số liệu tổng hợp (p95, cảnh báo) tới Prometheus và Grafana."
+    ],
+    [
+      "Bật ghi vết LangSmith theo tài liệu hiện hành dùng biến môi trường nào?",
+      "LANGSMITH_TRACING=true",
+      "LANGCHAIN_HUB_ENABLE=true",
+      "OTEL_GENAI_TRACING=true",
+      "WEAVE_AUTO_TRACE=true",
+      "Tài liệu dùng LANGSMITH_*; SDK vẫn nhận LANGCHAIN_TRACING_V2 như biến cũ."
+    ],
+    [
+      "Trong mã mẫu LangSmith, bọc client bằng wrap_openai() có tác dụng gì?",
+      "Mỗi lời gọi LLM trở thành một child run trong vết",
+      "Mỗi lời gọi LLM tự động được chấm bằng RAGAS",
+      "Mỗi prompt được đẩy lên kho với nhãn staging",
+      "Mỗi phản hồi được lọc PII trước khi trả về",
+      "Chú thích trong mã: client = wrap_openai(openai.Client()) # each LLM call -> child run."
+    ],
+    [
+      "Vết minh hoạ: run gốc 1,54 s, retriever 120 ms, format_prompt 5 ms, lời gọi mô hình 1,41 s. Kết luận và cách giảm?",
+      "Nghẽn ở mô hình (~92%); rút ngắn đầu ra hoặc streaming",
+      "Nghẽn ở retriever (~8%); thêm chỉ mục cho vector store",
+      "Nghẽn ở format_prompt; gộp mẫu prompt vào một bước",
+      "Nghẽn ở run gốc; tách pipeline thành nhiều dịch vụ",
+      "1,41/1,54 ≈ 92%; slide gợi ý rút ngắn đầu ra hoặc phát dòng (streaming)."
+    ],
+    [
+      "Theo quy ước OpenTelemetry GenAI, một span lời gọi mô hình được đặt tên thế nào?",
+      "{operation} {model}, ví dụ chat gpt-4o-mini",
+      "{model}.{provider}, ví dụ gpt-4o-mini.openai",
+      "{service}/{route}, ví dụ rag/answer-question",
+      "{run_type}:{name}, ví dụ chain:rag_pipeline",
+      "Mỗi lời gọi mô hình là một span tên theo {operation} {model}."
+    ],
+    [
+      "Trạng thái hiện tại của quy ước GenAI trong OpenTelemetry theo slide là gì?",
+      "Mức Development; gen_ai.system được thay bằng gen_ai.provider.name",
+      "Mức Stable; gen_ai.provider.name được thay bằng gen_ai.system",
+      "Đã bị loại bỏ; thay bằng định dạng vết riêng của LangSmith",
+      "Mức Stable; chỉ còn thuộc tính token, bỏ hết tên nhà cung cấp",
+      "Quy ước GenAI vẫn ở mức Development, chưa ổn định; tên cũ gen_ai.system thay bằng gen_ai.provider.name."
+    ],
+    [
+      "Điểm khác chính giữa đánh giá trực tuyến (online) và ngoại tuyến (offline) là gì?",
+      "Online lấy mẫu lưu lượng thật, không cần đáp án chuẩn",
+      "Online chạy trước triển khai trên tập có đáp án chuẩn",
+      "Online chỉ dùng kiểm tra xác định, không dùng mô hình",
+      "Online chạy một lần mỗi quý để so sánh các phiên bản",
+      "Offline: trước triển khai, có đáp án chuẩn, regression test. Online: lưu lượng thật, lấy mẫu (ví dụ 10%), không cần đáp án chuẩn."
+    ],
+    [
+      "Trong luồng 'từ vết sản xuất đến kiểm thử chống suy giảm', bước cuối là gì?",
+      "Chặn thay đổi nếu điểm giảm so với mốc nền",
+      "Xoá các vết đã gán nhãn để tiết kiệm lưu trữ",
+      "Tự động đẩy prompt mới lên nhãn production",
+      "Gửi toàn bộ vết lỗi cho nhà cung cấp mô hình",
+      "Vết → gán nhãn → thêm vào dataset → chạy lại khi đổi prompt/mô hình → chặn nếu điểm giảm so với mốc nền."
+    ],
+    [
+      "Bài học slide rút ra từ sự cố chỉnh sửa trái phép chỉ dẫn hệ thống của Grok (xAI, 14/05/2025)?",
+      "Prompt cần pull request và dấu vết kiểm toán",
+      "Prompt cần mã hoá để người ngoài không đọc được",
+      "Prompt cần ghim mã mô hình có ngày phát hành",
+      "Prompt cần chạy canary 5% trước khi mở rộng",
+      "xAI cho biết quy trình rà soát bị vượt qua; bài học: yêu cầu hợp nhất (pull request) và dấu vết kiểm toán."
+    ],
+    [
+      "Sự cố GPT-4o xu nịnh (25–29/04/2025) cho bài học gì về đánh giá?",
+      "Suy giảm có thể xảy ra dù prompt không đổi; đánh giá chỉ bắt điều nó đo",
+      "Thử nghiệm A/B đã phát hiện lỗi nhưng đội ngũ bỏ qua kết quả cảnh báo",
+      "Nguyên nhân là một dòng prompt bị sửa mà không qua pull request rà soát",
+      "Đánh giá ngoại tuyến cho điểm thấp nhưng vẫn bị ép phát hành đúng hạn",
+      "Tín hiệu thưởng mới từ nút thích làm yếu tín hiệu chính; offline eval và A/B đều tốt."
+    ],
+    [
+      "Vì sao slide khuyên ghim mã mô hình có ngày phát hành, ví dụ gpt-4o-mini-2024-07-18?",
+      "Tên không kèm ngày có thể trỏ tới bản mới, hành vi đổi dù prompt giữ nguyên",
+      "Mã có ngày phát hành luôn rẻ hơn tên mô hình chung trên bảng giá token",
+      "Chỉ mã có ngày mới gửi được thuộc tính gen_ai.usage qua OpenTelemetry",
+      "Tên không kèm ngày bị nhà cung cấp chặn ở môi trường vận hành production",
+      "Phiên bản là tổ hợp; tên mô hình không kèm ngày có thể trỏ tới bản mới hơn."
+    ],
+    [
+      "Nguyên tắc 'bản ghi bất biến, nhãn di động' nghĩa là gì?",
+      "Mỗi lần lưu tạo bản ghi mới; nhãn là con trỏ có thể chuyển",
+      "Mỗi lần lưu ghi đè bản cũ; nhãn cố định vào một bản ghi",
+      "Bản ghi có thể sửa trong 24 giờ; sau đó nhãn bị khoá lại",
+      "Nhãn tạo bản ghi mới; bản ghi là con trỏ chỉ tới nhãn",
+      "Mỗi lần lưu tạo một bản ghi mới, không sửa bản ghi cũ; staging/production là con trỏ di động."
+    ],
+    [
+      "Công cụ nào dùng bí danh (alias) dạng @production làm con trỏ di động cho prompt?",
+      "MLflow 3",
+      "LangSmith",
+      "Langfuse",
+      "Promptfoo",
+      "LangSmith dùng tag (staging, production); Langfuse dùng label (production, latest dành riêng); MLflow 3 dùng alias @production."
+    ],
+    [
+      "Lệnh nào kéo prompt đúng phiên bản đang gắn nhãn production trong LangSmith SDK?",
+      "c.pull_prompt(\"support-bot:production\")",
+      "c.push_prompt(\"support-bot\", commit_tags=[\"production\"])",
+      "hub.pull(\"support-bot\", tag=\"latest\")",
+      "c.get_prompt(\"support-bot\").latest()",
+      "Kéo theo tag hoặc mã băm: pull_prompt(\"support-bot:production\") hoặc \"support-bot:12344e88\"."
+    ],
+    [
+      "Trạng thái của langchain.hub theo slide là gì?",
+      "Ngừng dùng từ langchain 1.0.6, gỡ ở 2.0.0; dùng langsmith",
+      "Vẫn khuyến nghị dùng; langsmith chỉ dành cho bản trả phí",
+      "Đã gỡ từ 1.0.6; thay bằng thư viện Langfuse mã nguồn mở",
+      "Ngừng dùng từ 2.0.0; chỉ còn hỗ trợ đọc, không cho đẩy lên",
+      "langchain.hub bị đánh dấu ngừng dùng từ 1.0.6, gỡ ở 2.0.0; dùng langsmith.Client."
+    ],
+    [
+      "Webhook của kho prompt LangSmith kích hoạt khi nào và dùng để làm gì?",
+      "Khi có bản ghi mới; nối với CI hoặc đồng bộ sang Git",
+      "Khi điểm RAGAS giảm; tự động khôi phục nhãn production",
+      "Khi chi phí vượt ngưỡng; gửi cảnh báo Slack cho trực ca",
+      "Khi vết bị lỗi; đẩy vết đó vào tập dữ liệu đánh giá",
+      "Webhook kích hoạt mỗi khi có bản ghi mới; sơ đồ đồng bộ: máy chủ trung gian ghi tệp vào GitHub."
+    ],
+    [
+      "Nhóm có nhiều người không lập trình cần sửa prompt qua giao diện rà soát. Slide gợi ý chọn gì và cần lưu ý gì?",
+      "Kho prompt; nó là phụ thuộc lúc chạy nên cần cache phía máy khách",
+      "Git monorepo; vì CI chặt chẽ giúp người không lập trình sửa dễ hơn",
+      "Kho prompt; nó không phụ thuộc mạng nên không cần bộ nhớ đệm",
+      "Tệp YAML; vì diff trên GitHub dễ đọc nhất cho người không lập trình",
+      "Kho prompt hợp nhóm lớn, người không lập trình; là phụ thuộc lúc chạy, cần cache phía client (Langfuse đã có)."
+    ],
+    [
+      "Bộ định tuyến A/B dùng hash(user_id) mod 100, nhánh < 50 sang v1. Vì sao băm theo người dùng thay vì theo yêu cầu?",
+      "Mỗi người luôn gặp một phiên bản suốt hội thoại",
+      "Băm theo yêu cầu không chia được đúng tỉ lệ 50/50",
+      "Băm theo người dùng giúp giảm chi phí token đầu ra",
+      "Băm theo yêu cầu làm lộ user_id vào trong vết",
+      "Slide A/B: băm theo người dùng, mỗi người luôn gặp một phiên bản trong suốt hội thoại."
+    ],
+    [
+      "Cổng phát hành prompt mô tả canary thế nào và khôi phục ra sao?",
+      "5% lưu lượng trước rồi 100%; khôi phục bằng đưa nhãn về bản trước",
+      "50% lưu lượng trước rồi 100%; khôi phục bằng phát hành lại ứng dụng",
+      "1% lưu lượng trong một tuần; khôi phục bằng huấn luyện lại mô hình",
+      "100% lưu lượng ngay; khôi phục bằng xoá bản ghi mới khỏi kho prompt",
+      "Canary 5% trước khi mở rộng 100%; khôi phục chỉ cần đưa nhãn về bản ghi trước, không phát hành lại ứng dụng."
+    ],
+    [
+      "Lỗi 'bộ truy xuất sai' trong RAG được bắt bằng chỉ số nào thay vì accuracy cuối?",
+      "context_recall và context_precision",
+      "faithfulness và response relevancy",
+      "noise sensitivity và tỉ lệ ảo giác",
+      "kiểm tra JSON và đối chiếu lược đồ",
+      "Accuracy cuối không cho biết lỗi ở retrieval hay ở sinh; dùng context_recall, context_precision."
+    ],
+    [
+      "Trong ba tầng đánh giá, tầng nào rẻ nhất và chạy ở mọi lần?",
+      "Kiểm tra xác định: JSON hợp lệ, độ dài, regex, lược đồ",
+      "LLM-as-judge và RAGAS chạy hàng loạt theo từng ngày",
+      "Người đánh giá chấm mẫu nhỏ đều đặn mỗi tuần một lần",
+      "Thử nghiệm A/B trên lưu lượng thật của toàn hệ thống",
+      "Tầng thấp chi phí gần 0, chạy mọi lần; judge hằng ngày; người hằng tuần, đắt nhất."
+    ],
+    [
+      "Câu trả lời có 8 khẳng định, 6 khẳng định được ngữ cảnh hỗ trợ. Faithfulness bằng bao nhiêu?",
+      "0,75",
+      "0,60",
+      "0,80",
+      "1,33",
+      "Faithfulness = số khẳng định được ngữ cảnh hỗ trợ / tổng khẳng định = 6/8 = 0,75."
+    ],
+    [
+      "RAGAS tính response relevancy như thế nào?",
+      "Trung bình cosine giữa câu hỏi và các câu hỏi sinh ngược từ câu trả lời",
+      "Số khẳng định của câu trả lời được ngữ cảnh hỗ trợ chia tổng khẳng định",
+      "Trung bình Precision@k của các đoạn truy xuất, có trọng số độ liên quan",
+      "Tỉ lệ khẳng định sai do đoạn nhiễu chia cho tổng khẳng định câu trả lời",
+      "Response relevancy: trung bình độ tương đồng cosine với các câu hỏi do mô hình sinh ngược (mặc định 3)."
+    ],
+    [
+      "Chỉ số RAGAS nào KHÔNG cần đáp án chuẩn (reference)?",
+      "Faithfulness",
+      "context_recall",
+      "context_precision",
+      "Noise sensitivity",
+      "Bảng chỉ số: Faithfulness và Response relevancy không cần đáp án chuẩn; ba chỉ số còn lại cần."
+    ],
+    [
+      "Ngưỡng faithfulness 0,8 nên được hiểu thế nào theo slide?",
+      "Chỉ là quy ước kinh nghiệm; so chênh lệch trên cùng cấu hình chấm",
+      "Là chuẩn bắt buộc do tài liệu RAGAS công bố cho mọi hệ thống RAG",
+      "Là mức tối thiểu OWASP yêu cầu để qua mục thông tin sai lệch",
+      "Là điểm cố định không phụ thuộc mô hình chấm hay prompt chấm",
+      "Ngưỡng như 0,8 không có trong tài liệu; điểm phụ thuộc mô hình chấm và prompt chấm."
+    ],
+    [
+      "Với RAGAS 0.4.3, phát biểu nào đúng về API?",
+      "evaluate() hiện không nhận chỉ số của ragas.metrics.collections",
+      "ragas.metrics đã bị gỡ hẳn, import sẽ báo lỗi ngay lập tức",
+      "langchain-community 0.4.2 là bản bắt buộc để import ragas chạy",
+      "Mã mới gọi metric.score() đồng bộ thay vì phương thức ascore",
+      "ragas.metrics vẫn chạy kèm deprecation warning (gỡ ở v1.0); collections dùng await metric.ascore(); phải ghim langchain-community<0.4."
+    ],
+    [
+      "Theo MT-bench (Zheng và cs., 2023), mức đồng thuận của GPT-4 với chuyên gia so với giữa người với người?",
+      "85% so với 81%",
+      "81% so với 85%",
+      "65% so với 85%",
+      "92% so với 70%",
+      "GPT-4 đồng thuận với chuyên gia 85%, so với 81% giữa người với người (bỏ cặp hoà)."
+    ],
+    [
+      "Thiên lệch vị trí của mô hình chấm được giảm bằng cách nào?",
+      "Chấm hai lần theo hai thứ tự, chỉ tính thắng khi thắng cả hai",
+      "Chọn câu trả lời ngắn hơn khi hai câu có điểm gần bằng nhau",
+      "Dùng mô hình chấm cùng họ với mô hình đang được đánh giá",
+      "Tăng temperature của judge để kết quả chấm đa dạng hơn",
+      "GPT-4 chỉ nhất quán ở 65% cặp đảo thứ tự; cách giảm: chấm hai thứ tự, thắng cả hai mới tính."
+    ],
+    [
+      "Mô hình chấm cho điểm cao đầu ra của chính nó. Slide đề xuất cách giảm nào?",
+      "Dùng mô hình chấm khác họ với mô hình được chấm",
+      "Ghi rõ trong rubric rằng độ dài không cộng điểm",
+      "Cho judge xem đáp án tham chiếu trước khi chấm",
+      "Đổi thứ tự hai câu trả lời rồi chấm lại lần nữa",
+      "Thiên lệch tự ưu ái: dùng mô hình chấm khác họ với mô hình được chấm."
+    ],
+    [
+      "Hệ số Cohen κ giữa judge và người đạt 0,72. Theo quy ước Landis và Koch, đọc thế nào?",
+      "Đồng thuận đáng kể, nhưng chỉ là quy ước tham khảo",
+      "Đồng thuận gần hoàn hảo, đủ để bỏ người đánh giá",
+      "Đồng thuận yếu, bắt buộc phải đổi mô hình chấm",
+      "Đồng thuận ngẫu nhiên, judge không có giá trị",
+      "κ 0,61–0,80 thường gọi là đồng thuận đáng kể; là quy ước, không có chứng cứ thực nghiệm, phụ thuộc tỉ lệ nhãn."
+    ],
+    [
+      "Trong vòng đánh giá kết hợp, nhịp của từng hoạt động được slide đề xuất thế nào?",
+      "Judge hằng ngày, người hằng tuần 100–200 mẫu, hiệu chỉnh κ hằng tháng",
+      "Judge hằng tuần, người hằng ngày 1.000 mẫu, hiệu chỉnh κ hằng quý",
+      "Judge hằng tháng, người hằng ngày 50 mẫu, hiệu chỉnh κ hằng tuần",
+      "Judge mỗi commit, người hằng năm 10 mẫu, hiệu chỉnh κ mỗi ngày",
+      "Vòng: LLM-as-judge hằng ngày, người hằng tuần lấy 100–200 đầu ra, hiệu chỉnh hằng tháng đo κ."
+    ],
+    [
+      "Từ mốc accuracy 70%, muốn phát hiện cải thiện 10 điểm (α = 0,05, lực 80%) cần khoảng bao nhiêu mẫu mỗi phiên bản?",
+      "290",
+      "59",
+      "1.247",
+      "50",
+      "Slide cỡ mẫu: 5 điểm ~1.250 (1.247), 10 điểm 290, 20 điểm 59."
+    ],
+    [
+      "Tập 50 mẫu của lab dùng để so hai prompt nên được hiểu thế nào?",
+      "Chỉ đủ cho chênh lệch cỡ 20 điểm; để kiểm tra nhanh",
+      "Đủ để kết luận mọi chênh lệch từ 5 điểm trở lên",
+      "Đủ nếu dùng LLM-as-judge thay cho người chấm",
+      "Không dùng được vì RAGAS cần tối thiểu 1.000 mẫu",
+      "Tập 50 mẫu chỉ đủ cho chênh lệch cỡ 20 điểm: kiểm tra nhanh, chưa đủ kết luận."
+    ],
+    [
+      "Test CI có TOLERANCE = 0.02. Mốc nền trung bình 0,85. Ứng viên nào bị chặn?",
+      "Ứng viên trung bình 0,82",
+      "Ứng viên trung bình 0,84",
+      "Ứng viên trung bình 0,83",
+      "Ứng viên trung bình 0,86",
+      "Điều kiện: mean(candidate) ≥ mean(baseline) − 0,02 = 0,83; chỉ 0,82 không đạt."
+    ],
+    [
+      "Bảng Vectara Hallucination Leaderboard đo gì và slide rút ra kết luận gì?",
+      "Tỉ lệ ảo giác khi tóm tắt (HHEM-2.3); cần đo trên dữ liệu của chính hệ thống",
+      "Faithfulness RAGAS của GPT, Claude, Gemini; chọn mô hình lớn nhất là an toàn",
+      "Tỉ lệ ảo giác khi tóm tắt (HHEM-2.3); mô hình lớn hơn luôn ít ảo giác hơn",
+      "Độ đồng thuận judge với người; chọn judge đứng đầu bảng cho mọi hệ thống",
+      "Chỉ số chấm bằng HHEM-2.3, không phải faithfulness RAGAS; mô hình nhỏ đứng đầu; đo trên dữ liệu của mình."
+    ],
+    [
+      "Trong W&B Weave, hàm scorer có ràng buộc bắt buộc nào?",
+      "Phải có đối số tên output",
+      "Phải trả về số thực từ 0 đến 1",
+      "Phải gắn @traceable của LangSmith",
+      "Phải gọi một LLM để chấm điểm",
+      "Slide Weave: hàm chấm điểm (scorer) bắt buộc có đối số tên output."
+    ],
+    [
+      "Nhóm muốn kiểm thử LLM theo kiểu pytest với assert_test và ngưỡng. Công cụ nào khớp nhất theo bảng?",
+      "DeepEval",
+      "Inspect AI",
+      "OpenAI Evals",
+      "RAGAS",
+      "Bảng chọn công cụ: DeepEval (Apache-2.0) kiểm thử kiểu pytest với assert_test và ngưỡng."
+    ],
+    [
+      "Công cụ nào được mô tả là khung của UK AI Security Institute với hơn 200 bộ đánh giá dựng sẵn?",
+      "Inspect AI",
+      "Promptfoo",
+      "W&B Weave",
+      "DeepEval",
+      "Inspect AI (MIT): khung của UK AI Security Institute, hơn 200 bộ đánh giá dựng sẵn."
+    ],
+    [
+      "Vụ Moffatt kiện Air Canada (2024) thuộc mục nào của OWASP LLM Top 10 2025?",
+      "LLM09: Thông tin sai lệch",
+      "LLM01: Chèn lệnh (prompt injection)",
+      "LLM06: Quyền hạn quá mức",
+      "LLM07: Lộ chỉ dẫn hệ thống",
+      "Slide: đây là lỗi thông tin sai lệch (OWASP LLM09), không phải tấn công; doanh nghiệp sở hữu đầu ra."
+    ],
+    [
+      "Kiểm soát theo cấu trúc trong mô hình phòng thủ nhiều lớp gồm những gì?",
+      "Quyền tối thiểu, người phê duyệt hành động có tác dụng phụ, không kênh gửi ra sau khi đọc nội dung không tin cậy",
+      "Regex lọc PII, bộ phân loại độc hại ở đầu vào, kiểm tra lược đồ JSON ở đầu ra và cảnh báo tỉ lệ chặn",
+      "Ghim mã mô hình có ngày, gắn prompt_version vào vết, triển khai canary 5% rồi mở rộng lên 100%",
+      "Mã hoá toàn bộ vết, xoay vòng khoá API hằng tuần, chặn mọi truy cập từ ngoài mạng nội bộ công ty",
+      "Dải trên cùng của sơ đồ phòng thủ nhiều lớp: quyền tối thiểu · người phê duyệt · không kênh gửi ra ngoài."
+    ],
+    [
+      "Trong NeMo Guardrails, loại rào chắn nào kiểm soát lời gọi công cụ?",
+      "execution rails",
+      "retrieval rails",
+      "dialog rails",
+      "output rails",
+      "retrieval rails lọc đoạn truy xuất; execution rails kiểm soát lời gọi công cụ; dialog rails điều hướng hội thoại."
+    ],
+    [
+      "Thay đổi API của Guardrails AI 0.11.0 theo slide là gì?",
+      "use() nhận đối tượng validator; on_fail đặt ở validator",
+      "use() nhận tên chuỗi validator; on_fail đặt ở Guard",
+      "use_many() thay use(); on_fail đặt trong prompt hệ thống",
+      "guard(llm_api=...) là cách duy nhất còn trong tài liệu",
+      "use() nhận instance validator, on_fail đặt ở validator; không có use_many; guard(llm_api=...) không còn trong tài liệu."
+    ],
+    [
+      "Đội đang ở giai đoạn đo tỉ lệ vi phạm, chưa muốn chặn người dùng. Nên chọn on_fail nào?",
+      "noop: giữ nguyên đầu ra, ghi thất bại vào nhật ký",
+      "refrain: không trả đầu ra nào, trả về giá trị None",
+      "exception: ném ValidationError và dừng toàn bộ luồng",
+      "filter: trả đầu ra rỗng, chỉ lọc bỏ trường bị lỗi",
+      "Bảng on_fail: noop giữ nguyên đầu ra, ghi nhật ký; dùng ở giai đoạn đo, chưa chặn."
+    ],
+    [
+      "Chèn lệnh gián tiếp (indirect prompt injection) khác trực tiếp ở điểm nào?",
+      "Lệnh độc hại nằm trong email, web hoặc tệp mà hệ thống đọc",
+      "Lệnh độc hại do chính người dùng gõ vào ô chat để đổi hành vi",
+      "Lệnh độc hại được cài vào trọng số khi tinh chỉnh mô hình",
+      "Lệnh độc hại nằm trong chỉ dẫn hệ thống do nhà phát triển viết",
+      "Trực tiếp: người dùng viết lệnh; gián tiếp: văn bản độc hại trong email, trang web, tệp hệ thống đọc."
+    ],
+    [
+      "Ba điều kiện của 'lethal trifecta' gây rò rỉ dữ liệu là gì?",
+      "Dữ liệu riêng tư, nội dung không tin cậy, kênh gửi ra ngoài",
+      "Prompt dài, mô hình lớn, không có bộ lọc ở đầu vào hệ thống",
+      "Thiếu vết, thiếu phiên bản prompt, thiếu cổng đánh giá CI",
+      "Quyền quản trị, mật khẩu yếu, máy chủ mở cổng ra Internet",
+      "Lethal trifecta (Simon Willison, 16/06/2025): cách chắc chắn là loại bỏ ít nhất một vòng bằng thiết kế."
+    ],
+    [
+      "Trên AgentDojo (Meta tự đo), kết hợp Prompt Guard 2 và AlignmentCheck đưa tỉ lệ tấn công thành công về bao nhiêu?",
+      "Từ 17,6% xuống 1,75%",
+      "Từ 17,6% xuống 0%",
+      "Từ 47,7% xuống 42,7%",
+      "Từ 7,5% xuống 2,9%",
+      "Không phòng thủ 17,6; Prompt Guard 2: 7,5; AlignmentCheck: 2,9; kết hợp: 1,75. Tiện ích giảm 47,7% → 42,7%."
+    ],
+    [
+      "CaMeL được slide nêu như ví dụ về điều gì?",
+      "Tách luồng điều khiển khỏi dữ liệu không tin cậy, giải 77% nhiệm vụ",
+      "Bộ phân loại chèn lệnh 22M tham số chạy 19,3 ms trên GPU A100",
+      "Bộ đánh giá ảo giác HHEM-2.3 dùng cho bảng xếp hạng công khai",
+      "Khung rào chắn năm loại viết bằng ngôn ngữ Colang của NVIDIA",
+      "CaMeL: bảo đảm có thể chứng minh, giải 77% nhiệm vụ so với 84% khi không phòng thủ."
+    ],
+    [
+      "Bài học chính từ EchoLeak (CVE-2025-32711) trong Microsoft 365 Copilot là gì?",
+      "Bộ phân loại không thay được thiết kế kiến trúc",
+      "Chatbot là chủ thể pháp lý riêng khỏi doanh nghiệp",
+      "Chỉ cần thêm chính sách CSP là chặn được rò rỉ",
+      "Lỗi chỉ xảy ra khi người dùng bấm vào liên kết lạ",
+      "EchoLeak không cần thao tác người dùng, vượt XPIA, che liên kết và CSP; bài học: bộ phân loại không thay thiết kế."
+    ],
+    [
+      "Để phát hiện số căn cước 12 chữ số và số thẻ, phương pháp nào được slide đánh giá chính xác, nhanh?",
+      "Regex kèm kiểm tra tổng kiểm (checksum)",
+      "Nhận dạng thực thể (NER) theo ngôn ngữ",
+      "LLM-as-judge chấm từng câu trả lời",
+      "Llama Guard 4 với 14 nhóm S1 đến S14",
+      "Regex và checksum hợp mã có cấu trúc; NER bắt tên, địa chỉ tự do nhưng nhiễu hơn; Presidio kết hợp cả hai."
+    ],
+    [
+      "Với SLO 99,9%, SRE Workbook gợi ý gọi trực khi tốc độ đốt ngân sách lỗi ở mức nào?",
+      "14,4 lần trong 1 giờ (cửa sổ ngắn 5 phút)",
+      "1 lần trong 3 ngày (cửa sổ ngắn 6 giờ)",
+      "2 lần trong 1 giờ (cửa sổ ngắn 1 phút)",
+      "6 lần trong 30 ngày (cửa sổ ngắn 1 ngày)",
+      "Gọi trực: 14,4× trong 1 giờ (cửa sổ 5 phút); 6× trong 6 giờ; 1× trong 3 ngày thì mở phiếu."
+    ],
+    [
+      "Lỗi thường gặp trong lab: gói miễn phí LangSmith giữ vết cơ bản bao lâu và cần làm gì?",
+      "14 ngày; xuất bằng chứng trước khi hết hạn",
+      "30 ngày; tự động lưu vĩnh viễn khi nộp bài",
+      "7 ngày; phải nâng cấp gói trả phí để nộp",
+      "90 ngày; không cần thao tác gì thêm",
+      "Checklist lab: gói miễn phí giữ vết cơ bản 14 ngày, xuất bằng chứng trước hạn."
+    ]
+  ],
+  "essay": [
+    [
+      "Tình huống mở đầu bài: một nhóm sửa một dòng system prompt để trả lời chi tiết hơn, sau đó độ trễ và chi phí cùng tăng nhưng không truy được nguyên nhân. Hãy thiết kế những gì hệ thống cần ghi lại và quy trình để lần sau truy ngược được, khôi phục nhanh.",
+      "Ý chấm: (1) Phiên bản hoá prompt như mã: mỗi thay đổi là bản ghi bất biến có commit message, người thực hiện; phiên bản phủ cả tổ hợp (mẫu prompt, mã mô hình có ngày, temperature/max tokens, schema, tool/few-shot). (2) Ghi vết mọi lời gọi LLM bằng OpenTelemetry/LangSmith: token vào/ra (gen_ai.usage.*), độ trễ, chi phí, gắn prompt_version và mã mô hình vào mọi vết. (3) Dashboard p50/p95, chi phí/ngày, token/ngày, lỗi theo loại, đánh dấu thời điểm đổi phiên bản. (4) Khôi phục bằng chuyển nhãn production về bản ghi cũ, không phát hành lại ứng dụng. (5) Cổng CI + canary 5% với điều kiện dừng (tỉ lệ lỗi, điểm online, chi phí mỗi yêu cầu). (6) Giải thích cơ chế: 200→600 token đầu ra, sinh tuần tự nên độ trễ ~3×, chi phí ~+200%."
+    ],
+    [
+      "Thiết kế quy trình phát hành một thay đổi prompt từ pull request đến 100% lưu lượng cho chatbot hỗ trợ khách hàng, bao gồm cổng chất lượng, triển khai dần và khôi phục.",
+      "Ý chấm: (1) Prompt lưu dạng tệp YAML trong Git hoặc kho prompt; mọi thay đổi qua pull request, diff rà soát; webhook đồng bộ kho prompt sang Git/CI. (2) CI chạy bộ đánh giá: kiểm tra xác định trước (JSON, lược đồ, độ dài), LLM-as-judge/RAGAS sau; so với mốc nền có tolerance (ví dụ 0,02), không đạt thì chặn. (3) Đạt thì đẩy với nhãn staging. (4) Canary 5% rồi 100%; điều kiện dừng đặt trước: tỉ lệ lỗi, điểm đánh giá trực tuyến, chi phí mỗi yêu cầu. (5) Giám sát bằng vết gắn prompt_version, dashboard. (6) Khôi phục: chuyển nhãn về bản ghi trước. (7) Production ghim nhãn hoặc mã băm, không kéo bản mới nhất; ghim mã mô hình có ngày."
+    ],
+    [
+      "Nhóm chạy A/B hai prompt trên 50 câu hỏi của lab: v1 đạt 70%, v2 đạt 75%. Trưởng nhóm muốn kết luận v2 tốt hơn. Phân tích kết luận này và đề xuất cách thiết kế thử nghiệm đủ tin cậy.",
+      "Ý chấm: (1) Chênh lệch 5 điểm từ mốc 70% cần khoảng 1.250 mẫu mỗi phiên bản (α=0,05, lực 80%, hai tỉ lệ độc lập: n = (zα/2+zβ)²[p1q1+p2q2]/(p1−p2)²); 50 mẫu chỉ đủ phát hiện chênh cỡ 20 điểm (59 mẫu) → chưa đủ kết luận. (2) Dùng thiết kế ghép cặp (cùng câu hỏi cho hai prompt, McNemar) giảm còn khoảng 312–940 mẫu. (3) Định tuyến hash(user_id) để mỗi người gặp một phiên bản; gắn prompt_version vào mọi vết. (4) So nhiều chiều: faithfulness, độ trễ, chi phí, độ dài. (5) Chấm trên cùng cấu hình judge; báo cáo cỡ mẫu và giới hạn kết luận; 100 truy vấn chỉ là mức khởi động."
+    ],
+    [
+      "Một hệ thống RAG nội bộ trả lời sai nhiều câu. Hãy dùng các chỉ số RAGAS để khoanh vùng lỗi ở bước truy xuất hay bước sinh, nêu cách tính và chỉ số nào cần đáp án chuẩn.",
+      "Ý chấm: (1) context_recall: số khẳng định của đáp án chuẩn được ngữ cảnh hỗ trợ / tổng → thấp nghĩa là retriever thiếu dữ kiện (cần reference). (2) context_precision: trung bình Precision@k có trọng số → đoạn liên quan có xếp hạng cao không (cần reference). (3) Faithfulness: khẳng định được ngữ cảnh hỗ trợ / tổng khẳng định → thấp khi ngữ cảnh tốt nghĩa là mô hình sinh ảo giác (không cần reference). (4) Response relevancy: cosine giữa câu hỏi và câu hỏi sinh ngược (mặc định 3) → lạc đề (không cần reference). (5) Noise sensitivity: lỗi do đoạn nhiễu, càng thấp càng tốt (cần reference). (6) Thêm kiểm tra xác định cho lỗi định dạng. (7) Ngưỡng 0,8 chỉ là quy ước; so chênh lệch trên cùng cấu hình chấm; ghim phiên bản ragas/langchain-community."
+    ],
+    [
+      "Thiết kế hệ thống LLM-as-judge cho bài toán so sánh hai câu trả lời, nêu các thiên lệch đã đo được và cách giảm, cùng quy trình hiệu chỉnh với người.",
+      "Ý chấm: (1) Pipeline: đầu vào + ngữ cảnh → đầu ra → judge với rubric → điểm kèm lý do; ưu điểm chạy hàng nghìn mẫu, reference-free nếu rubric rõ; GPT-4 đồng thuận 85% vs 81% người-người nhưng chỉ đo trên MT-bench. (2) Thiên lệch vị trí (GPT-4 nhất quán 65%): chấm hai thứ tự, thắng cả hai mới tính. (3) Độ dài: rubric nêu độ dài không cộng điểm. (4) Tự ưu ái: judge khác họ. (5) Toán/lập luận: cho đáp án tham chiếu (sai 70%→15%). (6) Cặp khó (JudgeBench): hiệu chỉnh với người, không tuyên bố đủ tin cậy. (7) Vòng kết hợp: judge hằng ngày, người hằng tuần 100–200 mẫu, hằng tháng đo Cohen κ, κ thấp (ngưỡng nhóm tự đặt, ví dụ <0,7) thì sửa rubric hoặc đổi judge."
+    ],
+    [
+      "Công ty triển khai agent đọc email khách hàng, truy cập CRM chứa dữ liệu cá nhân và có công cụ gửi email ra ngoài. Phân tích rủi ro chèn lệnh và đề xuất kiến trúc phòng thủ.",
+      "Ý chấm: (1) Nhận diện lethal trifecta: dữ liệu riêng tư (CRM) + nội dung không tin cậy (email) + kênh gửi ra ngoài → rủi ro rò rỉ; chèn lệnh gián tiếp qua email (như EchoLeak, zero-click). (2) OWASP LLM01: chưa có biện pháp tuyệt đối; RAG, fine-tuning không giải quyết triệt để. (3) Loại bỏ ít nhất một vòng bằng thiết kế: không cho gửi ra ngoài sau khi đọc nội dung không tin cậy, hoặc cần người phê duyệt hành động có tác dụng phụ; quyền tối thiểu; tách luồng điều khiển khỏi dữ liệu (CaMeL). (4) Lớp lọc xác suất: Prompt Guard 2, AlignmentCheck giảm ASR 17,6%→1,75% nhưng không về 0 và giảm tiện ích. (5) Rào chắn đầu vào/đầu ra (PII, schema), execution rails cho tool call. (6) Quan sát: vết, nhật ký sự cố, cảnh báo theo tỉ lệ chặn."
+    ],
+    [
+      "Chatbot ngân hàng cần rào chắn bằng Guardrails AI cho bốn tình huống: (a) đầu ra chứa số thẻ, (b) đầu ra không phải JSON hợp lệ, (c) nội dung độc hại, (d) giai đoạn mới bật validator mới, muốn đo trước. Chọn on_fail cho từng tình huống và giải thích, kèm lưu ý API 0.11.",
+      "Ý chấm: (a) fix: thay đầu ra bằng giá trị đã sửa (che PII/khoá), kết quả hợp lệ. (b) reask hoặc fix_reask: gọi lại mô hình kèm thông báo lỗi; fix_reask sửa xác định trước rồi mới hỏi lại; hoặc exception nếu luồng phải dừng. (c) refrain: không trả đầu ra (None) cho nội dung không an toàn. (d) noop: giữ nguyên đầu ra, ghi thất bại vào nhật ký. Nêu thêm filter (bỏ trường hỏng), exception (ném ValidationError). API 0.11: Guard().use(ValidJson(on_fail=...)) nhận instance validator, on_fail đặt ở validator, không có use_many; validator Hub cài bằng pip; tài liệu còn cú pháp cũ nên thử lại. Ghi nhật ký sự cố cho mỗi lần thất bại."
+    ],
+    [
+      "Thiết kế nhật ký sự cố và chính sách cảnh báo cho lớp rào chắn của một ứng dụng LLM đang vận hành, giải thích vì sao không nên chỉ dùng ngưỡng cố định.",
+      "Ý chấm: (1) Trường nhật ký: mã yêu cầu và vết; phiên bản prompt và mã mô hình; tên và phiên bản rào chắn; giai đoạn (đầu vào, đầu ra, công cụ); kết luận, điểm số, hành động on_fail; mã nhóm OWASP; đoạn trích đã che hoặc mã băm (không lưu dữ liệu gốc); độ trễ rào chắn; kết quả rà soát của người. (2) Ngưỡng minh hoạ: độc hại >0,5% báo Slack; ảo giác >5% gọi trực; rò rỉ PII chặn ngay; reask >3 lần/giờ xem lại prompt; rào chắn thất bại >2% kiểm tra cấu hình — không có nguồn công bố, phải hiệu chỉnh theo mốc nền. (3) Cách có cơ sở: định nghĩa SLI (tỉ lệ phản hồi qua rào chắn), SLO 99,9%, burn rate: 14,4× trong 1 giờ (cửa sổ 5 phút) gọi trực; 6× trong 6 giờ; 1× trong 3 ngày mở phiếu. (4) PII detection: regex+checksum cho dữ liệu có cấu trúc, NER cho tên/địa chỉ, Presidio không bảo đảm phát hiện hết."
+    ],
+    [
+      "Một công ty 40 kỹ sư cùng đội nội dung không biết lập trình đang cân nhắc quản lý prompt bằng kho prompt (LangSmith/Langfuse) hay tệp YAML trong Git. Phân tích lựa chọn và đề xuất cách kết hợp.",
+      "Ý chấm: (1) Kho prompt: có giao diện rà soát, playground, người không lập trình sửa được, nhãn production/latest, liên kết generation với phiên bản; nhưng là phụ thuộc lúc chạy → cần cache phía client (Langfuse có). (2) Git + YAML: diff, pull request, CI chặt, monorepo; tệp chứa name, version, model có ngày, temperature, variables, template; ứng dụng nạp từ tệp thay vì viết cứng. (3) Kết hợp: webhook kho prompt khi có bản ghi mới → máy chủ trung gian ghi tệp vào GitHub → có cả UI và lịch sử Git/CI. (4) Production ghim nhãn hoặc mã băm; commit message theo feat/fix/refactor; biến có tên để kiểm tra đầu vào. (5) Giữ định dạng mở để đổi nhà cung cấp khi thị trường hợp nhất (Langfuse về ClickHouse, Helicone bảo trì...)."
+    ],
+    [
+      "Chất lượng chatbot giảm rõ rệt trong tuần qua dù không ai sửa prompt. Hãy phân tích các nguyên nhân có thể dựa trên khái niệm 'phiên bản là một tổ hợp' và sự cố công khai trong bài, và đề xuất cách phát hiện, phòng ngừa.",
+      "Ý chấm: (1) Phiên bản = mẫu prompt + biến, mã mô hình có ngày, tham số lấy mẫu, lược đồ đầu ra, công cụ và few-shot; đổi một thành phần là đổi hành vi. (2) Nguyên nhân: tên mô hình không kèm ngày trỏ sang bản mới; nhà cung cấp cập nhật mô hình (GPT-4o xu nịnh 04/2025: tín hiệu thưởng mới, offline eval và A/B vẫn tốt); thay đổi công cụ/ví dụ mẫu/dữ liệu truy xuất. (3) Phòng ngừa: ghim mã mô hình có ngày (gpt-4o-mini-2024-07-18), mã phiên bản phủ cả tổ hợp. (4) Phát hiện: đánh giá online lấy mẫu (ví dụ 10%), dashboard theo phiên bản, gán nhãn vết lỗi đưa vào dataset, regression test khi đổi mô hình; người đánh giá chuyên môn vì đánh giá chỉ bắt điều nó đo. (5) Khôi phục bằng chuyển nhãn về tổ hợp cũ."
+    ]
+  ]
+}

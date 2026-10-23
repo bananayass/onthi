@@ -1,0 +1,127 @@
+{
+  "id": "day3_track2_tu_luan",
+  "title": "Tự luận Track 2 Ngày 3",
+  "questionCount": 10,
+  "questions": [
+    {
+      "id": "T2D03-TL-01",
+      "type": "essay",
+      "prompt": "Team của bạn đổ raw JSON từ chatbot LLM vào S3 không schema, partition theo user_id, không chạy OPTIMIZE, VACUUM 0 HOURS cho rẻ, và dùng Spark cluster cho query 5 GB. Dựa vào Top 5 Lakehouse Anti-Patterns, nêu hậu quả và cách fix từng vấn đề.",
+      "modelAnswer": "(1) Đổ tất cả vào S3 → data swamp; enforce schema từ Bronze, dùng Delta/Iceberg từ đầu. (2) Partition high-cardinality user_id → triệu partition nhỏ; partition by date/region + Z-ORDER user_id. (3) Bỏ OPTIMIZE → small-file problem, 10K files × 1 MB → query 10× chậm; daily OPTIMIZE cron. (4) VACUUM 0 HOURS → mất time travel, concurrent readers fail; giữ tối thiểu 168h (7 ngày). (5) Spark cho 5 GB → lãng phí 10× chi phí; DuckDB/Athena cho <100 GB, chỉ scale-up khi > 1 node RAM. Nêu 80% pain production thuộc 5 anti-pattern, cần audit checklist trước deploy.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D03-TL-02",
+      "type": "essay",
+      "prompt": "Thiết kế medallion Bronze/Silver/Gold cho LLM observability (log request/response của inference API). Nêu schema, cardinality, partition, retention, consumer và quy tắc ghi của từng layer.",
+      "modelAnswer": "Bronze: request_id, ts, raw_json; 1 row/LLM call; partition ingest_date; retention 30 ngày; consumer replay/debug; append-only (immutable audit). Silver: request_id, ts, model, prompt_tokens, completion_tokens, latency_ms, user_id, status; dedup + parse, validated; partition date; 1 năm; feature store/RAG corpus; upsert MERGE. Gold: date, model, p50/p95 latency, total_tokens, cost_usd, error_rate; 1 row/(date, model); partition date + Z-ORDER model; 5 năm; dashboards, alerts, FinOps; rebuild-from-Silver idempotent. Schema mỗi layer = data contract giữa teams. Có thể thêm S3 Intelligent-Tiering/Glacier cho Bronze cold.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D03-TL-03",
+      "type": "essay",
+      "prompt": "Một fintech VN muốn đồng bộ bảng giao dịch từ Postgres OLTP sang lakehouse để phân tích mà không ảnh hưởng OLTP. Thiết kế pipeline CDC và nêu 3 failure mode phổ biến cùng cách phòng tránh.",
+      "modelAnswer": "Pipeline: Postgres WAL → Debezium (WAL reader, Avro msg) → Kafka + Schema Registry (durable buffer, decouple uptime) → Hudi/Delta Streamer → Bronze table, MERGE upsert. Freshness end-to-end 1–5 phút, không impact OLTP. Failure: (1) Kafka full → Postgres WAL fills → DB outage; alert Debezium lag + Kafka retention dài. (2) Source schema change phá pipeline; Schema Registry + mergeSchema=true ở sink. (3) Out-of-order events → bad updates; MERGE WHEN MATCHED AND src.ts > tgt.ts. Có thể dùng DV + CDF + MERGE làm CDC sink; với Decree 13 cân nhắc Iceberg trên MinIO on-prem.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D03-TL-04",
+      "type": "essay",
+      "prompt": "Một bảng Delta 1 TB nhận yêu cầu GDPR xoá dữ liệu của một user. Hãy giải thích vì sao DELETE thông thường chậm, Deletion Vectors cải thiện thế nào, và các bước để dữ liệu thực sự bị xoá vĩnh viễn (kể cả với time travel).",
+      "modelAnswer": "Không DV: DELETE 1 row → rewrite cả Parquet file, write amplification ~1000×. DV: lưu bitmap rows bị xoá trong sidecar, reader skip theo bitmap, không rewrite; DELETE/UPDATE/MERGE 10–100× nhanh, GDPR DELETE từ giờ → phút. Bật bằng TBLPROPERTIES delta.enableDeletionVectors=true. Physical removal khi OPTIMIZE. Time travel vẫn giữ version cũ → khôi phục ≠ GDPR DELETE; cần VACUUM sau retention (slide security: DELETE + VACUUM sau 30d grace) mới xoá vĩnh viễn. Lưu ý Decree 13 right-to-forget 72h SLA nên phải cân retention; audit log truy cập PII.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D03-TL-05",
+      "type": "essay",
+      "prompt": "Một job ingest đẩy dữ liệu lỗi vào bảng Delta training lúc 2h sáng, và team ML cần chứng minh model tháng trước được train trên đúng dataset nào. Trình bày cách dùng time travel và MLflow để xử lý cả hai việc, cùng giới hạn cần lưu ý.",
+      "modelAnswer": "Rollback: DESCRIBE HISTORY xác định version trước lỗi; restoreToVersion(n) tạo version mới với data như vn — vài chục giây thay vì ~2h manual fix. Có thể đọc so sánh bằng versionAsOf/timestampAsOf. Reproducibility: pin Delta version trong MLflow run (run_id ↔ table version, ví dụ data_version=3), lineage data → features → model → deploy. DESCRIBE HISTORY = audit log compliance. Giới hạn: bị chặn bởi VACUUM retention (default 7 ngày) — training set cần giữ lâu phải tăng retention hoặc tag; old version schema-incompatible có thể fail; time travel + schema registry = data contracts. Có thể dùng Nessie tag/branch để trả lời “Model X dùng data nào?”.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D03-TL-06",
+      "type": "essay",
+      "prompt": "Công ty bạn chạy Spark trên Databricks nhưng team BI dùng Trino và Snowflake, đồng thời cần git-like branching cho thử nghiệm ML. So sánh Delta Lake, Iceberg, Hudi và đề xuất format + catalog phù hợp, có giải thích.",
+      "modelAnswer": "So sánh: cả ba có ACID, time travel, deletion vectors (Delta 2.3+, Iceberg v3, Hudi MOR). Hidden partitioning chỉ Iceberg. Branching: Delta tag only, Iceberg + Nessie, Hudi không. Multi-engine: Iceberg default, Delta qua UniForm. Hudi mạnh mutation-heavy (MOR). Đề xuất: Iceberg (multi-engine, vendor neutral, partition evolution, Databricks Iceberg v3 GA Apr 2026) hoặc Delta + UniForm nếu muốn giữ Delta API; catalog REST: Polaris (multi-cloud, vendor-neutral) hoặc Nessie (branch/tag cho ML), Unity nếu Databricks-native. Nêu format war đã kết thúc, on-disk Parquet giống nhau, chọn theo tooling fit; XTable convert nếu cần.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D03-TL-07",
+      "type": "essay",
+      "prompt": "Bảng events 2 TB trên Hive partition theo ts_day thường bị full scan do user quên filter. Đề xuất thiết kế lại bằng Iceberg và chiến lược partition/layout, giải thích cơ chế giúp query nhanh.",
+      "modelAnswer": "Iceberg hidden partitioning: PARTITIONED BY (days(ts)), bỏ cột ts_day duplicate; user filter ts tự nhiên, Iceberg auto-prune. Transforms: years/months/days/hours, bucket(N,col), truncate(N,col). Partition evolution: đổi days → hours không rewrite data. Partition low-cardinality (date, region), không partition user_id; dùng Z-ORDER/clustering user_id trong file. Target file 100 MB–1 GB; OPTIMIZE định kỳ tránh small files. Parquet footer min/max, page index, bloom filter giúp skip (ví dụ user_id=42 trên 1 TB đọc ∼50 MB). Nêu đa số regression do quên partition column; LinkedIn migrate vì lý do này.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D03-TL-08",
+      "type": "essay",
+      "prompt": "Ước tính và so sánh chi phí lakehouse 100 TB/tháng giữa Snowflake, Iceberg + Trino trên S3 và Databricks theo slide; sau đó đề xuất 5 biện pháp FinOps và giải thích vì sao savings không tự đến.",
+      "modelAnswer": "Tổng: Snowflake $24,000; Iceberg + Trino/S3 $12,800 (−47%): storage $2,300, BI Trino EC2 $8,000, ETL Spark EMR $2,000, Polaris $500; Databricks $17,300 (−28%). Biện pháp: per-layer budget, Bronze → Glacier sau 30d (hoặc 90 ngày −60% storage); auto-OPTIMIZE nightly cron; tag clusters team/purpose/expires_at; spot cho ETL, on-demand cho BI; review top-10 query hàng tháng; DuckDB cho query nhỏ. Savings chỉ materialize nếu actively optimize: không OPTIMIZE → small-file tax, có thể đắt 10× hơn DW.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D03-TL-09",
+      "type": "essay",
+      "prompt": "Thiết kế stack data quality, data contract và lineage cho pipeline Bronze → Silver → Gold phục vụ dashboard cost LLM. Chỉ rõ công cụ ở từng chỗ, ví dụ check, và cách xử lý khi contract bị vỡ.",
+      "modelAnswer": "Bronze ingestion: Great Expectations validate raw (50+ expectations, ví dụ status in set ok/rate_limited/error). Silver/Gold transforms: dbt tests SQL-native (unique, not_null, relationships). Prod monitoring: Soda (SodaCL: row_count >= 1000, freshness < 1h, anomaly_score < 0.7 cho cost_usd). Data contract = schema + constraints + freshness SLA + ownership, chạy trong CI (pre-merge) và runtime (per-batch); vỡ contract → block pipeline. Lineage: OpenLineage (Spark/Airflow/dbt/Flink emit tự động) + Marquez (graph + UI), trả lời drop column ảnh hưởng ai, metric Gold sai truy ngược Bronze nào; bật từ ngày 1 (spark.openlineage.transport.type=http). Catalog-level commit để Bronze+Silver+Gold all-or-nothing.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D03-TL-10",
+      "type": "essay",
+      "prompt": "Một startup VN xây corpus fine-tune LLM (Wiki-VI + ZNews) chứa cả dữ liệu cá nhân người dùng. Thiết kế lakehouse cho corpus + embedding + multimodal, đồng thời đáp ứng Decree 13 và governance.",
+      "modelAnswer": "Corpus: Bronze raw → Silver quality filter + MinHash dedup (RedPajama-style; Dolma dùng Bloom filter) → Gold curated + license tags train-ready; time travel revert dedup mistakes. Embedding version = doc_v × model_v, pin qua Iceberg/Delta version + MLflow run_id. Lance cho embeddings/multimodal blobs (random access ∼2000× Parquet, HNSW, versioning); vector DB là derived index rebuild được cho online ANN sub-100 ms. Governance: RBAC/ABAC (Unity/Polaris), row-level security, column masking, tokenize PII ở Bronze, encrypt field-level (Iceberg v3), audit log mọi PII access, retention 365+ ngày regulated. Decree 13: phân basic vs sensitive, sensitive lưu tại VN → on-prem MinIO + Iceberg, cross-border cần consent + DPI, right-to-forget 72h SLA (DELETE + VACUUM).",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    }
+  ]
+}

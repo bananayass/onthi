@@ -1,0 +1,127 @@
+{
+  "id": "day1_track2_tu_luan",
+  "title": "Tự luận Track 2 Ngày 1",
+  "questionCount": 10,
+  "questions": [
+    {
+      "id": "T2D01-TL-01",
+      "type": "essay",
+      "prompt": "Một startup y tế ở Việt Nam xử lý hồ sơ bệnh nhân, cần chatbot dùng mô hình mở 70B. Hãy dùng bốn yếu tố chọn nhà cung cấp và cây quyết định trong bài để đề xuất nhà cung cấp, nêu khung pháp lý liên quan và hạn chế cần lường trước.",
+      "modelAnswer": "Ý chấm: (1) Bốn yếu tố: loại khối lượng × ngân sách × tuân thủ × độ trễ. (2) Dữ liệu cá nhân nhạy cảm, phải ở trong nước → nhánh Viettel / FPT / VNG. (3) Nêu đám mây trong nước đã có H100/H200 (FPT AI Factory, Viettel H200 Hoà Lạc 2, VNG HGX H100), thông tin “chỉ có T4/V100” đã lỗi thời. (4) Pháp lý: Luật Dữ liệu 60/2024 (01/07/2025), Luật BVDLCN 91/2025 (01/01/2026, Nghị định 356/2025 thay 13/2023), Luật AI 134/2025 (01/03/2026). (5) Hạn chế: ít vùng khả dụng, ít dịch vụ quản lý → tự vận hành serving, cần kế hoạch dự phòng. (6) Có thể dùng đám mây lớn/chuyên biệt cho phần không chứa dữ liệu cá nhân.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D01-TL-02",
+      "type": "essay",
+      "prompt": "Cần phục vụ Llama-3-70B (80 lớp, 8 đầu KV, kích thước đầu 128) cho 8 yêu cầu đồng thời, mỗi yêu cầu 8K token, KV ở FP16. Hãy tính bộ nhớ trọng số ở FP16 và FP8, bộ nhớ KV, rồi đánh giá phương án 1 H100, 2 H100 (FP16) và 1 H200 (FP8).",
+      "modelAnswer": "Ý chấm: (1) Công thức: trọng số = tham số × byte; KV/token = 2 × lớp × đầu KV × kích thước đầu × byte; điều kiện: trọng số + KV + bộ nhớ trung gian ≤ VRAM. (2) FP16 ≈ 141 GB, FP8 ≈ 70,6 GB. (3) KV = 2×80×8×128×2 = 320 KiB/token; 8K token ≈ 2,7 GB; 8 yêu cầu ≈ 21–22 GB. (4) 1 H100 80 GB: FP16 không vừa; FP8 70,6 + 21,5 > 80 → không đủ. (5) 2 H100 FP16: dư ~19 GB < KV cần → thiếu hoặc phải giảm lô/độ dài. (6) 1 H200 FP8: 141 GB, dư ~70 GB → chứa KV thoải mái; phương án hợp lý. (7) Nhắc decode giới hạn bởi băng thông HBM.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D01-TL-03",
+      "type": "essay",
+      "prompt": "Hoá đơn GPU của một công ty là 50.000 USD/tháng, gồm huấn luyện định kỳ, xử lý lô ban đêm và một API phục vụ ổn định 24/7. Hãy đề xuất kế hoạch giảm chi phí theo bài, gắn mỗi bước với hình thức mua phù hợp và rủi ro đi kèm.",
+      "modelAnswer": "Ý chấm: (1) Right-sizing: đổi GPU quá lớn sang L40S/A10G cho mô hình nhỏ (bước giảm lớn nhất trong ví dụ, −20 nghìn). (2) Spot cho huấn luyện và lô: rẻ 60–70%, bị thu hồi (AWS báo 2 phút) → bắt buộc checkpoint. (3) Tắt GPU ngoài giờ: giảm về 0 bản sao đêm/cuối tuần cho tải không nhạy độ trễ. (4) Cam kết 1–3 năm (30–40% / 50–60%) cho phần phục vụ ổn định; rủi ro trả tiền khi không dùng; quy tắc >12 tháng. (5) Đặt chỗ GPU cho đợt huấn luyện lớn có lịch. (6) Kết quả minh hoạ 50k → 12k; nêu đây là ví dụ, cần đo thực tế. (7) Kiểm soát bằng Terraform: trần số GPU, ngân sách, thẻ.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D01-TL-04",
+      "type": "essay",
+      "prompt": "Nhóm bạn bắt đầu dựng nền tảng GPU trên AWS bằng Terraform. Hãy thiết kế cách tổ chức mã, cấu hình backend state và các biện pháp kiểm soát chi phí ngay trong mã, kèm các bẫy cần tránh ở lần apply đầu.",
+      "modelAnswer": "Ý chấm: (1) Tách tệp theo nhóm: network.tf (VPC, subnet riêng cho nút GPU, NAT), eks.tf, storage.tf (bucket trọng số versioning + vòng đời, VPC endpoint S3), helm.tf (GPU Operator), iam.tf (quyền tối thiểu), cost.tf (ngân sách cảnh báo dự báo + thực tế). (2) Backend S3: encrypt = true, use_lockfile = true (.tflock), không dùng DynamoDB lock (lỗi thời từ 1.11), bật versioning, không commit state vì có thể chứa bí mật. (3) Nhóm nút GPU: AMI AL2023_x86_64_NVIDIA + cài device plugin qua GPU Operator, taint nvidia.com/gpu, min_size 0, max_size làm trần; hoặc Karpenter limits nvidia.com/gpu. (4) Bẫy hạn mức vCPU họ G/VT/P = 0 ở tài khoản mới: xin trước, không để apply phụ thuộc. (5) Luôn plan và đọc kế hoạch trước apply vì NAT, EKS tốn phí.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D01-TL-05",
+      "type": "essay",
+      "prompt": "Thiết kế pipeline CI/CD cho kho Terraform của nền tảng GPU sao cho mọi thay đổi được kiểm tra bảo mật, chi phí và chính sách trước khi áp dụng. Nêu các bước, công cụ, ví dụ chính sách GPU và cách cấp quyền cho CI.",
+      "modelAnswer": "Ý chấm: (1) Pull request: fmt, validate, tflint. (2) Quét bảo mật Trivy/Checkov. (3) terraform plan, bình luận kế hoạch vào PR. (4) Infracost báo chênh lệch giá/tháng; lưu ý aws_launch_template không có giá riêng, cần aws_instance/ASG/nhóm nút để thấy chi phí. (5) Chính sách OPA/Sentinel: cấm loại máy ngoài danh sách cho phép, cấm thiếu thẻ CostCenter, trần max_size nhóm nút GPU. (6) Duyệt, hợp nhất, apply từ đúng kế hoạch đã duyệt. (7) Kiểm tra lệch hằng đêm (plan -refresh-only). (8) CI dùng OIDC nhận quyền tạm thời, không lưu khoá tĩnh.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D01-TL-06",
+      "type": "essay",
+      "prompt": "Dịch vụ suy luận trên Kubernetes cần khoảng 4 phút để một pod mới nhận yêu cầu đầu tiên, khiến người dùng chờ lâu khi tải tăng đột ngột. Hãy phân tích các đoạn thời gian và đề xuất cách rút ngắn từng đoạn, kể cả cách viết Dockerfile.",
+      "modelAnswer": "Ý chấm: (1) Các đoạn: lập lịch ≈20 s, khởi tạo nút GPU ≈90 s, tải image ≈60 s, nạp trọng số ≈50 s, biên dịch ≈20 s. (2) Nút: warm pool giữ sẵn nút ấm. (3) Image: Dockerfile multi-stage (devel để build wheel, runtime để chạy), thư viện trước mã, .dockerignore loại dữ liệu/checkpoint; lưu đệm image trên nút. (4) Trọng số: NVMe cục bộ, hệ tệp song song FSx for Lustre, init container nạp trước; ví dụ 140 GB qua 10 Gb/s mất 112 s, NVMe 7 GB/s ~20 s. (5) Thiết kế: đặt ngưỡng tự mở rộng sớm (HPA/KEDA theo hàng đợi), giữ dư công suất, không scale-to-zero cho dịch vụ cần độ trễ thấp.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D01-TL-07",
+      "type": "essay",
+      "prompt": "Một phòng lab có một máy H100 và ba nhu cầu: (a) sinh viên thử nghiệm notebook nhẹ, (b) một người dùng chạy nhiều tiến trình nhỏ, (c) ba nhóm khác nhau mỗi nhóm phục vụ một mô hình nhỏ cần ổn định. Hãy chọn cách chia sẻ GPU cho từng nhu cầu và giải thích rủi ro.",
+      "modelAnswer": "Ý chấm: (1) Mặc định Kubernetes cấp nguyên GPU cho một pod; chia sẻ là lựa chọn có chủ ý. (2) (a) Time-slicing: luân phiên thời gian, hầu hết GPU hỗ trợ, không cách ly bộ nhớ → một pod OOM ảnh hưởng pod khác; chấp nhận cho thử nghiệm. (3) (b) MPS: nhiều tiến trình dùng chung SM, giới hạn bộ nhớ mềm, hợp cùng một người dùng. (4) (c) MIG: cắt tối đa 7 lát phần cứng, mỗi lát bộ nhớ và SM riêng, hỗ trợ A100/H100/H200/B200 → cách ly cho người dùng khác nhau. (5) Triển khai qua GPU Operator (MIG Manager, Device Plugin), theo dõi bằng DCGM Exporter + Prometheus.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D01-TL-08",
+      "type": "essay",
+      "prompt": "Bạn cần chọn engine và cấu hình phục vụ cho hai dịch vụ: (1) API chat chung cho nhiều ứng dụng, (2) agent nhiều lượt với system prompt dài lặp lại. Hãy giải thích hai giai đoạn prefill/decode, chọn engine cho từng dịch vụ, nêu tham số khởi chạy quan trọng và chỉ số cần đo.",
+      "modelAnswer": "Ý chấm: (1) Prefill xử lý cả prompt song song, giới hạn tính toán, quyết định TTFT; decode sinh từng token, đọc lại trọng số + KV, giới hạn băng thông, quyết định ITL. (2) Dịch vụ (1): vLLM — PagedAttention (khối KV qua bảng khối, gần hết phân mảnh, 2–4× thông lượng), gom lô liên tục, API tương thích OpenAI; mặc định cho hầu hết dịch vụ. (3) Dịch vụ (2): SGLang — RadixAttention lưu cây tiền tố, bỏ qua prefill phần chung, loại nút lá ít dùng khi đầy. (4) Tham số: --max-model-len theo độ dài thực tế, --gpu-memory-utilization (0,92; giảm khi chung GPU), --tensor-parallel-size/--tp trong một máy NVLink; dùng vllm serve thay api_server cũ. (5) Đo TTFT, ITL, thông lượng. (6) Tránh TGI (bảo trì).",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D01-TL-09",
+      "type": "essay",
+      "prompt": "Thiết kế hạ tầng cho một agent hỗ trợ khách hàng chạy ở môi trường vận hành theo mô hình tám lớp trong bài. Với mỗi lớp, nêu công cụ đề xuất và vai trò; giải thích cách agent mở rộng ngang.",
+      "modelAnswer": "Ý chấm: (1) Tính toán: GPU cho suy luận, CPU cho điều phối, Lambda cho công cụ. (2) Điều phối: LangGraph/CrewAI trên pod CPU. (3) Hàng đợi: Redis Streams, Kafka, RabbitMQ. (4) Bộ nhớ đệm: L1 trong tiến trình, L2 Redis, L3 bộ nhớ đệm embedding. (5) Lưu trữ: PostgreSQL + pgvector, Redis, S3. (6) Mạng: API Gateway, gRPC nội bộ, HTTP + SSE (truyền tải MCP); service mesh mTLS. (7) Quan sát: OpenTelemetry, Jaeger, Prometheus, Grafana. (8) Bí mật: Vault, Secrets Manager, cờ tính năng. (9) Agent stateless, trạng thái đưa ra Redis/Postgres để mở rộng ngang.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    },
+    {
+      "id": "T2D01-TL-10",
+      "type": "essay",
+      "prompt": "Một công ty để khoá truy cập AWS trong repo công khai, một bucket chứa dữ liệu huấn luyện bị đặt public và mọi vai trò đều có quyền *:* trong một tài khoản duy nhất. Hãy phân tích lỗi theo mô hình trách nhiệm chia sẻ và đề xuất thiết kế landing zone cùng rào chắn để ngăn tái diễn.",
+      "modelAnswer": "Ý chấm: (1) Các lỗi đều thuộc phía người dùng (sự cố phổ biến nhất), không phải nhà cung cấp; nhà cung cấp chỉ lo hạ tầng vật lý, ảo hoá, mạng lõi/DDoS, bảo trì. (2) Trách nhiệm người dùng: mã hoá dữ liệu, least privilege, chống prompt injection, tuân thủ GDPR/luật Việt Nam. (3) Landing zone: Organization + SCP; tài khoản bảo mật (log archive, audit), hạ tầng dùng chung (mạng trung tâm Transit Gateway, registry, CI), khối lượng AI (dev, staging, prod GPU), sandbox ngân sách thấp. (4) Rào chắn SCP: chặn vùng ngoài danh sách, bắt buộc mã hoá, cấm bucket công khai, giới hạn loại máy GPU đắt. (5) Một tài khoản duy nhất không tách được ngân sách, quyền, log → tách sớm. (6) CI dùng OIDC thay khoá tĩnh; xoay khoá đã lộ.",
+      "rubric": [
+        "Đúng khái niệm trọng tâm",
+        "Có lập luận hoặc ví dụ cụ thể",
+        "Nêu rủi ro/đánh đổi phù hợp",
+        "Đề xuất hành động có thể kiểm chứng"
+      ]
+    }
+  ]
+}

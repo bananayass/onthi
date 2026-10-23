@@ -1,0 +1,1568 @@
+{
+  "id": "day4_track2",
+  "title": "Bộ đề ôn tập Track 2 Ngày 4",
+  "sourceFolder": "onthi",
+  "questionCount": 60,
+  "questions": [
+    {
+      "id": "T2D04-001",
+      "type": "mcq",
+      "prompt": "Cosine similarity giữa hai vector có miền giá trị nào và đo yếu tố gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "[−∞, ∞], đo tổng tích từng chiều"
+        },
+        {
+          "key": "B",
+          "text": "[−1, 1], chỉ đo góc giữa hai vector"
+        },
+        {
+          "key": "C",
+          "text": "[0, 1], đo cả góc lẫn độ dài vector"
+        },
+        {
+          "key": "D",
+          "text": "[0, ∞), đo khoảng cách hình học thực"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide Similarity Metrics: cosine range [−1, 1], angle only; với text embedding thực tế thường > 0.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-002",
+      "type": "mcq",
+      "prompt": "Theo bảng Embedding Models 2026, text-embedding-3-small có số chiều và giá bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "1024d, self-host miễn phí"
+        },
+        {
+          "key": "B",
+          "text": "768d, $0.05/M token"
+        },
+        {
+          "key": "C",
+          "text": "1536d, $0.02/M token"
+        },
+        {
+          "key": "D",
+          "text": "3072d, $0.13/M token"
+        }
+      ],
+      "answer": "C",
+      "explanation": "3-small là baseline rẻ: 1536d, $0.02/M; 3-large mới là 3072d, $0.13/M.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-003",
+      "type": "mcq",
+      "prompt": "Truncate text-embedding-3-large từ 3072d xuống 256d bằng Matryoshka (MRL) giúp index nhỏ đi bao nhiêu lần?",
+      "options": [
+        {
+          "key": "A",
+          "text": "6 lần"
+        },
+        {
+          "key": "B",
+          "text": "32 lần"
+        },
+        {
+          "key": "C",
+          "text": "4 lần"
+        },
+        {
+          "key": "D",
+          "text": "12 lần"
+        }
+      ],
+      "answer": "D",
+      "explanation": "3072/256 = 12×; so với ada-002 1536d chỉ là 6×. Nên áp dụng khi scale >10M vectors.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-004",
+      "type": "mcq",
+      "prompt": "Khi so điểm benchmark embedding, lưu ý “vệ sinh benchmark” nào là đúng theo slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Điểm MTEB v2 không so được với v1"
+        },
+        {
+          "key": "B",
+          "text": "MMTEB và MTEB v2 là cùng một bảng"
+        },
+        {
+          "key": "C",
+          "text": "Điểm v1 cao hơn luôn tốt hơn v2"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ cần xem MTEB, không cần golden set"
+        }
+      ],
+      "answer": "A",
+      "explanation": "MTEB v2 (Eng) và MMTEB (đa ngữ) là hai bảng khác nhau; v2 không so được với v1; luôn re-rank trên golden set của bạn.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-005",
+      "type": "mcq",
+      "prompt": "Trên VN-MTEB, bge-m3 (64.90) đứng trên cả bản fine-tune tiếng Việt của chính nó. Bài học rút ra là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Benchmark rộng thay được đo trên domain hẹp"
+        },
+        {
+          "key": "B",
+          "text": "Generalist đa ngữ có thể thắng trên benchmark rộng"
+        },
+        {
+          "key": "C",
+          "text": "Fine-tune tiếng Việt luôn làm model kém đi"
+        },
+        {
+          "key": "D",
+          "text": "Model ít params hơn luôn cho điểm cao hơn"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bài học 1 của slide VN-MTEB; bài học 2: fine-tune vẫn có thể thắng trên domain hẹp nên phải đo trên dữ liệu của bạn.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-006",
+      "type": "mcq",
+      "prompt": "Theo slide VN-MTEB, vì sao một số model vượt trội hơn model khác?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Có số chiều vector lớn hơn 3072 chiều"
+        },
+        {
+          "key": "B",
+          "text": "Được train riêng trên văn hoá Việt Nam"
+        },
+        {
+          "key": "C",
+          "text": "Dùng RoPE thay vì absolute positional embedding"
+        },
+        {
+          "key": "D",
+          "text": "Được phát hành muộn hơn nên tự động tốt hơn"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Model dùng RoPE vượt model dùng absolute positional embedding — lý do kỹ thuật, không phải “mới hơn”.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-007",
+      "type": "mcq",
+      "prompt": "Hạn chế quan trọng của VN-MTEB là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chỉ có 6 datasets nên không đủ ý nghĩa thống kê"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ đánh giá model đóng, không có model open-source"
+        },
+        {
+          "key": "C",
+          "text": "Chỉ đo latency, không đo chất lượng retrieval"
+        },
+        {
+          "key": "D",
+          "text": "Dịch từ MTEB tiếng Anh nên chưa đo văn hoá/domain Việt"
+        }
+      ],
+      "answer": "D",
+      "explanation": "VN-MTEB: 41 datasets, 6 tasks, 18 models, dịch từ MTEB ⇒ đo năng lực ngôn ngữ, chưa đo văn hoá/domain.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-008",
+      "type": "mcq",
+      "prompt": "Dùng sai similarity metric so với pretraining objective của model gây hậu quả gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Recall giảm khoảng 10–20%"
+        },
+        {
+          "key": "B",
+          "text": "Latency tăng khoảng 10–20 lần"
+        },
+        {
+          "key": "C",
+          "text": "Index phải rebuild mỗi giờ một lần"
+        },
+        {
+          "key": "D",
+          "text": "Không ảnh hưởng gì nếu đã normalize"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide: match metric với pretraining objective; sai metric degrade recall 10–20%.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-009",
+      "type": "mcq",
+      "prompt": "Với vector unit-norm, khoảng cách Euclidean liên hệ với cosine theo công thức nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "d = 2 · cos"
+        },
+        {
+          "key": "B",
+          "text": "d² = 2(1 − cos)"
+        },
+        {
+          "key": "C",
+          "text": "d = 1 − cos"
+        },
+        {
+          "key": "D",
+          "text": "d² = 1 + cos"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Slide Euclidean (L2): Unit-norm ⇒ d² = 2(1 − cos), nên xếp hạng theo L2 và cosine tương đương.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-010",
+      "type": "mcq",
+      "prompt": "Trong nhóm multi-modal embedding 2026, model nào là backbone của ColPali?",
+      "options": [
+        {
+          "key": "A",
+          "text": "ImageBind (Meta)"
+        },
+        {
+          "key": "B",
+          "text": "CLIP (OpenAI)"
+        },
+        {
+          "key": "C",
+          "text": "jina-clip-v2"
+        },
+        {
+          "key": "D",
+          "text": "SigLIP (Google)"
+        }
+      ],
+      "answer": "D",
+      "explanation": "SigLIP là backbone của ColPali; ImageBind hỗ trợ 6 modalities; jina-clip-v2 multilingual có tiếng Việt.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-011",
+      "type": "mcq",
+      "prompt": "Theo bảng so sánh Vector DB (VectorDBBench 2025), pgvector phù hợp nhất khi nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cần filter bằng GraphQL"
+        },
+        {
+          "key": "B",
+          "text": "Cần managed hoàn toàn"
+        },
+        {
+          "key": "C",
+          "text": "Team đã chạy sẵn Postgres"
+        },
+        {
+          "key": "D",
+          "text": "Cần multi-modal native"
+        }
+      ],
+      "answer": "C",
+      "explanation": "pgvector là extension, filter bằng SQL WHERE, P99 ~15 ms; best for “Have Postgres”.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-012",
+      "type": "mcq",
+      "prompt": "Phát biểu nào đúng về FAISS (Meta, 2017)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chỉ hỗ trợ HNSW, không có IVF hay PQ"
+        },
+        {
+          "key": "B",
+          "text": "Là thư viện index, không phải database"
+        },
+        {
+          "key": "C",
+          "text": "Là managed service chạy trên cloud Meta"
+        },
+        {
+          "key": "D",
+          "text": "Là vector DB có REST API và replication"
+        }
+      ],
+      "answer": "B",
+      "explanation": "FAISS: library C++/Python, no server; hỗ trợ IVF, HNSW, PQ, OPQ, IVF-PQ; 2026 vẫn là thư viện index bên trong Milvus.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-013",
+      "type": "mcq",
+      "prompt": "Deep metric learning thời pre-LLM (triplet loss FaceNet, ArcFace) là tiền thân của gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Contrastive pre-training hiện đại như CLIP"
+        },
+        {
+          "key": "B",
+          "text": "Thuật toán BM25 dùng cho keyword search"
+        },
+        {
+          "key": "C",
+          "text": "Kỹ thuật chunking theo cấu trúc AST"
+        },
+        {
+          "key": "D",
+          "text": "Point-in-time join trong feature store"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Train embedding để cosine/Euclidean tách class — tiền thân của contrastive pre-training (CLIP, SigLIP).",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-014",
+      "type": "mcq",
+      "prompt": "HNSW với 10M vector 768d fp32 cần khoảng bao nhiêu RAM cho riêng vector (chưa tính graph)?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Khoảng 3 GB"
+        },
+        {
+          "key": "B",
+          "text": "Khoảng 310 GB"
+        },
+        {
+          "key": "C",
+          "text": "Khoảng 7,7 GB"
+        },
+        {
+          "key": "D",
+          "text": "Khoảng 31 GB"
+        }
+      ],
+      "answer": "D",
+      "explanation": "768 × 4 B ≈ 3 KB/vec; 10M × 3 KB ≈ 31 GB + graph ⇒ HNSW là RAM-bound.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-015",
+      "type": "mcq",
+      "prompt": "Trường hợp nào slide nêu HNSW KHÔNG phải lựa chọn tốt?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cần recall 95%+ ở khoảng 10 ms"
+        },
+        {
+          "key": "B",
+          "text": "Chạy trên Qdrant hoặc Weaviate"
+        },
+        {
+          "key": "C",
+          "text": "Corpus update nhiều, re-build chậm"
+        },
+        {
+          "key": "D",
+          "text": "Corpus ≤10M vector cần latency thấp"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Khi HNSW không phải lựa chọn: RAM-bound, update-heavy corpus (re-build chậm), static billion-scale → DiskANN.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-016",
+      "type": "mcq",
+      "prompt": "IVF (FAISS) phù hợp nhất với kịch bản nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Corpus thay đổi liên tục từng giây"
+        },
+        {
+          "key": "B",
+          "text": "Batch-mode, corpus tĩnh, hạ tầng CPU-only"
+        },
+        {
+          "key": "C",
+          "text": "Hot vectors cần latency dưới 10 ms"
+        },
+        {
+          "key": "D",
+          "text": "Hơn 1 tỷ vector trên SSD một node"
+        }
+      ],
+      "answer": "B",
+      "explanation": "IVF: cluster-based, RAM thấp hơn, latency ~30–50 ms, cần retrain khi drift lớn; params nlist=1024, nprobe=64.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-017",
+      "type": "mcq",
+      "prompt": "RaBitQ (SIGMOD 2024) nén vector bằng cách nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Xoay ngẫu nhiên rồi 1 bit/chiều, có cận sai số"
+        },
+        {
+          "key": "B",
+          "text": "Cắt bớt chiều cuối theo kiểu Matryoshka"
+        },
+        {
+          "key": "C",
+          "text": "Gom cụm rồi lưu ID centroid cho mỗi vector"
+        },
+        {
+          "key": "D",
+          "text": "Chuyển fp32 sang int8 theo min-max từng chiều"
+        }
+      ],
+      "answer": "A",
+      "explanation": "RaBitQ dùng trong VectorChord, Milvus; BBQ của Elasticsearch phát triển từ đó; pgvectorscale dùng SBQ.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-018",
+      "type": "mcq",
+      "prompt": "Reciprocal Rank Fusion tính điểm thế nào và vì sao tiện?",
+      "options": [
+        {
+          "key": "A",
+          "text": "∑ score × rank; cần normalize BM25 về [0, 1]"
+        },
+        {
+          "key": "B",
+          "text": "max(score); chỉ giữ điểm cao nhất của mỗi hệ"
+        },
+        {
+          "key": "C",
+          "text": "α·cos + (1−α)·BM25; cần tune α trên golden set"
+        },
+        {
+          "key": "D",
+          "text": "∑ 1/(k + rank); chỉ dùng hạng, không cần normalize"
+        }
+      ],
+      "answer": "D",
+      "explanation": "RRF score(d) = ∑ 1/(k + rank_r(d)), k = 60 (Qdrant mặc định k = 2); rank-only nên không cần chuẩn hoá raw scores.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-019",
+      "type": "mcq",
+      "prompt": "Lab 19 đo hybrid so với semantic thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "P@10 78,6% vs 73,2%; P99 6,3 vs 8,9 ms"
+        },
+        {
+          "key": "B",
+          "text": "P@10 bằng nhau; P99 hybrid nhanh gấp đôi"
+        },
+        {
+          "key": "C",
+          "text": "P@10 78,6% vs 73,2%; P99 8,9 vs 6,3 ms"
+        },
+        {
+          "key": "D",
+          "text": "P@10 73,2% vs 78,6%; P99 6,3 vs 8,9 ms"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Hybrid tốt hơn về chất lượng nhưng chậm hơn (CPU, 1K doc) — đo trên golden set của bạn.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-020",
+      "type": "mcq",
+      "prompt": "Late interaction (ColBERT) chấm điểm query–document thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đếm số token trùng giữa query và document"
+        },
+        {
+          "key": "B",
+          "text": "Lấy trung bình vector token rồi tính dot product"
+        },
+        {
+          "key": "C",
+          "text": "MaxSim: mỗi token query lấy cos lớn nhất rồi cộng lại"
+        },
+        {
+          "key": "D",
+          "text": "Nén cả chunk thành một vector rồi tính một cos"
+        }
+      ],
+      "answer": "C",
+      "explanation": "score = ∑_{t∈q} max_{d∈D} cos(t, d) — giữ vector từng token/patch, bắt chi tiết single-vector bỏ sót.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-021",
+      "type": "mcq",
+      "prompt": "ColPali encode mỗi trang PDF thành bao nhiêu vector?",
+      "options": [
+        {
+          "key": "A",
+          "text": "1 vector 3072d cho toàn trang"
+        },
+        {
+          "key": "B",
+          "text": "512 patch (16 × 32), mỗi patch 768d"
+        },
+        {
+          "key": "C",
+          "text": "256 patch (16 × 16), mỗi patch 1024d"
+        },
+        {
+          "key": "D",
+          "text": "1024 patch (32 × 32), mỗi patch 128d"
+        }
+      ],
+      "answer": "D",
+      "explanation": "1M trang × 1024 × 128d × 4B ≈ 524 GB ⇒ cần vector DB hỗ trợ multi-vector + MaxSim.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-022",
+      "type": "mcq",
+      "prompt": "Theo Production Tuning, chunk size và overlap khuyến nghị cho RAG là bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "200–500 tokens, overlap 10–20%"
+        },
+        {
+          "key": "B",
+          "text": "1K–2K tokens, overlap 50%"
+        },
+        {
+          "key": "C",
+          "text": "50–100 tokens, không overlap"
+        },
+        {
+          "key": "D",
+          "text": "4K tokens, overlap 1–2%"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Chunk 200–500 tokens cho RAG, 1K+ cho long-context; overlap 10–20% (~50–100 tokens).",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-023",
+      "type": "mcq",
+      "prompt": "Chiến lược chunking Hierarchical hoạt động thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ngắt tại topic shift dựa trên similarity"
+        },
+        {
+          "key": "B",
+          "text": "Retrieve child (đoạn), trả về parent (trang)"
+        },
+        {
+          "key": "C",
+          "text": "Retrieve parent (trang), trả về mọi child"
+        },
+        {
+          "key": "D",
+          "text": "Cắt cố định 512 tokens rồi gộp theo tầng"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Hierarchical: parent (page) + child (paragraph); semantic mới là ngắt tại topic shift.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-024",
+      "type": "mcq",
+      "prompt": "Top-K khuyến nghị theo slide RAG Production Best Practices là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "1–2 cho RAG, 200 trước reranker"
+        },
+        {
+          "key": "B",
+          "text": "Luôn 100 để tối đa recall"
+        },
+        {
+          "key": "C",
+          "text": "5–10 cho RAG, 20–50 trước reranker"
+        },
+        {
+          "key": "D",
+          "text": "50–100 cho RAG, 5–10 trước reranker"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Top-K 5–10 cho RAG, 20–50 trước reranker; ef_search 200 default.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-025",
+      "type": "mcq",
+      "prompt": "MMR với λ=0.5 được dùng trong retrieval để làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tăng recall bằng cách mở rộng query"
+        },
+        {
+          "key": "B",
+          "text": "Giảm latency bằng cách cắt bớt chiều"
+        },
+        {
+          "key": "C",
+          "text": "Chuẩn hoá điểm BM25 về khoảng [0, 1]"
+        },
+        {
+          "key": "D",
+          "text": "Tăng đa dạng, giảm chunks trùng nhau"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Slide: MMR diversity λ=0.5 giảm chunks trùng.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-026",
+      "type": "mcq",
+      "prompt": "HyDE và multi-query expansion thuộc nhóm kỹ thuật nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Query rewriting"
+        },
+        {
+          "key": "B",
+          "text": "Index quantization"
+        },
+        {
+          "key": "C",
+          "text": "Embedding versioning"
+        },
+        {
+          "key": "D",
+          "text": "Metadata filtering"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Production Gotchas: query rewriting gồm HyDE, multi-query expansion.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-027",
+      "type": "mcq",
+      "prompt": "Khác biệt giữa stage 1 và stage 2 trong 2-stage retrieval là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Stage 1 lọc metadata; stage 2 chạy ANN trên toàn bộ corpus gốc"
+        },
+        {
+          "key": "B",
+          "text": "Stage 1 bi-encoder embed riêng; stage 2 cross-encoder chấm từng cặp"
+        },
+        {
+          "key": "C",
+          "text": "Stage 1 cross-encoder chấm từng cặp; stage 2 bi-encoder embed riêng"
+        },
+        {
+          "key": "D",
+          "text": "Stage 1 dùng BM25 thuần; stage 2 dùng LLM sinh lại toàn bộ câu hỏi"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Stage 1: ANN top-100, latency <20 ms; stage 2: cross-encoder query + doc cùng lúc, chọn top-10.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-028",
+      "type": "mcq",
+      "prompt": "Reranker managed API (Cohere Rerank v4, zerank) có latency khoảng bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Khoảng 50 ms"
+        },
+        {
+          "key": "B",
+          "text": "Khoảng 6 s"
+        },
+        {
+          "key": "C",
+          "text": "Khoảng 600 ms"
+        },
+        {
+          "key": "D",
+          "text": "Khoảng 5 ms"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Self-host + GPU ~50–200 ms; managed ~600 ms, không cần GPU — rerank cộng thẳng vào P99.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-029",
+      "type": "mcq",
+      "prompt": "Theo Context Rot (Chroma Research, 07/2025), model cửa sổ 1M token thường suy giảm rõ ở đâu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Ngay từ 10K token"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ khi vượt 1M token"
+        },
+        {
+          "key": "C",
+          "text": "Quanh 900K–1M token"
+        },
+        {
+          "key": "D",
+          "text": "Quanh 300–400K token"
+        }
+      ],
+      "answer": "D",
+      "explanation": "18 model frontier; chất lượng giảm khi input dài; multi-hop gãy sớm hơn nhiều.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-030",
+      "type": "mcq",
+      "prompt": "Mặc định 2026 khi kết hợp RAG với model long-context là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Bỏ retrieval vì cửa sổ lớn đã đảm bảo chất lượng"
+        },
+        {
+          "key": "B",
+          "text": "Retrieve 50K–200K token liên quan rồi để model suy luận"
+        },
+        {
+          "key": "C",
+          "text": "Nhồi toàn bộ corpus vào cửa sổ 1M token mỗi request"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ retrieve top-1 chunk để tiết kiệm token tối đa"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Lai, không phải chọn một: cửa sổ lớn là sức chứa, không phải đảm bảo; retrieval trả tiền index một lần.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-031",
+      "type": "mcq",
+      "prompt": "MS GraphRAG có đặc điểm gì so với các tool GraphRAG khác?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Community summaries, chất lượng cao, index đắt nhất"
+        },
+        {
+          "key": "B",
+          "text": "Hoãn extraction sang query-time, index rẻ nhất"
+        },
+        {
+          "key": "C",
+          "text": "Index nhẹ, chỉ lưu entity không lưu quan hệ"
+        },
+        {
+          "key": "D",
+          "text": "In-memory, traversal dưới 1 ms, query Cypher"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Lazy hoãn extraction; LightRAG index nhẹ; Memgraph in-memory sub-ms.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-032",
+      "type": "mcq",
+      "prompt": "Vì sao agentic retrieval không nên là mặc định cho mọi query?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Không truy xuất được từ nhiều nguồn"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ chạy được trên knowledge graph"
+        },
+        {
+          "key": "C",
+          "text": "Không tách được câu hỏi nhiều phần"
+        },
+        {
+          "key": "D",
+          "text": "Thêm LLM call nên tăng latency và token"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Classic RAG một lượt đủ cho tra cứu đơn giản; agentic tốn thêm LLM call.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-033",
+      "type": "mcq",
+      "prompt": "Weaviate (1.37+, Preview) cho agent truy cập vector DB thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Plugin LangChain bắt buộc cài thêm"
+        },
+        {
+          "key": "B",
+          "text": "Webhook đẩy kết quả sang agent"
+        },
+        {
+          "key": "C",
+          "text": "MCP server nhúng sẵn tại /v1/mcp"
+        },
+        {
+          "key": "D",
+          "text": "SDK riêng chạy qua cổng gRPC khác"
+        }
+      ],
+      "answer": "C",
+      "explanation": "MCP server cùng cổng REST API — vector DB thành công cụ agent gọi được.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-034",
+      "type": "mcq",
+      "prompt": "Kiến trúc agent memory Letta (ex-MemGPT) tổ chức bộ nhớ thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Một bảng KV duy nhất theo user_id"
+        },
+        {
+          "key": "B",
+          "text": "3 tầng: core / recall / archival"
+        },
+        {
+          "key": "C",
+          "text": "Knowledge graph theo thời gian"
+        },
+        {
+          "key": "D",
+          "text": "Vector-first, trích sự kiện từ chat"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Mem0: vector-first; Zep: temporal KG (Graphiti); Letta: 3 tầng core/recall/archival.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-035",
+      "type": "mcq",
+      "prompt": "Trong định nghĩa retrieval tool cho agent, trường description đóng vai trò gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Là prompt truy xuất: agent dựa vào nó để quyết định gọi"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ là ghi chú cho developer, agent không đọc tới"
+        },
+        {
+          "key": "C",
+          "text": "Là schema bắt buộc để validate tham số đầu vào"
+        },
+        {
+          "key": "D",
+          "text": "Là câu query mặc định gửi tới vector DB mỗi lần"
+        }
+      ],
+      "answer": "A",
+      "explanation": "“this description IS the retrieval prompt” — mơ hồ ⇒ gọi sai lúc.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-036",
+      "type": "mcq",
+      "prompt": "Vì sao tham số filter của search tool nên là enum thay vì string tự do?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Để giảm số chiều của embedding"
+        },
+        {
+          "key": "B",
+          "text": "Để vector DB tự tạo index mới"
+        },
+        {
+          "key": "C",
+          "text": "Để bỏ được tham số top_k"
+        },
+        {
+          "key": "D",
+          "text": "Để agent không bịa giá trị filter"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Bốn điều quyết định chất lượng: description, filter enum, trả citation + score, top_k có trần.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-037",
+      "type": "mcq",
+      "prompt": "Agent trả lời chung chung dù tài liệu đúng nằm trong top-K. Cách sửa theo bảng debug là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đổi sang model lớn hơn"
+        },
+        {
+          "key": "B",
+          "text": "Tắt hybrid, chỉ dùng BM25"
+        },
+        {
+          "key": "C",
+          "text": "Giảm top_k, thêm reranker"
+        },
+        {
+          "key": "D",
+          "text": "Tăng top_k lên gấp đôi"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Nguyên nhân: top_k quá lớn → context loãng (context rot).",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-038",
+      "type": "mcq",
+      "prompt": "Hệ thống chạy đúng lúc demo nhưng sai trên production. Nguyên nhân và cách sửa?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Model quá nhỏ; đổi sang embedding 3072d cho mọi request"
+        },
+        {
+          "key": "B",
+          "text": "Query thật khác golden set; log query thật, refresh hàng tuần"
+        },
+        {
+          "key": "C",
+          "text": "Thiếu GPU khi production; chuyển sang reranker managed API"
+        },
+        {
+          "key": "D",
+          "text": "Vector DB bị đầy; tăng RAM và rebuild lại toàn bộ index"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Bảng Debug Agent + Retrieval: refresh golden set từ query thật hàng tuần.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-039",
+      "type": "mcq",
+      "prompt": "Agent làm theo “lệnh” nằm trong tài liệu được retrieve. Cách sửa là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tách data khỏi instruction; text retrieve không điều khiển tool"
+        },
+        {
+          "key": "B",
+          "text": "Tăng threshold similarity để loại tài liệu chứa câu mệnh lệnh"
+        },
+        {
+          "key": "C",
+          "text": "Giảm top_k về 1 để chỉ đọc đúng một tài liệu đáng tin nhất"
+        },
+        {
+          "key": "D",
+          "text": "Bật semantic cache để agent không gọi lại tài liệu đó lần nữa"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Nguyên nhân: prompt injection qua retrieved doc.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-040",
+      "type": "mcq",
+      "prompt": "Với on-demand feature view, write_to_online_store=True có nghĩa gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tính lúc ghi; mặc định False là tính lúc đọc"
+        },
+        {
+          "key": "B",
+          "text": "Tính lúc đọc; mặc định False là tính lúc ghi"
+        },
+        {
+          "key": "C",
+          "text": "Bỏ qua request source khi materialize"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ dùng cho training, không dùng serving"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Slide On-Demand Feature: write_to_online_store=True ⇒ tính lúc ghi; mặc định False ⇒ lúc đọc.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-041",
+      "type": "mcq",
+      "prompt": "Thí nghiệm Lab 19 với TabICL và HistGradientBoosting cho thấy điều gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "TabICL thắng mà không cần aggregate"
+        },
+        {
+          "key": "B",
+          "text": "Đổi model +0,02 AUC, thêm feature +0,14"
+        },
+        {
+          "key": "C",
+          "text": "Đổi model +0,14 AUC, thêm feature +0,02"
+        },
+        {
+          "key": "D",
+          "text": "Đổi model và thêm feature đều +0,08"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Nhãn phụ thuộc hành vi gần đây của user; model không học được thứ bạn không đưa vào.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-042",
+      "type": "mcq",
+      "prompt": "Rào cản nào khi đưa TabPFN-2.5 vào production theo slide?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cần retrain lại cho từng bộ dữ liệu mới"
+        },
+        {
+          "key": "B",
+          "text": "Latency dưới 2 ms nhưng AUC thấp hơn XGBoost"
+        },
+        {
+          "key": "C",
+          "text": "Thiết kế cho ≤50K dòng, weights cấm thương mại"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ chạy trên CPU, không hỗ trợ GPU inference"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Latency 151–1.275 ms trên GPU; ≤50K dòng; giấy phép cấm thương mại; TabICL weights BSD-3.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-043",
+      "type": "mcq",
+      "prompt": "Vì sao Uber xây Michelangelo và khái niệm feature store ra đời?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cần lưu embedding cho RAG ngay từ năm 2017"
+        },
+        {
+          "key": "B",
+          "text": "Muốn bán feature store như sản phẩm SaaS"
+        },
+        {
+          "key": "C",
+          "text": "Thay thế data warehouse bằng key-value store"
+        },
+        {
+          "key": "D",
+          "text": "100+ model reuse features, cần tránh skew và tính trùng"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Why feature stores emerged: centralize để tránh skew + duplicate compute.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-044",
+      "type": "mcq",
+      "prompt": "Online store khác offline store ở điểm nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Online lưu giá trị hiện tại, offline lưu full history"
+        },
+        {
+          "key": "B",
+          "text": "Online lưu full history, offline lưu giá trị hiện tại"
+        },
+        {
+          "key": "C",
+          "text": "Online dùng cho training, offline dùng cho serving"
+        },
+        {
+          "key": "D",
+          "text": "Online chạy batch TB, offline lookup dưới 10 ms"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Online: Redis/DynamoDB, KV lookup <10 ms P99, current value only; offline: Parquet/BigQuery, full history.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-045",
+      "type": "mcq",
+      "prompt": "Bài toán nào slide nói KHÔNG cần streaming feature pipeline?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Real-time recsys"
+        },
+        {
+          "key": "B",
+          "text": "Churn prediction"
+        },
+        {
+          "key": "C",
+          "text": "Fraud detection"
+        },
+        {
+          "key": "D",
+          "text": "Dynamic pricing"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Không cần streaming: churn prediction (daily batch OK), credit scoring.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-046",
+      "type": "mcq",
+      "prompt": "Recommendation system trong 3 use cases feature store có latency mục tiêu bao nhiêu?",
+      "options": [
+        {
+          "key": "A",
+          "text": "<10 ms"
+        },
+        {
+          "key": "B",
+          "text": "<1 s"
+        },
+        {
+          "key": "C",
+          "text": "<50 ms"
+        },
+        {
+          "key": "D",
+          "text": "<2 ms"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Fraud <10 ms, recsys <50 ms (homepage personalization), dynamic pricing <100 ms.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-047",
+      "type": "mcq",
+      "prompt": "Trong Feast, khai báo Field với vector_index=True cho phép làm gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tự động sinh embedding từ cột văn bản"
+        },
+        {
+          "key": "B",
+          "text": "Nén vector sang binary trước khi lưu"
+        },
+        {
+          "key": "C",
+          "text": "Bỏ qua TTL cho riêng cột vector đó"
+        },
+        {
+          "key": "D",
+          "text": "Tra cứu bằng độ tương đồng thay vì bằng khoá"
+        }
+      ],
+      "answer": "D",
+      "explanation": "retrieve_online_documents_v2(query=..., top_k=3) — RAG corpus thành một feature view (Alpha).",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-048",
+      "type": "mcq",
+      "prompt": "Embedding cache bằng Redis TTL 24h đạt hit rate bao nhiêu theo slide Production Optimization?",
+      "options": [
+        {
+          "key": "A",
+          "text": "60–80%"
+        },
+        {
+          "key": "B",
+          "text": "10–20%"
+        },
+        {
+          "key": "C",
+          "text": "95–99%"
+        },
+        {
+          "key": "D",
+          "text": "30–40%"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Hit rate 60–80% giảm embedding cost; batch 1000 texts/request: throughput 50×.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-049",
+      "type": "mcq",
+      "prompt": "Quy trình cập nhật index đúng theo Index Lifecycle Management là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Serve song song V1 và V2 vĩnh viễn để so sánh"
+        },
+        {
+          "key": "B",
+          "text": "Build V2 offline, validate, blue-green switch rồi retire V1"
+        },
+        {
+          "key": "C",
+          "text": "Xoá V1, ingest lại vào chính index cũ rồi mới serve"
+        },
+        {
+          "key": "D",
+          "text": "Ghi đè vector mới lên V1 trong giờ thấp điểm"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Rollback ngay nếu quality giảm.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-050",
+      "type": "mcq",
+      "prompt": "MRR trong retrieval evaluation đo gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Tỷ lệ relevant docs trong top-k"
+        },
+        {
+          "key": "B",
+          "text": "Xếp hạng có trọng số theo nhãn"
+        },
+        {
+          "key": "C",
+          "text": "Độ trễ P99 của truy vấn search"
+        },
+        {
+          "key": "D",
+          "text": "Vị trí của kết quả đúng đầu tiên"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Recall@k là tỷ lệ relevant trong top-k; nDCG@k là xếp hạng có weight.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-051",
+      "type": "mcq",
+      "prompt": "Trong LLM-as-Judge cho RAG, Groundedness kiểm tra điều gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Câu trả lời có trả lời đúng query không"
+        },
+        {
+          "key": "B",
+          "text": "Query có nằm trong golden set không"
+        },
+        {
+          "key": "C",
+          "text": "Câu trả lời có dựa trên context không"
+        },
+        {
+          "key": "D",
+          "text": "Chunk retrieve có liên quan query không"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Context Relevance, Answer Relevance, Groundedness ⇒ RAGAS: faithfulness, answer relevancy, context precision.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-052",
+      "type": "mcq",
+      "prompt": "Luật AI Việt Nam 134/2025/QH15 có hiệu lực từ ngày nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "17/02/2027"
+        },
+        {
+          "key": "B",
+          "text": "01/03/2026"
+        },
+        {
+          "key": "C",
+          "text": "01/01/2026"
+        },
+        {
+          "key": "D",
+          "text": "01/09/2027"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Luật AI tham chiếu EU AI Act; chuyển tiếp đến 01/03/2027 (y tế, giáo dục, tài chính: 01/09/2027).",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-053",
+      "type": "mcq",
+      "prompt": "Trong 5 khoản chi của hệ retrieval, khoản nào thường lớn nhất và đòn bẩy hiệu quả nhất là gì?",
+      "options": [
+        {
+          "key": "A",
+          "text": "LLM generation; semantic cache"
+        },
+        {
+          "key": "B",
+          "text": "Embedding; Matryoshka"
+        },
+        {
+          "key": "C",
+          "text": "Lưu index; quantization"
+        },
+        {
+          "key": "D",
+          "text": "Reranker; giảm Top-K"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Semantic cache cắt cả khoản 4 (reranker) và 5 (LLM generation).",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-054",
+      "type": "mcq",
+      "prompt": "Vì sao re-index được gọi là “khoản không ai lập ngân sách”?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chỉ tốn thêm phí reranker trong vài ngày đầu"
+        },
+        {
+          "key": "B",
+          "text": "Vector DB tính phí phạt khi xoá index cũ"
+        },
+        {
+          "key": "C",
+          "text": "Phải mua thêm GPU mới cho mỗi lần re-index"
+        },
+        {
+          "key": "D",
+          "text": "Trả lại toàn bộ embedding và tạm gấp đôi lưu index"
+        }
+      ],
+      "answer": "D",
+      "explanation": "Đổi embedding model = trả lại khoản 1 + blue-green tạm thời gấp đôi khoản 2 ⇒ chi phí định kỳ.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-055",
+      "type": "mcq",
+      "prompt": "Slide Enterprise Case Studies khuyên nhìn các con số ROI (vd. GlassDollar 40% cost ↓) thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Đã kiểm toán độc lập, tin được"
+        },
+        {
+          "key": "B",
+          "text": "Chỉ đúng với hệ dưới 1M vector"
+        },
+        {
+          "key": "C",
+          "text": "Do vendor tự công bố, nên tự đo"
+        },
+        {
+          "key": "D",
+          "text": "Là chuẩn ngành, dùng làm SLA"
+        }
+      ],
+      "answer": "C",
+      "explanation": "“con số đáng tin nhất là con số bạn tự đo.”",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-056",
+      "type": "mcq",
+      "prompt": "So với ML Era, index tooling của LLM Era thay đổi thế nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chuyển hết sang SQL LIKE trên Postgres"
+        },
+        {
+          "key": "B",
+          "text": "Managed multi-tenant như Pinecone, Zilliz Cloud"
+        },
+        {
+          "key": "C",
+          "text": "FAISS / Annoy nhúng trong process ứng dụng"
+        },
+        {
+          "key": "D",
+          "text": "Chỉ còn dùng kd-tree trên CPU đơn lẻ"
+        }
+      ],
+      "answer": "B",
+      "explanation": "ML Era: FAISS/Annoy/NMSLIB embedded trong app; LLM Era: managed multi-tenant.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-057",
+      "type": "mcq",
+      "prompt": "Vì sao CodeWiki nên chunk code theo AST thay vì theo số ký tự?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Cắt theo ký tự làm đôi hàm, mất import và signature"
+        },
+        {
+          "key": "B",
+          "text": "AST tạo ra ít chunk hơn nên tiết kiệm chi phí embed"
+        },
+        {
+          "key": "C",
+          "text": "Embedding model chỉ đọc được code đã format AST"
+        },
+        {
+          "key": "D",
+          "text": "Cắt theo ký tự không hỗ trợ các file tiếng Việt"
+        }
+      ],
+      "answer": "A",
+      "explanation": "tree-sitter cắt tại hàm/class/method; cAST: +4,3 Recall@5 RepoEval, +2,67 Pass@1 SWE-bench.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-058",
+      "type": "mcq",
+      "prompt": "Phát biểu nào đúng về llms.txt?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Chuẩn W3C bắt buộc cho mọi trang tài liệu"
+        },
+        {
+          "key": "B",
+          "text": "File HTML liệt kê toàn bộ nội dung site"
+        },
+        {
+          "key": "C",
+          "text": "Thay thế robots.txt để chặn crawler AI"
+        },
+        {
+          "key": "D",
+          "text": "Đề xuất cộng đồng, chưa là chuẩn IETF/W3C"
+        }
+      ],
+      "answer": "D",
+      "explanation": "llms.txt: file markdown sitemap cho LLM, mặc định trên Mintlify, Fern, GitBook, Vercel, Supabase.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-059",
+      "type": "mcq",
+      "prompt": "Vì sao trong Lab 19 semantic search yếu ở câu paraphrase tiếng Việt?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Qdrant in-memory không hỗ trợ tiếng Việt"
+        },
+        {
+          "key": "B",
+          "text": "Golden set chỉ có 5 câu nên nhiễu lớn"
+        },
+        {
+          "key": "C",
+          "text": "Dùng bge-small-en, model tiếng Anh 384d"
+        },
+        {
+          "key": "D",
+          "text": "Dùng BM25 thuần không có vector index"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Demo: index 1.000 tài liệu với bge-small-en (384d, CPU), đổi model bằng EMBEDDING_BACKEND.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    },
+    {
+      "id": "T2D04-060",
+      "type": "mcq",
+      "prompt": "Feature Store thắng cùng lúc ở 3 dimensions nào?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Model training, hyperparameter tuning, deployment"
+        },
+        {
+          "key": "B",
+          "text": "Data lake, ETL scheduling, BI dashboard"
+        },
+        {
+          "key": "C",
+          "text": "Feature reuse, train/serve consistency, low-latency lookup"
+        },
+        {
+          "key": "D",
+          "text": "Vector search, semantic cache, agent memory"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Key takeaway 3: không tool nào khác giải quyết cả 3.",
+      "source": "onthi/Slide_Day_4_Vector Store & Feature Store.pdf"
+    }
+  ]
+}

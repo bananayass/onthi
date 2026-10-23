@@ -1,6 +1,6 @@
 import type { Exam } from '../types/exam';
 
-export type GroupId = 'all' | 'aicb' | 'tridung' | 'other';
+export type GroupId = 'all' | 'aicb' | 'tridung' | 'track2' | 'other';
 
 export interface GroupTab {
   id: GroupId;
@@ -16,6 +16,11 @@ export function isAicb(exam: Exam): boolean {
 /** Bộ đề do Trí Dũng biên soạn. */
 export function isTridung(exam: Exam): boolean {
   return exam.course === 'tridung';
+}
+
+/** Bộ đề Track 2, soạn từ slide Phase 2 Track 2. */
+export function isTrack2(exam: Exam): boolean {
+  return exam.course === 'track2';
 }
 
 /**
@@ -50,18 +55,21 @@ export function compareExams(a: Exam, b: Exam): number {
 export function filterByGroup(exams: Exam[], group: GroupId): Exam[] {
   if (group === 'aicb') return exams.filter(isAicb);
   if (group === 'tridung') return exams.filter(isTridung);
-  if (group === 'other') return exams.filter((exam) => !isAicb(exam) && !isTridung(exam));
+  if (group === 'track2') return exams.filter(isTrack2);
+  if (group === 'other') return exams.filter((exam) => !exam.course);
   return exams;
 }
 
 export function buildGroupTabs(exams: Exam[]): GroupTab[] {
   const aicb = exams.filter(isAicb).length;
   const tridung = exams.filter(isTridung).length;
+  const track2 = exams.filter(isTrack2).length;
   return [
     { id: 'all', label: 'Tất cả', count: exams.length },
     { id: 'aicb', label: 'Khóa AICB', count: aicb },
     { id: 'tridung', label: 'Trí Dũng đẹp trai', count: tridung },
-    { id: 'other', label: 'Đề khác', count: exams.length - aicb - tridung }
+    { id: 'track2', label: 'Track 2', count: track2 },
+    { id: 'other', label: 'Đề khác', count: exams.length - aicb - tridung - track2 }
   ];
 }
 
